@@ -1,0 +1,41 @@
+<template>
+	<view>
+        <page-head :title="title"></page-head>
+        <view class="example">
+            <view class="example-title">基础卡片</view>
+            <uni-card title="标题文字" @click="clickCard">
+            	这是一个基础卡片示例，内容样式可自定义，卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、时间等。
+            </uni-card>
+            <view class="example-title">完整卡片</view>
+            <uni-card title="标题文字" thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="额外信息" note="Tips">
+            	内容主体，可自定义内容及样式
+            </uni-card>
+            <view class="example-title">内容通栏</view>
+            <uni-card is-full="true" title="DCloud" thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="2018.12.12" >
+            	<image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg" mode="" style="width: 100%;"></image>
+            </uni-card>
+        </view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+                title:'Card'
+			}
+		},
+		methods: {
+			clickCard() {
+				uni.showToast({
+					title: '点击卡片',
+					icon: 'none'
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>
