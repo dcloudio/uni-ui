@@ -1,6 +1,6 @@
 ### Collapse 折叠面板
 
-卡片视图组件，组件名：``uni-collapse``、``uni-collapse-item``，代码块： uCollapse。
+展示可以折叠 / 展开的内容区域，组件名：``uni-collapse``、``uni-collapse-item``，代码块： uCollapse。
 
 **使用方式：**
 
