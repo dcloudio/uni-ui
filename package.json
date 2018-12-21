@@ -1,6 +1,6 @@
 {
 	"name": "uni-ui",
-	"version": "0.0.2",
+	"version": "0.0.1",
 	"main": "lib/index.js",
 	"scripts": {
 		"serve": "cross-env UNI_INPUT_DIR='./examples' vue-cli-service serve",
