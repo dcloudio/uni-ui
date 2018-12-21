@@ -1,6 +1,6 @@
 <template>
-	<view v-if="visible" class="uni-drawer" :catchtouchmove="catchtouchmove" :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}">
-		<view  class="uni-drawer__mask" @tap="close"></view>
+	<view v-if="visibleSync" class="uni-drawer" :catchtouchmove="catchtouchmove" :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}">
+		<view class="uni-drawer__mask" @tap="close"></view>
 		<view class="uni-drawer__content">
 			<slot></slot>
 		</view>
@@ -32,28 +32,36 @@
 		},
 		data() {
 			return {
+				visibleSync: false,
 				showDrawer: false,
 				rightMode: false,
 				catchtouchmove: false
 			}
 		},
-        watch:{
-            visible(val){
-                setTimeout(()=>{
-                    this.showDrawer = val
-                },100)
-                
-            }
-        },
+		watch: {
+			visible(val) {
+				setTimeout(() => {
+					this.showDrawer = val
+				}, 100)
+				if (val) {
+					this.visibleSync = val
+				} else {
+					setTimeout(() => {
+						this.visibleSync = val
+					}, 300)
+				}
+			}
+		},
 		computed: {
 			showMask() {
 				return String(this.mask) === 'true'
 			}
 		},
 		created() {
-            setTimeout(()=>{
-            	this.showDrawer = this.visible
-            },100)
+			this.visibleSync = this.visible
+			setTimeout(() => {
+				this.showDrawer = this.visible
+			}, 100)
 			this.rightMode = this.mode === 'right'
 			//#ifdef MP-WEIXIN
 			this.catchtouchmove = true
@@ -61,17 +69,19 @@
 		},
 		methods: {
 			close() {
-                this.showDrawer = false
-                setTimeout(()=>{
-                	this.$emit('close')
-                },300)
+				this.showDrawer = false
+				setTimeout(() => {
+					this.visibleSync = false
+					this.$emit('close')
+				}, 300)
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-    $drawer-width:61.8%;
+	$drawer-width:61.8%;
+
 	.uni-drawer {
 		display: block;
 		position: fixed;
@@ -85,33 +95,38 @@
 		height: 100%;
 
 		&.uni-drawer--right {
-            .uni-drawer__content {
-            	left: auto;
-            	right: 0;
-            	transform: translatex(100%);
-            }
+			.uni-drawer__content {
+				left: auto;
+				right: 0;
+				transform: translatex(100%);
+			}
 		}
-        &.uni-drawer--visible {
-        	visibility: visible;
-        	.uni-drawer__content {
-        		transform: translatex(0);
-        	}
-        	.uni-drawer__mask{
-        		display: block;
-                opacity: 1;
-        	}
-        }
-        &__mask{
-            display: block;
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            transition: opacity 0.3s;
-        }
+
+		&.uni-drawer--visible {
+			visibility: visible;
+
+			.uni-drawer__content {
+				transform: translatex(0);
+			}
+
+			.uni-drawer__mask {
+				display: block;
+				opacity: 1;
+			}
+		}
+
+		&__mask {
+			display: block;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.4);
+			transition: opacity 0.3s;
+		}
+
 		&__content {
 			display: block;
 			position: absolute;
@@ -124,6 +139,4 @@
 			transform: translatex(-100%);
 		}
 	}
-
-
 </style>
