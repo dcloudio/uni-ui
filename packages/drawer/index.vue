@@ -123,7 +123,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(0, 0, 0, 0.4);
+			background: $uni-bg-color-mask;
 			transition: opacity 0.3s;
 		}
 
@@ -134,7 +134,7 @@
 			left: 0;
 			width: $drawer-width;
 			height: 100%;
-			background: $uni-background-color;
+			background: $uni-bg-color;
 			transition: all 0.3s ease-out;
 			transform: translatex(-100%);
 		}

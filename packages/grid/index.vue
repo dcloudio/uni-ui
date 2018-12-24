@@ -138,7 +138,7 @@
 			}
 
 			&-hover {
-				background-color: $uni-background-color-hover;
+				background-color: $uni-bg-color-hover;
 			}
 
 			&-image {

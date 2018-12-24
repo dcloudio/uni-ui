@@ -58,7 +58,7 @@
 </script>
 <style lang="scss">
 	.uni-collapse {
-		background-color: $uni-background-color;
+		background-color: $uni-bg-color;
 		position: relative;
 		width: 100%;
 		display: flex;

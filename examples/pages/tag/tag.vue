@@ -17,10 +17,7 @@
 					<uni-tag text="标签" type="warning"></uni-tag>
 				</view>
 				<view class="tag-view">
-					<uni-tag text="标签" type="danger" :circle="true"></uni-tag>
-				</view>
-				<view class="tag-view">
-					<uni-tag text="标签" type="royal" :circle="true"></uni-tag>
+					<uni-tag text="标签" type="error" :circle="true"></uni-tag>
 				</view>
 			</view>
             <view class="example-title">空心标签</view>
@@ -38,10 +35,7 @@
 					<uni-tag text="标签" inverted="true" type="warning"></uni-tag>
 				</view>
 				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="danger" :circle="true"></uni-tag>
-				</view>
-				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="royal" :circle="true"></uni-tag>
+					<uni-tag text="标签" inverted="true" type="error" :circle="true"></uni-tag>
 				</view>
 			</view>
 
@@ -70,10 +64,7 @@
 					<uni-tag text="标签" inverted="true" type="warning" size="small"></uni-tag>
 				</view>
 				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="danger" size="small" :circle="true"></uni-tag>
-				</view>
-				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="royal" size="small" :circle="true"></uni-tag>
+					<uni-tag text="标签" inverted="true" type="error" size="small" :circle="true"></uni-tag>
 				</view>
 			</view>
 
@@ -86,10 +77,7 @@
 					<uni-tag text="标签" type="primary" :disabled="true"></uni-tag>
 				</view>
 				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="danger" size="small" :disabled="true"></uni-tag>
-				</view>
-				<view class="tag-view">
-					<uni-tag text="标签" inverted="true" type="royal" size="small" :circle="true" :disabled="true"></uni-tag>
+					<uni-tag text="标签" inverted="true" type="error" size="small" :disabled="true"></uni-tag>
 				</view>
 			</view>
 		</view>
@@ -107,7 +95,7 @@
 		},
 		methods: {
 			setType() {
-				let types = ['default', 'primary', 'success', 'warning', 'danger', 'royal'];
+				let types = ['default', 'primary', 'success', 'warning', 'error'];
 				let index = types.indexOf(this.type);
 				types.splice(index, 1)
 				let randomIndex = Math.ceil(Math.random() * 5);

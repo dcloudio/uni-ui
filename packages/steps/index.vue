@@ -68,6 +68,7 @@
 </script>
 
 <style lang="scss">
+    $uni-border-color-light:#ebedf0;//较浅的灰色，如steps时间轴的颜色
 	.uni-steps {
 		width: 100%;
 		box-sizing: border-box;
@@ -97,7 +98,7 @@
 						width: 100%;
 						bottom: 9px;
 						left: 0;
-						background-color: $uni-border-color-second;
+						background-color: $uni-border-color-light;
 						transform: scaleY(0.5);
 					}
 
@@ -213,7 +214,7 @@
 				bottom: 8px;
 				left: -8px;
 				padding: 0 8px;
-				background-color: $uni-background-color;
+				background-color: $uni-bg-color;
 				z-index: 1;
 			}
 
@@ -221,11 +222,11 @@
 				width: 5px;
 				height: 5px;
 				background-color: $uni-text-color-grey;
-				border-radius: 50%;
+				border-radius: $uni-border-radius-circle;
 			}
 
 			&-line {
-				background-color: $uni-border-color-second;
+				background-color: $uni-border-color-light;
 				position: absolute;
 				bottom: 10px;
 				left: 0;

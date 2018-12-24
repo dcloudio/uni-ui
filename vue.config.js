@@ -21,7 +21,7 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			sass: {
-				data: `@import "${normalizePath(path.resolve(__dirname, './src/variables.scss'))}";`
+				data: `@import "${normalizePath(path.resolve(__dirname, './uni.scss'))}";`
 			}
 		}
 	}

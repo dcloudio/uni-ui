@@ -10,7 +10,7 @@
 </script>
 <style lang="scss">
 	.uni-list {
-		background-color: $uni-background-color;
+		background-color: $uni-bg-color;
 		position: relative;
 		width: 100%;
 		display: flex;

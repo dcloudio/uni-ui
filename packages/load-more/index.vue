@@ -68,7 +68,7 @@
 
 		&__text {
 			font-size: 28upx;
-			color: $uni-text-color-second;
+			color: $uni-text-color-grey;
 		}
 
 		&__img {
@@ -84,7 +84,7 @@
 					height: 2px;
 					border-top-left-radius: 1px;
 					border-bottom-left-radius: 1px;
-					background: $uni-text-color-second;
+					background: $uni-text-color-grey;
 					position: absolute;
 					opacity: 0.2;
 					transform-origin: 50%;

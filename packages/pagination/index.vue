@@ -140,7 +140,7 @@
 
 	@mixin pagination-hover {
 		color: rgba(0, 0, 0, .6);
-		background-color: $uni-background-color-hover;
+		background-color: $uni-bg-color-hover;
 	}
     
 	.uni-pagination {
@@ -185,7 +185,7 @@
 				transform: scale(.5);
 				transform-origin: 0 0;
 				box-sizing: border-box;
-				border-radius: 10px;
+				border-radius: $uni-border-radius-lg;
 			}
 		}
 
@@ -201,7 +201,7 @@
 			transform: translateX(-50%);
 
 			&-current {
-				color: $uni-color-blue;
+				color: $uni-color-primary;
 			}
 		}
 

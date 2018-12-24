@@ -149,14 +149,14 @@
 
 <style lang="scss">
 	@mixin collapse-hover {
-		background-color: $uni-background-color-hover;
+		background-color: $uni-bg-color-hover;
 	}
 
 	@mixin collapse-disabled {
 		opacity: 0.3;
 	}
 
-	$collapse-title-pd:22upx 30upx;
+	$collapse-title-pd:$spacing-col-base $spacing-col-lg;
 
 	.uni-collapse-cell {
 		position: relative;
@@ -247,7 +247,7 @@
 			position: relative;
 			width: 100%;
 			overflow: hidden;
-			background: #FFFFFF;
+			background: $uni-bg-color;
 
 			view {
 				font-size: $uni-font-size-base;

@@ -140,7 +140,7 @@
 			line-height: $countdown-height;
 			justify-content: center;
 			height: $countdown-height;
-			border-radius: 8upx;
+			border-radius: $uni-border-radius-base;
 			margin: 0 5upx;
 			font-size: $uni-font-size-base;
 			border: 1px solid #000000;

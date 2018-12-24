@@ -36,7 +36,6 @@
 </script>
 
 <style lang="scss">
-    $card-head-pd: 18upx 24upx;
     $card-extra-width: 30%;
     
 	@mixin text-omit {
@@ -46,8 +45,8 @@
 	}
 
 	.uni-card {
-		margin: 20upx;
-		background: $uni-background-color;
+		margin: $spacing-col-base;
+		background: $uni-bg-color;
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -63,7 +62,7 @@
 			right: -50%;
 			bottom: -50%;
 			border: 1px solid $uni-border-color;
-			border-radius: 6px;
+			border-radius: $uni-border-radius-lg;
 			transform: scale(.5);
 		}
 
@@ -72,7 +71,7 @@
 			position: relative;
 			display: flex;
 			flex-direction: row;
-			padding: $card-head-pd;
+			padding: $spacing-col-base;
 			align-items: center;
 		}
 
@@ -91,7 +90,7 @@
 
 			&-title {
 				flex: 1;
-				margin-right: 20upx;
+				margin-right: $spacing-col-base;
 				display: flex;
 				flex-direction: row;
 				justify-content: flex-start;
@@ -112,13 +111,13 @@
 				&-img {
 					height: $uni-img-size-sm;
 					width: $uni-img-size-sm;
-					margin-right: 20upx;
+					margin-right: $spacing-col-base;
 				}
 
 				&-text {
 					flex: 0 0 auto;
 					width: $card-extra-width;
-					margin-left: 20upx;
+					margin-left: $spacing-col-base;
 					font-size: $uni-font-size-base;
 					text-align: right;
 					@include text-omit;
@@ -129,7 +128,7 @@
 
 		&__content {
 			&--pd {
-				padding: 24upx;
+				padding: $spacing-col-base;
 			}
 		}
 

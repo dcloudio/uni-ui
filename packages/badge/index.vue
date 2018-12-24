@@ -53,7 +53,7 @@
 		padding: 3px 6px;
 		color: $uni-text-color;
 		border-radius: 100px;
-		background-color: $uni-background-color-hover;
+		background-color: $uni-bg-color-hover;
 
 		&.uni-badge-inverted {
 			padding: 0 5px 0 0;
@@ -62,7 +62,7 @@
 		}
 
 		&-primary {
-			color: #fff;
+			color: $uni-text-color-inverse;
 			background-color: $uni-color-primary;
 
 			&.uni-badge-inverted {
@@ -72,7 +72,7 @@
 		}
 
 		&-success {
-			color: #fff;
+			color: $uni-text-color-inverse;
 			background-color: $uni-color-success;
 
 			&.uni-badge-inverted {
@@ -82,7 +82,7 @@
 		}
 
 		&-warning {
-			color: #fff;
+			color: $uni-text-color-inverse;
 			background-color: $uni-color-warning;
 
 			&.uni-badge-inverted {
@@ -91,22 +91,12 @@
 			}
 		}
 
-		&-danger {
-			color: #fff;
-			background-color: $uni-color-danger;
+		&-error {
+			color: $uni-text-color-inverse;
+			background-color: $uni-color-error;
 
 			&.uni-badge-inverted {
-				color: $uni-color-danger;
-				background-color: transparent
-			}
-		}
-
-		&-royal {
-			color: #fff;
-			background-color: $uni-color-royal;
-
-			&.uni-badge-inverted {
-				color: $uni-color-royal;
+				color: $uni-color-error;
 				background-color: transparent
 			}
 		}

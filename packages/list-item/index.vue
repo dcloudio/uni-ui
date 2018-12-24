@@ -92,14 +92,14 @@
 
 <style lang="scss">
 	@mixin list-hover {
-		background-color: $uni-background-color-hover;
+		background-color: $uni-bg-color-hover;
 	}
 
 	@mixin list-disabled {
 		opacity: 0.3;
 	}
 
-	$list-cell-pd:22upx 30upx;
+	$list-cell-pd:$spacing-col-base $spacing-col-lg;
 
 	.uni-list-cell {
 		font-size: $uni-font-size-lg;

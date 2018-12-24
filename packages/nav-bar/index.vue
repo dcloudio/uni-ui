@@ -122,7 +122,7 @@
 			display: block;
 			position: relative;
 			width: 100%;
-			background-color: $uni-background-color;
+			background-color: $uni-bg-color;
 			overflow: hidden;
 
 			view {
