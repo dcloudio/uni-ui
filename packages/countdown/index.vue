@@ -121,8 +121,6 @@
 	}
 </script>
 <style lang="scss">
-	$countdown-text-size:28upx;
-	$countdown-num-size:22upx;
 	$countdown-height:44upx;
 
 	.uni-countdown {
@@ -135,7 +133,7 @@
 			justify-content: center;
 			line-height: $countdown-height;
 			padding: 0 5upx;
-            font-size: $countdown-text-size;
+            font-size: $uni-font-size-base;
 		}
 
 		&__number {
@@ -144,9 +142,9 @@
 			height: $countdown-height;
 			border-radius: 8upx;
 			margin: 0 5upx;
-			font-size: $countdown-text-size;
+			font-size: $uni-font-size-base;
 			border: 1px solid #000000;
-			font-size: $countdown-num-size;
+			font-size: $uni-font-size-sm;
 			padding: 0 10upx;
 		}
 	}

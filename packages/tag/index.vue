@@ -42,16 +42,8 @@
 
 <style lang="scss">
 	$tag-pd:0px 32upx;
-    $tag-size:28upx;
-    $tag-small-size:20upx;
 	$tag-small-pd:0px 16upx;
-    $tag-default-color:#666666;
-    $tag-default-bg:#F1F1F1;
-    $primary:#007aff;
-    $success:#4cd964;
-    $warning:#f0ad4e;
-    $danger:#dd524d;
-    $royal:#8a6de9;
+
 	@mixin tag-disabled {
 		opacity: 0.5;
 	}
@@ -61,15 +53,17 @@
 		padding: $tag-pd;
 		height: 60upx;
 		line-height: calc(60upx - 2px);
-		font-size: $tag-size;
+		font-size: $uni-font-size-base;
 		display: inline-block;
-		color: $tag-default-color;
+		color: $uni-text-color-second;
 		border-radius: 8upx;
-		background-color: $tag-default-bg;
-		border: 1px solid $tag-default-bg;
-        &--circle {
-        	border-radius: 30upx;
-        }
+		background-color: $uni-background-color-grey;
+		border: 1px solid $uni-background-color-grey;
+
+		&--circle {
+			border-radius: 30upx;
+		}
+
 		&--disabled {
 			@include tag-disabled;
 		}
@@ -78,78 +72,78 @@
 			height: 40upx;
 			padding: $tag-small-pd;
 			line-height: calc(40upx - 2px);
-			font-size: $tag-small-size;
+			font-size: $uni-font-size-xs;
 		}
 
 		&--primary {
 			color: #fff;
-			background-color: $primary;
-			border: 1px solid $primary;
+			background-color: $uni-color-primary;
+			border: 1px solid $uni-color-primary;
 
 			&.uni-tag--inverted {
-				color: $primary;
+				color: $uni-color-primary;
 				background-color: #FFFFFF;
-				border: 1px solid $primary;
+				border: 1px solid $uni-color-primary;
 			}
 
 		}
 
 		&--success {
 			color: #fff;
-			background-color: $success;
-			border: 1px solid $success;
+			background-color: $uni-color-success;
+			border: 1px solid $uni-color-success;
 
 			&.uni-tag--inverted {
-				color: $success;
+				color: $uni-color-success;
 				background-color: #FFFFFF;
-				border: 1px solid $success;
+				border: 1px solid $uni-color-success;
 			}
 
 		}
-        
+
 		&--warning {
 			color: #fff;
-			background-color: $warning;
-			border: 1px solid $warning;
+			background-color: $uni-color-warning;
+			border: 1px solid $uni-color-warning;
 
 			&.uni-tag--inverted {
-				color: $warning;
+				color: $uni-color-warning;
 				background-color: #FFFFFF;
-				border: 1px solid $warning;
+				border: 1px solid $uni-color-warning;
 			}
 
 		}
-        
+
 		&--danger {
 			color: #fff;
-			background-color: $danger;
-			border: 1px solid $danger;
+			background-color: $uni-color-danger;
+			border: 1px solid $uni-color-danger;
 
 			&.uni-tag--inverted {
-				color: $danger;
+				color: $uni-color-danger;
 				background-color: #FFFFFF;
-				border: 1px solid $danger;
+				border: 1px solid $uni-color-danger;
 			}
 
 		}
+
 		&--royal {
 			color: #fff;
-			background-color: $royal;
-			border: 1px solid $royal;
+			background-color: $uni-color-royal;
+			border: 1px solid $uni-color-royal;
 
 			&.uni-tag--inverted {
-				color: $royal;
+				color: $uni-color-royal;
 				background-color: #FFFFFF;
-				border: 1px solid $royal;
+				border: 1px solid $uni-color-royal;
 			}
 
 		}
 
 		&--inverted {
-			color: $tag-default-color;
+			color: $uni-text-color-second;
 			background-color: #FFFFFF;
-			border: 1px solid $tag-default-bg;
+			border: 1px solid $uni-background-color-grey;
 		}
 	}
-
 </style>

@@ -92,22 +92,17 @@
 
 <style lang="scss">
 	@mixin list-hover {
-		background-color: #eee;
+		background-color: $uni-background-color-hover;
 	}
 
 	@mixin list-disabled {
 		opacity: 0.3;
 	}
 
-	$border-color:#c8c7cc;
-	$list-title-size:32upx;
-	$list-note-size:26upx;
-	$list-note-color:#999999;
 	$list-cell-pd:22upx 30upx;
-	$list-img-size:54upx;
 
 	.uni-list-cell {
-		font-size: 30upx;
+		font-size: $uni-font-size-lg;
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -143,7 +138,7 @@
 				content: '';
 				-webkit-transform: scaleY(.5);
 				transform: scaleY(.5);
-				background-color: $border-color;
+				background-color: $uni-border-color;
 			}
 		}
 
@@ -154,7 +149,7 @@
 			flex-direction: column;
 
 			&-title {
-				font-size: $list-title-size;
+				font-size: $uni-font-size-lg;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				color: inherit;
@@ -163,8 +158,8 @@
 			}
 
 			&-note {
-				color: $list-note-color;
-				font-size: $list-note-size;
+				color: $uni-text-color-grey;
+				font-size: $uni-font-size-base;
 				white-space: normal;
 				display: -webkit-box;
 				-webkit-box-orient: vertical;
@@ -189,8 +184,8 @@
 			align-items: center;
 
 			&-img {
-				height: $list-img-size;
-				width: $list-img-size;
+				height: $uni-img-size-base;
+				width: $uni-img-size-base;
 			}
 		}
 	}

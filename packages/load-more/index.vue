@@ -59,8 +59,6 @@
 </script>
 
 <style lang="scss">
-	$load-more-text-color:#777777;
-
 	.uni-load-more {
 		display: flex;
 		flex-direction: row;
@@ -70,7 +68,7 @@
 
 		&__text {
 			font-size: 28upx;
-			color: $load-more-text-color;
+			color: $uni-text-color-second;
 		}
 
 		&__img {
@@ -86,7 +84,7 @@
 					height: 2px;
 					border-top-left-radius: 1px;
 					border-bottom-left-radius: 1px;
-					background: $load-more-text-color;
+					background: $uni-text-color-second;
 					position: absolute;
 					opacity: 0.2;
 					transform-origin: 50%;

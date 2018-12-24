@@ -149,18 +149,14 @@
 
 <style lang="scss">
 	@mixin collapse-hover {
-		background-color: #eee;
+		background-color: $uni-background-color-hover;
 	}
 
 	@mixin collapse-disabled {
 		opacity: 0.3;
 	}
 
-	$border-color:#c8c7cc;
-	$collapse-text-size:32upx;
-	$collapse-content-size-size:28upx;
 	$collapse-title-pd:22upx 30upx;
-	$collapse-img-size:54upx;
 
 	.uni-collapse-cell {
 		position: relative;
@@ -191,7 +187,7 @@
 			content: '';
 			-webkit-transform: scaleY(0.5);
 			transform: scaleY(0.5);
-			background-color: $border-color;
+			background-color: $uni-border-color;
 		}
 
 		&__title {
@@ -214,8 +210,8 @@
 			}
 
 			&-img {
-				height: $collapse-img-size;
-				width: $collapse-img-size;
+				height: $uni-img-size-base;
+				width: $uni-img-size-base;
 			}
 
 			&-arrow {
@@ -238,7 +234,7 @@
 			}
 
 			&-text {
-				font-size: $collapse-text-size;
+				font-size: $uni-font-size-lg;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				color: inherit;
@@ -254,7 +250,7 @@
 			background: #FFFFFF;
 
 			view {
-				font-size: $collapse-content-size-size;
+				font-size: $uni-font-size-base;
 			}
 		}
 

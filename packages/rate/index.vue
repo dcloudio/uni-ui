@@ -50,32 +50,32 @@
 				default: false
 			}
 		},
-        data(){
-            console.log('data')
-          return {
-              maxSync:this.max,
-              valueSync:this.value
-          }  
-        },
+		data() {
+			console.log('data')
+			return {
+				maxSync: this.max,
+				valueSync: this.value
+			}
+		},
 		computed: {
 			stars() {
-                const max = Number(this.maxSync) ? Number(this.maxSync) : 5
-                const value = Number(this.valueSync) ? Number(this.valueSync) : 0
+				const max = Number(this.maxSync) ? Number(this.maxSync) : 5
+				const value = Number(this.valueSync) ? Number(this.valueSync) : 0
 				const starList = []
 				const floorValue = Math.floor(value)
 				const ceilValue = Math.ceil(value)
 				for (let i = 0; i < max; i++) {
 					if (floorValue > i) {
 						starList.push({
-                            activeWitch:'100%'
-                        })
+							activeWitch: '100%'
+						})
 					} else if (ceilValue - 1 === i) {
 						starList.push({
-							activeWitch:(value - floorValue) * 100 + '%'
+							activeWitch: (value - floorValue) * 100 + '%'
 						})
 					} else {
 						starList.push({
-							activeWitch:'0'
+							activeWitch: '0'
 						})
 					}
 				}
@@ -84,10 +84,10 @@
 		},
 		methods: {
 			onClick(index) {
-                if(this.disabled === true || this.disabled === 'true'){
-                    return
-                }
-                this.valueSync = index + 1
+				if (this.disabled === true || this.disabled === 'true') {
+					return
+				}
+				this.valueSync = index + 1
 				this.$emit('change', {
 					value: this.valueSync
 				})

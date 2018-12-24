@@ -122,9 +122,6 @@
 </script>
 
 <style lang="scss">
-	$noticebar-text-size:26upx;
-	$noticebar-text-color:#999999;
-
 	@mixin flex-row-center {
 		display: flex;
 		flex-direction: row;
@@ -134,13 +131,13 @@
 
 	.uni-noticebar {
 		padding: 12upx 24upx;
-		font-size: $noticebar-text-size;
+		font-size: $uni-font-size-sm;
 		line-height: 1.5;
 		margin-bottom: 20upx;
 		@include flex-row-center;
 
 		&__close {
-			color: $noticebar-text-color;
+			color: $uni-text-color-grey;
 			margin-right: 24upx;
 			@include flex-row-center;
 		}
@@ -163,10 +160,10 @@
 				@include flex-row-center;
 				word-break: keep-all;
 				margin-left: 10upx;
-				color: $noticebar-text-color;
+				color: $uni-text-color-grey;
 
 				&-text {
-					font-size: $noticebar-text-size;
+					font-size: $uni-font-size-sm;
 				}
 			}
 
@@ -190,7 +187,7 @@
 			}
 
 			&-inner {
-				font-size: $noticebar-text-size;
+				font-size: $uni-font-size-sm;
 				display: inline;
 			}
 		}

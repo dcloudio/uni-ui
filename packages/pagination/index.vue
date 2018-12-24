@@ -140,13 +140,8 @@
 
 	@mixin pagination-hover {
 		color: rgba(0, 0, 0, .6);
-		background-color: #dedede;
+		background-color: $uni-background-color-hover;
 	}
-
-	$pagination-num-current-color:#6190e8;
-	$pagination-num-color:#333333;
-	$pagination-num-size:28upx;
-	$border-color:#c8c7cc;
     
 	.uni-pagination {
 		width: 100%;
@@ -170,7 +165,7 @@
 			height: 60upx;
 			padding: 0 16upx;
 			line-height: 60upx;
-			font-size: $pagination-num-size;
+			font-size: $uni-font-size-base;
 			box-sizing: border-box;
 			position: relative;
 			background-color: #f8f8f8;
@@ -186,7 +181,7 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				border: 1px solid $border-color;
+				border: 1px solid $uni-border-color;
 				transform: scale(.5);
 				transform-origin: 0 0;
 				box-sizing: border-box;
@@ -198,15 +193,15 @@
 			width: 100upx;
 			height: 60upx;
 			line-height: 60upx;
-			font-size: $pagination-num-size;
-			color: $pagination-num-color;
+			font-size: $uni-font-size-base;
+			color: $uni-text-color;
 			position: absolute;
 			left: 50%;
 			top: 0;
 			transform: translateX(-50%);
 
 			&-current {
-				color: $pagination-num-current-color;
+				color: $uni-color-blue;
 			}
 		}
 

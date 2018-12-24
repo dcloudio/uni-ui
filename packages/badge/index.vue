@@ -42,12 +42,7 @@
 
 <style lang="scss">
 	$bage-size:12px;
-	$primary:#007aff;
-	$success:#4cd964;
-	$warning:#f0ad4e;
-	$danger:#dd524d;
-	$royal:#8a6de9;
-    $bage-small:scale(0.8);
+	$bage-small:scale(0.8);
 
 	.uni-badge {
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -56,68 +51,69 @@
 		line-height: 1;
 		display: inline-block;
 		padding: 3px 6px;
-		color: #333;
+		color: $uni-text-color;
 		border-radius: 100px;
-		background-color: rgba(0, 0, 0, .15);
+		background-color: $uni-background-color-hover;
 
 		&.uni-badge-inverted {
 			padding: 0 5px 0 0;
-			color: #929292;
+			color: $uni-text-color-grey;
 			background-color: transparent;
 		}
 
 		&-primary {
 			color: #fff;
-			background-color: $primary;
+			background-color: $uni-color-primary;
 
 			&.uni-badge-inverted {
-				color: $primary;
+				color: $uni-color-primary;
 				background-color: transparent
 			}
 		}
 
 		&-success {
 			color: #fff;
-			background-color: $success;
+			background-color: $uni-color-success;
 
 			&.uni-badge-inverted {
-				color: $success;
+				color: $uni-color-success;
 				background-color: transparent
 			}
 		}
 
 		&-warning {
 			color: #fff;
-			background-color: $warning;
+			background-color: $uni-color-warning;
 
 			&.uni-badge-inverted {
-				color: $warning;
+				color: $uni-color-warning;
 				background-color: transparent
 			}
 		}
 
 		&-danger {
 			color: #fff;
-			background-color: $danger;
+			background-color: $uni-color-danger;
 
 			&.uni-badge-inverted {
-				color: $danger;
+				color: $uni-color-danger;
 				background-color: transparent
 			}
 		}
 
 		&-royal {
 			color: #fff;
-			background-color: $royal;
+			background-color: $uni-color-royal;
 
 			&.uni-badge-inverted {
-				color: $royal;
+				color: $uni-color-royal;
 				background-color: transparent
 			}
 		}
-        &--small{
-            transform: $bage-small;
-            transform-origin: center center;
-        }
+
+		&--small {
+			transform: $bage-small;
+			transform-origin: center center;
+		}
 	}
 </style>

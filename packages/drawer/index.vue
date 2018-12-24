@@ -134,7 +134,7 @@
 			left: 0;
 			width: $drawer-width;
 			height: 100%;
-			background: #FFFFFF;
+			background: $uni-background-color;
 			transition: all 0.3s ease-out;
 			transform: translatex(-100%);
 		}

@@ -57,11 +57,8 @@
 	}
 </script>
 <style lang="scss">
-	$collapse-background:#FFFFFF;
-	$border-color:#c8c7cc;
-
 	.uni-collapse {
-		background-color: $collapse-background;
+		background-color: $uni-background-color;
 		position: relative;
 		width: 100%;
 		display: flex;
@@ -77,7 +74,7 @@
 			content: '';
 			-webkit-transform: scaleY(0.5);
 			transform: scaleY(0.5);
-			background-color: $border-color;
+			background-color: $uni-border-color;
 		}
 
 		&:before {
@@ -90,7 +87,7 @@
 			content: '';
 			-webkit-transform: scaleY(0.5);
 			transform: scaleY(0.5);
-			background-color: $border-color;
+			background-color: $uni-border-color;
 		}
 	}
 </style>

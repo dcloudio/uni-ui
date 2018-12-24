@@ -95,14 +95,9 @@
 	}
 </script>
 <style lang="scss">
-	$numbox-border-color:#c8c7cc;
-	$numbox-btn-bg:#f9f9f9;
-	$numbox-btn-color:#555555;
-	$numbox-btn-size:40upx;
 	$numbox-btn-width:70upx;
 	$numbox-input-width:80upx;
 	$numbox-height:70upx;
-	$numbox-disabled-color:#c0c0c0;
 
 	.uni-numbox {
 		display: inline-flex;
@@ -121,7 +116,7 @@
 			left: -50%;
 			right: -50%;
 			bottom: -50%;
-			border: 1px solid $numbox-border-color;
+			border: 1px solid $uni-border-color;
 			border-radius: 6px;
 			transform: scale(.5);
 		}
@@ -129,19 +124,19 @@
 		&__minus,
 		&__plus {
 			margin: 0;
-			background-color: $numbox-btn-bg;
+			background-color: $uni-background-color-grey;
 			width: $numbox-btn-width;
-			font-size: $numbox-btn-size;
+			font-size: $uni-font-size-xxl;
 			height: 100%;
 			line-height: $numbox-height;
 			text-align: center;
-			color: $numbox-btn-color;
+			color: $uni-text-color;
 			position: relative;
 		}
 
 		&__value {
 			position: relative;
-			background-color: #ffffff;
+			background-color: $uni-background-color;
 			width: $numbox-input-width;
 			height: 100%;
 			text-align: center;
@@ -157,7 +152,7 @@
 				right: -50%;
 				bottom: -50%;
 				border-style: solid;
-				border-color: $numbox-border-color;
+				border-color: $uni-border-color;
 				border-left-width: 1px;
 				border-right-width: 1px;
 				border-top-width: 0;
@@ -167,7 +162,7 @@
 		}
 
 		&--disabled {
-			color: $numbox-disabled-color;
+			color: $uni-text-color-disable;
 		}
 	}
 </style>

@@ -68,13 +68,6 @@
 </script>
 
 <style lang="scss">
-	$steps-line-color:#ebedf0;
-	$steps-text-color:#969799;
-	$steps-title-size:28upx;
-	$steps-desc-size:24upx;
-	$steps-text-finish-color:#333333;
-	$steps-bg-color:#ffffff;
-
 	.uni-steps {
 		width: 100%;
 		box-sizing: border-box;
@@ -104,7 +97,7 @@
 						width: 100%;
 						bottom: 9px;
 						left: 0;
-						background-color: #ebedf0;
+						background-color: $uni-border-color-second;
 						transform: scaleY(0.5);
 					}
 
@@ -182,15 +175,15 @@
 				margin-left: 3px;
 				display: inline-block;
 				transform: translateX(-50%);
-				color: $steps-text-color;
+				color: $uni-text-color-grey;
 			}
 
 			&-title {
-				font-size: $steps-title-size;
+				font-size: $uni-font-size-base;
 			}
 
 			&-desc {
-				font-size: $steps-desc-size;
+				font-size: $uni-font-size-sm;
 			}
 
 			&:first-child {
@@ -220,19 +213,19 @@
 				bottom: 8px;
 				left: -8px;
 				padding: 0 8px;
-				background-color: $steps-bg-color;
+				background-color: $uni-background-color;
 				z-index: 1;
 			}
 
 			&-circle {
 				width: 5px;
 				height: 5px;
-				background-color: $steps-text-color;
+				background-color: $uni-text-color-grey;
 				border-radius: 50%;
 			}
 
 			&-line {
-				background-color: $steps-line-color;
+				background-color: $uni-border-color-second;
 				position: absolute;
 				bottom: 10px;
 				left: 0;
@@ -242,7 +235,7 @@
 
 			&.uni-steps-finish {
 				.uni-steps-item-title-container {
-					color: $steps-text-finish-color;
+					color: $uni-text-color;
 				}
 			}
 

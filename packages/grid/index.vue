@@ -81,13 +81,6 @@
 </script>
 
 <style lang="scss">
-	$border-color:#c8c7cc;
-	$grid-hover:#f0f0f0;
-	$grid-img-size:80upx;
-	$gird-img-size-sm:50upx;
-    $grid-text-size:30upx;
-    $grid-text-color:#333333;
-
 	.uni-grid {
 		position: relative;
 		display: flex;
@@ -119,7 +112,7 @@
 				left: -50%;
 				right: -50%;
 				bottom: -50%;
-				border-color: $border-color;
+				border-color: $uni-border-color;
 				border-style: solid;
 				border-width: 1px;
 				-webkit-transform: scale(.5);
@@ -139,18 +132,18 @@
 			}
 
 			&-text {
-				font-size: $grid-text-size;
-				color: $grid-text-color;
+				font-size: $uni-font-size-lg;
+				color: $uni-text-color;
 				margin-top: 12upx;
 			}
 
 			&-hover {
-				background-color: $grid-hover;
+				background-color: $uni-background-color-hover;
 			}
 
 			&-image {
-				width: $grid-img-size;
-				height: $grid-img-size;
+				width: $uni-img-size-lg;
+				height: $uni-img-size-lg;
 			}
 		}
 	}
@@ -206,8 +199,8 @@
 			}
 
 			&-image {
-				width: $gird-img-size-sm;
-				height: $gird-img-size-sm;
+				width: $uni-img-size-base;
+				height: $uni-img-size-base;
 			}
 
 			&-text {

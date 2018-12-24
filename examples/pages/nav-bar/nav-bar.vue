@@ -3,7 +3,7 @@
         <page-head :title="title"></page-head>
 		<view>
 			<view class="example-title">基本用法</view>
-			<uni-nav-bar left-icon="back" @click-left="back" title="标题"></uni-nav-bar>
+			<uni-nav-bar left-icon="back" @click-left="back" title="标题" fixed='true'></uni-nav-bar>
             <view class="example-title">左右显示文字</view>
             <uni-nav-bar left-icon="back" right-text="菜单" left-text="返回" @click-left="back" title="标题"></uni-nav-bar>
             <view class="example-title">插入slot</view>

@@ -36,14 +36,8 @@
 </script>
 
 <style lang="scss">
-	$border-color:#c8c7cc;
-    $card-foot-color:#999999;
-    $card-foot-size:24upx;
     $card-head-pd: 18upx 24upx;
-    $card-head-text-size: 34upx;
-    $card-extra-img-size:42upx;
-    $card-extra-text-size:30upx;
-    
+    $card-extra-width: 30%;
     
 	@mixin text-omit {
 		text-overflow: ellipsis;
@@ -53,7 +47,7 @@
 
 	.uni-card {
 		margin: 20upx;
-		background: #fff;
+		background: $uni-background-color;
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -68,7 +62,7 @@
 			left: -50%;
 			right: -50%;
 			bottom: -50%;
-			border: 1px solid $border-color;
+			border: 1px solid $uni-border-color;
 			border-radius: 6px;
 			transform: scale(.5);
 		}
@@ -92,7 +86,7 @@
 				content: '';
 				-webkit-transform: scaleY(.5);
 				transform: scaleY(.5);
-				background-color: $border-color;
+				background-color: $uni-border-color;
 			}
 
 			&-title {
@@ -104,7 +98,7 @@
 				align-items: center;
 
 				&-text {
-					font-size: $card-head-text-size;
+					font-size: $uni-font-size-lg;
 					flex: 1;
 					@include text-omit;
 				}
@@ -116,16 +110,16 @@
 				}
 
 				&-img {
-					height: $card-extra-img-size;
-					width: $card-extra-img-size;
+					height: $uni-img-size-sm;
+					width: $uni-img-size-sm;
 					margin-right: 20upx;
 				}
 
 				&-text {
 					flex: 0 0 auto;
-					width: 30%;
+					width: $card-extra-width;
 					margin-left: 20upx;
-					font-size: $card-extra-text-size;
+					font-size: $uni-font-size-base;
 					text-align: right;
 					@include text-omit;
 				}
@@ -141,8 +135,8 @@
 
 		&__footer {
 			justify-content: space-between;
-			color: $card-foot-color;
-			font-size: $card-foot-size;
+			color: $uni-text-color-grey;
+			font-size: $uni-font-size-sm;
 			padding-top: 0;
 		}
 	}
