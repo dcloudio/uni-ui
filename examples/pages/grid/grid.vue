@@ -52,7 +52,7 @@
 					},
 					{
 						image: '../../static/xunlu.png',
-						text: '迷路'
+						text: '驯鹿'
 					},
 					{
 						image: '../../static/xuehua.png',
@@ -89,7 +89,7 @@
 					},
 					{
 						image: '../../static/xunlu.png',
-						text: '迷路'
+						text: '驯鹿'
 					}
 				],
 				data3: [{
