@@ -45,7 +45,7 @@
 	}
 
 	.uni-card {
-		margin: $spacing-col-base;
+		margin: $uni-spacing-col-base;
 		background: $uni-bg-color;
 		position: relative;
 		display: flex;
@@ -71,7 +71,7 @@
 			position: relative;
 			display: flex;
 			flex-direction: row;
-			padding: $spacing-col-base;
+			padding: $uni-spacing-col-base;
 			align-items: center;
 		}
 
@@ -90,7 +90,7 @@
 
 			&-title {
 				flex: 1;
-				margin-right: $spacing-col-base;
+				margin-right: $uni-spacing-col-base;
 				display: flex;
 				flex-direction: row;
 				justify-content: flex-start;
@@ -111,13 +111,13 @@
 				&-img {
 					height: $uni-img-size-sm;
 					width: $uni-img-size-sm;
-					margin-right: $spacing-col-base;
+					margin-right: $uni-spacing-col-base;
 				}
 
 				&-text {
 					flex: 0 0 auto;
 					width: $card-extra-width;
-					margin-left: $spacing-col-base;
+					margin-left: $uni-spacing-col-base;
 					font-size: $uni-font-size-base;
 					text-align: right;
 					@include text-omit;
@@ -128,7 +128,7 @@
 
 		&__content {
 			&--pd {
-				padding: $spacing-col-base;
+				padding: $uni-spacing-col-base;
 			}
 		}
 

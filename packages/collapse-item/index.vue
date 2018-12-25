@@ -156,7 +156,7 @@
 		opacity: 0.3;
 	}
 
-	$collapse-title-pd:$spacing-col-base $spacing-col-lg;
+	$collapse-title-pd:$uni-spacing-col-lg $uni-spacing-row-lg;
 
 	.uni-collapse-cell {
 		position: relative;

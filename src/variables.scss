@@ -19,7 +19,7 @@ $uni-color-error: #dd524d;
 $uni-text-color:#333;//基本色
 $uni-text-color-inverse:#fff;//反色
 $uni-text-color-grey:#999;//辅助灰色，如加载更多的提示信息
-$color-text-color-placeholder: #808080;
+$uni-text-color-placeholder: #808080;
 $uni-text-color-disable:#c0c0c0;
 
 /* 背景颜色 */
@@ -50,20 +50,20 @@ $uni-border-radius-lg: 12upx;
 $uni-border-radius-circle: 50%;
 
 /* 水平间距 */
-$spacing-row-sm: 10px;
-$spacing-row-base: 20upx;
-$spacing-row-lg: 30upx;
+$uni-spacing-row-sm: 10px;
+$uni-spacing-row-base: 20upx;
+$uni-spacing-row-lg: 30upx;
 
 /* 垂直间距 */
-$spacing-col-sm: 10upx;
-$spacing-col-base: 20upx;
-$spacing-col-lg: 30upx;
+$uni-spacing-col-sm: 8upx;
+$uni-spacing-col-base: 16upx;
+$uni-spacing-col-lg: 24upx;
 
 /* 透明度 */
 $uni-opacity-disabled: 0.3; // 组件禁用态的透明度
 
 /* 文章场景相关 */
 $uni-color-title: #2C405A; // 文章标题颜色
-$uni-font-size-title:36upx;
+$uni-font-size-title:40upx;
 $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30upx;

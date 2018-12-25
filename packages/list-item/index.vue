@@ -99,7 +99,7 @@
 		opacity: 0.3;
 	}
 
-	$list-cell-pd:$spacing-col-base $spacing-col-lg;
+	$list-cell-pd:$uni-spacing-col-lg $uni-spacing-row-lg;
 
 	.uni-list-cell {
 		font-size: $uni-font-size-lg;
