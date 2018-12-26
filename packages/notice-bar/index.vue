@@ -7,8 +7,8 @@
 			<view v-if="showIcon === 'true' || showIcon === true" class="uni-noticebar__content-icon" :style="{backgroundColor:backgroundColor,color:color}">
 				<uni-icon type="sound" size="14" :color="color"></uni-icon>
 			</view>
-			<view class="uni-noticebar__content-text" :id="elId" :class="setTextClass" :style="{animationDuration:dura + 's'}">
-				<view class="uni-noticebar__content-inner">{{text}}</view>
+			<view class="uni-noticebar__content-text" :class="setTextClass">
+				<view class="uni-noticebar__content-inner" :id="elId" :style="{animationDuration:dura + 's'}">{{text}}</view>
 			</view>
 			<view class="uni-noticebar__content-more" v-if="moreText" @click="clickMore">
 				<view class="uni-noticebar__content-more-text">{{moreText}}</view>
@@ -178,11 +178,15 @@
 				}
 
 				&.uni-noticebar--scrollable {
-					padding-left: 100%;
-					white-space: nowrap;
-					display: inline-block;
-					animation: notice 1s linear infinite both;
-					transform: translateZ(0);
+                    display: block;
+                    overflow: hidden;
+                    .uni-noticebar__content-inner{
+                        padding-left: 100%;
+                        white-space: nowrap;
+                        display: inline-block;
+                        animation: notice 1s linear infinite both;
+                        transform: translateZ(0);
+                    }
 				}
 			}
 
