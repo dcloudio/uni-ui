@@ -61,12 +61,12 @@
 		},
 		watch: {
 			current(val) {
-				this.currentIndex = val
+				this.currentIndex = Number(val)
 			}
 		},
 		data() {
 			return {
-				currentIndex: this.current
+				currentIndex: Number(this.current)
 			}
 		},
 		computed: {
