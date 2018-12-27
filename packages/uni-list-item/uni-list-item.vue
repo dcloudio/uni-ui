@@ -22,8 +22,8 @@
 </template>
 
 <script>
-	import uniIcon from '../icon/index.vue'
-	import uniBadge from '../badge/index.vue'
+	import uniIcon from '../uni-icon/uni-icon.vue'
+	import uniBadge from '../uni-badge/uni-badge.vue'
 	export default {
 		name: 'uni-list-item',
 		components: {

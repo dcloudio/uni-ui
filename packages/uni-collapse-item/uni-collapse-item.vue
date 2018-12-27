@@ -20,7 +20,7 @@
 </template>
 
 <script>
-	import uniIcon from '../icon/index.vue'
+	import uniIcon from '../uni-icon/uni-icon.vue'
 	export default {
 		name: 'uni-collapse-item',
 		components: {

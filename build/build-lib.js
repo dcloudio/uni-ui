@@ -16,19 +16,26 @@ var files = glob.sync(packages + '/**/*.vue')
 //复制vue文件到lib目录
 files.forEach(name => {
 	var relativePath = path.relative(packages, name)
-	filenames.push(relativePath.split('\\')[0])
+    let fileName = relativePath.split('\\')[0]
+    if(!~fileName.indexOf('uni-')){
+        return
+    }
+	filenames.push(fileName)
 	var dest = path.join(lib, relativePath)
 	fs.copySync(name, dest)
 })
-
+console.log(filenames)
 //导入vue文件
 const importEvtCode = filenames.map(name => {
 	var names = name.split('-')
 	names.forEach((value, index) => {
+        if(index === 0){
+            return
+        }
 		names[index] = names[index].charAt(0).toUpperCase() + names[index].slice(1)
 	})
-	filenamesUpper.push(`uni${names.join('')}`)
-	return `import * as uni${names.join('')} from './${name}/index.vue'`
+	filenamesUpper.push(`${names.join('')}`)
+	return `import * as ${names.join('')} from './${name}/${name}.vue'`
 }).join('\r\n')
 
 // 导出vue文件
@@ -42,7 +49,7 @@ export {
   ${exportEvtCode}
 }
 const install = function(Vue, options) {
-  const components = require.context('./', true, /index\.vue$/)
+  const components = require.context('./', true, /\.vue$/)
   components.keys().forEach(fileName => {
     const componentConfig = components(fileName)['default']
     Vue.component(componentConfig.name, componentConfig)
