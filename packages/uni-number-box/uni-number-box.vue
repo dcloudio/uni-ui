@@ -141,6 +141,7 @@
             width: $numbox-input-width;
             height: 100%;
             text-align: center;
+            padding: 0;
 
             &:after {
                 content: '';
