@@ -115,12 +115,6 @@
 			"style": {
 				"navigationBarTitleText": "NoticeBar 通告栏"
 			}
-		},
-		{
-			"path": "pages/calendar/calendar",
-			"style": {
-				"navigationBarTitleText": "Calendar 日历"
-			}
 		}
 	],
 	"globalStyle": {

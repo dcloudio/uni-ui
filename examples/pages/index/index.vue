@@ -49,9 +49,6 @@
 					name: 'CountDown 倒计时',
 					url: 'count-down'
 				}, {
-					name: 'Calendar 日历',
-					url: 'calendar'
-				}, {
 					name: 'Icon 图标',
 					url: 'icon'
 				}, {
