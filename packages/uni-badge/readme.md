@@ -7,7 +7,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniBadge from "uni-ui"
+import uniBadge from "@/components/uni-badge/uni-badge.vue"
 export default {
     components: {uniBadge}
 }
@@ -30,3 +30,8 @@ export default {
 |size		|String		|normal|Badge 大小，可取值：normal、small|
 |inverted	|Boolean	|false	|是否无需背景颜色，为 true 时，背景颜色将变为文字的字体颜色														|
 |@click		|EventHandle|	-	|点击 Badge 触发事件																							|
+
+Tips:
+
+* 组件实际运行效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
+* npm 使用方式参考：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)

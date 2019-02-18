@@ -1,4 +1,4 @@
-<template name="page-head">
+<template>
 	<view class="uni-page-head">
 		<view class="uni-page-head-title">{{title}}</view>
 	</view>

@@ -11,13 +11,6 @@ module.exports = {
 			}
 		}
 	},
-	chainWebpack: webpackConfig => {
-		// Vue
-		webpackConfig.module
-			.rule('vue')
-			.include
-			.add(path.resolve(__dirname, './packages'))
-	},
 	css: {
 		loaderOptions: {
 			sass: {
