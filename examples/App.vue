@@ -13,8 +13,6 @@
 </script>
 
 <style lang="scss">
-	@import './common/variables.scss';
-
 	/*每个页面公共css */
 	page {
 		display: flex;
