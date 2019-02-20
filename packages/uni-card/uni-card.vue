@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-card" @click="onClick">
+	<view class="uni-card" :class="isFull === true || isFull === 'true' ? 'uni-card--full' : ''" @click="onClick">
 		<view class="uni-card__header" v-if="title">
 			<view class="uni-card__header-extra-img-view" v-if="thumbnail">
 				<image class="uni-card__header-extra-img" :src="thumbnail"></image>
@@ -7,7 +7,7 @@
 			<view class="uni-card__header-title-text">{{title}}</view>
 			<view class="uni-card__header-extra-text" v-if="extra">{{extra}}</view>
 		</view>
-		<view class="uni-card__content" :class="isFull === false || isFull === 'false' ? 'uni-card__content--pd' : ''">
+		<view class="uni-card__content uni-card__content--pd">
 			<slot />
 		</view>
 		<view class="uni-card__footer" v-if="note">{{note}}</view>
@@ -37,6 +37,7 @@
 
 <style lang="scss">
     $card-extra-width: 30%;
+    $uni-spacing-marign:24upx;
     
 	@mixin text-omit {
 		text-overflow: ellipsis;
@@ -45,7 +46,8 @@
 	}
 
 	.uni-card {
-		margin: $uni-spacing-col-base;
+		margin-left: $uni-spacing-marign;
+		margin-right: $uni-spacing-marign;
 		background: $uni-bg-color;
 		position: relative;
 		display: flex;
@@ -138,6 +140,9 @@
 			font-size: $uni-font-size-sm;
 			padding-top: 0;
 		}
+        &--full{
+            margin: 0;
+        }
 	}
 
 </style>
