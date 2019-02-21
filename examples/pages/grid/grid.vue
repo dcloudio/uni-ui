@@ -23,97 +23,97 @@
 			return {
 				title: "Grid",
 				data1: [{
-						image: '../../static/shu.png',
+						image: '/static/shu.png',
 						text: '圣诞树'
 					},
 					{
-						image: '../../static/lindang.png',
+						image: '/static/lindang.png',
 						text: '铃铛'
 					},
 					{
-						image: '../../static/laoren.png',
+						image: '/static/laoren.png',
 						text: '圣诞老人'
 					},
 					{
-						image: '../../static/liwu.png',
+						image: '/static/liwu.png',
 						text: '礼物'
 					},
 					{
-						image: '../../static/maozi.png',
+						image: '/static/maozi.png',
 						text: '帽子'
 					},
 					{
-						image: '../../static/shoutao.png',
+						image: '/static/shoutao.png',
 						text: '手套'
 					},
 					{
-						image: '../../static/xueqiao.png',
+						image: '/static/xueqiao.png',
 						text: '雪橇'
 					},
 					{
-						image: '../../static/xunlu.png',
+						image: '/static/xunlu.png',
 						text: '驯鹿'
 					},
 					{
-						image: '../../static/xuehua.png',
+						image: '/static/xuehua.png',
 						text: '雪花'
 					}
 				],
 				data2: [{
-						image: '../../static/shu.png',
+						image: '/static/shu.png',
 						text: '圣诞树'
 					},
 					{
-						image: '../../static/lindang.png',
+						image: '/static/lindang.png',
 						text: '铃铛'
 					},
 					{
-						image: '../../static/laoren.png',
+						image: '/static/laoren.png',
 						text: '圣诞老人'
 					},
 					{
-						image: '../../static/liwu.png',
+						image: '/static/liwu.png',
 						text: '礼物'
 					},
 					{
-						image: '../../static/maozi.png',
+						image: '/static/maozi.png',
 						text: '帽子'
 					},
 					{
-						image: '../../static/shoutao.png',
+						image: '/static/shoutao.png',
 						text: '手套'
 					},
 					{
-						image: '../../static/xueqiao.png',
+						image: '/static/xueqiao.png',
 						text: '雪橇'
 					},
 					{
-						image: '../../static/xunlu.png',
+						image: '/static/xunlu.png',
 						text: '驯鹿'
 					}
 				],
 				data3: [{
-						image: '../../static/shu.png',
+						image: '/static/shu.png',
 						text: '圣诞树'
 					},
 					{
-						image: '../../static/lindang.png',
+						image: '/static/lindang.png',
 						text: '铃铛'
 					},
 					{
-						image: '../../static/laoren.png',
+						image: '/static/laoren.png',
 						text: '圣诞老人'
 					},
 					{
-						image: '../../static/liwu.png',
+						image: '/static/liwu.png',
 						text: '礼物'
 					},
 					{
-						image: '../../static/maozi.png',
+						image: '/static/maozi.png',
 						text: '帽子'
 					},
 					{
-						image: '../../static/shoutao.png',
+						image: '/static/shoutao.png',
 						text: '手套'
 					}
 				]
