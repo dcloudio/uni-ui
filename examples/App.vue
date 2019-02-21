@@ -22,6 +22,7 @@
 	}
     view{
         font-size: 28upx;
+        line-height: inherit;
     }
     .example{
         padding: 0 30upx 30upx;
