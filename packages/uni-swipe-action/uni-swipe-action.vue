@@ -6,7 +6,7 @@
                 <slot></slot>
             </view>
             <view class="uni-swipe-action__btn-group">
-                <div v-for="(item,index) in options" :key="index" class="uni-swipe-action--btn" :style="item.style"
+                <div v-for="(item,index) in options" :key="index" class="uni-swipe-action--btn" :style="{backgroundColor:item.style.backgroundColor,color:item.style.color,fontSize:item.style.fontSize}"
                     @click="bindClick(item,index)">
                     {{item.text}}
                 </div>
@@ -42,10 +42,10 @@
             options: Array
         },
         watch: {
-        	isOpened(newValue, oldValue) {
-        		this.isShowBtn = newValue ? true : false;
+            isOpened(newValue, oldValue) {
+                this.isShowBtn = newValue ? true : false;
                 this.endMove();
-        	}
+            }
         },
         data() {
             return {
@@ -69,8 +69,8 @@
             }, data => {
                 this.btnGroupWidth = data.width;
             }).exec();
-            if(this.isOpened === true){
-                this.isShowBtn =true;
+            if (this.isOpened === true) {
+                this.isShowBtn = true;
                 this.endMove();
             }
         },
@@ -83,8 +83,8 @@
             }, data => {
                 this.btnGroupWidth = data.width;
             }).exec();
-            if(this.isOpened === true){
-                this.isShowBtn =true;
+            if (this.isOpened === true) {
+                this.isShowBtn = true;
                 this.endMove();
             }
         },
@@ -141,6 +141,10 @@
             },
             touchEnd(event) {
                 this.isMoving = false;
+                if(this.direction !== 'right' && this.direction !== 'left'){
+                    this.direction = '';
+                    return;
+                }
                 if (!this.isDrag) {
                     if (this.direction == 'right') {
                         this.isShowBtn = false
@@ -162,11 +166,10 @@
                 }
                 if (this.direction === 'right') {
                     this.isShowBtn = Math.abs(this.touchMoveLength) > this.btnGroupWidth / 2 ? false : true;
-                    this.endMove()
-                } else if (this.direction === 'left') {
+                } else {
                     this.isShowBtn = Math.abs(this.touchMoveLength) > this.btnGroupWidth / 2 ? true : false;
-                    this.endMove()
                 }
+                this.endMove();
             },
             endMove() {
                 this.touchMoveLength = 0;
