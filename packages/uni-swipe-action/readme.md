@@ -1,0 +1,138 @@
+### SwipeAction 滑动操作
+
+通过滑动触发选项的容器，组件名：``uni-swipe-action``
+
+**使用方式：**
+
+在 ``script`` 中引用组件 
+
+```javascript
+import {uniSwipeAction} from "uni-ui"
+export default {
+    components: {uniSwipeAction}
+}
+```
+
+一般用法
+
+```html
+<uni-swipe-action :options="[
+    {
+        text: '取消',
+        style: {
+            backgroundColor: '#007aff'
+        }
+    }, {
+        text: '确认',
+        style: {
+            backgroundColor: '#dd524d'
+        }
+    }
+]">
+    <view class='cont'>SwipeAction 基础使用场景</view>
+</uni-swipe-action>
+```
+
+不跟跟手滑动
+
+```html
+<uni-swipe-action :is-drag='false' :options="[
+    {
+        text: '取消',
+        style: {
+            backgroundColor: '#007aff'
+        }
+    }, {
+        text: '确认',
+        style: {
+            backgroundColor: '#dd524d'
+        }
+    }
+]">
+    <view class='cont'>SwipeAction 不跟手滑动展示</view>
+</uni-swipe-action>
+```
+
+
+自动关闭
+
+```html
+<uni-swipe-action :auto-close="true" :options="[
+    {
+        text: '取消',
+        style: {
+            backgroundColor: '#007aff'
+        }
+    }, {
+        text: '确认',
+        style: {
+            backgroundColor: '#dd524d'
+        }
+    }
+]">
+    <view class='cont'>点击按钮自动关闭</view>
+</uni-swipe-action>
+```
+
+
+传递点击事件
+
+```html
+<uni-swipe-action @click="bindClick" :options="[
+    {
+        text: '取消',
+        style: {
+            backgroundColor: '#007aff'
+        }
+    }, {
+        text: '确认',
+        style: {
+            backgroundColor: '#dd524d'
+        }
+    }
+]">
+    <view class='cont'>点击选项时触发事件</view>
+</uni-swipe-action>
+```
+
+与 List 组件使用
+
+```html
+<uni-list>
+    <uni-swipe-action :options="options1">
+        <uni-list-item title="item1" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+    <uni-swipe-action :options="options2">
+        <uni-list-item title="item2" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+    <uni-swipe-action :options="options3">
+        <uni-list-item title="item3" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+</uni-list>
+```
+
+**SwipeAction 属性说明：**
+
+|属性名|类型|默认值|是否必填	|说明|
+|:--|:--|:--|:--|:--|
+|is-drag|Boolean|true|否|是否跟手滑动|
+|is-opened|Boolean|false|否|是否为开启状态|
+|disabled|Boolean|false|否|是否禁止滑动|
+|auto-close|Boolean|false|否|点击选项时,是否自动关闭|
+|options|Array<Object>|-|是|点击选项时,是否自动关闭|
+
+options 参数说明
+
+|参数|类型|说明|
+|:--|:--|:---|
+|text|String|按钮的文字|
+|style|Object|按钮样式，注意如 background-color 这样的样式需要写成 backgroundColor|
+
+**SwipeAction 事件说明：**
+
+|事件称名|说明|返回参数|
+|:--|:---|:--|
+|click|点击选项按钮时触发事件|{text,style,index} ，text（按钮文字）、style（按钮的样式）、index（下标）|
+|opened|完全打开时触发|-|
+|closed|完全关闭时触发|-|
+

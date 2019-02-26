@@ -41,6 +41,9 @@
 				}, {
 					name: 'SegmentedControl 分段器',
 					url: 'segmented-control'
+				}, {
+					name: 'SwipeAction 滑动操作',
+					url: 'swipe-action'
 				}],
 				views: [{
 					name: 'Badge 数字角标',

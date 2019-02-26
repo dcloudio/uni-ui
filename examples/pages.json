@@ -115,6 +115,12 @@
 			"style": {
 				"navigationBarTitleText": "NoticeBar 通告栏"
 			}
+		},
+		{
+			"path": "pages/swipe-action/swipe-action",
+			"style": {
+				"navigationBarTitleText": "SwipeAction 滑动操作"
+			}
 		}
 	],
 	"globalStyle": {
