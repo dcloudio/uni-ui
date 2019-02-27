@@ -2,34 +2,26 @@
     <view>
         <page-head :title="title"></page-head>
         <view class="example-title">基本用法</view>
-        <uni-swipe-action :options="options1" @click="bindClick">
+        <uni-swipe-action :options="options" @click="bindClick">
             <view class='cont'>SwipeAction 基础使用场景</view>
-        </uni-swipe-action>
-        <view class="example-title">不跟手滑动</view>
-        <uni-swipe-action :is-drag='false' :options="options1">
-            <view class='cont'>SwipeAction 不跟手滑动展示</view>
         </uni-swipe-action>
         <view class="example-title">禁止滑动</view>
         <uni-swipe-action :disabled="true">
             <view class='cont'>SwipeAction 禁止滑动展示</view>
         </uni-swipe-action>
         <view class="example-title">传递点击事件</view>
-        <uni-swipe-action :options="options2" @click="bindClick">
+        <uni-swipe-action :options="options" @click="bindClick">
             <view class='cont'>点击选项时触发事件</view>
         </uni-swipe-action>
-        <view class="example-title">自动关闭</view>
-        <uni-swipe-action :options="options2" :auto-close="true">
-            <view class='cont'>点击点击按钮自动关闭</view>
-        </uni-swipe-action>
         <view class="example-title">开启或关闭事件</view>
-        <uni-swipe-action :options="options2" :auto-close="true" @opened="bindOpened" @closed="bindClosed">
+        <uni-swipe-action :options="options" @opened="bindOpened" @closed="bindClosed">
             <view class='cont'>开启或关闭事件时触发事件</view>
         </uni-swipe-action>
         <view class="example-title">使用变量控制开关</view>
         <view class="button-view">
             <view class="button" @click="setOpened">当前状态：{{isOpened ? '开' : '关'}}</view>
         </view>
-        <uni-swipe-action :options="options2" :is-opened="isOpened" :auto-close="true" @opened="bindOpened2" @closed="bindClosed2">
+        <uni-swipe-action :options="options" :is-opened="isOpened" :auto-close="true" @opened="bindOpened2" @closed="bindClosed2">
             <view class='cont'>开启或关闭事件时触发事件</view>
         </uni-swipe-action>
         <view class="example-title">与 List 组件一起使用</view>
@@ -37,10 +29,10 @@
             <uni-swipe-action :options="options1">
                 <uni-list-item title="item1" show-arrow="false"></uni-list-item>
             </uni-swipe-action>
-            <uni-swipe-action :options="options2">
+            <uni-swipe-action :options="options">
                 <uni-list-item title="item2" show-arrow="false"></uni-list-item>
             </uni-swipe-action>
-            <uni-swipe-action :options="options1">
+            <uni-swipe-action :options="options3">
                 <uni-list-item title="item3" show-arrow="false"></uni-list-item>
             </uni-swipe-action>
         </uni-list>
@@ -53,7 +45,7 @@
             return {
                 title: 'SwipeAction',
                 isOpened: false,
-                options1: [{
+                options: [{
                     text: '取消',
                     style: {
                         backgroundColor: '#007aff'
@@ -64,16 +56,20 @@
                         backgroundColor: '#dd524d'
                     }
                 }],
-                options2: [{
-                    text: '取消',
+                options1: [{
+                    text: '取消置顶'
+                }],
+                options3: [{
+                    text: '置顶'
+                }, {
+                    text: '标记为已读',
                     style: {
-                        backgroundColor: '#F8F8F8',
-                        color: '#333'
+                        backgroundColor: 'rgb(254,156,1)'
                     }
                 }, {
-                    text: '确认',
+                    text: '删除',
                     style: {
-                        backgroundColor: '#dd524d'
+                        backgroundColor: 'rgb(255,58,49)'
                     }
                 }]
             }

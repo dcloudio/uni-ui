@@ -33,31 +33,11 @@ export default {
 </uni-swipe-action>
 ```
 
-不跟跟手滑动
+
+禁止滑动
 
 ```html
-<uni-swipe-action :is-drag='false' :options="[
-    {
-        text: '取消',
-        style: {
-            backgroundColor: '#007aff'
-        }
-    }, {
-        text: '确认',
-        style: {
-            backgroundColor: '#dd524d'
-        }
-    }
-]">
-    <view class='cont'>SwipeAction 不跟手滑动展示</view>
-</uni-swipe-action>
-```
-
-
-自动关闭
-
-```html
-<uni-swipe-action :auto-close="true" :options="[
+<uni-swipe-action :disabled="true" :options="[
     {
         text: '取消',
         style: {
@@ -115,18 +95,17 @@ export default {
 
 |属性名|类型|默认值|是否必填	|说明|
 |:--|:--|:--|:--|:--|
-|is-drag|Boolean|true|否|是否跟手滑动|
 |is-opened|Boolean|false|否|是否为开启状态|
 |disabled|Boolean|false|否|是否禁止滑动|
-|auto-close|Boolean|false|否|点击选项时,是否自动关闭|
-|options|Array<Object>|-|是|点击选项时,是否自动关闭|
+|auto-close|Boolean|true|否|在组件开启状态时点击组件，是否自动关闭|
+|options|Array<Object>|-|是|组件选项内容及样式|
 
 options 参数说明
 
-|参数|类型|说明|
-|:--|:--|:---|
-|text|String|按钮的文字|
-|style|Object|按钮样式，注意如 background-color 这样的样式需要写成 backgroundColor|
+|参数|类型|是否必填|说明|
+|:--|:--|:--|:--|
+|text|String|是|按钮的文字|
+|style|Object|否|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：28upx|
 
 **SwipeAction 事件说明：**
 
