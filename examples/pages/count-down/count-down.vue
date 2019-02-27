@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<page-head :title="title"></page-head>
         <view class="example">
         	<view class="example-title">一般用法</view>
         	<uni-countdown :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
@@ -18,9 +17,7 @@
 <script>
 	export default {
 		data() {
-			return {
-				title: 'CountDown'
-			}
+			return {}
 		},
 		methods: {
             timeup(){

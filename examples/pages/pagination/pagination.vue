@@ -1,6 +1,5 @@
 <template>
 	<view>
-        <page-head :title="title"></page-head>
 		<view class="example-title">默认样式</view>
 		<uni-pagination title="标题文字" total="20"></uni-pagination>
         <view class="example-title">修改按钮文字</view>
@@ -23,7 +22,6 @@
 	export default {
 		data() {
 			return {
-                title:'Pagination',
 				current:1,
                 total:0,
                 pageSize:10

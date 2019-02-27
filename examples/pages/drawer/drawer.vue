@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<page-head :title="title"></page-head>
 		<view class="example">
 			<view class="example-title">左侧滑出</view>
 			<view>
@@ -38,8 +37,7 @@
 		data() {
 			return {
 				showRigth: false,
-				showLeft: false,
-				title: 'Drawer'
+				showLeft: false
 			}
 		},
 		methods: {

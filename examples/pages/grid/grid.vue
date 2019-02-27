@@ -1,6 +1,5 @@
 <template>
     <view class="page">
-        <page-head :title="title"></page-head>
         <view class="example">
             <view class="example-title">默认样式</view>
             <uni-grid :data="data1" @click="onClick"></uni-grid>
@@ -21,7 +20,6 @@
     export default {
         data() {
             return {
-                title: "Grid",
                 data1: [{
                         image: '/static/c1.png',
                         text: 'Grid'

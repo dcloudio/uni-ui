@@ -1,6 +1,5 @@
 <template>
 	<view>
-        <page-head :title="title"></page-head>
         <view class="example-title">基础卡片</view>
         <uni-card title="标题文字" @click="clickCard">
             这是一个基础卡片示例，内容样式可自定义，卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、时间等。
@@ -19,9 +18,7 @@
 <script>
 	export default {
 		data() {
-			return {
-                title:'Card'
-			}
+			return {}
 		},
 		methods: {
 			clickCard() {

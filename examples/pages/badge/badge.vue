@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<page-head :title="title"></page-head>
 		<view class="example">
             <view class="example-title">有底色</view>
 			<view style="background:#FFF; padding:20upx;">
@@ -33,9 +32,7 @@
 <script>
 	export default {
 		data() {
-			return {
-				title: "Badge"
-			}
+			return {}
 		}
 	}
 </script>

@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<page-head :title="title"></page-head>
 		<view class="example">
 			<view class="example-title">基本用法</view>
 			<uni-number-box></uni-number-box>
@@ -20,7 +19,6 @@
 	export default {
 		data() {
 			return {
-				title: 'NumberBox',
 				numberValue: 0,
 			}
 		},

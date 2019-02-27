@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<page-head :title="title"></page-head>
         <view class="example">
         	<view class="example-title">居中弹出</view>
         	<button type="button" @click="showMiddlePopup">弹出 Popup</button>
@@ -26,7 +25,6 @@
 		data() {
 			return {
 				popType: 'middle',
-				title: 'Popup',
 				showPopupMiddle: false,
 				showPopupTop: false,
 				showPopupBottom: false,

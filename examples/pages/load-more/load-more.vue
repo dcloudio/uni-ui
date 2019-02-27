@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<page-head :title="title"></page-head>
 		<view>
 			<view class="example-title">基本用法</view>
 			<uni-load-more :status="status"></uni-load-more>
@@ -26,7 +25,6 @@
 	export default {
 		data() {
 			return {
-				title: 'LoadMore',
 				status: 'more',
 				contentText: {
 					contentdown: "查看更多",

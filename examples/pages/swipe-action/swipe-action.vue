@@ -1,6 +1,5 @@
 <template>
     <view>
-        <page-head :title="title"></page-head>
         <view class="example-title">基本用法</view>
         <uni-swipe-action :options="options" @click="bindClick">
             <view class='cont'>SwipeAction 基础使用场景</view>
@@ -43,7 +42,6 @@
     export default {
         data() {
             return {
-                title: 'SwipeAction',
                 isOpened: false,
                 options: [{
                     text: '取消',

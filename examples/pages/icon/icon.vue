@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<page-head :title="title"></page-head>
 		<view>
 			<view class="icon-item" v-for="(item,index) in iconClassList" :key="index">
 				<uni-icon size="40" :type="item" :color="activeIndex === index?'#007aff':'#8f8f94'" @click="switchActive(index)"></uni-icon>
@@ -105,7 +104,6 @@
 					'scan',
 					'sound'
 				],
-				title: 'Icon',
 				activeIndex: -1
 			};
 		},

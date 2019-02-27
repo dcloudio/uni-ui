@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<page-head :title="title"></page-head>
 		<view class="example">
 			<view class="example-title">基本用法</view>
             <uni-rate value="2" @change="onChange"></uni-rate>
@@ -21,12 +20,9 @@
 </template>
 
 <script>
-    var ss = "123456"
 	export default {
 		data() {
-			return {
-				title: "Rate"
-			}
+			return {}
 		},
 		methods: {
 			onChange(e) {
