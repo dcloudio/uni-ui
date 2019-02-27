@@ -1,6 +1,6 @@
 <template>
     <view v-if="show" class="uni-noticebar" :style="{backgroundColor:backgroundColor,color:color}" @click="onClick">
-        <view v-if="showClose === 'true' || showClose === true" class="uni-noticebar__close" @click="close">
+        <view v-if="showClose === 'true' || showClose === true" class="uni-noticebar__close">
             <uni-icon type="closefill" size="12"></uni-icon>
         </view>
         <view class="uni-noticebar__content" :class="setContenClass">
@@ -112,16 +112,16 @@
         },
         // #endif
         methods: {
-            close() {
-                this.show = false
-                this.$emit('close')
-            },
             clickMore() {
                 this.$emit('getmore')
             },
-            onClick() {
-                this.$emit('click')
-            }
+            onClick(e) {
+				if(uni.upx2px(48) + 12 > e.touches[0].clientX && (String(this.showClose) ===  'true')){
+					this.show = false
+					this.$emit('close')
+				}
+				this.$emit('click')
+			}
         }
     }
 </script>
