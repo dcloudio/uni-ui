@@ -17,18 +17,30 @@
 		</view>
 
 		<view class="example-title">Style</view>
-		<radio-group @change="styleChange">
-			<label v-for="item in styles" :key="item.value">
-				{{item.text}}
-				<radio :value="item.value" :checked="item.checked" />
+		<radio-group  class="uni-list" @change="styleChange">
+			<label v-for="(item, index) in styles" :key="index" class="uni-list-item">
+				<view class="uni-list-item__container">
+					<view class="uni-list-item__content">
+						<view class="uni-list-item__content-title">{{item.text}}</view>
+					</view>
+					<view class="uni-list-item__extra" >
+						<radio :value="item.value" :checked="item.checked" />
+					</view>
+				</view>
 			</label>
 		</radio-group>
 
 		<view class="example-title">Color</view>
-		<radio-group @change="colorChange">
-			<label v-for="(item, index) in colors" :key="index">
-				<view class="color-tag" :style="{backgroundColor: item}"></view>
-				<radio :value="item" :checked="item.checked" />
+		<radio-group  class="uni-list" @change="colorChange">
+			<label v-for="(item, index) in colors" :key="index" class="uni-list-item">
+				<view class="uni-list-item__container">
+					<view class="uni-list-item__content">
+						<view class="color-tag" :style="{backgroundColor: item}"></view>
+					</view>
+					<view class="uni-list-item__extra" >
+						<radio :value="item" :checked="index === colorIndex"  />
+					</view>
+				</view>
 			</label>
 		</radio-group>
 	</view>
@@ -57,6 +69,7 @@
 					'#dd524d'
 				],
 				current: 0,
+				colorIndex: 0,
 				activeColor: '#007aff',
 				styleType: 'button'
 			}
@@ -88,22 +101,6 @@
 		align-items: center;
 		height: 300upx;
 		text-align: center;
-	}
-
-	radio-group {
-		margin-top: 30upx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-	}
-
-	radio {
-		margin-left: 20upx;
-	}
-
-	label {
-		display: flex;
-		flex-direction: row;
 	}
 
 	.color-tag {
