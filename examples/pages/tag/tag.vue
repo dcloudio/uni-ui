@@ -94,7 +94,7 @@
                 let types = ['default', 'primary', 'success', 'warning', 'error'];
                 let index = types.indexOf(this.type);
                 types.splice(index, 1)
-                let randomIndex = Math.ceil(Math.random() * 5);
+                let randomIndex = Math.floor(Math.random() * 4);
                 this.type = types[randomIndex];
             },
             setInverted() {
