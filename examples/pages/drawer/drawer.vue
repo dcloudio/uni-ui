@@ -1,5 +1,14 @@
 <template>
 	<view>
+        <view class="header">
+        	<view class="input-view">
+        		<uni-icon type="search" size="22" color="#666666"></uni-icon>
+        		<input confirm-type="search" @confirm="confirm" class="input" type="text" placeholder="输入搜索关键词" />
+        	</view>
+        </view>
+        <view class="uni-padding-wrap" style="margin-top:30upx;">
+        	这是抽屉式导航组件使用示例，可以指定菜单左侧或者右侧弹出（仅初始化生效），组件内部可以放置任何内容。点击页面按钮即可显示导航菜单。
+        </view>
 		<view class="example">
 			<view class="example-title">左侧滑出</view>
 			<view>
@@ -60,6 +69,9 @@
 				}
 			}
 		},
+        onNavigationBarButtonTap(e) {
+        	this.showRigth = !this.showRigth
+        },
 		onBackPress() {
 			if (this.showRigth || this.showLeft) {
 				this.hide()
@@ -70,6 +82,33 @@
 </script>
 
 <style>
+    .header {
+    	display: flex;
+    	flex-direction: row;
+    	padding: 10px 15px;
+    	align-items: center;
+    }
+    .input-view {
+    	display: flex;
+    	align-items: center;
+    	flex-direction: row;
+    	background-color: #e7e7e7;
+    	height: 30px;
+    	border-radius: 15px;
+    	padding: 0 10px;
+    	flex: 1;
+    }
+    .uni-padding-wrap{
+        padding: 0 15px;
+        line-height: 1.8;
+    }
+    .input {
+    	flex: 1;
+    	padding: 0 5px;
+    	height: 24px;
+    	line-height: 24px;
+    	font-size: 16px;
+    }
 	.close {
 		padding: 30upx;
 	}
