@@ -1,7 +1,10 @@
 <template>
     <view>
+        <view class="uni-common-mt">
+            本导航栏为自定义组件，并非原生导航栏。除非原生导航栏无法满足需求，否则不推荐使用自定义导航栏组件。具体参考http://ask.dcloud.net.cn/article/34921
+        </view>
         <view class="example-title">基本用法</view>
-        <uni-nav-bar left-icon="back" @click-left="back" title="标题" fixed='true'></uni-nav-bar>
+        <uni-nav-bar left-icon="back" @click-left="back" title="标题"></uni-nav-bar>
         <view class="example-title">左右显示文字</view>
         <uni-nav-bar left-icon="back" right-text="菜单" left-text="返回" @click-left="back" title="标题"></uni-nav-bar>
         <view class="example-title">插入slot</view>
@@ -76,6 +79,11 @@
 </script>
 
 <style>
+    .uni-common-mt{
+        color: #7a7e83;
+        font-size: 28upx;
+        padding: 30upx;
+    }
     .title {
         font-size: 15px;
         line-height: 20px;
