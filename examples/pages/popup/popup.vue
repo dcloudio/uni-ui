@@ -1,73 +1,237 @@
 <template>
-	<view class="page">
-        <view class="example">
-        	<view class="example-title">居中弹出</view>
-        	<button type="button" @click="showMiddlePopup">弹出 Popup</button>
-        	<uni-popup :show="showPopupMiddle" :type="popType" v-on:hidePopup="hidePopup">
-        		<view class="uni-center" style="font-size:0;">
-        			<image class="image" style="width:150upx;height:150upx;" mode="widthFix" src="/static/laoren.png" />
-        		</view>
-        		<view class="uni-common-mt uni-helllo-text uni-center">
-        			消息内容使用 slot 形式定义
-        		</view>
-        	</uni-popup>
-        	<view class="example-title">顶部弹出</view>
-        	<button type="button" @click="showTopPopup" data-position="top">弹出 Popup</button>
-            <uni-popup :show="showPopupTop" :type="popType" :msg="msg" v-on:hidePopup="hidePopup"></uni-popup>
-        	<view class="example-title">底部弹出</view>
-        	<button type="button" @click="showBottomPopup" data-position="bottom">弹出 Popup</button>
-        	<uni-popup :show="showPopupBottom" :type="popType" :msg="msg" v-on:hidePopup="hidePopup"></uni-popup>
-        </view>
+	<view>
+		<view class="example">
+			<view class="example-title">基本用法</view>
+			<button type="button" @click="x">顶部弹出 popup</button>
+			<uni-popup :show="top" position="top" mode="fixed" msg="顶部弹出popup" @hidePopup="hidePopup"></uni-popup>
+			<button type="button" @click="y">居中弹出 popup</button>
+			<uni-popup :show="middle" position="middle" mode="fixed" msg="居中弹出popup" @hidePopup="hidePopup"></uni-popup>
+			<button type="button" @click="z">底部部弹出 popup</button>
+			<uni-popup :show="bottom" position="bottom" mode="fixed" msg="底部弹出popup" @hidePopup="hidePopup"></uni-popup>
+		</view>
+		<view class="example">
+			<view class="example-title">slot用法</view>
+			<button type="button" @click="showMiddlePopup">居中弹出（插屏广告）</button>
+			<uni-popup :show="showPopupMiddleImg" position="middle" mode="insert" @hidePopup="hidePopup">
+				<view class="uni-center center-box">
+					<image class="image" src="/static/uni.png" />
+				</view>
+			</uni-popup>
+			<button type="button" @click="showMiddlePopupList">居中弹出（滚动列表）</button>
+			<uni-popup :show="showPopupMiddleList" position="middle" mode="fixed" @hidePopup="hidePopup">
+				<scroll-view class="uni-center center-box" scroll-y="true">
+					<view class="uni-list-item" v-for="(item, index) in list" :key="index">
+						滚动列表数据 {{ item }}
+					</view>
+				</scroll-view>
+			</uni-popup>
+			<button type="button" @click="showBottomPopup" data-position="bottom">底部弹出（分享界面）</button>
+			<uni-popup :show="showPopupBottomShare" position="bottom" @hidePopup="hidePopup">
+				<view class="bottom-title">分享到</view>
+				<view class="bottom-content">
+					<view class="bottom-content-box" v-for="(item, index) in bottomData" :key="index">
+						<view class="bottom-content-image" :class="item.name">
+							<text class="icon">{{ item.icon }}</text>
+						</view>
+						<view class="bottom-content-text">{{ item.text }}</view>
+					</view>
+				</view>
+				<view class="bottom-btn" @click="hidePopup">取消分享</view>
+			</uni-popup>
+		</view>
 	</view>
 </template>
+
 <script>
 	export default {
 		data() {
 			return {
-				popType: 'middle',
-				showPopupMiddle: false,
-				showPopupTop: false,
-				showPopupBottom: false,
-				msg: ''
+				top: false,
+				middle: false,
+				bottom: false,
+				showPopupMiddleImg: false,
+				showPopupMiddleList: false,
+				showPopupBottomShare: false,
+				list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+				bottomData: [{
+						text: '微信',
+						icon: '\ue6a4',
+						name: 'wx'
+					},
+					{
+						text: '朋友圈',
+						icon: '\ue646',
+						name: 'wx'
+					},
+					{
+						text: 'QQ',
+						icon: '\ue66b',
+						name: 'qq'
+					},
+					{
+						text: '新浪',
+						icon: '\ue600',
+						name: 'sina'
+					},
+					{
+						text: '复制',
+						icon: '\ue632',
+						name: 'copy'
+					},
+					{
+						text: '更多',
+						icon: '\ue618',
+						name: 'more'
+					}
+				]
+			};
+		},
+		onBackPress(){
+			if(this.showPopupMiddleImg || this.showPopupMiddleList || this.showPopupBottomShare || this.top || this.middle || this.bottom){
+				this.hidePopup();
+				return true;
 			}
 		},
-        onBackPress() {
-        	// 返回按钮监听
-        	if(this.showPopupMiddle || this.showPopupTop || this.showPopupBottom){
-        		this.hidePopup();
-        		return true;
-        	}
-        },
 		methods: {
-			//统一的关闭popup方法
-			hidePopup: function() {
-				this.showPopupMiddle = false;
-				this.showPopupTop = false;
-				this.showPopupBottom = false;
+			hidePopup() {
+				this.showPopupMiddleImg = false;
+				this.showPopupMiddleList = false;
+				this.showPopupBottomShare = false;
+				this.top = false;
+				this.middle = false;
+				this.bottom = false;
 			},
-			//展示居中 popup
-			showMiddlePopup: function() {
+			showMiddlePopup() {
 				this.hidePopup();
-				this.popType = 'middle';
-				this.showPopupMiddle = true;
+				this.showPopupMiddleImg = true;
 			},
-			//展示顶部 popup
-			showTopPopup: function() {
+			showMiddlePopupList() {
 				this.hidePopup();
-				this.popType = 'top';
-				this.msg = '顶部 popup 信息内容';
-				this.showPopupTop = true;
+				this.showPopupMiddleList = true;
 			},
-			//展示底部 popup
-			showBottomPopup: function() {
+			showBottomPopup() {
 				this.hidePopup();
-				this.popType = 'bottom';
-				this.msg = '底部 popup 信息内容';
-				this.showPopupBottom = true;
+				this.showPopupBottomShare = true;
+			},
+			x() {
+				this.hidePopup();
+				this.top = true;
+			},
+			y() {
+				this.hidePopup();
+				this.middle = true;
+			},
+			z() {
+				this.hidePopup();
+				this.bottom = true;
 			}
 		}
-	}
+	};
 </script>
 <style>
+	.uni-padding-wrap {
+		padding: 0 30upx;
+	}
 
+	button {
+		margin: 20upx 0;
+	}
+
+	.uni-helllo-text {
+		height: 100upx;
+		line-height: 100upx;
+		text-align: center;
+	}
+
+	.center-box {
+		width: 500upx;
+		height: 500upx;
+	}
+
+	.uni-list-item {
+		text-align: left;
+		line-height: 80upx;
+		border-bottom: 1px #f5f5f5 solid;
+	}
+
+	.uni-list-item:last-child {
+		border: none;
+	}
+
+	.center-box .image {
+		width: 100%;
+		height: 100%;
+	}
+
+	.bottom-title {
+		line-height: 60upx;
+		font-size: 24upx;
+		padding: 15upx 0;
+	}
+
+	.bottom-content {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0 35upx;
+	}
+
+	.bottom-content-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 15upx;
+		width: 25%;
+		box-sizing: border-box;
+	}
+
+	.bottom-content-image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 90upx;
+		height: 90upx;
+		overflow: hidden;
+		background: #007aff;
+		border-radius: 10upx;
+	}
+
+	.bottom-content-text {
+		font-size: 26upx;
+		color: #333;
+		margin-top: 10upx;
+	}
+
+	.bottom-btn {
+		height: 90upx;
+		line-height: 90upx;
+		border-top: 1px #f5f5f5 solid;
+	}
+
+	.bottom-content-image.wx {
+		background: #00ce47;
+	}
+
+	.bottom-content-image.qq {
+		background: #00b6f6;
+	}
+
+	.bottom-content-image.sina {
+		background: #ff766a;
+	}
+
+	.bottom-content-image.copy {
+		background: #07ccd0;
+	}
+
+	@font-face {
+		font-family: 'iconfont';
+		/* project id 1028200 */
+		src: url('https://at.alicdn.com/t/font_1028200_47ewtwy4t04.ttf') format('truetype');
+	}
+
+	.icon {
+		font-family: 'iconfont';
+		font-size: 40upx;
+		color: #fff;
+	}
 </style>
