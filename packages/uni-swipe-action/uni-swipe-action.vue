@@ -1,7 +1,7 @@
 <template>
     <view class="uni-swipe-action">
         <view class="uni-swipe-action__container" :class="!isMoving ? 'animtion' : ''" @touchstart="touchStart"
-            @touchmove="touchMove" @touchend="touchEnd" @touchcancel="touchEnd" @click="bindClickCont" :style="{transform:transformX}">
+            @touchmove="touchMove" @touchend="touchEnd" @touchcancel="touchEnd" @click="bindClickCont" :style="{'transform':transformX,'-webkit-transform':transformX}">
             <view class="uni-swipe-action__content">
                 <slot></slot>
             </view>
