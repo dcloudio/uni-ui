@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-tag" v-if="text" :class="[disabled === true || disabled === 'true' ? 'uni-tag--disabled' : '',inverted === true || inverted === 'true' ? 'uni-tag--inverted' : '',circle === true || circle === 'true' ? 'uni-tag--circle' : '','uni-tag--'+size,'uni-tag--'+type]"
+	<view class="uni-tag" v-if="text" :class="[disabled === true || disabled === 'true' ? 'uni-tag--disabled' : '',inverted === true || inverted === 'true' ? 'uni-tag--inverted' : '',circle === true || circle === 'true' ? 'uni-tag--circle' : '',mark === true || mark === 'true' ? 'uni-tag--mark' : '','uni-tag--'+size,'uni-tag--'+type]"
 	 @click="onClick()">{{text}}</view>
 </template>
 
@@ -24,7 +24,11 @@
 				type: [String, Boolean],
 				defalut: false
 			},
-			circle: { //是否为圆角
+			circle: { //是否为圆角样式
+				type: [String, Boolean],
+				defalut: false
+			},
+			mark: { //是否为标记样式
 				type: [String, Boolean],
 				defalut: false
 			}
@@ -62,6 +66,9 @@
 
 		&--circle {
 			border-radius: 30upx;
+		}
+		&--mark {
+			border-radius: 0 30upx 30upx 0;
 		}
 
 		&--disabled {

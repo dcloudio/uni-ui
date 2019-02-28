@@ -1,6 +1,6 @@
 <template>
     <view class="example">
-        <view class="example-title">空心标签</view>
+        <view class="example-title">实心标签</view>
         <view>
             <view class="tag-view">
                 <uni-tag text="标签"></uni-tag>
@@ -15,7 +15,7 @@
                 <uni-tag text="标签" type="warning"></uni-tag>
             </view>
             <view class="tag-view">
-                <uni-tag text="标签" type="error" :circle="true"></uni-tag>
+                <uni-tag text="标签" type="error"></uni-tag>
             </view>
         </view>
         <view class="example-title">空心标签</view>
@@ -33,10 +33,39 @@
                 <uni-tag text="标签" inverted="true" type="warning"></uni-tag>
             </view>
             <view class="tag-view">
-                <uni-tag text="标签" inverted="true" type="error" :circle="true"></uni-tag>
+                <uni-tag text="标签" inverted="true" type="error"></uni-tag>
             </view>
         </view>
-
+		<view class="example-title">圆角样式</view>
+		<view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="primary" size="small" :circle="true"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="success" size="small" :inverted="true" :circle="true"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="warning" :circle="true"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="error" :inverted="true" :circle="true"></uni-tag>
+		    </view>
+		</view>
+		<view class="example-title">标记样式</view>
+		<view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="primary" :mark="true" size="small"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="success" :mark="true" size="small"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="warning" :mark="true"></uni-tag>
+		    </view>
+		    <view class="tag-view">
+		        <uni-tag text="标签" type="error" :mark="true" :circle="true"></uni-tag>
+		    </view>
+		</view>
         <view class="example-title">点击事件</view>
         <view>
             <view class="tag-view">
@@ -59,7 +88,7 @@
                 <uni-tag text="标签" type="success" size="small"></uni-tag>
             </view>
             <view class="tag-view">
-                <uni-tag text="标签" inverted="true" type="warning" size="small"></uni-tag>
+                <uni-tag text="标签" inverted="true" type="warning" :mark="true" size="small"></uni-tag>
             </view>
             <view class="tag-view">
                 <uni-tag text="标签" inverted="true" type="error" size="small" :circle="true"></uni-tag>
