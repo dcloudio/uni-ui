@@ -2,8 +2,7 @@
 	<view class="uni-grid" :class="setBorderClass">
 		<view class="uni-grid__flex" v-if="gridGroup.length>0" v-for="(items,i) in gridGroup" :key="i">
 			<view class="uni-grid-item" hover-class="uni-grid-item-hover" :hover-start-time="20" :hover-stay-time="70" v-for="(item,index) in items"
-			 :key="index" :class="[index === columnNumber ? 'uni-grid-item-last' : '','uni-grid-item-' + type]" :style="{flexBasis:100/columnNumber + '%'}"
-			 @click="onClick(i,index)">
+			 :key="index" :class="[index === columnNumber ? 'uni-grid-item-last' : '','uni-grid-item-' + type]" @click="onClick(i,index)">
 				<view class="uni-grid-item__content">
 					<image class="uni-grid-item-image" :src="item.image"></image>
 					<text class="uni-grid-item-text">{{item.text}}</text>
@@ -17,7 +16,7 @@
 	export default {
 		name: "uni-grid",
 		props: {
-			data: Array, //数据
+			data: Array,
 			type: { //布局格式，长方形oblong，正方形square
 				type: String,
 				default: 'square'
@@ -95,6 +94,7 @@
 			display: flex;
 			position: relative;
 			flex-direction: column;
+			flex:1;
 
 			&:before {
 				display: block;
@@ -123,8 +123,8 @@
 
 			&__content {
 				position: absolute;
-                left: 0;
-                top: 0;
+				left: 0;
+				top: 0;
 				width: 100%;
 				height: 100%;
 				display: flex;
@@ -176,19 +176,21 @@
 			border-right-width: 0;
 		}
 	}
-    
+
 	/* 无边框 */
-    .uni-grid.uni-grid-no-border{
-        .uni-grid-item:after {
-        	border-width: 0;
-        }
-        .uni-grid__flex:first-child .uni-grid-item:after {
-        	border-top-width: 0px;
-        }
-        .uni-grid__flex .uni-grid-item:first-child:after {
-        	border-left-width: 0px;
-        }
-    }
+	.uni-grid.uni-grid-no-border {
+		.uni-grid-item:after {
+			border-width: 0;
+		}
+
+		.uni-grid__flex:first-child .uni-grid-item:after {
+			border-top-width: 0px;
+		}
+
+		.uni-grid__flex .uni-grid-item:first-child:after {
+			border-left-width: 0px;
+		}
+	}
 
 	.uni-grid-item-oblong {
 		&.uni-grid-item:before {
