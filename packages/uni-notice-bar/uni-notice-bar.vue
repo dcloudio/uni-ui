@@ -10,8 +10,8 @@
             <view class="uni-noticebar__content-text" :class="setTextClass">
                 <view class="uni-noticebar__content-inner" :id="elId" :style="{animationDuration:dura + 's'}">{{text}}</view>
             </view>
-            <view class="uni-noticebar__content-more" v-if="moreText" @click="clickMore">
-                <view class="uni-noticebar__content-more-text">{{moreText}}</view>
+            <view class="uni-noticebar__content-more" v-if="showGetMore === 'true' || showGetMore === true" @click="clickMore" :style="{width:moreText ? '180upx' : '20px'}">
+                <view class="uni-noticebar__content-more-text" v-if="moreText">{{moreText}}</view>
                 <uni-icon type="arrowright" size="14"></uni-icon>
             </view>
         </view>
@@ -52,6 +52,10 @@
                 type: [String, Boolean],
                 default: false
             },
+			showGetMore: { //是否显示右侧查看更多
+			    type: [String, Boolean],
+			    default: false
+			},
             showClose: { //是否显示左侧关闭按钮
                 type: [String, Boolean],
                 default: false
@@ -152,6 +156,7 @@
             overflow: hidden;
 
             &.uni-noticebar--flex {
+				flex: 1;
                 display: flex;
                 flex-direction: row;
             }
@@ -188,6 +193,7 @@
                 }
 
                 &.uni-noticebar--scrollable {
+					flex: 1;
                     display: block;
                     overflow: hidden;
 
