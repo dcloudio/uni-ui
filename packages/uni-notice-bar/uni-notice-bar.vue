@@ -157,6 +157,7 @@
 		}
 
 		&__content {
+			flex: 1;
 			overflow: hidden;
 
 			&.uni-noticebar--flex {

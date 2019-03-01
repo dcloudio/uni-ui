@@ -51,7 +51,6 @@
 			}
 		},
 		data() {
-			console.log('data')
 			return {
 				maxSync: this.max,
 				valueSync: this.value
