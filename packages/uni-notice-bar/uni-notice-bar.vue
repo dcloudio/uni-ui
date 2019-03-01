@@ -124,12 +124,9 @@
 				if (this.scrollable === false || this.scrollable === 'false') {
 					return;
 				}
-				let view = uni.createSelectorQuery().select(`#${this.elId}`);
-				view.fields({
-					size: true
-				}, data => {
-					this.animation = `notice ${data.width / this.speed}s linear infinite both`;
-				}).exec();
+				uni.createSelectorQuery().select(`#${this.elId}`).boundingClientRect().exec((ret) => {
+					this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`;
+				});
 			}
 		}
 	}
