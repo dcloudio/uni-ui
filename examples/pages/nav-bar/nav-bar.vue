@@ -12,7 +12,7 @@
             @click-right="scan">
             <block slot="left">
                 <view class="city">
-                    <text>{{city}}</text>
+                    <view>{{city}}</view>
                     <uni-icon type="arrowdown" color="#333333" size="22"></uni-icon>
                 </view>
             </block>
@@ -98,6 +98,7 @@
         justify-content: center;
         width: 100%;
         margin-left: 8px;
+		white-space: nowrap;
     }
 
     .input-view {
