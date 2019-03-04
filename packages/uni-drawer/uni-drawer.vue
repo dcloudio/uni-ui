@@ -1,5 +1,5 @@
 <template>
-	<view v-if="visibleSync" class="uni-drawer" :catchtouchmove="catchtouchmove" :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}">
+	<view v-if="visibleSync" class="uni-drawer" @touchmove.stop.prevent="moveHandle" :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}">
 		<view class="uni-drawer__mask" @tap="close"></view>
 		<view class="uni-drawer__content">
 			<slot></slot>
@@ -35,18 +35,23 @@
 				visibleSync: false,
 				showDrawer: false,
 				rightMode: false,
-				catchtouchmove: false
+				closeTimer:null,
+				watchTimer:null
 			}
 		},
 		watch: {
 			visible(val) {
+				clearTimeout(this.watchTimer)
 				setTimeout(() => {
 					this.showDrawer = val
 				}, 100)
+				if(this.visibleSync){
+					clearTimeout(this.closeTimer)
+				}
 				if (val) {
 					this.visibleSync = val
 				} else {
-					setTimeout(() => {
+					this.watchTimer = setTimeout(() => {
 						this.visibleSync = val
 					}, 300)
 				}
@@ -63,18 +68,16 @@
 				this.showDrawer = this.visible
 			}, 100)
 			this.rightMode = this.mode === 'right'
-			//#ifdef MP-WEIXIN
-			this.catchtouchmove = true
-			//#endif
 		},
 		methods: {
 			close() {
 				this.showDrawer = false
-				setTimeout(() => {
+				this.$emit('close')
+				this.closeTimer = setTimeout(() => {
 					this.visibleSync = false
-					this.$emit('close')
-				}, 300)
-			}
+				}, 200)
+			},
+			moveHandle(){}
 		}
 	}
 </script>
