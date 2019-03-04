@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-grid" :class="setBorderClass">
-		<view class="uni-grid__flex" v-if="gridGroup.length>0" v-for="(items,i) in gridGroup" :key="i">
+		<view class="uni-grid__flex" v-for="(items,i) in gridGroup" :key="i">
 			<view class="uni-grid-item" hover-class="uni-grid-item-hover" :hover-start-time="20" :hover-stay-time="70" v-for="(item,index) in items"
 			 :key="index" :class="[index === columnNumber ? 'uni-grid-item-last' : '','uni-grid-item-' + type]" @click="onClick(i,index)">
 				<view class="uni-grid-item__content">

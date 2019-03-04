@@ -11,7 +11,6 @@
             <uni-grid :data="data2" show-out-border="false" column-num="4"></uni-grid>
             <view class="example-title">矩形案例</view>
             <uni-grid :data="data3" type="oblong"></uni-grid>
-            <uni-grid type="rect"></uni-grid>
         </view>
     </view>
 </template>
