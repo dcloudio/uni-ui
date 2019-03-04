@@ -113,7 +113,7 @@
 				this.$emit('getmore')
 			},
 			onClick(e) {
-				let clientX = e.touches ? e.touches[0].clientX : e.detail.clientX;
+				let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX;
 				if (uni.upx2px(48) + 12 > clientX  && (String(this.showClose) === 'true')) {
 					this.show = false
 					this.$emit('close')
