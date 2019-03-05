@@ -124,9 +124,18 @@
 				if (this.scrollable === false || this.scrollable === 'false') {
 					return;
 				}
+				//#ifdef MP-TOUTIAO
+				setTimeout(() => {
+					uni.createSelectorQuery().select(`#${this.elId}`).boundingClientRect().exec((ret) => {
+						this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`;
+					});
+				},200)
+				// #endif
+				// #ifndef MP-TOUTIAO
 				uni.createSelectorQuery().select(`#${this.elId}`).boundingClientRect().exec((ret) => {
 					this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`;
 				});
+				// #endif
 			}
 		}
 	}
