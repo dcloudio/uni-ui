@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import calendar from '@/components/mehaotian-calendar/mehaotian-calendar.vue';
+
+import {calendar} from "uni-ui"
+
 export default {
 	components: {
 		calendar
