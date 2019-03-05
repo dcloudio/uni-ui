@@ -2,31 +2,31 @@
 	<view>
 		<view class="example">
 			<view class="example-title">基本用法</view>
-			<button type="button" @click="x">顶部弹出 popup</button>
-			<uni-popup :show="top" position="top" mode="fixed" msg="顶部弹出popup" @hidePopup="hidePopup"></uni-popup>
-			<button type="button" @click="y">居中弹出 popup</button>
-			<uni-popup :show="middle" position="middle" mode="fixed" msg="居中弹出popup" @hidePopup="hidePopup"></uni-popup>
-			<button type="button" @click="z">底部部弹出 popup</button>
-			<uni-popup :show="bottom" position="bottom" mode="fixed" msg="底部弹出popup" @hidePopup="hidePopup"></uni-popup>
+			<button type="button" @click="togglePopup('top')">顶部弹出 popup</button>
+			<uni-popup :show="type === 'top'" position="top" mode="fixed" msg="顶部弹出popup" @hidePopup="togglePopup('')"></uni-popup>
+			<button type="button" @click="togglePopup('middle')">居中弹出 popup</button>
+			<uni-popup :show="type === 'middle'" position="middle" mode="fixed" msg="居中弹出popup" @hidePopup="togglePopup('')"></uni-popup>
+			<button type="button" @click="togglePopup('bottom')">底部部弹出 popup</button>
+			<uni-popup :show="type === 'bottom'" position="bottom" mode="fixed" msg="底部弹出popup" @hidePopup="togglePopup('')"></uni-popup>
 		</view>
 		<view class="example">
 			<view class="example-title">slot用法</view>
-			<button type="button" @click="showMiddlePopup">居中弹出（插屏广告）</button>
-			<uni-popup :show="showPopupMiddleImg" position="middle" mode="insert" @hidePopup="hidePopup">
+			<button type="button" @click="togglePopup('middle-img')">居中弹出（插屏广告）</button>
+			<uni-popup :show="type === 'middle-img'" position="middle" mode="insert" @hidePopup="togglePopup('')">
 				<view class="uni-center center-box">
 					<image class="image" src="/static/uni.png" />
 				</view>
 			</uni-popup>
-			<button type="button" @click="showMiddlePopupList">居中弹出（滚动列表）</button>
-			<uni-popup :show="showPopupMiddleList" position="middle" mode="fixed" @hidePopup="hidePopup">
+			<button type="button" @click="togglePopup('middle-list')">居中弹出（滚动列表）</button>
+			<uni-popup :show="type === 'middle-list'" position="middle" mode="fixed" @hidePopup="togglePopup('')">
 				<scroll-view class="uni-center center-box" scroll-y="true">
 					<view class="uni-list-item" v-for="(item, index) in list" :key="index">
 						滚动列表数据 {{ item }}
 					</view>
 				</scroll-view>
 			</uni-popup>
-			<button type="button" @click="showBottomPopup" data-position="bottom">底部弹出（分享界面）</button>
-			<uni-popup :show="showPopupBottomShare" position="bottom" @hidePopup="hidePopup">
+			<button type="button" @click="togglePopup('bottom-share')" data-position="bottom">底部弹出（分享界面）</button>
+			<uni-popup :show="type === 'bottom-share'" position="bottom" @hidePopup="togglePopup('')">
 				<view class="bottom-title">分享到</view>
 				<view class="bottom-content">
 					<view class="bottom-content-box" v-for="(item, index) in bottomData" :key="index">
@@ -36,7 +36,7 @@
 						<view class="bottom-content-text">{{ item.text }}</view>
 					</view>
 				</view>
-				<view class="bottom-btn" @click="hidePopup">取消分享</view>
+				<view class="bottom-btn" @click="togglePopup('')">取消分享</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -46,12 +46,7 @@
 	export default {
 		data() {
 			return {
-				top: false,
-				middle: false,
-				bottom: false,
-				showPopupMiddleImg: false,
-				showPopupMiddleList: false,
-				showPopupBottomShare: false,
+				type:'',
 				list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
 				bottomData: [{
 						text: '微信',
@@ -87,43 +82,14 @@
 			};
 		},
 		onBackPress(){
-			if(this.showPopupMiddleImg || this.showPopupMiddleList || this.showPopupBottomShare || this.top || this.middle || this.bottom){
-				this.hidePopup();
+			if(this.type !== ''){
+				this.type = '';
 				return true;
 			}
 		},
 		methods: {
-			hidePopup() {
-				this.showPopupMiddleImg = false;
-				this.showPopupMiddleList = false;
-				this.showPopupBottomShare = false;
-				this.top = false;
-				this.middle = false;
-				this.bottom = false;
-			},
-			showMiddlePopup() {
-				this.hidePopup();
-				this.showPopupMiddleImg = true;
-			},
-			showMiddlePopupList() {
-				this.hidePopup();
-				this.showPopupMiddleList = true;
-			},
-			showBottomPopup() {
-				this.hidePopup();
-				this.showPopupBottomShare = true;
-			},
-			x() {
-				this.hidePopup();
-				this.top = true;
-			},
-			y() {
-				this.hidePopup();
-				this.middle = true;
-			},
-			z() {
-				this.hidePopup();
-				this.bottom = true;
+			togglePopup(type){
+				this.type = type;
 			}
 		}
 	};

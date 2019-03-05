@@ -94,7 +94,7 @@
 		bottom: 0;
 		overflow: hidden;
 		visibility: hidden;
-		z-index: 998;
+		z-index: 10001;
 		height: 100%;
 
 		&.uni-drawer--right {
