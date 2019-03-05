@@ -14,11 +14,20 @@
 			<view>
 				<button type="default" @click="show('left')">显示Drawer</button>
 				<uni-drawer :visible="showLeft" mode="left" @close="closeDrawer('left')">
+					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1"></uni-list-item>
 						<uni-list-item title="Item2"></uni-list-item>
 						<uni-list-item title="Item3" show-badge="true" badge-text="12"></uni-list-item>
 					</uni-list>
+					<!-- #endif -->
+					<!-- #ifdef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
+					<view class="uni-list">
+						<uni-list-item title="Item1"></uni-list-item>
+						<uni-list-item title="Item2"></uni-list-item>
+						<uni-list-item title="Item3" show-badge="true" badge-text="12"></uni-list-item>
+					</view>
+					<!-- #endif -->
 					<view class="close">
 						<button type="default" @click="hide">关闭Drawer</button>
 					</view>
@@ -28,11 +37,20 @@
 			<view>
 				<button type="default" @click="show('right')">显示Drawer</button>
 				<uni-drawer :visible="showRigth" mode="right" @close="closeDrawer('right')">
+					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1"></uni-list-item>
 						<uni-list-item title="Item2"></uni-list-item>
 						<uni-list-item title="Item3" show-badge="true" badge-text="12"></uni-list-item>
 					</uni-list>
+					<!-- #endif -->
+					<!-- #ifdef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
+					<view class="uni-list">
+						<uni-list-item title="Item1"></uni-list-item>
+						<uni-list-item title="Item2"></uni-list-item>
+						<uni-list-item title="Item3" show-badge="true" badge-text="12"></uni-list-item>
+					</view>
+					<!-- #endif -->
 					<view class="close">
 						<button type="default" @click="hide">关闭Drawer</button>
 					</view>
