@@ -17,10 +17,14 @@
 				layouts: [{
 					name: 'Card 卡片',
 					url: 'card'
-				}, {
+				}, 
+				// #ifndef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
+				{
 					name: 'Collapse 折叠面板',
 					url: 'collapse'
-				}, {
+				},
+				// #endif
+				{
 					name: 'Drawer 抽屉',
 					url: 'drawer'
 				}, {
