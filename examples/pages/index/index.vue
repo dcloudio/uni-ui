@@ -72,6 +72,9 @@
 				}, {
 					name: 'Tag 标签',
 					url: 'tag'
+				}, {
+					name: 'Calendar 日历',
+					url: 'calendar'
 				}]
 			}
 		},
