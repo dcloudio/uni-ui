@@ -1,8 +1,7 @@
 const path = require('path')
- console.log('----------------------------')
 const isWin = /^win/.test(process.platform)
 const normalizePath = path => (isWin ? path.replace(/\\/g, '/') : path)
-// process.env.UNI_INPUT_DIR= path.join(__dirname,'./examples');
+process.env.UNI_INPUT_DIR= path.join(__dirname,'./examples')
 
 module.exports = {
 	configureWebpack: {
