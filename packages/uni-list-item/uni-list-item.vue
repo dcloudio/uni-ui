@@ -1,21 +1,25 @@
 <template>
-	<view class="uni-list-item" :class="[disabled === true || disabled === 'true' ? 'uni-list-item--disabled' : '']"
-	 :hover-class="disabled === true || disabled === 'true' || showSwitch === true || showSwitch === 'true' ? '' : 'uni-list-item--hover'" @click="onClick">
-		<view class="uni-list-item__container">
-			<view class="uni-list-item__icon" v-if="thumb">
-				<image class="uni-list-item__icon-img" :src="thumb"></image>
+	<view class="uni-list-cell" :class="[disabled === true || disabled === 'true' ? 'uni-list-cell--disabled' : '']"
+	 :hover-class="disabled === true || disabled === 'true' || showSwitch === true || showSwitch === 'true' ? '' : 'uni-list-cell--hover'" @click="onClick">
+		<view class="uni-list-cell__container">
+			<view class="uni-list-cell__icon" v-if="thumb">
+				<image class="uni-list-cell__icon-img" :src="thumb"></image>
 			</view>
-			<view class="uni-list-item__icon" v-else-if="showExtraIcon === true || showExtraIcon === 'true'">
+			<view class="uni-list-cell__icon" v-else-if="showExtraIcon === true || showExtraIcon === 'true'">
 				<uni-icon :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type"></uni-icon>
 			</view>
-			<view class="uni-list-item__content">
-				<view class="uni-list-item__content-title">{{title}}</view>
-				<view class="uni-list-item__content-note" v-if="note">{{note}}</view>
+			<view class="uni-list-cell__content">
+				<view class="uni-list-cell__content-title">{{title}}</view>
+				<view class="uni-list-cell__content-note" v-if="note">{{note}}</view>
 			</view>
-			<view class="uni-list-item__extra" v-if="showBadge === true || showBadge === 'true' || showArrow === true || showArrow === 'true'||showSwitch === true || showSwitch === 'true'">
+			<view class="uni-list-cell__extra" v-if="showBadge === true || showBadge === 'true' || showArrow === true || showArrow === 'true'||showSwitch === true || showSwitch === 'true'">
 				<uni-badge v-if="showBadge === true || showBadge === 'true'" :type="badgeType" :text="badgeText"></uni-badge>
 				<switch v-if="showSwitch === true || showSwitch === 'true'" :disabled='disabled' :checked="switchChecked" @change="onSwitchChange" />
 				<uni-icon v-if="showArrow === true || showArrow === 'true'" color="#bbb" size="20" type="arrowright"></uni-icon>
+			</view>
+			<view class="uni-list-cell__message" v-if="showMessage">
+				<view class="uni-list-cell__message-time" v-if="showMessage === true || showMessage === 'true'" v-text="messageTime"></view>
+				<uni-badge v-if="showMessage === true || showMessage === 'true'" :type="messageType" :text="messageNumber"></uni-badge>
 			</view>
 		</view>
 	</view>
@@ -54,6 +58,10 @@
 				type: [Boolean, String],
 				default: false
 			},
+			showMessage: { //是否显示消息
+				type:[Boolean, String],
+				default: false
+			},
 			switchChecked: { //Switch是否被选中
 				type: [Boolean, String],
 				default: false
@@ -62,6 +70,15 @@
 			badgeType: { //badge类型
 				type: String,
 				default: 'success'
+			},
+			messageNumber: String, //消息内容
+			messageType: {
+				type: String,
+				default: 'success'
+			},
+			messageTime:{
+				type: String,
+				default: ''
 			},
 			thumb: String, //缩略图
 			showExtraIcon: { //是否显示扩展图标
@@ -99,9 +116,9 @@
 		opacity: 0.3;
 	}
 
-	$list-item-pd:$uni-spacing-col-lg $uni-spacing-row-lg;
+	$list-cell-pd:$uni-spacing-col-lg $uni-spacing-row-lg;
 
-	.uni-list-item {
+	.uni-list-cell {
 		font-size: $uni-font-size-lg;
 		position: relative;
 		display: flex;
@@ -118,7 +135,7 @@
 		}
 
 		&__container {
-			padding: $list-item-pd;
+			padding: $list-cell-pd;
 			width: 100%;
 			box-sizing: border-box;
 			flex: 1;
@@ -175,7 +192,18 @@
 			justify-content: flex-end;
 			align-items: center;
 		}
-
+		&__message {
+			width: 15%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			align-items: center;
+			&-time {
+				margin-bottom:10upx;
+				font-size:22upx;
+				color:#9a9292;
+			}
+		}
 		&__icon {
 			margin-right: 18upx;
 			display: flex;
@@ -190,7 +218,7 @@
 		}
 	}
 
-	.uni-list>.uni-list-item:last-child .uni-list-item-container:after {
+	.uni-list>.uni-list-cell:last-child .uni-list-cell-container:after {
 		height: 0px;
 	}
 </style>
