@@ -17,13 +17,13 @@
 		</view>
 
 		<view class="example-title">Style</view>
-		<radio-group  class="uni-list" @change="styleChange">
+		<radio-group class="uni-list" @change="styleChange">
 			<label v-for="(item, index) in styles" :key="index" class="uni-list-item">
 				<view class="uni-list-item__container">
 					<view class="uni-list-item__content">
 						<view class="uni-list-item__content-title">{{item.text}}</view>
 					</view>
-					<view class="uni-list-item__extra" >
+					<view class="uni-list-item__extra">
 						<radio :value="item.value" :checked="item.checked" />
 					</view>
 				</view>
@@ -31,14 +31,14 @@
 		</radio-group>
 
 		<view class="example-title">Color</view>
-		<radio-group  class="uni-list" @change="colorChange">
+		<radio-group class="uni-list" @change="colorChange">
 			<label v-for="(item, index) in colors" :key="index" class="uni-list-item">
 				<view class="uni-list-item__container">
 					<view class="uni-list-item__content">
 						<view class="color-tag" :style="{backgroundColor: item}"></view>
 					</view>
-					<view class="uni-list-item__extra" >
-						<radio :value="item" :checked="index === colorIndex"  />
+					<view class="uni-list-item__extra">
+						<radio :value="item" :checked="index === colorIndex" />
 					</view>
 				</view>
 			</label>
@@ -106,5 +106,34 @@
 	.color-tag {
 		width: 50upx;
 		height: 50upx;
+	}
+
+	uni-radio-group uni-label {
+		padding: 0;
+	}
+
+	.uni-list-item__container {
+		padding: 24upx 30upx;
+		width: 100%;
+		box-sizing: border-box;
+		flex: 1;
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.uni-list-item__container:after {
+		position: absolute;
+		z-index: 3;
+		right: 0;
+		bottom: 0;
+		left: 30upx;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: #c8c7cc;
 	}
 </style>
