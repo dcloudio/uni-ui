@@ -37,6 +37,7 @@ export default {
 #### uni-ui 已支持的组件列表
 
 |组件名			|引用路径														|说明			|
+|---|---|---|
 |uniBadge		|'@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue'					|[数字角标](https://ext.dcloud.net.cn/plugin?id=21)|
 |uniCard		|'@dcloudio/uni-ui/lib/uni-card/uni-card.vue'					|[卡片](https://ext.dcloud.net.cn/plugin?id=22)			|
 |uniCollapse	|'@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue'			|[折叠面板](http://ext.dcloud.net.cn/plugin?id=23)		|
