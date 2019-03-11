@@ -1,17 +1,17 @@
 <template>
 	<view>
 		<block v-for="(weeks, week) in canlender.weeks" :key="week">
-			<view class="calender-body-date-week">
+			<view class="uni-calender__body-date-week">
 				<block v-for="(day, index) in weeks" :key="index">
-					<view class="date" :class="{
-							disable: canlender.month !== day.month || day.disable,
-							'date-current':
+					<view class="uni-calender__date" :class="{
+							'uni-calender__disable': canlender.month !== day.month || day.disable,
+							'uni-calender__date-current':
 								(day.date == canlender.date || day.checked) &&
 								canlender.month == day.month &&
 								!day.disable,
-							lunar: lunar,
-							active: day.isDay,
-							'is-day': day.isDay
+							'uni-calender__lunar': lunar,
+							'uni-calender__active': day.isDay,
+							'uni-calender__is-day': day.isDay
 						}"
 					 @tap="
 							selectDays(
@@ -22,10 +22,10 @@
 								canlender.lunar
 							)
 						">
-						<view class="circle-box">
+						<view class="uni-calender__circle-box">
 							{{ day.date }}
-							<view v-if="lunar" class="lunar">{{ day.lunar }}</view>
-							<view v-if="day.have" class="data-circle"></view>
+							<view v-if="lunar" class="uni-calender__lunar">{{ day.lunar }}</view>
+							<view v-if="day.have" class="uni-calender__data-circle"></view>
 						</view>
 					</view>
 				</block>
@@ -55,9 +55,7 @@
 		data() {
 			return {};
 		},
-		created() {
-
-		},
+		created() {},
 		methods: {
 			selectDays(week, index, ischeck, isDay, lunar) {
 				this.$emit('selectDays', {
@@ -73,7 +71,7 @@
 </script>
 
 <style lang="scss">
-	.calender-body-date-week {
+	.uni-calender__body-date-week {
 		display: flex;
 		width: 100%;
 		border-bottom: 1px #f5f5f5 solid;
@@ -83,7 +81,7 @@
 		}
 
 		// 日期的样式
-		.date {
+		.uni-calender__date {
 			position: relative;
 			width: 100%;
 			text-align: center;
@@ -97,12 +95,12 @@
 			padding: 20upx 0;
 			line-height: 1.5;
 
-			.lunar {
+			.uni-calender__lunar {
 				font-size: 20upx;
 				color: #000;
 			}
 
-			.circle-box {
+			.uni-calender__circle-box {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -111,50 +109,49 @@
 				height: 80upx;
 				flex-shrink: 0;
 				border-radius: 50%;
-				transition: all .2s;
-
+				transition: all 0.2s;
 			}
 
-			&.lunar {
+			&.uni-calender__lunar {
 				// 			padding: 20upx 0;
 				// 			line-height: 1.5;
 			}
 
 			// 本月禁止的样式
-			&.disable {
+			&.uni-calender__disable {
 				color: #d4d4d4;
 
-				.lunar {
+				.uni-calender__lunar {
 					color: #d4d4d4;
 				}
 			}
 
-			&.is-day {
+			&.uni-calender__is-day {
 				color: #fd2e32;
 			}
 
-			&.is-day .lunar {
+			&.uni-calender__is-day .uni-calender__lunar {
 				color: #fd2e32;
 			}
 
 			// 当前选中
-			&.date-current {
-				// background: #000; 
+			&.uni-calender__date-current {
+				// background: #000;
 				color: #fff;
 				box-sizing: border-box;
 
-				.circle-box {
+				.uni-calender__circle-box {
 					background: #fd2e32;
 				}
 
-				&.active {}
+				&.uni-calender__active {}
 
-				.lunar {
+				.uni-calender__lunar {
 					color: #fff;
 				}
 			}
 
-			.data-circle {
+			.uni-calender__data-circle {
 				position: absolute;
 				// bottom: 10rpx;
 				top: 10upx;

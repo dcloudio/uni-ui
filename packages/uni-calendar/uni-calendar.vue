@@ -1,22 +1,22 @@
 <template>
 	<view>
-		<view class="calendar-box">
-			<view class="calendar-wrapper ">
-				<view class="content">
-					<view class="calendar-panel">
-						<view class="date-befor" @tap="dataBefor('0', 'month')">
+		<view class="uni-calendar__box">
+			<view class="uni-calendar__wrapper">
+				<view class="uni-calenda__content">
+					<view class="uni-calendar__panel">
+						<view class="uni-calendar__date-befor" @tap="dataBefor('0', 'month')">
 							<text class="iconfont icon-jiantou"></text>
 						</view>
-						<view class="calendar-panel-box">
+						<view class="uni-calendar__panel-box">
 							<view>{{ canlender.year }}年</view>
 							<view>{{ canlender.month }}月</view>
 						</view>
-						<view class="date-after rollback" @tap="dataBefor('1', 'month')">
+						<view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor('1', 'month')">
 							<text class="iconfont icon-jiantou "></text>
 						</view>
-						<view class="backtoday" @tap="backtoday">回到今天</view>
+						<view class="uni-calendar__backtoday" @tap="backtoday">回到今天</view>
 					</view>
-					<view v-if="lunar" class="day-detail">
+					<view v-if="lunar" class="uni-calendar__day-detail">
 						<view>
 							{{
 								canlender.year +
@@ -44,17 +44,17 @@
 							{{ canlender.lunar.isTerm ? canlender.lunar.Term : '' }}
 						</view>
 					</view>
-					<view class="calendar-header">
-						<view class="week">日</view>
-						<view class="week">一</view>
-						<view class="week">二</view>
-						<view class="week">三</view>
-						<view class="week">四</view>
-						<view class="week">五</view>
-						<view class="week">六</view>
+					<view class="uni-calendar__header">
+						<view class="uni-calendar__week">日</view>
+						<view class="uni-calendar__week">一</view>
+						<view class="uni-calendar__week">二</view>
+						<view class="uni-calendar__week">三</view>
+						<view class="uni-calendar__week">四</view>
+						<view class="uni-calendar__week">五</view>
+						<view class="uni-calendar__week">六</view>
 					</view>
 					<uni-calendar-item v-if="slide === 'none'" :canlender="canlender" :lunar="lunar" @selectDays="selectDays"></uni-calendar-item>
-					<swiper v-else class="calendar-body" :style="{ height: domHeihgt + 'px' }" :current="currentIndex" circular
+					<swiper v-else class="uni-calendar__body" :style="{ height: domHeihgt + 'px' }" :current="currentIndex" circular
 					 :vertical="slide === 'vertical' ? true : false" skip-hidden-item-layout :duration="duration" @animationfinish="animationfinish"
 					 @change="change">
 						<swiper-item v-for="(item, itemindx) in swiperData" :key="itemindx">
@@ -537,7 +537,7 @@
 				let surplus = 42 - (dates.lastMonthDays.length + dates.currentMonthDys.length);
 
 				if (!this.fixedHeihgt) {
-					surplus = 6 - dates.endDay
+					surplus = 6 - dates.endDay;
 				}
 				// 循环下个月开始几天 添加到数组
 				for (let i = 1; i < surplus + 1; i++) {
@@ -627,7 +627,7 @@
 
 <style lang="scss">
 	@font-face {
-		font-family: "iconfont";
+		font-family: 'iconfont';
 		src: url('//at.alicdn.com/t/font_989023_qdgy7euvg4.eot?t=1545961121132');
 		/* IE9*/
 		src: url('//at.alicdn.com/t/font_989023_qdgy7euvg4.eot?t=1545961121132#iefix') format('embedded-opentype'),
@@ -640,7 +640,7 @@
 	}
 
 	.iconfont {
-		font-family: "iconfont" !important;
+		font-family: 'iconfont' !important;
 		font-size: 32upx;
 		font-style: normal;
 		-webkit-font-smoothing: antialiased;
@@ -648,7 +648,7 @@
 	}
 
 	.icon-jiantou:before {
-		content: "\e606";
+		content: '\e606';
 	}
 
 	.header {
@@ -663,21 +663,21 @@
 		font-size: $uni-font-size-lg;
 	}
 
-	.calendar-box {
+	.uni-calendar__box {
 		width: 100%;
 		box-sizing: border-box;
 		transition: all 0.3s;
 	}
 
-	.calendar-wrapper {
+	.uni-calendar__wrapper {
 		width: 100%;
 		box-sizing: border-box;
 		font-size: 26rpx;
 		background: #fff;
 		transition: all 0.3s;
 
-		.content {
-			.calendar-panel {
+		.uni-calenda__content {
+			.uni-calendar__panel {
 				position: relative;
 				display: flex;
 				align-items: center;
@@ -685,8 +685,8 @@
 				font-size: 28rpx;
 				height: 80rpx;
 
-				.date-befor,
-				.date-after {
+				.uni-calendar__date-befor,
+				.uni-calendar__date-after {
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -695,19 +695,19 @@
 					text-align: center;
 					line-height: 80rpx;
 
-					&.rollback {
+					&.uni-calendar__rollback {
 						transform: rotate(180deg);
 					}
 				}
 
-				.calendar-panel-box {
+				.uni-calendar__panel-box {
 					display: flex;
 					justify-content: center;
 					align-items: center;
 					width: 200upx;
 				}
 
-				.backtoday {
+				.uni-calendar__backtoday {
 					position: absolute;
 					right: 0;
 					top: 15rpx;
@@ -725,18 +725,18 @@
 				}
 			}
 
-			.day-detail {
+			.uni-calendar__day-detail {
 				padding: 20upx;
 				padding-left: 30upx;
 				border-top: 1px #f5f5f5 solid;
 			}
 
-			.calendar-header {
+			.uni-calendar__header {
 				display: flex;
 				font-size: $uni-font-size-base;
 				border-top: 1px #f5f5f5 solid;
 
-				.week {
+				.uni-calendar__week {
 					width: 100%;
 					text-align: center;
 					line-height: 80rpx;
@@ -745,7 +745,7 @@
 				}
 			}
 
-			.calendar-body {
+			.uni-calendar__body {
 				display: flex;
 				flex-wrap: wrap;
 				font-size: $uni-font-size-base;
