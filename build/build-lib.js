@@ -23,6 +23,22 @@ files.forEach(name => {
 	filenames.push(fileName)
 	var dest = path.join(lib, relativePath)
 	fs.copySync(name, dest)
+	
+	var data = fs.readFileSync(name).toString();
+	// 判断下是否存在 import xx from 'xxx',如果存在，复制其到对应的目录
+	var importFiles = data.match(/import.*from\s'.*'/ig);
+	if(importFiles){
+		importFiles.forEach(value => {
+			let importFile = path.resolve(name,'../',data.match(/import.*from\s'.*'/)[0].split('\'')[1]);
+			if(path.extname(importFile) === ''){
+				importFile += '.js'
+			}
+			if(path.extname(importFile) !== '.js'){
+				return;
+			}
+			fs.copySync(importFile, path.join(dest,path.relative(name,importFile)))
+		})
+	}
 })
 console.log(filenames)
 //导入vue文件
