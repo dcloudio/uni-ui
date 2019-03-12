@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-rate">
+	<view class="uni-rate" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
 		<view class="uni-rate-icon" v-for="(star,index) in stars" :key="index" :style="{marginLeft:margin+'px'}" @click="onClick(index)">
 			<uni-icon :size="size" :color="color" :type="isFill === false || isFill === 'false' ? 'star' : 'star-filled'"></uni-icon>
 			<view class="uni-rate-icon-on" :style="{width:star.activeWitch}">
@@ -53,7 +53,8 @@
 		data() {
 			return {
 				maxSync: this.max,
-				valueSync: this.value
+				valueSync: this.value,
+				isTouched: false,
 			}
 		},
 		computed: {
@@ -90,6 +91,34 @@
 				this.$emit('change', {
 					value: this.valueSync
 				})
+			},
+			touchstart(e) {
+				if (this.disabled === true || this.disabled === 'true') {
+					return
+				}
+				this.isTouched = true;
+			},
+			touchmove(e) {
+				if (this.isTouched) {
+					this.slideSelectStar(e);
+				}
+			},
+			touchend(e) {
+				this.isTouched = false;
+				this.slideSelectStar(e);
+			},
+			slideSelectStar(e) {
+				let clientX = 0;
+				let touches = e.touches;
+				if (touches && touches.length > 0) {
+					clientX = touches[0].clientX;
+					let index = parseInt(clientX / this.size);
+					index = Math.max(index, 0);
+					this.valueSync = index;
+					this.$emit('change', {
+						value: this.valueSync
+					})
+				}
 			}
 		}
 	}
