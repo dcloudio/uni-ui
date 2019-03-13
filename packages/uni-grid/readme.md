@@ -33,7 +33,7 @@ export default {
 一行四个
 
 ```html
-<uni-grid :data="[
+<uni-grid :options="[
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/shu.png',text:'圣诞树'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/lindang.png',text:'铃铛'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/laoren.png',text:'圣诞老人'},
@@ -49,7 +49,7 @@ export default {
 无边框
 
 ```html
-<uni-grid :data="[
+<uni-grid :options="[
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/shu.png',text:'圣诞树'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/lindang.png',text:'铃铛'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/laoren.png',text:'圣诞老人'},
@@ -63,7 +63,7 @@ export default {
 矩形用法
 
 ```html
-<uni-grid :data="[
+<uni-grid :options="[
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/shu.png',text:'圣诞树'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/lindang.png',text:'铃铛'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/laoren.png',text:'圣诞老人'},
@@ -81,7 +81,7 @@ export default {
 
 |属性名|类型|默认值	|说明|
 |---|----|---|---|
-|data|Array&lt;Object&gt;|-|宫格布局数据，格式为：[{image:'xxx',text:'xxx'},{image:'xxx',text:'xxx'}]|
+|options|Array&lt;Object&gt;|-|宫格布局数据，格式为：[{image:'xxx',text:'xxx'},{image:'xxx',text:'xxx'}]|
 |type|String|oblong|宫格的类型，可取值：square（正方形）/oblong（长方形）|
 |column-num|Number|3|每行有多少个|
 |show-out-border|Boolean|true|是否显示外边框|

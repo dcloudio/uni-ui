@@ -16,7 +16,7 @@
 	export default {
 		name: "uni-grid",
 		props: {
-			data: Array,
+			options: Array,
 			type: { //布局格式，长方形oblong，正方形square
 				type: String,
 				default: 'square'
@@ -44,7 +44,7 @@
 			gridGroup() {
 				let group = []
 				let groupItem = []
-				this.data && this.data.forEach((item, index) => {
+				this.options && this.options.forEach((item, index) => {
 					groupItem.push(item)
 					if (index % this.columnNum === this.columnNum - 1) {
 						group.push(groupItem)

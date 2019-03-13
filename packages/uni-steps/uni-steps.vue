@@ -36,7 +36,7 @@
 				type: [Number, String],
 				default: 0
 			},
-			data: Array //数据
+			options: Array //数据
 		},
 		data() {
 			return {}
@@ -44,7 +44,7 @@
 		computed: {
 			steps() {
 				let steps = []
-				this.data.forEach((item, index) => {
+				this.options.forEach((item, index) => {
 					let step = {}
 					step.title = item.title
 					step.desc = item.desc
