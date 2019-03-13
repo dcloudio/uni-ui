@@ -54,30 +54,12 @@
         },
         // #ifdef H5
         mounted() {
-            let view = uni.createSelectorQuery().select(`#${this.elId}`);
-            view.fields({
-                size: true
-            }, data => {
-                this.btnGroupWidth = data.width;
-            }).exec();
-            if (this.isOpened === true) {
-                this.isShowBtn = true;
-                this.endMove();
-            }
+            this.getSize()
         },
         // #endif
         // #ifndef H5
         onReady() {
-            let view = uni.createSelectorQuery().select(`#${this.elId}`);
-            view.fields({
-                size: true
-            }, data => {
-                this.btnGroupWidth = data.width;
-            }).exec();
-            if (this.isOpened === true) {
-                this.isShowBtn = true;
-                this.endMove();
-            }
+            this.getSize()
         },
         // #endif
         computed: {
@@ -86,6 +68,18 @@
             }
         },
         methods: {
+			getSize(){
+				let view = uni.createSelectorQuery().select(`#${this.elId}`);
+				view.fields({
+				    size: true
+				}, data => {
+				    this.btnGroupWidth = data.width;
+				}).exec();
+				if (this.isOpened === true) {
+				    this.isShowBtn = true;
+				    this.endMove();
+				}
+			},
             bindClickBtn(item, index) {
                 this.$emit('click', {
                     text: item.text,
