@@ -82,10 +82,8 @@
 			 * 当前日期
 			 */
 			date: {
-				type: null,
-				default: () => {
-					return new Date();
-				}
+				type: String,
+				default: ''
 			},
 			/**
 			 * 打点日期
@@ -162,12 +160,10 @@
 				this.getMonthAll(0, this.date, true);
 			} else {
 				this.getMonthAll(1, this.date, true);
-				setTimeout(() => {
-					this.getQueryDom(1);
-				}, 300);
+				this.getQueryDom(1);
+
 			}
 		},
-		computed: {},
 		watch: {
 			selected(newVal) {
 				let canlender = this.canlender;
@@ -206,6 +202,9 @@
 			 * 获取全部月份
 			 */
 			getMonthAll(index, date, first) {
+				if(date === ''){
+					date = new Date();
+				}
 				let canlender = this.getWeek(date);
 				this.currentSelDate = canlender.date;
 				let tempyear = canlender.year + '-' + canlender.month + '-1';
@@ -307,6 +306,7 @@
 			 * 今天之前的日期是否可选
 			 */
 			isDisableBefore(year, month, date) {
+				let nowDate = this.date?this.date: new Date();
 				let time = year + '-' + month + '-' + date;
 				let startDate = false;
 				let endDate = false;
@@ -320,13 +320,13 @@
 				if (this.disableBefore) {
 					if (!this.startDate) {
 						if (!this.endDate) {
-							return !this.dateCompare(this.getDate(this.date, 0), time);
+							return !this.dateCompare(this.getDate(nowDate, 0), time);
 						} else {
-							return !this.dateCompare(this.getDate(this.date, 0), time) || endDate;
+							return !this.dateCompare(this.getDate(nowDate, 0), time) || endDate;
 						}
 					} else {
 						return (
-							!this.dateCompare(this.getDate(this.date, 0), time) || !startDate || endDate
+							!this.dateCompare(this.getDate(nowDate, 0), time) || !startDate || endDate
 						);
 					}
 				} else {
@@ -383,7 +383,6 @@
 					} else {
 						num = 1;
 					}
-					console.log(num);
 					let year =
 						this.canlender.year + '-' + this.canlender.month + '-' + this.canlender.date;
 
@@ -602,10 +601,10 @@
 			 * 计算时间大小
 			 */
 			dateCompare(startDate, endDate) {
-				//计划截止时间
-				var startDate = new Date(startDate.replace('-', '/').replace('-', '/'));
-				//计划详细项的截止时间
-				var endDate = new Date(endDate.replace('-', '/').replace('-', '/'));
+				//计算截止时间
+				 startDate = new Date(startDate.replace('-', '/').replace('-', '/'));
+				//计算详细项的截止时间
+				 endDate = new Date(endDate.replace('-', '/').replace('-', '/'));
 				if (startDate <= endDate) {
 					return true;
 				} else {
@@ -614,8 +613,11 @@
 			},
 			getQueryDom(index) {
 				let dom = uni.createSelectorQuery().selectAll(`.${this.elClass}`);
-
 				dom.boundingClientRect(rect => {}).exec(e => {
+					if(!e[0]){
+					   this.getQueryDom(1);
+					   return;
+					}
 					if (e[0][index]) {
 						this.domHeihgt = e[0][index].height;
 					}
