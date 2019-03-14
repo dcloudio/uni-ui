@@ -35,8 +35,8 @@
 				visibleSync: false,
 				showDrawer: false,
 				rightMode: false,
-				closeTimer:null,
-				watchTimer:null
+				closeTimer: null,
+				watchTimer: null
 			}
 		},
 		watch: {
@@ -45,7 +45,7 @@
 				setTimeout(() => {
 					this.showDrawer = val
 				}, 100)
-				if(this.visibleSync){
+				if (this.visibleSync) {
 					clearTimeout(this.closeTimer)
 				}
 				if (val) {
@@ -55,11 +55,6 @@
 						this.visibleSync = val
 					}, 300)
 				}
-			}
-		},
-		computed: {
-			showMask() {
-				return String(this.mask) === 'true'
 			}
 		},
 		created() {
@@ -77,7 +72,7 @@
 					this.visibleSync = false
 				}, 200)
 			},
-			moveHandle(){}
+			moveHandle() {}
 		}
 	}
 </script>
