@@ -3,3 +3,4 @@ node_modules/
 unpackage/
 lib/
 .DS_Store
+dist/
