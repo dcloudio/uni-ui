@@ -1,6 +1,12 @@
 <template>
-	<view class="segmented-control" :class="styleType" :style="wrapStyle">
-		<view v-for="(item, index) in values" class="segmented-control-item" :class="styleType" :key="index" :style="index === currentIndex ? activeStyle : itemStyle" @click="onClick(index)">
+	<view class="segmented-control" :class="styleType" :style="styleType === 'text' ? {border: 'none'} : {borderColor: activeColor}">
+		<view v-for="(item, index) in values" class="segmented-control-item" :class="[styleType, {'active': index === currentIndex}]"
+		 :key="index" @click="_onClick(index)" :style="styleType === 'text' ? {
+				color: index === currentIndex ? activeColor : '#000'
+			 } : {
+				color: index === currentIndex ? '#fff' : activeColor,
+				backgroundColor: index === currentIndex ? activeColor : 'inherit'
+			 }">
 			{{item}}
 		</view>
 	</view>
@@ -41,52 +47,14 @@
 				}
 			}
 		},
-		computed: {
-			wrapStyle() {
-				let styleString = '';
-				switch (this.styleType) {
-					case 'text':
-						styleString = `border:0;`;
-						break;
-					default:
-						styleString = `border-color: ${this.activeColor}`;
-						break;
-				}
-				return styleString;
-			},
-			itemStyle() {
-				let styleString = '';
-				switch (this.styleType) {
-					case 'text':
-						styleString = `color:#000;border-left:0;`;
-						break;
-					default:
-						styleString = `color:${this.activeColor};border-color:${this.activeColor};`;
-						break;
-				}
-				return styleString;
-			},
-			activeStyle() {
-				let styleString = '';
-				switch (this.styleType) {
-					case 'text':
-						styleString = `color:${this.activeColor};border-left:0;border-bottom-style:solid;`;
-						break;
-					default:
-						styleString = `color:#fff;border-color:${this.activeColor};background-color:${this.activeColor}`;
-						break;
-				}
-				return styleString;
-			}
-		},
 		methods: {
-			onClick(index) {
+			_onClick(index) {
 				if (this.currentIndex !== index) {
 					this.currentIndex = index;
 					this.$emit('clickItem', index);
 				}
 			}
-		},
+		}
 	}
 </script>
 
@@ -109,9 +77,8 @@
 
 	.segmented-control.text {
 		border: 0;
-		border-radius: 0upx;
+		border-radius: 0;
 	}
-
 
 	.segmented-control-item {
 		flex: 1;
@@ -121,11 +88,20 @@
 	}
 
 	.segmented-control-item.button {
-		border-left: 1upx solid;
+		border-left: 1px solid;
+	}
+
+	.segmented-control-item.button.active {
+		color: #fff;
 	}
 
 	.segmented-control-item.text {
 		border-left: 0;
+		color: #000;
+	}
+
+	.segmented-control-item.text.active {
+		border-bottom-style: solid;
 	}
 
 	.segmented-control-item:first-child {
