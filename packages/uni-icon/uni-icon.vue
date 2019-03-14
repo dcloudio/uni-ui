@@ -1,32 +1,27 @@
 <template>
-	<view class="uni-icon" :class="['uni-icon-'+type]" :style="{color:color,'font-size':fontSize}" @click="onClick()"></view>
+	<view class="uni-icon" :class="'uni-icon-' + type" :style="{color:color, 'font-size': size + 'px'}" @click="_onClick"></view>
 </template>
 
 <script>
 	export default {
 		name: 'uni-icon',
 		props: {
-			/**
-			 * 图标类型
-			 */
-			type: String,
-			/**
-			 * 图标颜色
-			 */
-			color: String,
-			/**
-			 * 图标大小
-			 */
-			size: [Number, String]
-		},
-		computed: {
-			fontSize() {
-				return `${this.size}px`
+			type: {
+				type: String,
+				default: ''
+			},
+			color: {
+				type: String,
+				default: '#333333'
+			},
+			size: {
+				type: [Number, String],
+				default: 16
 			}
 		},
 		methods: {
-			onClick() {
-				this.$emit('click')
+			_onClick() {
+				this.$emit('click');
 			}
 		}
 	}
