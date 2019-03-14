@@ -1,11 +1,9 @@
 <template>
-	<view class="segmented-control" :class="styleType" :style="styleType === 'text' ? {border: 'none'} : {borderColor: activeColor}">
-		<view v-for="(item, index) in values" class="segmented-control-item" :class="[styleType, {'active': index === currentIndex}]"
-		 :key="index" @click="_onClick(index)" :style="styleType === 'text' ? {
-				color: index === currentIndex ? activeColor : '#000'
-			 } : {
-				color: index === currentIndex ? '#fff' : activeColor,
-				backgroundColor: index === currentIndex ? activeColor : 'inherit'
+	<view class="segmented-control" :class="{'text': styleType === 'text'}" :style="{borderColor: styleType === 'text' ? '' : activeColor}">
+		<view v-for="(item, index) in values" class="segmented-control-item" :class="[{'text': styleType === 'text'}, {'active': index === currentIndex}]"
+		 :key="index" @click="_onClick(index)" :style="{
+				color: index === currentIndex ? (styleType === 'text' ? activeColor : '#fff') : (styleType === 'text' ? '#000' : activeColor),
+				backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : ''
 			 }">
 			{{item}}
 		</view>
@@ -65,14 +63,12 @@
 		justify-content: center;
 		width: 75%;
 		font-size: 28upx;
-		border-radius: 10upx;
 		box-sizing: border-box;
 		margin: 0 auto;
 		overflow: hidden;
 
-		&.button {
-			border: 1px solid;
-		}
+		border: 1px solid;
+		border-radius: 10upx;
 
 		&.text {
 			border: 0;
@@ -86,12 +82,10 @@
 		line-height: 60upx;
 		box-sizing: border-box;
 
-		&.button {
-			border-left: 1px solid;
+		border-left: 1px solid;
 
-			&.active {
-				color: #fff;
-			}
+		&.active {
+			color: #fff;
 		}
 
 		&.text {
