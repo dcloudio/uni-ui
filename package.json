@@ -5,7 +5,8 @@
     "scripts": {
         "serve": "npm run dev:h5",
         "build:lib": "rm -rf lib && node ./build/build-lib.js",
-        "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 UNI_INPUT_DIR='./examples' vue-cli-service uni-serve"
+        "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 UNI_INPUT_DIR='./examples' vue-cli-service uni-serve",
+		"dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin UNI_INPUT_DIR='./examples' vue-cli-service uni-build --watch"
     },
     "license": "ISC",
     "author": "dcloud.io",
