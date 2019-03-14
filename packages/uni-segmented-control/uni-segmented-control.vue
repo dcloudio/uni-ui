@@ -58,7 +58,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.segmented-control {
 		display: flex;
 		flex-direction: row;
@@ -69,15 +69,15 @@
 		box-sizing: border-box;
 		margin: 0 auto;
 		overflow: hidden;
-	}
 
-	.segmented-control.button {
-		border: 2upx solid;
-	}
+		&.button {
+			border: 1px solid;
+		}
 
-	.segmented-control.text {
-		border: 0;
-		border-radius: 0;
+		&.text {
+			border: 0;
+			border-radius: 0;
+		}
 	}
 
 	.segmented-control-item {
@@ -85,26 +85,26 @@
 		text-align: center;
 		line-height: 60upx;
 		box-sizing: border-box;
-	}
 
-	.segmented-control-item.button {
-		border-left: 1px solid;
-	}
+		&.button {
+			border-left: 1px solid;
 
-	.segmented-control-item.button.active {
-		color: #fff;
-	}
+			&.active {
+				color: #fff;
+			}
+		}
 
-	.segmented-control-item.text {
-		border-left: 0;
-		color: #000;
-	}
+		&.text {
+			border-left: 0;
+			color: #000;
 
-	.segmented-control-item.text.active {
-		border-bottom-style: solid;
-	}
+			&.active {
+				border-bottom-style: solid;
+			}
+		}
 
-	.segmented-control-item:first-child {
-		border-left-width: 0;
+		&:first-child {
+			border-left-width: 0;
+		}
 	}
 </style>
