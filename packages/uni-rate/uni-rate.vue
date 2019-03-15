@@ -73,9 +73,6 @@ export default {
 			valueSync: ''
 		};
 	},
-	created() {
-		this.valueSync = this.value;
-	},
 	computed: {
 		stars() {
 			const value = Number(this.valueSync) ? Number(this.valueSync) : 0;
@@ -110,6 +107,9 @@ export default {
 				value: this.valueSync
 			});
 		}
+	},
+	created() {
+		this.valueSync = this.value;
 	}
 };
 </script>

@@ -27,6 +27,32 @@
 		components: {
 			uniIcon
 		},
+		props: {
+			animation: { //动画效果:inner内容动；outer容器动
+				type: String,
+				default: 'outer'
+			},
+			title: { //列表标题
+				type: String,
+				default: ''
+			},
+			name: { //唯一标识符
+				type: [Number, String],
+				default: 0
+			},
+			disabled: { //是否禁用
+				type: [Boolean, String],
+				default: false
+			},
+			open: { //是否展开
+				type: [Boolean, String],
+				default: false
+			},
+			thumb: { //缩略图
+				type: String,
+				default: ''
+			}
+		},
 		data() {
 			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
 			return {
@@ -40,29 +66,10 @@
 				this.isOpen = val
 			}
 		},
-		props: {
-			animation: { //动画效果:inner内容动；outer容器动
-				type: String,
-				default: 'outer'
-			},
-			title: String, //列表标题
-			name: { //唯一标识符
-				type: [Number, String],
-				default: 0
-			},
-			disabled: { //是否禁用
-				type: [Boolean, String],
-				default: false
-			},
-			open: { //是否展开
-				type: [Boolean, String],
-				default: false
-			},
-			thumb: String //缩略图
-		},
 		created() {
 			let parent = this.$parent || this.$root
 			let name = parent.$options.name
+			this.isOpen = this.open
 
 			while (parent && name !== 'uni-collapse') {
 				parent = parent.$parent
