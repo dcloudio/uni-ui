@@ -98,6 +98,7 @@
 			.uni-calender__lunar {
 				font-size: 20upx;
 				color: #000;
+				line-height: 1.2;
 			}
 
 			.uni-calender__circle-box {
@@ -110,6 +111,7 @@
 				flex-shrink: 0;
 				border-radius: 50%;
 				transition: all 0.2s;
+				line-height: 1.2;
 			}
 
 			&.uni-calender__lunar {

@@ -29,41 +29,6 @@
 				/>
 			</view>
 		</view>
-
-		<!-- <text class="title">不固定高度</text>
-		<view class="calendar-box">
-			<uni-calendar :fixedHeihgt="false" slide="none" />
-		</view>
-		<text class="title">日历水平滚动切换</text>
-		<view class="calendar-box">
-			<uni-calendar slide="horizontal" />
-		</view>
-		<text class="title">日历垂直滚动切换</text>
-		<view class="calendar-box">
-			<uni-calendar slide="vertical" />
-		</view>
-		<text class="title">禁止选择今天之前的日期</text>
-		<view class="calendar-box">
-			<uni-calendar :disable-before="true" slide="none" />
-		</view>
-		<text class="title">选择范围 （2019-02-10 ～ 2019-05-10）</text>
-		<view class="calendar-box">
-			<uni-calendar start-date="2019-02-10" end-date="2019-05-10" slide="none" />
-		</view>
-		<text class="title">自定义当前日期 （2019-03-10）</text>
-		<view class="calendar-box">
-			<uni-calendar :disable-before="true" date="2019-03-10" slide="none" />
-		</view>
-		<text class="title">开启农历</text>
-		<view class="calendar-box">
-			<uni-calendar :lunar="true" slide="none" />
-		</view>
-		<text class="title">事件</text>
-		<view class="calendar-box">
-			<uni-calendar :lunar="false" :disable-before="false" slide="horizontal" @change="change" @to-click="toClick" />
-		</view>
-		<view>change: 当前选择时间：{{cahngInfo}}</view>
-		<view>to-click: 当前选择时间：{{clickInfo}}</view> -->
 	</view>
 </template>
 
@@ -128,7 +93,8 @@ export default {
 			this.show = false;
 		},
 		toggle(index, item) {
-			item.checked = !item.checked;
+			this.tags[index].checked = !item.checked;
+			// item.checked = !item.checked;
 			if (index === 'horizontal') {
 				this.tags['vertical'].checked = false;
 			}
