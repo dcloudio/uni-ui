@@ -70,9 +70,11 @@ export default {
 	},
 	data() {
 		return {
-			maxSync: this.max,
-			valueSync: this.value
+			valueSync: ''
 		};
+	},
+	created() {
+		this.valueSync = this.value;
 	},
 	computed: {
 		stars() {
