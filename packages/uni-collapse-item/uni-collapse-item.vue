@@ -56,7 +56,7 @@
 		data() {
 			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
 			return {
-				isOpen: this.open,
+				isOpen: false,
 				height: 0,
 				elId: elId
 			};
