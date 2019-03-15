@@ -1,8 +1,8 @@
 <template>
 	<view class="uni-pagination">
 		<view class="uni-pagination__btns">
-			<view @click="clickLeft" :class="['uni-pagination__btn',{'uni-pagination--disabled':currentIndex === 1}]" :hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'" :hover-start-time="20"
-			 :hover-stay-time="70">
+			<view @click="clickLeft" :class="['uni-pagination__btn',{'uni-pagination--disabled':currentIndex === 1}]"
+			 :hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70">
 				<template v-if="showIcon===true || showIcon === 'true'">
 					<uni-icon color="#000" size="20" type="arrowleft"></uni-icon>
 				</template>
@@ -10,7 +10,8 @@
 					{{prevText}}
 				</template>
 			</view>
-			<view @click="clickRight" :class="['uni-pagination__btn',{'uni-pagination--disabled':currentIndex === maxPage}]" :hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70">
+			<view @click="clickRight" :class="['uni-pagination__btn',{'uni-pagination--disabled':currentIndex === maxPage}]"
+			 :hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70">
 				<template v-if="showIcon===true || showIcon === 'true'">
 					<uni-icon color="#000" size="20" type="arrowright"></uni-icon>
 				</template>
@@ -28,7 +29,7 @@
 <script>
 	import uniIcon from '../uni-icon/uni-icon.vue'
 	export default {
-		name: "uni-pagination",
+		name: 'uni-pagination',
 		components: {
 			uniIcon
 		},
@@ -60,12 +61,12 @@
 		},
 		watch: {
 			current(val) {
-				this.currentIndex = Number(val)
+				this.currentIndex = +val
 			}
 		},
 		data() {
 			return {
-				currentIndex: Number(this.current)
+				currentIndex: 1
 			}
 		},
 		computed: {
@@ -100,6 +101,9 @@
 					current: this.currentIndex
 				})
 			}
+		},
+		created() {
+			this.currentIndex = +this.current;
 		}
 	}
 </script>
@@ -113,7 +117,7 @@
 		color: rgba(0, 0, 0, .6);
 		background-color: $uni-bg-color-hover;
 	}
-    
+
 	.uni-pagination {
 		width: 100%;
 		box-sizing: border-box;
