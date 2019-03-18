@@ -42,7 +42,6 @@
 			</uni-swipe-action>
 		</view>
 		<!-- #endif -->
-		<view style="height: 800px;"></view>
 	</view>
 </template>
 
