@@ -115,3 +115,17 @@ options 参数说明
 |opened|完全打开时触发|-|
 |closed|完全关闭时触发|-|
 
+**注意：** iOS 端由于存在bounce效果，滑动体验略差，建议禁止bounce效果，禁止方式如下：
+
+```javascript
+{
+	"path": "swipe-action/swipe-action",
+	"style": {
+		"navigationBarTitleText": "SwipeAction 滑动操作",
+		"disableScroll":true,
+		"app-plus":{
+			"bounce":"none"
+		}
+	}
+}
+```
