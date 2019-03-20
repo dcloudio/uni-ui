@@ -11,7 +11,9 @@
 					</view>
 				</swiper-item>
 				<swiper-item>
-					<uni-grid :options="data1" @click="onClick"></uni-grid>
+					<view class="grid-view">
+						<uni-grid :options="data1" @click="onClick"></uni-grid>
+					</view>
 				</swiper-item>
 			</swiper>
 			<view class="example-title">无外边框</view>
@@ -144,3 +146,11 @@
 		}
 	}
 </script>
+<style>
+	.grid-view{
+		/* #ifdef H5 */
+		padding: 0 0.5px;
+		/* #endif */
+		box-sizing: border-box;
+	}
+</style>
