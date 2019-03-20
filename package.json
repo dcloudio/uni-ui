@@ -10,29 +10,29 @@
     "license": "ISC",
     "author": "dcloud.io",
     "dependencies": {
-        "@dcloudio/uni-h5": "*",
+        "@dcloudio/uni-h5": "^0.4.0",
         "@dcloudio/uni-mp-alipay": "*",
-        "@dcloudio/uni-mp-baidu": "*",
-        "@dcloudio/uni-mp-toutiao": "*",
-        "@dcloudio/uni-mp-weixin": "*",
-        "flyio": "^0.6.2",
-        "vue": "^2.6.6",
-        "vuex": "^3.0.1"
+        "@dcloudio/uni-mp-baidu": "0.0.812",
+        "@dcloudio/uni-mp-toutiao": "0.0.312",
+        "@dcloudio/uni-mp-weixin": "0.0.912",
+        "flyio": "^0.6.14",
+        "vue": "^2.6.9",
+        "vuex": "^3.1.0"
     },
     "devDependencies": {
-        "@dcloudio/uni-cli-shared": "*",
-        "@dcloudio/vue-cli-plugin-uni": "latest",
-        "@dcloudio/webpack-uni-mp-loader": "*",
-        "@dcloudio/webpack-uni-pages-loader": "*",
+        "@dcloudio/uni-cli-shared": "^0.2.934",
+        "@dcloudio/vue-cli-plugin-uni": "^0.9.411",
+        "@dcloudio/webpack-uni-mp-loader": "^0.3.602",
+        "@dcloudio/webpack-uni-pages-loader": "^0.2.802",
         "@vue/cli-plugin-babel": "3.3.0",
-        "@vue/cli-service": "^3.4.0",
+        "@vue/cli-service": "^3.5.1",
         "babel-plugin-import": "^1.11.0",
         "cross-env": "^5.2.0",
         "fs-extra": "^7.0.1",
         "glob": "^7.1.3",
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
-        "vue-template-compiler": "^2.5.21"
+        "vue-template-compiler": "^2.6.9"
     },
     "browserslist": [
         "last 3 versions",
