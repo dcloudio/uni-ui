@@ -1,13 +1,13 @@
-### 日历选择组件
+### Calendar 日历
 
-本组件农历转换使用的js是 [@1900-2100区间内的公历、农历互转](https://github.com/jjonline/calendar.js)
+日历组件，组件名：``uni-calendar``，代码块： uCalendar。  
 
 ### 调用方式
 ```javascript
 
 <template>
 	<view>
-		<calendar 
+		<uni-calendar 
 		:lunar="true" 
 		:disable-before="true" 
 		:start-date="'2019-3-2'"
@@ -21,11 +21,11 @@
 
 <script>
 
-import {calendar} from "uni-ui"
+import {uniCalendar} from "uni-ui"
 
 export default {
 	components: {
-		calendar
+		uniCalendar
 	},
 	data() {
 		return {};
@@ -43,7 +43,6 @@ export default {
 
 
 ```
-
 
 ### 属性说明
 
@@ -67,9 +66,9 @@ export default {
 | to-click		| function 	|  日历选择事件	|
 | change		| function 	|  日历切换事件	|
 
+本组件农历转换使用的js是 [@1900-2100区间内的公历、农历互转](https://github.com/jjonline/calendar.js)  
 
 Tips:
 - 不支持快速滑动，快速滑动只会滑动近一个月
 - to-click 事件和 change 事件，返回的数据都是一样的，所以两个事件只会一个生效。不同的地方在于，to-click 只有点击生效，而 change 是只要日期有变化就生效，这个变化不一定是点击。
-
 

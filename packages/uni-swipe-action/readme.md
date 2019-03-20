@@ -1,6 +1,6 @@
 ### SwipeAction 滑动操作
 
-通过滑动触发选项的容器，组件名：``uni-swipe-action``
+通过滑动触发选项的容器，组件名：``uni-swipe-action``,代码块： uSwipeAction。
 
 **使用方式：**
 
