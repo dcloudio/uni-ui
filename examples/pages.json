@@ -91,6 +91,7 @@
 			"path": "pages/collapse/collapse",
 			"style": {
 				"navigationBarTitleText": "Collapse 折叠面板"
+				
 			}
 		},
 		{
@@ -126,7 +127,10 @@
 		{
 			"path": "pages/swipe-action/swipe-action",
 			"style": {
-				"navigationBarTitleText": "SwipeAction 滑动操作"
+				"navigationBarTitleText": "SwipeAction 滑动操作",
+				"app-plus":{
+					"bounce":"none"
+				}
 			}
 		},
 		{
