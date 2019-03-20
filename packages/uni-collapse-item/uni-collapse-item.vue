@@ -27,25 +27,15 @@
 		components: {
 			uniIcon
 		},
-		data() {
-			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
-			return {
-				isOpen: this.open,
-				height: 0,
-				elId: elId
-			};
-		},
-		watch: {
-			open(val) {
-				this.isOpen = val
-			}
-		},
 		props: {
 			animation: { //动画效果:inner内容动；outer容器动
 				type: String,
 				default: 'outer'
 			},
-			title: String, //列表标题
+			title: { //列表标题
+				type: String,
+				default: ''
+			},
 			name: { //唯一标识符
 				type: [Number, String],
 				default: 0
@@ -58,19 +48,37 @@
 				type: [Boolean, String],
 				default: false
 			},
-			thumb: String //缩略图
+			thumb: { //缩略图
+				type: String,
+				default: ''
+			}
 		},
+		data() {
+			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+			return {
+				isOpen: false,
+				height: 0,
+				elId: elId
+			};
+		},
+		watch: {
+			open(val) {
+				this.isOpen = val
+			}
+		},
+		inject: ['collapse'],
 		created() {
-			let parent = this.$parent || this.$root
-			let name = parent.$options.name
-
-			while (parent && name !== 'uni-collapse') {
-				parent = parent.$parent
-				if (parent) {
-					name = parent.$options.name
+			this.isOpen = this.open
+			this.nameSync = this.name ? this.name : this.collapse.childrens.length
+			this.collapse.childrens.push(this)
+			if (String(this.collapse.accordion) === 'true') {
+				if (this.isOpen) {
+					let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2]
+					if (lastEl) {
+						this.collapse.childrens[this.collapse.childrens.length - 2].isOpen = false
+					}
 				}
 			}
-			this.parent = parent
 		},
 		// #ifdef H5
 		mounted() {
@@ -92,9 +100,8 @@
 				if (this.disabled) {
 					return
 				}
-				let accordion = this.parent.accordion ? this.parent.accordion : false
-				if (accordion === true || accordion === 'true') {
-					this.$parent.$children.forEach(vm => {
+				if (String(this.collapse.accordion) === 'true') {
+					this.collapse.childrens.forEach(vm => {
 						if (vm === this) {
 							return
 						}
@@ -102,7 +109,7 @@
 					})
 				}
 				this.isOpen = !this.isOpen
-				this.parent.onChange && this.parent.onChange(this)
+				this.collapse.onChange && this.collapse.onChange()
 			}
 		}
 	}

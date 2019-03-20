@@ -37,7 +37,7 @@ List 一般用法
 
 ```html
 <uni-list>
-    <uni-list-item title="标题文字" thumb="http://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
+    <uni-list-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
 </uni-list>
 ```
 

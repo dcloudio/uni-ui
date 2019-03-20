@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-swipe-action">
-		<view class="uni-swipe-action__container" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
+		<view class="uni-swipe-action__container" :class="{'uni-swipe-action--show':isShowBtn}" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
 		 @touchcancel="touchEnd" @click="bindClickCont" :style="{'transform':transformX,'-webkit-transform':transformX}">
 			<view class="uni-swipe-action__content">
 				<slot></slot>
@@ -12,6 +12,7 @@
 				</div>
 			</view>
 		</view>
+		<view class="uni-swipe-action__mask" v-if="isShowBtn" @click="close" @touchmove.stop.prevent="close"></view>
 	</view>
 </template>
 
@@ -43,6 +44,7 @@
 			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
 			return {
 				elId: elId,
+				isShowBtn:false,
 				transformX: 'translateX(0px)'
 			}
 		},
@@ -51,7 +53,6 @@
 			this.startX = 0
 			this.startY = 0
 			this.btnGroupWidth = 0
-			this.isShowBtn = false
 			this.isMoving = false
 		},
 		// #ifdef H5
@@ -130,6 +131,10 @@
 					this.$emit('closed');
 				}
 				this.direction = '';
+			},
+			close(){
+				this.isShowBtn = false
+				this.endMove()
 			}
 		}
 	}
@@ -141,6 +146,7 @@
 		overflow: hidden;
 
 		&__container {
+			position: relative;
 			background-color: #FFFFFF;
 			width: 200%;
 			display: flex;
@@ -157,7 +163,10 @@
 			display: flex;
 			flex-direction: row;
 		}
-
+		&--show{
+			position: relative;
+			z-index: 1000;
+		}
 		&--btn {
 			padding: 0 32upx;
 			color: #FFFFFF;
@@ -167,6 +176,16 @@
 			text-align: center;
 			flex-direction: row;
 			align-items: center;
+		}
+		&__mask{
+			display: block;
+			opacity: 0;
+			position: fixed;
+			z-index: 999;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 		}
 	}
 </style>

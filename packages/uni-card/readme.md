@@ -16,7 +16,7 @@ export default {
 一般用法
 
 ```html
-<uni-card title="标题文字" thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="额外信息" note="Tips">
+<uni-card title="标题文字" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="额外信息" note="Tips">
     内容主体，可自定义内容及样式
 </uni-card>
 ```
@@ -24,7 +24,7 @@ export default {
 内容通栏
 
 ```html
-<uni-card is-full="true" title="DCloud" thumbnail="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="2018.12.12" >
+<uni-card is-full="true" title="DCloud" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" extra="2018.12.12" >
     <image src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg" style="width: 100%;"></image>
 </uni-card>
 ```

@@ -19,8 +19,8 @@ export default {
 <uni-collapse @change="change">
     <uni-collapse-item title="标题文字">
         <uni-list>
-            <uni-list-item title="标题文字" thumb="http://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
-            <uni-list-item title="标题文字" note="描述信息" thumb="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"></uni-list-item>
+            <uni-list-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
+            <uni-list-item title="标题文字" note="描述信息" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"></uni-list-item>
             <uni-list-item title="标题文字" note="描述信息" show-extra-icon="true" :extra-icon="{color: '#4cd964',size: '22',type: 'spinner'}"></uni-list-item>
         </uni-list>
     </uni-collapse-item>
@@ -60,12 +60,12 @@ export default {
 
 ```html
 <uni-collapse>
-    <uni-collapse-item title="标题文字" thumb="http://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
+    <uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
         <view style="padding: 30upx;">
             折叠内容主体，可自定义内容及样式
         </view>
     </uni-collapse-item>
-    <uni-collapse-item title="标题文字" thumb="http://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png">
+    <uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png">
         <view style="padding: 30upx;">
             折叠内容主体，可自定义内容及样式
         </view>
