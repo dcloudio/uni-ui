@@ -96,6 +96,7 @@ export default {
 |属性名|类型|默认值|是否必填	|说明|
 |:--|:--|:--|:--|:--|
 |is-opened|Boolean|false|否|是否为开启状态|
+|is-drag|Boolean|false|否|是否为跟手滑动|
 |disabled|Boolean|false|否|是否禁止滑动|
 |auto-close|Boolean|true|否|在组件开启状态时点击组件，是否自动关闭|
 |options|Array<Object>|-|是|组件选项内容及样式|
