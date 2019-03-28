@@ -70,7 +70,7 @@ export default {
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/liwu.png',text:'礼物'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/maozi.png',text:'帽子'},
     {image:'https://img-cdn-qiniu.dcloud.net.cn/img/shoutao.png',text:'手套'}]" 
-    type="rect">
+    type="oblong">
 </uni-grid>
 ```
 
@@ -82,7 +82,7 @@ export default {
 |属性名|类型|默认值	|说明|
 |---|----|---|---|
 |options|Array&lt;Object&gt;|-|宫格布局数据，格式为：[{image:'xxx',text:'xxx'},{image:'xxx',text:'xxx'}]|
-|type|String|oblong|宫格的类型，可取值：square（正方形）/oblong（长方形）|
+|type|String|square|宫格的类型，可取值：square（正方形）/oblong（长方形）|
 |column-num|Number|3|每行有多少个|
 |show-out-border|Boolean|true|是否显示外边框|
 |show-border|Boolean|true|是否显示边框（如果为false，则show-out-border设置无效）|
