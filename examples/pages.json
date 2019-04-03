@@ -101,6 +101,12 @@
 			}
 		},
 		{
+			"path": "pages/swiper-dot/swiper-dot",
+			"style": {
+				"navigationBarTitleText": "SwiperDot 轮播图指示点"
+			}
+		},
+		{
 			"path": "pages/grid/grid",
 			"style": {
 				"navigationBarTitleText": "Grid 宫格"
