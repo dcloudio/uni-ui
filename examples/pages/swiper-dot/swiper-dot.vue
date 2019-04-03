@@ -44,7 +44,7 @@
 				info: [{
 					name: 'test',
 					colorClass: 'uni-bg-red',
-					url: '../../static/shuijiao.jpg',
+					url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',
 					content: '内容 A'
 				}, {
 					name: 'test',
