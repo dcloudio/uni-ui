@@ -58,7 +58,8 @@
 		height: 60upx;
 		line-height: calc(60upx - 2px);
 		font-size: $uni-font-size-base;
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
 		color: $uni-text-color;
 		border-radius: $uni-border-radius-base;
 		background-color: $uni-bg-color-grey;

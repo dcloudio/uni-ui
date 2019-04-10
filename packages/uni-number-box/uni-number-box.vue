@@ -128,6 +128,9 @@
 			height: 100%;
 			line-height: $numbox-height;
 			text-align: center;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
 			color: $uni-text-color;
 			position: relative;
 		}
