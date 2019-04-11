@@ -97,3 +97,8 @@ export default {
 |disabled|Boolean|false|是否禁用|
 |open|Boolean|false|是否展开面板|
 |animation|String|false|动画类型：outer（内容进行动画）/outer（容器进行动画）|
+
+Tips
+- 组件实际运行效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
+- npm 使用方式参考：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+- 如果需要在组件上使用 `v-for` 循环，需要使用 `hbuilderX.alpha 1.8.5+` 版本
