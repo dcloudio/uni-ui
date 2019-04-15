@@ -4,48 +4,27 @@
 		:end-date="'2019-3-15'" -->
 		<text class="calendar-title">日历组件</text>
 		<view class="calendar-tags-group">
-			<view
-				class="calendar-tags"
-				:class="{ checked: item.checked }"
-				v-for="(item, index) in tags"
-				:key="index"
-				@click="toggle(index, item)"
-			>
+			<view class="calendar-tags" :class="{ checked: item.checked }" v-for="(item, index) in tags" :key="index" @click="toggle(index, item)">
 				<view class="calendar-tags-item">{{ item.name }}</view>
 			</view>
 		</view>
 		<button class="calendar-button" type="button" @click="open">打开日历</button>
 		<text v-if="timeData.lunar" class="calendar-title">已选日期</text>
 		<view v-if="timeData.lunar" class="calendar-info">
-			<view>当前选择时间 : {{timeData.fulldate}}</view>
-			<view v-if="tags['lunar'].checked">农历日期 : {{timeData.year +
-									'年' +
-									timeData.month +
-									'月' +
-									timeData.date +
-									'日 （' +
-									timeData.lunar.astro +
-									')'}}</view>
-			<view v-if="tags['lunar'].checked"> {{
-					timeData.lunar.gzYear +
-						'年' +
-						timeData.lunar.gzMonth +
-						'月' +
-						timeData.lunar.gzDay +
-						'日 (' +
-						timeData.lunar.Animal +
-						'年)'
-				}}
-				{{ timeData.lunar.IMonthCn + timeData.lunar.IDayCn }}
-				{{ timeData.lunar.isTerm ? timeData.lunar.Term : '' }}</view>
+			<view>当前选择时间 : {{ timeData.fulldate }}</view>
+			<view v-if="tags[0].checked">农历日期 : {{ timeData.year + '年' + timeData.month + '月' + timeData.date + '日 （' + timeData.lunar.astro + ')' }}</view>
+			<view v-if="tags[0].checked">
+				{{ timeData.lunar.gzYear + '年' + timeData.lunar.gzMonth + '月' + timeData.lunar.gzDay + '日 (' + timeData.lunar.Animal + '年)' }}
+				{{ timeData.lunar.IMonthCn + timeData.lunar.IDayCn }} {{ timeData.lunar.isTerm ? timeData.lunar.Term : '' }}
+			</view>
 		</view>
 		<view v-if="show" class="calendar-mask" @click="closeMask">
 			<view class="calendar-box" @click.stop="">
 				<uni-calendar
-					:lunar="tags['lunar'].checked"
-					:fixedHeihgt="tags['fixedHeihgt'].checked"
+					:lunar="tags[0].checked"
+					:fixedHeihgt="tags[1].checked"
 					:slide="slide"
-					:disableBefore="tags['disableBefore'].checked"
+					:disableBefore="tags[6].checked"
 					:start-date="startDate"
 					:end-date="endDate"
 					:date="date"
@@ -62,9 +41,7 @@
 </template>
 
 <script>
-
 export default {
-
 	data() {
 		/**
 		 * 时间计算
@@ -74,58 +51,32 @@ export default {
 				date = date.replace(/-/g, '/');
 			}
 			let dd = new Date(date);
-				dd.setMonth(dd.getMonth() + AddDayCount); // 获取AddDayCount天后的日期
+			dd.setMonth(dd.getMonth() + AddDayCount); // 获取AddDayCount天后的日期
 			let y = dd.getFullYear();
 			let m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1; // 获取当前月份的日期，不足10补0
 			let d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate(); // 获取当前几号，不足10补0
 			return y + '-' + m + '-' + d;
 		}
-		let tags = {
-			lunar: {
+		let tags = [
+			{
+				id: 0,
 				name: '农历',
 				checked: false,
 				attr: 'lunar'
 			},
-			fixedHeihgt: {
+			{
+				id: 1,
 				name: '固定高度',
 				checked: false,
 				attr: 'fixedHeihgt'
 			},
-			vertical: {
-				name: '垂直滚动',
-				checked: false,
-				attr: 'vertical'
-			},
-			horizontal: {
-				name: '水平滚动',
-				checked: false,
-				attr: 'horizontal'
-			},
-			startDate: {
-				name: '开始日期('+getDate(new Date(),-1)+')',
-				checked: false,
-				value:getDate(new Date(),-1),
-				attr: 'startDate'
-			},
-			endDate: {
-				name: '结束日期('+getDate(new Date(),2)+')',
-				value:getDate(new Date(),2),
-				checked: false,
-				attr: 'endDate'
-			},
-			disableBefore: {
-				name: '禁用今天之前的日期',
-				checked: false,
-				attr: 'disableBefore'
-			},
-			date: {
-				name: '自定义当前日期('+getDate(new Date(),1)+')',
-				value: getDate(new Date(),1),
-				checked: false,
-				attr: 'date'
-			}
-		};
-		
+			{ id: 2, name: '垂直滚动', checked: false, attr: 'vertical' },
+			{ id: 3, name: '水平滚动', checked: false, attr: 'horizontal' },
+			{ id: 4, name: '开始日期(' + getDate(new Date(), -1) + ')', checked: false, value: getDate(new Date(), -1), attr: 'startDate' },
+			{ id: 5, name: '结束日期(' + getDate(new Date(), 2) + ')', value: getDate(new Date(), 2), checked: false, attr: 'endDate' },
+			{ id: 6, name: '禁用今天之前的日期', checked: false, attr: 'disableBefore' },
+			{ id: 7, name: '自定义当前日期(' + getDate(new Date(), 1) + ')', value: getDate(new Date(), 1), checked: false, attr: 'date' }
+		];
 
 		return {
 			show: false,
@@ -134,7 +85,7 @@ export default {
 			date: '',
 			startDate: '',
 			endDate: '',
-			timeData:{}
+			timeData: {}
 		};
 	},
 	onLoad() {},
@@ -145,49 +96,50 @@ export default {
 		toggle(index, item) {
 			this.tags[index].checked = !item.checked;
 			// item.checked = !item.checked;
-			if (index === 'horizontal') {
-				this.tags['vertical'].checked = false;
+			console.log(index)
+			if (index === 2) {
+				this.tags[3].checked = false;
 			}
-			if (index === 'vertical') {
-				this.tags['horizontal'].checked = false;
+			if (index === 3) {
+				this.tags[2].checked = false;
 			}
 			// this.attribute[item.attr] = !item.checked;
 		},
 		open() {
-			if (this.tags['horizontal'].checked) {
+			if (this.tags[3].checked) {
 				this.slide = 'horizontal';
-			} else if (this.tags['vertical'].checked) {
+			} else if (this.tags[2].checked) {
 				this.slide = 'vertical';
 			} else {
 				this.slide = 'none';
 			}
-			if (this.tags['startDate'].checked) {
-				this.startDate = this.tags['startDate'].value;
+			if (this.tags[4].checked) {
+				this.startDate = this.tags[4].value;
 			} else {
 				this.startDate = '';
 			}
-			if (this.tags['endDate'].checked) {
-				this.endDate = this.tags['endDate'].value;
+			if (this.tags[5].checked) {
+				this.endDate = this.tags[5].value;
 			} else {
 				this.endDate = '';
 			}
-			if (this.tags['date'].checked) {
-				this.date = this.tags['date'].value;
+			if (this.tags[7].checked) {
+				this.date = this.tags[7].value;
 			} else {
 				this.date = '';
 			}
 			this.show = true;
-			console.log(this.date)
+			console.log(this.date);
 		},
-		change(e){
-			console.log('change 返回:',e.fulldate);
-			this.timeData = e ;
+		change(e) {
+			console.log('change 返回:', e.fulldate);
+			this.timeData = e;
 		},
-		toClick(e){
-			console.log('点击事件',e.fulldate);
-			this.timeData = e ;
+		toClick(e) {
+			console.log('点击事件', e.fulldate);
+			this.timeData = e;
 		},
-		confirm(){
+		confirm() {
 			this.show = false;
 		}
 	}
@@ -226,7 +178,7 @@ page {
 }
 .calendar-tags-item {
 	padding: 10upx 20upx;
-	border: 1px rgba(0,0,0,.2) solid;
+	border: 1px rgba(0, 0, 0, 0.2) solid;
 	color: #333;
 	border-radius: 10upx;
 	text-align: center;
@@ -237,7 +189,7 @@ page {
 	background: #f8f8f8;
 }
 .checked .calendar-tags-item {
-	background: rgb(0, 122, 255);;
+	background: rgb(0, 122, 255);
 	color: #fff;
 	border: 1px rgba(0, 0, 0, 0.1) solid;
 }
@@ -272,7 +224,7 @@ page {
 	background: #fff;
 }
 .calendar-button-groups {
-	position:absolute;
+	position: absolute;
 	width: 100%;
 	bottom: 0;
 	display: flex;
