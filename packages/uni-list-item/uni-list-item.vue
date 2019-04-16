@@ -1,105 +1,132 @@
 <template>
-	<view class="uni-list-item" :class="disabled ? 'uni-list-item--disabled' : ''"
-	 :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'" @click="onClick">
-		<view class="uni-list-item__container">
-			<view class="uni-list-item__icon" v-if="thumb">
-				<image class="uni-list-item__icon-img" :src="thumb"></image>
-			</view>
-			<view class="uni-list-item__icon" v-else-if="showExtraIcon">
-				<uni-icon :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type"></uni-icon>
-			</view>
-			<view class="uni-list-item__content">
-				<view class="uni-list-item__content-title">{{title}}</view>
-				<view class="uni-list-item__content-note" v-if="note">{{note}}</view>
-			</view>
-			<view class="uni-list-item__extra" v-if="showBadge || showArrow || showSwitch">
-				<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText"></uni-badge>
-				<switch v-if="showSwitch" :disabled='disabled' :checked="switchChecked" @change="onSwitchChange" />
-				<uni-icon v-if="showArrow" color="#bbb" :size="20" type="arrowright"></uni-icon>
-			</view>
-		</view>
-	</view>
+  <view
+    :class="disabled ? 'uni-list-item--disabled' : ''"
+    :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
+    class="uni-list-item"
+    @click="onClick">
+    <view class="uni-list-item__container">
+      <view
+        v-if="thumb"
+        class="uni-list-item__icon">
+        <image
+          :src="thumb"
+          class="uni-list-item__icon-img"/></image></image>
+      </view>
+      <view
+        v-else-if="showExtraIcon"
+        class="uni-list-item__icon">
+        <uni-icon
+          :color="extraIcon.color"
+          :size="extraIcon.size"
+          :type="extraIcon.type"/>
+      </view>
+      <view class="uni-list-item__content">
+        <view class="uni-list-item__content-title">{{ title }}</view>
+        <view
+          v-if="note"
+          class="uni-list-item__content-note">{{ note }}</view>
+      </view>
+      <view
+        v-if="showBadge || showArrow || showSwitch"
+        class="uni-list-item__extra">
+        <uni-badge
+          v-if="showBadge"
+          :type="badgeType"
+          :text="badgeText"/>
+        <switch
+          v-if="showSwitch"
+          :disabled="disabled"
+          :checked="switchChecked"
+          @change="onSwitchChange" />
+        <uni-icon
+          v-if="showArrow"
+          :size="20"
+          color="#bbb"
+          type="arrowright"/>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
-	import uniIcon from '../uni-icon/uni-icon.vue'
-	import uniBadge from '../uni-badge/uni-badge.vue'
-	export default {
-		name: 'uni-list-item',
-		components: {
-			uniIcon,
-			uniBadge
-		},
-		data() {
-			return {
+import uniIcon from '../uni-icon/uni-icon.vue'
+import uniBadge from '../uni-badge/uni-badge.vue'
+export default {
+  name: 'UniListItem',
+  components: {
+    uniIcon,
+    uniBadge
+  },
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }, // 列表标题
+    note: {
+      type: String,
+      default: ''
+    }, // 列表描述
+    disabled: { // 是否禁用
+      type: Boolean,
+      default: false
+    },
+    showArrow: { // 是否显示箭头
+      type: Boolean,
+      default: true
+    },
+    showBadge: { // 是否显示数字角标
+      type: Boolean,
+      default: false
+    },
+    showSwitch: { // 是否显示Switch
+      type: Boolean,
+      default: false
+    },
+    switchChecked: { // Switch是否被选中
+      type: Boolean,
+      default: false
+    },
+    badgeText: {
+      type: [String, Number],
+      default: ''
+    }, // badge内容
+    badgeType: { // badge类型
+      type: String,
+      default: 'success'
+    },
+    thumb: {
+      type: String,
+      default: ''
+    }, // 缩略图
+    showExtraIcon: { // 是否显示扩展图标
+      type: Boolean,
+      default: false
+    },
+    extraIcon: {
+      type: Object,
+      default () {
+        return {
+          type: 'contact',
+          color: '#000000',
+          size: 20
+        }
+      }
+    }
+  },
+  data () {
+    return {
 
-			};
-		},
-		props: {
-			title: {
-				type: String,
-				default: ''
-			}, //列表标题
-			note: {
-				type: String,
-				default: ''
-			}, //列表描述
-			disabled: { //是否禁用
-				type: Boolean,
-				default: false
-			},
-			showArrow: { //是否显示箭头
-				type: Boolean,
-				default: true
-			},
-			showBadge: { //是否显示数字角标
-				type: Boolean,
-				default: false
-			},
-			showSwitch: { //是否显示Switch
-				type: Boolean,
-				default: false
-			},
-			switchChecked: { //Switch是否被选中
-				type: Boolean,
-				default: false
-			},
-			badgeText: {
-				type: [String, Number],
-				default: ''
-			}, //badge内容
-			badgeType: { //badge类型
-				type: String,
-				default: 'success'
-			},
-			thumb: {
-				type: String,
-				default: ''
-			}, //缩略图
-			showExtraIcon: { //是否显示扩展图标
-				type: Boolean,
-				default: false
-			},
-			extraIcon: {
-				type: Object,
-				default () {
-					return {
-						type: 'contact',
-						color: '#000000',
-						size: 20
-					};
-				}
-			}
-		},
-		methods: {
-			onClick() {
-				this.$emit('click')
-			},
-			onSwitchChange(e) {
-				this.$emit('switchChange', e.detail)
-			}
-		}
-	}
+    }
+  },
+  methods: {
+    onClick () {
+      this.$emit('click')
+    },
+    onSwitchChange (e) {
+      this.$emit('switchChange', e.detail)
+    }
+  }
+}
 </script>
 
 <style lang="scss">

@@ -1,80 +1,86 @@
 <template>
-	<view v-if="visibleSync" class="uni-drawer" @touchmove.stop.prevent="moveHandle" :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}">
-		<view class="uni-drawer__mask" @tap="close"></view>
-		<view class="uni-drawer__content">
-			<slot></slot>
-		</view>
-	</view>
+  <view
+    v-if="visibleSync"
+    :class="{'uni-drawer--visible':showDrawer,'uni-drawer--right':rightMode}"
+    class="uni-drawer"
+    @touchmove.stop.prevent="moveHandle">
+    <view
+      class="uni-drawer__mask"
+      @tap="close"/>
+    <view class="uni-drawer__content">
+      <slot/>
+    </view>
+  </view>
 </template>
 
 <script>
-	export default {
-		name: 'uni-drawer',
-		props: {
-			/**
+export default {
+  name: 'UniDrawer',
+  props: {
+    /**
 			 * 显示状态
 			 */
-			visible: {
-				type: Boolean,
-				default: false
-			},
-			/**
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    /**
 			 * 显示模式（左、右），只在初始化生效
 			 */
-			mode: String,
-			/**
+    mode: String,
+    /**
 			 * 蒙层显示状态
 			 */
-			mask: {
-				type: [Boolean, String],
-				default: true
-			}
-		},
-		data() {
-			return {
-				visibleSync: false,
-				showDrawer: false,
-				rightMode: false,
-				closeTimer: null,
-				watchTimer: null
-			}
-		},
-		watch: {
-			visible(val) {
-				clearTimeout(this.watchTimer)
-				setTimeout(() => {
-					this.showDrawer = val
-				}, 100)
-				if (this.visibleSync) {
-					clearTimeout(this.closeTimer)
-				}
-				if (val) {
-					this.visibleSync = val
-				} else {
-					this.watchTimer = setTimeout(() => {
-						this.visibleSync = val
-					}, 300)
-				}
-			}
-		},
-		created() {
-			this.visibleSync = this.visible
-			setTimeout(() => {
-				this.showDrawer = this.visible
-			}, 100)
-			this.rightMode = this.mode === 'right'
-		},
-		methods: {
-			close() {
-				this.showDrawer = false
-				this.closeTimer = setTimeout(() => {
-					this.visibleSync = false
-					this.$emit('close')
-				}, 200)
-			},
-			moveHandle() {}
-		}
-	}
+    mask: {
+      type: [Boolean, String],
+      default: true
+    }
+  },
+  data () {
+    return {
+      visibleSync: false,
+      showDrawer: false,
+      rightMode: false,
+      closeTimer: null,
+      watchTimer: null
+    }
+  },
+  watch: {
+    visible (val) {
+      clearTimeout(this.watchTimer)
+      setTimeout(() => {
+        this.showDrawer = val
+      }, 100)
+      if (this.visibleSync) {
+        clearTimeout(this.closeTimer)
+      }
+      if (val) {
+        this.visibleSync = val
+      } else {
+        this.watchTimer = setTimeout(() => {
+          this.visibleSync = val
+        }, 300)
+      }
+    }
+  },
+  created () {
+    this.visibleSync = this.visible
+    setTimeout(() => {
+      this.showDrawer = this.visible
+    }, 100)
+    this.rightMode = this.mode === 'right'
+  },
+  methods: {
+    close () {
+      this.showDrawer = false
+      this.closeTimer = setTimeout(() => {
+        this.visibleSync = false
+        this.$emit('close')
+      }, 200)
+    },
+    moveHandle () {}
+  }
+}
 </script>
 
 <style lang="scss">

@@ -1,103 +1,126 @@
 <template>
-	<view class="uni-navbar">
-		<view class="uni-navbar__content" :class="{'uni-navbar--fixed': !!fixed,'uni-navbar--shadow':!!border,'uni-navbar--border':!!border}"
-		 :style="{'background-color':backgroundColor}">
-			<uni-status-bar v-if="statusBar"></uni-status-bar>
-			<view class="uni-navbar__header" :style="{color:color}">
-				<view class="uni-navbar__header-btns" @tap="onClickLeft">
-					<view v-if="leftIcon.length">
-						<uni-icon :type="leftIcon" :color="color" size="24"></uni-icon>
-					</view>
-					<view v-if="leftText.length" class="uni-navbar-btn-text" :class="{'uni-navbar-btn-icon-left':!leftIcon.length}">{{leftText}}</view>
-					<slot name="left"></slot>
-				</view>
-				<view class="uni-navbar__header-container">
-					<view v-if="title.length" class="uni-navbar__header-container-inner">{{title}}</view>
-					<!-- 标题插槽 -->
-					<slot></slot>
-				</view>
-				<view class="uni-navbar__header-btns" @tap="onClickRight">
-					<view v-if="rightIcon.length">
-						<uni-icon :type="rightIcon" :color="color" size="24"></uni-icon>
-					</view>
-					<!-- 优先显示图标 -->
-					<view v-if="rightText.length&&!rightIcon.length" class="uni-navbar-btn-text">{{rightText}}</view>
-					<slot name="right"></slot>
-				</view>
-			</view>
-		</view>
-		<view class="uni-navbar__placeholder" v-if="fixed">
-			<uni-status-bar v-if="statusBar"></uni-status-bar>
-			<view class="uni-navbar__placeholder-view"></view>
-		</view>
-	</view>
+  <view class="uni-navbar">
+    <view
+      :class="{'uni-navbar--fixed': !!fixed,'uni-navbar--shadow':!!border,'uni-navbar--border':!!border}"
+      :style="{'background-color':backgroundColor}"
+      class="uni-navbar__content">
+      <uni-status-bar v-if="statusBar"/>
+      <view
+        :style="{color:color}"
+        class="uni-navbar__header">
+        <view
+          class="uni-navbar__header-btns"
+          @tap="onClickLeft">
+          <view v-if="leftIcon.length">
+            <uni-icon
+              :type="leftIcon"
+              :color="color"
+              size="24"/>
+          </view>
+          <view
+            v-if="leftText.length"
+            :class="{'uni-navbar-btn-icon-left':!leftIcon.length}"
+            class="uni-navbar-btn-text">{{ leftText }}</view>
+          <slot name="left"/>
+        </view>
+        <view class="uni-navbar__header-container">
+          <view
+            v-if="title.length"
+            class="uni-navbar__header-container-inner">{{ title }}</view>
+          <!-- 标题插槽 -->
+          <slot/>
+        </view>
+        <view
+          class="uni-navbar__header-btns"
+          @tap="onClickRight">
+          <view v-if="rightIcon.length">
+            <uni-icon
+              :type="rightIcon"
+              :color="color"
+              size="24"/>
+          </view>
+          <!-- 优先显示图标 -->
+          <view
+            v-if="rightText.length&&!rightIcon.length"
+            class="uni-navbar-btn-text">{{ rightText }}</view>
+          <slot name="right"/>
+        </view>
+      </view>
+    </view>
+    <view
+      v-if="fixed"
+      class="uni-navbar__placeholder">
+      <uni-status-bar v-if="statusBar"/>
+      <view class="uni-navbar__placeholder-view"/>
+    </view>
+  </view>
 </template>
 
 <script>
-	import uniStatusBar from '../uni-status-bar/uni-status-bar.vue'
-	import uniIcon from '../uni-icon/uni-icon.vue'
+import uniStatusBar from '../uni-status-bar/uni-status-bar.vue'
+import uniIcon from '../uni-icon/uni-icon.vue'
 
-	export default {
-		name: 'uni-nav-bar',
-		components: {
-			uniStatusBar,
-			uniIcon
-		},
-		props: {
-			title: {
-				type: String,
-				default: ''
-			},
-			leftText: {
-				type: String,
-				default: ''
-			},
-			rightText: {
-				type: String,
-				default: ''
-			},
-			leftIcon: {
-				type: String,
-				default: ''
-			},
-			rightIcon: {
-				type: String,
-				default: ''
-			},
-			fixed: {
-				type: [Boolean, String],
-				default: false
-			},
-			color: {
-				type: String,
-				default: '#000000'
-			},
-			backgroundColor: {
-				type: String,
-				default: '#FFFFFF'
-			},
-			statusBar: {
-				type: [Boolean, String],
-				default: false
-			},
-			shadow: {
-				type: [String, Boolean],
-				default: true
-			},
-			border: {
-				type: [String, Boolean],
-				default: true
-			}
-		},
-		methods: {
-			onClickLeft() {
-				this.$emit('click-left')
-			},
-			onClickRight() {
-				this.$emit('click-right')
-			}
-		}
-	}
+export default {
+  name: 'UniNavBar',
+  components: {
+    uniStatusBar,
+    uniIcon
+  },
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    leftText: {
+      type: String,
+      default: ''
+    },
+    rightText: {
+      type: String,
+      default: ''
+    },
+    leftIcon: {
+      type: String,
+      default: ''
+    },
+    rightIcon: {
+      type: String,
+      default: ''
+    },
+    fixed: {
+      type: [Boolean, String],
+      default: false
+    },
+    color: {
+      type: String,
+      default: '#000000'
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    statusBar: {
+      type: [Boolean, String],
+      default: false
+    },
+    shadow: {
+      type: [String, Boolean],
+      default: true
+    },
+    border: {
+      type: [String, Boolean],
+      default: true
+    }
+  },
+  methods: {
+    onClickLeft () {
+      this.$emit('click-left')
+    },
+    onClickRight () {
+      this.$emit('click-right')
+    }
+  }
+}
 </script>
 
 <style lang="scss">

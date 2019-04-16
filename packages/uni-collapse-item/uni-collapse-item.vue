@@ -1,119 +1,135 @@
 <template>
-	<view :class="['uni-collapse-cell',{'uni-collapse-cell--disabled':disabled,'uni-collapse-cell--open':isOpen}]" :hover-class="disabled ? '' : 'uni-collapse-cell--hover'">
-		<view class="uni-collapse-cell__title" @click="onClick">
-			<view class="uni-collapse-cell__title-extra" v-if="thumb">
-				<image class="uni-collapse-cell__title-img" :src="thumb"></image>
-			</view>
-			<view class="uni-collapse-cell__title-inner">
-				<view class="uni-collapse-cell__title-text">{{title}}</view>
-			</view>
-			<view class="uni-collapse-cell__title-arrow" :class="{'uni-active':isOpen,'uni-collapse-cell--animation':showAnimation===true}">
-				<uni-icon color="#bbb" size="20" type="arrowdown"></uni-icon>
-			</view>
-		</view>
-		<view class="uni-collapse-cell__content" :class="{'uni-collapse-cell--animation':showAnimation===true}" :style="{height:isOpen ? height : '0px'}">
-			<view :id="elId">
-				<slot />
-			</view>
-		</view>
-	</view>
+  <view
+    :class="['uni-collapse-cell',{'uni-collapse-cell--disabled':disabled,'uni-collapse-cell--open':isOpen}]"
+    :hover-class="disabled ? '' : 'uni-collapse-cell--hover'">
+    <view
+      class="uni-collapse-cell__title"
+      @click="onClick">
+      <view
+        v-if="thumb"
+        class="uni-collapse-cell__title-extra">
+        <image
+          :src="thumb"
+          class="uni-collapse-cell__title-img"/></image></image>
+      </view>
+      <view class="uni-collapse-cell__title-inner">
+        <view class="uni-collapse-cell__title-text">{{ title }}</view>
+      </view>
+      <view
+        :class="{'uni-active':isOpen,'uni-collapse-cell--animation':showAnimation===true}"
+        class="uni-collapse-cell__title-arrow">
+        <uni-icon
+          color="#bbb"
+          size="20"
+          type="arrowdown"/>
+      </view>
+    </view>
+    <view
+      :class="{'uni-collapse-cell--animation':showAnimation===true}"
+      :style="{height:isOpen ? height : '0px'}"
+      class="uni-collapse-cell__content">
+      <view :id="elId">
+        <slot />
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
-	import uniIcon from '../uni-icon/uni-icon.vue'
-	export default {
-		name: 'uni-collapse-item',
-		components: {
-			uniIcon
-		},
-		props: {
-			title: { //列表标题
-				type: String,
-				default: ''
-			},
-			name: { //唯一标识符
-				type: [Number, String],
-				default: 0
-			},
-			disabled: { //是否禁用
-				type: [Boolean, String],
-				default: false
-			},
-			showAnimation: { //是否显示动画
-				type: Boolean,
-				default: false
-			},
-			open: { //是否展开
-				type: [Boolean, String],
-				default: false
-			},
-			thumb: { //缩略图
-				type: String,
-				default: ''
-			}
-		},
-		data() {
-			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
-			return {
-				isOpen: false,
-				height: 'auto',
-				elId: elId
-			};
-		},
-		watch: {
-			open(val) {
-				this.isOpen = val
-			}
-		},
-		inject: ['collapse'],
-		created() {
-			this.isOpen = this.open
-			this.nameSync = this.name ? this.name : this.collapse.childrens.length
-			this.collapse.childrens.push(this)
-			if (String(this.collapse.accordion) === 'true') {
-				if (this.isOpen) {
-					let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2]
-					if (lastEl) {
-						this.collapse.childrens[this.collapse.childrens.length - 2].isOpen = false
-					}
-				}
-			}
-		},
-		// #ifdef H5
-		mounted() {
-			this.getSize()
-		},
-		// #endif
-		// #ifndef H5
-		onReady() {
-			this.getSize()
-		},
-		// #endif
-		methods: {
-			getSize() {
-				if(this.showAnimation){
-					uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
-						this.height = ret[0].height + 'px'
-					});
-				}
-			},
-			onClick() {
-				if (this.disabled) {
-					return
-				}
-				if (String(this.collapse.accordion) === 'true') {
-					this.collapse.childrens.forEach(vm => {
-						if (vm === this) {
-							return
-						}
-						vm.isOpen = false
-					})
-				}
-				this.isOpen = !this.isOpen
-				this.collapse.onChange && this.collapse.onChange()
-			}
-		}
-	}
+import uniIcon from '../uni-icon/uni-icon.vue'
+export default {
+  name: 'UniCollapseItem',
+  components: {
+    uniIcon
+  },
+  props: {
+    title: { // 列表标题
+      type: String,
+      default: ''
+    },
+    name: { // 唯一标识符
+      type: [Number, String],
+      default: 0
+    },
+    disabled: { // 是否禁用
+      type: [Boolean, String],
+      default: false
+    },
+    showAnimation: { // 是否显示动画
+      type: Boolean,
+      default: false
+    },
+    open: { // 是否展开
+      type: [Boolean, String],
+      default: false
+    },
+    thumb: { // 缩略图
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    return {
+      isOpen: false,
+      height: 'auto',
+      elId: elId
+    }
+  },
+  watch: {
+    open (val) {
+      this.isOpen = val
+    }
+  },
+  inject: ['collapse'],
+  created () {
+    this.isOpen = this.open
+    this.nameSync = this.name ? this.name : this.collapse.childrens.length
+    this.collapse.childrens.push(this)
+    if (String(this.collapse.accordion) === 'true') {
+      if (this.isOpen) {
+        let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2]
+        if (lastEl) {
+          this.collapse.childrens[this.collapse.childrens.length - 2].isOpen = false
+        }
+      }
+    }
+  },
+  // #ifdef H5
+  mounted () {
+    this.getSize()
+  },
+  // #endif
+  // #ifndef H5
+  onReady () {
+    this.getSize()
+  },
+  // #endif
+  methods: {
+    getSize () {
+      if (this.showAnimation) {
+        uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
+          this.height = ret[0].height + 'px'
+        })
+      }
+    },
+    onClick () {
+      if (this.disabled) {
+        return
+      }
+      if (String(this.collapse.accordion) === 'true') {
+        this.collapse.childrens.forEach(vm => {
+          if (vm === this) {
+            return
+          }
+          vm.isOpen = false
+        })
+      }
+      this.isOpen = !this.isOpen
+      this.collapse.onChange && this.collapse.onChange()
+    }
+  }
+}
 </script>
 
 <style lang="scss">

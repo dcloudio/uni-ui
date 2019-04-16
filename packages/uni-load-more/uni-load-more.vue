@@ -1,61 +1,65 @@
 <template>
-	<view class="uni-load-more">
-		<view class="uni-load-more__img" v-show="status === 'loading' && showIcon">
-			<view class="load1">
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-			</view>
-			<view class="load2">
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-			</view>
-			<view class="load3">
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-				<view :style="{background:color}"></view>
-			</view>
-		</view>
-		<text class="uni-load-more__text" :style="{color:color}">{{status === 'more' ? contentText.contentdown : (status === 'loading' ? contentText.contentrefresh : contentText.contentnomore)}}</text>
-	</view>
+  <view class="uni-load-more">
+    <view
+      v-show="status === 'loading' && showIcon"
+      class="uni-load-more__img">
+      <view class="load1">
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+      </view>
+      <view class="load2">
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+      </view>
+      <view class="load3">
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+        <view :style="{background:color}"/>
+      </view>
+    </view>
+    <text
+      :style="{color:color}"
+      class="uni-load-more__text">{{ status === 'more' ? contentText.contentdown : (status === 'loading' ? contentText.contentrefresh : contentText.contentnomore) }}</text>
+  </view>
 </template>
 
 <script>
-	export default {
-		name: "uni-load-more",
-		props: {
-			status: {
-				//上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
-				type: String,
-				default: 'more'
-			},
-			showIcon: {
-				type: Boolean,
-				default: true
-			},
-			color: {
-				type: String,
-				default: "#777777"
-			},
-			contentText: {
-				type: Object,
-				default () {
-					return {
-						contentdown: "上拉显示更多",
-						contentrefresh: "正在加载...",
-						contentnomore: "没有更多数据了"
-					};
-				}
-			}
-		},
-		data() {
-			return {}
-		}
-	}
+export default {
+  name: 'UniLoadMore',
+  props: {
+    status: {
+      // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
+      type: String,
+      default: 'more'
+    },
+    showIcon: {
+      type: Boolean,
+      default: true
+    },
+    color: {
+      type: String,
+      default: '#777777'
+    },
+    contentText: {
+      type: Object,
+      default () {
+        return {
+          contentdown: '上拉显示更多',
+          contentrefresh: '正在加载...',
+          contentnomore: '没有更多数据了'
+        }
+      }
+    }
+  },
+  data () {
+    return {}
+  }
+}
 </script>
 
 <style lang="scss">
@@ -131,7 +135,6 @@
 	.load3 {
 		transform: rotate(60deg);
 	}
-
 
 	.load1 view:nth-child(1) {
 		animation-delay: 0s;

@@ -1,12 +1,12 @@
 <template>
-	<view class="uni-list">
-		<slot></slot>
-	</view>
+  <view class="uni-list">
+    <slot/>
+  </view>
 </template>
 <script>
-	export default {
-		name: 'uni-list'
-	}
+export default {
+  name: 'UniList'
+}
 </script>
 <style lang="scss">
 	.uni-list {
