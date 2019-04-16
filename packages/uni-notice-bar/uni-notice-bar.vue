@@ -55,8 +55,14 @@ export default {
     uniIcon
   },
   props: {
-    text: String,
-    moreText: String,
+    text: {
+      type: String,
+      default: ''
+    },
+    moreText: {
+      type: String,
+      default: ''
+    },
     backgroundColor: {
       type: String,
       default: '#fffbe8'

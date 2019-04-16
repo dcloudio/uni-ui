@@ -10,7 +10,7 @@
         class="uni-list-item__icon">
         <image
           :src="thumb"
-          class="uni-list-item__icon-img"/></image></image>
+          class="uni-list-item__icon-img"/>
       </view>
       <view
         v-else-if="showExtraIcon"

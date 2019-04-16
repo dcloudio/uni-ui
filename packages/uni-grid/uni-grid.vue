@@ -21,7 +21,7 @@
           class="uni-grid-item__content">
           <image
             :src="item.image"
-            class="uni-grid-item-image"/></image></image>
+            class="uni-grid-item-image"/>
           <text class="uni-grid-item-text">{{ item.text }}</text>
         </view>
       </view>
@@ -33,7 +33,12 @@
 export default {
   name: 'UniGrid',
   props: {
-    options: Array,
+    options: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
     type: { // 布局格式，长方形oblong，正方形square
       type: String,
       default: 'square'

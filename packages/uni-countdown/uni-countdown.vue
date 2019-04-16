@@ -51,7 +51,7 @@ export default {
     },
     color: {
       type: String,
-      value: '#000000'
+      default: '#000000'
     },
     splitorColor: {
       type: String,
@@ -120,7 +120,7 @@ export default {
         this.timeUp()
       }
       if (day < 10) {
-                	day = '0' + day
+        day = '0' + day
       }
       if (hour < 10) {
         hour = '0' + hour

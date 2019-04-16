@@ -1,9 +1,9 @@
 <template>
   <view
     v-if="text"
-    :class="[disabled === true || disabled === 'true' ? 'uni-tag--disabled' : '',inverted === true || inverted === 'true' ? 'uni-tag--inverted' : '',circle === true || circle === 'true' ? 'uni-tag--circle' : '',mark === true || mark === 'true' ? 'uni-tag--mark' : '','uni-tag--'+size,'uni-tag--'+type]"
+    :class="[disabled ? 'uni-tag--disabled' : '',inverted ? 'uni-tag--inverted' : '',circle ? 'uni-tag--circle' : '', mark ? 'uni-tag--mark' : '', 'uni-tag--' + size, 'uni-tag--' + type]"
     class="uni-tag"
-    @click="onClick()">{{ text }}</view>
+    @click="_onClick">{{ text }}</view>
 </template>
 
 <script>
@@ -18,27 +18,30 @@ export default {
       type: String,
       default: 'normal'
     },
-    text: String, // 标签内容
+    text: {
+      type: String,
+      default: ''
+    }, // 标签内容
     disabled: { // 是否为禁用状态
-      type: [String, Boolean],
-      defalut: false
+      type: Boolean,
+      default: false
     },
     inverted: { // 是否为空心
-      type: [String, Boolean],
-      defalut: false
+      type: Boolean,
+      default: false
     },
     circle: { // 是否为圆角样式
-      type: [String, Boolean],
-      defalut: false
+      type: Boolean,
+      default: false
     },
     mark: { // 是否为标记样式
-      type: [String, Boolean],
-      defalut: false
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-    onClick () {
-      if (this.disabled === true || this.disabled === 'true') {
+    _onClick () {
+      if (this.disabled) {
         return
       }
       this.$emit('click')

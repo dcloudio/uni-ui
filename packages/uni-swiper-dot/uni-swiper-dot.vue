@@ -58,7 +58,7 @@ export default {
       }
     },
     current: {
-      info: Number,
+      type: Number,
       default: 0
     },
     dotsStyles: {

@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="isFull === true || isFull === 'true' ? 'uni-card--full' : ''"
+    :class="isFull ? 'uni-card--full' : ''"
     class="uni-card"
     @click="onClick">
     <view
@@ -11,7 +11,7 @@
         class="uni-card__header-extra-img-view">
         <image
           :src="thumbnail"
-          class="uni-card__header-extra-img"/></image></image>
+          class="uni-card__header-extra-img"/>
       </view>
       <view class="uni-card__header-title-text">{{ title }}</view>
       <view
@@ -31,12 +31,24 @@
 export default {
   name: 'UniCard',
   props: {
-    title: String, // 标题
-    extra: String, // 扩展信息
-    note: String, // Tips
-    thumbnail: String, // 缩略图
+    title: {
+      type: String,
+      default: ''
+    }, // 标题
+    extra: {
+      type: String,
+      default: ''
+    }, // 扩展信息
+    note: {
+      type: String,
+      default: ''
+    }, // Tips
+    thumbnail: {
+      type: String,
+      default: ''
+    }, // 缩略图
     isFull: { // 内容区域是否通栏
-      type: [Boolean, String],
+      type: Boolean,
       default: false
     }
   },

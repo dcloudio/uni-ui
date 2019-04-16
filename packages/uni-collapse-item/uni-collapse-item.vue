@@ -10,7 +10,7 @@
         class="uni-collapse-cell__title-extra">
         <image
           :src="thumb"
-          class="uni-collapse-cell__title-img"/></image></image>
+          class="uni-collapse-cell__title-img"/>
       </view>
       <view class="uni-collapse-cell__title-inner">
         <view class="uni-collapse-cell__title-text">{{ title }}</view>

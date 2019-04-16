@@ -56,7 +56,12 @@ export default {
       type: Number,
       default: 0
     },
-    options: Array // 数据
+    options: {
+      type: Array,
+      default () {
+        return []
+      }
+    } // 数据
   },
   data () {
     return {}

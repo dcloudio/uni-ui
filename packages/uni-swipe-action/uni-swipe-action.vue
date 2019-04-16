@@ -53,7 +53,12 @@ export default {
       type: Boolean,
       default: true
     },
-    options: Array
+    options: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   },
   data () {
     const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
@@ -92,7 +97,7 @@ export default {
       uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
         this.btnGroupWidth = ret[0].width
       })
-      if (this.isOpened === true) {
+      if (this.isOpened) {
         this.isShowBtn = true
         this.endMove()
       }
@@ -105,7 +110,7 @@ export default {
       })
     },
     bindClickCont (e) {
-      if (this.isShowBtn && this.autoClose === true) {
+      if (this.isShowBtn && this.autoClose) {
         this.isShowBtn = false
         this.endMove()
       }
@@ -116,7 +121,7 @@ export default {
       this.startY = event.touches[0].pageY
     },
     touchMove (event) {
-      if (this.direction === 'Y' || this.disabled === true) {
+      if (this.direction === 'Y' || this.disabled) {
         return
       }
       var moveY = event.touches[0].pageY - this.startY
@@ -157,14 +162,14 @@ export default {
         let movedTime = event.timeStamp - this.startTime
         this.isShowBtn = movedLength >= this.btnGroupWidth / 2
         if (movedTime > 50 && movedTime < 300 && movedLength > 20) { // 在这个时间里面，且滑动了一定的距离
-          if (this.direction == 'right') {
+          if (this.direction === 'right') {
             this.isShowBtn = false
           } else {
             this.isShowBtn = true
           }
         }
       } else {
-        if (this.direction == 'right') {
+        if (this.direction === 'right') {
           this.isShowBtn = false
         } else {
           this.isShowBtn = true

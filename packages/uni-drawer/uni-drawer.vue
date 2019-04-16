@@ -6,7 +6,7 @@
     @touchmove.stop.prevent="moveHandle">
     <view
       class="uni-drawer__mask"
-      @tap="close"/>
+      @click="close"/>
     <view class="uni-drawer__content">
       <slot/>
     </view>
@@ -27,12 +27,15 @@ export default {
     /**
 			 * 显示模式（左、右），只在初始化生效
 			 */
-    mode: String,
+    mode: {
+      type: String,
+      default: ''
+    },
     /**
 			 * 蒙层显示状态
 			 */
     mask: {
-      type: [Boolean, String],
+      type: Boolean,
       default: true
     }
   },
