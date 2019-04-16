@@ -15,7 +15,7 @@
 				default: false
 			},
 			text: {
-				type: String,
+				type: [String, Number],
 				default: ''
 			},
 			size: { //small.normal
