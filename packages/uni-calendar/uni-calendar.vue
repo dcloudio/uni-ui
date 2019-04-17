@@ -7,7 +7,7 @@
             <view
               class="uni-calendar__date-befor"
               @tap="dataBefor('0', 'month')">
-              <text class="iconfont icon-jiantou"/>
+              <text class="iconfont icon-jiantou" />
             </view>
             <view class="uni-calendar__panel-box">
               <view>{{ canlender.year }}年</view>
@@ -16,7 +16,7 @@
             <view
               class="uni-calendar__date-after uni-calendar__rollback"
               @tap="dataBefor('1', 'month')">
-              <text class="iconfont icon-jiantou "/>
+              <text class="iconfont icon-jiantou " />
             </view>
             <view
               class="uni-calendar__backtoday"
@@ -65,7 +65,7 @@
             v-if="slide === 'none'"
             :canlender="canlender"
             :lunar="lunar"
-            @selectDays="selectDays"/>
+            @selectDays="selectDays" />
           <swiper
             v-else
             :style="{ height: domHeihgt + 'px' }"
@@ -84,7 +84,7 @@
                 <uni-calendar-item
                   :canlender="item"
                   :lunar="lunar"
-                  @selectDays="selectDays"/>
+                  @selectDays="selectDays" />
               </view>
             </swiper-item>
           </swiper>
@@ -443,8 +443,7 @@ export default {
         week,
         index,
         ischeck,
-        isDay,
-        lunar
+        isDay
       } = params
       let canlender = null
       if (this.slide === 'none') {
@@ -456,13 +455,10 @@ export default {
       if (isDay) return false
       // console.log(isDay);
       let month =
-					canlender.weeks[week][index].month < 10
-					  ? '0' + canlender.weeks[week][index].month
-					  : canlender.weeks[week][index].month
-      let date =
-					canlender.weeks[week][index].date < 10
-					  ? '0' + canlender.weeks[week][index].date
-					  : canlender.weeks[week][index].date
+					canlender.weeks[week][index].month < 10 ? '0' + canlender.weeks[week][index].month : canlender.weeks[week][index].month
+      let date = canlender.weeks[week][index].date < 10 ? '0' +
+					canlender.weeks[week][index].date
+        : canlender.weeks[week][index].date
       // this.getWeek(canlender.year + '-' + month + '-' + date);
       let indexNum = 0
       if (this.slide !== 'none') {
@@ -476,7 +472,6 @@ export default {
     // 获取日历内容
     getWeek (dateData) {
       let selected = this.selected
-      let a = new Date()
       let nowDate = this.getDate(this.date)
       // 判断当前是 安卓还是ios ，传入不容的日期格式
       if (typeof dateData !== 'object') {
@@ -531,8 +526,8 @@ export default {
               clockinfoTemp.info = selected[j].info
             }
             if (
-              JSON.stringify(selected[j].data) == '{}' ||
-								selected[j].data != undefined
+              JSON.stringify(selected[j].data) === '{}' ||
+								selected[j].data !== undefined
             ) {
               clockinfoTemp.data = selected[j].data
             }
@@ -584,7 +579,7 @@ export default {
       )
       // 拼接数组  上个月开始几天 + 本月天数+ 下个月开始几天
       for (let i = 0; i < canlender.length; i++) {
-        if (i % 7 == 0) {
+        if (i % 7 === 0) {
           dates.weeks[parseInt(i / 7)] = new Array(7)
         }
         dates.weeks[parseInt(i / 7)][i % 7] = canlender[i]
@@ -630,9 +625,9 @@ export default {
 			 */
     dateCompare (startDate, endDate) {
       // 计算截止时间
-				 startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
+      startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
       // 计算详细项的截止时间
-				 endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
+      endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
       if (startDate <= endDate) {
         return true
       } else {
@@ -643,8 +638,8 @@ export default {
       let dom = uni.createSelectorQuery().in(this).selectAll(`.${this.elClass}`)
       dom.boundingClientRect(rect => {}).exec(e => {
         if (!e[0][index]) {
-					   setTimeout(() => this.getQueryDom(1), 50)
-					   return
+          setTimeout(() => this.getQueryDom(1), 50)
+          return
         }
         // console.log(e[0][index])
         if (e[0][index]) {

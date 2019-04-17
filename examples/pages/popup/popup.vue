@@ -1,98 +1,151 @@
 <template>
-	<view>
-		<view class="example">
-			<view class="example-title">基本用法</view>
-			<button type="button" @click="togglePopup('top')">顶部弹出 popup</button>
-			<uni-popup :show="type === 'top'" position="top" mode="fixed" msg="顶部弹出popup" @hidePopup="togglePopup('')"></uni-popup>
-			<button type="button" @click="togglePopup('middle')">居中弹出 popup</button>
-			<uni-popup :show="type === 'middle'" position="middle" mode="fixed" msg="居中弹出popup" @hidePopup="togglePopup('')"></uni-popup>
-			<button type="button" @click="togglePopup('bottom')">底部部弹出 popup</button>
-			<uni-popup :show="type === 'bottom'" position="bottom" mode="fixed" msg="底部弹出popup" @hidePopup="togglePopup('')"></uni-popup>
-		</view>
-		<view class="example">
-			<view class="example-title">slot用法</view>
-			<button type="button" @click="togglePopup('middle-img')">居中弹出（插屏广告）</button>
-			<uni-popup :show="type === 'middle-img'" position="middle" mode="insert" @hidePopup="togglePopup('')">
-				<view class="uni-center center-box">
-					<image class="image" src="/static/uni.png" />
-				</view>
-			</uni-popup>
-			<button type="button" @click="togglePopup('middle-list')">居中弹出（滚动列表）</button>
-			<uni-popup :show="type === 'middle-list'" position="middle" mode="fixed" @hidePopup="togglePopup('')">
-				<scroll-view class="uni-center center-box" :scroll-y="true">
-					<view class="uni-list-item" v-for="(item, index) in list" :key="index">
-						滚动列表数据 {{ item }}
-					</view>
-				</scroll-view>
-			</uni-popup>
-			<button type="button" @click="togglePopup('bottom-share')" data-position="bottom">底部弹出（分享界面）</button>
-			<uni-popup :show="type === 'bottom-share'" position="bottom" @hidePopup="togglePopup('')">
-				<view class="bottom-title">分享到</view>
-				<view class="bottom-content">
-					<view class="bottom-content-box" v-for="(item, index) in bottomData" :key="index">
-						<view class="bottom-content-image" :class="item.name">
-							<text class="icon">{{ item.icon }}</text>
-						</view>
-						<view class="bottom-content-text">{{ item.text }}</view>
-					</view>
-				</view>
-				<view class="bottom-btn" @click="togglePopup('')">取消分享</view>
-			</uni-popup>
-		</view>
-	</view>
+  <view>
+    <view class="example">
+      <view class="example-title">基本用法</view>
+      <button
+        type="button"
+        @click="togglePopup('top')">顶部弹出 popup</button>
+      <uni-popup
+        :show="type === 'top'"
+        position="top"
+        mode="fixed"
+        msg="顶部弹出popup"
+        @hidePopup="togglePopup('')"/>
+      <button
+        type="button"
+        @click="togglePopup('middle')">居中弹出 popup</button>
+      <uni-popup
+        :show="type === 'middle'"
+        position="middle"
+        mode="fixed"
+        msg="居中弹出popup"
+        @hidePopup="togglePopup('')"/>
+      <button
+        type="button"
+        @click="togglePopup('bottom')">底部部弹出 popup</button>
+      <uni-popup
+        :show="type === 'bottom'"
+        position="bottom"
+        mode="fixed"
+        msg="底部弹出popup"
+        @hidePopup="togglePopup('')"/>
+    </view>
+    <view class="example">
+      <view class="example-title">slot用法</view>
+      <button
+        type="button"
+        @click="togglePopup('middle-img')">居中弹出（插屏广告）</button>
+      <uni-popup
+        :show="type === 'middle-img'"
+        position="middle"
+        mode="insert"
+        @hidePopup="togglePopup('')">
+        <view class="uni-center center-box">
+          <image
+            class="image"
+            src="/static/uni.png" />
+        </view>
+      </uni-popup>
+      <button
+        type="button"
+        @click="togglePopup('middle-list')">居中弹出（滚动列表）</button>
+      <uni-popup
+        :show="type === 'middle-list'"
+        position="middle"
+        mode="fixed"
+        @hidePopup="togglePopup('')">
+        <scroll-view
+          :scroll-y="true"
+          class="uni-center center-box">
+          <view
+            v-for="(item, index) in list"
+            :key="index"
+            class="uni-list-item">
+            滚动列表数据 {{ item }}
+          </view>
+        </scroll-view>
+      </uni-popup>
+      <button
+        type="button"
+        data-position="bottom"
+        @click="togglePopup('bottom-share')">底部弹出（分享界面）</button>
+      <uni-popup
+        :show="type === 'bottom-share'"
+        position="bottom"
+        @hidePopup="togglePopup('')">
+        <view class="bottom-title">分享到</view>
+        <view class="bottom-content">
+          <view
+            v-for="(item, index) in bottomData"
+            :key="index"
+            class="bottom-content-box">
+            <view
+              :class="item.name"
+              class="bottom-content-image">
+              <text class="icon">{{ item.icon }}</text>
+            </view>
+            <view class="bottom-content-text">{{ item.text }}</view>
+          </view>
+        </view>
+        <view
+          class="bottom-btn"
+          @click="togglePopup('')">取消分享</view>
+      </uni-popup>
+    </view>
+  </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				type:'',
-				list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-				bottomData: [{
-						text: '微信',
-						icon: '\ue6a4',
-						name: 'wx'
-					},
-					{
-						text: '朋友圈',
-						icon: '\ue646',
-						name: 'wx'
-					},
-					{
-						text: 'QQ',
-						icon: '\ue66b',
-						name: 'qq'
-					},
-					{
-						text: '新浪',
-						icon: '\ue600',
-						name: 'sina'
-					},
-					{
-						text: '复制',
-						icon: '\ue632',
-						name: 'copy'
-					},
-					{
-						text: '更多',
-						icon: '\ue618',
-						name: 'more'
-					}
-				]
-			};
-		},
-		onBackPress(){
-			if(this.type !== ''){
-				this.type = '';
-				return true;
-			}
-		},
-		methods: {
-			togglePopup(type){
-				this.type = type;
-			}
-		}
-	};
+export default {
+  data () {
+    return {
+      type: '',
+      list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      bottomData: [{
+        text: '微信',
+        icon: '\ue6a4',
+        name: 'wx'
+      },
+      {
+        text: '朋友圈',
+        icon: '\ue646',
+        name: 'wx'
+      },
+      {
+        text: 'QQ',
+        icon: '\ue66b',
+        name: 'qq'
+      },
+      {
+        text: '新浪',
+        icon: '\ue600',
+        name: 'sina'
+      },
+      {
+        text: '复制',
+        icon: '\ue632',
+        name: 'copy'
+      },
+      {
+        text: '更多',
+        icon: '\ue618',
+        name: 'more'
+      }
+      ]
+    }
+  },
+  onBackPress () {
+    if (this.type !== '') {
+      this.type = ''
+      return true
+    }
+  },
+  methods: {
+    togglePopup (type) {
+      this.type = type
+    }
+  }
+}
 </script>
 <style>
 	.uni-padding-wrap {

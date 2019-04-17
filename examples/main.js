@@ -9,6 +9,6 @@ App.mpType = 'app'
 Vue.use(UniUI)
 
 const app = new Vue({
-	...App
+  ...App
 })
 app.$mount()

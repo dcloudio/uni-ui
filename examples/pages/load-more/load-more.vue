@@ -1,60 +1,70 @@
 <template>
-	<view>
-		<view>
-			<view class="example-title">基本用法</view>
-			<uni-load-more :status="status"></uni-load-more>
-		</view>
-		<view>
-			<view class="example-title">修改默认颜色及文字</view>
-			<uni-load-more color="#007aff" :status="status" :contentText="contentText"></uni-load-more>
-		</view>
-		
-		<view class="example-title">改变组件状态</view>
-		<radio-group class="uni-list" @change="onChange">
-			<label v-for="(item, index) in statusTypes" :key="index" class="uni-list-item">
-				<view class="uni-list-item__container">
-					<view class="uni-list-item__content">
-						<view class="uni-list-item__content-title">{{item.text}}</view>
-					</view>
-					<view class="uni-list-item__extra">
-						<radio :value="item.value" :checked="item.checked" />
-					</view>
-				</view>
-			</label>
-		</radio-group>
-	</view>
+  <view>
+    <view>
+      <view class="example-title">基本用法</view>
+      <uni-load-more :status="status"/>
+    </view>
+    <view>
+      <view class="example-title">修改默认颜色及文字</view>
+      <uni-load-more
+        :status="status"
+        :content-text="contentText"
+        color="#007aff"/>
+    </view>
+
+    <view class="example-title">改变组件状态</view>
+    <radio-group
+      class="uni-list"
+      @change="onChange">
+      <label
+        v-for="(item, index) in statusTypes"
+        :key="index"
+        class="uni-list-item">
+        <view class="uni-list-item__container">
+          <view class="uni-list-item__content">
+            <view class="uni-list-item__content-title">{{ item.text }}</view>
+          </view>
+          <view class="uni-list-item__extra">
+            <radio
+              :value="item.value"
+              :checked="item.checked" />
+          </view>
+        </view>
+      </label>
+    </radio-group>
+  </view>
 </template>
 <script>
-	export default {
-		data() {
-			return {
-				status: 'more',
-				statusTypes:[{
-					value: 'more',
-					text: '加载前',
-					checked: true
-				},{
-					value: 'loading',
-					text: '加载中',
-					checked:false
-				},{
-					value: 'noMore',
-					text: '没有更多',
-					checked:false
-				}],
-				contentText: {
-					contentdown: "查看更多",
-					contentrefresh: "加载中",
-					contentnomore: "没有更多"
-				}
-			}
-		},
-		methods: {
-			onChange(e) {
-				this.status = e.detail.value
-			}
-		}
-	}
+export default {
+  data () {
+    return {
+      status: 'more',
+      statusTypes: [{
+        value: 'more',
+        text: '加载前',
+        checked: true
+      }, {
+        value: 'loading',
+        text: '加载中',
+        checked: false
+      }, {
+        value: 'noMore',
+        text: '没有更多',
+        checked: false
+      }],
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '没有更多'
+      }
+    }
+  },
+  methods: {
+    onChange (e) {
+      this.status = e.detail.value
+    }
+  }
+}
 </script>
 
 <style>

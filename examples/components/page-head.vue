@@ -1,18 +1,18 @@
 <template>
-	<view class="uni-page-head">
-		<view class="uni-page-head-title">{{title}}</view>
-	</view>
+  <view class="uni-page-head">
+    <view class="uni-page-head-title">{{ title }}</view>
+  </view>
 </template>
 <script>
-	export default {
-		name: "page-head",
-		props: {
-			title: {
-				type: String,
-				default: ""
-			}
-		}
-	}
+export default {
+  name: 'PageHead',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
+  }
+}
 </script>
 <style>
 	.uni-page-head {
