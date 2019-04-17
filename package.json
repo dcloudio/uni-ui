@@ -4,6 +4,7 @@
     "main": "lib/index.js",
     "scripts": {
         "lint": "eslint --fix --config package.json --ext .js --ext .vue packages/",
+        "lint:demo": "eslint --fix --config package.json --ext .js --ext .vue examples/",
         "serve": "npm run dev:h5",
         "build:lib": "rm -rf lib && node ./build/build-lib.js",
         "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 UNI_INPUT_DIR='./examples' vue-cli-service uni-serve"
