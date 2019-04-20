@@ -7,7 +7,7 @@
         :hover-start-time="20"
         :hover-stay-time="70"
         @click="clickLeft">
-        <template v-if="showIcon===true || showIcon === 'true'">
+        <template v-if="showIcon">
           <uni-icon
             color="#000"
             size="20"
@@ -23,7 +23,7 @@
         :hover-start-time="20"
         :hover-stay-time="70"
         @click="clickRight">
-        <template v-if="showIcon===true || showIcon === 'true'">
+        <template v-if="showIcon">
           <uni-icon
             color="#000"
             size="20"
@@ -69,7 +69,7 @@ export default {
       default: 10
     },
     showIcon: { // 是否以 icon 形式展示按钮
-      type: [Boolean, String],
+      type: Boolean,
       default: false
     }
   },

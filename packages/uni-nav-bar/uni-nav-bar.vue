@@ -1,7 +1,7 @@
 <template>
   <view class="uni-navbar">
     <view
-      :class="{'uni-navbar--fixed': !!fixed,'uni-navbar--shadow':!!border,'uni-navbar--border':!!border}"
+      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':border,'uni-navbar--border':border}"
       :style="{'background-color':backgroundColor}"
       class="uni-navbar__content">
       <uni-status-bar v-if="statusBar"/>
@@ -88,7 +88,7 @@ export default {
       default: ''
     },
     fixed: {
-      type: [Boolean, String],
+      type: Boolean,
       default: false
     },
     color: {
@@ -100,15 +100,15 @@ export default {
       default: '#FFFFFF'
     },
     statusBar: {
-      type: [Boolean, String],
+      type: Boolean,
       default: false
     },
     shadow: {
-      type: [String, Boolean],
+      type: Boolean,
       default: true
     },
     border: {
-      type: [String, Boolean],
+      type: Boolean,
       default: true
     }
   },

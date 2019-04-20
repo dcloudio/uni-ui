@@ -179,7 +179,7 @@ export default {
       this.endMove()
     },
     endMove () {
-      if (this.direction === 'Y' || this.disabled === true) {
+      if (this.direction === 'Y' || this.disabled) {
         this.direction = ''
         return
       }

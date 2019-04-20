@@ -5,7 +5,7 @@
     class="uni-noticebar"
     @click="onClick">
     <view
-      v-if="showClose === 'true' || showClose === true"
+      v-if="showClose"
       class="uni-noticebar__close">
       <uni-icon
         type="closefill"
@@ -15,7 +15,7 @@
       :class="{'uni-noticebar--flex': scrollable || single || moreText}"
       class="uni-noticebar__content">
       <view
-        v-if="showIcon === 'true' || showIcon === true"
+        v-if="showIcon"
         :style="{backgroundColor:backgroundColor,color:color}"
         class="uni-noticebar__content-icon">
         <uni-icon
@@ -32,7 +32,7 @@
           class="uni-noticebar__content-inner">{{ text }}</view>
       </view>
       <view
-        v-if="showGetMore === 'true' || showGetMore === true"
+        v-if="showGetMore"
         :style="{width:moreText ? '180upx' : '20px'}"
         class="uni-noticebar__content-more"
         @click="clickMore">
@@ -76,23 +76,23 @@ export default {
       default: '#de8c17'
     },
     single: { // 是否单行
-      type: [String, Boolean],
+      type: Boolean,
       default: false
     },
     scrollable: { // 是否滚动，添加后控制单行效果取消
-      type: [String, Boolean],
+      type: Boolean,
       default: false
     },
     showIcon: { // 是否显示左侧icon
-      type: [String, Boolean],
+      type: Boolean,
       default: false
     },
     showGetMore: { // 是否显示右侧查看更多
-      type: [String, Boolean],
+      type: Boolean,
       default: false
     },
     showClose: { // 是否显示左侧关闭按钮
-      type: [String, Boolean],
+      type: Boolean,
       default: false
     }
   },
@@ -127,14 +127,14 @@ export default {
     },
     onClick (e) {
       let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX
-      if (uni.upx2px(48) + 12 > clientX && (String(this.showClose) === 'true')) {
+      if (uni.upx2px(48) + 12 > clientX && this.showClose) {
         this.show = false
         this.$emit('close')
       }
       this.$emit('click')
     },
     setAnimation () {
-      if (this.scrollable === false || this.scrollable === 'false') {
+      if (!this.scrollable) {
         return
       }
       // #ifdef MP-TOUTIAO
