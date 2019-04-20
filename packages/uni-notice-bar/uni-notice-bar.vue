@@ -97,7 +97,7 @@ export default {
     }
   },
   data () {
-    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elId = this.__call_hook ? 'uni_notice_bar' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       elId: elId,
       show: true,

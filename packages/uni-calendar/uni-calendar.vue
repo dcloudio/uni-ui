@@ -115,7 +115,7 @@ export default {
 			 */
     selected: {
       type: Array,
-      default: () => {
+      default () {
         return []
       }
     },
@@ -160,7 +160,7 @@ export default {
     }
   },
   data () {
-    const elClass = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elClass = this.__call_hook ? 'uni_canlender' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       dateShow: false, // 日期是否选择
       selectDay: '', // 当前选择日期

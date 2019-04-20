@@ -69,7 +69,7 @@ export default {
     }
   },
   data () {
-    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elId = this.__callback_hook ? 'uni_collapse_item' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       isOpen: false,
       height: 'auto',
