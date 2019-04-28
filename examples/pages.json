@@ -145,6 +145,12 @@
 			"style": {
 				"navigationBarTitleText": "calendar 日历"
 			}
+		},
+		{
+			"path": "pages/fab/fab",
+			"style": {
+				"navigationBarTitleText": "fab 悬浮按钮"
+			}
 		}
 	],
 	"globalStyle": {

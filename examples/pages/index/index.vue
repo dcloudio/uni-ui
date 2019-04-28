@@ -90,6 +90,9 @@ export default {
       }, {
         name: 'Calendar 日历',
         url: 'calendar'
+      }, {
+        name: 'Fab 悬浮按钮',
+        url: 'fab'
       }]
     }
   },
