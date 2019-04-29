@@ -1,6 +1,7 @@
 <template>
   <uni-indexed-list
     :options="list"
+		:showSelect="false"
     @click="bindClick"/>
 </template>
 
