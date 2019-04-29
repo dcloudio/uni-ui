@@ -93,6 +93,9 @@ export default {
       }, {
         name: 'Fab 悬浮按钮',
         url: 'fab'
+      }, {
+        name: 'IndexedList 索引列表',
+        url: 'indexed-list'
       }]
     }
   },

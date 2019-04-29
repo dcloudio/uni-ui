@@ -143,13 +143,19 @@
 		{
 			"path": "pages/calendar/calendar",
 			"style": {
-				"navigationBarTitleText": "calendar 日历"
+				"navigationBarTitleText": "Calendar 日历"
 			}
 		},
 		{
 			"path": "pages/fab/fab",
 			"style": {
-				"navigationBarTitleText": "fab 悬浮按钮"
+				"navigationBarTitleText": "Fab 悬浮按钮"
+			}
+		},
+		{
+			"path": "pages/indexed-list/indexed-list",
+			"style": {
+				"navigationBarTitleText": "IndexedList 索引列表"
 			}
 		}
 	],
