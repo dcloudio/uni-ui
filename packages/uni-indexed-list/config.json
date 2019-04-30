@@ -1,0 +1,8 @@
+{
+	"name": "IndexedList",
+	"desc": "索引列表（未上传插件市场）",
+	"url": "indexed-list",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"hidden": true
+}
