@@ -1,6 +1,7 @@
 {
 	"name":"Calendar",
 	"desc":"日历",
+	"url":"calendar",
 	"edition":"1.0.0",
 	"path":"https://ext.dcloud.net.cn/plugin?id=56"
 }

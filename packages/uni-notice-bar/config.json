@@ -1,6 +1,7 @@
 {
 	"name":"NoticeBar",
 	"desc":"通告栏",
+	"url":"notice-bar",
 	"edition":"1.0.0",
 	"path":"https://ext.dcloud.net.cn/plugin?id=30"
 }

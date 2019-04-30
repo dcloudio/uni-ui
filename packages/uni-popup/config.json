@@ -1,6 +1,7 @@
 {
 	"name":"PopUp",
 	"desc":"弹出层",
+	"url":"popup",
 	"edition":"1.0.1",
 	"path":"https://ext.dcloud.net.cn/plugin?id=329"
 }
