@@ -229,7 +229,7 @@ export default {
 		}
 	}
 
-	.uni-list>.uni-list-item:last-child .uni-list-item-container:after {
-		height: 0px;
+	.uni-list>.uni-list-item:last-child .uni-list-item__container:after {
+		display: none;
 	}
 </style>
