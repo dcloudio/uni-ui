@@ -91,7 +91,7 @@
 			"path": "pages/collapse/collapse",
 			"style": {
 				"navigationBarTitleText": "Collapse 折叠面板"
-				
+
 			}
 		},
 		{
@@ -135,8 +135,8 @@
 			"style": {
 				"navigationBarTitleText": "SwipeAction 滑动操作",
 				"disableScroll": true,
-				"app-plus":{
-					"bounce":"none"
+				"app-plus": {
+					"bounce": "none"
 				}
 			}
 		},
@@ -155,7 +155,17 @@
 		{
 			"path": "pages/indexed-list/indexed-list",
 			"style": {
-				"navigationBarTitleText": "IndexedList 索引列表"
+				"navigationBarTitleText": "IndexedList 索引列表",
+
+				"mp-weixin": {
+					"disableScroll": true
+				},
+				"app-plus": {
+					"bounce": "none"
+				},
+				"mp-alipay": {
+					"allowsBounceVertical": "NO"
+				}
 			}
 		}
 	],
