@@ -184,6 +184,12 @@ export default {
 		opacity: 0.8;
 	}
 
+	.uni-popup-top, .uni-popup-bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.uni-popup-top {
 		top: 0;
 		left: 0;
