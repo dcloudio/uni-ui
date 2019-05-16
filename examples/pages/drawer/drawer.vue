@@ -163,6 +163,11 @@ export default {
   line-height: 24px;
   font-size: 16px;
 }
+
+.input-view .input {
+  background-color: transparent;
+}
+
 .close {
   padding: 30upx;
 }
