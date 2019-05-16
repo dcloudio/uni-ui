@@ -217,6 +217,9 @@ export default {
 				padding: 0 8px;
 				background-color: $uni-bg-color;
 				z-index: 1;
+				/* #ifdef MP-ALIPAY */
+				line-height: normal!important;
+				/* #endif */
 			}
 
 			&-circle {
