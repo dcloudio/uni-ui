@@ -207,6 +207,8 @@ export default {
 			&-arrow {
 				width: 20px;
 				height: 20px;
+				display: flex;
+				align-items: center;
 				transform: rotate(0deg);
 				transform-origin: center center;
 

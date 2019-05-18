@@ -20,7 +20,7 @@
       :current="current"
       :total="total"
       title="标题文字"
-      show-icon="true"
+      :show-icon="true"
       @change="change"/>
     <view class="btn-view">
       <view>
