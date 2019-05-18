@@ -3,6 +3,5 @@
 	"desc":"折叠面板",
 	"url":"collapse",
 	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=23",
-	"compilation":"#ifdef H5 || APP-PLUS || MP-WEIXIN"
+	"path":"https://ext.dcloud.net.cn/plugin?id=23"
 }
