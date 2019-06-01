@@ -41,7 +41,7 @@ export default {
 		format('truetype');
 }
 
-uni-icon {
+.uni-icon-wrapper {
 	line-height: 1;
 }
 

@@ -28,7 +28,7 @@
       :class="{'uni-collapse-cell--animation':showAnimation===true}"
       :style="{height:isOpen ? height : '0px'}"
       class="uni-collapse-cell__content">
-      <view :id="elId">
+      <view class="view" :id="elId">
         <slot />
       </view>
     </view>
@@ -240,7 +240,7 @@ export default {
 			overflow: hidden;
 			background: $uni-bg-color;
 
-			view {
+			.view {
 				font-size: $uni-font-size-base;
 			}
 		}

@@ -16,6 +16,7 @@
         v-else-if="showExtraIcon"
         class="uni-list-item__icon">
         <uni-icon
+					class="uni-icon-wrapper"
           :color="extraIcon.color"
           :size="extraIcon.size"
           :type="extraIcon.type"/>
@@ -39,6 +40,7 @@
           :checked="switchChecked"
           @change="onSwitchChange" />
         <uni-icon
+					class="uni-icon-wrapper"
           v-if="showArrow"
           :size="20"
           color="#bbb"

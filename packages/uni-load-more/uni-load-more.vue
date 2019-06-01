@@ -4,22 +4,22 @@
       v-show="status === 'loading' && showIcon"
       class="uni-load-more__img">
       <view class="load1">
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
       </view>
       <view class="load2">
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
       </view>
       <view class="load3">
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
-        <view :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
+        <view class="uni-load-view_wrapper" :style="{background:color}"/>
       </view>
     </view>
     <text
@@ -80,10 +80,10 @@ export default {
 			width: 24px;
 			margin-right: 10px;
 
-			&>view {
+			&>.uni-load-view_wrapper {
 				position: absolute;
 
-				view {
+				.uni-load-view_wrapper {
 					width: 6px;
 					height: 2px;
 					border-top-left-radius: 1px;
@@ -136,51 +136,51 @@ export default {
 		transform: rotate(60deg);
 	}
 
-	.load1 view:nth-child(1) {
+	.load1 .uni-load-view_wrapper:nth-child(1) {
 		animation-delay: 0s;
 	}
 
-	.load2 view:nth-child(1) {
+	.load2 .uni-load-view_wrapper:nth-child(1) {
 		animation-delay: 0.13s;
 	}
 
-	.load3 view:nth-child(1) {
+	.load3 .uni-load-view_wrapper:nth-child(1) {
 		animation-delay: 0.26s;
 	}
 
-	.load1 view:nth-child(2) {
+	.load1 .uni-load-view_wrapper:nth-child(2) {
 		animation-delay: 0.39s;
 	}
 
-	.load2 view:nth-child(2) {
+	.load2 .uni-load-view_wrapper:nth-child(2) {
 		animation-delay: 0.52s;
 	}
 
-	.load3 view:nth-child(2) {
+	.load3 .uni-load-view_wrapper:nth-child(2) {
 		animation-delay: 0.65s;
 	}
 
-	.load1 view:nth-child(3) {
+	.load1 .uni-load-view_wrapper:nth-child(3) {
 		animation-delay: 0.78s;
 	}
 
-	.load2 view:nth-child(3) {
+	.load2 .uni-load-view_wrapper:nth-child(3) {
 		animation-delay: 0.91s;
 	}
 
-	.load3 view:nth-child(3) {
+	.load3 .uni-load-view_wrapper:nth-child(3) {
 		animation-delay: 1.04s;
 	}
 
-	.load1 view:nth-child(4) {
+	.load1 .uni-load-view_wrapper:nth-child(4) {
 		animation-delay: 1.17s;
 	}
 
-	.load2 view:nth-child(4) {
+	.load2 .uni-load-view_wrapper:nth-child(4) {
 		animation-delay: 1.30s;
 	}
 
-	.load3 view:nth-child(4) {
+	.load3 .uni-load-view_wrapper:nth-child(4) {
 		animation-delay: 1.43s;
 	}
 
