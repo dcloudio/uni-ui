@@ -1,7 +1,8 @@
 {
-	"name":"CountDown",
-	"desc":"倒计时",
-	"url":"count-down",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=25"
+	"id": "25",
+	"name": "CountDown",
+	"desc": "倒计时",
+	"url": "count-down",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=25"
 }

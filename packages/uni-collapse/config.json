@@ -1,7 +1,8 @@
 {
-	"name":"Collapse",
-	"desc":"折叠面板",
-	"url":"collapse",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=23"
+	"id": "23",
+	"name": "Collapse",
+	"desc": "折叠面板",
+	"url": "collapse",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=23"
 }

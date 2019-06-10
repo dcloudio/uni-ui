@@ -1,7 +1,8 @@
 {
-	"name":"LoadMore",
-	"desc":"加载更多",
-	"url":"load-more",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=29"
+	"id": "29",
+	"name": "LoadMore",
+	"desc": "加载更多",
+	"url": "load-more",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=29"
 }
