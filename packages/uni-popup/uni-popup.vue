@@ -18,7 +18,7 @@
           'uni-close-bottom': buttonMode === 'bottom',
           'uni-close-right': buttonMode === 'right'
         }"
-        class=" uni-icon uni-icon-close"
+        class="uni-icon uni-icon-close"
         @click="closeMask"/>
     </view>
   </view>
@@ -120,7 +120,7 @@ export default {
 	}
 
 	.uni-popup {
-		position: fixed;
+		position: absolute;
 		z-index: 999;
 		background-color: #ffffff;
 	}
@@ -166,6 +166,8 @@ export default {
 		margin: auto;
 		left: 0;
 		right: 0;
+		width: 28px;
+		height: 28px;
 	}
 	.uni-close-right {
 		right: -60upx;
@@ -182,12 +184,6 @@ export default {
 		left: 50%;
 		transform: translate(-50%, -0%);
 		opacity: 0.8;
-	}
-
-	.uni-popup-top, .uni-popup-bottom {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 
 	.uni-popup-top {

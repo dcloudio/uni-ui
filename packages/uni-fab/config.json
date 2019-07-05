@@ -4,5 +4,6 @@
 	"desc":"悬浮按钮",
 	"url":"fab",
 	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=144"
+	"path":"https://ext.dcloud.net.cn/plugin?id=144",
+	"hidden":true
 }

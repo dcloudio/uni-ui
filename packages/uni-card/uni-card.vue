@@ -1,29 +1,58 @@
 <template>
   <view
-    :class="isFull ? 'uni-card--full' : ''"
+    :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true' }"
     class="uni-card"
     @click="onClick">
     <view
-      v-if="title"
+      v-if="mode === 'style'"
+      class="uni-card__thumbnailimage">
+      <image
+        :src="thumbnail"
+        mode="aspectFill" />
+      <view
+        v-if="title"
+        class="uni-card__thumbnailimage-title">{{ title }}</view>
+    </view>
+    <view
+      v-if="mode === 'title'"
+      class="uni-card__title">
+      <view class="uni-card__title-header"><image
+        :src="thumbnail"
+        mode="aspectFill" /></view>
+      <view class="uni-card__title-content">
+        <view class="uni-card__title-content-title">{{ title }}</view>
+        <view class="uni-card__title-content-extra">{{ extra }}</view>
+      </view>
+    </view>
+    <!-- 标题 -->
+    <view
+      v-if="mode === 'basic' && title"
       class="uni-card__header">
       <view
         v-if="thumbnail"
-        class="uni-card__header-extra-img-view">
-        <image
+        class="uni-card__header-extra-img-view"><image
           :src="thumbnail"
-          class="uni-card__header-extra-img"/>
-      </view>
+          class="uni-card__header-extra-img" /></view>
       <view class="uni-card__header-title-text">{{ title }}</view>
       <view
         v-if="extra"
         class="uni-card__header-extra-text">{{ extra }}</view>
     </view>
+    <!-- 内容 -->
     <view class="uni-card__content uni-card__content--pd">
+      <view
+        v-if="mode === 'style' && extra"
+        class="uni-card__content-extra">{{ extra }}</view>
       <slot />
     </view>
+    <!-- 底部 -->
     <view
       v-if="note"
-      class="uni-card__footer">{{ note }}</view>
+      class="uni-card__footer">
+      <slot name="footer">
+        <text>{{ note }}</text>
+      </slot>
+    </view>
   </view>
 </template>
 
@@ -47,7 +76,18 @@ export default {
       type: String,
       default: ''
     }, // 缩略图
-    isFull: { // 内容区域是否通栏
+    // 卡片模式 ， 可选值 basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片
+    mode: {
+      type: String,
+      default: 'basic'
+    },
+    isFull: {
+      // 内容区域是否通栏
+      type: Boolean,
+      default: false
+    },
+    isShadow: {
+      // 是否开启阴影
       type: Boolean,
       default: false
     }
@@ -61,114 +101,186 @@ export default {
 </script>
 
 <style lang="scss">
-    $card-extra-width: 30%;
-    $uni-spacing-marign:24upx;
+$card-extra-width: 30%;
+$uni-spacing-marign: 24upx;
 
-    @mixin text-omit {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+@mixin text-omit {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
 
-    .uni-card {
-        margin-left: $uni-spacing-marign;
-        margin-right: $uni-spacing-marign;
-        background: $uni-bg-color;
-        box-shadow: none;
-        position: relative;
-        display: flex;
-        flex-direction: column;
+.uni-card {
+	margin-left: $uni-spacing-marign;
+	margin-right: $uni-spacing-marign;
+	background: $uni-bg-color;
+	box-shadow: none;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px #ddd solid;
+	border-radius: 6upx;
+	overflow: hidden;
 
-        &:after {
-            content: '';
-            position: absolute;
-            transform-origin: center;
-            box-sizing: border-box;
-            pointer-events: none;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            border: 1px solid $uni-border-color;
-            border-radius: $uni-border-radius-lg;
-            transform: scale(.5);
-        }
+	&__thumbnailimage {
+		position: relative;
+		height: 300upx;
 
-        &__footer,
-        &__header {
-            position: relative;
-            display: flex;
-            flex-direction: row;
-            padding: $uni-spacing-col-base;
-            align-items: center;
-        }
+		image {
+			width: 100%;
+			height: 100%;
+		}
 
-        &__header {
-            &:after {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                height: 1px;
-                content: '';
-                -webkit-transform: scaleY(.5);
-                transform: scaleY(.5);
-                background-color: $uni-border-color;
-            }
+		&-title {
+			position: absolute;
+			bottom: 0;
+			padding: 15upx 20upx;
+			font-size: 32upx;
+			width: 100%;
+			color: #fff;
+		}
+	}
 
-            &-title {
-                flex: 1;
-                margin-right: $uni-spacing-col-base;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
+	&__title {
+		display: flex;
+		padding: 20upx;
+		border-bottom: 1px #f5f5f5 solid;
 
-                &-text {
-                    font-size: $uni-font-size-lg;
-                    flex: 1;
-                    @include text-omit;
-                }
-            }
+		&-header {
+			flex-shrink: 0;
+			width: 80upx;
+			height: 80upx;
+			overflow: hidden;
+			border-radius: 10upx;
 
-            &-extra {
-                &-img-view {
-                    display: flex;
-                }
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
 
-                &-img {
-                    height: $uni-img-size-sm;
-                    width: $uni-img-size-sm;
-                    margin-right: $uni-spacing-col-base;
-                }
+		&-content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding-left: 20upx;
+			height: 80upx;
+			overflow: hidden;
 
-                &-text {
-                    flex: 0 0 auto;
-                    width: $card-extra-width;
-                    margin-left: $uni-spacing-col-base;
-                    font-size: $uni-font-size-base;
-                    text-align: right;
-                    @include text-omit;
-                }
-            }
+			&-title {
+				font-size: 30upx;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 
-        }
+			&-extra {
+				font-size: 26upx;
+				color: #999;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+	}
 
-        &__content {
-            &--pd {
-                padding: $uni-spacing-col-base;
-            }
-        }
+	&__header {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		padding: $uni-spacing-col-base;
+		align-items: center;
+	}
 
-        &__footer {
-            justify-content: space-between;
-            color: $uni-text-color-grey;
-            font-size: $uni-font-size-sm;
-            padding-top: 0;
-        }
+	&__header {
+		&:after {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			height: 1px;
+			content: '';
+			-webkit-transform: scaleY(0.5);
+			transform: scaleY(0.5);
+			background-color: $uni-border-color;
+		}
 
-        &--full {
-            margin: 0;
-        }
-    }
+		&-title {
+			flex: 1;
+			margin-right: $uni-spacing-col-base;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
+
+			&-text {
+				font-size: $uni-font-size-lg;
+				flex: 1;
+				@include text-omit;
+			}
+		}
+
+		&-extra {
+			&-img-view {
+				display: flex;
+			}
+
+			&-img {
+				height: $uni-img-size-sm;
+				width: $uni-img-size-sm;
+				margin-right: $uni-spacing-col-base;
+			}
+
+			&-text {
+				flex: 0 0 auto;
+				width: $card-extra-width;
+				margin-left: $uni-spacing-col-base;
+				font-size: $uni-font-size-base;
+				text-align: right;
+				color: #666;
+				@include text-omit;
+			}
+		}
+	}
+
+	&__content {
+		color: #555;
+		&--pd {
+			padding: $uni-spacing-col-base;
+		}
+
+		&-extra {
+			padding-bottom: 20upx;
+			color: #999;
+		}
+	}
+
+	&__footer {
+		// justify-content: space-between;
+		padding: 20upx;
+		color: $uni-text-color-grey;
+		font-size: $uni-font-size-sm;
+		border-top: 1px #f5f5f5 solid;
+	}
+
+	&--shadow {
+		border: 1px #ddd solid;
+		box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
+		&:after {
+			border: none;
+		}
+	}
+
+	&--full {
+		margin: 0;
+		border-left: none;
+		border-right: none;
+		border-radius: 0;
+		// &:after {
+		// 	border-left: none;
+		// 	border-right: none;
+		// 	border-radius: 0;
+		// }
+	}
+}
 </style>

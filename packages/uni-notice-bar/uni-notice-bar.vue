@@ -1,39 +1,37 @@
 <template>
   <view
     v-if="show"
-    :style="{backgroundColor:backgroundColor,color:color}"
+    :style="{ backgroundColor: backgroundColor, color: color }"
     class="uni-noticebar"
     @click="onClick">
     <view
-      v-if="showClose"
-      class="uni-noticebar__close">
-      <uni-icon
+      v-if="showClose === 'true' || showClose === true"
+      class="uni-noticebar__close"><uni-icon
         type="closefill"
-        size="12"/>
-    </view>
+        size="12" /></view>
     <view
-      :class="{'uni-noticebar--flex': scrollable || single || moreText}"
+      :class="{ 'uni-noticebar--flex': scrollable || single || moreText }"
       class="uni-noticebar__content">
       <view
-        v-if="showIcon"
-        :style="{backgroundColor:backgroundColor,color:color}"
+        v-if="showIcon === 'true' || showIcon === true"
+        :style="{ backgroundColor: backgroundColor, color: color }"
         class="uni-noticebar__content-icon">
         <uni-icon
           :color="color"
           type="sound"
-          size="14"/>
+          size="14" />
       </view>
       <view
-        :class="{'uni-noticebar--scrollable':scrollable,'uni-noticebar--single':!scrollable && (single || moreText)}"
+        :class="{ 'uni-noticebar--scrollable': scrollable, 'uni-noticebar--single': !scrollable && (single || moreText) }"
         class="uni-noticebar__content-text">
         <view
           :id="elId"
-          :style="{'animation': animation,'-webkit-animation': animation}"
+          :style="{ animation: animation, '-webkit-animation': animation }"
           class="uni-noticebar__content-inner">{{ text }}</view>
       </view>
       <view
-        v-if="showGetMore"
-        :style="{width:moreText ? '180upx' : '20px'}"
+        v-if="showGetMore === 'true' || showGetMore === true"
+        :style="{ width: moreText ? '180upx' : '20px' }"
         class="uni-noticebar__content-more"
         @click="clickMore">
         <view
@@ -41,7 +39,7 @@
           class="uni-noticebar__content-more-text">{{ moreText }}</view>
         <uni-icon
           type="arrowright"
-          size="14"/>
+          size="14" />
       </view>
     </view>
   </view>
@@ -67,7 +65,8 @@ export default {
       type: String,
       default: '#fffbe8'
     },
-    speed: { // 默认1s滚动100px
+    speed: {
+      // 默认1s滚动100px
       type: [String, Number],
       default: 100
     },
@@ -75,34 +74,34 @@ export default {
       type: String,
       default: '#de8c17'
     },
-    single: { // 是否单行
-      type: Boolean,
+    single: {
+      // 是否单行
+      type: [String, Boolean],
       default: false
     },
-    scrollable: { // 是否滚动，添加后控制单行效果取消
-      type: Boolean,
+    scrollable: {
+      // 是否滚动，添加后控制单行效果取消
+      type: [String, Boolean],
       default: false
     },
-    showIcon: { // 是否显示左侧icon
-      type: Boolean,
+    showIcon: {
+      // 是否显示左侧icon
+      type: [String, Boolean],
       default: false
     },
-    showGetMore: { // 是否显示右侧查看更多
-      type: Boolean,
+    showGetMore: {
+      // 是否显示右侧查看更多
+      type: [String, Boolean],
       default: false
     },
-    showClose: { // 是否显示左侧关闭按钮
-      type: Boolean,
+    showClose: {
+      // 是否显示左侧关闭按钮
+      type: [String, Boolean],
       default: false
     }
   },
   data () {
-    /**
-     * TODO 兼容新旧编译器
-     * 新编译器（自定义组件模式）下必须使用固定数值，否则部分平台下会获取不到节点。
-     * 随机数值是在旧编译器下使用的，旧编译器模式已经不推荐使用，后续直接废掉随机数值的写法。
-     */
-    const elId = this.__call_hook ? 'uni_notice_bar' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       elId: elId,
       show: true,
@@ -132,27 +131,35 @@ export default {
     },
     onClick (e) {
       let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX
-      if (uni.upx2px(48) + 12 > clientX && this.showClose) {
+      if (uni.upx2px(48) + 12 > clientX && String(this.showClose) === 'true') {
         this.show = false
         this.$emit('close')
       }
       this.$emit('click')
     },
     setAnimation () {
-      if (!this.scrollable) {
+      if (this.scrollable === false || this.scrollable === 'false') {
         return
       }
       // #ifdef MP-TOUTIAO
       setTimeout(() => {
-        uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
-          this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-        })
+        uni.createSelectorQuery()
+          .in(this)
+          .select(`#${this.elId}`)
+          .boundingClientRect()
+          .exec(ret => {
+            this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
+          })
       }, 200)
       // #endif
       // #ifndef MP-TOUTIAO
-      uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
-        this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-      })
+      uni.createSelectorQuery()
+        .in(this)
+        .select(`#${this.elId}`)
+        .boundingClientRect()
+        .exec(ret => {
+          this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
+        })
       // #endif
     }
   }
@@ -160,92 +167,92 @@ export default {
 </script>
 
 <style lang="scss">
-	@mixin flex-row-center {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
+@mixin flex-row-center {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uni-noticebar {
+	padding: 12upx 24upx;
+	font-size: $uni-font-size-sm;
+	line-height: 1.5;
+	margin-bottom: 20upx;
+	@include flex-row-center;
+	justify-content: left;
+
+	&__close {
+		color: $uni-text-color-grey;
+		margin-right: 24upx;
+		@include flex-row-center;
 	}
 
-	.uni-noticebar {
-		padding: 12upx 24upx;
-		font-size: $uni-font-size-sm;
-		line-height: 1.5;
-		margin-bottom: 20upx;
-		@include flex-row-center;
-		justify-content: left;
+	&__content {
+		flex: 1;
+		overflow: hidden;
 
-		&__close {
-			color: $uni-text-color-grey;
-			margin-right: 24upx;
-			@include flex-row-center;
+		&.uni-noticebar--flex {
+			flex: 1;
+			display: flex;
+			flex-direction: row;
 		}
 
-		&__content {
-			flex: 1;
-			overflow: hidden;
+		&-icon {
+			display: inline-block;
+			z-index: 1;
+			padding-right: 12upx;
+		}
 
-			&.uni-noticebar--flex {
-				flex: 1;
-				display: flex;
-				flex-direction: row;
-			}
-
-			&-icon {
-				display: inline-block;
-				z-index: 1;
-				padding-right: 12upx;
-			}
-
-			&-more {
-				width: 180upx;
-				@include flex-row-center;
-				justify-content: flex-end;
-				word-break: keep-all;
-				margin-left: 10upx;
-				color: $uni-text-color-grey;
-
-				&-text {
-					font-size: $uni-font-size-sm;
-					white-space: nowrap;
-				}
-			}
+		&-more {
+			width: 180upx;
+			@include flex-row-center;
+			justify-content: flex-end;
+			word-break: keep-all;
+			margin-left: 10upx;
+			color: $uni-text-color-grey;
 
 			&-text {
-				word-break: break-all;
-				line-height: 1.5;
-				display: inline;
-
-				&.uni-noticebar--single {
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					overflow: hidden;
-				}
-
-				&.uni-noticebar--scrollable {
-					flex: 1;
-					display: block;
-					overflow: hidden;
-
-					.uni-noticebar__content-inner {
-						padding-left: 100%;
-						white-space: nowrap;
-						display: inline-block;
-						transform: translateZ(0);
-					}
-				}
-			}
-
-			&-inner {
 				font-size: $uni-font-size-sm;
-				display: inline;
+				white-space: nowrap;
 			}
 		}
-	}
 
-	@keyframes notice {
-		100% {
-			transform: translate3d(-100%, 0, 0);
+		&-text {
+			word-break: break-all;
+			line-height: 1.5;
+			display: inline;
+
+			&.uni-noticebar--single {
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+
+			&.uni-noticebar--scrollable {
+				flex: 1;
+				display: block;
+				overflow: hidden;
+
+				.uni-noticebar__content-inner {
+					padding-left: 100%;
+					white-space: nowrap;
+					display: inline-block;
+					transform: translateZ(0);
+				}
+			}
+		}
+
+		&-inner {
+			font-size: $uni-font-size-sm;
+			display: inline;
 		}
 	}
+}
+
+@keyframes notice {
+	100% {
+		transform: translate3d(-100%, 0, 0);
+	}
+}
 </style>

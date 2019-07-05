@@ -8,7 +8,7 @@ export default {
   name: 'UniCollapse',
   props: {
     accordion: { // 是否开启手风琴效果
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     }
   },

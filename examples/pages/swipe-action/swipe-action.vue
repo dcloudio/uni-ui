@@ -11,7 +11,7 @@
       <view class="cont">SwipeAction 禁止滑动展示</view>
     </uni-swipe-action>
     <view class="example-title">使用变量控制开关</view>
-    <view class="button-view">
+    <view class="example-body">
       <view
         class="button"
         @click="setOpened">当前状态：{{ isOpened ? '开' : '关' }}</view>
@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 	.cont {
 		height: 90upx;
 		line-height: 90upx;
@@ -137,7 +137,7 @@ export default {
 		height: 1px;
 		content: '';
 		transform: scaleY(0.5);
-		background-color: #c8c7cc;
+		background-color: $uni-border-color;
 	}
 
 	.cont::after {
@@ -149,15 +149,21 @@ export default {
 		height: 1px;
 		content: '';
 		transform: scaleY(0.5);
-		background-color: #c8c7cc;
+		background-color: $uni-border-color;
 	}
-
-	.button-view {
+	.example-body {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		padding: 20upx 0;
 	}
+	/* .button-view {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		padding: 20upx 0;
+		background: #fff;
+	} */
 
 	.button {
 		border: 1px solid #E7E7E7;

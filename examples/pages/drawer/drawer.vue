@@ -11,17 +11,13 @@
           class="input"
           type="text"
           placeholder="输入搜索关键词"
-          @confirm="confirm"
-        >
+          @confirm="confirm" >
       </view>
     </view>
-    <view
-      class="uni-padding-wrap"
-      style="margin-top:30upx;"
-    >这是抽屉式导航组件使用示例，可以指定菜单左侧或者右侧弹出（仅初始化生效），组件内部可以放置任何内容。点击页面按钮即可显示导航菜单。</view>
-    <view class="example">
+    <view class="uni-drawer-info">这是抽屉式导航组件使用示例，可以指定菜单左侧或者右侧弹出（仅初始化生效），组件内部可以放置任何内容。点击页面按钮即可显示导航菜单。</view>
+    <view>
       <view class="example-title">左侧滑出</view>
-      <view>
+      <view class="example-body">
         <button
           type="default"
           @click="show('left')">显示Drawer</button>
@@ -49,15 +45,13 @@
               badge-text="12"/>
           </view>
           <!-- #endif -->
-          <view class="close">
-            <button
-              type="default"
-              @click="hide">关闭Drawer</button>
-          </view>
+          <view class="close"><button
+            type="default"
+            @click="hide">关闭Drawer</button></view>
         </uni-drawer>
       </view>
       <view class="example-title">右侧滑出</view>
-      <view>
+      <view class="example-body">
         <button
           type="default"
           @click="show('right')">显示Drawer</button>
@@ -85,11 +79,9 @@
               badge-text="12"/>
           </view>
           <!-- #endif -->
-          <view class="close">
-            <button
-              type="default"
-              @click="hide">关闭Drawer</button>
-          </view>
+          <view class="close"><button
+            type="default"
+            @click="hide">关闭Drawer</button></view>
         </uni-drawer>
       </view>
     </view>
@@ -121,7 +113,8 @@ export default {
       } else {
         this.showRigth = false
       }
-    }
+    },
+    confirm () {}
   },
   onNavigationBarButtonTap (e) {
     this.showRigth = !this.showRigth
@@ -137,38 +130,43 @@ export default {
 
 <style>
 .header {
-  display: flex;
-  flex-direction: row;
-  padding: 10px 15px;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	padding: 10px 15px;
+	align-items: center;
+	border-top: 1px #f5f5f5 solid;
+	background: #fff;
 }
+
 .input-view {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  background-color: #e7e7e7;
-  height: 30px;
-  border-radius: 15px;
-  padding: 0 10px;
-  flex: 1;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	background-color: #e7e7e7;
+	height: 30px;
+	border-radius: 15px;
+	padding: 0 10px;
+	flex: 1;
+	background: #f5f5f5;
+}
+.uni-drawer-info {
+	background: #fff;
+	padding: 30upx;
+	padding-top: 10upx;
+	color: #3b4144;
 }
 .uni-padding-wrap {
-  padding: 0 15px;
-  line-height: 1.8;
+	padding: 0 15px;
+	line-height: 1.8;
 }
 .input {
-  flex: 1;
-  padding: 0 5px;
-  height: 24px;
-  line-height: 24px;
-  font-size: 16px;
+	flex: 1;
+	padding: 0 5px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 16px;
 }
-
-.input-view .input {
-  background-color: transparent;
-}
-
 .close {
-  padding: 30upx;
+	padding: 30upx;
 }
 </style>

@@ -30,3 +30,9 @@ export default {
 |color	|String	|#777777|图标和文字颜色	|
 |content-text	|Object	|```{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}```|各状态文字说明|
 
+### 更新日志
+**2.0.0**
+- 修复 load 动画失效的问题
+
+**1.0.0**
+- 初始项目

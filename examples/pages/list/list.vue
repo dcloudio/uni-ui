@@ -1,79 +1,51 @@
 <template>
   <view>
-    <view class="example-title">基本用法</view>
+    <view class="example-info">列表组件可以在其中使用图标、略缩图或放置任何你想放的元素，使用场景如：导航菜单、列表、设置中心排版等</view>
+    <view class="example-title">基础列表</view>
     <uni-list>
       <uni-list-item
         :show-arrow="false"
-        title="标题文字"/>
-      <uni-list-item title="标题文字"/>
+        title="列表文字"/>
       <uni-list-item
-        :show-badge="true"
-        :badge-text="12"
-        title="标题文字"/>
+        :show-arrow="false"
+        title="列表文字"
+        note="列表描述信息"/>
       <uni-list-item
         :disabled="true"
-        :show-badge="true"
-        :badge-text="12"
-        title="禁用状态"/>
-    </uni-list>
-    <view class="example-title">包含描述信息</view>
-    <uni-list>
-      <uni-list-item
         :show-arrow="false"
-        title="标题文字"
-        note="描述信息"/>
-      <uni-list-item
-        title="标题文字"
-        note="描述信息"/>
+        title="列表禁用状态"/>
+    </uni-list>
+    <view class="example-title">菜单列表</view>
+    <uni-list>
+      <uni-list-item title="列表右侧带箭头"/>
       <uni-list-item
         :show-badge="true"
-        :badge-text="12"
-        title="标题文字"
-        note="描述信息"/>
-    </uni-list>
-    <view class="example-title">显示缩略图</view>
-    <uni-list>
+        title="列表右侧带箭头 + 角标"
+        badge-text="12"/>
       <uni-list-item
-        title="标题文字"
-        thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"/>
-      <uni-list-item
-        title="标题文字"
-        note="描述信息"
+        title="列表左侧带略缩图"
         thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"/>
-    </uni-list>
-    <view class="example-title">显示扩展图标</view>
-    <uni-list>
       <uni-list-item
         :show-extra-icon="true"
         :extra-icon="extraIcon1"
-        title="标题文字"/>
+        title="列表左侧带扩展图标"/>
       <uni-list-item
         :show-extra-icon="true"
-        :extra-icon="extraIcon2"
-        title="标题文字"
-        note="描述信息"/>
-    </uni-list>
-    <view class="example-title">显示Switch</view>
-    <uni-list>
-      <uni-list-item
+        :extra-icon="extraIcon1"
         :show-switch="true"
-        :show-arrow="false"
-        title="标题文字"
-        @switchChange="switchChange"/>
-      <uni-list-item
-        :show-switch="true"
-        :switch-checked="true"
-        :show-arrow="false"
-        title="标题文字"
+        title="列表右侧带 switch"
         @switchChange="switchChange"/>
       <uni-list-item
         :disabled="true"
+        :show-extra-icon="true"
+        :extra-icon="extraIcon2"
         :show-switch="true"
         :switch-checked="true"
-        :show-arrow="false"
         title="禁用状态"
-        @switchChange="switchChange"/>
+        @switchChange="switchChange"
+      />
     </uni-list>
+
   </view>
 </template>
 
@@ -84,12 +56,12 @@ export default {
       extraIcon1: {
         color: '#007aff',
         size: '22',
-        type: 'info-filled'
+        type: 'gear-filled'
       },
       extraIcon2: {
         color: '#4cd964',
         size: '22',
-        type: 'spinner'
+        type: 'image'
       }
     }
   },
@@ -104,5 +76,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

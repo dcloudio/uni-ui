@@ -3,7 +3,7 @@
     :class="['uni-collapse-cell',{'uni-collapse-cell--disabled':disabled,'uni-collapse-cell--open':isOpen}]"
     :hover-class="disabled ? '' : 'uni-collapse-cell--hover'">
     <view
-      class="uni-collapse-cell__title"
+      class="uni-collapse-cell__title header"
       @click="onClick">
       <view
         v-if="thumb"
@@ -28,7 +28,7 @@
       :class="{'uni-collapse-cell--animation':showAnimation===true}"
       :style="{height:isOpen ? height : '0px'}"
       class="uni-collapse-cell__content">
-      <view class="view" :id="elId">
+      <view :id="elId">
         <slot />
       </view>
     </view>
@@ -52,7 +52,7 @@ export default {
       default: 0
     },
     disabled: { // 是否禁用
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
     showAnimation: { // 是否显示动画
@@ -60,7 +60,7 @@ export default {
       default: false
     },
     open: { // 是否展开
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
     thumb: { // 缩略图
@@ -69,12 +69,7 @@ export default {
     }
   },
   data () {
-    /**
-     * TODO 兼容新旧编译器
-     * 新编译器（自定义组件模式）下必须使用固定数值，否则部分平台下会获取不到节点。
-     * 随机数值是在旧编译器下使用的，旧编译器模式已经不推荐使用，后续直接废掉随机数值的写法。
-     */
-    const elId = this.__call_hook ? 'uni_collapse_item' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       isOpen: false,
       height: 'auto',
@@ -91,7 +86,7 @@ export default {
     this.isOpen = this.open
     this.nameSync = this.name ? this.name : this.collapse.childrens.length
     this.collapse.childrens.push(this)
-    if (this.collapse.accordion) {
+    if (String(this.collapse.accordion) === 'true') {
       if (this.isOpen) {
         let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2]
         if (lastEl) {
@@ -122,7 +117,7 @@ export default {
       if (this.disabled) {
         return
       }
-      if (this.collapse.accordion) {
+      if (String(this.collapse.accordion) === 'true') {
         this.collapse.childrens.forEach(vm => {
           if (vm === this) {
             return
@@ -139,7 +134,7 @@ export default {
 
 <style lang="scss">
 	@mixin collapse-hover {
-		background-color: $uni-bg-color-hover;
+		background-color: #f5f5f5;
 	}
 
 	@mixin collapse-disabled {
@@ -150,7 +145,6 @@ export default {
 
 	.uni-collapse-cell {
 		position: relative;
-
 		&--hover {
 			@include collapse-hover;
 		}
@@ -207,8 +201,6 @@ export default {
 			&-arrow {
 				width: 20px;
 				height: 20px;
-				display: flex;
-				align-items: center;
 				transform: rotate(0deg);
 				transform-origin: center center;
 

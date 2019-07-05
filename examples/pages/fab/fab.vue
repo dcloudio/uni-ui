@@ -1,7 +1,6 @@
 <template>
   <view>
     <view class="uni-padding-wrap">
-
       <button
         class="btn"
         type="primary"

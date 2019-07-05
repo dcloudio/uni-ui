@@ -1,73 +1,83 @@
 <template>
-	<view>
-		<block v-for="(weeks, week) in canlender.weeks" :key="week">
-			<view class="uni-calender__body-date-week">
-				<block v-for="(day, index) in weeks" :key="index">
-					<view
-						:class="{
-							'uni-calender__disable': canlender.month !== day.month || day.disable,
-							'uni-calender__date-current':
-								((day.date == canlender.date && !day.checked) || day.multipleBegin || day.multipleEnd) && canlender.month == day.month && !day.disable,
-							'uni-calender__lunar': lunar,
-							'uni-calender__active': !day.isDay,
-							'uni-calender__is-day': day.isDay,
-							'uni-calender__multiple': day.multipleBegin || day.multipleEnd,
-							'uni-calender__multiple-box': day.checked
-						}"
-						class="uni-calender__date"
-						@tap="selectDays(week, index, canlender.month === day.month, day.disable, canlender.lunar)"
-					>
-						<view class="uni-calender__circle-box">
-							{{ day.date }}
-							<view v-if="lunar" class="uni-calender__lunar">{{ day.lunar }}</view>
-							<view v-if="day.have" class="uni-calender__data-circle"></view>
-							<view v-if="day.have && !lunar" class="uni-calender__lunar">{{ day.clockinfo.info }}</view>
-						</view>
-						<view
-							class="uni-calender_check-bg"
-							:class="{ 'uni-calender_check': day.checked, 'calender_check-begin': day.multipleBegin, 'calender_check-end': day.multipleEnd }"
-						></view>
-					</view>
-				</block>
-			</view>
-		</block>
-	</view>
+  <view>
+    <block
+      v-for="(weeks, week) in canlender.weeks"
+      :key="week">
+      <view class="uni-calender__body-date-week">
+        <block
+          v-for="(day, index) in weeks"
+          :key="index">
+          <view
+            :class="{
+              'uni-calender__disable': canlender.month !== day.month || day.disable,
+              'uni-calender__date-current':
+                ((day.date == canlender.date && !day.checked) || day.multipleBegin || day.multipleEnd) && canlender.month == day.month && !day.disable,
+              'uni-calender__lunar': lunar,
+              'uni-calender__active': !day.isDay,
+              'uni-calender__is-day': day.isDay,
+              'uni-calender__multiple': day.multipleBegin || day.multipleEnd,
+              'uni-calender__multiple-box': day.checked
+            }"
+            class="uni-calender__date"
+            @tap="selectDays(week, index, canlender.month === day.month, day.disable, canlender.lunar)"
+          >
+            <view class="uni-calender__circle-box">
+              {{ day.date }}
+              <view
+                v-if="lunar"
+                class="uni-calender__lunar">{{ day.lunar }}</view>
+              <view
+                v-if="day.have"
+                class="uni-calender__data-circle" />
+              <view
+                v-if="day.have && !lunar"
+                class="uni-calender__lunar">{{ day.clockinfo.info }}</view>
+            </view>
+            <view
+              :class="{ 'uni-calender_check': day.checked, 'calender_check-begin': day.multipleBegin, 'calender_check-end': day.multipleEnd }"
+              class="uni-calender_check-bg"
+            />
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
 </template>
 
 <script>
 export default {
-	name: 'UniCalendarItem',
-	props: {
-		/**
+  name: 'UniCalendarItem',
+  props: {
+    /**
 		 * 当前日期
 		 */
-		canlender: {
-			type: null,
-			default: () => {
-				return {};
-			}
-		},
-		lunar: {
-			type: Boolean,
-			default: false
-		}
-	},
-	data() {
-		return {};
-	},
-	created() {},
-	methods: {
-		selectDays(week, index, ischeck, isDay, lunar) {
-			this.$emit('selectDays', {
-				week,
-				index,
-				ischeck,
-				isDay,
-				lunar
-			});
-		}
-	}
-};
+    canlender: {
+      type: null,
+      default: () => {
+        return {}
+      }
+    },
+    lunar: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {}
+  },
+  created () {},
+  methods: {
+    selectDays (week, index, ischeck, isDay, lunar) {
+      this.$emit('selectDays', {
+        week,
+        index,
+        ischeck,
+        isDay,
+        lunar
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">

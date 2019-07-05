@@ -34,7 +34,7 @@ export default {
   props: {
     isFill: {
       // 星星的类型，是否镂空
-      type: Boolean,
+      type: [Boolean, String],
       default: true
     },
     color: {
@@ -69,7 +69,7 @@ export default {
     },
     disabled: {
       // 是否可点击
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     }
   },

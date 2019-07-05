@@ -48,17 +48,7 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {
-				"navigationBarTitleText": "NavBar 导航栏",
-				"navigationStyle":"custom",
-				"enablePullDownRefresh":true,
-				"app-plus":{
-					"titleNView":false,
-					"bounce":"none",
-					"pullToRefresh":{
-						"style":"circle",
-						"offset":"70px"
-					}
-				}
+				"navigationBarTitleText": "NavBar 导航栏"
 			}
 		},
 		{
@@ -101,7 +91,7 @@
 			"path": "pages/collapse/collapse",
 			"style": {
 				"navigationBarTitleText": "Collapse 折叠面板"
-
+				
 			}
 		},
 		{
@@ -145,37 +135,27 @@
 			"style": {
 				"navigationBarTitleText": "SwipeAction 滑动操作",
 				"disableScroll": true,
-				"app-plus": {
-					"bounce": "none"
+				"app-plus":{
+					"bounce":"none"
 				}
 			}
 		},
 		{
 			"path": "pages/calendar/calendar",
 			"style": {
-				"navigationBarTitleText": "Calendar 日历"
+				"navigationBarTitleText": "calendar 日历"
+			}
+		},
+		{
+			"path": "pages/indexed-list/indexed-list",
+			"style": {
+				"navigationBarTitleText": "IndexedList 索引列表"
 			}
 		},
 		{
 			"path": "pages/fab/fab",
 			"style": {
 				"navigationBarTitleText": "Fab 悬浮按钮"
-			}
-		},
-		{
-			"path": "pages/indexed-list/indexed-list",
-			"style": {
-				"navigationBarTitleText": "IndexedList 索引列表",
-
-				"mp-weixin": {
-					"disableScroll": true
-				},
-				"app-plus": {
-					"bounce": "none"
-				},
-				"mp-alipay": {
-					"allowsBounceVertical": "NO"
-				}
 			}
 		}
 	],

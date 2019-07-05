@@ -81,3 +81,9 @@ List 一般用法
 |---|----|---|
 |click|点击 uniListItem 触发事件||
 |switchChange|点击切换 Switch 时触发|{value:checked}|
+
+
+### 更新日志
+
+**1.0.0**
+- 初始项目

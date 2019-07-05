@@ -1,7 +1,8 @@
 <template>
-  <view class="example">
+  <view>
+    <view class="example-info">标签组件多用于商品分类、重点内容显示等场景。</view>
     <view class="example-title">实心标签</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag text="标签"/>
       </view>
@@ -27,7 +28,7 @@
       </view>
     </view>
     <view class="example-title">空心标签</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           :inverted="true"
@@ -59,7 +60,7 @@
       </view>
     </view>
     <view class="example-title">圆角样式</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           :circle="true"
@@ -90,7 +91,7 @@
       </view>
     </view>
     <view class="example-title">标记样式</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           :mark="true"
@@ -120,7 +121,7 @@
       </view>
     </view>
     <view class="example-title">点击事件</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           :type="type"
@@ -138,7 +139,7 @@
     </view>
 
     <view class="example-title">小标签</view>
-    <view>
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           text="标签"
@@ -175,7 +176,7 @@
     </view>
 
     <view class="example-title">不可点击状态</view>
-    <view class="page-section">
+    <view class="example-body">
       <view class="tag-view">
         <uni-tag
           :disabled="true"
@@ -223,6 +224,9 @@ export default {
 </script>
 
 <style>
+	.example-body {
+		padding: 20upx 0;
+	}
     .tag-view {
         margin: 10upx 20upx;
         display: inline-block;

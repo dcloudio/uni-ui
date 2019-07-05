@@ -2,36 +2,36 @@
   <view class="uni-countdown">
     <view
       v-if="showDay"
-      :style="{borderColor:borderColor, color:color, background:backgroundColor}"
+      :style="{ borderColor: borderColor, color: color, background: backgroundColor }"
       class="uni-countdown__number">{{ d }}</view>
     <view
       v-if="showDay"
-      :style="{color:splitorColor}"
+      :style="{ color: splitorColor }"
       class="uni-countdown__splitor">天</view>
     <view
-      :style="{borderColor:borderColor, color:color, background:backgroundColor}"
+      :style="{ borderColor: borderColor, color: color, background: backgroundColor }"
       class="uni-countdown__number">{{ h }}</view>
     <view
-      :style="{color:splitorColor}"
+      :style="{ color: splitorColor }"
       class="uni-countdown__splitor">{{ showColon ? ':' : '时' }}</view>
     <view
-      :style="{borderColor:borderColor, color:color, background:backgroundColor}"
+      :style="{ borderColor: borderColor, color: color, background: backgroundColor }"
       class="uni-countdown__number">{{ i }}</view>
     <view
-      :style="{color:splitorColor}"
+      :style="{ color: splitorColor }"
       class="uni-countdown__splitor">{{ showColon ? ':' : '分' }}</view>
     <view
-      :style="{borderColor:borderColor, color:color, background:backgroundColor}"
+      :style="{ borderColor: borderColor, color: color, background: backgroundColor }"
       class="uni-countdown__number">{{ s }}</view>
     <view
       v-if="!showColon"
-      :style="{color:splitorColor}"
+      :style="{ color: splitorColor }"
       class="uni-countdown__splitor">秒</view>
   </view>
 </template>
 <script>
 export default {
-  name: 'UniCountdown',
+  name: 'UniCountDown',
   props: {
     showDay: {
       type: Boolean,
@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     toSeconds (day, hours, minutes, seconds) {
-      return (day * 60 * 60 * 24) + (hours * 60 * 60) + (minutes * 60) + seconds
+      return day * 60 * 60 * 24 + hours * 60 * 60 + minutes * 60 + seconds
     },
     timeUp () {
       clearInterval(this.timer)
@@ -113,9 +113,9 @@ export default {
       let [day, hour, minute, second] = [0, 0, 0, 0]
       if (seconds > 0) {
         day = Math.floor(seconds / (60 * 60 * 24))
-        hour = Math.floor(seconds / (60 * 60)) - (day * 24)
-        minute = Math.floor(seconds / 60) - (day * 24 * 60) - (hour * 60)
-        second = Math.floor(seconds) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60)
+        hour = Math.floor(seconds / (60 * 60)) - day * 24
+        minute = Math.floor(seconds / 60) - day * 24 * 60 - hour * 60
+        second = Math.floor(seconds) - day * 24 * 60 * 60 - hour * 60 * 60 - minute * 60
       } else {
         this.timeUp()
       }
@@ -140,31 +140,31 @@ export default {
 }
 </script>
 <style lang="scss">
-	$countdown-height:44upx;
+$countdown-height: 44upx;
 
-	.uni-countdown {
-		padding: 2upx 0;
-		display: inline-flex;
-		flex-wrap: nowrap;
+.uni-countdown {
+	padding: 2upx 0;
+	display: inline-flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+
+	&__splitor {
 		justify-content: center;
-
-		&__splitor {
-			justify-content: center;
-			line-height: $countdown-height;
-			padding: 0 5upx;
-            font-size: $uni-font-size-base;
-		}
-
-		&__number {
-			line-height: $countdown-height;
-			justify-content: center;
-			height: $countdown-height;
-			border-radius: $uni-border-radius-base;
-			margin: 0 5upx;
-			font-size: $uni-font-size-base;
-			border: 1px solid #000000;
-			font-size: $uni-font-size-sm;
-			padding: 0 10upx;
-		}
+		line-height: $countdown-height;
+		padding: 0 5upx;
+		font-size: $uni-font-size-base;
 	}
+
+	&__number {
+		line-height: $countdown-height;
+		justify-content: center;
+		height: $countdown-height;
+		border-radius: $uni-border-radius-base;
+		margin: 0 5upx;
+		font-size: $uni-font-size-base;
+		border: 1px solid #000000;
+		font-size: $uni-font-size-sm;
+		padding: 0 10upx;
+	}
+}
 </style>

@@ -1,3 +1,5 @@
+> 测试使用，勿用
+
 ### Badge 数字角标
 
 数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，组件名：``uni-badge``，代码块： uBadge。
@@ -35,3 +37,8 @@ Tips:
 
 * 组件实际运行效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
 * npm 使用方式参考：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+
+### 更新日志
+**1.0.0**
+- 初始项目

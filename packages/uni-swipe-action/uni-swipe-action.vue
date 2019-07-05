@@ -1,26 +1,30 @@
 <template>
   <view class="uni-swipe-action">
     <view
-      :class="{'uni-swipe-action--show':isShowBtn}"
-      :style="{'transform':transformX,'-webkit-transform':transformX}"
+      :class="{ 'uni-swipe-action--show': isShowBtn }"
+      :style="{ transform: transformX, '-webkit-transform': transformX }"
       class="uni-swipe-action__container"
       @touchstart="touchStart"
       @touchmove="touchMove"
       @touchend="touchEnd"
       @touchcancel="touchEnd"
-      @click="bindClickCont">
-      <view class="uni-swipe-action__content">
-        <slot/>
-      </view>
+      @click="bindClickCont"
+    >
+      <view class="uni-swipe-action__content"><slot /></view>
       <view
         :id="elId"
         class="uni-swipe-action__btn-group">
         <div
-          v-for="(item,index) in options"
+          v-for="(item, index) in options"
           :key="index"
-          :style="{backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '28upx'}"
+          :style="{
+            backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
+            color: item.style && item.style.color ? item.style.color : '#FFFFFF',
+            fontSize: item.style && item.style.fontSize ? item.style.fontSize : '28upx'
+          }"
           class="uni-swipe-action--btn"
-          @click="bindClickBtn(item,index)">
+          @click="bindClickBtn(item, index)"
+        >
           {{ item.text }}
         </div>
       </view>
@@ -29,7 +33,7 @@
       v-if="isShowBtn"
       class="uni-swipe-action__mask"
       @click="close"
-      @touchmove.stop.prevent="close"/>
+      @touchmove.stop.prevent="close" />
   </view>
 </template>
 
@@ -61,12 +65,7 @@ export default {
     }
   },
   data () {
-    /**
-     * TODO 兼容新旧编译器
-     * 新编译器（自定义组件模式）下必须使用固定数值，否则部分平台下会获取不到节点。
-     * 随机数值是在旧编译器下使用的，旧编译器模式已经不推荐使用，后续直接废掉随机数值的写法。
-     */
-    const elId = this.__call_hook ? 'uni_swipe_action' : `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
       elId: elId,
       isShowBtn: false,
@@ -99,10 +98,14 @@ export default {
   // #endif
   methods: {
     getSize () {
-      uni.createSelectorQuery().in(this).select(`#${this.elId}`).boundingClientRect().exec((ret) => {
-        this.btnGroupWidth = ret[0].width
-      })
-      if (this.isOpened) {
+      uni.createSelectorQuery()
+        .in(this)
+        .select(`#${this.elId}`)
+        .boundingClientRect()
+        .exec(ret => {
+          this.btnGroupWidth = ret[0].width
+        })
+      if (this.isOpened === true) {
         this.isShowBtn = true
         this.endMove()
       }
@@ -115,7 +118,7 @@ export default {
       })
     },
     bindClickCont (e) {
-      if (this.isShowBtn && this.autoClose) {
+      if (this.isShowBtn && this.autoClose === true) {
         this.isShowBtn = false
         this.endMove()
       }
@@ -126,12 +129,13 @@ export default {
       this.startY = event.touches[0].pageY
     },
     touchMove (event) {
-      if (this.direction === 'Y' || this.disabled) {
+      if (this.direction === 'Y' || this.disabled === true) {
         return
       }
       var moveY = event.touches[0].pageY - this.startY
       var moveX = event.touches[0].pageX - this.startX
-      if (!this.isMoving && Math.abs(moveY) > Math.abs(moveX)) { // 纵向滑动
+      if (!this.isMoving && Math.abs(moveY) > Math.abs(moveX)) {
+        // 纵向滑动
         this.direction = 'Y'
         return
       }
@@ -166,7 +170,8 @@ export default {
         let movedLength = Math.abs(Number(this.transformX.slice(11, -3)))
         let movedTime = event.timeStamp - this.startTime
         this.isShowBtn = movedLength >= this.btnGroupWidth / 2
-        if (movedTime > 50 && movedTime < 300 && movedLength > 20) { // 在这个时间里面，且滑动了一定的距离
+        if (movedTime > 50 && movedTime < 300 && movedLength > 20) {
+          // 在这个时间里面，且滑动了一定的距离
           if (this.direction === 'right') {
             this.isShowBtn = false
           } else {
@@ -184,7 +189,7 @@ export default {
       this.endMove()
     },
     endMove () {
-      if (this.direction === 'Y' || this.disabled) {
+      if (this.direction === 'Y' || this.disabled === true) {
         this.direction = ''
         return
       }
@@ -206,54 +211,54 @@ export default {
 </script>
 
 <style lang="scss">
-	.uni-swipe-action {
-		width: 100%;
-		overflow: hidden;
+.uni-swipe-action {
+	width: 100%;
+	overflow: hidden;
 
-		&__container {
-			position: relative;
-			background-color: #FFFFFF;
-			width: 200%;
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			transition: transform 350ms cubic-bezier(.165, .84, .44, 1);
-		}
-
-		&__content {
-			width: 50%;
-		}
-
-		&__btn-group {
-			display: flex;
-			flex-direction: row;
-		}
-
-		&--show {
-			position: relative;
-			z-index: 1000;
-		}
-
-		&--btn {
-			padding: 0 32upx;
-			color: #FFFFFF;
-			background-color: #C7C6CD;
-			font-size: 28upx;
-			display: inline-flex;
-			text-align: center;
-			flex-direction: row;
-			align-items: center;
-		}
-
-		&__mask {
-			display: block;
-			opacity: 0;
-			position: fixed;
-			z-index: 999;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
+	&__container {
+		position: relative;
+		background-color: #ffffff;
+		width: 200%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
+
+	&__content {
+		width: 50%;
+	}
+
+	&__btn-group {
+		display: flex;
+		flex-direction: row;
+	}
+
+	&--show {
+		position: relative;
+		z-index: 1000;
+	}
+
+	&--btn {
+		padding: 0 32upx;
+		color: #ffffff;
+		background-color: #c7c6cd;
+		font-size: 28upx;
+		display: inline-flex;
+		text-align: center;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	&__mask {
+		display: block;
+		opacity: 0;
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
 </style>

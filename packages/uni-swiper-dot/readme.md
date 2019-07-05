@@ -1,4 +1,4 @@
-### SwiperDot 轮播图指示点
+### SwiperDod 轮播图指示点
 
 自定义轮播图指示点，组件名：``uni-swiper-dot``，代码块： uSwiperDot。
 

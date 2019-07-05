@@ -1,11 +1,12 @@
 <template>
   <view>
-    <view>
-      <view class="example-title">基本用法</view>
+    <view class="example-info">加载更多组件用于页面加载更多数据时，页面底部显示内容等场景。</view>
+    <view class="example-title">基本用法</view>
+    <view class="example-body">
       <uni-load-more :status="status"/>
     </view>
-    <view>
-      <view class="example-title">修改默认颜色及文字</view>
+    <view class="example-title">修改默认颜色及文字</view>
+    <view class="example-body">
       <uni-load-more
         :status="status"
         :content-text="contentText"
@@ -71,7 +72,12 @@ export default {
 	uni-radio-group uni-label {
 		padding: 0;
 	}
-
+	.uni-list {
+		background: #fff;
+	}
+	.example-body {
+		padding: 10upx 30upx;
+	}
 	.uni-list-item__container {
 		padding: 24upx 30upx;
 		width: 100%;
