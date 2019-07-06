@@ -72,7 +72,7 @@
         :show="type === 'bottom-share'"
         position="bottom"
         @hidePopup="togglePopup('')">
-        <view style="display: block;">
+        <view style="display: block;width:100%;">
           <view class="bottom-title">分享到</view>
           <view class="bottom-content">
             <view

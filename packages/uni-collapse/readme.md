@@ -87,20 +87,61 @@ export default {
 |change|切换面板时触发|activeNames（Array）：展开状态的uniCollapseItem的name值|
 
 
+**uniCollapse 方法说明：**
+
+|事件称名|说明|
+|---|----|---|
+|resize|通过 ref 使用，更新当前列表高度，只有 animation:true 下生效 |
+
+**代码示例**
+```html
+<uni-collapse @change="change">
+    <uni-collapse-item ref="add" title="动画效果" :show-animation="true" open="true">
+        {{ content }}
+    </uni-collapse-item>
+</uni-collapse>
+```
+
+```javascript
+export default {
+	data() {
+		
+		return {
+			content: '一段短文字',
+		};
+	},
+	methods: {
+		onClick() {
+			this.content = "这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。"
+			this.$nextTick(() => {
+				this.$refs.add.resize();
+			});
+		}
+	}
+};
+```
+
+Tips
+- resize 方法解决动态添加数据，带动画的折叠面板高度不更新的问题
+- 需要在数据渲染完毕之后使用 `resize` 方法。推荐在 `this.nextTick()` 中使用
+
 **uniCollapseItem 属性说明：**
 
 |属性名|类型|默认值|说明|
 |---|----|---|---|
 |title|String||标题文字|
-|name|String & Number|Index|唯一标识符，默认为索引值|
 |thumb|String||标题左侧缩略图|
 |disabled|Boolean|false|是否禁用|
 |open|Boolean|false|是否展开面板|
-|animation|String|false|动画类型：outer（内容进行动画）/outer（容器进行动画）|
+|animation|String|false|开启动画|
 
 Tips
-- 如果需要在组件上使用 `v-for` 循环，需要使用自定义组件模式。
+- 本组件需要使用自定义组件模式，非自定义组件使用，会出现问题。
 
 ### 更新日志
+**1.1.0**
+- 修复 在 v-for 循环中，组件报错的 bug
+- 修复 提供在动画模式下，动态渲染数据，高度不更新的解决方案
+
 **1.0.0**
 - 初始项目

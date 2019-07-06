@@ -54,3 +54,9 @@ export default {
     <view  slot="right">right</view>
 </uni-nav-bar>
 ```
+
+
+### 更新日志
+
+**1.0.0**
+- 初始项目
