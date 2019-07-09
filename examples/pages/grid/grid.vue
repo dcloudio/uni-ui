@@ -1,44 +1,152 @@
 <template>
-  <view class="page">
+  <view class="warp">
     <view class="example-info">宫格组件主要使用场景如：商品推荐列表、热门内容等</view>
-    <view class="example-title">默认样式</view>
-    <view class="example-body"><uni-grid
-      :options="data1"
-      @click="onClick"/></view>
-    <view class="example-title">可滑动宫格组件</view>
+    <view class="example-title">默认样式（3列）</view>
     <view class="example-body">
-      <swiper
-        :indicator-dots="true"
-        :style="{ height: swiperGridHeight, width: swiperGridWidth }">
-        <swiper-item>
-          <view class="grid-view"><uni-grid
-            :options="data1"
-            @click="onClick"/></view>
-        </swiper-item>
-        <swiper-item>
-          <view class="grid-view"><uni-grid
-            :options="data1"
-            @click="onClick"/></view>
-        </swiper-item>
-      </swiper>
+      <uni-grid
+        :column="3"
+        :highlight="true"
+        @change="change">
+        <uni-grid-item
+          v-for="(item,index) in list"
+          :key="index">
+          <image
+            :src="item.url"
+            class="image"
+            mode="aspectFill" />
+          <text class="text">{{ item.text }}</text>
+        </uni-grid-item>
+      </uni-grid>
     </view>
-    <view class="example-title">无外边框</view>
-    <view class="example-body"><uni-grid
-      :options="data3"
-      :show-out-border="false"/></view>
-    <view class="example-title">无所有框</view>
-    <view class="example-body"><uni-grid
-      :options="data3"
-      :show-border="false"/></view>
-    <view class="example-title">一行四个</view>
-    <view class="example-body"><uni-grid
-      :options="data2"
-      :show-out-border="false"
-      :column-num="4"/></view>
-    <view class="example-title">矩形案例</view>
-    <view class="example-body"><uni-grid
-      :options="data3"
-      type="oblong"/></view>
+    <view class="example-title">带红点角标（4列）</view>
+    <view class="example-body">
+      <uni-grid
+        :column="4"
+        :show-border="true"
+        :square="true"
+        :hor="35"
+        :ver="-45"
+        @change="change">
+        <uni-grid-item marker="dot">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png"
+            mode="aspectFill" />
+          <text class="text">新浪</text>
+        </uni-grid-item>
+        <uni-grid-item
+          marker="badge"
+          text="99"
+          type="success">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png"
+            mode="aspectFill" />
+          <text class="text">微信</text>
+        </uni-grid-item>
+        <uni-grid-item
+          marker="badge"
+          type="error"
+          text="热">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png"
+            mode="aspectFill" />
+          <text class="text">QQ</text>
+        </uni-grid-item>
+        <uni-grid-item
+          :hor="35"
+          :ver="-45"
+          :img-width="25"
+          marker="image"
+          src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/recommend.png">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png"
+            mode="aspectFill"/>
+          <text class="text">抖音</text>
+        </uni-grid-item>
+      </uni-grid>
+    </view>
+    <view class="example-title">无边框（3列）</view>
+    <view class="example-body">
+      <uni-grid
+        :column="3"
+        :show-border="false"
+        :square="false"
+        @change="change">
+        <uni-grid-item
+          :hor="35"
+          :ver="-45"
+          marker="badge"
+          type="error"
+          text="12">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png"
+            mode="aspectFill" />
+          <text class="text">新浪</text>
+        </uni-grid-item>
+        <uni-grid-item
+          :hor="40"
+          :ver="-55"
+          :img-width="30"
+          marker="image"
+          src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/recommend.png">
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png"
+            mode="aspectFill" />
+          <text class="text">微信</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png"
+            mode="aspectFill" />
+          <text class="text">QQ</text>
+        </uni-grid-item>
+        <uni-grid-item >
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png"
+            mode="aspectFill"/>
+          <text class="text">抖音</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png"
+            mode="aspectFill"/>
+          <text class="text">百度</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png"
+            mode="aspectFill"/>
+          <text class="text">支付宝</text>
+        </uni-grid-item>
+      </uni-grid>
+    </view>
+    <view class="example-title">矩形宫格（3列）</view>
+    <view class="example-body">
+      <uni-grid
+        :column="3"
+        :square="false"
+				:highlight="false"
+        @change="change">
+        <uni-grid-item
+          v-for="(item,index) in list"
+          :key="index">
+          <image
+            :src="item.url"
+            class="image"
+            mode="aspectFill" />
+          <text class="text">{{ item.text }}</text>
+        </uni-grid-item>
+      </uni-grid>
+    </view>
   </view>
 </template>
 
@@ -46,132 +154,55 @@
 export default {
   data () {
     return {
-      swiperGridHeight: '0px',
-      swiperGridWidth: '100%',
-      data1: [
+      list: [
         {
-          image: '/static/c1.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c2.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c3.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c4.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c5.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c6.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c7.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c8.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c9.png',
-          text: 'Grid'
-        }
-      ],
-      data2: [
-        {
-          image: '/static/c1.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c2.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c3.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c4.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c5.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c6.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c7.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c8.png',
-          text: 'Grid'
-        }
-      ],
-      data3: [
-        {
-          image: '/static/c1.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c2.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c3.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c4.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c5.png',
-          text: 'Grid'
-        },
-        {
-          image: '/static/c6.png',
-          text: 'Grid'
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
+          text: '新浪'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+          text: '微信'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+          text: 'QQ'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-4.png',
+          text: '抖音'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
+          text: '百度'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
+          text: '支付宝'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
+          text: '字节跳动'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
+          text: '手机'
+        }, {
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-9.png',
+          text: '工具'
         }
       ]
+
     }
   },
-  onReady () {
-    uni.createSelectorQuery()
-      .select('.grid-view')
-      .boundingClientRect()
-      .exec(ret => {
-        this.swiperGridHeight = ret[0].height + 1 + 'px'
-        // #ifndef H5
-        this.swiperGridWidth = ret[0].width + 1 + 'px'
-        // #endif
-      })
-  },
   methods: {
-    onClick (e) {
-      console.log('点击grid:' + JSON.stringify(e))
+    change (e) {
+      let { index } = e.detail
+      console.log(index)
     }
   }
 }
 </script>
-<style>
-.grid-view {
-	/* #ifdef H5 */
-	padding: 0 0.5px;
-	/* #endif */
-	box-sizing: border-box;
-}
 
+<style>
+.image {
+	width: 50upx;
+	height: 50upx;
+}
+.text {
+	font-size: 26upx;
+	margin-top: 10upx;
+}
 </style>

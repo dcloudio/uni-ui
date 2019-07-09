@@ -1,237 +1,123 @@
 <template>
   <view
-    :class="{ 'uni-grid-no-border': !showBorder, 'uni-grid-no-out-border': showBorder && !showOutBorder }"
-    class="uni-grid">
-    <view
-      v-for="(items, i) in gridGroup"
-      :key="i"
-      class="uni-grid__flex">
-      <view
-        v-for="(item, index) in items"
-        :hover-start-time="20"
-        :hover-stay-time="70"
-        :key="index"
-        :class="[index == columnNum ? 'uni-grid-item-last' : '', 'uni-grid-item-' + type]"
-        :style="{ visibility: item.seize ? 'hidden' : 'inherit' }"
-        class="uni-grid-item"
-        hover-class="uni-grid-item-hover"
-        @click="onClick(i, index)"
-      >
-        <view
-          v-if="!item.seize"
-          class="uni-grid-item__content">
-          <image
-            :src="item.image"
-            class="uni-grid-item-image" />
-          <text class="uni-grid-item-text">{{ item.text }}</text>
-        </view>
-      </view>
-    </view>
-  </view>
+    :class="{ border: showBorder }"
+    class="uni-grid"><slot /></view>
 </template>
 
 <script>
 export default {
   name: 'UniGrid',
   props: {
-    options: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-    type: {
-      // 布局格式，长方形oblong，正方形square
-      type: String,
-      default: 'square'
-    },
-    columnNum: {
-      // 每一行有多少个
-      type: [Number, String],
+    // 每列显示个数
+    column: {
+      type: Number,
       default: 3
     },
-    showOutBorder: {
-      // 显示外边框
-      type: [Boolean, String],
+    // 是否显示边框
+    showBorder: {
+      type: Boolean,
       default: true
     },
-    showBorder: {
-      // 是否显示border，如果为false，showOutBorder无效
-      type: [Boolean, String],
+    // 全局标记水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动
+    hor: {
+      type: Number,
+      default: 0
+    },
+    // 全局标记垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动
+    ver: {
+      type: Number,
+      default: 0
+    },
+    // 是否正方形显示,默认为 true
+    square: {
+      type: Boolean,
       default: true
+    },
+    highlight: {
+      type: Boolean,
+      default: true
+    }
+  },
+  provide () {
+    return {
+      grid: this
     }
   },
   data () {
-    return {}
-  },
-  computed: {
-    gridGroup () {
-      let group = []
-      let groupItem = []
-      this.options &&
-        this.options.forEach((item, index) => {
-          groupItem.push(item)
-          if (index % this.columnNum === this.columnNum - 1) {
-            group.push(groupItem)
-            groupItem = []
-          }
-        })
-      if (groupItem.length > 0) {
-        if (this.columnNum > groupItem.length) {
-          for (let i = 0, length = groupItem.length; i < this.columnNum - length; i++) {
-            groupItem.push({ seize: true })
-          }
-        }
-        group.push(groupItem)
-      }
-      groupItem = null
-      return group
+    return {
+      index: 0
     }
   },
   created () {
-    this.columnNumber = this.gridGroup[0].length
+    this.index = 0
+    this.childrens = []
   },
   methods: {
-    onClick (index, num) {
-      this.$emit('click', {
-        index: index * this.columnNumber + num
-      })
+    change (e) {
+      this.$emit('change', e)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .uni-grid {
-	position: relative;
 	display: flex;
-	flex-direction: column;
-
-	&__flex {
-		display: flex;
-		flex-direction: row;
-	}
-
-	&-item {
-		display: flex;
-		position: relative;
-		flex-direction: column;
-		flex: 1;
-
-		&:before {
-			display: block;
-			content: ' ';
-			padding-bottom: 100%;
-		}
-
-		&:after {
-			content: '';
-			position: absolute;
-			z-index: 1;
-			transform-origin: center;
-			box-sizing: border-box;
-			top: -50%;
-			left: -50%;
-			right: -50%;
-			bottom: -50%;
-			border-color: $uni-border-color;
-			border-style: solid;
-			border-width: 1px;
-			-webkit-transform: scale(0.5);
-			transform: scale(0.5);
-			border-top-width: 0;
-			border-left-width: 0;
-		}
-
-		&__content {
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-
-		&-text {
-			font-size: $uni-font-size-lg;
-			color: $uni-text-color;
-			margin-top: 12upx;
-		}
-
-		&-hover {
-			background-color: $uni-bg-color-hover;
-		}
-
-		&-image {
-			width: $uni-img-size-lg;
-			height: $uni-img-size-lg;
-		}
-	}
-}
-
-.uni-grid .uni-grid__flex:first-child .uni-grid-item:after {
-	border-top-width: 1px;
-}
-
-.uni-grid .uni-grid__flex .uni-grid-item:first-child:after {
-	border-left-width: 1px;
-}
-
-/* 无外边框 */
-.uni-grid.uni-grid-no-out-border .uni-grid__flex {
-	&:first-child .uni-grid-item:after {
-		border-top-width: 0;
-	}
-
-	&:last-child .uni-grid-item:after {
-		border-bottom-width: 0;
-	}
-
-	.uni-grid-item:first-child:after {
-		border-left-width: 0;
-	}
-
-	.uni-grid-item:last-child:after {
-		border-right-width: 0;
-	}
-}
-
-/* 无边框 */
-.uni-grid.uni-grid-no-border {
-	.uni-grid-item:after {
-		border-width: 0;
-	}
-
-	.uni-grid__flex:first-child .uni-grid-item:after {
-		border-top-width: 0px;
-	}
-
-	.uni-grid__flex .uni-grid-item:first-child:after {
-		border-left-width: 0px;
-	}
-}
-
-.uni-grid-item-oblong {
-	&.uni-grid-item:before {
-		padding-bottom: 60%;
-	}
-
+	flex-wrap: wrap;
+	box-sizing: border-box;
 	.uni-grid-item {
-		&__content {
-			flex-direction: row;
-		}
-
-		&-image {
-			width: $uni-img-size-base;
-			height: $uni-img-size-base;
-		}
-
-		&-text {
-			margin-top: 0;
-			margin-left: 12upx;
+		box-sizing: border-box;
+		&__box {
+			position: relative;
+			width: 100%;
+			&-item {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				font-size: 32upx;
+				color: #666;
+				padding: 20upx 0;
+				box-sizing: border-box;
+				&-image {
+					width: 50upx;
+					height: 50upx;
+				}
+				&-text {
+					font-size: 26upx;
+					margin-top: 10upx;
+				}
+			}
+			&.uni-grid-item__box-square {
+				height: 0;
+				padding-top: 100%;
+				& .uni-grid-item__box-item {
+					position: absolute;
+					top: 0;
+				}
+			}
+			&.border {
+				position: relative;
+				border-left: 1px #d0dee5 solid;
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0%;
+					bottom: 0%;
+					left: 0%;
+					right: 0%;
+					border-right: 1px #d0dee5 solid;
+					border-bottom: 1px #d0dee5 solid;
+				}
+			}
+			&.border-top {
+				border-top: 1px #d0dee5 solid;
+			}
+			&.uni-highlight:active {
+				background-color: #eee;
+			}
 		}
 	}
 }
