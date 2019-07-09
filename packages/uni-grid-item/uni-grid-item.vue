@@ -1,6 +1,6 @@
 <template>
   <view
-		v-if="width"
+    v-if="width"
     :style="{ width: width }"
     class="uni-grid-item">
     <view
