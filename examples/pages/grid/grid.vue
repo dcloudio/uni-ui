@@ -8,7 +8,7 @@
         :highlight="true"
         @change="change">
         <uni-grid-item
-          v-for="(item,index) in list"
+          v-for="(item, index) in list"
           :key="index">
           <image
             :src="item.url"
@@ -63,7 +63,7 @@
           <image
             class="image"
             src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png"
-            mode="aspectFill"/>
+            mode="aspectFill" />
           <text class="text">抖音</text>
         </uni-grid-item>
       </uni-grid>
@@ -106,44 +106,81 @@
             mode="aspectFill" />
           <text class="text">QQ</text>
         </uni-grid-item>
-        <uni-grid-item >
+        <uni-grid-item>
           <image
             class="image"
             src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png"
-            mode="aspectFill"/>
+            mode="aspectFill" />
           <text class="text">抖音</text>
         </uni-grid-item>
         <uni-grid-item>
           <image
             class="image"
             src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png"
-            mode="aspectFill"/>
+            mode="aspectFill" />
           <text class="text">百度</text>
         </uni-grid-item>
         <uni-grid-item>
           <image
             class="image"
             src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png"
-            mode="aspectFill"/>
+            mode="aspectFill" />
           <text class="text">支付宝</text>
         </uni-grid-item>
       </uni-grid>
     </view>
+
     <view class="example-title">矩形宫格（3列）</view>
     <view class="example-body">
       <uni-grid
         :column="3"
         :square="false"
-				:highlight="false"
+        :highlight="false"
         @change="change">
         <uni-grid-item
-          v-for="(item,index) in list"
+          v-for="(item, index) in list"
           :key="index">
           <image
             :src="item.url"
             class="image"
             mode="aspectFill" />
           <text class="text">{{ item.text }}</text>
+        </uni-grid-item>
+      </uni-grid>
+    </view>
+    <view class="example-title">边框颜色（4列）</view>
+    <view class="example-body">
+      <uni-grid
+        :column="4"
+        border-color="#03a9f4"
+        @change="change">
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png"
+            mode="aspectFill" />
+          <text class="text">新浪</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png"
+            mode="aspectFill" />
+          <text class="text">微信</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png"
+            mode="aspectFill" />
+          <text class="text">QQ</text>
+        </uni-grid-item>
+        <uni-grid-item>
+          <image
+            class="image"
+            src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png"
+            mode="aspectFill" />
+          <text class="text">抖音</text>
         </uni-grid-item>
       </uni-grid>
     </view>
@@ -158,33 +195,40 @@ export default {
         {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
           text: '新浪'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
           text: '微信'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
           text: 'QQ'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-4.png',
           text: '抖音'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
           text: '百度'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
           text: '支付宝'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
           text: '字节跳动'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
           text: '手机'
-        }, {
+        },
+        {
           url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-9.png',
           text: '工具'
         }
       ]
-
     }
   },
   methods: {

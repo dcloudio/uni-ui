@@ -36,11 +36,10 @@
           </template>
         </uni-collapse-item>
       </uni-collapse>
-      <button
-        class="button"
-        @click="onClick">动态添加一组数据，并更新高度</button>
     </view>
-
+    <button
+      class="button"
+      @click="onClick">动态添加一组数据，并更新高度</button>
     <view class="example-title">手风琴效果</view>
     <uni-collapse :accordion="true">
       <uni-collapse-item

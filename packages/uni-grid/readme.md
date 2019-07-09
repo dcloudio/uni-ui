@@ -77,12 +77,13 @@ export default {
 
 **uni-grid 属性说明：**
 
-|属性名		|类型		|默认值	|说明																	|
-|---		|----		|---	|---																	|
+|属性名		|类型		|默认值	|说明																		|
+|---		|----		|---	|---																		|
 |column		|Number		|3		|每列显示个数																|
 |showBorder	|Boolean	|true	|是否显示边框																|
-|hor		|Number		|0		|全局 marker 水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动			|
-|ver		|Number		|0		|全局 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动			|
+|borderColor|String		|#d0dee5|边框颜色																	|
+|hor		|Number		|0		|全局 marker 水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动		|
+|ver		|Number		|0		|全局 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动		|
 |square		|Boolean	|true	|是否方形显示																|
 |highlight	|Boolean	|true	|点击背景是否高亮															|
 |@change	|function	|		|点击 grid 触发，返回 event={detail:{index:0}},index 为当前点击 gird 下标	|
@@ -104,38 +105,16 @@ export default {
 Tips
 - marker:dot ， 暂不支持修改大小，和颜色
 - Grid 组件仅在自定义组件模式下支持
-
+- column 属性最大值最好不要超过 5 个，如果超过，注意内容显示
 
 
 ### 更新日志
 **1.1.0**
 - 新增 红点、数字角标、图片角标
+- 新增 可显示隐藏边框，修改边框颜色
 - 优化 内容改为插槽，提高定制性
 - 优化 （重要）组件代码重构，与之前代码不兼容，如需使用新功能，请替换当前最新组件
 
 
 **1.0.0**
 - 初始项目
-
-
-
-
-
-
-
-
-**uniGrid 属性说明：**
-
-|属性名|类型|默认值	|说明|
-|---|----|---|---|
-|options|Array&lt;Object&gt;|-|宫格布局数据，格式为：[{image:'xxx',text:'xxx'},{image:'xxx',text:'xxx'}]|
-|type|String|square|宫格的类型，可取值：square（正方形）/oblong（长方形）|
-|column-num|Number|3|每行有多少个|
-|show-out-border|Boolean|true|是否显示外边框|
-|show-border|Boolean|true|是否显示边框（如果为false，则show-out-border设置无效）|
-
-**uniGrid 事件说明：**
-
-|事件称名|说明|返回参数|
-|---|----|---|
-|click|点击 uniGrid 触发事件，返回参数为宫格下标|{index:Number}|

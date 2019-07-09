@@ -1,9 +1,10 @@
 <template>
   <view
-    :style="{ width: 100 / column + '%' }"
+    :style="{ width: width }"
     class="uni-grid-item">
     <view
       :class="{ border: showBorder, 'uni-grid-item__box-square': square, 'border-top': showBorder && index < column, 'uni-highlight': highlight }"
+      :style="{ 'border-color': borderColor }"
       class="uni-grid-item__box"
       @click="_onClick"
     >
@@ -98,7 +99,9 @@ export default {
       left: 0,
       top: 0,
       index: 0,
-      openNum: 2
+      openNum: 2,
+      width: 0,
+      borderColor: '#d0dee5'
     }
   },
   created () {
@@ -108,8 +111,23 @@ export default {
     this.highlight = this.grid.highlight
     this.top = this.hor === 0 ? this.grid.hor : this.hor
     this.left = this.ver === 0 ? this.grid.ver : this.ver
+    this.borderColor = this.grid.borderColor
     this.index = this.grid.index++
   },
+  // #ifdef H5
+  mounted () {
+    this.grid._getSize(width => {
+      this.width = width
+    })
+  },
+  // #endif
+  // #ifndef H5
+  onReady () {
+    this.grid._getSize(width => {
+      this.width = width
+    })
+  },
+  // #endif
   methods: {
     _onClick () {
       // console.log('点击', this.index);
@@ -125,7 +143,6 @@ export default {
 	&__box {
 		position: relative;
 		width: 100%;
-		// box-sizing: border-box;
 		// overflow: hidden;
 		&-item {
 			display: flex;
@@ -157,20 +174,21 @@ export default {
 		}
 		&.border {
 			position: relative;
-			// border-bottom: 1px #d0dee5 solid;
-			// border-right: 1px #d0dee5 solid;
+			box-sizing: border-box;
 			// box-shadow: 0 0 0 1px #d0dee5;
-			border-left: 1px #d0dee5 solid;
-			&::after {
-				content: '';
-				position: absolute;
-				top: 0%;
-				bottom: 0%;
-				left: 0%;
-				right: 0%;
-				border-right: 1px #d0dee5 solid;
-				border-bottom: 1px #d0dee5 solid;
-			}
+			// border-left: 1px #d0dee5 solid;
+			border-bottom: 1px #d0dee5 solid;
+			border-right: 1px #d0dee5 solid;
+			// &::after {
+			// 	content: '';
+			// 	position: absolute;
+			// 	top: 0%;
+			// 	bottom: 0%;
+			// 	left: 0%;
+			// 	right: 0%;
+			// 	border-right: 1px #d0dee5 solid;
+			// 	border-bottom: 1px #d0dee5 solid;
+			// }
 		}
 		&.border-top {
 			border-top: 1px #d0dee5 solid;
