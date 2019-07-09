@@ -4,5 +4,6 @@
 	"desc":"宫格",
 	"url":"grid",
 	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=27"
+	"path":"https://ext.dcloud.net.cn/plugin?id=27",
+	"compilation":"#ifndef MP-ALIPAY"
 }

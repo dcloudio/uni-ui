@@ -205,27 +205,27 @@ export default {
           text: 'QQ'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-4.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
           text: '抖音'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
           text: '百度'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
           text: '支付宝'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-9.png',
           text: '字节跳动'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-4.png',
           text: '手机'
         },
         {
-          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-9.png',
+          url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
           text: '工具'
         }
       ]
