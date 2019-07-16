@@ -3,6 +3,7 @@
 	"name":"Grid",
 	"desc":"宫格",
 	"url":"grid",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=27"
+	"edition":"1.1.0",
+	"path":"https://ext.dcloud.net.cn/plugin?id=27",
+	"update_log":"- 新增 红点、数字角标、图片角标 \n- 新增 可显示隐藏边框，修改边框颜色 \n- 优化 内容改为插槽，提高定制性 \n- 优化 （重要）组件代码重构，与之前代码不兼容，如需使用新功能，请替换当前最新组件"
 }

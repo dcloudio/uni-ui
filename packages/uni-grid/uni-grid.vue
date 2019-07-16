@@ -86,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .uni-grid {
 	display: flex;
 	flex-wrap: wrap;

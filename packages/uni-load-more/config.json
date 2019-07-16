@@ -4,5 +4,6 @@
 	"desc": "加载更多",
 	"url": "load-more",
 	"edition": "1.1.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=29"
+	"path": "https://ext.dcloud.net.cn/plugin?id=29",
+	"update_log":"修复 load 动画失效的问题"
 }

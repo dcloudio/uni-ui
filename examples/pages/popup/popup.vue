@@ -138,12 +138,6 @@ export default {
       ]
     }
   },
-  onBackPress () {
-    if (this.type !== '') {
-      this.type = ''
-      return true
-    }
-  },
   methods: {
     togglePopup (type, open) {
       switch (type) {

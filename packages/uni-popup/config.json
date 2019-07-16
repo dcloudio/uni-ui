@@ -3,6 +3,7 @@
 	"name":"PopUp",
 	"desc":"弹出层",
 	"url":"popup",
-	"edition":"1.1.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=329"
+	"edition":"1.1.1",
+	"path":"https://ext.dcloud.net.cn/plugin?id=329",
+	"update_log":"- 修复 图片不显示的问题"
 }

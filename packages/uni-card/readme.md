@@ -81,10 +81,10 @@ Tips
 
 |属性名|类型|默认值	|说明|
 |---|----|---|---|
-|title|String||标题文字|
-|extra|String||标题额外信息|
-|note|String||底部信息|
-|thumbnail|String||标题左侧缩略图|
+|title|String|-|标题文字|
+|extra|String|-|标题额外信息|
+|note|String|-|底部信息|
+|thumbnail|String|-|标题左侧缩略图|
 |mode|String|basic|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片|
 |is-full|Boolean|false|卡片内容是否通栏，为true时将去除padding值|
 |is-shadow|Boolean|false|卡片内容是否开启阴影|
@@ -97,6 +97,9 @@ Tips
 
 
 ### 更新日志
+**1.1.1**
+- 更新 readme
+
 **1.1.0**
 - 修复 v-for 循环，内容不显示的 bug。（需要 HBuilderX 开启自定义组件模式）
 - 添加图文卡片模式

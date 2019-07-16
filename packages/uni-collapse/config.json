@@ -4,5 +4,6 @@
 	"desc": "折叠面板",
 	"url": "collapse",
 	"edition": "1.1.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=23"
+	"path": "https://ext.dcloud.net.cn/plugin?id=23",
+    "update_log":"- 修复 在 v-for 循环中，组件报错的 bug \n- 修复 提供在动画模式下，动态渲染数据，高度不更新的解决方案"
 }
