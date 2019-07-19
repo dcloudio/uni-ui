@@ -129,8 +129,8 @@ Tips
 
 |属性名|类型|默认值|说明|
 |---|----|---|---|
-|title|String||标题文字|
-|thumb|String||标题左侧缩略图|
+|title|String|-|标题文字|
+|thumb|String|-|标题左侧缩略图|
 |disabled|Boolean|false|是否禁用|
 |open|Boolean|false|是否展开面板|
 |animation|String|false|开启动画|
@@ -139,6 +139,9 @@ Tips
 - 本组件需要使用自定义组件模式，非自定义组件使用，会出现问题。
 
 ### 更新日志
+**1.1.1**
+- 修复 依赖组件找不到的问题
+
 **1.1.0**
 - 修复 在 v-for 循环中，组件报错的 bug
 - 修复 提供在动画模式下，动态渲染数据，高度不更新的解决方案
