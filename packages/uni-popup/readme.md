@@ -26,14 +26,16 @@ export default {
 | ---		| ---		| ---	| ---															|
 | animation	| Boolean	|true	| 是否开启动画													|
 | type		| String	|center	| 弹出方式，可选值：top（顶部），center（居中），bottom（底部）	|
+| show		| Boolean	|false	| 显示弹窗	|
 | custom	| Boolean	|false	| 是否自定义内容												|
 | maskClick	| Boolean	|true	| 蒙版点击是否关闭弹窗											|
+| change	| function	|true	| 打开关闭弹窗触发											|
 
 
 **方法说明：**
 通过 `ref` 获取组件方法
 
-|事件称名	|说明		|
+|方法称名	|说明		|
 |---		|----		|
 |open		|打开弹出层	|
 |close		|关闭弹出层	|
@@ -61,7 +63,17 @@ export default {
 }
 ```
 
+Tips 
+- show 的作用与 open() 效果一致 ，在使用中显示弹窗二者只能选择其一。如果使用 show 显示弹窗，那么关闭弹窗时，应将 show 置为 false
+
 ### 更新日志
+**1.1.3**
+- 新增 打开关闭弹窗的回调事件
+
+**1.1.2**
+- 新增 显示弹窗属性
+- 修复 h5 取消导航栏，顶部空白问题
+
 **1.1.1**
 - 修复 图片不显示的问题
 

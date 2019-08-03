@@ -33,22 +33,24 @@
     </view>
     <uni-popup
       ref="popup"
-      :type="type">{{ content }}</uni-popup>
+      :type="type"
+      @change="change">{{ content }}</uni-popup>
     <uni-popup
-      ref="tip"
+      :show="show"
       :type="type"
       :custom="true"
-      :mask-click="false">
+      :mask-click="false"
+      @change="change">
       <view class="uni-tip">
         <view class="uni-tip-title">警告</view>
         <view class="uni-tip-content">这是一个通过自定义 popup，自由扩展的 警告弹窗。点击遮罩不会关闭弹窗。</view>
         <view class="uni-tip-group-button">
           <view
             class="uni-tip-button"
-            @click="cancel">取消</view>
+            @click="cancel('tip')">取消</view>
           <view
             class="uni-tip-button"
-            @click="cancel">确定</view>
+            @click="cancel('tip')">确定</view>
         </view>
       </view>
     </uni-popup>
@@ -57,11 +59,12 @@
       ref="image"
       :type="type"
       :custom="true"
-      :mask-click="false">
+      :mask-click="false"
+      @change="change">
       <view class="uni-image">
         <view
           class="uni-image-close"
-          @click="cancel"><uni-icon
+          @click="cancel('image')"><uni-icon
             type="clear"
             color="#fff"
             size="30" /></view>
@@ -75,7 +78,8 @@
     <uni-popup
       ref="share"
       :type="type"
-      :custom="true">
+      :custom="true"
+      @change="change">
       <view class="uni-share">
         <view class="uni-share-title">分享到</view>
         <view class="uni-share-content">
@@ -91,7 +95,7 @@
         </view>
         <view
           class="uni-share-btn"
-          @click="cancel">取消分享</view>
+          @click="cancel('share')">取消分享</view>
       </view>
     </uni-popup>
   </view>
@@ -101,6 +105,7 @@
 export default {
   data () {
     return {
+      show: false,
       type: '',
       list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
       content: '顶部弹 popup',
@@ -153,13 +158,21 @@ export default {
           break
       }
       this.type = type
-      this.$refs[open].open()
+      if (open === 'tip') {
+        this.show = true
+      } else {
+        this.$refs[open].open()
+      }
     },
-    cancel () {
-      console.log(1111)
-      this.$refs.tip.close()
-      this.$refs.share.close()
-      this.$refs.image.close()
+    cancel (type) {
+      if (type === 'tip') {
+        this.show = false
+        return
+      }
+      this.$refs[type].close()
+    },
+    change (e) {
+      console.log(e.show)
     }
   }
 }
