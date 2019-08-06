@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 	.cont {
 		height: 90upx;
 		line-height: 90upx;
