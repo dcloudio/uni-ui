@@ -124,6 +124,9 @@ export default {
       }
     },
     touchStart (event) {
+      if(!this.btnGroupWidth){
+			  this.getSize()
+		  }
       this.startTime = event.timeStamp
       this.startX = event.touches[0].pageX
       this.startY = event.touches[0].pageY
