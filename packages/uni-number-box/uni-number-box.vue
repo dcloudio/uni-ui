@@ -72,9 +72,17 @@ export default {
       } else if (type === 'plus') {
         value += step
       }
-      if (value < this.min || value > this.max) {
-        return
+      // Fix the init value out of range can't minus or plus issue
+      //if (value < this.min || value > this.max) {
+      //  return
+      //}
+      if ("minus" === type && value < this.min) {
+        return;
+      } 
+      if ("plus" === type && value > this.max) {
+        return;
       }
+      // End of fix
       this.inputValue = value / scale
     },
     _getDecimalScale () {
