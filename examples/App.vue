@@ -51,8 +51,7 @@ view {
 	top: 0;
 	bottom: 0;
 	width: 6upx;
-	height: 30upx;
-	border-radius: 5upx;
+	height: 32upx;
 	background-color: #CCCCCC;
 }
 .example .example-title {
