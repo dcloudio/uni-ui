@@ -39,8 +39,9 @@
     }
   },
   "quickapp": {},
-  "mp-weixin": {
+  "mp-weixin": { 
     "appid": "",
+    "usingComponents" : true,
     "setting": {
       "urlCheck": true
     }
