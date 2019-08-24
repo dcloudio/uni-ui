@@ -45,11 +45,7 @@
 </template>
 
 <script>
-  import uniPagination from '@/components/uni-pagination/uni-pagination.vue'
 export default {
-  components:{
-    uniPagination
-  },
   data () {
     return {
       current: 1,

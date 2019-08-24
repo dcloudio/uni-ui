@@ -247,6 +247,8 @@ $uni-border-color-light: #ebedf0; //较浅的灰色，如steps时间轴的颜色
 		&.uni-steps-process {
 			.uni-steps-item-circle-container {
 				bottom: 3px;
+        height: 14px;
+        line-height: 14px;
 				display: flex;
 			}
 		}

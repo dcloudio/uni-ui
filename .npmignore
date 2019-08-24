@@ -1,8 +1,12 @@
 node_modules/
+dist/
+build/
 public/
 src/
 .gitignore
 babel.config.js
 postcss.config.js
 package-lock.json
+postcss.config.js
 README.md
+yarn.lock

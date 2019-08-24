@@ -236,7 +236,7 @@ export default {
 
 	&--show {
 		position: relative;
-		z-index: 1000;
+		z-index: 999;
 	}
 
 	&--btn {
@@ -254,7 +254,7 @@ export default {
 		display: block;
 		opacity: 0;
 		position: fixed;
-		z-index: 999;
+		z-index: 998;
 		top: 0;
 		left: 0;
 		width: 100%;

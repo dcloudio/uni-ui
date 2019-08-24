@@ -1,9 +1,12 @@
 import Vue from 'vue'
+import UniUI from '../lib'
 import App from './App'
-import uniUi from '../lib'
+
 Vue.config.productionTip = false
-Vue.use(uniUi)
+
 App.mpType = 'app'
+
+Vue.use(UniUI)
 
 const app = new Vue({
   ...App
