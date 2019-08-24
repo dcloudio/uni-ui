@@ -8,6 +8,17 @@
       <view
         v-for="(item,index) in info"
         :style="{
+        'width': (index === current? dots.width*2:dots.width ) + 'px','height':dots.height/4 +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
+        :key="index"
+        class="uni-swiper__dots-item uni-swiper__dots-bar"/>
+    </view>
+    <view
+      v-if="mode === 'round'"
+      :style="{'bottom':dots.bottom + 'px'}"
+      class="uni-swiper__dots-box">
+      <view
+        v-for="(item,index) in info"
+        :style="{
         'width': dots.width + 'px','height':dots.height +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
         :key="index"
         class="uni-swiper__dots-item"/>
@@ -127,7 +138,7 @@ export default {
 
 	.uni-swiper__dots-box {
 		position: absolute;
-		bottom: 20upx;
+		bottom: 20rpx;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -137,9 +148,9 @@ export default {
 
 	.uni-swiper__dots-item {
 		flex-shrink: 0;
-		width: 16upx;
+		width: 16rpx;
 		border-radius: 50%;
-		margin-left: 12upx;
+		margin-left: 12rpx;
 		background: rgba(0, 0, 0, .3);
 		transition: all 0.2s linear;
 	}
@@ -153,12 +164,16 @@ export default {
 	}
 
 	.uni-swiper__dots-long {
-		border-radius: 100upx;
+		border-radius: 100rpx;
 	}
+
+  .uni-swiper__dots-bar {
+    border-radius: 100rpx;
+  }
 
 	.uni-swiper__dots-nav {
 		bottom: 0;
-		height: 80upx;
+		height: 80rpx;
 		justify-content: flex-start;
 		background: rgba(0, 0, 0, 0.2);
 		box-sizing: box-sizing;
@@ -169,10 +184,10 @@ export default {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 28upx;
+		font-size: 28rpx;
 		color: #fff;
 		box-sizing: box-sizing;
-		margin: 0 30upx;
+		margin: 0 30rpx;
 	}
 
 	.uni-swiper__dots-indexes {
@@ -180,6 +195,6 @@ export default {
 		justify-content: center;
 		align-items: center;
 		color: #fff;
-		font-size: 24upx;
+		font-size: 24rpx;
 	}
 </style>
