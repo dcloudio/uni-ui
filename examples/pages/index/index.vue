@@ -70,7 +70,7 @@ export default {
           url: 'tag'
         }
       ],
-      functionals:[
+      functionals: [
         {
           name: 'Calendar 日历',
           url: 'calendar'
@@ -124,11 +124,11 @@ export default {
           url: 'swipe-action'
         }
       ],
-      navigations:[
+      navigations: [
         {
           name: 'NavBar 导航栏',
           url: 'nav-bar'
-        },
+        }
       ]
     }
   },
