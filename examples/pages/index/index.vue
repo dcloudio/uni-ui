@@ -6,12 +6,24 @@
       :key="index"
       :title="layout.name"
       @click="goDetailPage(layout)" /></uni-list>
-    <view class="example-title">视图组件</view>
+    <view class="example-title">基础组件</view>
     <uni-list><uni-list-item
       v-for="(view, index) in views"
       :key="index"
       :title="view.name"
       @click="goDetailPage(view)" /></uni-list>
+    <view class="example-title">功能组件</view>
+    <uni-list><uni-list-item
+      v-for="(func, index) in functionals"
+      :key="index"
+      :title="func.name"
+      @click="goDetailPage(func)" /></uni-list>
+    <view class="example-title">导航</view>
+    <uni-list><uni-list-item
+      v-for="(navi, index) in navigations"
+      :key="index"
+      :title="navi.name"
+      @click="goDetailPage(navi)" /></uni-list>
   </view>
 </template>
 <script>
@@ -24,6 +36,42 @@ export default {
           url: 'card'
         },
         {
+          name: 'Grid 宫格',
+          url: 'grid'
+        },
+        {
+          name: 'List 列表',
+          url: 'list'
+        }
+      ],
+      views: [
+        {
+          name: 'Badge 数字角标',
+          url: 'badge'
+        },
+        {
+          name: 'Fab 悬浮按钮',
+          url: 'fab'
+        },
+        {
+          name: 'Icon 图标',
+          url: 'icon'
+        },
+        {
+          name: 'NoticeBar 通告栏',
+          url: 'notice-bar'
+        },
+        {
+          name: 'NumberBox 数字输入框',
+          url: 'number-box'
+        },
+        {
+          name: 'Tag 标签',
+          url: 'tag'
+        }
+      ],
+      functionals:[
+        {
           name: 'Calendar 日历',
           url: 'calendar'
         },
@@ -34,18 +82,6 @@ export default {
         {
           name: 'Drawer 抽屉',
           url: 'drawer'
-        },
-        {
-          name: 'Grid 宫格',
-          url: 'grid'
-        },
-        {
-          name: 'List 列表',
-          url: 'list'
-        },
-        {
-          name: 'NavBar 导航栏',
-          url: 'nav-bar'
         },
         {
           name: 'Pagination 分页器',
@@ -64,26 +100,16 @@ export default {
           url: 'segmented-control'
         },
         {
-          name: 'SwipeAction 滑动操作',
-          url: 'swipe-action'
-        }
-      ],
-      views: [
-        {
-          name: 'Badge 数字角标',
-          url: 'badge'
-        },
-        {
           name: 'CountDown 倒计时',
           url: 'count-down'
         },
         {
-          name: 'Fab 悬浮按钮',
-          url: 'fab'
+          name: 'Rate 评分',
+          url: 'rate'
         },
         {
-          name: 'Icon 图标',
-          url: 'icon'
+          name: 'Popup 弹出层',
+          url: 'popup'
         },
         {
           name: 'IndexedList 索引列表',
@@ -94,25 +120,15 @@ export default {
           url: 'load-more'
         },
         {
-          name: 'NoticeBar 通告栏',
-          url: 'notice-bar'
-        },
-        {
-          name: 'NumberBox 数字输入框',
-          url: 'number-box'
-        },
-        {
-          name: 'Popup 弹出层',
-          url: 'popup'
-        },
-        {
-          name: 'Rate 评分',
-          url: 'rate'
-        },
-        {
-          name: 'Tag 标签',
-          url: 'tag'
+          name: 'SwipeAction 滑动操作',
+          url: 'swipe-action'
         }
+      ],
+      navigations:[
+        {
+          name: 'NavBar 导航栏',
+          url: 'nav-bar'
+        },
       ]
     }
   },
