@@ -16,7 +16,7 @@ export default {
 在 ``template`` 中使用组件
 
 ```html
-<uni-load-more :loadingType="1"></uni-load-more>
+<uni-load-more :status="1"></uni-load-more>
 ```
 
 实际效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
