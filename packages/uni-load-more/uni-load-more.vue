@@ -59,7 +59,7 @@ export default {
   name: 'UniLoadMore',
   props: {
     status: {
-      // 上拉的状态：more-loading前；loading-loading中；noMore-没有更多了
+      // 上拉的状态：加载前: more ;  加载中: loading ; 没有更多: noMore
       type: String,
       default: 'more'
     },
