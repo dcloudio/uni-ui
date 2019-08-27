@@ -151,6 +151,12 @@
 			}
 		},
 		{
+			"path": "pages/search-bar/search-bar",
+			"style": {
+				"navigationBarTitleText": "SearchBar 搜索栏"
+			}
+		},
+		{
 			"path": "pages/calendar/calendar",
 			"style": {
 				"navigationBarTitleText": "Calendar 日历"

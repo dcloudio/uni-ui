@@ -122,6 +122,10 @@ export default {
         {
           name: 'SwipeAction 滑动操作',
           url: 'swipe-action'
+        },
+        {
+          name: 'SearchBar 搜索栏',
+          url: 'search-bar'
         }
       ],
       navigations: [
