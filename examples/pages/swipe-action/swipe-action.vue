@@ -18,10 +18,9 @@
     </view>
     <uni-swipe-action
       :options="options2"
-      :is-opened="isOpened"
-      :auto-close="true"
-      @opened="bindOpened"
-      @closed="bindClosed">
+      :show="isOpened"
+      :auto-close="false"
+      @change="change">
       <view class="cont">使用变量控制SwipeAction的开启状态</view>
     </uni-swipe-action>
     <view class="example-title">与 List 组件一起使用</view>
@@ -30,17 +29,17 @@
       <uni-swipe-action :options="options1">
         <uni-list-item
           :show-arrow="false"
-          title="item1"/>
+          title="item1" />
       </uni-swipe-action>
       <uni-swipe-action :options="options2">
         <uni-list-item
           :show-arrow="false"
-          title="item2"/>
+          title="item2" />
       </uni-swipe-action>
       <uni-swipe-action :options="options3">
         <uni-list-item
           :show-arrow="false"
-          title="item3"/>
+          title="item3" />
       </uni-swipe-action>
     </uni-list>
     <!-- #endif -->
@@ -49,17 +48,17 @@
       <uni-swipe-action :options="options1">
         <uni-list-item
           :show-arrow="false"
-          title="item1"/>
+          title="item1" />
       </uni-swipe-action>
       <uni-swipe-action :options="options2">
         <uni-list-item
           :show-arrow="false"
-          title="item2"/>
+          title="item2" />
       </uni-swipe-action>
       <uni-swipe-action :options="options3">
         <uni-list-item
           :show-arrow="false"
-          title="item3"/>
+          title="item3" />
       </uni-swipe-action>
     </view>
     <!-- #endif -->
@@ -70,7 +69,7 @@
 export default {
   data () {
     return {
-      isOpened: false,
+      isOpened: true,
       options1: [{
         text: '取消置顶'
       }],
@@ -101,63 +100,64 @@ export default {
     }
   },
   methods: {
-    bindClick (value) {
+    bindClick (e) {
+      console.log(e)
       uni.showToast({
-        title: `点击了${value.text}按钮`,
+        title: `点击了${e.content.text}按钮`,
         icon: 'none'
       })
     },
     setOpened () {
       this.isOpened = !this.isOpened
     },
-    bindOpened () {
-      this.isOpened = true
-    },
-    bindClosed () {
-      this.isOpened = false
+    change (e) {
+      this.isOpened = e
     }
   }
 }
 </script>
 
 <style>
-	.cont {
-		height: 90upx;
-		line-height: 90upx;
-		padding: 0 30upx;
-		position: relative;
-	}
+  .cont {
+    height: 90upx;
+    line-height: 90upx;
+    padding: 0 30upx;
+    position: relative;
+    background: #fff;
+  }
 
-	.cont::before {
-		position: absolute;
-		z-index: 3;
-		left: 0;
-		right: 0;
-		top: 0;
-		height: 1px;
-		content: '';
-		transform: scaleY(0.5);
-		background-color: $uni-border-color;
-	}
+  .cont::before {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    content: '';
+    transform: scaleY(0.5);
+    background-color: $uni-border-color;
+  }
 
-	.cont::after {
-		position: absolute;
-		z-index: 3;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		height: 1px;
-		content: '';
-		transform: scaleY(0.5);
-		background-color: $uni-border-color;
-	}
-	.example-body {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		padding: 20upx 0;
-	}
-	/* .button-view {
+  .cont::after {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    content: '';
+    transform: scaleY(0.5);
+    background-color: $uni-border-color;
+  }
+
+  .example-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20upx 0;
+  }
+
+  /* .button-view {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
@@ -165,9 +165,9 @@ export default {
 		background: #fff;
 	} */
 
-	.button {
-		border: 1px solid #E7E7E7;
-		padding: 8upx 16upx;
-		border-radius: 8upx;
-	}
+  .button {
+    border: 1px solid #E7E7E7;
+    padding: 8upx 16upx;
+    border-radius: 8upx;
+  }
 </style>

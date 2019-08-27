@@ -62,7 +62,7 @@
                 src="http://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/run1x7.png"/>
             </view>
             <view class="content-box">
-             uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。 即使不跨端，uni-app同时也是更好的小程序开发框架。
+              uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。 即使不跨端，uni-app同时也是更好的小程序开发框架。
             </view>
           </view>
           <template v-slot:footer>
