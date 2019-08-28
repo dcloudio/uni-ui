@@ -15,7 +15,7 @@
         v-for="(item,index) in iconClassList"
         :key="index"
         class="icon-item">
-        <uni-icon
+        <uni-icons
           :type="item.name"
           :color="activeIndex === index?'#007aff':'#8f8f94'"
           size="40"

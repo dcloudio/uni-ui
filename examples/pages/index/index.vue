@@ -132,6 +132,10 @@ export default {
         {
           name: 'NavBar 导航栏',
           url: 'nav-bar'
+        },
+        {
+          name: 'GoodsNav 商品导航',
+          url: 'goods-nav'
         }
       ]
     }

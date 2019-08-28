@@ -182,6 +182,12 @@
 			"style": {
 				"navigationBarTitleText": "Fab 悬浮按钮"
 			}
+		},
+		{
+			"path": "pages/goods-nav/goods-nav",
+			"style": {
+				"navigationBarTitleText": "GoodsNav 商品导航"
+			}
 		}
 	],
 	"globalStyle": {
