@@ -26,7 +26,7 @@
               <view
                 v-if="showSelect"
                 style="margin-right: 20upx;">
-                <uni-icon
+                <uni-icons
                   :type="item.checked ? 'checkbox-filled' : 'circle'"
                   :color="item.checked ? '#007aff' : '#aaa'"
                   size="24" />
@@ -61,11 +61,11 @@
   </view>
 </template>
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniIndexedList',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     options: {

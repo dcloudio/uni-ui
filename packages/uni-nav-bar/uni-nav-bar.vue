@@ -15,7 +15,7 @@
           <view
             v-if="leftIcon.length"
             class="uni-navbar__content_view">
-            <uni-icon
+            <uni-icons
               :type="leftIcon"
               :color="color"
               size="24"/>
@@ -39,7 +39,7 @@
           <view
             v-if="rightIcon.length"
             class="uni-navbar__content_view">
-            <uni-icon
+            <uni-icons
               :type="rightIcon"
               :color="color"
               size="24"/>
@@ -63,13 +63,13 @@
 
 <script>
 import uniStatusBar from '../uni-status-bar/uni-status-bar.vue'
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 
 export default {
   name: 'UniNavBar',
   components: {
     uniStatusBar,
-    uniIcon
+    uniIcons
   },
   props: {
     title: {

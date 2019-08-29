@@ -1,54 +1,62 @@
 <template>
-	<view>
+  <view>
     <!-- 底部占位 -->
-		<view class="uni-tab__seat"></view>
-		<view class="uni-tab__cart-box flex">
-			<view class="flex uni-tab__cart-sub-box">
-				<view class="flex uni-tab__cart-button-left">
-					<!-- <text class="iconfont icon-kefu"></text> -->
-          <uni-icons type="contact" color="#333"></uni-icons>
-					<text class="uni-tab__text">客服</text>
-				</view>
-				<view class="flex uni-tab__cart-button-left">
-					<!-- <text class="iconfont icon-dianpu"></text> -->
-          <uni-icons type="contact" color="#333"></uni-icons>
-					<text class="uni-tab__text">店铺</text>
-				</view>
-				<view class="flex uni-tab__cart-button-left uni-tab__shop-cart">
-					<!-- <text class="iconfont icon-gouwuche"></text> -->
-          <uni-icons type="contact" color="#333"></uni-icons>
-					<text class="uni-tab__text">购物车</text>
-					<view class="flex uni-tab__dot-box">
-						<view v-if="amount" class="uni-tab__dot " :class="{ 'uni-tab__dots': amount > 9 }">
-							{{ amount }}
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="flex uni-tab__cart-sub-box uni-tab__right">
-				<view class="flex uni-tab__cart-button-right uni-tab__color-r" @click="add">加入购物车</view>
+    <view class="uni-tab__seat"/>
+    <view class="uni-tab__cart-box flex">
+      <view class="flex uni-tab__cart-sub-box">
+        <view v-for="(item,index) in options" :key="index" class="flex uni-tab__cart-button-left uni-tab__shop-cart">
+          <view class="uni-tab__icon">
+            <image :src="item.icon" mode="widthFix"></image>
+          </view>
+          <text class="uni-tab__text">{{item.text}}</text>
+          <view class="flex uni-tab__dot-box">
+            <view
+              v-if="item.info"
+              :class="{ 'uni-tab__dots': item.info > 9 }"
+              class="uni-tab__dot ">
+              {{ item.info }}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="flex uni-tab__cart-sub-box uni-tab__right">
+        <view v-for="(item,index) in buttonGroup" :key="index"
+          class="flex uni-tab__cart-button-right"
+          :style="{backgroundColor:item.backgroundColor,color:item.color}"
+          @click="add(index,item)">{{item.text}}</view>
 
-				<view class="flex uni-tab__cart-button-right uni-tab__color-y ">立即购买</view>
-			</view>
-		</view>
-	</view>
+        <!-- <view class="flex uni-tab__cart-button-right uni-tab__color-y ">立即购买</view> -->
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
 export default {
-  name:'uniGoodsNav',
-	props: {
-		amount: {
-			type: Number,
-			default: 0
-		}
-	},
-	methods: {
-		add() {
-      this.$emit('add')
-		}
-	}
-};
+  name: 'UniGoodsNav',
+  props: {
+    options: {
+      type: Array,
+      default(){
+        return []
+      }
+    },
+    buttonGroup:{
+      type: Array,
+      default(){
+        return []
+      }
+    }
+  },
+  methods: {
+    add (index,item) {
+      this.$emit('add',{
+        index,
+        content:item
+      })
+    }
+  }
+}
 </script>
 
 <style>
@@ -87,12 +95,19 @@ export default {
 	width: 100%;
 	font-size: 12px;
 }
-.uni-tab__cart-button-left .iconfont {
-	font-size: 38upx;
-	color: #666;
+
+.uni-tab__icon {
+  width: 20px;
+  height: 20px;
 }
+.uni-tab__icon image {
+  width: 100%;
+  height: 100%;
+}
+
 .uni-tab__cart-button-left .uni-tab__text {
 	margin-top: 5upx;
+  font-size: 12px;
 	color: #666;
 }
 .uni-tab__cart-button-right {

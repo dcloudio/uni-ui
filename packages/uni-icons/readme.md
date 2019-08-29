@@ -1,22 +1,22 @@
 ### Icon 图标
 
-用于展示 icon，组件名：``uni-icon``，代码块： uIcon。
+用于展示 icon，组件名：``uni-icons``，代码块： uIcon。
 
 **使用方式：**
 
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniIcon from "@/components/uni-icon/index.vue"
+import uniIcons from "@/components/uni-icons/index.vue"
 export default {
-    components: {uniIcon}
+    components: {uniIcons}
 }
 ```
 
 在 ``template`` 中使用组件
 
 ```html
-<uni-icon type="contact" size="30"></uni-icon>
+<uni-icons type="contact" size="30"></uni-icons>
 ```
 
 **Icon 属性说明：**

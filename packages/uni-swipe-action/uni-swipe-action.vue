@@ -187,7 +187,7 @@ export default {
     getSelectorQuery () {
       const views = uni.createSelectorQuery()
       // #ifndef MP-ALIPAY
-      .in(this)
+        .in(this)
       // #endif
       views
         .selectAll('.selector-query-hock')

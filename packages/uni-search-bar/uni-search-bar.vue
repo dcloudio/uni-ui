@@ -7,7 +7,7 @@
         :style="{borderRadius:radius+'rpx'}"
         class="uni-searchbar-form__box"
       >
-        <uni-icon
+        <uni-icons
           :color="'#999999'"
           class="icon-search"
           type="search"
@@ -21,7 +21,7 @@
           placeholder-style="color:#cccccc"
           confirm-type="search"
           @confirm="confirm">
-        <uni-icon
+        <uni-icons
           :color="'#999999'"
           class="icon-clear"
           type="clear"
@@ -32,7 +32,7 @@
         :style="{borderRadius:radius+'rpx'}"
         class="uni-searchbar-form__text"
         @click="searchClick">
-        <uni-icon
+        <uni-icons
           :color="'#999999'"
           class="icon-search"
           type="search"
@@ -47,11 +47,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniSearchBar',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     placeholder: {
