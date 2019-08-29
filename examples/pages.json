@@ -184,6 +184,12 @@
 			}
 		},
 		{
+			"path": "pages/fav/fav",
+			"style": {
+				"navigationBarTitleText": "Fav 收藏按钮"
+			}
+		},
+		{
 			"path": "pages/goods-nav/goods-nav",
 			"style": {
 				"navigationBarTitleText": "GoodsNav 商品导航"
