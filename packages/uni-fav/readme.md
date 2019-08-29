@@ -24,16 +24,16 @@ export default {
 
 **属性说明：**
 
-|属性名		|类型	|默认值					|说明				|
-|---		|----	|---					|---																											|
-|star		|Boolean	|true						|按钮是否带星星																										|
-|bgColor		|String	|#eeeeee|未收藏时的背景色					|
-|bgColorChecked		|String	|#007aff|已收藏时的背景色|
-|fgColor	|String|#666666	|未收藏时的文字颜色|
-|fgColorChecked	|String|#FFFFFF	|已收藏时的文字颜色|
-|circle 	|Boolean|false |是否为圆角|
-|checked 	|Boolean|false |是否为已收藏|
-|contentText 	|Object|```{contentDefault: '收藏',contentFav: '已收藏'}``` |收藏按钮文字|
+|属性名						|类型		|默认值																							|说明								|
+|---							|----		|---																								|---								|
+|star							|Boolean|true																								|按钮是否带星星			|
+|bg-color					|String	|#eeeeee																						|未收藏时的背景色		|
+|bg-color-checked	|String	|#007aff																						|已收藏时的背景色		|
+|fg-color					|String	|#666666																						|未收藏时的文字颜色	|
+|fg-color-checked	|String	|#FFFFFF																						|已收藏时的文字颜色	|
+|circle						|Boolean|false																							|是否为圆角					|
+|checked					|Boolean|false																							|是否为已收藏				|
+|content-text			|Object	|```{contentDefault: '收藏',contentFav: '已收藏'}```|收藏按钮文字				|
 
 
 **事件说明：**
