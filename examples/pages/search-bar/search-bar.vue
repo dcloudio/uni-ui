@@ -11,11 +11,11 @@
         当前输入为：{{ searchVal }}
       </view>
       <uni-search-bar
-        placeholder="自定placeholder"
+        placeholder="自定义placeholder"
         @confirm="search"/>
       <uni-search-bar
-        :radius="100"
-        placeholder="自定圆角"
+        radius="100"
+        placeholder="自定义圆角"
         @confirm="search"/>
     </view>
   </view>

@@ -59,7 +59,7 @@ export default {
       default: '搜索'
     },
     radius: {
-      type: Number,
+      type: [Number, String],
       default: 10
     }
   },
@@ -120,6 +120,7 @@ export default {
         }
         .search-input{
           flex: 1;
+          font-size: 28rpx;
           height: $uni-searbar-height;
           line-height: $uni-searbar-height;
           color: #333333;
@@ -148,6 +149,7 @@ export default {
         }
         .placeholder{
           display: inline-block;
+          font-size: 28rpx;
           color: #cccccc;
           margin-left: 10rpx;
         }

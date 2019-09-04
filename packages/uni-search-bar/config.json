@@ -3,6 +3,6 @@
 	"name":"SearchBar",
 	"desc":"搜索栏",
 	"url":"search-bar",
-	"edition":"1.0.0",
+	"edition":"0.0.1",
 	"path":""
 }

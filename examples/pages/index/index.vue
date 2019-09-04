@@ -58,6 +58,10 @@ export default {
           url: 'fab'
         },
         {
+          name: 'Fav 收藏按钮',
+          url: 'fav'
+        },
+        {
           name: 'Icon 图标',
           url: 'icon'
         },
