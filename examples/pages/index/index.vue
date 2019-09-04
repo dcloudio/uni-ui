@@ -42,6 +42,10 @@ export default {
         {
           name: 'List 列表',
           url: 'list'
+        },
+        {
+          name: 'Title 标题栏',
+          url: 'title'
         }
       ],
       views: [

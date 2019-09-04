@@ -12,7 +12,7 @@
           <view class="uni-tab__icon">
             <image
               :src="item.icon"
-              mode="widthFix"/></image>
+              mode="widthFix"/>
           </view>
           <text class="uni-tab__text">{{ item.text }}</text>
           <view class="flex uni-tab__dot-box">
@@ -86,6 +86,9 @@ export default {
       })
     },
     buttonClick (index, item) {
+      if (uni.report) {
+        uni.report(item.text, item.text)
+      }
       this.$emit('buttonClick', {
         index,
         content: item
@@ -102,7 +105,7 @@ export default {
 
   .uni-tab__cart-box {
     width: 100%;
-    height: 100upx;
+    height: 100rpx;
     background: #fff;
     z-index: 900;
   }
@@ -125,12 +128,12 @@ export default {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    font-size: 12px;
+    font-size: 24rpx;
   }
 
   .uni-tab__icon {
-    width: 20px;
-    height: 20px;
+    width: 40rpx;
+    height: 40rpx;
   }
 
   .uni-tab__icon image {
@@ -139,8 +142,8 @@ export default {
   }
 
   .uni-tab__cart-button-left .uni-tab__text {
-    margin-top: 5upx;
-    font-size: 12px;
+    margin-top: 5rpx;
+    font-size: 24rpx;
     color: #666;
   }
 
@@ -148,7 +151,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    font-size: 12upx;
+    font-size: 24rpx;
     color: #fff;
   }
 
@@ -158,8 +161,8 @@ export default {
 
   .uni-tab__cart-button-left .uni-tab__dot-box {
     position: absolute;
-    right: 40upx;
-    top: 20upx;
+    right: 40rpx;
+    top: 20rpx;
     justify-content: center;
     align-items: center;
     width: 0;
@@ -168,9 +171,9 @@ export default {
 
   .uni-tab__dot-box .uni-tab__dot {
     flex-shrink: 0;
-    width: 30upx;
-    height: 30upx;
-    line-height: 30upx;
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 30rpx;
     color: #ffffff;
     text-align: center;
     font-size: 12px;
@@ -179,9 +182,9 @@ export default {
   }
 
   .uni-tab__dot-box .uni-tab__dot.uni-tab__dots {
-    padding: 0 8upx;
+    padding: 0 8rpx;
     width: auto;
-    border-radius: 30upx;
+    border-radius: 30rpx;
   }
 
   .uni-tab__color-y {

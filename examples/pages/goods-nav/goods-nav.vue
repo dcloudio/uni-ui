@@ -64,6 +64,7 @@ export default {
     },
     buttonClick (e) {
       console.log(e)
+     
       this.options[2].info++
     }
   }

@@ -188,6 +188,12 @@
 			"style": {
 				"navigationBarTitleText": "GoodsNav 商品导航"
 			}
+		},
+		{
+			"path": "pages/title/title", 
+			"style": {
+				"navigationBarTitleText": "Title 标题栏"
+			}
 		}
 	],
 	"globalStyle": {
