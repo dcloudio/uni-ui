@@ -76,8 +76,6 @@ export default {
   .uni-fav {
     display: inline-block;
     width: 120rpx;
-    height: 50rpx;
-    line-height: 50rpx;
     text-align: center;
     font-size: 28rpx;
     box-sizing: border-box;
@@ -86,15 +84,16 @@ export default {
       border-radius: 60rpx;
     }
     &-star {
-      display: inline-block;
-      line-height: 50rpx;
+			height: 50rpx;
+			line-height: 50rpx;
       margin-right: 5rpx;
-      &:after {
-        vertical-align: middle;
-      }
+			vertical-align: middle;
     }
-    &-text {
-      display: inline-block;
-    }
+		&-text{
+			display: inline-block;
+			height: 50rpx;
+			line-height: 50rpx;
+			vertical-align: middle;
+		}
   }
 </style>
