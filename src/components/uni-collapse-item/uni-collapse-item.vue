@@ -23,10 +23,9 @@
       </view>
     </view>
     <view
-      :class="{ 'uni-collapse-cell--animation': showAnimation === true }"
       :style="{ height: isOpen ? height : '0px' }"
       class="uni-collapse-cell__content">
-      <view :id="elId">
+      <view :id="elId" :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
         <slot />
       </view>
     </view>
@@ -214,7 +213,7 @@ $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 			transform-origin: center center;
 
 			&.uni-active {
-				transform: rotate(-180deg);
+				transform: rotate(180deg);
 			}
 		}
 
