@@ -3,13 +3,13 @@
     <view class="example-info">图标组件方便用户在设计页面的时候，减少小图片的使用。可方便自定义图标单色、尺寸</view>
     <view class="example-title"><text>基础图标</text>
       <view class="uni-right">
-        <text>显示{{checked?' unicode':'图标名'}}</text>
-        <switch class="switch" :checked="checked" @change="change" />
+        <text>显示{{ checked?' unicode':'图标名' }}</text>
+        <switch :checked="checked" class="switch" @change="change" />
       </view>
     </view>
     <view class="example-body">
       <view v-for="(item,index) in iconClassList" :key="index" class="icon-item">
-        <uni-icon :type="item.name" :color="activeIndex === index?'#007aff':'#8f8f94'" size="40" @click="switchActive(index)" />
+        <uni-icons :type="item.name" :color="activeIndex === index?'#007aff':'#8f8f94'" size="40" @click="switchActive(index)" />
         <text :style="{color:activeIndex === index?'#007aff':'#8f8f94'}">{{ checked? item.unicode: item.name }}</text>
       </view>
     </view>
@@ -17,7 +17,11 @@
 </template>
 
 <script>
+  import uniIcons from '@/components/uni-icons/uni-icons.vue'
   export default {
+    components: {
+      uniIcons
+    },
     data() {
       return {
         iconClassList: [{
@@ -377,20 +381,24 @@
   .example-title {
     padding-right: 5px;
   }
+
   .example-body {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
   }
+
   .uni-right {
     display: flex;
     align-items: center;
     color: #666;
   }
+
   .switch {
     transform: scale(0.8);
     margin-left: 5px;
   }
+
   .icon-item {
     display: flex;
     flex-direction: column;

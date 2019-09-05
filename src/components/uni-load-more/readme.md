@@ -16,7 +16,7 @@ export default {
 在 ``template`` 中使用组件
 
 ```html
-<uni-load-more :loadingType="1"></uni-load-more>
+<uni-load-more :status="more"></uni-load-more>
 ```
 
 实际效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
@@ -31,6 +31,9 @@ export default {
 |content-text	|Object	|```{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}```|各状态文字说明|
 
 ### 更新日志
+**1.1.1**
+- 根据不同平台使用不同加载动画
+
 **1.1.0**
 - 修复 load 动画失效的问题
 

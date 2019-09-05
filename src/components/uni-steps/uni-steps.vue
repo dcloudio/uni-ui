@@ -21,7 +21,7 @@
             v-if="index !== active"
             :style="{ backgroundColor: index < active ? activeColor : '' }"
             class="uni-steps-item-circle" />
-          <uni-icon
+          <uni-icons
             v-else
             :color="activeColor"
             type="checkbox-filled"
@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniSteps',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     direction: {

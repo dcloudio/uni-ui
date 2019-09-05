@@ -151,6 +151,12 @@
 			}
 		},
 		{
+			"path": "pages/search-bar/search-bar",
+			"style": {
+				"navigationBarTitleText": "SearchBar 搜索栏"
+			}
+		},
+		{
 			"path": "pages/calendar/calendar",
 			"style": {
 				"navigationBarTitleText": "Calendar 日历"
@@ -175,6 +181,24 @@
 			"path": "pages/fab/fab",
 			"style": {
 				"navigationBarTitleText": "Fab 悬浮按钮"
+			}
+		},
+		{
+			"path": "pages/fav/fav",
+			"style": {
+				"navigationBarTitleText": "Fav 收藏按钮"
+			}
+		},
+		{
+			"path": "pages/goods-nav/goods-nav",
+			"style": {
+				"navigationBarTitleText": "GoodsNav 商品导航"
+			}
+		},
+		{
+			"path": "pages/title/title", 
+			"style": {
+				"navigationBarTitleText": "Title 标题栏"
 			}
 		}
 	],

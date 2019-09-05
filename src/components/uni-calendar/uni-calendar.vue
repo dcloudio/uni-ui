@@ -65,7 +65,7 @@
 
 <script>
 import CALENDAR from './calendar.js'
-import uniCalendarItem from './uni-calendar-item'
+import uniCalendarItem from './uni-calendar-item.vue'
 export default {
   name: 'UniCalendar',
   components: {

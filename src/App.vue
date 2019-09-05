@@ -38,6 +38,7 @@ view {
 	margin-top: 20upx;
 	position: relative;
 	background-color: #fdfdfd;
+  border-bottom: 1px #f5f5f5 solid;
 }
 .example-title__after {
 	position: relative;
@@ -58,7 +59,6 @@ view {
 	margin: 40upx 0;
 }
 .example-body {
-	border-top: 1px #f5f5f5 solid;
 	padding: 30upx;
 	background: #ffffff;
 }

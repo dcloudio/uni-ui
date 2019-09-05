@@ -1,20 +1,30 @@
 <template>
   <view>
-    <view class="example-title">布局组件</view>
+    <uni-title title="布局组件" type="line"></uni-title>
     <uni-list>
       <uni-list-item v-for="(layout, index) in layouts" :key="index" :title="layout.name" @click="goDetailPage(layout)" />
     </uni-list>
-    <view class="example-title">视图组件</view>
+    <uni-title title="基础组件" type="line"></uni-title>
     <uni-list>
       <uni-list-item v-for="(view, index) in views" :key="index" :title="view.name" @click="goDetailPage(view)" />
+    </uni-list>
+    <uni-title title="功能组件" type="line"></uni-title>
+    <uni-list>
+      <uni-list-item v-for="(func, index) in functionals" :key="index" :title="func.name" @click="goDetailPage(func)" />
+    </uni-list>
+    <uni-title title="导航" type="line"></uni-title>
+    <uni-list>
+      <uni-list-item v-for="(navi, index) in navigations" :key="index" :title="navi.name" @click="goDetailPage(navi)" />
     </uni-list>
   </view>
 </template>
 <script>
   import uniList from '@/components/uni-list/uni-list.vue'
   import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
+  import uniTitle from '@/components/uni-title/uni-title.vue'
   export default {
-    components: {
+    components:{
+      uniTitle,
       uniList,
       uniListItem
     },
@@ -25,6 +35,48 @@
             url: 'card'
           },
           {
+            name: 'Grid 宫格',
+            url: 'grid'
+          },
+          {
+            name: 'List 列表',
+            url: 'list'
+          },
+          {
+            name: 'Title 标题栏',
+            url: 'title'
+          }
+        ],
+        views: [{
+            name: 'Badge 数字角标',
+            url: 'badge'
+          },
+          {
+            name: 'Fab 悬浮按钮',
+            url: 'fab'
+          },
+          {
+            name: 'Fav 收藏按钮',
+            url: 'fav'
+          },
+          {
+            name: 'Icon 图标',
+            url: 'icon'
+          },
+          {
+            name: 'NoticeBar 通告栏',
+            url: 'notice-bar'
+          },
+          {
+            name: 'NumberBox 数字输入框',
+            url: 'number-box'
+          },
+          {
+            name: 'Tag 标签',
+            url: 'tag'
+          }
+        ],
+        functionals: [{
             name: 'Calendar 日历',
             url: 'calendar'
           },
@@ -35,18 +87,6 @@
           {
             name: 'Drawer 抽屉',
             url: 'drawer'
-          },
-          {
-            name: 'Grid 宫格',
-            url: 'grid'
-          },
-          {
-            name: 'List 列表',
-            url: 'list'
-          },
-          {
-            name: 'NavBar 导航栏',
-            url: 'nav-bar'
           },
           {
             name: 'Pagination 分页器',
@@ -65,25 +105,16 @@
             url: 'segmented-control'
           },
           {
-            name: 'SwipeAction 滑动操作',
-            url: 'swipe-action'
-          }
-        ],
-        views: [{
-            name: 'Badge 数字角标',
-            url: 'badge'
-          },
-          {
             name: 'CountDown 倒计时',
             url: 'count-down'
           },
           {
-            name: 'Fab 悬浮按钮',
-            url: 'fab'
+            name: 'Rate 评分',
+            url: 'rate'
           },
           {
-            name: 'Icon 图标',
-            url: 'icon'
+            name: 'Popup 弹出层',
+            url: 'popup'
           },
           {
             name: 'IndexedList 索引列表',
@@ -94,24 +125,21 @@
             url: 'load-more'
           },
           {
-            name: 'NoticeBar 通告栏',
-            url: 'notice-bar'
+            name: 'SwipeAction 滑动操作',
+            url: 'swipe-action'
           },
           {
-            name: 'NumberBox 数字输入框',
-            url: 'number-box'
+            name: 'SearchBar 搜索栏',
+            url: 'search-bar'
+          }
+        ],
+        navigations: [{
+            name: 'NavBar 导航栏',
+            url: 'nav-bar'
           },
           {
-            name: 'Popup 弹出层',
-            url: 'popup'
-          },
-          {
-            name: 'Rate 评分',
-            url: 'rate'
-          },
-          {
-            name: 'Tag 标签',
-            url: 'tag'
+            name: 'GoodsNav 商品导航',
+            url: 'goods-nav'
           }
         ]
       }

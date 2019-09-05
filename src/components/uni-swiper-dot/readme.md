@@ -57,7 +57,7 @@ export default {
 |info		|Array	|-		|轮播图的数据，通过数组长度决定指示点个数										|
 |current	|Number	|0		|当前指示点索引，必须是通过 `swiper` 的 `change` 事件获取到的 `e.detail.current`|
 |dotsStyles	|Object	|-		|指示点样式																	|
-|mode		|String	|default|指示点的类型，可选值：default 、 indexes 、 long 、nav							|
+|mode		|String	|default|指示点的类型，可选值：default 、round 、long 、nav	 、 indexes 						|
 |field		|String	|-		| mode 为 nav 时，显示的内容字段（mode = nav 时必填）							|
 
 **dotsStyles 属性说明：**
@@ -78,3 +78,13 @@ Tips:
 - `width` 与 `height` 如非必要，请勿设置过大，或者过小
 - `swiper-item` 尽量控制在一定数量之内，否则指示点可能会超出屏幕
 - 暂不支持垂直方向的指示点
+
+### 更新日志
+
+**1.0.0**
+- 初始项目
+
+
+**1.0.1**
+- 增加一个新的样式并设为默认
+- 圆点（1.0.0默认样式）更名为round

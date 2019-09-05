@@ -16,7 +16,7 @@
       <view
         :class="{ 'uni-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
         class="uni-collapse-cell__title-arrow">
-        <uni-icon
+        <uni-icons
           color="#bbb"
           size="20"
           type="arrowdown" />
@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniCollapseItem',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     title: {

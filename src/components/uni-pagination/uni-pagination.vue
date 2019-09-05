@@ -8,7 +8,7 @@
         :hover-stay-time="70"
         @click="clickLeft">
         <template v-if="showIcon===true || showIcon === 'true'">
-          <uni-icon
+          <uni-icons
             color="#000"
             size="20"
             type="arrowleft"/>
@@ -24,7 +24,7 @@
         :hover-stay-time="70"
         @click="clickRight">
         <template v-if="showIcon===true || showIcon === 'true'">
-          <uni-icon
+          <uni-icons
             color="#000"
             size="20"
             type="arrowright"/>
@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniPagination',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     prevText: {
