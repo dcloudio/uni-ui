@@ -35,10 +35,11 @@ export default {
 
 **uniSearchBar 属性说明：**
 
-|属性名			|类型		|默认值	|说明								|
-|---				|----		|---		|---								|
-|placeholder|String	|搜索		|搜索栏Placeholder	|
-|radius			|Number	|10			|搜索栏圆角，单位rpx|
+|属性名			|类型		|默认值	|说明																																									|
+|---				|----		|---		|---																																									|
+|placeholder|String	|搜索		|搜索栏Placeholder																																		|
+|radius			|Number	|10			|搜索栏圆角，单位rpx																																	|
+|clearButton|String	|auto		|是否显示清除按钮可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示|
 
 **uniSearchBar 事件说明：**
 
@@ -46,3 +47,4 @@ export default {
 |---			|----																																|---						|
 |confirm	|uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value	|{value:Number}	|
 |input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|{value:Number}	|
+|cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value							|{value:Number}	|

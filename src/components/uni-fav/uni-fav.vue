@@ -76,6 +76,8 @@ export default {
   .uni-fav {
     display: inline-block;
     width: 120rpx;
+		height: 50rpx;
+		line-height: 50rpx;
     text-align: center;
     font-size: 28rpx;
     box-sizing: border-box;

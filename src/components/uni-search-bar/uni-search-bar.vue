@@ -23,6 +23,7 @@
           @confirm="confirm">
         <uni-icons
           :color="'#999999'"
+					v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
           class="icon-clear"
           type="clear"
           size="14"
@@ -33,7 +34,7 @@
         class="uni-searchbar-form__text"
         @click="searchClick">
         <uni-icons
-          :color="'#999999'"
+          color="#999999"
           class="icon-search"
           type="search"
           size="18"/>
@@ -41,7 +42,7 @@
       </view>
       <text
         class="uni-searchbar-form__cancel"
-        @click="hideSearch">取消</text>
+        @click="cancel">取消</text>
     </view>
   </view>
 </template>
@@ -61,6 +62,10 @@ export default {
     radius: {
       type: [Number, String],
       default: 10
+    },
+    clearButton: {
+      type: String,
+      default: 'auto'
     }
   },
   data () {
@@ -82,7 +87,8 @@ export default {
     clear () {
       this.searchVal = ''
     },
-    hideSearch () {
+    cancel () {
+			this.$emit('cancel', { value: this.searchVal })
       this.searchVal = ''
       this.show = false
     },
@@ -94,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss">
-  $uni-searbar-height:64rpx;
+  $uni-searchbar-height:64rpx;
   .uni-searchbar{
     &-form{
       position: relative;
@@ -106,8 +112,8 @@ export default {
         display: flex;
         flex: 1;
         width: 100%;
-        height: $uni-searbar-height;
-        line-height: $uni-searbar-height;
+        height: $uni-searchbar-height;
+        line-height: $uni-searchbar-height;
         color: #c8c7cc;
         background: #ffffff;
         border: solid 1px #c8c7cc;
@@ -115,19 +121,19 @@ export default {
         .icon-search{
           text-align: right;
           color: #c8c7cc;
-          line-height: $uni-searbar-height;
+          line-height: $uni-searchbar-height;
           padding: 0rpx 10rpx 0rpx 15rpx;
         }
         .search-input{
           flex: 1;
           font-size: 28rpx;
-          height: $uni-searbar-height;
-          line-height: $uni-searbar-height;
+          height: $uni-searchbar-height;
+          line-height: $uni-searchbar-height;
           color: #333333;
         }
         .icon-clear{
           color: #c8c7cc;
-          line-height: $uni-searbar-height;
+          line-height: $uni-searchbar-height;
           padding: 0rpx 15rpx 0rpx 10rpx;
         }
       }
@@ -135,8 +141,8 @@ export default {
         display: flex;
         flex: 1;
         width: 100%;
-        height: $uni-searbar-height;
-        line-height: $uni-searbar-height;
+        height: $uni-searchbar-height;
+        line-height: $uni-searchbar-height;
         text-align: center;
         color: #c8c7cc;
         background: #ffffff;
@@ -144,8 +150,8 @@ export default {
         border-radius: 10rpx;
         display: none;
         .icon-search{
-          height: $uni-searbar-height;
-          line-height: $uni-searbar-height;
+          height: $uni-searchbar-height;
+          line-height: $uni-searchbar-height;
         }
         .placeholder{
           display: inline-block;
@@ -156,7 +162,7 @@ export default {
       }
       &__cancel{
         padding-left: 20rpx;
-        line-height: $uni-searbar-height;
+        line-height: $uni-searchbar-height;
         color: #333333;
       }
       &.hide{
