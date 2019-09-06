@@ -1,7 +1,7 @@
 <template>
   <view class="uni-load-more">
     <view
-      v-if="platform === 'android'"
+      v-if="iconType==='circle' || iconType==='auto' && platform === 'android'"
       v-show="status === 'loading' && showIcon"
       class="uni-load-more__img"
     >
@@ -78,6 +78,10 @@ export default {
       type: Boolean,
       default: true
     },
+		iconType: {
+			type: String,
+			default: 'auto'
+		},
     color: {
       type: String,
       default: '#777777'
