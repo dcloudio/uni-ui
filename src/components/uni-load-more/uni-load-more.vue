@@ -134,7 +134,7 @@ export default {
 				position: absolute;
 				opacity: 0.2;
 				transform-origin: 50%;
-				animation: load 0.72s ease infinite;
+				animation: load 0.96s ease infinite;
 
 				&:nth-child(1) {
 					transform: rotate(90deg);
@@ -195,47 +195,47 @@ export default {
 }
 
 .load2 .uni-load-view_wrapper:nth-child(1) {
-	animation-delay: 0.06s;
+	animation-delay: 0.08s;
 }
 
 .load3 .uni-load-view_wrapper:nth-child(1) {
-	animation-delay: 0.12s;
+	animation-delay: 0.16s;
 }
 
 .load1 .uni-load-view_wrapper:nth-child(2) {
-	animation-delay: 0.18s;
-}
-
-.load2 .uni-load-view_wrapper:nth-child(2) {
 	animation-delay: 0.24s;
 }
 
+.load2 .uni-load-view_wrapper:nth-child(2) {
+	animation-delay: 0.32s;
+}
+
 .load3 .uni-load-view_wrapper:nth-child(2) {
-	animation-delay: 0.30s;
+	animation-delay: 0.40s;
 }
 
 .load1 .uni-load-view_wrapper:nth-child(3) {
-	animation-delay: 0.36s;
-}
-
-.load2 .uni-load-view_wrapper:nth-child(3) {
-	animation-delay: 0.42s;
-}
-
-.load3 .uni-load-view_wrapper:nth-child(3) {
 	animation-delay: 0.48s;
 }
 
+.load2 .uni-load-view_wrapper:nth-child(3) {
+	animation-delay: 0.56s;
+}
+
+.load3 .uni-load-view_wrapper:nth-child(3) {
+	animation-delay: 0.64s;
+}
+
 .load1 .uni-load-view_wrapper:nth-child(4) {
-	animation-delay: 0.54s;
+	animation-delay: 0.72s;
 }
 
 .load2 .uni-load-view_wrapper:nth-child(4) {
-	animation-delay: 0.60s;
+	animation-delay: 0.80s;
 }
 
 .load3 .uni-load-view_wrapper:nth-child(4) {
-	animation-delay: 0.66s;
+	animation-delay: 0.88s;
 }
 
 @-webkit-keyframes load {
