@@ -213,7 +213,6 @@ $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 		position: relative;
 		width: 100%;
 		overflow: hidden;
-		background: $uni-bg-color;
 
 		.view {
 			font-size: $uni-font-size-base;
