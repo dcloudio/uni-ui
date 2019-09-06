@@ -34,7 +34,6 @@ function touchmove(e, ownerInstance) {
   if (disabled) return
   if (state.isMove) return
   var pageX = e.touches[0].pageX;
-  console.log(pageX);
   setValue(pageX - state.width, instance, ownerInstance)
 
 }
@@ -56,7 +55,6 @@ function setValue(value, instance, ownerInstance) {
     transform: 'translateX(' + x + 'px)',
     '-webkit-transform': 'translateX(' + x + 'px)'
   })
-  console.log(x);
   setFold(x, instance, ownerInstance)
 }
 
