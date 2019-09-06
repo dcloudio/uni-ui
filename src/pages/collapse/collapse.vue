@@ -164,7 +164,7 @@
     },
     methods: {
       change(e) {
-        console.log(e)
+        //console.log(e)
       }
     }
   }

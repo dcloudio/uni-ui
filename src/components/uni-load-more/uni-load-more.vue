@@ -171,7 +171,7 @@ export default {
       border: solid 2px #777777;
       border-radius: 50%;
       border-bottom-color: transparent !important;
-      animation: loader-android 2s 0s linear infinite;
+      animation: loader-android 1s 0s linear infinite;
     }
 	}
 }

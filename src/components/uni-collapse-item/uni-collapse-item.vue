@@ -25,7 +25,7 @@
     <view
       :style="{ height: isOpen ? 'auto' : '0px' }"
       class="uni-collapse-cell__content">
-      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
+      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)','-webkit-transform' : isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
         <slot />
       </view>
     </view>

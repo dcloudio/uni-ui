@@ -26,7 +26,7 @@
 					v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
           class="icon-clear"
           type="clear"
-          size="14"
+          size="24"
           @click="clear"/>
       </view>
       <view
