@@ -45,9 +45,9 @@
   "devDependencies": {
     "@dcloudio/uni-cli-shared": "^0.2.990",
     "@dcloudio/uni-template-compiler": "^0.9.182",
-    "@dcloudio/vue-cli-plugin-hbuilderx": "latest",
-    "@dcloudio/vue-cli-plugin-uni": "latest",
-    "@dcloudio/vue-cli-plugin-uni-optimize": "latest",
+    "@dcloudio/vue-cli-plugin-hbuilderx": "^2.0.0-22420190823019",
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.0-22420190823019",
+    "@dcloudio/vue-cli-plugin-uni-optimize": "^2.0.0-22420190823019",
     "@dcloudio/webpack-uni-mp-loader": "^0.3.644",
     "@dcloudio/webpack-uni-pages-loader": "^0.2.874",
     "@types/html5plus": "*",
