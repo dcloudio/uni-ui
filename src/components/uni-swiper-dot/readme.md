@@ -39,7 +39,7 @@ export default {
 				content: '内容 C'
 			}],
 			current: 0,
-			mode: 'long',
+			mode: 'round',
 		}
 	},
 	methods: {
@@ -57,7 +57,7 @@ export default {
 |info		|Array	|-		|轮播图的数据，通过数组长度决定指示点个数										|
 |current	|Number	|0		|当前指示点索引，必须是通过 `swiper` 的 `change` 事件获取到的 `e.detail.current`|
 |dotsStyles	|Object	|-		|指示点样式																	|
-|mode		|String	|default|指示点的类型，可选值：default 、round 、long 、nav	 、 indexes 						|
+|mode		|String	|default|指示点的类型，可选值：default 、round 、nav	 、 indexes 						|
 |field		|String	|-		| mode 为 nav 时，显示的内容字段（mode = nav 时必填）							|
 
 **dotsStyles 属性说明：**
@@ -86,5 +86,5 @@ Tips:
 
 
 **1.0.1**
-- 增加一个新的样式并设为默认
+- 将条状修改为默认
 - 圆点（1.0.0默认样式）更名为round
