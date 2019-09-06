@@ -23,9 +23,9 @@
       </view>
     </view>
     <view
-      :style="{ height: isOpen ? height : '0px' }"
+      :style="{ height: isOpen ? 'auto' : '0px' }"
       class="uni-collapse-cell__content">
-      <view :id="elId" :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
+      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
         <slot />
       </view>
     </view>
@@ -72,11 +72,8 @@ export default {
     }
   },
   data () {
-    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
     return {
-      isOpen: false,
-      height: 'auto',
-      elId: elId
+      isOpen: false
     }
   },
   watch: {
@@ -98,29 +95,7 @@ export default {
       }
     }
   },
-  // #ifdef H5
-  mounted () {
-    this._getSize()
-  },
-  // #endif
-  // #ifndef H5
-  onReady () {
-    this._getSize()
-  },
-  // #endif
   methods: {
-    _getSize () {
-      if (this.showAnimation) {
-        uni.createSelectorQuery()
-          .in(this)
-          .select(`#${this.elId}`)
-          .boundingClientRect()
-          .exec(ret => {
-            this.height = ret[0].height + 'px'
-            console.log(this.height)
-          })
-      }
-    },
     onClick () {
       if (this.disabled) {
         return

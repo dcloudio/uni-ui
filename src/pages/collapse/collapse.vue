@@ -19,7 +19,7 @@
         </uni-collapse-item>
       </uni-collapse>
     </view>
-    <button class="button" @click="onClick">动态添加一组数据，并更新高度</button>
+    <button class="button" @click="onClick">动态添加一组数据</button>
     <view class="example-title">手风琴效果</view>
     <uni-collapse :accordion="true">
       <uni-collapse-item v-for="item in accordion" :key="item.id" :title="item.title" :show-animation="item.animation">
@@ -167,9 +167,6 @@
         this.list[1].data[1].subList.push({
           title: '新增',
           thumb: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
-        })
-        this.$nextTick(() => {
-          this.$refs.add[1].resize()
         })
       },
       change(e) {
