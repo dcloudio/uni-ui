@@ -56,7 +56,8 @@
           data: [{
               type: false,
               subName: '默认开启',
-              open: true,
+              open: false,
+							openPre: true,
               content: '折叠内容主体，可自定义内容及样式'
             },
             {
@@ -101,7 +102,8 @@
           data: [{
               type: false,
               subName: '默认开启',
-              open: true,
+              open: false,
+							openPre: true,
               showAnimation: true,
               content: '折叠内容主体，可自定义内容及样式'
             },
@@ -162,6 +164,17 @@
         id: 2
       }
     },
+		onLoad() {
+			setTimeout(()=>{
+				this.list.map(function(item){
+					item.data.map(function(collapseItem){
+						if (collapseItem.openPre) {
+							collapseItem.open = collapseItem.openPre
+						}
+					})
+				})
+			},350)
+		},
     methods: {
       change(e) {
         //console.log(e)

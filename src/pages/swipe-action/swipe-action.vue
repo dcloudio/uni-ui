@@ -57,7 +57,7 @@
     },
     data() {
       return {
-        isOpened: true,
+        isOpened: false,
         options1: [{
           text: '取消置顶'
         }],
@@ -87,6 +87,11 @@
         }]
       }
     },
+		onLoad() {
+			setTimeout(()=>{
+				this.isOpened = true
+			},350)
+		},
     methods: {
       bindClick(e) {
         console.log(e)

@@ -111,17 +111,16 @@ export default {
       &__box{
         display: flex;
         flex: 1;
+				align-items: center;
         width: 100%;
         height: $uni-searchbar-height;
-        line-height: $uni-searchbar-height;
         color: #c8c7cc;
         background: #ffffff;
         border: solid 1px #c8c7cc;
         border-radius: 10rpx;
         .icon-search{
-          text-align: right;
           color: #c8c7cc;
-          line-height: $uni-searchbar-height;
+          line-height: 24px;
           padding: 0rpx 10rpx 0rpx 15rpx;
         }
         .search-input{
@@ -133,13 +132,14 @@ export default {
         }
         .icon-clear{
           color: #c8c7cc;
-          line-height: $uni-searchbar-height;
+          line-height: 20px;
           padding: 0rpx 15rpx 0rpx 10rpx;
         }
       }
       &__text{
         display: flex;
         flex: 1;
+				align-items: center;
         width: 100%;
         height: $uni-searchbar-height;
         line-height: $uni-searchbar-height;
@@ -164,6 +164,7 @@ export default {
         padding-left: 20rpx;
         line-height: $uni-searchbar-height;
         color: #333333;
+				white-space: nowrap;
       }
       &.hide{
         .uni-searchbar-form__box{
