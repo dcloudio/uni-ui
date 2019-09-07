@@ -64,8 +64,7 @@ export default {
 
 |属性名		|类型	|默认值	|说明|
 |---		|----	|---	|---|
-|width|Number| 8 |指示点宽度 **在 mode = nav 时不生效**|
-|height|Number| 8|指示点高度 **在 mode = nav 时不生效**|
+|width|Number| 8 |指示点宽度 **在 mode = nav、mode = indexes 时不生效**|
 |bottom|Number| 10|指示点距 `swiper` 底部的高度|
 |color|Color| '#fff'|指示点前景色，**只在 mode = nav ，mode = indexes 时生效**|
 |backgroundColor|Color| 'rgba(0, 0, 0, .3)'|未选择指示点背景色|
