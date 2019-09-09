@@ -85,7 +85,7 @@ export default {
 
 <style lang="scss">
   .uni-fav {
-    display: inline-block;
+    display: inline-flex;
     width: 120rpx;
 		height: 50rpx;
 		line-height: 50rpx;
@@ -93,6 +93,8 @@ export default {
     font-size: 28rpx;
     box-sizing: border-box;
     border-radius: 6rpx;
+		align-items: center;
+		justify-content: center;
     &--circle{
       border-radius: 60rpx;
     }
