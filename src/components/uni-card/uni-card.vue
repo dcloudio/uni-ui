@@ -1,286 +1,275 @@
 <template>
-  <view
-    :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true' }"
-    class="uni-card"
-    @click="onClick">
-    <view
-      v-if="mode === 'style'"
-      class="uni-card__thumbnailimage">
-      <image
-        :src="thumbnail"
-        mode="aspectFill" />
-      <view
-        v-if="title"
-        class="uni-card__thumbnailimage-title">{{ title }}</view>
+  <view :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true' }"
+    class="uni-card" @click="onClick">
+    <view v-if="mode === 'style'" class="uni-card__thumbnailimage">
+      <image :src="thumbnail" mode="aspectFill" />
+      <view v-if="title" class="uni-card__thumbnailimage-title"><text class="uni-card__thumbnailimage-title-text">{{ title }}</text></view>
     </view>
-    <view
-      v-if="mode === 'title'"
-      class="uni-card__title">
-      <view class="uni-card__title-header"><image
-        :src="thumbnail"
-        mode="aspectFill" /></view>
+    <view v-if="mode === 'title'" class="uni-card__title">
+      <view class="uni-card__title-header">
+        <image class="uni-card__title-header-image" :src="thumbnail" mode="scaleToFill"/>
+      </view>
       <view class="uni-card__title-content">
-        <view class="uni-card__title-content-title">{{ title }}</view>
-        <view class="uni-card__title-content-extra">{{ extra }}</view>
+        <text class="uni-card__title-content-title">{{ title }}</text>
+        <text class="uni-card__title-content-extra">{{ extra }}</text>
       </view>
     </view>
     <!-- 标题 -->
-    <view
-      v-if="mode === 'basic' && title"
-      class="uni-card__header">
-      <view
-        v-if="thumbnail"
-        class="uni-card__header-extra-img-view"><image
-          :src="thumbnail"
-          class="uni-card__header-extra-img" /></view>
-      <view class="uni-card__header-title-text">{{ title }}</view>
-      <view
-        v-if="extra"
-        class="uni-card__header-extra-text">{{ extra }}</view>
+    <view v-if="mode === 'basic' && title" class="uni-card__header">
+      <view v-if="thumbnail" class="uni-card__header-extra-img-view">
+        <image :src="thumbnail" class="uni-card__header-extra-img" />
+      </view>
+      <text class="uni-card__header-title-text">{{ title }}</text>
+      <text v-if="extra" class="uni-card__header-extra-text">{{ extra }}</text>
     </view>
     <!-- 内容 -->
     <view class="uni-card__content uni-card__content--pd">
-      <view
-        v-if="mode === 'style' && extra"
-        class="uni-card__content-extra">{{ extra }}</view>
+      <view v-if="mode === 'style' && extra" class=""><text class="uni-card__content-extra">{{ extra }}</text></view>
       <slot />
     </view>
     <!-- 底部 -->
-    <view
-      v-if="note"
-      class="uni-card__footer">
+    <view v-if="note" class="uni-card__footer">
       <slot name="footer">
-        <text>{{ note }}</text>
+        <text class="uni-card__footer-text">{{ note }}</text>
       </slot>
     </view>
   </view>
 </template>
 
 <script>
-export default {
-  name: 'UniCard',
-  props: {
-    title: {
-      type: String,
-      default: ''
-    }, // 标题
-    extra: {
-      type: String,
-      default: ''
-    }, // 扩展信息
-    note: {
-      type: String,
-      default: ''
-    }, // Tips
-    thumbnail: {
-      type: String,
-      default: ''
-    }, // 缩略图
-    // 卡片模式 ， 可选值 basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片
-    mode: {
-      type: String,
-      default: 'basic'
+  export default {
+    name: 'UniCard',
+    props: {
+      title: {
+        type: String,
+        default: ''
+      }, // 标题
+      extra: {
+        type: String,
+        default: ''
+      }, // 扩展信息
+      note: {
+        type: String,
+        default: ''
+      }, // Tips
+      thumbnail: {
+        type: String,
+        default: ''
+      }, // 缩略图
+      // 卡片模式 ， 可选值 basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片
+      mode: {
+        type: String,
+        default: 'basic'
+      },
+      isFull: {
+        // 内容区域是否通栏
+        type: Boolean,
+        default: false
+      },
+      isShadow: {
+        // 是否开启阴影
+        type: Boolean,
+        default: false
+      }
     },
-    isFull: {
-      // 内容区域是否通栏
-      type: Boolean,
-      default: false
-    },
-    isShadow: {
-      // 是否开启阴影
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    onClick () {
-      this.$emit('click')
+    methods: {
+      onClick() {
+        this.$emit('click')
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
-$card-extra-width: 30%;
-$uni-spacing-marign: 24upx;
+  @import '~@/uni.scss';
+  $card-extra-width: 30%;
+  $uni-spacing-marign: 24rpx;
 
-@mixin text-omit {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
+  @mixin text-omit {
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+    overflow: hidden;
+  }
 
-.uni-card {
-	margin-left: $uni-spacing-marign;
-	margin-right: $uni-spacing-marign;
-	background: $uni-bg-color;
-	box-shadow: none;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	border: 1px #ddd solid;
-	border-radius: 6upx;
-	overflow: hidden;
+  .uni-card {
+    margin-left: $uni-spacing-marign;
+    margin-right: $uni-spacing-marign;
+    background-color: $uni-bg-color;
+    box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+    position: relative;
+    flex-direction: column;
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6rpx;
+    overflow: hidden;
+  }
 
-	&__thumbnailimage {
-		position: relative;
-		height: 300upx;
+  .uni-card__thumbnailimage {
+    position: relative;
+    height: 300rpx;
+  }
 
-		image {
-			width: 100%;
-			height: 100%;
-		}
+  .uni-card__thumbnailimage-title {
+    width: 750px;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    padding: $uni-spacing-col-base $uni-spacing-col-lg;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+  }
+  .uni-card__thumbnailimage-title-text {
+    font-size: 32rpx;
+    color: #fff;
+  }
 
-		&-title {
-			position: absolute;
-			bottom: 0;
-			padding: 15upx 20upx;
-			font-size: 32upx;
-			width: 100%;
-			color: #fff;
-		}
-	}
+  .uni-card__title {
+    flex-direction: row;
+    padding: 20rpx;
+    border-bottom-color: #F5F5F5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+  }
 
-	&__title {
-		display: flex;
-		padding: 20upx;
-		border-bottom: 1px #f5f5f5 solid;
+  .uni-card__title-header {
+    width: 80rpx;
+    height: 80rpx;
+    overflow: hidden;
+    border-radius: 10rpx;
+    // image {
+    //   width: 100%;
+    //   height: 100%;
+    // }
+  }
+  .uni-card__title-header-image {
+    flex: 1;
+  }
 
-		&-header {
-			flex-shrink: 0;
-			width: 80upx;
-			height: 80upx;
-			overflow: hidden;
-			border-radius: 10upx;
+  .uni-card__title-content {
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20rpx;
+    height: 80rpx;
+    overflow: hidden;
 
-			image {
-				width: 100%;
-				height: 100%;
-			}
-		}
 
-		&-content {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			padding-left: 20upx;
-			height: 80upx;
-			overflow: hidden;
+  }
 
-			&-title {
-				font-size: 30upx;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
+  .uni-card__title-content-title {
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+  }
 
-			&-extra {
-				font-size: 26upx;
-				color: #999;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-		}
-	}
+  .uni-card__title-content-extra {
+    font-size: 26rpx;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+  }
 
-	&__header {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		padding: $uni-spacing-col-base;
-		align-items: center;
-	}
+  .uni-card__header {
+    position: relative;
+    flex-direction: row;
+    padding: $uni-spacing-col-lg;
+    align-items: center;
+    border-bottom-color: #F5F5F5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+  }
 
-	&__header {
-		&:after {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			left: 0;
-			height: 1px;
-			content: '';
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			background-color: $uni-border-color;
-		}
+  .uni-card__header {}
 
-		&-title {
-			flex: 1;
-			margin-right: $uni-spacing-col-base;
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-			align-items: center;
+  // .uni-card__header:after {
+  //   position: absolute;
+  //   bottom: 0;
+  //   right: 0;
+  //   left: 0;
+  //   height: 1px;
+  //   content: '';
+  //   -webkit-transform: scaleY(0.5);
+  //   transform: scaleY(0.5);
+  //   // background-color: $uni-border-color;
+  // }
 
-			&-text {
-				font-size: $uni-font-size-lg;
-				flex: 1;
-				@include text-omit;
-			}
-		}
+  .uni-card__header-title {
+    flex: 1;
+    margin-right: $uni-spacing-col-base;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-		&-extra {
-			&-img-view {
-				display: flex;
-			}
+  .uni-card__header-title-text {
+    font-size: $uni-font-size-lg;
+    flex: 1;
+    @include text-omit;
+  }
 
-			&-img {
-				height: $uni-img-size-sm;
-				width: $uni-img-size-sm;
-				margin-right: $uni-spacing-col-base;
-			}
+  .uni-card__header-extra {}
 
-			&-text {
-				flex: 0 0 auto;
-				width: $card-extra-width;
-				margin-left: $uni-spacing-col-base;
-				font-size: $uni-font-size-base;
-				text-align: right;
-				color: #666;
-				@include text-omit;
-			}
-		}
-	}
+  .uni-card__header-extra-img-view {
+  }
 
-	&__content {
-		color: #555;
-		&--pd {
-			padding: $uni-spacing-col-base;
-		}
+  .uni-card__header-extra-img {
+    height: $uni-img-size-sm;
+    width: $uni-img-size-sm;
+    margin-right: $uni-spacing-col-base;
+  }
 
-		&-extra {
-			padding-bottom: 20upx;
-			color: #999;
-		}
-	}
+  .uni-card__header-extra-text {
+    flex: 1;
+    width: $card-extra-width;
+    margin-left: $uni-spacing-col-base;
+    font-size: $uni-font-size-base;
+    text-align: right;
+    color: #666;
+    @include text-omit;
+  }
 
-	&__footer {
-		// justify-content: space-between;
-		padding: 20upx;
-		color: $uni-text-color-grey;
-		font-size: $uni-font-size-sm;
-		border-top: 1px #f5f5f5 solid;
-	}
+  .uni-card__content {
+    color: #555;
+  }
 
-	&--shadow {
-		border: 1px #ddd solid;
-		box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
-		&:after {
-			border: none;
-		}
-	}
+  .uni-card__content--pd {
+    padding: $uni-spacing-col-lg;
+  }
 
-	&--full {
-		margin: 0;
-		border-left: none;
-		border-right: none;
-		border-radius: 0;
-		// &:after {
-		// 	border-left: none;
-		// 	border-right: none;
-		// 	border-radius: 0;
-		// }
-	}
-}
+  .uni-card__content-extra {
+    font-size: $uni-font-size-base;
+    padding-bottom: 20rpx;
+    color: #999;
+  }
+
+  .uni-card__footer {
+    justify-content: space-between;
+    padding: 20rpx;
+    border-top-color: #F5F5F5;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+  .uni-card__footer-text {
+    color: $uni-text-color-grey;
+    font-size: $uni-font-size-base;
+  }
+
+  .uni-card--shadow {
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
+  }
+
+  .uni-card--full {
+    margin: 0;
+
+    border-radius: 0;
+    // &:after {
+    // 	border-left: none;
+    // 	border-right: none;
+    // 	border-radius: 0;
+    // }
+  }
 </style>
