@@ -1,0 +1,10 @@
+{
+  "id": "",
+  "name": "Title",
+  "desc": "标题栏",
+  "edition": "0.0.1",
+  "url": "title",
+  "path": "https://ext.dcloud.net.cn/plugin?id=",
+  "hidden": true,
+  "update_log": "- 初始化项目"
+}
