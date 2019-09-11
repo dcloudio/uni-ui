@@ -1,7 +1,7 @@
 <template>
   <view class="uni-swipe_content">
     <!-- #ifdef APP-PLUS|| MP-WEIXIN||H5 -->
-    <view :data-disabled="disabled" :data-position="pos" :change:prop="swipe.change" :prop="pos" class="uni-swipe_move-box selector-query-hock move-hock"
+    <view :data-disabled="disabled" :data-position="pos" :change:prop="swipe.sizeReady" :prop="pos" class="uni-swipe_move-box selector-query-hock move-hock"
       @touchstart="swipe.touchstart" @touchmove="swipe.touchmove" @touchend="swipe.touchend" @change="change">
       <!-- #endif -->
       <!-- #ifndef APP-PLUS|| MP-WEIXIN||H5 -->
@@ -27,7 +27,7 @@
     <!-- #endif -->
   </view>
 </template>
-<wxs src="./index.wxs" module="swipe"></wxs>
+<script src="./index.wxs" module="swipe" lang="wxs"></script>
 <script>
   import mixins from './mpother'
   import mp from './mp'
