@@ -1,81 +1,68 @@
 {
-    "name": "@dcloudio/uni-ui",
-    "version": "1.0.0",
-    "main": "src/index.js",
-    "scripts": {
-        "lint": "eslint --fix --config package.json --ext .js --ext .vue packages/",
-        "lint:demo": "eslint --fix --config package.json --ext .js --ext .vue examples/",
-        "serve": "npm run dev:h5",
-        "build:lib": "rm -rf lib && node ./build/build-lib.js",
-        "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 UNI_INPUT_DIR='./examples' vue-cli-service uni-serve"
-    },
-    "license": "MIT",
-    "author": "dcloud.io",
-    "dependencies": {
-        "@dcloudio/uni-app-plus": "0.0.250",
-        "@dcloudio/uni-h5": "*",
-        "@dcloudio/uni-mp-alipay": "0.0.824",
-        "@dcloudio/uni-mp-baidu": "0.0.854",
-        "@dcloudio/uni-mp-qq": "0.0.108",
-        "@dcloudio/uni-mp-toutiao": "0.0.348",
-        "@dcloudio/uni-mp-weixin": "0.0.970",
-        "flyio": "^0.6.14",
-        "vue": "^2.6.9",
-        "vuex": "^3.1.0"
-    },
-    "devDependencies": {
-        "@dcloudio/uni-cli-shared": "^0.2.984",
-        "@dcloudio/uni-template-compiler": "*",
-        "@dcloudio/vue-cli-plugin-hbuilderx": "latest",
-        "@dcloudio/vue-cli-plugin-uni": "latest",
-        "@dcloudio/vue-cli-plugin-uni-optimize": "latest",
-        "@dcloudio/webpack-uni-mp-loader": "^0.3.640",
-        "@dcloudio/webpack-uni-pages-loader": "^0.2.868",
-        "@types/html5plus": "*",
-        "@types/uni-app": "*",
-        "@vue/cli-plugin-babel": "3.3.0",
-        "@vue/cli-service": "^3.5.1",
-        "babel-plugin-import": "^1.11.0",
-        "cross-env": "^5.2.0",
-        "fs-extra": "^7.0.1",
-        "glob": "^7.1.3",
-        "node-sass": "^4.11.0",
-        "sass-loader": "^7.1.0",
-        "vue-template-compiler": "^2.6.10",
-        "@vue/cli-plugin-eslint": "^3.4.1",
-        "eslint": "^5.5.0",
-        "eslint-config-standard": "^12.0.0",
-        "eslint-loader": "^2.1.0",
-        "eslint-plugin-import": "^2.14.0",
-        "eslint-plugin-node": "^7.0.1",
-        "eslint-plugin-promise": "^4.0.0",
-        "eslint-plugin-standard": "^4.0.0",
-        "eslint-plugin-vue": "^4.7.1",
-        "babel-eslint": "^7.2.3"
-    },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/recommended",
-            "standard"
-        ],
-        "globals": {
-            "uni": true
-        },
-        "rules": {
-            "no-tabs": 0,
-            "standard/no-callback-literal": 0
-        },
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
-    "overrideBrowserList": [
-        "last 3 versions",
-        "Android >= 4.4",
-        "ios >= 8"
-    ]
+  "name": "wxs-test-alpha-del-2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "npm run dev:h5",
+    "build": "npm run build:h5",
+    "build:app-plus": "cross-env NODE_ENV=production UNI_PLATFORM=app-plus vue-cli-service uni-build",
+    "build:custom": "cross-env NODE_ENV=production uniapp-cli custom",
+    "build:h5": "cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build",
+    "build:mp-alipay": "cross-env NODE_ENV=production UNI_PLATFORM=mp-alipay vue-cli-service uni-build",
+    "build:mp-baidu": "cross-env NODE_ENV=production UNI_PLATFORM=mp-baidu vue-cli-service uni-build",
+    "build:mp-qq": "cross-env NODE_ENV=production UNI_PLATFORM=mp-qq vue-cli-service uni-build",
+    "build:mp-toutiao": "cross-env NODE_ENV=production UNI_PLATFORM=mp-toutiao vue-cli-service uni-build",
+    "build:mp-weixin": "cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build",
+    "dev:app-plus": "cross-env NODE_ENV=development UNI_PLATFORM=app-plus vue-cli-service uni-build --watch",
+    "dev:custom": "cross-env NODE_ENV=development uniapp-cli custom",
+    "dev:h5": "cross-env NODE_ENV=development UNI_PLATFORM=h5 vue-cli-service uni-serve",
+    "dev:mp-alipay": "cross-env NODE_ENV=development UNI_PLATFORM=mp-alipay vue-cli-service uni-build --watch",
+    "dev:mp-baidu": "cross-env NODE_ENV=development UNI_PLATFORM=mp-baidu vue-cli-service uni-build --watch",
+    "dev:mp-qq": "cross-env NODE_ENV=development UNI_PLATFORM=mp-qq vue-cli-service uni-build --watch",
+    "dev:mp-toutiao": "cross-env NODE_ENV=development UNI_PLATFORM=mp-toutiao vue-cli-service uni-build --watch",
+    "dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
+    "info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js"
+  },
+  "dependencies": {
+    "@dcloudio/uni-app-plus": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-h5": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-helper-json": "*",
+    "@dcloudio/uni-mp-alipay": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-mp-baidu": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-mp-qq": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-mp-toutiao": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-mp-weixin": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-stat": "^2.0.0-alpha-22420190823018",
+    "flyio": "^0.6.2",
+    "regenerator-runtime": "^0.12.1",
+    "vue": "^2.6.10",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@dcloudio/uni-cli-shared": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/uni-template-compiler": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/vue-cli-plugin-hbuilderx": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/vue-cli-plugin-uni-optimize": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/webpack-uni-mp-loader": "^2.0.0-alpha-22420190823018",
+    "@dcloudio/webpack-uni-pages-loader": "^2.0.0-alpha-22420190823018",
+    "@types/html5plus": "*",
+    "@types/uni-app": "*",
+    "@vue/cli-plugin-babel": "3.5.1",
+    "@vue/cli-service": "^3.11.0",
+    "babel-plugin-import": "^1.11.0",
+    "mini-types": "*",
+    "miniprogram-api-typings": "^2.8.0-2",
+    "postcss-comment": "^2.0.0",
+    "vue-template-compiler": "^2.6.10",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.3.1"
+  },
+  "browserslist": [
+    "Android >= 4.4",
+    "ios >= 8"
+  ],
+  "uni-app": {
+    "scripts": {}
+  }
 }
