@@ -1,0 +1,48 @@
+/* #ifndef APP-NVUE */
+page {
+    min-height: 100%;
+    height: auto;
+}
+/* #endif */
+
+/* 解决头条小程序字体图标不显示问题，因为头条运行时自动插入了span标签，且有全局字体 */
+/* #ifdef MP-TOUTIAO */
+text :not(view) {
+    font-family: uniicons;
+}
+/* #endif */
+
+.example {
+  padding: 0 30rpx 30rpx;
+}
+  
+.example-info-text {
+  font-size: 28rpx;
+  line-height: 36rpx;
+}
+
+.example-title {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.example-title-bar {
+  width: 6rpx;
+  height: 32rpx;
+  background-color: #cccccc;
+  margin-right: 10rpx;
+}
+
+.example-title-text {
+  flex: 1;
+  font-size: 32rpx;
+}
+
+.example-body {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  font-size: 14rpx;
+}

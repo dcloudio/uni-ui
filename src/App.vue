@@ -13,6 +13,7 @@
 </script>
 
 <style lang="scss">
+  /* #ifndef APP-NVUE */
   /*每个页面公共css */
   page {
     display: flex;
@@ -47,18 +48,6 @@
   .example-title__after {
     position: relative;
     color: #031e3c;
-  }
-
-  .example-title:after {
-    content: '';
-    position: absolute;
-    left: 30upx;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    width: 6upx;
-    height: 32upx;
-    background-color: #CCCCCC;
   }
 
   .example .example-title {
@@ -106,4 +95,5 @@
     padding: 0;
     font-size: 14rpx;
   }
+  /* #endif */
 </style>
