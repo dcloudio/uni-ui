@@ -15,7 +15,7 @@
           <view
             v-if="leftIcon.length"
             class="uni-navbar__content_view">
-            <uni-icon
+            <uni-icons
               :type="leftIcon"
               :color="color"
               size="24"/>
@@ -34,12 +34,13 @@
           <slot/>
         </view>
         <view
+          :class="title.length?'uni-navbar__header-btns-right':''"
           class="uni-navbar__header-btns uni-navbar__content_view"
           @tap="onClickRight">
           <view
             v-if="rightIcon.length"
             class="uni-navbar__content_view">
-            <uni-icon
+            <uni-icons
               :type="rightIcon"
               :color="color"
               size="24"/>
@@ -63,13 +64,13 @@
 
 <script>
 import uniStatusBar from '../uni-status-bar/uni-status-bar.vue'
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 
 export default {
   name: 'UniNavBar',
   components: {
     uniStatusBar,
-    uniIcon
+    uniIcons
   },
   props: {
     title: {
@@ -168,6 +169,12 @@ export default {
 				&:last-child {
 					width: 60upx;
 				}
+
+        &-right:last-child{
+          width: 120rpx;
+          text-align: right;
+          flex-direction: row-reverse;
+        }
 			}
 
 			&-container {
@@ -179,7 +186,7 @@ export default {
 					display: flex;
 					justify-content: center;
 					font-size: 30upx;
-					padding-right: 60upx;
+					// padding-right: 60upx;
 				}
 			}
 		}

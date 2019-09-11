@@ -568,7 +568,7 @@ export default {
 	background: rgba($color: #000, $alpha: 0.4);
 	transition: all 0.3s;
 	opacity: 0;
-	z-index: 9998;
+	z-index: 998;
 	&.ani-mask-show {
 		opacity: 1;
 	}
@@ -580,7 +580,7 @@ export default {
 	position: relative;
 	height: 100upx;
 	background: #fff;
-	z-index: 10000;
+	z-index: 999;
 	// background: $uni-bg-color-grey;
 	font-size: $uni-font-size-lg;
 }
@@ -588,7 +588,7 @@ export default {
 .uni-calendar__box {
 	position: fixed;
 	bottom: 0;
-	z-index: 9999;
+	z-index: 999;
 	width: 100%;
 	box-sizing: border-box;
 	transition: all 0.3s;

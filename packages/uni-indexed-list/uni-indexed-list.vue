@@ -26,7 +26,7 @@
               <view
                 v-if="showSelect"
                 style="margin-right: 20upx;">
-                <uni-icon
+                <uni-icons
                   :type="item.checked ? 'checkbox-filled' : 'circle'"
                   :color="item.checked ? '#007aff' : '#aaa'"
                   size="24" />
@@ -61,11 +61,11 @@
   </view>
 </template>
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniIndexedList',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     options: {
@@ -89,36 +89,47 @@ export default {
       scrollViewId: ''
     }
   },
+  watch: {
+    options: {
+      handler: function () {
+        this.setList()
+      },
+      deep: true
+    }
+  },
   created () {
-    let winHeight = uni.getSystemInfoSync().windowHeight
-    this.itemHeight = winHeight / this.options.length
-    this.winHeight = winHeight
-
-    // if (!this.showSelect) {
-    // 	this.lists = this.options;
-    // 	return;
-    // }
-    // console.log(this.options)
-    this.lists = this.options.map(value => {
-      // console.log(value)
-      let items = value.data.map(item => {
-        let obj = {}
-        // for (let key in item) {
-        obj['key'] = value.letter
-        obj['name'] = item
-        // }
-        obj.checked = item.checked ? item.checked : false
-        return obj
-      })
-      return {
-        title: value.letter,
-        key: value.letter,
-        items: items
-      }
-    })
-    // console.log(this.lists)
+    this.setList()
   },
   methods: {
+    setList () {
+      let winHeight = uni.getSystemInfoSync().windowHeight
+      this.itemHeight = winHeight / this.options.length
+      this.winHeight = winHeight
+
+      // if (!this.showSelect) {
+      // 	this.lists = this.options;
+      // 	return;
+      // }
+      // console.log(this.options)
+      this.lists = this.options.map(value => {
+        // console.log(value)
+        let items = value.data.map(item => {
+          let obj = {}
+          // for (let key in item) {
+          obj['key'] = value.letter
+          obj['name'] = item
+          // }
+          obj.checked = item.checked ? item.checked : false
+          return obj
+        })
+        return {
+          title: value.letter,
+          key: value.letter,
+          items: items
+        }
+      })
+      // console.log(this.lists)
+    },
     touchStart (e) {
       this.touchmove = true
       let pageY = e.touches[0].pageY

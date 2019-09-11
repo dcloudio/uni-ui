@@ -13,7 +13,7 @@
       <view
         v-else-if="showExtraIcon"
         class="uni-list-item__icon">
-        <uni-icon
+        <uni-icons
           :color="extraIcon.color"
           :size="extraIcon.size"
           :type="extraIcon.type"
@@ -37,7 +37,7 @@
           :disabled="disabled"
           :checked="switchChecked"
           @change="onSwitchChange" />
-        <uni-icon
+        <uni-icons
           v-if="showArrow"
           :size="20"
           class="uni-icon-wrapper"
@@ -49,12 +49,12 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 import uniBadge from '../uni-badge/uni-badge.vue'
 export default {
   name: 'UniListItem',
   components: {
-    uniIcon,
+    uniIcons,
     uniBadge
   },
   props: {

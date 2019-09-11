@@ -7,7 +7,7 @@
       class="uni-rate-icon"
       @click="_onClick(index)"
     >
-      <uni-icon
+      <uni-icons
         :size="size"
         :color="color"
         :type="isFill ? 'star-filled' : 'star'"
@@ -15,7 +15,7 @@
       <view
         :style="{ width: star.activeWitch }"
         class="uni-rate-icon-on">
-        <uni-icon
+        <uni-icons
           :size="size"
           :color="activeColor"
           type="star-filled"/>
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniRate',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     isFill: {

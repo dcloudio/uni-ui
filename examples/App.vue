@@ -34,10 +34,11 @@ view {
 	font-size: 32upx;
 	// line-height: $uni-font-size-base;
 	color: #464e52;
-	padding: 30upx;
+	padding: 30upx 30upx 30upx 50upx;
 	margin-top: 20upx;
 	position: relative;
 	background-color: #fdfdfd;
+  border-bottom: 1px #f5f5f5 solid;
 }
 .example-title__after {
 	position: relative;
@@ -46,21 +47,18 @@ view {
 .example-title:after {
 	content: '';
 	position: absolute;
-	left:0px;
+	left: 30upx;
 	margin: auto;
 	top: 0;
 	bottom: 0;
-	width: 10upx;
-	height: 40upx;
-	border-top-right-radius: 10upx;
-	border-bottom-right-radius: 10upx;
-	background-color: #031e3c;
+	width: 6upx;
+	height: 32upx;
+	background-color: #CCCCCC;
 }
 .example .example-title {
 	margin: 40upx 0;
 }
 .example-body {
-	border-top: 1px #f5f5f5 solid;
 	padding: 30upx;
 	background: #ffffff;
 }

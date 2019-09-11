@@ -6,7 +6,7 @@
     @click="onClick">
     <view
       v-if="showClose === 'true' || showClose === true"
-      class="uni-noticebar__close"><uni-icon
+      class="uni-noticebar__close"><uni-icons
         type="closefill"
         size="12" /></view>
     <view
@@ -16,7 +16,7 @@
         v-if="showIcon === 'true' || showIcon === true"
         :style="{ backgroundColor: backgroundColor, color: color }"
         class="uni-noticebar__content-icon">
-        <uni-icon
+        <uni-icons
           :color="color"
           type="sound"
           size="14" />
@@ -37,7 +37,7 @@
         <view
           v-if="moreText"
           class="uni-noticebar__content-more-text">{{ moreText }}</view>
-        <uni-icon
+        <uni-icons
           type="arrowright"
           size="14" />
       </view>
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import uniIcon from '../uni-icon/uni-icon.vue'
+import uniIcons from '../uni-icons/uni-icons.vue'
 export default {
   name: 'UniNoticeBar',
   components: {
-    uniIcon
+    uniIcons
   },
   props: {
     text: {

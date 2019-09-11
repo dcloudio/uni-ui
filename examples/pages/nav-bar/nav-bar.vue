@@ -34,14 +34,14 @@
         <block slot="left">
           <view class="city">
             <view>{{ city }}</view>
-            <uni-icon
+            <uni-icons
               type="arrowdown"
               color="#333333"
               size="22"/>
           </view>
         </block>
         <view class="input-view">
-          <uni-icon
+          <uni-icons
             type="search"
             size="22"
             color="#666666"/>

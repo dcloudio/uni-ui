@@ -96,7 +96,7 @@ $drawer-width: 61.8%;
 	bottom: 0;
 	overflow: hidden;
 	visibility: hidden;
-	z-index: 10001;
+	z-index: 999;
 	height: 100%;
 
 	&.uni-drawer--right {
