@@ -17,6 +17,7 @@ export default {
     show (newVal) {
       if (this.autoClose) return
       let valueObj = this.position[0]
+      if (!valueObj) return
       valueObj.show = newVal
       this.$set(this.position, 0, valueObj)
     }

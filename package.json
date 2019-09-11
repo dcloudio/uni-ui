@@ -1,6 +1,6 @@
 {
-  "name": "wxs-test-alpha-del-2",
-  "version": "0.1.0",
+  "name": "@dcloudio/uni-ui",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "npm run dev:h5",
@@ -53,10 +53,10 @@
     "babel-plugin-import": "^1.11.0",
     "mini-types": "*",
     "miniprogram-api-typings": "^2.8.0-2",
-    "postcss-comment": "^2.0.0",
-    "vue-template-compiler": "^2.6.10",
     "node-sass": "^4.12.0",
-    "sass-loader": "^7.3.1"
+    "postcss-comment": "^2.0.0",
+    "sass-loader": "^7.3.1",
+    "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
     "Android >= 4.4",
