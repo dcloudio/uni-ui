@@ -23,23 +23,23 @@
   }
 
   view {
-    font-size: 28upx;
+    font-size: 28rpx;
     line-height: inherit;
   }
 
   .example {
-    padding: 0 30upx 30upx;
+    padding: 0 30rpx 30rpx;
   }
 
   .example-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 32upx;
+    font-size: 32rpx;
     // line-height: $uni-font-size-base;
     color: #464e52;
-    padding: 30upx 30upx 30upx 50upx;
-    margin-top: 20upx;
+    padding: 30rpx 30rpx 30rpx 50rpx;
+    margin-top: 20rpx;
     position: relative;
     background-color: #fdfdfd;
     border-bottom: 1px #f5f5f5 solid;
@@ -51,16 +51,16 @@
   }
 
   .example .example-title {
-    margin: 40upx 0;
+    margin: 40rpx 0;
   }
 
   .example-body {
-    padding: 30upx;
+    padding: 30rpx;
     background-color: #ffffff;
   }
 
   .example-info {
-    padding: 30upx;
+    padding: 30rpx;
     color: #3b4144;
     background: #ffffff;
   }
