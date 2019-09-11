@@ -17,6 +17,7 @@ export default {
     show (newVal) {
       if (this.autoClose) return
       let valueObj = this.position[0]
+      if (!valueObj) return
       valueObj.show = newVal
       this.$set(this.position, 0, valueObj)
     }
@@ -25,14 +26,14 @@ export default {
   mounted () {
     this.init()
     this.getSize()
-    this.getBUttonSize()
+    this.getButtonSize()
   },
   // #endif
   // #ifndef H5
   onReady () {
     this.init()
     this.getSize()
-    this.getBUttonSize()
+    this.getButtonSize()
   },
   // #endif
   methods: {
@@ -75,7 +76,7 @@ export default {
         })
         .exec()
     },
-    getBUttonSize () {
+    getButtonSize () {
       const views = uni.createSelectorQuery().in(this)
       views
         .selectAll('.button-hock')

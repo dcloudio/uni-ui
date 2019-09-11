@@ -1,6 +1,6 @@
 {
-  "name": "wxs-test-alpha-del-2",
-  "version": "0.1.0",
+  "name": "@dcloudio/uni-ui",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "npm run dev:h5",
