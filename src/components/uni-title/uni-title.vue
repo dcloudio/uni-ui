@@ -1,66 +1,56 @@
 <template>
-  <view
-    :class="{sticky:sticky}"
-    :style="{top:stickyTop+'px'}"
-    class="uni-title">
-    <view
-      v-if="type"
-      class="uni-title__head">
-      <view
-        :class="type"
-        class="uni-title__head-tag"/>
+  <view :class="{sticky:sticky}" :style="{top:stickyTop+'px'}" class="uni-title">
+    <view v-if="type" class="uni-title__head">
+      <view :class="type" class="uni-title__head-tag" />
     </view>
     <view class="uni-title__content">
-      <view
-        :class="{'distraction':!subTitle}"
-        class="uni-title__content-title">{{ title }}</view>
+      <view :class="{'distraction':!subTitle}" class="uni-title__content-title">{{ title }}</view>
       <view class="uni-title__content-sub">{{ subTitle }}</view>
     </view>
   </view>
 </template>
 
 <script>
-export default {
-  name: 'UniTitle',
-  props: {
-    type: {
-      type: String,
-      default: ''
+  export default {
+    name: 'UniTitle',
+    props: {
+      type: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      subTitle: {
+        type: String,
+        default: ''
+      },
+      sticky: {
+        type: Boolean,
+        default: false
+      },
+      stickyTop: {
+        type: Number,
+        default: 0
+      }
     },
-    title: {
-      type: String,
-      default: ''
+    data() {
+      return {}
     },
-    subTitle: {
-      type: String,
-      default: ''
+    watch: {
+      title(newVal) {
+        if (uni.report && newVal !== '') {
+          uni.report('title', newVal)
+        }
+      }
     },
-    sticky: {
-      type: Boolean,
-      default: false
-    },
-    stickyTop: {
-      type: Number,
-      default: 0
-    }
-  },
-  data () {
-    return {
-    }
-  },
-  watch: {
-    title (newVal) {
-      if (uni.report && newVal !== '') {
-        uni.report('title', newVal)
+    methods: {
+      onClick() {
+        this.$emit('click')
       }
     }
-  },
-  methods: {
-    onClick () {
-      this.$emit('click')
-    }
   }
-}
 </script>
 
 <style lang="scss">
@@ -75,6 +65,7 @@ export default {
     background-color: #fdfdfd;
     border-bottom: 1px #f5f5f5 solid;
     box-sizing: border-box;
+
     &.sticky {
       position: sticky;
       // top: 44px;
@@ -84,7 +75,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 10px;
+      margin-right: 10px; 
 
       &-tag {
         &.line {
