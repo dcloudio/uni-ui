@@ -56,8 +56,7 @@
           data: [{
               type: false,
               subName: '默认开启',
-              open: false,
-							openPre: true,
+              open: true,
               content: '折叠内容主体，可自定义内容及样式'
             },
             {
@@ -164,7 +163,7 @@
         id: 2
       }
     },
-		onLoad() {
+		onReady() {
 			setTimeout(()=>{
 				this.list.map(function(item){
 					item.data.map(function(collapseItem){
