@@ -47,14 +47,12 @@ export default {
 @import '../../uni.scss';
 $bage-size: 12px;
 $bage-small: scale(0.8);
+$bage-height: 40rpx;
 
 .uni-badge {
-	// position: relative;
-	// left: 10rpx;
 	flex-direction: row;
-	height: 40rpx;
-	// margin-top: -1rpx;
-	line-height: 40rpx;
+	height: $bage-height;
+	line-height: $bage-height;
 	color: $uni-text-color;
 	border-radius: 100px;
 	background-color: $uni-bg-color-hover;
