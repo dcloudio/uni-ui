@@ -1,7 +1,7 @@
 <template>
-  <view class="uni-noticebar" :style="{ backgroundColor: backgroundColor }">
+  <view v-if="show" class="uni-noticebar" :style="{ backgroundColor: backgroundColor }" @click="onClick">
     <uni-icons v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" type="closefill" :color="color"
-      size="12" />
+      size="12" @click="close" />
     <uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
       size="14" />
     <view class="uni-noticebar-content-wrapper">
@@ -20,6 +20,10 @@
 
 <script>
   import uniIcons from '../uni-icons/uni-icons.vue'
+  // #ifdef APP-NVUE
+  const dom = weex.requireModule('dom');
+  const animation = weex.requireModule('animation');
+  // #endif
   export default {
     name: 'UniNoticeBar',
     components: {
@@ -76,6 +80,10 @@
     data() {
       const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
       return {
+        // #ifdef APP-NVUE
+        textWidth: 0,
+        stopAnimation: false,
+        // #endif
         elId: elId,
         show: true,
         animationDuration: 'none',
@@ -85,6 +93,11 @@
     mounted() {
       this.setAnimation()
     },
+    // #ifdef APP-NVUE
+    beforeDestroy() {
+      this.stopAnimation = true
+    },
+    // #endif
     methods: {
       setAnimation() {
         if (this.scrollable) {
@@ -100,20 +113,47 @@
             })
           // #endif
           // #ifdef APP-NVUE
-          const animation = weex.requireModule('animation');
-          animation.transition(this.$refs['animationEle'], {
-            styles: {
-              transform: 'translateX(-1500px)'
-            },
-            duration: this.text.length * 100,
-            timingFunction: 'linear',
-            delay: 0
-          },function(res){
-            console.log(JSON.stringify(res));
-          });
+          dom.getComponentRect(this.$refs['animationEle'], (res)=>{
+            this.textWidth = res.size.width;
+            this.loopAnimation()
+          })
           // #endif
-
         }
+      },
+      loopAnimation() {
+        // #ifdef APP-NVUE
+        animation.transition(this.$refs['animationEle'], {
+          styles: {
+            transform: `translateX(-${this.textWidth}px)`
+          },
+          duration: this.textWidth / this.speed * 1000,
+          timingFunction: 'linear',
+          delay: 0
+        },()=>{
+          if (!this.stopAnimation) {
+            animation.transition(this.$refs['animationEle'], {
+              styles: {
+                transform: `translateX(0px)`
+              },
+              duration: 0
+            },()=>{
+              if (!this.stopAnimation) {
+                this.loopAnimation()
+              }
+            });
+          }
+        });
+        // #endif
+      },
+      clickMore() {
+        this.$emit('getmore')
+      },
+      close() {
+        this.show = false;
+        this.$emit('close')
+      },
+      onClick() {
+        this.$emit('click')
       }
     }
   }
