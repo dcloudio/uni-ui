@@ -1,7 +1,7 @@
 <template>
   <view>
-    <view class="example-info">标签组件多用于商品分类、重点内容显示等场景。</view>
-    <view class="example-title">实心标签</view>
+    <view class="example-info"><text class="example-title-text">标签组件多用于商品分类、重点内容显示等场景。</text></view>
+    <view class="example-title"><text class="example-title-text">实心标签</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag text="标签" /></view>
       <view class="tag-view"><uni-tag text="标签" type="primary" /></view>
@@ -9,7 +9,7 @@
       <view class="tag-view"><uni-tag text="标签" type="warning" /></view>
       <view class="tag-view"><uni-tag text="标签" type="error" /></view>
     </view>
-    <view class="example-title">空心标签</view>
+    <view class="example-title"><text class="example-title-text">空心标签</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag :inverted="true" text="标签" /></view>
       <view class="tag-view"><uni-tag :inverted="true" text="标签" type="primary" /></view>
@@ -17,27 +17,27 @@
       <view class="tag-view"><uni-tag :inverted="true" text="标签" type="warning" /></view>
       <view class="tag-view"><uni-tag :inverted="true" text="标签" type="error" /></view>
     </view>
-    <view class="example-title">圆角样式</view>
+    <view class="example-title"><text class="example-title-text">圆角样式</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag :circle="true" text="标签" type="primary" size="small" /></view>
       <view class="tag-view"><uni-tag :inverted="true" :circle="true" text="标签" type="success" size="small" /></view>
       <view class="tag-view"><uni-tag :circle="true" text="标签" type="warning" /></view>
       <view class="tag-view"><uni-tag :inverted="true" :circle="true" text="标签" type="error" /></view>
     </view>
-    <view class="example-title">标记样式</view>
+    <view class="example-title"><text class="example-title-text">标记样式</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag :mark="true" text="标签" type="primary" size="small" /></view>
       <view class="tag-view"><uni-tag :mark="true" text="标签" type="success" size="small" /></view>
       <view class="tag-view"><uni-tag :mark="true" text="标签" type="warning" /></view>
       <view class="tag-view"><uni-tag :mark="true" :circle="true" text="标签" type="error" /></view>
     </view>
-    <view class="example-title">点击事件</view>
+    <view class="example-title"><text class="example-title-text">点击事件</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag :type="type" text="标签" @click="setType" /></view>
       <view class="tag-view"><uni-tag :circle="true" :inverted="inverted" text="标签" type="primary" @click="setInverted" /></view>
     </view>
 
-    <view class="example-title">小标签</view>
+    <view class="example-title"><text class="example-title-text">小标签</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag text="标签" size="small" /></view>
       <view class="tag-view"><uni-tag text="标签" type="primary" size="small" /></view>
@@ -46,7 +46,7 @@
       <view class="tag-view"><uni-tag :inverted="true" :circle="true" text="标签" type="error" size="small" /></view>
     </view>
 
-    <view class="example-title">不可点击状态</view>
+    <view class="example-title"><text class="example-title-text">不可点击状态</text></view>
     <view class="example-body">
       <view class="tag-view"><uni-tag :disabled="true" text="标签" /></view>
       <view class="tag-view"><uni-tag :disabled="true" text="标签" type="primary" /></view>
@@ -82,7 +82,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+  @import '@/common/uni-nvue.scss';
 .example-body {
   flex-direction: row;
   padding: 20upx 0 0 0;
