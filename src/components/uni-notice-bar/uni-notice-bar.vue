@@ -5,9 +5,10 @@
     <uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
       size="14" />
     <view class="uni-noticebar-content-wrapper">
-      <view class="uni-noticebar-content" :class="{'uni-noticebar-content--scrollable':scrollable}">
-        <text :id="elId" ref="animationEle" class="uni-noticebar-content-text" :class="{'uni-noticebar-content-text--scrollable':scrollable,'uni-noticebar-content-text--single':!scrollable && (single || moreText)}"
-          :style="{'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: animationPlayState,'-webkit-animationPlayState':animationPlayState, color:color}">{{text}}</text>
+      <view :id="elId" ref="animationEle" class="uni-noticebar-content" :class="{'uni-noticebar-content--scrollable':scrollable}"
+        :style="{'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: animationPlayState,'-webkit-animationPlayState':animationPlayState}">
+        <text class="uni-noticebar-content-text" :class="{'uni-noticebar-content-text--scrollable':scrollable,'uni-noticebar-content-text--single':!scrollable && (single || moreText)}"
+          :style="{color:color}">{{text}}</text>
       </view>
     </view>
     <view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar-more" @click="clickMore">
@@ -87,9 +88,6 @@
     methods: {
       setAnimation() {
         if (this.scrollable) {
-          // #ifdef APP-NVUE
-
-          // #endif
           // #ifndef APP-NVUE
           uni.createSelectorQuery()
             .in(this)
@@ -98,20 +96,23 @@
             .exec(ret => {
               this.animationDuration = `${ret[0].width / this.speed}s`
               this.animationPlayState = 'running'
+
             })
           // #endif
-          // const query = uni.createSelectorQuery().in(this);
-          // query.select("animationEle")
-          // this.animationDuration = 
-          // const animation = weex.requireModule('animation');
-          // animation.transition(this.$refs['tab-bar'], {
-          //   styles: {
-          //     transform: `translateX(${index * 375}px)`
-          //   },
-          //   duration: 150,
-          //   timingFunction: 'ease',
-          //   delay: 0
-          // });
+          // #ifdef APP-NVUE
+          const animation = weex.requireModule('animation');
+          animation.transition(this.$refs['animationEle'], {
+            styles: {
+              transform: 'translateX(-1500px)'
+            },
+            duration: this.text.length * 100,
+            timingFunction: 'linear',
+            delay: 0
+          },function(res){
+            console.log(JSON.stringify(res));
+          });
+          // #endif
+
         }
       }
     }
@@ -139,18 +140,22 @@
   .uni-noticebar-icon {
     margin-right: 5px;
   }
-  
-  .uni-noticebar-content-wrapper{
+
+  .uni-noticebar-content-wrapper {
     flex: 1;
+    flex-direction: row;
     overflow: hidden;
   }
 
   .uni-noticebar-content {
     /* #ifdef APP-NVUE */
-    display: block;
-    /* #endif */
     flex: 0;
-    overflow: visible;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    flex: 1;
+    animation: notice 10s 0s linear infinite both;
+    animation-play-state: paused;
+    /* #endif */
   }
 
   .uni-noticebar-content-text {
@@ -177,8 +182,6 @@
     white-space: nowrap;
     /* #endif */
     padding-left: 750rpx;
-    animation: notice 10s 0s linear infinite both;
-    animation-play-state: paused;
   }
 
   .uni-noticebar-more {
