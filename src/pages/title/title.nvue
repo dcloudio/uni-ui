@@ -2,9 +2,7 @@
   <view class="uni-wrap">
     <scroll-view class="scroll" scroll-y>
       <view class="example-info">
-        <text class="example-info-text">
-          uni-title 组件主要用于文章、列表详情的等标题展示
-        </text>
+        <text class="example-info-text"> uni-title 组件主要用于文章、列表详情的等标题展示 </text>
       </view>
       <uni-title class="uni-title" title="基础用法" sub-title="离开页面修改导航栏标题"></uni-title>
       <view class="example-body">
@@ -108,11 +106,7 @@
   .scroll {
     flex-direction: column;
     flex: 1;
-    border-color: red;
-    border-style: solid;
-    border-width: 1px;
-  }
-
+  } 
   .example-body {
     padding: 0;
   }

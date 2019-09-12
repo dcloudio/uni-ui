@@ -9,8 +9,8 @@
         <uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
       </view>
       <view class="uni-list-item__content">
-        <view class="uni-list-item__content-title">{{ title }}</view>
-        <view v-if="note" class="uni-list-item__content-note">{{ note }}</view>
+        <text class="uni-list-item__content-title">{{ title }}</text>
+        <text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
       </view>
       <view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra">
         <uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
@@ -125,95 +125,86 @@
   .uni-list-item {
     font-size: $uni-font-size-lg;
     position: relative;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-left: $uni-spacing-row-lg;
+    // align-items: center;
+  }
+
+  .uni-list-item--disabled {
+    @include list-disabled;
+  }
+
+  .uni-list-item--hover {
+    @include list-hover;
+  }
+
+  .uni-list-item__container {
+    padding: $list-item-pd;
+    padding-left: 0;
+    flex: 1;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-
-    &--disabled {
-      @include list-disabled;
-    }
-
-    &--hover {
-      @include list-hover;
-    }
-
-    &__container {
-      padding: $list-item-pd;
-      width: 100%;
-      box-sizing: border-box;
-      flex: 1;
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-
-      &:after {
-        position: absolute;
-        z-index: 3;
-        right: 0;
-        bottom: 0;
-        left: 30upx;
-        height: 1px;
-        content: '';
-        -webkit-transform: scaleY(0.5);
-        transform: scaleY(0.5);
-        background-color: $uni-border-color;
-      }
-    }
-
-    &__content {
-      flex: 1;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      color: #3b4144;
-
-      &-title {
-        font-size: $uni-font-size-lg;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        color: inherit;
-        line-height: 1.5;
-        overflow: hidden;
-      }
-
-      &-note {
-        margin-top: 6upx;
-        color: $uni-text-color-grey;
-        font-size: $uni-font-size-base;
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-      }
-    }
-
-    &__extra {
-      width: 25%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    &__icon {
-      margin-right: 18upx;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      &-img {
-        height: $uni-img-size-base;
-        width: $uni-img-size-base;
-      }
-    }
+    border-bottom-color: $uni-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    // &:after {
+    //   position: absolute;
+    //   z-index: 3;
+    //   right: 0;
+    //   bottom: 0;
+    //   left: 30rpx;
+    //   height: 1px;
+    //   content: '';
+    //   -webkit-transform: scaleY(0.5);
+    //   transform: scaleY(0.5);
+    //   background-color: $uni-border-color;
+    // }
   }
 
-  .uni-list>.uni-list-item:last-child .uni-list-item-container:after {
-    height: 0px;
+  .uni-list-item__content {
+    flex: 1;
+    overflow: hidden;
+    flex-direction: column;
+    color: #3b4144;
+
   }
+
+  .uni-list-item__content-title {
+    font-size: $uni-font-size-lg;
+    color: #3b4144;
+    overflow: hidden;
+  }
+
+  .uni-list-item__content-note {
+    margin-top: 6rpx;
+    color: $uni-text-color-grey;
+    font-size: $uni-font-size-base;
+    overflow: hidden;
+  }
+
+  .uni-list-item__extra {
+    width: 25%;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .uni-list-item__icon {
+    margin-right: 18rpx;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .uni-list-item__icon-img {
+    height: $uni-img-size-base;
+    width: $uni-img-size-base;
+  }
+
+  // .uni-list>.uni-list-item:last-child .uni-list-item-container:after {
+  //   height: 0px;
+  // }
 </style>
