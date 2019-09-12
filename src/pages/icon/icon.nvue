@@ -384,7 +384,11 @@
 
 <style lang="scss">
   @import '@/common/uni-nvue.scss';
-  
+  .example-body{
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
   .uni-right {
     flex-direction: row;
     flex-wrap: nowrap;

@@ -1,258 +1,203 @@
 <template>
-  <view
-    v-if="show"
-    :style="{ backgroundColor: backgroundColor, color: color }"
-    class="uni-noticebar"
-    @click="onClick">
-    <view
-      v-if="showClose === 'true' || showClose === true"
-      class="uni-noticebar__close"><uni-icons
-        type="closefill"
-        size="12" /></view>
-    <view
-      :class="{ 'uni-noticebar--flex': scrollable || single || moreText }"
-      class="uni-noticebar__content">
-      <view
-        v-if="showIcon === 'true' || showIcon === true"
-        :style="{ backgroundColor: backgroundColor, color: color }"
-        class="uni-noticebar__content-icon">
-        <uni-icons
-          :color="color"
-          type="sound"
-          size="14" />
+  <view class="uni-noticebar" :style="{ backgroundColor: backgroundColor }">
+    <uni-icons v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" type="closefill" :color="color"
+      size="12" />
+    <uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
+      size="14" />
+    <view class="uni-noticebar-content-wrapper">
+      <view class="uni-noticebar-content" :class="{'uni-noticebar-content--scrollable':scrollable}">
+        <text :id="elId" ref="animationEle" class="uni-noticebar-content-text" :class="{'uni-noticebar-content-text--scrollable':scrollable,'uni-noticebar-content-text--single':!scrollable && (single || moreText)}"
+          :style="{'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: animationPlayState,'-webkit-animationPlayState':animationPlayState, color:color}">{{text}}</text>
       </view>
-      <view
-        :class="{ 'uni-noticebar--scrollable': scrollable, 'uni-noticebar--single': !scrollable && (single || moreText) }"
-        class="uni-noticebar__content-text">
-        <view
-          :id="elId"
-          :style="{ animation: animation, '-webkit-animation': animation }"
-          class="uni-noticebar__content-inner">{{ text }}</view>
-      </view>
-      <view
-        v-if="showGetMore === 'true' || showGetMore === true"
-        :style="{ width: moreText ? '180upx' : '20px' }"
-        class="uni-noticebar__content-more"
-        @click="clickMore">
-        <view
-          v-if="moreText"
-          class="uni-noticebar__content-more-text">{{ moreText }}</view>
-        <uni-icons
-          type="arrowright"
-          size="14" />
-      </view>
+    </view>
+    <view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar-more" @click="clickMore">
+      <text v-if="moreText" :style="{ color: color }" class="uni-noticebar-more-text">{{ moreText }}</text>
+      <uni-icons type="arrowright" :style="{ color: color }" size="14" />
     </view>
   </view>
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue'
-export default {
-  name: 'UniNoticeBar',
-  components: {
-    uniIcons
-  },
-  props: {
-    text: {
-      type: String,
-      default: ''
+  import uniIcons from '../uni-icons/uni-icons.vue'
+  export default {
+    name: 'UniNoticeBar',
+    components: {
+      uniIcons
     },
-    moreText: {
-      type: String,
-      default: ''
-    },
-    backgroundColor: {
-      type: String,
-      default: '#fffbe8'
-    },
-    speed: {
-      // 默认1s滚动100px
-      type: [String, Number],
-      default: 100
-    },
-    color: {
-      type: String,
-      default: '#de8c17'
-    },
-    single: {
-      // 是否单行
-      type: [String, Boolean],
-      default: false
-    },
-    scrollable: {
-      // 是否滚动，添加后控制单行效果取消
-      type: [String, Boolean],
-      default: false
-    },
-    showIcon: {
-      // 是否显示左侧icon
-      type: [String, Boolean],
-      default: false
-    },
-    showGetMore: {
-      // 是否显示右侧查看更多
-      type: [String, Boolean],
-      default: false
-    },
-    showClose: {
-      // 是否显示左侧关闭按钮
-      type: [String, Boolean],
-      default: false
-    }
-  },
-  data () {
-    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
-    return {
-      elId: elId,
-      show: true,
-      animation: ''
-    }
-  },
-  watch: {
-    text (newValue, oldValue) {
-      this.$nextTick(() => {
-        setTimeout(this.setAnimation, 200)
-      })
-    }
-  },
-  // #ifdef H5
-  mounted () {
-    this.setAnimation()
-  },
-  // #endif
-  // #ifndef H5
-  onReady () {
-    this.setAnimation()
-  },
-  // #endif
-  methods: {
-    clickMore () {
-      this.$emit('getmore')
-    },
-    onClick (e) {
-      let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX
-      if (uni.upx2px(48) + 12 > clientX && String(this.showClose) === 'true') {
-        this.show = false
-        this.$emit('close')
+    props: {
+      text: {
+        type: String,
+        default: ''
+      },
+      moreText: {
+        type: String,
+        default: ''
+      },
+      backgroundColor: {
+        type: String,
+        default: '#fffbe8'
+      },
+      speed: {
+        // 默认1s滚动100px
+        type: [String, Number],
+        default: 100
+      },
+      color: {
+        type: String,
+        default: '#de8c17'
+      },
+      single: {
+        // 是否单行
+        type: [String, Boolean],
+        default: false
+      },
+      scrollable: {
+        // 是否滚动，添加后控制单行效果取消
+        type: [String, Boolean],
+        default: false
+      },
+      showIcon: {
+        // 是否显示左侧icon
+        type: [String, Boolean],
+        default: false
+      },
+      showGetMore: {
+        // 是否显示右侧查看更多
+        type: [String, Boolean],
+        default: false
+      },
+      showClose: {
+        // 是否显示左侧关闭按钮
+        type: [String, Boolean],
+        default: false
       }
-      this.$emit('click')
     },
-    setAnimation () {
-      if (this.scrollable === false || this.scrollable === 'false') {
-        return
+    data() {
+      const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+      return {
+        elId: elId,
+        show: true,
+        animationDuration: 'none',
+        animationPlayState: 'paused'
       }
-      // #ifdef MP-TOUTIAO
-      setTimeout(() => {
-        uni.createSelectorQuery()
-          .in(this)
-          .select(`#${this.elId}`)
-          .boundingClientRect()
-          .exec(ret => {
-            this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-          })
-      }, 200)
-      // #endif
-      // #ifndef MP-TOUTIAO
-      uni.createSelectorQuery()
-        .in(this)
-        .select(`#${this.elId}`)
-        .boundingClientRect()
-        .exec(ret => {
-          this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-        })
-      // #endif
+    },
+    mounted() {
+      this.setAnimation()
+    },
+    methods: {
+      setAnimation() {
+        if (this.scrollable) {
+          // #ifdef APP-NVUE
+
+          // #endif
+          // #ifndef APP-NVUE
+          uni.createSelectorQuery()
+            .in(this)
+            .select(`#${this.elId}`)
+            .boundingClientRect()
+            .exec(ret => {
+              this.animationDuration = `${ret[0].width / this.speed}s`
+              this.animationPlayState = 'running'
+            })
+          // #endif
+          // const query = uni.createSelectorQuery().in(this);
+          // query.select("animationEle")
+          // this.animationDuration = 
+          // const animation = weex.requireModule('animation');
+          // animation.transition(this.$refs['tab-bar'], {
+          //   styles: {
+          //     transform: `translateX(${index * 375}px)`
+          //   },
+          //   duration: 150,
+          //   timingFunction: 'ease',
+          //   delay: 0
+          // });
+        }
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
-@mixin flex-row-center {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
+  @import '@/uni.scss';
 
-.uni-noticebar {
-	padding: 12upx 24upx;
-	font-size: $uni-font-size-sm;
-	line-height: 1.5;
-	margin-bottom: 20upx;
-	@include flex-row-center;
-	justify-content: left;
+  .uni-noticebar {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    width: 100%;
+    /* #endif */
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+  }
 
-	&__close {
-		color: $uni-text-color-grey;
-		margin-right: 24upx;
-		@include flex-row-center;
-	}
+  .uni-noticebar-close {
+    margin-right: 5px;
+  }
 
-	&__content {
-		flex: 1;
-		overflow: hidden;
+  .uni-noticebar-icon {
+    margin-right: 5px;
+  }
+  
+  .uni-noticebar-content-wrapper{
+    flex: 1;
+    overflow: hidden;
+  }
 
-		&.uni-noticebar--flex {
-			flex: 1;
-			display: flex;
-			flex-direction: row;
-		}
+  .uni-noticebar-content {
+    /* #ifdef APP-NVUE */
+    display: block;
+    /* #endif */
+    flex: 0;
+    overflow: visible;
+  }
 
-		&-icon {
-			display: inline-block;
-			z-index: 1;
-			padding-right: 12upx;
-		}
+  .uni-noticebar-content-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
 
-		&-more {
-			width: 180upx;
-			@include flex-row-center;
-			justify-content: flex-end;
-			word-break: keep-all;
-			margin-left: 10upx;
-			color: $uni-text-color-grey;
+  .uni-noticebar-content-text--single {
+    /* #ifdef APP-NVUE */
+    lines: 1;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-			&-text {
-				font-size: $uni-font-size-sm;
-				white-space: nowrap;
-			}
-		}
+  .uni-noticebar-content-text--scrollable {
+    /* #ifdef APP-NVUE */
+    lines: 1;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+    padding-left: 750rpx;
+    animation: notice 10s 0s linear infinite both;
+    animation-play-state: paused;
+  }
 
-		&-text {
-			word-break: break-all;
-			line-height: 1.5;
-			display: inline;
+  .uni-noticebar-more {
+    /* #ifndef APP-NVUE */
+    display: inline-flex;
+    /* #endif */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-left: 5px;
+  }
 
-			&.uni-noticebar--single {
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				overflow: hidden;
-			}
+  .uni-noticebar-more-text {
+    font-size: 14px;
+  }
 
-			&.uni-noticebar--scrollable {
-				flex: 1;
-				display: block;
-				overflow: hidden;
-
-				.uni-noticebar__content-inner {
-					padding-left: 100%;
-					white-space: nowrap;
-					display: inline-block;
-					transform: translateZ(0);
-				}
-			}
-		}
-
-		&-inner {
-			font-size: $uni-font-size-sm;
-			display: inline;
-		}
-	}
-}
-
-@keyframes notice {
-	100% {
-		transform: translate3d(-100%, 0, 0);
-	}
-}
+  @keyframes notice {
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
 </style>

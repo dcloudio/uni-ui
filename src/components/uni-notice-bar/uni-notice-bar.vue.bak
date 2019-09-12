@@ -1,0 +1,246 @@
+<template>
+  <view v-if="show" :style="{ backgroundColor: backgroundColor, color: color }" class="uni-noticebar" @click="onClick">
+    <view v-if="showClose === 'true' || showClose === true" class="uni-noticebar__close">
+      <uni-icons type="closefill" size="12" />
+    </view>
+    <view :class="{ 'uni-noticebar--flex': scrollable || single || moreText }" class="uni-noticebar__content">
+      <view v-if="showIcon === 'true' || showIcon === true" :style="{ backgroundColor: backgroundColor }"
+        class="uni-noticebar__content-icon">
+        <uni-icons :color="color" type="sound" size="14" />
+      </view>
+      <view :class="{ 'uni-noticebar--scrollable': scrollable, 'uni-noticebar--single': !scrollable &&(single || moreText) }"
+        class="uni-noticebar__content-text">
+        <text :id="elId" :class="{'uni-noticebar__content-text--scrollable': scrollable, 'uni-noticebar__content-text--single': !scrollable &&(single || moreText)  }" :style="{ animation: animation, '-webkit-animation': animation ,color: color}" class="uni-noticebar__content-inner">{{ text }}</text>
+      </view>
+      <view v-if="showGetMore === 'true' || showGetMore === true" :style="{ width: moreText ? '180rpx' : '20px' }"
+        class="uni-noticebar__content-more" @click="clickMore">
+        <text v-if="moreText" :style="{ color: color }" class="uni-noticebar__content-more-text">{{ moreText }}</text>
+        <uni-icons type="arrowright" :style="{ color: color }" size="14" />
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import uniIcons from '../uni-icons/uni-icons.vue'
+  export default {
+    name: 'UniNoticeBar',
+    components: {
+      uniIcons
+    },
+    props: {
+      text: {
+        type: String,
+        default: ''
+      },
+      moreText: {
+        type: String,
+        default: ''
+      },
+      backgroundColor: {
+        type: String,
+        default: '#fffbe8'
+      },
+      speed: {
+        // 默认1s滚动100px
+        type: [String, Number],
+        default: 100
+      },
+      color: {
+        type: String,
+        default: '#de8c17'
+      },
+      single: {
+        // 是否单行
+        type: [String, Boolean],
+        default: false
+      },
+      scrollable: {
+        // 是否滚动，添加后控制单行效果取消
+        type: [String, Boolean],
+        default: false
+      },
+      showIcon: {
+        // 是否显示左侧icon
+        type: [String, Boolean],
+        default: false
+      },
+      showGetMore: {
+        // 是否显示右侧查看更多
+        type: [String, Boolean],
+        default: false
+      },
+      showClose: {
+        // 是否显示左侧关闭按钮
+        type: [String, Boolean],
+        default: false
+      }
+    },
+    data() {
+      const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+      return {
+        elId: elId,
+        show: true,
+        animation: ''
+      }
+    },
+    watch: {
+      text(newValue, oldValue) {
+        this.$nextTick(() => {
+          setTimeout(this.setAnimation, 200)
+        })
+      }
+    },
+    // #ifdef H5
+    mounted() {
+      this.setAnimation()
+    },
+    // #endif
+    // #ifndef H5
+    onReady() {
+      this.setAnimation()
+    },
+    // #endif
+    methods: {
+      clickMore() {
+        this.$emit('getmore')
+      },
+      onClick(e) {
+        let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX
+        if (uni.rpx2px(48) + 12 > clientX && String(this.showClose) === 'true') {
+          this.show = false
+          this.$emit('close')
+        }
+        this.$emit('click')
+      },
+      setAnimation() {
+        if (this.scrollable === false || this.scrollable === 'false') {
+          return
+        }
+        // #ifdef MP-TOUTIAO
+        setTimeout(() => {
+          uni.createSelectorQuery()
+            .in(this)
+            .select(`#${this.elId}`)
+            .boundingClientRect()
+            .exec(ret => {
+              this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
+            })
+        }, 200)
+        // #endif
+        // #ifndef MP-TOUTIAO
+        uni.createSelectorQuery()
+          .in(this)
+          .select(`#${this.elId}`)
+          .boundingClientRect()
+          .exec(ret => {
+            this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
+          })
+        // #endif
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  @import '@/uni.scss';
+
+  @mixin flex-row-center {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .uni-noticebar {
+    flex: 1;
+    padding: 12rpx 24rpx;
+    margin-bottom: 20rpx;
+    @include flex-row-center;
+    justify-content: flex-start;
+  }
+
+  .uni-noticebar__close {
+    color: $uni-text-color-grey;
+    margin-right: 24rpx;
+    @include flex-row-center;
+  }
+
+  .uni-noticebar--flex {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .uni-noticebar__content-icon {
+    width: 14px;
+    z-index: 1;
+    margin-right: 12rpx;
+  }
+
+  .uni-noticebar__content-more {
+    width: 180rpx;
+    @include flex-row-center;
+    justify-content: flex-end;
+    margin-left: 10rpx;
+    color: $uni-text-color-grey;
+  }
+
+  .uni-noticebar__content-more-text {
+    font-size: $uni-font-size-sm;
+  }
+
+  .uni-noticebar__content-text {
+    flex: 1;
+  }
+  
+  .uni-noticebar__content-text--scrollable{
+    padding-left: 700rpx;
+    /* #ifdef APP-NVUE */
+    lines: 1;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+  }
+  
+  .uni-noticebar__content-text--single {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* #ifdef APP-NVUE */
+    lines: 1;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+  }
+
+  .uni-noticebar--scrollable {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .uni-noticebar__content-inner {
+    flex: 1;
+    font-size: $uni-font-size-sm;
+    line-height: $uni-font-size-sm * 1.5;
+    transform: translateZ(0);
+  }
+  
+  .uni-noticebar__content {
+    flex: 1;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .uni-noticebar__content-inner {
+    font-size: $uni-font-size-sm;
+  }
+
+  @keyframes notice {
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+</style>
