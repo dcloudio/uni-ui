@@ -1,50 +1,54 @@
 <template>
   <view class="page">
-    <view class="example-info">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</view>
-    <view class="example-title">有底色</view>
+    <view class="example-info"><text class="example-info-text">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text></view>
+    <view class="example-title"><text class="example-title-text">有底色</text></view>
     <view class="example-body">
-      <uni-badge text="1" />
-      <uni-badge text="2" type="primary" />
-      <uni-badge text="34" type="success" />
-      <uni-badge text="45" type="warning" />
-      <uni-badge text="123" type="error" />
+      <uni-badge class="uni-badge-left-margin" text="1" />
+      <uni-badge class="uni-badge-left-margin" text="2" type="primary" />
+      <uni-badge class="uni-badge-left-margin" text="34" type="success" />
+      <uni-badge class="uni-badge-left-margin" text="45" type="warning" />
+      <uni-badge class="uni-badge-left-margin" text="123" type="error" />
     </view>
-    <view class="example-title">无底色</view>
+    <view class="example-title"><text class="example-title-text">无底色</text></view>
     <view class="example-body">
-      <uni-badge :inverted="true" text="1" />
-      <uni-badge :inverted="true" text="2" type="primary" />
-      <uni-badge :inverted="true" text="34" type="success" />
-      <uni-badge :inverted="true" text="45" type="warning" />
-      <uni-badge :inverted="true" text="123" type="error" />
+      <uni-badge class="uni-badge-left-margin" :inverted="true" text="1" />
+      <uni-badge class="uni-badge-left-margin" :inverted="true" text="2" type="primary" />
+      <uni-badge class="uni-badge-left-margin" :inverted="true" text="34" type="success" />
+      <uni-badge class="uni-badge-left-margin" :inverted="true" text="45" type="warning" />
+      <uni-badge class="uni-badge-left-margin" :inverted="true" text="123" type="error" />
     </view>
-    <view class="example-title">迷你</view>
+    <view class="example-title"><text class="example-title-text">迷你</text></view>
     <view class="example-body">
-      <uni-badge text="1" size="small" />
-      <uni-badge text="2" type="primary" size="small" />
-      <uni-badge text="34" type="success" size="small" />
-      <uni-badge text="45" type="warning" size="small" />
-      <uni-badge text="123" type="error" size="small" />
+      <uni-badge class="uni-badge-left-margin" text="1" size="small" />
+      <uni-badge class="uni-badge-left-margin" text="2" type="primary" size="small" />
+      <uni-badge class="uni-badge-left-margin" text="34" type="success" size="small" />
+      <uni-badge class="uni-badge-left-margin" text="45" type="warning" size="small" />
+      <uni-badge class="uni-badge-left-margin" text="123" type="error" size="small" />
     </view>
   </view>
 </template>
 
 <script>
-  import uniBadge from '@/components/uni-badge/uni-badge.vue'
-  export default {
-    components:{
-      uniBadge
-    },
-    data() {
-      return {}
-    }
+import uniBadge from '@/components/uni-badge/uni-badge.vue';
+export default {
+  components: {
+    uniBadge
+  },
+  data() {
+    return {};
   }
+};
 </script>
 
-<style>
-  .uni-badge {
-    margin: 20rpx;
-  }
-  .example-body{
-    flex-direction: row;
-  }
+<style lang="scss">
+@import '@/common/uni-nvue.scss';
+.uni-badge {
+  margin: 20rpx;
+}
+.example-body {
+  flex-direction: row;
+}
+.uni-badge-left-margin{
+  margin-left: 10px;
+}
 </style>
