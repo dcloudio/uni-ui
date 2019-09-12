@@ -2,12 +2,14 @@
   <view :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true' }"
     class="uni-card" @click="onClick">
     <view v-if="mode === 'style'" class="uni-card__thumbnailimage">
-      <image :src="thumbnail" mode="aspectFill" />
+      <view class="uni-card__thumbnailimage-box">
+        <image class="uni-card__thumbnailimage-image" :src="thumbnail" mode="aspectFill" />
+      </view>
       <view v-if="title" class="uni-card__thumbnailimage-title"><text class="uni-card__thumbnailimage-title-text">{{ title }}</text></view>
     </view>
     <view v-if="mode === 'title'" class="uni-card__title">
       <view class="uni-card__title-header">
-        <image class="uni-card__title-header-image" :src="thumbnail" mode="scaleToFill"/>
+        <image class="uni-card__title-header-image" :src="thumbnail" mode="scaleToFill" />
       </view>
       <view class="uni-card__title-content">
         <text class="uni-card__title-content-title">{{ title }}</text>
@@ -85,11 +87,11 @@
   $card-extra-width: 30%;
   $uni-spacing-marign: 24rpx;
 
-  @mixin text-omit {
-    text-overflow: ellipsis;
-    // white-space: nowrap;
-    overflow: hidden;
-  }
+  // @mixin text-omit {
+  //   text-overflow: ellipsis;
+  //   white-space: nowrap;
+  //   overflow: hidden;
+  // }
 
   .uni-card {
     margin-left: $uni-spacing-marign;
@@ -107,18 +109,30 @@
 
   .uni-card__thumbnailimage {
     position: relative;
+    flex-direction: column;
+    justify-content: center;
     height: 300rpx;
+    overflow: hidden;
+  }
+
+  .uni-card__thumbnailimage-box {
+    flex: 1;
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .uni-card__thumbnailimage-image {
+    flex: 1;
   }
 
   .uni-card__thumbnailimage-title {
-    width: 750px;
-    flex-direction: column;
-    position: absolute;
-    bottom: 0;
+    flex-direction: row;
     padding: $uni-spacing-col-base $uni-spacing-col-lg;
     background-color: rgba($color: #000000, $alpha: 0.4);
   }
+
   .uni-card__thumbnailimage-title-text {
+    flex: 1;
     font-size: 32rpx;
     color: #fff;
   }
@@ -141,8 +155,10 @@
     //   height: 100%;
     // }
   }
+
   .uni-card__title-header-image {
-    flex: 1;
+    width: 80rpx;
+    height: 80rpx;
   }
 
   .uni-card__title-content {
@@ -157,17 +173,12 @@
 
   .uni-card__title-content-title {
     font-size: 30rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    // white-space: nowrap;
+    lines: 1;
   }
 
   .uni-card__title-content-extra {
     font-size: 26rpx;
     color: #999;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    // white-space: nowrap;
   }
 
   .uni-card__header {
@@ -182,20 +193,7 @@
 
   .uni-card__header {}
 
-  // .uni-card__header:after {
-  //   position: absolute;
-  //   bottom: 0;
-  //   right: 0;
-  //   left: 0;
-  //   height: 1px;
-  //   content: '';
-  //   -webkit-transform: scaleY(0.5);
-  //   transform: scaleY(0.5);
-  //   // background-color: $uni-border-color;
-  // }
-
   .uni-card__header-title {
-    flex: 1;
     margin-right: $uni-spacing-col-base;
     flex-direction: row;
     justify-content: flex-start;
@@ -205,13 +203,12 @@
   .uni-card__header-title-text {
     font-size: $uni-font-size-lg;
     flex: 1;
-    @include text-omit;
+    lines: 1;
   }
 
   .uni-card__header-extra {}
 
-  .uni-card__header-extra-img-view {
-  }
+  .uni-card__header-extra-img-view {}
 
   .uni-card__header-extra-img {
     height: $uni-img-size-sm;
@@ -226,7 +223,8 @@
     font-size: $uni-font-size-base;
     text-align: right;
     color: #666;
-    @include text-omit;
+    lines: 1;
+
   }
 
   .uni-card__content {
@@ -250,6 +248,7 @@
     border-top-style: solid;
     border-top-width: 1px;
   }
+
   .uni-card__footer-text {
     color: $uni-text-color-grey;
     font-size: $uni-font-size-base;
