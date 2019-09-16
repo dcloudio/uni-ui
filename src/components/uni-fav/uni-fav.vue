@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../uni.scss';
+@import '~@/uni.scss';
 $fav-height: 50rpx;
 $fav-font-size: 28rpx;
 .uni-fav {

@@ -93,7 +93,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '../../uni.scss';
+@import '~@/uni.scss';
 $box-height:80rpx;
 $box-width:80rpx;
 

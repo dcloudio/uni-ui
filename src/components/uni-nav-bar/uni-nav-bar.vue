@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../uni.scss';
+@import '~@/uni.scss';
 $nav-height: 44px;
 
 .uni-nav-bar-text{
