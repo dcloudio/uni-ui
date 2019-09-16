@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../uni.scss';
+@import '~@/uni.scss';
 $bage-size: 12px;
 $bage-small: scale(0.8);
 $bage-height: 40rpx;

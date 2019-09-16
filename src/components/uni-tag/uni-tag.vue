@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../uni.scss';
+@import '~@/uni.scss';
 $tag-pd: 0px 32rpx;
 $tag-small-pd: 0px 16rpx;
 
