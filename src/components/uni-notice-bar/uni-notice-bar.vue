@@ -4,7 +4,7 @@
       size="12" @click="close" />
     <uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
       size="14" />
-    <view class="uni-noticebar-content-wrapper">
+    <view class="uni-noticebar-content-wrapper" :class="{'uni-noticebar-content-wrapper--scrollable':scrollable, 'uni-noticebar-content-wrapper--single':!scrollable && (single || moreText)}">
       <view :id="elId" ref="animationEle" class="uni-noticebar-content" :class="{'uni-noticebar-content--scrollable':scrollable, 'uni-noticebar-content--single':!scrollable && (single || moreText)}"
         :style="{'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: animationPlayState,'-webkit-animationPlayState':animationPlayState}">
         <text class="uni-noticebar-content-text" :class="{'uni-noticebar-content-text--scrollable':scrollable,'uni-noticebar-content-text--single':!scrollable && (single || moreText)}"
@@ -183,10 +183,15 @@
 
   .uni-noticebar-content-wrapper {
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
     overflow: hidden;
   }
-
+  
+  .uni-noticebar-content-wrapper--single,
+  .uni-noticebar-content-wrapper--scrollable {
+    flex-direction: row;
+  }
+  
   .uni-noticebar-content {
     /* #ifdef APP-NVUE */
     flex: 0;
