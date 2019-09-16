@@ -1,25 +1,17 @@
 <template>
   <view
-    :style="{backgroundColor:checked?bgColorChecked:bgColor,color:checked?fgColorChecked:fgColor}"
-    :class="[
-      circle === true || circle === 'true' ? 'uni-fav--circle' : '',
-    ]"
+    :style="[{ backgroundColor: checked ? bgColorChecked : bgColor }]"
+    :class="[circle === true || circle === 'true' ? 'uni-fav--circle' : '']"
     class="uni-fav"
-    @click="onClick">
-    <uni-icons
-      v-if="!checked&&(star===true||star==='true')"
-      :color="fgColor"
-      class="uni-fav-star"
-      type="star-filled"
-      size="16" />
-    <text class="uni-fav-text">
-      {{ checked ? contentText.contentFav : contentText.contentDefault }}
-    </text>
+    @click="onClick"
+  >
+    <uni-icons :style="{color: checked ? fgColorChecked : fgColor}" v-if="!checked && (star === true || star === 'true')" :color="fgColor" class="uni-fav-star" type="star-filled" size="14" />
+    <text :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-text">{{ checked ? contentText.contentFav : contentText.contentDefault }}</text>
   </view>
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue'
+import uniIcons from '../uni-icons/uni-icons.vue';
 export default {
   name: 'UniFav',
   components: {
@@ -56,59 +48,62 @@ export default {
     },
     contentText: {
       type: Object,
-      default () {
+      default() {
         return {
           contentDefault: '收藏',
           contentFav: '已收藏'
+        };
+      }
+    }
+  },
+  watch: {
+    checked() {
+      if (uni.report) {
+        if (this.checked) {
+          uni.report('收藏', '收藏');
+        } else {
+          uni.report('取消收藏', '取消收藏');
         }
       }
     }
   },
-	watch:{
-		checked(){
-			if (uni.report) {
-				if (this.checked) {
-					uni.report("收藏","收藏")
-				} else{
-					uni.report("取消收藏","取消收藏")
-				}
-			}
-		}
-	},
   methods: {
-    onClick () {
-      this.$emit('click')
+    onClick() {
+      this.$emit('click');
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .uni-fav {
-    display: inline-flex;
-    width: 120rpx;
-		height: 50rpx;
-		line-height: 50rpx;
-    text-align: center;
-    font-size: 28rpx;
-    box-sizing: border-box;
-    border-radius: 6rpx;
-		align-items: center;
-		justify-content: center;
-    &--circle{
-      border-radius: 60rpx;
-    }
-    &-star {
-			height: 50rpx;
-			line-height: 50rpx;
-      margin-right: 5rpx;
-			vertical-align: middle;
-    }
-		&-text{
-			display: inline-block;
-			height: 50rpx;
-			line-height: 50rpx;
-			vertical-align: middle;
-		}
-  }
+@import '~@/uni.scss';
+$fav-height: 50rpx;
+$fav-font-size: 28rpx;
+.uni-fav {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  height: $fav-height;
+  line-height: $fav-height;
+  text-align: center;
+  border-radius: 6rpx;
+}
+.uni-fav--circle {
+  border-radius: 60rpx;
+}
+.uni-fav-star {
+  height: $fav-height;
+  line-height: $fav-height;
+  margin-right: 5rpx;
+  align-items: center;
+  justify-content: center;
+}
+.uni-fav-text {
+  height: $fav-height;
+  line-height: $fav-height;
+  align-items: center;
+  justify-content: center;
+  font-size: $fav-font-size;
+}
 </style>

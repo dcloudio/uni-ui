@@ -1,0 +1,51 @@
+<template>
+  <view>
+    <view class="example-info"><text class="example-info-text">倒计时组件主要用于促销商品剩余时间，发送短信验证等待时间等场景</text></view>
+    <view class="example-title"><text class="example-info-text">一般用法</text></view>
+    <view class="example-body">
+      <uni-count-down :day="1" :hour="1" :minute="12" :second="40" />
+    </view>
+    <view class="example-title"><text class="example-info-text">不显示天数</text></view>
+    <view class="example-body">
+      <uni-count-down :show-day="false" :hour="12" :minute="12" :second="12" />
+    </view>
+    <view class="example-title"><text class="example-info-text">文字分隔符</text></view>
+    <view class="example-body">
+      <uni-count-down :minute="30" :second="0" :show-colon="false" />
+    </view>
+    <view class="example-title"><text class="example-info-text">修改颜色</text></view>
+    <view class="example-body">
+      <uni-count-down :day="1" :hour="2" :minute="30" :second="0" color="#FFFFFF" background-color="#00B26A"
+        border-color="#00B26A" />
+    </view>
+    <view class="example-title"><text class="example-info-text">倒计时回调事件</text></view>
+    <view class="example-body">
+      <uni-count-down :show-day="false" :second="10" @timeup="timeup" />
+    </view>
+  </view>
+</template>
+<script>
+  import uniCountDown from '@/components/uni-count-down/uni-count-down.vue'
+  export default {
+    components: {
+      uniCountDown
+    },
+    data() {
+      return {}
+    },
+    methods: {
+      timeup() {
+        uni.showToast({
+          title: '时间到'
+        })
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+@import '@/common/uni-nvue.scss';
+  .title {
+    margin: 80upx 0 20upx 0;
+  }
+</style>

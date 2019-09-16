@@ -5,7 +5,15 @@
 </template>
 <script>
   export default {
-    name: 'UniList'
+    name: 'UniList',
+    provide () {
+      return {
+        list: this
+      }
+    },
+    created() {
+      this.firstChildAppend = false
+    }
   }
 </script>
 <style lang="scss">

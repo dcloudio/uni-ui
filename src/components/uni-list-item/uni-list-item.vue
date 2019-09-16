@@ -1,7 +1,7 @@
 <template>
   <view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
     class="uni-list-item" @click="onClick">
-    <view class="uni-list-item__container">
+    <view class="uni-list-item__container" :class="{'uni-list-item--first':isFirstChild}">
       <view v-if="thumb" class="uni-list-item__icon">
         <image :src="thumb" class="uni-list-item__icon-img" />
       </view>
@@ -95,8 +95,17 @@
         }
       }
     },
+    inject: ['list'],
     data() {
-      return {}
+      return {
+        isFirstChild: false
+      }
+    },
+    mounted() {
+      if(!this.list.firstChildAppend){
+        this.list.firstChildAppend = true
+        this.isFirstChild = true
+      }
     },
     methods: {
       onClick() {
@@ -147,9 +156,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom-color: $uni-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-top-color: $uni-border-color;
+    border-top-style: solid;
+    border-top-width: 1px;
     // &:after {
     //   position: absolute;
     //   z-index: 3;
@@ -162,6 +171,10 @@
     //   transform: scaleY(0.5);
     //   background-color: $uni-border-color;
     // }
+  }
+  
+  .uni-list-item--first {
+    border-top-width: 0px;
   }
 
   .uni-list-item__content {
@@ -186,7 +199,7 @@
   }
 
   .uni-list-item__extra {
-    width: 25%;
+    // width: 25%;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;

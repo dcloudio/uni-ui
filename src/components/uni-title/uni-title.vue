@@ -5,8 +5,9 @@
     </view>
     <view class="uni-title__content">
       <text :class="{'distraction':!subTitle}" class="uni-title__content-title">{{ title }}</text>
-      <text class="uni-title__content-sub">{{ subTitle }}</text>
+      <text v-if="subTitle" class="uni-title__content-sub">{{ subTitle }}</text>
     </view>
+    <slot/>
   </view>
 </template>
 
@@ -100,6 +101,7 @@
   }
 
   .uni-title__content {
+    flex: 1;
     color: #464e52;
   }
 
