@@ -1,70 +1,40 @@
 <template>
-
   <view class="uni-navbar">
     <view
-      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':border,'uni-navbar--border':border}"
-      :style="{'background-color':backgroundColor}"
-      class="uni-navbar__content">
-      <uni-status-bar v-if="statusBar"/>
-      <view
-        :style="{color:color}"
-        class="uni-navbar__header uni-navbar__content_view">
-        <view
-          class="uni-navbar__header-btns uni-navbar__content_view"
-          @tap="onClickLeft">
-          <view
-            v-if="leftIcon.length"
-            class="uni-navbar__content_view">
-            <uni-icons
-              :type="leftIcon"
-              :color="color"
-              size="24"/>
-          </view>
-          <view
-            v-if="leftText.length"
-            :class="{'uni-navbar-btn-icon-left':!leftIcon.length}"
-            class="uni-navbar-btn-text uni-navbar__content_view">{{ leftText }}</view>
-          <slot name="left"/>
+      :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': border, 'uni-navbar--border': border }"
+      :style="{ 'background-color': backgroundColor }"
+      class="uni-navbar__content"
+    >
+      <!-- <uni-status-bar v-if="statusBar" /> -->
+      <view :style="{ color: color }" class="uni-navbar__header uni-navbar__content_view">
+        <view class="uni-navbar__header-btns uni-navbar__content_view" @tap="onClickLeft">
+          <view v-if="leftIcon.length" class="uni-navbar__content_view"><uni-icons :type="leftIcon" :color="color" size="24" /></view>
+          <view v-if="leftText.length" :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length }" class="uni-navbar-btn-text uni-navbar__content_view"><text class="uni-nav-bar-text">{{ leftText }}</text></view>
+          <slot name="left" />
         </view>
-        <view class="uni-navbar__header-container uni-navbar__content_view">
-          <view
-            v-if="title.length"
-            class="uni-navbar__header-container-inner uni-navbar__content_view">{{ title }}</view>
+        <view class="uni-navbar__header-container uni-navbar__content_view" >
+          <view v-if="title.length" class="uni-navbar__header-container-inner uni-navbar__content_view"><text class="uni-nav-bar-text">{{ title }}</text></view>
           <!-- 标题插槽 -->
-          <slot/>
+          <slot />
         </view>
-        <view
-          :class="title.length?'uni-navbar__header-btns-right':''"
-          class="uni-navbar__header-btns uni-navbar__content_view"
-          @tap="onClickRight">
-          <view
-            v-if="rightIcon.length"
-            class="uni-navbar__content_view">
-            <uni-icons
-              :type="rightIcon"
-              :color="color"
-              size="24"/>
-          </view>
+        <view :class="title.length ? 'uni-navbar__header-btns-right' : ''" class="uni-navbar__header-btns uni-navbar__content_view" @tap="onClickRight">
+          <view v-if="rightIcon.length" class="uni-navbar__content_view"><uni-icons :type="rightIcon" :color="color" size="24" /></view>
           <!-- 优先显示图标 -->
-          <view
-            v-if="rightText.length&&!rightIcon.length"
-            class="uni-navbar-btn-text uni-navbar__content_view">{{ rightText }}</view>
-          <slot name="right"/>
+          <view v-if="rightText.length && !rightIcon.length" class="uni-navbar-btn-text uni-navbar__content_view"><text class="uni-nav-bar-text">{{ rightText }}</text></view>
+          <slot name="right" />
         </view>
       </view>
     </view>
-    <view
-      v-if="fixed"
-      class="uni-navbar__placeholder">
-      <uni-status-bar v-if="statusBar"/>
-      <view class="uni-navbar__placeholder-view"/>
+    <view v-if="fixed" class="uni-navbar__placeholder">
+      <uni-status-bar v-if="statusBar" />
+      <view class="uni-navbar__placeholder-view" />
     </view>
   </view>
 </template>
 
 <script>
-import uniStatusBar from '../uni-status-bar/uni-status-bar.vue'
-import uniIcons from '../uni-icons/uni-icons.vue'
+import uniStatusBar from '../uni-status-bar/uni-status-bar.vue';
+import uniIcons from '../uni-icons/uni-icons.vue';
 
 export default {
   name: 'UniNavBar',
@@ -119,104 +89,110 @@ export default {
     }
   },
   methods: {
-    onClickLeft () {
-      this.$emit('click-left')
+    onClickLeft() {
+      this.$emit('clickLeft');
     },
-    onClickRight () {
-      this.$emit('click-right')
+    onClickRight() {
+      this.$emit('clickRight');
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-	$nav-height:44px;
+@import '../../uni.scss';
+$nav-height: 44px;
 
-	.uni-navbar {
-		&__content {
-			display: block;
-			position: relative;
-			width: 100%;
-			background-color: $uni-bg-color;
-			overflow: hidden;
+.uni-nav-bar-text{
+  font-size: $uni-font-size-lg;
+}
+.uni-navbar {
+  width: 750rpx;
+}
+.uni-navbar__content {
+  position: relative;
+  // width: 100%;
+  width: 750rpx;
+  background-color: $uni-bg-color;
+  overflow: hidden;
 
-			.uni-navbar__content_view {
-				// line-height: $nav-height;
-				display: flex;
-				align-items: center;
-			}
-		}
 
-		&__header {
-			display: flex;
-			flex-direction: row;
-			width: 100%;
-			height: $nav-height;
-			line-height: $nav-height;
-			font-size: 16px;
+}
+.uni-navbar__content_view {
+    // line-height: $nav-height;
+    align-items: center;
+    flex-direction: row;
+    // width: 100%;
+  }
 
-			&-btns {
-				display: inline-flex;
-				flex-wrap: nowrap;
-				flex-shrink: 0;
-				width: 120upx;
-				padding: 0 12upx;
+.uni-navbar__header {
+  flex-direction: row;
+  width: 750rpx;
+  height: $nav-height;
+  line-height: $nav-height;
+  font-size: 16px;
+}
+.uni-navbar__header-btns {
+  flex-wrap: nowrap;
+  // flex-shrink: 0;
+  width: 120upx;
+  padding: 0 12upx;
+  justify-content: center;
+  align-items: center;
+}
+// .uni-navbar__header-btns:first-child {
+//   padding-left: 0;
+// }
+//
+// .uni-navbar__header-btns:last-child {
+//   width: 60upx;
+// }
+//
+// .uni-navbar__header-btns-right:last-child {
+//   width: 120rpx;
+//   text-align: right;
+//   flex-direction: row-reverse;
+// }
 
-				&:first-child {
-					padding-left: 0;
-				}
+.uni-navbar__header-container {
+  // width: 100%;
+  flex:1;
+  margin: 0 10upx;
+}
 
-				&:last-child {
-					width: 60upx;
-				}
+.uni-navbar__header-container-inner {
+ // width: 750rpx;
+ flex:1;
+  align-items: center;
+  justify-content: center;
+  font-size: 30upx;
+  // padding-right: 60upx;
+}
+.uni-navbar__placeholder {
+}
+.uni-navbar__placeholder-view {
+  height: $nav-height;
+}
 
-        &-right:last-child{
-          width: 120rpx;
-          text-align: right;
-          flex-direction: row-reverse;
-        }
-			}
+.uni-navbar--fixed {
+  position: fixed;
+  z-index: 998;
+}
 
-			&-container {
-				width: 100%;
-				margin: 0 10upx;
+// .uni-navbar--shadow {
+//   box-shadow: 0 1px 6px #ccc;
+// }
 
-				&-inner {
-					width: 100%;
-					display: flex;
-					justify-content: center;
-					font-size: 30upx;
-					// padding-right: 60upx;
-				}
-			}
-		}
-
-		&__placeholder {
-			&-view {
-				height: $nav-height;
-			}
-		}
-
-		&--fixed {
-			position: fixed;
-			z-index: 998;
-		}
-
-		&--shadow {
-			box-shadow: 0 1px 6px #ccc;
-		}
-
-		&--border:after {
-			position: absolute;
-			z-index: 3;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 1px;
-			content: '';
-			-webkit-transform: scaleY(.5);
-			transform: scaleY(.5);
-			background-color: $uni-border-color;
-		}
-	}
+// .uni-navbar--border:after {
+//   position: absolute;
+//   z-index: 3;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   height: 1px;
+//   content: '';
+//   -webkit-transform: scaleY(0.5);
+//   transform: scaleY(0.5);
+//   background-color: $uni-border-color;
+// }
 </style>
