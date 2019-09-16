@@ -67,5 +67,8 @@
     padding: 5upx 0;
     padding-top: 20upx;
     flex-direction: column;
+    /* #ifndef APP-NVUE */
+    display: block;
+    /* #endif */
   }
 </style>
