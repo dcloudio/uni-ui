@@ -59,7 +59,8 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  @import '@/common/uni-nvue.scss';
   .status-btn {
     margin: 30rpx;
   }
