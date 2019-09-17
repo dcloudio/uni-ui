@@ -126,7 +126,7 @@
     right: 0;
     width: 20rpx;
     height: 20rpx;
-    background: #ff5a5f;
+    background-color: #ff5a5f;
     border-radius: 50rpx;
   }
 

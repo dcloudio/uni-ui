@@ -106,8 +106,11 @@
   .scroll {
     flex-direction: column;
     flex: 1;
-  } 
+  }
   .example-body {
     padding: 0;
+    /* #ifndef APP-NVUE */
+    display: block;
+    /* #endif */
   }
 </style>

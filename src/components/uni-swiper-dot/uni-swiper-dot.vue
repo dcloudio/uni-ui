@@ -119,7 +119,7 @@
     width: 16rpx;
     border-radius: 100px;
     margin-left: 12rpx;
-    background: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .3);
     /* transition: width 0.2s linear; */
   }
 
@@ -145,7 +145,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
   .uni-swiper__dots-nav-item {
