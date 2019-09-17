@@ -178,10 +178,10 @@
   }
 
   .uni-tab__color-y {
-    background: #ffa200;
+    background-color: #ffa200;
   }
 
   .uni-tab__color-r {
-    background: #ff0000;
+    background-color: #ff0000;
   }
 </style>
