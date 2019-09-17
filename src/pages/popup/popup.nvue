@@ -261,7 +261,6 @@
     height: 90rpx;
     line-height: 90rpx;
     font-size: 14px;
-    // border-top: 1px #f5f5f5 solid;
     border-top-color: #f5f5f5;
     border-top-width: 1px;
     border-top-style:solid;
