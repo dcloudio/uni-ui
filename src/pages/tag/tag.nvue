@@ -86,6 +86,7 @@ export default {
   @import '@/common/uni-nvue.scss';
 .example-body {
   flex-direction: row;
+  justify-content: flex-start;
   padding: 20upx 0 0 0;
 }
 
