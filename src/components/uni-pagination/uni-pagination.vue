@@ -173,7 +173,7 @@
   }
 
   .uni-pagination__num-current {
-    color: $uni-color-primary;
+    // color: $uni-color-primary;
   }
 
   .uni-pagination--enabled {
