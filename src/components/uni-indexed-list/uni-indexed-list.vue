@@ -29,7 +29,7 @@
       </view>
     </view>
     <view v-if="touchmove" class="uni-indexed--alert-wrapper">
-      <!-- <text class="uni-indexed--alert">{{ lists[touchmoveIndex].key }}</text> -->
+      <text class="uni-indexed--alert">{{ lists[touchmoveIndex].key }}</text>
     </view>
   </view>
 </template>
