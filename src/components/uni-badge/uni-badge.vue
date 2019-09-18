@@ -63,8 +63,18 @@ $bage-height: 40rpx;
 }
 .uni-badge-inverted {
 	padding: 0 5px 0 0;
-	color: $uni-text-color-grey;
+	color: $uni-bg-color-hover;
 }
+.uni-badge-default {
+	color: $uni-text-color;
+	background-color: $uni-bg-color-hover;
+}
+
+.uni-badge-default-inverted {
+	color:$uni-text-color-grey;
+	background-color: transparent;
+}
+
 .uni-badge-primary {
 	color: $uni-text-color-inverse;
 	background-color: $uni-color-primary;

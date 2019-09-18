@@ -5,8 +5,8 @@
 </template>
 
 <script>
-// var statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px'
- var statusBarHeight = '70px'
+var statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px'
+ // var statusBarHeight = '20px'
 // console.log(statusBarHeight);
 export default {
   name: 'UniStatusBar',
@@ -22,6 +22,6 @@ export default {
 .uni-status-bar {
 	width: 100%;
 	height: 20px;
-	/* height: var(--status-bar-height); */
+	height: var(--status-bar-height);
 }
 </style>
