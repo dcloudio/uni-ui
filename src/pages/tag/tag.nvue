@@ -94,7 +94,7 @@ export default {
 
 .tag-view {
   flex-direction: column;
-  margin: 10upx 10upx;
+  margin: 10upx 15upx;
   justify-content: center;
 }
 </style>
