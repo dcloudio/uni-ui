@@ -205,7 +205,7 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarBackgroundColor": "rgb(248, 248, 248)",
     "backgroundColor": "#FFFFFF",
     "app-plus":{
       "background":"#efeff4"
