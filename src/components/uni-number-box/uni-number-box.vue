@@ -94,8 +94,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/uni.scss';
-$box-height:80rpx;
-$box-width:80rpx;
+$box-height:70rpx;
+$box-width:70rpx;
 
 .uni-numbox {
   flex-direction: row;
@@ -106,23 +106,23 @@ $box-width:80rpx;
 
 .uni-numbox__value {
   background-color: $uni-bg-color;
-  width: $box-width;
+  width: 80rpx;
   height: $box-height;
   text-align: center;
   font-size: $uni-font-size-lg;
   border-width: 1rpx;
   border-style: solid;
   border-color: $uni-border-color;
+  border-left-width: 0;
+  border-right-width: 0;
 }
 
 .uni-numbox__minus {
-  align-items: center;
-  justify-content: center;
   width: $box-width;
   height: $box-height;
   line-height: $box-height;
   text-align: center;
-  font-size: $uni-font-size-lg;
+  font-size: 40rpx;
   color: $uni-text-color;
   background-color: $uni-bg-color-grey;
   border-width: 1rpx;
@@ -134,13 +134,11 @@ $box-width:80rpx;
 }
 
 .uni-numbox__plus {
-  align-items: center;
-  justify-content: center;
   width: $box-width;
   height: $box-height;
   line-height: $box-height;
   text-align: center;
-  font-size: $uni-font-size-lg;
+  font-size: 40rpx;
   color: $uni-text-color;
   border-width: 1rpx;
   border-style: solid;
