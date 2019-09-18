@@ -8,6 +8,22 @@
       }"
       class="uni-fab">
       <view :class="{
+          'uni-fab-content--left': horizontal === 'left',
+          'uni-fab-content--right': horizontal === 'right',
+          'uni-fab-content--flexDirection': direction === 'vertical',
+          'uni-fab-content--flexDirectionStart': flexDirectionStart,
+          'uni-fab-content--flexDirectionEnd': flexDirectionEnd
+        }"
+        :style="{ width: boxWidth, height: boxHeight, backgroundColor: styles.backgroundColor }" class="uni-fab-content">
+        <view v-if="flexDirectionStart || horizontalLeft" class="uni-fab-item uni-fab-item--first" />
+        <view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab-item--active': isShow }" class="uni-fab-item"
+          @click="_onItemClick(index, item)">
+          <image :src="item.active ? item.selectedIconPath : item.iconPath" class="uni-fab-item-image" mode="widthFix" />
+          <text class="uni-fab-item-text" :style="{ color: item.active ? styles.selectedColor : styles.color }">{{ item.text }}</text>
+        </view>
+        <view v-if="flexDirectionEnd || horizontalRight" class="uni-fab-item uni-fab-item--first" />
+      </view>
+      <view :class="{
           'uni-fab-circle--left': horizontal === 'left' && direction === 'horizontal',
           'uni-fab-circle--top': vertical === 'top' && direction === 'vertical',
           'uni-fab-circle--bottom': vertical === 'bottom' && direction === 'vertical',
@@ -16,22 +32,6 @@
         :style="{ 'background-color': styles.buttonColor }" class="uni-fab-circle" @click="_onClick">
         <uni-icons :class="{ 'uni-fab-plus--active': isShow }" class="uni-fab-plus" type="plusempty" color="#FFFFFF"
           size="48"></uni-icons>
-      </view>
-      <view :class="{
-          'uni-fab-content--left': horizontal === 'left',
-          'uni-fab-content--right': horizontal === 'right',
-          'uni-fab-content--flexDirection': direction === 'vertical',
-          'uni-fab-content--flexDirectionStart': flexDirectionStart,
-          'uni-fab-content--flexDirectionEnd': flexDirectionEnd
-        }"
-        :style="{ width: boxWidth, height: boxHeight, background: styles.backgroundColor }" class="uni-fab-content">
-        <view v-if="flexDirectionStart || horizontalLeft" class="uni-fab-item uni-fab-item--first" />
-        <view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab-item--active': isShow }" class="uni-fab-item"
-          @click="_onItemClick(index, item)">
-          <image :src="item.active ? item.selectedIconPath : item.iconPath" class="uni-fab-item-image" mode="widthFix" />
-          <text class="uni-fab-item-text" :style="{ color: item.active ? styles.selectedColor : styles.color }">{{ item.text }}</text>
-        </view>
-        <view v-if="flexDirectionEnd || horizontalRight" class="uni-fab-item uni-fab-item--first" />
       </view>
     </view>
   </view>
@@ -287,7 +287,12 @@
     border-radius: 50px;
     overflow: hidden;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+    /* #ifdef APP-NVUE */
     transition: width,height 0.2s;
+    /* #endif */
+    /* #ifndef APP-NVUE */
+    transition: all 0.2s;
+    /* #endif */
     width: 55px;
   }
 
