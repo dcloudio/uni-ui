@@ -27,7 +27,7 @@ export default {
 |---|----|---|---|
 |status	|String	|more|loading 的状态，可选值：more（loading前）、loading（loading中）、noMore（没有更多了）|
 |showIcon	|Boolean	|true|是否显示 loading 图标|
-|iconType	|String	|auto|指定图标样式，可选值：spinner（ios加载样式）、circle（安卓加载样式）、auto（根据平台自动选择加载样式）|
+|iconType	|String	|auto|指定图标样式，可选值：spinner（ios加载样式）、circle（安卓加载样式）、auto（根据平台自动选择加载样式），指定后不可更改|
 |color	|String	|#777777|图标和文字颜色	|
 |content-text	|Object	|```{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}```|各状态文字说明|
 
