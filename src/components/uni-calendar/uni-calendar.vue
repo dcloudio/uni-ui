@@ -1,37 +1,34 @@
 <template>
   <view>
     <view v-if="maskShow && !insert" :class="{ 'ani-mask-show': aniMaskShow }" class="uni-calendar__mask" />
-    <view v-if="maskShow || insert" :class="{ 'ani-calendar-show': aniMaskShow, 'uni-calendar__static': insert }" class="uni-calendar__box">
+    <view v-if="maskShow || insert" class="uni-calendar__box" :class="{  'uni-calendar__static': insert ,'ani-calendar-show': aniMaskShow}">
       <view v-if="!insert" class="uni-calendar__nav">
-        <view class="uni-calendar__nav-item" @click="close">取消</view>
-        <view class="uni-calendar__nav-item" @click="confirm">确认</view>
+        <view class="uni-calendar__nav-item" @click="close"><text class="uni-calendar__nav-item-text">取消</text></view>
+        <view class="uni-calendar__nav-item" @click="confirm"><text class="uni-calendar__nav-item-text">确认</text></view>
       </view>
       <view class="uni-calendar__wrapper">
         <view class="uni-calenda__content">
           <view class="uni-calendar__panel">
-            <view class="uni-calendar__date-befor" @tap="dataBefor(-1, 'month')"><text class="iconfont icon-jiantou" /></view>
+            <view class="uni-calendar__date-befor" @tap="dataBefor(-1, 'month')"><uni-icons type="arrowleft" size="20"></uni-icons></view>
             <view class="uni-calendar__panel-box">
-              <view>{{ canlender.year }}年</view>
-              <view>{{ canlender.month }}月</view>
+              <text class="uni-calendar__panel-box-text">{{ canlender.year }}年</text>
+              <text class="uni-calendar__panel-box-text">{{ canlender.month }}月</text>
             </view>
-            <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')"><text class="iconfont icon-jiantou " /></view>
-            <view class="uni-calendar__backtoday" @tap="backtoday">回到今天</view>
+            <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')"><uni-icons type="arrowleft" size="20"></uni-icons></view>
+            <text class="uni-calendar__backtoday" @tap="backtoday">回到今天</text>
           </view>
           <view v-if="isLunar" class="uni-calendar__day-detail">
-            <view>{{ canlender.year + '年' + canlender.month + '月' + canlender.date + '日 （' + canlender.lunar.astro + ')' }}</view>
-            <view>
-              {{ canlender.lunar.gzYear + '年' + canlender.lunar.gzMonth + '月' + canlender.lunar.gzDay + '日 (' + canlender.lunar.Animal + '年)' }}
-              {{ canlender.lunar.IMonthCn + canlender.lunar.IDayCn }} {{ canlender.lunar.isTerm ? canlender.lunar.Term : '' }}
-            </view>
+            <text class="uni-calendar__day-detail-text">{{ canlender.year + '年' + canlender.month + '月' + canlender.date + '日 （' + canlender.lunar.astro + ')' }}</text>
+            <text class="uni-calendar__day-detail-text"> {{ canlender.lunar.gzYear + '年' + canlender.lunar.gzMonth + '月' + canlender.lunar.gzDay + '日 (' + canlender.lunar.Animal + '年)' + canlender.lunar.IMonthCn + canlender.lunar.IDayCn + (canlender.lunar.isTerm ? canlender.lunar.Term : '') }}</text>
           </view>
           <view class="uni-calendar__header">
-            <view class="uni-calendar__week">日</view>
-            <view class="uni-calendar__week">一</view>
-            <view class="uni-calendar__week">二</view>
-            <view class="uni-calendar__week">三</view>
-            <view class="uni-calendar__week">四</view>
-            <view class="uni-calendar__week">五</view>
-            <view class="uni-calendar__week">六</view>
+            <text class="uni-calendar__week">日</text>
+            <text class="uni-calendar__week">一</text>
+            <text class="uni-calendar__week">二</text>
+            <text class="uni-calendar__week">三</text>
+            <text class="uni-calendar__week">四</text>
+            <text class="uni-calendar__week">五</text>
+            <text class="uni-calendar__week">六</text>
           </view>
           <uni-calendar-item :canlender="canlender" :lunar="isLunar" @selectDays="selectDays" />
         </view>
@@ -43,10 +40,12 @@
 <script>
   import CALENDAR from './calendar.js'
   import uniCalendarItem from './uni-calendar-item.vue'
+  import uniIcons from '@/components/uni-icons/uni-icons.vue'
   export default {
     name: 'UniCalendar',
     components: {
-      uniCalendarItem
+      uniCalendarItem,
+      uniIcons
     },
     props: {
       /**
@@ -531,54 +530,30 @@
 </script>
 
 <style lang="scss">
-  @font-face {
-    font-family: 'iconfont';
-    src: url('//at.alicdn.com/t/font_989023_qdgy7euvg4.eot?t=1545961121132');
-    /* IE9*/
-    src: url('//at.alicdn.com/t/font_989023_qdgy7euvg4.eot?t=1545961121132#iefix') format('embedded-opentype'),
-      /* IE6-IE8 */
-      url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAPcAAsAAAAABiAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFY8fEf5Y21hcAAAAYAAAABLAAABcOcutbxnbHlmAAABzAAAACgAAAAoOZ2GtGhlYWQAAAH0AAAALwAAADYTtoNAaGhlYQAAAiQAAAAcAAAAJAfeA4NobXR4AAACQAAAAAgAAAAICAAAAGxvY2EAAAJIAAAABgAAAAYAFAAAbWF4cAAAAlAAAAAeAAAAIAENABJuYW1lAAACcAAAAUUAAAJtPlT+fXBvc3QAAAO4AAAAIQAAADLf6deseJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkYWCcwMDKwMHUyXSGgYGhH0IzvmYwYuRgYGBiYGVmwAoC0lxTGByesT1jY27438AQw9zI0AAUZgTJAQDeIAvweJxjYGBgZWBgYAZiHSBmYWBgDGFgZAABP6AoI1icmYELLM7CoARWwwISf8b2/z+MBPJZwCQDIxvDKOABkzJQHjisIJiBEQA3lgmBAAABAAD/gAMAA4EABQAACQE1CQE1AQACAP6IAXgBgP4AiAF4AXiIAAB4nGNgZGBgAOLdZzma4vltvjJwszCAwA3v+QsR9P8GFgbmRiCXg4EJJAoAMzgKmgB4nGNgZGBgbvjfwBDDwgACQJKRARUwAQBHCAJrBAAAAAQAAAAAAAAAABQAAHicY2BkYGBgYmBjANEgFgMDFxAyMPwH8xkACS0BIAAAeJxlj01OwzAQhV/6B6QSqqhgh+QFYgEo/RGrblhUavdddN+mTpsqiSPHrdQDcB6OwAk4AtyAO/BIJ5s2lsffvHljTwDc4Acejt8t95E9XDI7cg0XuBeuU38QbpBfhJto41W4Rf1N2MczpsJtdGF5g9e4YvaEd2EPHXwI13CNT+E69S/hBvlbuIk7/Aq30PHqwj7mXle4jUcv9sdWL5xeqeVBxaHJIpM5v4KZXu+Sha3S6pxrW8QmU4OgX0lTnWlb3VPs10PnIhVZk6oJqzpJjMqt2erQBRvn8lGvF4kehCblWGP+tsYCjnEFhSUOjDFCGGSIyujoO1Vm9K+xQ8Jee1Y9zed0WxTU/3OFAQL0z1xTurLSeTpPgT1fG1J1dCtuy56UNJFezUkSskJe1rZUQuoBNmVXjhF6XNGJPyhnSP8ACVpuyAAAAHicY2BigAAuBuyAiZGJkZmBIyszMa8kv9SEgQEAGD0DTAAAAA==') format('woff'),
-      url('//at.alicdn.com/t/font_989023_qdgy7euvg4.ttf?t=1545961121132') format('truetype'),
-      /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-      url('//at.alicdn.com/t/font_989023_qdgy7euvg4.svg?t=1545961121132#iconfont') format('svg');
-    /* iOS 4.1- */
-  }
-
-  .iconfont {
-    font-family: 'iconfont' !important;
-    font-size: 32upx;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .icon-jiantou:before {
-    content: '\e606';
-  }
-
+  @import '~@/uni.scss';
   .uni-calendar__mask {
     position: fixed;
     bottom: 0;
     top: 0;
-    width: 100%;
-    background: rgba($color: #000, $alpha: 0.4);
-    transition: all 0.3s;
+    left: 0;
+    right: 0;
+    background-color: rgba($color: #000, $alpha: 0.4);
+    transition-property: opacity;
+    transition-duration: 0.3s;
     opacity: 0;
-    z-index: 998;
+  }
 
-    &.ani-mask-show {
-      opacity: 1;
-    }
+  .ani-mask-show {
+    opacity: 1;
   }
 
   .header {
-    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 100upx;
-    background: #fff;
-    z-index: 999;
+    height: 100rpx;
+    background-color: #fff;
     // background: $uni-bg-color-grey;
     font-size: $uni-font-size-lg;
   }
@@ -586,121 +561,156 @@
   .uni-calendar__box {
     position: fixed;
     bottom: 0;
-    z-index: 999;
-    width: 100%;
-    box-sizing: border-box;
-    transition: all 0.3s;
+    left: 0;
+    right: 0;
+    transition-property: transform;
+    transition-duration: 0.3s;
     transform: translateY(100%);
+  }
 
-    &.ani-calendar-show {
-      transform: translateY(0%);
-    }
+  .ani-calendar-show {
+    transform: translateY(0%);
+  }
 
-    &.uni-calendar__static {
-      position: static;
-      transform: translateY(0%);
-    }
+  .uni-calendar__fixed {}
 
-    .uni-calendar__nav {
-      display: flex;
-      justify-content: space-between;
-      height: 100upx;
-      border-bottom: 1px #f5f5f5 solid;
-      background: #f5f5f5;
-      padding: 0 10upx;
+  .uni-calendar__static {
+    position: relative;
+    transform: translateY(0%);
+  }
 
-      .uni-calendar__nav-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100upx;
-        height: 100upx;
-        color: #333;
-      }
-    }
+  .uni-calendar__nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100rpx;
+    border-bottom-color: #F5F5F5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: #f5f5f5;
+    padding: 0 10rpx;
+  }
+
+  .uni-calendar__nav-item {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 100rpx;
+
+  }
+
+  .uni-calendar__nav-item-text {
+    font-size: 30rpx;
+    color: #333;
   }
 
   .uni-calendar__wrapper {
-    width: 100%;
-    box-sizing: border-box;
+    flex: 1;
     font-size: 26rpx;
-    background: #fff;
-    transition: all 0.3s;
+    background-color: #fff;
+    // transition-duration: 0.3s;
+    // transform: translateY(100%);
+  }
 
-    .uni-calenda__content {
-      .uni-calendar__panel {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28rpx;
-        height: 100rpx;
+  .uni-calenda__content {}
 
-        .uni-calendar__date-befor,
-        .uni-calendar__date-after {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 80rpx;
-          width: 80rpx;
-          text-align: center;
-          line-height: 80rpx;
+  .uni-calendar__panel {
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    height: 100rpx;
 
-          &.uni-calendar__rollback {
-            transform: rotate(180deg);
-          }
-        }
 
-        .uni-calendar__panel-box {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 200upx;
-        }
+  }
 
-        .uni-calendar__backtoday {
-          position: absolute;
-          right: 0;
-          top: 25rpx;
-          padding: 0 10rpx;
-          padding-left: 20rpx;
-          height: 50rpx;
-          line-height: 50rpx;
-          border: 1px rgba($color: #fd2e32, $alpha: 0.5) solid;
-          border-right: none;
-          font-size: 24rpx;
-          border-top-left-radius: 50rpx;
-          border-bottom-left-radius: 50rpx;
-          color: rgba($color: #fd2e32, $alpha: 0.7);
-          background: rgba(241, 233, 233, 0.4);
-        }
-      }
+  .uni-calendar__date-after {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+    width: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+  }
 
-      .uni-calendar__day-detail {
-        padding: 20upx;
-        padding-left: 30upx;
-        border-top: 1px #f5f5f5 solid;
-      }
+  .uni-calendar__date-befor {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+    width: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+  }
 
-      .uni-calendar__header {
-        display: flex;
-        font-size: $uni-font-size-base;
-        border-top: 1px #f5f5f5 solid;
+  .uni-calendar__rollback {
+    transform: rotate(180deg);
+  }
 
-        .uni-calendar__week {
-          width: 100%;
-          text-align: center;
-          line-height: 80rpx;
-          color: #333;
-          font-weight: bold;
-        }
-      }
+  .uni-calendar__panel-box {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 200rpx;
+  }
 
-      .uni-calendar__body {
-        display: flex;
-        flex-wrap: wrap;
-        font-size: $uni-font-size-base;
-      }
-    }
+  .uni-calendar__panel-box-text {
+    font-size: 30rpx;
+  }
+
+  .uni-calendar__backtoday {
+    position: absolute;
+    right: 0;
+    top: 25rpx;
+    padding: 0 10rpx;
+    padding-left: 20rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border-color: rgba($color: #fd2e32, $alpha: 0.5);
+    border-style: solid;
+    border-width: 1px;
+    border-right-width: 0;
+    font-size: 24rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+    color: rgba($color: #fd2e32, $alpha: 0.7);
+    background-color: rgba(241, 233, 233, 0.4);
+  }
+
+  .uni-calendar__day-detail {
+    padding: 20rpx;
+    padding-left: 30rpx;
+    border-top-color: #f5f5f5;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .uni-calendar__day-detail-text {
+    font-size: 30rpx;
+  }
+
+  .uni-calendar__header {
+    flex-direction: row;
+    font-size: $uni-font-size-base;
+    border-top-color: #f5f5f5;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .uni-calendar__week {
+    flex: 1;
+    text-align: center;
+    line-height: 80rpx;
+    color: #333;
+    font-weight: bold;
+    font-size: 24rpx;
+  }
+
+  .uni-calendar__body {
+    flex-wrap: wrap;
+    font-size: $uni-font-size-base;
   }
 </style>
