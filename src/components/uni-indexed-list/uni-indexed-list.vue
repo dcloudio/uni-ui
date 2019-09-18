@@ -9,7 +9,7 @@
         <view v-if="list.items && list.items.length > 0" class="uni-list">
           <view v-for="(item, index) in list.items" :key="index" class="uni-list-item" hover-class="uni-list-item--hover">
             <view class="uni-list-item__container" @click="onClick(idx, index)">
-              <view class="uni-list-item__border">
+              <view class="uni-list-item__border" :class="{'uni-list-item__border--last':index===list.items.length-1}">
                 <view v-if="showSelect" style="margin-right: 20rpx;">
                   <uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#aaa'"
                     size="24" />
@@ -208,6 +208,10 @@
     border-bottom-width: 1px;
     border-bottom-color: $uni-border-color;
   }
+  
+  .uni-list-item__border--last{
+    border-bottom-width: 0px;
+  }
 
   .uni-list-item__content {
     flex: 1;
@@ -248,8 +252,6 @@
     flex-direction: column;
   }
   
-
-
   .uni-indexed__menu-item {
     flex: 1;
     align-items: center;
