@@ -51,7 +51,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../uni.scss';
+  @import '@/uni.scss';
   @import '@/common/uni-nvue.scss';
 
 </style>
