@@ -1,13 +1,13 @@
 <template>
   <view class="uni-countdown">
-    <view v-if="showDay" :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ d }}</view>
-    <view v-if="showDay" :style="{ color: splitorColor }" class="uni-countdown__splitor">天</view>
-    <view :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ h }}</view>
-    <view :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '时' }}</view>
-    <view :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ i }}</view>
-    <view :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '分' }}</view>
-    <view :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ s }}</view>
-    <view v-if="!showColon" :style="{ color: splitorColor }" class="uni-countdown__splitor">秒</view>
+    <text v-if="showDay" :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ d }}</text>
+    <text v-if="showDay" :style="{ color: splitorColor }" class="uni-countdown__splitor">天</text>
+    <text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ h }}</text>
+    <text :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '时' }}</text>
+    <text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ i }}</text>
+    <text :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '分' }}</text>
+    <text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ s }}</text>
+    <text v-if="!showColon" :style="{ color: splitorColor }" class="uni-countdown__splitor">秒</text>
   </view>
 </template>
 <script>
@@ -122,7 +122,8 @@
 </script>
 <style lang="scss">
   @import '~@/uni.scss';
-  $countdown-height: 60upx;
+  $countdown-height: 48upx;
+  $countdown-width: 52upx;
 
   .uni-countdown {
     flex-direction: row;
@@ -132,26 +133,23 @@
 
   .uni-countdown__splitor {
     justify-content: center;
-    // line-height: $countdown-height;
+    line-height: $countdown-height;
     padding:  5upx;
-    font-size: $uni-font-size-base;
+    font-size: $uni-font-size-sm;
   }
 
   .uni-countdown__number {
-    width: $countdown-height;
+    width: $countdown-width;
     height: $countdown-height;
-    // line-height: $countdown-height;
-    justify-content: center;
-    align-items: center;
-    // height: $countdown-height;
+    line-height: $countdown-height;
+    // justify-content: center;
+    // align-items: center;
     border-radius: $uni-border-radius-base;
     margin: 5upx;
-    font-size: $uni-font-size-base;
     border-width: 1rpx;
     border-style: solid;
     border-color: #000000;
+    text-align: center;
     font-size: $uni-font-size-sm;
-
-    // padding: 8upx 10upx;
   }
 </style>
