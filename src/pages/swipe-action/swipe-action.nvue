@@ -1,22 +1,21 @@
 <template>
   <view>
-    <view class="example-title">基本用法</view>
+    <uni-title title="基本用法" type="line"></uni-title>
     <uni-swipe-action :options="options2" @click="bindClick">
-      <view class="cont">SwipeAction 基础使用场景</view>
+      <text class="cont">SwipeAction 基础使用场景</text>
     </uni-swipe-action>
-    <view class="example-title">禁止滑动</view>
+    <uni-title title="禁止滑动" type="line"></uni-title>
     <uni-swipe-action :disabled="true">
-      <view class="cont">SwipeAction 禁止滑动展示</view>
+      <text class="cont">SwipeAction 禁止滑动展示</text>
     </uni-swipe-action>
-    <view class="example-title">使用变量控制开关</view>
+    <uni-title title="使用变量控制开关" type="line"></uni-title>
     <view class="example-body">
-      <view class="button" @click="setOpened">当前状态：{{ isOpened ? '开' : '关' }}</view>
+      <view class="button" @click="setOpened"><text class="button-text">当前状态：{{ isOpened ? '开' : '关' }}</text></view>
     </view>
     <uni-swipe-action :options="options2" :show="isOpened" :auto-close="false" @change="change">
-      <view class="cont">使用变量控制SwipeAction的开启状态</view>
+      <text class="cont">使用变量控制SwipeAction的开启状态</text>
     </uni-swipe-action>
-    <view class="example-title">与 List 组件一起使用</view>
-    <!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
+    <uni-title title="与 List 组件一起使用" type="line"></uni-title>
     <uni-list>
       <uni-swipe-action :options="options1">
         <uni-list-item :show-arrow="false" title="item1" />
@@ -28,29 +27,17 @@
         <uni-list-item :show-arrow="false" title="item3" />
       </uni-swipe-action>
     </uni-list>
-    <!-- #endif -->
-    <!-- #ifdef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
-    <view class="uni-list">
-      <uni-swipe-action :options="options1">
-        <uni-list-item :show-arrow="false" title="item1" />
-      </uni-swipe-action>
-      <uni-swipe-action :options="options2">
-        <uni-list-item :show-arrow="false" title="item2" />
-      </uni-swipe-action>
-      <uni-swipe-action :options="options3">
-        <uni-list-item :show-arrow="false" title="item3" />
-      </uni-swipe-action>
-    </view>
-    <!-- #endif -->
   </view>
 </template>
 
 <script>
+  import uniTitle from '@/components/uni-title/uni-title.vue'
   import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
   import uniList from '@/components/uni-list/uni-list.vue'
   import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
   export default {
     components: {
+      uniTitle,
       uniSwipeAction,
       uniList,
       uniListItem
@@ -110,57 +97,31 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  @import '@/common/uni-nvue.scss';
   .cont {
-    height: 90upx;
-    line-height: 90upx;
-    padding: 0 30upx;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding: 0 30rpx;
     position: relative;
-    background: #fff;
-  }
-
-  .cont::before {
-    position: absolute;
-    z-index: 3;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 1px;
-    content: '';
-    transform: scaleY(0.5);
-    background-color: $uni-border-color;
-  }
-
-  .cont::after {
-    position: absolute;
-    z-index: 3;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    content: '';
-    transform: scaleY(0.5);
-    background-color: $uni-border-color;
+    background-color: #fff;
+    font-size: 30rpx;
   }
 
   .example-body {
-    display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 20upx 0;
+    padding: 20rpx 0;
   }
 
-  /* .button-view {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		padding: 20upx 0;
-		background: #fff;
-	} */
-
   .button {
-    border: 1px solid #E7E7E7;
-    padding: 8upx 16upx;
-    border-radius: 8upx;
+    border-color: #E7E7E7;
+    border-style: solid;
+    border-width: 1px;
+    padding: 8rpx 16rpx;
+    border-radius: 8rpx;
+  }
+  .button-text {
+    font-size: 30rpx;
   }
 </style>
