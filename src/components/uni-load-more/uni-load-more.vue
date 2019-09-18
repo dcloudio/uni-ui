@@ -228,10 +228,5 @@
       transform: rotate(360deg);
     }
   }
-
-  /* #endif */
-  /* #ifdef APP-NVUE */
-  .uni-load-more__img--android {}
-
   /* #endif */
 </style>
