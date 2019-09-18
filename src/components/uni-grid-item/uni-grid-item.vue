@@ -17,8 +17,6 @@
     components: {
       uniBadge
     },
-    props: {
-    },
     inject: ['grid'],
     data() {
       return {
@@ -64,10 +62,10 @@
 
 <style lang="scss">
   .uni-grid-item {
-    // flex: 1;
   }
 
   .uni-grid-item__box {
+    flex: 1;
     position: relative;
     flex-direction: row;
     justify-content: center;
