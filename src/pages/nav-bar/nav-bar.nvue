@@ -33,14 +33,17 @@
 </template>
 
 <script>
+  // console.log(uni.getSystemInfoSync());
   import uniIcons from '@/components/uni-icons/uni-icons.vue'
   import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
   import uniTitle from '@/components/uni-title/uni-title.vue'
+  import uniStatusBar from '@/components/uni-status-bar/uni-status-bar.vue';
   export default {
     components: {
       uniIcons,
       uniNavBar,
-      uniTitle
+      uniTitle,
+      uniStatusBar
     },
     data() {
       return {
@@ -107,15 +110,15 @@
   .city {
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-left: 8px;
-    // white-space: nowrap;
+    justify-content: flex-start;
+    // width: 160rpx;
+    margin-left: 8rpx;
   }
 
   .input-view {
     flex-direction: row;
-    width: 500rpx;
+    // width: 500rpx;
+    flex: 1;
     background-color: #e7e7e7;
     height: $nav-height;
     border-radius: 15px;
@@ -134,7 +137,7 @@
   .nav-bar-input {
     height: $nav-height;
     line-height: $nav-height;
-    width: 450rpx;
+    // width: 450rpx;
     padding: 0 10rpx;
     font-size: $uni-font-size-lg;
   }
