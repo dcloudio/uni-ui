@@ -1,18 +1,18 @@
 <template>
   <view>
-    <view class="example-title"><text class="example-title-text">默认样式</text></view>
+    <uni-title title="默认样式" type="line"></uni-title>
     <view class="example-body">
       <uni-pagination :total="50" title="标题文字" />
     </view>
-    <view class="example-title"><text class="example-title-text">修改按钮文字</text></view>
+    <uni-title title="修改按钮文字" type="line"></uni-title>
     <view class="example-body">
       <uni-pagination :total="50" title="标题文字" prev-text="前一页" next-text="后一页" />
     </view>
-    <view class="example-title"><text class="example-title-text">图标样式</text></view>
+    <uni-title title="图标样式" type="line"></uni-title>
     <view class="example-body">
       <uni-pagination :show-icon="true" :total="50" title="标题文字" />
     </view>
-    <view class="example-title"><text class="example-title-text">修改数据长度</text></view>
+    <uni-title title="修改数据长度" type="line"></uni-title>
     <view class="example-body">
       <uni-pagination :current="current" :total="total" title="标题文字" show-icon="true" @change="change" />
     </view>
@@ -30,11 +30,13 @@
   import uniPagination from '@/components/uni-pagination/uni-pagination.vue'
   import uniList from '@/components/uni-list/uni-list.vue'
   import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
+  import uniTitle from '@/components/uni-title/uni-title.vue'
   export default {
     components: {
       uniPagination,
       uniList,
-      uniListItem
+      uniListItem,
+      uniTitle
     },
     data() {
       return {
