@@ -1,21 +1,21 @@
 <template>
   <view class="uni-pagination">
     <view class="uni-pagination__btns">
-      <view class="uni-pagination__btn" :hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'"
-        :hover-start-time="20" :hover-stay-time="70" @click="clickLeft">
+      <view class="uni-pagination__btn" :class="currentIndex === 1 ? 'uni-pagination--disabled' : 'uni-pagination--enabled'"
+        :hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70"
+        @click="clickLeft">
         <template v-if="showIcon===true || showIcon === 'true'">
-          <uni-icons :class="[currentIndex === 1 ? 'uni-pagination--disabled' : 'uni-pagination--enabled']" color="#000"
-            size="20" type="arrowleft" />
+          <uni-icons color="#000" size="20" type="arrowleft" />
         </template>
-        <template v-else><text class="uni-pagination-child__btn" :class="[currentIndex === 1 ? 'uni-pagination--disabled' : 'uni-pagination--enabled']">{{ prevText }}</text></template>
+        <template v-else><text class="uni-pagination-child__btn">{{ prevText }}</text></template>
       </view>
-      <view class="uni-pagination__btn" :hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'"
-        :hover-start-time="20" :hover-stay-time="70" @click="clickRight">
+      <view class="uni-pagination__btn" :class="currentIndex === maxPage ? 'uni-pagination--disabled' : 'uni-pagination--enabled'"
+        :hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70"
+        @click="clickRight">
         <template v-if="showIcon===true || showIcon === 'true'">
-          <uni-icons :class="currentIndex === maxPage ? 'uni-pagination--disabled' : 'uni-pagination--enabled'" color="#000"
-            size="20" type="arrowright" />
+          <uni-icons color="#000" size="20" type="arrowright" />
         </template>
-        <template v-else><text class="uni-pagination-child__btn" :class="currentIndex === maxPage ? 'uni-pagination--disabled' : 'uni-pagination--enabled'">{{ nextText }}</text></template>
+        <template v-else><text class="uni-pagination-child__btn">{{ nextText }}</text></template>
       </view>
     </view>
     <view class="uni-pagination__num">
@@ -179,7 +179,7 @@
 
   .uni-pagination--enabled {
     color: #333333;
-    opacity: 1 !important;
+    opacity: 1;
   }
 
   .uni-pagination--disabled {
