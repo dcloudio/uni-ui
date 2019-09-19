@@ -156,12 +156,14 @@ $uni-searchbar-height: 64rpx;
 
 .uni-searchbar-form__box-icon-clear {
   color: #c8c7cc;
-  line-height: 20px;
+  /* #ifndef APP-PLUS */
+  margin-top: 3px;
+  /* #endif */
+  line-height: 24px;
   padding: 0rpx 15rpx 0rpx 10rpx;
 }
 
 .uni-searchbar-form__text {
-  display: flex;
   flex-direction: row;
   flex: 1;
   align-items: center;
