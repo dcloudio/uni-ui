@@ -107,6 +107,7 @@
 </script>
 
 <style lang="scss">
+	@import '@/uni.scss';
   @mixin pagination-disabled {
     opacity: 0.3;
   }
