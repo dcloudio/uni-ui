@@ -1,20 +1,20 @@
 <template>
   <view class="uni-indexed">
-    <scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed__list"
+    <scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed-list"
       scroll-y>
       <view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
-        <view class="uni-indexed__list-title-wrapper">
-          <text v-if="list.items && list.items.length > 0" class="uni-indexed__list-title">{{ list.key }}</text>
+        <view class="uni-indexed-list-title-wrapper">
+          <text v-if="list.items && list.items.length > 0" class="uni-indexed-list-title">{{ list.key }}</text>
         </view>
         <view v-if="list.items && list.items.length > 0" class="uni-list">
-          <view v-for="(item, index) in list.items" :key="index" class="uni-list-item" hover-class="uni-list-item--hover">
-            <view class="uni-list-item__container" @click="onClick(idx, index)">
-              <view class="uni-list-item__border" :class="{'uni-list-item__border--last':index===list.items.length-1}">
+          <view v-for="(item, index) in list.items" :key="index" class="uni-indexed__item" hover-class="uni-indexed__item--hover">
+            <view class="uni-indexed__item-container" @click="onClick(idx, index)">
+              <view class="uni-indexed__item-border" :class="{'uni-indexed__item-border--last':index===list.items.length-1}">
                 <view v-if="showSelect" style="margin-right: 20rpx;">
                   <uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#aaa'"
                     size="24" />
                 </view>
-                <text class="uni-list-item__content">{{ item.name }}</text>
+                <text class="uni-indexed__item-content">{{ item.name }}</text>
               </view>
             </view>
           </view>
@@ -28,8 +28,8 @@
         <text class="uni-indexed__menu-text" :class="touchmoveIndex == key ? 'uni-indexed__menu-text--active' : ''">{{ list.key }}</text>
       </view>
     </view>
-    <view v-if="touchmove" class="uni-indexed--alert-wrapper">
-      <text class="uni-indexed--alert">{{ lists[touchmoveIndex].key }}</text>
+    <view v-if="touchmove" class="uni-indexed__alert-wrapper">
+      <text class="uni-indexed__alert">{{ lists[touchmoveIndex].key }}</text>
     </view>
   </view>
 </template>
@@ -168,7 +168,7 @@
     border-top-color: $uni-border-color;
   }
 
-  .uni-list-item {
+  .uni-indexed__item {
     font-size: $uni-font-size-lg;
     /* #ifndef APP-NVUE */
     display: flex;
@@ -179,7 +179,7 @@
     align-items: center;
   }
 
-  .uni-list-item__container {
+  .uni-indexed__item-container {
     padding-left: $uni-spacing-row-lg;
     flex: 1;
     position: relative;
@@ -192,7 +192,7 @@
     align-items: center;
   }
 
-  .uni-list-item__border {
+  .uni-indexed__item-border {
     flex: 1;
     position: relative;
     /* #ifndef APP-NVUE */
@@ -209,11 +209,11 @@
     border-bottom-color: $uni-border-color;
   }
   
-  .uni-list-item__border--last{
+  .uni-indexed__item-border--last{
     border-bottom-width: 0px;
   }
 
-  .uni-list-item__content {
+  .uni-indexed__item-content {
     flex: 1;
     font-size: 14px;
   }
@@ -225,11 +225,11 @@
     flex-direction: row;
   }
 
-  .uni-indexed__list {
+  .uni-indexed-list {
     flex: 1;
   }
 
-  .uni-indexed__list-title-wrapper {
+  .uni-indexed-list-title-wrapper {
     /* #ifndef APP-NVUE */
     display: flex;
     width: 100%;
@@ -237,7 +237,7 @@
     background-color: #f7f7f7;
   }
 
-  .uni-indexed__list-title {
+  .uni-indexed-list-title {
     padding: 6px 12px;
     line-height: 24px;
     font-size: $uni-font-size-sm;
@@ -273,7 +273,7 @@
     color: #007aff;
   }
 
-  .uni-indexed--alert-wrapper {
+  .uni-indexed__alert-wrapper {
     position: absolute;
     left: 0;
     top: 0;
@@ -287,7 +287,7 @@
     justify-content: center;
   }
 
-  .uni-indexed--alert {
+  .uni-indexed__alert {
     width: 80px;
     height: 80px;
     border-radius: 80px;

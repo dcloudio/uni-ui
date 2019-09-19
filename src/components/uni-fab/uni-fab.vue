@@ -8,29 +8,29 @@
       }"
       class="uni-fab">
       <view :class="{
-          'uni-fab-content--left': horizontal === 'left',
-          'uni-fab-content--right': horizontal === 'right',
-          'uni-fab-content--flexDirection': direction === 'vertical',
-          'uni-fab-content--flexDirectionStart': flexDirectionStart,
-          'uni-fab-content--flexDirectionEnd': flexDirectionEnd
+          'uni-fab__content--left': horizontal === 'left',
+          'uni-fab__content--right': horizontal === 'right',
+          'uni-fab__content--flexDirection': direction === 'vertical',
+          'uni-fab__content--flexDirectionStart': flexDirectionStart,
+          'uni-fab__content--flexDirectionEnd': flexDirectionEnd
         }"
-        :style="{ width: boxWidth, height: boxHeight, backgroundColor: styles.backgroundColor }" class="uni-fab-content">
-        <view v-if="flexDirectionStart || horizontalLeft" class="uni-fab-item uni-fab-item--first" />
-        <view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab-item--active': isShow }" class="uni-fab-item"
+        :style="{ width: boxWidth, height: boxHeight, backgroundColor: styles.backgroundColor }" class="uni-fab__content">
+        <view v-if="flexDirectionStart || horizontalLeft" class="uni-fab__item uni-fab__item--first" />
+        <view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab__item--active': isShow }" class="uni-fab__item"
           @click="_onItemClick(index, item)">
-          <image :src="item.active ? item.selectedIconPath : item.iconPath" class="uni-fab-item-image" mode="widthFix" />
-          <text class="uni-fab-item-text" :style="{ color: item.active ? styles.selectedColor : styles.color }">{{ item.text }}</text>
+          <image :src="item.active ? item.selectedIconPath : item.iconPath" class="uni-fab__item-image" mode="widthFix" />
+          <text class="uni-fab__item-text" :style="{ color: item.active ? styles.selectedColor : styles.color }">{{ item.text }}</text>
         </view>
-        <view v-if="flexDirectionEnd || horizontalRight" class="uni-fab-item uni-fab-item--first" />
+        <view v-if="flexDirectionEnd || horizontalRight" class="uni-fab__item uni-fab__item--first" />
       </view>
       <view :class="{
-          'uni-fab-circle--left': horizontal === 'left' && direction === 'horizontal',
-          'uni-fab-circle--top': vertical === 'top' && direction === 'vertical',
-          'uni-fab-circle--bottom': vertical === 'bottom' && direction === 'vertical',
-          'uni-fab-circle--right': horizontal === 'right' && direction === 'horizontal'
+          'uni-fab__circle--left': horizontal === 'left' && direction === 'horizontal',
+          'uni-fab__circle--top': vertical === 'top' && direction === 'vertical',
+          'uni-fab__circle--bottom': vertical === 'bottom' && direction === 'vertical',
+          'uni-fab__circle--right': horizontal === 'right' && direction === 'horizontal'
         }"
-        :style="{ 'background-color': styles.buttonColor }" class="uni-fab-circle" @click="_onClick">
-        <uni-icons :class="{ 'uni-fab-plus--active': isShow }" class="uni-fab-plus" type="plusempty" color="#FFFFFF"
+        :style="{ 'background-color': styles.buttonColor }" class="uni-fab__circle" @click="_onClick">
+        <uni-icons :class="{ 'uni-fab__plus--active': isShow }" class="uni-fab__plus" type="plusempty" color="#FFFFFF"
           size="48"></uni-icons>
       </view>
     </view>
@@ -183,7 +183,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .uni-fab {
     position: fixed;
     /* #ifndef APP-NVUE */
@@ -237,7 +240,7 @@
     /* #endif */
   }
 
-  .uni-fab-circle {
+  .uni-fab__circle {
     /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
@@ -252,33 +255,34 @@
     z-index: 11;
   }
 
-  .uni-fab-circle--left {
+  .uni-fab__circle--left {
     left: 0;
   }
 
-  .uni-fab-circle--right {
+  .uni-fab__circle--right {
     right: 0;
   }
 
-  .uni-fab-circle--top {
+  .uni-fab__circle--top {
     top: 0;
   }
 
-  .uni-fab-circle--bottom {
+  .uni-fab__circle--bottom {
     bottom: 0;
   }
 
-  .uni-fab-plus {
+  .uni-fab__plus {
+    transform: rotate(0deg);
     transition: transform 0.3s;
     font-weight: bold;
   }
 
-  .uni-fab-plus--active {
+  .uni-fab__plus--active {
     transform: rotate(135deg);
     font-size: 40px;
   }
 
-  .uni-fab-content {
+  .uni-fab__content {
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     display: flex;
@@ -296,30 +300,30 @@
     width: 55px;
   }
 
-  .uni-fab-content--left {
+  .uni-fab__content--left {
     justify-content: flex-start;
   }
 
-  .uni-fab-content--right {
+  .uni-fab__content--right {
     justify-content: flex-end;
   }
 
-  .uni-fab-content--flexDirection {
+  .uni-fab__content--flexDirection {
     flex-direction: column;
     justify-content: flex-end;
   }
 
-  .uni-fab-content--flexDirectionStart {
+  .uni-fab__content--flexDirectionStart {
     flex-direction: column;
     justify-content: flex-start;
   }
 
-  .uni-fab-content--flexDirectionEnd {
+  .uni-fab__content--flexDirectionEnd {
     flex-direction: column;
     justify-content: flex-end;
   }
 
-  .uni-fab-item {
+  .uni-fab__item {
     /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
@@ -332,22 +336,26 @@
     transition: opacity 0.2s;
   }
 
-  .uni-fab-item--active {
+  .uni-fab__item--active {
     opacity: 1;
   }
 
-  .uni-fab-item-image {
+  .uni-fab__item-image {
     width: 25px;
     height: 25px;
     margin-bottom: 3px;
   }
 
-  .uni-fab-item-text {
+  .uni-fab__item-text {
     color: #FFFFFF;
     font-size: 12px;
   }
 
-  .uni-fab-item--first {
+  .uni-fab__item--first {
     width: 55px;
   }
+  
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>

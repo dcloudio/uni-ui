@@ -35,7 +35,7 @@
       },
       disabled: {
         // 是否禁用
-        type: [Boolean, String],
+        type: Boolean,
         default: false
       },
       showAnimation: {
@@ -45,7 +45,7 @@
       },
       open: {
         // 是否展开
-        type: [Boolean, String],
+        type: Boolean,
         default: false
       },
       thumb: {
@@ -80,6 +80,7 @@
     },
     methods: {
       onClick() {
+        console.log(this.disabled);
         if (this.disabled) {
           return
         }
