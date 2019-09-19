@@ -1,13 +1,27 @@
 <template>
   <view class="uni-numbox">
-    <text :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }" class="uni-numbox__minus" @click="_calcValue('minus')">-</text>
-    <input :disabled="disabled" v-model="inputValue" class="uni-numbox__value" type="number" @blur="_onBlur" />
-    <text :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }" class="uni-numbox__plus" @click="_calcValue('plus')">+</text>
+    <text
+      :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }"
+      @click="_calcValue('minus')"
+      class="uni-numbox__minus"
+    >-</text>
+    <input
+      :disabled="disabled"
+      @blur="_onBlur"
+      class="uni-numbox__value"
+      type="number"
+      v-model="inputValue"
+    />
+    <text
+      :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }"
+      @click="_calcValue('plus')"
+      class="uni-numbox__plus"
+    >+</text>
   </view>
 </template>
 <script>
 export default {
-  name: 'UniNumberBox',
+  name: "UniNumberBox",
   props: {
     value: {
       type: [Number, String],
@@ -41,7 +55,7 @@ export default {
     },
     inputValue(newVal, oldVal) {
       if (+newVal !== +oldVal) {
-        this.$emit('change', newVal);
+        this.$emit("change", newVal);
       }
     }
   },
@@ -56,9 +70,9 @@ export default {
       const scale = this._getDecimalScale();
       let value = this.inputValue * scale;
       let step = this.step * scale;
-      if (type === 'minus') {
+      if (type === "minus") {
         value -= step;
-      } else if (type === 'plus') {
+      } else if (type === "plus") {
         value += step;
       }
       if (value < this.min || value > this.max) {
@@ -71,7 +85,7 @@ export default {
       let scale = 1;
       // 浮点型
       if (~~this.step !== this.step) {
-        scale = Math.pow(10, (this.step + '').split('.')[1].length);
+        scale = Math.pow(10, (this.step + "").split(".")[1].length);
       }
       return scale;
     },
@@ -93,9 +107,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '~@/uni.scss';
-$box-height:70rpx;
-$box-width:70rpx;
+@import "~@/uni.scss";
+$box-height: 70rpx;
+/* #ifdef APP-PLUS */
+$box-line-height: 70rpx;
+/* #endif */
+$box-line-height: 60rpx;
+$box-width: 70rpx;
 
 .uni-numbox {
   flex-direction: row;
@@ -120,7 +138,7 @@ $box-width:70rpx;
 .uni-numbox__minus {
   width: $box-width;
   height: $box-height;
-  line-height: $box-height;
+  line-height: $box-line-height;
   text-align: center;
   font-size: 40rpx;
   color: $uni-text-color;
@@ -136,7 +154,7 @@ $box-width:70rpx;
 .uni-numbox__plus {
   width: $box-width;
   height: $box-height;
-  line-height: $box-height;
+  line-height: $box-line-height;
   text-align: center;
   font-size: 40rpx;
   color: $uni-text-color;

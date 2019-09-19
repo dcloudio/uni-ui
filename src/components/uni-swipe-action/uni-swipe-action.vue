@@ -15,7 +15,8 @@
       @touchstart="swipe.touchstart" @touchmove="swipe.touchmove" @touchend="swipe.touchend" @change="change">
       <!-- #endif -->
       <!-- #ifndef APP-VUE|| MP-WEIXIN||H5 -->
-      <view ref='selector-content-hock' :class="{'ani':uniShow}" :style="{transform:moveLeft}" class="ani uni-swipe_move-box  selector-query-hock"
+      <!-- :class="{'ani':uniShow}" -->
+      <view ref='selector-content-hock'  :style="{transform:moveLeft,'transition-duration':uniShow?'0.3s':'0s'}" class="ani uni-swipe_move-box  selector-query-hock"
         @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
         <!-- #endif -->
         <view class="uni-swipe_box">
@@ -127,7 +128,6 @@
   }
 
   .ani {
-    /* transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1); */
     transition-property:transform;
     transition-duration:0.3s;
     transition-timing-function:cubic-bezier(0.165, 0.84, 0.44, 1);
