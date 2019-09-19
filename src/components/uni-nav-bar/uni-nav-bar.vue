@@ -167,7 +167,7 @@ $nav-height: 44px;
   background-color: $uni-bg-color;
   overflow: hidden;
 }
-
+ 
 .uni-navbar__content_view {
   align-items: center;
   flex-direction: row;
@@ -230,7 +230,9 @@ $nav-height: 44px;
 }
 
 .uni-navbar--border {
-  border-bottom: 1rpx solid $uni-border-color;
+  border-bottom-width: 1rpx;
+  border-bottom-style: solid;
+  border-bottom-color: $uni-border-color;
 }
  /* #ifdef MP-ALIPAY */ 
   } 
