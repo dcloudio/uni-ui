@@ -130,7 +130,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .uni-load-more {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -155,6 +158,9 @@
     height: 24px;
     transform: rotate(0deg);
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 
   /* #ifndef APP-NVUE */
   .uni-load-more__img--android {

@@ -163,7 +163,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .uni-noticebar {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -251,6 +254,9 @@
   .uni-noticebar__more-text {
     font-size: 14px;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 
   @keyframes notice {
     100% {

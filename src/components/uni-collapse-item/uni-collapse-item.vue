@@ -102,7 +102,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   @mixin collapse-hover {
     background-color: #f5f5f5;
   }
@@ -199,4 +202,7 @@
     height: 0px;
     line-height: 0px;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>

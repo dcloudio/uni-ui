@@ -69,6 +69,11 @@
 </script>
 
 <style lang="scss">
+  @import '@/uni.scss';
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .segmented-control {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -119,4 +124,7 @@
     line-height: 20px;
     text-align: center;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>

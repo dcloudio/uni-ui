@@ -81,6 +81,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   $drawer-width: 220px;
 
   .uni-drawer {
@@ -143,4 +147,7 @@
     /* #endif */
     opacity: 1;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>
