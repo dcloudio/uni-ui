@@ -86,9 +86,14 @@ export default {
 </script>
 
 <style lang="scss">
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+   /* #ifdef MP-ALIPAY */ 
+    page {  
+  /* #endif */
 @import "~@/uni.scss";
 $fav-height: 50rpx;
 $fav-font-size: 28rpx;
+
 .uni-fav {
   flex-direction: row;
   align-items: center;
@@ -116,4 +121,7 @@ $fav-font-size: 28rpx;
   justify-content: center;
   font-size: $fav-font-size;
 }
+ /* #ifdef MP-ALIPAY */ 
+  } 
+/* #endif */
 </style>
