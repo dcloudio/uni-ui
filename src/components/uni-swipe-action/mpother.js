@@ -10,12 +10,13 @@ export default {
   },
   computed: {
     moveLeft() {
+      console.log('-----', `translateX(${this.left}px)`);
       return `translateX(${this.left}px)`
     }
   },
   watch: {
     show(newVal) {
-      if(!this.position || JSON.stringify(this.position)=== '{}') return;
+      if (!this.position || JSON.stringify(this.position) === '{}') return;
       if (this.autoClose) return
       if (newVal) {
         this.$emit('change', true)
@@ -109,15 +110,14 @@ export default {
     open() {
       this.uniShow = true
       this.left = -this.position.button.width
+      console.log(this.left);
       this.setValue(-this.position.button.width)
     },
     close() {
       this.uniShow = true
       this.setValue(0)
-      setTimeout(() => {
-        this.uniShow = false
-        this.isopen = false
-      }, 200)
+      this.uniShow = false
+      this.isopen = false
     },
     getSelectorQuery() {
       // #ifndef APP-NVUE
@@ -126,7 +126,8 @@ export default {
       views
         .selectAll('.selector-query-hock')
         .boundingClientRect(data => {
-          this.position = data
+          this.position.content = data[1]
+          this.position.button = data[0]
           if (this.autoClose) return
           if (this.show) {
             this.open()
@@ -144,7 +145,7 @@ export default {
           }, 50)
           return
         }
-        if(this.position.content) return
+        if (this.position.content) return
         this.position.content = data.size
       })
       dom.getComponentRect(this.$refs['selector-button-hock'], (data) => {
@@ -154,7 +155,7 @@ export default {
           }, 50)
           return
         }
-        if(this.position.button) return
+        if (this.position.button) return
         this.position.button = data.size
         if (this.autoClose) return
         if (this.show) {

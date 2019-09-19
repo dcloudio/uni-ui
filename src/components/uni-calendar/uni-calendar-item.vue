@@ -163,7 +163,7 @@
   // }
   .uni-calender__multiple {
     border-radius: 50px;
-    background: #fd2e32;
+    background-color: #fd2e32;
   }
 
 
@@ -183,7 +183,9 @@
     height: 10rpx;
     border-radius: 50%;
     background-color: #ff5a5f;
-    border: 1px #fff solid;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 1px;
     z-index: 2;
   }
 
