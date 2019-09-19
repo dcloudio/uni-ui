@@ -45,13 +45,13 @@ export default {
 <style lang="scss">
 @import '@/common/uni-nvue.scss';
 .uni-badge {
-  margin: 20rpx;
+  // margin: 20rpx;
 }
 .example-body {
   flex-direction: row;
   justify-content: flex-start;
 }
 .uni-badge-left-margin{
-  margin-left: 10px;
+  margin-left: 20px;
 }
 </style>
