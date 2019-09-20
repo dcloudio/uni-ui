@@ -26,6 +26,7 @@
     <uni-title title="修改颜色" type="line"></uni-title>
     <view class="example-body">
       <uni-notice-bar :single="true" more-text="查看更多" color="red" background-color="#eee" text="uni-app 1.6版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" />
+      <uni-notice-bar :single="true" :show-get-more="true" more-text="查看更多" more-color="blue" color="red" background-color="#eee" text="uni-app 1.6版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。"  @getmore="getMore" />
       <uni-notice-bar :show-icon="true" color="blue" text="uni-app 1.6版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" />
     </view>
     <uni-title title="关闭按钮" type="line"></uni-title>

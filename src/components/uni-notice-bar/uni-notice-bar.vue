@@ -12,8 +12,8 @@
       </view>
     </view>
     <view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar__more" @click="clickMore">
-      <text v-if="moreText" :style="{ color: color }" class="uni-noticebar__more-text">{{ moreText }}</text>
-      <uni-icons type="arrowright" :style="{ color: color }" size="14" />
+      <text v-if="moreText" :style="{ color: moreColor }" class="uni-noticebar__more-text">{{ moreText }}</text>
+      <uni-icons type="arrowright" :color="moreColor" size="14" />
     </view>
   </view>
 </template>
@@ -50,6 +50,10 @@
       color: {
         type: String,
         default: '#de8c17'
+      },
+      moreColor: {
+        type: String,
+        default: '#999999'
       },
       single: {
         // 是否单行
@@ -197,7 +201,7 @@
     flex-direction: row;
   }
   
-  .uni-noticebar__content {
+  .uni-noticebar__content--scrollable {
     /* #ifdef APP-NVUE */
     flex: 0;
     /* #endif */

@@ -53,6 +53,7 @@ export default {
 |speed|Number|100|文字滚动的速度，默认100px/秒|
 |background-color|String|#fffbe8|背景颜色|
 |color|String|#de8c17|文字颜色|
+|moreColor|String|#999999|查看更多文字的颜色|
 |single|Boolean|false|是否单行|
 |scrollable|Boolean|false|是否滚动，为true时，NoticeBar为单行|
 |show-icon|Boolean|false|是否显示左侧喇叭图标|
