@@ -49,6 +49,11 @@ $bage-size: 12px;
 $bage-small: scale(0.8);
 $bage-height: 40rpx;
 
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+    /* #endif */
+
 .uni-badge {
 	flex-direction: row;
 	height: $bage-height;
@@ -111,4 +116,7 @@ $bage-height: 40rpx;
 	transform: $bage-small;
 	transform-origin: center center;
 }
+    /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>
