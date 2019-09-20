@@ -73,6 +73,9 @@
   }
 
   .example-body-first {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
     flex-direction: row;
     justify-content: flex-start;
   }

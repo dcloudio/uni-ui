@@ -96,6 +96,9 @@ $fav-font-size: 28rpx;
   /* #endif */
 
 .uni-fav {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -109,6 +112,9 @@ $fav-font-size: 28rpx;
   border-radius: 60rpx;
 }
 .uni-fav-star {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   height: $fav-height;
   line-height: $fav-height;
   margin-right: 5rpx;
@@ -116,6 +122,9 @@ $fav-font-size: 28rpx;
   justify-content: center;
 }
 .uni-fav-text {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   height: $fav-height;
   line-height: $fav-height;
   align-items: center;
