@@ -4,15 +4,15 @@
       size="12" @click="close" />
     <uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
       size="14" />
-    <view class="uni-noticebar-content-wrapper" :class="{'uni-noticebar-content-wrapper--scrollable':scrollable, 'uni-noticebar-content-wrapper--single':!scrollable && (single || moreText)}">
-      <view :id="elId" ref="animationEle" class="uni-noticebar-content" :class="{'uni-noticebar-content--scrollable':scrollable, 'uni-noticebar-content--single':!scrollable && (single || moreText)}"
+    <view class="uni-noticebar__content-wrapper" :class="{'uni-noticebar__content-wrapper--scrollable':scrollable, 'uni-noticebar__content-wrapper--single':!scrollable && (single || moreText)}">
+      <view :id="elId" ref="animationEle" class="uni-noticebar__content" :class="{'uni-noticebar__content--scrollable':scrollable, 'uni-noticebar__content--single':!scrollable && (single || moreText)}"
         :style="{'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: animationPlayState,'-webkit-animationPlayState':animationPlayState}">
-        <text class="uni-noticebar-content-text" :class="{'uni-noticebar-content-text--scrollable':scrollable,'uni-noticebar-content-text--single':!scrollable && (single || moreText)}"
+        <text class="uni-noticebar__content-text" :class="{'uni-noticebar__content-text--scrollable':scrollable,'uni-noticebar__content-text--single':!scrollable && (single || moreText)}"
           :style="{color:color}">{{text}}</text>
       </view>
     </view>
-    <view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar-more" @click="clickMore">
-      <text v-if="moreText" :style="{ color: color }" class="uni-noticebar-more-text">{{ moreText }}</text>
+    <view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar__more" @click="clickMore">
+      <text v-if="moreText" :style="{ color: color }" class="uni-noticebar__more-text">{{ moreText }}</text>
       <uni-icons type="arrowright" :style="{ color: color }" size="14" />
     </view>
   </view>
@@ -91,7 +91,9 @@
       }
     },
     mounted() {
-      this.setAnimation()
+      this.$nextTick(()=>{
+        this.setAnimation()
+      })
     },
     // #ifdef APP-NVUE
     beforeDestroy() {
@@ -161,7 +163,10 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .uni-noticebar {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -181,18 +186,18 @@
     margin-right: 5px;
   }
 
-  .uni-noticebar-content-wrapper {
+  .uni-noticebar__content-wrapper {
     flex: 1;
     flex-direction: column;
     overflow: hidden;
   }
   
-  .uni-noticebar-content-wrapper--single,
-  .uni-noticebar-content-wrapper--scrollable {
+  .uni-noticebar__content-wrapper--single,
+  .uni-noticebar__content-wrapper--scrollable {
     flex-direction: row;
   }
   
-  .uni-noticebar-content {
+  .uni-noticebar__content {
     /* #ifdef APP-NVUE */
     flex: 0;
     /* #endif */
@@ -203,19 +208,19 @@
     /* #endif */
   }
   
-  .uni-noticebar-content--single {
+  .uni-noticebar__content--single {
     /* #ifndef APP-NVUE */
     flex: none;
     width: 100%;
     /* #endif */
   }
 
-  .uni-noticebar-content-text {
+  .uni-noticebar__content-text {
     font-size: 14px;
     line-height: 18px;
   }
 
-  .uni-noticebar-content-text--single {
+  .uni-noticebar__content-text--single {
     /* #ifdef APP-NVUE */
     lines: 1;
     /* #endif */
@@ -226,7 +231,7 @@
     text-overflow: ellipsis;
   }
 
-  .uni-noticebar-content-text--scrollable {
+  .uni-noticebar__content-text--scrollable {
     /* #ifdef APP-NVUE */
     lines: 1;
     /* #endif */
@@ -236,7 +241,7 @@
     padding-left: 750rpx;
   }
 
-  .uni-noticebar-more {
+  .uni-noticebar__more {
     /* #ifndef APP-NVUE */
     display: inline-flex;
     /* #endif */
@@ -246,9 +251,12 @@
     padding-left: 5px;
   }
 
-  .uni-noticebar-more-text {
+  .uni-noticebar__more-text {
     font-size: 14px;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 
   @keyframes notice {
     100% {

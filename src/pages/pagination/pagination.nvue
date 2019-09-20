@@ -14,7 +14,7 @@
     </view>
     <uni-title title="修改数据长度" type="line"></uni-title>
     <view class="example-body">
-      <uni-pagination :current="current" :total="total" title="标题文字" show-icon="true" @change="change" />
+      <uni-pagination :current="current" :total="total" title="标题文字" :show-icon="true" @change="change" />
     </view>
     <view class="btn-view">
       <view>

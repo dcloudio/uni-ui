@@ -6,8 +6,6 @@
 
 <script>
 var statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px'
- // var statusBarHeight = '20px'
-// console.log(statusBarHeight);
 export default {
   name: 'UniStatusBar',
   data () {

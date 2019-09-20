@@ -1,11 +1,11 @@
 <template>
   <view :class="[styleType === 'text'?'segmented-control--text' : 'segmented-control--button' ]" :style="{ borderColor: styleType === 'text' ? '' : activeColor }"
     class="segmented-control">
-    <view v-for="(item, index) in values" :class="[ styleType === 'text'?'segmented-control-item--text': 'segmented-control-item--button' , index === currentIndex&&styleType === 'button'?'segmented-control-item--button--active': '' , index === 0&&styleType === 'button'?'segmented-control-item--button--first': '',index === values.length - 1&&styleType === 'button'?'segmented-control-item--button--last': '' ]"
+    <view v-for="(item, index) in values" :class="[ styleType === 'text'?'segmented-control__item--text': 'segmented-control__item--button' , index === currentIndex&&styleType === 'button'?'segmented-control__item--button--active': '' , index === 0&&styleType === 'button'?'segmented-control__item--button--first': '',index === values.length - 1&&styleType === 'button'?'segmented-control__item--button--last': '' ]"
       :key="index" :style="{
         backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : '',borderColor: index === currentIndex&&styleType === 'text'||styleType === 'button'?activeColor:'transparent'
       }"
-      class="segmented-control-item" @click="_onClick(index)">
+      class="segmented-control__item" @click="_onClick(index)">
       <text :style="{color:
           index === currentIndex
             ? styleType === 'text'
@@ -14,7 +14,7 @@
             : styleType === 'text'
               ? '#000'
               : activeColor}"
-        class="segmented-control-text">{{ item }}</text>
+        class="segmented-control__text">{{ item }}</text>
     </view>
   </view>
 </template>
@@ -69,6 +69,11 @@
 </script>
 
 <style lang="scss">
+  @import '@/uni.scss';
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+  /* #endif */
   .segmented-control {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -79,7 +84,7 @@
     overflow: hidden;
   }
 
-  .segmented-control-item {
+  .segmented-control__item {
     /* #ifndef APP-NVUE */
     display: inline-flex;
     box-sizing: border-box;
@@ -90,7 +95,7 @@
     align-items: center;
   }
 
-  .segmented-control-item--button {
+  .segmented-control__item--button {
     border-style: solid;
     border-top-width: 1px;
     border-bottom-width: 1px;
@@ -98,25 +103,28 @@
     border-left-width: 0;
   }
 
-  .segmented-control-item--button--first {
+  .segmented-control__item--button--first {
     border-left-width: 1px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
   
-  .segmented-control-item--button--last {
+  .segmented-control__item--button--last {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
 
-  .segmented-control-item--text {
+  .segmented-control__item--text {
     border-bottom-style: solid;
     border-bottom-width: 3px;
   }
 
-  .segmented-control-text {
+  .segmented-control__text {
     font-size: 16px;
     line-height: 20px;
     text-align: center;
   }
+  /* #ifdef MP-ALIPAY */
+  }
+  /* #endif */
 </style>

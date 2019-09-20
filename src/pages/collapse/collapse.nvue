@@ -101,13 +101,6 @@
         {
           name: '添加动画效果',
           data: [{
-              type: false,
-              subName: '默认开启',
-              open: false,
-              showAnimation: true,
-              content: '折叠内容主体，可自定义内容及样式'
-            },
-            {
               type: true,
               subName: '折叠列表',
               showAnimation: true,
