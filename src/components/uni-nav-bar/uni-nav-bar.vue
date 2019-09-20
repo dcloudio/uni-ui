@@ -149,10 +149,10 @@ export default {
 <style lang="scss">
 @import "~@/uni.scss";
 $nav-height: 44px;
-/* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */ 
- /* #ifdef MP-ALIPAY */ 
-  page {  
-/* #endif */
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
 .uni-nav-bar-text {
   font-size: $uni-font-size-lg;
 }
@@ -234,7 +234,8 @@ $nav-height: 44px;
   border-bottom-style: solid;
   border-bottom-color: $uni-border-color;
 }
- /* #ifdef MP-ALIPAY */ 
-  } 
+/* #ifdef MP-ALIPAY */ 
+  }  
 /* #endif */
+
 </style>

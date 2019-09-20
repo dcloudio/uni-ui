@@ -78,6 +78,11 @@ $tag-small-pd: 0px 16rpx;
   opacity: 0.5;
 }
 
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
+
 .uni-tag {
   padding: $tag-pd;
   height: 60rpx;
@@ -219,4 +224,9 @@ $tag-small-pd: 0px 16rpx;
   border-style: solid;
   border-color: $uni-bg-color-grey;
 }
+
+/* #ifdef MP-ALIPAY */ 
+  }  
+/* #endif */
+
 </style>

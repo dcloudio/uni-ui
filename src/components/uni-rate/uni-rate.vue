@@ -139,6 +139,11 @@ export default {
 </script>
 
 <style lang="scss">
+  
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
 .uni-rate {
   line-height: 0;
   font-size: 0;
@@ -158,4 +163,9 @@ export default {
   left: 0;
   overflow: hidden;
 }
+
+/* #ifdef MP-ALIPAY */ 
+  }  
+/* #endif */
+
 </style>

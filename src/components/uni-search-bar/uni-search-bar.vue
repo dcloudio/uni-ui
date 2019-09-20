@@ -119,6 +119,11 @@ export default {
 @import "@/uni.scss";
 $uni-searchbar-height: 64rpx;
 
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
+
 .uni-searchbar-form {
   flex-direction: row;
   position: relative;
@@ -199,17 +204,8 @@ $uni-searchbar-height: 64rpx;
   color: $uni-text-color;
 }
 
-// .uni-searchbar-form-hide {
-//   .uni-searchbar-form__box {
-//     display: none;
-//   }
+/* #ifdef MP-ALIPAY */ 
+  }  
+/* #endif */
 
-//   .uni-searchbar-form__text {
-//     display: block;
-//   }
-
-//   .uni-searchbar-form__cancel {
-//     display: none;
-//   }
-// }
 </style>

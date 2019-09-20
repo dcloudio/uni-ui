@@ -19,7 +19,7 @@
       </view>
     </view>
     <view class="uni-pagination__num">
-      <text class="uni-pagination__num-current">{{ currentIndex }}/{{ maxPage }}</text>
+      <text class="uni-pagination__num-current">{{ currentIndex }}/{{ maxPage || 0 }}</text>
     </view>
   </view>
 </template>
@@ -116,6 +116,11 @@
     color: rgba(0, 0, 0, .6);
     background-color: $uni-bg-color-hover;
   }
+  
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
 
   .uni-pagination {
     width: 700rpx;
@@ -189,4 +194,9 @@
   .uni-pagination--hover {
     @include pagination-hover;
   }
+  
+  /* #ifdef MP-ALIPAY */ 
+    }  
+  /* #endif */
+
 </style>

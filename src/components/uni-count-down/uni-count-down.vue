@@ -125,6 +125,11 @@
   $countdown-height: 48upx;
   $countdown-width: 52upx;
 
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+    page {
+  /* #endif */
+
   .uni-countdown {
     flex-direction: row;
     justify-content: flex-start;
@@ -152,4 +157,7 @@
     text-align: center;
     font-size: $uni-font-size-sm;
   }
+  /* #ifdef MP-ALIPAY */ 
+    }  
+  /* #endif */
 </style>
