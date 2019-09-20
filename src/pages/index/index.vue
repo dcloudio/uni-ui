@@ -60,8 +60,8 @@
             url: 'fav'
           },
           {
-            name: 'Icon 图标',
-            url: 'icon'
+            name: 'Icons 图标',
+            url: 'icons'
           },
           {
             name: 'NoticeBar 通告栏',
