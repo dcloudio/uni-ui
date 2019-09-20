@@ -1,7 +1,7 @@
 <template>
   <view class="uni-swiper__warp">
     <slot />
-    <view v-if="mode === 'default'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box"  key='default'>
+    <view v-if="mode === 'default'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box" key='default'>
       <view v-for="(item,index) in info" :style="{
         'width': (index === current? dots.width*2:dots.width ) + 'px','height':dots.width/3 +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border-radius':'0px'}"
         :key="index" class="uni-swiper__dots-item uni-swiper__dots-bar" />
@@ -19,7 +19,7 @@
     <view v-if="mode === 'nav'" key='nav' :style="{'background-color':dotsStyles.backgroundColor,'bottom':'0'}" class="uni-swiper__dots-box uni-swiper__dots-nav">
       <text :style="{'color':dotsStyles.color}" class="uni-swiper__dots-nav-item">{{ (current+1)+"/"+info.length +' ' +info[current][field] }}</text>
     </view>
-   <view v-if="mode === 'indexes'"  key='indexes' :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box">
+    <view v-if="mode === 'indexes'" key='indexes' :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box">
       <view v-for="(item,index) in info" :style="{
         'width':dots.width + 'px','height':dots.height +'px' ,'color':index === current?dots.selectedColor:dots.color,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
         :key="index" class="uni-swiper__dots-item uni-swiper__dots-indexes"><text class="uni-swiper__dots-indexes-text">{{ index+1 }}</text></view>
@@ -97,73 +97,83 @@
   }
 </script>
 
-<style>
-  .uni-swiper__warp {
-    flex: 1;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-  }
+<style lang="scss">
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
 
-  .uni-swiper__dots-box {
-    position: absolute;
-    bottom: 20rpx;
-    left: 0;
-    right: 0;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+    /* #endif */
+    .uni-swiper__warp {
+      flex: 1;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .uni-swiper__dots-item {
-    width: 16rpx;
-    border-radius: 100px;
-    margin-left: 12rpx;
-    background-color: rgba(0, 0, 0, .3);
-    /* transition: width 0.2s linear; */
-  }
+    .uni-swiper__dots-box {
+      position: absolute;
+      bottom: 20rpx;
+      left: 0;
+      right: 0;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .uni-swiper__dots-item:first-child {
-    margin: 0;
-  }
+    .uni-swiper__dots-item {
+      width: 16rpx;
+      border-radius: 100px;
+      margin-left: 12rpx;
+      background-color: rgba(0, 0, 0, .3);
+      /* transition: width 0.2s linear; */
+    }
 
-  .uni-swiper__dots-default {
-    border-radius: 100px;
-  }
+    .uni-swiper__dots-item:first-child {
+      margin: 0;
+    }
 
-  .uni-swiper__dots-long {
-    border-radius: 100rpx;
-  }
+    .uni-swiper__dots-default {
+      border-radius: 100px;
+    }
 
-  .uni-swiper__dots-bar {
-    border-radius: 100rpx;
-  }
+    .uni-swiper__dots-long {
+      border-radius: 100rpx;
+    }
 
-  .uni-swiper__dots-nav {
-    bottom: 0px;
-    height: 80rpx;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+    .uni-swiper__dots-bar {
+      border-radius: 100rpx;
+    }
 
-  .uni-swiper__dots-nav-item {
-   /* overflow: hidden;
+    .uni-swiper__dots-nav {
+      bottom: 0px;
+      height: 80rpx;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .uni-swiper__dots-nav-item {
+      /* overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; */
-    font-size: 28rpx;
-    color: #fff;
-    margin: 0 30rpx;
+      font-size: 28rpx;
+      color: #fff;
+      margin: 0 30rpx;
+    }
+
+    .uni-swiper__dots-indexes {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .uni-swiper__dots-indexes-text {
+      color: #fff;
+      font-size: 24rpx;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-swiper__dots-indexes {
-    justify-content: center;
-    align-items: center;
-  }
-
-  .uni-swiper__dots-indexes-text {
-    color: #fff;
-    font-size: 24rpx;
-  }
+  /* #endif */
 </style>

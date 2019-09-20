@@ -9,12 +9,16 @@
       <view class="uni-calendar__wrapper">
         <view class="uni-calenda__content">
           <view class="uni-calendar__panel">
-            <view class="uni-calendar__date-befor" @tap="dataBefor(-1, 'month')"><uni-icons type="arrowleft" size="20"></uni-icons></view>
+            <view class="uni-calendar__date-befor" @tap="dataBefor(-1, 'month')">
+              <uni-icons type="arrowleft" size="20"></uni-icons>
+            </view>
             <view class="uni-calendar__panel-box">
               <text class="uni-calendar__panel-box-text">{{ canlender.year }}年</text>
               <text class="uni-calendar__panel-box-text">{{ canlender.month }}月</text>
             </view>
-            <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')"><uni-icons type="arrowleft" size="20"></uni-icons></view>
+            <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')">
+              <uni-icons type="arrowleft" size="20"></uni-icons>
+            </view>
             <text class="uni-calendar__backtoday" @tap="backtoday">回到今天</text>
           </view>
           <view v-if="isLunar" class="uni-calendar__day-detail">
@@ -531,186 +535,197 @@
 
 <style lang="scss">
   @import '~@/uni.scss';
-  .uni-calendar__mask {
-    position: fixed;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba($color: #000, $alpha: 0.4);
-    transition-property: opacity;
-    transition-duration: 0.3s;
-    opacity: 0;
+
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+
+    /* #endif */
+    .uni-calendar__mask {
+      position: fixed;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba($color: #000, $alpha: 0.4);
+      transition-property: opacity;
+      transition-duration: 0.3s;
+      opacity: 0;
+    }
+
+    .ani-mask-show {
+      opacity: 1;
+    }
+
+    .header {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 100rpx;
+      background-color: #fff;
+      // background: $uni-bg-color-grey;
+      font-size: $uni-font-size-lg;
+    }
+
+    .uni-calendar__box {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition-property: transform;
+      transition-duration: 0.3s;
+      transform: translateY(100%);
+    }
+
+    .ani-calendar-show {
+      transform: translateY(0%);
+    }
+
+    .uni-calendar__fixed {}
+
+    .uni-calendar__static {
+      position: relative;
+      transform: translateY(0%);
+    }
+
+    .uni-calendar__nav {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 100rpx;
+      border-bottom-color: #F5F5F5;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      background-color: #f5f5f5;
+      padding: 0 10rpx;
+    }
+
+    .uni-calendar__nav-item {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100rpx;
+      height: 100rpx;
+
+    }
+
+    .uni-calendar__nav-item-text {
+      font-size: 30rpx;
+      color: #333;
+    }
+
+    .uni-calendar__wrapper {
+      flex: 1;
+      font-size: 26rpx;
+      background-color: #fff;
+      // transition-duration: 0.3s;
+      // transform: translateY(100%);
+    }
+
+    .uni-calenda__content {}
+
+    .uni-calendar__panel {
+      flex-direction: row;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      font-size: 28rpx;
+      height: 100rpx;
+
+
+    }
+
+    .uni-calendar__date-after {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 80rpx;
+      width: 80rpx;
+      text-align: center;
+      line-height: 80rpx;
+    }
+
+    .uni-calendar__date-befor {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 80rpx;
+      width: 80rpx;
+      text-align: center;
+      line-height: 80rpx;
+    }
+
+    .uni-calendar__rollback {
+      transform: rotate(180deg);
+    }
+
+    .uni-calendar__panel-box {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 200rpx;
+    }
+
+    .uni-calendar__panel-box-text {
+      font-size: 30rpx;
+    }
+
+    .uni-calendar__backtoday {
+      position: absolute;
+      right: 0;
+      top: 25rpx;
+      padding: 0 10rpx;
+      padding-left: 20rpx;
+      height: 50rpx;
+      line-height: 50rpx;
+      border-color: rgba($color: #fd2e32, $alpha: 0.5);
+      border-style: solid;
+      border-width: 1px;
+      border-right-width: 0;
+      font-size: 24rpx;
+      border-top-left-radius: 50rpx;
+      border-bottom-left-radius: 50rpx;
+      color: rgba($color: #fd2e32, $alpha: 0.7);
+      background-color: rgba(241, 233, 233, 0.4);
+    }
+
+    .uni-calendar__day-detail {
+      padding: 20rpx;
+      padding-left: 30rpx;
+      border-top-color: #f5f5f5;
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+
+    .uni-calendar__day-detail-text {
+      font-size: 30rpx;
+    }
+
+    .uni-calendar__header {
+      flex-direction: row;
+      font-size: $uni-font-size-base;
+      border-top-color: #f5f5f5;
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+
+    .uni-calendar__week {
+      flex: 1;
+      text-align: center;
+      line-height: 80rpx;
+      color: #333;
+      font-weight: bold;
+      font-size: 24rpx;
+    }
+
+    .uni-calendar__body {
+      flex-wrap: wrap;
+      font-size: $uni-font-size-base;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .ani-mask-show {
-    opacity: 1;
-  }
-
-  .header {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100rpx;
-    background-color: #fff;
-    // background: $uni-bg-color-grey;
-    font-size: $uni-font-size-lg;
-  }
-
-  .uni-calendar__box {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition-property: transform;
-    transition-duration: 0.3s;
-    transform: translateY(100%);
-  }
-
-  .ani-calendar-show {
-    transform: translateY(0%);
-  }
-
-  .uni-calendar__fixed {}
-
-  .uni-calendar__static {
-    position: relative;
-    transform: translateY(0%);
-  }
-
-  .uni-calendar__nav {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100rpx;
-    border-bottom-color: #F5F5F5;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    background-color: #f5f5f5;
-    padding: 0 10rpx;
-  }
-
-  .uni-calendar__nav-item {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100rpx;
-    height: 100rpx;
-
-  }
-
-  .uni-calendar__nav-item-text {
-    font-size: 30rpx;
-    color: #333;
-  }
-
-  .uni-calendar__wrapper {
-    flex: 1;
-    font-size: 26rpx;
-    background-color: #fff;
-    // transition-duration: 0.3s;
-    // transform: translateY(100%);
-  }
-
-  .uni-calenda__content {}
-
-  .uni-calendar__panel {
-    flex-direction: row;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    font-size: 28rpx;
-    height: 100rpx;
-
-
-  }
-
-  .uni-calendar__date-after {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 80rpx;
-    width: 80rpx;
-    text-align: center;
-    line-height: 80rpx;
-  }
-
-  .uni-calendar__date-befor {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 80rpx;
-    width: 80rpx;
-    text-align: center;
-    line-height: 80rpx;
-  }
-
-  .uni-calendar__rollback {
-    transform: rotate(180deg);
-  }
-
-  .uni-calendar__panel-box {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 200rpx;
-  }
-
-  .uni-calendar__panel-box-text {
-    font-size: 30rpx;
-  }
-
-  .uni-calendar__backtoday {
-    position: absolute;
-    right: 0;
-    top: 25rpx;
-    padding: 0 10rpx;
-    padding-left: 20rpx;
-    height: 50rpx;
-    line-height: 50rpx;
-    border-color: rgba($color: #fd2e32, $alpha: 0.5);
-    border-style: solid;
-    border-width: 1px;
-    border-right-width: 0;
-    font-size: 24rpx;
-    border-top-left-radius: 50rpx;
-    border-bottom-left-radius: 50rpx;
-    color: rgba($color: #fd2e32, $alpha: 0.7);
-    background-color: rgba(241, 233, 233, 0.4);
-  }
-
-  .uni-calendar__day-detail {
-    padding: 20rpx;
-    padding-left: 30rpx;
-    border-top-color: #f5f5f5;
-    border-top-style: solid;
-    border-top-width: 1px;
-  }
-
-  .uni-calendar__day-detail-text {
-    font-size: 30rpx;
-  }
-
-  .uni-calendar__header {
-    flex-direction: row;
-    font-size: $uni-font-size-base;
-    border-top-color: #f5f5f5;
-    border-top-style: solid;
-    border-top-width: 1px;
-  }
-
-  .uni-calendar__week {
-    flex: 1;
-    text-align: center;
-    line-height: 80rpx;
-    color: #333;
-    font-weight: bold;
-    font-size: 24rpx;
-  }
-
-  .uni-calendar__body {
-    flex-wrap: wrap;
-    font-size: $uni-font-size-base;
-  }
+  /* #endif */
 </style>

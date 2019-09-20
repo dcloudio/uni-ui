@@ -157,7 +157,7 @@
     border-color: #EEEEEE;
     border-style: solid;
     border-width: 1px;
-    border-radius: 10rpx;
+    border-radius: 20rpx;
   }
   .example-body-item-text {
     font-size: 28rpx;
@@ -167,13 +167,9 @@
   .example-body-dots {
     width: 16rpx;
     height: 16rpx;
-    border-radius: 50%;
+    border-radius: 50px;
     background-color: #333333;
     margin-left: 10rpx;
-  }
-
-  .example-body-dots:first-child {
-    margin: 0;
   }
 
   .active {

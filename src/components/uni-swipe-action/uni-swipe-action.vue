@@ -16,7 +16,7 @@
       <!-- #endif -->
       <!-- #ifndef APP-VUE|| MP-WEIXIN||H5 -->
       <!-- :class="{'ani':uniShow}" -->
-      <view ref='selector-content-hock'  :style="{transform:moveLeft,'transition-duration':uniShow?'0.3s':'0s'}" class="ani uni-swipe_move-box  selector-query-hock"
+      <view ref='selector-content-hock' :style="{transform:moveLeft,'transition-duration':uniShow?'0.3s':'0s'}" class="ani uni-swipe_move-box  selector-query-hock"
         @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
         <!-- #endif -->
         <view class="uni-swipe_box">
@@ -81,56 +81,65 @@
     }
   }
 </script>
-<style>
-  .uni-swipe_content {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-  }
+<style lang="scss">
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
 
-  .uni-swipe_move-box {
-    position: relative;
-    flex-direction: row;
-  }
-
-  .uni-swipe_box {
-    /* #ifndef APP-NVUE */
-    width: 100%;
-    flex-shrink: 0;
     /* #endif */
-    /* #ifdef APP-NVUE */
-    flex: 1;
-    /* #endif */
-    font-size: 14px;
-    background-color: #fff;
+    .uni-swipe_content {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .uni-swipe_move-box {
+      position: relative;
+      flex-direction: row;
+    }
+
+    .uni-swipe_box {
+      /* #ifndef APP-NVUE */
+      width: 100%;
+      flex-shrink: 0;
+      /* #endif */
+      /* #ifdef APP-NVUE */
+      flex: 1;
+      /* #endif */
+      font-size: 14px;
+      background-color: #fff;
+    }
+
+    .uni-swipe_button-group {
+      /* #ifndef APP-VUE|| MP-WEIXIN||H5 */
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      /* #endif */
+      flex-direction: row;
+    }
+
+    .uni-swipe_button {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .uni-swipe_button-text {
+      font-size: 14px;
+    }
+
+    .ani {
+      transition-property: transform;
+      transition-duration: 0.3s;
+      transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-swipe_button-group {
-    /* #ifndef APP-VUE|| MP-WEIXIN||H5 */
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    /* #endif */
-    flex-direction: row;
-  }
-
-  .uni-swipe_button {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-  }
-
-  .uni-swipe_button-text {
-    font-size: 14px;
-  }
-
-  .ani {
-    transition-property:transform;
-    transition-duration:0.3s;
-    transition-timing-function:cubic-bezier(0.165, 0.84, 0.44, 1);
-
-  }
+  /* #endif */
 </style>

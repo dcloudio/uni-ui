@@ -85,134 +85,148 @@
 <style lang="scss">
   @import '~@/uni.scss';
 
-  .uni-calender__body-date-week {
-    flex: 1;
-    flex-direction: row;
-    border-color: #F5F5F5;
-    border-style: solid;
-    border-bottom-width: 1px;
-    justify-content: space-around;
-    // &:last-child {
-    //   border: none;
-    // }
-  }
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
 
-  // 日期的样式
-  .uni-calender__date {
-    flex: 1;
-    flex-direction: column;
-    position: relative;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: #000;
-    background-color: #fff;
-    padding: 10rpx 0;
-  }
+    /* #endif */
+    .uni-calender__body-date-week {
+      flex: 1;
+      flex-direction: row;
+      border-color: #F5F5F5;
+      border-style: solid;
+      border-bottom-width: 1px;
+      justify-content: space-around;
+      // &:last-child {
+      //   border: none;
+      // }
+    }
 
-  .uni-calender__lunar {
-    font-size: 20rpx;
-    color: #000;
-  }
+    // 日期的样式
+    .uni-calender__date {
+      flex: 1;
+      flex-direction: column;
+      position: relative;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      background-color: #fff;
+      padding: 10rpx 0;
+    }
 
-  .uni-calender__circle-box {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80rpx;
-    height: 80rpx;
-    border-radius: 10rpx;
-  }
+    .uni-calender__lunar {
+      font-size: 20rpx;
+      color: #000;
+    }
 
-  .uni-calender__circle-box-text {
-    font-size: 30rpx;
-  }
+    .uni-calender__circle-box {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80rpx;
+      height: 80rpx;
+      border-radius: 10rpx;
+    }
 
-  // // 本月禁止的样式
-  .uni-calender__disable {
-    color: #f1f1f1;
-    // .uni-calender__lunar {
-    //   color: #f1f1f1;
-    // }
-  }
-  .uni-calender__lunar-disable {
+    .uni-calender__circle-box-text {
+      font-size: 30rpx;
+    }
+
+    // // 本月禁止的样式
+    .uni-calender__disable {
       color: #f1f1f1;
+      // .uni-calender__lunar {
+      //   color: #f1f1f1;
+      // }
+    }
+
+    .uni-calender__lunar-disable {
+      color: #f1f1f1;
+    }
+
+    .uni-calender__is-day {
+      color: #fd2e32;
+    }
+
+    .uni-calender__lunar-is-day {
+      color: #fd2e32;
+    }
+
+    // // 当前选中
+    .uni-calender__date-current {
+      color: #fff;
+    }
+
+    .uni-calender__lunar-date-current {
+      color: #fff;
+    }
+
+    .uni-calender__circle-box-current {
+      background-color: #fd2e32;
+    }
+
+    // .uni-calender__active {
+    //   background-color: #000;
+    // }
+    .uni-calender__multiple {
+      border-radius: 50px;
+      background-color: #fd2e32;
+    }
+
+
+
+    .uni-calender__multiple-box {
+      color: #fff;
+    }
+
+    .uni-calender__lunar-multiple-box {
+      color: #fff;
+    }
+
+    .uni-calender__data-circle {
+      position: absolute;
+      top: 5rpx;
+      right: 5rpx;
+      width: 10rpx;
+      height: 10rpx;
+      border-radius: 50%;
+      background-color: #ff5a5f;
+      border-color: #fff;
+      border-style: solid;
+      border-width: 1px;
+      z-index: 2;
+    }
+
+    .uni-calender_check-bg {
+      position: absolute;
+      top: 10rpx;
+      bottom: 10rpx;
+      left: 0;
+      right: 0;
+    }
+
+    .uni-calender_check {
+      background-color: #ffd3d3;
+      border-color: #ffd3d3;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    .calender_check-begin {
+      left: 20rpx;
+      border-top-left-radius: 100rpx;
+      border-bottom-left-radius: 100rpx;
+    }
+
+    .calender_check-end {
+      right: 20rpx;
+      border-top-right-radius: 100rpx;
+      border-bottom-right-radius: 100rpx;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-calender__is-day {
-    color: #fd2e32;
-  }
-  .uni-calender__lunar-is-day {
-    color: #fd2e32;
-  }
-
-  // // 当前选中
-  .uni-calender__date-current {
-    color: #fff;
-  }
-  .uni-calender__lunar-date-current {
-    color: #fff;
-  }
-
-  .uni-calender__circle-box-current {
-    background-color: #fd2e32;
-  }
-
-  // .uni-calender__active {
-  //   background-color: #000;
-  // }
-  .uni-calender__multiple {
-    border-radius: 50px;
-    background-color: #fd2e32;
-  }
-
-
-
-  .uni-calender__multiple-box {
-    color: #fff;
-  }
-  .uni-calender__lunar-multiple-box{
-    color: #fff;
-  }
-
-  .uni-calender__data-circle {
-    position: absolute;
-    top: 5rpx;
-    right: 5rpx;
-    width: 10rpx;
-    height: 10rpx;
-    border-radius: 50%;
-    background-color: #ff5a5f;
-    border-color: #fff;
-    border-style: solid;
-    border-width: 1px;
-    z-index: 2;
-  }
-
-  .uni-calender_check-bg {
-    position: absolute;
-    top: 10rpx;
-    bottom: 10rpx;
-    left: 0;
-    right: 0;
-  }
-
-  .uni-calender_check {
-    background-color: #ffd3d3;
-    border-color: #ffd3d3;
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  .calender_check-begin {
-    left: 20rpx;
-    border-top-left-radius: 100rpx;
-    border-bottom-left-radius: 100rpx;
-  }
-
-  .calender_check-end {
-    right: 20rpx;
-    border-top-right-radius: 100rpx;
-    border-bottom-right-radius: 100rpx;
-  }
+  /* #endif */
 </style>

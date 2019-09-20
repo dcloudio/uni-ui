@@ -102,7 +102,7 @@
       }
     },
     mounted() {
-      if(!this.list.firstChildAppend){
+      if (!this.list.firstChildAppend) {
         this.list.firstChildAppend = true
         this.isFirstChild = true
       }
@@ -129,95 +129,89 @@
     opacity: 0.3;
   }
 
-  $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
 
-  .uni-list-item {
-    font-size: $uni-font-size-lg;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: $uni-spacing-row-lg;
-    // align-items: center;
+    /* #endif */
+
+    $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
+
+    .uni-list-item {
+      font-size: $uni-font-size-lg;
+      position: relative;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: $uni-spacing-row-lg;
+    }
+
+    .uni-list-item--disabled {
+      @include list-disabled;
+    }
+
+    .uni-list-item--hover {
+      @include list-hover;
+    }
+
+    .uni-list-item__container {
+      padding: $list-item-pd;
+      padding-left: 0;
+      flex: 1;
+      position: relative;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-top-color: $uni-border-color;
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+
+    .uni-list-item--first {
+      border-top-width: 0px;
+    }
+
+    .uni-list-item__content {
+      flex: 1;
+      overflow: hidden;
+      flex-direction: column;
+      color: #3b4144;
+
+    }
+
+    .uni-list-item__content-title {
+      font-size: $uni-font-size-lg;
+      color: #3b4144;
+      overflow: hidden;
+    }
+
+    .uni-list-item__content-note {
+      margin-top: 6rpx;
+      color: $uni-text-color-grey;
+      font-size: $uni-font-size-base;
+      overflow: hidden;
+    }
+
+    .uni-list-item__extra {
+      // width: 25%;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .uni-list-item__icon {
+      margin-right: 18rpx;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .uni-list-item__icon-img {
+      height: $uni-img-size-base;
+      width: $uni-img-size-base;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-list-item--disabled {
-    @include list-disabled;
-  }
-
-  .uni-list-item--hover {
-    @include list-hover;
-  }
-
-  .uni-list-item__container {
-    padding: $list-item-pd;
-    padding-left: 0;
-    flex: 1;
-    position: relative;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-top-color: $uni-border-color;
-    border-top-style: solid;
-    border-top-width: 1px;
-    // &:after {
-    //   position: absolute;
-    //   z-index: 3;
-    //   right: 0;
-    //   bottom: 0;
-    //   left: 30rpx;
-    //   height: 1px;
-    //   content: '';
-    //   -webkit-transform: scaleY(0.5);
-    //   transform: scaleY(0.5);
-    //   background-color: $uni-border-color;
-    // }
-  }
-  
-  .uni-list-item--first {
-    border-top-width: 0px;
-  }
-
-  .uni-list-item__content {
-    flex: 1;
-    overflow: hidden;
-    flex-direction: column;
-    color: #3b4144;
-
-  }
-
-  .uni-list-item__content-title {
-    font-size: $uni-font-size-lg;
-    color: #3b4144;
-    overflow: hidden;
-  }
-
-  .uni-list-item__content-note {
-    margin-top: 6rpx;
-    color: $uni-text-color-grey;
-    font-size: $uni-font-size-base;
-    overflow: hidden;
-  }
-
-  .uni-list-item__extra {
-    // width: 25%;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .uni-list-item__icon {
-    margin-right: 18rpx;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .uni-list-item__icon-img {
-    height: $uni-img-size-base;
-    width: $uni-img-size-base;
-  }
-
-  // .uni-list>.uni-list-item:last-child .uni-list-item-container:after {
-  //   height: 0px;
-  // }
+  /* #endif */
 </style>

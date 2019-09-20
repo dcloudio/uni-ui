@@ -83,105 +83,115 @@
 </script>
 
 <style lang="scss">
-  .flex {
-    flex-direction: row;
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+
+    /* #endif */
+    .flex {
+      flex-direction: row;
+    }
+
+    .uni-goods-nav {
+      flex: 1;
+      flex-direction: row;
+    }
+
+    .uni-tab__cart-box {
+      flex: 1;
+      height: 100rpx;
+      background-color: #fff;
+      z-index: 900;
+    }
+
+    .uni-tab__cart-sub-box {
+      flex: 1;
+    }
+
+    .uni-tab__right {
+      margin: 5px 0;
+      margin-right: 10px;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .uni-tab__cart-button-left {
+      flex: 1;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .uni-tab__icon {
+      width: 40rpx;
+      height: 40rpx;
+    }
+
+    .image {
+      width: 20px;
+      height: 20px;
+    }
+
+    .uni-tab__text {
+      margin-top: 5rpx;
+      font-size: 24rpx;
+      color: #666;
+    }
+
+    .uni-tab__cart-button-right {
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .uni-tab__cart-button-right-text {
+      font-size: 24rpx;
+      color: #fff;
+    }
+
+    .uni-tab__cart-button-right:active {
+      opacity: 0.7;
+    }
+
+    .uni-tab__dot-box {
+      position: absolute;
+      right: 25rpx;
+      top: 5rpx;
+      justify-content: center;
+      align-items: center;
+      // width: 0;
+      // height: 0;
+    }
+
+    .uni-tab__dot {
+      // width: 30rpx;
+      // height: 30rpx;
+      padding: 0 8rpx;
+      line-height: 30rpx;
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      background-color: #ff0000;
+      border-radius: 30rpx;
+    }
+
+    .uni-tab__dots {
+      padding: 0 8rpx;
+      // width: auto;
+      border-radius: 30rpx;
+    }
+
+    .uni-tab__color-y {
+      background-color: #ffa200;
+    }
+
+    .uni-tab__color-r {
+      background-color: #ff0000;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-goods-nav {
-    flex: 1;
-    flex-direction: row;
-  }
-
-  .uni-tab__cart-box {
-    flex: 1;
-    height: 100rpx;
-    background-color: #fff;
-    z-index: 900;
-  }
-
-  .uni-tab__cart-sub-box {
-    flex: 1;
-  }
-
-  .uni-tab__right {
-    margin: 5px 0;
-    margin-right: 10px;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .uni-tab__cart-button-left {
-    flex: 1;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .uni-tab__icon {
-    width: 40rpx;
-    height: 40rpx;
-  }
-
-  .image {
-    width: 20px;
-    height: 20px;
-  }
-
-  .uni-tab__text {
-    margin-top: 5rpx;
-    font-size: 24rpx;
-    color: #666;
-  }
-
-  .uni-tab__cart-button-right {
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .uni-tab__cart-button-right-text {
-    font-size: 24rpx;
-    color: #fff;
-  }
-
-  .uni-tab__cart-button-right:active {
-    opacity: 0.7;
-  }
-
-  .uni-tab__dot-box {
-    position: absolute;
-    right: 25rpx;
-    top: 5rpx;
-    justify-content: center;
-    align-items: center;
-    // width: 0;
-    // height: 0;
-  }
-
-  .uni-tab__dot {
-    // width: 30rpx;
-    // height: 30rpx;
-    padding: 0 8rpx;
-    line-height: 30rpx;
-    color: #ffffff;
-    text-align: center;
-    font-size: 12px;
-    background-color: #ff0000;
-    border-radius: 30rpx;
-  }
-
-  .uni-tab__dots {
-    padding: 0 8rpx;
-    // width: auto;
-    border-radius: 30rpx;
-  }
-
-  .uni-tab__color-y {
-    background-color: #ffa200;
-  }
-
-  .uni-tab__color-r {
-    background-color: #ff0000;
-  }
+  /* #endif */
 </style>

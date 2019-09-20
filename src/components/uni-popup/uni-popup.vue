@@ -1,14 +1,6 @@
 <template>
   <view v-if="showPopup" class="uni-popup">
-    <!-- <view :class="[ani+'-mask', animation ? 'mask-ani' : '', !custom ? 'uni-custom' : '']" class="uni-popup__mask"
-      @click="close(true)" /> -->
     <view class="uni-popup__mask" :class="[ani+'-mask', animation ? 'mask-ani' : '']" @click="close(true)" />
-    <!-- <view :class="[type, ani+'-content', animation ? 'content-ani' : '', !custom ? 'uni-custom' : '']" class="uni-popup__wrapper"
-      @click="close(true)">
-      <view class="uni-popup__wrapper-box" @click.stop="clear">
-        <slot />
-      </view>
-    </view> -->
     <view class="uni-popup__wrapper" :class="[type,ani+'-content', animation ? 'content-ani' : '']" @click="close(true)">
       <view class="uni-popup__wrapper-box" @click.stop="clear">
         <slot />
@@ -93,98 +85,103 @@
   }
 </script>
 <style lang="scss">
-  .uni-popup {
-    position: fixed;
-    /*  #ifdef  H5  */
-    top: 0px;
-    // top: 50px;
-    /*  #endif  */
-    /*  #ifndef  H5  */
-    top: 0px;
-    /*  #endif  */
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+
+    /* #endif */
+    .uni-popup {
+      position: fixed;
+      top: var(--window-top);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    .uni-popup__mask {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+    }
+
+    .mask-ani {
+      // transition: all 0.3s;
+      transition-property: opacity;
+      transition-duration: 0.3s;
+    }
+
+    .uni-top-mask {
+      opacity: 1;
+    }
+
+    .uni-bottom-mask {
+      opacity: 1;
+    }
+
+    .uni-center-mask {
+      opacity: 1;
+    }
+
+    .uni-popup__wrapper {
+      position: absolute;
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-100%);
+    }
+
+    .bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(100%);
+    }
+
+    .center {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      justify-content: center;
+      align-items: center;
+      transform: scale(1.2);
+      opacity: 0;
+    }
+
+    .uni-popup__wrapper-box {
+      position: relative;
+    }
+
+    .content-ani {
+      // transition: transform 0.3s;
+      transition-property: transform, opacity;
+      transition-duration: 0.3s;
+    }
+
+
+    .uni-top-content {
+      transform: translateY(0);
+    }
+
+    .uni-bottom-content {
+      transform: translateY(0);
+    }
+
+    .uni-center-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-popup__mask {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-  }
-
-  .mask-ani {
-    // transition: all 0.3s;
-    transition-property: opacity;
-    transition-duration: 0.3s;
-  }
-
-  .uni-top-mask {
-    opacity: 1;
-  }
-
-  .uni-bottom-mask {
-    opacity: 1;
-  }
-
-  .uni-center-mask {
-    opacity: 1;
-  }
-
-  .uni-popup__wrapper {
-    position: absolute;
-  }
-
-  .top {
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: translateY(-100%);
-  }
-
-  .bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translateY(100%);
-  }
-
-  .center {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    justify-content: center;
-    align-items: center;
-    transform: scale(1.2);
-    opacity: 0;
-  }
-
-  .uni-popup__wrapper-box {
-    position: relative;
-  }
-  .content-ani {
-    // transition: transform 0.3s;
-    transition-property: transform, opacity;
-    transition-duration: 0.3s;
-  }
-
-
-  .uni-top-content {
-    transform: translateY(0);
-  }
-
-  .uni-bottom-content {
-    transform: translateY(0);
-  }
-
-  .uni-center-content {
-    transform: scale(1);
-    opacity: 1;
-  }
+  /* #endif */
 </style>

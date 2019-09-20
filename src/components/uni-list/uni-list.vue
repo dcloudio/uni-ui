@@ -6,7 +6,7 @@
 <script>
   export default {
     name: 'UniList',
-    provide () {
+    provide() {
       return {
         list: this
       }
@@ -19,12 +19,22 @@
 <style lang="scss">
   @import '~@/uni.scss';
 
-  .uni-list {
-    background-color: $uni-bg-color;
-    position: relative;
-    flex-direction: column;
-    border-bottom-color: $uni-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+
+    /* #endif */
+    .uni-list {
+      background-color: $uni-bg-color;
+      position: relative;
+      flex-direction: column;
+      border-bottom-color: $uni-border-color;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
+
+  /* #endif */
 </style>

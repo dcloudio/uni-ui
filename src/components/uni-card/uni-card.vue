@@ -87,188 +87,192 @@
   $card-extra-width: 30%;
   $uni-spacing-marign: 24rpx;
 
-  // @mixin text-omit {
-  //   text-overflow: ellipsis;
-  //   white-space: nowrap;
-  //   overflow: hidden;
-  // }
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+    /* #endif */
 
-  .uni-card {
-    margin-left: $uni-spacing-marign;
-    margin-right: $uni-spacing-marign;
-    background-color: $uni-bg-color;
-    box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
-    position: relative;
-    flex-direction: column;
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 6rpx;
-    overflow: hidden;
+    .uni-card {
+      margin-left: $uni-spacing-marign;
+      margin-right: $uni-spacing-marign;
+      background-color: $uni-bg-color;
+      box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+      position: relative;
+      flex-direction: column;
+      border-color: #ddd;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 6rpx;
+      overflow: hidden;
+    }
+
+    .uni-card__thumbnailimage {
+      position: relative;
+      flex-direction: column;
+      justify-content: center;
+      height: 300rpx;
+      overflow: hidden;
+    }
+
+    .uni-card__thumbnailimage-box {
+      flex: 1;
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    .uni-card__thumbnailimage-image {
+      flex: 1;
+    }
+
+    .uni-card__thumbnailimage-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      flex-direction: row;
+      padding: $uni-spacing-col-base $uni-spacing-col-lg;
+      background-color: rgba($color: #000000, $alpha: 0.4);
+    }
+
+    .uni-card__thumbnailimage-title-text {
+      flex: 1;
+      font-size: 32rpx;
+      color: #fff;
+    }
+
+    .uni-card__title {
+      flex-direction: row;
+      padding: 20rpx;
+      border-bottom-color: #F5F5F5;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+
+    .uni-card__title-header {
+      width: 80rpx;
+      height: 80rpx;
+      overflow: hidden;
+      border-radius: 10rpx;
+      // image {
+      //   width: 100%;
+      //   height: 100%;
+      // }
+    }
+
+    .uni-card__title-header-image {
+      width: 80rpx;
+      height: 80rpx;
+    }
+
+    .uni-card__title-content {
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: 20rpx;
+      height: 80rpx;
+      overflow: hidden;
+
+
+    }
+
+    .uni-card__title-content-title {
+      font-size: 30rpx;
+      lines: 1;
+    }
+
+    .uni-card__title-content-extra {
+      font-size: 26rpx;
+      color: #999;
+    }
+
+    .uni-card__header {
+      position: relative;
+      flex-direction: row;
+      padding: $uni-spacing-col-lg;
+      align-items: center;
+      border-bottom-color: #F5F5F5;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+
+    .uni-card__header {}
+
+    .uni-card__header-title {
+      margin-right: $uni-spacing-col-base;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .uni-card__header-title-text {
+      font-size: $uni-font-size-lg;
+      flex: 1;
+      lines: 1;
+    }
+
+    .uni-card__header-extra {}
+
+    .uni-card__header-extra-img-view {}
+
+    .uni-card__header-extra-img {
+      height: $uni-img-size-sm;
+      width: $uni-img-size-sm;
+      margin-right: $uni-spacing-col-base;
+    }
+
+    .uni-card__header-extra-text {
+      flex: 1;
+      width: $card-extra-width;
+      margin-left: $uni-spacing-col-base;
+      font-size: $uni-font-size-base;
+      text-align: right;
+      color: #666;
+      lines: 1;
+
+    }
+
+    .uni-card__content {
+      color: #555;
+    }
+
+    .uni-card__content--pd {
+      padding: $uni-spacing-col-lg;
+    }
+
+    .uni-card__content-extra {
+      font-size: $uni-font-size-base;
+      padding-bottom: 20rpx;
+      color: #999;
+    }
+
+    .uni-card__footer {
+      justify-content: space-between;
+      padding: 20rpx;
+      border-top-color: #F5F5F5;
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+
+    .uni-card__footer-text {
+      color: $uni-text-color-grey;
+      font-size: $uni-font-size-base;
+    }
+
+    .uni-card--shadow {
+      border-color: #ddd;
+      border-style: solid;
+      border-width: 1px;
+      box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
+    }
+
+    .uni-card--full {
+      margin: 0;
+
+      border-radius: 0;
+
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-card__thumbnailimage {
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    height: 300rpx;
-    overflow: hidden;
-  }
-
-  .uni-card__thumbnailimage-box {
-    flex: 1;
-    flex-direction: row;
-    overflow: hidden;
-  }
-
-  .uni-card__thumbnailimage-image {
-    flex: 1;
-  }
-
-  .uni-card__thumbnailimage-title {
-    flex-direction: row;
-    padding: $uni-spacing-col-base $uni-spacing-col-lg;
-    background-color: rgba($color: #000000, $alpha: 0.4);
-  }
-
-  .uni-card__thumbnailimage-title-text {
-    flex: 1;
-    font-size: 32rpx;
-    color: #fff;
-  }
-
-  .uni-card__title {
-    flex-direction: row;
-    padding: 20rpx;
-    border-bottom-color: #F5F5F5;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-  }
-
-  .uni-card__title-header {
-    width: 80rpx;
-    height: 80rpx;
-    overflow: hidden;
-    border-radius: 10rpx;
-    // image {
-    //   width: 100%;
-    //   height: 100%;
-    // }
-  }
-
-  .uni-card__title-header-image {
-    width: 80rpx;
-    height: 80rpx;
-  }
-
-  .uni-card__title-content {
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 20rpx;
-    height: 80rpx;
-    overflow: hidden;
-
-
-  }
-
-  .uni-card__title-content-title {
-    font-size: 30rpx;
-    lines: 1;
-  }
-
-  .uni-card__title-content-extra {
-    font-size: 26rpx;
-    color: #999;
-  }
-
-  .uni-card__header {
-    position: relative;
-    flex-direction: row;
-    padding: $uni-spacing-col-lg;
-    align-items: center;
-    border-bottom-color: #F5F5F5;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-  }
-
-  .uni-card__header {}
-
-  .uni-card__header-title {
-    margin-right: $uni-spacing-col-base;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .uni-card__header-title-text {
-    font-size: $uni-font-size-lg;
-    flex: 1;
-    lines: 1;
-  }
-
-  .uni-card__header-extra {}
-
-  .uni-card__header-extra-img-view {}
-
-  .uni-card__header-extra-img {
-    height: $uni-img-size-sm;
-    width: $uni-img-size-sm;
-    margin-right: $uni-spacing-col-base;
-  }
-
-  .uni-card__header-extra-text {
-    flex: 1;
-    width: $card-extra-width;
-    margin-left: $uni-spacing-col-base;
-    font-size: $uni-font-size-base;
-    text-align: right;
-    color: #666;
-    lines: 1;
-
-  }
-
-  .uni-card__content {
-    color: #555;
-  }
-
-  .uni-card__content--pd {
-    padding: $uni-spacing-col-lg;
-  }
-
-  .uni-card__content-extra {
-    font-size: $uni-font-size-base;
-    padding-bottom: 20rpx;
-    color: #999;
-  }
-
-  .uni-card__footer {
-    justify-content: space-between;
-    padding: 20rpx;
-    border-top-color: #F5F5F5;
-    border-top-style: solid;
-    border-top-width: 1px;
-  }
-
-  .uni-card__footer-text {
-    color: $uni-text-color-grey;
-    font-size: $uni-font-size-base;
-  }
-
-  .uni-card--shadow {
-    border-color: #ddd;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
-  }
-
-  .uni-card--full {
-    margin: 0;
-
-    border-radius: 0;
-    // &:after {
-    // 	border-left: none;
-    // 	border-right: none;
-    // 	border-radius: 0;
-    // }
-  }
+  /* #endif */
 </style>

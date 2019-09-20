@@ -29,7 +29,7 @@
     <uni-popup ref="image" :type="type" :mask-click="false" :custom="true" @change="change">
       <view class="uni-image">
         <view class="uni-image-close" @click="cancel('image')">
-          <uni-icon type="clear" color="#fff" size="30" />
+          <uni-icons type="clear" color="#fff" size="30" />
         </view>
         <image class="image" src="/static/uni.png" mode="" />
       </view>
@@ -41,7 +41,7 @@
         <view class="uni-share-content">
           <view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box">
             <view class="uni-share-content-image">
-              <image :src="item.icon" class="content-image" />
+              <image :src="item.icon" class="content-image" mode="widthFix"/> 
             </view>
             <text class="uni-share-content-text">{{ item.text }}</text>
           </view>
@@ -55,12 +55,12 @@
 <script>
   import uniTitle from '@/components/uni-title/uni-title.vue'
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
-  import uniIcon from '@/components/uni-icons/uni-icons.vue'
+  import uniIcons from '@/components/uni-icons/uni-icons.vue'
   export default {
     components: {
       uniTitle,
       uniPopup,
-      uniIcon
+      uniIcons
     },
     data() {
       return {

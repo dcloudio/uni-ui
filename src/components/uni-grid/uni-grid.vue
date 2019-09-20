@@ -1,6 +1,6 @@
 <template>
   <view class="uni-grid-wrap">
-    <view :id="elId" ref="uni-grid" class="uni-grid" :class="{ border: showBorder }" :style="{ 'border-left-style':'solid','border-left-color':borderColor, 'border-left-width':showBorder?'1px':0 }">
+    <view :id="elId" ref="uni-grid" class="uni-grid" :class="{ 'uni-grid--border': showBorder }" :style="{ 'border-left-style':'solid','border-left-color':borderColor, 'border-left-width':showBorder?'1px':0 }">
       <slot />
     </view>
   </view>
@@ -108,23 +108,33 @@
 </script>
 
 <style lang="scss">
-  .uni-grid-wrap {
-    flex: 1;
-    flex-direction: column;
-    /* #ifdef H5 */
-    width: 100%;
-    /* #endif */ 
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+
+    /* #endif */
+    .uni-grid-wrap {
+      flex: 1;
+      flex-direction: column;
+      /* #ifdef H5 */
+      width: 100%;
+      /* #endif */
+    }
+
+    .uni-grid {
+      flex: 1;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .uni-grid--border {
+      border-left-color: #d0dee5;
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-grid {
-    flex: 1;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .border {
-    border-left-color: #d0dee5;
-    border-left-style: solid;
-    border-left-width: 1px;
-  }
+  /* #endif */
 </style>

@@ -10,7 +10,6 @@ export default {
   },
   computed: {
     moveLeft() {
-      console.log('-----', `translateX(${this.left}px)`);
       return `translateX(${this.left}px)`
     }
   },
@@ -86,7 +85,6 @@ export default {
       if (!this.position.button.width) {
         return
       }
-      // const width = this.position.content.width
       this.left = x - this.width
       this.setValue(x - this.width)
     },
@@ -110,14 +108,15 @@ export default {
     open() {
       this.uniShow = true
       this.left = -this.position.button.width
-      console.log(this.left);
       this.setValue(-this.position.button.width)
     },
     close() {
       this.uniShow = true
       this.setValue(0)
-      this.uniShow = false
-      this.isopen = false
+      setTimeout(() => {
+        this.uniShow = false
+        this.isopen = false
+      }, 300)
     },
     getSelectorQuery() {
       // #ifndef APP-NVUE

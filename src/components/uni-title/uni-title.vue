@@ -7,7 +7,7 @@
       <text :class="{'distraction':!subTitle}" class="uni-title__content-title">{{ title }}</text>
       <text v-if="subTitle" class="uni-title__content-sub">{{ subTitle }}</text>
     </view>
-    <slot/>
+    <slot />
   </view>
 </template>
 
@@ -53,69 +53,79 @@
     }
   }
 </script>
-
 <style lang="scss">
   @import '~@/uni.scss';
-  .uni-title {
-    margin-top: 10px;
-    flex-direction: row;
-    align-items: center;
-    padding: 5px 10px;
-    height: 50px;
-    background-color: #fdfdfd;
-    border-bottom-color: #f5f5f5;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+
+  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+  /* #ifdef MP-ALIPAY */
+  page {
+    /* #endif */
+
+    .uni-title {
+      margin-top: 10px;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 10px;
+      height: 50px;
+      background-color: #fdfdfd;
+      border-bottom-color: #f5f5f5;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+
+    .sticky {
+      position: sticky;
+      // top: 44px;
+    }
+
+    .uni-title__head {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .uni-title__head-tag {}
+
+    .line {
+      height: 15px;
+      background-color: #ccc;
+      border-radius: 5px;
+      width: 3px;
+    }
+
+    .circle {
+      width: 8px;
+      height: 8px;
+      // border-radius: 50px;
+      border-top-right-radius: 50px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      background-color: #ccc;
+    }
+
+    .uni-title__content {
+      flex: 1;
+      color: #464e52;
+    }
+
+    .uni-title__content-title {
+      font-size: 16px;
+    }
+
+    .distraction {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .uni-title__content-sub {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .sticky {
-    position: sticky;
-    // top: 44px;
-  }
-
-  .uni-title__head {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-  }
-
-  .uni-title__head-tag {}
-
-  .line {
-    height: 15px;
-    background-color: #ccc;
-    border-radius: 5px;
-    width: 3px;
-  }
-
-  .circle {
-    width: 8px;
-    height: 8px;
-    // border-radius: 50px;
-    border-top-right-radius: 50px;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    background-color: #ccc;
-  }
-
-  .uni-title__content {
-    flex: 1;
-    color: #464e52;
-  }
-
-  .uni-title__content-title {
-    font-size: 16px;
-  }
-
-  .distraction {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .uni-title__content-sub {
-    font-size: 12px;
-    color: #999;
-  }
+  /* #endif */
 </style>
