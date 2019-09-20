@@ -140,6 +140,7 @@
     // width: 450rpx;
     padding: 0 10rpx;
     font-size: $uni-font-size-lg;
+    background-color: #e7e7e7;
   }
 
   .example-body {
