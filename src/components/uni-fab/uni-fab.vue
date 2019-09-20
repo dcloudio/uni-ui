@@ -272,6 +272,7 @@
   }
 
   .uni-fab__plus {
+    font-size: 40px;
     transform: rotate(0deg);
     transition: transform 0.3s;
     font-weight: bold;
@@ -279,7 +280,6 @@
 
   .uni-fab__plus--active {
     transform: rotate(135deg);
-    font-size: 40px;
   }
 
   .uni-fab__content {
