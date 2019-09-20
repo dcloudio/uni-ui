@@ -116,7 +116,7 @@ $fav-font-size: 28rpx;
     display: flex;
   /* #endif */
   height: $fav-height;
-  line-height: $fav-height;
+  line-height: 49rpx;
   margin-right: 5rpx;
   align-items: center;
   justify-content: center;
