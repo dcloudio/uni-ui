@@ -109,18 +109,24 @@ export default {
 <style lang="scss" scoped>
 @import "~@/uni.scss";
 $box-height: 70rpx;
-/* #ifdef APP-PLUS */
+/* #ifdef APP-PLUS-NVUE */
 $box-line-height: 70rpx;
 /* #endif */
-$box-line-height: 60rpx;
+/* #ifdef APP-PLUS */
+
+/* #endif */
+$box-line-height: 62rpx;
 $box-width: 70rpx;
 
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-    page {
-  /* #endif */
+/* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
+/* #ifdef MP-ALIPAY */
+  page {
+/* #endif */
 
 .uni-numbox {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: row;
   height: $box-height;
   line-height: $box-height;
