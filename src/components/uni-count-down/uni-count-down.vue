@@ -131,12 +131,18 @@
   /* #endif */
 
   .uni-countdown {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     flex-direction: row;
     justify-content: flex-start;
     padding: 2upx 0;
   }
 
   .uni-countdown__splitor {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     justify-content: center;
     line-height: $countdown-height;
     padding:  5upx;
@@ -144,11 +150,14 @@
   }
 
   .uni-countdown__number {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
+    justify-content: center;
+    align-items: center;
     width: $countdown-width;
     height: $countdown-height;
     line-height: $countdown-height;
-    // justify-content: center;
-    // align-items: center;
     border-radius: $uni-border-radius-base;
     margin: 5upx;
     border-width: 1rpx;
