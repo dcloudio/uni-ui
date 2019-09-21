@@ -19,14 +19,18 @@ export default {
 <uni-icons type="contact" size="30"></uni-icons>
 ```
 
-**Icon 属性说明：**
+**Icons 属性说明：**
 
 |属性名		|类型|默认值	|说明|
 |---|----|---|---|
 |type	|String	|-|图标图案，参考示例|
 |color	|String	|-|图标颜色	|
-|size	|Number	|24|图标大小|
-|@click	|EventHandle|-|点击 Icon 触发事件|
+|size	|Number	|24|图标大小（单位px）|
+
+
+**Icons 事件说明：**
+|事件名	|说明								|
+|click	|点击 Icon 触发事件	|
 
 
 ### 更新日志

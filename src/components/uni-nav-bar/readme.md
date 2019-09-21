@@ -21,20 +21,19 @@ export default {
 
 **NavBar 属性说明：**
 
-|属性名		|类型|默认值	|说明|
-|---|----|---|---|
-|title	|String	|-|标题文字|
-|left-text	|String	|-|右侧按钮文本|
-|right-text	|String	|-|右侧按钮文本|
-|left-icon	|String	|-|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）|
-|right-icon	|String	|-|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）|
-|fixed	|Boolean	|false|是否固定顶部|
-|status-bar	|Boolean|false（fixed为true时，status-bar默认值为true）|是否包含状态栏，|
-|shadow	|Boolean|true|导航栏下是否有阴影|
-|color	|String	|#000000|图标和文字颜色	|
-|background-color|String|#FFFFFF|导航栏背景颜色	|
-|@click-left|EventHandle|-|左侧按钮点击时触发	|
-|@click-right|EventHandle|-|右侧按钮点击时触发	|
+|属性名						|类型		|默认值																					|说明																																											|
+|---							|----		|---																						|---																																											|
+|title						|String	|-																							|标题文字																																									|
+|left-text				|String	|-																							|右侧按钮文本																																							|
+|right-text				|String	|-																							|右侧按钮文本																																							|
+|left-icon				|String	|-																							|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）|
+|right-icon				|String	|-																							|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）|
+|fixed						|Boolean|false																					|是否固定顶部																																							|
+|status-bar				|Boolean|false（fixed为true时，status-bar默认值为true）	|是否包含状态栏，																																					|
+|shadow						|Boolean|true																						|导航栏下是否有阴影																																				|
+|color						|String	|#000000																				|图标和文字颜色																																						|
+|background-color	|String	|#FFFFFF																				|导航栏背景颜色																																						|
+|border						|Boolean|true																						|是否显示底部边框																																					|
 
 **NavBar 插槽**
 
@@ -46,6 +45,13 @@ export default {
 |left	|向导航栏左侧插入|
 |right	|向导航栏右侧插入|
 |其他	|向导航栏中间插入|
+
+**事件说明：**
+
+|事件名称	|说明		|
+|---|---|
+|click-left	|左侧按钮点击时触发|
+|click-right	|右侧按钮点击时触发|
 
 ```html
 <uni-nav-bar>
