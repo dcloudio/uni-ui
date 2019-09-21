@@ -94,6 +94,9 @@
         }
       },
       loopAnimationAndroid() {
+        if(!this.$refs['loadingAndroid']) {
+          return false
+        }
         this.rotate += 360
         animation.transition(this.$refs['loadingAndroid'], {
           styles: {
@@ -109,6 +112,9 @@
         });
       },
       loopAnimationIos() {
+        if(!this.$refs['loadingIos']) {
+          return false
+        }
         this.rotate += 30
         animation.transition(this.$refs['loadingIos'], {
           styles: {
@@ -116,11 +122,14 @@
           },
           duration: 0,
           timingFunction: 'linear',
-          delay: 84
+          delay: 0
         }, () => {
-          if (!this.stopAnimation) {
-            this.loopAnimationIos()
-          }
+          // 使用setTimeout替代delay，解决IOS端迷之抖动
+          setTimeout(()=>{
+            if (!this.stopAnimation) {
+                this.loopAnimationIos()
+            }
+          },84)
         });
       }
       // #endif
