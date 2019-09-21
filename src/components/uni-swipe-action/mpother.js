@@ -10,6 +10,7 @@ export default {
   },
   computed: {
     moveLeft() {
+      console.log(`translateX(${this.left}px)`); 
       return `translateX(${this.left}px)`
     }
   },
@@ -85,7 +86,7 @@ export default {
       if (!this.position.button.width) {
         return
       }
-      this.left = x - this.width
+      // this.left = x - this.width
       this.setValue(x - this.width)
     },
     setValue(value) {
