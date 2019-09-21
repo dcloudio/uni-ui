@@ -108,6 +108,9 @@
     font-size: $uni-font-size-lg;
   }
   .city {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
@@ -116,6 +119,9 @@
   }
 
   .input-view {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     flex-direction: row;
     // width: 500rpx;
     flex: 1;
