@@ -11,8 +11,8 @@
           <view class="uni-calendar__panel">
             <view class="uni-calendar__date-befor" @tap="dataBefor(-1, 'month')"><text class="iconfont icon-jiantou" /></view>
             <view class="uni-calendar__panel-box">
-              <view>{{ canlender.year }}年</view>
-              <view>{{ canlender.month }}月</view>
+              <view>{{ canlender.year ||''}}年</view>
+              <view>{{ canlender.month ||''}}月</view>
             </view>
             <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')"><text class="iconfont icon-jiantou " /></view>
             <view class="uni-calendar__backtoday" @tap="backtoday">回到今天</view>
@@ -484,7 +484,11 @@
             dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
             break
           case 'month':
-            dd.setMonth(dd.getMonth() + AddDayCount) // 获取AddDayCount天后的日期
+            if (dd.getDate() === 31) {
+              dd.setDate(dd.getDate() + AddDayCount)
+            } else {
+              dd.setMonth(dd.getMonth() + AddDayCount) // 获取AddDayCount天后的日期
+            }
             break
           case 'year':
             dd.setFullYear(dd.getFullYear() + AddDayCount) // 获取AddDayCount天后的日期
@@ -514,9 +518,9 @@
         var ab = begin.split('-')
         var ae = end.split('-')
         var db = new Date()
-        db.setUTCFullYear(ab[0], ab[1] - 1, ab[2])
+        db.setFullYear(ab[0], ab[1] - 1, ab[2])
         var de = new Date()
-        de.setUTCFullYear(ae[0], ae[1] - 1, ae[2])
+        de.setFullYear(ae[0], ae[1] - 1, ae[2])
         var unixDb = db.getTime() - 24 * 60 * 60 * 1000
         var unixDe = de.getTime() - 24 * 60 * 60 * 1000
         for (var k = unixDb; k <= unixDe;) {
