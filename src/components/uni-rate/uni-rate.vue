@@ -12,7 +12,7 @@
         :size="size"
         :type="isFill ? 'star-filled' : 'star'"
       />
-      <!-- #ifdef APP-PLUS -->
+      <!-- #ifdef APP-PLUS-NVUE -->
       <view
         :style="{ width: star.activeWitch.replace('%','')*size/100+'px'}"
         class="uni-rate-icon-on"
@@ -24,7 +24,7 @@
         />
       </view>
       <!-- #endif -->
-      <!-- #ifndef APP-PLUS -->
+      <!-- #ifndef APP-PLUS-NVUE -->
       <view
         :style="{ width: star.activeWitch,top:-size/2+'px' }"
         class="uni-rate-icon-on"
@@ -145,6 +145,9 @@ export default {
     page {
   /* #endif */
 .uni-rate {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   line-height: 0;
   font-size: 0;
   flex-direction: row;
