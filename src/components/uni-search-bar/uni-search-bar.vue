@@ -125,6 +125,9 @@ $uni-searchbar-height: 64rpx;
   /* #endif */
 
 .uni-searchbar-form {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: row;
   position: relative;
   padding: 15rpx 0;
@@ -132,6 +135,9 @@ $uni-searchbar-height: 64rpx;
 }
 
 .uni-searchbar-form__box {
+  /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
   flex: 1;
   flex-direction: row;
   align-items: center;
@@ -161,7 +167,7 @@ $uni-searchbar-height: 64rpx;
 
 .uni-searchbar-form__box-icon-clear {
   color: #c8c7cc;
-  /* #ifndef APP-PLUS */
+  /* #ifndef APP-PLUS-NVUE */
   margin-top: 3px;
   /* #endif */
   line-height: 24px;
@@ -169,6 +175,9 @@ $uni-searchbar-height: 64rpx;
 }
 
 .uni-searchbar-form__text {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: row;
   flex: 1;
   align-items: center;
