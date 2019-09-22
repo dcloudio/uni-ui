@@ -1,7 +1,7 @@
 <template>
   <view
     :class="'uni-icon-' + type"
-    :style="{ color: color, 'font-size': size + 'px' }"
+    :style="{ color: color, 'font-size': uxSize + 'px' }"
     class="uni-icon"
     @click="_onClick"
   />
@@ -22,6 +22,11 @@ export default {
     size: {
       type: [Number, String],
       default: 16
+    }
+  },
+  computed:{
+    uxSize(){
+      return uni.upx2px(this.size)
     }
   },
   methods: {
