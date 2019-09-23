@@ -41,7 +41,7 @@
         <view class="uni-share-content">
           <view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box">
             <view class="uni-share-content-image">
-              <image :src="item.icon" class="content-image" mode="widthFix"/> 
+              <image :src="item.icon" class="content-image" mode="widthFix" />
             </view>
             <text class="uni-share-content-text">{{ item.text }}</text>
           </view>
@@ -122,7 +122,9 @@
         if (open === 'tip') {
           this.show = true
         } else {
-          this.$refs[open].open()
+          this.$nextTick(() => {
+            this.$refs[open].open()
+          })
         }
       },
       cancel(type) {
@@ -133,13 +135,14 @@
         this.$refs[type].close()
       },
       change(e) {
-        console.log(e.show)
+        console.log('是否打开:' + e.show)
       }
     }
   }
 </script>
 <style lang="scss">
   @import '@/common/uni-nvue.scss';
+
   .example-body {
     /* #ifndef APP-NVUE */
     display: block;
@@ -151,11 +154,13 @@
     flex: 1;
     margin: 20rpx 0;
   }
+
   .popup-content {
     background-color: #fff;
     padding: 15px;
     font-size: 14px;
   }
+
   /* 提示窗口 */
   .uni-tip {
     padding: 15px;
@@ -225,14 +230,15 @@
   .uni-share-content {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 15px;
   }
 
   .uni-share-content-box {
     flex-direction: column;
     align-items: center;
-    width: 180rpx;
-    flex: 1;
+    width: 200rpx;
+    // flex: 1;
   }
 
   .uni-share-content-image {
@@ -263,7 +269,7 @@
     font-size: 14px;
     border-top-color: #f5f5f5;
     border-top-width: 1px;
-    border-top-style:solid;
+    border-top-style: solid;
     text-align: center;
     color: #666;
   }

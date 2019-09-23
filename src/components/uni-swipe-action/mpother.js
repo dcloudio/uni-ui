@@ -10,7 +10,6 @@ export default {
   },
   computed: {
     moveLeft() {
-      console.log(`translateX(${this.left}px)`); 
       return `translateX(${this.left}px)`
     }
   },
