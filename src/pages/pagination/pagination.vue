@@ -65,6 +65,10 @@
   @import '@/common/uni-nvue.scss';
 
   .btn-view {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+      flex-direction: column;
+    /* #endif */
     padding: 30upx;
     text-align: center;
     background-color: #fff;

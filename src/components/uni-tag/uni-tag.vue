@@ -84,6 +84,9 @@ $tag-small-pd: 0px 16rpx;
   /* #endif */
 
 .uni-tag {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   padding: $tag-pd;
   height: 60rpx;
   line-height: 60rpx;

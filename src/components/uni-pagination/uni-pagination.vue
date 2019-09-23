@@ -123,8 +123,13 @@
   /* #endif */
 
   .uni-pagination {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
+    /* #ifdef APP-PLUS-NVUE */
+      padding: 0 40rpx;
+    /* #endif */
     width: 700rpx;
-    padding: 0 40rpx;
     position: relative;
     overflow: hidden;
     flex-direction: row;
@@ -133,6 +138,9 @@
   }
 
   .uni-pagination__btns {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     flex: 1;
     justify-content: space-between;
     align-items: center;
@@ -140,6 +148,9 @@
   }
 
   .uni-pagination__btn {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     width: 120upx;
     height: 60upx;
     line-height: 60upx;
@@ -156,6 +167,9 @@
   }
 
   .uni-pagination-child__btn {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     font-size: $uni-font-size-base;
     position: relative;
     flex-direction: row;
@@ -165,6 +179,9 @@
   }
 
   .uni-pagination__num {
+    /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+    /* #endif */
     position: absolute;
     left: 300rpx;
     top: 0;

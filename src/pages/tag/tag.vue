@@ -87,12 +87,18 @@ export default {
 <style lang="scss">
   @import '@/common/uni-nvue.scss';
 .example-body {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: row;
   justify-content: flex-start;
   padding: 20upx 0 0 0;
 }
 
 .tag-view {
+  /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+  /* #endif */
   flex-direction: column;
   margin: 10upx 15upx;
   justify-content: center;

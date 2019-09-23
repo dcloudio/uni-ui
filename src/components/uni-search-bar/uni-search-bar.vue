@@ -103,8 +103,10 @@ export default {
       this.$emit("cancel", {
         value: this.searchVal
       });
-      this.searchVal = "";
-      this.show = false;
+      // setTimeout(function(){
+        this.searchVal = "";
+        this.show = false;
+      // },0)
     },
     confirm() {
       this.$emit("confirm", {
@@ -117,7 +119,7 @@ export default {
 
 <style lang="scss">
 @import "@/uni.scss";
-$uni-searchbar-height: 64rpx;
+$uni-searchbar-height: 32px;
 
   /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
   /* #ifdef MP-ALIPAY */
@@ -136,8 +138,9 @@ $uni-searchbar-height: 64rpx;
 
 .uni-searchbar-form__box {
   /* #ifndef APP-PLUS-NVUE */
-      display: flex;
-    /* #endif */
+    display: flex;
+  /* #endif */
+  position: relative;
   flex: 1;
   flex-direction: row;
   align-items: center;
@@ -158,18 +161,29 @@ $uni-searchbar-height: 64rpx;
 }
 
 .uni-searchbar-form__box-search-input {
+  /* #ifdef APP-PLUS */
+  position:absolute;
+  top:10rpx;
+  left:66rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  padding-top: 0;
+  padding-bottom: 0;
+  /* #endif */
+  
   flex: 1;
   font-size: 28rpx;
-  height: $uni-searchbar-height;
-  line-height: $uni-searchbar-height;
   color: #333333;
 }
 
 .uni-searchbar-form__box-icon-clear {
+  position: absolute;
+  right:0;
   color: #c8c7cc;
   /* #ifndef APP-PLUS-NVUE */
   margin-top: 3px;
   /* #endif */
+  
   line-height: 24px;
   padding: 0rpx 15rpx 0rpx 10rpx;
 }
