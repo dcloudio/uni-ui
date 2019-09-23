@@ -1,7 +1,6 @@
 {
   "name": "@dcloudio/uni-ui",
-  "version": "1.0.1",
-  "private": true,
+  "version": "1.0.3",
   "scripts": {
     "serve": "npm run dev:h5",
     "build": "npm run build:h5",
@@ -21,7 +20,8 @@
     "dev:mp-qq": "cross-env NODE_ENV=development UNI_PLATFORM=mp-qq vue-cli-service uni-build --watch",
     "dev:mp-toutiao": "cross-env NODE_ENV=development UNI_PLATFORM=mp-toutiao vue-cli-service uni-build --watch",
     "dev:mp-weixin": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
-    "info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js"
+    "info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js",
+    "build:lib": "rm -rf lib && node ./build/build-lib.js"
   },
   "dependencies": {
     "@dcloudio/uni-app-plus": "^2.0.0-alpha-22420190823018",
