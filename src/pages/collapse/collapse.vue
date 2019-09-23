@@ -100,7 +100,7 @@
           name: '添加动画效果',
           data: [{
               type: false,
-              subName: '默认开启',
+              subName: '开启动画',
               open: false,
               showAnimation: true,
               content: '折叠内容主体，可自定义内容及样式'
