@@ -128,7 +128,7 @@
     background-color: #e7e7e7;
     height: $nav-height;
     border-radius: 15px;
-    padding: 0 4%;
+    padding: 0 30rpx;
     flex-wrap: nowrap;
     margin: 7px 0;
     line-height: $nav-height;
@@ -143,7 +143,9 @@
   .nav-bar-input {
     height: $nav-height;
     line-height: $nav-height;
-    // width: 450rpx;
+    /* #ifdef APP-PLUS-NVUE */
+    width: 370rpx;
+    /* #endif */
     padding: 0 10rpx;
     font-size: $uni-font-size-lg;
     background-color: #e7e7e7;
