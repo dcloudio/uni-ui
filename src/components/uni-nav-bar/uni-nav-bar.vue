@@ -29,7 +29,7 @@
             class="uni-navbar-btn-text uni-navbar__content_view"
             v-if="leftText.length"
           >
-            <text class="uni-nav-bar-text">{{ leftText }}</text>
+            <text :style="{ color: color, fontSize: '14px' }" >{{ leftText }}</text>
           </view>
           <slot name="left" />
         </view>
@@ -38,7 +38,7 @@
             class="uni-navbar__header-container-inner uni-navbar__content_view"
             v-if="title.length"
           >
-            <text class="uni-nav-bar-text">{{ title }}</text>
+            <text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
           </view>
           <!-- 标题插槽 -->
           <slot />
