@@ -1,8 +1,10 @@
 {
-	"id":"33",
-	"name":"Rate",
-	"desc":"评分",
-	"url":"rate",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=33"
+  "id": "33",
+  "name": "Rate",
+  "desc": "评分",
+  "url": "rate",
+  "edition": "1.0.1",
+  "path": "https://ext.dcloud.net.cn/plugin?id=33",
+  "update_log": "- 新增 示例项目"
+
 }

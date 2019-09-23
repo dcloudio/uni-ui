@@ -1,8 +1,9 @@
 {
-	"id":"54",
-	"name":"SegmentedControl",
-	"desc":"分段器",
-	"url":"segmented-control",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=54"
+  "id": "54",
+  "name": "SegmentedControl",
+  "desc": "分段器",
+  "url": "segmented-control",
+  "edition": "1.0.1",
+  "path": "https://ext.dcloud.net.cn/plugin?id=54",
+  "update_log": "- 新增 示例项目"
 }

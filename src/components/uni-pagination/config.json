@@ -1,8 +1,9 @@
 {
-	"id":"32",
-	"name":"Pagination",
-	"desc":"分页器",
-	"url":"pagination",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=32"
+  "id": "32",
+  "name": "Pagination",
+  "desc": "分页器",
+  "url": "pagination",
+  "edition": "1.0.1",
+  "path": "https://ext.dcloud.net.cn/plugin?id=32",
+  "update_log": "- 修复 示例项目组件引用错的 Bug"
 }

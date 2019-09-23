@@ -1,9 +1,9 @@
 {
-	"id": "23",
-	"name": "Collapse",
-	"desc": "折叠面板",
-	"url": "collapse",
-	"edition": "1.1.1",
-	"path": "https://ext.dcloud.net.cn/plugin?id=23",
-    "update_log":"- 修复 依赖组件找不到的问题"
+  "id": "23",
+  "name": "Collapse",
+  "desc": "折叠面板",
+  "url": "collapse",
+  "edition": "1.1.2",
+  "path": "https://ext.dcloud.net.cn/plugin?id=23",
+  "update_log": "- 修复 示例项目找不到 uni-icons 的 Bug \n- 修复 在低端机上动画卡顿的问题"
 }

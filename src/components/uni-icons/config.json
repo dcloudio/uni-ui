@@ -3,6 +3,7 @@
 	"name":"Icons",
 	"desc":"图标",
 	"url":"icons",
-	"edition":"1.1.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=28"
+	"edition":"1.1.1",
+	"path":"https://ext.dcloud.net.cn/plugin?id=28",
+  "update_log":"- 修复 H5 中不显示的 Bug \n- 添加 示例项目"
 }
