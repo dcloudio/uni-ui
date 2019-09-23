@@ -170,7 +170,11 @@ $uni-searchbar-height: 32px;
   padding-top: 0;
   padding-bottom: 0;
   /* #endif */
-  
+  /* #ifdef APP-PLUS-NVUE */
+  height: 52rpx;
+  line-height: 52rpx;
+  width: 600rpx;
+  /* #endif */
   flex: 1;
   font-size: 28rpx;
   color: #333333;
