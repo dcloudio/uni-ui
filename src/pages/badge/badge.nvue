@@ -52,6 +52,6 @@ export default {
   justify-content: flex-start;
 }
 .uni-badge-left-margin{
-  margin-left: 20px;
+  margin-left: 20rpx;
 }
 </style>
