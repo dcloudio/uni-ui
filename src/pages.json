@@ -34,9 +34,9 @@
       }
     },
     {
-      "path": "pages/icon/icon",
+      "path": "pages/icons/icons",
       "style": {
-        "navigationBarTitleText": "Icon 图标"
+        "navigationBarTitleText": "Icons 图标"
       }
     },
     {

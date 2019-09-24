@@ -44,7 +44,6 @@
   page {
   /* #endif */
   .uni-collapse {
-    background-color: $uni-bg-color;
     /* #ifndef APP-NVUE */
     width: 100%;
     display: flex;
@@ -52,10 +51,8 @@
     /* #ifdef APP-NVUE */
     flex: 1;
     /* #endif */
-    // border-color: $uni-border-color;
-    // border-top-width: 1px;
-    // border-bottom-width: 1px;
-    // border-style: solid;
+	flex-direction: column;
+    background-color: $uni-bg-color;
   }
   /* #ifdef MP-ALIPAY */
   }

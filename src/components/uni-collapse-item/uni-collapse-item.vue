@@ -8,7 +8,7 @@
         class="uni-collapse-cell__title-arrow" color="#bbb" size="20" type="arrowdown" />
     </view>
     <view :class="{'uni-collapse-cell__content--hide':!isOpen}" class="uni-collapse-cell__content">
-      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{'transform':isOpen?'translateY(0)':'translateY(-50%)','-webkit-transform':isOpen?'translateY(0)':'translateY(-50%)'}">
+      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__wrapper" :style="{'transform':isOpen?'translateY(0)':'translateY(-50%)','-webkit-transform':isOpen?'translateY(0)':'translateY(-50%)'}">
         <slot />
       </view>
     </view>
@@ -118,7 +118,7 @@
     flex-direction: column;
     border-color: $uni-border-color;
     border-bottom-width: 1px;
-    border-style: solid;
+    border-bottom-style: solid;
   }
 
 
@@ -196,6 +196,13 @@
 
   .uni-collapse-cell__content {
     overflow: hidden;
+  }
+  
+  .uni-collapse-cell__wrapper {
+	  /* #ifndef APP-NVUE */
+	  display: flex;
+	  /* #endif */
+	  flex-direction: column;
   }
 
   .uni-collapse-cell__content--hide {

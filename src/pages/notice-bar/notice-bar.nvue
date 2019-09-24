@@ -34,7 +34,7 @@
       <uni-notice-bar :show-close="true" :single="true" text="HBuilderX 1.0正式发布！uni-app实现里程碑突破！" />
       <uni-notice-bar :show-close="true" :show-icon="true" more-text="查看更多" text="HBuilderX 1.0正式发布！uni-app实现里程碑突破！" />
       <uni-notice-bar :show-close="true" :show-icon="true" text="uni-app 1.6发布，开发一次、7端覆盖！" />
-      <uni-notice-bar :show-close="true" :show-icon="true" :single="true" text="uni-app 1.6版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" />
+      <uni-notice-bar :show-close="true" :show-icon="true" :single="true" text="uni-app 1.6版正式发布，开发一次，同时发布到iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" />
     </view>
   </view>
 </template>
