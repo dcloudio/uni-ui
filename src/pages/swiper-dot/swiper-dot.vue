@@ -4,20 +4,22 @@
       <swiper class="swiper-box" @change="change">
         <swiper-item v-for="(item, index) in info" :key="index">
           <view :class="item.colorClass" class="swiper-item">
-            <image :src="item.url" mode="aspectFill" />
+            <image class="image" :src="item.url" mode="aspectFill" />
           </view>
         </swiper-item>
       </swiper>
     </uni-swiper-dot>
-    <view class="example-title">模式选择</view>
+    <uni-title title="模式选择" type="line"></uni-title>
     <view class="example-body">
-      <view :class="{ active: modeIndex === 0 }" class="example-body-item" @click="selectMode('default', 0)">default</view>
-      <view :class="{ active: modeIndex === 1 }" class="example-body-item" @click="selectMode('dot', 1)">dot</view>
-      <view :class="{ active: modeIndex === 2 }" class="example-body-item" @click="selectMode('round', 2)">round</view>
-      <view :class="{ active: modeIndex === 3 }" class="example-body-item" @click="selectMode('nav', 3)">nav</view>
-      <view :class="{ active: modeIndex === 4 }" class="example-body-item" @click="selectMode('indexes', 4)">indexes</view>
+      <view :class="{ active: modeIndex === 0 }" class="example-body-item" @click="selectMode('default', 0)"><text
+          class="example-body-item-text">default</text></view>
+      <view :class="{ active: modeIndex === 1 }" class="example-body-item" @click="selectMode('dot', 1)"><text class="example-body-item-text">dot</text></view>
+      <view :class="{ active: modeIndex === 2 }" class="example-body-item" @click="selectMode('round', 2)"><text class="example-body-item-text">round</text></view>
+      <view :class="{ active: modeIndex === 3 }" class="example-body-item" @click="selectMode('nav', 3)"><text class="example-body-item-text">nav</text></view>
+      <view :class="{ active: modeIndex === 4 }" class="example-body-item" @click="selectMode('indexes', 4)"><text
+          class="example-body-item-text">indexes</text></view>
     </view>
-    <view class="example-title">颜色样式选择</view>
+    <uni-title title="颜色样式选择" type="line"></uni-title>
     <view class="example-body">
       <template v-if="mode !== 'nav'">
         <view v-for="(item, index) in dotStyle" :class="{ active: styleIndex === index }" :key="index" class="example-body-item"
@@ -30,7 +32,7 @@
       <template v-if="mode === 'nav'">
         <view v-for="(item, index) in dotStyle" :class="{ active: styleIndex === index }" :key="index" :style="{ 'background-color': item.selectedBackgroundColor }"
           class="example-body-item" @click="selectStyle(index)">
-          <text :style="{ color: item.color }">内容</text>
+          <text class="example-body-item-text" :style="{ color: item.color }">内容</text>
         </view>
       </template>
     </view>
@@ -38,9 +40,11 @@
 </template>
 
 <script>
+  import uniTitle from '@/components/uni-title/uni-title.vue'
   import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
   export default {
     components: {
+      uniTitle,
       uniSwiperDot
     },
     data() {
@@ -109,69 +113,82 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  @import '@/common/uni-nvue.scss';
+
   .swiper-box {
-    height: 400upx;
+    height: 400rpx;
   }
 
   .swiper-item {
+    /* #ifndef APP-NVUE */
     display: flex;
+    /* #endif */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    background: #eee;
+    background-color: #eee;
     color: #fff;
   }
 
-  .swiper-item image {
-    width: 100%;
-    height: 100%;
+  .image {
+    width: 750rpx;
   }
 
   .uni-bg-red {
-    background: #ff5a5f;
+    background-color: #ff5a5f;
   }
 
   .uni-bg-green {
-    background: #09bb07;
+    background-color: #09bb07;
   }
 
   .uni-bg-blue {
-    background: #007aff;
+    background-color: #007aff;
   }
 
   .example-body {
+    /* #ifndef APP-NVUE */
     display: flex;
-    padding: 20upx;
+    /* #endif */
+    flex-direction: row;
+    padding: 20rpx;
   }
 
   .example-body-item {
-    display: flex;
+
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 15upx;
-    height: 60upx;
-    width: 100%;
-    font-size: 28upx;
+    margin: 15rpx;
+    padding:15rpx;
+    height: 60rpx;
+ /* #ifndef APP-NVUE */
+    display: flex;
+    padding:0 15rpx;
+    /* #endif */
+    border-color: #EEEEEE;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10rpx;
+  }
+
+  .example-body-item-text {
+    font-size: 28rpx;
     color: #333;
-    border: 1px #eee solid;
-    border-radius: 10upx;
   }
 
   .example-body-dots {
-    width: 16upx;
-    height: 16upx;
-    border-radius: 50%;
-    background: #333333;
-    margin-left: 10upx;
-    box-sizing: border-box;
-  }
-
-  .example-body-dots:first-child {
-    margin: 0;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50px;
+    background-color: #333333;
+    margin-left: 10rpx;
   }
 
   .active {
-    border: 1px #000 solid;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
   }
 </style>

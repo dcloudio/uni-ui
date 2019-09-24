@@ -7,15 +7,14 @@
       <uni-calendar :insert="true" :lunar="tags[0].checked" :disable-before="tags[3].checked" :range="tags[5].checked"
         :start-date="startDate" :end-date="endDate" :date="date" :selected="selected" @change="change" />
       <view class="calendar-tags-group example-body">
-        <view v-for="(item, index) in tags"  :key="index" class="calendar-tags"
-          @click="toggle(index, item)">
+        <view v-for="(item, index) in tags" :key="index" class="calendar-tags" @click="toggle(index, item)">
           <text class="calendar-tags-item" :class="{ checked: item.checked }">{{ item.name }}</text>
         </view>
         <view class="calendar-tags" @click="open">
           <text class="calendar-tags-item calendar-button">打开日历</text>
         </view>
       </view>
-      <view v-if="infoShow" class="calendar-content-active"></view>
+      <view :class="[infoShow?'calendar-content-active':'calendar-content-no']"></view>
       <!-- <button class="calendar-button" type="button" @click="open">打开日历</button> -->
       <view :class="{ 'calendar-active': infoShow }" class="calendar-box">
         <view v-if="timeData.lunar" class="calendar-info-header">
@@ -25,7 +24,7 @@
         <scroll-view scroll-y v-if="timeData.lunar" class="calendar-info">
           <view><text class="calendar-info-text">当前选择时间 : {{ timeData.fulldate }}</text></view>
           <view><text v-if="tags[0].checked" class="calendar-info-text">农历日期 : {{ timeData.year + '年' + timeData.month + '月' + timeData.date + '日 （' + timeData.lunar.astro + ')' }}</text></view>
-          <view><text v-if="tags[0].checked" class="calendar-info-text" >{{ timeData.lunar.gzYear + '年' + timeData.lunar.gzMonth + '月' + timeData.lunar.gzDay + '日 (' + timeData.lunar.Animal + '年)' + timeData.lunar.IMonthCn + timeData.lunar.IDayCn + ( timeData.lunar.isTerm ? timeData.lunar.Term : '')}}</text></view>
+          <view><text v-if="tags[0].checked" class="calendar-info-text">{{ timeData.lunar.gzYear + '年' + timeData.lunar.gzMonth + '月' + timeData.lunar.gzDay + '日 (' + timeData.lunar.Animal + '年)' + timeData.lunar.IMonthCn + timeData.lunar.IDayCn + ( timeData.lunar.isTerm ? timeData.lunar.Term : '')}}</text></view>
           <view> <text class="calendar-info-text">是否打点 : {{ timeData.clockinfo.have ? '是' : '否' }}</text></view>
           <view><text v-if="timeData.clockinfo.have" class="calendar-info-text">打点信息 : {{ timeData.clockinfo.info || '' }}</text></view>
           <view><text v-if="timeData.clockinfo.have" class="calendar-info-text">打点额外信息 : {{ JSON.stringify(timeData.clockinfo.data) || '' }}</text></view>
@@ -209,12 +208,16 @@
   }
 
   .calendar-content-active {
-    height: 220px;
+    height: 240px;
+  }
+
+  .calendar-content-no {
+    height: 50px;
   }
 
   .calendar-tags-group {
     /* #ifndef APP-NVUE */
-     display: block;
+    display: block;
     /* #endif */
     flex-direction: column;
     flex-wrap: wrap;
@@ -226,6 +229,9 @@
   }
 
   .calendar-tags-item {
+    /* #ifndef APP-NVUE */
+    display: block;
+    /* #endif */
     padding: 20rpx 20rpx;
     border-color: rgba(0, 0, 0, 0.2);
     border-style: solid;
@@ -259,6 +265,9 @@
   }
 
   .calendar-button-groups {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
     flex: 1;
     flex-direction: row;
     position: absolute;
@@ -283,7 +292,6 @@
     transition-property: transform;
     transition-duration: 0.3s;
     transform: translateY(160px);
-    /* background: #f5f5f5; */
   }
 
   .calendar-active {
@@ -291,6 +299,9 @@
   }
 
   .calendar-info-header {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
@@ -327,6 +338,9 @@
     border-width: 1px;
     height: 160px;
     padding: 30rpx 30rpx;
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    /* #endif */
   }
 
   .calendar-info-text {

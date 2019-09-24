@@ -77,6 +77,9 @@
     /* #endif */
   }
   .goods-carts {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
     flex-direction: column;
     position: fixed;
     left: 0;

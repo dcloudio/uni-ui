@@ -97,6 +97,9 @@
     }
 
     .uni-swipe_move-box {
+      /* #ifndef APP-NUVE */
+      display: flex;
+      /* #endif */
       position: relative;
       flex-direction: row;
     }
@@ -121,10 +124,17 @@
       bottom: 0;
       z-index: 0;
       /* #endif */
+      /* #ifndef APP-NUVE */
+      display: flex;
+      flex-shrink: 0;
+      /* #endif */
       flex-direction: row;
     }
 
     .uni-swipe_button {
+      /* #ifndef APP-NUVE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -132,6 +142,9 @@
     }
 
     .uni-swipe_button-text {
+      /* #ifndef APP-NVUE */
+      flex-shrink: 0;
+      /* #endif */
       font-size: 14px;
     }
 
