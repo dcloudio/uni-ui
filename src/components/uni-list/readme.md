@@ -82,6 +82,8 @@ List 一般用法
 |click|点击 uniListItem 触发事件||
 |switchChange|点击切换 Switch 时触发|{value:checked}|
 
+Tips
+- 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
 
 ### 更新日志
 
