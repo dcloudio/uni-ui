@@ -44,9 +44,11 @@ export default {
 
 <style lang="scss">
 @import '@/common/uni-nvue.scss';
+/* #ifdef MP-ALIPAY */
 .uni-badge {
-  // margin: 20rpx;
+  margin-left: 20rpx;
 }
+/* #endif */
 .example-body {
   flex-direction: row;
   justify-content: flex-start;

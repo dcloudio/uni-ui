@@ -9,12 +9,14 @@
         class="uni-searchbar-form__box"
         v-if="show"
       >
-        <uni-icons
-          :color="'#999999'"
-          class="uni-searchbar-form__box-icon-search"
-          size="18"
-          type="search"
-        />
+        <view class="uni-searchbar-form__box-icon-search">
+			<uni-icons
+			  :color="'#999999'"
+			  class="uni-searchbar-form__box-icon-search"
+			  size="18"
+			  type="search"
+			/>
+		</view>
         <input
           :focus="show"
           :placeholder="placeholder"
@@ -25,14 +27,16 @@
           type="text"
           v-model="searchVal"
         />
-        <uni-icons
-          :color="'#999999'"
-          @click="clear"
-          class="uni-searchbar-form__box-icon-clear"
-          size="24"
-          type="clear"
-          v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
-        />
+        <view class="uni-searchbar-form__box-icon-clear">
+        	<uni-icons
+        	  :color="'#999999'"
+        	  @click="clear"
+        	  class="uni-searchbar-form__box-icon-clear"
+        	  size="24"
+        	  type="clear"
+        	  v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
+        	/>
+        </view>
       </view>
       <view
         :style="{borderRadius:radius+'rpx'}"
@@ -40,12 +44,14 @@
         class="uni-searchbar-form__text"
         v-if="!show"
       >
-        <uni-icons
-          class="uni-searchbar-form__text-icon-search"
-          color="#999999"
-          size="18"
-          type="search"
-        />
+        <view class="uni-searchbar-form__text-icon-search">
+			<uni-icons
+			  class="uni-searchbar-form__text-icon-search"
+			  color="#999999"
+			  size="18"
+			  type="search"
+			/>
+		</view>
         <text class="uni-searchbar-form__text-placeholder">{{ placeholder }}</text>
       </view>
       <text
@@ -140,6 +146,9 @@ $uni-searchbar-height: 32px;
   /* #ifndef APP-PLUS-NVUE */
     display: flex;
   /* #endif */
+  /* #ifdef MP-ALIPAY */
+  overflow: hidden;
+  /* #endif */
   position: relative;
   flex: 1;
   flex-direction: row;
@@ -183,13 +192,16 @@ $uni-searchbar-height: 32px;
 .uni-searchbar-form__box-icon-clear {
   position: absolute;
   right:0;
-  color: #c8c7cc;
-  /* #ifndef APP-PLUS-NVUE */
-  margin-top: 3px;
+  /* #ifdef MP-TOUTIAO */
+  top:-1px;
   /* #endif */
-  
   line-height: 24px;
   padding: 0rpx 15rpx 0rpx 10rpx;
+  color: #c8c7cc;
+  /* #ifndef APP-PLUS-NVUE | MP-ALIPAY */
+  margin-top: 3px;
+  /* #endif */
+  z-index: 10;
 }
 
 .uni-searchbar-form__text {
