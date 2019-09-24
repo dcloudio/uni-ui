@@ -17,6 +17,9 @@ page {
 }
 
 .example-info {
+	/* #ifndef APP-NVUE */
+	display: block;
+	/* #endif */
   padding: 30rpx;
   color: #3b4144;
   background-color: #ffffff;
