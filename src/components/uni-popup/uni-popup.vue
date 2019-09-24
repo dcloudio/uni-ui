@@ -1,7 +1,8 @@
 <template>
   <view
     v-if="showPopup"
-    class="uni-popup">
+    class="uni-popup"
+    @touchmove.stop.prevent="clear">
     <view
       :class="[ani, animation ? 'ani' : '', !custom ? 'uni-custom' : '']"
       class="uni-popup__mask"
