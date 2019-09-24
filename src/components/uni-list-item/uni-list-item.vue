@@ -154,11 +154,14 @@
     }
 
     .uni-list-item__container {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex-direction: row;
       padding: $list-item-pd;
       padding-left: 0;
       flex: 1;
       position: relative;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       border-top-color: $uni-border-color;

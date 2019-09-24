@@ -62,6 +62,9 @@
     /* #endif */
 
     .uni-title {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       margin-top: 10px;
       flex-direction: row;
       align-items: center;
