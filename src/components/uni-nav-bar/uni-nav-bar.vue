@@ -3,7 +3,7 @@
 		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': border, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
-			<view :style="{ color: color }" class="uni-navbar__header uni-navbar__content_view">
+			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
 				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
@@ -137,7 +137,7 @@
 			/* #endif */
 			align-items: center;
 			flex-direction: row;
-			background-color: #FFFFFF;
+			// background-color: #FFFFFF;
 		}
 
 		.uni-navbar__header {
@@ -149,7 +149,7 @@
 			height: $nav-height;
 			line-height: $nav-height;
 			font-size: 16px;
-			background-color: #ffffff;
+			// background-color: #ffffff;
 		}
 
 		.uni-navbar__header-btns {
