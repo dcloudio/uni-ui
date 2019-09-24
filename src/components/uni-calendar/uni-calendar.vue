@@ -558,6 +558,9 @@
     }
 
     .header {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -590,6 +593,9 @@
     }
 
     .uni-calendar__nav {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -602,6 +608,9 @@
     }
 
     .uni-calendar__nav-item {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -619,13 +628,14 @@
       flex: 1;
       font-size: 26rpx;
       background-color: #fff;
-      // transition-duration: 0.3s;
-      // transform: translateY(100%);
     }
 
     .uni-calenda__content {}
 
     .uni-calendar__panel {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       position: relative;
       align-items: center;
@@ -637,6 +647,9 @@
     }
 
     .uni-calendar__date-after {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -647,6 +660,9 @@
     }
 
     .uni-calendar__date-befor {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -661,6 +677,9 @@
     }
 
     .uni-calendar__panel-box {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -679,9 +698,9 @@
       padding-left: 20rpx;
       height: 50rpx;
       line-height: 50rpx;
-      border-color: rgba($color: #fd2e32, $alpha: 0.5);
-      border-style: solid;
-      border-width: 1px;
+      border-right-color: rgba($color: #fd2e32, $alpha: 0.5);
+      border-right-style: solid;
+      border-right-width: 1px;
       border-right-width: 0;
       font-size: 24rpx;
       border-top-left-radius: 50rpx;
@@ -703,6 +722,9 @@
     }
 
     .uni-calendar__header {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
       font-size: $uni-font-size-base;
       border-top-color: #f5f5f5;

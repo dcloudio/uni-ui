@@ -91,19 +91,22 @@
 
     /* #endif */
     .uni-calender__body-date-week {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: row;
-      border-color: #F5F5F5;
-      border-style: solid;
+      border-bottom-color: #F5F5F5;
+      border-bottom-style: solid;
       border-bottom-width: 1px;
       justify-content: space-around;
-      // &:last-child {
-      //   border: none;
-      // }
     }
 
     // 日期的样式
     .uni-calender__date {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: column;
       position: relative;
@@ -121,6 +124,10 @@
     }
 
     .uni-calender__circle-box {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      z-index: 1;
+      /* #endif */
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -136,9 +143,6 @@
     // // 本月禁止的样式
     .uni-calender__disable {
       color: #f1f1f1;
-      // .uni-calender__lunar {
-      //   color: #f1f1f1;
-      // }
     }
 
     .uni-calender__lunar-disable {
@@ -166,15 +170,13 @@
       background-color: #fd2e32;
     }
 
-    // .uni-calender__active {
-    //   background-color: #000;
-    // }
     .uni-calender__multiple {
+      /* #ifndef APP-NVUE */
+      z-index: 1;
+      /* #endif */
       border-radius: 50px;
       background-color: #fd2e32;
     }
-
-
 
     .uni-calender__multiple-box {
       color: #fff;

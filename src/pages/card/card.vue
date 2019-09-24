@@ -1,5 +1,5 @@
 <template>
-  <view >
+  <view>
     <text class="example-info">卡片组件通用来显示完整独立的一段信息，同时让用户理解他的作用。例如一篇文章的预览图、作者信息、时间等，卡片通常是更复杂和更详细信息的入口点。</text>
     <!-- <view class="example-title">基础卡片</view> -->
     <uni-title title="基础卡片" type="line"></uni-title>
@@ -36,7 +36,8 @@
             </view>
             <view class="content-box">
               <text class="content-box-text">
-                uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。 即使不跨端，uni-app同时也是更好的小程序开发框架。
+                uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。
+                即使不跨端，uni-app同时也是更好的小程序开发框架。
               </text>
             </view>
           </view>
@@ -119,6 +120,7 @@
 
 <style lang="scss">
   @import '@/common/uni-nvue.scss';
+
   .example-body {
     padding: 30rpx 0;
     padding-bottom: 0;
@@ -130,21 +132,34 @@
   }
 
   .image-box {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    flex-direction: column;
+    /* #endif */
     height: 350rpx;
     overflow: hidden;
   }
 
   .image {
-   flex: 1;
+    /* #ifndef APP-NVUE */
+    width: 100%;
+    height: 100%;
+    /* #endif */
+    flex: 1;
   }
 
   .content-box {
     padding-top: 20rpx;
   }
+
   .content-box-text {
     font-size: 30rpx;
   }
+
   .footer-box {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
     justify-content: space-between;
     flex-direction: row;
 
@@ -156,12 +171,4 @@
     font-size: 30rpx;
     color: #666;
   }
-
-  /* .footer-box__item:nth-child(2) {
-    justify-content: center;
-  }
-
-  .footer-box__item:last-child {
-    justify-content: flex-end;
-  } */
 </style>

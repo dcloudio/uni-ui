@@ -18,7 +18,6 @@
       <view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-box ">
         <view v-for="(item,index) in buttonGroup" :key="index" :style="{backgroundColor:item.backgroundColor,color:item.color}"
           class="flex uni-tab__cart-button-right" @click="buttonClick(index,item)"><text class="uni-tab__cart-button-right-text">{{ item.text }}</text></view>
-
         <!-- <view class="flex uni-tab__cart-button-right uni-tab__color-y ">立即购买</view> -->
       </view>
     </view>
@@ -89,10 +88,16 @@
 
     /* #endif */
     .flex {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex-direction: row;
     }
 
     .uni-goods-nav {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: row;
     }
@@ -116,6 +121,9 @@
     }
 
     .uni-tab__cart-button-left {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       position: relative;
       justify-content: center;
@@ -140,6 +148,10 @@
     }
 
     .uni-tab__cart-button-right {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      flex-direction: column;
+      /* #endif */
       flex: 1;
       justify-content: center;
       align-items: center;
@@ -155,6 +167,10 @@
     }
 
     .uni-tab__dot-box {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      flex-direction: column;
+      /* #endif */
       position: absolute;
       right: 25rpx;
       top: 5rpx;

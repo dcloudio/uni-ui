@@ -128,6 +128,9 @@
     }
 
     .uni-popup__wrapper {
+      /* #ifndef APP-NVUE */
+      display: block;
+      /* #endif */
       position: absolute;
     }
 
@@ -146,6 +149,10 @@
     }
 
     .center {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      flex-direction: column;
+      /* #endif */
       bottom: 0;
       left: 0;
       right: 0;
@@ -157,6 +164,9 @@
     }
 
     .uni-popup__wrapper-box {
+      /* #ifndef APP-NVUE */
+      display: block;
+      /* #endif */
       position: relative;
     }
 

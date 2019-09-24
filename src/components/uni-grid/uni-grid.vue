@@ -114,6 +114,9 @@
 
     /* #endif */
     .uni-grid-wrap {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: column;
       /* #ifdef H5 */
@@ -122,6 +125,9 @@
     }
 
     .uni-grid {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: row;
       flex-wrap: wrap;

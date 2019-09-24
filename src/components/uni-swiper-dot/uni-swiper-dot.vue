@@ -104,6 +104,9 @@
 
     /* #endif */
     .uni-swiper__warp {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
       flex: 1;
       flex-direction: column;
       position: relative;
@@ -115,6 +118,10 @@
       bottom: 20rpx;
       left: 0;
       right: 0;
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex: 1;
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -147,6 +154,10 @@
     .uni-swiper__dots-nav {
       bottom: 0px;
       height: 80rpx;
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex: 1;
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
@@ -163,6 +174,10 @@
     }
 
     .uni-swiper__dots-indexes {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      // flex: 1;
       justify-content: center;
       align-items: center;
     }
