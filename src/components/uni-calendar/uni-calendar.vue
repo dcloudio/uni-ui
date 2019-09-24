@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-if="maskShow && !insert" :class="{ 'ani-mask-show': aniMaskShow }" class="uni-calendar__mask" />
+    <view v-if="maskShow && !insert" :class="{ 'ani-mask-show': aniMaskShow }" class="uni-calendar__mask" @touchmove.stop.prevent="clear"/>
     <view v-if="maskShow || insert" :class="{ 'ani-calendar-show': aniMaskShow, 'uni-calendar__static': insert }" class="uni-calendar__box">
       <view v-if="!insert" class="uni-calendar__nav">
         <view class="uni-calendar__nav-item" @click="close">取消</view>
@@ -156,6 +156,7 @@
       this.init()
     },
     methods: {
+      clear(){},
       init() {
         // 初始化日历
         // this.canlender = this.getWeek(this.date || new Date());
