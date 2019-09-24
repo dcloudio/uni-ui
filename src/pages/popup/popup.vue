@@ -25,10 +25,10 @@
       </view>
     </uni-popup>
     <!-- 插屏弹窗 -->
-    <uni-popup ref="image" :type="type" :custom="true" :mask-click="false" @change="change">
+    <uni-popup ref="image" :type="type" :custom="true" :mask-click="true" @change="change">
       <view class="uni-image">
         <view class="uni-image-close" @click="cancel('image')">
-          <uni-icon type="clear" color="#fff" size="30" />
+          <uni-icons type="clear" color="#fff" size="30" />
         </view>
         <image class="image" src="/static/uni.png" mode="" />
       </view>
@@ -52,9 +52,11 @@
 </template>
 
 <script>
+  import uniIcons from '@/components/uni-icons/uni-icons.vue'
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
   export default {
     components: {
+      uniIcons,
       uniPopup
     },
     data() {

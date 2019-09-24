@@ -86,7 +86,6 @@ export default {
 |ver		|Number		|0		|全局 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动		|
 |square		|Boolean	|true	|是否方形显示																|
 |highlight	|Boolean	|true	|点击背景是否高亮															|
-|@change	|function	|	-	|点击 grid 触发，返回 event={detail:{index:0}},index 为当前点击 gird 下标	|
 
 **uni-grid-item 属性实名：**
 
@@ -101,6 +100,11 @@ export default {
 |src		|String	|-		| **marker:image 下生效** ，marker 图片地址路径													|
 |imgWidth	|Number	|30		| **marker:image 下生效** ，marker 宽度，高度自适应												|
 
+
+**uni-grid 事件说明：**
+
+|事件名	|说明																																			|
+|change	|点击 grid 触发，返回 event={detail:{index:0}},index 为当前点击 gird 下标	|
 
 Tips
 - marker:dot ， 暂不支持修改大小，和颜色

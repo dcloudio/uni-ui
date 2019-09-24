@@ -100,9 +100,8 @@
           name: '添加动画效果',
           data: [{
               type: false,
-              subName: '默认开启',
+              subName: '开启动画',
               open: false,
-							openPre: true,
               showAnimation: true,
               content: '折叠内容主体，可自定义内容及样式'
             },
@@ -163,17 +162,6 @@
         id: 2
       }
     },
-		onReady() {
-			setTimeout(()=>{
-				this.list.map(function(item){
-					item.data.map(function(collapseItem){
-						if (collapseItem.openPre) {
-							collapseItem.open = collapseItem.openPre
-						}
-					})
-				})
-			},350)
-		},
     methods: {
       change(e) {
         //console.log(e)

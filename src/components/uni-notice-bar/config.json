@@ -1,8 +1,9 @@
 {
-	"id":"30",
-	"name":"NoticeBar",
-	"desc":"通告栏",
-	"url":"notice-bar",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=30"
+  "id": "30",
+  "name": "NoticeBar",
+  "desc": "通告栏",
+  "url": "notice-bar",
+  "edition": "1.0.1",
+  "path": "https://ext.dcloud.net.cn/plugin?id=30",
+  "update_log": "- 添加 示例项目"
 }

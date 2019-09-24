@@ -4,6 +4,7 @@ packages/
 public/
 src/
 build/
+dist/
 babel.config.js
 postcss.config.js
 vue.config.js

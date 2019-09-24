@@ -121,7 +121,7 @@ export default {
 
 |  参数		|    类型	| 说明					   |
 | ---	    |  ---		| ---		               | 
-| trigger	| function	| 展开菜单点击事件，返回点击信息|
+| trigger	| function	| 展开菜单点击事件，返回点击信息e={index:0,item:{...}}|
 
 
 

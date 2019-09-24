@@ -88,6 +88,7 @@ Tips
 |mode|String|basic|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片|
 |is-full|Boolean|false|卡片内容是否通栏，为true时将去除padding值|
 |is-shadow|Boolean|false|卡片内容是否开启阴影|
+
 **事件说明：**
 
 |事件称名|说明|返回参数|

@@ -12,7 +12,31 @@ var filenames = []
 var filenamesUpper = []
 
 var files = glob.sync(packages + '/**/*.vue')
+console.log(packages);
 
+let readdirFiles = fs.readdirSync(packages);
+readdirFiles.forEach(function(item, index) {
+  if (!~item.indexOf('uni-')) {
+    return
+  }
+  var relativePath = path.join(packages, item)
+  var dest = path.join(lib, item)
+  fs.copySync(relativePath, dest);
+
+  let filesLists = fs.readdirSync(dest);
+  filesLists.forEach(function(data, idx) {
+    let fileName = path.join(dest, data)
+    // 删除 无用文件
+    if (fileName.indexOf('.json') != -1 || fileName.indexOf('.md') != -1 || fileName.indexOf('.bak') !=
+      -1) {
+      fs.removeSync(fileName);
+      console.log('删除', fileName);
+    }
+  })
+})
+
+
+return
 //复制vue文件到lib目录
 files.forEach(name => {
   var relativePath = path.relative(packages, name)
@@ -20,9 +44,9 @@ files.forEach(name => {
   if (!~fileName.indexOf('uni-')) {
     return
   }
-  const fileCatalog =fileName.split('/')
+  const fileCatalog = fileName.split('/')
   const fileSubName = fileCatalog[1].split('.')[0]
-  if(fileCatalog[0] === fileSubName){
+  if (fileCatalog[0] === fileSubName) {
     filenames.push(fileSubName)
   }
   var dest = path.join(lib, relativePath)
@@ -44,7 +68,6 @@ files.forEach(name => {
     })
   }
 })
-console.log(filenames)
 //导入vue文件
 const importEvtCode = filenames.map(name => {
   var names = name.split('-')
