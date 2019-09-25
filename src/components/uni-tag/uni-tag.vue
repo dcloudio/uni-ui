@@ -71,9 +71,9 @@ export default {
 $tag-pd: 0px 32upx;
 $tag-small-pd: 0px 16upx;
 
-@mixin tag-disabled {
-	opacity: 0.5;
-}
+// @mixin tag-disabled {
+// 	opacity: 0.5;
+// }
 
 .uni-tag {
 	box-sizing: border-box;
@@ -96,7 +96,8 @@ $tag-small-pd: 0px 16upx;
 	}
 
 	&--disabled {
-		@include tag-disabled;
+		// @include tag-disabled;
+    opacity: 0.5;
 	}
 
 	&--small {

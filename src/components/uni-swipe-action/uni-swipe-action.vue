@@ -32,6 +32,7 @@
   import mixins from './mpother'
   import mp from './mp'
   export default {
+    name:'uniSwipeAction',
     // #ifdef APP-PLUS|| MP-WEIXIN||H5
     mixins: [mp],
     // #endif

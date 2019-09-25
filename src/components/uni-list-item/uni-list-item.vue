@@ -139,13 +139,13 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin list-hover {
-	background-color: $uni-bg-color-hover;
-}
+// @mixin list-hover {
+// 	background-color: $uni-bg-color-hover;
+// }
 
-@mixin list-disabled {
-	opacity: 0.3;
-}
+// @mixin list-disabled {
+// 	opacity: 0.3;
+// }
 
 $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
@@ -158,11 +158,13 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	align-items: center;
 
 	&--disabled {
-		@include list-disabled;
+		// @include list-disabled;
+    opacity: 0.3;
 	}
 
 	&--hover {
-		@include list-hover;
+		// @include list-hover;
+    background-color: $uni-bg-color-hover;
 	}
 
 	&__container {
