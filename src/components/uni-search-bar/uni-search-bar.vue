@@ -9,14 +9,24 @@
         class="uni-searchbar-form__box"
         v-if="show"
       >
-        <view class="uni-searchbar-form__box-icon-search">
-			<uni-icons
-			  :color="'#999999'"
-			  class="uni-searchbar-form__box-icon-search"
-			  size="18"
-			  type="search"
-			/>
-		</view>
+        <!-- #ifndef APP-PLUS-NVUE -->
+            <uni-icons
+              :color="'#999999'"
+              class="uni-searchbar-form__box-icon-search"
+              size="18"
+              type="search"
+            />
+        <!-- #endif -->
+        <!-- #ifdef APP-PLUS-NVUE -->
+          <view class="uni-searchbar-form__box-icon-search">
+            <uni-icons
+              :color="'#999999'"
+              class="uni-searchbar-form__box-icon-search"
+              size="18"
+              type="search"
+            />
+          </view>
+        <!-- #endif -->
         <input
           :focus="show"
           :placeholder="placeholder"
@@ -27,16 +37,27 @@
           type="text"
           v-model="searchVal"
         />
-        <view class="uni-searchbar-form__box-icon-clear">
+        <!-- #ifndef APP-PLUS-NVUE -->
+        <view class="uni-searchbar-form__box-icon-clear" @click="clear">
         	<uni-icons
         	  :color="'#999999'"
-        	  @click="clear"
         	  class="uni-searchbar-form__box-icon-clear"
         	  size="24"
         	  type="clear"
         	  v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
         	/>
         </view>
+        <!-- #endif -->
+        <!-- #ifdef APP-PLUS-NVUE -->
+        <uni-icons
+          :color="'#999999'"
+          @click="clear"
+          class="uni-searchbar-form__box-icon-clear"
+          size="24"
+          type="clear"
+          v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
+        />
+        <!-- #endif -->
       </view>
       <view
         :style="{borderRadius:radius+'rpx'}"
@@ -45,13 +66,13 @@
         v-if="!show"
       >
         <view class="uni-searchbar-form__text-icon-search">
-			<uni-icons
-			  class="uni-searchbar-form__text-icon-search"
-			  color="#999999"
-			  size="18"
-			  type="search"
-			/>
-		</view>
+          <uni-icons
+            class="uni-searchbar-form__text-icon-search"
+            color="#999999"
+            size="18"
+            type="search"
+          />
+        </view>
         <text class="uni-searchbar-form__text-placeholder">{{ placeholder }}</text>
       </view>
       <text
@@ -146,9 +167,7 @@ $uni-searchbar-height: 32px;
   /* #ifndef APP-PLUS-NVUE */
     display: flex;
   /* #endif */
-  /* #ifdef MP-ALIPAY */
   overflow: hidden;
-  /* #endif */
   position: relative;
   flex: 1;
   flex-direction: row;
@@ -171,9 +190,10 @@ $uni-searchbar-height: 32px;
 
 .uni-searchbar-form__box-search-input {
   /* #ifdef APP-PLUS */
+  width: 485rpx;
   position:absolute;
   top:10rpx;
-  left:66rpx;
+  left:63rpx;
   height: 28rpx;
   line-height: 28rpx;
   padding-top: 0;
@@ -184,24 +204,23 @@ $uni-searchbar-height: 32px;
   line-height: 52rpx;
   width: 600rpx;
   /* #endif */
-  flex: 1;
   font-size: 28rpx;
   color: #333333;
 }
 
+
 .uni-searchbar-form__box-icon-clear {
   position: absolute;
   right:0;
-  /* #ifdef MP-TOUTIAO|MP-QQ */
-  top:-1px;
-  /* #endif */
-  line-height: 24px;
+  top:0;
+  align-items: center;
+  height: 30px;
+  line-height: 30px;
   padding: 0rpx 15rpx 0rpx 10rpx;
   color: #c8c7cc;
-  /* #ifndef APP-PLUS-NVUE | MP-ALIPAY */
-  margin-top: 3px;
-  /* #endif */
   z-index: 10;
+  background-color: #FFFFFF;
+  border-radius: 30px;
 }
 
 .uni-searchbar-form__text {
@@ -243,8 +262,8 @@ $uni-searchbar-height: 32px;
   color: $uni-text-color;
 }
 
-/* #ifdef MP-ALIPAY */ 
-  }  
+/* #ifdef MP-ALIPAY */
+  }
 /* #endif */
 
 </style>
