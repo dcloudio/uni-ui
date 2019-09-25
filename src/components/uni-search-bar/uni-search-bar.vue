@@ -192,7 +192,7 @@ $uni-searchbar-height: 32px;
 .uni-searchbar-form__box-icon-clear {
   position: absolute;
   right:0;
-  /* #ifdef MP-TOUTIAO */
+  /* #ifdef MP-TOUTIAO|MP-QQ */
   top:-1px;
   /* #endif */
   line-height: 24px;
