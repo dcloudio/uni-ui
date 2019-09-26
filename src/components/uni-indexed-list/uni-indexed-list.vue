@@ -2,12 +2,12 @@
 	<view class="uni-indexed-list">
 		<scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__scroll" scroll-y>
 			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
-				<view class="uni-indexed-list__title-wrapper">
+				<view v-if="loaded || list.itemIndex < 15" class="uni-indexed-list__title-wrapper">
 					<text v-if="list.items && list.items.length > 0" class="uni-indexed-list__title">{{ list.key }}</text>
 				</view>
-				<view v-if="list.items && list.items.length > 0" class="uni-indexed-list__list">
+				<view v-if="(loaded || list.itemIndex < 15) && list.items && list.items.length > 0" class="uni-indexed-list__list">
 					<view v-for="(item, index) in list.items" :key="index" class="uni-indexed-list__item" hover-class="uni-indexed-list__item--hover">
-						<view v-if="loaded || item.index<20" class="uni-indexed-list__item-container" @click="onClick(idx, index)">
+						<view v-if="loaded || item.itemIndex < 15" class="uni-indexed-list__item-container" @click="onClick(idx, index)">
 							<view class="uni-indexed-list__item-border" :class="{'uni-indexed-list__item-border--last':index===list.items.length-1}">
 								<view v-if="showSelect" style="margin-right: 20rpx;">
 									<uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#aaa'" size="24" />
@@ -75,7 +75,7 @@
 		mounted() {
 			setTimeout(()=>{
 				this.loaded = true
-			},200);
+			},300);
 		},
 		methods: {
 			setList() {
@@ -91,12 +91,13 @@
 				let index = 0;
 				this.lists = this.options.map(value => {
 					// console.log(value)
+					let indexBefore = index
 					let items = value.data.map(item => {
 						let obj = {}
 						// for (let key in item) {
 						obj['key'] = value.letter
 						obj['name'] = item
-						obj['index'] = index
+						obj['itemIndex'] = index
 						index++
 						// }
 						obj.checked = item.checked ? item.checked : false
@@ -105,7 +106,8 @@
 					return {
 						title: value.letter,
 						key: value.letter,
-						items: items
+						items: items,
+						itemIndex: indexBefore
 					}
 				})
 				// console.log(this.lists)
