@@ -19,7 +19,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view :class="touchmove ? 'active' : ''" :style="{ height: winHeight + 'px' }" class="uni-indexed__menu" @touchstart="touchStart"
+		<view :class="touchmove ? 'uni-indexed__menu--active' : ''" :style="{ height: winHeight + 'px' }" class="uni-indexed__menu" @touchstart="touchStart"
 		 @touchmove.stop.prevent="touchMove" @touchend="touchEnd">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed__menu-item">
 				<text class="uni-indexed__menu-text" :class="touchmoveIndex == key ? 'uni-indexed__menu-text--active' : ''">{{ list.key }}</text>
@@ -56,7 +56,8 @@
 				touchmoveIndex: -1,
 				itemHeight: 0,
 				winHeight: 0,
-				scrollViewId: ''
+				scrollViewId: '',
+				touchmoveTimeout: ''
 			}
 		},
 		watch: {
@@ -111,13 +112,18 @@
 				}
 			},
 			touchMove(e) {
-				let pageY = e.touches[0].pageY
-				let index = Math.floor(pageY / this.itemHeight)
-				let item = this.lists[index]
-				if (item) {
-					this.scrollViewId = 'uni-indexed-list-' + item.key
-					this.touchmoveIndex = index
+				if(this.touchmoveTimeout){
+					clearTimeout(this.touchmoveTimeout)
 				}
+				this.touchmoveTimeout = setTimeout(()=>{
+					let pageY = e.touches[0].pageY
+					let index = Math.floor(pageY / this.itemHeight)
+					let item = this.lists[index]
+					if (item) {
+						this.scrollViewId = 'uni-indexed-list-' + item.key
+						this.touchmoveIndex = index
+					}
+				},10)
 			},
 			touchEnd() {
 				this.touchmove = false
