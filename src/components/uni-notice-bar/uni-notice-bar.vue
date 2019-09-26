@@ -290,7 +290,9 @@
 		.uni-noticebar__content-text {
 			font-size: 14px;
 			line-height: 18px;
+			/* #ifndef APP-NVUE */
 			word-break: break-all;
+			/* #endif */
 		}
 
 		.uni-noticebar__content-text--single {
