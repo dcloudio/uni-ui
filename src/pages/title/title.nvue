@@ -61,27 +61,27 @@
       }
     },
     onReady() {
-      const systeminfo = uni.getSystemInfoSync()
-      observer = uni.createIntersectionObserver(this);
-      observer.relativeTo('.scroll', {
-        top: -systeminfo.windowTop
-      }).observe('.uni-title', (res) => {
-        console.log(res);
-        if (res.intersectionRatio > 0 && !this.appear) {
-          uni.setNavigationBarTitle({
-            title: 'Title 标题栏'
-          })
-        } else {
-          uni.setNavigationBarTitle({
-            title: '修改后的标题'
-          })
-        }
-      })
+      // const systeminfo = uni.getSystemInfoSync()
+      // observer = uni.createIntersectionObserver(this);
+      // observer.relativeTo('.scroll', {
+      //   top: -systeminfo.windowTop
+      // }).observe('.uni-title', (res) => {
+      //   console.log(res);
+      //   if (res.intersectionRatio > 0 && !this.appear) {
+      //     uni.setNavigationBarTitle({
+      //       title: 'Title 标题栏'
+      //     })
+      //   } else {
+      //     uni.setNavigationBarTitle({
+      //       title: '修改后的标题'
+      //     })
+      //   }
+      // })
     },
     onUnload() {
-      if (observer) {
-        observer.disconnect()
-      }
+      // if (observer) {
+      //   observer.disconnect()
+      // }
     },
     methods: {
 
