@@ -107,113 +107,105 @@
 </script>
 
 <style lang="scss">
-	@import '@/uni.scss';
-  @mixin pagination-disabled {
-    opacity: 0.3;
-  }
+  @import '@/uni.scss';
 
-  @mixin pagination-hover {
-    color: rgba(0, 0, 0, .6);
-    background-color: $uni-bg-color-hover;
-  }
-  
   /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
   /* #ifdef MP-ALIPAY */
-    page {
-  /* #endif */
-
-  .uni-pagination {
-    /* #ifndef APP-PLUS-NVUE */
-      display: flex;
+  page {
     /* #endif */
-    /* #ifdef APP-PLUS-NVUE */
+
+    .uni-pagination {
+      /* #ifndef APP-PLUS-NVUE */
+      display: flex;
+      /* #endif */
+      /* #ifdef APP-PLUS-NVUE */
       padding: 0 40rpx;
-    /* #endif */
-    width: 700rpx;
-    position: relative;
-    overflow: hidden;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+      /* #endif */
+      width: 700rpx;
+      position: relative;
+      overflow: hidden;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .uni-pagination__btns {
-    /* #ifndef APP-PLUS-NVUE */
+    .uni-pagination__btns {
+      /* #ifndef APP-PLUS-NVUE */
       display: flex;
-    /* #endif */
-    flex: 1;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-  }
+      /* #endif */
+      flex: 1;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+    }
 
-  .uni-pagination__btn {
-    /* #ifndef APP-PLUS-NVUE */
+    .uni-pagination__btn {
+      /* #ifndef APP-PLUS-NVUE */
       display: flex;
-    /* #endif */
-    width: 120upx;
-    height: 60upx;
-    line-height: 60upx;
-    font-size: $uni-font-size-base;
-    position: relative;
-    background-color: #f8f8f8;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-width: 1rpx;
-    border-style: solid;
-    border-color: $uni-border-color;
-  }
+      /* #endif */
+      width: 120upx;
+      height: 60upx;
+      line-height: 60upx;
+      font-size: $uni-font-size-base;
+      position: relative;
+      background-color: #f8f8f8;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-width: 1rpx;
+      border-style: solid;
+      border-color: $uni-border-color;
+    }
 
-  .uni-pagination-child__btn {
-    /* #ifndef APP-PLUS-NVUE */
+    .uni-pagination-child__btn {
+      /* #ifndef APP-PLUS-NVUE */
       display: flex;
-    /* #endif */
-    font-size: $uni-font-size-base;
-    position: relative;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+      /* #endif */
+      font-size: $uni-font-size-base;
+      position: relative;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-  .uni-pagination__num {
-    /* #ifndef APP-PLUS-NVUE */
+    .uni-pagination__num {
+      /* #ifndef APP-PLUS-NVUE */
       display: flex;
-    /* #endif */
-    position: absolute;
-    left: 300rpx;
-    top: 0;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100upx;
-    height: 60upx;
-    line-height: 60upx;
-    font-size: $uni-font-size-base;
-    color: $uni-text-color;
+      /* #endif */
+      position: absolute;
+      left: 300rpx;
+      top: 0;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100upx;
+      height: 60upx;
+      line-height: 60upx;
+      font-size: $uni-font-size-base;
+      color: $uni-text-color;
+    }
+
+    .uni-pagination__num-current {
+      // color: $uni-color-primary;
+    }
+
+    .uni-pagination--enabled {
+      color: #333333;
+      opacity: 1;
+    }
+
+    .uni-pagination--disabled {
+      opacity: 0.3;
+    }
+
+    .uni-pagination--hover {
+      color: rgba(0, 0, 0, .6);
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-pagination__num-current {
-    // color: $uni-color-primary;
-  }
-
-  .uni-pagination--enabled {
-    color: #333333;
-    opacity: 1;
-  }
-
-  .uni-pagination--disabled {
-    @include pagination-disabled;
-  }
-
-  .uni-pagination--hover {
-    @include pagination-hover;
-  }
-  
-  /* #ifdef MP-ALIPAY */ 
-    }  
   /* #endif */
-
 </style>

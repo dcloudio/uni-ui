@@ -61,9 +61,12 @@ uniSwiperAction.vue
 如果只有当前组件依赖的文件，如js、wxs 等，都需要放到当前组件目录引用
 
 
-## 组件开发原则
+
+## 注意事项
 - 尽量少使用外部js
 - 控制组件体积 
 - 使用 sass 开发，统一使用全局 sass 样式
 - 组件内如非必要，尽量不要使用 uni-ui 组件
 - 组件内引用 improt ，文件后缀不能省略
+- sass 不能使用 @mixin
+- sass 不能使用 background: rgba($color: #000000, $alpha: 1.0)这样的语法

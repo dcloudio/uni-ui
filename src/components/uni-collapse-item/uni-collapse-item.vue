@@ -1,14 +1,15 @@
 <template>
   <view :class="{ 'uni-collapse-cell--disabled': disabled,'uni-collapse-cell--notdisabled': !disabled, 'uni-collapse-cell--open': isOpen,'uni-collapse-cell--hide':!isOpen }"
     class="uni-collapse-cell">
-    <view class="uni-collapse-cell__title"  @click="onClick">
+    <view class="uni-collapse-cell__title" @click="onClick">
       <image v-if="thumb" :src="thumb" class="uni-collapse-cell__title-img" />
       <text class="uni-collapse-cell__title-text">{{ title }}</text>
       <uni-icons :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
         class="uni-collapse-cell__title-arrow" color="#bbb" size="20" type="arrowdown" />
     </view>
     <view :class="{'uni-collapse-cell__content--hide':!isOpen}" class="uni-collapse-cell__content">
-      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__wrapper" :style="{'transform':isOpen?'translateY(0)':'translateY(-50%)','-webkit-transform':isOpen?'translateY(0)':'translateY(-50%)'}">
+      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__wrapper"
+        :style="{'transform':isOpen?'translateY(0)':'translateY(-50%)','-webkit-transform':isOpen?'translateY(0)':'translateY(-50%)'}">
         <slot />
       </view>
     </view>
@@ -102,114 +103,110 @@
 
 <style lang="scss">
   @import '@/uni.scss';
+
   /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
   /* #ifdef MP-ALIPAY */
   page {
-  /* #endif */
-  @mixin collapse-hover {
-    background-color: #f5f5f5;
-  }
-
-  @mixin collapse-disabled {
-    opacity: 0.3;
-  }
-
-  .uni-collapse-cell {
-    flex-direction: column;
-    border-color: $uni-border-color;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-  }
-
-
-  .uni-collapse-cell--hover {
-    @include collapse-hover;
-  }
-
-  .uni-collapse-cell--open {
-    @include collapse-hover;
-  }
-
-  .uni-collapse-cell--disabled {
-    @include collapse-disabled;
-  }
-
-
-  .uni-collapse-cell--hide {
-    height: 48px;
-  }
-
-  .uni-collapse-cell--animation {
-    transition: transform 0.3s ease;
-  }
-
-  .uni-collapse-cell__title {
-    padding: 12px 12px;
-    position: relative;
-    /* #ifndef APP-NVUE */
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
     /* #endif */
-    height: 48px;
-    line-height: 24px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .uni-collapse-cell__title:active {
-    @include collapse-hover;
+
+    .uni-collapse-cell {
+      flex-direction: column;
+      border-color: $uni-border-color;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+
+
+    .uni-collapse-cell--hover {
+      background-color: #f5f5f5;
+    }
+
+    .uni-collapse-cell--open {
+      background-color: #f5f5f5;
+    }
+
+    .uni-collapse-cell--disabled {
+      opacity: 0.3;
+    }
+
+
+    .uni-collapse-cell--hide {
+      height: 48px;
+    }
+
+    .uni-collapse-cell--animation {
+      transition: transform 0.3s ease;
+    }
+
+    .uni-collapse-cell__title {
+      padding: 12px 12px;
+      position: relative;
+      /* #ifndef APP-NVUE */
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      /* #endif */
+      height: 48px;
+      line-height: 24px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .uni-collapse-cell__title:active {
+      background-color: #f5f5f5;
+    }
+
+    .uni-collapse-cell__title-img {
+      height: $uni-img-size-base;
+      width: $uni-img-size-base;
+      margin-right: 10px;
+    }
+
+    .uni-collapse-cell__title-arrow {
+      width: 20px;
+      height: 20px;
+      transform: rotate(0deg);
+      transform-origin: center center;
+
+    }
+
+    .uni-collapse-cell__title-arrow-active {
+      transform: rotate(180deg);
+    }
+
+    .uni-collapse-cell__title-text {
+      flex: 1;
+      font-size: $uni-font-size-lg;
+      /* #ifndef APP-NVUE */
+      white-space: nowrap;
+      color: inherit;
+      /* #endif */
+      /* #ifdef APP-NVUE */
+      lines: 1;
+      /* #endif */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .uni-collapse-cell__content {
+      overflow: hidden;
+    }
+
+    .uni-collapse-cell__wrapper {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex-direction: column;
+    }
+
+    .uni-collapse-cell__content--hide {
+      height: 0px;
+      line-height: 0px;
+    }
+
+    /* #ifdef MP-ALIPAY */
   }
 
-  .uni-collapse-cell__title-img {
-    height: $uni-img-size-base;
-    width: $uni-img-size-base;
-    margin-right: 10px;
-  }
-
-  .uni-collapse-cell__title-arrow {
-    width: 20px;
-    height: 20px;
-    transform: rotate(0deg);
-    transform-origin: center center;
-
-  }
-
-  .uni-collapse-cell__title-arrow-active {
-    transform: rotate(180deg);
-  }
-
-  .uni-collapse-cell__title-text {
-    flex: 1;
-    font-size: $uni-font-size-lg;
-    /* #ifndef APP-NVUE */
-    white-space: nowrap;
-    color: inherit;
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    lines: 1;
-    /* #endif */
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .uni-collapse-cell__content {
-    overflow: hidden;
-  }
-  
-  .uni-collapse-cell__wrapper {
-	  /* #ifndef APP-NVUE */
-	  display: flex;
-	  /* #endif */
-	  flex-direction: column;
-  }
-
-  .uni-collapse-cell__content--hide {
-    height: 0px;
-    line-height: 0px;
-  }
-  /* #ifdef MP-ALIPAY */
-  }
   /* #endif */
 </style>

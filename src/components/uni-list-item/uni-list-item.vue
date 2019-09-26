@@ -121,14 +121,6 @@
 <style lang="scss">
   @import '~@/uni.scss';
 
-  @mixin list-hover {
-    background-color: $uni-bg-color-hover;
-  }
-
-  @mixin list-disabled {
-    opacity: 0.3;
-  }
-
   /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
   /* #ifdef MP-ALIPAY */
   page {
@@ -146,11 +138,11 @@
     }
 
     .uni-list-item--disabled {
-      @include list-disabled;
+      opacity: 0.3;
     }
 
     .uni-list-item--hover {
-      @include list-hover;
+      background-color: $uni-bg-color-hover;
     }
 
     .uni-list-item__container {
