@@ -9,7 +9,7 @@
         class="uni-searchbar__box"
         v-if="show"
       >
-        <!-- #ifndef APP-PLUS-NVUE -->
+        <!-- #ifndef MP-ALIPAY -->
             <uni-icons
               :color="'#999999'"
               class="uni-searchbar__box-icon-search"
@@ -17,7 +17,7 @@
               type="search"
             />
         <!-- #endif -->
-        <!-- #ifdef APP-PLUS-NVUE -->
+        <!-- #ifdef MP-ALIPAY -->
           <view class="uni-searchbar__box-icon-search">
             <uni-icons
               :color="'#999999'"
@@ -204,15 +204,18 @@ $uni-searchbar-height: 32px;
   line-height: 52rpx;
   width: 600rpx;
   /* #endif */
+  flex:1;
   font-size: 28rpx;
   color: #333333;
 }
 
 
 .uni-searchbar__box-icon-clear {
+  /* #ifdef APP-PLUS */
   position: absolute;
   right:0;
   top:0;
+  /* #endif */
   align-items: center;
   height: 30px;
   line-height: 30px;
