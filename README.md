@@ -63,3 +63,4 @@ export default {
 - 本页面介绍使用 npm 的安装使用方式，也可下载相关组件直接使用，组件下载地址见上表
 - uni-ui 不支持使用 Vue.use() 的方式安装
 - uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要安装 node-sass 和 sass-loader
+- 如果需要使用uni-ui，请从插件市场下载，或者使用npm安装，不要直接从hello uni-app里面拷贝
