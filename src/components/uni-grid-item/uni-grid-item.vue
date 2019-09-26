@@ -132,6 +132,10 @@
       border-top-color: #d0dee5;
       border-top-style: solid;
       border-top-width: 1px;
+      /* #ifndef APP-NVUE */
+      height: 100%;
+      box-sizing: border-box;
+      /* #endif */
     }
 
     .uni-highlight:active {
