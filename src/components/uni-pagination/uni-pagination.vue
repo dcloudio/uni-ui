@@ -36,15 +36,15 @@
         type: [Number, String],
         default: 1
       },
-      total: { // 数据总量       
+      total: { // 数据总量
         type: [Number, String],
         default: 0
       },
-      pageSize: { // 每页数据量    
+      pageSize: { // 每页数据量
         type: [Number, String],
         default: 10
       },
-      showIcon: { // 是否以 icon 形式展示按钮    
+      showIcon: { // 是否以 icon 形式展示按钮
         type: [Boolean, String],
         default: false
       }
@@ -57,7 +57,9 @@
     computed: {
       maxPage() {
         let maxPage = 1
-        let total = Number(this.total) let pageSize = Number(this.pageSize) if (total && pageSize) {
+        let total = Number(this.total)
+        let pageSize = Number(this.pageSize)
+        if (total && pageSize) {
           maxPage = Math.ceil(total / pageSize)
         }
         return maxPage
@@ -76,13 +78,15 @@
         if (Number(this.currentIndex) === 1) {
           return
         }
-        this.currentIndex -= 1 this.change('prev')
+        this.currentIndex -= 1
+        this.change('prev')
       },
       clickRight() {
         if (Number(this.currentIndex) === this.maxPage) {
           return
         }
-        this.currentIndex += 1 this.change('next')
+        this.currentIndex += 1 
+        this.change('next')
       },
       change(e) {
         this.$emit('change', {
@@ -175,5 +179,24 @@
     }
 
     .uni-pagination__num-current {
-      // color: $uni-color-primary;    }    .uni-pagination--enabled {      color: #333333;      opacity: 1;    }    .uni-pagination--disabled {      opacity: 0.3;    }    .uni-pagination--hover {      color: rgba(0, 0, 0, .6);    }    /* #ifdef MP-ALIPAY */  }  /* #endif */
+      // color: $uni-color-primary;
+    }
+
+    .uni-pagination--enabled {
+      color: #333333;
+      opacity: 1;
+    }
+
+    .uni-pagination--disabled {
+      opacity: 0.3;
+    }
+
+    .uni-pagination--hover {
+      color: rgba(0, 0, 0, .6);
+    }
+
+    /* #ifdef MP-ALIPAY */
+  }
+
+  /* #endif */
 </style>
