@@ -1,5 +1,5 @@
 <template>
-  <view v-if="showPopup" class="uni-popup">
+  <view v-if="showPopup" class="uni-popup" @touchmove.stop.prevent="clear">
     <view class="uni-popup__mask" :class="[ani+'-mask', animation ? 'mask-ani' : '']" @click="close(true)" />
     <view class="uni-popup__wrapper" :class="[type,ani+'-content', animation ? 'content-ani' : '']" @click="close(true)">
       <view class="uni-popup__wrapper-box" @click.stop="clear">

@@ -1,6 +1,7 @@
 <template>
   <view>
-    <view v-if="maskShow && !insert" :class="{ 'ani-mask-show': aniMaskShow }" class="uni-calendar__mask" />
+    <view v-if="maskShow && !insert" :class="{ 'ani-mask-show': aniMaskShow }" class="uni-calendar__mask"
+      @touchmove.stop.prevent="clear" />
     <view v-if="maskShow || insert" class="uni-calendar__box" :class="{  'uni-calendar__static': insert ,'ani-calendar-show': aniMaskShow}">
       <view v-if="!insert" class="uni-calendar__nav">
         <view class="uni-calendar__nav-item" @click="close"><text class="uni-calendar__nav-item-text">取消</text></view>
@@ -487,7 +488,11 @@
             dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
             break
           case 'month':
-            dd.setMonth(dd.getMonth() + AddDayCount) // 获取AddDayCount天后的日期
+            if (dd.getDate() === 31) {
+              dd.setDate(dd.getDate() + AddDayCount)
+            } else {
+              dd.setMonth(dd.getMonth() + AddDayCount) // 获取AddDayCount天后的日期
+            }
             break
           case 'year':
             dd.setFullYear(dd.getFullYear() + AddDayCount) // 获取AddDayCount天后的日期
@@ -517,9 +522,9 @@
         var ab = begin.split('-')
         var ae = end.split('-')
         var db = new Date()
-        db.setUTCFullYear(ab[0], ab[1] - 1, ab[2])
+        db.setFullYear(ab[0], ab[1] - 1, ab[2])
         var de = new Date()
-        de.setUTCFullYear(ae[0], ae[1] - 1, ae[2])
+        db.setFullYear(ae[0], ae[1] - 1, ae[2])
         var unixDb = db.getTime() - 24 * 60 * 60 * 1000
         var unixDe = de.getTime() - 24 * 60 * 60 * 1000
         for (var k = unixDb; k <= unixDe;) {
