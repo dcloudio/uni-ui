@@ -97,12 +97,12 @@
         if(!this.$refs['loadingAndroid']) {
           return false
         }
-        this.rotate += 360
+        this.rotate += 30
         animation.transition(this.$refs['loadingAndroid'], {
           styles: {
             transform: `rotate(${this.rotate}deg)`
           },
-          duration: 1000,
+          duration: 84,
           timingFunction: 'linear',
           delay: 0
         }, () => {
