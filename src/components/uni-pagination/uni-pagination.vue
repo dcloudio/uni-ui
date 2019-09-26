@@ -110,14 +110,6 @@
 
 <style lang="scss">
 	@import '@/uni.scss';
-  @mixin pagination-disabled {
-    opacity: 0.3;
-  }
-
-  @mixin pagination-hover {
-    color: rgba(0, 0, 0, .6);
-    background-color: $uni-bg-color-hover;
-  }
 
   /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
   /* #ifdef MP-ALIPAY */
@@ -215,11 +207,12 @@
   }
 
   .uni-pagination--disabled {
-    @include pagination-disabled;
+    opacity: 0.3;
   }
 
   .uni-pagination--hover {
-    @include pagination-hover;
+    color: rgba(0, 0, 0, .6);
+    background-color: $uni-bg-color-hover;
   }
 
   /* #ifdef MP-ALIPAY */

@@ -70,3 +70,87 @@ uniSwiperAction.vue
 - 组件内引用 improt ，文件后缀不能省略
 - sass 不能使用 @mixin
 - sass 不能使用 background: rgba($color: #000000, $alpha: 1.0)这样的语法
+
+## uni-ui 命名规则
+
+### css 
+
+1. 所有的样式名需要组件名前缀,如：
+```html
+<template>
+  <view class="uni-badge">
+  <!-- ... -->
+  </view>
+</template>
+
+```
+组件名应为最外层元素的类名
+
+2. 大功能模块需要 __ 两个下划线连接 如：
+```html
+<template>
+  <view class="uni-badge">
+    <view class="uni-badge__container">
+    <!-- ... -->
+    </view>
+  </view>
+</template>
+
+```
+
+3. 功能细节需要用 - 连接线连接 如：
+
+```html
+<template>
+  <view class="uni-badge">
+    <view class="uni-badge__container">
+      <view class="uni-badge__container-list">
+        <view class="uni-badge__container-list-item"></view>
+        <view class="uni-badge__container-list-item"></view>
+        <view class="uni-badge__container-list-item"></view>
+        <view class="uni-badge__container-list-item"></view>
+      </view>
+    </view>
+  </view>
+</template>
+
+```
+
+4. 状态样式需要用 -- 双连接线 如：
+
+```html
+<template>
+  <view class="uni-badge">
+    <view class="uni-badge__container" :class="['uni-badge--success']">
+    <!-- ... -->
+    </view>
+  </view>
+</template>
+
+```
+状态样式如：动态增加删除的类名，区别主样式的类名
+
+5. 公用样式需要 uni- 前缀 如：
+
+```html
+<template>
+  <view class="uni-badge">
+    <view class="uni-color--red uni-ft--12 uni-style--border"></view>
+    <!-- 公用的颜色、公用的字体大小 、公用的边框样式-->
+    </view>
+  </view>
+</template>
+
+```
+
+Tips
+- template 模板内必须使用双引号
+- 类名需要小写 连接符只能为 '__'、'-'、'--'
+
+### js
+
+- 尽量不要在一个函数内出现大段代码
+- 变量命名使用 小驼峰，尽量不要使用 _ 下划线命名变量名如： setColor()
+- 函数名只能在 函数名之前使用 _ 表示私有 ，如： _fun()
+- js内使用字符串使用单引号
+- 如果使用分号，所有都要用分号，如果不用，就全都不要用
