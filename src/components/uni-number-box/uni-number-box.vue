@@ -106,7 +106,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~@/uni.scss";
 $box-height: 70rpx;
 /* #ifdef APP-PLUS-NVUE */
