@@ -13,8 +13,8 @@
               <uni-icons type="arrowleft" size="20"></uni-icons>
             </view>
             <view class="uni-calendar__panel-box">
-              <text class="uni-calendar__panel-box-text">{{ canlender.year }}年</text>
-              <text class="uni-calendar__panel-box-text">{{ canlender.month }}月</text>
+              <text class="uni-calendar__panel-box-text">{{ canlender.year||'' }}年</text>
+              <text class="uni-calendar__panel-box-text">{{ canlender.month||'' }}月</text>
             </view>
             <view class="uni-calendar__date-after uni-calendar__rollback" @tap="dataBefor(1, 'month')">
               <uni-icons type="arrowleft" size="20"></uni-icons>

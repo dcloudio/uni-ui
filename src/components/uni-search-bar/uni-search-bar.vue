@@ -1,27 +1,27 @@
 <template>
-  <view class="uni-searchbar">
+  <view class="">
     <view
-      :class="show?'':'uni-searchbar-form-hide'"
-      class="uni-searchbar-form"
+      :class="show?'':'uni-searchbar-hide'"
+      class="uni-searchbar"
     >
       <view
         :style="{borderRadius:radius+'rpx'}"
-        class="uni-searchbar-form__box"
+        class="uni-searchbar__box"
         v-if="show"
       >
         <!-- #ifndef APP-PLUS-NVUE -->
             <uni-icons
               :color="'#999999'"
-              class="uni-searchbar-form__box-icon-search"
+              class="uni-searchbar__box-icon-search"
               size="18"
               type="search"
             />
         <!-- #endif -->
         <!-- #ifdef APP-PLUS-NVUE -->
-          <view class="uni-searchbar-form__box-icon-search">
+          <view class="uni-searchbar__box-icon-search">
             <uni-icons
               :color="'#999999'"
-              class="uni-searchbar-form__box-icon-search"
+              class="uni-searchbar__box-icon-search"
               size="18"
               type="search"
             />
@@ -31,17 +31,17 @@
           :focus="show"
           :placeholder="placeholder"
           @confirm="confirm"
-          class="uni-searchbar-form__box-search-input"
+          class="uni-searchbar__box-search-input"
           confirm-type="search"
           placeholder-style="color:#cccccc"
           type="text"
           v-model="searchVal"
         />
         <!-- #ifndef APP-PLUS-NVUE -->
-        <view class="uni-searchbar-form__box-icon-clear" @click="clear">
+        <view class="uni-searchbar__box-icon-clear" @click="clear">
         	<uni-icons
         	  :color="'#999999'"
-        	  class="uni-searchbar-form__box-icon-clear"
+        	  class="uni-searchbar__box-icon-clear"
         	  size="24"
         	  type="clear"
         	  v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
@@ -52,7 +52,7 @@
         <uni-icons
           :color="'#999999'"
           @click="clear"
-          class="uni-searchbar-form__box-icon-clear"
+          class="uni-searchbar__box-icon-clear"
           size="24"
           type="clear"
           v-if="clearButton==='always'||clearButton==='auto'&&searchVal!==''"
@@ -62,22 +62,22 @@
       <view
         :style="{borderRadius:radius+'rpx'}"
         @click="searchClick"
-        class="uni-searchbar-form__text"
+        class="uni-searchbar__text"
         v-if="!show"
       >
-        <view class="uni-searchbar-form__text-icon-search">
+        <view class="uni-searchbar__text-icon-search">
           <uni-icons
-            class="uni-searchbar-form__text-icon-search"
+            class="uni-searchbar__text-icon-search"
             color="#999999"
             size="18"
             type="search"
           />
         </view>
-        <text class="uni-searchbar-form__text-placeholder">{{ placeholder }}</text>
+        <text class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
       </view>
       <text
         @click="cancel"
-        class="uni-searchbar-form__cancel"
+        class="uni-searchbar__cancel"
         v-if="show"
       >取消</text>
     </view>
@@ -153,7 +153,7 @@ $uni-searchbar-height: 32px;
     page {
   /* #endif */
 
-.uni-searchbar-form {
+.uni-searchbar {
   /* #ifndef APP-PLUS-NVUE */
     display: flex;
   /* #endif */
@@ -163,7 +163,7 @@ $uni-searchbar-height: 32px;
   width: 690rpx;
 }
 
-.uni-searchbar-form__box {
+.uni-searchbar__box {
   /* #ifndef APP-PLUS-NVUE */
     display: flex;
   /* #endif */
@@ -182,13 +182,13 @@ $uni-searchbar-height: 32px;
   border-radius: 10rpx;
 }
 
-.uni-searchbar-form__box-icon-search {
+.uni-searchbar__box-icon-search {
   color: #c8c7cc;
   line-height: 24px;
   padding: 0rpx 10rpx 0rpx 15rpx;
 }
 
-.uni-searchbar-form__box-search-input {
+.uni-searchbar__box-search-input {
   /* #ifdef APP-PLUS */
   width: 485rpx;
   position:absolute;
@@ -209,7 +209,7 @@ $uni-searchbar-height: 32px;
 }
 
 
-.uni-searchbar-form__box-icon-clear {
+.uni-searchbar__box-icon-clear {
   position: absolute;
   right:0;
   top:0;
@@ -223,7 +223,7 @@ $uni-searchbar-height: 32px;
   border-radius: 30px;
 }
 
-.uni-searchbar-form__text {
+.uni-searchbar__text {
   /* #ifndef APP-PLUS-NVUE */
     display: flex;
   /* #endif */
@@ -243,18 +243,18 @@ $uni-searchbar-height: 32px;
   border-radius: 10rpx;
 }
 
-.uni-searchbar-form__text-icon-search {
+.uni-searchbar__text-icon-search {
   height: $uni-searchbar-height;
   line-height: $uni-searchbar-height;
 }
 
-.uni-searchbar-form__text-placeholder {
+.uni-searchbar__text-placeholder {
   font-size: 28rpx;
   color: #cccccc;
   margin-left: 10rpx;
 }
 
-.uni-searchbar-form__cancel {
+.uni-searchbar__cancel {
   width: 80rpx;
   padding-left: 20rpx;
   line-height: $uni-searchbar-height;
