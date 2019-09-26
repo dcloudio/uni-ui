@@ -552,7 +552,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background-color: rgba($color: #000, $alpha: 0.4);
+      background-color: rgba(0, 0, 0, 0.4);
       transition-property: opacity;
       transition-duration: 0.3s;
       opacity: 0;
@@ -703,14 +703,14 @@
       padding-left: 20rpx;
       height: 50rpx;
       line-height: 50rpx;
-      border-right-color: rgba($color: #fd2e32, $alpha: 0.5);
+      border-right-color: rgba(0, 0, 0, 0.5);
       border-right-style: solid;
       border-right-width: 1px;
       border-right-width: 0;
       font-size: 24rpx;
       border-top-left-radius: 50rpx;
       border-bottom-left-radius: 50rpx;
-      color: rgba($color: #fd2e32, $alpha: 0.7);
+      color: rgba(253, 46, 50, 0.7);
       background-color: rgba(241, 233, 233, 0.4);
     }
 

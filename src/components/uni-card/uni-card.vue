@@ -100,7 +100,7 @@
       margin-left: $uni-spacing-marign;
       margin-right: $uni-spacing-marign;
       background-color: $uni-bg-color;
-      box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
       position: relative;
       flex-direction: column;
       border-color: #ddd;
@@ -142,7 +142,7 @@
       right: 0;
       flex-direction: row;
       padding: $uni-spacing-col-base $uni-spacing-col-lg;
-      background-color: rgba($color: #000000, $alpha: 0.4);
+      background-color: rgba(0, 0, 0, 0.4);
     }
 
     .uni-card__thumbnailimage-title-text {
@@ -284,7 +284,7 @@
       border-color: #ddd;
       border-style: solid;
       border-width: 1px;
-      box-shadow: 0px 1px 2px rgba($color: #000000, $alpha: 0.2);
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .uni-card--full {
