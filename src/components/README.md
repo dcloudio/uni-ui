@@ -70,6 +70,7 @@ uniSwiperAction.vue
 - 组件内引用 improt ，文件后缀不能省略
 - sass 不能使用 @mixin
 - sass 不能使用 background: rgba($color: #000000, $alpha: 1.0)这样的语法
+- 示例页面如果需要使用全局样式，必须 @import 不能定义在 App.vue 中
 
 ## uni-ui 命名规则
 
