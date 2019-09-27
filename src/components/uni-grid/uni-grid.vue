@@ -108,39 +108,29 @@
 </script>
 
 <style lang="scss">
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-
+  .uni-grid-wrap {
+    /* #ifndef APP-NVUE */
+    display: flex;
     /* #endif */
-    .uni-grid-wrap {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      flex-direction: column;
-      /* #ifdef H5 */
-      width: 100%;
-      /* #endif */
-    }
-
-    .uni-grid {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .uni-grid--border {
-      border-left-color: #d0dee5;
-      border-left-style: solid;
-      border-left-width: 1px;
-    }
-
-    /* #ifdef MP-ALIPAY */
+    flex: 1;
+    flex-direction: column;
+    /* #ifdef H5 */
+    width: 100%;
+    /* #endif */
   }
 
-  /* #endif */
+  .uni-grid {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .uni-grid--border {
+    border-left-color: #d0dee5;
+    border-left-style: solid;
+    border-left-width: 1px;
+  }
 </style>

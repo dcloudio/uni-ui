@@ -60,127 +60,116 @@
 </script>
 
 <style lang="scss">
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-
+  .uni-grid-item {
+    /* #ifndef APP-NVUE */
+    height: 100%;
     /* #endif */
-    .uni-grid-item {
-      /* #ifndef APP-NVUE */
-      height: 100%;
-      /* #endif */
-    }
-
-    .uni-grid-item__box {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      position: relative;
-      flex-direction: row;
-      align-items: center;
-      /* #ifdef APP-NVUE */
-      justify-content: center;
-      /* #endif */
-    }
-
-    .uni-grid-item__box-item {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      width: 100%;
-      /* #endif */
-      position: relative;
-      flex: 1;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      padding: 30rpx 0;
-    }
-
-    .uni-grid-item__box-item-square {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-    }
-
-    .uni-grid-item--image {
-      width: 50rpx;
-      height: 50rpx;
-    }
-
-    .uni-grid-item--text {
-      font-size: 26rpx;
-      margin-top: 10rpx;
-    }
-
-    .uni-grid-item__box-square {
-      height: 0;
-      padding-top: 100%;
-    }
-
-    .uni-grid-item--border {
-      position: relative;
-      border-bottom-color: #d0dee5;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      border-right-color: #d0dee5;
-      border-right-style: solid;
-      border-right-width: 1px;
-    }
-
-    .uni-grid-item--border-top {
-      border-top-color: #d0dee5;
-      border-top-style: solid;
-      border-top-width: 1px;
-      /* #ifndef APP-NVUE */
-      height: 100%;
-      box-sizing: border-box;
-      /* #endif */
-    }
-
-    .uni-highlight:active {
-      background-color: #eee;
-    }
-
-    .uni-grid-item__box-dot {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20rpx;
-      height: 20rpx;
-      background-color: #ff5a5f;
-      border-radius: 50rpx;
-    }
-
-    .uni-grid-item__box-badge {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 10;
-      justify-content: center;
-      align-items: center;
-      width: 0;
-      height: 0;
-    }
-
-    .uni-grid-item__box-image {
-      position: absolute;
-      top: 0;
-      right: 0;
-      justify-content: center;
-      align-items: center;
-      width: 100rpx;
-      height: 100rpx;
-      overflow: hidden;
-    }
-
-    .box-image {
-      width: 90rpx;
-      // height: 100rpx;
-    }
-
-    /* #ifdef MP-ALIPAY */
   }
 
-  /* #endif */
+  .uni-grid-item__box {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex: 1;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    /* #ifdef APP-NVUE */
+    justify-content: center;
+    /* #endif */
+  }
+
+  .uni-grid-item__box-item {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    width: 100%;
+    /* #endif */
+    position: relative;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 30rpx 0;
+  }
+
+  .uni-grid-item__box-item-square {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .uni-grid-item--image {
+    width: 50rpx;
+    height: 50rpx;
+  }
+
+  .uni-grid-item--text {
+    font-size: 26rpx;
+    margin-top: 10rpx;
+  }
+
+  .uni-grid-item__box-square {
+    height: 0;
+    padding-top: 100%;
+  }
+
+  .uni-grid-item--border {
+    position: relative;
+    border-bottom-color: #d0dee5;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-right-color: #d0dee5;
+    border-right-style: solid;
+    border-right-width: 1px;
+  }
+
+  .uni-grid-item--border-top {
+    border-top-color: #d0dee5;
+    border-top-style: solid;
+    border-top-width: 1px;
+    /* #ifndef APP-NVUE */
+    height: 100%;
+    box-sizing: border-box;
+    /* #endif */
+  }
+
+  .uni-highlight:active {
+    background-color: #eee;
+  }
+
+  .uni-grid-item__box-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20rpx;
+    height: 20rpx;
+    background-color: #ff5a5f;
+    border-radius: 50rpx;
+  }
+
+  .uni-grid-item__box-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    height: 0;
+  }
+
+  .uni-grid-item__box-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    height: 100rpx;
+    overflow: hidden;
+  }
+
+  .box-image {
+    width: 90rpx;
+  }
 </style>

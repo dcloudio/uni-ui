@@ -1,138 +1,120 @@
 <template>
-  <view
-    :class="[circle === true || circle === 'true' ? 'uni-fav--circle' : '']"
-    :style="[{ backgroundColor: checked ? bgColorChecked : bgColor }]"
-    @click="onClick"
-    class="uni-fav"
-  >
-    <uni-icons
-      :color="fgColor"
-      :style="{color: checked ? fgColorChecked : fgColor}"
-      class="uni-fav-star"
-      size="14"
-      type="star-filled"
-      v-if="!checked && (star === true || star === 'true')"
-    />
-    <text
-      :style="{color: checked ? fgColorChecked : fgColor}"
-      class="uni-fav-text"
-    >{{ checked ? contentText.contentFav : contentText.contentDefault }}</text>
+  <view :class="[circle === true || circle === 'true' ? 'uni-fav--circle' : '']" :style="[{ backgroundColor: checked ? bgColorChecked : bgColor }]"
+    @click="onClick" class="uni-fav">
+    <uni-icons :color="fgColor" :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-star" size="14"
+      type="star-filled" v-if="!checked && (star === true || star === 'true')" />
+    <text :style="{color: checked ? fgColorChecked : fgColor}" class="uni-fav-text">{{ checked ? contentText.contentFav : contentText.contentDefault }}</text>
   </view>
 </template>
 
 <script>
-import uniIcons from "@/components/uni-icons/uni-icons.vue";
-export default {
-  name: "UniFav",
-  components: {
-    uniIcons
-  },
-  props: {
-    star: {
-      type: [Boolean, String],
-      default: true
+  import uniIcons from "@/components/uni-icons/uni-icons.vue";
+  export default {
+    name: "UniFav",
+    components: {
+      uniIcons
     },
-    bgColor: {
-      type: String,
-      default: "#eeeeee"
-    },
-    fgColor: {
-      type: String,
-      default: "#666666"
-    },
-    bgColorChecked: {
-      type: String,
-      default: "#007aff"
-    },
-    fgColorChecked: {
-      type: String,
-      default: "#FFFFFF"
-    },
-    circle: {
-      type: [Boolean, String],
-      default: false
-    },
-    checked: {
-      type: Boolean,
-      default: false
-    },
-    contentText: {
-      type: Object,
-      default() {
-        return {
-          contentDefault: "收藏",
-          contentFav: "已收藏"
-        };
-      }
-    }
-  },
-  watch: {
-    checked() {
-      if (uni.report) {
-        if (this.checked) {
-          uni.report("收藏", "收藏");
-        } else {
-          uni.report("取消收藏", "取消收藏");
+    props: {
+      star: {
+        type: [Boolean, String],
+        default: true
+      },
+      bgColor: {
+        type: String,
+        default: "#eeeeee"
+      },
+      fgColor: {
+        type: String,
+        default: "#666666"
+      },
+      bgColorChecked: {
+        type: String,
+        default: "#007aff"
+      },
+      fgColorChecked: {
+        type: String,
+        default: "#FFFFFF"
+      },
+      circle: {
+        type: [Boolean, String],
+        default: false
+      },
+      checked: {
+        type: Boolean,
+        default: false
+      },
+      contentText: {
+        type: Object,
+        default () {
+          return {
+            contentDefault: "收藏",
+            contentFav: "已收藏"
+          };
         }
       }
+    },
+    watch: {
+      checked() {
+        if (uni.report) {
+          if (this.checked) {
+            uni.report("收藏", "收藏");
+          } else {
+            uni.report("取消收藏", "取消收藏");
+          }
+        }
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
     }
-  },
-  methods: {
-    onClick() {
-      this.$emit("click");
-    }
-  }
-};
+  };
 </script>
 
 <style lang="scss">
-@import "~@/uni.scss";
-$fav-height: 50rpx;
-$fav-font-size: 28rpx;
+  @import "~@/uni.scss";
+  $fav-height: 50rpx;
+  $fav-font-size: 28rpx;
 
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-    page {
-  /* #endif */
 
-.uni-fav {
-  /* #ifndef APP-PLUS-NVUE */
+  .uni-fav {
+    /* #ifndef APP-PLUS-NVUE */
     display: flex;
-  /* #endif */
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 120rpx;
-  height: $fav-height;
-  line-height: $fav-height;
-  text-align: center;
-  border-radius: 6rpx;
-}
-.uni-fav--circle {
-  border-radius: 60rpx;
-}
-.uni-fav-star {
-  /* #ifndef APP-PLUS-NVUE */
-    display: flex;
-  /* #endif */
-  height: $fav-height;
-  line-height: 49rpx;
-  margin-right: 5rpx;
-  align-items: center;
-  justify-content: center;
-}
-.uni-fav-text {
-  /* #ifndef APP-PLUS-NVUE */
-    display: flex;
-  /* #endif */
-  height: $fav-height;
-  line-height: $fav-height;
-  align-items: center;
-  justify-content: center;
-  font-size: $fav-font-size;
-}
-/* #ifdef MP-ALIPAY */ 
-  }  
-/* #endif */
+    /* #endif */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 120rpx;
+    height: $fav-height;
+    line-height: $fav-height;
+    text-align: center;
+    border-radius: 6rpx;
+  }
 
+  .uni-fav--circle {
+    border-radius: 60rpx;
+  }
+
+  .uni-fav-star {
+    /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+    /* #endif */
+    height: $fav-height;
+    line-height: 49rpx;
+    margin-right: 5rpx;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .uni-fav-text {
+    /* #ifndef APP-PLUS-NVUE */
+    display: flex;
+    /* #endif */
+    height: $fav-height;
+    line-height: $fav-height;
+    align-items: center;
+    justify-content: center;
+    font-size: $fav-font-size;
+  }
 </style>

@@ -125,14 +125,9 @@
   $countdown-height: 48upx;
   $countdown-width: 52upx;
 
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-    page {
-  /* #endif */
-
   .uni-countdown {
     /* #ifndef APP-PLUS-NVUE */
-      display: flex;
+    display: flex;
     /* #endif */
     flex-direction: row;
     justify-content: flex-start;
@@ -141,17 +136,17 @@
 
   .uni-countdown__splitor {
     /* #ifndef APP-PLUS-NVUE */
-      display: flex;
+    display: flex;
     /* #endif */
     justify-content: center;
     line-height: $countdown-height;
-    padding:  5upx;
+    padding: 5upx;
     font-size: $uni-font-size-sm;
   }
 
   .uni-countdown__number {
     /* #ifndef APP-PLUS-NVUE */
-      display: flex;
+    display: flex;
     /* #endif */
     justify-content: center;
     align-items: center;
@@ -166,7 +161,4 @@
     text-align: center;
     font-size: $uni-font-size-sm;
   }
-  /* #ifdef MP-ALIPAY */ 
-    }  
-  /* #endif */
 </style>

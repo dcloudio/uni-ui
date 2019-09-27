@@ -169,11 +169,6 @@
 <style lang="scss">
 	@import '@/uni.scss';
 
-	/* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-	/* #ifdef MP-ALIPAY */
-	page {
-
-		/* #endif */
 		.uni-indexed-list__list {
 			background-color: $uni-bg-color;
 			/* #ifndef APP-NVUE */
@@ -318,8 +313,4 @@
 			background-color: rgba(0, 0, 0, 0.5);
 		}
 
-		/* #ifdef MP-ALIPAY */
-	}
-
-	/* #endif */
 </style>

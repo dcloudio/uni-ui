@@ -39,10 +39,7 @@
 </script>
 <style lang="scss">
   @import '@/uni.scss';
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-  /* #endif */
+
   .uni-collapse {
     /* #ifndef APP-NVUE */
     width: 100%;
@@ -51,10 +48,7 @@
     /* #ifdef APP-NVUE */
     flex: 1;
     /* #endif */
-	flex-direction: column;
+    flex-direction: column;
     background-color: $uni-bg-color;
   }
-  /* #ifdef MP-ALIPAY */
-  }
-  /* #endif */
 </style>

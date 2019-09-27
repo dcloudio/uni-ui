@@ -183,10 +183,7 @@
 
 <style lang="scss">
   @import '@/uni.scss';
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-  /* #endif */
+
   .uni-fab {
     position: fixed;
     /* #ifndef APP-NVUE */
@@ -292,7 +289,7 @@
     overflow: hidden;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
     /* #ifdef APP-NVUE */
-    transition: width,height 0.2s;
+    transition: width, height 0.2s;
     /* #endif */
     /* #ifndef APP-NVUE */
     transition: all 0.2s;
@@ -354,8 +351,4 @@
   .uni-fab__item--first {
     width: 55px;
   }
-  
-  /* #ifdef MP-ALIPAY */
-  }
-  /* #endif */
 </style>

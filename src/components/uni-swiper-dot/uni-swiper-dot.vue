@@ -98,97 +98,87 @@
 </script>
 
 <style lang="scss">
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-
+  .uni-swiper__warp {
+    /* #ifndef APP-NVUE */
+    display: flex;
     /* #endif */
-    .uni-swiper__warp {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .uni-swiper__dots-box {
-      position: absolute;
-      bottom: 20rpx;
-      left: 0;
-      right: 0;
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .uni-swiper__dots-item {
-      width: 16rpx;
-      border-radius: 100px;
-      margin-left: 12rpx;
-      background-color: rgba(0, 0, 0, .3);
-      /* transition: width 0.2s linear; */
-    }
-
-    .uni-swiper__dots-item:first-child {
-      margin: 0;
-    }
-
-    .uni-swiper__dots-default {
-      border-radius: 100px;
-    }
-
-    .uni-swiper__dots-long {
-      border-radius: 100rpx;
-    }
-
-    .uni-swiper__dots-bar {
-      border-radius: 100rpx;
-    }
-
-    .uni-swiper__dots-nav {
-      bottom: 0px;
-      height: 80rpx;
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex: 1;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .uni-swiper__dots-nav-item {
-      /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
-      font-size: 28rpx;
-      color: #fff;
-      margin: 0 30rpx;
-    }
-
-    .uni-swiper__dots-indexes {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      // flex: 1;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .uni-swiper__dots-indexes-text {
-      color: #fff;
-      font-size: 24rpx;
-    }
-
-    /* #ifdef MP-ALIPAY */
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* #endif */
+  .uni-swiper__dots-box {
+    position: absolute;
+    bottom: 20rpx;
+    left: 0;
+    right: 0;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .uni-swiper__dots-item {
+    width: 16rpx;
+    border-radius: 100px;
+    margin-left: 12rpx;
+    background-color: rgba(0, 0, 0, .3);
+    /* transition: width 0.2s linear; */
+  }
+
+  .uni-swiper__dots-item:first-child {
+    margin: 0;
+  }
+
+  .uni-swiper__dots-default {
+    border-radius: 100px;
+  }
+
+  .uni-swiper__dots-long {
+    border-radius: 100rpx;
+  }
+
+  .uni-swiper__dots-bar {
+    border-radius: 100rpx;
+  }
+
+  .uni-swiper__dots-nav {
+    bottom: 0px;
+    height: 80rpx;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .uni-swiper__dots-nav-item {
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    font-size: 28rpx;
+    color: #fff;
+    margin: 0 30rpx;
+  }
+
+  .uni-swiper__dots-indexes {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    // flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .uni-swiper__dots-indexes-text {
+    color: #fff;
+    font-size: 24rpx;
+  }
 </style>

@@ -121,92 +121,81 @@
 <style lang="scss">
   @import '~@/uni.scss';
 
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
+  $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
-    /* #endif */
-
-    $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
-
-    .uni-list-item {
-      font-size: $uni-font-size-lg;
-      position: relative;
-      flex-direction: column;
-      justify-content: space-between;
-      padding-left: $uni-spacing-row-lg;
-    }
-
-    .uni-list-item--disabled {
-      opacity: 0.3;
-    }
-
-    .uni-list-item--hover {
-      background-color: $uni-bg-color-hover;
-    }
-
-    .uni-list-item__container {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex-direction: row;
-      padding: $list-item-pd;
-      padding-left: 0;
-      flex: 1;
-      position: relative;
-      justify-content: space-between;
-      align-items: center;
-      border-top-color: $uni-border-color;
-      border-top-style: solid;
-      border-top-width: 1px;
-    }
-
-    .uni-list-item--first {
-      border-top-width: 0px;
-    }
-
-    .uni-list-item__content {
-      flex: 1;
-      overflow: hidden;
-      flex-direction: column;
-      color: #3b4144;
-
-    }
-
-    .uni-list-item__content-title {
-      font-size: $uni-font-size-lg;
-      color: #3b4144;
-      overflow: hidden;
-    }
-
-    .uni-list-item__content-note {
-      margin-top: 6rpx;
-      color: $uni-text-color-grey;
-      font-size: $uni-font-size-base;
-      overflow: hidden;
-    }
-
-    .uni-list-item__extra {
-      // width: 25%;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    .uni-list-item__icon {
-      margin-right: 18rpx;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .uni-list-item__icon-img {
-      height: $uni-img-size-base;
-      width: $uni-img-size-base;
-    }
-
-    /* #ifdef MP-ALIPAY */
+  .uni-list-item {
+    font-size: $uni-font-size-lg;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: $uni-spacing-row-lg;
   }
 
-  /* #endif */
+  .uni-list-item--disabled {
+    opacity: 0.3;
+  }
+
+  .uni-list-item--hover {
+    background-color: $uni-bg-color-hover;
+  }
+
+  .uni-list-item__container {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
+    padding: $list-item-pd;
+    padding-left: 0;
+    flex: 1;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    border-top-color: $uni-border-color;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .uni-list-item--first {
+    border-top-width: 0px;
+  }
+
+  .uni-list-item__content {
+    flex: 1;
+    overflow: hidden;
+    flex-direction: column;
+    color: #3b4144;
+
+  }
+
+  .uni-list-item__content-title {
+    font-size: $uni-font-size-lg;
+    color: #3b4144;
+    overflow: hidden;
+  }
+
+  .uni-list-item__content-note {
+    margin-top: 6rpx;
+    color: $uni-text-color-grey;
+    font-size: $uni-font-size-base;
+    overflow: hidden;
+  }
+
+  .uni-list-item__extra {
+    // width: 25%;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .uni-list-item__icon {
+    margin-right: 18rpx;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .uni-list-item__icon-img {
+    height: $uni-img-size-base;
+    width: $uni-img-size-base;
+  }
 </style>

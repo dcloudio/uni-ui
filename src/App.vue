@@ -13,5 +13,5 @@
 </script>
 
 <style lang="scss">
-  
+   @import './common/uni.css';
 </style>

@@ -15,10 +15,10 @@
       @touchstart="swipe.touchstart" @touchmove="swipe.touchmove" @touchend="swipe.touchend" @change="change">
       <!-- #endif -->
       <!-- #ifndef APP-VUE|| MP-WEIXIN||H5 -->
-      <view ref='selector-content-hock'  class="selector-query-hock"
-        @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
+      <view ref='selector-content-hock' class="selector-query-hock" @touchstart="touchstart" @touchmove="touchmove"
+        @touchend="touchend">
         <view class="uni-swipe_move-box" :class="{'ani':uniShow}" :style="{transform:moveLeft}">
-        <!-- #endif -->
+          <!-- #endif -->
           <view class="uni-swipe_box">
             <slot />
           </view>
@@ -85,77 +85,67 @@
   }
 </script>
 <style lang="scss">
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-
-    /* #endif */
-    .uni-swipe_content {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .uni-swipe_move-box {
-      /* #ifndef APP-NUVE */
-      display: flex;
-      /* #endif */
-      position: relative;
-      flex-direction: row;
-    }
-
-    .uni-swipe_box {
-      /* #ifndef APP-NVUE */
-      width: 100%;
-      flex-shrink: 0;
-      /* #endif */
-      /* #ifdef APP-NVUE */
-      flex: 1;
-      /* #endif */
-      font-size: 14px;
-      background-color: #fff;
-    }
-
-    .uni-swipe_button-group {
-      /* #ifndef APP-VUE|| MP-WEIXIN||H5 */
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
-      /* #endif */
-      /* #ifndef APP-NUVE */
-      display: flex;
-      flex-shrink: 0;
-      /* #endif */
-      flex-direction: row;
-    }
-
-    .uni-swipe_button {
-      /* #ifndef APP-NUVE */
-      display: flex;
-      /* #endif */
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 0 20px;
-    }
-
-    .uni-swipe_button-text {
-      /* #ifndef APP-NVUE */
-      flex-shrink: 0;
-      /* #endif */
-      font-size: 14px;
-    }
-
-    .ani {
-      transition-property: transform;
-      transition-duration: 0.3s;
-      transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
-    /* #ifdef MP-ALIPAY */
+  .uni-swipe_content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* #endif */
+  .uni-swipe_move-box {
+    /* #ifndef APP-NUVE */
+    display: flex;
+    /* #endif */
+    position: relative;
+    flex-direction: row;
+  }
+
+  .uni-swipe_box {
+    /* #ifndef APP-NVUE */
+    width: 100%;
+    flex-shrink: 0;
+    /* #endif */
+    /* #ifdef APP-NVUE */
+    flex: 1;
+    /* #endif */
+    font-size: 14px;
+    background-color: #fff;
+  }
+
+  .uni-swipe_button-group {
+    /* #ifndef APP-VUE|| MP-WEIXIN||H5 */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    /* #endif */
+    /* #ifndef APP-NUVE */
+    display: flex;
+    flex-shrink: 0;
+    /* #endif */
+    flex-direction: row;
+  }
+
+  .uni-swipe_button {
+    /* #ifndef APP-NUVE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .uni-swipe_button-text {
+    /* #ifndef APP-NVUE */
+    flex-shrink: 0;
+    /* #endif */
+    font-size: 14px;
+  }
+
+  .ani {
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
 </style>

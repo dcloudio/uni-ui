@@ -104,109 +104,99 @@
 <style lang="scss">
   @import '@/uni.scss';
 
-  /* 解决支付宝页面标签指定的样式覆盖组件内类名指定样式的BUG */
-  /* #ifdef MP-ALIPAY */
-  page {
-    /* #endif */
-
-    .uni-collapse-cell {
-      flex-direction: column;
-      border-color: $uni-border-color;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-    }
-
-
-    .uni-collapse-cell--hover {
-      background-color: #f5f5f5;
-    }
-
-    .uni-collapse-cell--open {
-      background-color: #f5f5f5;
-    }
-
-    .uni-collapse-cell--disabled {
-      opacity: 0.3;
-    }
-
-
-    .uni-collapse-cell--hide {
-      height: 48px;
-    }
-
-    .uni-collapse-cell--animation {
-      transition: transform 0.3s ease;
-    }
-
-    .uni-collapse-cell__title {
-      padding: 12px 12px;
-      position: relative;
-      /* #ifndef APP-NVUE */
-      display: flex;
-      width: 100%;
-      box-sizing: border-box;
-      /* #endif */
-      height: 48px;
-      line-height: 24px;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .uni-collapse-cell__title:active {
-      background-color: #f5f5f5;
-    }
-
-    .uni-collapse-cell__title-img {
-      height: $uni-img-size-base;
-      width: $uni-img-size-base;
-      margin-right: 10px;
-    }
-
-    .uni-collapse-cell__title-arrow {
-      width: 20px;
-      height: 20px;
-      transform: rotate(0deg);
-      transform-origin: center center;
-
-    }
-
-    .uni-collapse-cell__title-arrow-active {
-      transform: rotate(180deg);
-    }
-
-    .uni-collapse-cell__title-text {
-      flex: 1;
-      font-size: $uni-font-size-lg;
-      /* #ifndef APP-NVUE */
-      white-space: nowrap;
-      color: inherit;
-      /* #endif */
-      /* #ifdef APP-NVUE */
-      lines: 1;
-      /* #endif */
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .uni-collapse-cell__content {
-      overflow: hidden;
-    }
-
-    .uni-collapse-cell__wrapper {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex-direction: column;
-    }
-
-    .uni-collapse-cell__content--hide {
-      height: 0px;
-      line-height: 0px;
-    }
-
-    /* #ifdef MP-ALIPAY */
+  .uni-collapse-cell {
+    flex-direction: column;
+    border-color: $uni-border-color;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
   }
 
-  /* #endif */
+
+  .uni-collapse-cell--hover {
+    background-color: #f5f5f5;
+  }
+
+  .uni-collapse-cell--open {
+    background-color: #f5f5f5;
+  }
+
+  .uni-collapse-cell--disabled {
+    opacity: 0.3;
+  }
+
+
+  .uni-collapse-cell--hide {
+    height: 48px;
+  }
+
+  .uni-collapse-cell--animation {
+    transition: transform 0.3s ease;
+  }
+
+  .uni-collapse-cell__title {
+    padding: 12px 12px;
+    position: relative;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    /* #endif */
+    height: 48px;
+    line-height: 24px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .uni-collapse-cell__title:active {
+    background-color: #f5f5f5;
+  }
+
+  .uni-collapse-cell__title-img {
+    height: $uni-img-size-base;
+    width: $uni-img-size-base;
+    margin-right: 10px;
+  }
+
+  .uni-collapse-cell__title-arrow {
+    width: 20px;
+    height: 20px;
+    transform: rotate(0deg);
+    transform-origin: center center;
+
+  }
+
+  .uni-collapse-cell__title-arrow-active {
+    transform: rotate(180deg);
+  }
+
+  .uni-collapse-cell__title-text {
+    flex: 1;
+    font-size: $uni-font-size-lg;
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    color: inherit;
+    /* #endif */
+    /* #ifdef APP-NVUE */
+    lines: 1;
+    /* #endif */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .uni-collapse-cell__content {
+    overflow: hidden;
+  }
+
+  .uni-collapse-cell__wrapper {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: column;
+  }
+
+  .uni-collapse-cell__content--hide {
+    height: 0px;
+    line-height: 0px;
+  }
 </style>
