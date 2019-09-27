@@ -91,10 +91,9 @@
     display: flex;
     flex: 1;
     /* #endif */
-    margin-left: $uni-spacing-marign;
-    margin-right: $uni-spacing-marign;
+    margin: $uni-spacing-marign;
     background-color: $uni-bg-color;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    // box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     position: relative;
     flex-direction: column;
     border-color: #ddd;
@@ -177,7 +176,7 @@
     display: flex;
     /* #endif */
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     padding-left: 20rpx;
     height: 80rpx;
     overflow: hidden;
@@ -187,11 +186,13 @@
 
   .uni-card__title-content-title {
     font-size: 30rpx;
+	line-height: 45rpx;
     lines: 1;
   }
 
   .uni-card__title-content-extra {
     font-size: 26rpx;
+	line-height: 35rpx;
     color: #999;
   }
 
@@ -278,7 +279,7 @@
     border-color: #ddd;
     border-style: solid;
     border-width: 1px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    // box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .uni-card--full {

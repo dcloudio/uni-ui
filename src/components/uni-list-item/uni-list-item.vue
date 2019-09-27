@@ -169,7 +169,6 @@
 
   .uni-list-item__content-title {
     font-size: $uni-font-size-lg;
-    line-height: 1.5;
     color: #3b4144;
     overflow: hidden;
   }

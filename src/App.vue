@@ -13,5 +13,7 @@
 </script>
 
 <style lang="scss">
-   @import './common/uni.css';
+	/* #ifndef APP-NVUE */
+	@import './common/uni.css';
+	/* #endif */
 </style>
