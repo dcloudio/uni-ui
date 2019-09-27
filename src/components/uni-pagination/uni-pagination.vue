@@ -140,9 +140,9 @@
     /* #ifndef APP-PLUS-NVUE */
       display: flex;
     /* #endif */
-    width: 120upx;
-    height: 60upx;
-    line-height: 60upx;
+    width: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
     font-size: $uni-font-size-base;
     position: relative;
     background-color: #f8f8f8;
@@ -177,9 +177,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100upx;
-    height: 60upx;
-    line-height: 60upx;
+    width: 100rpx;
+    height: 60rpx;
+    line-height: 60rpx;
     font-size: $uni-font-size-base;
     color: $uni-text-color;
   }

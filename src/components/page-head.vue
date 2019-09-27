@@ -16,19 +16,19 @@ export default {
 </script>
 <style>
 .uni-page-head {
-	padding: 35upx;
+	padding: 35rpx;
 	text-align: center;
 	background: #f8f8f8;
 }
 
 .uni-page-head-title {
 	display: inline-block;
-	padding: 0 40upx;
-	font-size: 30upx;
-	height: 88upx;
-	line-height: 88upx;
+	padding: 0 40rpx;
+	font-size: 30rpx;
+	height: 88rpx;
+	line-height: 88rpx;
 	color: #bebebe;
 	box-sizing: border-box;
-	border-bottom: 2upx solid #d8d8d8;
+	border-bottom: 2rpx solid #d8d8d8;
 }
 </style>

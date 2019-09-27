@@ -48,6 +48,6 @@ import uniTitle from '@/components/uni-title/uni-title.vue'
 <style lang="scss">
 @import '@/common/uni-nvue.scss';
   .title {
-    margin: 80upx 0 20upx 0;
+    margin: 80rpx 0 20rpx 0;
   }
 </style>

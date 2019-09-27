@@ -17,7 +17,7 @@ Drawer 在 ``template`` 中以 **插槽** 形式插入内容
 
 ```html
 <uni-drawer :visible="true">
-    <view style="padding:30upx;">
+    <view style="padding:30rpx;">
         <view class="uni-title">抽屉式导航</view>
     </view>
 </uni-drawer>

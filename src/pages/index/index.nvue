@@ -156,4 +156,6 @@
   }
 </script>
 
-<style></style>
+<style lang="scss">
+  @import '@/common/uni-nvue.scss'
+</style>

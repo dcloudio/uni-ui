@@ -25,10 +25,10 @@ export default {
         </uni-list>
     </uni-collapse-item>
     <uni-collapse-item title="默认开启" open="true">
-        <view style="padding: 30upx;"> 折叠内容主体，可自定义内容及样式 </view>
+        <view style="padding: 30rpx;"> 折叠内容主体，可自定义内容及样式 </view>
     </uni-collapse-item>
     <uni-collapse-item title="禁用状态" disabled="true">
-        <view style="padding: 30upx;"> 禁用状态 </view>
+        <view style="padding: 30rpx;"> 禁用状态 </view>
     </uni-collapse-item>
 </uni-collapse>
 ```
@@ -38,17 +38,17 @@ export default {
 ```html
 <uni-collapse accordion="true">
     <uni-collapse-item title="标题文字">
-        <view style="padding: 30upx;">
+        <view style="padding: 30rpx;">
             手风琴效果
         </view>
     </uni-collapse-item>
     <uni-collapse-item title="标题文字">
-        <view style="padding: 30upx;">
+        <view style="padding: 30rpx;">
             手风琴效果
         </view>
     </uni-collapse-item>
     <uni-collapse-item title="标题文字">
-        <view style="padding: 30upx;">
+        <view style="padding: 30rpx;">
             手风琴效果
         </view>
     </uni-collapse-item>
@@ -61,12 +61,12 @@ export default {
 ```html
 <uni-collapse>
     <uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
-        <view style="padding: 30upx;">
+        <view style="padding: 30rpx;">
             折叠内容主体，可自定义内容及样式
         </view>
     </uni-collapse-item>
     <uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png">
-        <view style="padding: 30upx;">
+        <view style="padding: 30rpx;">
             折叠内容主体，可自定义内容及样式
         </view>
     </uni-collapse-item>

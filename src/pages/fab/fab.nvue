@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="uni-fab-box">
     <view class="uni-padding-wrap">
       <button class="btn" type="primary" @click="switchBtn(0)">切换菜单({{ directionStr }}显示)</button>
       <button class="btn" type="primary" @click="switchBtn('left', 'bottom')">左下角显示</button>
@@ -90,6 +90,13 @@
 </script>
 
 <style lang="scss">
+  .uni-fab-box {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
+    justify-content: center;
+  }
   .uni-padding-wrap {
     padding-top: 100px;
   }
