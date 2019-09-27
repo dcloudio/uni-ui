@@ -20,7 +20,7 @@
       <view>
         当前页：{{ current }}，数据总量：{{ total }}条，每页数据：{{ pageSize }}
       </view>
-      <button class="button" type="primary" @click="add">增加10条数据</button>
+      <button class="button pagination-btn-primary" @click="add">增加10条数据</button>
       <button class="button" type="default" @click="reset">重置数据</button>
     </view>
   </view>
@@ -79,5 +79,10 @@
   .button {
     margin-top: 30rpx;
     width: 700rpx;
+  }
+  
+  .pagination-btn-primary {
+	  background-color: #007AFF;
+	  color: white;
   }
 </style>
