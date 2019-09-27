@@ -69,10 +69,8 @@
 				deep: true
 			}
 		},
-		created() {
-			this.setList()
-		},
 		mounted() {
+			this.setList()
 			setTimeout(()=>{
 				this.loaded = true
 			},300);
