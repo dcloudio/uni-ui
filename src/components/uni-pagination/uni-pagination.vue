@@ -7,7 +7,7 @@
         <template v-if="showIcon===true || showIcon === 'true'">
           <uni-icons color="#000" size="20" type="arrowleft" />
         </template>
-        <template v-else><text class="uni-pagination-child__btn">{{ prevText }}</text></template>
+        <template v-else><text class="uni-pagination__child-btn">{{ prevText }}</text></template>
       </view>
       <view class="uni-pagination__btn" :class="currentIndex === maxPage ? 'uni-pagination--disabled' : 'uni-pagination--enabled'"
         :hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20" :hover-stay-time="70"
@@ -15,7 +15,7 @@
         <template v-if="showIcon===true || showIcon === 'true'">
           <uni-icons color="#000" size="20" type="arrowright" />
         </template>
-        <template v-else><text class="uni-pagination-child__btn">{{ nextText }}</text></template>
+        <template v-else><text class="uni-pagination__child-btn">{{ nextText }}</text></template>
       </view>
     </view>
     <view class="uni-pagination__num">
@@ -160,7 +160,7 @@
     border-color: $uni-border-color;
   }
 
-  .uni-pagination-child__btn {
+  .uni-pagination__child-btn {
     /* #ifndef APP-PLUS-NVUE */
       display: flex;
     /* #endif */

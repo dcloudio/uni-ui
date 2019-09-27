@@ -4,7 +4,7 @@
       :key="index"
       :style="{ marginLeft: margin + 'px' }"
       @click="_onClick(index)"
-      class="uni-rate-icon"
+      class="uni-rate__icon"
       v-for="(star, index) in stars"
     >
       <uni-icons
@@ -15,7 +15,7 @@
       <!-- #ifdef APP-PLUS-NVUE -->
       <view
         :style="{ width: star.activeWitch.replace('%','')*size/100+'px'}"
-        class="uni-rate-icon-on"
+        class="uni-rate__icon-on"
       >
         <uni-icons
           :color="activeColor"
@@ -27,7 +27,7 @@
       <!-- #ifndef APP-PLUS-NVUE -->
       <view
         :style="{ width: star.activeWitch,top:-size/2+'px' }"
-        class="uni-rate-icon-on"
+        class="uni-rate__icon-on"
       >
         <uni-icons
           :color="activeColor"
@@ -153,13 +153,13 @@ export default {
   flex-direction: row;
 }
 
-.uni-rate-icon {
+.uni-rate__icon {
   position: relative;
   line-height: 0;
   font-size: 0;
 }
 
-.uni-rate-icon-on {
+.uni-rate__icon-on {
   line-height: 1;
   position: absolute;
   top: 0;

@@ -1,7 +1,7 @@
 <template>
 	<text
 		v-if="text"
-		:class="inverted ? 'uni-badge-' + type + ' uni-badge--' + size + ' uni-badge-' + type + '-inverted' : 'uni-badge-' + type + ' uni-badge--' + size"
+		:class="inverted ? 'uni-badge--' + type + ' uni-badge--' + size + ' uni-badge--' + type + '-inverted' : 'uni-badge--' + type + ' uni-badge--' + size"
 		class="uni-badge"
 		:style="width"
 		@click="onClick()"
@@ -69,49 +69,49 @@ $bage-height: 40rpx;
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 	font-size: $bage-size;
 }
-.uni-badge-inverted {
+.uni-badge--inverted {
 	padding: 0 5px 0 0;
 	color: $uni-bg-color-hover;
 }
-.uni-badge-default {
+.uni-badge--default {
 	color: $uni-text-color;
 	background-color: $uni-bg-color-hover;
 }
 
-.uni-badge-default-inverted {
+.uni-badge--default-inverted {
 	color:$uni-text-color-grey;
 	background-color: transparent;
 }
 
-.uni-badge-primary {
+.uni-badge--primary {
 	color: $uni-text-color-inverse;
 	background-color: $uni-color-primary;
 }
-.uni-badge-primary-inverted {
+.uni-badge--primary-inverted {
 	color: $uni-color-primary;
 	background-color: transparent;
 }
-.uni-badge-success {
+.uni-badge--success {
 	color: $uni-text-color-inverse;
 	background-color: $uni-color-success;
 }
-.uni-badge-success-inverted {
+.uni-badge--success-inverted {
 	color: $uni-color-success;
 	background-color: transparent;
 }
-.uni-badge-warning {
+.uni-badge--warning {
 	color: $uni-text-color-inverse;
 	background-color: $uni-color-warning;
 }
-.uni-badge-warning-inverted {
+.uni-badge--warning-inverted {
 	color: $uni-color-warning;
 	background-color: transparent;
 }
-.uni-badge-error {
+.uni-badge--error {
 	color: $uni-text-color-inverse;
 	background-color: $uni-color-error;
 }
-.uni-badge-error-inverted {
+.uni-badge--error-inverted {
 	color: $uni-color-error;
 	background-color: transparent;
 }
