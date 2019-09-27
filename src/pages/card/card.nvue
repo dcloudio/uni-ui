@@ -118,17 +118,17 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '@/common/uni-nvue.scss';
 
   .example-body {
-    padding: 30rpx 0;
+    padding:20rpx  0;
     padding-bottom: 0;
 
   }
 
   .example-box {
-    margin-bottom: 30rpx;
+    // margin-bottom: 30rpx;
   }
 
   .image-box {

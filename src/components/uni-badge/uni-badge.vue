@@ -58,6 +58,7 @@
     text-align: center;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
     font-size: $bage-size;
+    padding: 0;
   }
 
   .uni-badge--inverted {

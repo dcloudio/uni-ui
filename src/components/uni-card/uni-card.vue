@@ -86,7 +86,6 @@
   @import '~@/uni.scss';
   $card-extra-width: 30%;
   $uni-spacing-marign: 24rpx;
-
   .uni-card {
     /* #ifndef APP-NVUE */
     display: flex;
@@ -288,4 +287,5 @@
     border-radius: 0;
 
   }
+
 </style>

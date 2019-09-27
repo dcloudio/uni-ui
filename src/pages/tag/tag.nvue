@@ -92,7 +92,7 @@ export default {
   /* #endif */
   flex-direction: row;
   justify-content: flex-start;
-  padding: 20upx 0 0 0;
+  padding: 20rpx;
 }
 
 .tag-view {

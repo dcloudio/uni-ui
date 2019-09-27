@@ -53,7 +53,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~@/uni.scss';
 
   .uni-title {
@@ -69,6 +69,7 @@
     border-bottom-color: #f5f5f5;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    font-weight: normal;
   }
 
   .sticky {
@@ -109,7 +110,8 @@
   }
 
   .uni-title__content-title {
-    font-size: 16px;
+    font-size: 15px;
+    color: #464e52;
   }
 
   .distraction {
