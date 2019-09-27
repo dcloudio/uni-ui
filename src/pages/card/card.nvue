@@ -118,7 +118,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '@/common/uni-nvue.scss';
 
   .example-body {
