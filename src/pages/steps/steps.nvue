@@ -64,7 +64,7 @@
   .status-btn {
     margin: 30rpx;
 	background-color: #007AFF;
-	color: white;
+	color: #FFFFFF;
   }
   .example-body{
     /* #ifndef APP-NVUE */

@@ -104,6 +104,6 @@
   .btn {
     margin: 15px;
 	background-color: #007AFF;
-	color: white;
+	color: #FFFFFF;
   }
 </style>

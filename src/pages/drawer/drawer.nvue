@@ -171,11 +171,11 @@
 	.drawer-control-button {
 		flex: 1;
 		background-color: #007AFF;
-		color: white;
+		color: #FFFFFF;
 	}
 	
 	.drawer-btn-primary {
 		background-color: #007AFF;
-		color: white;
+		color: #FFFFFF;
 	}
 </style>
