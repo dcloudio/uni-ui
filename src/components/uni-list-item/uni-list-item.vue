@@ -178,7 +178,6 @@
     color: $uni-text-color-grey;
     font-size: $uni-font-size-base;
     overflow: hidden;
-    line-height: 1;
   }
 
   .uni-list-item__extra {

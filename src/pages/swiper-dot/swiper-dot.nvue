@@ -163,10 +163,11 @@
     margin: 15rpx;
     padding:15rpx;
     height: 60rpx;
- /* #ifndef APP-NVUE */
+	/* #ifndef APP-NVUE */
     display: flex;
     padding:0 15rpx;
     /* #endif */
+    flex: 1;
     border-color: #EEEEEE;
     border-style: solid;
     border-width: 1px;
