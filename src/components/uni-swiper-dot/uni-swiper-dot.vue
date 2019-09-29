@@ -97,7 +97,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .uni-swiper__warp {
     /* #ifndef APP-NVUE */
     display: flex;
