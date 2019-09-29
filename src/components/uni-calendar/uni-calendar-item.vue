@@ -82,7 +82,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~@/uni.scss';
 
   .uni-calender__body-date-week {
