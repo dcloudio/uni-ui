@@ -63,7 +63,7 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "~@/uni.scss";
   $tag-pd: 0px 32rpx;
   $tag-small-pd: 0px 16rpx;

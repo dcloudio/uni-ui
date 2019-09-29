@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .uni-status-bar {
 	width: 750rpx;
 	height: 20px;

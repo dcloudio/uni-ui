@@ -118,7 +118,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~@/uni.scss';
 
   $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;

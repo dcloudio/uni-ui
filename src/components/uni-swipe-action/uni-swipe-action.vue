@@ -84,7 +84,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .uni-swipe_content {
     flex: 1;
     position: relative;
