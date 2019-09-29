@@ -79,7 +79,7 @@
 
 
   .uni-fav {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
     flex-direction: row;
@@ -97,18 +97,18 @@
   }
 
   .uni-fav-star {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
     height: $fav-height;
-    line-height: 49rpx;
+    line-height: 48rpx;
     margin-right: 5rpx;
     align-items: center;
     justify-content: center;
   }
 
   .uni-fav-text {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
     height: $fav-height;

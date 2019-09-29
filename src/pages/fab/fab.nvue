@@ -1,11 +1,11 @@
 <template>
 	<view class="uni-fab-box">
 		<view class="uni-padding-wrap">
-			<button class="btn" @click="switchBtn(0)"><text class="btn-text">切换菜单({{ directionStr }}显示)</text></button>
-			<button class="btn" @click="switchBtn('left', 'bottom')"><text class="btn-text">左下角显示</text></button>
-			<button class="btn" @click="switchBtn('right', 'bottom')"><text class="btn-text">右下角显示</text></button>
-			<button class="btn" @click="switchBtn('left', 'top')"><text class="btn-text">左上角显示</text></button>
-			<button class="btn" @click="switchBtn('right', 'top')"><text class="btn-text">右上角显示</text></button>
+			<button class="word-btn" @click="switchBtn(0)"><text class="word-btn-white">切换菜单({{ directionStr }}显示)</text></button>
+			<button class="word-btn" @click="switchBtn('left', 'bottom')"><text class="word-btn-white">左下角显示</text></button>
+			<button class="word-btn" @click="switchBtn('right', 'bottom')"><text class="word-btn-white">右下角显示</text></button>
+			<button class="word-btn" @click="switchBtn('left', 'top')"><text class="word-btn-white">左上角显示</text></button>
+			<button class="word-btn" @click="switchBtn('right', 'top')"><text class="word-btn-white">右上角显示</text></button>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction"
 		 @trigger="trigger" />
@@ -90,30 +90,31 @@
 </script>
 
 <style lang="scss">
+	@import '@/common/uni-nvue.scss';
+
 	.uni-fab-box {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		flex-direction: row;
 		justify-content: center;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 	}
 
 	.uni-padding-wrap {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
+		flex-direction: column;
+		justify-content: center;
 		align-items: center;
-		padding-top: 100px;
 	}
 
-	.btn {
-		width: 240px;
-		height: 50px;
-		margin: 15px;
-		background-color: #007AFF;
-	}
-
-	.btn-text {
-		color: #FFFFFF;
+	.word-btn {
+		width: 600rpx;
 	}
 </style>

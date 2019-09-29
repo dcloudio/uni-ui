@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="example-info"><text class="example-title-text">标签组件多用于商品分类、重点内容显示等场景。</text></view>
+    <text class="example-info">标签组件多用于商品分类、重点内容显示等场景。</text>
     <uni-title title="实心标签" type="line"></uni-title>
     <view class="example-body">
       <view class="tag-view"><uni-tag text="标签" /></view>

@@ -69,7 +69,7 @@
   $tag-small-pd: 0px 16rpx;
 
   .uni-tag {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
     display: flex;
     /* #endif */
     padding: $tag-pd;

@@ -112,10 +112,10 @@
 	@import '@/uni.scss';
 
   .uni-pagination {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
-    /* #ifdef APP-PLUS-NVUE */
+    /* #ifdef APP-NVUE */
       padding: 0 40rpx;
     /* #endif */
     width: 700rpx;
@@ -127,7 +127,7 @@
   }
 
   .uni-pagination__btns {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
     flex: 1;
@@ -137,7 +137,7 @@
   }
 
   .uni-pagination__btn {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
     width: 120rpx;
@@ -156,7 +156,7 @@
   }
 
   .uni-pagination__child-btn {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
     font-size: $uni-font-size-base;
@@ -168,7 +168,7 @@
   }
 
   .uni-pagination__num {
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
     position: absolute;
@@ -186,7 +186,7 @@
 
   .uni-pagination__num-current {
     // color: $uni-color-primary;
-    /* #ifndef APP-PLUS-NVUE */
+    /* #ifndef APP-NVUE */
       display: flex;
     /* #endif */
     flex-direction: row;

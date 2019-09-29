@@ -1,6 +1,7 @@
 <template>
 	<view class="uni-indexed-list">
-		<scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__scroll" scroll-y>
+		<scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__scroll"
+		 scroll-y>
 			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
 				<view v-if="loaded || list.itemIndex < 15" class="uni-indexed-list__title-wrapper">
 					<text v-if="list.items && list.items.length > 0" class="uni-indexed-list__title">{{ list.key }}</text>
@@ -19,8 +20,8 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__menu" @touchstart="touchStart"
-		 @touchmove.stop.prevent="touchMove" @touchend="touchEnd">
+		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__menu"
+		 @touchstart="touchStart" @touchmove.stop.prevent="touchMove" @touchend="touchEnd">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
 			</view>
@@ -31,6 +32,18 @@
 	</view>
 </template>
 <script>
+	function throttle(func, delay) {
+		var prev = Date.now();
+		return function() {
+			var context = this;
+			var args = arguments;
+			var now = Date.now();
+			if (now - prev >= delay) {
+				func.apply(context, args);
+				prev = Date.now();
+			}
+		}
+	}
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
 		name: 'UniIndexedList',
@@ -71,9 +84,9 @@
 		},
 		mounted() {
 			this.setList()
-			setTimeout(()=>{
+			setTimeout(() => {
 				this.loaded = true
-			},300);
+			}, 300);
 		},
 		methods: {
 			setList() {
@@ -121,18 +134,13 @@
 				}
 			},
 			touchMove(e) {
-				if(this.touchmoveTimeout){
-					clearTimeout(this.touchmoveTimeout)
+				let pageY = e.touches[0].pageY
+				let index = Math.floor(pageY / this.itemHeight)
+				let item = this.lists[index]
+				if (item) {
+					this.scrollViewId = 'uni-indexed-list-' + item.key
+					this.touchmoveIndex = index
 				}
-				this.touchmoveTimeout = setTimeout(()=>{
-					let pageY = e.touches[0].pageY
-					let index = Math.floor(pageY / this.itemHeight)
-					let item = this.lists[index]
-					if (item) {
-						this.scrollViewId = 'uni-indexed-list-' + item.key
-						this.touchmoveIndex = index
-					}
-				},10)
 			},
 			touchEnd() {
 				this.touchmove = false
@@ -169,149 +177,148 @@
 <style lang="scss">
 	@import '@/uni.scss';
 
-		.uni-indexed-list__list {
-			background-color: $uni-bg-color;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex-direction: column;
-			border-top-style: solid;
-			border-top-width: 1px;
-			border-top-color: $uni-border-color;
-		}
+	.uni-indexed-list__list {
+		background-color: $uni-bg-color;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		border-top-style: solid;
+		border-top-width: 1px;
+		border-top-color: $uni-border-color;
+	}
 
-		.uni-indexed-list__item {
-			font-size: $uni-font-size-lg;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex: 1;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
+	.uni-indexed-list__item {
+		font-size: $uni-font-size-lg;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex: 1;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-		.uni-indexed-list__item-container {
-			padding-left: $uni-spacing-row-lg;
-			flex: 1;
-			position: relative;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			box-sizing: border-box;
-			/* #endif */
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
+	.uni-indexed-list__item-container {
+		padding-left: $uni-spacing-row-lg;
+		flex: 1;
+		position: relative;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		box-sizing: border-box;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-		.uni-indexed-list__item-border {
-			flex: 1;
-			position: relative;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			box-sizing: border-box;
-			/* #endif */
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			height: 50px;
-			padding: $uni-spacing-row-lg;
-			padding-left: 0;
-			border-bottom-style: solid;
-			border-bottom-width: 1px;
-			border-bottom-color: $uni-border-color;
-		}
+	.uni-indexed-list__item-border {
+		flex: 1;
+		position: relative;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		box-sizing: border-box;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		height: 50px;
+		padding: $uni-spacing-row-lg;
+		padding-left: 0;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: $uni-border-color;
+	}
 
-		.uni-indexed-list__item-border--last {
-			border-bottom-width: 0px;
-		}
+	.uni-indexed-list__item-border--last {
+		border-bottom-width: 0px;
+	}
 
-		.uni-indexed-list__item-content {
-			flex: 1;
-			font-size: 14px;
-		}
+	.uni-indexed-list__item-content {
+		flex: 1;
+		font-size: 14px;
+	}
 
-		.uni-indexed-list {
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex-direction: row;
-		}
+	.uni-indexed-list {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+	}
 
-		.uni-indexed-list__scroll {
-			flex: 1;
-		}
+	.uni-indexed-list__scroll {
+		flex: 1;
+	}
 
-		.uni-indexed-list__title-wrapper {
-			/* #ifndef APP-NVUE */
-			display: flex;
-			width: 100%;
-			/* #endif */
-			background-color: #f7f7f7;
-		}
+	.uni-indexed-list__title-wrapper {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		width: 100%;
+		/* #endif */
+		background-color: #f7f7f7;
+	}
 
-		.uni-indexed-list__title {
-			padding: 6px 12px;
-			line-height: 24px;
-			font-size: $uni-font-size-sm;
-		}
+	.uni-indexed-list__title {
+		padding: 6px 12px;
+		line-height: 24px;
+		font-size: $uni-font-size-sm;
+	}
 
-		.uni-indexed-list__menu {
-			width: 24px;
-			background-color: lightgrey;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex-direction: column;
-		}
+	.uni-indexed-list__menu {
+		width: 24px;
+		background-color: lightgrey;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+	}
 
-		.uni-indexed-list__menu-item {
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex: 1;
-			align-items: center;
-			justify-content: center;
-		}
+	.uni-indexed-list__menu-item {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+	}
 
-		.uni-indexed-list__menu-text {
-			line-height: 20px;
-			font-size: 12px;
-			text-align: center;
-			color: #aaa;
-		}
+	.uni-indexed-list__menu-text {
+		line-height: 20px;
+		font-size: 12px;
+		text-align: center;
+		color: #aaa;
+	}
 
-		.uni-indexed-list__menu--active {
-			background-color: rgb(200, 200, 200);
-		}
+	.uni-indexed-list__menu--active {
+		background-color: rgb(200, 200, 200);
+	}
 
-		.uni-indexed-list__menu-text--active {
-			color: #007aff;
-		}
+	.uni-indexed-list__menu-text--active {
+		color: #007aff;
+	}
 
-		.uni-indexed-list__alert-wrapper {
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-		}
+	.uni-indexed-list__alert-wrapper {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
 
-		.uni-indexed-list__alert {
-			width: 80px;
-			height: 80px;
-			border-radius: 80px;
-			text-align: center;
-			line-height: 80px;
-			font-size: 35px;
-			color: #fff;
-			background-color: rgba(0, 0, 0, 0.5);
-		}
-
+	.uni-indexed-list__alert {
+		width: 80px;
+		height: 80px;
+		border-radius: 80px;
+		text-align: center;
+		line-height: 80px;
+		font-size: 35px;
+		color: #fff;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 </style>
