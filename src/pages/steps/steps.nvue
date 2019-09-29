@@ -8,7 +8,7 @@
     <view class="example-body">
       <uni-steps :options="list2" active-color="#007AFF" :active="active" direction="column" />
     </view>
-    <button class="status-btn" @click="change"><text class="word-white">改变状态</text></button>
+    <button class="word-btn" @click="change"><text class="word-btn-white">改变状态</text></button>
   </view>
 </template>
 
@@ -72,8 +72,6 @@
     height: 92rpx;
     margin: 30rpx;
     background-color: #007AFF;
-    color: #FFFFFF;
-
   }
 
   .example-body {

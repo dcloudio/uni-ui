@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="example-info"><text class="example-title-text">评分组件多用于商品评价打分、服务态度评价、用户满意度等场景。</text></view>
+    <text class="example-info">评分组件多用于商品评价打分、服务态度评价、用户满意度等场景。</text>
     <uni-title title="基本用法" type="line"></uni-title>
     <view class="example-body">
       <uni-rate :value="2" @change="onChange" />

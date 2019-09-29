@@ -1,6 +1,6 @@
 <template>
   <view class="page">
-    <view class="example-info"><text class="example-title-text">数字输入框组件多用于购物车加减商品等场景</text></view>
+    <text class="example-info">数字输入框组件多用于购物车加减商品等场景</text>
     <uni-title title="基本用法" type="line"></uni-title>
     <view class="example-body">
       <uni-number-box />
