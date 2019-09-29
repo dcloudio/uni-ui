@@ -68,6 +68,18 @@
   background-color: #ffffff;
 }
 
-.word-white{
+.word-btn-white{
   color:#FFFFFF;
+}
+
+.word-btn{
+  /* #ifndef APP-NVUE */
+  display: flex;
+  /* #endif */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  margin: 30rpx;
+  background-color: #007AFF;
 }
