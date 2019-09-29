@@ -289,7 +289,7 @@
 		overflow: hidden;
 		// box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
 		/* #ifdef APP-NVUE */
-		transition: width, height 0.2s;
+		transition: width 0.2s;
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		transition: all 0.2s;
@@ -308,6 +308,9 @@
 	.uni-fab__content--flexDirection {
 		flex-direction: column;
 		justify-content: flex-end;
+		/* #ifdef APP-NVUE */
+		transition: height 0.2s;
+		/* #endif */
 	}
 
 	.uni-fab__content--flexDirectionStart {

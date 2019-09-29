@@ -90,30 +90,31 @@
 </script>
 
 <style lang="scss">
-  @import '@/common/uni-nvue.scss';
+	@import '@/common/uni-nvue.scss';
+
 	.uni-fab-box {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		flex-direction: row;
 		justify-content: center;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 	}
 
 	.uni-padding-wrap {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
-  .word-btn{
-    width: 600rpx;
-  }
 
+	.word-btn {
+		width: 600rpx;
+	}
 </style>

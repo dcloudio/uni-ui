@@ -57,7 +57,6 @@
 				itemHeight: 0,
 				winHeight: 0,
 				scrollViewId: '',
-				touchmoveTimeout: '',
 				loaded: false
 			}
 		},
@@ -121,18 +120,13 @@
 				}
 			},
 			touchMove(e) {
-				if(this.touchmoveTimeout){
-					clearTimeout(this.touchmoveTimeout)
+				let pageY = e.touches[0].pageY
+				let index = Math.floor(pageY / this.itemHeight)
+				let item = this.lists[index]
+				if (item) {
+					this.scrollViewId = 'uni-indexed-list-' + item.key
+					this.touchmoveIndex = index
 				}
-				this.touchmoveTimeout = setTimeout(()=>{
-					let pageY = e.touches[0].pageY
-					let index = Math.floor(pageY / this.itemHeight)
-					let item = this.lists[index]
-					if (item) {
-						this.scrollViewId = 'uni-indexed-list-' + item.key
-						this.touchmoveIndex = index
-					}
-				},10)
 			},
 			touchEnd() {
 				this.touchmove = false

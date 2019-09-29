@@ -90,10 +90,10 @@
     /* #ifndef APP-NVUE */
     display: flex;
     flex: 1;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     /* #endif */
     margin: $uni-spacing-marign;
     background-color: $uni-bg-color;
-    // box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     position: relative;
     flex-direction: column;
     border-color: #ddd;
@@ -224,7 +224,14 @@
   .uni-card__header-title-text {
     font-size: $uni-font-size-lg;
     flex: 1;
+	/* #ifndef APP-NVUE */
+    white-space: nowrap;
+	/* #endif */
+	/* #ifdef APP-NVUE */
     lines: 1;
+	/* #endif */
+	overflow: hidden;
+	text-overflow: ellipsis;
   }
 
   .uni-card__header-extra {}
@@ -244,7 +251,6 @@
     font-size: $uni-font-size-base;
     text-align: right;
     color: #666;
-    lines: 1;
 
   }
 
@@ -279,7 +285,9 @@
     border-color: #ddd;
     border-style: solid;
     border-width: 1px;
-    // box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+	/* #ifndef APP-NVUE */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+	/* #endif */
   }
 
   .uni-card--full {
