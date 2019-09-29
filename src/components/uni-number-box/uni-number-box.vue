@@ -109,7 +109,7 @@ export default {
 <style lang="scss">
 @import "~@/uni.scss";
 $box-height: 70rpx;
-/* #ifdef APP-PLUS-NVUE */
+/* #ifdef APP-NVUE */
 $box-line-height: 70rpx;
 /* #endif */
 /* #ifdef APP-PLUS */
@@ -119,7 +119,7 @@ $box-line-height: 62rpx;
 $box-width: 70rpx;
 
 .uni-numbox {
-  /* #ifndef APP-PLUS-NVUE */
+  /* #ifndef APP-NVUE */
     display: flex;
   /* #endif */
   flex-direction: row;
