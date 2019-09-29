@@ -27,9 +27,7 @@ export default {
 | animation	| Boolean	|true	| 是否开启动画													|
 | type		| String	|center	| 弹出方式，可选值：top（顶部），center（居中），bottom（底部）	|
 | show		| Boolean	|false	| 显示弹窗	|
-| custom	| Boolean	|false	| 是否自定义内容												|
 | maskClick	| Boolean	|true	| 蒙版点击是否关闭弹窗											|
-| change	| function	|true	| 打开关闭弹窗触发											|
 
 
 **方法说明：**
@@ -39,6 +37,14 @@ export default {
 |---		|----		|
 |open		|打开弹出层	|
 |close		|关闭弹出层	|
+
+
+**事件说明：**
+通过 `ref` 获取组件方法
+
+|事件称名	|说明		|
+|---		|----		|
+|change		|打开关闭弹窗触发	e={show: false}|
 
 ```html
 <view>
