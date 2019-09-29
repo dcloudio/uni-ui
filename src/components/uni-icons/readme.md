@@ -1,6 +1,6 @@
-### Icon 图标
+### Icons 图标
 
-用于展示 icon，组件名：``uni-icons``，代码块： uIcon。
+用于展示 icons，组件名：``uni-icons``，代码块： uIcons。
 
 **使用方式：**
 
