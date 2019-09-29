@@ -8,7 +8,7 @@
     <view class="example-body">
       <uni-steps :options="list2" active-color="#007AFF" :active="active" direction="column" />
     </view>
-    <button class="status-btn" @click="change">改变状态</button>
+    <button class="status-btn" @click="change"><text class="word-white">改变状态</text></button>
   </view>
 </template>
 
@@ -61,12 +61,22 @@
 
 <style lang="scss">
   @import '@/common/uni-nvue.scss';
+
   .status-btn {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 92rpx;
     margin: 30rpx;
-	background-color: #007AFF;
-	color: #FFFFFF;
+    background-color: #007AFF;
+    color: #FFFFFF;
+
   }
-  .example-body{
+
+  .example-body {
     /* #ifndef APP-NVUE */
     display: block;
     /* #endif */
