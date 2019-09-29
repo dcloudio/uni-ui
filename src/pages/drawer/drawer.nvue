@@ -2,7 +2,7 @@
 	<view>
 		<view class="header">
 			<view class="input-view">
-				<uni-icon type="search" size="22" color="#666666" />
+				<uni-icons type="search" size="22" color="#666666" />
 				<input confirm-type="search" class="input" type="text" placeholder="输入搜索关键词" @confirm="confirm">
 			</view>
 		</view>
@@ -10,7 +10,7 @@
 		<view>
 			<uni-title title="左侧滑出" type="line"></uni-title>
 				<view class="example-body">
-					<button class="word-btn" @click="show('left')"><text class="word-btn-white">显示Drawer</text></button>
+					<button class="drawer-control-button" @click="show('left')"><text class="drawer-control-button-text">显示Drawer</text></button>
 					<uni-drawer :visible="showLeft" mode="left" @close="closeDrawer('left')">
 						<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 						<uni-list>
@@ -26,12 +26,12 @@
 							<uni-list-item :show-badge="true" title="Item3" badge-text="12" />
 						</view>
 						<!-- #endif -->
-						<view class="close"><button class="word-btn" @click="hide"><text class="word-btn-white">关闭Drawer</text></button></view>
+						<view class="close"><button class="drawer-btn-primary" @click="hide"><text class="drawer-btn-primary-text">关闭Drawer</text></button></view>
 					</uni-drawer>
 				</view>
 				<uni-title title="右侧滑出" type="line"></uni-title>
 					<view class="example-body">
-						<button class="word-btn" @click="show('right')"><text class="word-btn-white">显示Drawer</text></button>
+						<button class="drawer-control-button" @click="show('right')"><text class="drawer-control-button-text">显示Drawer</text></button>
 						<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
 							<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 							<uni-list>
@@ -47,7 +47,7 @@
 								<uni-list-item class="last-list-item" :show-badge="true" title="Item3" badge-text="12" />
 							</view>
 							<!-- #endif -->
-							<view class="close"><button class="word-btn" @click="hide"><text class="word-btn-white">关闭Drawer</text></button></view>
+							<view class="close"><button class="drawer-btn-primary" @click="hide"><text class="drawer-btn-primary-text">关闭Drawer</text></button></view>
 						</uni-drawer>
 					</view>
 		</view>
@@ -58,8 +58,10 @@
 	import uniList from '@/components/uni-list/uni-list.vue'
 	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
 	import uniTitle from '@/components/uni-title/uni-title.vue'
+	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
 		components: {
+			uniIcons
 			uniDrawer,
 			uniList,
 			uniListItem,
@@ -168,9 +170,22 @@
 		flex-direction: row;
 	}
 
-	.word-btn {
-		flex: 1;
+	.drawer-control-button {
+		flex: 1; 
+		height: 50px;
+		background-color: #007AFF;
 	}
-
-
+	
+	.drawer-control-button-text {
+		color: #FFFFFF;
+	}
+	
+	.drawer-btn-primary {
+		height: 50px;
+		background-color: #007AFF;
+	}
+	
+	.drawer-btn-primary-text {
+		color: #FFFFFF;
+	}
 </style>
