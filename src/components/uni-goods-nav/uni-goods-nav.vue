@@ -81,7 +81,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .flex {
     /* #ifndef APP-NVUE */
     display: flex;

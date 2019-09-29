@@ -38,7 +38,7 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~@/uni.scss';
   $bage-size: 12px;
   $bage-small: scale(0.8);

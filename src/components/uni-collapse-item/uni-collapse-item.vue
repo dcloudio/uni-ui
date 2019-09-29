@@ -101,7 +101,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '@/uni.scss';
 
   .uni-collapse-cell {

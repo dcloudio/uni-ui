@@ -40,7 +40,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   /* #ifndef APP-NVUE */
   @font-face {
     font-family: uniicons;

@@ -72,7 +72,7 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "~@/uni.scss";
   $fav-height: 50rpx;
   $fav-font-size: 28rpx;

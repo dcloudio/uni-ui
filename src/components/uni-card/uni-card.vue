@@ -82,7 +82,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~@/uni.scss';
   $card-extra-width: 30%;
   $uni-spacing-marign: 24rpx;
