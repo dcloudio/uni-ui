@@ -297,11 +297,9 @@
         // this.multiple = this.multiple === 0 ? 1 : 0;
 
         if (this.multiple === 0) {
-          console.log('开始选择');
           this.multipleDates.begin = time
           this.multiple = 1
         } else if (this.multiple === 1) {
-          console.log('已经选择');
           this.multiple = 2
           if (this.multipleDates.data) {
             this.multipleDates.data = []
@@ -316,7 +314,6 @@
             this.multipleDates.begin = time
           }
         } else {
-          console.log('再次选择');
           this.multiple = 0
           this.multipleDates.data = []
           this.multipleDates.begin = ''
@@ -410,7 +407,6 @@
 
           // 结束日期
           if (year === Number(eYear) && month === Number(eMonth) && i === Number(eDate)) {
-            // console.log(eYear, eMonth, eDate, 'end');
             multipleEnd = true
           }
 
@@ -521,7 +517,6 @@
         }
       },
       geDateAll(begin, end) {
-        console.log(begin, end);
         var arr = []
         var ab = begin.split('-')
         var ae = end.split('-')
@@ -531,13 +526,10 @@
         de.setFullYear(ae[0], ae[1] - 1, ae[2])
         var unixDb = db.getTime() - 24 * 60 * 60 * 1000
         var unixDe = de.getTime() - 24 * 60 * 60 * 1000
-        console.log(unixDb, unixDe);
         for (var k = unixDb; k <= unixDe;) {
           k = k + 24 * 60 * 60 * 1000
-          console.log(k);
           arr.push(this.getDate(new Date(parseInt(k))))
         }
-        console.log(arr);
         return arr
       }
     }
