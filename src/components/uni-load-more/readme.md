@@ -27,11 +27,21 @@ export default {
 |---|----|---|---|
 |status	|String	|more|loading 的状态，可选值：more（loading前）、loading（loading中）、noMore（没有更多了）|
 |showIcon	|Boolean	|true|是否显示 loading 图标|
-|iconType	|String	|auto|指定图标样式，可选值：spinner（ios加载样式）、circle（安卓加载样式）、auto（根据平台自动选择加载样式），指定后不可更改|
+|iconType	|String	|auto|指定图标样式，可选值：snow（ios雪花加载样式）、circle（安卓环形加载样式）、auto（根据平台自动选择加载样式），指定后不可更改|
 |color	|String	|#777777|图标和文字颜色	|
-|content-text	|Object	|```{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}```|各状态文字说明|
+|content-text	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`|各状态文字说明|
+
+**事件说明：**
+
+|事件名			|说明				|返回值						|
+|clickLoadMore	|点击加载更多时触发	|e.detail={status:'loading'}|
 
 ### 更新日志
+
+**1.1.2**
+- 优化动画速度
+- 增加点击事件
+
 **1.1.1**
 - 根据不同平台使用不同加载动画
 
