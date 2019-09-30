@@ -130,7 +130,6 @@
     display: flex;
     /* #endif */
     flex-direction: row;
-    // position: absolute;
     width: 62rpx;
     justify-content: center;
     align-items: center;
@@ -138,20 +137,6 @@
   }
 
   .uni-searchbar__box-search-input {
-    /* #ifdef APP-PLUS */
-    // position: absolute;
-    // top: 10rpx;
-    // left: 62rpx;
-    // width: 485rpx;
-    // height: 28rpx;
-    // line-height: 28rpx;
-    // padding-top: 0;
-    // padding-bottom: 0;
-    // padding-left: 62rpx;
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    // width: 600rpx;
-    /* #endif */
     flex: 1;
     font-size: 28rpx;
     color: #333333;
