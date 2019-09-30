@@ -106,7 +106,7 @@
     width: $drawer-width;
     bottom: 0;
     background-color: $uni-bg-color;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease;
   }
 
   .uni-drawer--left {
