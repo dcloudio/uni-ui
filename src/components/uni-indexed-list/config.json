@@ -5,5 +5,6 @@
 	"url": "indexed-list",
 	"edition": "1.0.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=375",
-	"compilation": "#ifndef MP-BAIDU"
+	"compilation": "#ifndef MP-BAIDU",
+	"hidden": true
 }

@@ -20,6 +20,6 @@ export default {
 .uni-status-bar {
 	width: 750rpx;
 	height: 20px;
-	height: var(--status-bar-height);
+	// height: var(--status-bar-height);
 }
 </style>
