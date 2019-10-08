@@ -27,10 +27,11 @@
           'uni-fab__circle--left': horizontal === 'left' && direction === 'horizontal',
           'uni-fab__circle--top': vertical === 'top' && direction === 'vertical',
           'uni-fab__circle--bottom': vertical === 'bottom' && direction === 'vertical',
-          'uni-fab__circle--right': horizontal === 'right' && direction === 'horizontal'
-        }"
-			 :style="{ 'background-color': styles.buttonColor }" class="uni-fab__circle" @click="_onClick">
-				<uni-icons :class="{ 'uni-fab__plus--active': isShow }" class="uni-fab__plus" type="plusempty" color="#FFFFFF" size="48"></uni-icons>
+          'uni-fab__circle--right': horizontal === 'right' && direction === 'horizontal',
+		  'uni-fab__plus--active': isShow
+        }" class="uni-fab__circle uni-fab__plus"
+			 :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
+				<uni-icons type="plusempty" color="#FFFFFF" size="48"></uni-icons>
 			</view>
 		</view>
 	</view>

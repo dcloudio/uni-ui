@@ -1,9 +1,14 @@
 <template>
 	<view class="uni-searchbar">
 		<view :style="{borderRadius:radius+'px'}" class="uni-searchbar__box" @click="searchClick">
+			<!-- #ifdef MP-ALIPAY -->
 			<view class="uni-searchbar__box-icon-search">
-				<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
+				<uni-icons color="#999999" size="18" type="search" />
 			</view>
+			<!-- #endif -->
+			<!-- #ifndef MP-ALIPAY -->
+			<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
+			<!-- #endif -->
 			<input v-if="show" :focus="show" :placeholder="placeholder" @confirm="confirm" class="uni-searchbar__box-search-input"
 			 confirm-type="search" placeholder-style="color:#cccccc" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>

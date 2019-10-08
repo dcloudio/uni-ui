@@ -4,8 +4,16 @@
     <view class="uni-collapse-cell__title" @click="onClick">
       <image v-if="thumb" :src="thumb" class="uni-collapse-cell__title-img" />
       <text class="uni-collapse-cell__title-text">{{ title }}</text>
-      <uni-icons :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
+	  <!-- #ifdef MP-ALIPAY -->
+	  <view :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
+        class="uni-collapse-cell__title-arrow" >
+		<uni-icons color="#bbb" size="20" type="arrowdown" />
+	  </view>
+	  <!-- #endif -->
+	  <!-- #ifndef MP-ALIPAY -->
+	  <uni-icons :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
         class="uni-collapse-cell__title-arrow" color="#bbb" size="20" type="arrowdown" />
+	  <!-- #endif -->
     </view>
     <view :class="{'uni-collapse-cell__content--hide':!isOpen}" class="uni-collapse-cell__content">
       <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__wrapper"
