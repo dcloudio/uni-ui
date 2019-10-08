@@ -2,5 +2,6 @@ node_modules/
 .project
 unpackage/
 lib/
+temp/
 .DS_Store
 dist/
