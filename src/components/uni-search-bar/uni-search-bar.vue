@@ -78,10 +78,8 @@
         this.$emit("cancel", {
           value: this.searchVal
         });
-        // setTimeout(function(){
         this.searchVal = "";
         this.show = false;
-        // },0)
       },
       confirm() {
         this.$emit("confirm", {
@@ -114,6 +112,7 @@
     overflow: hidden;
     position: relative;
     flex: 1;
+    justify-content: flex-start;
     flex-direction: row;
     align-items: center;
     // width: 100%;
@@ -127,27 +126,17 @@
   }
 
   .uni-searchbar__box-icon-search {
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
+    width: 62rpx;
+    justify-content: center;
+    align-items: center;
     color: #c8c7cc;
-    line-height: 24px;
-    padding: 0rpx 10rpx 0rpx 15rpx;
   }
 
   .uni-searchbar__box-search-input {
-    /* #ifdef APP-PLUS */
-    width: 485rpx;
-    position: absolute;
-    top: 10rpx;
-    left: 63rpx;
-    height: 28rpx;
-    line-height: 28rpx;
-    padding-top: 0;
-    padding-bottom: 0;
-    /* #endif */
-    /* #ifdef APP-NVUE */
-    height: 52rpx;
-    line-height: 52rpx;
-    width: 600rpx;
-    /* #endif */
     flex: 1;
     font-size: 28rpx;
     color: #333333;
