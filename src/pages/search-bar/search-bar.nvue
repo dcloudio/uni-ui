@@ -63,7 +63,7 @@
 		margin-bottom: 20px;
 		text-align: center;
 	}
-	
+
 	.search-result-text {
 		text-align: center;
 		font-size: 14px;

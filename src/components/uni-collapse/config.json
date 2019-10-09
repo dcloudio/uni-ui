@@ -5,5 +5,5 @@
 	"url": "collapse",
 	"edition": "1.1.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=23",
-    "update_log":"- 修复 依赖组件找不到的问题"
+	"update_log": "- 修复 依赖组件找不到的问题"
 }

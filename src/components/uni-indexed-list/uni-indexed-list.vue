@@ -10,7 +10,7 @@
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
 			</view>
-		</view> 
+		</view>
 		<view v-if="touchmove" class="uni-indexed-list__alert-wrapper">
 			<text class="uni-indexed-list__alert">{{ lists[touchmoveIndex].key }}</text>
 		</view>
@@ -152,7 +152,10 @@
 				this.touchmoveIndex = -1
 			},
 			onClick(e) {
-				let {idx, index} = e
+				let {
+					idx,
+					index
+				} = e
 				let obj = {}
 				for (let key in this.lists[idx].items[index]) {
 					obj[key] = this.lists[idx].items[index][key]
@@ -189,7 +192,7 @@
 		/* #endif */
 		flex-direction: row;
 	}
-	
+
 	.uni-indexed-list__scroll {
 		flex: 1;
 	}

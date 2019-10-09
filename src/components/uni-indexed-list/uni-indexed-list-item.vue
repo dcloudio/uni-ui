@@ -46,8 +46,11 @@
 			}
 		},
 		methods: {
-			onClick(idx,index){
-				this.$emit("itemClick", {idx, index})
+			onClick(idx, index) {
+				this.$emit("itemClick", {
+					idx,
+					index
+				})
 			}
 		}
 	}
@@ -55,7 +58,7 @@
 
 <style lang="scss" scoped>
 	@import '@/uni.scss';
-	
+
 	.uni-indexed-list__list {
 		background-color: $uni-bg-color;
 		/* #ifndef APP-NVUE */
@@ -66,7 +69,7 @@
 		border-top-width: 1px;
 		border-top-color: $uni-border-color;
 	}
-	
+
 	.uni-indexed-list__item {
 		font-size: $uni-font-size-lg;
 		/* #ifndef APP-NVUE */
@@ -77,7 +80,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	
+
 	.uni-indexed-list__item-container {
 		padding-left: $uni-spacing-row-lg;
 		flex: 1;
@@ -90,7 +93,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	
+
 	.uni-indexed-list__item-border {
 		flex: 1;
 		position: relative;
@@ -108,23 +111,23 @@
 		border-bottom-width: 1px;
 		border-bottom-color: $uni-border-color;
 	}
-	
+
 	.uni-indexed-list__item-border--last {
 		border-bottom-width: 0px;
 	}
-	
+
 	.uni-indexed-list__item-content {
 		flex: 1;
 		font-size: 14px;
 	}
-	
+
 	.uni-indexed-list {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		flex-direction: row;
 	}
-	
+
 	.uni-indexed-list__title-wrapper {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -132,11 +135,10 @@
 		/* #endif */
 		background-color: #f7f7f7;
 	}
-	
+
 	.uni-indexed-list__title {
 		padding: 6px 12px;
 		line-height: 24px;
 		font-size: $uni-font-size-sm;
 	}
-	
 </style>

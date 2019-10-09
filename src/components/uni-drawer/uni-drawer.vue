@@ -66,7 +66,7 @@
 			},
 			_change(param1, param2, status) {
 				this[param1] = status
-				if(this.watchTimer){
+				if (this.watchTimer) {
 					clearTimeout(this.watchTimer)
 				}
 				this.watchTimer = setTimeout(() => {

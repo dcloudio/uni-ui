@@ -13,7 +13,7 @@
 			 confirm-type="search" placeholder-style="color:#cccccc" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear">
-				<uni-icons color="#999999" class="" size="24" type="clear"/>
+				<uni-icons color="#999999" class="" size="24" type="clear" />
 			</view>
 		</view>
 		<text @click="cancel" class="uni-searchbar__cancel" v-if="show">取消</text>

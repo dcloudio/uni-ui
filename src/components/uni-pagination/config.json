@@ -1,8 +1,8 @@
 {
-	"id":"32",
-	"name":"Pagination",
-	"desc":"分页器",
-	"url":"pagination",
-	"edition":"1.0.0",
-	"path":"https://ext.dcloud.net.cn/plugin?id=32"
+	"id": "32",
+	"name": "Pagination",
+	"desc": "分页器",
+	"url": "pagination",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=32"
 }

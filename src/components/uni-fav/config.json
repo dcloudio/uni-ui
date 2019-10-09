@@ -1,8 +1,8 @@
 {
-	"id":"",
-	"name":"Fav",
-	"desc":"收藏按钮",
-	"url":"fav",
-	"edition":"0.0.1",
-	"path":""
+	"id": "",
+	"name": "Fav",
+	"desc": "收藏按钮",
+	"url": "fav",
+	"edition": "0.0.1",
+	"path": ""
 }
