@@ -247,7 +247,7 @@
 		width: 55px;
 		height: 55px;
 		background-color: #3c3e49;
-		border-radius: 50%;
+		border-radius: 55px;
 		/* #ifndef APP-NVUE */
 		box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 		/* #endif */
@@ -288,10 +288,13 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		border-radius: 50px;
+		border-radius: 55px;
 		overflow: hidden;
 		/* #ifdef APP-NVUE */
 		transition: width 0.2s;
+		border-color:#007AFF;
+    border-width: 1rpx;
+    border-style: solid;
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		transition: all 0.2s;
