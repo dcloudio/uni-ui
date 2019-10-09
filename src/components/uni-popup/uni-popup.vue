@@ -102,7 +102,7 @@
   .mask-ani {
     // transition: all 0.3s;
     transition-property: opacity;
-    transition-duration: 0.1s;
+    transition-duration: 0.2s;
   }
 
   .uni-top-mask {
@@ -163,7 +163,7 @@
   .content-ani {
     // transition: transform 0.3s;
     transition-property: transform, opacity;
-    transition-duration: 0.1s;
+    transition-duration: 0.2s;
   }
 
 
