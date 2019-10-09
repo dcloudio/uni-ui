@@ -291,10 +291,10 @@
 		border-radius: 55px;
 		overflow: hidden;
 		/* #ifdef APP-NVUE */
-		transition: width 0.2s;
+		transition: width,height 0.2s;
 		border-color:#007AFF;
-    border-width: 1rpx;
-    border-style: solid;
+		border-width: 1rpx;
+		border-style: solid;
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		transition: all 0.2s;
@@ -314,9 +314,6 @@
 	.uni-fab__content--flexDirection {
 		flex-direction: column;
 		justify-content: flex-end;
-		/* #ifdef APP-NVUE */
-		transition: height 0.2s;
-		/* #endif */
 	}
 
 	.uni-fab__content--flexDirectionStart {
