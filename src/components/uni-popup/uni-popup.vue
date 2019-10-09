@@ -54,9 +54,9 @@
     methods: {
       clear() {},
       open() {
-        this.$emit('change', {
-          show: true
-        })
+        // this.$emit('change', {
+        //   show: true
+        // })
         this.showPopup = true
         this.$nextTick(() => {
           setTimeout(() => {

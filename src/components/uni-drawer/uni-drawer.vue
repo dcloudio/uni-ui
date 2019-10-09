@@ -75,20 +75,31 @@
     },
     methods: {
       close() {
-        this.showDrawer = false
-        this.$nextTick(()=>{
-          setTimeout(() => {
-             this.visibleSync = false
-             this.$emit('close')
-           }, 200)
-        })
+        // this.showDrawer = false
+        // this.$nextTick(()=>{
+        //   setTimeout(() => {
+        //      this.visibleSync = false
+        //      this.$emit('close')
+        //    }, 200)
+        // })
+        this._change('showDrawer','visibleSync',false)
       },
       open(){
-        this.visibleSync = true
+        // this.visibleSync = true
+        // this.$nextTick(()=>{
+        //   setTimeout(() => {
+        //     this.showDrawer = true
+        //     this.$emit('open')
+        //   }, 100)
+        // })
+        this._change('visibleSync','showDrawer',true)
+      },
+      _change(param1,param2,status){
+        this[param1] = status
         this.$nextTick(()=>{
           setTimeout(() => {
-            this.showDrawer = true
-            this.$emit('open')
+            this[param2] = status
+            this.$emit(status?'open':'close')
           }, 100)
         })
       }
