@@ -7,11 +7,11 @@
       <uni-calendar :insert="true" :lunar="tags[0].checked" :disable-before="tags[3].checked" :range="tags[5].checked"
         :start-date="startDate" :end-date="endDate" :date="date" :selected="selected" @change="change" />
       <view class="calendar-tags-group example-body">
-        <view v-for="(item, index) in tags" :key="index" class="calendar-tags" @click="toggle(index, item)">
-          <text class="calendar-tags-item" :class="{ checked: item.checked }">{{ item.name }}</text>
+        <view v-for="(item, index) in tags" :key="index" class="calendar-tags">
+          <text class="calendar-tags-item" :class="{ checked: item.checked }" @click="toggle(index, item)">{{ item.name }}</text>
         </view>
-        <view class="calendar-tags" @click="open">
-          <text class="calendar-tags-item calendar-button">打开日历</text>
+        <view class="calendar-tags">
+          <text class="calendar-tags-item calendar-button" @click="open">打开日历</text>
         </view>
       </view>
       <view :class="[infoShow?'calendar-content-active':'calendar-content-no']"></view>

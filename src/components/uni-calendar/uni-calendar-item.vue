@@ -10,8 +10,10 @@
               'uni-calender__active': !day.isDay,
             }"
           @tap="selectDays(week, index, canlender.month === day.month, day.disable, canlender.lunar)">
-          <view :class="{ 'uni-calender_check': day.checked, 'calender_check-begin': day.multipleBegin, 'calender_check-end': day.multipleEnd }"
-            class="uni-calender_check-bg" :key="index"></view>
+          <view v-if="day.checked" :class="{ 'uni-calender_check': day.checked }" class="uni-calender_check-bg" :key="index">
+            <view class="calender_check-bg" :class="{'calender_check-end': day.multipleBegin}"></view>
+            <view class="calender_check-bg" :class="{'calender_check-begin': day.multipleEnd}"></view>
+          </view>
           <view class="uni-calender__circle-box" :class="{
               'uni-calender__circle-box-current':
                 ((day.date == canlender.date && !day.checked) || day.multipleBegin || day.multipleEnd) && canlender.month == day.month && !day.disable,
@@ -135,7 +137,7 @@
     font-size: 30rpx;
   }
 
-  // // 本月禁止的样式
+  // 本月禁止的样式
   .uni-calender__disable {
     color: #f1f1f1;
   }
@@ -152,7 +154,7 @@
     color: #fd2e32;
   }
 
-  // // 当前选中
+  // 当前选中
   .uni-calender__date-current {
     color: #fff;
   }
@@ -199,26 +201,26 @@
     position: absolute;
     top: 10rpx;
     bottom: 10rpx;
-    left: 0;
-    right: 0;
+    left: 0px;
+    right: 0px;
   }
 
   .uni-calender_check {
-    background-color: #ffd3d3;
-    border-color: #ffd3d3;
-    border-style: solid;
-    border-width: 1px;
+    /* #ifndef APP-PLUS */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
   }
-
+  .calender_check-bg {
+    flex: 1;
+    background-color: #ffd3d3;
+  }
   .calender_check-begin {
-    left: 20rpx;
-    border-top-left-radius: 100rpx;
-    border-bottom-left-radius: 100rpx;
+    background-color: #fff;
   }
 
   .calender_check-end {
-    right: 20rpx;
-    border-top-right-radius: 100rpx;
-    border-bottom-right-radius: 100rpx;
+    background-color: #fff;
   }
+
 </style>
