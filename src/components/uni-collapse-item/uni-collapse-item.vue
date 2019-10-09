@@ -137,7 +137,10 @@
 	}
 
 	.uni-collapse-cell--animation {
-		transition: transform 0.3s ease;
+		// transition: transform 0.3s ease;
+		transition-property: transform;
+		transition-duration: 0.3s;
+		transition-timing-function: ease;
 	}
 
 	.uni-collapse-cell__title {
