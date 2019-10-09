@@ -150,18 +150,17 @@
       }
     },
     onBackPress() {
-      console.log('showpopup',this.showpopup)
-      console.log('showtip',this.showtip);
-      console.log('showimage',this.showimage);
-      console.log('showshare',this.showshare);
-      if (!this.showpopup && !this.showtip && !this.showimage && !this.showshare) {
-        return false
+      console.log('showpopup', this.showpopup)
+      console.log('showtip', this.showtip);
+      console.log('showimage', this.showimage);
+      console.log('showshare', this.showshare);
+      if (this.showpopup || this.showtip || this.showimage || this.showshare) {
+        this.showpopup = false
+        this.showtip = false
+        this.showimage = false
+        this.showshare = false
+        return true
       }
-      this.showpopup = false
-      this.showtip = false
-      this.showimage = false
-      this.showshare = false
-      return true
     }
   }
 </script>
