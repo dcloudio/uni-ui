@@ -68,6 +68,7 @@
 				});
 				this.searchVal = "";
 				this.show = false;
+				uni.hideKeyboard();
 			},
 			confirm() {
 				this.$emit("confirm", {
