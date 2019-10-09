@@ -2,21 +2,7 @@
 	<view class="uni-indexed-list" :style="{ height: winHeight + 'px' }">
 		<scroll-view :scroll-into-view="scrollViewId" class="uni-indexed-list__scroll" scroll-y>
 			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
-				<view v-if="loaded || list.itemIndex < 15" class="uni-indexed-list__title-wrapper">
-					<text v-if="list.items && list.items.length > 0" class="uni-indexed-list__title">{{ list.key }}</text>
-				</view>
-				<view v-if="(loaded || list.itemIndex < 15) && list.items && list.items.length > 0" class="uni-indexed-list__list">
-					<view v-for="(item, index) in list.items" :key="index" class="uni-indexed-list__item" hover-class="uni-indexed-list__item--hover">
-						<view v-if="loaded || item.itemIndex < 15" class="uni-indexed-list__item-container" @click="onClick(idx, index)">
-							<view class="uni-indexed-list__item-border" :class="{'uni-indexed-list__item-border--last':index===list.items.length-1}">
-								<view v-if="showSelect" style="margin-right: 20rpx;">
-									<uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#aaa'" size="24" />
-								</view>
-								<text class="uni-indexed-list__item-content">{{ item.name }}</text>
-							</view>
-						</view>
-					</view>
-				</view>
+				<uni-indexed-list-item :list="list" :loaded="loaded" :idx="idx" :showSelect="showSelect" @itemClick="onClick"></uni-indexed-list-item>
 			</view>
 		</scroll-view>
 		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart" @touchmove.stop="touchMove"
@@ -24,7 +10,7 @@
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
 			</view>
-		</view>
+		</view> 
 		<view v-if="touchmove" class="uni-indexed-list__alert-wrapper">
 			<text class="uni-indexed-list__alert">{{ lists[touchmoveIndex].key }}</text>
 		</view>
@@ -32,6 +18,7 @@
 </template>
 <script>
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
+	import uniIndexedListItem from './uni-indexed-list-item.vue'
 	// #ifdef APP-PLUS
 	function throttle(func, delay) {
 		var prev = Date.now();
@@ -58,12 +45,13 @@
 			this.touchmoveIndex = index
 		}
 	}
-	const throttleTouchMove = throttle(touchMove, 20)
+	const throttleTouchMove = throttle(touchMove, 40)
 	// #endif
 	export default {
 		name: 'UniIndexedList',
 		components: {
-			uniIcons
+			uniIcons,
+			uniIndexedListItem
 		},
 		props: {
 			options: {
@@ -163,7 +151,8 @@
 				this.touchmove = false
 				this.touchmoveIndex = -1
 			},
-			onClick(idx, index) {
+			onClick(e) {
+				let {idx, index} = e
 				let obj = {}
 				for (let key in this.lists[idx].items[index]) {
 					obj[key] = this.lists[idx].items[index][key]
@@ -200,92 +189,9 @@
 		/* #endif */
 		flex-direction: row;
 	}
-
-	.uni-indexed-list__list {
-		background-color: $uni-bg-color;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: column;
-		border-top-style: solid;
-		border-top-width: 1px;
-		border-top-color: $uni-border-color;
-	}
-
-	.uni-indexed-list__item {
-		font-size: $uni-font-size-lg;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex: 1;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.uni-indexed-list__item-container {
-		padding-left: $uni-spacing-row-lg;
-		flex: 1;
-		position: relative;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		box-sizing: border-box;
-		/* #endif */
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.uni-indexed-list__item-border {
-		flex: 1;
-		position: relative;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		box-sizing: border-box;
-		/* #endif */
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		height: 50px;
-		padding: $uni-spacing-row-lg;
-		padding-left: 0;
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		border-bottom-color: $uni-border-color;
-	}
-
-	.uni-indexed-list__item-border--last {
-		border-bottom-width: 0px;
-	}
-
-	.uni-indexed-list__item-content {
-		flex: 1;
-		font-size: 14px;
-	}
-
-	.uni-indexed-list {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-	}
-
+	
 	.uni-indexed-list__scroll {
 		flex: 1;
-	}
-
-	.uni-indexed-list__title-wrapper {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		width: 100%;
-		/* #endif */
-		background-color: #f7f7f7;
-	}
-
-	.uni-indexed-list__title {
-		padding: 6px 12px;
-		line-height: 24px;
-		font-size: $uni-font-size-sm;
 	}
 
 	.uni-indexed-list__menu {

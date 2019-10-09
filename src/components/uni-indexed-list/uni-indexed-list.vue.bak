@@ -1,14 +1,13 @@
 <template>
-	<view class="uni-indexed-list">
-		<scroll-view :scroll-into-view="scrollViewId" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__scroll"
-		 scroll-y>
+	<view class="uni-indexed-list" :style="{ height: winHeight + 'px' }">
+		<scroll-view :scroll-into-view="scrollViewId" class="uni-indexed-list__scroll" scroll-y>
 			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
 				<view v-if="loaded || list.itemIndex < 15" class="uni-indexed-list__title-wrapper">
 					<text v-if="list.items && list.items.length > 0" class="uni-indexed-list__title">{{ list.key }}</text>
 				</view>
 				<view v-if="(loaded || list.itemIndex < 15) && list.items && list.items.length > 0" class="uni-indexed-list__list">
 					<view v-for="(item, index) in list.items" :key="index" class="uni-indexed-list__item" hover-class="uni-indexed-list__item--hover">
-						<view v-if="loaded || item.itemIndex < 15" class="uni-indexed-list__item-container" @click="onClick(idx, index)">
+						<view class="uni-indexed-list__item-container" @click="onClick(idx, index)">
 							<view class="uni-indexed-list__item-border" :class="{'uni-indexed-list__item-border--last':index===list.items.length-1}">
 								<view v-if="showSelect" style="margin-right: 20rpx;">
 									<uni-icons :type="item.checked ? 'checkbox-filled' : 'circle'" :color="item.checked ? '#007aff' : '#aaa'" size="24" />
@@ -20,8 +19,8 @@
 				</view>
 			</view>
 		</scroll-view>
-		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" :style="{ height: winHeight + 'px' }" class="uni-indexed-list__menu"
-		 @touchstart="touchStart" @touchmove.stop.prevent="touchMove" @touchend="touchEnd">
+		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart" @touchmove.stop="touchMove"
+		 @touchend="touchEnd" class="uni-indexed-list__menu">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
 			</view>
@@ -32,6 +31,8 @@
 	</view>
 </template>
 <script>
+	import uniIcons from '@/components/uni-icons/uni-icons.vue'
+	// #ifdef APP-PLUS
 	function throttle(func, delay) {
 		var prev = Date.now();
 		return function() {
@@ -44,7 +45,21 @@
 			}
 		}
 	}
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
+
+	function touchMove(e) {
+		let pageY = e.touches[0].pageY
+		let index = Math.floor(pageY / this.itemHeight)
+		if (this.touchmoveIndex === index) {
+			return false
+		}
+		let item = this.lists[index]
+		if (item) {
+			this.scrollViewId = 'uni-indexed-list-' + item.key
+			this.touchmoveIndex = index
+		}
+	}
+	const throttleTouchMove = throttle(touchMove, 20)
+	// #endif
 	export default {
 		name: 'UniIndexedList',
 		components: {
@@ -65,10 +80,10 @@
 		data() {
 			return {
 				lists: [],
+				winHeight: 0,
+				itemHeight: 0,
 				touchmove: false,
 				touchmoveIndex: -1,
-				itemHeight: 0,
-				winHeight: 0,
 				scrollViewId: '',
 				touchmoveTimeout: '',
 				loaded: false
@@ -93,12 +108,6 @@
 				let winHeight = uni.getSystemInfoSync().windowHeight
 				this.itemHeight = winHeight / this.options.length
 				this.winHeight = winHeight
-
-				// if (!this.showSelect) {
-				// 	this.lists = this.options;
-				// 	return;
-				// }
-				// console.log(this.options)
 				let index = 0;
 				this.lists = this.options.map(value => {
 					// console.log(value)
@@ -134,13 +143,21 @@
 				}
 			},
 			touchMove(e) {
+				// #ifndef APP-PLUS
 				let pageY = e.touches[0].pageY
 				let index = Math.floor(pageY / this.itemHeight)
+				if (this.touchmoveIndex === index) {
+					return false
+				}
 				let item = this.lists[index]
 				if (item) {
 					this.scrollViewId = 'uni-indexed-list-' + item.key
 					this.touchmoveIndex = index
 				}
+				// #endif
+				// #ifdef APP-PLUS
+				throttleTouchMove.call(this, e)
+				// #endif
 			},
 			touchEnd() {
 				this.touchmove = false
@@ -176,6 +193,13 @@
 </script>
 <style lang="scss" scoped>
 	@import '@/uni.scss';
+
+	.uni-indexed-list {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+	}
 
 	.uni-indexed-list__list {
 		background-color: $uni-bg-color;
