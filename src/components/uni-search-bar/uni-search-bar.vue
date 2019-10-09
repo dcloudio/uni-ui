@@ -134,10 +134,8 @@
 
 	.uni-searchbar__box-icon-clear {
 		align-items: center;
-		height: 30px;
-		line-height: 30px;
+		line-height: 24px;
 		padding: 0px 5px 0px 5px;
-		border-radius: 30px;
 	}
 
 	.uni-searchbar__text-placeholder {
@@ -149,7 +147,7 @@
 	.uni-searchbar__cancel {
 		padding-left: 10px;
 		line-height: $uni-searchbar-height;
-		font-size: $uni-font-size-base;
+		font-size: 14px;
 		color: $uni-text-color;
 	}
 </style>
