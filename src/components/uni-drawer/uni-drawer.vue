@@ -44,20 +44,26 @@
     },
     watch: {
       visible(val) {
-        clearTimeout(this.watchTimer)
-        setTimeout(() => {
-          this.showDrawer = val
-        }, 100)
-        if (this.visibleSync) {
-          clearTimeout(this.closeTimer)
+        console.log('visible:',val)
+        if(val){
+          this.open()
+        }else{
+          this.close()
         }
-        if (val) {
-          this.visibleSync = val
-        } else {
-          this.watchTimer = setTimeout(() => {
-            this.visibleSync = val
-          }, 300)
-        }
+        // clearTimeout(this.watchTimer)
+        // setTimeout(() => {
+        //   this.showDrawer = val
+        // }, 100)
+        // if (this.visibleSync) {
+        //   clearTimeout(this.closeTimer)
+        // }
+        // if (val) {
+        //   this.visibleSync = val
+        // } else {
+        //   this.watchTimer = setTimeout(() => {
+        //     this.visibleSync = val
+        //   }, 300)
+        // }
       }
     },
     created() {
@@ -69,11 +75,33 @@
     },
     methods: {
       close() {
-        this.showDrawer = false
-        this.closeTimer = setTimeout(() => {
-          this.visibleSync = false
-          this.$emit('close')
-        }, 200)
+        // this.showDrawer = false
+        // this.$nextTick(()=>{
+        //   setTimeout(() => {
+        //      this.visibleSync = false
+        //      this.$emit('close')
+        //    }, 200)
+        // })
+        this._change('showDrawer','visibleSync',false)
+      },
+      open(){
+        // this.visibleSync = true
+        // this.$nextTick(()=>{
+        //   setTimeout(() => {
+        //     this.showDrawer = true
+        //     this.$emit('open')
+        //   }, 100)
+        // })
+        this._change('visibleSync','showDrawer',true)
+      },
+      _change(param1,param2,status){
+        this[param1] = status
+        this.$nextTick(()=>{
+          setTimeout(() => {
+            this[param2] = status
+            this.$emit(status?'open':'close')
+          }, 100)
+        })
       }
     }
   }
@@ -111,12 +139,12 @@
 
   .uni-drawer--left {
     left: 0;
-    transform: translateX(-100%);
+    transform: translateX(-220px);
   }
 
   .uni-drawer--right {
     right: 0;
-    transform: translateX(100%);
+    transform: translateX(220px);
   }
 
   .uni-drawer__content--visible {
