@@ -68,7 +68,12 @@
 				});
 				this.searchVal = "";
 				this.show = false;
+				// #ifndef APP-PLUS
 				uni.hideKeyboard();
+				// #endif
+				// #ifdef APP-PLUS
+				plus.key.hideSoftKeybord()
+				// #endif
 			},
 			confirm() {
 				this.$emit("confirm", {
