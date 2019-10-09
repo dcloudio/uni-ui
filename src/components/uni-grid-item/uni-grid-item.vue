@@ -1,7 +1,7 @@
 <template>
 	<view v-if="width" :style="{ width: width }" class="uni-grid-item">
 		<view :class="{ 'uni-grid-item--border': showBorder, 'uni-grid-item__box-square': square, 'uni-grid-item--border-top': showBorder && index < column, 'uni-highlight': highlight }"
-		 :style="{ 'border-color': borderColor }" class="uni-grid-item__box" @click="_onClick">
+		 :style="{  'border-right-color': borderColor ,'border-bottom-color': borderColor ,'border-top-color': borderColor }" class="uni-grid-item__box" @click="_onClick">
 			<view class="uni-grid-item__box-item" :class="{'uni-grid-item__box-item-square': square}">
 				<slot />
 			</view>
