@@ -44,26 +44,11 @@
     },
     watch: {
       visible(val) {
-        console.log('visible:',val)
         if(val){
           this.open()
         }else{
           this.close()
         }
-        // clearTimeout(this.watchTimer)
-        // setTimeout(() => {
-        //   this.showDrawer = val
-        // }, 100)
-        // if (this.visibleSync) {
-        //   clearTimeout(this.closeTimer)
-        // }
-        // if (val) {
-        //   this.visibleSync = val
-        // } else {
-        //   this.watchTimer = setTimeout(() => {
-        //     this.visibleSync = val
-        //   }, 300)
-        // }
       }
     },
     created() {
@@ -75,23 +60,9 @@
     },
     methods: {
       close() {
-        // this.showDrawer = false
-        // this.$nextTick(()=>{
-        //   setTimeout(() => {
-        //      this.visibleSync = false
-        //      this.$emit('close')
-        //    }, 200)
-        // })
         this._change('showDrawer','visibleSync',false)
       },
       open(){
-        // this.visibleSync = true
-        // this.$nextTick(()=>{
-        //   setTimeout(() => {
-        //     this.showDrawer = true
-        //     this.$emit('open')
-        //   }, 100)
-        // })
         this._change('visibleSync','showDrawer',true)
       },
       _change(param1,param2,status){

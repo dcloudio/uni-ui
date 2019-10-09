@@ -54,9 +54,9 @@
     methods: {
       clear() {},
       open() {
-        // this.$emit('change', {
-        //   show: true
-        // })
+        this.$emit('change', {
+          show: true
+        })
         this.showPopup = true
         this.$nextTick(() => {
           setTimeout(() => {
@@ -102,7 +102,7 @@
   .mask-ani {
     // transition: all 0.3s;
     transition-property: opacity;
-    transition-duration: 0.3s;
+    transition-duration: 0.1s;
   }
 
   .uni-top-mask {
@@ -128,14 +128,14 @@
     top: 0;
     left: 0;
     right: 0;
-    transform: translateY(-200px);
+    transform: translateY(-500px);
   }
 
   .bottom {
     bottom: 0;
     left: 0;
     right: 0;
-    transform: translateY(200px);
+    transform: translateY(500px);
   }
 
   .center {
@@ -163,7 +163,7 @@
   .content-ani {
     // transition: transform 0.3s;
     transition-property: transform, opacity;
-    transition-duration: 0.3s;
+    transition-duration: 0.1s;
   }
 
 
