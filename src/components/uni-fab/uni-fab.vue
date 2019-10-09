@@ -29,8 +29,8 @@
           'uni-fab__circle--bottom': vertical === 'bottom' && direction === 'vertical',
           'uni-fab__circle--right': horizontal === 'right' && direction === 'horizontal',
 		  'uni-fab__plus--active': isShow
-        }"
-			 class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
+        }" class="uni-fab__circle uni-fab__plus"
+			 :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
 				<uni-icons type="plusempty" color="#FFFFFF" size="48"></uni-icons>
 			</view>
 		</view>
@@ -291,8 +291,8 @@
 		border-radius: 55px;
 		overflow: hidden;
 		/* #ifdef APP-NVUE */
-		transition: width 0.2s;
-		border-color: #007AFF;
+		transition: width,height 0.2s;
+		border-color:#007AFF;
 		border-width: 1rpx;
 		border-style: solid;
 		/* #endif */
@@ -314,9 +314,6 @@
 	.uni-fab__content--flexDirection {
 		flex-direction: column;
 		justify-content: flex-end;
-		/* #ifdef APP-NVUE */
-		transition: height 0.2s;
-		/* #endif */
 	}
 
 	.uni-fab__content--flexDirectionStart {
