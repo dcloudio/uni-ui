@@ -91,7 +91,14 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
-
+	
+	
+	/* #ifndef APP-NVUE */
+	page {
+		height: 100vh;
+	}
+	/* #endif */
+	
 	.uni-fab-box {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -115,6 +122,6 @@
 	}
 
 	.word-btn {
-		width: 600rpx;
+		width: 250px;
 	}
 </style>
