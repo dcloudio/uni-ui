@@ -28,10 +28,10 @@
     <!-- 插屏弹窗 -->
     <uni-popup :show="showimage" :type="type" :mask-click="true" @change="change">
       <view class="uni-image">
-        <view class="uni-image-close" @click="cancel('image')">
-          <uni-icons type="clear" color="#fff" size="30" />
-        </view>
         <image class="image" src="/static/uni.png" mode="" />
+		<view class="uni-image-close" @click="cancel('image')">
+		  <uni-icons type="clear" color="#fff" size="30" />
+		</view>
       </view>
     </uni-popup>
     <!-- 底部分享弹窗 -->
@@ -243,10 +243,8 @@
   }
 
   .uni-image-close {
-    position: absolute;
-    right: -30px;
-    top: -30px;
-    z-index: 2;
+	  margin-top: 20px;
+	  text-align: center;
   }
 
   /* 底部分享 */
