@@ -18,7 +18,7 @@
 		</view>
 		<view class="btn-view">
 			<view>
-				当前页：{{ current }}，数据总量：{{ total }}条，每页数据：{{ pageSize }}
+				<text class="example-info">当前页：{{ current }}，数据总量：{{ total }}条，每页数据：{{ pageSize }}</text>
 			</view>
 			<view class="button word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="add"><text
 				 class="word-btn-white">增加10条数据</text></view>
