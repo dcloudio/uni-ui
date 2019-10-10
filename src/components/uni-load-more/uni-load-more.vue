@@ -45,9 +45,6 @@
 
 <script>
 	const platform = uni.getSystemInfoSync().platform
-	// #ifdef APP-NVUE
-	const animation = weex.requireModule('animation');
-	// #endif
 	export default {
 		name: 'UniLoadMore',
 		props: {
