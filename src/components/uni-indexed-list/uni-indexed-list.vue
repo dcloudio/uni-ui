@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-indexed-list" :style="{ height: winHeight + 'px' }">
+	<view class="uni-indexed-list" ref="list" id="list">
 		<scroll-view :scroll-into-view="scrollViewId" class="uni-indexed-list__scroll" scroll-y>
 			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
 				<uni-indexed-list-item :list="list" :loaded="loaded" :idx="idx" :showSelect="showSelect" @itemClick="onClick"></uni-indexed-list-item>
@@ -47,6 +47,9 @@
 	}
 	const throttleTouchMove = throttle(touchMove, 40)
 	// #endif
+	// #ifdef APP-NVUE
+	const dom = weex.requireModule('dom');
+	// #endif
 	export default {
 		name: 'UniIndexedList',
 		components: {
@@ -86,16 +89,31 @@
 			}
 		},
 		mounted() {
-			this.setList()
+			setTimeout(()=>{
+				this.setList()
+			},50)
 			setTimeout(() => {
 				this.loaded = true
 			}, 300);
 		},
 		methods: {
 			setList() {
-				let winHeight = uni.getSystemInfoSync().windowHeight
-				this.itemHeight = winHeight / this.options.length
-				this.winHeight = winHeight
+				// #ifndef APP-NVUE
+				uni.createSelectorQuery()
+					.in(this)
+					.select('#list')
+					.boundingClientRect()
+					.exec(ret => {
+						this.winHeight = ret[0].height
+						this.itemHeight = this.winHeight / this.options.length
+					})
+				// #endif
+				// #ifdef APP-NVUE
+				dom.getComponentRect(this.$refs['list'], (res) => {
+					this.winHeight = res.size.height
+					this.itemHeight = this.winHeight / this.options.length
+				})
+				// #endif
 				let index = 0;
 				this.lists = this.options.map(value => {
 					// console.log(value)
@@ -187,6 +205,11 @@
 	@import '@/uni.scss';
 
 	.uni-indexed-list {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
