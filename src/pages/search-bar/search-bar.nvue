@@ -50,6 +50,9 @@
 					showCancel: false
 				})
 			}
+		},
+		onBackPress() {
+			plus.key.hideSoftKeybord();
 		}
 	}
 </script>
