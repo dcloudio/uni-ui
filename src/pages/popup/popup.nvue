@@ -28,7 +28,7 @@
 		<!-- 插屏弹窗 -->
 		<uni-popup :show="showimage" :type="type" :mask-click="true" @change="change">
 			<view class="uni-image">
-				<image class="image" src="/static/uni.png" mode="" />
+				<image class="image" src="/static/uni.png" mode="scaleToFill" />
 				<view class="uni-image-close" @click="cancel('image')">
 					<uni-icons type="clear" color="#fff" size="30" />
 				</view>
@@ -236,10 +236,11 @@
 	}
 
 	.image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 200px;
 		height: 200px;
-		// width: 100%;
-		// height: 100%;
 	}
 
 	.uni-image-close {
