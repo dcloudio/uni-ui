@@ -9,7 +9,7 @@
 			<!-- #ifndef MP-ALIPAY -->
 			<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
 			<!-- #endif -->
-			<input v-if="show" :focus="show" :placeholder="placeholder" @confirm="confirm" class="uni-searchbar__box-search-input"
+			<input v-if="show" :focus="showSync" :placeholder="placeholder" @confirm="confirm" class="uni-searchbar__box-search-input"
 			 confirm-type="search" placeholder-style="color:#cccccc" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear">
@@ -44,6 +44,7 @@
 		data() {
 			return {
 				show: false,
+				showSync: false,
 				searchVal: ""
 			};
 		},
@@ -58,6 +59,9 @@
 			searchClick() {
 				this.searchVal = "";
 				this.show = true;
+				this.$nextTick(()=>{
+					this.showSync = true;
+				})
 			},
 			clear() {
 				this.searchVal = "";
@@ -67,6 +71,7 @@
 					value: this.searchVal
 				});
 				this.searchVal = "";
+				this.showSync = false;
 				this.show = false;
 				// #ifndef APP-PLUS
 				uni.hideKeyboard();
@@ -76,6 +81,12 @@
 				// #endif
 			},
 			confirm() {
+				// #ifndef APP-PLUS
+				uni.hideKeyboard();
+				// #endif
+				// #ifdef APP-PLUS
+				plus.key.hideSoftKeybord()
+				// #endif
 				this.$emit("confirm", {
 					value: this.searchVal
 				});
