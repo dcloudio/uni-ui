@@ -1,21 +1,21 @@
 <template>
 	<view>
-		<uni-title title="基本用法" type="line"></uni-title>
+		<uni-section title="基本用法" type="line"></uni-section>
 		<uni-swipe-action :options="options2" @click="bindClick">
 			<text class="cont">SwipeAction 基础使用场景</text>
 		</uni-swipe-action>
-		<uni-title title="禁止滑动" type="line"></uni-title>
+		<uni-section title="禁止滑动" type="line"></uni-section>
 		<uni-swipe-action :disabled="true">
 			<text class="cont">SwipeAction 禁止滑动展示</text>
 		</uni-swipe-action>
-		<uni-title title="使用变量控制开关" type="line"></uni-title>
+		<uni-section title="使用变量控制开关" type="line"></uni-section>
 		<view class="example-body">
 			<view class="button" @click="setOpened"><text class="button-text">当前状态：{{ isOpened ? '开' : '关' }}</text></view>
 		</view>
 		<uni-swipe-action :options="options2" :show="isOpened" :auto-close="false" @change="change">
 			<text class="cont">使用变量控制SwipeAction的开启状态</text>
 		</uni-swipe-action>
-		<uni-title title="与 List 组件一起使用" type="line"></uni-title>
+		<uni-section title="与 List 组件一起使用" type="line"></uni-section>
 		<uni-list>
 			<uni-swipe-action :options="options1">
 				<uni-list-item :show-arrow="false" title="item1" />
@@ -31,13 +31,13 @@
 </template>
 
 <script>
-	import uniTitle from '@/components/uni-title/uni-title.vue'
+	import uniSection from '@/components/uni-section/uni-section.vue'
 	import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
 	import uniList from '@/components/uni-list/uni-list.vue'
 	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
 	export default {
 		components: {
-			uniTitle,
+			uniSection,
 			uniSwipeAction,
 			uniList,
 			uniListItem

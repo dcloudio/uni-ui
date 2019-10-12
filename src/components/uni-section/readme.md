@@ -1,14 +1,14 @@
 
-### Title 标题栏
+### Section 标题栏
 
-标题栏，用于显示标题，组件名：``uni-title``，代码块： uTitle。
+标题栏，用于显示标题，组件名：``uni-section``，代码块： uTitle。
 
 **使用方式：**
 
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniTitle from "@/components/uni-title/uni-title.vue"
+import uniTitle from "@/components/uni-section/uni-section.vue"
 export default {
     components: {uniTitle}
 }
@@ -17,9 +17,9 @@ export default {
 在 ``template`` 中使用组件
 
 ```html
-<uni-title title="只有主标题"></uni-title>
-<uni-title title="竖线装饰" sub-title="副标题" type="line"></uni-title>
-<uni-title title="圆形装饰" sub-title="副标题" type="circle"></uni-title>
+<uni-section title="只有主标题"></uni-section>
+<uni-section title="竖线装饰" sub-title="副标题" type="line"></uni-section>
+<uni-section title="圆形装饰" sub-title="副标题" type="circle"></uni-section>
 ```
 
 **Title 属性说明：**
