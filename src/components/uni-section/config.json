@@ -1,7 +1,7 @@
 {
 	"id": "",
-	"name": "Title",
-	"desc": "标题栏",
+	"name": "Section",
+	"desc": "章节标题",
 	"edition": "0.0.1",
 	"url": "title",
 	"path": "https://ext.dcloud.net.cn/plugin?id=",
