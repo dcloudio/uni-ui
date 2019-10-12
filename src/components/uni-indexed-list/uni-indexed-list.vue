@@ -1,10 +1,22 @@
 <template>
 	<view class="uni-indexed-list" ref="list" id="list">
-		<scroll-view :scroll-into-view="scrollViewId" class="uni-indexed-list__scroll" scroll-y>
-			<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
-				<uni-indexed-list-item :list="list" :loaded="loaded" :idx="idx" :showSelect="showSelect" @itemClick="onClick"></uni-indexed-list-item>
-			</view>
-		</scroll-view>
+		<!-- #ifdef APP-NVUE -->
+		<list class="uni-indexed-list__scroll" scrollable="true" show-scrollbar="false">
+			<cell v-for="(list, idx) in lists" :key="idx" :ref="'uni-indexed-list-' + list.key">
+				<!-- #endif -->
+				<!-- #ifndef APP-NVUE -->
+				<scroll-view :scroll-into-view="scrollViewId" class="uni-indexed-list__scroll" scroll-y>
+					<view v-for="(list, idx) in lists" :key="idx" :id="'uni-indexed-list-' + list.key">
+						<!-- #endif -->
+						<uni-indexed-list-item :list="list" :loaded="loaded" :idx="idx" :showSelect="showSelect" @itemClick="onClick"></uni-indexed-list-item>
+						<!-- #ifndef APP-NVUE -->
+					</view>
+				</scroll-view>
+				<!-- #endif -->
+				<!-- #ifdef APP-NVUE -->
+			</cell>
+		</list>
+		<!-- #endif -->
 		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart" @touchmove.stop="touchMove"
 		 @touchend="touchEnd" class="uni-indexed-list__menu">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
@@ -19,6 +31,9 @@
 <script>
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import uniIndexedListItem from './uni-indexed-list-item.vue'
+	// #ifdef APP-NVUE
+	const dom = weex.requireModule('dom');
+	// #endif
 	// #ifdef APP-PLUS
 	function throttle(func, delay) {
 		var prev = Date.now();
@@ -41,14 +56,19 @@
 		}
 		let item = this.lists[index]
 		if (item) {
+			// #ifndef APP-NVUE
 			this.scrollViewId = 'uni-indexed-list-' + item.key
 			this.touchmoveIndex = index
+			// #endif
+			// #ifdef APP-NVUE
+			dom.scrollToElement(this.$refs['uni-indexed-list-' + item.key][0], {
+				animated: false
+			})
+			this.touchmoveIndex = index
+			// #endif
 		}
 	}
 	const throttleTouchMove = throttle(touchMove, 40)
-	// #endif
-	// #ifdef APP-NVUE
-	const dom = weex.requireModule('dom');
 	// #endif
 	export default {
 		name: 'UniIndexedList',
@@ -89,9 +109,9 @@
 			}
 		},
 		mounted() {
-			setTimeout(()=>{
+			setTimeout(() => {
 				this.setList()
-			},50)
+			}, 50)
 			setTimeout(() => {
 				this.loaded = true
 			}, 300);
