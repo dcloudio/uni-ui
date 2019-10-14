@@ -117,28 +117,31 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin collapse-hover {
-	background-color: #f5f5f5;
-}
+// @mixin collapse-hover {
+// 	background-color: #f5f5f5;
+// }
 
-@mixin collapse-disabled {
-	opacity: 0.3;
-}
+// @mixin collapse-disabled {
+// 	opacity: 0.3;
+// }
 
 $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
 .uni-collapse-cell {
 	position: relative;
 	&--hover {
-		@include collapse-hover;
+		// @include collapse-hover;
+    background-color: #f5f5f5;
 	}
 
 	&--open {
-		@include collapse-hover;
+		// @include collapse-hover;
+    background-color: #f5f5f5;
 	}
 
 	&--disabled {
-		@include collapse-disabled;
+		// @include collapse-disabled;
+    opacity: 0.3;
 	}
 
 	&--animation {

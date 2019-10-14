@@ -110,7 +110,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .cont {
     height: 90upx;
     line-height: 90upx;

@@ -167,25 +167,32 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin flex-row-center {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
+// @mixin flex-row-center {
+// 	display: flex;
+// 	flex-direction: row;
+// 	justify-content: center;
+// 	align-items: center;
+// }
 
 .uni-noticebar {
 	padding: 12upx 24upx;
 	font-size: $uni-font-size-sm;
 	line-height: 1.5;
 	margin-bottom: 20upx;
-	@include flex-row-center;
+	// @include flex-row-center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 	justify-content: left;
 
 	&__close {
 		color: $uni-text-color-grey;
 		margin-right: 24upx;
-		@include flex-row-center;
+		// @include flex-row-center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 	}
 
 	&__content {
@@ -206,7 +213,10 @@ export default {
 
 		&-more {
 			width: 180upx;
-			@include flex-row-center;
+			// @include flex-row-center;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 			justify-content: flex-end;
 			word-break: keep-all;
 			margin-left: 10upx;

@@ -123,14 +123,14 @@ export default {
 </script>
 
 <style lang="scss">
-	@mixin pagination-disabled {
-		opacity: 0.3;
-	}
+	// @mixin pagination-disabled {
+	// 	opacity: 0.3;
+	// }
 
-	@mixin pagination-hover {
-		color: rgba(0, 0, 0, .6);
-		background-color: $uni-bg-color-hover;
-	}
+	// @mixin pagination-hover {
+	// 	color: rgba(0, 0, 0, .6);
+	// 	background-color: $uni-bg-color-hover;
+	// }
 
 	.uni-pagination {
 		width: 100%;
@@ -195,11 +195,14 @@ export default {
 		}
 
 		&--disabled {
-			@include pagination-disabled;
+			// @include pagination-disabled;
+      opacity: 0.3;
 		}
 
 		&--hover {
-			@include pagination-hover;
+			// @include pagination-hover;
+      color: rgba(0, 0, 0, .6);
+      background-color: $uni-bg-color-hover;
 		}
 	}
 </style>

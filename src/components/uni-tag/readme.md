@@ -29,7 +29,7 @@ export default {
 |---			|----		|---		|---																																																					|
 |text			|String	|-			|标签内容																																																			|
 |size			|String	|normal	|大小尺寸，可选值：normal、small																																							|
-|type			|String	|default|颜色类型，可选值：default（灰色）、primary（蓝色）、success（绿色）、warning(黄色)、danger(红色)|
+|type			|String	|default|颜色类型，可选值：default（灰色）、primary（蓝色）、success（绿色）、warning(黄色)、error(红色)|
 |disabled	|Boolean|false	|是否为禁用状态																																																|
 |inverted	|Boolean|false	|是否无需背景颜色（空心标签）																																									|
 |circle		|Boolean|false	|是否为圆角																																																		|
