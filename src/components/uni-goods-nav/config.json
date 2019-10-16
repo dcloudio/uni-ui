@@ -1,9 +1,9 @@
 {
-	"id": "",
+	"id": "865",
 	"name": "GoodsNav",
 	"desc": "商品导航",
 	"url": "goods-nav",
 	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"path": "https://ext.dcloud.net.cn/plugin?id=865",
 	"update_log": "- 新增 商品导航"
 }
