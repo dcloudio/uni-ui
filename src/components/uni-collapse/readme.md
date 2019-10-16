@@ -138,6 +138,6 @@ Tips
 Tips
 - 本组件需要使用自定义组件模式，非自定义组件使用，会出现问题。
 
-### 更新日志
+### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/collapse/collapse](https://uniapp.dcloud.io/h5/pages/extUI/collapse/collapse)
