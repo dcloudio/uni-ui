@@ -1,9 +1,9 @@
 {
-	"id": "",
+	"id": "866",
 	"name": "SearchBar",
 	"desc": "搜索栏",
 	"url": "search-bar",
 	"edition": "1.0.0",
-	"path": "",
+	"path": "https://ext.dcloud.net.cn/plugin?id=866",
 	"update_log": "- 新增 搜索栏组件"
 }
