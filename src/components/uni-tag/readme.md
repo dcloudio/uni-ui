@@ -40,3 +40,6 @@ export default {
 |事件称名|说明|
 |---|----|---|
 |click|点击 Tag 触发事件	|
+
+### 插件预览地址 
+[https://uniapp.dcloud.io/h5/pages/extUI/tag/tag](https://uniapp.dcloud.io/h5/pages/extUI/tag/tag)
