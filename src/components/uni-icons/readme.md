@@ -29,11 +29,6 @@ export default {
 |@click	|EventHandle|-|点击 Icon 触发事件|
 
 
-### 更新日志
-**1.1.0**
-- 新增 大批新图标
-- 优化 老图标样式
-- 修复 flex 布局下，高度出现问题
--
-**1.0.0**
-- 初始项目
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/icon/icon](https://uniapp.dcloud.io/h5/pages/extUI/icon/icon)

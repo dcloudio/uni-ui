@@ -68,3 +68,6 @@ export default {
 |close	|关闭 NoticeBar 触发事件	|
 |getmore|点击”查看更多“时触发事件|
 
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/notice-bar/notice-bar](https://uniapp.dcloud.io/h5/pages/extUI/notice-bar/notice-bar)

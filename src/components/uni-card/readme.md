@@ -94,20 +94,6 @@ Tips
 |---|----|---|
 |click|点击 Card 触发事件|-|
 
-### 更新日志
+### 插件预览地址
 
-**1.1.2**
-- 修复 依赖组件找不到的问题
-
-**1.1.1**
-- 更新 readme
-
-**1.1.0**
-- 修复 v-for 循环，内容不显示的 bug。（需要 HBuilderX 开启自定义组件模式）
-- 添加图文卡片模式
-- 修复点击事件失效的 bug
-- 优化代码示例显示效果
-- 添加更多自定义模式
-
-**1.0.0**
-- 初始项目
+[https://uniapp.dcloud.io/h5/pages/extUI/card/card](https://uniapp.dcloud.io/h5/pages/extUI/card/card)

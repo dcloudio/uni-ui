@@ -51,3 +51,7 @@ export default {
 |事件称名|说明|返回参数|
 |---|----|---|
 |timeup|倒计时时间到触发事件|-|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/count-down/count-down](https://uniapp.dcloud.io/h5/pages/extUI/count-down/count-down)

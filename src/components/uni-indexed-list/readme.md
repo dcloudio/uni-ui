@@ -60,9 +60,6 @@ export default {
 }]
 ```
 
-### 更新日志
-**1.0.1**
-- 修复 添加列表数据变化的监听
--
-**1.0.0**
-- 初始项目
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/indexed-list/indexed-list](https://uniapp.dcloud.io/h5/pages/extUI/indexed-list/indexed-list)

@@ -38,3 +38,7 @@ export default {
 |事件名称	|说明		|
 |---|---|
 |change	|输入框值改变时触发的事件，参数为输入框当前的 value|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/number-box/number-box](https://uniapp.dcloud.io/h5/pages/extUI/number-box/number-box)

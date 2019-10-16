@@ -36,7 +36,6 @@ Tips:
 * 组件实际运行效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
 * npm 使用方式参考：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
+### 插件预览地址
 
-### 更新日志
-**1.0.0**
-- 初始项目
+[https://uniapp.dcloud.io/h5/pages/extUI/badge/badge](https://uniapp.dcloud.io/h5/pages/extUI/badge/badge)

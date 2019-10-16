@@ -36,17 +36,6 @@ export default {
 |事件名			|说明				|返回值						|
 |clickLoadMore	|点击加载更多时触发	|e.detail={status:'loading'}|
 
-### 更新日志
+### 插件预览地址
 
-**1.1.2**
-- 优化动画速度
-- 增加点击事件
-
-**1.1.1**
-- 根据不同平台使用不同加载动画
-
-**1.1.0**
-- 修复 load 动画失效的问题
-
-**1.0.0**
-- 初始项目
+[https://uniapp.dcloud.io/h5/pages/extUI/load-more/load-more](https://uniapp.dcloud.io/h5/pages/extUI/load-more/load-more)

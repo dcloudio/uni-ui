@@ -85,7 +85,6 @@ List 一般用法
 Tips
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
 
-### 更新日志
+### 插件预览地址
 
-**1.0.0**
-- 初始项目
+[https://uniapp.dcloud.io/h5/pages/extUI/list/list](https://uniapp.dcloud.io/h5/pages/extUI/list/list)

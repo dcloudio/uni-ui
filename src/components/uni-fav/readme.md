@@ -41,3 +41,7 @@ export default {
 |事件称名|说明|
 |---|----|---|
 |click|点击 fav按钮 触发事件	|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/fav/fav](https://uniapp.dcloud.io/h5/pages/extUI/fav/fav)

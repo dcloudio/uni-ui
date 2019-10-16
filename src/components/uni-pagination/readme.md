@@ -37,3 +37,7 @@ export default {
 |事件称名|说明|返回参数|
 |---|----|---|
 |change|点击页码按钮时触发|{type,current} current为当前页，type值为：next/prev，表示点击的是上一页还是下一个|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/pagination/pagination](https://uniapp.dcloud.io/h5/pages/extUI/pagination/pagination)

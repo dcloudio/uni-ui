@@ -29,8 +29,3 @@ export default {
 |type			|String			|无			|标题装饰类型 ，可选值：line（竖线）、circle（圆形）|
 |title		|String			|无			|主标题																							|
 |sub-title|String			|无			|副标题																							|
-
-
-### 更新日志
-**0.0.1**
-- 初始项目

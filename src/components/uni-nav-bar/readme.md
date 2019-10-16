@@ -56,6 +56,6 @@ export default {
 ```
 
 
-### 更新日志
-**1.0.0**
-- 初始项目
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/nav-bar/nav-bar](https://uniapp.dcloud.io/h5/pages/extUI/nav-bar/nav-bar)

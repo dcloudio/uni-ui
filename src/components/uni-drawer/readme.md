@@ -38,3 +38,7 @@ Drawer 在 ``template`` 中以 **插槽** 形式插入内容
 
 |事件名|说明		|
 |close|组件关闭时触发事件|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/drawer/drawer](https://uniapp.dcloud.io/h5/pages/extUI/drawer/drawer)

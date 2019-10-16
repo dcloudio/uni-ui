@@ -48,3 +48,7 @@ export default {
 |confirm	|uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value	|{value:Number}	|
 |input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|{value:Number}	|
 |cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value							|{value:Number}	|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar](https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar)

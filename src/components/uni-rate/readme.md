@@ -58,3 +58,7 @@ export default {
 |事件称名|说明|返回参数|
 |---|----|---|
 |change|uniRate 的 value 改变时触发事件，返回参数为uniRate的value|{value:Number}|
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/rate/rate](https://uniapp.dcloud.io/h5/pages/extUI/rate/rate)

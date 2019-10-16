@@ -56,3 +56,8 @@ SegmentedControl 在 ``template`` 中的使用
 |style-type	|String	|button|分段器样式类型，可选值：button（按钮类型），text（文字类型）|
 |active-color|String	|#007aff|选中的标签背景色与边框颜色|
 |@clickItem|EventHandle|-|组件触发点击事件时触发，参数为当前选中的tab索引值 current	|
+
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control](https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control)

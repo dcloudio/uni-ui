@@ -96,6 +96,6 @@ export default {
 |@click				|左侧点击事件，返回 e = {index,content}				|
 |@buttonClick	|右侧按钮组点击事件，返回 e = {index,content}	|
 
-### 更新日志
-**0.0.1**
-- 初始项目
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/goods-nav/goods-nav](https://uniapp.dcloud.io/h5/pages/extUI/goods-nav/goods-nav)
