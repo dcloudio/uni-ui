@@ -78,12 +78,7 @@ Tips:
 - `swiper-item` 尽量控制在一定数量之内，否则指示点可能会超出屏幕
 - 暂不支持垂直方向的指示点
 
-### 更新日志
 
-**1.0.0**
-- 初始项目
+### 插件预览地址 
+[https://uniapp.dcloud.io/h5/pages/extUI/swiper-dot/swiper-dot](https://uniapp.dcloud.io/h5/pages/extUI/swiper-dot/swiper-dot)
 
-
-**1.0.1**
-- 将条状修改为默认
-- 圆点（1.0.0默认样式）更名为round

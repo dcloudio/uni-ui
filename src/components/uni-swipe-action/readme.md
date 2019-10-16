@@ -114,3 +114,5 @@ options 参数说明
 ```
 
 
+### 插件预览地址 
+[https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action](https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action)

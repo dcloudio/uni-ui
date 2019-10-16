@@ -3,6 +3,7 @@
 	"name": "Tag",
 	"desc": "标签",
 	"url": "tag",
-	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=35"
+	"edition": "1.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=35",
+	"update_log": "- 新增 插件示例"
 }
