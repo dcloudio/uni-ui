@@ -3,6 +3,7 @@
 	"name": "Drawer",
 	"desc": "抽屉",
 	"url": "drawer",
-	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=26"
+	"edition": "1.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=26",
+	"update_log": "- 新增 插件在线示例"
 }

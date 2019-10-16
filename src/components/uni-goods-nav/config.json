@@ -3,7 +3,7 @@
 	"name": "GoodsNav",
 	"desc": "商品导航",
 	"url": "goods-nav",
-	"edition": "0.0.1",
+	"edition": "1.0.0",
 	"path": "https://ext.dcloud.net.cn/plugin?id=",
-	"update_log": "- 初始化项目"
+	"update_log": "- 新增 商品导航"
 }

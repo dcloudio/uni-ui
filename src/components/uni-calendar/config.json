@@ -3,7 +3,7 @@
 	"name": "Calendar",
 	"desc": "日历",
 	"url": "calendar",
-	"edition": "1.3.0",
+	"edition": "1.3.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=56",
-	"update_log": "- 新增 弹出显示模式 \n- 新增 标点功能，并携带额外信息 - 新增 多选模式 \n- 新增 其他日期与今天高亮区分显示 \n- 修复 不显示最后一行的 bug \n- 修复 初始化组件日期显示不对的 bug \n- 优化 性能问题，删除日历滑动 \n- 优化 代码整体优化，解决在低版本设备上卡顿的问题"
+	"update_log": "- 新增 插件在线示例"
 }

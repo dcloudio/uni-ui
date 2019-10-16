@@ -3,7 +3,7 @@
 	"name": "Collapse",
 	"desc": "折叠面板",
 	"url": "collapse",
-	"edition": "1.1.1",
+	"edition": "1.1.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=23",
-	"update_log": "- 修复 依赖组件找不到的问题"
+	"update_log": "- 新增 插件在线示例"
 }

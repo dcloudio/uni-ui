@@ -3,6 +3,7 @@
 	"name": "Fav",
 	"desc": "收藏按钮",
 	"url": "fav",
-	"edition": "0.0.1",
-	"path": ""
+	"edition": "1.0.0",
+	"path": "",
+	"update_log": "- 新增 收藏组件"
 }

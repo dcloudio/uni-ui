@@ -2,8 +2,8 @@
 	"id": "21",
 	"name": "Badge",
 	"desc": "数字角标",
-	"edition": "1.0.1",
+	"edition": "1.0.3",
 	"url": "badge",
 	"path": "https://ext.dcloud.net.cn/plugin?id=21",
-	"update_log": "- 更新示例 UI 样式"
+	"update_log": "- 新增 插件在线示例"
 }
