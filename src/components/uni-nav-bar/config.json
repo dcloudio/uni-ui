@@ -3,6 +3,7 @@
 	"name": "NavBar",
 	"desc": "自定义导航栏",
 	"url": "nav-bar",
-	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=52"
+	"edition": "1.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=52",
+	"update_log": "- 新增 插件在线示例"
 }

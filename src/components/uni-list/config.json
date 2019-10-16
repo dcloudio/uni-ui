@@ -3,6 +3,7 @@
 	"name": "List",
 	"desc": "列表",
 	"url": "list",
-	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=24"
+	"edition": "1.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=24",
+	"update_log": "- 新增 插件在线示例"
 }

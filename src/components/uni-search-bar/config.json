@@ -3,6 +3,7 @@
 	"name": "SearchBar",
 	"desc": "搜索栏",
 	"url": "search-bar",
-	"edition": "0.0.1",
-	"path": ""
+	"edition": "1.0.0",
+	"path": "",
+	"update_log": "- 新增 搜索栏组件"
 }
