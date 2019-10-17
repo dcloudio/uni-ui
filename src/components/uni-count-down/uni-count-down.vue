@@ -82,11 +82,17 @@ export default {
       i: '00',
       s: '00',
       leftTime: 0,
-      seconds: 0
+      seconds: 0,
+      props: {
+        day: this.day,
+        hour: this.hour,
+        minute: this.minute,
+        second: this.second
+      }
     }
   },
   created: function (e) {
-    this.seconds = this.toSeconds(this.day, this.hour, this.minute, this.second)
+    this.seconds = this.toSeconds(this.props.day, this.props.hour, this.props.minute, this.props.second)
     this.countDown()
     this.timer = setInterval(() => {
       this.seconds--
