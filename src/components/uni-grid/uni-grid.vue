@@ -67,7 +67,7 @@
 			this.pIndex = this.pIndex ? this.pIndex++ : 0
 		},
 		mounted() {
-			// this._getSize()
+			this._getSize()
 		},
 		methods: {
 			change(e) {
@@ -86,8 +86,7 @@
 							}, 50)
 							return
 						}
-						let width = parseInt(ret[0].width / this.column) - 1 + 'px'
-						typeof fn === 'function' && fn(width)
+						this.width = parseInt(ret[0].width / this.column) - 1 + 'px'
 					})
 				// #endif
 				// #ifdef APP-NVUE
@@ -98,8 +97,7 @@
 						}, 50)
 						return
 					}
-					let width = parseInt(ret.size.width / this.column) - 1 + 'px'
-					typeof fn === 'function' && fn(width)
+					this.width = parseInt(ret.size.width / this.column) - 1 + 'px'
 				})
 				// #endif
 			}
