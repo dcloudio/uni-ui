@@ -43,9 +43,9 @@
 			this.index = this.grid.index++
 		},
 		mounted() {
-			this.$nextTick(function() {
+			setTimeout(()=>{
 				this.width = this.grid.width
-			})
+			},100)
 		},
 		methods: {
 			_onClick() {
