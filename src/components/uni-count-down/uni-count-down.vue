@@ -182,9 +182,6 @@
 		height: $countdown-height;
 		line-height: $countdown-height;
 		margin: 5rpx;
-		border-width: 1rpx;
-		border-style: solid;
-		border-color: #000000;
 		text-align: center;
 		font-size: $uni-font-size-sm;
 	}
