@@ -62,13 +62,16 @@
 			}
 		},
 		created() {
+			this.children = []
 			this.index = 0
-			this.childrens = []
-			this.pIndex = this.pIndex ? this.pIndex++ : 0
 		},
 		mounted() {
 			setTimeout(()=>{
-				this._getSize()
+				this._getSize((width)=>{
+					this.children.forEach((item,index)=>{
+						item.width = width
+					})
+				})
 			},50)
 		},
 		methods: {
@@ -83,11 +86,13 @@
 					.boundingClientRect()
 					.exec(ret => {
 						this.width = parseInt(ret[0].width / this.column) - 1 + 'px'
+						fn(this.width)
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['uni-grid'], (ret) => {
 					this.width = parseInt(ret.size.width / this.column) - 1 + 'px'
+					fn(this.width)
 				})
 				// #endif
 			}
