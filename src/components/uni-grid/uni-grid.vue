@@ -67,7 +67,9 @@
 			this.pIndex = this.pIndex ? this.pIndex++ : 0
 		},
 		mounted() {
-			this._getSize()
+			setTimeout(()=>{
+				this._getSize()
+			},50)
 		},
 		methods: {
 			change(e) {
@@ -80,23 +82,11 @@
 					.select(`#${this.elId}`)
 					.boundingClientRect()
 					.exec(ret => {
-						if (!ret[0]) {
-							setTimeout(() => {
-								this._getSize(fn)
-							}, 50)
-							return
-						}
 						this.width = parseInt(ret[0].width / this.column) - 1 + 'px'
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['uni-grid'], (ret) => {
-					if (ret.size.width === 0) {
-						setTimeout(() => {
-							this._getSize(fn)
-						}, 50)
-						return
-					}
 					this.width = parseInt(ret.size.width / this.column) - 1 + 'px'
 				})
 				// #endif
