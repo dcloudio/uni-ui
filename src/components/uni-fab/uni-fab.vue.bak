@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view :class="{
+		<view v-if="leftBottom||rightBottom||leftTop||rightTop" :class="{
         'uni-fab--leftBottom': leftBottom,
         'uni-fab--rightBottom': rightBottom,
         'uni-fab--leftTop': leftTop,
