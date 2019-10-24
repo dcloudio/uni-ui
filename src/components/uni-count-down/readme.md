@@ -36,7 +36,6 @@ export default {
 |属性名|类型|默认值	|说明|
 |---|----|---|---|
 |background-color|String|#FFFFFF|背景色|
-|border-color|String|#000000|边框颜色|
 |color	|String	|#000000|文字颜色|
 |splitor-color|String|#000000|割符号颜色|
 |day|Number|0|天数|

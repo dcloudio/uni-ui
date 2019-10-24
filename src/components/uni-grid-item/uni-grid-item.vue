@@ -41,11 +41,7 @@
 			this.left = this.ver === 0 ? this.grid.ver : this.ver
 			this.borderColor = this.grid.borderColor
 			this.index = this.grid.index++
-		},
-		mounted() {
-			setTimeout(()=>{
-				this.width = this.grid.width
-			},100)
+			this.grid.children.push(this)
 		},
 		methods: {
 			_onClick() {

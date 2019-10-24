@@ -181,11 +181,7 @@
 		width: $countdown-width;
 		height: $countdown-height;
 		line-height: $countdown-height;
-		border-radius: $uni-border-radius-base;
 		margin: 5rpx;
-		border-width: 1rpx;
-		border-style: solid;
-		border-color: #000000;
 		text-align: center;
 		font-size: $uni-font-size-sm;
 	}
