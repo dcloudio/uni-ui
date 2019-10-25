@@ -144,7 +144,7 @@
 						itemIndex: indexBefore
 					})
 				})
-				console.log(this.lists)
+				// console.log(this.lists)
 				// #ifndef APP-NVUE
 				uni.createSelectorQuery()
 					.in(this)
