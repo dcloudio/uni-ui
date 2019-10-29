@@ -357,9 +357,9 @@
 
 	.uni-calendar__box-bg-text {
 		font-size: 200px;
-		font-style: italic;
 		font-weight: bold;
 		color: #faacae;
 		opacity: 0.1;
+		text-align: center;
 	}
 </style>
