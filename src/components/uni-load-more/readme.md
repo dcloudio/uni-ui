@@ -2,7 +2,7 @@
 
 用于列表中，做滚动加载使用，展示 loading 的各种状态，组件名：``uni-load-more``，代码块： uLoadMore。
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -19,19 +19,18 @@ export default {
 <uni-load-more :status="more"></uni-load-more>
 ```
 
-实际效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
 
-**属性说明：**
+### 属性说明
 
-|属性名		|类型|默认值	|说明|
-|---|----|---|---|
-|status	|String	|more|loading 的状态，可选值：more（loading前）、loading（loading中）、noMore（没有更多了）|
-|show-icon	|Boolean	|true|是否显示 loading 图标|
-|icon-type	|String	|auto|指定图标样式，可选值：snow（ios雪花加载样式）、circle（安卓环形加载样式）、auto（根据平台自动选择加载样式）。**注意：**APP-NVUE不支持此选项|
-|color	|String	|#777777|图标和文字颜色	**注意：**非APP-NVUE、H5平台不支持此选项|
-|content-text	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`|各状态文字说明|
+|属性名			|类型	|默认值																							|说明																																		|
+|---			|----	|---																							|---																																		|
+|status			|String	|more																							|loading 的状态，可选值：more（loading前）、loading（loading中）、noMore（没有更多了）														|
+|show-icon		|Boolean|true																							|是否显示 loading 图标																														|
+|icon-type		|String	|auto																							|指定图标样式，可选值：snow（ios雪花加载样式）、circle（安卓环形加载样式）、auto（根据平台自动选择加载样式）。**注意：**APP-NVUE不支持此选项|
+|color			|String	|#777777																						|图标和文字颜色**注意：**非APP-NVUE、H5平台不支持此选项																						|
+|content-text	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`	|各状态文字说明																																|
 
-**事件说明：**
+### 事件说明
 
 |事件名			|说明				|返回值						|
 |clickLoadMore	|点击加载更多时触发	|e.detail={status:'loading'}|

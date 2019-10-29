@@ -2,7 +2,7 @@
 
 带加减按钮的数字输入框，组件名：``uni-number-box``，代码块： uNumberBox。
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -21,9 +21,7 @@ export default {
 <uni-number-box @change="bindChange"></uni-number-box>
 ```
 
-实际效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
-
-**NumberBox 属性说明：**
+### 属性说明
 
 |属性名		|类型	|默认值	|说明					|
 |---		|----	|---	|---					|
@@ -33,11 +31,11 @@ export default {
 |step		|Number	|1		|每次点击改变的间隔大小	|
 |disabled	|Boolean|false	|是否为禁用状态			|
 
-**事件说明：**
+### 事件说明
 
-|事件名称	|说明		|
-|---|---|
-|change	|输入框值改变时触发的事件，参数为输入框当前的 value|
+|事件名称	|说明												|返回值	|
+|---		|---												|---	|
+|change		|输入框值改变时触发的事件，参数为输入框当前的 value	|-		|
 
 ### 插件预览地址
 

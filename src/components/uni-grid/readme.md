@@ -2,7 +2,7 @@
 
 宫格组件，组件名：``uni-grid``，代码块： uGrid。
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -14,11 +14,10 @@ export default {
 }
 ```
 
-
-
-**Grid 一般用法**
+在 ``template`` 中使用组件
 
 ```html
+<!-- 一般用法 -->
 <uni-grid :column="3">
 	<uni-grid-item>
 		<text class="text">文本</text>
@@ -30,11 +29,8 @@ export default {
 		<text class="text">文本</text>
 	</uni-grid-item>
 </uni-grid>
-```
 
-**Grid 添加角标红点**
-
-```html
+<!-- 添加角标红点 -->
 <uni-grid :column="3" :hor="35" :ver="-45">
 	<uni-grid-item marker="dot">
 		<text class="text">文本</text>
@@ -46,11 +42,8 @@ export default {
 		<text class="text">文本</text>
 	</uni-grid-item>
 </uni-grid>
-```
 
-**Gird 不带边框并矩形显示**
-
-```html
+<!-- 不带边框并矩形显示 -->
 <uni-grid :column="3" :show-border="false"  :square="false">
 	<uni-grid-item>
 		<text class="text">文本</text>
@@ -73,7 +66,7 @@ export default {
 </uni-grid>
 ```
 
-
+### 属性说明
 
 **uni-grid 属性说明：**
 
@@ -86,9 +79,8 @@ export default {
 |ver		|Number		|0		|全局 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动		|
 |square		|Boolean	|true	|是否方形显示																|
 |highlight	|Boolean	|true	|点击背景是否高亮															|
-|@change	|function	|	-	|点击 grid 触发，返回 event={detail:{index:0}},index 为当前点击 gird 下标	|
 
-**uni-grid-item 属性实名：**
+**uni-grid-item 属性说明：**
 
 |属性名		|类型	|默认值	|说明																							|
 |---		|----	|---	|---																							|
@@ -101,8 +93,13 @@ export default {
 |src		|String	|-		| **marker:image 下生效** ，marker 图片地址路径													|
 |imgWidth	|Number	|30		| **marker:image 下生效** ，marker 宽度，高度自适应												|
 
+### 事件说明
+|事件名	|说明			|返回值											|
+|---	|----			|---											|
+|@change|点击 grid 触发	|e={detail:{index:0}}，index 为当前点击 gird 下标|
 
-Tips
+**Tips**
+
 - marker:dot ， 暂不支持修改大小，和颜色
 - Grid 组件仅在自定义组件模式下支持
 - column 属性最大值最好不要超过 5 个，如果超过，注意内容显示

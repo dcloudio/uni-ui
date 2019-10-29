@@ -1,9 +1,9 @@
-## Popup 弹出层
+### Popup 弹出层
 
 弹出层组件，为了解决遮罩弹层的问题。组件名：``uni-popup``，代码块： uPopup。
 
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -14,24 +14,25 @@ export default {
 }
 ```
 
-**基本用法**
+在 ``template`` 中使用组件
 
 ```html
 <uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup>
 ```
 
-**属性说明：**
+### 属性说明
 
-|  属性名	|    类型	| 默认值| 说明															|
+| 属性名	| 类型		| 默认值| 说明															|
 | ---		| ---		| ---	| ---															|
 | animation	| Boolean	|true	| 是否开启动画													|
 | type		| String	|center	| 弹出方式，可选值：top（顶部），center（居中），bottom（底部）	|
-| show		| Boolean	|false	| 显示弹窗	|
+| show		| Boolean	|false	| 显示弹窗														|
 | maskClick	| Boolean	|true	| 蒙版点击是否关闭弹窗											|
 
 
-**方法说明：**
-通过 `ref` 获取组件方法
+### 方法说明
+
+通过 `ref` 获取组件调用方法
 
 |方法称名	|说明		|
 |---		|----		|
@@ -39,38 +40,12 @@ export default {
 |close		|关闭弹出层	|
 
 
-**事件说明：**
-通过 `ref` 获取组件方法
+### 事件说明
 
-|事件称名	|说明		|
-|---		|----		|
-|change		|打开关闭弹窗触发	e={show: false}|
+|事件称名	|说明				|返回值			|
+|---		|----				|---			|
+|change		|打开关闭弹窗触发	|e={show: false}|
 
-```html
-<view>
-	<button @click="openPopup">打开弹出层</button>
-	<uni-popup ref="popup" type="center">
-		弹出层示例
-		<button @click="closePopup">关闭弹出层</button>
-	</uni-popup>
-</view>
-```
-
-```javascript
-export default {
-	methods:{
-		openPopup(){
-			this.$refs.popup.open()
-		},
-		closePopup(){
-			this.$refs.popup.close()
-		}
-	}
-}
-```
-
-Tips 
-- show 的作用与 open() 效果一致 ，在使用中显示弹窗二者只能选择其一。如果使用 show 显示弹窗，那么关闭弹窗时，应将 show 置为 false
 
 ### 插件预览地址
 
