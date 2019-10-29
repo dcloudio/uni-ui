@@ -2,7 +2,7 @@
 
 展示可以折叠 / 展开的内容区域，组件名：``uni-collapse``、``uni-collapse-item``，代码块： uCollapse。
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -13,9 +13,10 @@ export default {
 }
 ```
 
-一般用法
+
 
 ```html
+<!-- 一般用法 -->
 <uni-collapse @change="change">
     <uni-collapse-item title="标题文字">
         <uni-list>
@@ -31,11 +32,8 @@ export default {
         <view style="padding: 30rpx;"> 禁用状态 </view>
     </uni-collapse-item>
 </uni-collapse>
-```
 
-手风琴效果
-
-```html
+<!-- 手风琴效果 -->
 <uni-collapse accordion="true">
     <uni-collapse-item title="标题文字">
         <view style="padding: 30rpx;">
@@ -53,12 +51,8 @@ export default {
         </view>
     </uni-collapse-item>
 </uni-collapse>
-```
 
-
-带图标
-
-```html
+<!-- 带图标 -->
 <uni-collapse>
     <uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
         <view style="padding: 30rpx;">
@@ -73,69 +67,44 @@ export default {
 </uni-collapse>
 ```
 
-**uniCollapse 属性说明：**
+### 属性说明
 
-|属性名|类型|默认值	|说明|
-|---|----|---|---|
-|accordion|Boolean|false|是否开启手风琴效果|
-
-
-**uniCollapse 事件说明：**
-
-|事件称名|说明|返回参数|
-|---|----|---|
-|change|切换面板时触发|activeNames（Array）：展开状态的uniCollapseItem的name值|
+|属性名		|类型	|默认值	|说明				|
+|---		|----	|---	|---				|
+|accordion	|Boolean|false	|是否开启手风琴效果	|
 
 
-**uniCollapse 方法说明：**
+### 事件说明
 
-|事件称名|说明|
-|---|----|---|
-|resize|通过 ref 使用，更新当前列表高度，只有 animation:true 下生效 |
+|事件称名	|说明			|返回参数												|
+|---		|----			|---													|
+|@change	|切换面板时触发	|activeNames（Array）：展开状态的uniCollapseItem的name值|
 
-**代码示例**
-```html
-<uni-collapse @change="change">
-    <uni-collapse-item ref="add" title="动画效果" :show-animation="true" open="true">
-        {{ content }}
-    </uni-collapse-item>
-</uni-collapse>
-```
 
-```javascript
-export default {
-	data() {
-		
-		return {
-			content: '一段短文字',
-		};
-	},
-	methods: {
-		onClick() {
-			this.content = "这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。这是一段长文字，高度会发生变化。"
-			this.$nextTick(() => {
-				this.$refs.add.resize();
-			});
-		}
-	}
-};
-```
+### 方法说明
 
-Tips
+|方法名称	|说明														|
+|---		|---														|
+|resize		|通过 ref 使用，更新当前列表高度，只有 animation:true 下生效|
+
+
+**Tips**
+
 - resize 方法解决动态添加数据，带动画的折叠面板高度不更新的问题
 - 需要在数据渲染完毕之后使用 `resize` 方法。推荐在 `this.nextTick()` 中使用
 
-**uniCollapseItem 属性说明：**
+### uniCollapseItem 属性说明
 
-|属性名|类型|默认值|说明|
-|---|----|---|---|
-|title|String|-|标题文字|
-|thumb|String|-|标题左侧缩略图|
-|disabled|Boolean|false|是否禁用|
-|open|Boolean|false|是否展开面板|
-|animation|String|false|开启动画|
+|属性名		|类型	|默认值	|说明			|
+|---		|----	|---	|---			|
+|title		|String	|-		|标题文字		|
+|thumb		|String	|-		|标题左侧缩略图	|
+|disabled	|Boolean|false	|是否禁用		|
+|open		|Boolean|false	|是否展开面板	|
+|animation	|String	|false	|开启动画		|
 
-Tips
+**Tips**
+
 - 本组件需要使用自定义组件模式，非自定义组件使用，会出现问题。
 
 ### 插件预览地址
