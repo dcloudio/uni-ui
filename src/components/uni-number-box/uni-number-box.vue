@@ -1,8 +1,12 @@
 <template>
 	<view class="uni-numbox">
-		<text :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }" @click="_calcValue('minus')" class="uni-numbox__minus">-</text>
+		<view @click="_calcValue('minus')" class="uni-numbox__minus">
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
+		</view>
 		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
-		<text :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }" @click="_calcValue('plus')" class="uni-numbox__plus">+</text>
+		<view @click="_calcValue('plus')" class="uni-numbox__plus">
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
+		</view>
 	</view>
 </template>
 <script>
@@ -95,10 +99,10 @@
 <style lang="scss" scoped>
 	$box-height: 35px;
 	/* #ifdef APP-NVUE */
-	$box-line-height: $box-height;
+	$box-line-height: 35px;
 	/* #endif */
 	$box-line-height: 26px;
-	$box-width: $box-height;
+	$box-width: 35px;
 
 	.uni-numbox {
 		/* #ifndef APP-NVUE */
@@ -124,10 +128,16 @@
 	}
 
 	.uni-numbox__minus {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		width: $box-width;
 		height: $box-height;
-		line-height: $box-line-height;
-		text-align: center;
+		// line-height: $box-line-height;
+		// text-align: center;
 		font-size: 20px;
 		color: $uni-text-color;
 		background-color: $uni-bg-color-grey;
@@ -140,12 +150,14 @@
 	}
 
 	.uni-numbox__plus {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		width: $box-width;
 		height: $box-height;
-		line-height: $box-line-height;
-		text-align: center;
-		font-size: 40rpx;
-		color: $uni-text-color;
 		border-width: 1rpx;
 		border-style: solid;
 		border-color: $uni-border-color;
@@ -153,6 +165,11 @@
 		border-bottom-right-radius: $uni-border-radius-base;
 		background-color: $uni-bg-color-grey;
 		border-left-width: 0;
+	}
+
+	.uni-numbox--text {
+		font-size: 40rpx;
+		color: $uni-text-color;
 	}
 
 	.uni-numbox--disabled {
