@@ -93,16 +93,12 @@
 	};
 </script>
 <style lang="scss" scoped>
-	@import "~@/uni.scss";
-	$box-height: 70rpx;
+	$box-height: 35px;
 	/* #ifdef APP-NVUE */
-	$box-line-height: 70rpx;
+	$box-line-height: $box-height;
 	/* #endif */
-	/* #ifdef APP-PLUS */
-
-	/* #endif */
-	$box-line-height: 62rpx;
-	$box-width: 70rpx;
+	$box-line-height: 26px;
+	$box-width: $box-height;
 
 	.uni-numbox {
 		/* #ifndef APP-NVUE */
@@ -111,12 +107,12 @@
 		flex-direction: row;
 		height: $box-height;
 		line-height: $box-height;
-		width: 240rpx;
+		width: 120px;
 	}
 
 	.uni-numbox__value {
 		background-color: $uni-bg-color;
-		width: 80rpx;
+		width: 40px;
 		height: $box-height;
 		text-align: center;
 		font-size: $uni-font-size-lg;
@@ -132,7 +128,7 @@
 		height: $box-height;
 		line-height: $box-line-height;
 		text-align: center;
-		font-size: 40rpx;
+		font-size: 20px;
 		color: $uni-text-color;
 		background-color: $uni-bg-color-grey;
 		border-width: 1rpx;

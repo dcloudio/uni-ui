@@ -95,12 +95,11 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: rgba(0, 0, 0, 0.4);
+		background-color: $uni-bg-color-mask;
 		opacity: 0;
 	}
 
 	.mask-ani {
-		// transition: all 0.3s;
 		transition-property: opacity;
 		transition-duration: 0.2s;
 	}

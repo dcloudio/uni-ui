@@ -64,17 +64,16 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "~@/uni.scss";
-	$tag-pd: 0px 32rpx;
-	$tag-small-pd: 0px 16rpx;
+	$tag-pd: 0px 16px;
+	$tag-small-pd: 0px 8px;
 
 	.uni-tag {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		padding: $tag-pd;
-		height: 60rpx;
-		line-height: 60rpx;
+		height: 30px;
+		line-height: 30px;
 		justify-content: center;
 		color: $uni-text-color;
 		border-radius: $uni-border-radius-base;
@@ -85,14 +84,14 @@
 	}
 
 	.uni-tag--circle {
-		border-radius: 30rpx;
+		border-radius: 15px;
 	}
 
 	.uni-tag--mark {
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
-		border-top-right-radius: 30rpx;
-		border-bottom-right-radius: 30rpx;
+		border-top-right-radius: 15px;
+		border-bottom-right-radius: 15px;
 	}
 
 	.uni-tag--disabled {
@@ -100,9 +99,9 @@
 	}
 
 	.uni-tag--small {
-		height: 40rpx;
+		height: 20px;
 		padding: $tag-small-pd;
-		line-height: 40rpx;
+		line-height: 20px;
 		font-size: $uni-font-size-sm;
 	}
 

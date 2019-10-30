@@ -79,11 +79,8 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	// 抽屉宽度
 	$drawer-width: 220px;
-
 	.uni-drawer {
 		/* #ifndef APP-NVUE */
 		display: block;

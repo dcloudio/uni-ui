@@ -10,7 +10,7 @@
 			<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
 			<!-- #endif -->
 			<input v-if="show" :focus="showSync" :placeholder="placeholder" @confirm="confirm" class="uni-searchbar__box-search-input"
-			 confirm-type="search" placeholder-style="color:#cccccc" type="text" v-model="searchVal" />
+			 confirm-type="search" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear">
 				<uni-icons color="#999999" class="" size="24" type="clear" />
@@ -30,11 +30,11 @@
 		props: {
 			placeholder: {
 				type: String,
-				default: "搜索"
+				default: "请输入搜索内容"
 			},
 			radius: {
 				type: [Number, String],
-				default: 5
+				default: 2
 			},
 			clearButton: {
 				type: String,
@@ -96,9 +96,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "@/uni.scss";
 	$uni-searchbar-height: 32px;
-
 
 	.uni-searchbar {
 		/* #ifndef APP-NVUE */
@@ -122,7 +120,7 @@
 		height: $uni-searchbar-height;
 		border-width: 1px;
 		border-style: solid;
-		border-color: #c8c7cc;
+		border-color: $uni-border-color;
 		border-radius: 5px;
 	}
 
@@ -134,13 +132,13 @@
 		width: 32px;
 		justify-content: center;
 		align-items: center;
-		color: #c8c7cc;
+		color: $uni-text-color-placeholder;
 	}
 
 	.uni-searchbar__box-search-input {
 		flex: 1;
-		font-size: 14px;
-		color: #333333;
+		font-size: $uni-font-size-base;
+		color: $uni-text-color;
 	}
 
 	.uni-searchbar__box-icon-clear {
@@ -150,8 +148,8 @@
 	}
 
 	.uni-searchbar__text-placeholder {
-		font-size: 14px;
-		color: #cccccc;
+		font-size: $uni-font-size-base;
+		color: $uni-text-color-placeholder;
 		margin-left: 5px;
 	}
 

@@ -109,16 +109,14 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-pagination {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		/* #ifdef APP-NVUE */
-		padding: 0 40rpx;
+		padding: 0 20px;
 		/* #endif */
-		width: 700rpx;
+		width: 350px;
 		position: relative;
 		overflow: hidden;
 		flex-direction: row;
@@ -140,17 +138,17 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		width: 120rpx;
-		height: 60rpx;
-		line-height: 60rpx;
+		width: 60px;
+		height: 30px;
+		line-height: 30px;
 		font-size: $uni-font-size-base;
 		position: relative;
-		background-color: #f8f8f8;
+		background-color: $uni-bg-color-grey;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		border-width: 1rpx;
+		border-width: 1px;
 		border-style: solid;
 		border-color: $uni-border-color;
 	}
@@ -172,20 +170,19 @@
 		display: flex;
 		/* #endif */
 		position: absolute;
-		left: 300rpx;
+		left: 150px;
 		top: 0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		width: 100rpx;
-		height: 60rpx;
-		line-height: 60rpx;
+		width: 50px;
+		height: 30px;
+		line-height: 30px;
 		font-size: $uni-font-size-base;
 		color: $uni-text-color;
 	}
 
 	.uni-pagination__num-current {
-		// color: $uni-color-primary;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */

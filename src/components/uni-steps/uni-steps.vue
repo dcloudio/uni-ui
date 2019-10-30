@@ -66,8 +66,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-steps {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -128,13 +126,13 @@
 	}
 
 	.uni-steps__row-title {
-		font-size: 14px;
+		font-size: $uni-font-size-base;
 		line-height: 16px;
 		text-align: center;
 	}
 
 	.uni-steps__column-title {
-		font-size: 14px;
+		font-size: $uni-font-size-base;
 		text-align: left;
 		line-height: 18px;
 	}
@@ -146,7 +144,7 @@
 	}
 
 	.uni-steps__column-desc {
-		font-size: 12px;
+		font-size: $uni-font-size-sm;
 		text-align: left;
 		line-height: 18px;
 	}

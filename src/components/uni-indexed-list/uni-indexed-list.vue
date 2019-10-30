@@ -226,8 +226,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-indexed-list {
 		position: absolute;
 		left: 0;

@@ -80,10 +80,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "~@/uni.scss";
-	$fav-height: 50rpx;
-	$fav-font-size: 28rpx;
-
+	$fav-height: 25px;
 
 	.uni-fav {
 		/* #ifndef APP-NVUE */
@@ -92,15 +89,15 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		width: 120rpx;
+		width: 60px;
 		height: $fav-height;
 		line-height: $fav-height;
 		text-align: center;
-		border-radius: 6rpx;
+		border-radius: 3px;
 	}
 
 	.uni-fav--circle {
-		border-radius: 60rpx;
+		border-radius: 30px;
 	}
 
 	.uni-fav-star {
@@ -108,8 +105,8 @@
 		display: flex;
 		/* #endif */
 		height: $fav-height;
-		line-height: 48rpx;
-		margin-right: 5rpx;
+		line-height: 24px;
+		margin-right: 3px;
 		align-items: center;
 		justify-content: center;
 	}
@@ -122,6 +119,6 @@
 		line-height: $fav-height;
 		align-items: center;
 		justify-content: center;
-		font-size: $fav-font-size;
+		font-size: $uni-font-size-base;
 	}
 </style>

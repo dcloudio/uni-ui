@@ -1,6 +1,8 @@
 <template>
 	<view>
-		<view class="uni-padding-wrap">
+		<text class="example-info">fab 悬浮按钮组件，可以方便用户快速创建一个收起的悬浮按钮组。</text>
+		<uni-section title="基本功能" type="line"></uni-section>
+		<view class="example-body">
 			<button class="btn" type="primary" @click="switchBtn(0)">切换菜单({{ directionStr }}显示)</button>
 			<button class="btn" type="primary" @click="switchBtn('left', 'bottom')">左下角显示</button>
 			<button class="btn" type="primary" @click="switchBtn('right', 'bottom')">右下角显示</button>
@@ -12,9 +14,11 @@
 </template>
 
 <script>
+	import uniSection from '@/components/uni-section/uni-section.vue'
 	import uniFab from '@/components/uni-fab/uni-fab.vue'
 	export default {
 		components: {
+			uniSection,
 			uniFab
 		},
 		data() {
@@ -88,71 +92,8 @@
 	}
 </script>
 
-<style>
-	page {
-		display: flex;
-		flex-direction: column;
-		box-sizing: border-box;
-		background-color: #efeff4
-	}
-
-	view {
-		font-size: 28upx;
-		line-height: inherit
-	}
-
-	.example {
-		padding: 0 30upx 30upx
-	}
-
-	.example-title {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 32upx;
-		color: #464e52;
-		padding: 30upx 30upx 30upx 50upx;
-		margin-top: 20upx;
-		position: relative;
-		background-color: #fdfdfd;
-		border-bottom: 1px #f5f5f5 solid
-	}
-
-	.example-title__after {
-		position: relative;
-		color: #031e3c
-	}
-
-	.example-title:after {
-		content: '';
-		position: absolute;
-		left: 30upx;
-		margin: auto;
-		top: 0;
-		bottom: 0;
-		width: 6upx;
-		height: 32upx;
-		background-color: #ccc
-	}
-
-	.example .example-title {
-		margin: 40upx 0
-	}
-
-	.example-body {
-		padding: 30upx;
-		background: #fff
-	}
-
-	.example-info {
-		padding: 30upx;
-		color: #3b4144;
-		background: #fff
-	}
-
-	.uni-padding-wrap {
-		padding-top: 200upx;
-	}
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
 
 	.btn {
 		margin: 30upx;

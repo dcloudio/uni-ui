@@ -27,7 +27,7 @@
 					</view>
 					<!-- 优先显示图标 -->
 					<view class="uni-navbar-btn-text uni-navbar__content_view" v-if="rightText.length && !rightIcon.length">
-						<text class="uni-nav-bar-text">{{ rightText }}</text>
+						<text class="uni-nav-bar-right-text">{{ rightText }}</text>
 					</view>
 					<slot name="right" />
 				</view>
@@ -113,16 +113,17 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "~@/uni.scss";
 	$nav-height: 44px;
-
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
-		font-size: 17px;
+		font-size: 34rpx;
 		/* #endif */
 		/* #ifndef APP-PLUS */
-		font-size: 16px;
+		font-size: $uni-font-size-lg;
 		/* #endif */
+	}
+	.uni-nav-bar-right-text {
+		font-size: $uni-font-size-base;
 	}
 
 	.uni-navbar {
@@ -163,7 +164,7 @@
 		/* #endif */
 		flex-wrap: nowrap;
 		width: 120rpx;
-		padding: 0 12rpx;
+		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
 	}
@@ -196,10 +197,9 @@
 		flex: 1;
 		align-items: center;
 		justify-content: center;
-		font-size: 30rpx;
+		font-size: $uni-font-size-base;
 	}
 
-	.uni-navbar__placeholder {}
 
 	.uni-navbar__placeholder-view {
 		height: $nav-height;

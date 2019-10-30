@@ -62,7 +62,7 @@
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
 
-	.title {
-		margin: 80rpx 0 20rpx 0;
+	.example-body {
+		padding: 10px;
 	}
 </style>

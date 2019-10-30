@@ -57,8 +57,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-indexed-list__list {
 		background-color: $uni-bg-color;
 		/* #ifndef APP-NVUE */

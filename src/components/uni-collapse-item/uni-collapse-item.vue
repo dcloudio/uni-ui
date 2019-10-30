@@ -88,7 +88,6 @@
 		},
 		methods: {
 			onClick() {
-				console.log(this.disabled);
 				if (this.disabled) {
 					return
 				}
@@ -120,15 +119,16 @@
 
 
 	.uni-collapse-cell--hover {
-		background-color: #f5f5f5;
+		background-color: $uni-bg-color-hover;
 	}
 
 	.uni-collapse-cell--open {
-		background-color: #f5f5f5;
+		background-color: $uni-bg-color-hover;
 	}
 
 	.uni-collapse-cell--disabled {
-		opacity: 0.3;
+		background-color: $uni-bg-color-hover;
+		// opacity: 0.3;
 	}
 
 
@@ -159,7 +159,7 @@
 	}
 
 	.uni-collapse-cell__title:active {
-		background-color: #f5f5f5;
+		background-color: $uni-bg-color-hover;
 	}
 
 	.uni-collapse-cell__title-img {
@@ -182,7 +182,7 @@
 
 	.uni-collapse-cell__title-text {
 		flex: 1;
-		font-size: $uni-font-size-lg;
+		font-size: $uni-font-size-base;
 		/* #ifndef APP-NVUE */
 		white-space: nowrap;
 		color: inherit;

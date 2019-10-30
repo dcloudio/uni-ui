@@ -181,7 +181,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 	.uni-icon {
 		font-family: uniicons;
@@ -193,10 +193,6 @@
 		text-decoration: none;
 		-webkit-font-smoothing: antialiased;
 	}
-
-	/* .uni-icon-plusempty:before {
-		content: '\e468';
-	} */
 
 	.fab-box {
 		position: fixed;

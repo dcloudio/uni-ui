@@ -99,12 +99,11 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
 	@import '@/common/uni-nvue.scss';
-	$nav-height: 60rpx;
+	$nav-height: 30px;
 
 	.uni-nav-bar-text {
-		font-size: $uni-font-size-lg;
+		font-size: $uni-font-size-base;
 	}
 
 	.city {
@@ -115,7 +114,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		// width: 160rpx;
-		margin-left: 8rpx;
+		margin-left: 4px;
 	}
 
 	.input-view {
@@ -125,10 +124,10 @@
 		flex-direction: row;
 		// width: 500rpx;
 		flex: 1;
-		background-color: #e7e7e7;
+		background-color: $uni-bg-color-grey;
 		height: $nav-height;
 		border-radius: 15px;
-		padding: 0 30rpx;
+		padding: 0 15px;
 		flex-wrap: nowrap;
 		margin: 7px 0;
 		line-height: $nav-height;
@@ -136,8 +135,6 @@
 
 	.input-uni-icon {
 		line-height: $nav-height;
-		// justify-content: center;
-		// align-items: center;
 	}
 
 	.nav-bar-input {
@@ -146,9 +143,9 @@
 		/* #ifdef APP-PLUS-NVUE */
 		width: 370rpx;
 		/* #endif */
-		padding: 0 10rpx;
-		font-size: $uni-font-size-lg;
-		background-color: #e7e7e7;
+		padding: 0 5px;
+		font-size: $uni-font-size-base;
+		background-color: $uni-bg-color-grey;
 	}
 
 	.example-body {
