@@ -342,6 +342,9 @@
 	}
 
 	.uni-calendar__box-bg {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		justify-content: center;
 		align-items: center;
 		position: absolute;
