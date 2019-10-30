@@ -97,9 +97,7 @@
 				textWidth: 0,
 				boxWidth: 0,
 				wrapWidth: '',
-				// #ifdef APP-PLUS
 				webviewHide: false,
-				// #endif
 				// #ifdef APP-NVUE
 				stopAnimation: false,
 				// #endif
