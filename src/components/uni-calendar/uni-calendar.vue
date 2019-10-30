@@ -132,7 +132,7 @@
 				this.$nextTick(() => {
 					setTimeout(() => {
 						this.show = false
-					}, 360)
+					}, 300)
 				})
 			},
 			confirm() {
@@ -208,7 +208,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		background-color: rgba(0, 0, 0, 0.4);
+		background-color: $uni-bg-color-mask;
 		transition-property: opacity;
 		transition-duration: 0.3s;
 		opacity: 0;
@@ -251,7 +251,7 @@
 		justify-content: center;
 		align-items: center;
 		height: 50px;
-		border-bottom-color: #f5f5f5;
+		border-bottom-color: $uni-border-color;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 	}
@@ -262,7 +262,7 @@
 		/* #endif */
 		flex-direction: row;
 		justify-content: space-between;
-		border-top-color: #f5f5f5;
+		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 1px;
 	}
@@ -280,22 +280,18 @@
 		padding-left: 10px;
 		height: 25px;
 		line-height: 25px;
-		border-right-color: rgba(0, 0, 0, 0.5);
-		border-right-style: solid;
-		border-right-width: 1px;
-		border-right-width: 0;
 		font-size: 12px;
 		border-top-left-radius: 25px;
 		border-bottom-left-radius: 25px;
-		color: rgba(253, 46, 50, 0.7);
-		background-color: rgba(241, 233, 233, 0.4);
+		color: $uni-text-color;
+		background-color: $uni-bg-color-hover;
 	}
 
 	.uni-calendar__header-text {
 		text-align: center;
 		width: 100px;
-		font-size: 14px;
-		color: #666;
+		font-size: $uni-font-size-base;
+		color: $uni-text-color;
 	}
 
 	.uni-calendar__header-btn-box {
@@ -312,10 +308,10 @@
 	.uni-calendar__header-btn {
 		width: 10px;
 		height: 10px;
-		border-left-color: #666;
+		border-left-color: $uni-text-color-placeholder;
 		border-left-style: solid;
 		border-left-width: 2px;
-		border-top-color: #666;
+		border-top-color: $uni-color-subtitle;
 		border-top-style: solid;
 		border-top-width: 2px;
 	}
@@ -358,7 +354,7 @@
 	.uni-calendar__box-bg-text {
 		font-size: 200px;
 		font-weight: bold;
-		color: #faacae;
+		color: $uni-text-color-grey;
 		opacity: 0.1;
 		text-align: center;
 	}

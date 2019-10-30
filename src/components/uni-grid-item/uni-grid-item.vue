@@ -29,7 +29,7 @@
 				index: 0,
 				openNum: 2,
 				width: 0,
-				borderColor: '#d0dee5'
+				borderColor: '#e5e5e5'
 			}
 		},
 		created() {
@@ -86,7 +86,7 @@
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
-		padding: 30rpx 0;
+		padding: 15px 0;
 	}
 
 	.uni-grid-item__box-item-square {
@@ -96,13 +96,13 @@
 	}
 
 	.uni-grid-item--image {
-		width: 50rpx;
-		height: 50rpx;
+		width: 25px;
+		height: 25px;
 	}
 
 	.uni-grid-item--text {
-		font-size: 26rpx;
-		margin-top: 10rpx;
+		font-size: $uni-font-size-sm;
+		margin-top: 5px;
 	}
 
 	.uni-grid-item__box-square {
@@ -112,16 +112,16 @@
 
 	.uni-grid-item--border {
 		position: relative;
-		border-bottom-color: #d0dee5;
+		border-bottom-color: $uni-border-color;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-		border-right-color: #d0dee5;
+		border-right-color: $uni-border-color;
 		border-right-style: solid;
 		border-right-width: 1px;
 	}
 
 	.uni-grid-item--border-top {
-		border-top-color: #d0dee5;
+		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 1px;
 		/* #ifndef APP-NVUE */
@@ -131,42 +131,7 @@
 	}
 
 	.uni-highlight:active {
-		background-color: #eee;
+		background-color: $uni-bg-color-hover;
 	}
 
-	.uni-grid-item__box-dot {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 20rpx;
-		height: 20rpx;
-		background-color: #ff5a5f;
-		border-radius: 50rpx;
-	}
-
-	.uni-grid-item__box-badge {
-		position: absolute;
-		top: 0;
-		right: 0;
-		z-index: 10;
-		justify-content: center;
-		align-items: center;
-		width: 0;
-		height: 0;
-	}
-
-	.uni-grid-item__box-image {
-		position: absolute;
-		top: 0;
-		right: 0;
-		justify-content: center;
-		align-items: center;
-		width: 100rpx;
-		height: 100rpx;
-		overflow: hidden;
-	}
-
-	.box-image {
-		width: 90rpx;
-	}
 </style>

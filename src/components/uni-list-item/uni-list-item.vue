@@ -160,6 +160,9 @@
 	}
 
 	.uni-list-item__content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		flex: 1;
 		overflow: hidden;
 		flex-direction: column;
@@ -168,7 +171,7 @@
 	}
 
 	.uni-list-item__content-title {
-		font-size: $uni-font-size-lg;
+		font-size: $uni-font-size-base;
 		color: #3b4144;
 		overflow: hidden;
 	}
@@ -176,12 +179,15 @@
 	.uni-list-item__content-note {
 		margin-top: 6rpx;
 		color: $uni-text-color-grey;
-		font-size: $uni-font-size-base;
+		font-size: $uni-font-size-sm;
 		overflow: hidden;
 	}
 
 	.uni-list-item__extra {
 		// width: 25%;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: center;

@@ -10,7 +10,6 @@
 	<uni-calendar 
 	:insert="true"
 	:lunar="true" 
-	:disable-before="true" 
 	:start-date="'2019-3-2'"
 	:end-date="'2019-5-20'"
 	@change="change"
@@ -41,14 +40,13 @@ export default {
 
 |  属性名		|    类型	| 默认值| 说明																													|
 | ---			| ---		| ---	| ---																													|
-| date			| String	|		| 自定义当前时间，默认为今天																							|
+| date			| String	|	-	| 自定义当前时间，默认为今天																							|
 | lunar			| Boolean	| false	| 显示农历																												|
-| disableBefore	| Boolean	| false	| 禁用今天之前的日期																									|
-| startDate		| String	|		| 日期选择范围-开始日期																									|
-| endDate		| String	|		| 日期选择范围-结束日期																									|
+| startDate		| String	|	-	| 日期选择范围-开始日期																									|
+| endDate		| String	|	-	| 日期选择范围-结束日期																									|
 | range			| Boolean	| false	| 范围选择																												|
 | insert		| Boolean	| false	| 插入模式,可选值，ture：弹窗模式；false：插入模式	；默认为插入模式																	|
-| selected		| Array		|		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
+| selected		| Array		|	-	| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
 
 ### 事件说明
 
@@ -160,9 +158,7 @@ export default {
         "astro": "巨蟹座"
     },
 	//打点信息
-    "clockinfo": {
-		// 是否打点
-        "have": true,
+    "extraInfo": {
 		// 打点日期
         "date": "2019-06-27",
 		// 打点描述

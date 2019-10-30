@@ -17,8 +17,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	@import '~@/uni.scss';
-
 	.uni-list {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -26,8 +24,17 @@
 		background-color: $uni-bg-color;
 		position: relative;
 		flex-direction: column;
-		border-bottom-color: $uni-border-color;
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
+		// border-bottom-color: $uni-border-color;
+		// border-bottom-style: solid;
+		// border-bottom-width: 1px;
 	}
+	/* #ifndef APP-NVUE */
+	.uni-list:before {
+		height: 0;
+	}
+	.uni-list:after {
+		height: 0;
+	}
+	/* #endif */
+
 </style>
