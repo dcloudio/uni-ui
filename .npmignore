@@ -1,9 +1,8 @@
-examples/
+build/
+dist/
 node_modules/
-packages/
 public/
 src/
-build/
 temp/
 babel.config.js
 postcss.config.js
@@ -11,5 +10,4 @@ vue.config.js
 package-lock.json
 .editorconfig
 LICENSE
-README.md
 uni.scss
