@@ -2,7 +2,7 @@
 
   <view class="uni-navbar">
     <view
-      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':border,'uni-navbar--border':border}"
+      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':shadow,'uni-navbar--border':border}"
       :style="{'background-color':backgroundColor}"
       class="uni-navbar__content">
       <uni-status-bar v-if="statusBar"/>
