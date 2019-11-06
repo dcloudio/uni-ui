@@ -106,7 +106,7 @@ export default {
 |uniNoticeBar				|'@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.vue'								|[通告栏](https://ext.dcloud.net.cn/plugin?id=30)				|
 |uniNumberBox				|'@dcloudio/uni-ui/lib/uni-number-box/uni-number-box.vue'								|[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)		|
 |uniPagination			|'@dcloudio/uni-ui/lib/uni-pagination/uni-pagination.vue'								|[分页器](https://ext.dcloud.net.cn/plugin?id=32)				|
-|uniPopUp						| '@dcloudio/uni-ui/lib/uni-pop-up/uni-pop-up.vue'											|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)			|
+|uniPopup						| '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'											|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)			|
 |uniRate						|'@dcloudio/uni-ui/lib/uni-rate/uni-rate.vue'														|[评分](https://ext.dcloud.net.cn/plugin?id=33)					|
 |uniSearchBar				| '@dcloudio/uni-ui/lib/uni-search-bar/uni-search-bar.vue'							|[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)			|
 |uniSegmentedControl|'@dcloudio/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue'	|[分段器](https://ext.dcloud.net.cn/plugin?id=54)				|
