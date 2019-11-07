@@ -82,7 +82,12 @@
 <style lang="scss" scoped>
 	.uni-popup {
 		position: fixed;
+		/* #ifdef H5 */
 		top: var(--window-top);
+		/* #endif */
+		/* #ifndef H5 */
+		top: 0;
+		/* #endif */
 		bottom: 0;
 		left: 0;
 		right: 0;
