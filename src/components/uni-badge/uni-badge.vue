@@ -16,7 +16,7 @@
 				default: false
 			},
 			text: {
-				type: String,
+				type: [String,Number],
 				default: ''
 			},
 			size: {
@@ -27,7 +27,7 @@
 		},
 		data() {
 			return {
-				width: `display: inline-block;width: ${this.text.length * 15 + 25}rpx`
+				width: `display: inline-block;width: ${String(this.text).length * 15 + 25}rpx`
 			};
 		},
 		methods: {
