@@ -1,4 +1,7 @@
 <template>
+	<!-- #ifdef APP-NVUE -->
+	<cell>
+	<!-- #endif -->
 	<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
 	 class="uni-list-item" @click="onClick">
 		<view class="uni-list-item__container" :class="{'uni-list-item--first':isFirstChild}">
@@ -9,6 +12,7 @@
 				<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
 			</view>
 			<view class="uni-list-item__content">
+				<slot />
 				<text class="uni-list-item__content-title">{{ title }}</text>
 				<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
 			</view>
@@ -19,6 +23,9 @@
 			</view>
 		</view>
 	</view>
+	<!-- #ifdef APP-NVUE -->
+	</cell>
+	<!-- #endif -->
 </template>
 
 <script>
