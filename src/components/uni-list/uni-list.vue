@@ -26,7 +26,7 @@
 			},
 			scrollY: {
 				type: [Boolean, String],
-				default: true
+				default: false
 			}
 		},
 		provide() {
