@@ -103,6 +103,12 @@
 				aniMaskShow: false
 			}
 		},
+		watch:{
+			selected(newVal){
+				this.cale.setSelectInfo(this.nowDate.fullDate,newVal)
+				this.weeks = this.cale.weeks
+			}
+		},
 		created() {
 			// 获取日历方法实例
 			this.cale = new Calendar({
@@ -360,5 +366,6 @@
 		color: $uni-text-color-grey;
 		opacity: 0.1;
 		text-align: center;
+		line-height: 1;
 	}
 </style>

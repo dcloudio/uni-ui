@@ -1,4 +1,5 @@
 ### Calendar 日历
+*已经支持在nvue页面中使用*
 
 日历组件，组件名：``uni-calendar``，代码块： uCalendar。  
 
