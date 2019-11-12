@@ -12,7 +12,7 @@
 </template>
 <script>
 	export default {
-		name: 'UniCountDown',
+		name: 'UniCountdown',
 		props: {
 			showDay: {
 				type: Boolean,

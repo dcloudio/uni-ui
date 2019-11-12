@@ -1,4 +1,5 @@
 ### CountDown 倒计时
+*已经支持在nvue页面中使用*
 
 倒计时组件，组件名：``uni-countdown``，代码块： uCountDown。
 

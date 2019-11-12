@@ -92,7 +92,7 @@ export default {
 |uniCalendar				| '@dcloudio/uni-ui/lib/uni-calendar/uni-calendar.vue'									|[日历](https://ext.dcloud.net.cn/plugin?id=56)					|
 |uniCard						|'@dcloudio/uni-ui/lib/uni-card/uni-card.vue'														|[卡片](https://ext.dcloud.net.cn/plugin?id=22)					|
 |uniCollapse				| '@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue'									|[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)			|
-|uniCountDown				|'@dcloudio/uni-ui/lib/uni-count-down/uni-count-down.vue'								| [倒计时](https://ext.dcloud.net.cn/plugin?id=25)			|
+|uniCountdown				|'@dcloudio/uni-ui/lib/uni-countdown/uni-countdown.vue'								| [倒计时](https://ext.dcloud.net.cn/plugin?id=25)			|
 |uniDrawer					|'@dcloudio/uni-ui/lib/uni-drawer/uni-drawer.vue'												|[抽屉](https://ext.dcloud.net.cn/plugin?id=26)					|
 |uniFab							|'@dcloudio/uni-ui/lib/uni-fab/uni-fab.vue'															|[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)		|
 |uniFav							| '@dcloudio/uni-ui/lib/uni-fav/uni-fav.vue'														|[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)		|

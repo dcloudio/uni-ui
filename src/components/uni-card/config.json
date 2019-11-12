@@ -3,7 +3,7 @@
 	"name": "Card",
 	"desc": "卡片",
 	"url": "card",
-	"edition": "1.1.4",
+	"edition": "1.1.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=22",
-	"update_log": "- 新增 插件在线示例"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

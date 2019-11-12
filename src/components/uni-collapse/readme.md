@@ -1,4 +1,5 @@
 ### Collapse 折叠面板
+*已经支持在nvue页面中使用*
 
 展示可以折叠 / 展开的内容区域，组件名：``uni-collapse``、``uni-collapse-item``，代码块： uCollapse。
 

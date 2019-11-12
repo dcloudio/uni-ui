@@ -12,9 +12,9 @@
 			}
 		},
 		{
-			"path": "pages/count-down/count-down",
+			"path": "pages/countdown/countdown",
 			"style": {
-				"navigationBarTitleText": "CountDown 倒计时"
+				"navigationBarTitleText": "Countdown 倒计时"
 			}
 		},
 		{
