@@ -1,4 +1,5 @@
 ### IndexedList 索引列表
+*已经支持在nvue页面中使用*
 
 用于展示索引列表，组件名：``uni-indexed-list``，代码块： uIndexedList。
 

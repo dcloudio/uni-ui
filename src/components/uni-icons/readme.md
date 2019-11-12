@@ -1,4 +1,5 @@
 ### Icons 图标
+*已经支持在nvue页面中使用*
 
 用于展示 icons，组件名：``uni-icons``，代码块： uIcons。
 

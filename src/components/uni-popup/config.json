@@ -3,7 +3,7 @@
 	"name": "PopUp",
 	"desc": "弹出层",
 	"url": "popup",
-	"edition": "1.1.5",
+	"edition": "1.1.6",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 新增 插件在线示例"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

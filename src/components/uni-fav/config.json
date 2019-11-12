@@ -3,7 +3,7 @@
 	"name": "Fav",
 	"desc": "收藏按钮",
 	"url": "fav",
-	"edition": "1.0.0",
+	"edition": "1.0.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=864",
-	"update_log": "- 新增 收藏组件"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

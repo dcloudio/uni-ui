@@ -1,4 +1,5 @@
 ### LoadMore 加载更多
+*已经支持在nvue页面中使用*
 
 用于列表中，做滚动加载使用，展示 loading 的各种状态，组件名：``uni-load-more``，代码块： uLoadMore。
 

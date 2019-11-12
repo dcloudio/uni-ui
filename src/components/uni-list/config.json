@@ -3,7 +3,7 @@
 	"name": "List",
 	"desc": "列表",
 	"url": "list",
-	"edition": "1.0.3",
+	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
-	"update_log": "- 优化 在 APP-NVUE 平台下的性能,使用原生 list 组件"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

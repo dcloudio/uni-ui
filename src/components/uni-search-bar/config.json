@@ -3,7 +3,7 @@
 	"name": "SearchBar",
 	"desc": "搜索栏",
 	"url": "search-bar",
-	"edition": "1.0.0",
+	"edition": "1.0.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=866",
-	"update_log": "- 新增 搜索栏组件"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

@@ -1,4 +1,5 @@
 ### SegmentedControl 分段器
+*已经支持在nvue页面中使用*
 
 用作不同视图的显示，组件名：``uni-segmented-control``，代码块： uSegmentedControl。
 

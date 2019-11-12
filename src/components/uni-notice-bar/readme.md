@@ -1,4 +1,5 @@
 ### NoticeBar 通告栏
+*已经支持在nvue页面中使用*
 
 通告栏组件，组件名：``uni-notice-bar``，代码块： uNoticeBar。
 

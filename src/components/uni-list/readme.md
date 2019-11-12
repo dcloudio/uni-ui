@@ -1,4 +1,5 @@
 ### List 列表
+*已经支持在nvue页面中使用*
 
 列表组件，组件名：``uni-list``、``uni-list-item``，代码块： uList。
 

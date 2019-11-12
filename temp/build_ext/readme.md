@@ -1,52 +1,122 @@
-### CountDown 倒计时
+### SwipeAction 滑动操作
 *已经支持在nvue页面中使用*
 
-倒计时组件，组件名：``uni-countdown``，代码块： uCountDown。
+通过滑动触发选项的容器，组件名：``uni-swipe-action``,代码块： uSwipeAction。
 
 ### 使用方式
 
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniCountdown from "@/components/uni-countdown.vue"
+import {uniSwipeAction} from "@dcloudio/uni-ui"
 export default {
-    components: {uniCountdown}
+    components: {uniSwipeAction}
 }
 ```
 
-在 ``template`` 中使用组件
+在 ``template`` 中的使用
 
 ```html
-<!-- 一般用法 -->
-<uni-countdown :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
+<!-- 基础用法 -->
+<uni-swipe-action :options="options" @click="onClick" @change="change">
+    <view class='cont'>SwipeAction 基础使用场景</view>
+</uni-swipe-action>
 
-<!-- 不显示天数 -->
-<uni-countdown :show-day="false" :hour="12" :minute="12" :second="12"></uni-countdown>
+<!-- 禁止滑动 -->
+<uni-swipe-action :disabled="true" :options="options">
+    <view class='cont'>点击按钮自动关闭</view>
+</uni-swipe-action>
 
-<!-- 修改颜色 -->
-<uni-countdown color="#FFFFFF" background-color="#00B26A" border-color="#00B26A" :day="1" :hour="2" :minute="30" :second="0"></uni-countdown>
+<!-- 与 List 组件使用 -->
+<uni-list>
+    <uni-swipe-action :options="options1">
+        <uni-list-item title="item1" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+    <uni-swipe-action :options="options2">
+        <uni-list-item title="item2" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+    <uni-swipe-action :options="options3">
+        <uni-list-item title="item3" show-arrow="false"></uni-list-item>
+    </uni-swipe-action>
+</uni-list>
 ```
+
+
+```javascript
+export default {
+  data(){
+    return {
+      options:[
+        {
+            text: '取消',
+            style: {
+                backgroundColor: '#007aff'
+            }
+        }, {
+            text: '确认',
+            style: {
+                backgroundColor: '#dd524d'
+            }
+        }
+      ]
+    }
+  },
+  methods:{
+    onClick(e){
+      console.log('当前点击的是第'+e.index+'个按钮，点击内容是'+e.content.text)
+    },
+    change(open){
+      console.log('当前开启状态：'+ open)
+    }
+  }
+}
+
+```
+
 
 ### 属性说明
 
-|属性名				|类型	|默认值	|说明				|
-|---				|----	|---	|---				|
-|background-color	|String	|#FFFFFF|背景色				|
-|color				|String	|#000000|文字颜色			|
-|splitor-color		|String	|#000000|割符号颜色			|
-|day				|Number	|0		|天数				|
-|hour				|Number	|0		|小时				|
-|minute				|Number	|0		|分钟				|
-|second				|Number	|0		|秒					|
-|show-day			|Boolean|true	|是否显示天数		|
-|show-colon			|Boolean|true	|是否以冒号为分隔符	|
+|属性名		|类型			|默认值	|是否必填	|说明										|
+|:--		|:--			|:--	|:--		|:--										|
+|show		|Boolean		|false	|否			|开启关闭组件，auto-close = false 时生效	|
+|disabled	|Boolean		|false	|否			|是否禁止滑动								|
+|auto-close	|Boolean		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	|
+|options	|Array<Object>	|-		|是			|组件选项内容及样式							|
+
+**options 参数说明**
+
+|参数	|类型	|是否必填	|说明																													|
+|:--	|:--	|:--		|:--																													|
+|text	|String	|是			|按钮的文字																												|
+|style	|Object	|否			|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：28rpx	|
 
 ### 事件说明
 
-|事件称名	|说明					|返回参数	|
-|---		|----					|---		|
-|@timeup		|倒计时时间到触发事件	|-			|
+|事件称名	|说明					|返回参数													|
+|:--		|:---					|:--														|
+|@click		|点击选项按钮时触发事件	|e = {content,index} ，content（点击内容）、index（下标）	|
+|@change	|组件打开或关闭时触发	|true：开启状态；false：关闭状态							|
 
-### 插件预览地址
+**Tips**
 
-[https://uniapp.dcloud.io/h5/pages/extUI/count-down/count-down](https://uniapp.dcloud.io/h5/pages/extUI/count-down/count-down)
+- iOS 端由于存在bounce效果，滑动体验略差，建议禁止bounce效果，禁止方式如下：
+
+```javascript
+{
+	"path": "swipe-action/swipe-action",
+	"style": {
+		"navigationBarTitleText": "SwipeAction 滑动操作",
+		"disableScroll":true,
+		"app-plus":{
+			"bounce":"none"
+		}
+	}
+}
+```
+
+- app 端 vue 页面、h5、微信小程序使用wxs ，nvue 页面使用 bindingx ，其他平台使用 js ，所以在各平台运行可能会有一些差别
+- nvue 页面使用bindingx ，为了效率，取消了多个 swipe-aciton 之间的联动操作，如需要请在业务层控制 show 实现相同效果
+
+### 插件预览地址 
+
+[https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action](https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action)

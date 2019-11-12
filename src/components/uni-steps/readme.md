@@ -1,4 +1,5 @@
 ### Steps 步骤条
+*已经支持在nvue页面中使用*
 
 评分组件，组件名：``uni-steps``，代码块： uSteps。
 

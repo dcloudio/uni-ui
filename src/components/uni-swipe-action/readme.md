@@ -1,4 +1,5 @@
 ### SwipeAction 滑动操作
+*已经支持在nvue页面中使用*
 
 通过滑动触发选项的容器，组件名：``uni-swipe-action``,代码块： uSwipeAction。
 
@@ -113,6 +114,8 @@ export default {
 }
 ```
 
+- app 端 vue 页面、h5、微信小程序使用wxs ，nvue 页面使用 bindingx ，其他平台使用 js ，所以在各平台运行可能会有一些差别
+- nvue 页面使用bindingx ，为了效率，取消了多个 swipe-aciton 之间的联动操作，如需要请在业务层控制 show 实现相同效果
 
 ### 插件预览地址 
 

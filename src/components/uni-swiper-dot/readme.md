@@ -1,4 +1,5 @@
 ### SwiperDod 轮播图指示点
+*已经支持在nvue页面中使用*
 
 自定义轮播图指示点，组件名：``uni-swiper-dot``，代码块： uSwiperDot。
 

@@ -3,7 +3,7 @@
 	"name": "SwipeAction",
 	"desc": "滑动操作",
 	"url": "swipe-action",
-	"edition": "1.0.4",
+	"edition": "1.0.7",
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
-	"update_log": "- 修复 在 H5 平台的报错Bug"
+	"update_log": "- 更新 插件"
 }
