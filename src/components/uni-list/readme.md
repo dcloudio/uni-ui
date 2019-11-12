@@ -65,6 +65,7 @@ export default {
 |show-extra-icon|Boolean|false	|左侧是否显示扩展图标																												|
 |extra-icon		|Object	|-		|扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	|
 |thumb			|String	|-		|左侧缩略图，若thumb有值，则不会显示扩展图标																						|
+|scroll-y       |Boolean|false	|允许纵向滚动，需要显式的设置其宽高|
 
 **uniListItem 事件说明：**
 
@@ -76,6 +77,8 @@ export default {
 **Tips**
 
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
+- 页面纵向滚动时，Android 平台不支持区域滚动，iOS 支持
+- iOS 有Bounce效果，Android 仅可滚动时有
 
 ### 插件预览地址
 
