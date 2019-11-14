@@ -2,7 +2,7 @@
 	<view>
 		<uni-section title="基本用法" type="line"></uni-section>
 		<view class="example-body">
-			<uni-search-bar @confirm="search" @input="input" @cancel="cancel" />
+			<uni-search-bar @confirm="search" @input="input" @cancel="cancel" fgColor="#ededed" bgColor="#ffffff" />
 			<view class="search-result">
 				<text class="search-result-text">当前输入为：{{ searchVal }}</text>
 			</view>
@@ -14,8 +14,8 @@
 		</view>
 		<uni-section title="控制清除按钮" type="line"></uni-section>
 		<view class="example-body">
-			<uni-search-bar radius="2" clearButton="always" @confirm="search" />
-			<uni-search-bar radius="2" clearButton="auto" @confirm="search" />
+			<uni-search-bar radius="5" clearButton="always" @confirm="search" />
+			<uni-search-bar radius="5" clearButton="auto" @confirm="search" />
 			<uni-search-bar radius="100" clearButton="no" @confirm="search" />
 		</view>
 	</view>
@@ -78,5 +78,6 @@
 		/* #ifndef APP-NVUE */
 		display: block;
 		/* #endif */
+		padding: 0px;
 	}
 </style>

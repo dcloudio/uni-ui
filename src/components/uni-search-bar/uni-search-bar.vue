@@ -34,7 +34,7 @@
 			},
 			radius: {
 				type: [Number, String],
-				default: 2
+				default: 5
 			},
 			clearButton: {
 				type: String,
@@ -104,7 +104,8 @@
 		/* #endif */
 		flex-direction: row;
 		position: relative;
-		padding: 8px 0;
+		padding: $uni-spacing-col-base;
+		background-color: $uni-bg-color;
 	}
 
 	.uni-searchbar__box {
@@ -118,10 +119,10 @@
 		flex-direction: row;
 		align-items: center;
 		height: $uni-searchbar-height;
-		border-width: 1px;
+		border-width: 0.5px;
 		border-style: solid;
 		border-color: $uni-border-color;
-		border-radius: 5px;
+		background-color: $uni-bg-color-grey;
 	}
 
 	.uni-searchbar__box-icon-search {
