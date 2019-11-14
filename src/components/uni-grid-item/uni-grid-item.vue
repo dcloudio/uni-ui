@@ -11,12 +11,8 @@
 </template>
 
 <script>
-	import uniBadge from '../uni-badge/uni-badge.vue'
 	export default {
 		name: 'UniGridItem',
-		components: {
-			uniBadge
-		},
 		inject: ['grid'],
 		data() {
 			return {

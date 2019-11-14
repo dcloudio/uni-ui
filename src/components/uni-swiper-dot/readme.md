@@ -8,7 +8,7 @@
 引用组件 
 
 ```javascript
-import {uniSwiperDot} from "uni-ui"
+import {uniSwiperDot} from "@components/uni-swiper-dot/uni-swiper-dot"
 export default {
     components: {uniSwiperDot}
 }

@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniIcons from "@/components/uni-icons/index.vue"
+import uniIcons from "@/components/uni-icons/uni-icons.vue"
 export default {
     components: {uniIcons}
 }
