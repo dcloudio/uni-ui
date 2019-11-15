@@ -206,7 +206,11 @@
 				"navigationBarTitleText": "Section 章节标题"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/transition/transition",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",

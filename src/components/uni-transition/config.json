@@ -1,0 +1,9 @@
+{
+	"id": "",
+	"name": "Transition",
+	"desc": "标签",
+	"url": "tag",
+	"edition": "1.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=35",
+	"update_log": "- 优化 可在nvue页面中使用"
+}

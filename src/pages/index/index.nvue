@@ -74,6 +74,9 @@
 					{
 						name: 'Tag 标签',
 						url: 'tag'
+					},{
+						name: 'Transition 过渡动画',
+						url:'transition'
 					}
 				],
 				functionals: [{
