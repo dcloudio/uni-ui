@@ -1,9 +1,9 @@
 {
 	"id": "",
 	"name": "Transition",
-	"desc": "标签",
-	"url": "tag",
-	"edition": "1.0.2",
-	"path": "https://ext.dcloud.net.cn/plugin?id=35",
-	"update_log": "- 优化 可在nvue页面中使用"
+	"desc": "过渡动画",
+	"url": "transition",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"update_log": "- 新增 uni-transition 过渡动画组件"
 }

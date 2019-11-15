@@ -3,7 +3,6 @@
 		<text class="example-info">过渡动画，通常用于元素的过渡效果，例如淡隐淡出效果，遮罩层的效果、放大缩小的效果等</text>
 		<uni-section title="基础过渡动画" type="line"></uni-section>
 		<view class="example-body">
-			<!-- <button class="transition-button" type="primary" @click="mask">透明遮罩</button> -->
 			<button class="transition-button" type="primary" @click="open(['fade'])">fade</button>
 			<button class="transition-button" type="primary" @click="open(['slide-top'])">slide-top</button>
 			<button class="transition-button" type="primary" @click="open(['slide-left'])">slide-left</button>
@@ -17,12 +16,12 @@
 			<button class="transition-button" type="primary" @click="mask">透明遮罩层</button>
 			<button class="transition-button" type="primary" @click="open(['fade','zoom-out','slide-top'])">slide-top && zoom-out && fade</button>
 			<button class="transition-button" type="primary" @click="open(['zoom-in','slide-bottom','fade'])">zoom-in && slide-bottom && fade</button>
-			<button class="transition-button" type="primary" @click="open(['slide-left','fade'])"> slide-left && fade</button>
+			<button class="transition-button" type="primary" @click="open(['slide-left','slide-top','fade'])"> slide-left && slide-top && fade</button>
 		</view>
 		<!-- 遮罩 -->
-		<uni-transition :mode-class="['fade']" :styles="maskClass" :show="show" @change="change" />
+		<uni-transition :mode-class="['fade']" :styles="maskClass" :show="show" @click="onTap" />
 		<!-- 过渡 -->
-		<uni-transition :mode-class="modeClass" :styles="transfromClass" :show="transShow" @change="change">
+		<uni-transition :duration="500" :mode-class="modeClass" :styles="transfromClass" :show="transShow" @click="onTap" @change="change">
 			<text class="box">Test</text>
 		</uni-transition>
 	</view>
@@ -40,7 +39,7 @@
 			return {
 				show: false,
 				transShow: false,
-				modeClass: 'fade',
+				modeClass: ['fade'],
 				maskClass: {
 					'position': 'fixed',
 					'bottom': 0,
@@ -72,8 +71,11 @@
 				this.modeClass = mode
 				this.transShow = !this.transShow
 			},
-			change() {
+			onTap() {
 				this.transShow = this.show = false
+			},
+			change(e){
+				console.log(e.detail);
 			}
 		}
 	}
@@ -89,7 +91,6 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		// justify-content: space-between;
 	}
 	.transition-button {
 		/* #ifndef APP-NVUE */

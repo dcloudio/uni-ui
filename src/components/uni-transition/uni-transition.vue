@@ -22,7 +22,7 @@
 				default: false
 			},
 			modeClass: {
-				type: [Array, String],
+				type: Array,
 				default () {
 					return []
 				}
@@ -59,7 +59,8 @@
 		computed: {
 			stylesObject() {
 				let styles = {
-					...this.styles
+					...this.styles,
+					'transition-duration': this.duration / 1000 + 's'
 				}
 				let transfrom = ''
 				for (let i in styles) {
@@ -70,7 +71,7 @@
 		},
 		methods: {
 			change() {
-				this.$emit('change', {
+				this.$emit('click', {
 					detail: this.isShow
 				})
 			},
@@ -108,6 +109,9 @@
 					if (!type) {
 						this.isShow = false
 					}
+					this.$emit('change', {
+						detail: this.isShow
+					})
 				})
 				// #endif
 				// #ifndef APP-NVUE
@@ -119,11 +123,14 @@
 						this.transform += `${styles[i]} `
 					}
 				}
-				if (!type) {
-					Promise.resolve().then(() => nextTick(this.duration)).then(() => {
+				Promise.resolve().then(() => nextTick(this.duration)).then(() => {
+					if (!type) {
 						this.isShow = false
+					}
+					this.$emit('change', {
+						detail: this.isShow
 					})
-				}
+				})
 				// #endif
 
 			},

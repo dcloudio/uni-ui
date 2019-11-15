@@ -8,7 +8,7 @@
 引用组件 
 
 ```javascript
-import uniTag from "@/components/tag/tag.vue"
+import uniTag from "@/components/uni-tag/uni-tag.vue"
 export default {
     components: {uniTag}
 }
