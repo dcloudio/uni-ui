@@ -6,12 +6,6 @@
 </template>
 
 <script>
-	let timer = null
-	const nextTick = (time = 50) => new Promise(resolve => {
-		clearTimeout(timer)
-		timer = setTimeout(resolve, time)
-		return timer
-	});
 	// #ifdef APP-NVUE
 	const animation = uni.requireNativePlugin('animation');
 	// #endif
@@ -48,12 +42,15 @@
 			};
 		},
 		watch: {
-			show(newVal) {
-				if (newVal) {
-					this.open()
-				} else {
-					this.close()
-				}
+			show: {
+				handler(newVal) {
+					if (newVal) {
+						this.open()
+					} else {
+						this.close()
+					}
+				},
+				immediate: true
 			}
 		},
 		computed: {
@@ -68,6 +65,14 @@
 				}
 				return transfrom
 			}
+		},
+		created() {
+			this.timer = null
+			this.nextTick = (time = 50) => new Promise(resolve => {
+				clearTimeout(this.timer)
+				this.timer = setTimeout(resolve, time)
+				return this.timer
+			});
 		},
 		methods: {
 			change() {
@@ -87,9 +92,9 @@
 					}
 				}
 				this.$nextTick(() => {
-					Promise.resolve().then(nextTick).then(() => {
+					setTimeout(() => {
 						this._animation(true)
-					})
+					}, 50)
 				})
 
 			},
@@ -123,7 +128,7 @@
 						this.transform += `${styles[i]} `
 					}
 				}
-				Promise.resolve().then(() => nextTick(this.duration)).then(() => {
+				Promise.resolve().then(() => this.nextTick(this.duration)).then(() => {
 					if (!type) {
 						this.isShow = false
 					}
@@ -156,10 +161,10 @@
 							styles.transform += `translateX(${type?'0':'-100%'}) `
 							break;
 						case 'zoom-in':
-							styles.transform += `scale(${type?1:0}) `
+							styles.transform += `scale(${type?1:0.8}) `
 							break;
 						case 'zoom-out':
-							styles.transform += `scale(${type?1:2}) `
+							styles.transform += `scale(${type?1:1.2}) `
 							break;
 					}
 				})
@@ -235,7 +240,7 @@
 	}
 
 	.zoom-in-in {
-		transform: scale(0);
+		transform: scale(0.8);
 	}
 
 	.zoom-out-active {
@@ -243,6 +248,6 @@
 	}
 
 	.zoom-out-in {
-		transform: scale(2);
+		transform: scale(1.2);
 	}
 </style>

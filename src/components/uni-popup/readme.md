@@ -47,6 +47,8 @@ export default {
 |---		|----				|---			|
 |change		|打开关闭弹窗触发	|e={show: false}|
 
+**Tips**
+- 在使用 `uni-popup` 时间，尽量将组件置于其他元素后面，避免出现层级问题
 
 ### 插件预览地址
 
