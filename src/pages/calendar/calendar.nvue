@@ -4,7 +4,7 @@
 		<uni-section title="插入模式" type="line"></uni-section>
 		<view>
 			<!-- 插入模式 -->
-			<uni-calendar :selected="info.selected" @change="change" />
+			<uni-calendar :selected="info.selected" @change="change" @monthSwitch="monthSwitch" />
 		</view>
 		<uni-section title="弹出模式" type="line"></uni-section>
 		<view class="example-body">
@@ -77,6 +77,9 @@
 			},
 			confirm(e) {
 				console.log('confirm 返回:', e)
+			},
+			monthSwitch(e) {
+				console.log('monthSwitchs 返回:', e)
 			}
 		}
 	}

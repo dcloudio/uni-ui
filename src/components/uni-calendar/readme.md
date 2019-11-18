@@ -51,10 +51,11 @@ export default {
 
 ### 事件说明
 
-|  事件名	|    类型	| 说明								|
-| ---		| ---		| ---								|
-| @change	| function	|  日期改变，`insert :ture` 时生效	    |
-| @confirm	| function	|  确认选择	`insert :false` 时生效	|
+|  事件名		| 说明								|
+| ---			| ---								|
+| @change		|  日期改变，`insert :ture` 时生效	|
+| @confirm		|  确认选择`insert :false` 时生效	|
+|@month-switch	| 切换月份时触发					|
 
 ### 方法说明
 在 `calendar` 组件上定义 `ref` 属性，通过 `ref` 属性使用方法。
