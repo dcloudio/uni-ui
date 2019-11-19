@@ -113,9 +113,8 @@ export default {
 	}
 }
 ```
-
+- 如果有动态显示隐藏组件之类的操作，请使用 `v-if` 而不是 `v-show`，因为组件内需要获取节点信息，v-show 之后不能正确获取
 - app 端 vue 页面、h5、微信小程序使用wxs ，nvue 页面使用 bindingx ，其他平台使用 js ，所以在各平台运行可能会有一些差别
-- nvue 页面使用bindingx ，为了效率，取消了多个 swipe-aciton 之间的联动操作，如需要请在业务层控制 show 实现相同效果
 
 ### 插件预览地址 
 

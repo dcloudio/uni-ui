@@ -3,7 +3,7 @@
 	"name": "SwipeAction",
 	"desc": "滑动操作",
 	"url": "swipe-action",
-	"edition": "1.0.7",
+	"edition": "1.0.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
-	"update_log": "- 更新 插件"
+	"update_log": "- 修复 组件见联动导致异常的 Bug\n- 新增 组件示例添加、删除的实现"
 }

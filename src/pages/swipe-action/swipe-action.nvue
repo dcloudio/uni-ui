@@ -195,7 +195,7 @@
 	@import '@/common/uni-nvue.scss';
 
 	.cont {
-		flex: 1;
+		flex:1;
 		height: 45px;
 		line-height: 45px;
 		padding: 0 15px;
