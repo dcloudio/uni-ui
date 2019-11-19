@@ -10,6 +10,7 @@
 	const animation = uni.requireNativePlugin('animation');
 	// #endif
 	export default {
+		name: 'uniTransition',
 		props: {
 			show: {
 				type: Boolean,
@@ -61,18 +62,19 @@
 				}
 				let transfrom = ''
 				for (let i in styles) {
-					transfrom += i + ':' + styles[i] + ';'
+					let line = this.toLine(i)
+					transfrom += line + ':' + styles[i] + ';'
 				}
 				return transfrom
 			}
 		},
 		created() {
-			this.timer = null
-			this.nextTick = (time = 50) => new Promise(resolve => {
-				clearTimeout(this.timer)
-				this.timer = setTimeout(resolve, time)
-				return this.timer
-			});
+			// this.timer = null
+			// this.nextTick = (time = 50) => new Promise(resolve => {
+			// 	clearTimeout(this.timer)
+			// 	this.timer = setTimeout(resolve, time)
+			// 	return this.timer
+			// });
 		},
 		methods: {
 			change() {
@@ -104,7 +106,8 @@
 			_animation(type) {
 				let styles = this.getTranfrom(type)
 				// #ifdef APP-NVUE
-				animation.transition(this.getEl(this.$refs['ani']), {
+				if(!this.$refs['ani']) return
+				animation.transition(this.$refs['ani'].ref, {
 					styles,
 					duration: this.duration, //ms
 					timingFunction: 'ease',
@@ -128,14 +131,16 @@
 						this.transform += `${styles[i]} `
 					}
 				}
-				Promise.resolve().then(() => this.nextTick(this.duration)).then(() => {
+				clearTimeout(this.timer)
+				this.timer = setTimeout(() => {
 					if (!type) {
 						this.isShow = false
 					}
 					this.$emit('change', {
 						detail: this.isShow
 					})
-				})
+
+				}, this.duration)
 				// #endif
 
 			},
@@ -182,8 +187,12 @@
 					return mode + '-' + type
 				}
 			},
-			getEl(el) {
-				return el.ref || null
+			// getEl(el) {
+			// 	console.log(el || el.ref || null);
+			// 	return el || el.ref || null
+			// },
+			toLine(name) {
+				return name.replace(/([A-Z])/g, "-$1").toLowerCase();
 			}
 		}
 	}

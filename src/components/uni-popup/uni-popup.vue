@@ -44,7 +44,7 @@
 					'top': 0,
 					'left': 0,
 					'right': 0,
-					'background-color': 'rgba(0, 0, 0, 0.4)'
+					'backgroundColor': 'rgba(0, 0, 0, 0.4)'
 				},
 				transClass: {
 					'position': 'fixed',
@@ -55,7 +55,6 @@
 		},
 		watch: {
 			type(newVal) {
-				console.log(newVal);
 				switch (this.type) {
 					case 'top':
 						this.ani = ['slide-top']
@@ -80,14 +79,14 @@
 							'position': 'fixed',
 							/* #ifndef APP-NVUE */
 							'display': 'flex',
-							'flex-direction': 'column',
+							'flexDirection': 'column',
 							/* #endif */
 							'bottom': 0,
 							'left': 0,
 							'right': 0,
 							'top': 0,
-							'justify-content': 'center',
-							'align-items': 'center'
+							'justifyContent': 'center',
+							'alignItems': 'center'
 						}
 
 						break
@@ -101,7 +100,6 @@
 				e.stopPropagation()
 			},
 			open() {
-				console.log('open');
 				this.showPopup = true
 				this.$nextTick(() => {
 					setTimeout(() => {

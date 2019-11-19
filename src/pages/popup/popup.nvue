@@ -56,12 +56,10 @@
 <script>
 	import uniSection from '@/components/uni-section/uni-section.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
 		components: {
 			uniSection,
-			uniPopup,
-			uniIcons
+			uniPopup
 		},
 		data() {
 			return {
@@ -116,7 +114,7 @@
 						break
 				}
 				this.type = type
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.$refs['show' + open].open()
 				})
 			},

@@ -1,6 +1,6 @@
 ### Transition 过渡动画
 
-元素的简单过渡动画，组件名：``uni-transition``
+元素的简单过渡动画，组件名：`uni-transition`
 
 ### 使用方式
 
@@ -17,7 +17,7 @@ export default {
 
 ```html
 <button type="primary">fade</button>
-<uni-transition :mode-class="['fade']" :styles="{'width':'100px','height':'100px';'background-color':'red'}" :show="show" @change="change" />
+<uni-transition :mode-class="['fade']" :styles="{'width':'100px','height':'100px';'backgroundColor':'red'}" :show="show" @change="change" />
 ```
 
 ```javascript
@@ -50,7 +50,7 @@ export default {
 |show		|Boolean|false	|控制组件显示或隐藏，	|
 |modeClass	|Array	|-		|过渡动画类型			|
 |duration	|Number	|300	|过渡动画持续时间		|
-|styles		|Object	|-		|组件样式，同 css 样式	|
+|styles		|Object	|-		|组件样式，同 css 样式，注意带’-‘连接符的属性需要使用小驼峰写法如：`backgroundColor:red`	|
 
 #### modeClass 类型说明说明
 **格式为** ：`['fade','slide-top']`
@@ -75,4 +75,3 @@ export default {
 |---		|---				|---			|
 |click		|点击组件触发		|-				|
 |change		|过渡动画结束时触发	| e = {detail:true}	|
-

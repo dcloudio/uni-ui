@@ -5,5 +5,5 @@
 	"url": "calendar",
 	"edition": "1.3.7",
 	"path": "https://ext.dcloud.net.cn/plugin?id=56",
-	"update_log": "-  修复 选择月份不能点击的Bug\n- 修复 切换月份选中每月1号的Bug\n- 修复 切换月份不返回事件的Bug"
+	"update_log": "- 修复 选择月份不能点击的Bug\n- 修复 切换月份选中每月1号的Bug\n- 修复 切换月份不返回事件的Bug"
 }
