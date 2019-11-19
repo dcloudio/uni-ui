@@ -81,7 +81,7 @@ export default {
 |show		|Boolean		|false	|否			|开启关闭组件，auto-close = false 时生效	|
 |disabled	|Boolean		|false	|否			|是否禁止滑动								|
 |auto-close	|Boolean		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	|
-|options	|Array<Object>	|-		|是			|组件选项内容及样式							|
+|options	|Array\Object	|-		|是			|组件选项内容及样式							|
 
 **options 参数说明**
 
@@ -93,7 +93,7 @@ export default {
 ### 事件说明
 
 |事件称名	|说明					|返回参数													|
-|:--		|:---					|:--														|
+|:--		|:---				|:--													|
 |@click		|点击选项按钮时触发事件	|e = {content,index} ，content（点击内容）、index（下标）	|
 |@change	|组件打开或关闭时触发	|true：开启状态；false：关闭状态							|
 
@@ -114,7 +114,8 @@ export default {
 }
 ```
 - 如果有动态显示隐藏组件之类的操作，请使用 `v-if` 而不是 `v-show`，因为组件内需要获取节点信息，v-show 之后不能正确获取
-- app 端 vue 页面、h5、微信小程序使用wxs ，nvue 页面使用 bindingx ，其他平台使用 js ，所以在各平台运行可能会有一些差别
+- swiperaction的跟手联动是非常考验性能的。为了提高交互体验，本组件在app 端 vue 页面、h5、微信小程序使用了wxs 技术，nvue 页面使用 bindingx 技术，可以达到流畅的体验。在其他小程序平台由于底层不支持优化技术，只能使用使用普通 js ，此时性能一般。
+- h5端运行报错的情况，已经在HBuilderX 2.4解决
 
 ### 插件预览地址 
 
