@@ -3,7 +3,7 @@
 	"name": "PopUp",
 	"desc": "弹出层",
 	"url": "popup",
-	"edition": "1.1.7",
+	"edition": "1.1.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 优化 动画更流畅\n- 修复 点击蒙版关闭后，再次打开弹框失败的Bug"
+	"update_log": "- 修复 type 值为静态的情况下,弹出错误的Bug"
 }

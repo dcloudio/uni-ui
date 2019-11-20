@@ -54,43 +54,46 @@
 			}
 		},
 		watch: {
-			type(newVal) {
-				switch (this.type) {
-					case 'top':
-						this.ani = ['slide-top']
-						this.transClass = {
-							'position': 'fixed',
-							'left': 0,
-							'right': 0,
-						}
-						break
-					case 'bottom':
-						this.ani = ['slide-bottom']
-						this.transClass = {
-							'position': 'fixed',
-							'left': 0,
-							'right': 0,
-							'bottom': 0
-						}
-						break
-					case 'center':
-						this.ani = ['zoom-out', 'fade']
-						this.transClass = {
-							'position': 'fixed',
-							/* #ifndef APP-NVUE */
-							'display': 'flex',
-							'flexDirection': 'column',
-							/* #endif */
-							'bottom': 0,
-							'left': 0,
-							'right': 0,
-							'top': 0,
-							'justifyContent': 'center',
-							'alignItems': 'center'
-						}
+			type: {
+				handler: function(newVal) {
+					switch (this.type) {
+						case 'top':
+							this.ani = ['slide-top']
+							this.transClass = {
+								'position': 'fixed',
+								'left': 0,
+								'right': 0,
+							}
+							break
+						case 'bottom':
+							this.ani = ['slide-bottom']
+							this.transClass = {
+								'position': 'fixed',
+								'left': 0,
+								'right': 0,
+								'bottom': 0
+							}
+							break
+						case 'center':
+							this.ani = ['zoom-out', 'fade']
+							this.transClass = {
+								'position': 'fixed',
+								/* #ifndef APP-NVUE */
+								'display': 'flex',
+								'flexDirection': 'column',
+								/* #endif */
+								'bottom': 0,
+								'left': 0,
+								'right': 0,
+								'top': 0,
+								'justifyContent': 'center',
+								'alignItems': 'center'
+							}
 
-						break
-				}
+							break
+					}
+				},
+				immediate: true
 			}
 		},
 		created() {},
