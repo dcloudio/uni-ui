@@ -5,5 +5,5 @@
 	"url": "grid",
 	"edition": "1.1.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=27",
-	"update_log": "- 修复 正方形宫格在某些平台下显示正常的Bug\n- 修复 不能动态加载宫格的Bug,添加动态加载数据示例"
+	"update_log": "- 修复 正方形宫格在某些平台下显示正常的Bug\n- 修复 不能动态加载宫格的Bug,添加动态加载数据示例\n- 新增 示例添加角标效果"
 }

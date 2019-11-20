@@ -28,16 +28,6 @@
 				type: String,
 				default: '#e5e5e5'
 			},
-			// 全局标记水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动
-			hor: {
-				type: Number,
-				default: 0
-			},
-			// 全局标记垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动
-			ver: {
-				type: Number,
-				default: 0
-			},
 			// 是否正方形显示,默认为 true
 			square: {
 				type: Boolean,
@@ -88,13 +78,13 @@
 					.select(`#${this.elId}`)
 					.boundingClientRect()
 					.exec(ret => {
-						this.width = parseInt((ret[0].width-1) / this.column) + 'px'
+						this.width = parseInt(ret[0].width / this.column) - 1 + 'px'
 						fn(this.width)
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['uni-grid'], (ret) => {
-					this.width = parseInt((ret.size.width-1) / this.column) + 'px'
+					this.width = parseInt(ret.size.width / this.column) - 1 + 'px'
 					fn(this.width)
 				})
 				// #endif

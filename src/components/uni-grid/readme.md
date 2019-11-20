@@ -31,19 +31,6 @@ export default {
 	</uni-grid-item>
 </uni-grid>
 
-<!-- 添加角标红点 -->
-<uni-grid :column="3" :hor="35" :ver="-45">
-	<uni-grid-item marker="dot">
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item marker="badge" text="99" type="success">
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item marker="image" :hor="35" :ver="-45" :img-width="25" src="https://img-cdn-qiniu.dcloud.net.cn/uni-ui/recommend.png">
-		<text class="text">文本</text>
-	</uni-grid-item>
-</uni-grid>
-
 <!-- 不带边框并矩形显示 -->
 <uni-grid :column="3" :show-border="false"  :square="false">
 	<uni-grid-item>
@@ -71,28 +58,13 @@ export default {
 
 **uni-grid 属性说明：**
 
-|属性名		|类型		|默认值	|说明																		|
-|---		|----		|---	|---																		|
-|column		|Number		|3		|每列显示个数																|
-|showBorder	|Boolean	|true	|是否显示边框																|
-|borderColor|String		|#d0dee5|边框颜色																	|
-|hor		|Number		|0		|全局 marker 水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动		|
-|ver		|Number		|0		|全局 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动		|
-|square		|Boolean	|true	|是否方形显示																|
-|highlight	|Boolean	|true	|点击背景是否高亮															|
-
-**uni-grid-item 属性说明：**
-
-|属性名		|类型	|默认值	|说明																							|
-|---		|----	|---	|---																							|
-|marker		|String	|-		| marker 类型，可选值，dot：圆点；badge：角标；image：图片； 默认不显示							|
-|hor		|Number	|0		| 局部 marker 水平方向移动距离 ，起点为中心，负数为左移动，正数为右移动，可覆盖全局 hor			|
-|ver		|Number	|0		| 局部 marker 垂直方向移动距离 ，起点为中心，负数为上移动，正数为下移动，可覆盖全局 ver			|
-|type		|String	|-		| **marker:badge 下生效** ，marker 显示内容，如果为汉字最多长度最大为1							|
-|size		|String	|normal	| **marker:badge 下生效** ，marker 大小，可取值：normal、small									|
-|inverted	|Boolean|false	| **marker:badge 下生效** ，marker 是否无需背景颜色，为 true 时，背景颜色将变为文字的字体颜色	|
-|src		|String	|-		| **marker:image 下生效** ，marker 图片地址路径													|
-|imgWidth	|Number	|30		| **marker:image 下生效** ，marker 宽度，高度自适应												|
+|属性名		|类型	|默认值	|说明				|
+|---		|----	|---	|---				|
+|column		|Number	|3		|每列显示个数		|
+|showBorder	|Boolean|true	|是否显示边框		|
+|borderColor|String	|#d0dee5|边框颜色			|
+|square		|Boolean|true	|是否方形显示		|
+|highlight	|Boolean|true	|点击背景是否高亮	|
 
 ### 事件说明
 |事件名	|说明			|返回值											|
@@ -101,7 +73,7 @@ export default {
 
 **Tips**
 
-- marker:dot ， 暂不支持修改大小，和颜色
+- 删除组件自带圆点角标效果，完全交给用户实现，示例有简单角标效果实现
 - Grid 组件仅在自定义组件模式下支持
 - column 属性最大值最好不要超过 5 个，如果超过，注意内容显示
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
