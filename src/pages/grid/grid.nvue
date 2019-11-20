@@ -10,6 +10,18 @@
 				</uni-grid-item>
 			</uni-grid>
 		</view>
+		<uni-section title="动态加载宫格" type="line"></uni-section>
+		<view class="example-body">
+			<view v-if="dynamicList.length!==0" class="box">
+				<uni-grid :column="3" :highlight="true" @change="change">
+					<uni-grid-item v-for="(item, index) in dynamicList" :key="index">
+						<image :src="item.url" class="image" mode="aspectFill" />
+						<text class="text">{{ item.text }}</text>
+					</uni-grid-item>
+				</uni-grid>
+			</view>
+			<button type="primary" @click="add">点击添加一个宫格</button>
+		</view>
 		<uni-section title="无边框（3列）" type="line"></uni-section>
 		<view class="example-body">
 			<uni-grid :column="3" :show-border="false" :square="false" @change="change">
@@ -85,6 +97,7 @@
 		},
 		data() {
 			return {
+				dynamicList: [],
 				list: [{
 						url: '/static/c1.png',
 						text: 'Grid 1'
@@ -129,7 +142,23 @@
 				let {
 					index
 				} = e.detail
-				console.log(index)
+				uni.showToast({
+					title: `点击第${index+1}个宫格`,
+					icon: 'none'
+				})
+			},
+			add() {
+				if (this.dynamicList.length < 9) {
+					this.dynamicList.push({
+						url: `/static/c${this.dynamicList.length+1}.png`,
+						text: `Grid ${this.dynamicList.length+1}`
+					})
+				} else {
+					uni.showToast({
+						title: '最多添加9个',
+						icon: 'none'
+					});
+				}
 			}
 		}
 	}
@@ -152,5 +181,9 @@
 		/* #ifndef APP-NVUE */
 		display: block;
 		/* #endif */
+	}
+
+	.box {
+		margin-bottom: 15px;
 	}
 </style>

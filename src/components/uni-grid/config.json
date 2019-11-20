@@ -3,7 +3,7 @@
 	"name": "Grid",
 	"desc": "宫格",
 	"url": "grid",
-	"edition": "1.1.7",
+	"edition": "1.1.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=27",
-	"update_log": "- 修复 使用HBuilderX导入示例项目报错的问题"
+	"update_log": "- 修复 正方形宫格在某些平台下显示正常的Bug\n- 修复 不能动态加载宫格的Bug,添加动态加载数据示例"
 }

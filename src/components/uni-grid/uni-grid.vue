@@ -8,7 +8,7 @@
 
 <script>
 	// #ifdef APP-NVUE
-	const dom = weex.requireModule('dom');
+	const dom = uni.requireNativePlugin('dom');
 	// #endif
 	export default {
 		name: 'UniGrid',
@@ -66,15 +66,18 @@
 			this.index = 0
 		},
 		mounted() {
-			setTimeout(() => {
-				this._getSize((width) => {
-					this.children.forEach((item, index) => {
-						item.width = width
-					})
-				})
-			}, 50)
+			this.init()
 		},
 		methods: {
+			init() {
+				setTimeout(() => {
+					this._getSize((width) => {
+						this.children.forEach((item, index) => {
+							item.width = width
+						})
+					})
+				}, 50)
+			},
 			change(e) {
 				this.$emit('change', e)
 			},
@@ -85,13 +88,13 @@
 					.select(`#${this.elId}`)
 					.boundingClientRect()
 					.exec(ret => {
-						this.width = parseInt(ret[0].width / this.column) - 1 + 'px'
+						this.width = parseInt((ret[0].width-1) / this.column) + 'px'
 						fn(this.width)
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['uni-grid'], (ret) => {
-					this.width = parseInt(ret.size.width / this.column) - 1 + 'px'
+					this.width = parseInt((ret.size.width-1) / this.column) + 'px'
 					fn(this.width)
 				})
 				// #endif
