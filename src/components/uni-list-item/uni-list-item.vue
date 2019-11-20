@@ -1,29 +1,29 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
 	<cell>
-	<!-- #endif -->
-	<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
-	 class="uni-list-item" @click="onClick">
-		<view class="uni-list-item__container" :class="{'uni-list-item--first':isFirstChild}">
-			<view v-if="thumb" class="uni-list-item__icon">
-				<image :src="thumb" class="uni-list-item__icon-img" />
-			</view>
-			<view v-else-if="showExtraIcon" class="uni-list-item__icon">
-				<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
-			</view>
-			<view class="uni-list-item__content">
-				<slot />
-				<text class="uni-list-item__content-title">{{ title }}</text>
-				<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
-			</view>
-			<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra">
-				<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
-				<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
-				<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+		<!-- #endif -->
+		<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
+		 class="uni-list-item" @click="onClick">
+			<view class="uni-list-item__container" :class="{'uni-list-item--first':isFirstChild}">
+				<view v-if="thumb" class="uni-list-item__icon">
+					<image :src="thumb" class="uni-list-item__icon-img" />
+				</view>
+				<view v-else-if="showExtraIcon" class="uni-list-item__icon">
+					<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
+				</view>
+				<view class="uni-list-item__content">
+					<slot />
+					<text class="uni-list-item__content-title">{{ title }}</text>
+					<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
+				</view>
+				<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra">
+					<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
+					<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
+					<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+				</view>
 			</view>
 		</view>
-	</view>
-	<!-- #ifdef APP-NVUE -->
+		<!-- #ifdef APP-NVUE -->
 	</cell>
 	<!-- #endif -->
 </template>
@@ -147,6 +147,7 @@
 	}
 
 	.uni-list-item__container {
+		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
@@ -157,14 +158,35 @@
 		position: relative;
 		justify-content: space-between;
 		align-items: center;
+		/* #ifdef APP-PLUS */
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
-		border-top-width: 1px;
+		border-top-width: 0.5px;
+		/* #endif */
 	}
-
 	.uni-list-item--first {
 		border-top-width: 0px;
 	}
+	/* #ifndef APP-NVUE */
+	.uni-list-item__container:after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: $uni-border-color;
+	}
+	.uni-list-item--first:after {
+		height: 0px;
+	}
+	/* #endif */
+
+
+	
+	
 
 	.uni-list-item__content {
 		/* #ifndef APP-NVUE */
