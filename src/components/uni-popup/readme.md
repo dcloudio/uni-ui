@@ -18,7 +18,19 @@ export default {
 在 ``template`` 中使用组件
 
 ```html
+<button @clcik="open">打开弹窗</button>
 <uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup>
+```
+
+```javascript
+export default {
+   methods:{
+      open(){
+         this.$refs.popup.open()
+      }
+   }
+
+}
 ```
 
 ### 属性说明
@@ -27,7 +39,6 @@ export default {
 | ---		| ---		| ---	| ---															|
 | animation	| Boolean	|true	| 是否开启动画													|
 | type		| String	|center	| 弹出方式，可选值：top（顶部），center（居中），bottom（底部）	|
-| show		| Boolean	|false	| 显示弹窗														|
 | maskClick	| Boolean	|true	| 蒙版点击是否关闭弹窗											|
 
 
