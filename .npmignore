@@ -3,7 +3,7 @@ dist/
 node_modules/
 public/
 src/
-temp/build_ext/
+temp/
 babel.config.js
 postcss.config.js
 vue.config.js

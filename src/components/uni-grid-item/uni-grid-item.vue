@@ -55,6 +55,7 @@
 	.uni-grid-item {
 		/* #ifndef APP-NVUE */
 		height: 100%;
+		display: flex;
 		/* #endif */
 	}
 
