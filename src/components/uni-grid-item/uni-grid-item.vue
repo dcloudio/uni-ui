@@ -36,7 +36,8 @@
 			this.borderColor = this.grid.borderColor
 			this.index = this.grid.index++
 			this.grid.children.push(this)
-			this.grid.init()
+			// this.grid.init()
+			this.width = this.grid.width
 		},
 		methods: {
 			_onClick() {

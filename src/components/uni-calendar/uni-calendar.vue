@@ -378,6 +378,8 @@
 		color: $uni-text-color-grey;
 		opacity: 0.1;
 		text-align: center;
+		/* #ifndef APP-NVUE */
 		line-height: 1;
+		/* #endif */
 	}
 </style>
