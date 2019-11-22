@@ -18,7 +18,7 @@ export default {
 在 ``template`` 中使用组件
 
 ```html
-<button @clcik="open">打开弹窗</button>
+<button @click="open">打开弹窗</button>
 <uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup>
 ```
 

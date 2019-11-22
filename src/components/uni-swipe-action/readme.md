@@ -8,9 +8,13 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniSwipeAction} from "@dcloudio/uni-ui"
+import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
+import uniSwipeActionItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'
 export default {
-    components: {uniSwipeAction}
+    components: {
+		uniSwipeAction,
+		uniSwipeActionItem
+	}
 }
 ```
 
@@ -18,27 +22,31 @@ export default {
 
 ```html
 <!-- 基础用法 -->
-<uni-swipe-action :options="options" @click="onClick" @change="change">
-    <view class='cont'>SwipeAction 基础使用场景</view>
+<uni-swipe-action>
+	<uni-swipe-action-item :options="options" @click="onClick" @change="change">
+		<view class='cont'>SwipeAction 基础使用场景</view>
+	</uni-swipe-action-item>
 </uni-swipe-action>
 
 <!-- 禁止滑动 -->
-<uni-swipe-action :disabled="true" :options="options">
-    <view class='cont'>点击按钮自动关闭</view>
+<uni-swipe-action>
+	<uni-swipe-action-item :disabled="true" :options="options">
+		<view class='cont'>SwipeAction 基础使用场景</view>
+	</uni-swipe-action-item>
 </uni-swipe-action>
 
-<!-- 与 List 组件使用 -->
-<uni-list>
-    <uni-swipe-action :options="options1">
+<!-- 按组使用 -->
+<uni-swipe-action>
+    <uni-swipe-action-item :options="options1">
         <uni-list-item title="item1" show-arrow="false"></uni-list-item>
-    </uni-swipe-action>
-    <uni-swipe-action :options="options2">
+    </uni-swipe-action-item>
+    <uni-swipe-action-item :options="options2">
         <uni-list-item title="item2" show-arrow="false"></uni-list-item>
-    </uni-swipe-action>
-    <uni-swipe-action :options="options3">
+    </uni-swipe-action-item>
+    <uni-swipe-action-item :options="options3">
         <uni-list-item title="item3" show-arrow="false"></uni-list-item>
-    </uni-swipe-action>
-</uni-list>
+    </uni-swipe-action-item>
+</uni-swipe-action>
 ```
 
 

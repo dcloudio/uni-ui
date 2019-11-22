@@ -1,6 +1,8 @@
 {
+	"id":"55",
 	"name": "@dcloudio/uni-ui",
-	"version": "1.0.9",
+	"version": "1.0.8",
+	"description":"修复 已知Bug",
 	"author": "",
 	"license": "Apache-2.0",
 	"scripts": {
