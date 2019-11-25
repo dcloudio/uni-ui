@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniNoticeBar} from "uni-ui"
+import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 export default {
     components: {uniNoticeBar}
 }

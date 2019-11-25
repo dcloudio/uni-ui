@@ -8,7 +8,8 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniCollapse,uniCollapseItem} from "uni-ui"
+import uniCollapse from '@/components/uni-collapse/uni-collapse.vue'
+import uniCollapseItem from '@/components/uni-collapse-item/uni-collapse-item.vue'
 export default {
     components: {uniCollapse,uniCollapseItem}
 }

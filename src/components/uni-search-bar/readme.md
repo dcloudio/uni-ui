@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniSearchBar} from "uni-ui"
+import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
 export default {
     components: {uniSearchBar}
 }

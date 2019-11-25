@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniPagination} from "uni-ui"
+import uniPagination from '@/components/uni-pagination/uni-pagination.vue'
 export default {
     components: {uniPagination}
 }

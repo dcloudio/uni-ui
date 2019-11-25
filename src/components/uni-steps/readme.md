@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import {uniSteps} from "uni-ui"
+import uniSteps from '@/components/uni-steps/uni-steps.vue'
 export default {
     components: {uniSteps}
 }
