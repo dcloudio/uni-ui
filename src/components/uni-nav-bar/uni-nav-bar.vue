@@ -89,7 +89,7 @@
 			},
 			shadow: {
 				type: [String, Boolean],
-				default: true
+				default: false
 			},
 			border: {
 				type: [String, Boolean],
