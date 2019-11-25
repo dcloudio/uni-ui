@@ -22,18 +22,18 @@ export default {
 
 ### 属性说明
 
-|属性名				|类型	|默认值											|说明																						|
-|---				|----	|---											|---																						|
-|title				|String	|-												|标题文字																					|
-|left-text			|String	|-												|右侧按钮文本																				|
-|right-text			|String	|-												|右侧按钮文本																				|
-|left-icon			|String	|-												|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
-|right-icon			|String	|-												|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
-|fixed				|Boolean|false											|是否固定顶部																				|
-|status-bar			|Boolean|false（fixed为true时，status-bar默认值为true）	|是否包含状态栏，																			|
-|shadow				|Boolean|true											|导航栏下是否有阴影																			|
-|color				|String	|#000000										|图标和文字颜色																				|
-|background-color	|String	|#FFFFFF										|导航栏背景颜色																				|
+|属性名				|类型	|默认值	|说明																						|
+|---				|----	|---	|---																						|
+|title				|String	|-		|标题文字																					|
+|left-text			|String	|-		|右侧按钮文本																				|
+|right-text			|String	|-		|右侧按钮文本																				|
+|left-icon			|String	|-		|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
+|right-icon			|String	|-		|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
+|fixed				|Boolean|false	|是否固定顶部																				|
+|status-bar			|Boolean|false	|是否包含状态栏，																			|
+|shadow				|Boolean|false	|导航栏下是否有阴影																			|
+|color				|String	|#000000|图标和文字颜色																				|
+|background-color	|String	|#FFFFFF|导航栏背景颜色																				|
 
 ### 插槽说明
 
