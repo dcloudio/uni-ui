@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-navbar">
-		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': border, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
+		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">

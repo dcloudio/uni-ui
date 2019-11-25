@@ -57,8 +57,8 @@ export default {
 
 |事件名			|说明				|返回值	|
 |---			|----				|----	|
-|@click-left	|左侧按钮点击时触发	|-		|
-|@click-right	|右侧按钮点击时触发	|-		|
+|@clickLeft	|左侧按钮点击时触发	|-		|
+|@clickRight	|右侧按钮点击时触发	|-		|
 
 ### 插件预览地址
 
