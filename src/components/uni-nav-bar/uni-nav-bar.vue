@@ -88,11 +88,11 @@
 				default: false
 			},
 			shadow: {
-				type: [String, Boolean],
+				type: [Boolean, String],
 				default: false
 			},
 			border: {
-				type: [String, Boolean],
+				type: [Boolean, String],
 				default: true
 			}
 		},
