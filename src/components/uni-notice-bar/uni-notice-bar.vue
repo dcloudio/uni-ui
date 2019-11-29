@@ -139,7 +139,9 @@
 						textWidth = 0;
 					let textQuery = new Promise((resolve, reject) => {
 						uni.createSelectorQuery()
+							// #ifndef MP-ALIPAY
 							.in(this)
+							// #endif
 							.select(`#${this.elId}`)
 							.boundingClientRect()
 							.exec(ret => {
@@ -149,7 +151,9 @@
 					})
 					let boxQuery = new Promise((resolve, reject) => {
 						uni.createSelectorQuery()
+							// #ifndef MP-ALIPAY
 							.in(this)
+							// #endif
 							.select(`#${this.elIdBox}`)
 							.boundingClientRect()
 							.exec(ret => {
