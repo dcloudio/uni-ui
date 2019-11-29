@@ -213,6 +213,10 @@
             "path" : "pages/transition/transition",
             "style" : {}
         }
+        ,{
+            "path" : "pages/title/title",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

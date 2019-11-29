@@ -3,7 +3,7 @@
 	"name": "Grid",
 	"desc": "宫格",
 	"url": "grid",
-	"edition": "1.2.0",
+	"edition": "1.2.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=27",
-	"update_log": "- 修复 在vue页面中使用,宫格高度不一致的Bug"
+	"update_log": "- 修复 动态删除gird,点击事件获取index不正确的Bug"
 }

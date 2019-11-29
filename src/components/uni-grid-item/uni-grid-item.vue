@@ -3,7 +3,7 @@
 		<view :class="{ 'uni-grid-item--border': showBorder,  'uni-grid-item--border-top': showBorder && index < column, 'uni-highlight': highlight }"
 		 :style="{  'border-right-color': borderColor ,'border-bottom-color': borderColor ,'border-top-color': borderColor }"
 		 class="uni-grid-item__box" @click="_onClick">
-				<slot />
+			<slot />
 		</view>
 	</view>
 </template>
@@ -38,6 +38,14 @@
 			this.grid.children.push(this)
 			// this.grid.init()
 			this.width = this.grid.width
+		},
+		beforeDestroy() {
+			this.grid.children.forEach((item, index) => {
+				if (item === this) {
+					this.grid.index -= 1
+					this.grid.children.splice(index, 1)
+				}
+			})
 		},
 		methods: {
 			_onClick() {
@@ -95,5 +103,4 @@
 	.uni-highlight:active {
 		background-color: $uni-bg-color-hover;
 	}
-
 </style>

@@ -43,7 +43,11 @@
 						url: 'list'
 					},
 					{
-						name: 'Section 章节标题',
+						name: 'Title 章节标题',
+						url: 'title'
+					},
+					{
+						name: 'Section 标题栏',
 						url: 'section'
 					}
 				],
