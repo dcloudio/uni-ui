@@ -1,9 +1,9 @@
 {
-  "id": "181",
-  "name": "SwipeAction",
-  "desc": "滑动操作",
-  "url": "swipe-action",
-  "edition": "1.0.2",
-  "path": "https://ext.dcloud.net.cn/plugin?id=181",
-  "update_log": "- 优化 App平台、H5 平台、微信小程序平台利用 wxs 实现跟手式流畅拖动"
+	"id": "181",
+	"name": "SwipeAction",
+	"desc": "滑动操作",
+	"url": "swipe-action",
+	"edition": "1.0.8",
+	"path": "https://ext.dcloud.net.cn/plugin?id=181",
+	"update_log": "- 修复 组件见联动导致异常的 Bug\n- 新增 组件示例添加、删除的实现"
 }

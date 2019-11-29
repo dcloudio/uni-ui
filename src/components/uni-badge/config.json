@@ -2,8 +2,8 @@
 	"id": "21",
 	"name": "Badge",
 	"desc": "数字角标",
-	"edition": "1.0.2",
+	"edition": "1.0.4",
 	"url": "badge",
 	"path": "https://ext.dcloud.net.cn/plugin?id=21",
-	"update_log":"- 修复 样式问题"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

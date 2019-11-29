@@ -1,45 +1,68 @@
 <template>
-  <view class="uni-list">
-    <slot/>
-  </view>
+	<!-- #ifndef APP-NVUE -->
+	<view class="uni-list">
+		<slot />
+	</view>
+	<!-- #endif -->
+	<!-- #ifdef APP-NVUE -->
+	<list class="uni-list" :enableBackToTop="enableBackToTop" loadmoreoffset="15" :scroll-y="scrollY" @loadmore="loadMore">
+		<slot />
+	</list>
+	<!-- #endif -->
 </template>
+
 <script>
-export default {
-  name: 'UniList'
-}
-</script>
-<style lang="scss">
-	.uni-list {
-		background-color: $uni-bg-color;
-		position: relative;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-
-		&:after {
-			position: absolute;
-			z-index: 10;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			height: 1px;
-			content: '';
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			background-color: $uni-border-color;
-		}
-
-		&:before {
-			position: absolute;
-			z-index: 10;
-			right: 0;
-			top: 0;
-			left: 0;
-			height: 1px;
-			content: '';
-			-webkit-transform: scaleY(0.5);
-			transform: scaleY(0.5);
-			background-color: $uni-border-color;
+	export default {
+		name: 'UniList',
+		'mp-weixin': {
+			options: {
+				multipleSlots: false
+			}
+		},
+		props: {
+			enableBackToTop: {
+				type: [Boolean, String],
+				default: false
+			},
+			scrollY: {
+				type: [Boolean, String],
+				default: false
+			}
+		},
+		provide() {
+			return {
+				list: this
+			}
+		},
+		created() {
+			this.firstChildAppend = false
+		},
+		methods: {
+			loadMore(e) {
+				this.$emit("scrolltolower");
+			}
 		}
 	}
+</script>
+<style lang="scss" scoped>
+	.uni-list {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		background-color: $uni-bg-color;
+		position: relative;
+		flex-direction: column;
+		// border-bottom-color: $uni-border-color;
+		// border-bottom-style: solid;
+		// border-bottom-width: 1px;
+	}
+	/* #ifndef APP-NVUE */
+	.uni-list:before {
+		height: 0;
+	}
+	.uni-list:after {
+		height: 0;
+	}
+	/* #endif */
+
 </style>

@@ -1,0 +1,9 @@
+{
+	"id": "25",
+	"name": "Countdown",
+	"desc": "倒计时",
+	"url": "countdown",
+	"edition": "1.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=25",
+	"update_log": "- 优化 可在nvue页面中使用"
+}

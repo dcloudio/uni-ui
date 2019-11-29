@@ -1,13 +1,17 @@
 <template>
 	<view class="uni-numbox">
-		<view :class="{'uni-numbox--disabled': inputValue <= min || disabled}" class="uni-numbox__minus" @click="_calcValue('minus')">-</view>
-		<input :disabled="disabled" v-model="inputValue" class="uni-numbox__value" type="number" @blur="_onBlur">
-		<view :class="{'uni-numbox--disabled': inputValue >= max || disabled}" class="uni-numbox__plus" @click="_calcValue('plus')">+</view>
+		<view @click="_calcValue('minus')" class="uni-numbox__minus">
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
+		</view>
+		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
+		<view @click="_calcValue('plus')" class="uni-numbox__plus">
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
+		</view>
 	</view>
 </template>
 <script>
 	export default {
-		name: 'UniNumberBox',
+		name: "UniNumberBox",
 		props: {
 			value: {
 				type: [Number, String],
@@ -33,141 +37,151 @@
 		data() {
 			return {
 				inputValue: 0
-			}
+			};
 		},
 		watch: {
 			value(val) {
-				this.inputValue = +val
+				this.inputValue = +val;
 			},
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
-					this.$emit('change', newVal)
+					this.$emit("change", newVal);
 				}
 			}
 		},
 		created() {
-			this.inputValue = +this.value
+			this.inputValue = +this.value;
 		},
 		methods: {
 			_calcValue(type) {
 				if (this.disabled) {
-					return
-				}
-				const scale = this._getDecimalScale()
-				let value = this.inputValue * scale
-				let step = this.step * scale
-				if (type === 'minus') {
-					value -= step
-				} else if (type === 'plus') {
-					value += step
-				}
-				if ("minus" === type && value < this.min) {
 					return;
 				}
-				if ("plus" === type && value > this.max) {
-					return;
+				const scale = this._getDecimalScale();
+				let value = this.inputValue * scale;
+				let step = this.step * scale;
+				if (type === "minus") {
+					value -= step;
+					if (value < this.min) {
+						return;
+					}
+					if(value > this.max){
+						value = this.max
+					}
+				} else if (type === "plus") {
+					value += step;
+					if (value > this.max) {
+						return;
+					}
+					if(value < this.min){
+						value = this.min
+					}
 				}
-				this.inputValue = value / scale
+
+				this.inputValue = String(value / scale);
 			},
 			_getDecimalScale() {
-				let scale = 1
+				let scale = 1;
 				// 浮点型
 				if (~~this.step !== this.step) {
-					scale = Math.pow(10, (this.step + '').split('.')[1].length)
+					scale = Math.pow(10, (this.step + "").split(".")[1].length);
 				}
-				return scale
+				return scale;
 			},
 			_onBlur(event) {
-				let value = event.detail.value
+				let value = event.detail.value;
 				if (!value) {
-					this.inputValue = 0
-					return
+					// this.inputValue = 0;
+					return;
 				}
-				value = +value
+				value = +value;
 				if (value > this.max) {
-					value = this.max
+					value = this.max;
 				} else if (value < this.min) {
-					value = this.min
+					value = this.min;
 				}
-				this.inputValue = value
+				this.inputValue = value;
 			}
 		}
-	}
+	};
 </script>
-<style lang="scss">
-	$numbox-btn-width:70upx;
-	$numbox-input-width:80upx;
-	$numbox-height:70upx;
-	$uni-font-size-xxl:40upx;
+<style lang="scss" scoped>
+	$box-height: 35px;
+	/* #ifdef APP-NVUE */
+	$box-line-height: 35px;
+	/* #endif */
+	$box-line-height: 26px;
+	$box-width: 35px;
 
 	.uni-numbox {
-		display: inline-flex;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		flex-direction: row;
-		justify-content: flex-start;
-		height: $numbox-height;
-		position: relative;
+		height: $box-height;
+		line-height: $box-height;
+		width: 120px;
+	}
 
-		&:after {
-			content: '';
-			position: absolute;
-			transform-origin: center;
-			box-sizing: border-box;
-			pointer-events: none;
-			top: -50%;
-			left: -50%;
-			right: -50%;
-			bottom: -50%;
-			border: 1px solid $uni-border-color;
-			border-radius: $uni-border-radius-lg;
-			transform: scale(.5);
-		}
+	.uni-numbox__value {
+		background-color: $uni-bg-color;
+		width: 40px;
+		height: $box-height;
+		text-align: center;
+		font-size: $uni-font-size-lg;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: $uni-border-color;
+		border-left-width: 0;
+		border-right-width: 0;
+	}
 
-		&__minus,
-		&__plus {
-			margin: 0;
-			background-color: $uni-bg-color-grey;
-			width: $numbox-btn-width;
-			font-size: $uni-font-size-xxl;
-			height: 100%;
-			line-height: $numbox-height;
-			text-align: center;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			color: $uni-text-color;
-			position: relative;
-		}
+	.uni-numbox__minus {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: $box-width;
+		height: $box-height;
+		// line-height: $box-line-height;
+		// text-align: center;
+		font-size: 20px;
+		color: $uni-text-color;
+		background-color: $uni-bg-color-grey;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: $uni-border-color;
+		border-top-left-radius: $uni-border-radius-base;
+		border-bottom-left-radius: $uni-border-radius-base;
+		border-right-width: 0;
+	}
 
-		&__value {
-			position: relative;
-			background-color: $uni-bg-color;
-			width: $numbox-input-width;
-			height: 100%;
-			text-align: center;
-			padding: 0;
+	.uni-numbox__plus {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: $box-width;
+		height: $box-height;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: $uni-border-color;
+		border-top-right-radius: $uni-border-radius-base;
+		border-bottom-right-radius: $uni-border-radius-base;
+		background-color: $uni-bg-color-grey;
+		border-left-width: 0;
+	}
 
-			&:after {
-				content: '';
-				position: absolute;
-				transform-origin: center;
-				box-sizing: border-box;
-				pointer-events: none;
-				top: -50%;
-				left: -50%;
-				right: -50%;
-				bottom: -50%;
-				border-style: solid;
-				border-color: $uni-border-color;
-				border-left-width: 1px;
-				border-right-width: 1px;
-				border-top-width: 0;
-				border-bottom-width: 0;
-				transform: scale(.5);
-			}
-		}
+	.uni-numbox--text {
+		font-size: 40rpx;
+		color: $uni-text-color;
+	}
 
-		&--disabled {
-			color: $uni-text-color-disable;
-		}
+	.uni-numbox--disabled {
+		color: $uni-text-color-disable;
 	}
 </style>

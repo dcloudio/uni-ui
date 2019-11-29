@@ -1,8 +1,9 @@
 ### SegmentedControl 分段器
+*已经支持在nvue页面中使用*
 
 用作不同视图的显示，组件名：``uni-segmented-control``，代码块： uSegmentedControl。
 
-**使用方式：**
+### 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -26,7 +27,7 @@ export default {
 }
 ```
 
-SegmentedControl 在 ``template`` 中的使用
+在 ``template`` 中的使用
 
 ```html
 <template>
@@ -47,12 +48,22 @@ SegmentedControl 在 ``template`` 中的使用
 </template>
 ```
 
-**SegmentedControl 属性说明：**
+### 属性说明
 
-|属性名		|类型|默认值	|说明|
-|---|----|---|---|
-|current	|Number|0|当前选中的tab索引值，从0计数|
-|values	|Array&lt;String&gt;|-|选项数组|
-|style-type	|String	|button|分段器样式类型，可选值：button（按钮类型），text（文字类型）|
-|active-color|String	|#007aff|选中的标签背景色与边框颜色|
-|@clickItem|EventHandle|-|组件触发点击事件时触发，参数为当前选中的tab索引值 current	|
+|属性名			|类型				|默认值	|说明															|
+|---			|----				|---	|---															|
+|current		|Number				|0		|当前选中的tab索引值，从0计数									|
+|values			|Array&lt;String&gt;|-		|选项数组														|
+|style-type		|String				|button	|分段器样式类型，可选值：button（按钮类型），text（文字类型）	|
+|active-color	|String				|#007aff|选中的标签背景色与边框颜色										|
+
+### 事件说明
+
+|事件名		|说明					|返回值				|
+|---		|----					|---				|
+|@clickItem	|组件触发点击事件时触发	|e={currentIndex}	|
+
+
+### 插件预览地址
+
+[https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control](https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control)

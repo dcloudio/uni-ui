@@ -1,8 +1,9 @@
 {
-	"id":"",
-	"name":"SearchBar",
-	"desc":"搜索栏",
-	"url":"search-bar",
-	"edition":"0.0.1",
-	"path":""
+	"id": "866",
+	"name": "SearchBar",
+	"desc": "搜索栏",
+	"url": "search-bar",
+	"edition": "1.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=866",
+	"update_log": "- 优化 可在nvue页面中使用"
 }

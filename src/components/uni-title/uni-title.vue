@@ -1,115 +1,105 @@
 <template>
-  <view :class="{sticky:sticky}" :style="{top:stickyTop+'px'}" class="uni-title">
-    <view v-if="type" class="uni-title__head">
-      <view :class="type" class="uni-title__head-tag" />
-    </view>
-    <view class="uni-title__content">
-      <view :class="{'distraction':!subTitle}" class="uni-title__content-title">{{ title }}</view>
-      <view class="uni-title__content-sub">{{ subTitle }}</view>
-    </view>
-  </view>
+	<view class="uni-title" :style="{'justify-content':textAlign}">
+		<text :class="['uni-'+type]" :style="{'color':color}">
+			<slot>{{title}}</slot>
+		</text>
+	</view>
 </template>
 
 <script>
-  export default {
-    name: 'UniTitle',
-    props: {
-      type: {
-        type: String,
-        default: ''
-      },
-      title: {
-        type: String,
-        default: ''
-      },
-      subTitle: {
-        type: String,
-        default: ''
-      },
-      sticky: {
-        type: Boolean,
-        default: false
-      },
-      stickyTop: {
-        type: Number,
-        default: 0
-      }
-    },
-    data() {
-      return {}
-    },
-    watch: {
-      title(newVal) {
-        if (uni.report && newVal !== '') {
-          uni.report('title', newVal)
-        }
-      }
-    },
-    methods: {
-      onClick() {
-        this.$emit('click')
-      }
-    }
-  }
+	export default {
+		props: {
+			type: {
+				type: String,
+				default: 'h3'
+			},
+			title: {
+				type: String,
+				default: ''
+			},
+			align: {
+				type: String,
+				default: 'left'
+			},
+			stat: {
+				type: Boolean,
+				default: false
+			},
+			color: {
+				type: String,
+				default: '#333333'
+			}
+		},
+		data() {
+			return {
+
+			};
+		},
+		computed: {
+			textAlign() {
+				let align = 'center';
+				switch (this.align) {
+					case 'left':
+						align = 'flex-start'
+						break;
+					case 'center':
+						align = 'center'
+						break;
+					case 'right':
+						align = 'flex-end'
+						break;
+				}
+				return align
+			}
+		},
+		mounted() {
+			if (uni.report) {
+				uni.report('title', this.title)
+			}
+		}
+	}
 </script>
 
-<style lang="scss">
-  .uni-title {
-    margin-top: 10px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    width: 100%;
-    height: 50px;
-    background-color: #fdfdfd;
-    border-bottom: 1px #f5f5f5 solid;
-    box-sizing: border-box;
+<style scoped>
+	.uni-title {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: flex-start;
+	}
 
-    &.sticky {
-      position: sticky;
-      // top: 44px;
-    }
+	.uni-h1 {
+		font-size: 20px;
+		color: #333;
+		font-weight: bold;
+	}
 
-    &__head {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 10px; 
+	.uni-h2 {
+		font-size: 18px;
+		color: #333;
+		font-weight: bold;
+	}
 
-      &-tag {
-        &.line {
-          height: 15px;
-          background: #ccc;
-          border-radius: 5px;
-          width: 3px;
-        }
+	.uni-h3 {
+		font-size: 16px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 400; */
+	}
 
-        &.circle {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #ccc;
-        }
-      }
-    }
+	.uni-h4 {
+		font-size: 14px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 300; */
+	}
 
-    &__content {
-      color: #464e52;
+	.uni-h5 {
+		font-size: 12px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 200; */
+	}
 
-      &-title {
-        font-size: 16px;
-
-        &.distraction {
-          display: flex;
-          align-items: center;
-        }
-      }
-
-      &-sub {
-        font-size: 12px;
-        color: #999;
-      }
-    }
-  }
 </style>

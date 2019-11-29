@@ -1,9 +1,9 @@
 {
-	"id":"329",
-	"name":"PopUp",
-	"desc":"弹出层",
-	"url":"popup",
-	"edition":"1.1.4",
-	"path":"https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log":"- 修复 示例项目中 uni-icons 不显示的 Bug"
+	"id": "329",
+	"name": "PopUp",
+	"desc": "弹出层",
+	"url": "popup",
+	"edition": "1.1.8",
+	"path": "https://ext.dcloud.net.cn/plugin?id=329",
+	"update_log": "- 修复 type 值为静态的情况下,弹出错误的Bug"
 }

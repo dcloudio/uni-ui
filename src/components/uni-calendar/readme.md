@@ -1,4 +1,5 @@
 ### Calendar 日历
+*已经支持在nvue页面中使用*
 
 日历组件，组件名：``uni-calendar``，代码块： uCalendar。  
 
@@ -10,7 +11,6 @@
 	<uni-calendar 
 	:insert="true"
 	:lunar="true" 
-	:disable-before="true" 
 	:start-date="'2019-3-2'"
 	:end-date="'2019-5-20'"
 	@change="change"
@@ -41,21 +41,21 @@ export default {
 
 |  属性名		|    类型	| 默认值| 说明																													|
 | ---			| ---		| ---	| ---																													|
-| date			| String	|		| 自定义当前时间，默认为今天																							|
+| date			| String	|	-	| 自定义当前时间，默认为今天																							|
 | lunar			| Boolean	| false	| 显示农历																												|
-| disableBefore	| Boolean	| false	| 禁用今天之前的日期																									|
-| startDate		| String	|		| 日期选择范围-开始日期																									|
-| endDate		| String	|		| 日期选择范围-结束日期																									|
+| startDate		| String	|	-	| 日期选择范围-开始日期																									|
+| endDate		| String	|	-	| 日期选择范围-结束日期																									|
 | range			| Boolean	| false	| 范围选择																												|
 | insert		| Boolean	| false	| 插入模式,可选值，ture：弹窗模式；false：插入模式	；默认为插入模式																	|
-| selected		| Array		|		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
+| selected		| Array		|	-	| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
 
 ### 事件说明
 
-|  事件名	|    类型	| 说明								|
-| ---		| ---		| ---								|
-| @change	| function	|  日期改变，`insert :ture` 时生效	    |
-| @confirm	| function	|  确认选择	`insert :false` 时生效	|
+|  事件名		| 说明								|
+| ---			| ---								|
+| @change		|  日期改变，`insert :ture` 时生效	|
+| @confirm		|  确认选择`insert :false` 时生效	|
+|@month-switch	| 切换月份时触发					|
 
 ### 方法说明
 在 `calendar` 组件上定义 `ref` 属性，通过 `ref` 属性使用方法。
@@ -107,12 +107,12 @@ export default {
 	// 范围选择
     "range": {	
 		// 范围开始日期
-        "begin": "2019-06-25", 
+        "before": "2019-06-25", 
 		// 范围结束日期
-        "end": "2019-06-27",  
+        "after": "2019-06-27",  
 		// 范围日期数组
         "data": [				
-			"2019-06-25",		
+			"2019-06-25",
             "2019-06-26",
             "2019-06-27"
         ]
@@ -160,9 +160,7 @@ export default {
         "astro": "巨蟹座"
     },
 	//打点信息
-    "clockinfo": {
-		// 是否打点
-        "have": true,
+    "extraInfo": {
 		// 打点日期
         "date": "2019-06-27",
 		// 打点描述
@@ -187,33 +185,6 @@ Tips:
 - date 传入的应该是一个 String ，如： 2019-06-27 ，而不是 new Date()
 - insert 属性，确定当前的事件是 @change 还是 @confirm 。理应合并为一个事件，但是为了区分模式，现使用两个事件，这里需要注意
 
-### 更新日志
-#### v1.3.0
-- 新增 弹出显示模式
-- 新增 标点功能，并携带额外信息
-- 新增 多选模式
-- 新增 其他日期与今天高亮区分显示
-- 修复 不显示最后一行的 bug 
-- 修复 初始化组件日期显示不对的 bug
-- 优化 性能问题，删除日历滑动
-- 优化 代码整体优化，解决在低版本设备上卡顿的问题
+### 插件预览地址
 
-#### v1.2.0
-- 新增 水平垂直滑动选择月份
-- 新增 当天日期高亮显示
-- 修复 选中当前日期，返回两遍信息的问题
-- 修复 二月份切换月份直接跳到三月份的bug
-
-#### v1.1.1
-- 修复 小程序不显示农历的问题
-- 修复 小程序不能设置开始日期和结束日期的问题
-
-#### v1.1.0
-- 新增 是否开启农历选项
-- 新增 是否禁止今天之前的日期
-- 新增 开始日期
-- 新增 结束日期
-
-#### v1.0.0
-- 新增 基础日历
-- 新增 基础打点功能
+[https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar](https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar)
