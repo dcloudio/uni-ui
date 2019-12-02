@@ -3,7 +3,7 @@
 	"name": "Grid",
 	"desc": "宫格",
 	"url": "grid",
-	"edition": "1.2.1",
+	"edition": "1.2.2",
 	"path": "https://ext.dcloud.net.cn/plugin?id=27",
-	"update_log": "- 修复 动态删除gird,点击事件获取index不正确的Bug"
+	"update_log": "- 新增 滑动视图示例\n- 修复 批量动态修改数据,返回index错乱的Bug"
 }
