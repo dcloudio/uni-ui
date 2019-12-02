@@ -114,6 +114,7 @@
 
 <style lang="scss" scoped>
 	$nav-height: 44px;
+
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
 		font-size: 34rpx;
@@ -122,17 +123,13 @@
 		font-size: $uni-font-size-lg;
 		/* #endif */
 	}
+
 	.uni-nav-bar-right-text {
 		font-size: $uni-font-size-base;
 	}
 
-	.uni-navbar {
-		width: 750rpx;
-	}
-
 	.uni-navbar__content {
 		position: relative;
-		width: 750rpx;
 		background-color: $uni-bg-color;
 		overflow: hidden;
 	}
@@ -151,7 +148,6 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		width: 750rpx;
 		height: $nav-height;
 		line-height: $nav-height;
 		font-size: 16px;

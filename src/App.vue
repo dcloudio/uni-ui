@@ -14,6 +14,8 @@
 
 <style lang="scss">
 	/* #ifndef APP-NVUE */
-	@import './common/uni.css';
+	page {
+		background-color: #efeff4;
+	}
 	/* #endif */
 </style>
