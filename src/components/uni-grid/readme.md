@@ -1,5 +1,5 @@
 ### Grid 宫格
-*uni-grid-item 子组件新增 index 属性，为比传入项，否则动态删减替换数据会导致返回索引不正常*
+*uni-grid-item 子组件新增 index 属性，是一个唯一标识，为必传项，如需要更新老版本grid，需要注意 index 属性，如不填写，点击grid将不会返回正确索引*
 
 宫格组件，组件名：``uni-grid``，代码块： uGrid。
 
