@@ -128,17 +128,16 @@
 			},
 			change(e) {
 				this.isOpened = e
-				console.log('...返回：', e);
+				console.log('返回：', e);
 			},
 			swipeChange(e) {
-				console.log('...返回：', e);
+				console.log('返回：', e);
 			},
 			swipeClick(e, index) {
 				let {
 					content
 				} = e
 				if (content.text === '删除') {
-					console.log(content.text, index);
 					uni.showModal({
 						title: '提示',
 						content: '是否删除',

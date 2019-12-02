@@ -21,25 +21,30 @@
 		},
 		methods: {
 			closeOther(vm) {
-				// console.log(e);
 				let children = this.children
-				// #ifdef APP-VUE || H5 || MP-WEIXIN
 				children.forEach((item, index) => {
 					if (vm === item) return
+					// 支付宝执行以下操作
+					// #ifdef MP-ALIPAY
+					if (item.isopen) {
+						item.close()
+					}
+					// #endif
+
+					// app vue 端、h5 、微信、支付宝  执行以下操作
+					// #ifdef APP-VUE || H5 || MP-WEIXIN
 					let position = item.position[0]
 					let show = position.show
 					if (show) {
 						position.show = false
-						// this.$set(this.children[index].position, 0, position)
 					}
-				})
-				// #endif
-				// #ifdef APP-NVUE
-				children.forEach((item, index) => {
-					if (vm === item) return
+					// #endif
+
+					// nvue 执行以下操作
+					// #ifdef APP-NVUE || MP-BAIDU || MP-QQ || MP-TOUTIAO
 					item.close()
+					// #endif
 				})
-				// #endif
 			}
 		}
 	}
