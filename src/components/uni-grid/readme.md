@@ -1,5 +1,5 @@
 ### Grid 宫格
-*已经支持在nvue页面中使用*
+*uni-grid-item 子组件新增 index 属性，为比传入项，否则动态删减替换数据会导致返回索引不正常*
 
 宫格组件，组件名：``uni-grid``，代码块： uGrid。
 
@@ -70,6 +70,13 @@ export default {
 |事件名	|说明			|返回值											|
 |---	|----			|---											|
 |@change|点击 grid 触发	|e={detail:{index:0}}，index 为当前点击 gird 下标|
+
+**uni-grid-item 属性说明：**
+
+|属性名	|类型	|默认值	|说明										|
+|---	|----	|---	|---										|
+|index	|Number	|-		|子组件的唯一标识 ，点击gird会返回当前的标识|
+
 
 **Tips**
 
