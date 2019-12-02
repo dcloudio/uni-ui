@@ -24,7 +24,7 @@
 
 		<uni-section title="swipe-action 列表" type="line"></uni-section>
 		<uni-swipe-action>
-			<uni-swipe-action-item v-for="(item,index) in swipeList" :show="isOpened" :options="item.options" :key="item.id"
+			<uni-swipe-action-item v-for="(item,index) in swipeList" :options="item.options" :key="item.id"
 			 @change="swipeChange" @click="swipeClick($event,index)">
 				<text class="cont">{{item.content}}</text>
 			</uni-swipe-action-item>

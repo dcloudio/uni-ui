@@ -37,10 +37,7 @@
 				// #ifdef APP-NVUE
 				children.forEach((item, index) => {
 					if (vm === item) return
-					let position = item.position[0]
-					if(item.show){
-						item.close()
-					}
+					item.close()
 				})
 				// #endif
 			}
