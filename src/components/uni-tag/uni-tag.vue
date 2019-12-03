@@ -119,11 +119,6 @@
 		font-size: $uni-font-size-base;
 	}
 
-	.uni-tag--default {
-		color: $uni-text-color;
-		font-size: $uni-font-size-base;
-	}
-
 	.uni-tag-text--primary {
 		color: $uni-color-primary !important;
 	}
