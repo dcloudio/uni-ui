@@ -232,7 +232,8 @@
 		transition-duration: 0.3s;
 		transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
-
+	
+	/* #ifdef MP-ALIPAY */
 	.movable-area {
 		width: 300px;
 		height: 100%;
@@ -245,7 +246,6 @@
 		height: 45px;
 		z-index: 2;
 	}
-
 	.transition {
 		transition: all 0.3s;
 	}
@@ -253,6 +253,7 @@
 	.movable-view-box {
 		width: 100%;
 		height: 100%;
-		background: #fff;
+		background-color: #fff;
 	}
+	/* #endif */
 </style>
