@@ -60,7 +60,7 @@ export default {
 |show-arrow		|Boolean|true	|是否显示箭头图标																													|
 |show-badge		|Boolean|false	|是否显示数字角标																													|
 |badge-text		|String	|-		|数字角标内容																														|
-|badge-type		|String	|-		|数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=28)																|
+|badge-type		|String	|-		|数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)																|
 |show-switch	|Boolean|false	|是否显示Switch																														|
 |switch-checked	|Boolean|false	|Switch是否被选中																													|
 |show-extra-icon|Boolean|false	|左侧是否显示扩展图标																												|
