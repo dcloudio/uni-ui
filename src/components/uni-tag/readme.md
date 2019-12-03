@@ -18,7 +18,7 @@ export default {
 
 ```html
 <uni-tag text="标签"></uni-tag>
-<uni-tag text="标签" type="danger" :circle="true"></uni-tag>
+<uni-tag text="标签" type="error" :circle="true"></uni-tag>
 <uni-tag text="标签" @click="bindClick"></uni-tag>
 ```
 
