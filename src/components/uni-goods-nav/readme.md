@@ -2,7 +2,7 @@
 ### GoodsNav 商品导航
 *已经支持在nvue页面中使用*
 
-商品加入购物车，立即购买，组件名：`uni-goods-nav`
+商品加入购物车，立即购买，组件名：`uni-goods-nav`，代码块： uGoodsNav。
 
 ### 使用方式
 
