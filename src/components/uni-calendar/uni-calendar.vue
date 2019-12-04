@@ -26,25 +26,25 @@
 				</view>
 				<view class="uni-calendar__weeks">
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周日</text>
+						<text class="uni-calendar__weeks-day-text">日</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周一</text>
+						<text class="uni-calendar__weeks-day-text">一</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周二</text>
+						<text class="uni-calendar__weeks-day-text">二</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周三</text>
+						<text class="uni-calendar__weeks-day-text">三</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周四</text>
+						<text class="uni-calendar__weeks-day-text">四</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周五</text>
+						<text class="uni-calendar__weeks-day-text">五</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">周六</text>
+						<text class="uni-calendar__weeks-day-text">六</text>
 					</view>
 				</view>
 				<view class="uni-calendar__weeks" v-for="(item,weekIndex) in weeks" :key="weekIndex">
