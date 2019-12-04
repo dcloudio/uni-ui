@@ -160,7 +160,9 @@
 			open() {
 				this.show = true
 				this.$nextTick(() => {
-					this.aniMaskShow = true
+					setTimeout(()=>{
+						this.aniMaskShow = true
+					},50)
 				})
 			},
 			close() {

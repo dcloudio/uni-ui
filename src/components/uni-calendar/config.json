@@ -3,7 +3,7 @@
 	"name": "Calendar",
 	"desc": "日历",
 	"url": "calendar",
-	"edition": "1.3.8",
+	"edition": "1.3.9",
 	"path": "https://ext.dcloud.net.cn/plugin?id=56",
-	"update_log": "-新增 隐藏月份背景属性\n- 修复 日期不显示的Bug"
+	"update_log": "- 弹出模式下,动画异常的Bug"
 }
