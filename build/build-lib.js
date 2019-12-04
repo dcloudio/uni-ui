@@ -41,7 +41,7 @@ start()
 function start () {
   // 任何你期望执行的cmd命令，ls都可以
   let cmdStr1 = 'npm publish'
-  let cmdPath = path.join(__dirname,'../lib')
+  let cmdPath = path.join(__dirname,'..')
   // 子进程名称
   let workerProcess
   runExec(cmdStr1)
