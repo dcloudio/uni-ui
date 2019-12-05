@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-title" :style="{'align-items':textAlign}">
+	<view class="uni-title__box" :style="{'align-items':textAlign}">
 		<text :class="['uni-'+type]" :style="{'color':color}">{{title}}</text>
 	</view>
 </template>
@@ -18,10 +18,6 @@
 			align: {
 				type: String,
 				default: 'left'
-			},
-			stat: {
-				type: Boolean,
-				default: false
 			},
 			color: {
 				type: String,
@@ -59,7 +55,10 @@
 </script>
 
 <style scoped>
-	.uni-title {
+	/* .uni-title {
+
+	} */
+	.uni-title__box {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
@@ -67,8 +66,6 @@
 		align-items: flex-start;
 		justify-content: center;
 		padding: 8px 0;
-	}
-	.uni-title__box {
 		flex: 1;
 	}
 

@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-content">
 		<view class="example-info">
-			<text class="example-info-text"> uni-title 组件主要用于文章、列表详情的标题展示 </text>
+			<text class="example-info-text"> 标题栏，通常用于记录页面标题，使用当前组件在 uni-app 开启统计的情况下，将会自动统计页面标题 </text>
 		</view>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<view class="example-body">
@@ -87,11 +87,15 @@
 	.uni-box {
 		// margin: 10px 0;
 	}
-
+	.example-body {
+		/* #ifndef APP-NVUE */
+		display: block;
+		/* #endif */
+	}
 	.uni-text {
 		font-size: 14px;
 		line-height: 22px;
 		color: #333;
 	}
-	
+
 </style>
