@@ -300,7 +300,8 @@ class Calendar {
 		}
 		let canlender = []
 		const surplus = 42 - (dates.lastMonthDays.length + dates.currentMonthDys.length)
-		dates.nextMonthDays = this._getNextMonthDays(surplus, this.getDate(dateData))
+		const weekSurplus = surplus >= 7 ? surplus - 7 : surplus
+		dates.nextMonthDays = this._getNextMonthDays(weekSurplus, this.getDate(dateData))
 		canlender = canlender.concat(dates.lastMonthDays, dates.currentMonthDys, dates.nextMonthDays)
 		let weeks = {}
 		// 拼接数组  上个月开始几天 + 本月天数+ 下个月开始几天
