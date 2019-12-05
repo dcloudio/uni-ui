@@ -54,7 +54,9 @@
 			this.children = []
 		},
 		mounted() {
-			this.init()
+			this.$nextTick(()=>{
+				this.init()
+			})
 		},
 		methods: {
 			init() {
