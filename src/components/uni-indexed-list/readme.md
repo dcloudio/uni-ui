@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniIndexedList from "@/components/uni-indexed-list/uni-indexed-list.vue"
+import uniIndexedList from '@/components/uni-indexed-list/uni-indexed-list.vue'
 export default {
     components: {uniIndexedList}
 }

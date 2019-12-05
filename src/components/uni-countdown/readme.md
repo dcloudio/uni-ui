@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniCountdown from "@/components/uni-countdown.vue"
+import uniCountdown from '@/components/uni-countdown/uni-countdown.vue'
 export default {
     components: {uniCountdown}
 }

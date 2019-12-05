@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniBadge from "@/components/uni-badge/uni-badge.vue"
+import uniBadge from '@/components/uni-badge/uni-badge.vue'
 export default {
     components: {uniBadge}
 }

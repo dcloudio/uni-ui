@@ -20,7 +20,7 @@
 
 ```javascript
 
-import {uniCalendar} from "@/components/uni-calendar/uni-calendar"
+import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
 export default {
 	components: {
 		uniCalendar
@@ -79,7 +79,7 @@ export default {
 
 ```javascript
 
-import {uniCalendar} from "@/components/uni-calendar/uni-calendar"
+import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
 export default {
 	components: {
 		uniCalendar

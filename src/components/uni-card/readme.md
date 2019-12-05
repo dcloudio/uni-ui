@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniCard from "@/components/uni-card/uni-card"
+import uniCard from '@/components/uni-card/uni-card.vue'
 export default {
     components: {uniCard}
 }

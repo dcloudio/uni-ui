@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue"
+import uniSegmentedControl from '@/components/uni-segmented-control/uni-segmented-control.vue'
 export default {
     components: {uniSegmentedControl},
     data() {

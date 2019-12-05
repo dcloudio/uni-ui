@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniNumberBox from "@/components/number-box/number-box.vue"
+import uniNumberBox from '@/components/number-box/number-box.vue'
 export default {
     components: {uniNumberBox}
 }

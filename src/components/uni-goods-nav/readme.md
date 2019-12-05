@@ -9,7 +9,7 @@
 引用组件 
 
 ```javascript
-import uniGoodsNav from "@/components/uni-goods-nav/uni-goods-nav.vue"
+import uniGoodsNav from '@/components/uni-goods-nav/uni-goods-nav.vue'
 export default {
     components: {uniGoodsNav}
 }

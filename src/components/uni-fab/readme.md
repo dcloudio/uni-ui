@@ -7,7 +7,7 @@
 在 ``script`` 中引用组件
 
 ```javascript
-import uniFab from '@/components/uni-fab.vue';
+import uniFab from '@/components/uni-fab/uni-fab.vue';
 export default {
 	components: {
 		uniFab

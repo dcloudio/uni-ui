@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniFav from "@/components/uni-fav/uni-fav.vue"
+import uniFav from '@/components/uni-fav/uni-fav.vue'
 export default {
     components: {uniFav}
 }

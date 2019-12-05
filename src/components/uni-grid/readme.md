@@ -8,8 +8,8 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniGrid from "@/components/uni-grid/uni-grid.vue"
-import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue"
+import uniGrid from '@/components/uni-grid/uni-grid.vue'
+import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 export default {
     components: {uniGrid,uniGridItem}
 }

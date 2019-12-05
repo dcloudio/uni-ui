@@ -7,7 +7,7 @@
 引用组件 
 
 ```javascript
-import uniTransition from "@/components/uni-transition/uni-transition.vue"
+import uniTransition from '@/components/uni-transition/uni-transition.vue'
 export default {
     components: {uniTransition}
 }
@@ -21,7 +21,7 @@ export default {
 ```
 
 ```javascript
-import uniTransition from "@/components/uni-transition/uni-transition.vue"
+import uniTransition from '@/components/uni-transition/uni-transition.vue'
 export default {
 		components: {
 			uniTransition

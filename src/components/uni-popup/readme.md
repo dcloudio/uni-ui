@@ -9,7 +9,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniPopup from "@/components/uni-popup/uni-popup.vue"
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
 export default {
     components: {uniPopup}
 }

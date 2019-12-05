@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniDrawer from "@/components/drawer/drawer.vue"
+import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
 export default {
     components: {uniDrawer}
 }

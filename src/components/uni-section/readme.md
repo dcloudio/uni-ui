@@ -1,15 +1,15 @@
 ### Section 标题栏
 
-标题栏，用于显示标题，组件名：``uni-section``，代码块： uTitle。
+标题栏，用于显示标题，组件名：``uni-section``，代码块： uSection。
 
 ### 使用方式
 
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniTitle from "@/components/uni-section/uni-section.vue"
+import uniSection from '@/components/uni-section/uni-section.vue'
 export default {
-    components: {uniTitle}
+    components: {uniSection}
 }
 ```
 
