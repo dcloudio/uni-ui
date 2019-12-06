@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-title__box" :style="{'align-items':textAlign}">
-		<text :class="['uni-'+type]" :style="{'color':color}">{{title}}</text>
+		<text class="uni-title__base" :class="['uni-'+type]" :style="{'color':color}">{{title}}</text>
 	</view>
 </template>
 
@@ -9,7 +9,7 @@
 		props: {
 			type: {
 				type: String,
-				default: 'h3'
+				default: ''
 			},
 			title: {
 				type: String,
@@ -67,6 +67,11 @@
 		justify-content: center;
 		padding: 8px 0;
 		flex: 1;
+	}
+	.uni-title__base {
+		font-size: 15px;
+		color: #333;
+		font-weight: 500;
 	}
 
 	.uni-h1 {
