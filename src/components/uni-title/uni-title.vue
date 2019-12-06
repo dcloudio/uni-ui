@@ -22,6 +22,10 @@
 			color: {
 				type: String,
 				default: '#333333'
+			},
+			stat: {
+				type: [Boolean, String],
+				default: ''
 			}
 		},
 		data() {
@@ -46,9 +50,47 @@
 				return align
 			}
 		},
+		watch: {
+			title(newVal) {
+				if (this.isOpenStat()) {
+					// 上报数据
+					if (uni.report) {
+						uni.report('title', this.title)
+					}
+				}
+			}
+		},
 		mounted() {
-			if (uni.report) {
-				uni.report('title', this.title)
+			if (this.isOpenStat()) {
+				// 上报数据
+				if (uni.report) {
+					uni.report('title', this.title)
+				}
+			}
+		},
+		methods: {
+			isOpenStat() {
+				if (this.stat === '') {
+					this.isStat = false
+				}
+				let stat_type = (typeof(this.stat) === 'boolean' && this.stat) || (typeof(this.stat) === 'string' && this.stat !==
+					'')
+				if (this.type === "") {
+					this.isStat = true
+					if (this.stat.toString() === 'false') {
+						this.isStat = false
+					}
+				}
+
+				if (this.type !== '') {
+					this.isStat = true
+					if (stat_type) {
+						this.isStat = true
+					} else {
+						this.isStat = false
+					}
+				}
+				return this.isStat
 			}
 		}
 	}
@@ -68,6 +110,7 @@
 		padding: 8px 0;
 		flex: 1;
 	}
+
 	.uni-title__base {
 		font-size: 15px;
 		color: #333;
@@ -106,5 +149,4 @@
 		font-weight: bold;
 		/* font-weight: 200; */
 	}
-
 </style>
