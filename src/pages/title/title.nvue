@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-content">
 		<view class="example-info">
-			<text class="example-info-text"> 标题栏，通常用于记录页面标题，使用当前组件在 uni-app 开启统计的情况下，将会自动统计页面标题 </text>
+			<text class="example-info-text"> 章节标题，通常用于记录页面标题，使用当前组件在 uni-app 开启统计的情况下，将会自动统计页面标题 </text>
 		</view>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<view class="example-body">
@@ -69,7 +69,7 @@
 		},
 		data() {
 			return {
-				title: '标题栏通常用于记录页面标题，例如商品标题、新闻标题等，当前标题栏会自动上报内容统计数据'
+				title: '章节标题通常用于记录页面标题，例如商品标题、新闻标题等，当前组件会自动上报内容统计数据'
 			}
 		},
 		onLoad() {},
