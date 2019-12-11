@@ -18,9 +18,9 @@ export default {
     	}
     },
     methods: {
-    	onClickItem(index) {
-    		if (this.current !== index) {
-    			this.current = index;
+    	onClickItem(e) {
+    		if (this.current !== e.currentIndex) {
+    			this.current = e.currentIndex;
     		}
     	}
     }
