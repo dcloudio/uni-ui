@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-searchbar">
-		<view :style="{borderRadius:radius+'px'}" class="uni-searchbar__box" @click="searchClick">
+		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<!-- #ifdef MP-ALIPAY -->
 			<view class="uni-searchbar__box-icon-search">
 				<uni-icons color="#999999" size="18" type="search" />
@@ -9,14 +9,14 @@
 			<!-- #ifndef MP-ALIPAY -->
 			<uni-icons color="#999999" class="uni-searchbar__box-icon-search" size="18" type="search" />
 			<!-- #endif -->
-			<input v-if="show" :focus="showSync" :placeholder="placeholder" @confirm="confirm" class="uni-searchbar__box-search-input"
+			<input v-if="show" :focus="showSync" :placeholder="placeholder" :maxlength="maxlength" @confirm="confirm" class="uni-searchbar__box-search-input"
 			 confirm-type="search" type="text" v-model="searchVal" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
-			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear">
+			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear" @click="clear">
 				<uni-icons color="#999999" class="" size="24" type="clear" />
 			</view>
 		</view>
-		<text @click="cancel" class="uni-searchbar__cancel" v-if="show">取消</text>
+		<text @click="cancel" class="uni-searchbar__cancel" v-if="cancelButton ==='always' || show && cancelButton ==='auto'">{{cancelText}}</text>
 	</view>
 </template>
 
@@ -39,6 +39,22 @@
 			clearButton: {
 				type: String,
 				default: "auto"
+			},
+			cancelButton: {
+				type: String,
+				default: "auto"
+			},
+			cancelText: {
+				type: String,
+				default: '取消'
+			},
+			bgColor: {
+				type: String,
+				default: "#F8F8F8"
+			},
+			maxlength: {
+				type: [Number, String],
+				default: ''
 			}
 		},
 		data() {
@@ -57,9 +73,12 @@
 		},
 		methods: {
 			searchClick() {
+				if (this.show) {
+					return
+				}
 				this.searchVal = ""
 				this.show = true;
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.showSync = true;
 				})
 			},
@@ -96,7 +115,7 @@
 </script>
 
 <style lang="scss" scoped>
-	$uni-searchbar-height: 32px;
+	$uni-searchbar-height: 36px;
 
 	.uni-searchbar {
 		/* #ifndef APP-NVUE */
@@ -111,6 +130,7 @@
 	.uni-searchbar__box {
 		/* #ifndef APP-NVUE */
 		display: flex;
+		box-sizing: border-box;
 		/* #endif */
 		overflow: hidden;
 		position: relative;
@@ -119,10 +139,10 @@
 		flex-direction: row;
 		align-items: center;
 		height: $uni-searchbar-height;
+		padding: 5px 8px 5px 0px;
 		border-width: 0.5px;
 		border-style: solid;
 		border-color: $uni-border-color;
-		background-color: $uni-bg-color-grey;
 	}
 
 	.uni-searchbar__box-icon-search {
@@ -145,7 +165,7 @@
 	.uni-searchbar__box-icon-clear {
 		align-items: center;
 		line-height: 24px;
-		padding: 0px 5px 0px 5px;
+		padding-left: 5px;
 	}
 
 	.uni-searchbar__text-placeholder {
