@@ -54,7 +54,7 @@
 			},
 			maxlength: {
 				type: [Number, String],
-				default: ''
+				default: 100
 			}
 		},
 		data() {
