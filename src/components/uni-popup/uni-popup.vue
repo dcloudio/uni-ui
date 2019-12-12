@@ -71,7 +71,7 @@
 								'position': 'fixed',
 								'left': 0,
 								'right': 0,
-								'bottom': 0
+								'bottom': 'var(--window-bottom)'
 							}
 							break
 						case 'center':
