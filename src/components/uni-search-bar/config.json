@@ -1,8 +1,9 @@
 {
-	"id":"",
-	"name":"SearchBar",
-	"desc":"搜索栏",
-	"url":"search-bar",
-	"edition":"0.0.1",
-	"path":""
+	"id": "866",
+	"name": "SearchBar",
+	"desc": "搜索栏",
+	"url": "search-bar",
+	"edition": "1.0.3",
+	"path": "https://ext.dcloud.net.cn/plugin?id=866",
+	"update_log": "- 修复 不设置maxlength时app-nvue不能正常输入的Bug"
 }

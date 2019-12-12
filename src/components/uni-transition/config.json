@@ -1,0 +1,9 @@
+{
+	"id": "985",
+	"name": "Transition",
+	"desc": "过渡动画",
+	"url": "transition",
+	"edition": "1.0.0",
+	"path": "https://ext.dcloud.net.cn/plugin?id=985",
+	"update_log": "- 新增 uni-transition 过渡动画组件"
+}

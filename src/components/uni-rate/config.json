@@ -1,10 +1,9 @@
 {
-  "id": "33",
-  "name": "Rate",
-  "desc": "评分",
-  "url": "rate",
-  "edition": "1.0.1",
-  "path": "https://ext.dcloud.net.cn/plugin?id=33",
-  "update_log": "- 新增 示例项目"
-
+	"id": "33",
+	"name": "Rate",
+	"desc": "评分",
+	"url": "rate",
+	"edition": "1.0.3",
+	"path": "https://ext.dcloud.net.cn/plugin?id=33",
+	"update_log": "- 优化 可在nvue页面中使用"
 }

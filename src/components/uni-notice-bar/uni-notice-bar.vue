@@ -1,268 +1,365 @@
 <template>
-  <view
-    v-if="show"
-    :style="{ backgroundColor: backgroundColor, color: color }"
-    class="uni-noticebar"
-    @click="onClick">
-    <view
-      v-if="showClose === 'true' || showClose === true"
-      class="uni-noticebar__close"><uni-icons
-        type="closefill"
-        size="12" /></view>
-    <view
-      :class="{ 'uni-noticebar--flex': scrollable || single || moreText }"
-      class="uni-noticebar__content">
-      <view
-        v-if="showIcon === 'true' || showIcon === true"
-        :style="{ backgroundColor: backgroundColor, color: color }"
-        class="uni-noticebar__content-icon">
-        <uni-icons
-          :color="color"
-          type="sound"
-          size="14" />
-      </view>
-      <view
-        :class="{ 'uni-noticebar--scrollable': scrollable, 'uni-noticebar--single': !scrollable && (single || moreText) }"
-        class="uni-noticebar__content-text">
-        <view
-          :id="elId"
-          :style="{ animation: animation, '-webkit-animation': animation }"
-          class="uni-noticebar__content-inner">{{ text }}</view>
-      </view>
-      <view
-        v-if="showGetMore === 'true' || showGetMore === true"
-        :style="{ width: moreText ? '180upx' : '20px' }"
-        class="uni-noticebar__content-more"
-        @click="clickMore">
-        <view
-          v-if="moreText"
-          class="uni-noticebar__content-more-text">{{ moreText }}</view>
-        <uni-icons
-          type="arrowright"
-          size="14" />
-      </view>
-    </view>
-  </view>
+	<view v-if="show" class="uni-noticebar" :style="{ backgroundColor: backgroundColor }" @click="onClick">
+		<!-- #ifdef MP-ALIPAY -->
+		<view v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" @click="close">
+			<uni-icons type="closefill" :color="color" size="12" />
+		</view>
+		<view v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon">
+			<uni-icons type="sound" :color="color" size="14" />
+		</view>
+		<!-- #endif -->
+		<!-- #ifndef MP-ALIPAY -->
+		<uni-icons v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" type="closefill" :color="color"
+		 size="12" @click="close" />
+		<uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
+		 size="14" />
+		<!-- #endif -->
+		<view ref="textBox" class="uni-noticebar__content-wrapper" :class="{'uni-noticebar__content-wrapper--scrollable':scrollable, 'uni-noticebar__content-wrapper--single':!scrollable && (single || moreText)}">
+			<view :id="elIdBox" class="uni-noticebar__content" :class="{'uni-noticebar__content--scrollable':scrollable, 'uni-noticebar__content--single':!scrollable && (single || moreText)}">
+				<text :id="elId" ref="animationEle" class="uni-noticebar__content-text" :class="{'uni-noticebar__content-text--scrollable':scrollable,'uni-noticebar__content-text--single':!scrollable && (single || moreText)}"
+				 :style="{color:color, width:wrapWidth+'px', 'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: webviewHide?'paused':animationPlayState,'-webkit-animationPlayState':webviewHide?'paused':animationPlayState, animationDelay: animationDelay, '-webkit-animationDelay':animationDelay}">{{text}}</text>
+			</view>
+		</view>
+		<view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar__more" @click="clickMore">
+			<text v-if="moreText" :style="{ color: moreColor }" class="uni-noticebar__more-text">{{ moreText }}</text>
+			<uni-icons type="arrowright" :color="moreColor" size="14" />
+		</view>
+	</view>
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue'
-export default {
-  name: 'UniNoticeBar',
-  components: {
-    uniIcons
-  },
-  props: {
-    text: {
-      type: String,
-      default: ''
-    },
-    moreText: {
-      type: String,
-      default: ''
-    },
-    backgroundColor: {
-      type: String,
-      default: '#fffbe8'
-    },
-    speed: {
-      // 默认1s滚动100px
-      type: [String, Number],
-      default: 100
-    },
-    color: {
-      type: String,
-      default: '#de8c17'
-    },
-    single: {
-      // 是否单行
-      type: [String, Boolean],
-      default: false
-    },
-    scrollable: {
-      // 是否滚动，添加后控制单行效果取消
-      type: [String, Boolean],
-      default: false
-    },
-    showIcon: {
-      // 是否显示左侧icon
-      type: [String, Boolean],
-      default: false
-    },
-    showGetMore: {
-      // 是否显示右侧查看更多
-      type: [String, Boolean],
-      default: false
-    },
-    showClose: {
-      // 是否显示左侧关闭按钮
-      type: [String, Boolean],
-      default: false
-    }
-  },
-  data () {
-    const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
-    return {
-      elId: elId,
-      show: true,
-      animation: ''
-    }
-  },
-  watch: {
-    text (newValue, oldValue) {
-      this.$nextTick(() => {
-        setTimeout(this.setAnimation, 200)
-      })
-    }
-  },
-  // #ifdef H5
-  mounted () {
-    this.setAnimation()
-  },
-  // #endif
-  // #ifndef H5
-  onReady () {
-    this.setAnimation()
-  },
-  // #endif
-  methods: {
-    clickMore () {
-      this.$emit('getmore')
-    },
-    onClick (e) {
-      let clientX = e.touches ? (e.touches[0] ? e.touches[0].clientX : e.changedTouches[0].clientX) : e.detail.clientX
-      if (uni.upx2px(48) + 12 > clientX && String(this.showClose) === 'true') {
-        this.show = false
-        this.$emit('close')
-      }
-      this.$emit('click')
-    },
-    setAnimation () {
-      if (this.scrollable === false || this.scrollable === 'false') {
-        return
-      }
-      // #ifdef MP-TOUTIAO
-      setTimeout(() => {
-        uni.createSelectorQuery()
-          .in(this)
-          .select(`#${this.elId}`)
-          .boundingClientRect()
-          .exec(ret => {
-            this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-          })
-      }, 200)
-      // #endif
-      // #ifndef MP-TOUTIAO
-      uni.createSelectorQuery()
-        .in(this)
-        .select(`#${this.elId}`)
-        .boundingClientRect()
-        .exec(ret => {
-          this.animation = `notice ${ret[0].width / this.speed}s linear infinite both`
-        })
-      // #endif
-    }
-  }
-}
+	import uniIcons from '../uni-icons/uni-icons.vue'
+	// #ifdef APP-NVUE
+	const dom = weex.requireModule('dom');
+	const animation = weex.requireModule('animation');
+	// #endif
+	export default {
+		name: 'UniNoticeBar',
+		components: {
+			uniIcons
+		},
+		props: {
+			text: {
+				type: String,
+				default: ''
+			},
+			moreText: {
+				type: String,
+				default: ''
+			},
+			backgroundColor: {
+				type: String,
+				default: '#fffbe8'
+			},
+			speed: {
+				// 默认1s滚动100px
+				type: Number,
+				default: 100
+			},
+			color: {
+				type: String,
+				default: '#de8c17'
+			},
+			moreColor: {
+				type: String,
+				default: '#999999'
+			},
+			single: {
+				// 是否单行
+				type: [Boolean, String],
+				default: false
+			},
+			scrollable: {
+				// 是否滚动，添加后控制单行效果取消
+				type: [Boolean, String],
+				default: false
+			},
+			showIcon: {
+				// 是否显示左侧icon
+				type: [Boolean, String],
+				default: false
+			},
+			showGetMore: {
+				// 是否显示右侧查看更多
+				type: [Boolean, String],
+				default: false
+			},
+			showClose: {
+				// 是否显示左侧关闭按钮
+				type: [Boolean, String],
+				default: false
+			}
+		},
+		data() {
+			const elId = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+			const elIdBox = `Uni_${Math.ceil(Math.random() * 10e5).toString(36)}`
+			return {
+				textWidth: 0,
+				boxWidth: 0,
+				wrapWidth: '',
+				webviewHide: false,
+				// #ifdef APP-NVUE
+				stopAnimation: false,
+				// #endif
+				elId: elId,
+				elIdBox: elIdBox,
+				show: true,
+				animationDuration: 'none',
+				animationPlayState: 'paused',
+				animationDelay: '0s'
+			}
+		},
+		mounted() {
+			// #ifdef APP-PLUS
+			var pages = getCurrentPages();
+			var page = pages[pages.length - 1];
+			var currentWebview = page.$getAppWebview();
+			currentWebview.addEventListener('hide',()=>{
+				this.webviewHide = true
+			})
+			currentWebview.addEventListener('show',()=>{
+				this.webviewHide = false
+			})
+			// #endif
+			this.$nextTick(() => {
+				this.initSize()
+			})
+		},
+		// #ifdef APP-NVUE
+		beforeDestroy() {
+			this.stopAnimation = true
+		},
+		// #endif
+		methods: {
+			initSize() {
+				if (this.scrollable) {
+					// #ifndef APP-NVUE
+					let query = [],
+						boxWidth = 0,
+						textWidth = 0;
+					let textQuery = new Promise((resolve, reject) => {
+						uni.createSelectorQuery()
+							// #ifndef MP-ALIPAY
+							.in(this)
+							// #endif
+							.select(`#${this.elId}`)
+							.boundingClientRect()
+							.exec(ret => {
+								this.textWidth = ret[0].width
+								resolve()
+							})
+					})
+					let boxQuery = new Promise((resolve, reject) => {
+						uni.createSelectorQuery()
+							// #ifndef MP-ALIPAY
+							.in(this)
+							// #endif
+							.select(`#${this.elIdBox}`)
+							.boundingClientRect()
+							.exec(ret => {
+								this.boxWidth = ret[0].width
+								resolve()
+							})
+					})
+					query.push(textQuery)
+					query.push(boxQuery)
+					Promise.all(query).then(() => {
+						this.animationDuration = `${this.textWidth / this.speed}s`
+						this.animationDelay = `-${this.boxWidth / this.speed}s`
+						setTimeout(() => {
+							this.animationPlayState = 'running'
+						}, 1000)
+					})
+					// #endif
+					// #ifdef APP-NVUE
+					dom.getComponentRect(this.$refs['animationEle'], (res) => {
+						let winWidth = uni.getSystemInfoSync().windowWidth
+						this.textWidth = res.size.width
+						animation.transition(this.$refs['animationEle'], {
+							styles: {
+								transform: `translateX(-${winWidth}px)`
+							},
+							duration: 0,
+							timingFunction: 'linear',
+							delay: 0
+						}, () => {
+							if (!this.stopAnimation) {
+								animation.transition(this.$refs['animationEle'], {
+									styles: {
+										transform: `translateX(-${this.textWidth}px)`
+									},
+									timingFunction: 'linear',
+									duration: (this.textWidth - winWidth) / this.speed * 1000,
+									delay: 1000
+								}, () => {
+									if (!this.stopAnimation) {
+										this.loopAnimation()
+									}
+								});
+							}
+						});
+					})
+					// #endif
+				}
+				// #ifdef APP-NVUE
+				if (!this.scrollable && (this.single || this.moreText)) {
+					dom.getComponentRect(this.$refs['textBox'], (res) => {
+						this.wrapWidth = res.size.width
+					})
+				}
+				// #endif
+			},
+			loopAnimation() {
+				// #ifdef APP-NVUE
+				animation.transition(this.$refs['animationEle'], {
+					styles: {
+						transform: `translateX(0px)`
+					},
+					duration: 0
+				}, () => {
+					if (!this.stopAnimation) {
+						animation.transition(this.$refs['animationEle'], {
+							styles: {
+								transform: `translateX(-${this.textWidth}px)`
+							},
+							duration: this.textWidth / this.speed * 1000,
+							timingFunction: 'linear',
+							delay: 0
+						}, () => {
+							if (!this.stopAnimation) {
+								this.loopAnimation()
+							}
+						});
+					}
+				});
+				// #endif
+			},
+			clickMore() {
+				this.$emit('getmore')
+			},
+			close() {
+				this.show = false;
+				this.$emit('close')
+			},
+			onClick() {
+				this.$emit('click')
+			}
+		}
+	}
 </script>
 
-<style lang="scss">
-// @mixin flex-row-center {
-// 	display: flex;
-// 	flex-direction: row;
-// 	justify-content: center;
-// 	align-items: center;
-// }
+<style lang="scss" scoped>
+	@import '@/uni.scss';
 
-.uni-noticebar {
-	padding: 12upx 24upx;
-	font-size: $uni-font-size-sm;
-	line-height: 1.5;
-	margin-bottom: 20upx;
-	// @include flex-row-center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-	justify-content: left;
-
-	&__close {
-		color: $uni-text-color-grey;
-		margin-right: 24upx;
-		// @include flex-row-center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+	.uni-noticebar {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		width: 100%;
+		box-sizing: border-box;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		padding: 6px 12px;
+		margin-bottom: 10px;
 	}
 
-	&__content {
+	.uni-noticebar-close {
+		margin-right: 5px;
+	}
+
+	.uni-noticebar-icon {
+		margin-right: 5px;
+	}
+
+	.uni-noticebar__content-wrapper {
 		flex: 1;
+		flex-direction: column;
 		overflow: hidden;
+	}
 
-		&.uni-noticebar--flex {
-			flex: 1;
-			display: flex;
-			flex-direction: row;
-		}
+	.uni-noticebar__content-wrapper--single {
+		/* #ifndef APP-NVUE */
+		line-height: 18px;
+		/* #endif */
+	}
 
-		&-icon {
-			display: inline-block;
-			z-index: 1;
-			padding-right: 12upx;
-		}
+	.uni-noticebar__content-wrapper--single,
+	.uni-noticebar__content-wrapper--scrollable {
+		flex-direction: row;
+	}
 
-		&-more {
-			width: 180upx;
-			// @include flex-row-center;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-			justify-content: flex-end;
-			word-break: keep-all;
-			margin-left: 10upx;
-			color: $uni-text-color-grey;
+	.uni-noticebar__content--scrollable {
+		/* #ifdef APP-NVUE */
+		flex: 0;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		flex: 1;
+		display: block;
+		overflow: hidden;
+		/* #endif */
+	}
 
-			&-text {
-				font-size: $uni-font-size-sm;
-				white-space: nowrap;
-			}
-		}
+	.uni-noticebar__content--single {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex: none;
+		width: 100%;
+		justify-content: center;
+		/* #endif */
+	}
 
-		&-text {
-			word-break: break-all;
-			line-height: 1.5;
-			display: inline;
+	.uni-noticebar__content-text {
+		font-size: 14px;
+		line-height: 18px;
+		/* #ifndef APP-NVUE */
+		word-break: break-all;
+		/* #endif */
+	}
 
-			&.uni-noticebar--single {
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				overflow: hidden;
-			}
+	.uni-noticebar__content-text--single {
+		/* #ifdef APP-NVUE */
+		lines: 1;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		display: inline-block;
+		width: 100%;
+		white-space: nowrap;
+		/* #endif */
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-			&.uni-noticebar--scrollable {
-				flex: 1;
-				display: block;
-				overflow: hidden;
+	.uni-noticebar__content-text--scrollable {
+		/* #ifdef APP-NVUE */
+		lines: 1;
+		padding-left: 750rpx;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		display: inline-block;
+		white-space: nowrap;
+		padding-left: 100%;
+		animation: notice 10s 0s linear infinite both;
+		animation-play-state: paused;
+		/* #endif */
+	}
 
-				.uni-noticebar__content-inner {
-					padding-left: 100%;
-					white-space: nowrap;
-					display: inline-block;
-					transform: translateZ(0);
-				}
-			}
-		}
+	.uni-noticebar__more {
+		/* #ifndef APP-NVUE */
+		display: inline-flex;
+		/* #endif */
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		padding-left: 5px;
+	}
 
-		&-inner {
-			font-size: $uni-font-size-sm;
-			display: inline;
+	.uni-noticebar__more-text {
+		font-size: 14px;
+	}
+
+	@keyframes notice {
+		100% {
+			transform: translate3d(-100%, 0, 0);
 		}
 	}
-}
-
-@keyframes notice {
-	100% {
-		transform: translate3d(-100%, 0, 0);
-	}
-}
 </style>

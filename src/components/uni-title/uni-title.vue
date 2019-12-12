@@ -1,115 +1,152 @@
 <template>
-  <view :class="{sticky:sticky}" :style="{top:stickyTop+'px'}" class="uni-title">
-    <view v-if="type" class="uni-title__head">
-      <view :class="type" class="uni-title__head-tag" />
-    </view>
-    <view class="uni-title__content">
-      <view :class="{'distraction':!subTitle}" class="uni-title__content-title">{{ title }}</view>
-      <view class="uni-title__content-sub">{{ subTitle }}</view>
-    </view>
-  </view>
+	<view class="uni-title__box" :style="{'align-items':textAlign}">
+		<text class="uni-title__base" :class="['uni-'+type]" :style="{'color':color}">{{title}}</text>
+	</view>
 </template>
 
 <script>
-  export default {
-    name: 'UniTitle',
-    props: {
-      type: {
-        type: String,
-        default: ''
-      },
-      title: {
-        type: String,
-        default: ''
-      },
-      subTitle: {
-        type: String,
-        default: ''
-      },
-      sticky: {
-        type: Boolean,
-        default: false
-      },
-      stickyTop: {
-        type: Number,
-        default: 0
-      }
-    },
-    data() {
-      return {}
-    },
-    watch: {
-      title(newVal) {
-        if (uni.report && newVal !== '') {
-          uni.report('title', newVal)
-        }
-      }
-    },
-    methods: {
-      onClick() {
-        this.$emit('click')
-      }
-    }
-  }
+	export default {
+		props: {
+			type: {
+				type: String,
+				default: ''
+			},
+			title: {
+				type: String,
+				default: ''
+			},
+			align: {
+				type: String,
+				default: 'left'
+			},
+			color: {
+				type: String,
+				default: '#333333'
+			},
+			stat: {
+				type: [Boolean, String],
+				default: ''
+			}
+		},
+		data() {
+			return {
+
+			};
+		},
+		computed: {
+			textAlign() {
+				let align = 'center';
+				switch (this.align) {
+					case 'left':
+						align = 'flex-start'
+						break;
+					case 'center':
+						align = 'center'
+						break;
+					case 'right':
+						align = 'flex-end'
+						break;
+				}
+				return align
+			}
+		},
+		watch: {
+			title(newVal) {
+				if (this.isOpenStat()) {
+					// 上报数据
+					if (uni.report) {
+						uni.report('title', this.title)
+					}
+				}
+			}
+		},
+		mounted() {
+			if (this.isOpenStat()) {
+				// 上报数据
+				if (uni.report) {
+					uni.report('title', this.title)
+				}
+			}
+		},
+		methods: {
+			isOpenStat() {
+				if (this.stat === '') {
+					this.isStat = false
+				}
+				let stat_type = (typeof(this.stat) === 'boolean' && this.stat) || (typeof(this.stat) === 'string' && this.stat !==
+					'')
+				if (this.type === "") {
+					this.isStat = true
+					if (this.stat.toString() === 'false') {
+						this.isStat = false
+					}
+				}
+
+				if (this.type !== '') {
+					this.isStat = true
+					if (stat_type) {
+						this.isStat = true
+					} else {
+						this.isStat = false
+					}
+				}
+				return this.isStat
+			}
+		}
+	}
 </script>
 
-<style lang="scss">
-  .uni-title {
-    margin-top: 10px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    width: 100%;
-    height: 50px;
-    background-color: #fdfdfd;
-    border-bottom: 1px #f5f5f5 solid;
-    box-sizing: border-box;
+<style scoped>
+	/* .uni-title {
 
-    &.sticky {
-      position: sticky;
-      // top: 44px;
-    }
+	} */
+	.uni-title__box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		padding: 8px 0;
+		flex: 1;
+	}
 
-    &__head {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 10px; 
+	.uni-title__base {
+		font-size: 15px;
+		color: #333;
+		font-weight: 500;
+	}
 
-      &-tag {
-        &.line {
-          height: 15px;
-          background: #ccc;
-          border-radius: 5px;
-          width: 3px;
-        }
+	.uni-h1 {
+		font-size: 20px;
+		color: #333;
+		font-weight: bold;
+	}
 
-        &.circle {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #ccc;
-        }
-      }
-    }
+	.uni-h2 {
+		font-size: 18px;
+		color: #333;
+		font-weight: bold;
+	}
 
-    &__content {
-      color: #464e52;
+	.uni-h3 {
+		font-size: 16px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 400; */
+	}
 
-      &-title {
-        font-size: 16px;
+	.uni-h4 {
+		font-size: 14px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 300; */
+	}
 
-        &.distraction {
-          display: flex;
-          align-items: center;
-        }
-      }
-
-      &-sub {
-        font-size: 12px;
-        color: #999;
-      }
-    }
-  }
+	.uni-h5 {
+		font-size: 12px;
+		color: #333;
+		font-weight: bold;
+		/* font-weight: 200; */
+	}
 </style>

@@ -1,9 +1,9 @@
 {
-	"id": "",
-	"name":"GoodsNav",
-	"desc":"商品导航",
-	"url":"goods-nav",
-	"edition":"0.0.1",
-	"path":"https://ext.dcloud.net.cn/plugin?id=",
-  "update_log":"- 初始化项目"
+	"id": "865",
+	"name": "GoodsNav",
+	"desc": "商品导航",
+	"url": "goods-nav",
+	"edition": "1.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=865",
+	"update_log": "- 优化 可在nvue页面中使用"
 }

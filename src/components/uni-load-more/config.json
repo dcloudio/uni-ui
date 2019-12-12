@@ -3,7 +3,7 @@
 	"name": "LoadMore",
 	"desc": "加载更多",
 	"url": "load-more",
-	"edition": "1.1.2",
+	"edition": "1.1.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=29",
-	"update_log":"- 根据不同平台使用不同加载动画 \n- 新增 示例项目"
+	"update_log": "- 优化 可在nvue页面中使用"
 }

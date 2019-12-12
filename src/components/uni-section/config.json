@@ -1,0 +1,10 @@
+{
+	"id": "99999",
+	"name": "Section",
+	"desc": "章节标题",
+	"edition": "0.0.1",
+	"url": "section",
+	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"hidden": true,
+	"update_log": "- 新增 插件在线示例"
+}

@@ -1,9 +1,0 @@
-{
-  "id": "25",
-  "name": "CountDown",
-  "desc": "倒计时",
-  "url": "count-down",
-  "edition": "1.0.1",
-  "path": "https://ext.dcloud.net.cn/plugin?id=25",
-  "update_log": "- 新增 示例项目"
-}

@@ -1,9 +1,9 @@
 {
-  "id": "284",
-  "name": "SwiperDot",
-  "desc": "轮播图指示点",
-  "url": "swiper-dot",
-  "edition": "1.0.2",
-  "path": "https://ext.dcloud.net.cn/plugin?id=284",
-  "update_log": "- 新增一个指示点样式"
+	"id": "284",
+	"name": "SwiperDot",
+	"desc": "轮播图指示点",
+	"url": "swiper-dot",
+	"edition": "1.0.4",
+	"path": "https://ext.dcloud.net.cn/plugin?id=284",
+	"update_log": "- 优化 可在nvue页面中使用"
 }
