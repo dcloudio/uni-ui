@@ -153,3 +153,21 @@ Tips
 - 函数名只能在 函数名之前使用 _ 表示私有 ，如： _fun()
 - js内使用字符串使用单引号
 - 如果使用分号，所有都要用分号，如果不用，就全都不要用
+
+
+
+### vue doc
+```javasceipr
+
+/**  
+* 这里是一个组件描述，会在提示标签的时候显示  
+* @description 这里也是一个组件描述  
+* @tutorial https://uniapp.dcloud.io/api/media/image?id=chooseimage  
+* @property {String} type = [button|input|] 这里是属性描述	
+* @value button adsjklfajdslfkajsdklf
+* @value input aldksjfalkdsjflkajsdflkj
+* @event {Function(Object,String)} tap 这是是事件描述   
+* @example 这里是示例代码 
+*/
+
+```
