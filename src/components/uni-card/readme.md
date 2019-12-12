@@ -36,7 +36,7 @@ export default {
 	extra="Dcloud 2019-05-20 12:32:19"
 	note="Tips"
 >
-		那是一个秋意盎然、金风送爽的日子，我和父母一起来到了位于上师大旁的康健园。一踏进公园，一股浓郁的桂香扑鼻而来，泌人心脾,让我心旷神怡，只见一朵朵开得正烈的金色桂花，迎风而立，仿佛在向我招手。我们追着这桂香，走进了清幽的公园。
+		uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。即使不跨端，uni-app同时也是更好的小程序开发框架。
 </uni-card>
 
 <!-- 标题卡片模式 -->
@@ -48,7 +48,7 @@ export default {
 	extra="技术没有上限" 
 	note="Tips"
 >
-	那是一个秋意盎然、金风送爽的日子,我和父母一起来到了位于上师大旁的康健园.一踏进公园,一股浓郁的桂香扑鼻而来,泌人心脾,让我心旷神怡,只见一朵朵开得正烈的金色桂花,迎风而立,仿佛在向我招手.我们追着这桂香,走进了清幽的公园.
+	uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可编译到iOS、Android、H5、以及各种小程序等多个平台。即使不跨端，uni-app同时也是更好的小程序开发框架。
 </uni-card>
 
 <!-- 自定义底部按钮 -->
@@ -74,8 +74,8 @@ export default {
 |note		|String	|-		|底部信息																	|
 |thumbnail	|String	|-		|标题左侧缩略图																|
 |mode		|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片	|
-|is-full	|Boolean|false	|卡片内容是否通栏，为true时将去除padding值									|
-|is-shadow	|Boolean|false	|卡片内容是否开启阴影														|
+|isFull	|Boolean|false	|卡片内容是否通栏，为true时将去除padding值									|
+|isShadow	|Boolean|false	|卡片内容是否开启阴影														|
 
 
 ### 事件说明
