@@ -83,7 +83,7 @@
 				default: 'success'
 			},
 			rightText: {
-				// badge内容
+				// 右侧文字内容
 				type: String,
 				default: ''
 			},
