@@ -21,8 +21,8 @@
 	 * @property {Number} hour 小时
 	 * @property {Number} minute 分钟
 	 * @property {Number} second 秒
-	 * @property {Boolean} showDay 是否显示天数
-	 * @property {Boolean} showColon 是否以冒号为分隔符
+	 * @property {Boolean} showDay = [true|false] 是否显示天数
+	 * @property {Boolean} showColon = [true|false] 是否以冒号为分隔符
 	 * @property {String} splitorColor 分割符号颜色
 	 * @event {Function} timeup 倒计时时间到触发事件
 	 * @example <uni-countdown :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
