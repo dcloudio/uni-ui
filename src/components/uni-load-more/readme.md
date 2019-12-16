@@ -32,6 +32,11 @@ export default {
 |color			|String	|#777777																						|图标和文字颜色																						|
 |content-text	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`	|各状态文字说明																																|
 
+**说明**
+
+- `iconType`为`snow`时，在`APP-NVUE`平台不可设置大小，在非`APP-NVUE`平台不可设置颜色
+
+
 ### 事件说明
 
 |事件名			|说明				|返回值						|
