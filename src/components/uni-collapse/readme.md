@@ -103,7 +103,7 @@ export default {
 |thumb		|String	|-		|标题左侧缩略图	|
 |disabled	|Boolean|false	|是否禁用		|
 |open		|Boolean|false	|是否展开面板	|
-|show-animation	|String	|false	|开启动画		|
+|showAnimation	|Boolean	|false	|开启动画		|
 
 **Tips**
 
