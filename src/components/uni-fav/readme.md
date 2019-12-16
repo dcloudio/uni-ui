@@ -18,7 +18,7 @@ export default {
 
 ```html
 <uni-fav :checked="checked" @click="onClick"/>
-<uni-fav :checked="checked" class="favBtn" circle="true" bg-color="#dd524d" bg-color-checked="#007aff" @click="onClick"/>
+<uni-fav :checked="checked" class="favBtn" circle="true" bgColor="#dd524d" bgColorChecked="#007aff" @click="onClick"/>
 ```
 
 
