@@ -56,18 +56,18 @@ export default {
 |---			|----	|---	|---																																|
 |title			|String	|-		|标题																																|
 |note			|String	|-		|描述																																|
-|disabled		|Boolean|false	|是否禁用																															|
-|showArrow		|Boolean|true	|是否显示箭头图标																													|
-|showBadge		|Boolean|false	|是否显示数字角标																													|
+|thumb			|String	|-		|左侧缩略图，若thumb有值，则不会显示扩展图标																						|
 |badgeText		|String	|-		|数字角标内容																														|
 |badgeType		|String	|-		|数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)																|
 |rightText		|String	|-		|右侧文字内容																														|
-|showSwitch	|Boolean|false	|是否显示Switch																														|
+|disabled		|Boolean|false	|是否禁用																															|
+|showArrow		|Boolean|true	|是否显示箭头图标																													|
+|showBadge		|Boolean|false	|是否显示数字角标																													|
+|showSwitch	    |Boolean|false	|是否显示Switch																														|
 |switchChecked	|Boolean|false	|Switch是否被选中																													|
-|showExtraIcon|Boolean|false	|左侧是否显示扩展图标																												|
-|extraIcon		|Object	|-		|扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	|
-|thumb			|String	|-		|左侧缩略图，若thumb有值，则不会显示扩展图标																						|
+|showExtraIcon  |Boolean|false	|左侧是否显示扩展图标																												|
 |scroll-y       |Boolean|false	|允许纵向滚动，需要显式的设置其宽高|
+|extraIcon		|Object	|-		|扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	|
 
 **uniListItem 事件说明：**
 
