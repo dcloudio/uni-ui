@@ -39,7 +39,7 @@
 	 * 	@value loading loading中
 	 * 	@value noMore 没有更多了
 	 * @property {Number} iconSize 指定图标大小
-	 * @property {showIcon} iconSize = [true|false] 是否显示 loading 图标
+	 * @property {Boolean} iconSize = [true|false] 是否显示 loading 图标
 	 * @property {String} iconType = [snow|circle|auto] 指定图标样式
 	 * 	@value snow ios雪花加载样式
 	 * 	@value circle 安卓唤醒加载样式
