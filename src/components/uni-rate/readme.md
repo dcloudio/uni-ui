@@ -39,15 +39,15 @@ export default {
 |size			|Number	|24		|星星的大小					|
 |margin			|Number	|0		|星星的间距					|
 |color			|String	|#ececec|星星的颜色					|
-|active-color	|String	|#ffca3e|选中状态的星星的颜色		|
-|is-fill		|Boolean|true	|星星的类型，是否为实心类型	|
+|activeColor	|String	|#ffca3e|选中状态的星星的颜色		|
+|isFill		|Boolean|true	|星星的类型，是否为实心类型	|
 |disabled		|Boolean|false	|是否为不可点击状态			|
 
 ### 事件说明
 
 |事件称名	|说明								|返回参数			|
 |---		|----								|---				|
-|change		|uniRate 的 value 改变时触发事件，	|e={value:Number}	|
+|@change		|uniRate 的 value 改变时触发事件，	|e={value:Number}	|
 
 ### 插件预览地址
 
