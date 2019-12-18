@@ -34,6 +34,7 @@
 	import uniBadge from '../uni-badge/uni-badge.vue'
 
 	/**
+	 * ListItem 列表子组件
 	 * @description 列表子组件
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=24
 	 * @property {String} title 标题
