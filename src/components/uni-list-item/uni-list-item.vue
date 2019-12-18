@@ -43,7 +43,7 @@
 	 * @property {String} badgeType 数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
 	 * @property {String} rightText 右侧文字内容
 	 * @property {Boolean} disabled = [true|false]是否禁用
-	 * @property {Boolean} showArrow = [true|false] 是否禁用
+	 * @property {Boolean} showArrow = [true|false] 是否显示箭头图标
 	 * @property {Boolean} showBadge = [true|false] 是否显示数字角标
 	 * @property {Boolean} showSwitch = [true|false] 是否显示Switch
 	 * @property {Boolean} switchChecked = [true|false] Switch是否被选中
