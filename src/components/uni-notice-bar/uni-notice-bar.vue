@@ -335,7 +335,7 @@
 		padding-left: 750rpx;
 		/* #endif */
 		/* #ifndef APP-NVUE */
-		display: block;
+		display: inline-block;
 		white-space: nowrap;
 		padding-left: 100%;
 		animation: notice 10s 0s linear infinite both;
