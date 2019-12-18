@@ -55,11 +55,11 @@ export default {
 
 |属性名		|类型	|默认值	|说明																			|
 |---		|----	|---	|---																			|
-|info		|Array	|-		|轮播图的数据，通过数组长度决定指示点个数										|
 |current	|Number	|0		|当前指示点索引，必须是通过 `swiper` 的 `change` 事件获取到的 `e.detail.current`|
-|dotsStyles	|Object	|-		|指示点样式																	|
 |mode		|String	|default|指示点的类型，可选值：default 、round 、nav	 、 indexes 						|
 |field		|String	|-		| mode 为 nav 时，显示的内容字段（mode = nav 时必填）							|
+|info		|Array	|-		|轮播图的数据，通过数组长度决定指示点个数										|
+|dotsStyles	|Object	|-		|指示点样式																	|
 
 **dotsStyles 属性说明：**
 
