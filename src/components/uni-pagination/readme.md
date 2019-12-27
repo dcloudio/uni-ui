@@ -25,12 +25,12 @@ export default {
 
 |属性名		|类型	|默认值	|说明						|
 |---		|----	|---	|---						|
-|prev-text	|String	|上一页	|左侧按钮文字				|
-|next-text	|String	|下一页	|右侧按钮文字				|
+|prevText	|String	|上一页	|左侧按钮文字				|
+|nextText	|String	|下一页	|右侧按钮文字				|
 |current	|Number	|1		|当前页						|
 |total		|Number	|0		|数据总量					|
 |pageSize	|Number	|10		|每页数据量					|
-|show-icon	|Boolean|false	|是否以 icon 形式展示按钮	|
+|showIcon	|Boolean|false	|是否以 icon 形式展示按钮	|
 
 
 ### 事件说明

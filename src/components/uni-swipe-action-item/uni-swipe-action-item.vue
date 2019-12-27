@@ -24,8 +24,8 @@
 		<view ref="selector-box-hock" class="uni-swipe_content" @horizontalpan="touchstart" @touchend="touchend">
 			<view ref="selector-button-hock" class="uni-swipe_button-group selector-query-hock move-hock" :style="{width:right+'px'}">
 				<view ref="button-hock" v-for="(item,index) in options" :key="index" :style="{
-		  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD'}"
-				 class="uni-swipe_button " @click.stop="onClick(index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px',left: right+'px'}">{{ item.text }}</text></view>
+		  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',left: right+'px'}"
+				 class="uni-swipe_button " @click.stop="onClick(index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'}">{{ item.text }}</text></view>
 			</view>
 			<view ref='selector-content-hock' class="uni-swipe_move-box selector-query-hock">
 				<view class="uni-swipe_box">
@@ -95,6 +95,18 @@
 	// #ifdef MP-ALIPAY
 	import mpalipay from './mpalipay'
 	// #endif
+
+	/**
+	 * SwipeActionItem 滑动操作子组件
+	 * @description 通过滑动触发选项的容器
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=181
+	 * @property {Boolean} show = [true|false] 开启关闭组件，auto-close = false 时生效
+	 * @property {Boolean} disabled = [true|false] 是否禁止滑动
+	 * @property {Boolean} autoClose = [true|false] 其他组件开启的时候，当前组件是否自动关闭
+	 * @property {Array} options 组件选项内容及样式
+	 * @event {Function} click 点击选项按钮时触发事件，e = {content,index} ，content（点击内容）、index（下标)
+	 * @event {Function} change 组件打开或关闭时触发，true：开启状态；false：关闭状态
+	 */
 
 	export default {
 		// #ifdef APP-VUE|| MP-WEIXIN||H5
@@ -230,7 +242,7 @@
 		transition-duration: 0.3s;
 		transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
-	
+
 	/* #ifdef MP-ALIPAY */
 	.movable-area {
 		width: 300px;

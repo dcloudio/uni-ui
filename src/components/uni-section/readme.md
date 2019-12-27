@@ -7,7 +7,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniSection from '@/components/uni-section/uni-section.vue'
+import uniSection from "@/components/uni-section/uni-section.vue"
 export default {
     components: {uniSection}
 }

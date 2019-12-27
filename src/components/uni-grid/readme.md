@@ -32,7 +32,7 @@ export default {
 </uni-grid>
 
 <!-- 不带边框并矩形显示 -->
-<uni-grid :column="3" :show-border="false"  :square="false">
+<uni-grid :column="3" :showBorder="false"  :square="false">
 	<uni-grid-item>
 		<text class="text">文本</text>
 	</uni-grid-item>
@@ -61,8 +61,8 @@ export default {
 |属性名		|类型	|默认值	|说明				|
 |---		|----	|---	|---				|
 |column		|Number	|3		|每列显示个数		|
-|showBorder	|Boolean|true	|是否显示边框		|
 |borderColor|String	|#d0dee5|边框颜色			|
+|showBorder	|Boolean|true	|是否显示边框		|
 |square		|Boolean|true	|是否方形显示		|
 |highlight	|Boolean|true	|点击背景是否高亮	|
 

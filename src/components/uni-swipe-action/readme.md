@@ -38,13 +38,13 @@ export default {
 <!-- 按组使用 -->
 <uni-swipe-action>
     <uni-swipe-action-item :options="options1">
-        <uni-list-item title="item1" show-arrow="false"></uni-list-item>
+		<view class='cont'>item1</view>
     </uni-swipe-action-item>
     <uni-swipe-action-item :options="options2">
-        <uni-list-item title="item2" show-arrow="false"></uni-list-item>
+		<view class='cont'>item2</view>
     </uni-swipe-action-item>
     <uni-swipe-action-item :options="options3">
-        <uni-list-item title="item3" show-arrow="false"></uni-list-item>
+		<view class='cont'>item3</view>
     </uni-swipe-action-item>
 </uni-swipe-action>
 ```
@@ -88,7 +88,7 @@ export default {
 |:--		|:--			|:--	|:--		|:--										|
 |show		|Boolean		|false	|否			|开启关闭组件，auto-close = false 时生效	|
 |disabled	|Boolean		|false	|否			|是否禁止滑动								|
-|auto-close	|Boolean		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	|
+|autoClose	|Boolean		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	|
 |options	|Array\Object	|-		|是			|组件选项内容及样式							|
 
 **options 参数说明**

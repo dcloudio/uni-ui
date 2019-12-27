@@ -1,10 +1,10 @@
 {
-	"id": "100000",
+	"id": "1066",
 	"name": "Title",
 	"desc": "章节标题",
 	"edition": "1.0.0",
 	"url": "title",
-	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"path": "https://ext.dcloud.net.cn/plugin?id=1066",
 	"update_log": "",
 	"hidden": true
 }

@@ -32,7 +32,7 @@ export default {
 ```html
 <template>
     <view>
-        <uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button" active-color="#4cd964"></uni-segmented-control>
+        <uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="button" activeColor="#4cd964"></uni-segmented-control>
         <view class="content">
             <view v-show="current === 0">
                 选项卡1的内容
@@ -53,9 +53,9 @@ export default {
 |属性名			|类型				|默认值	|说明															|
 |---			|----				|---	|---															|
 |current		|Number				|0		|当前选中的tab索引值，从0计数									|
-|values			|Array&lt;String&gt;|-		|选项数组														|
 |style-type		|String				|button	|分段器样式类型，可选值：button（按钮类型），text（文字类型）	|
 |active-color	|String				|#007aff|选中的标签背景色与边框颜色										|
+|values			|Array|-		|选项数组														|
 
 ### 事件说明
 
