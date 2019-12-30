@@ -25,12 +25,17 @@ export default {
 
 |属性名			|类型	|默认值																							|说明																																		|
 |---			|----	|---																							|---																																		|
+|iconSize		|Number	|24																								|指定图标大小																																|
 |status			|String	|more																							|loading 的状态，可选值：more（loading前）、loading（loading中）、noMore（没有更多了）														|
 |showIcon		|Boolean|true																							|是否显示 loading 图标																														|
 |iconType		|String	|auto																							|指定图标样式，可选值：snow（ios雪花加载样式）、circle（安卓环形加载样式）、auto（根据平台自动选择加载样式）。**注意：**APP-NVUE不支持此选项|
-|iconSize		|Number	|24																							|指定图标大小|
-|color			|String	|#777777																						|图标和文字颜色																						|
-|content-text	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`	|各状态文字说明																																|
+|color			|String	|#777777																						|图标和文字颜色																																|
+|contentText	|Object	|`{contentdown: "上拉显示更多",contentrefresh: "正在加载...",contentnomore: "没有更多数据了"}`	|各状态文字说明																																|
+
+**说明**
+
+- `iconType`为`snow`时，在`APP-NVUE`平台不可设置大小，在非`APP-NVUE`平台不可设置颜色
+
 
 ### 事件说明
 

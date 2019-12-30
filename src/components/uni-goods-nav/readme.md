@@ -18,7 +18,7 @@ export default {
 使用组件
 
 ```html
-<uni-goods-nav :fill="true"  :options="options" :button-group="buttonGroup"  @click="onClick" @buttonClick="buttonClick" />
+<uni-goods-nav :fill="true"  :options="options" :buttonGroup="buttonGroup"  @click="onClick" @buttonClick="buttonClick" />
 ```
 
 ```javascript

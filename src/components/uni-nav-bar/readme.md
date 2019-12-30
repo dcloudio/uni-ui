@@ -25,15 +25,15 @@ export default {
 |属性名				|类型	|默认值	|说明																						|
 |---				|----	|---	|---																						|
 |title				|String	|-		|标题文字																					|
-|left-text			|String	|-		|右侧按钮文本																				|
-|right-text			|String	|-		|右侧按钮文本																				|
-|left-icon			|String	|-		|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
-|right-icon			|String	|-		|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
-|fixed				|Boolean|false	|是否固定顶部																				|
-|status-bar			|Boolean|false	|是否包含状态栏，																			|
-|shadow				|Boolean|false	|导航栏下是否有阴影																			|
+|leftText			|String	|-		|左侧按钮文本																				|
+|rightText			|String	|-		|右侧按钮文本																				|
+|leftIcon			|String	|-		|左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
+|rightIcon			|String	|-		|右侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）	|
 |color				|String	|#000000|图标和文字颜色																				|
-|background-color	|String	|#FFFFFF|导航栏背景颜色																				|
+|backgroundColor	|String	|#FFFFFF|导航栏背景颜色																				|
+|fixed				|Boolean|false	|是否固定顶部																				|
+|statusBar			|Boolean|false	|是否包含状态栏																			|
+|shadow				|Boolean|false	|导航栏下是否有阴影																			|
 
 ### 插槽说明
 

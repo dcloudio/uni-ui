@@ -25,31 +25,34 @@ export default {
 <uni-notice-bar scrollable="true" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 
 <!-- 显示图标 -->
-<uni-notice-bar show-icon="true" text="[多行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
+<uni-notice-bar showIcon="true" text="[多行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 
 <!-- 显示关闭按钮 -->
-<uni-notice-bar show-close="true" show-icon="true" text="这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
+<uni-notice-bar showClose="true" showIcon="true" text="这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 
 <!-- 查看更多 -->
- <uni-notice-bar @getmore="getMore" :show-get-more="true" more-text="查看更多" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
+ <uni-notice-bar @getmore="getMore" :showGetMore="true" moreText="查看更多" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 ```
 
+**注意**
+
+如果需要异步获取内容后展示需要使用`v-if`进行控制，`<uni-notice-bar v-if="text" :text="text"></uni-notice-bar>`
 
 ### 属性说明
 
 |属性名				|类型	|默认值	|说明												|
 |---				|----	|---	|---												|
-|text				|String	|-		|显示文字											|
 |speed				|Number	|100	|文字滚动的速度，默认100px/秒						|
+|text				|String	|-		|显示文字											|
 |background-color	|String	|#fffbe8|背景颜色											|
 |color				|String	|#de8c17|文字颜色											|
 |moreColor			|String	|#999999|查看更多文字的颜色									|
+|moreText			|String	|-		|设置“查看更多”的文本								|
 |single				|Boolean|false	|是否单行											|
 |scrollable			|Boolean|false	|是否滚动，为true时，NoticeBar为单行				|
-|show-icon			|Boolean|false	|是否显示左侧喇叭图标								|
-|show-close			|Boolean|false	|是否显示左侧关闭按钮								|
-|show-get-more		|Boolean|false	|是否显示右侧查看更多图标，为true时，NoticeBar为单行|
-|more-text			|String	|-		|设置“查看更多”的文本								|
+|showIcon			|Boolean|false	|是否显示左侧喇叭图标								|
+|showClose			|Boolean|false	|是否显示左侧关闭按钮								|
+|showGetMore		|Boolean|false	|是否显示右侧查看更多图标，为true时，NoticeBar为单行|
 
 ### 事件说明
 

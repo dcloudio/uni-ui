@@ -1,7 +1,7 @@
 ### SearchBar 搜索栏
 *已经支持在nvue页面中使用*
 
-评分组件，组件名：``uni-search-bar``，代码块： uSearchBar。
+搜索栏组件，组件名：``uni-search-bar``，代码块： uSearchBar。
 
 ### 使用方式
 
@@ -31,13 +31,13 @@ export default {
 
 |属性名			|类型	|默认值	|说明																					|
 |---			|----	|---	|---																					|
-|placeholder	|String	|搜索	|搜索栏Placeholder																		|
 |radius			|Number	|10		|搜索栏圆角，单位rpx																	|
+|maxlength		|Number	|100	|输入最大长度																			|
+|placeholder	|String	|搜索	|搜索栏Placeholder																		|
 |clearButton	|String	|auto	|是否显示清除按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
 |cancelButton	|String	|auto	|是否显示取消按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
 |cancelText		|String	|取消	|取消按钮的文字																			|
 |bgColor		|String	|#F8F8F8|输入框背景颜色																			|
-|maxlength		|Number	|100	|输入最大长度																			|
 
 ### 事件说明
 

@@ -27,19 +27,19 @@
 		props: {
 			type: {
 				type: String,
-				// default: 'default'
+				default: 'default'
 			},
 			inverted: {
 				type: Boolean,
-				// default: false
+				default: false
 			},
 			text: {
-				type: String,
-				// default: ''
+				type: [String,Number],
+				default: ''
 			},
 			size: {
 				type: String,
-				// default: 'normal'
+				default: 'normal'
 			}
 		},
 		data() {

@@ -30,10 +30,10 @@ export default {
 
 |属性名			|类型				|默认值	|说明																|
 |---			|----				|---	|---																|
-|options		|Array&lt;Object&gt;|		|数据源，格式为：[{title:'xxx',desc:'xxx'},{title:'xxx',desc:'xxx'}]|
 |active			|Number				|0		|当前步骤															|
 |direction		|String				|row	|排列方向，可取值：row（横向）、column（纵向）						|
 |active-color	|String				|#1aad19|选中状态的颜色														|
+|options		|Array|		|数据源，格式为：[{title:'xxx',desc:'xxx'},{title:'xxx',desc:'xxx'}]|
 
 ### 插件预览地址 
 [https://uniapp.dcloud.io/h5/pages/extUI/steps/steps](https://uniapp.dcloud.io/h5/pages/extUI/steps/steps)
