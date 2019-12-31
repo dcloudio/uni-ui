@@ -412,6 +412,12 @@
 				}, {
 					"name": "pulldown",
 					"unicode": "e588"
+				}, {
+					"name": "headphones",
+					"unicode": "e8bf"
+				}, {
+					"name": "shop",
+					"shop": "e609"
 				}],
 				activeIndex: -1,
 				checked: false

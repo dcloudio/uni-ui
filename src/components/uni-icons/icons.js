@@ -126,5 +126,7 @@ export default {
 	"cloud-download": "\ue8e4",
 	"cloud-upload-filled": "\ue8e5",
 	"cloud-upload": "\ue8e6",
-	"cloud-download-filled": "\ue8e9"
+	"cloud-download-filled": "\ue8e9",
+	"headphones":"\ue8bf",
+	"shop":"\ue609"
 }
