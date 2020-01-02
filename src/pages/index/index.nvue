@@ -128,6 +128,10 @@
 						url: 'indexed-list'
 					},
 					{
+						name: 'Link 超链接',
+						url: 'link'
+					},
+					{
 						name: 'LoadMore 加载更多',
 						url: 'load-more'
 					},

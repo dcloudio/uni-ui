@@ -1,0 +1,9 @@
+{
+	"id": "1182",
+	"name": "Link",
+	"desc": "超链接",
+	"url": "link",
+	"edition": "0.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=1182",
+	"update_log": "- 初始化项目"
+}

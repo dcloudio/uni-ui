@@ -217,6 +217,10 @@
             "path" : "pages/title/title",
             "style" : {}
         }
+        ,{
+            "path" : "pages/link/link",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
