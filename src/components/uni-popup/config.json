@@ -3,7 +3,7 @@
 	"name": "PopUp",
 	"desc": "弹出层",
 	"url": "popup",
-	"edition": "1.1.8",
+	"edition": "1.1.9",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 修复 type 值为静态的情况下,弹出错误的Bug"
+	"update_log": "- 修复 animation 属性不生效的 Bug"
 }
