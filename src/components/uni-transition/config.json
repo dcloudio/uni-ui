@@ -3,7 +3,7 @@
 	"name": "Transition",
 	"desc": "过渡动画",
 	"url": "transition",
-	"edition": "1.0.0",
+	"edition": "1.0.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=985",
-	"update_log": "- 新增 uni-transition 过渡动画组件"
+	"update_log": "- 修复 在某些设备上不显示内容的 Bug"
 }
