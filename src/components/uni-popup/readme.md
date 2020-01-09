@@ -60,7 +60,7 @@ export default {
 
 **Tips**
 - 在使用 `uni-popup` 时，尽量将组件置于其他元素后面，避免出现层级问题
-- 在微信小程序开发者工具中，启用真机调试，会出现popup 内容不显示的问题，预览和发布小程序不会出现此问题
+- 在微信小程序开发者工具中，启用真机调试，popup 会延时出现，是因为 setTimeout 在真机调试中的延时问题导致的，预览和发布小程序不会出现此问题
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/popup/popup](https://uniapp.dcloud.io/h5/pages/extUI/popup/popup)
