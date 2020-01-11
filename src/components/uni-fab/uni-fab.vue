@@ -202,7 +202,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
 
 	.uni-fab {
 		position: fixed;

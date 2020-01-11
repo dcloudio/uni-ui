@@ -62,7 +62,6 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
-	@import '@/uni.scss';
 
 	.search-result {
 		margin-top: 10px;

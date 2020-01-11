@@ -270,7 +270,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
 
 	.uni-noticebar {
 		/* #ifndef APP-NVUE */

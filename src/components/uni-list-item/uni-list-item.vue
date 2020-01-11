@@ -154,10 +154,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '~@/uni.scss';
-
 	$list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
-
 	.uni-list-item {
 		font-size: $uni-font-size-lg;
 		position: relative;
