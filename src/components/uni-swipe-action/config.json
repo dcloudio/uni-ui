@@ -3,7 +3,7 @@
 	"name": "SwipeAction",
 	"desc": "滑动操作",
 	"url": "swipe-action",
-	"edition": "1.1.0",
+	"edition": "1.1.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
-	"update_log": "- 新增 支付宝小程序使用 movable-area 实现"
+	"update_log": "- 修复 在 app-vue v3 模式下滑动失效的Bug"
 }
