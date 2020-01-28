@@ -5,5 +5,5 @@
 	"url": "fab",
 	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
-	"update_log": "- 新增 仅显示加号按钮选项\n- 新增 加号按钮点击事件plusClick"
+	"update_log": "- 修改 不恰当的事件/属性名"
 }
