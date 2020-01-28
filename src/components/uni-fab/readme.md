@@ -68,7 +68,7 @@ export default {
 |  参数		|    类型	| 说明							|
 | ---		|  ---		| ---							|
 | @trigger	| Function	| 展开菜单点击事件，返回点击信息|
-| @plusClick| Function	| 加号按钮点击事件				|
+| @fabClick	| Function	| 悬浮按钮点击事件				|
 
 ### 插件预览地址
 

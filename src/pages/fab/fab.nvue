@@ -13,7 +13,7 @@
 				 class="word-btn-white">右上角显示</text></view>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction"
-		 @trigger="trigger" @plusClick="plusClick" />
+		 @trigger="trigger" @fabClick="fabClick" />
 	</view>
 </template>
 
@@ -80,9 +80,9 @@
 					}
 				})
 			},
-			plusClick() {
+			fabClick() {
 				uni.showToast({
-					title: '点击了加号按钮',
+					title: '点击了悬浮按钮',
 					icon: 'none'
 				})
 			},
