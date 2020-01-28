@@ -34,14 +34,14 @@ export default {
 
 ### 属性说明
 
-|  属性名		|    类型	| 默认值		| 说明															|
-| ---			| ---		| ---			| ---															|
-| pattern		| Object	| -				| 可选样式配置项												|
-| horizontal	| String	| 'left'		| 水平对齐方式。`left`:左对齐，`right`：右对齐					|
-| vertical		| String	| 'bottom'		| 垂直对齐方式。`bottom`:下对齐，`top`：上对齐					|
-| direction		| String	| 'horizontal'	| 展开菜单显示方式。`horizontal`:水平显示，`vertical`：垂直显示	|
-| onlyPlusButton| Boolean	| false			| 是否只显示加号按钮											|
-| content		| Array		| -				| 展开菜单内容配置项											|
+|  属性名	|    类型	| 默认值		| 说明															|
+| ---		| ---		| ---			| ---															|
+| pattern	| Object	| -				| 可选样式配置项												|
+| horizontal| String	| 'left'		| 水平对齐方式。`left`:左对齐，`right`：右对齐					|
+| vertical	| String	| 'bottom'		| 垂直对齐方式。`bottom`:下对齐，`top`：上对齐					|
+| direction	| String	| 'horizontal'	| 展开菜单显示方式。`horizontal`:水平显示，`vertical`：垂直显示	|
+| popMenu	| Boolean	| true			| 是否使用弹出菜单											|
+| content	| Array		| -				| 展开菜单内容配置项											|
 
 
 
