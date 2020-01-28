@@ -3,7 +3,7 @@
 	"name": "Fab",
 	"desc": "悬浮按钮",
 	"url": "fab",
-	"edition": "1.0.2",
+	"edition": "1.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
-	"update_log": "- 新增 APP-NVUE安卓端支持阴影"
+	"update_log": "- 新增 仅显示加号按钮选项\n- 新增 加号按钮点击事件plusClick"
 }

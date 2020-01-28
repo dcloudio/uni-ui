@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-if="leftBottom||rightBottom||leftTop||rightTop" :class="{
+		<view v-if="!onlyPlusButton && (leftBottom||rightBottom||leftTop||rightTop)" :class="{
         'uni-fab--leftBottom': leftBottom,
         'uni-fab--rightBottom': rightBottom,
         'uni-fab--leftTop': leftTop,
@@ -15,7 +15,8 @@
           'uni-fab__content--flexDirectionEnd': flexDirectionEnd,
 		  'uni-fab__content--other-platform': !isAndroidNvue
         }"
-			 :style="{ width: boxWidth, height: boxHeight, backgroundColor: styles.backgroundColor }" class="uni-fab__content" elevation="5">
+			 :style="{ width: boxWidth, height: boxHeight, backgroundColor: styles.backgroundColor }" class="uni-fab__content"
+			 elevation="5">
 				<view v-if="flexDirectionStart || horizontalLeft" class="uni-fab__item uni-fab__item--first" />
 				<view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab__item--active': isShow }" class="uni-fab__item"
 				 @click="_onItemClick(index, item)">
@@ -32,10 +33,10 @@
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
 		}"
-			 class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
-				<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow}"></view>
-				<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow}"></view>
-			</view>
+		 class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
+			<view class="fab-circle-v" :class="{'uni-fab__plus--active': isShow}"></view>
+			<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow}"></view>
+		</view>
 	</view>
 </template>
 
@@ -60,6 +61,7 @@
 	 * 	@value horizontal 水平显示
 	 * 	@value vertical 垂直显示
 	 * @property {Array} content 展开菜单内容配置项
+	 * @property {Boolean} onlyPlusButton 是否只显示加号按钮
 	 * @event {Function} trigger 展开菜单点击事件，返回点击信息
 	 */
 	export default {
@@ -90,6 +92,10 @@
 				}
 			},
 			show: {
+				type: Boolean,
+				default: false
+			},
+			onlyPlusButton: {
 				type: Boolean,
 				default: false
 			}
@@ -166,6 +172,10 @@
 		},
 		methods: {
 			_onClick() {
+				this.$emit('plusClick')
+				if (this.onlyPlusButton) {
+					return
+				}
 				this.isShow = !this.isShow
 			},
 			open() {
@@ -202,7 +212,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 	.uni-fab {
 		position: fixed;
 		/* #ifndef APP-NVUE */
