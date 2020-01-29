@@ -211,15 +211,27 @@
 		}
 	    ,{
             "path" : "pages/transition/transition",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"Transition 过渡动画"
+			}
         }
         ,{
             "path" : "pages/title/title",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"Title 章节标题"
+			}
         }
         ,{
             "path" : "pages/link/link",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "Link 链接"
+			}
+        }
+        ,{
+            "path" : "pages/combox/combox",
+            "style" : {
+				"navigationBarTitleText": "Combox 组合框"
+			}
         }
     ],
 	"globalStyle": {

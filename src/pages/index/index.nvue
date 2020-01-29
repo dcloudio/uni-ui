@@ -92,6 +92,10 @@
 						url: 'collapse'
 					},
 					{
+						name: 'Combox 组合输入框',
+						url: 'combox'
+					},
+					{
 						name: 'Drawer 抽屉',
 						url: 'drawer'
 					},
