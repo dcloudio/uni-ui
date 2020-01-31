@@ -230,6 +230,9 @@
 	.uni-fab--leftBottom {
 		left: 5px;
 		bottom: 20px;
+		/* #ifdef H5 */
+		bottom: calc(20px + var(--window-bottom));
+		/* #endif */
 		padding: 10px;
 	}
 
@@ -245,6 +248,9 @@
 	.uni-fab--rightBottom {
 		right: 5px;
 		bottom: 20px;
+		/* #ifdef H5 */
+		bottom: calc(20px + var(--window-bottom));
+		/* #endif */
 		padding: 10px;
 	}
 
@@ -274,6 +280,9 @@
 	.uni-fab__circle--leftBottom {
 		left: 15px;
 		bottom: 30px;
+		/* #ifdef H5 */
+		bottom: calc(30px + var(--window-bottom));
+		/* #endif */
 	}
 
 	.uni-fab__circle--leftTop {
@@ -287,6 +296,9 @@
 	.uni-fab__circle--rightBottom {
 		right: 15px;
 		bottom: 30px;
+		/* #ifdef H5 */
+		bottom: calc(30px + var(--window-bottom));
+		/* #endif */
 	}
 
 	.uni-fab__circle--rightTop {
