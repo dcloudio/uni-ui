@@ -95,7 +95,8 @@ export default {
 |uniCalendar				| '@dcloudio/uni-ui/lib/uni-calendar/uni-calendar.vue'									|[日历](https://ext.dcloud.net.cn/plugin?id=56)					|
 |uniCard						|'@dcloudio/uni-ui/lib/uni-card/uni-card.vue'														|[卡片](https://ext.dcloud.net.cn/plugin?id=22)					|
 |uniCollapse				| '@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue'									|[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)			|
-|uniCountdown				|'@dcloudio/uni-ui/lib/uni-countdown/uni-countdown.vue'								| [倒计时](https://ext.dcloud.net.cn/plugin?id=25)			|
+|uniCombox					| '@dcloudio/uni-ui/lib/uni-combox/uni-combox.vue'											|[组合框](https://ext.dcloud.net.cn/plugin?id=1261)			|
+|uniCountdown				|'@dcloudio/uni-ui/lib/uni-countdown/uni-countdown.vue'									| [倒计时](https://ext.dcloud.net.cn/plugin?id=25)			|
 |uniDrawer					|'@dcloudio/uni-ui/lib/uni-drawer/uni-drawer.vue'												|[抽屉](https://ext.dcloud.net.cn/plugin?id=26)					|
 |uniFab							|'@dcloudio/uni-ui/lib/uni-fab/uni-fab.vue'															|[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)		|
 |uniFav							| '@dcloudio/uni-ui/lib/uni-fav/uni-fav.vue'														|[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)		|
@@ -109,7 +110,7 @@ export default {
 |uniNoticeBar				|'@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.vue'								|[通告栏](https://ext.dcloud.net.cn/plugin?id=30)				|
 |uniNumberBox				|'@dcloudio/uni-ui/lib/uni-number-box/uni-number-box.vue'								|[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)		|
 |uniPagination			|'@dcloudio/uni-ui/lib/uni-pagination/uni-pagination.vue'								|[分页器](https://ext.dcloud.net.cn/plugin?id=32)				|
-|uniPopup						| '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'											|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)			|
+|uniPopup						| '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'												|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)			|
 |uniRate						|'@dcloudio/uni-ui/lib/uni-rate/uni-rate.vue'														|[评分](https://ext.dcloud.net.cn/plugin?id=33)					|
 |uniSearchBar				| '@dcloudio/uni-ui/lib/uni-search-bar/uni-search-bar.vue'							|[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)			|
 |uniSegmentedControl|'@dcloudio/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue'	|[分段器](https://ext.dcloud.net.cn/plugin?id=54)				|
@@ -117,6 +118,8 @@ export default {
 |uniSwipeAction			| '@dcloudio/uni-ui/lib/uni-swipe-action/uni-swipe-action.vue'					|[滑动操作](https://ext.dcloud.net.cn/plugin?id=181)		|
 |uniSwiperDot				|'@dcloudio/uni-ui/lib/uni-swiper-dot/uni-swiper-dot.vue'								|[轮播图指示点](https://ext.dcloud.net.cn/plugin?id=284)|
 |uniTag							| '@dcloudio/uni-ui/lib/uni-tag/uni-tag.vue'														|[标签](https://ext.dcloud.net.cn/plugin?id=35)					|
+|uniTitle						| '@dcloudio/uni-ui/lib/uni-title/uni-title.vue'												|[章节标题](https://ext.dcloud.net.cn/plugin?id=1066)		|
+|uniTransition			| '@dcloudio/uni-ui/lib/uni-transition/uni-transition.vue'							|[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)		|
 
 
 #### 其他
