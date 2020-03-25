@@ -1,0 +1,9 @@
+{
+	"id": "1261",
+	"name": "Combox",
+	"desc": "组合框",
+	"url": "combox",
+	"edition": "0.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=1261",
+	"update_log": "- 修复 微信小程序下的样式问题"
+}

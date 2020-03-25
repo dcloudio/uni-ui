@@ -165,7 +165,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	@import '~@/uni.scss';
 	$countdown-height: 48rpx;
 	$countdown-width: 52rpx;
 
