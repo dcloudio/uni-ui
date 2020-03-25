@@ -8,7 +8,7 @@
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniCard from "@/components/uni-card/uni-card"
+import uniCard from '@/components/uni-card/uni-card.vue'
 export default {
     components: {uniCard}
 }
@@ -72,7 +72,7 @@ export default {
 |title		|String	|-		|标题文字																	|
 |extra		|String	|-		|标题额外信息																|
 |note		|String	|-		|底部信息																	|
-|thumbnail	|String	|-		|标题左侧缩略图																|
+|thumbnail	|String	|-		|标题左侧缩略图,支持网络图片，本地图片，本图片需要传入一个绝对路径，如：`/static/xxx.png`															|
 |mode		|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片	|
 |isFull	|Boolean|false	|卡片内容是否通栏，为true时将去除padding值									|
 |isShadow	|Boolean|false	|卡片内容是否开启阴影														|
@@ -84,10 +84,11 @@ export default {
 |---		|---				|---		|
 |@click		|点击 Card 触发事件	|-			|
 
+**Tips**
+- 因为平台兼容问题 ， 目前 APP-NVUE 安卓平台下不支持阴影
+- 自定义底部按钮，必须指定 `<template v-slot:footer> </template>` 。此时 `note` 随意指定内容即可。
+
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/card/card](https://uniapp.dcloud.io/h5/pages/extUI/card/card)
 
-**Tips**
-
-- 自定义底部按钮，必须指定 `<template v-slot:footer> </template>` 。此时 `note` 随意指定内容即可。

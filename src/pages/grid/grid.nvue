@@ -5,7 +5,7 @@
 		<view class="example-body">
 			<uni-grid :column="3" :highlight="true" @change="change">
 				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
-					<view class="grid-item-box">
+					<view class="grid-item-box" style="background-color: #fff;">
 						<image :src="item.url" class="image" mode="aspectFill" />
 						<text class="text">{{ item.text }}</text>
 					</view>

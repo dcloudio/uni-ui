@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-grid-wrap">
-		<view :id="elId" ref="uni-grid" class="uni-grid" :class="{ 'uni-grid--border': showBorder }" :style="{ 'border-left-style':'solid','border-left-color':borderColor, 'border-left-width':showBorder?'1px':0 }">
+		<view :id="elId" ref="uni-grid" class="uni-grid" :class="{ 'uni-grid--border': showBorder }" :style="{ 'border-left-color':borderColor}">
 			<slot />
 		</view>
 	</view>
@@ -88,13 +88,13 @@
 					.select(`#${this.elId}`)
 					.boundingClientRect()
 					.exec(ret => {
-						this.width = parseInt((ret[0].width-1) / this.column) + 'px'
+						this.width = parseInt((ret[0].width - 1) / this.column) + 'px'
 						fn(this.width)
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['uni-grid'], (ret) => {
-					this.width = parseInt((ret.size.width-1) / this.column)  + 'px'
+					this.width = parseInt((ret.size.width - 1) / this.column) + 'px'
 					fn(this.width)
 				})
 				// #endif
@@ -125,8 +125,15 @@
 	}
 
 	.uni-grid--border {
+		position: relative;
+		/* #ifdef APP-NVUE */
 		border-left-color: $uni-border-color;
 		border-left-style: solid;
-		border-left-width: 1px;
+		border-left-width: 0.5px;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		z-index: 1;
+		border-left: 1px $uni-border-color solid;
+		/* #endif */
 	}
 </style>
