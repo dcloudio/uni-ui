@@ -100,10 +100,33 @@
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		z-index: 0;
-		border-bottom: 1px $uni-border-color solid;
-		border-right: 1px $uni-border-color solid;
 		/* #endif */
 	}
+
+	/* #ifndef APP-NVUE */
+	.uni-grid-item--border:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: inherit;
+		border-right-style: solid;
+		border-right-width: 1px;
+		border-right-color: inherit;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		transform: scale(0.5);
+		transform-origin: left top;
+		z-index: -1;
+	}
+
+	/* #endif */
+
 	.uni-grid-item--border-top {
 		position: relative;
 		/* #ifdef APP-NVUE */
@@ -113,12 +136,31 @@
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		height: 100%;
-		border-top: 1px $uni-border-color solid;
+		box-sizing: border-box;
 		z-index: 0;
 		/* #endif */
 	}
 
+	/* #ifndef APP-NVUE */
+	.uni-grid-item--border-top:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		border-top-style: solid;
+		border-top-width: 1px;
+		border-top-color: inherit;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		transform: scale(0.5);
+		transform-origin: left top;
+		z-index: -1;
+	}
 
+	/* #endif */
 	.uni-highlight:active {
 		background-color: $uni-bg-color-hover;
 	}

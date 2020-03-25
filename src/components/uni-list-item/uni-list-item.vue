@@ -16,10 +16,11 @@
 					<text class="uni-list-item__content-title">{{ title }}</text>
 					<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
 				</view>
-				<view v-if="showBadge || showArrow || showSwitch" class="uni-list-item__extra">
+				<view class="uni-list-item__extra">
 					<text v-if="rightText" class="uni-list-item__extra-text">{{rightText}}</text>
 					<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
 					<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
+					<slot name="right"></slot>
 					<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
 				</view>
 			</view>
@@ -154,8 +155,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '~@/uni.scss';
-
 	$list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
 	.uni-list-item {
@@ -192,9 +191,11 @@
 		border-top-width: 0.5px;
 		/* #endif */
 	}
+
 	.uni-list-item--first {
 		border-top-width: 0px;
 	}
+
 	/* #ifndef APP-NVUE */
 	.uni-list-item__container:after {
 		position: absolute;
@@ -207,9 +208,11 @@
 		transform: scaleY(.5);
 		background-color: $uni-border-color;
 	}
+
 	.uni-list-item--first:after {
 		height: 0px;
 	}
+
 	/* #endif */
 
 

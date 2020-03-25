@@ -46,6 +46,15 @@ export default {
 <uni-list>
     <uni-list-item title="标题文字" :show-switch="true" :show-arrow="false"></uni-list-item>
 </uni-list>
+
+<!-- 右侧插槽 -->
+<uni-list>
+    <uni-list-item title="右侧插槽" :showArrow="false">
+        <template v-slot:right="">
+            <image style="width: 40px;height: 40px;" src="/static/logo.png" mode="widthFix"></image>
+        </template>
+    </uni-list-item>
+</uni-list>
 ```
 
 ### 属性说明
@@ -68,6 +77,13 @@ export default {
 |showExtraIcon  |Boolean|false	|左侧是否显示扩展图标																												|
 |scroll-y       |Boolean|false	|允许纵向滚动，需要显式的设置其宽高|
 |extraIcon		|Object	|-		|扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	|
+
+**插槽**
+
+|名称	|说明					|
+|:-		|:-						|
+|default|显示在title位置的插槽	|
+|right	|右侧插槽				|
 
 **uniListItem 事件说明：**
 

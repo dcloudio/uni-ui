@@ -45,8 +45,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-collapse {
 		/* #ifndef APP-NVUE */
 		width: 100%;

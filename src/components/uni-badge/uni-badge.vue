@@ -1,6 +1,6 @@
 <template>
 	<text v-if="text" :class="inverted ? 'uni-badge--' + type + ' uni-badge--' + size + ' uni-badge--' + type + '-inverted' : 'uni-badge--' + type + ' uni-badge--' + size"
-	 class="uni-badge" @click="onClick()">{{ text }}</text>
+	 :style="badgeStyle" class="uni-badge" @click="onClick()">{{ text }}</text>
 </template>
 
 <script>
@@ -34,7 +34,7 @@
 				default: false
 			},
 			text: {
-				type: [String,Number],
+				type: [String, Number],
 				default: ''
 			},
 			size: {
@@ -44,10 +44,21 @@
 		},
 		data() {
 			return {
-
+				badgeStyle: ''
 			};
 		},
+		watch: {
+			text() {
+				this.setStyle()
+			}
+		},
+		mounted() {
+			this.setStyle()
+		},
 		methods: {
+			setStyle() {
+				this.badgeStyle = `width: ${String(this.text).length * 8 + 12}px`
+			},
 			onClick() {
 				this.$emit('click');
 			}
@@ -58,12 +69,13 @@
 <style lang="scss" scoped>
 	$bage-size: 12px;
 	$bage-small: scale(0.8);
-	$bage-height: 40rpx;
+	$bage-height: 20px;
 
 	.uni-badge {
 		/* #ifndef APP-PLUS */
 		display: flex;
 		/* #endif */
+		justify-content: center;
 		flex-direction: row;
 		height: $bage-height;
 		line-height: $bage-height;

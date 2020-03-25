@@ -116,8 +116,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/uni.scss';
-
 	.uni-collapse-cell {
 		flex-direction: column;
 		border-color: $uni-border-color;
