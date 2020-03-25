@@ -5,6 +5,7 @@
 	"description": "",
 	"author": "",
 	"license": "Apache-2.0",
+	"git repository": "https://github.com/dcloudio/uni-ui",
 	"scripts": {
 		"serve": "npm run dev:h5",
 		"build": "npm run build:h5",
