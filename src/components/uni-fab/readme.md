@@ -36,11 +36,12 @@ export default {
 
 |  属性名	|    类型	| 默认值		| 说明															|
 | ---		| ---		| ---			| ---															|
-| pattern	| Object	|-				| 可选样式配置项												|
+| pattern	| Object	| -				| 可选样式配置项												|
 | horizontal| String	| 'left'		| 水平对齐方式。`left`:左对齐，`right`：右对齐					|
 | vertical	| String	| 'bottom'		| 垂直对齐方式。`bottom`:下对齐，`top`：上对齐					|
 | direction	| String	| 'horizontal'	| 展开菜单显示方式。`horizontal`:水平显示，`vertical`：垂直显示	|
-| content	| Array		|-				| 展开菜单内容配置项											|
+| popMenu	| Boolean	| true			| 是否使用弹出菜单											|
+| content	| Array		| -				| 展开菜单内容配置项											|
 
 
 
@@ -64,9 +65,10 @@ export default {
 
 ### 事件说明
 
-|  参数		|    类型	| 说明					   |
-| ---	    |  ---		| ---		               | 
+|  参数		|    类型	| 说明							|
+| ---		|  ---		| ---							|
 | @trigger	| Function	| 展开菜单点击事件，返回点击信息|
+| @fabClick	| Function	| 悬浮按钮点击事件				|
 
 ### 插件预览地址
 

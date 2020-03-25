@@ -3,7 +3,7 @@
 	"name": "Fab",
 	"desc": "悬浮按钮",
 	"url": "fab",
-	"edition": "1.0.2",
+	"edition": "1.0.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
-	"update_log": "- 新增 APP-NVUE安卓端支持阴影"
+	"update_log": "- 修复 tabbar页面底部位置不正确的Bug"
 }

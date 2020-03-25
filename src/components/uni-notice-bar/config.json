@@ -3,7 +3,7 @@
 	"name": "NoticeBar",
 	"desc": "通告栏",
 	"url": "notice-bar",
-	"edition": "1.0.4",
+	"edition": "1.0.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=30",
-	"update_log": "- 修复 在百度小程序不可滚动的Bug"
+	"update_log": "- 修复 showClose 选项无效的Bug"
 }

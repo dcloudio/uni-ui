@@ -50,7 +50,7 @@
 
 	function touchMove(e) {
 		let pageY = e.touches[0].pageY
-		let index = Math.floor(pageY / this.itemHeight)
+		let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 		if (this.touchmoveIndex === index) {
 			return false
 		}
@@ -72,7 +72,7 @@
 	// #endif
 
 	/**
-	 * IndexedList 索引列表 
+	 * IndexedList 索引列表
 	 * @description 用于展示索引列表
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=375
 	 * @property {Boolean} showSelect = [true|false] 展示模式
@@ -105,6 +105,7 @@
 				lists: [],
 				winHeight: 0,
 				itemHeight: 0,
+				winOffsetY: 0,
 				touchmove: false,
 				touchmoveIndex: -1,
 				scrollViewId: '',
@@ -132,7 +133,7 @@
 			setList() {
 				let index = 0;
 				this.lists = []
-				this.options.forEach((value,index) => {
+				this.options.forEach((value, index) => {
 					if (value.data.length === 0) {
 						return
 					}
@@ -159,12 +160,14 @@
 					.select('#list')
 					.boundingClientRect()
 					.exec(ret => {
+						this.winOffsetY = ret[0].top
 						this.winHeight = ret[0].height
 						this.itemHeight = this.winHeight / this.lists.length
 					})
 				// #endif
 				// #ifdef APP-NVUE
 				dom.getComponentRect(this.$refs['list'], (res) => {
+					this.winOffsetY = res.size.top
 					this.winHeight = res.size.height
 					this.itemHeight = this.winHeight / this.lists.length
 				})
@@ -173,7 +176,7 @@
 			touchStart(e) {
 				this.touchmove = true
 				let pageY = e.touches[0].pageY
-				let index = Math.floor(pageY / this.itemHeight)
+				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 				let item = this.lists[index]
 				if (item) {
 					this.scrollViewId = 'uni-indexed-list-' + index
@@ -188,7 +191,7 @@
 			touchMove(e) {
 				// #ifndef APP-PLUS
 				let pageY = e.touches[0].pageY
-				let index = Math.floor(pageY / this.itemHeight)
+				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 				if (this.touchmoveIndex === index) {
 					return false
 				}
