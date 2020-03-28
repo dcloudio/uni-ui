@@ -26,6 +26,7 @@
 	/**
 	 * Combox 组合输入框
 	 * @description 组合输入框一般用于既可以输入也可以选择的场景
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=1261
 	 * @property {String} label 左侧文字
 	 * @property {String} labelWidth 左侧内容宽度
 	 * @property {String} placeholder 输入框占位符
