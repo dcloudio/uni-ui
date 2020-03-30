@@ -13,8 +13,6 @@ var filenamesUpper = []
 
 var files = glob.sync(packages + '/**/*.vue')
 
-
-
 // //复制vue文件到lib目录
 //   var relativePath = path.relative(packages, name)
 //   let fileName = relativePath.split('\\')[0]
@@ -27,6 +25,7 @@ var files = glob.sync(packages + '/**/*.vue')
 //     filenames.push(fileSubName)
 //   }
 //   var dest = path.join(lib, relativePath)
+
 fs.copySync(packages, lib)
 
 const delFileLists = glob.sync(lib + '/**/*.{json,md,bak}')
