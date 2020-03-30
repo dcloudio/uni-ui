@@ -1,7 +1,7 @@
 {
 	"id": "55",
 	"name": "@dcloudio/uni-ui",
-	"version": "1.1.4",
+	"version": "1.1.9",
 	"description": "update: npm 同步 git 配置",
 	"author": "",
 	"license": "Apache-2.0",
@@ -32,7 +32,8 @@
 		"dev:quickapp": "cross-env NODE_ENV=development UNI_PLATFORM=quickapp vue-cli-service uni-build --watch",
 		"info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js",
 		"serve:quickapp": "node node_modules/@dcloudio/uni-quickapp/bin/serve.js",
-		"build:lib":"node build/build-lib.js"
+		"build:lib":"node build/build-lib.js lib",
+		"build:npm":"node build/build-lib.js npm"
 	},
 	"dependencies": {
 		"@dcloudio/uni-app-plus": "^2.0.0-alpha-26620200319004",
