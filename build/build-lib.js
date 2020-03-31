@@ -17,9 +17,7 @@ fs.copy(packages, lib).then(() => {
 	// 删除json  md 等不必要文件
 	delFileLists.reduce((promise, fileName) => {
 		return promise.then(() => {
-			return fs.remove(fileName).then(() => {
-				console.log('删除成功', fileName);
-			})
+			return fs.remove(fileName)
 		})
 	}, Promise.resolve([])).then(() => {
 		// 删除所有文件成功之后，开始去同步 npm
@@ -45,11 +43,11 @@ function runExec(cmdStr, cmdPath, workerProcess) {
 	})
 	// 打印正常的后台可执行程序输出
 	workerProcess.stdout.on('data', function(data) {
-		console.log('stdout: ' + data)
+		console.log(data)
 	})
 	// 打印错误的后台可执行程序输出
 	workerProcess.stderr.on('data', function(data) {
-		console.log('stderr: ' + data)
+		console.log(data)
 	})
 	// 退出之后的输出
 	workerProcess.on('close', function(code) {
