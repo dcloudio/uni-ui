@@ -114,6 +114,7 @@
 	}
 
 	.uni-section__content {
+		flex-direction: column;
 		flex: 1;
 		color: $uni-text-color;
 	}

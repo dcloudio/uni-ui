@@ -1,0 +1,106 @@
+<template>
+	<view>
+		<text class="example-info">过渡动画，通常用于元素的过渡效果，例如淡隐淡出效果，遮罩层的效果、放大缩小的效果等</text>
+		<uni-section title="基础过渡动画" type="line"></uni-section>
+		<view class="example-body">
+			<button class="transition-button" type="primary" @click="open(['fade'])">fade</button>
+			<button class="transition-button" type="primary" @click="open(['slide-top'])">slide-top</button>
+			<button class="transition-button" type="primary" @click="open(['slide-left'])">slide-left</button>
+			<button class="transition-button" type="primary" @click="open(['slide-right'])">slide-right</button>
+			<button class="transition-button" type="primary" @click="open(['slide-bottom'])">slide-bottom</button>
+			<button class="transition-button" type="primary" @click="open(['zoom-in','fade'])">zoom-in</button>
+			<button class="transition-button" type="primary" @click="open(['zoom-out','fade'])">zoom-out</button>
+		</view>
+		<uni-section title="组合过渡动画" type="line"></uni-section>
+		<view class="example-body">
+			<button class="transition-button" type="primary" @click="mask">透明遮罩层</button>
+			<button class="transition-button" type="primary" @click="open(['fade','zoom-out','slide-top'])">组合动画示例一</button>
+			<button class="transition-button" type="primary" @click="open(['zoom-in','slide-bottom','fade'])">组合动画示例二</button>
+			<button class="transition-button" type="primary" @click="open(['slide-left','slide-top','fade'])">组合动画示例三</button>
+		</view>
+		<!-- 遮罩 -->
+		<uni-transition :mode-class="['fade']" :styles="maskClass" :show="show" @click="onTap" />
+		<!-- 过渡 -->
+		<uni-transition :duration="500" :mode-class="modeClass" :styles="transfromClass" :show="transShow" @click="onTap" @change="change">
+			<text class="box">Test</text>
+		</uni-transition>
+	</view>
+</template>
+
+<script>
+	export default {
+		components: {},
+		data() {
+			return {
+				show: false,
+				transShow: false,
+				modeClass: ['fade'],
+				maskClass: {
+					'position': 'fixed',
+					'bottom': 0,
+					'top': 0,
+					'left': 0,
+					'right': 0,
+					'background-color': 'rgba(0, 0, 0, 0.4)'
+				},
+				transfromClass: {
+					'position': 'fixed',
+					'bottom': 0,
+					'top': 0,
+					'left': 0,
+					'right': 0,
+					/* #ifndef APP-NVUE */
+					'display': 'flex',
+					/* #endif */
+					'justify-content': 'center',
+					'align-items': 'center'
+				}
+			}
+		},
+		onLoad() {},
+		methods: {
+			mask() {
+				this.show = true
+			},
+			open(mode) {
+				this.modeClass = mode
+				this.transShow = !this.transShow
+			},
+			onTap() {
+				this.transShow = this.show = false
+			},
+			change(e){
+				console.log(e.detail);
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
+	.example-body {
+		padding: 15px 20px;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+	.transition-button {
+		/* #ifndef APP-NVUE */
+		/* width: 100%; */
+		/* #endif */
+		padding: 0 15px;
+		margin: 10px 5px;
+	}
+
+	.box {
+		color: #fff;
+		width: 100px;
+		height: 100px;
+		line-height: 100px;
+		text-align: center;
+		background-color: #4CD964;
+	}
+</style>
