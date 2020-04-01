@@ -155,10 +155,16 @@
 		methods: {
 			goDetailPage(e) {
 				let path = e.url
+				// #ifdef APP-NVUE
 				uni.navigateTo({
-					url: `/pages/vue/${path}/${path}`
+					url: `/pages/nvue/${path}/${path}`
 				})
-				return false
+				// #endif
+				// #ifndef APP-NVUE
+				uni.navigateTo({
+					url: `/pages/nvue/${path}/${path}`
+				})
+				// #endif
 			}
 		}
 	}
