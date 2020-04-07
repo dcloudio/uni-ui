@@ -17,7 +17,7 @@
 			</view>
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-right ">
 				<view v-for="(item,index) in buttonGroup" :key="index" :style="{backgroundColor:item.backgroundColor,color:item.color}"
-				 class="flex uni-tab__cart-button-right" @click="buttonClick(index,item)"><text class="uni-tab__cart-button-right-text">{{ item.text }}</text></view>
+				 class="flex uni-tab__cart-button-right" @click="buttonClick(index,item)"><text :style="{color:item.color}" class="uni-tab__cart-button-right-text">{{ item.text }}</text></view>
 				<!-- <view class="flex uni-tab__cart-button-right uni-tab__color-y ">立即购买</view> -->
 			</view>
 		</view>
