@@ -1,5 +1,5 @@
 
-### uni ui产品特点
+### uni-ui产品特点
 
 1. 高性能
 
@@ -137,8 +137,7 @@ export default {
 - uni-ui 是uni-app内置组件的扩展。注意与web开发不同，uni-ui不包括基础组件，它是基础组件的补充。web开发中有的开发者习惯用一个ui库完成所有开发，但在uni-app体系中，推荐开发者首先使用性能更高的基础组件，然后按需引入必要的扩展组件。
 - uni-ui 不支持使用 Vue.use() 的方式安装
 - uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要在项目下npm安装 node-sass 和 sass-loader
-- 如果在涉及slot的组件中使用v-for等语法，需要使用自定义组件编译模式，[详见](https://ask.dcloud.net.cn/article/35843)
-
+- `CLI` 引用方式 `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用 [easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom) 的方式引用组件
 
 ### 贡献代码
 在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
