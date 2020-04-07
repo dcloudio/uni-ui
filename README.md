@@ -3,7 +3,7 @@
 
 ### uni-ui产品特点
 
-1. 高性能
+**1. 高性能**
 
 目前为止，在小程序和混合app领域，暂时还没有比uni ui更高性能的框架。
 - 自动差量更新数据
@@ -23,7 +23,7 @@
 
 而uni ui的组件，会自动判断自己的显示状态，在组件不再可见时，不会再消耗硬件资源。
 
-2. 全端
+**2. 全端**
 
 uni ui的组件都是多端自适应的，底层会抹平很多小程序平台的差异或bug。
 
@@ -34,7 +34,7 @@ uni ui还支持nvue原生渲染，[详见](https://github.com/dcloudio/uni-ui/tr
 
 未来uni ui还会支持pc等大屏设备。
 
-3. 与uni统计自动集成实现免打点
+**3. 与uni统计自动集成实现免打点**
 
 uni统计是优秀的多端统计平台，见[tongji.dcloud.net.cn](https://tongji.dcloud.net.cn)。
 
@@ -42,7 +42,7 @@ uni统计是优秀的多端统计平台，见[tongji.dcloud.net.cn](https://tong
 比如使用uni ui的navbar标题栏、收藏、购物车等组件，均可实现自动打点，统计页面标题等各种行为数据。
 当然你也可以关闭uni统计，这不是强制的。
 
-4. 主题扩展
+**4. 主题扩展**
 
 uni ui支持[uni.scss](https://uniapp.dcloud.io/collocation/uni-scss)，可以方便的切换App的风格。
 
