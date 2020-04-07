@@ -246,8 +246,8 @@
 		"backgroundColor": "#F8F8F8",
 		"list": [{
 				"pagePath": "pages/vue/index/index",
-				"iconPath": "static/api.png",
-				"selectedIconPath": "static/apiHL.png",
+				"iconPath": "static/component.png",
+				"selectedIconPath": "static/componentHL.png",
 				"text": "VUE"
 			},{
 				"pagePath": "pages/nvue/index/index",

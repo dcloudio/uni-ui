@@ -1,5 +1,14 @@
 <template>
 	<view>
+		<view class="index-box">
+			<!-- #ifdef APP-NVUE -->
+			<text class="index-text">当前页面为 nvue 页面引用 uni-ui 组件示例</text>
+			<!-- #endif -->
+			<!-- #ifndef APP-NVUE -->
+			<text class="index-text">当前页面为 vue 页面引用 uni-ui 组件示例</text>
+			<!-- #endif -->
+		</view>
+
 		<uni-section title="布局组件" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item v-for="(layout, index) in layouts" :key="index" :title="layout.name" @click="goDetailPage(layout)" />
@@ -71,9 +80,9 @@
 					{
 						name: 'Tag 标签',
 						url: 'tag'
-					},{
+					}, {
 						name: 'Transition 过渡动画',
-						url:'transition'
+						url: 'transition'
 					}
 				],
 				functionals: [{
@@ -171,5 +180,20 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss'
+	@import '@/common/uni-nvue.scss';
+
+	.index-box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		height: 50px;
+		padding: 0 15px;
+	}
+
+	.index-text {
+		font-size: 14px;
+		color: #666;
+	}
 </style>
