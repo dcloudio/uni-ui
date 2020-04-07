@@ -112,7 +112,6 @@
 		border-top-width: 0.5px;
 		/* #endif */
 		/* #ifndef APP-NVUE */
-		height: 100%;
 		border-top: 1px $uni-border-color solid;
 		z-index: 0;
 		/* #endif */
