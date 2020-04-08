@@ -12,7 +12,7 @@
 			<view class="example-body">
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
 				 @click="show('left')"><text class="word-btn-white">显示Drawer</text></view>
-				<uni-drawer :visible="showLeft" mode="left" @close="closeDrawer('left')">
+				<uni-drawer :visible="showLeft" mode="left" :width="320" @close="closeDrawer('left')">
 					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1" />

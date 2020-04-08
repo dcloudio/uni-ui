@@ -1,7 +1,7 @@
 <template>
 	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer">
 		<view class="uni-drawer__mask" :class="{ 'uni-drawer__mask--visible': showDrawer && mask }" @tap="close" />
-		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}">
+		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}" :style="{width:drawerWidth+'px'}">
 			<slot />
 		</view>
 	</view>
@@ -17,6 +17,7 @@
 	 * @property {Boolean} mode = [left | right] Drawer 滑出位置
 	 * 	@value left 从左侧滑出
 	 * 	@value right 从右侧侧滑出
+	 * @property {Number} width 抽屉的宽度 ，仅 vue 页面生效
 	 * @event {Function} close 组件关闭时触发事件
 	 */
 	export default {
@@ -42,6 +43,13 @@
 			mask: {
 				type: Boolean,
 				default: true
+			},
+			/**
+			 * 抽屉宽度
+			 */
+			width: {
+				type: Number,
+				default: 220
 			}
 		},
 		data() {
@@ -49,7 +57,8 @@
 				visibleSync: false,
 				showDrawer: false,
 				rightMode: false,
-				watchTimer: null
+				watchTimer: null,
+				drawerWidth: 220
 			}
 		},
 		watch: {
@@ -62,6 +71,9 @@
 			}
 		},
 		created() {
+			// #ifndef APP-NVUE
+			this.drawerWidth = this.width
+			// #endif
 			this.visibleSync = this.visible
 			setTimeout(() => {
 				this.showDrawer = this.visible
@@ -92,6 +104,7 @@
 <style lang="scss" scoped>
 	// 抽屉宽度
 	$drawer-width: 220px;
+
 	.uni-drawer {
 		/* #ifndef APP-NVUE */
 		display: block;
@@ -119,12 +132,22 @@
 
 	.uni-drawer--left {
 		left: 0;
+		/* #ifdef APP-NVUE */
 		transform: translateX(-$drawer-width);
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		transform: translateX(-100%);
+		/* #endif */
 	}
 
 	.uni-drawer--right {
 		right: 0;
+		/* #ifdef APP-NVUE */
 		transform: translateX($drawer-width);
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		transform: translateX(100%);
+		/* #endif */
 	}
 
 	.uni-drawer__content--visible {

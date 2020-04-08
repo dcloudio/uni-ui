@@ -171,7 +171,7 @@
 				// #endif
 				// #ifndef APP-NVUE
 				uni.navigateTo({
-					url: `/pages/nvue/${path}/${path}`
+					url: `/pages/vue/${path}/${path}`
 				})
 				// #endif
 			}
