@@ -4,6 +4,7 @@
 	"desc": "章节标题",
 	"edition": "0.0.1",
 	"url": "section",
+	"type": "布局组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=",
 	"hidden": true,
 	"update_log": "- 新增 插件在线示例"

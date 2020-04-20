@@ -3,6 +3,7 @@
 	"name": "PopUp",
 	"desc": "弹出层",
 	"url": "popup",
+	"type": "功能组件",
 	"edition": "1.2.0",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
 	"update_log": "- 修复 微信小程序端真机调试不显示内容的 Bug"

@@ -3,6 +3,7 @@
 	"name": "SwipeAction",
 	"desc": "滑动操作",
 	"url": "swipe-action",
+	"type": "功能组件",
 	"edition": "1.1.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
 	"update_log": "- 修复 在 app-vue v3 模式下滑动失效的Bug"
