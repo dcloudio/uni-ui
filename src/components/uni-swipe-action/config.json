@@ -4,7 +4,7 @@
 	"desc": "滑动操作",
 	"url": "swipe-action",
 	"type": "功能组件",
-	"edition": "1.1.1",
+	"edition": "1.1.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
-	"update_log": "- 修复 在 app-vue v3 模式下滑动失效的Bug"
+	"update_log": "- 修复 在 ios13 中，点击按钮不触发点击事件的Bug"
 }

@@ -96,7 +96,7 @@ export default {
 |参数	|类型	|是否必填	|说明																													|
 |:--	|:--	|:--		|:--																													|
 |text	|String	|是			|按钮的文字																												|
-|style	|Object	|否			|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：28rpx	|
+|style	|Object	|否			|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：14px	|
 
 ### 事件说明
 
