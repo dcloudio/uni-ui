@@ -1,5 +1,5 @@
 ### Drawer 抽屉
-*已经支持在nvue页面中使用*
+> *已经支持在nvue页面中使用*
 
 抽屉侧滑菜单，组件名：``uni-drawer``，代码块： uDrawer。
 

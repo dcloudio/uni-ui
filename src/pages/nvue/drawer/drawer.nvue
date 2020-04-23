@@ -48,7 +48,7 @@
 									 class="word-btn-white">关闭Drawer</text></view>
 							</view>
 							<view class="info-content" v-for="item in 100" :key="item">
-								可滚动内容 {{item +  1}}
+								可滚动内容 {{item}}
 							</view>
 							<view class="close">
 								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
