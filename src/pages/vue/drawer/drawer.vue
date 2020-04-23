@@ -38,26 +38,23 @@
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
 				 @click="showDrawer('showRight')"><text class="word-btn-white">显示Drawer</text></view>
 				<uni-drawer ref="showRight" mode="right" :mask-click="false" @change="change($event,'showRight')">
-					<view class="info">
-						<text class="info-text">右侧遮罩只能通过按钮关闭，不能通过点击遮罩关闭</text>
-					</view>
-					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
-					<uni-list>
-						<uni-list-item title="Item1" />
-						<uni-list-item title="Item2" />
-						<uni-list-item class="last-list-item" :show-badge="true" title="Item3" badge-text="12" />
-					</uni-list>
-					<!-- #endif -->
-					<!-- #ifdef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
-					<view class="uni-list">
-						<uni-list-item title="Item1" />
-						<uni-list-item title="Item2" />
-						<uni-list-item class="last-list-item" :show-badge="true" title="Item3" badge-text="12" />
-					</view>
-					<!-- #endif -->
-					<view class="close">
-						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
-							 class="word-btn-white">关闭Drawer</text></view>
+					<view>
+						<scroll-view class="scroll-view" scroll-y="true" >
+							<view class="info">
+								<text class="info-text">右侧遮罩只能通过按钮关闭，不能通过点击遮罩关闭</text>
+							</view>
+							<view class="close">
+								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
+									 class="word-btn-white">关闭Drawer</text></view>
+							</view>
+							<view class="info-content" v-for="item in 100" :key="item">
+								可滚动内容 {{item +  1}}
+							</view>
+							<view class="close">
+								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
+									 class="word-btn-white">关闭Drawer</text></view>
+							</view>
+						</scroll-view>
 					</view>
 				</uni-drawer>
 			</view>
@@ -133,8 +130,8 @@
 
 	.uni-drawer-info {
 		background-color: #ffffff;
-		padding: 30rpx;
-		padding-top: 10rpx;
+		padding: 15px;
+		padding-top: 5px;
 		color: #3b4144;
 	}
 
@@ -153,7 +150,7 @@
 	}
 
 	.close {
-		padding: 30rpx;
+		padding: 15px;
 	}
 
 	.example-body {
@@ -176,5 +173,15 @@
 	.info-text {
 		font-size: 14px;
 		color: #666;
+	}
+	// 处理抽屉内容滚动
+	.scroll-view {
+		flex: 1;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+	}
+	.info-content {
+		padding: 5px 15px;
 	}
 </style>
