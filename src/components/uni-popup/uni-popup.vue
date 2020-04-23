@@ -126,23 +126,27 @@
 			open() {
 				this.showPopup = true
 				this.$nextTick(() => {
-					clearTimeout(this.timer)
-					this.timer = setTimeout(() => {
-						this.showTrans = true
-					}, 50);
-				})
-				this.$emit('change', {
-					show: true
+					new Promise(resolve => {
+						clearTimeout(this.timer)
+						this.timer = setTimeout(() => {
+							this.showTrans = true
+							resolve();
+						}, 50);
+					}).then(res => {
+						this.$emit('change', {
+							show: true
+						})
+					})
 				})
 			},
 			close(type) {
 				this.showTrans = false
 				this.$nextTick(() => {
+					this.$emit('change', {
+						show: false
+					})
 					clearTimeout(this.timer)
 					this.timer = setTimeout(() => {
-						this.$emit('change', {
-							show: false
-						})
 						this.showPopup = false
 					}, 300)
 				})
