@@ -27,7 +27,10 @@
 					text: '客服'
 				}, {
 					icon: 'shop',
-					text: '店铺'
+					text: '店铺',
+					info: 2,
+					infoBackgroundColor:'#007aff',
+					infoColor:"red"
 				}, {
 					icon: 'cart',
 					text: '购物车',
@@ -35,7 +38,7 @@
 				}],
 				buttonGroup: [{
 						text: '加入购物车',
-						backgroundColor: '#ffa200 ',
+						backgroundColor: '#ffa200',
 						color: '#fff'
 					},
 					{

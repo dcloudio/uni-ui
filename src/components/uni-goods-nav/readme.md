@@ -75,18 +75,19 @@ export default {
 
 **options 参数说明：**
 
-|属性名	|类型	|默认值	|说明								|
-|---	|----	|---	|---								|
-|icon	|String	|-		|显示图片，本地绝对路径或线上路径	|
-|text	|String	|-		|显示文字							|
-|info	|Number	|0		|右上角数字角标						|
+|属性名				|类型				|默认值	|说明		|
+|---				|----				|---	|---		|
+|text				|String				|-		|显示文字	|
+|info				|Number				|0		|右上角数字角标|
+|infoBackgroundColor|String				|#ff0000|角标背景色|
+|infoColor			|String				|#fff   |角标前景色|
 
 **buttonGroup 参数说明：**
 
 |属性名				|类型	|默认值	|说明		|
 |---				|----	|---	|---		|
 |text				|String	|-		|按钮文字	|
-|background-color	|String	|-		|按钮背景色	|
+|backgroundColor	|String	|-		|按钮背景色	|
 |color				|String	|-		|字体颜色	|
 
 ### 事件说明
