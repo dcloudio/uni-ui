@@ -50,9 +50,9 @@ class CopyPlugin {
         console.log(path.join(filePath, '..'))
         console.log(from)
         if (path.join(filePath, '..').indexOf(from) === -1) {
-          console.log('不修改这个文件', filePath)
+          // console.log('不修改这个文件', filePath)
         } else {
-          console.log('同步文件到:', toFilePath)
+          // console.log('同步文件到:', toFilePath)
           fs.copySync(filePath, toFilePath)
         }
 

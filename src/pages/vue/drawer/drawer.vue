@@ -11,8 +11,8 @@
 			<uni-section title="左侧滑出" type="line"></uni-section>
 			<view class="example-body">
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
-				 @click="show('left')"><text class="word-btn-white">显示Drawer</text></view>
-				<uni-drawer :visible="showLeft" mode="left" :width="320" @close="closeDrawer('left')">
+				 @click="showDrawer('showLeft')"><text class="word-btn-white">显示Drawer</text></view>
+				<uni-drawer ref="showLeft" mode="left" :width="320" @change="change($event,'showLeft')">
 					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1" />
@@ -28,7 +28,7 @@
 					</view>
 					<!-- #endif -->
 					<view class="close">
-						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="hide"><text
+						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showLeft')"><text
 							 class="word-btn-white">关闭Drawer</text></view>
 					</view>
 				</uni-drawer>
@@ -36,8 +36,11 @@
 			<uni-section title="右侧滑出" type="line"></uni-section>
 			<view class="example-body">
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
-				 @click="show('right')"><text class="word-btn-white">显示Drawer</text></view>
-				<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
+				 @click="showDrawer('showRight')"><text class="word-btn-white">显示Drawer</text></view>
+				<uni-drawer ref="showRight" mode="right" :mask-click="false" @change="change($event,'showRight')">
+					<view class="info">
+						<text class="info-text">右侧遮罩只能通过按钮关闭，不能通过点击遮罩关闭</text>
+					</view>
 					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1" />
@@ -53,7 +56,7 @@
 					</view>
 					<!-- #endif -->
 					<view class="close">
-						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="hide"><text
+						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
 							 class="word-btn-white">关闭Drawer</text></view>
 					</view>
 				</uni-drawer>
@@ -62,13 +65,7 @@
 	</view>
 </template>
 <script>
-	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
-	import uniList from '@/components/uni-list/uni-list.vue'
-	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
-	import uniSection from '@/components/uni-section/uni-section.vue'
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
-		components: {},
 		data() {
 			return {
 				showRight: false,
@@ -76,34 +73,28 @@
 			}
 		},
 		methods: {
-			show(e) {
-				console.log("show", e);
-				if (e === 'left') {
-					this.showLeft = true
-				} else {
-					this.showRight = true
-				}
+			// 打开窗口
+			showDrawer(e) {
+				this.$refs[e].open()
 			},
-			hide() {
-				console.log("hide");
-				this.showLeft = false
-				this.showRight = false
-			},
+			// 关闭窗口
 			closeDrawer(e) {
-				if (e === 'left') {
-					this.showLeft = false
-				} else {
-					this.showRight = false
-				}
+				this.$refs[e].close()
 			},
-			confirm() {}
+			// 抽屉状态发生变化触发
+			change(e, type) {
+				console.log((type === 'showLeft' ? '左窗口' : '右窗口') + (e ? '打开' : '关闭'));
+				this[type] = e
+			}
 		},
 		onNavigationBarButtonTap(e) {
 			this.showRight = !this.showRight
 		},
+		// app端拦截返回事件 ，仅app端生效
 		onBackPress() {
 			if (this.showRight || this.showLeft) {
-				this.hide()
+				this.$refs.showLeft.close()
+				this.$refs.showRight.close()
 				return true
 			}
 		}
@@ -175,5 +166,15 @@
 
 	.draw-cotrol-btn {
 		flex: 1;
+	}
+
+	.info {
+		padding: 15px;
+		color: #666;
+	}
+
+	.info-text {
+		font-size: 14px;
+		color: #666;
 	}
 </style>

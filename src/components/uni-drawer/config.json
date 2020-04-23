@@ -4,7 +4,7 @@
 	"desc": "抽屉",
 	"url": "drawer",
 	"type": "功能组件",
-	"edition": "1.0.3",
+	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=26",
-	"update_log": "- 新增 width 属性，仅在vue页面生效"
+	"update_log": "- 新增 maskClick 属性，点击遮罩是否可以关闭\n- 修复 close 执行两遍的Bug\n- 优化 使用事件来开关抽屉，避免了使用属性开关抽屉在某些场景下打不开抽屉的bug"
 }
