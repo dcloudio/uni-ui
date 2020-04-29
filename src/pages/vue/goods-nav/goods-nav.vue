@@ -30,7 +30,7 @@
 					text: '店铺',
 					info: 2,
 					infoBackgroundColor:'#007aff',
-					infoColor:"red"
+					infoColor:"#f5f5f5"
 				}, {
 					icon: 'cart',
 					text: '购物车',

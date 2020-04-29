@@ -38,8 +38,8 @@
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
 				 @click="showDrawer('showRight')"><text class="word-btn-white">显示Drawer</text></view>
 				<uni-drawer ref="showRight" mode="right" :mask-click="false" @change="change($event,'showRight')">
-					<view>
-						<scroll-view class="scroll-view" scroll-y="true" >
+					<view class="scroll-view">
+						<scroll-view class="scroll-view-box" scroll-y="true" >
 							<view class="info">
 								<text class="info-text">右侧遮罩只能通过按钮关闭，不能通过点击遮罩关闭</text>
 							</view>
@@ -48,7 +48,7 @@
 									 class="word-btn-white">关闭Drawer</text></view>
 							</view>
 							<view class="info-content" v-for="item in 100" :key="item">
-								可滚动内容 {{item}}
+								<text>可滚动内容 {{item}}</text>
 							</view>
 							<view class="close">
 								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showRight')"><text
@@ -70,6 +70,7 @@
 			}
 		},
 		methods: {
+			confirm(){},
 			// 打开窗口
 			showDrawer(e) {
 				this.$refs[e].open()
@@ -85,7 +86,11 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
-			this.showRight = !this.showRight
+			if(this.showLeft){
+				this.$refs.showLeft.close()
+			}else{
+				this.$refs.showLeft.open()
+			}
 		},
 		// app端拦截返回事件 ，仅app端生效
 		onBackPress() {
@@ -174,12 +179,17 @@
 		font-size: 14px;
 		color: #666;
 	}
-	// 处理抽屉内容滚动
 	.scroll-view {
+		flex:1
+	}
+	// 处理抽屉内容滚动
+	.scroll-view-box {
 		flex: 1;
 		position: absolute;
 		top: 0;
+		right: 0;
 		bottom: 0;
+		left: 0;
 	}
 	.info-content {
 		padding: 5px 15px;

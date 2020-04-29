@@ -4,7 +4,7 @@
 	"desc": "商品导航",
 	"url": "goods-nav",
 	"type": "导航组件",
-	"edition": "1.0.2",
+	"edition": "1.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=865",
-	"update_log": "- 修复 buttonGroup.color 设置颜色不生效的 Bug"
+	"update_log": "- 优化 添加图标 "
 }
