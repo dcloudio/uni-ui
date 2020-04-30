@@ -4,7 +4,7 @@
 	"desc": "弹出层",
 	"url": "popup",
 	"type": "功能组件",
-	"edition": "1.2.1",
+	"edition": "1.2.2",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 优化 部分逻辑实现\n- 新增 消息提示、对话框、底部分享三种扩展样式"
+	"update_log": "- 修复 placeholder 内容设置不生效的 Bug"
 }
