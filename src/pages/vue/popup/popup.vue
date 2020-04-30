@@ -192,7 +192,7 @@
 		background-color: #fff;
 		padding: 15px;
 	}
-	
+
 	/* #ifndef APP-NVUE */
 	.button {
 		margin: 0;
@@ -200,7 +200,7 @@
 		line-height: 1;
 	}
 	/* #endif */
-	
+
 	.button {
 		/* #ifndef APP-NVUE */
 		display: flex;

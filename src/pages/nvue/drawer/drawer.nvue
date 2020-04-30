@@ -180,6 +180,10 @@
 		color: #666;
 	}
 	.scroll-view {
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		height: 100%;
+		/* #endif */
 		flex:1
 	}
 	// 处理抽屉内容滚动

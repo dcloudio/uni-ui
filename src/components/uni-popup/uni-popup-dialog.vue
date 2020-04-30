@@ -5,7 +5,7 @@
 		</view>
 		<view class="uni-dialog-content">
 			<text class="uni-dialog-content-text" v-if="mode === 'base'">{{content}}</text>
-			<input v-else class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" placeholder="请输入内容">
+			<input v-else class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" >
 		</view>
 		<view class="uni-dialog-button-group">
 			<view class="uni-dialog-button" @click="close">
@@ -20,8 +20,28 @@
 </template>
 
 <script>
+	/**
+	 * PopUp 弹出层-对话框样式
+	 * @description 弹出层-对话框样式
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=329
+	 * @property {String} value input 模式下的默认值
+	 * @property {String} placeholder input 模式下输入提示
+	 * @property {String} type = [success|warning|info|error] 主题样式
+	 *  @value success 成功
+	 * 	@value warning 提示
+	 * 	@value info 消息
+	 * 	@value error 错误
+	 * @property {String} mode = [base|input] 模式、
+	 * 	@value base 基础对话框
+	 * 	@value input 可输入对话框
+	 * @property {String} content 对话框内容
+	 * @property {Boolean} beforeClose 是否拦截取消事件
+	 * @event {Function} confirm 点击确认按钮触发
+	 * @event {Function} close 点击取消按钮触发
+	 */
+
 	export default {
-		name:"uniPopupDialog",
+		name: "uniPopupDialog",
 		props: {
 			value: {
 				type: [String, Number],
@@ -110,7 +130,7 @@
 					this.popup.close()
 					if (this.mode === 'input') this.val = this.value
 				}, this.mode === 'input' ? this.val : '')
-			}, 
+			},
 			/**
 			 * 点击取消按钮
 			 */
@@ -135,9 +155,9 @@
 	}
 
 	.uni-dialog-title {
-		// #ifndef APP-NVUE
+		/* #ifndef APP-NVUE */
 		display: flex;
-		// #endif
+		/* #endif */
 		flex-direction: row;
 		justify-content: center;
 		padding-top: 15px;
@@ -150,23 +170,24 @@
 	}
 
 	.uni-dialog-content {
-		// #ifndef APP-NVUE
+		/* #ifndef APP-NVUE */
 		display: flex;
-		// #endif
+		/* #endif */
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		padding: 5px 15px 15px 15px;
 	}
+
 	.uni-dialog-content-text {
 		font-size: 14px;
 		color: #6e6e6e;
 	}
 
 	.uni-dialog-button-group {
-		// #ifndef APP-NVUE
+		/* #ifndef APP-NVUE */
 		display: flex;
-		// #endif
+		/* #endif */
 		flex-direction: row;
 		border-top-color: #f5f5f5;
 		border-top-style: solid;
@@ -174,9 +195,10 @@
 	}
 
 	.uni-dialog-button {
-		// #ifndef APP-NVUE
+		/* #ifndef APP-NVUE */
 		display: flex;
-		// #endif
+		/* #endif */
+
 		flex: 1;
 		flex-direction: row;
 		justify-content: center;
@@ -197,7 +219,7 @@
 	.uni-button-color {
 		color: $uni-color-primary;
 	}
-	
+
 	.uni-dialog-input {
 		flex: 1;
 		font-size: 14px;
@@ -218,6 +240,4 @@
 	.uni-popup__info {
 		color: #909399;
 	}
-
-
 </style>

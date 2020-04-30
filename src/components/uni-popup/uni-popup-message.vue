@@ -5,6 +5,20 @@
 </template>
 
 <script>
+	
+	/**
+	 * PopUp 弹出层-消息提示
+	 * @description 弹出层-消息提示
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=329
+	 * @property {String} type = [success|warning|info|error] 主题样式
+	 *  @value success 成功
+	 * 	@value warning 提示
+	 * 	@value info 消息
+	 * 	@value error 错误
+	 * @property {String} message 消息提示文字
+	 * @property {String} duration 显示时间，设置为 0 则不会自动关闭
+	 */
+	
 	export default {
 		name: 'UniPopupMessage',
 		props: {
@@ -53,9 +67,9 @@
 </script>
 <style lang="scss" scoped>
 	.uni-popup-message {
-		// #ifndef APP-NVUE
+		/* #ifndef APP-NVUE */
 		display: flex;
-		// #endif
+		/* #endif */
 		flex-direction: row;
 		background-color: #e1f3d8;
 		padding: 10px 15px;
