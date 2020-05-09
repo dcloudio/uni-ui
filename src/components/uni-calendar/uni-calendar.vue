@@ -137,29 +137,43 @@
 		created() {
 			// 获取日历方法实例
 			this.cale = new Calendar({
-				date: this.date,
+				// date: new Date(),
 				selected: this.selected,
 				startDate: this.startDate,
 				endDate: this.endDate,
 				range: this.range,
 			})
-			this.init(this.cale.date.fullDate)
+			console.log(this.cale.date.fullDate);
+			// 选中某一天
+			this.cale.setDate(this.date)
+			this.init(this.cale.selectDate.fullDate)
+			// this.setDay
 		},
 		methods: {
 			// 取消穿透
 			clean() {},
+			/**
+			 * 初始化日期显示
+			 * @param {Object} date
+			 */
 			init(date) {
 				this.weeks = this.cale.weeks
 				this.nowDate = this.calendar = this.cale.getInfo(date)
 			},
+			/**
+			 * 打开日历弹窗
+			 */
 			open() {
 				this.show = true
 				this.$nextTick(() => {
-					setTimeout(()=>{
+					setTimeout(() => {
 						this.aniMaskShow = true
-					},50)
+					}, 50)
 				})
 			},
+			/**
+			 * 关闭日历弹窗
+			 */
 			close() {
 				this.aniMaskShow = false
 				this.$nextTick(() => {
@@ -168,14 +182,23 @@
 					}, 300)
 				})
 			},
+			/**
+			 * 确认按钮
+			 */
 			confirm() {
 				this.setEmit('confirm')
 				this.close()
 			},
+			/**
+			 * 变化触发
+			 */
 			change() {
 				if (!this.insert) return
 				this.setEmit('change')
 			},
+			/**
+			 * 选择月份触发
+			 */
 			monthSwitch() {
 				let {
 					year,
@@ -186,6 +209,10 @@
 					month: Number(month)
 				})
 			},
+			/**
+			 * 派发事件
+			 * @param {Object} name
+			 */
 			setEmit(name) {
 				let {
 					year,
@@ -205,6 +232,10 @@
 					extraInfo: extraInfo || {}
 				})
 			},
+			/**
+			 * 选择天触发
+			 * @param {Object} weeks
+			 */
 			choiceDate(weeks) {
 				if (weeks.disable) return
 				this.calendar = weeks
@@ -213,23 +244,38 @@
 				this.weeks = this.cale.weeks
 				this.change()
 			},
+			/**
+			 * 回到今天
+			 */
 			backtoday() {
-				this.cale.setDate(this.date)
+				console.log(this.cale.getDate(new Date()).fullDate);
+				let date = this.cale.getDate(new Date()).fullDate
+				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
-				this.nowDate = this.calendar = this.cale.getInfo(this.date)
+				this.nowDate = this.calendar = this.cale.getInfo(date)
 				this.change()
 			},
+			/**
+			 * 上个月
+			 */
 			pre() {
 				const preDate = this.cale.getDate(this.nowDate.fullDate, -1, 'month').fullDate
 				this.setDate(preDate)
 				this.monthSwitch()
 
 			},
+			/**
+			 * 下个月
+			 */
 			next() {
 				const nextDate = this.cale.getDate(this.nowDate.fullDate, +1, 'month').fullDate
 				this.setDate(nextDate)
 				this.monthSwitch()
 			},
+			/**
+			 * 设置日期
+			 * @param {Object} date
+			 */
 			setDate(date) {
 				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
@@ -395,6 +441,7 @@
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 	}
+
 	.uni-calendar__weeks-day-text {
 		font-size: 14px;
 	}

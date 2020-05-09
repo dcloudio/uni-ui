@@ -9,7 +9,7 @@ class Calendar {
 		range
 	} = {}) {
 		// 当前日期
-		this.date = this.getDate(date) // 当前初入日期
+		this.date = this.getDate(new Date()) // 当前初入日期
 		// 打点信息
 		this.selected = selected || [];
 		// 范围开始
@@ -25,8 +25,15 @@ class Calendar {
 		}
 		// 每周日期
 		this.weeks = {}
-
-		this._getWeek(this.date.fullDate)
+		// this._getWeek(this.date.fullDate)
+	}
+	/**
+	 * 设置日期
+	 * @param {Object} date
+	 */
+	setDate(date) {
+		this.selectDate = this.getDate(date)
+		this._getWeek(this.selectDate.fullDate)
 	}
 
 	/**
@@ -89,6 +96,7 @@ class Calendar {
 	 */
 	_currentMonthDys(dateData, full) {
 		let dateArr = []
+		console.log(this.date);
 		let fullDate = this.date.fullDate
 		for (let i = 1; i <= dateData; i++) {
 			let isinfo = false
@@ -164,13 +172,7 @@ class Calendar {
 		}
 		return dateArr
 	}
-	/**
-	 * 设置日期
-	 * @param {Object} date
-	 */
-	setDate(date) {
-		this._getWeek(date)
-	}
+	
 	/**
 	 * 获取当前日期详情
 	 * @param {Object} date
