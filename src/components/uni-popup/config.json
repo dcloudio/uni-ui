@@ -4,7 +4,7 @@
 	"desc": "弹出层",
 	"url": "popup",
 	"type": "功能组件",
-	"edition": "1.2.2",
+	"edition": "1.2.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 修复 placeholder 内容设置不生效的 Bug"
+	"update_log": "- 修复 maskClick 属性失效的Bug"
 }

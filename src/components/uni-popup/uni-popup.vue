@@ -97,10 +97,11 @@
 				},
 				maskShow: true,
 				mkclick: true,
-				popupstyle:'top'
+				popupstyle: 'top'
 			}
 		},
 		created() {
+			this.mkclick = this.maskClick
 			if (this.animation) {
 				this.duration = 300
 			} else {
@@ -127,9 +128,9 @@
 					}).then(res => {
 						// 自定义打开事件
 						clearTimeout(this.msgtimer)
-						this.msgtimer = setTimeout(()=>{
+						this.msgtimer = setTimeout(() => {
 							this.customOpen && this.customOpen()
-						},100)
+						}, 100)
 						this.$emit('change', {
 							show: true,
 							type: this.type
@@ -258,6 +259,7 @@
 	.bottom {
 		bottom: 0;
 	}
+
 	.uni-popup__wrapper-box {
 		/* #ifndef APP-NVUE */
 		display: block;
