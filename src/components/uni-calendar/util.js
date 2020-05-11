@@ -337,7 +337,6 @@ class Calendar {
 		}
 		this.canlender = canlender
 		this.weeks = weeks
-		console.log(this.weeks);
 	}
 
 	//静态方法

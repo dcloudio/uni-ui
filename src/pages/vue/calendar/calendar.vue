@@ -10,8 +10,8 @@
 		<view class="example-body">
 			<button class="calendar-button" type="button" @click="open">打开日历</button>
 		</view>
-		<uni-calendar ref="calendar" :date="info.date" :insert="info.insert" :lunar="info.lunar" :startDate="info.startDate"
-		 :endDate="info.endDate" :range="info.range" @confirm="confirm" />
+		<uni-calendar ref="calendar" :clear-date="true" :date="info.date" :insert="info.insert" :lunar="info.lunar" :startDate="info.startDate"
+		 :endDate="info.endDate" :range="info.range" @confirm="confirm" @close="close"/>
 	</view>
 </template>
 
@@ -85,6 +85,9 @@
 		methods: {
 			open() {
 				this.$refs.calendar.open()
+			},
+			close(){
+				console.log('弹窗关闭');
 			},
 			change(e) {
 				console.log('change 返回:', e)

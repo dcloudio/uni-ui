@@ -47,6 +47,7 @@ export default {
 | endDate	| String	|-		| 日期选择范围-结束日期																									|
 | range		| Boolean	| false	| 范围选择																												|
 | insert	| Boolean	| false	| 插入模式,可选值，ture：插入模式；false：弹窗模式；默认为插入模式														|
+|clearDate	|Boolean	|true	|弹窗模式是否清空上次选择内容	|
 | selected	| Array		|-		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
 |showMonth	| Boolean	| true	| 是否显示月份为背景																									|
 
@@ -57,6 +58,7 @@ export default {
 | @change		|  日期改变，`insert :ture` 时生效	|
 | @confirm		|  确认选择`insert :false` 时生效	|
 | @monthSwitch	| 切换月份时触发					|
+| @close		| 关闭日历弹窗触发					|
 
 ### 方法说明
 在 `calendar` 组件上定义 `ref` 属性，通过 `ref` 属性使用方法。
