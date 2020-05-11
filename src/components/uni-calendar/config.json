@@ -4,7 +4,7 @@
 	"desc": "日历",
 	"url": "calendar",
 	"type": "功能组件",
-	"edition": "1.3.9",
+	"edition": "1.3.10",
 	"path": "https://ext.dcloud.net.cn/plugin?id=56",
-	"update_log": "- 优化 自定义日期显示今天的问题"
+	"update_log": "- 新增 快捷选择年月\n- 优化 如果不是今天的日期，修改date不在显示今天\n- 修复 动态修改开始结束日期不渲染的Bug\n - 修复 无法滚动的Bug"
 }

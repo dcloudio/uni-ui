@@ -185,7 +185,7 @@ Tips:
 - 仅支持自定义组件模式
 - date 传入的应该是一个 String ，如： 2019-06-27 ，而不是 new Date()
 - insert 属性，确定当前的事件是 @change 还是 @confirm 。理应合并为一个事件，但是为了区分模式，现使用两个事件，这里需要注意
-
+- 弹窗模式下无法阻止后面的元素滚动，如有需要阻止，请在弹窗弹出后，手动设置滚动元素为不可滚动
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar](https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar)

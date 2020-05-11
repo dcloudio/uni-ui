@@ -16,15 +16,37 @@
 </template>
 
 <script>
+	/**
+	 * 获取任意时间
+	 */
+	function getDate(date, AddDayCount = 0) {
+		if (!date) {
+			date = new Date()
+		}
+		if (typeof date !== 'object') {
+			date = date.replace(/-/g, '/')
+		}
+		const dd = new Date(date)
+
+		dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
+
+		const y = dd.getFullYear()
+		const m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1 // 获取当前月份的日期，不足10补0
+		const d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate() // 获取当前几号，不足10补0
+		return {
+			fullDate: y + '-' + m + '-' + d,
+			year: y,
+			month: m,
+			date: d,
+			day: dd.getDay()
+		}
+	}
 	export default {
 		components: {},
 		data() {
 			return {
 				showCalendar: false,
 				info: {
-					date: '2019-08-15',
-					startDate: '2019-06-15',
-					endDate: '2019-010-15',
 					lunar: true,
 					range: true,
 					insert: false,
@@ -38,12 +60,15 @@
 			})
 			// TODO 模拟请求异步同步数据
 			setTimeout(() => {
+				this.info.date = getDate(new Date(),-30).fullDate
+				this.info.startDate = getDate(new Date(),-60).fullDate
+				this.info.endDate =  getDate(new Date(),30).fullDate
 				this.info.selected = [{
-						date: '2019-08-20',
+						date: getDate(new Date(),-3).fullDate,
 						info: '打卡'
 					},
 					{
-						date: '2019-08-21',
+						date: getDate(new Date(),-2).fullDate,
 						info: '签到',
 						data: {
 							custom: '自定义信息',
@@ -51,11 +76,11 @@
 						}
 					},
 					{
-						date: '2019-08-22',
+						date: getDate(new Date(),-1).fullDate,
 						info: '已打卡'
 					}
 				]
-			}, 500)
+			}, 2000)
 		},
 		methods: {
 			open() {

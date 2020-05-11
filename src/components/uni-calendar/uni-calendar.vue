@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-calendar" @touchmove.stop.prevent="clean">
+	<view class="uni-calendar">
 		<view v-if="!insert&&show" class="uni-calendar__mask" :class="{'uni-calendar--mask-show':aniMaskShow}" @click="clean"></view>
 		<view v-if="insert || show" class="uni-calendar__content" :class="{'uni-calendar--fixed':!insert,'uni-calendar--ani-show':aniMaskShow}">
 			<view v-if="!insert" class="uni-calendar__header uni-calendar--fixed-top">
@@ -11,14 +11,17 @@
 				</view>
 			</view>
 			<view class="uni-calendar__header">
-				<view class="uni-calendar__header-btn-box" @click="pre">
+				<view class="uni-calendar__header-btn-box" @click.stop="pre">
 					<view class="uni-calendar__header-btn uni-calendar--left"></view>
 				</view>
-				<text class="uni-calendar__header-text">{{ (nowDate.year||'') +'年'+( nowDate.month||'') +'月'}}</text>
-				<view class="uni-calendar__header-btn-box" @click="next">
+				<picker mode="date" :value="date" fields="month" @change="bindDateChange">
+					<text class="uni-calendar__header-text">{{ (nowDate.year||'') +'年'+( nowDate.month||'') +'月'}}</text>
+				</picker>
+				<view class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
 				</view>
 				<text class="uni-calendar__backtoday" @click="backtoday">回到今天</text>
+
 			</view>
 			<view class="uni-calendar__box">
 				<view v-if="showMonth" class="uni-calendar__box-bg">
@@ -117,6 +120,10 @@
 			showMonth: {
 				type: Boolean,
 				default: true
+			},
+			clearDate: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
@@ -129,6 +136,17 @@
 			}
 		},
 		watch: {
+			date(newVal) {
+				console.log(newVal);
+				this.cale.setDate(newVal)
+				this.init(this.cale.selectDate.fullDate)
+			},
+			startDate(val){
+				this.cale.resetSatrtDate(val)
+			},
+			endDate(val){
+				this.cale.resetEndDate(val)
+			},
 			selected(newVal) {
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
 				this.weeks = this.cale.weeks
@@ -143,7 +161,6 @@
 				endDate: this.endDate,
 				range: this.range,
 			})
-			console.log(this.cale.date.fullDate);
 			// 选中某一天
 			this.cale.setDate(this.date)
 			this.init(this.cale.selectDate.fullDate)
@@ -152,6 +169,12 @@
 		methods: {
 			// 取消穿透
 			clean() {},
+			bindDateChange(e) {
+				const value = e.detail.value + '-1'
+				console.log(this.cale.getDate(value));
+				this.cale.setDate(value)
+				this.init(value)
+			},
 			/**
 			 * 初始化日期显示
 			 * @param {Object} date
@@ -164,6 +187,12 @@
 			 * 打开日历弹窗
 			 */
 			open() {
+				// 弹窗模式并且清理数据
+				if (this.clearDate && !this.insert) {
+					this.cale.cleanMultipleStatus()
+					this.cale.setDate(this.date)
+					this.init(this.cale.selectDate.fullDate)
+				}
 				this.show = true
 				this.$nextTick(() => {
 					setTimeout(() => {
@@ -251,8 +280,7 @@
 				console.log(this.cale.getDate(new Date()).fullDate);
 				let date = this.cale.getDate(new Date()).fullDate
 				this.cale.setDate(date)
-				this.weeks = this.cale.weeks
-				this.nowDate = this.calendar = this.cale.getInfo(date)
+				this.init(date)
 				this.change()
 			},
 			/**

@@ -18,11 +18,7 @@ class Calendar {
 		this.endDate = endDate
 		this.range = range
 		// 多选状态
-		this.multipleStatus = {
-			before: '',
-			after: '',
-			data: []
-		}
+		this.cleanMultipleStatus()
 		// 每周日期
 		this.weeks = {}
 		// this._getWeek(this.date.fullDate)
@@ -34,6 +30,34 @@ class Calendar {
 	setDate(date) {
 		this.selectDate = this.getDate(date)
 		this._getWeek(this.selectDate.fullDate)
+	}
+
+	/**
+	 * 清理多选状态
+	 */
+	cleanMultipleStatus() {
+		this.multipleStatus = {
+			before: '',
+			after: '',
+			data: []
+		}
+	}
+
+	/**
+	 * 重置开始日期
+	 */
+	resetSatrtDate(startDate) {
+		// 范围开始
+		this.startDate = startDate
+
+	}
+
+	/**
+	 * 重置结束日期
+	 */
+	resetEndDate(endDate) {
+		// 范围结束
+		this.endDate = endDate
 	}
 
 	/**
@@ -96,7 +120,6 @@ class Calendar {
 	 */
 	_currentMonthDys(dateData, full) {
 		let dateArr = []
-		console.log(this.date);
 		let fullDate = this.date.fullDate
 		for (let i = 1; i <= dateData; i++) {
 			let isinfo = false
@@ -172,7 +195,7 @@ class Calendar {
 		}
 		return dateArr
 	}
-	
+
 	/**
 	 * 获取当前日期详情
 	 * @param {Object} date
@@ -314,6 +337,7 @@ class Calendar {
 		}
 		this.canlender = canlender
 		this.weeks = weeks
+		console.log(this.weeks);
 	}
 
 	//静态方法
