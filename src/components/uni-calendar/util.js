@@ -147,7 +147,6 @@ class Calendar {
 				let dateCompAfter = this.dateCompare(fullDate, this.endDate)
 				disableAfter = this.dateCompare(nowDate, dateCompAfter ? this.endDate : fullDate)
 			}
-
 			let multiples = this.multipleStatus.data
 			let checked = false
 			let multiplesStatus = -1
@@ -161,12 +160,13 @@ class Calendar {
 					checked = true
 				}
 			}
-
 			let data = {
 				fullDate: nowDate,
 				year: full.year,
 				date: i,
 				multiple: this.range ? checked : false,
+				beforeMultiple: this.dateEqual(this.multipleStatus.before, nowDate),
+				afterMultiple: this.dateEqual(this.multipleStatus.after, nowDate),
 				month: full.month,
 				lunar: this.getlunar(full.year, full.month, i),
 				disable: !disableBefore || !disableAfter,
@@ -282,12 +282,12 @@ class Calendar {
 			before,
 			after
 		} = this.multipleStatus
+
 		if (!this.range) return
 		if (before && after) {
 			this.multipleStatus.before = ''
 			this.multipleStatus.after = ''
 			this.multipleStatus.data = []
-			this._getWeek(fullDate)
 		} else {
 			if (!before) {
 				this.multipleStatus.before = fullDate
@@ -298,9 +298,9 @@ class Calendar {
 				} else {
 					this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus.before);
 				}
-				this._getWeek(fullDate)
 			}
 		}
+		this._getWeek(fullDate)
 	}
 
 	/**

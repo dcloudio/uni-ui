@@ -118,8 +118,7 @@
 		/* #ifndef APP-NVUE */
 		display: block;
 		/* #endif */
-		padding: 0 0;
-		padding-bottom: 0;
+		padding: 1px 0;
 	}
 
 	.example-box {
