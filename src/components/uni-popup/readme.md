@@ -10,8 +10,14 @@
 
 ```javascript
 import uniPopup from '@/components/uni-popup/uni-popup.vue'
+import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 export default {
-    components: {uniPopup}
+    components: {
+		uniPopup,
+		uniPopupMessage,
+		uniPopupDialog
+	}
 }
 ```
 
@@ -280,7 +286,9 @@ export default {
 - 在微信小程序开发者工具中，启用真机调试，popup 会延时出现，是因为 setTimeout 在真机调试中的延时问题导致的，预览和发布小程序不会出现此问题
 - `uni-popup` 并不能完全阻止页面滚动，可在打开 `uni-popup` 的时候，去做一些处理，禁止页面滚动
 - 如果需要在子组件内关闭 `uni-popup` ，请使用上述的扩展（provide/inject）方式，其他方式可能会出现不可预知问题
-
+- 扩展组件使用前不要忘记注册组件
+- 如果想在页面渲染完毕后就打开 `uni-popup` ，请在 `onReady` 或 `mounted` 生命周期内调用，确保组件渲染完毕
+- 使用 `npm` 方式引入组件，如果确认引用正确，但是提示未注册组件或显示不正常，请尝试重新编译项目
 
 ### 插件预览地址
 
