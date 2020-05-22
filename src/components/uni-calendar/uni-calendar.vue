@@ -85,7 +85,7 @@
 	 */
 	export default {
 		components: {
-			uniCalendarItem
+			calendarItem
 		},
 		props: {
 			date: {
