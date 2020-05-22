@@ -4,6 +4,7 @@ node_modules/
 public/
 src/
 temp/
+plugin/
 babel.config.js
 postcss.config.js
 vue.config.js
