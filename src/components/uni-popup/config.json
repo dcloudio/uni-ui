@@ -4,7 +4,7 @@
 	"desc": "弹出层",
 	"url": "popup",
 	"type": "功能组件",
-	"edition": "1.2.4",
+	"edition": "1.2.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 优化 使用文档"
+	"update_log": "- 优化 删除重复代码"
 }
