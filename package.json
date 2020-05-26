@@ -1,8 +1,8 @@
 {
 	"id": "55",
 	"name": "@dcloudio/uni-ui",
-	"version": "1.2.0",
-	"description": "+ uni-ui 新增 uni-drawer 组件 width 属性（仅在 vue 页面生效）、maskClick 属性，点击遮罩是否关闭抽屉\n+ uni-ui 新增 uni-goods-nav 组件角标的前景色和背景色设置\n+ uni-ui 新增 uni-popup 组件的信息提示、对话框、底部分享示例三种组件扩展样式\n+ uni-ui 优化 uni-drawer 组件废弃 visible 属性，改用 open()、close() 方法开关抽屉，避免在某些场景不能正常关闭的 Bug\n+ uni-ui 优化 uni-popup 组件部分代码逻辑，可支持自定义扩展组件\n+ uni-ui 修复 uni-drawer 组件 close 回调执行两遍的 Bug\n+ uni-ui 修复 uni-goods-nav 组件 buttonGroup 属性修改 color 颜色不生效的 Bug\n+ uni-ui 修复 uni-popup 组件内放置 input/textarea 获取不到焦点的 Bug\n+ uni-ui 修复 uni-swipe-action 组件在 iOS13 中按钮点击失效或点击错位的 Bug",
+	"version": "1.2.1",
+	"description": "+ uni-ui 修复 npm run sever 报错的Bug",
 	"author": "",
 	"license": "Apache-2.0",
 	"repository": {
@@ -75,8 +75,5 @@
 	"browserslist": [
 		"Android >= 4",
 		"ios >= 8"
-	],
-	"uni-app": {
-		"scripts": {}
-	}
+	]
 }
