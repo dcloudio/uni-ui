@@ -149,6 +149,7 @@
 		position: relative;
 		background-color: $uni-bg-color;
 		overflow: hidden;
+		width: 750rpx;
 	}
 
 	.uni-navbar__content_view {
