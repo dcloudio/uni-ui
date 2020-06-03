@@ -326,6 +326,9 @@ class Calendar {
 		let canlender = []
 		const surplus = 42 - (dates.lastMonthDays.length + dates.currentMonthDys.length)
 		dates.nextMonthDays = this._getNextMonthDays(surplus, this.getDate(dateData))
+		//不要显示多余的一周
+		if(dates.nextMonthDays.length >= 7)
+			dates.nextMonthDays.splice(dates.nextMonthDays.length - 7, 7);
 		canlender = canlender.concat(dates.lastMonthDays, dates.currentMonthDys, dates.nextMonthDays)
 		let weeks = {}
 		// 拼接数组  上个月开始几天 + 本月天数+ 下个月开始几天

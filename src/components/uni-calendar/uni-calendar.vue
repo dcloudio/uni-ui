@@ -52,7 +52,7 @@
 				</view>
 				<view class="uni-calendar__weeks" v-for="(item,weekIndex) in weeks" :key="weekIndex">
 					<view class="uni-calendar__weeks-item" v-for="(weeks,weeksIndex) in item" :key="weeksIndex">
-						<calendar-item :weeks="weeks" :calendar="calendar" :selected="selected" :lunar="lunar" @change="choiceDate"></calendar-item>
+						<calendar-item v-if="showSurplusDate||!weeks.disable" :weeks="weeks" :calendar="calendar" :selected="selected" :lunar="lunar" @change="choiceDate"></calendar-item>
 					</view>
 				</view>
 			</view>
@@ -76,6 +76,7 @@
 	 * 	@value true 弹窗模式
 	 * 	@value false 插入模式
 	 * @property {Boolean} clearDate = [true|false] 弹窗模式是否清空上次选择内容
+	 * @property {Boolean} showSurplusDate = [true|false] 是否显示多余的非本月日期
 	 * @property {Array} selected 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]
 	 * @property {Boolean} showMonth 是否选择月份为背景
 	 * @event {Function} change 日期改变，`insert :ture` 时生效
@@ -123,6 +124,10 @@
 				default: true
 			},
 			clearDate: {
+				type: Boolean,
+				default: true
+			},
+			showSurplusDate:{
 				type: Boolean,
 				default: true
 			}
