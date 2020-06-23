@@ -72,8 +72,11 @@
 			 * 监听遮罩是否可点击
 			 * @param {Object} val
 			 */
-			maskClick(val) {
-				this.mkclick = val
+			maskClick: {
+				handler: function(val) {
+					this.mkclick = val
+				},
+				immediate: true
 			}
 		},
 		data() {
