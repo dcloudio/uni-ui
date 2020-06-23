@@ -261,6 +261,7 @@
 	}
 
 	.uni-list-item__icon-img {
+		vertical-align: middle;
 		height: $uni-img-size-base;
 		width: $uni-img-size-base;
 	}
