@@ -14,7 +14,7 @@
 					</view>
 					<slot name="left" />
 				</view>
-				<view class="uni-navbar__header-container uni-navbar__content_view">
+				<view class="uni-navbar__header-container uni-navbar__content_view" @tap="onClickTitle">
 					<view class="uni-navbar__header-container-inner uni-navbar__content_view" v-if="title.length">
 						<text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
 					</view>
@@ -60,6 +60,7 @@
 	 * @property {Boolean} shadow = [true|false] 导航栏下是否有阴影
 	 * @event {Function} clickLeft 左侧按钮点击时触发
 	 * @event {Function} clickRight 右侧按钮点击时触发
+	 * @event {Function} clickTitle 中间标题点击时触发
 	 */
 	export default {
 		name: "UniNavBar",
@@ -124,6 +125,9 @@
 			},
 			onClickRight() {
 				this.$emit("clickRight");
+			},
+			onClickTitle() {
+				this.$emit("clickTitle");
 			}
 		}
 	};
@@ -149,6 +153,7 @@
 		position: relative;
 		background-color: $uni-bg-color;
 		overflow: hidden;
+		width: 750rpx;
 	}
 
 	.uni-navbar__content_view {
