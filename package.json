@@ -32,8 +32,7 @@
 		"dev:quickapp": "cross-env NODE_ENV=development UNI_PLATFORM=quickapp vue-cli-service uni-build --watch",
 		"info": "node node_modules/@dcloudio/vue-cli-plugin-uni/commands/info.js",
 		"serve:quickapp": "node node_modules/@dcloudio/uni-quickapp/bin/serve.js",
-		"build:lib": "node build/build-lib.js lib",
-		"build:npm": "node build/build-lib.js npm"
+		"build:lib": "node build/build-lib.js lib"
 	},
 	"dependencies": {
 		"@dcloudio/uni-app-plus": "^2.0.0-alpha-27920200615002",

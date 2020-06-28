@@ -1,6 +1,5 @@
 node_modules/
 .project
 unpackage/
-lib/
 .DS_Store
 dist/
