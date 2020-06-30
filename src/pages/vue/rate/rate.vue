@@ -29,7 +29,10 @@
 		<view class="example-body">
 			<uni-rate :value="3" :is-fill="false" />
 		</view>
-
+		<uni-section title="当前评分实现双向绑定" type="line"></uni-section>
+		<view class="example-body">
+			<uni-rate v-bind:value.sync="val" />
+		</view>
 	</view>
 </template>
 
@@ -37,7 +40,9 @@
 	export default {
 		components: {},
 		data() {
-			return {}
+			return {
+				val: 2
+			}
 		},
 		methods: {
 			onChange(e) {
