@@ -30,6 +30,27 @@ export default {
 <uni-rate disabled="true" value="3.5"></uni-rate>
 ```
 
+当前评分实现动态更新
+
+  1.在``script`` 中声明绑定的值
+
+```javascript
+data() {
+    return {
+        val: 2
+    }
+}
+```
+
+  2.在``template`` 中绑定声明的值
+
+```html
+<!-- 两种方式均可 -->
+<uni-rate v-bind:value="val" v-on:update:value="val = $event"/>
+
+<uni-rate v-bind:value.sync="val"/>
+```
+
 ### 属性说明
 
 |属性名			|类型	|默认值	|说明						|

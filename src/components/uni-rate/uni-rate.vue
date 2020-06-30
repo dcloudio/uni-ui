@@ -86,6 +86,13 @@
 				valueSync: ""
 			};
 		},
+		watch: {
+			valueSync: {
+				handler(val) {
+					this.$emit('update:value', val);
+				}
+			}
+		},
 		computed: {
 			stars() {
 				const value = this.valueSync ? this.valueSync : 0;
