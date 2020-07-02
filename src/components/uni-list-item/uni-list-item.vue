@@ -2,18 +2,18 @@
 	<!-- #ifdef APP-NVUE -->
 	<cell>
 		<!-- #endif -->
-		<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="disabled || showSwitch ? '' : 'uni-list-item--hover'"
+		<view :class="disabled ? 'uni-list-item--disabled' : ''" :hover-class="(!clickable && !link )|| disabled || showSwitch ? '' : 'uni-list-item--hover'"
 		 class="uni-list-item" @click="onClick">
-			<view class="uni-list-item__container" :class="{'uni-list-item--first':isFirstChild}">
+			<view class="uni-list-item__container" :class="{'uni-list--border':border,'uni-list-item--first':isFirstChild}">
 				<view v-if="thumb" class="uni-list-item__icon">
-					<image :src="thumb" class="uni-list-item__icon-img" />
+					<image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--'+thumbSize]" />
 				</view>
 				<view v-else-if="showExtraIcon" class="uni-list-item__icon">
 					<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
 				</view>
 				<view class="uni-list-item__content">
 					<slot />
-					<text class="uni-list-item__content-title">{{ title }}</text>
+					<text v-if="title" class="uni-list-item__content-title">{{ title }}</text>
 					<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
 				</view>
 				<view class="uni-list-item__extra">
@@ -21,7 +21,7 @@
 					<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
 					<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
 					<slot name="right"></slot>
-					<uni-icons v-if="showArrow" :size="20" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
+					<uni-icons v-if="link" :size="16" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
 				</view>
 			</view>
 		</view>
@@ -38,22 +38,31 @@
 	 * ListItem 列表子组件
 	 * @description 列表子组件
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=24
-	 * @property {String} title 标题
-	 * @property {String} note 描述
-	 * @property {String} thumb 左侧缩略图，若thumb有值，则不会显示扩展图标
-	 * @property {String} badgeText 数字角标内容
-	 * @property {String} badgeType 数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
-	 * @property {String} rightText 右侧文字内容
-	 * @property {Boolean} disabled = [true|false]是否禁用
-	 * @property {Boolean} showArrow = [true|false] 是否显示箭头图标
-	 * @property {Boolean} showBadge = [true|false] 是否显示数字角标
-	 * @property {Boolean} showSwitch = [true|false] 是否显示Switch
-	 * @property {Boolean} switchChecked = [true|false] Switch是否被选中
-	 * @property {Boolean} showExtraIcon = [true|false] 左侧是否显示扩展图标
-	 * @property {Boolean} scrollY = [true|false] 允许纵向滚动，需要显式的设置其宽高
-	 * @property {Object} extraIcon 扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
-	 * @event {Function} click 点击 uniListItem 触发事件
-	 * @event {Function} switchChange 点击切换 Switch 时触发
+	 * @property {String} 	title 							标题
+	 * @property {String} 	note 							描述
+	 * @property {String} 	thumb 							左侧缩略图，若thumb有值，则不会显示扩展图标
+	 * @property {String}  	thumbSize = [lg|base|sm]		略缩图大小
+	 * 	@value 	 lg			大图
+	 * 	@value 	 base		一般
+	 * 	@value 	 sm			小图
+	 * @property {String} 	badgeText						数字角标内容
+	 * @property {String} 	badgeType 						数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
+	 * @property {String} 	rightText 						右侧文字内容
+	 * @property {Boolean} 	disabled = [true|false]			是否禁用
+	 * @property {Boolean} 	clickable = [true|false] 		是否开启点击反馈
+	 * @property {String} 	link = [navigateTo|redirectTo|reLaunch|switchTab] 是否展示右侧箭头并开启点击反馈
+	 *  @value 	navigateTo 	同 uni.navigateTo()
+	 * 	@value redirectTo 	同 uni.redirectTo()
+	 * 	@value reLaunch   	同 uni.reLaunch()
+	 * 	@value switchTab  	同 uni.switchTab()
+	 * @property {String} 	to  							跳转目标页面
+	 * @property {Boolean} 	showBadge = [true|false] 		是否显示数字角标
+	 * @property {Boolean} 	showSwitch = [true|false] 		是否显示Switch
+	 * @property {Boolean} 	switchChecked = [true|false] 	Switch是否被选中
+	 * @property {Boolean} 	showExtraIcon = [true|false] 	左侧是否显示扩展图标
+	 * @property {Object} 	extraIcon 						扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
+	 * @event {Function} 	click 							点击 uniListItem 触发事件
+	 * @event {Function} 	switchChange 					点击切换 Switch 时触发
 	 */
 	export default {
 		name: 'UniListItem',
@@ -65,58 +74,60 @@
 			title: {
 				type: String,
 				default: ''
-			}, // 列表标题
+			},
 			note: {
 				type: String,
 				default: ''
-			}, // 列表描述
+			},
 			disabled: {
-				// 是否禁用
 				type: [Boolean, String],
 				default: false
 			},
-			showArrow: {
-				// 是否显示箭头
+			clickable: {
+				type: Boolean,
+				default: false
+			},
+			link: {
 				type: [Boolean, String],
-				default: true
+				default: false
+			},
+			to: {
+				type: String,
+				default: ''
 			},
 			showBadge: {
-				// 是否显示数字角标
 				type: [Boolean, String],
-				default: false
+				default: false 
 			},
 			showSwitch: {
-				// 是否显示Switch
 				type: [Boolean, String],
 				default: false
 			},
 			switchChecked: {
-				// Switch是否被选中
 				type: [Boolean, String],
 				default: false
 			},
 			badgeText: {
-				// badge内容
 				type: String,
 				default: ''
 			},
 			badgeType: {
-				// badge类型
 				type: String,
 				default: 'success'
 			},
 			rightText: {
-				// 右侧文字内容
 				type: String,
 				default: ''
 			},
 			thumb: {
-				// 缩略图
 				type: String,
 				default: ''
 			},
+			thumbSize: {
+				type: String,
+				default: 'medium'
+			},
 			showExtraIcon: {
-				// 是否显示扩展图标
 				type: [Boolean, String],
 				default: false
 			},
@@ -134,7 +145,8 @@
 		inject: ['list'],
 		data() {
 			return {
-				isFirstChild: false
+				isFirstChild: false,
+				border: true
 			}
 		},
 		mounted() {
@@ -142,14 +154,42 @@
 				this.list.firstChildAppend = true
 				this.isFirstChild = true
 			}
+			this.border = this.list.border
 		},
 		methods: {
 			onClick() {
-				this.$emit('click')
+				if (this.clickable || this.link) {
+					if (typeof this.to !== 'string') {
+						this.$emit('click', {
+							data: {}
+						})
+					}
+				}
+				if (typeof this.to === 'string') {
+					this.openPage()
+				}
 			},
 			onSwitchChange(e) {
 				this.$emit('switchChange', e.detail)
+			},
+			openPage() {
+				if (['navigateTo', 'redirectTo', 'reLaunch', 'switchTab'].indexOf(this.link) !== -1) {
+					this.pageApi(this.link)
+				} else {
+					this.pageApi('navigateTo')
+				}
+			},
+			pageApi(api) {5
+				uni[api]({
+					url: this.to,
+					complete: (res) => {
+						this.$emit('click', {
+							data: res
+						})
+					}
+				})
 			}
+
 		}
 	}
 </script>
@@ -163,6 +203,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		padding-left: $uni-spacing-row-lg;
+		background-color: #fff;
 	}
 
 	.uni-list-item--disabled {
@@ -185,6 +226,12 @@
 		position: relative;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+
+
+	.uni-list--border {
+		position: relative;
 		/* #ifdef APP-PLUS */
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
@@ -192,12 +239,8 @@
 		/* #endif */
 	}
 
-	.uni-list-item--first {
-		border-top-width: 0px;
-	}
-
 	/* #ifndef APP-NVUE */
-	.uni-list-item__container:after {
+	.uni-list--border:after {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -215,9 +258,9 @@
 
 	/* #endif */
 
-
-
-
+	.uni-list-item--first {
+		border-top-width: 0px;
+	}
 
 	.uni-list-item__content {
 		/* #ifndef APP-NVUE */
@@ -261,9 +304,22 @@
 	}
 
 	.uni-list-item__icon-img {
-		vertical-align: middle;
+		display: block;
+	}
+
+	.uni-list--lg {
+		height: $uni-img-size-lg;
+		width: $uni-img-size-lg;
+	}
+
+	.uni-list--base {
 		height: $uni-img-size-base;
 		width: $uni-img-size-base;
+	}
+
+	.uni-list--sm {
+		height: $uni-img-size-sm;
+		width: $uni-img-size-sm;
 	}
 
 	.uni-list-item__extra-text {

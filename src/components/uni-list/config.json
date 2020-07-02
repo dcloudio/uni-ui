@@ -4,7 +4,7 @@
 	"desc": "列表",
 	"url": "list",
 	"type": "布局组件",
-	"edition": "1.0.6",
+	"edition": "1.0.7",
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
-	"update_log": "- 新增 右侧插槽"
+	"update_log": "- 新增 clickable 属性，是否开启点击反馈\n- 新增 link 属性，显示右侧箭头并开启点击反馈\n- 新增 to 属性，直接跳转到指定页面\n- 废弃 showArrow 属性，使用 link 属性代替"
 }

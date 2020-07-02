@@ -1,102 +1,251 @@
-### List 列表
-*已经支持在nvue页面中使用*
+## List 列表
+> 组件名：``uni-list``、``uni-list-item``，代码块： uList、uListItem。
 
-列表组件，组件名：``uni-list``、``uni-list-item``，代码块： uList。
+list 列表组件一般用于导航菜单、列表、设置页排版等，可以在其中使用图标、略缩图或放置任何你想放的元素
 
-### 使用方式
 
-在 ``script`` 中引用组件 
+### 平台差异说明
 
-```javascript
-import uniList from '@/components/uni-list/uni-list.vue'
-import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
-export default {
-    components: {uniList,uniListItem}
-}
-```
+如无特殊说明，则全平台支持
 
-在 ``template`` 中使用组件 
+### 使用说明
+
+为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的使用说明，可以帮你避免一些必要的错误使用。
+
+- 组件需要依赖 `sass` 插件 ，请自行手动安装
+- `uni-list` 和 `uni-list-item` 需要配套使用，暂不支持单独使用 `uni-list-item`
+- 开启点击反馈后，会有点击选中效果
+- 使用左侧插槽时，不设置 title 、 note 等属性，可以完全自定义左侧内容，右侧插槽同理
+
+
+### 基本用法 
 
 ```html
-<!-- 一般用法 -->
+<!-- 单行内容显示 -->
 <uni-list>
-    <uni-list-item title="标题文字" :show-arrow="false"></uni-list-item>
-    <uni-list-item title="标题文字"></uni-list-item>
-    <uni-list-item title="标题文字" :show-badge="true" badge-text="12"></uni-list-item>
-    <uni-list-item title="禁用状态" :disabled="true" :show-badge="true" badge-text="12"></uni-list-item>
+	<uni-list-item  title="列表文字" />
+	<uni-list-item :disabled="true" title="列表禁用状态" />
 </uni-list>
-
-<!-- 带描述信息 -->
+<!-- 多行内容显示 -->
 <uni-list>
-    <uni-list-item title="标题文字" note="描述信息"></uni-list-item>
-    <uni-list-item title="标题文字" note="描述信息" :show-badge="true" badge-text="12"></uni-list-item>
+	<uni-list-item title="列表文字" note="列表描述信息"/>
+	<uni-list-item :disabled="true" title="列表文字" note="列表禁用状态"/>
 </uni-list>
-
-<!-- 包含图片 -->
+<!-- 右侧显示角标、switch -->
 <uni-list>
-    <uni-list-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
+	<uni-list-item  title="列表右侧显示角标" :show-badge="true" badge-text="12" />
+	<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" />
 </uni-list>
-
-<!-- 包含图标 -->
-<uni-list>
-    <uni-list-item title="标题文字" :show-extra-icon="true" :extra-icon="{color: '#4cd964',size: '22',type: 'spinner'}"></uni-list-item>
+ <!-- 左侧显示略缩图、图标 -->
+ <uni-list>
+ 	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"
+ 	 thumb-size="lg" rightText="右侧文字"/>
+ 	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" />
 </uni-list>
-
-<!-- 显示Switch -->
-<uni-list>
-    <uni-list-item title="标题文字" :show-switch="true" :show-arrow="false"></uni-list-item>
-</uni-list>
-
-<!-- 右侧插槽 -->
-<uni-list>
-    <uni-list-item title="右侧插槽" :showArrow="false">
-        <template v-slot:right="">
-            <image style="width: 40px;height: 40px;" src="/static/logo.png" mode="widthFix"></image>
-        </template>
-    </uni-list-item>
-</uni-list>
+			 
 ```
 
-### 属性说明
+### 开启点击反馈和右侧箭头
+- 设置 `clickable` 为 `true` ，则表示这是一个可点击的列表，会默认给一个点击效果，并可以监听 `click` 事件
+- 设置 `link` 属性，会自动开启点击反馈，并给列表右侧添加一个箭头
+- 设置 `to` 属性，可以跳转页面，`link` 的值表示跳转方式，如果不指定，默认为 `navigateTo`
+
+```html
+
+<uni-list>
+	<uni-list-item title="开启点击反馈" clickable  @click="onClick" />
+	<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index" @click="onClick($event,1)" />
+	<uni-list-item title="reLaunch 方式跳转页面" link="reLaunch" to="/pages/vue/index/index" @click="onClick($event,1)" />
+</uni-list>
+
+```
+
+
+### 聊天列表展示
+- 设置 `clickable` 为 `true` ，则表示这是一个可点击的列表，会默认给一个点击效果，并可以监听 `click` 事件
+- 设置 `link` 属性，会自动开启点击反馈，`link` 的值表示跳转方式，如果不指定，默认为 `navigateTo`
+- 设置 `to` 属性，可以跳转页面
+- `time` 属性，通常会设置成时间显示，但是这个属性不仅仅可以设置时间，你可以传入任何文本，注意文本长度可能会影响显示
+- `avatar` 和 `avatarList` 属性同时只会有一个生效，同时设置的话，`avatarList` 属性的长度大于1 ，`avatar` 属性将失效
+- 可以通过默认插槽自定义列表右侧内容
+
+```html
+
+<uni-list>
+	<uni-list :border="true">
+		<!-- 显示圆形头像 -->
+		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" />
+		<!-- 右侧带角标 -->
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"/>
+		<!-- 头像显示圆点 -->
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
+		<!-- 头像显示角标 -->
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"/>
+		<!-- 显示多头像 -->
+		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
+		<!-- 自定义右侧内容 -->
+		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot">
+			<view class="chat-custom-right">
+				<text class="chat-custom-text">刚刚</text>
+				<!-- 需要使用 uni-icons 请自行引入 -->
+				<uni-icons type="star-filled" color="#999" size="18"></uni-icons>
+			</view>
+		</uni-list-chat>
+	</uni-list>
+</uni-list>
+
+```
+
+```javascript
+
+export default {
+	components: {},
+	data() {
+		return {
+			avatarList: [{
+				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+			}, {
+				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+			}, {
+				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+			}]
+		}
+	}
+}
+
+```
+
+
+```css
+
+.chat-custom-right {
+	flex: 1;
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.chat-custom-text {
+	font-size: 12px;
+	color: #999;
+}
+
+```
+
+
+### uni-list 属性说明
+列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
+
+**uniList 属性说明：**
+
+属性名			|类型		|默认值		|	说明																									
+---				|----		|---		|	---	
+title			|Boolean	|true		|	是否显示边框
+
+
+### uni-list-item 属性说明
+
+常用于基础列表的展示使用，不适合复杂的列表场景使用
 
 **uniListItem 属性说明：**
 
-|属性名			|类型	|默认值	|说明																																|
-|---			|----	|---	|---																																|
-|title			|String	|-		|标题																																|
-|note			|String	|-		|描述																																|
-|thumb			|String	|-		|左侧缩略图，若thumb有值，则不会显示扩展图标																						|
-|badgeText		|String	|-		|数字角标内容																														|
-|badgeType		|String	|-		|数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)																|
-|rightText		|String	|-		|右侧文字内容																														|
-|disabled		|Boolean|false	|是否禁用																															|
-|showArrow		|Boolean|true	|是否显示箭头图标																													|
-|showBadge		|Boolean|false	|是否显示数字角标																													|
-|showSwitch	    |Boolean|false	|是否显示Switch																														|
-|switchChecked	|Boolean|false	|Switch是否被选中																													|
-|showExtraIcon  |Boolean|false	|左侧是否显示扩展图标																												|
-|scroll-y       |Boolean|false	|允许纵向滚动，需要显式的设置其宽高|
-|extraIcon		|Object	|-		|扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	|
+属性名			|类型		|默认值		|	说明																									
+---				|----		|---		|	---	
+title			|String		|-			|	标题
+note			|String		|-			|	描述
+thumb			|String		|-			|	左侧缩略图，若thumb有值，则不会显示扩展图标
+thumbSize		|String 	|medium 	|	略缩图尺寸，可选值，lg:大图;  medium:一般;	sm:小图;
+badgeText		|String		|-			|	数字角标内容
+badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)									
+rightText		|String		|-			|	右侧文字内容
+disabled		|Boolean	|false		|	是否禁用	
+clickable		|Boolean	|false		|	是否开启点击反馈
+link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
+to				|String		|-			|	跳转页面地址
+showArrow【废弃】	|Boolean	|true		|	是否显示箭头图标																						
+showBadge		|Boolean	|false		|	是否显示数字角标																						
+showSwitch	    |Boolean	|false		|	是否显示Switch																						
+switchChecked	|Boolean	|false		|	Switch是否被选中																						
+showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																					
+extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	
+
+
+**link 属性说明：**
+
+属性名		|	说明
+---			|	---
+navigateTo 	| 	同 uni.navigateTo()
+redirectTo 	|	同 uni.reLaunch()
+reLaunch	|	同 uni.reLaunch()
+switchTab  	|	同 uni.switchTab()
+
 
 **插槽**
 
-|名称	|说明					|
-|:-		|:-						|
-|default|显示在title位置的插槽	|
-|right	|右侧插槽				|
+名称	 	|	说明					
+:-		|	:-						
+default	|	显示在title位置的插槽
+right	|	右侧插槽				
 
 **uniListItem 事件说明：**
 
-|事件称名		|说明						|返回参数			|
-|---			|---						|---				|
-|click			|点击 uniListItem 触发事件	|-					|
-|switchChange	|点击切换 Switch 时触发		|e={value:checked}	|
+事件称名			|说明						|返回参数			
+---				|---						|---				
+click			|点击 uniListItem 触发事件	|-					
+switchChange	|点击切换 Switch 时触发		|e={value:checked}	
+
+
+### uni-list-chat 属性说明
+
+用于聊天类型的列表展示，提供了基础角标、头像的展示
+
+**uniListChat 属性说明：**
+
+属性名			|类型		|默认值		|	说明																									
+---				|----		|---		|	---	
+title 			|String		|-			|	标题
+note 			|String		|-			|	描述
+clickable		|Boolean	|false		|	是否开启点击反馈
+badgeText		|String		|-			|	数字角标内容，设置为 `dot` 将显示圆点
+badgePositon 	|String		|right		|	角标位置
+link			|String 	|navigateTo	|	开启点击反馈，并设置跳转方式，可选值见下表
+to  			|String 	|-			|	跳转目标页面
+time			|String 	|-			|	右侧时间显示
+avatarCircle 	|Boolean 	|false		|	是否显示圆形头像
+avatar			|String 	|-			|	头像地址，avatarCircle 不填时生效
+avatarList 		|Array	 	|-			|	头像组，格式为 [{url:''}]
+
+
+**link 属性说明：**
+
+属性名		|	说明
+---			|	---
+navigateTo 	| 	同 uni.navigateTo()
+redirectTo 	|	同 uni.reLaunch()
+reLaunch	|	同 uni.reLaunch()
+switchTab  	|	同 uni.switchTab()
+
+
+**插槽**
+
+名称	 	|	说明					
+:-		|	:-						
+default	|	自定义列表右侧内容（包括时间和角标显示）
+
+**uniListChat 事件说明：**
+
+事件称名			|	说明						|	返回参数			
+---				|	---						|	---	
+click			|	点击 uniListChat 触发事件	|	-		
 
 **Tips**
 
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
-- 页面纵向滚动时，Android 平台不支持区域滚动，iOS 支持
-- iOS 有Bounce效果，Android 仅可滚动时有
+- 在 `HBuilderX` 低版本中，可能会出现组件显示 `undefined` 的问题，请升级最新的 `HBuilderX` 或者 `cli` 
+- 如果需要修改 `switch`、`badge` 样式，请使用插槽自定义
 
 ### 插件预览地址
 

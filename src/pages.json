@@ -228,6 +228,12 @@
 			"style": {
 				"navigationBarTitleText": "Combox 组合框"
 			}
+		}, {
+			"path": "pages/vue/list/ad",
+			"style": {}
+		}, {
+			"path": "pages/vue/list/chat",
+			"style": {}
 		}
 	],
 	"globalStyle": {
@@ -245,16 +251,15 @@
 		"borderStyle": "black",
 		"backgroundColor": "#F8F8F8",
 		"list": [{
-				"pagePath": "pages/vue/index/index",
-				"iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
-				"text": "VUE"
-			},{
-				"pagePath": "pages/nvue/index/index",
-				"iconPath": "static/component.png",
-				"selectedIconPath": "static/componentHL.png",
-				"text": "NUVE"
-			}
-		]
+			"pagePath": "pages/vue/index/index",
+			"iconPath": "static/component.png",
+			"selectedIconPath": "static/componentHL.png",
+			"text": "VUE"
+		}, {
+			"pagePath": "pages/nvue/index/index",
+			"iconPath": "static/component.png",
+			"selectedIconPath": "static/componentHL.png",
+			"text": "NUVE"
+		}]
 	}
 }

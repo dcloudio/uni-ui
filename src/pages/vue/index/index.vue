@@ -11,19 +11,19 @@
 
 		<uni-section title="布局组件" type="line"></uni-section>
 		<uni-list>
-			<uni-list-item v-for="(layout, index) in layouts" :key="index" :title="layout.name" @click="goDetailPage(layout)" />
+			<uni-list-item v-for="(layout, index) in layouts" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 		</uni-list>
 		<uni-section title="基础组件" type="line"></uni-section>
 		<uni-list>
-			<uni-list-item v-for="(view, index) in views" :key="index" :title="view.name" @click="goDetailPage(view)" />
+			<uni-list-item v-for="(view, index) in views" :key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
 		</uni-list>
 		<uni-section title="功能组件" type="line"></uni-section>
 		<uni-list>
-			<uni-list-item v-for="(func, index) in functionals" :key="index" :title="func.name" @click="goDetailPage(func)" />
+			<uni-list-item v-for="(func, index) in functionals" :key="index" :title="func.name" link :to='`/pages/${platform}/${func.url}/${func.url}`' />
 		</uni-list>
 		<uni-section title="导航" type="line"></uni-section>
 		<uni-list>
-			<uni-list-item v-for="(navi, index) in navigations" :key="index" :title="navi.name" @click="goDetailPage(navi)" />
+			<uni-list-item v-for="(navi, index) in navigations" :key="index" :title="navi.name" link :to='`/pages/${platform}/${navi.url}/${navi.url}`' />
 		</uni-list>
 	</view>
 </template>
@@ -158,7 +158,13 @@
 						name: 'GoodsNav 商品导航',
 						url: 'goods-nav'
 					}
-				]
+				],
+				// #ifdef APP-NVUE
+				platform:'nvue',
+				// #endif
+				// #ifndef APP-NVUE
+				platform:'vue'
+				// #endif
 			}
 		},
 		methods: {
