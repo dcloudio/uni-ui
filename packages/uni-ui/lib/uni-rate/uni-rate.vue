@@ -31,7 +31,7 @@
 			<!-- #endif -->
 			<!-- #ifndef APP-NVUE -->
 			<view
-			    :style="{ width: star.activeWitch,top:-size/2+'px' }"
+			    :style="{ width: star.activeWitch}"
 			    class="uni-rate__icon-on"
 			>
 				<uni-icons
@@ -46,7 +46,9 @@
 </template>
 
 <script>
+	import uniIcons from "../uni-icons/uni-icons.vue";
 	import rateMixin from './mixins/rate-mixin.js'
+	
 	/**
 	 * Rate 评分
 	 * @description 评分组件
@@ -65,7 +67,11 @@
 	 * @property {Boolean} 	touchable = [true|false] 	是否支持滑动手势，默认为 true
 	 * @event {Function} change 						uniRate 的 value 改变时触发事件，e={value:Number}
 	 */
+	
 	export default {
+		components: {
+			uniIcons
+		},
 		name: "UniRate",
 		mixins: [rateMixin]
 	};
@@ -79,14 +85,14 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		line-height: 0;
+		line-height: 1;
 		font-size: 0;
 		flex-direction: row;
 	}
 
 	.uni-rate__icon {
 		position: relative;
-		line-height: 0;
+		line-height: 1;
 		font-size: 0;
 	}
 

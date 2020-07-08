@@ -1,4 +1,9 @@
+// #ifdef APP-NVUE
+const dom = uni.requireNativePlugin('dom');
+// #endif
+
 export default {
+
 	props: {
 		isFill: {
 			// 星星的类型，是否镂空
@@ -102,25 +107,28 @@ export default {
 	},
 	mounted() {
 		this.$nextTick(() => {
-			setTimeout(this._getSize(), 50)
+			setTimeout(() => {
+				this._getSize()
+			}, 50)
 		})
 	},
 	methods: {
-
 		touchstart(e) {
-			console.log(this.readonly || this.disabled);
 			if (this.readonly || this.disabled) return
 			const {
-				clientX
+				clientX,
+				screenX
 			} = e.changedTouches[0]
-			this._getRateCount(clientX)
+			// TODO 做一下兼容，只有 Nvue 下才有 screenX，其他平台式 clientX
+			this._getRateCount(clientX || screenX)
 		},
 		touchmove(e) {
 			if (this.readonly || this.disabled || !this.touchable) return
 			const {
-				clientX
+				clientX,
+				screenX
 			} = e.changedTouches[0]
-			this._getRateCount(clientX)
+			this._getRateCount(clientX || screenX)
 		},
 		/**
 		 * 获取星星个数
@@ -176,7 +184,10 @@ export default {
 			// #endif
 			// #ifdef APP-NVUE
 			dom.getComponentRect(this.$refs['uni-rate'], (ret) => {
-				console.log(ret);
+				const size = ret.size
+				if (size) {
+					this._rateBoxLeft = size.left
+				}
 			})
 			// #endif
 		}
