@@ -6,5 +6,5 @@
 	"type": "功能组件",
 	"edition": "1.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=33",
-	"update_log": "- 优化 可在nvue页面中使用"
+	"update_log": "- uni-rate 新增 disabled 属性，可设置组件禁用状态（之前版本的不可点击状态）\n- uni-rate 新增 disabledColor 属性，可设置禁用颜色\n- uni-rate 新增 readonly 属性，可设置组件只读属性\n- uni-rate 新增 allowHalf 属性，可设置组件是否开启半星选择\n- uni-rate 新增 touchable 属性，可设置组件是否支持滑动手势\n- uni-rate 修复 动态传值不更新的问题\n- uni-rate 优化 value 属性可使用 v-model 双向绑定数据"
 }
