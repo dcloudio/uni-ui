@@ -1,11 +1,11 @@
 <template>
 	<!-- #ifndef APP-NVUE -->
-	<view class="uni-list">
+	<view class="uni-list" :class="{'uni-list--border':border}">
 		<slot />
 	</view>
 	<!-- #endif -->
 	<!-- #ifdef APP-NVUE -->
-	<list class="uni-list" :enableBackToTop="enableBackToTop" loadmoreoffset="15" :scroll-y="scrollY" @loadmore="loadMore">
+	<list class="uni-list" :class="{'uni-list--border':border}" :enableBackToTop="enableBackToTop" loadmoreoffset="15">
 		<slot />
 	</list>
 	<!-- #endif -->
@@ -32,6 +32,10 @@
 			scrollY: {
 				type: [Boolean, String],
 				default: false
+			},
+			border:{
+				type: Boolean,
+				default: true
 			}
 		},
 		provide() {
@@ -62,13 +66,26 @@
 		// border-bottom-width: 1px;
 	}
 
-	/* #ifndef APP-NVUE */
-	.uni-list:before {
-		height: 0;
+	.uni-list--border {
+		position: relative;
+		/* #ifdef APP-PLUS */
+		border-top-color: $uni-border-color;
+		border-top-style: solid;
+		border-top-width: 0.5px;
+		/* #endif */
 	}
+	/* #ifndef APP-NVUE */
 
-	.uni-list:after {
-		height: 0;
+	.uni-list--border:after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 1px;
+		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: $uni-border-color;
 	}
 
 	/* #endif */

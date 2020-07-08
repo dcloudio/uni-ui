@@ -69,24 +69,24 @@
 		height: 50px;
 		background-color: $uni-bg-color-grey;
 		/* #ifdef APP-NVUE */
-		border-bottom-color: $uni-border-color;
-		border-bottom-style: solid;
-		border-bottom-width: 0.5px;
+		// border-bottom-color: $uni-border-color;
+		// border-bottom-style: solid;
+		// border-bottom-width: 0.5px;
 		/* #endif */
 		font-weight: normal;
 	}
 	/* #ifndef APP-NVUE */
-	.uni-section:after {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		height: 1px;
-		content: '';
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: $uni-border-color;
-	}
+	// .uni-section:after {
+	// 	position: absolute;
+	// 	bottom: 0;
+	// 	right: 0;
+	// 	left: 0;
+	// 	height: 1px;
+	// 	content: '';
+	// 	-webkit-transform: scaleY(.5);
+	// 	transform: scaleY(.5);
+	// 	background-color: $uni-border-color;
+	// }
 	/* #endif */
 
 	.uni-section__head {

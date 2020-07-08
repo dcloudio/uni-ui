@@ -1,4 +1,9 @@
+import uniIcons from "../../uni-icons/uni-icons.vue";
+
 export default {
+	components: {
+		uniIcons
+	},
 	props: {
 		isFill: {
 			// 星星的类型，是否镂空

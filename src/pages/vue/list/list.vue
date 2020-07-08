@@ -48,7 +48,7 @@
 		</uni-list>
 		<uni-section title="列表扩展" type="line"></uni-section>
 		<uni-list>
-			<uni-list-item title="广告组件" link :to="`/pages/${platform}/list/ad`" @click="onClick($event,1)" />
+			<!-- <uni-list-item title="广告组件" link :to="`/pages/${platform}/list/ad`" @click="onClick($event,1)" /> -->
 			<uni-list-item title="聊天列表" link :to="`/pages/${platform}/list/chat`" @click="onClick($event,1)" />
 		</uni-list>
 	</view>
