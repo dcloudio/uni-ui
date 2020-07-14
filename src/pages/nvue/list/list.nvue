@@ -10,7 +10,7 @@
 		<uni-section title="点击反馈" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item title="弹窗提示" clickable @click="onClick($event,0)" />
-			<uni-list-item title="switchTab 到首页" link="switchTab" :to="`/pages/${platform}/index/index`" @click="onClick($event,1)" />
+			<uni-list-item title="页面跳转" link :to="`./chat`" @click="onClick($event,1)" />
 		</uni-list>
 		<uni-section title="菜单列表" type="line"></uni-section>
 		<uni-list>
@@ -49,7 +49,7 @@
 		<uni-section title="列表扩展" type="line"></uni-section>
 		<uni-list>
 			<!-- <uni-list-item title="广告组件" link :to="`/pages/${platform}/list/ad`" @click="onClick($event,1)" /> -->
-			<uni-list-item title="聊天列表" link :to="`/pages/${platform}/list/chat`" @click="onClick($event,1)" />
+			<uni-list-item title="聊天列表" link :to="`./chat`" @click="onClick($event,1)" />
 		</uni-list>
 	</view>
 </template>

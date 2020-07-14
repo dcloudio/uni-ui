@@ -6,5 +6,8 @@
 	"type": "功能组件",
 	"edition": "1.2.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
-	"update_log": "- 优化 删除重复代码"
+	"update_log": [
+		"- 优化 uni-popup-message 、uni-popup-dialog等扩展组件支持 easycom",
+		"- 优化 使用文档，添加部分使用注意事项"
+	]
 }

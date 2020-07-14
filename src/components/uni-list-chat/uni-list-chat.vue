@@ -168,7 +168,32 @@
 </script>
 
 <style lang="scss" scoped>
-	@import './uni-list-chat.scss';
+
+	$background-color : #fff;
+	$divide-line-color : #e5e5e5;
+	$avatar-width : 45px ;
+	$avatar-border-radius: 5px;
+	$avatar-border-color: #eee;
+	$avatar-border-width: 1px;
+	$title-size : 16px;
+	$title-color : #3b4144;
+	$title-weight : normal;
+	$note-size : 12px;
+	$note-color : #999;
+	$note-weight : normal;
+	$right-text-size : 12px;
+	$right-text-color : #999;
+	$right-text-weight : normal;
+	$badge-left: 0px;
+	$badge-top: 0px;
+	$dot-width: 10px;
+	$dot-height: 10px;
+	$badge-size : 18px;
+	$badge-font : 12px;
+	$badge-color : #fff;
+	$badge-background-color : #ff5a5f;
+	$badge-space : 6px;
+	$hover : #f5f5f5;
 
 	.uni-list-chat {
 		font-size: $uni-font-size-lg;

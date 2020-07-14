@@ -235,7 +235,11 @@
 			"path": "pages/vue/list/chat",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/vue/test/test",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",

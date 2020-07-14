@@ -51,9 +51,9 @@ npm install @dcloudio/uni-ui
 在 ``script`` 中引用组件：
 
 ```javascript
-import {uniList,uniListItem,uniListChat} from '@dcloudio/uni-ui'
+import {uniList,uniListItem} from '@dcloudio/uni-ui'
 export default {
-    components: {uniPopup,uniListItem,uniListChat}
+    components: {uniPopup,uniListItem}
 }
 ```
 
@@ -128,7 +128,7 @@ export default {
 ```
 
 
-### 聊天列表
+### 聊天列表展示
 - 设置 `clickable` 为 `true` ，则表示这是一个可点击的列表，会默认给一个点击效果，并可以监听 `click` 事件
 - 设置 `link` 属性，会自动开启点击反馈，`link` 的值表示跳转方式，如果不指定，默认为 `navigateTo`
 - 设置 `to` 属性，可以跳转页面
@@ -314,11 +314,6 @@ click			|	点击 uniListChat 触发事件	|	-
 - 在 `HBuilderX` 低版本中，可能会出现组件显示 `undefined` 的问题，请升级最新的 `HBuilderX` 或者 `cli` 
 - 如果需要修改 `switch`、`badge` 样式，请使用插槽自定义
 
-
-
-
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/list/list](https://uniapp.dcloud.io/h5/pages/extUI/list/list)
-
-

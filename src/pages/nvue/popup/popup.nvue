@@ -49,15 +49,15 @@
 </template>
 
 <script>
-	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
-	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
-	import uniPopupShare from '@/components/uni-popup/uni-popup-share.vue'
+	// import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	// import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	// import uniPopupShare from '@/components/uni-popup/uni-popup-share.vue'
 	export default {
-		components: {
-			uniPopupMessage,
-			uniPopupDialog,
-			uniPopupShare
-		},
+		// components: {
+		// 	uniPopupMessage,
+		// 	uniPopupDialog,
+		// 	uniPopupShare
+		// },
 		data() {
 			return {
 				type: 'top',

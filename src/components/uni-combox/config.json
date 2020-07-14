@@ -5,6 +5,7 @@
 	"url": "combox",
 	"type": "功能组件",
 	"edition": "0.0.2",
+	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=1261",
 	"update_log": "- 修复 微信小程序下的样式问题"
 }

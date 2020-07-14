@@ -70,7 +70,7 @@
 				type: String,
 				default: ''
 			},
-			subTitle:{
+			subTitle: {
 				type: String,
 				default: ''
 			},
@@ -262,6 +262,7 @@
 		padding: 10px;
 
 	}
+
 	.uni-card__title-box {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -387,6 +388,7 @@
 	.uni-card--full:after {
 		border-radius: 0;
 	}
+
 	/* #endif */
 	.uni-ellipsis {
 		/* #ifndef APP-NVUE */
@@ -395,7 +397,7 @@
 		text-overflow: ellipsis;
 		/* #endif */
 		/* #ifdef APP-NVUE */
-		lines:1
+		lines: 1;
 		/* #endif */
 	}
 </style>
