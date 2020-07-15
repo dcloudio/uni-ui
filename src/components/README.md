@@ -34,6 +34,7 @@ uniSwiperAction.vue
 - uni-xxx.vue 组件文件
 
 **config.json 说明**
+
 ```json
 {
 	"name":"Collapse", // 组件名称

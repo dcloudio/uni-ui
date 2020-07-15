@@ -19,10 +19,8 @@
 	 */
 	export default {
 		name: 'UniList',
-		'mp-weixin': {
-			options: {
-				multipleSlots: false
-			}
+		options: {
+			multipleSlots: false
 		},
 		props: {
 			enableBackToTop: {
@@ -33,7 +31,7 @@
 				type: [Boolean, String],
 				default: false
 			},
-			border:{
+			border: {
 				type: Boolean,
 				default: true
 			}
@@ -74,6 +72,7 @@
 		border-top-width: 0.5px;
 		/* #endif */
 	}
+
 	/* #ifndef APP-NVUE */
 
 	.uni-list--border:after {
