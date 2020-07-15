@@ -1,3 +1,23 @@
+var MIN_DISTANCE = 10;
+
+
+
+/**
+ * 滑动中，是否禁止打开
+ * @param {Object} event
+ */
+function stopTouchMove(event) {
+	var instance = event.instance;
+	var state = instance.getState();
+	var touch = event.touches[0];
+	state.deltaX = touch.clientX - state.startX;
+	state.deltaY = touch.clientY - state.startY;
+	state.offsetX = Math.abs(state.deltaX);
+	state.offsetY = Math.abs(state.deltaY);
+	state.direction = state.direction || getDirection(state.offsetX, state.offsetY);
+}
+
+
 /**
  * 监听页面内值的变化,主要用于动态开关swipe-action
  * @param {Object} newValue
@@ -28,6 +48,9 @@ function touchstart(e, ins) {
 	var instance = e.instance;
 	var state = instance.getState();
 	var pageX = e.touches[0].pageX;
+
+	// 计算滑动开始位置
+	stopTouchStart(e, ins)
 	// 开始触摸时移除动画类
 	instance.removeClass('ani');
 	var owner = ins.selectAllComponents('.button-hock')
@@ -50,10 +73,17 @@ function touchmove(e, ownerInstance) {
 	var instance = e.instance;
 	var disabled = instance.getDataset().disabled
 	var state = instance.getState()
+
 	// fix by mehaotian, TODO 兼容 app-vue 获取dataset为字符串 , h5 获取 为 undefined 的问题,待框架修复
 	disabled = (typeof(disabled) === 'string' ? JSON.parse(disabled) : disabled) || false;
 
 	if (disabled) return
+	// 是否可以滑动页面
+	stopTouchMove(e);
+	if (state.direction !== 'horizontal') {
+		return;
+	}
+
 	var pageX = e.touches[0].pageX;
 	move(pageX - state.width, instance, ownerInstance)
 }
@@ -195,6 +225,45 @@ function openState(type, ins, ownerInstance) {
 	move(type ? -position[1].width : 0, ins, ownerInstance)
 
 }
+
+
+function getDirection(x, y) {
+	if (x > y && x > MIN_DISTANCE) {
+		return 'horizontal';
+	}
+	if (y > x && y > MIN_DISTANCE) {
+		return 'vertical';
+	}
+	return '';
+}
+
+/**
+ * 重置滑动状态
+ * @param {Object} event
+ */
+function resetTouchStatus(event) {
+	var instance = event.instance;
+	var state = instance.getState();
+	state.direction = '';
+	state.deltaX = 0;
+	state.deltaY = 0;
+	state.offsetX = 0;
+	state.offsetY = 0;
+}
+
+/**
+ * 设置滑动开始位置
+ * @param {Object} event
+ */
+function stopTouchStart(event) {
+	var instance = event.instance;
+	var state = instance.getState();
+	resetTouchStatus(event);
+	var touch = event.touches[0];
+	state.startX = touch.clientX;
+	state.startY = touch.clientY;
+}
+
 
 module.exports = {
 	sizeReady: sizeReady,
