@@ -125,7 +125,7 @@ export default {
 			views
 				.selectAll('.selector-query-hock')
 				.boundingClientRect(data => {
-					console.log(data)
+					// console.log(data)
 					this.position.content = data[1]
 					this.position.button = data[0]
 					if (this.autoClose) return

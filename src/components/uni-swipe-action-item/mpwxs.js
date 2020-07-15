@@ -82,7 +82,7 @@ export default {
 			// fixed by xxxx 模拟点击事件，解决 ios 13 点击区域错位的问题
 			let diff = Math.abs(this.clientX - clientX)
 			let time = (new Date().getTime()) - this.timestamp
-			console.log(diff);
+			// console.log(diff);
 			if (diff < 40 && time < 300) {
 				// console.log('点击');
 				this.$emit('click', {
