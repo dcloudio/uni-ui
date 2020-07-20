@@ -24,7 +24,7 @@
 	 */
 
 	export default {
-		name: 'UniTitle',
+		name: 'UniSection',
 		props: {
 			type: {
 				type: String,
