@@ -36,10 +36,9 @@
 
 					// app vue 端、h5 、微信、支付宝  执行以下操作
 					// #ifdef APP-VUE || H5 || MP-WEIXIN
-					let position = item.position[0]
-					let show = position.show
-					if (show) {
-						position.show = false
+					let show = item.button.show
+					if (show !== 'none') {
+						item.button.show = 'none'
 					}
 					// #endif
 

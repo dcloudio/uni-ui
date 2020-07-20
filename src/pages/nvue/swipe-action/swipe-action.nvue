@@ -2,30 +2,52 @@
 	<view>
 		<uni-section title="基本用法" type="line"></uni-section>
 		<uni-swipe-action>
-			<uni-swipe-action-item :options="options1" @click="bindClick">
-				<text class="cont">SwipeAction 基础使用场景</text>
+			<uni-swipe-action-item :left-options="options2" :threshold="10" :right-options="options1" @click="bindClick">
+				<text class="cont">使用数据填充</text>
+			</uni-swipe-action-item>
+			<uni-swipe-action-item @click="bindClick">
+				<template v-slot:left>
+					<view class="slot-button">
+						<text class="slot-button-text">置顶</text>
+					</view>
+				</template>
+				<text class="cont">使用插槽填充</text>
+				<template v-slot:right>
+					<view class="slot-button">
+						<text class="slot-button-text">删除</text>
+					</view>
+				</template>
+			</uni-swipe-action-item>
+			<uni-swipe-action-item :right-options="options1" @click="bindClick">
+				<template v-slot:left>
+					<view class="slot-button">
+						<text class="slot-button-text">置顶</text>
+					</view>
+				</template>
+				<text class="cont">混合使用</text>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
 		<uni-section title="禁止滑动" type="line"></uni-section>
 		<uni-swipe-action>
 			<uni-swipe-action-item :disabled="true">
-				<text class="cont">SwipeAction 禁止滑动展示</text>
+				<text class="cont">禁止左右滑动</text>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
 		<uni-section title="使用变量控制开关" type="line"></uni-section>
 		<view class="example-body">
-			<view class="button" @click="setOpened"><text class="button-text">当前状态：{{ isOpened ? '开' : '关' }}</text></view>
+			<view class="button" @click="setOpened"><text class="button-text">当前状态：{{ isOpened }}</text></view>
 		</view>
 		<uni-swipe-action>
-			<uni-swipe-action-item :options="options2" :show="isOpened" :auto-close="false" @change="change" @click="bindClick">
+			<uni-swipe-action-item :left-options="options2" :right-options="options2" :show="isOpened" :auto-close="false"
+			 @change="change" @click="bindClick">
 				<text class="cont">使用变量控制SwipeAction的开启状态</text>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
 
 		<uni-section title="swipe-action 列表" type="line"></uni-section>
 		<uni-swipe-action>
-			<uni-swipe-action-item v-for="(item,index) in swipeList" :options="item.options" :key="item.id"
-			 @change="swipeChange" @click="swipeClick($event,index)">
+			<uni-swipe-action-item v-for="(item,index) in swipeList" :right-options="item.options" :key="item.id" @change="swipeChange($event,index)"
+			 @click="swipeClick($event,index)">
 				<text class="cont">{{item.content}}</text>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
@@ -37,7 +59,7 @@
 		components: {},
 		data() {
 			return {
-				isOpened: false,
+				isOpened: 'none',
 				options1: [{
 					text: '取消置顶'
 				}],
@@ -105,26 +127,38 @@
 			}
 		},
 		onReady() {
-			this.$nextTick(() => {
-				this.isOpened = true
-			})
+			setTimeout(() => {
+				this.isOpened = 'right'
+			}, 2000)
 		},
 		methods: {
 			bindClick(e) {
 				uni.showToast({
-					title: `点击了${e.content.text}按钮`,
+					title: `点击了${e.position === 'left'?'左侧':'右侧'} ${e.content.text}按钮`,
 					icon: 'none'
 				})
 			},
 			setOpened() {
-				this.isOpened = !this.isOpened
+				if (this.isOpened === 'none') {
+					this.isOpened = 'left'
+					return
+				}
+				if (this.isOpened === 'left') {
+					this.isOpened = 'right'
+					return
+				}
+				if (this.isOpened === 'right') {
+					this.isOpened = 'none'
+					return
+				}
 			},
 			change(e) {
 				this.isOpened = e
 				console.log('返回：', e);
 			},
-			swipeChange(e) {
+			swipeChange(e, index) {
 				console.log('返回：', e);
+				console.log('当前索引：', index);
 			},
 			swipeClick(e, index) {
 				let {
@@ -159,7 +193,7 @@
 									backgroundColor: 'rgb(255,58,49)'
 								}
 							}],
-							content: '新增'
+							content: '新增' + new Date().getTime()
 						})
 						uni.showToast({
 							title: `添加了一条数据`,
@@ -187,7 +221,7 @@
 	@import '@/common/uni-nvue.scss';
 
 	.cont {
-		flex:1;
+		flex: 1;
 		height: 45px;
 		line-height: 45px;
 		padding: 0 15px;
@@ -220,4 +254,23 @@
 	.button-text {
 		font-size: 15px;
 	}
+
+	.slot-button {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		height: 100%;
+		/* #endif */
+		flex: 1;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 0 20px;
+		background-color: #FF5A5F;
+	}
+
+	.slot-button-text {
+		color: #FFFFFF;
+		font-size: 14px;
+	}
+	
 </style>

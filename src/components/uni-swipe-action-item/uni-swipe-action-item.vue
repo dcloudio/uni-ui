@@ -1,83 +1,62 @@
 <template>
+	<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
+	<!-- #ifdef APP-VUE || MP-WEIXIN || H5 -->
 	<view class="uni-swipe">
-		<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
-		<!-- #ifdef APP-VUE || MP-WEIXIN || H5 -->
-		<view class="uni-swipe_content">
-			<view :data-disabled="disabled" :data-position="pos" :change:prop="swipe.sizeReady" :prop="pos" class="uni-swipe_move-box selector-query-hock move-hock"
-			 @touchstart="swipe.touchstart" @touchmove="swipe.touchmove" @touchend="swipe.touchend" @change="change">
-				<view class="uni-swipe_box">
-					<slot />
-				</view>
-				<view ref="selector-button-hock" class="uni-swipe_button-group selector-query-hock move-hock">
-					<!-- 使用 touchend 解决 ios 13 不触发按钮事件的问题-->
-					<view v-for="(item,index) in options" :data-button="btn" :key="index" :style="{
-		          backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
-		          fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
-		        }"
-					 class="uni-swipe_button button-hock" @touchstart="appTouchStart" @touchend="appTouchEnd($event,index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
-				</view>
+		<view class="uni-swipe_box" :data-threshold="threshold" :data-disabled="disabled" :change:prop="swipe.sizeReady" :prop="btn" @touchstart="swipe.touchstart"
+		 @touchmove="swipe.touchmove" @touchend="swipe.touchend">
+			<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
+			<view class="uni-swipe_button-group button-group--left">
+				<slot name="left">
+					<view v-for="(item,index) in leftOptions" :data-button="btn" :key="index" :style="{
+					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
+					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
+					}"
+					 class="uni-swipe_button button-hock" @touchstart="appTouchStart" @touchend="appTouchEnd($event,index,item,'left')"><text
+						 class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
+				</slot>
+			</view>
+			<slot></slot>
+			<view class="uni-swipe_button-group button-group--right">
+				<slot name="right">
+					<view v-for="(item,index) in rightOptions" :data-button="btn" :key="index" :style="{
+					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
+					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
+					}"
+					 class="uni-swipe_button button-hock" @touchstart="appTouchStart" @touchend="appTouchEnd($event,index,item,'right')"><text
+						 class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
+				</slot>
 			</view>
 		</view>
-		<!-- #endif -->
-
-		<!--  app nvue端 使用 bindingx -->
-		<!-- #ifdef APP-NVUE -->
-		<view ref="selector-box-hock" class="uni-swipe_content" @horizontalpan="touchstart" @touchend="touchend">
-			<view ref="selector-button-hock" class="uni-swipe_button-group selector-query-hock move-hock" :style="{width:right+'px'}">
-				<view ref="button-hock" v-for="(item,index) in options" :key="index" :style="{
-		  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',left: right+'px'}"
-				 class="uni-swipe_button " @click.stop="onClick(index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'}">{{ item.text }}</text></view>
-			</view>
-			<view ref='selector-content-hock' class="uni-swipe_move-box selector-query-hock">
-				<view class="uni-swipe_box">
-					<slot />
-				</view>
-			</view>
-		</view>
-		<!-- #endif -->
-
-		<!-- 在非 app 端、非微信小程序、支付宝小程序、h5端使用 js -->
-		<!-- #ifndef APP-PLUS || MP-WEIXIN || MP-ALIPAY || H5 -->
-		<view class="uni-swipe_content">
-			<view ref="selector-button-hock" class="uni-swipe_button-group selector-query-hock move-hock">
-				<view v-for="(item,index) in options" :data-button="btn" :key="index" :style="{
-		    backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
-		    fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
-		  }"
-				 class="uni-swipe_button button-hock" @click.stop="onClick(index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
-			</view>
-			<view ref='selector-content-hock' class="selector-query-hock" @touchstart="touchstart" @touchmove="touchmove"
-			 @touchend="touchend" :class="{'ani':uniShow}" :style="{transform:moveLeft}">
-				<view class="uni-swipe_move-box"  >
-					<view class="uni-swipe_box">
-						<slot />
-					</view>
-				</view>
-			</view>
-		</view>
-		<!-- #endif -->
-		<!-- #ifdef MP-ALIPAY -->
-		<view class="uni-swipe-box" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
-			<view class="viewWidth-hook">
-				<movable-area v-if="viewWidth !== 0" class="movable-area" :style="{width:(viewWidth-buttonWidth)+'px'}">
-					<movable-view class="movable-view" direction="horizontal" :animation="!transition" :style="{width:viewWidth+'px'}"
-					 :class="[transition?'transition':'']" :x="x" :disabled="disabledView" @change="onChange">
-						<view class="movable-view-box">
-							<slot></slot>
-						</view>
-					</movable-view>
-				</movable-area>
-			</view>
-			<view ref="selector-button-hock" class="uni-swipe_button-group viewWidth-hook">
-				<view v-for="(item,index) in options" :data-button="btn" :key="index" :style="{
+	</view>
+	<!-- #endif -->
+	<!-- #ifdef APP-NVUE -->
+	<view ref="selector-box--hock" class="uni-swipe"  @horizontalpan="touchstart" @touchend="touchend">
+		<view ref='selector-left-button--hock' class="uni-swipe_button-group button-group--left">
+			<slot name="left">
+				<view v-for="(item,index) in leftOptions" :data-button="btn" :key="index" :style="{
 				  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
 				  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
 				}"
-				 class="uni-swipe_button button-hock" @click.stop="onClick(index,item)"><text class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
-			</view>
+				 class="uni-swipe_button button-hock" @click.stop="onClick(index,item,'left')"><text
+					 class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
+			</slot>
 		</view>
-		<!-- #endif -->
+		<view ref='selector-right-button--hock' class="uni-swipe_button-group button-group--right">
+			<slot name="right">
+				<view v-for="(item,index) in rightOptions" :data-button="btn" :key="index" :style="{
+				  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
+				  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
+				}"
+				 class="uni-swipe_button button-hock" @click.stop="onClick(index,item,'right')"><text
+					 class="uni-swipe_button-text" :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text></view>
+			</slot>
+		</view>
+		<view ref='selector-content--hock' class="uni-swipe_box">
+			<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
+			<slot></slot>
+		</view>
 	</view>
+	<!-- #endif -->
 </template>
 <script src="./index.wxs" module="swipe" lang="wxs"></script>
 <script>
@@ -128,9 +107,18 @@
 
 		props: {
 			/**
-			 * 按钮内容
+			 * 左侧按钮内容
 			 */
-			options: {
+			leftOptions: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			/**
+			 * 右侧按钮内容
+			 */
+			rightOptions: {
 				type: Array,
 				default () {
 					return []
@@ -147,8 +135,8 @@
 			 * 变量控制开关
 			 */
 			show: {
-				type: Boolean,
-				default: false
+				type: String,
+				default: 'none'
 			},
 			/**
 			 * 是否自动关闭
@@ -156,6 +144,10 @@
 			autoClose: {
 				type: Boolean,
 				default: true
+			},
+			threshold: {
+				type: Number,
+				default: 40
 			}
 		},
 		inject: ['swipeaction']
@@ -165,62 +157,49 @@
 </script>
 <style lang="scss" scoped>
 	.uni-swipe {
-		overflow: hidden;
-	}
-
-	.uni-swipe-box {
 		position: relative;
-		width: 100%;
-	}
-
-	.uni-swipe_content {
-		flex: 1;
-		position: relative;
-	}
-
-	.uni-swipe_move-box {
 		/* #ifndef APP-NVUE */
-		display: flex;
+		overflow: hidden;
 		/* #endif */
-		position: relative;
-		flex-direction: row;
 	}
-
+	
 	.uni-swipe_box {
 		/* #ifndef APP-NVUE */
 		display: flex;
-		flex-direction: row;
-		width: 100%;
 		flex-shrink: 0;
 		/* #endif */
-		/* #ifdef APP-NVUE */
-		flex: 1;
-		/* #endif */
-		font-size: 14px;
-		background-color: #fff;
+		position: relative;
+		position: relative;
 	}
-
+	
+	.uni-swipe_content {
+		// border: 1px red solid;
+	}
+	
 	.uni-swipe_button-group {
-		/* #ifndef APP-VUE|| MP-WEIXIN||H5 */
+		/* #ifndef APP-NVUE */
+		box-sizing: border-box;
+		display: flex;
+		/* #endif */
+		flex-direction: row;
 		position: absolute;
 		top: 0;
-		right: 0;
 		bottom: 0;
-		z-index: 0;
-		/* #endif */
-		/* #ifndef APP-NVUE */
-		display: flex;
-		flex-shrink: 0;
-		/* #endif */
-		flex-direction: row;
 	}
-
+	
+	.button-group--left {
+		left: 0;
+		transform: translateX(-100%) 
+	}
+	
+	.button-group--right {
+		right: 0;
+		transform: translateX(100%) 
+	}
+	
 	.uni-swipe_button {
 		/* #ifdef APP-NVUE */
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
+		flex: 1;
 		/* #endif */
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -230,41 +209,43 @@
 		align-items: center;
 		padding: 0 20px;
 	}
-
+	
 	.uni-swipe_button-text {
 		/* #ifndef APP-NVUE */
 		flex-shrink: 0;
 		/* #endif */
 		font-size: 14px;
 	}
-
+	
 	.ani {
 		transition-property: transform;
 		transition-duration: 0.3s;
 		transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
-
+	
 	/* #ifdef MP-ALIPAY */
 	.movable-area {
 		width: 300px;
 		height: 100%;
 		height: 45px;
 	}
-
+	
 	.movable-view {
 		position: relative;
 		width: 160%;
 		height: 45px;
 		z-index: 2;
 	}
+	
 	.transition {
 		transition: all 0.3s;
 	}
-
+	
 	.movable-view-box {
 		width: 100%;
 		height: 100%;
 		background-color: #fff;
 	}
+	
 	/* #endif */
 </style>

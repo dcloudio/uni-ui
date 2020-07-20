@@ -74,6 +74,7 @@
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 0.5px;
+		border-bottom-color: $uni-border-color;
 		border-bottom-style: solid;
 		border-bottom-width: 0.5px;
 		/* #endif */
