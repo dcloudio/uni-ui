@@ -59,8 +59,8 @@
 		<!-- #ifdef MP-ALIPAY -->
 		<view class="uni-swipe-box" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
 			<view class="viewWidth-hook">
-				<movable-area v-if="viewWidth !== 0" class="movable-area" :style="{width:(viewWidth-buttonWidth)+'px'}">
-					<movable-view class="movable-view" direction="horizontal" :animation="!transition" :style="{width:viewWidth+'px'}"
+				<movable-area class="movable-area" :style="{width:(viewWidth-buttonWidth)+'px', height: movableHeight + 'px'}">
+					<movable-view class="movable-view" direction="horizontal" :animation="!transition" :style="{width:viewWidth+'px', height: movableHeight + 'px'}"
 					 :class="[transition?'transition':'']" :x="x" :disabled="disabledView" @change="onChange">
 						<view class="movable-view-box">
 							<slot></slot>
@@ -247,14 +247,11 @@
 	/* #ifdef MP-ALIPAY */
 	.movable-area {
 		width: 300px;
-		height: 100%;
-		height: 45px;
 	}
 
 	.movable-view {
 		position: relative;
 		width: 160%;
-		height: 45px;
 		z-index: 2;
 	}
 	.transition {
@@ -263,7 +260,6 @@
 
 	.movable-view-box {
 		width: 100%;
-		height: 100%;
 		background-color: #fff;
 	}
 	/* #endif */

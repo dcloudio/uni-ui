@@ -4,6 +4,7 @@ export default {
 			isshow: false,
 			viewWidth: 0,
 			buttonWidth: 0,
+			movableHeight: 0,
 			disabledView: false,
 			x: 0,
 			transition: false
@@ -135,7 +136,8 @@ export default {
 
 		},
 		getQuerySelect() {
-			const query = uni.createSelectorQuery().in(this);
+			const query = uni.createSelectorQuery().in(this)
+			const contentBox = uni.createSelectorQuery().in(this)
 			query.selectAll('.viewWidth-hook').boundingClientRect(data => {
 
 				this.viewWidth = data[0].width
@@ -143,6 +145,9 @@ export default {
 				this.transition = false
 				this.$nextTick(() => {
 					this.transition = true
+					contentBox.select('.movable-view-box').boundingClientRect(res => {
+						this.movableHeight = res.height
+					}).exec()
 				})
 
 				if (!this.buttonWidth) {
