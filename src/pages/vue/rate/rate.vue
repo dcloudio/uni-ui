@@ -113,11 +113,14 @@
 		components: {},
 		data() {
 			return {
-				rateValue: 3.5
+				rateValue: 0
 			}
 		},
 		onLoad() {
 			// 模拟动态赋值
+			setTimeout(()=>{
+				this.rateValue = 3
+			},1000)
 		},
 		methods: {
 			onChange(e) {

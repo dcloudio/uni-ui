@@ -1,4 +1,5 @@
 发现错误？想参与编辑？[在 GitHub 上编辑此页面！](https://github.com/dcloudio/uni-ui/blob/master/src/components/uni-rate/readme.md)
+
 ## Rate 评分
 > 组件名：``uni-rate``，代码块： uRate。
 
@@ -12,8 +13,8 @@
 
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的使用说明，可以帮你避免一些必要的错误使用。
 
-- 组件内部依赖 `'uni-icons'` 组件
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
+- 组件内部依赖 `'uni-icons'` 组件
 - 暂时不支持零星选择
 - 绑定值推荐使用 `v-model` 的方式
 
@@ -40,7 +41,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui
+npm install @dcloudio/uni-ui -D
 ```
 
 

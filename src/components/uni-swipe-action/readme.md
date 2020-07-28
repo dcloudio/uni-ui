@@ -45,7 +45,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui
+npm install @dcloudio/uni-ui -D
 ```
 
 
