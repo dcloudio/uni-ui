@@ -39,12 +39,15 @@ function touchstart(e, ins) {
 	disabled = (typeof(disabled) === 'string' ? JSON.parse(disabled) : disabled) || false;
 	if (disabled) return
 	// 开始触摸时移除动画类
-	instance.removeClass('ani');
+	instance.requestAnimationFrame(function(){
+		instance.removeClass('ani');
+		ins.callMethod('closeSwipe');
+	})
+
 	// 记录上次的位置
 	state.x = state.left || 0
 	// 计算滑动开始位置
 	stopTouchStart(e, ins)
-	ins.callMethod('closeSwipe')
 }
 
 /**
@@ -106,9 +109,11 @@ function move(value, instance, ownerInstance) {
 	var rightWidth = state.rightWidth
 	// 获取可滑动范围
 	state.left = range(value, -rightWidth, leftWidth);
-	instance.setStyle({
-		transform: 'translateX(' + state.left + 'px)',
-		'-webkit-transform': 'translateX(' + state.left + 'px)'
+	instance.requestAnimationFrame(function(){
+		instance.setStyle({
+			transform: 'translateX(' + state.left + 'px)',
+			'-webkit-transform': 'translateX(' + state.left + 'px)'
+		})
 	})
 
 }
@@ -133,7 +138,7 @@ function range(num, min, max) {
  */
 function moveDirection(left, ins, ownerInstance) {
 	var state = ins.getState()
-	var threshold = 40
+	var threshold = state.threshold
 	var position = state.position
 	var isopen = state.isopen || 'none'
 	var leftWidth = state.leftWidth
@@ -180,9 +185,9 @@ function openState(type, ins, ownerInstance) {
 		default:
 			left = 0
 	}
-	
+
 	// && !state.throttle
-	
+
 	if (state.isopen !== type ) {
 		state.throttle = true
 		ownerInstance.callMethod('change', {
@@ -193,10 +198,11 @@ function openState(type, ins, ownerInstance) {
 
 	state.isopen = type
 	// 添加动画类
-	ins.addClass('ani');
+	ins.requestAnimationFrame(function(){
+		ins.addClass('ani');
+		move(left, ins, ownerInstance)
+	})
 	// 设置最终移动位置,理论上只要进入到这个函数，肯定是要打开的
-	move(left, ins, ownerInstance)
-
 }
 
 

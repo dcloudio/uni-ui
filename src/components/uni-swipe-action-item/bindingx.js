@@ -114,7 +114,6 @@ export default {
 			const rightWidth = this.button.right.width
 			const threshold = this.threshold
 			if (!this.isopen || this.isopen === 'none') {
-
 				if (left > threshold) {
 					this.open('left')
 				} else if (left < -threshold) {

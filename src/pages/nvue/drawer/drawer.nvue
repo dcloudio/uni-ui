@@ -9,27 +9,18 @@
 		<text class="example-info">这是抽屉式导航组件使用示例，可以指定菜单左侧或者右侧弹出（仅初始化生效），组件内部可以放置任何内容。点击页面按钮即可显示导航菜单。</text>
 		<view>
 			<uni-section title="左侧滑出" type="line"></uni-section>
+			
 			<view class="example-body">
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
 				 @click="showDrawer('showLeft')"><text class="word-btn-white">显示Drawer</text></view>
 				<uni-drawer ref="showLeft" mode="left" :width="320" @change="change($event,'showLeft')">
-					<!-- #ifndef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
 					<uni-list>
 						<uni-list-item title="Item1" />
 						<uni-list-item title="Item2" />
 						<uni-list-item :show-badge="true" title="Item3" badge-text="12" />
 					</uni-list>
-					<!-- #endif -->
-					<!-- #ifdef MP-BAIDU || MP-ALIPAY || MP-TOUTIAO -->
-					<view class="uni-list">
-						<uni-list-item title="Item1" />
-						<uni-list-item title="Item2" />
-						<uni-list-item :show-badge="true" title="Item3" badge-text="12" />
-					</view>
-					<!-- #endif -->
 					<view class="close">
-						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showLeft')"><text
-							 class="word-btn-white">关闭Drawer</text></view>
+						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showLeft')"><text class="word-btn-white">关闭Drawer</text></view>
 					</view>
 				</uni-drawer>
 			</view>

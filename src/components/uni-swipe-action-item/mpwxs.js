@@ -2,18 +2,25 @@ export default {
 	data() {
 		return {
 			position: [],
-			button: []
+			button: {},
+			btn: "[]"
 		}
 	},
-	computed: {
-		pos() {
-			return JSON.stringify(this.position)
-		},
-		btn() {
-			return JSON.stringify(this.button)
-		}
-	},
+	// computed: {
+	// 	pos() {
+	// 		return JSON.stringify(this.position)
+	// 	},
+	// 	btn() {
+	// 		return JSON.stringify(this.button)
+	// 	}
+	// },
 	watch: {
+		button: {
+			handler(newVal) {
+				this.btn = JSON.stringify(newVal)
+			},
+			deep: true
+		},
 		show(newVal) {
 			if (this.autoClose) return
 			if (!this.button) {
@@ -92,7 +99,6 @@ export default {
 			views
 				.selectAll('.uni-swipe_button-group')
 				.boundingClientRect(data => {
-					// console.log(data);
 					let show = 'none'
 					if (this.autoClose) {
 						show = 'none'
