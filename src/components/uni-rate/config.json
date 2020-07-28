@@ -4,15 +4,9 @@
 	"desc": "评分",
 	"url": "rate",
 	"type": "功能组件",
-	"edition": "1.0.4",
+	"edition": "1.0.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=33",
 	"update_log":[
-		"- 新增 disabled 属性，可设置组件禁用状态（之前版本的不可点击状态）",
-		"- 新增 disabledColor 属性，可设置禁用颜色",
-		"- 新增 readonly 属性，可设置组件只读属性",
-		"- 新增 allowHalf 属性，可设置组件是否开启半星选择",
-		"- 新增 touchable 属性，可设置组件是否支持滑动手势",
-		"- 修复 动态传值不更新的问题",
-		"- 优化 value 属性可使用 v-model 双向绑定数据"
+		"- 修复 支付宝小程序获取节点信息错误的Bug"
 	]
 }
