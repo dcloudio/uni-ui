@@ -14,11 +14,6 @@
 				<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70"
 				 @click="showDrawer('showLeft')"><text class="word-btn-white">显示Drawer</text></view>
 				<uni-drawer ref="showLeft" mode="left" :width="320" @change="change($event,'showLeft')">
-					<uni-list>
-						<uni-list-item title="Item1" />
-						<uni-list-item title="Item2" />
-						<uni-list-item :show-badge="true" title="Item3" badge-text="12" />
-					</uni-list>
 					<view class="close">
 						<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('showLeft')"><text class="word-btn-white">关闭Drawer</text></view>
 					</view>
