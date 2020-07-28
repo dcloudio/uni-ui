@@ -181,11 +181,8 @@
 	// #ifdef APP-NVUE
 	import bindingx from './bindingx.js'
 	// #endif
-	// #ifdef MP-ALIPAY
-	import mpalipay from './mpalipay'
-	// #endif
 
-	// #ifndef APP-PLUS|| MP-WEIXIN || MP-ALIPAY ||  H5
+	// #ifndef APP-PLUS|| MP-WEIXIN  ||  H5
 	import mixins from './mpother'
 	// #endif
 
@@ -196,6 +193,7 @@
 	 * @property {Boolean} show = [left|right｜none] 	开启关闭组件，auto-close = false 时生效
 	 * @property {Boolean} disabled = [true|false] 		是否禁止滑动
 	 * @property {Boolean} autoClose = [true|false] 	滑动打开当前组件，是否关闭其他组件
+	 * @property {Number}  threshold 					滑动缺省值
 	 * @property {Array} leftOptions 					左侧选项内容及样式
 	 * @property {Array} rgihtOptions 					右侧选项内容及样式
 	 * @event {Function} click 							点击选项按钮时触发事件，e = {content,index} ，content（点击内容）、index（下标)
@@ -211,12 +209,8 @@
 		mixins: [bindingx],
 		// #endif
 
-		// #ifndef APP-PLUS|| MP-WEIXIN || MP-ALIPAY ||  H5
+		// #ifndef APP-PLUS|| MP-WEIXIN ||  H5
 		mixins: [mixins],
-		// #endif
-
-		// #ifdef MP-ALIPAY
-		mixins: [mpalipay],
 		// #endif
 
 		props: {

@@ -47,7 +47,7 @@ export default {
 			clearTimeout(this.timer)
 			this.timer = setTimeout(() => {
 				this.getSelectorQuery()
-			}, 50)
+			}, 100)
 			// 移动距离
 			this.left = 0
 			this.x = 0

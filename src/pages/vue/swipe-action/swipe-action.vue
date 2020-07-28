@@ -17,10 +17,12 @@
 			</uni-swipe-action-item>
 			<uni-swipe-action-item @click="bindClick">
 				<template v-slot:left>
-					<view class="slot-button"><text
+					<view class="slot-button">
+						<text
 						    class="slot-button-text"
 						    @click="bindClick({position:'left',content:{text:'置顶'}})"
-						>置顶</text></view>
+						>置顶</text>
+					</view>
 				</template>
 				<view class="content-box">
 					<text class="content-text">使用插槽</text>
@@ -107,7 +109,7 @@
 		components: {},
 		data() {
 			return {
-				show:false,
+				show: false,
 				isOpened: 'none',
 				options1: [{
 					text: '取消置顶'
