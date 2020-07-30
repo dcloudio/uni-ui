@@ -1,5 +1,5 @@
 module.exports = {
-	title: 'uni-ui',
+	title: '',
 	description: 'Just playing around',
 	markdown: {
 		// 显示行号
@@ -7,10 +7,17 @@ module.exports = {
 		extractHeaders: ['h2', 'h3', 'h4']
 	},
 	themeConfig: {
-		logo: '//img-cdn-qiniu.dcloud.net.cn/uniapp/doc/logo2@2x.png',
+		logo: {
+			img: '//img-cdn-qiniu.dcloud.net.cn/uniapp/doc/uniapp4@2x.png',
+			link: 'https://uniapp.dcloud.io'
+		},
+		subLogo: {
+			img: '//img-cdn-qiniu.dcloud.net.cn/uniapp/doc/logo2@2x.png',
+			link: 'https://dcloud.io'
+		},
 		nav: [{
-				text: '官网',
-				link: '/'
+				text: 'uni-app官网',
+				link: 'https://uniapp.dcloud.io/'
 			},
 			{
 				text: '插件市场',
@@ -20,14 +27,10 @@ module.exports = {
 		],
 		repo: 'dcloudio/uni-ui', // git 仓库
 		repoLabel: '查看源码', // git 仓库显示文字
-    // 假如文档不是放在仓库的根目录下：
-    docsDir: 'docs',
-    // 假如文档放在一个特定的分支下：
-    docsBranch: 'master',
-    // 默认是 false, 设置为 true 来启用
-    editLinks: true,
-    // 默认为 "Edit this page"
-    editLinkText: '帮助我们改善此页面！',
+		docsDir: 'docs',
+		docsBranch: 'master',
+		editLinks: true,
+		editLinkText: '在 GitHub 上编辑此页面！',
 		smoothScroll: true, //开启滚动效果
 		sidebarDepth: 0, //嵌套标题深度
 		lastUpdated: '最后更新时间', // 最后更新时间

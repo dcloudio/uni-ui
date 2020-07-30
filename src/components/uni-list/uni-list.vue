@@ -18,6 +18,7 @@
 	 * List 列表
 	 * @description 列表组件
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=24
+	 * @property {String} 	border = [true|false] 		标题
 	 */
 	export default {
 		name: 'UniList',

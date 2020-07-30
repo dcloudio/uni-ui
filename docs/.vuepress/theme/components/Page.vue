@@ -46,7 +46,7 @@ export default {
 	padding-bottom 2rem
 	display block
 .wrap
-	max-width 1150px
+	max-width 1400px
 	display flex
 	width auto
 	margin 0 auto
@@ -127,7 +127,7 @@ export default {
 		@media (max-width: 1300px)
 			display none
 .page-nav
-	max-width 1150px
+	max-width 1400px
 	margin 0 auto
 	.inner
 		display flex

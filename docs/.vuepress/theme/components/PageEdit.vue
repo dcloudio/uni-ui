@@ -80,7 +80,7 @@ export default {
 	padding-top 1rem
 	padding-bottom 1rem
 	overflow auto
-	max-width 1150px
+	max-width 1400px
 	display flex
 	justify-content space-between
 	width auto
