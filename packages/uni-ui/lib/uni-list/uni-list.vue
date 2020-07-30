@@ -1,7 +1,9 @@
 <template>
 	<!-- #ifndef APP-NVUE -->
-	<view class="uni-list" :class="{'uni-list--border':border}">
-		<slot />
+	<view class="uni-list">
+		<view v-if="border" class="uni-list--border-top"></view>
+			<slot />
+		<view v-if="border" class="uni-list--border-bottom"></view>
 	</view>
 	<!-- #endif -->
 	<!-- #ifdef APP-NVUE -->
@@ -33,7 +35,7 @@
 				type: [Boolean, String],
 				default: false
 			},
-			border:{
+			border: {
 				type: Boolean,
 				default: true
 			}
@@ -72,17 +74,33 @@
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 0.5px;
+		border-bottom-color: $uni-border-color;
+		border-bottom-style: solid;
+		border-bottom-width: 0.5px;
 		/* #endif */
+		z-index: -1;
 	}
+
 	/* #ifndef APP-NVUE */
 
-	.uni-list--border:after {
+	.uni-list--border-top {
 		position: absolute;
 		top: 0;
 		right: 0;
 		left: 0;
 		height: 1px;
-		content: '';
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5);
+		background-color: $uni-border-color;
+		z-index: 1;
+	}
+
+	.uni-list--border-bottom {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		height: 1px;
 		-webkit-transform: scaleY(.5);
 		transform: scaleY(.5);
 		background-color: $uni-border-color;

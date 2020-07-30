@@ -97,7 +97,7 @@
 			},
 			showBadge: {
 				type: [Boolean, String],
-				default: false 
+				default: false
 			},
 			showSwitch: {
 				type: [Boolean, String],
@@ -179,7 +179,7 @@
 					this.pageApi('navigateTo')
 				}
 			},
-			pageApi(api) {5
+			pageApi(api) {
 				uni[api]({
 					url: this.to,
 					complete: (res) => {
@@ -304,7 +304,9 @@
 	}
 
 	.uni-list-item__icon-img {
+		/* #ifndef APP-NVUE */
 		display: block;
+		/* #endif */
 	}
 
 	.uni-list--lg {

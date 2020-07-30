@@ -1,8 +1,8 @@
 {
 	"id": "55",
 	"name": "@dcloudio/uni-ui",
-	"version": "1.2.3",
-	"description": "- uni-list 新增 link 属性，显示右侧箭头并开启点击反馈\n- uni-list 新增 to 属性，直接跳转到指定页面\n- uni-list 新增 border 属性，是否显示列表分割线\n- uni-list 废弃 showArrow 属性，使用 link 属性代替\n- uni-rate 新增 disabled 属性，可设置组件禁用状态（之前版本的不可点击状态）\n- uni-rate 新增 disabledColor 属性，可设置禁用颜色\n- uni-rate 新增 readonly 属性，可设置组件只读属性\n- uni-rate 新增 allowHalf 属性，可设置组件是否开启半星选择\n- uni-rate 新增 touchable 属性，可设置组件是否支持滑动手势\n- uni-rate 修复 动态传值不更新的问题\n- uni-rate 优化 value 属性可使用 v-model 双向绑定数据",
+	"version": "1.2.4",
+	"description": "",
 	"author": "dcloud",
 	"license": "Apache-2.0",
 	"repository": {
@@ -45,7 +45,9 @@
 		"test:ios": "cross-env UNI_PLATFORM=app-plus UNI_OS_NAME=ios jest -i",
 		"test:mp-baidu": "cross-env UNI_PLATFORM=mp-baidu jest -i",
 		"test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i",
-		"build:lib": "node build/build-lib.js lib"
+		"build:lib": "node build/build-lib.js lib",
+		"dev:docs": "vuepress dev docs",
+		"build:docs": "vuepress build docs"
 	},
 	"dependencies": {
 		"@dcloudio/uni-app-plus": "^2.0.0-27920200618002",
@@ -87,7 +89,8 @@
 		"node-sass": "^4.14.1",
 		"postcss-comment": "^2.0.0",
 		"sass-loader": "^8.0.2",
-		"vue-template-compiler": "^2.6.11"
+		"vue-template-compiler": "^2.6.11",
+		"vuepress": "^1.5.2"
 	},
 	"browserslist": [
 		"Android >= 4",

@@ -232,7 +232,7 @@ disabled		|Boolean	|false		|	是否禁用
 clickable		|Boolean	|false		|	是否开启点击反馈
 link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
 to				|String		|-			|	跳转页面地址
-showArrow【废弃】	|Boolean	|true		|	是否显示箭头图标																						
+showArrow【废弃】	|Boolean	|true		|	是否显示箭头图标，使用 link 属性代替				
 showBadge		|Boolean	|false		|	是否显示数字角标																						
 showSwitch	    |Boolean	|false		|	是否显示Switch																						
 switchChecked	|Boolean	|false		|	Switch是否被选中																						

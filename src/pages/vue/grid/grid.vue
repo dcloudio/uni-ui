@@ -51,7 +51,7 @@
 		</view>
 		<uni-section title="动态加载" type="line"></uni-section>
 		<view class="example-body">
-			<view v-if="dynamicList.length!==0" class="grid-dynamic-box">
+			<view class="grid-dynamic-box">
 				<uni-grid :column="3" :highlight="true" @change="change">
 					<uni-grid-item v-for="(item, index) in dynamicList" :index="index" :key="index">
 						<view class="grid-item-box" :style="{'backgroundColor':item.color}">

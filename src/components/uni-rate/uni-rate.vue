@@ -178,9 +178,9 @@
 			this._oldValue = null
 		},
 		mounted() {
-				setTimeout(() => {
-					this._getSize()
-				}, 100)
+			setTimeout(() => {
+				this._getSize()
+			}, 100)
 		},
 		methods: {
 			touchstart(e) {
