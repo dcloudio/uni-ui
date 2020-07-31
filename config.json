@@ -1,0 +1,8 @@
+{
+	"id": "2272",
+	"name": "uni-ui",
+	"desc": "基于 uni-app 的 UI 组件库",
+	"edition": "1.2.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=2272",
+	"update_log": ["- 修复 test bug"]
+}
