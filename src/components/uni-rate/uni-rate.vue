@@ -205,9 +205,13 @@
 			 */
 			_getRateCount(clientX) {
 				const rateMoveRange = clientX - this._rateBoxLeft
-				const index = parseInt(rateMoveRange / (this.size + this.margin))
-				const range = parseInt(rateMoveRange - ((this.size + this.margin) * index))
-				let value = 0
+				let index = parseInt(rateMoveRange / (this.size + this.margin))
+				index = index < 0 ? 0 : index;
+				index = index > this.max ? this.max : index;
+				const range = parseInt(rateMoveRange - (this.size + this.margin) * index);
+				let value = 0;
+				if (this._oldValue === index) return;
+				this._oldValue = index;
 
 				if (this.allowHalf) {
 					if (range > (this.size / 2)) {
@@ -220,11 +224,8 @@
 				}
 
 				value = Math.max(0.5, Math.min(value, this.max))
-				if (this.valueSync !== value) {
-					this.valueSync = value
-					this._onChange()
-				}
-				// const rateCount = parseInt(rateMoveRange / (this.size / 2)) + 1
+				this.valueSync = value
+				this._onChange()
 			},
 
 			/**
