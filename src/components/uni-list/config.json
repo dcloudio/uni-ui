@@ -4,15 +4,9 @@
 	"desc": "列表",
 	"url": "list",
 	"type": "布局组件",
-	"edition": "1.0.7",
+	"edition": "1.0.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
 	"update_log": [
-		"- 新增 border 属性，是否显示分割线",
-		"- 新增 clickable 属性，是否开启点击反馈",
-		"- 新增 link 属性，显示右侧箭头并开启点击反馈",
-		"- 新增 to 属性，直接跳转到指定页面",
-		"- 新增 ellipsis 属性是否溢出显示省略号",
-		"- 优化 插槽，uni-list-item 可完全自定义内容",
 		"- 优化 使用示例"
 	]
 }

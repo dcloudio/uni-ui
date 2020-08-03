@@ -46,7 +46,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui
+npm install @dcloudio/uni-ui -D
 ```
 
 
@@ -221,7 +221,7 @@ border			|Boolean	|true		|	是否显示边框
 
 **uniListItem 属性说明：**
 
-属性名			|类型		|默认值		|	说明																									
+属性名			|类型		|默认值		|	说明																					
 ---				|----		|---		|	---	
 title			|String		|-			|	标题
 note			|String		|-			|	描述
@@ -230,16 +230,16 @@ thumb			|String		|-			|	左侧缩略图，若thumb有值，则不会显示扩展
 thumbSize		|String 	|medium 	|	略缩图尺寸，可选值，lg:大图;  medium:一般;	sm:小图;
 showBadge		|Boolean	|false		|	是否显示数字角标	
 badgeText		|String		|-			|	数字角标内容
-badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)									
+badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)					
 rightText		|String		|-			|	右侧文字内容
 disabled		|Boolean	|false		|	是否禁用	
 showArrow 		|Boolean	|true		|	是否显示箭头图标			
 link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
 clickable		|Boolean	|false		|	是否开启点击反馈
 to				|String		|-			|	跳转页面地址，如填写此属性，click 事件会失效				
-showSwitch	    |Boolean	|false		|	是否显示Switch																						
-switchChecked	|Boolean	|false		|	Switch是否被选中																						
-showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																					
+showSwitch	    |Boolean	|false		|	是否显示Switch																			
+switchChecked	|Boolean	|false		|	Switch是否被选中																			
+showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																		
 extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	
 
 
@@ -275,7 +275,7 @@ switchChange	|点击切换 Switch 时触发，需显示 switch		|e={value:checke
 
 **uniListChat 属性说明：**
 
-属性名			|类型		|默认值		|	说明																									
+属性名			|类型		|默认值		|	说明																		
 ---				|----		|---		|	---	
 title 			|String		|-			|	标题
 note 			|String		|-			|	描述
