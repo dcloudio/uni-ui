@@ -237,10 +237,10 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	padding: $list-item-pd;
 	padding-left: $uni-spacing-row-lg;
 	flex: 1;
-	position: relative;
 	justify-content: space-between;
 	align-items: center;
 }
+
 
 .border--left {
 	margin-left: $uni-spacing-row-lg;

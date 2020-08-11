@@ -71,7 +71,7 @@
 
 	.uni-list--border {
 		position: relative;
-		/* #ifdef APP-PLUS */
+		/* #ifdef APP-NVUE */
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 0.5px;
