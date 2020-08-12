@@ -29,7 +29,6 @@ export default {
 			const children = groupHeaders(item.headers);
 			return [link, renderChildren(h, children, item.path, $route, maxDepth)];
 		} else {
-			console.log(item.title);
 			return link;
 		}
 	}

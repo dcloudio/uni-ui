@@ -4,16 +4,12 @@
 		<div class="wrap">
 			<Content class="theme-default-content" />
 			<div ref="simulator" class="simulator-box">
-				<div class="simulator-top">
-					<div class="simulator-top_box"></div>
-				</div>
+				<div class="simulator-top"><div class="simulator-top_box"></div></div>
 				<div class="simulator-content">
 					<div class="simulator-seat"></div>
 					<iframe class="simulator-iframe" src="https://uniapp.dcloud.io/h5"></iframe>
 				</div>
-				<div class="simulator-bottom">
-					<div class="simulator-bottom_box"></div>
-				</div>
+				<div class="simulator-bottom"><div class="simulator-bottom_box"></div></div>
 			</div>
 		</div>
 		<PageEdit />
@@ -53,18 +49,18 @@ export default {
 	.simulator-box
 		position -webkit-sticky
 		position sticky
-		top 150px
+		top 130px
 		z-index 9
 		display flex
 		flex-direction column
-		margin-top 150px
+		margin-top 130px
 		// margin-left 50px
 		flex-shrink 0
 		width 400px
 		height 790px
 		border-radius 20px
 		background-color #333
-		box-shadow 0px 0px 10px 2px rgba(0,0,0,0.2)
+		box-shadow 0px 0px 10px 2px rgba(0, 0, 0, 0.2)
 		transform scale(0.8)
 		.simulator-top
 			display flex
@@ -78,7 +74,7 @@ export default {
 				height 14px
 				background-color #222
 				border-radius 8px
-				box-shadow -1px -2px 1px 0px rgba(255,255,255,0.4) inset
+				box-shadow -1px -2px 1px 0px rgba(255, 255, 255, 0.4) inset
 		.simulator-content
 			position relative
 			height 100%
@@ -109,7 +105,7 @@ export default {
 				border-radius 50%
 				background-color #555
 				border 1px #666 solid
-				box-shadow 0px 10px 5px 1px rgba(0,0,0,0.3) inset
+				box-shadow 0px 10px 5px 1px rgba(0, 0, 0, 0.3) inset
 				&::after
 					content ''
 					position absolute

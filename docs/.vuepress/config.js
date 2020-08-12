@@ -1,6 +1,6 @@
 module.exports = {
-	title: '',
-	description: 'Just playing around',
+	title: 'uni-ui',
+	description: 'uni-ui 的描述',
 	markdown: {
 		// 显示行号
 		lineNumbers: true,
@@ -39,7 +39,10 @@ module.exports = {
 			'/quickstart',
 			'/changelog.md',
 			'/questions.md',
-			'/styleguide.md',
+			{
+				path: 'https://cn.vuejs.org/v2/style-guide/',
+				title: '风格指南'
+			},
 			{
 				title: '基础组件', // 必要的
 				collapsable: false, // 可选的, 默认值是 true,
