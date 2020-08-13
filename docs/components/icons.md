@@ -1,9 +1,9 @@
-### Icons 图标
+# Icons 图标
 *已经支持在nvue页面中使用*
 
 用于展示 icons 图标，组件名：``uni-icons``，代码块： uIcons。
 
-### 使用方式
+## 使用方式
 
 在 ``script`` 中引用组件 
 
@@ -20,7 +20,11 @@ export default {
 <uni-icons type="contact" size="30"></uni-icons>
 ```
 
-### 属性说明
+## 图标
+
+<!-- <icons :types="['']"><icons> -->
+
+## 属性说明
 
 |属性名	|类型		|默认值	|说明				|
 |---	|----		|---	|---				|

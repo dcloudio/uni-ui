@@ -83,7 +83,7 @@ export default {
 ### uni-ui 已支持的组件列表
 
 #### uni-ui 已支持的组件列表 
-组件名								|组件说明
+组件名								|	组件说明
 ---									|	---
 uniBadge						|	[数字角标](https://ext.dcloud.net.cn/plugin?id=21)
 uniCalendar					|	[日历](https://ext.dcloud.net.cn/plugin?id=56)
