@@ -204,5 +204,8 @@ module.exports = {
 				]
 			}
 		]
-	}
+	},
+	plugins: [
+		['vuepress-plugin-code-copy', true]
+	]
 }

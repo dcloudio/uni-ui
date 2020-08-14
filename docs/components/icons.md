@@ -43,6 +43,7 @@
 |	@click	|	点击 Icon 触发事件	|	-    	|
 
 ## 图标示例
+点击复制图标类型
 
 <icons-layouts></icons-layouts>
 
