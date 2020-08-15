@@ -4,9 +4,9 @@
 	"desc": "列表",
 	"url": "list",
 	"type": "布局组件",
-	"edition": "1.0.8",
+	"edition": "1.0.9",
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
 	"update_log": [
-		"- 优化 使用示例"
+		"- 修复 chat 组件跳转失败的Bug"
 	]
 }

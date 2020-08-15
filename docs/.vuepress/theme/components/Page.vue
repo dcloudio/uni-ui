@@ -7,7 +7,7 @@
 				<div class="simulator-top"><div class="simulator-top_box"></div></div>
 				<div class="simulator-content">
 					<div class="simulator-seat"></div>
-					<iframe class="simulator-iframe" src="https://uniapp.dcloud.io/h5"></iframe>
+					<iframe class="simulator-iframe" :src="path"></iframe>
 				</div>
 				<div class="simulator-bottom"><div class="simulator-bottom_box"></div></div>
 			</div>
@@ -28,10 +28,27 @@ export default {
 	components: { PageEdit, PageNav },
 	props: ['sidebarItems'],
 	data() {
-		return {};
+		return {
+			url: 'pages/tabBar/extUI/extUI'
+		};
+	},
+	computed:{
+		path(){
+			return '//hellouniapp.dcloud.net.cn/' + this.url
+		}
+	},
+	watch: {
+		$page: {
+			handler(newName) {
+				const { frontmatter } = newName;
+				this.url = frontmatter.url ? frontmatter.url : 'pages/tabBar/extUI/extUI';
+				console.log(newName);
+			},
+			immediate: true
+		}
 	},
 	methods: {},
-	mounted() {}
+	created() {}
 };
 </script>
 

@@ -1,5 +1,5 @@
 module.exports = {
-	title: 'uni-ui',
+	title: '',
 	description: 'uni-ui 的描述',
 	markdown: {
 		// 显示行号
@@ -25,6 +25,10 @@ module.exports = {
 			}
 
 		],
+		algolia: {
+			apiKey: '48a1bc6e7170949bb834becb9d8815e5',
+			indexName: 'dcloud_uniui'
+		},
 		repo: 'dcloudio/uni-ui', // git 仓库
 		repoLabel: '查看源码', // git 仓库显示文字
 		docsDir: 'docs',
@@ -41,7 +45,7 @@ module.exports = {
 			'/questions.md',
 			{
 				path: 'https://cn.vuejs.org/v2/style-guide/',
-				title: '风格指南'
+				title: '风格指南',
 			},
 			{
 				title: '基础组件', // 必要的

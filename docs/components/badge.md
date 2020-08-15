@@ -1,3 +1,7 @@
+---
+url : pages/extUI/badge/badge
+---
+
 # Badge 数字角标
 *已经支持在nvue页面中使用*
 
