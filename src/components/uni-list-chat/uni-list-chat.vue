@@ -69,7 +69,7 @@ const avatarWidth = 45;
  * 	@value redirectTo 	同 uni.redirectTo()
  * 	@value reLaunch   	同 uni.reLaunch()
  * 	@value switchTab  	同 uni.switchTab()
- * @property {String} 	to  							跳转目标页面
+ * @property {String | PageURIString} 	to  			跳转目标页面
  * @property {String} 	time							右侧时间显示
  * @property {Boolean} 	avatarCircle = [true|false]		是否显示圆形头像，默认为false
  * @property {String} 	avatar							头像地址，avatarCircle 不填时生效
@@ -170,11 +170,12 @@ export default {
 	},
 	methods: {
 		onClick() {
-			if (this.link) {
-				if (this.to !== '') {
-					this.openPage();
-					return;
-				}
+			if (this.to !== '') {
+				this.openPage();
+				return;
+			}
+
+			if (this.clickable || this.link) {
 				this.$emit('click', {
 					data: {}
 				});
@@ -190,10 +191,16 @@ export default {
 		pageApi(api) {
 			uni[api]({
 				url: this.to,
-				complete: res => {
+				success: res => {
 					this.$emit('click', {
 						data: res
 					});
+				},
+				fail: err => {
+					this.$emit('click', {
+						data: err
+					});
+					console.error(err.errMsg);
 				}
 			});
 		}

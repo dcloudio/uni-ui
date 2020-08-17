@@ -5,7 +5,7 @@
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
-	// "debug":true,
+    // "debug":true,
     "app-plus" : {
         "nvueCompiler" : "uni-app",
         "compilerVersion" : 3,
@@ -48,5 +48,13 @@
         "setting" : {
             "urlCheck" : true
         }
+    },
+    "h5" : {
+        "router" : {
+            "mode" : "hash",
+            "base" : "/h5"
+        },
+        "title" : "uni-ui",
+        "template" : "template.h5.html"
     }
 }

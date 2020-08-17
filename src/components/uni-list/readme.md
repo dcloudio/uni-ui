@@ -22,6 +22,7 @@ list 列表组件一般用于导航菜单、列表、设置页排版等，可以
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
 - 如果需要修改 `switch`、`badge` 样式，请使用插槽自定义
 - 在 `HBuilderX` 低版本中，可能会出现组件显示 `undefined` 的问题，请升级最新的 `HBuilderX` 或者 `cli`
+- 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 
 ### 使用方式
 
@@ -205,6 +206,12 @@ export default {
 ```
 
 
+### 新闻列表
+
+参考 [基于 uni-list 的云端一体化新闻列表模板](https://ext.dcloud.net.cn/plugin?id=2546)
+
+
+
 ### uni-list 属性说明
 列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
 
@@ -236,7 +243,7 @@ disabled		|Boolean	|false		|	是否禁用
 showArrow 		|Boolean	|true		|	是否显示箭头图标			
 link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
 clickable		|Boolean	|false		|	是否开启点击反馈
-to				|String		|-			|	跳转页面地址，如填写此属性，click 事件会失效				
+to				|String		|-			|	跳转页面地址，如填写此属性，click 会返回页面是否跳转成功			
 showSwitch	    |Boolean	|false		|	是否显示Switch																			
 switchChecked	|Boolean	|false		|	Switch是否被选中																			
 showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																		
@@ -282,8 +289,9 @@ note 			|String		|-			|	描述
 clickable		|Boolean	|false		|	是否开启点击反馈
 badgeText		|String		|-			|	数字角标内容，设置为 `dot` 将显示圆点
 badgePositon 	|String		|right		|	角标位置
-link			|String 	|navigateTo	|	开启点击反馈，并设置跳转方式，可选值见下表
-to  			|String 	|-			|	跳转目标页面
+link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
+clickable		|Boolean	|false		|	是否开启点击反馈
+to				|String		|-			|	跳转页面地址，如填写此属性，click 会返回页面是否跳转成功	
 time			|String 	|-			|	右侧时间显示
 avatarCircle 	|Boolean 	|false		|	是否显示圆形头像
 avatar			|String 	|-			|	头像地址，avatarCircle 不填时生效
@@ -310,10 +318,11 @@ default	|	自定义列表右侧内容（包括时间和角标显示）
 
 事件称名			|	说明						|	返回参数			
 ---				|	---						|	---	
-click			|	点击 uniListChat 触发事件	|	-		
+@click			|	点击 uniListChat 触发事件	|	{data:{}，如有 to 属性，会返回页面跳转信息}		
 
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/list/list](https://uniapp.dcloud.io/h5/pages/extUI/list/list)
+
 
 

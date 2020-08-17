@@ -18,7 +18,7 @@
 	 * List 列表
 	 * @description 列表组件
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=24
-	 * @property {String} 	border = [true|false] 		标题
+	 * @property {String} 	border = [true|false] 	是否显示边框
 	 */
 	export default {
 		name: 'UniList',

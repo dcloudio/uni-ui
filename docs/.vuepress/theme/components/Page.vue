@@ -29,26 +29,29 @@ export default {
 	props: ['sidebarItems'],
 	data() {
 		return {
-			url: 'pages/tabBar/extUI/extUI'
+			url: ''
 		};
 	},
 	computed:{
 		path(){
-			return '//hellouniapp.dcloud.net.cn/' + this.url
+			return '//uniui.dcloud.net.cn/h5/#/' + this.url
 		}
 	},
 	watch: {
 		$page: {
 			handler(newName) {
 				const { frontmatter } = newName;
-				this.url = frontmatter.url ? frontmatter.url : 'pages/tabBar/extUI/extUI';
-				console.log(newName);
+				this.url = frontmatter.url ? frontmatter.url : '';
 			},
 			immediate: true
 		}
 	},
-	methods: {},
-	created() {}
+	created() {},
+	methods: {
+		onload(err){
+			console.log('----加载完成',err);
+		}
+	}
 };
 </script>
 
@@ -98,13 +101,13 @@ export default {
 			margin 0 20px
 			border-radius 5px
 			background-color #FFFFFF
-			.simulator-seat
-				position absolute
-				left 0px
-				top 0px
-				width 44px
-				height 44px
-				background-color rgb(0, 122, 255)
+			// .simulator-seat
+			// 	position absolute
+			// 	left 0px
+			// 	top 0px
+			// 	width 44px
+			// 	height 44px
+			// 	background-color rgb(0, 122, 255)
 			.simulator-iframe
 				width 100%
 				height 100%

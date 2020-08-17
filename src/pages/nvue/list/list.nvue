@@ -13,17 +13,19 @@
 			<uni-list-item showArrow title="列表文字" />
 			<uni-list-item showArrow title="列表文字" rightText="右侧文字" />
 		</uni-list>
-		<uni-section title="点击反馈" type="line"></uni-section> 
+		<uni-section title="点击反馈" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item title="弹窗提示" clickable @click="onClick" />
-			<uni-list-item title="页面跳转" link :to="`./chat`" />
+			<uni-list-item title="页面跳转" :to="`./chat`" @click="onClick"/>
+			<uni-list-item title="关闭当前页面打开新页面" link="redirectTo" to="./chat" @click="onClick"/>
+			<uni-list-item title="打开错误页面(查看控制台)" link="redirectTo" to="./chats" @click="onClick" />
 		</uni-list>
 		<uni-section title="不显示分割线" type="line"></uni-section>
 		<uni-list :border="false">
 			<uni-list-item title="列表文字" />
-			<uni-list-item title="列表文字" note="列表描述信息" rightText="右侧文字" />
+			<uni-list-item :border="false" title="列表文字" note="列表描述信息" rightText="右侧文字" />
+			<uni-list-item :border="true" title="列表文字" note="列表描述信息" rightText="右侧文字" />
 		</uni-list>
-
 		<uni-section title="文字溢出隐藏" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item
@@ -105,7 +107,8 @@ export default {
 		};
 	},
 	methods: {
-		onClick() {
+		onClick(e) {
+			console.log('执行click事件',e.data)
 			uni.showToast({
 				title: '点击反馈'
 			});

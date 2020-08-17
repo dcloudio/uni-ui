@@ -1,5 +1,5 @@
 ---
-url : pages/extUI/badge/badge
+url : pages/vue/badge/badge
 ---
 
 # Badge 数字角标

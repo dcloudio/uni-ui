@@ -10,7 +10,7 @@
 			@click.stop="onClick"
 		>
 			<view v-if="!isFirstChild" class="border--left" :class="{ 'uni-list--border': border }"></view>
-			<view class="uni-list-item__container" >
+			<view class="uni-list-item__container">
 				<slot name="left">
 					<view v-if="thumb" class="uni-list-item__icon"><image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--' + thumbSize]" /></view>
 					<view v-else-if="showExtraIcon" class="uni-list-item__icon">
@@ -63,12 +63,13 @@ import uniBadge from '../uni-badge/uni-badge.vue';
  * 	@value redirectTo 	同 uni.redirectTo()
  * 	@value reLaunch   	同 uni.reLaunch()
  * 	@value switchTab  	同 uni.switchTab()
- * @property {String} 	to  							跳转目标页面
+ * @property {String | PageURIString} 	to  			跳转目标页面
  * @property {Boolean} 	showBadge = [true|false] 		是否显示数字角标
  * @property {Boolean} 	showSwitch = [true|false] 		是否显示Switch
  * @property {Boolean} 	switchChecked = [true|false] 	Switch是否被选中
  * @property {Boolean} 	showExtraIcon = [true|false] 	左侧是否显示扩展图标
  * @property {Object} 	extraIcon 						扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
+ * @property {Boolean} 	border 							是否显示边框
  * @event {Function} 	click 							点击 uniListItem 触发事件
  * @event {Function} 	switchChange 					点击切换 Switch 时触发
  */
@@ -99,7 +100,7 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		showArrow:{
+		showArrow: {
 			type: [Boolean, String],
 			default: false
 		},
@@ -156,13 +157,16 @@ export default {
 					size: 20
 				};
 			}
+		},
+		border:{
+			type: Boolean,
+			default: true
 		}
 	},
 	inject: ['list'],
 	data() {
 		return {
-			isFirstChild: false,
-			border: true
+			isFirstChild: false
 		};
 	},
 	mounted() {
@@ -170,20 +174,20 @@ export default {
 			this.list.firstChildAppend = true;
 			this.isFirstChild = true;
 		}
-		this.border = this.list.border;
+		// this.border = this.list.border;
 	},
 	methods: {
 		onClick() {
+			if (this.to !== '') {
+				this.openPage();
+				return;
+			}
+
 			if (this.clickable || this.link) {
-				if (this.to !== '') {
-					this.openPage();
-					return
-				}
 				this.$emit('click', {
 					data: {}
 				});
 			}
-
 		},
 		onSwitchChange(e) {
 			this.$emit('switchChange', e.detail);
@@ -198,10 +202,16 @@ export default {
 		pageApi(api) {
 			uni[api]({
 				url: this.to,
-				complete: res => {
+				success: res => {
 					this.$emit('click', {
 						data: res
 					});
+				},
+				fail: err => {
+					this.$emit('click', {
+						data: err
+					});
+					console.error(err.errMsg);
 				}
 			});
 		}
@@ -240,7 +250,6 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	justify-content: space-between;
 	align-items: center;
 }
-
 
 .border--left {
 	margin-left: $uni-spacing-row-lg;
@@ -327,7 +336,6 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	width: $uni-img-size-base;
 }
 
-
 .uni-list--lg {
 	height: $uni-img-size-lg;
 	width: $uni-img-size-lg;
@@ -371,5 +379,4 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	lines: 2;
 	/* #endif */
 }
-
 </style>
