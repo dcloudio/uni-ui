@@ -93,24 +93,24 @@ export default {
 ```html
 <!-- 单行内容显示 -->
 <uni-list>
-	<uni-list-item  title="列表文字" />
-	<uni-list-item :disabled="true" title="列表禁用状态" />
+	<uni-list-item  title="列表文字" ></uni-list-item>
+	<uni-list-item :disabled="true" title="列表禁用状态" ></uni-list-item>
 </uni-list>
 <!-- 多行内容显示 -->
 <uni-list>
-	<uni-list-item title="列表文字" note="列表描述信息"/>
-	<uni-list-item :disabled="true" title="列表文字" note="列表禁用状态"/>
+	<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+	<uni-list-item :disabled="true" title="列表文字" note="列表禁用状态"></uni-list-item>
 </uni-list>
 <!-- 右侧显示角标、switch -->
 <uni-list>
-	<uni-list-item  title="列表右侧显示角标" :show-badge="true" badge-text="12" />
-	<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" />
+	<uni-list-item  title="列表右侧显示角标" :show-badge="true" badge-text="12" ></uni-list-item>
+	<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" ></uni-list-item>
 </uni-list>
  <!-- 左侧显示略缩图、图标 -->
  <uni-list>
  	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"
- 	 thumb-size="lg" rightText="右侧文字"/>
- 	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" />
+ 	 thumb-size="lg" rightText="右侧文字"></uni-list-item>
+ 	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" ></uni-list-item>
 </uni-list>
 			 
 ```
@@ -123,9 +123,9 @@ export default {
 ```html
 
 <uni-list>
-	<uni-list-item title="开启点击反馈" clickable  @click="onClick" />
-	<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index" @click="onClick($event,1)" />
-	<uni-list-item title="reLaunch 方式跳转页面" link="reLaunch" to="/pages/vue/index/index" @click="onClick($event,1)" />
+	<uni-list-item title="开启点击反馈" clickable  @click="onClick" ></uni-list-item>
+	<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index" @click="onClick($event,1)" ></uni-list-item>
+	<uni-list-item title="reLaunch 方式跳转页面" link="reLaunch" to="/pages/vue/index/index" @click="onClick($event,1)" ></uni-list-item>
 </uni-list>
 
 ```
@@ -144,15 +144,15 @@ export default {
 <uni-list>
 	<uni-list :border="true">
 		<!-- 显示圆形头像 -->
-		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" />
+		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" ></uni-list-chat>
 		<!-- 右侧带角标 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"/>
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"></uni-list-chat>
 		<!-- 头像显示圆点 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"></uni-list-chat>
 		<!-- 头像显示角标 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"/>
+		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"></uni-list-chat>
 		<!-- 显示多头像 -->
-		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
+		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"></uni-list-chat>
 		<!-- 自定义右侧内容 -->
 		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot">
 			<view class="chat-custom-right">
@@ -318,11 +318,8 @@ default	|	自定义列表右侧内容（包括时间和角标显示）
 
 事件称名			|	说明						|	返回参数			
 ---				|	---						|	---	
-@click			|	点击 uniListChat 触发事件	|	{data:{}，如有 to 属性，会返回页面跳转信息}		
+@click			|	点击 uniListChat 触发事件	|	{data:{}}	，如有 to 属性，会返回页面跳转信息	
 
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/list/list](https://uniapp.dcloud.io/h5/pages/extUI/list/list)
-
-
-
