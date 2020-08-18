@@ -4,34 +4,34 @@
 		<!-- #endif -->
 
 		<view
-			:class="disabled ? 'uni-list-item--disabled' : ''"
+			:class="{ 'uni-list-item--disabled': disabled }"
 			:hover-class="(!clickable && !link) || disabled || showSwitch ? '' : 'uni-list-item--hover'"
 			class="uni-list-item"
 			@click.stop="onClick"
 		>
 			<view v-if="!isFirstChild" class="border--left" :class="{ 'uni-list--border': border }"></view>
-			<view class="uni-list-item__container">
-				<slot name="left">
-					<view v-if="thumb" class="uni-list-item__icon"><image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--' + thumbSize]" /></view>
-					<view v-else-if="showExtraIcon" class="uni-list-item__icon">
-						<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" class="uni-icon-wrapper" />
+			<view class="uni-list-item__container" :class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column' }">
+				<slot name="header">
+					<view class="uni-list-item__header">
+						<view v-if="thumb" class="uni-list-item__icon"><image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--' + thumbSize]" /></view>
+						<view v-else-if="showExtraIcon" class="uni-list-item__icon"><uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" /></view>
 					</view>
 				</slot>
-				<view class="uni-list-item__content">
-					<slot>
+				<slot name="body">
+					<view class="uni-list-item__content" :class="{ 'uni-list-item__content--center': thumb || showExtraIcon || showBadge || showSwitch }">
 						<text v-if="title" class="uni-list-item__content-title" :class="[ellipsis !== 0 && ellipsis <= 2 ? 'uni-ellipsis-' + ellipsis : '']">{{ title }}</text>
 						<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
-					</slot>
-				</view>
-				<view class="uni-list-item__extra">
-					<slot name="right">
+					</view>
+				</slot>
+				<slot name="footer">
+					<view v-if="rightText || showBadge || showSwitch" class="uni-list-item__extra" :class="{ 'flex--justify': direction === 'column' }">
 						<text v-if="rightText" class="uni-list-item__extra-text">{{ rightText }}</text>
 						<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
 						<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
-					</slot>
-					<uni-icons v-if="showArrow || link" :size="16" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
-				</view>
+					</view>
+				</slot>
 			</view>
+			<uni-icons v-if="showArrow || link" :size="16" class="uni-icon-wrapper" color="#bbb" type="arrowright" />
 		</view>
 		<!-- #ifdef APP-NVUE -->
 	</cell>
@@ -69,7 +69,9 @@ import uniBadge from '../uni-badge/uni-badge.vue';
  * @property {Boolean} 	switchChecked = [true|false] 	Switch是否被选中
  * @property {Boolean} 	showExtraIcon = [true|false] 	左侧是否显示扩展图标
  * @property {Object} 	extraIcon 						扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
- * @property {Boolean} 	border 							是否显示边框
+ * @property {String} 	direction = [row|column]		排版方向
+ * @value row 			水平排列
+ * @value column 		垂直排列
  * @event {Function} 	click 							点击 uniListItem 触发事件
  * @event {Function} 	switchChange 					点击切换 Switch 时触发
  */
@@ -80,6 +82,10 @@ export default {
 		uniBadge
 	},
 	props: {
+		direction: {
+			type: String,
+			default: 'row'
+		},
 		title: {
 			type: String,
 			default: ''
@@ -158,7 +164,7 @@ export default {
 				};
 			}
 		},
-		border:{
+		border: {
 			type: Boolean,
 			default: true
 		}
@@ -174,7 +180,6 @@ export default {
 			this.list.firstChildAppend = true;
 			this.isFirstChild = true;
 		}
-		// this.border = this.list.border;
 	},
 	methods: {
 		onClick() {
@@ -182,7 +187,6 @@ export default {
 				this.openPage();
 				return;
 			}
-
 			if (this.clickable || this.link) {
 				this.$emit('click', {
 					data: {}
@@ -219,15 +223,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
 .uni-list-item {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
 	font-size: $uni-font-size-lg;
 	position: relative;
-	flex-direction: column;
 	justify-content: space-between;
 	background-color: #fff;
+	flex-direction: row;
 }
 
 .uni-list-item--disabled {
@@ -247,17 +254,24 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	padding: $list-item-pd;
 	padding-left: $uni-spacing-row-lg;
 	flex: 1;
-	justify-content: space-between;
-	align-items: center;
+	overflow: hidden;
+	// align-items: center;
 }
 
-.border--left {
-	margin-left: $uni-spacing-row-lg;
+.container--right {
+	padding-right: 0;
 }
+
+// .border--left {
+// 	margin-left: $uni-spacing-row-lg;
+// }
 
 .uni-list--border {
-	position: relative;
-	/* #ifdef APP-PLUS */
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	/* #ifdef APP-NVUE */
 	border-top-color: $uni-border-color;
 	border-top-style: solid;
 	border-top-width: 0.5px;
@@ -277,15 +291,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	background-color: $uni-border-color;
 }
 
-.uni-list-item--first:after {
-	height: 0px;
-}
-
 /* #endif */
-
-.uni-list-item--first {
-	border-top-width: 0px;
-}
 
 .uni-list-item__content {
 	/* #ifndef APP-NVUE */
@@ -293,9 +299,15 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	/* #endif */
 	padding-right: 8px;
 	flex: 1;
-	overflow: hidden;
-	flex-direction: column;
 	color: #3b4144;
+	// overflow: hidden;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.uni-list-item__content--center {
+	justify-content: center;
 }
 
 .uni-list-item__content-title {
@@ -321,6 +333,14 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	align-items: center;
 }
 
+.uni-list-item__header {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	align-items: center;
+}
+
 .uni-list-item__icon {
 	margin-right: 18rpx;
 	flex-direction: row;
@@ -334,6 +354,23 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	/* #endif */
 	height: $uni-img-size-base;
 	width: $uni-img-size-base;
+}
+
+.uni-icon-wrapper {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	align-items: center;
+	padding: 0 10px;
+}
+
+.flex--direction {
+	flex-direction: column;
+	align-items: initial;
+}
+
+.flex--justify {
+	justify-content: initial;
 }
 
 .uni-list--lg {

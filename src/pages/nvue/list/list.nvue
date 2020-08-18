@@ -68,20 +68,20 @@
 		<uni-section title="使用插槽" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item>
-				<view class="slot-box">
+				<view slot="body" class="slot-box">
 					<text class="slot-text">默认插槽</text>
 					<uni-badge text="2" type="primary" />
 				</view>
 			</uni-list-item>
 			<uni-list-item title="自定义右侧插槽" note="列表描述信息" link>
-				<template slot="right">
+				<template slot="header">
 					<image class="slot-image" src="/static/logo.png" mode="widthFix"></image>
 				</template>
 			</uni-list-item>
 			<uni-list-item>
-				<view slot="left" class="slot-box"><image class="slot-image" src="/static/logo.png" mode="widthFix"></image></view>
-				<text class="slot-text">自定义左侧插槽</text>
-				<template slot="right">
+				<view slot="header" class="slot-box"><image class="slot-image" src="/static/logo.png" mode="widthFix"></image></view>
+				<text slot="body" class="slot-box slot-text">自定义左侧插槽</text>
+				<template slot="footer">
 					<image class="slot-image" src="/static/logo.png" mode="widthFix"></image>
 				</template>
 			</uni-list-item>
@@ -144,6 +144,7 @@ export default {
 }
 
 .slot-text {
+	flex: 1;
 	font-size: 14px;
 	color: #4cd964;
 	margin-right: 10px;

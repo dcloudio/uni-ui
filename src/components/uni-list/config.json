@@ -7,7 +7,7 @@
 	"edition": "1.0.10",
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
 	"update_log": [
-		"- 优化 to 属性可以单独使用",
-		"- 优化 新增页面跳转反馈，通过 @click 监听"
+		"- 新增 direction属性",
+		"- 优化 插槽的使用方式"
 	]
 }

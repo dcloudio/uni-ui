@@ -248,6 +248,7 @@ showSwitch	    |Boolean	|false		|	是否显示Switch
 switchChecked	|Boolean	|false		|	Switch是否被选中																			
 showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																		
 extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	
+direction		| String	|row		|	排版方向，可选值，row:水平排列;  column:垂直排列;
 
 
 **link 属性说明：**
@@ -261,12 +262,13 @@ switchTab  	|	同 uni.switchTab()
 
 
 **插槽**
+> 注意：与之前的插槽不兼容，left 更改为 header ， right 更改为 footer
 
 名称	 	|	说明					
 :-		|	:-						
-default	|	默认插槽，可完全自定义默认显示
-left	|	左侧插槽，可完全自定义左侧内容				
-right	|	右侧插槽，可完全自定义右侧内容			
+header	|	左/上内容插槽，可完全自定义默认显示
+body	|	中间内容插槽，可完全自定义左侧内容				
+footer	|	右/下内容插槽，可完全自定义右侧内容			
 
 **uniListItem 事件说明：**
 
