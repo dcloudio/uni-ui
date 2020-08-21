@@ -56,7 +56,7 @@ npm install @dcloudio/uni-ui -D
 ```javascript
 import {uniList,uniListItem,uniListChat} from '@dcloudio/uni-ui'
 export default {
-    components: {uniPopup,uniListItem,uniListChat}
+    components: {uniList,uniListItem,uniListChat}
 }
 ```
 
