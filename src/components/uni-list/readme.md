@@ -208,7 +208,15 @@ export default {
 
 ### 新闻列表
 
-参考 [基于 uni-list 的云端一体化新闻列表模板](https://ext.dcloud.net.cn/plugin?id=2546)
+参考 ：
+
+1. 混合使用模板：[https://ext.dcloud.net.cn/plugin?id=2546](https://ext.dcloud.net.cn/plugin?id=2546)
+2. 垂直排列，略缩图显示大图：[https://ext.dcloud.net.cn/plugin?id=2583](https://ext.dcloud.net.cn/plugin?id=2583)
+3. 垂直排列，图文混排：[https://ext.dcloud.net.cn/plugin?id=2584](https://ext.dcloud.net.cn/plugin?id=2584)
+4. 垂直排列，略缩图显示多图：[https://ext.dcloud.net.cn/plugin?id=2585](https://ext.dcloud.net.cn/plugin?id=2585)
+5. 水平排列，左图右文：[https://ext.dcloud.net.cn/plugin?id=2586](https://ext.dcloud.net.cn/plugin?id=2586)
+6. 水平排列，右图左文：[https://ext.dcloud.net.cn/plugin?id=2587](https://ext.dcloud.net.cn/plugin?id=2587)
+7. 垂直排列，无略缩图，主标题+副标题显示：[https://ext.dcloud.net.cn/plugin?id=2588](https://ext.dcloud.net.cn/plugin?id=2588)
 
 
 

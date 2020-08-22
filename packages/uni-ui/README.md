@@ -73,7 +73,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui
+npm install @dcloudio/uni-ui -D
 ```
 
 
@@ -96,40 +96,39 @@ export default {
 ```
 
 
-#### uni-ui 已支持的组件列表
-
-|组件名							|引用路径																																|说明																										|
-|---								|---																																		|---																										|
-|uniBadge						|'@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue'													|[数字角标](https://ext.dcloud.net.cn/plugin?id=21)			|
-|uniCalendar				|'@dcloudio/uni-ui/lib/uni-calendar/uni-calendar.vue'										|[日历](https://ext.dcloud.net.cn/plugin?id=56)					|
-|uniCard						|'@dcloudio/uni-ui/lib/uni-card/uni-card.vue'														|[卡片](https://ext.dcloud.net.cn/plugin?id=22)					|
-|uniCollapse				|'@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue'										|[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)			|
-|uniCombox					|'@dcloudio/uni-ui/lib/uni-combox/uni-combox.vue'												|[组合框](https://ext.dcloud.net.cn/plugin?id=1261)			|
-|uniCountdown				|'@dcloudio/uni-ui/lib/uni-countdown/uni-countdown.vue'									| [倒计时](https://ext.dcloud.net.cn/plugin?id=25)			|
-|uniDrawer					|'@dcloudio/uni-ui/lib/uni-drawer/uni-drawer.vue'												|[抽屉](https://ext.dcloud.net.cn/plugin?id=26)					|
-|uniFab							|'@dcloudio/uni-ui/lib/uni-fab/uni-fab.vue'															|[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)		|
-|uniFav							|'@dcloudio/uni-ui/lib/uni-fav/uni-fav.vue'															|[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)		|
-|uniGoodsNav				|'@dcloudio/uni-ui/lib/uni-goods-nav/uni-goods-nav.vue'									|[商品导航](https://ext.dcloud.net.cn/plugin?id=865)		|
-|uniGrid						|'@dcloudio/uni-ui/lib/uni-grid/uni-grid.vue'														|[宫格](https://ext.dcloud.net.cn/plugin?id=27)					|
-|uniIcons						|'@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue'													|[图标](https://ext.dcloud.net.cn/plugin?id=28)					|
-|uniIndexedList			|'@dcloudio/uni-ui/lib/uni-indexed-list/uni-indexed-list.vue'						| [索引列表](https://ext.dcloud.net.cn/plugin?id=375)		|
-|uniList						|'@dcloudio/uni-ui/lib/uni-list/uni-list.vue'														|[列表](https://ext.dcloud.net.cn/plugin?id=24)					|
-|uniLoadMore				|'@dcloudio/uni-ui/lib/uni-load-more/uni-load-more.vue'									|[加载更多](https://ext.dcloud.net.cn/plugin?id=29)			|
-|uniNavBar					|'@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar.vue'											|[自定义导航栏](https://ext.dcloud.net.cn/plugin?id=52)	|
-|uniNoticeBar				|'@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.vue'								|[通告栏](https://ext.dcloud.net.cn/plugin?id=30)				|
-|uniNumberBox				|'@dcloudio/uni-ui/lib/uni-number-box/uni-number-box.vue'								|[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)		|
-|uniPagination			|'@dcloudio/uni-ui/lib/uni-pagination/uni-pagination.vue'								|[分页器](https://ext.dcloud.net.cn/plugin?id=32)				|
-|uniPopup						|'@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'													|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)			|
-|uniRate						|'@dcloudio/uni-ui/lib/uni-rate/uni-rate.vue'														|[评分](https://ext.dcloud.net.cn/plugin?id=33)					|
-|uniSearchBar				|'@dcloudio/uni-ui/lib/uni-search-bar/uni-search-bar.vue'								|[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)			|
-|uniSegmentedControl|'@dcloudio/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue'	|[分段器](https://ext.dcloud.net.cn/plugin?id=54)				|
-|uniSteps						|'@dcloudio/uni-ui/lib/uni-steps/uni-steps.vue'													|[步骤条](https://ext.dcloud.net.cn/plugin?id=34)				|
-|uniSwipeAction			|'@dcloudio/uni-ui/lib/uni-swipe-action/uni-swipe-action.vue'						|[滑动操作](https://ext.dcloud.net.cn/plugin?id=181)		|
-|uniSwiperDot				|'@dcloudio/uni-ui/lib/uni-swiper-dot/uni-swiper-dot.vue'								|[轮播图指示点](https://ext.dcloud.net.cn/plugin?id=284)|
-|uniTag							|'@dcloudio/uni-ui/lib/uni-tag/uni-tag.vue'															|[标签](https://ext.dcloud.net.cn/plugin?id=35)					|
-|uniTitle						|'@dcloudio/uni-ui/lib/uni-title/uni-title.vue'													|[章节标题](https://ext.dcloud.net.cn/plugin?id=1066)		|
-|uniTransition			|'@dcloudio/uni-ui/lib/uni-transition/uni-transition.vue'								|[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)		|
-
+#### uni-ui 已支持的组件列表 
+组件名|组件说明
+---|---
+uniBadge|[数字角标](https://ext.dcloud.net.cn/plugin?id=21)
+uniCalendar|[日历](https://ext.dcloud.net.cn/plugin?id=56)
+uniCard|[卡片](https://ext.dcloud.net.cn/plugin?id=22)
+uniCollapse|[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)
+uniCombox|[组合框](https://ext.dcloud.net.cn/plugin?id=1261)
+uniCountdown|[倒计时](https://ext.dcloud.net.cn/plugin?id=25)
+uniDrawer|[抽屉](https://ext.dcloud.net.cn/plugin?id=26)
+uniFab|[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)
+uniFav|[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)
+uniGoodsNav|[商品导航](https://ext.dcloud.net.cn/plugin?id=865)
+uniGrid|[宫格](https://ext.dcloud.net.cn/plugin?id=27)
+uniIcons|[图标](https://ext.dcloud.net.cn/plugin?id=28)
+uniIndexedList|[索引列表](https://ext.dcloud.net.cn/plugin?id=375)
+uniLink|[超链接](https://ext.dcloud.net.cn/plugin?id=1182)
+uniList|[列表](https://ext.dcloud.net.cn/plugin?id=24)
+uniLoadMore|[加载更多](https://ext.dcloud.net.cn/plugin?id=29)
+uniNavBar|[自定义导航栏](https://ext.dcloud.net.cn/plugin?id=52)
+uniNoticeBar|[通告栏](https://ext.dcloud.net.cn/plugin?id=30)
+uniNumberBox|[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)
+uniPagination|[分页器](https://ext.dcloud.net.cn/plugin?id=32)
+uniPopUp|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)
+uniRate|[评分](https://ext.dcloud.net.cn/plugin?id=33)
+uniSearchBar|[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)
+uniSegmentedControl|[分段器](https://ext.dcloud.net.cn/plugin?id=54)
+uniSteps|[步骤条](https://ext.dcloud.net.cn/plugin?id=34)
+uniSwipeAction|[滑动操作](https://ext.dcloud.net.cn/plugin?id=181)
+uniSwiperDot|[轮播图指示点](https://ext.dcloud.net.cn/plugin?id=284)
+uniTag|[标签](https://ext.dcloud.net.cn/plugin?id=35)
+uniTitle|[章节标题](https://ext.dcloud.net.cn/plugin?id=1066)
+uniTransition|[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)
 
 #### 其他
 
