@@ -6,6 +6,33 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+<log title="1.2.5" date="2020-08-14">
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="feat">
+			更新更多模板示例
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			direction 属性，可以改变列表的排版方向
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			uni-list-chat 组件添加 to 属性，@click 事件不触发的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			to 属性可单独设置
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="perf">
+			按钮缺省时，可直接点击大按钮
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="fix">
+			超出设置星星的长度，还可以继续选择的Bug
+		</log-item-text>
+	</log-item>
+</log>
+
 
 <log title="1.2.4" date="2020-08-13">
 	<log-item-text tag-type="perf" only>
