@@ -4,7 +4,7 @@
 	"desc": "日历",
 	"url": "calendar",
 	"type": "功能组件",
-	"edition": "1.3.14",
+	"edition": "1.3.15",
 	"path": "https://ext.dcloud.net.cn/plugin?id=56",
-	"update_log": "- 修复 自定义easycom规则，子组件提示未找到的Bug"
+	"update_log": "- 新增 增加农历模式为true时展示节气"
 }
