@@ -34,6 +34,9 @@ view {
 }
 
 .example-body {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;

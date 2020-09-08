@@ -3,6 +3,7 @@
 	"name": "Fab",
 	"desc": "悬浮按钮",
 	"url": "fab",
+	"type": "基础组件",
 	"edition": "1.0.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
 	"update_log": "- 修复 tabbar页面底部位置不正确的Bug"

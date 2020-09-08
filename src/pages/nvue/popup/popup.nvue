@@ -1,0 +1,266 @@
+<template>
+	<view>
+		<text class="example-info">弹出层组件用于弹出一个覆盖到页面上的内容，使用场景如：底部弹出分享弹窗、页面插屏广告等。</text>
+		<uni-section title="基本示例" type="line"></uni-section>
+		<view class="example-body message">
+			<button class="button" type="primary" @click="toggle('top')"><text class="button-text">顶部弹出</text></button>
+			<button class="button" type="primary" @click="toggle('bottom')"><text class="button-text">底部弹出</text></button>
+			<button class="button" type="primary" @click="toggle('center')"><text class="button-text">居中弹出</text></button>
+		</view>
+		<uni-section title="自定义弹出层(dialog + message) 示例" type="line"></uni-section>
+		<view class="example-body message">
+			<button class="button popup__success" @click="toggleMessage('success')"><text class="button-text">成功</text></button>
+			<button class="button popup__error" @click="toggleMessage('error')"><text class="button-text">错误</text></button>
+			<button class="button popup__warn" @click="toggleMessage('warn')"><text class="button-text">警告</text></button>
+			<button class="button popup__info" @click="toggleMessage('info')"><text class="button-text">信息</text></button>
+		</view>
+		<uni-section title="提交信息 (input + 延迟关闭)" type="line"></uni-section>
+		<view class="example-body dialog">
+			<view class="dialog-box">
+				<text class="dialog-text">输入内容：{{value}}</text>
+			</view>
+			<button class="button" type="primary" @click="confirmDialog"><text class="button-text">输入对话框</text></button>
+		</view>
+		<uni-section title="底部分享示例" type="line"></uni-section>
+		<view class="example-body share">
+			<button class="button" type="primary" @click="confirmShare"><text class="button-text">分享模版示例</text></button>
+		</view>
+		<!-- 基本示例 -->
+		<uni-popup id="popup" ref="popup" :type="type" :animation="false" @change="change">
+			<view class="popup-content">popup 内容，此示例没有动画效果</view>
+		</uni-popup>
+		<!-- 消息提示 -->
+		<uni-popup id="popupMessage" ref="popupMessage" type="message" @change="change">
+			<uni-popup-message :type="msgType" :message="message" :duration="2000"></uni-popup-message>
+		</uni-popup>
+		<!-- 对话框 -->
+		<uni-popup id="popupDialog" ref="popupDialog" type="dialog" @change="change">
+			<uni-popup-dialog :type="msgType" title="通知" content="欢迎使用 uni-popup!" :before-close="true" @confirm="dialogConfirm" @close="dialogClose"></uni-popup-dialog>
+		</uni-popup>
+		<!-- 提交信息 -->
+		<uni-popup id="dialogInput" ref="dialogInput" type="dialog" @change="change">
+			<uni-popup-dialog mode="input" title="输入内容" value="对话框预置提示内容!" placeholder="请输入内容" @confirm="dialogInputConfirm"></uni-popup-dialog>
+		</uni-popup>
+		<!-- 分享示例 -->
+		<uni-popup id="popupShare" ref="popupShare" type="share" @change="change">
+			<uni-popup-share title="分享到" @select="select"></uni-popup-share>
+		</uni-popup>
+	</view>
+</template>
+
+<script>
+	// import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	// import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	// import uniPopupShare from '@/components/uni-popup/uni-popup-share.vue'
+	export default {
+		// components: {
+		// 	uniPopupMessage,
+		// 	uniPopupDialog,
+		// 	uniPopupShare
+		// },
+		data() {
+			return {
+				type: 'top',
+				msgType: 'success',
+				message: '这是一条成功消息提示',
+				value: '默认输入的内容'
+			}
+		},
+		onReady() {
+			// 页面打开自动打开对话框
+			setTimeout(() => {
+				this.msgType = 'success'
+				this.$refs.popupDialog.open()
+			}, 500)
+		},
+		methods: {
+
+			/**
+			 * 打开基础内容
+			 */
+			toggle(type) {
+				this.type = type
+				this.$refs.popup.open()
+			},
+			/**
+			 * 打开消息提示
+			 * @param {Object} type
+			 */
+			toggleMessage(type) {
+				this.msgType = type
+				switch (type) {
+					case 'success':
+						this.message = '这是一条成功消息提示'
+						break
+					case 'warn':
+						this.message = '这是一条警告消息提示'
+						break
+					case 'info':
+						this.message = '这是一条消息提示'
+						break
+					case 'error':
+						this.message = '这是一条错误消息提示'
+						break
+				}
+				this.$refs.popupDialog.open()
+			},
+			/**
+			 * 打开提交信息
+			 */
+			confirmDialog() {
+				this.$refs.dialogInput.open()
+			},
+			/**
+			 * 分享模版
+			 */
+			confirmShare() {
+				this.$refs.popupShare.open()
+			},
+			/**
+			 * 选择内容
+			 */
+			select(e, done) {
+				uni.showToast({
+					title: `您选择了第${e.index+1}项：${e.item.text}`,
+					icon: 'none'
+				})
+				done()
+			},
+			/**
+			 * 对话框点击确认按钮
+			 */
+			dialogConfirm(done) {
+				this.$refs.popupMessage.open()
+				console.log('点击确认');
+				// 需要执行 done 才能关闭对话框
+				done()
+			},
+			/**
+			 * 输入对话框的确定事件
+			 */
+			dialogInputConfirm(done, val) {
+				uni.showLoading({
+					title: '3秒后会关闭'
+				})
+				console.log(val);
+				this.value = val
+				setTimeout(() => {
+					uni.hideLoading()
+					// 关闭窗口后，恢复默认内容
+					done()
+				}, 3000)
+			},
+			/**
+			 * 对话框取消按钮
+			 */
+			dialogClose(done) {
+				this.msgType = 'info'
+				this.message = '点击了对话框的取消按钮'
+				this.$refs.popupMessage.open()
+				// 需要执行 done 才能关闭对话框
+				done()
+			},
+			/**
+			 * popup 状态发生变化触发
+			 * @param {Object} e
+			 */
+			change(e) {
+				console.log('popup ' + e.type + ' 状态', e.show)
+			},
+		},
+		/**
+		 * 拦截应用返回事件，仅仅 app 端生效
+		 */
+		onBackPress() {
+
+		}
+	}
+</script>
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
+
+	.example-body {
+		/* #ifndef APP-NVUE */
+		display: block;
+		/* #endif */
+		padding: 5px 15px;
+	}
+
+
+	.popup-content {
+		background-color: #fff;
+		padding: 15px;
+	}
+
+	/* #ifndef APP-NVUE */
+	.button {
+		margin: 0;
+		padding: 0;
+		line-height: 1;
+	}
+	/* #endif */
+
+	.button {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		height: 40px;
+		margin: 0 15px;
+	}
+
+	.button-text {
+		color: #fff;
+		font-size: 14px;
+	}
+
+	.message {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		padding: 15px 0;
+	}
+
+	.dialog {
+		padding: 15px 0;
+	}
+
+	.dialog-box {
+		margin-left: 15px;
+		margin-bottom: 15px;
+	}
+
+	.dialog-text {
+		font-size: 14px;
+		color: #666;
+	}
+
+	.share {
+		padding: 15px 0;
+	}
+
+	.popup__success {
+		color: #fff;
+		background-color: $uni-color-success;
+	}
+
+	.popup__warn {
+		color: #fff;
+		background-color: $uni-color-warning;
+	}
+
+	.popup__error {
+		color: #fff;
+		background-color: $uni-color-error;
+	}
+
+	.popup__info {
+		color: #fff;
+		background-color: #909399;
+	}
+</style>

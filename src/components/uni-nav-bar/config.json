@@ -3,6 +3,7 @@
 	"name": "NavBar",
 	"desc": "自定义导航栏",
 	"url": "nav-bar",
+	"type": "导航组件",
 	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=52",
 	"update_log": "- 修复 阴影配置不生效的Bug"

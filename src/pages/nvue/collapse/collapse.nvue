@@ -1,0 +1,121 @@
+<template>
+	<view>
+		<text class="example-info">折叠面板用来折叠/显示过长的内容或者是列表。通常是在多内容分类项使用，折叠不重要的内容，显示重要内容。点击可以展开折叠部分。</text>
+		<view v-for="(item, index) in list" :key="index">
+			<uni-section :title="item.name" type="line"></uni-section>
+			<uni-collapse ref="add" class="warp" @change="change">
+				<uni-collapse-item v-for="(sub, key) in item.data" :key="key" :open="sub.open" :show-animation="sub.showAnimation"
+				 :disabled="sub.disabled" :title="sub.subName">
+					<text class="content">{{ sub.content }}</text>
+				</uni-collapse-item>
+			</uni-collapse>
+		</view>
+		<uni-section title="手风琴效果" type="line"></uni-section>
+		<uni-collapse :accordion="true">
+			<uni-collapse-item v-for="item in accordion" :key="item.id" :title="item.title" :show-animation="item.animation">
+				<text class="content">{{ item.content }}</text>
+			</uni-collapse-item>
+		</uni-collapse>
+		<uni-section title="配置图标" type="line"></uni-section>
+		<uni-collapse>
+			<uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
+				<text class="content">折叠内容主体，可自定义内容及样式</text>
+			</uni-collapse-item>
+			<uni-collapse-item title="标题文字" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png">
+				<text class="content">折叠内容主体，可自定义内容及样式</text>
+			</uni-collapse-item>
+		</uni-collapse>
+	</view>
+</template>
+
+<script>
+	export default {
+		components: {},
+		data() {
+			const listData = [{
+					name: '基础用法',
+					data: [{
+							type: false,
+							subName: '默认开启',
+							open: true,
+							content: '折叠内容主体，可自定义内容及样式'
+						},
+						{
+							type: false,
+							subName: '折叠内容',
+							content: '折叠内容主体，这是一段比较长内容。默认折叠主要内容，只显示当前项标题。点击标题展开，才能看到这段问题。再次点击标题，折叠内容。'
+						},
+						{
+							type: false,
+							subName: '禁用状态',
+							disabled: true,
+							content: '折叠内容主体，这是一段比较长内容。默认折叠主要内容，只显示当前项标题。点击标题展开，才能看到这段问题。再次点击标题，折叠内容。'
+						}
+					]
+				},
+				{
+					name: '添加动画效果',
+					data: [{
+						type: true,
+						subName: '动画效果',
+						showAnimation: true,
+						content: '折叠内容主体，这是一段比较长内容。默认折叠主要内容，只显示当前项标题。点击标题展开，才能看到这段问题。再次点击标题，折叠内容。'
+					}]
+				}
+			]
+			return {
+				list: listData,
+				accordion: [{
+						id: 0,
+						title: '标题文字',
+						content: '手风琴效果',
+						animation: true
+					},
+					{
+						id: 1,
+						title: '标题文字',
+						content: '手风琴效果',
+						animation: true
+					},
+					{
+						id: 2,
+						title: '标题文字',
+						content: '手风琴效果',
+						animation: true
+					}
+				],
+				extraIcon: {
+					color: '#4cd964',
+					size: '26',
+					type: 'image'
+				},
+				id: 2
+			}
+		},
+		methods: {
+			change(e) {}
+		}
+	}
+</script>
+
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
+
+	.example-body {
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.content {
+		padding: 15px;
+		font-size: 14px;
+		line-height: 20px;
+		background-color: #f9f9f9;
+		color: #666;
+	}
+
+	.button {
+		font-size: 26rpx;
+		line-height: 90rpx;
+	}
+</style>

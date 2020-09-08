@@ -3,7 +3,10 @@
 	"name": "Rate",
 	"desc": "评分",
 	"url": "rate",
-	"edition": "1.0.3",
+	"type": "功能组件",
+	"edition": "1.0.5",
 	"path": "https://ext.dcloud.net.cn/plugin?id=33",
-	"update_log": "- 优化 可在nvue页面中使用"
+	"update_log":[
+		"- 修复 支付宝小程序获取节点信息错误的Bug"
+	]
 }

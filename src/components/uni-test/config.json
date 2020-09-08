@@ -1,0 +1,18 @@
+{
+	"id": "2272",
+	"name": "Test",
+	"desc": "测试插件",
+	"edition": "0.0.8",
+	"url": "test",
+	"type": "测试插件",
+	"test":true,
+	"hidden": true,
+	"path": "https://ext.dcloud.net.cn/plugin?id=2272",
+	"update_log": [
+		"- 新增 clickable 属性，是否开启点击反馈",
+		"- 新增 link 属性，显示右侧箭头并开启点击反馈",
+		"- 新增 to 属性，直接跳转到指定页面",
+		"- 新增 聊天列表组件",
+		"- 废弃 showArrow 属性，使用 link 属性代替"
+	]
+}

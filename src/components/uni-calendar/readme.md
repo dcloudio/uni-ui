@@ -46,9 +46,10 @@ export default {
 | startDate	| String	|-		| 日期选择范围-开始日期																									|
 | endDate	| String	|-		| 日期选择范围-结束日期																									|
 | range		| Boolean	| false	| 范围选择																												|
-| insert	| Boolean	| false	| 插入模式,可选值，ture：弹窗模式；false：插入模式；默认为插入模式														|
+| insert	| Boolean	| false	| 插入模式,可选值，ture：插入模式；false：弹窗模式；默认为插入模式														|
+|clearDate	|Boolean	|true	|弹窗模式是否清空上次选择内容	|
 | selected	| Array		|-		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
-|showMonth	|Boolean	| false	| 是否显示月份为背景																									|
+|showMonth	| Boolean	| true	| 是否显示月份为背景																									|
 
 ### 事件说明
 
@@ -57,6 +58,7 @@ export default {
 | @change		|  日期改变，`insert :ture` 时生效	|
 | @confirm		|  确认选择`insert :false` 时生效	|
 | @monthSwitch	| 切换月份时触发					|
+| @close		| 关闭日历弹窗触发					|
 
 ### 方法说明
 在 `calendar` 组件上定义 `ref` 属性，通过 `ref` 属性使用方法。
@@ -185,7 +187,7 @@ Tips:
 - 仅支持自定义组件模式
 - date 传入的应该是一个 String ，如： 2019-06-27 ，而不是 new Date()
 - insert 属性，确定当前的事件是 @change 还是 @confirm 。理应合并为一个事件，但是为了区分模式，现使用两个事件，这里需要注意
-
+- 弹窗模式下无法阻止后面的元素滚动，如有需要阻止，请在弹窗弹出后，手动设置滚动元素为不可滚动
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar](https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar)

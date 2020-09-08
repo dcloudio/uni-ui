@@ -5,11 +5,22 @@ const exec = require('child_process').exec
 const argv = process.argv.splice(2)[0]
 
 const packages = path.join(__dirname, '../src/components')
-const lib = path.join(__dirname, '../lib')
+const uniui = path.join(__dirname, '../packages/uni-ui')
+const lib = path.join(uniui, 'lib')
 const root = path.join(__dirname, '../')
 
 var filenames = []
 var filenamesUpper = []
+
+const uniuiPackagePath = path.join(uniui, 'package.json')
+let uniuiData = fs.readFileSync(path.join(root, 'package.json'), 'utf-8')
+uniuiData = JSON.parse(uniuiData)
+let uniuiPackageData = fs.readFileSync(uniuiPackagePath, 'utf-8')
+uniuiPackageData = JSON.parse(uniuiPackageData)
+uniuiPackageData.version = uniuiData.version
+fs.outputFileSync(uniuiPackagePath, JSON.stringify(uniuiPackageData, '', 2))
+fs.copySync(path.join(root, 'README.md'), path.join(uniui, 'README.md'))
+fs.removeSync(lib)
 
 fs.copy(packages, lib).then(() => {
 	console.log('---- 同步完成 ----');
@@ -21,9 +32,9 @@ fs.copy(packages, lib).then(() => {
 		})
 	}, Promise.resolve([])).then(() => {
 		// 删除所有文件成功之后，开始去同步 npm
-		if (argv === 'npm') {
-			start()
-		}
+		// if (argv === 'npm') {
+		// 	start()
+		// }
 	})
 
 })

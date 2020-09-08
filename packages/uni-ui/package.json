@@ -1,0 +1,17 @@
+{
+  "name": "@dcloudio/uni-ui",
+  "version": "1.2.5",
+  "description": "",
+  "author": "",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcloudio/uni-ui"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "browserslist": [
+    "Android >= 4",
+    "ios >= 8"
+  ]
+}

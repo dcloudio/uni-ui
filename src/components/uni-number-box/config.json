@@ -3,6 +3,7 @@
 	"name": "NumberBox",
 	"desc": "数字输入框",
 	"url": "number-box",
+	"type": "基础组件",
 	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=31",
 	"update_log": "- 修复 初始值超出边界时不可使用的Bug"

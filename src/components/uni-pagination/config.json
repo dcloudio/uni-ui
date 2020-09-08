@@ -3,6 +3,7 @@
 	"name": "Pagination",
 	"desc": "分页器",
 	"url": "pagination",
+	"type": "功能组件",
 	"edition": "1.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=32",
 	"update_log": "- 优化 可在nvue页面中使用"

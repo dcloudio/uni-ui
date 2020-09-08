@@ -3,7 +3,8 @@
 	"name": "GoodsNav",
 	"desc": "商品导航",
 	"url": "goods-nav",
-	"edition": "1.0.1",
+	"type": "导航组件",
+	"edition": "1.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=865",
-	"update_log": "- 优化 可在nvue页面中使用"
+	"update_log": "- 优化 添加图标 "
 }

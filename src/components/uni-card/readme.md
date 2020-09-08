@@ -67,15 +67,15 @@ export default {
 
 ### 属性说明
 
-|属性名		|类型	|默认值	|说明																		|
-|---		|----	|---	|---																		|
-|title		|String	|-		|标题文字																	|
-|extra		|String	|-		|标题额外信息																|
-|note		|String	|-		|底部信息																	|
-|thumbnail	|String	|-		|标题左侧缩略图,支持网络图片，本地图片，本图片需要传入一个绝对路径，如：`/static/xxx.png`															|
-|mode		|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片	|
-|isFull	|Boolean|false	|卡片内容是否通栏，为true时将去除padding值									|
-|isShadow	|Boolean|false	|卡片内容是否开启阴影														|
+|属性名		|类型	|默认值	|说明																			|
+|---		|----	|---	|---																			|
+|title		|String	|-		|标题文字																			|
+|extra		|String	|-		|标题额外信息																		|
+|note		|String	|-		|底部信息																			|
+|thumbnail	|String	|-		|标题左侧缩略图,支持网络图片，本地图片，本图片需要传入一个绝对路径，如：`/static/xxx.png`	|
+|mode		|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片				|
+|isFull		|Boolean|false	|卡片内容是否通栏，为true时将去除padding值											|
+|isShadow	|Boolean|false	|卡片内容是否开启阴影																|
 
 
 ### 事件说明
