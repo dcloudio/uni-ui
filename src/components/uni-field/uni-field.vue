@@ -1,19 +1,19 @@
 <template>
-	<view class="u-field" :class="{'u-border-top': borderTop, 'u-border-bottom': borderBottom }">
-		<view class="u-field-inner" :class="[type == 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + labelPosition]">
-			<view class="u-label" :class="[required ? 'u-required' : '']" :style="{
+	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }">
+		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPosition]">
+			<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
 				justifyContent: justifyContent, 
 				flex: labelPosition == 'left' ? `0 0 ${labelWidth}rpx` : '1'
 			}">
-				<view class="u-icon-wrap" v-if="icon">
-					<u-icon size="32" :custom-style="iconStyle" :name="icon" :color="iconColor" class="u-icon"></u-icon>
+				<view class="uni-icon-wrap" v-if="icon">
+					<uni-icon size="32" :custom-style="iconStyle" :name="icon" :color="iconColor" class="uni-icon"></uni-icon>
 				</view>
 				<slot name="icon"></slot>
-				<text class="u-label-text" :class="[this.$slots.icon || icon ? 'u-label-left-gap' : '']">{{ label }}</text>
+				<text class="uni-label-text" :class="[this.$slots.icon || icon ? 'uni-label-left-gap' : '']">{{ label }}</text>
 			</view>
 			<view class="fild-body">
-				<view class="u-flex-1 u-flex" :style="[inputWrapStyle]">
-					<textarea v-if="type == 'textarea'" class="u-flex-1 u-textarea-class" :style="[fieldStyle]" :value="value"
+				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
+					<textarea v-if="type == 'textarea'" class="uni-flex-1 uni-textarea-class" :style="[fieldStyle]" :value="value"
 					 :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength"
 					 :focus="focus" :autoHeight="autoHeight" :fixed="fixed" @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm"
 					 @tap="fieldClick" />
@@ -21,7 +21,7 @@
 						v-else
 						:style="[fieldStyle]"
 						:type="type"
-						class="u-flex-1 u-field__input-wrap"
+						class="uni-flex-1 uni-field__input-wrap"
 						:value="value"
 						:password="password || this.type === 'password'"
 						:placeholder="placeholder"
@@ -37,12 +37,9 @@
 						@tap="fieldClick"
 					/>
 				</view>
-				<u-icon :size="clearSize" v-if="clearable && value != '' && focused" name="close-circle-fill" color="#c0c4cc" class="u-clear-icon" @click="onClear"/>
-				<view class="u-button-wrap"><slot name="right" /></view>
-				<u-icon v-if="rightIcon" @click="rightIconClick" :name="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" size="26" class="u-arror-right" />
 			</view>
 		</view>
-		<view v-if="errorMessage !== false && errorMessage != ''" class="u-error-message" :style="{
+		<view v-if="errorMessage !== false && errorMessage != ''" class="uni-error-message" :style="{
 			paddingLeft: labelWidth + 'rpx'
 		}">{{ errorMessage }}</view>
 	</view>
@@ -84,10 +81,10 @@
  * @event {Function} confirm 点击完成按钮时触发
  * @event {Function} right-icon-click 通过right-icon生成的图标被点击时触发
  * @event {Function} click 输入框被点击或者通过right-icon生成的图标被点击时触发，这样设计是考虑到传递右边的图标，一般都为需要弹出"picker"等操作时的场景，点击倒三角图标，理应发出此事件，见上方说明
- * @example <u-field v-model="mobile" label="手机号" required :error-message="errorMessage"></u-field>
+ * @example <uni-field v-model="mobile" label="手机号" required :error-message="errorMessage"></uni-field>
  */
 export default {
-	name:"u-field",
+	name:"uni-field",
 	props: {
 		icon: String,
 		rightIcon: String,
@@ -282,24 +279,24 @@ export default {
 
 <style lang="scss" scoped>
 	
-.u-field {
+.uni-field {
 	font-size: 28rpx;
 	padding: 20rpx 28rpx;
 	text-align: left;
 	position: relative;
-	color: $u-main-color;
+	color: $uni-main-color;
 }
 
-.u-field-inner {
+.uni-field-inner {
 	display: flex;
 	align-items: center;
 }
 
-.u-textarea-inner {
+.uni-textarea-inner {
 	align-items: flex-start;
 }
 
-.u-textarea-class {
+.uni-textarea-class {
 	min-height: 96rpx;
 	width: auto;
 	font-size: 28rpx;
@@ -311,24 +308,24 @@ export default {
 	align-items: center;
 }
 
-.u-arror-right {
+.uni-arror-right {
 	margin-left: 8rpx;
 }
 
-.u-label-text {
+.uni-label-text {
 	display: inline-block;
 }
 
-.u-label-left-gap {
+.uni-label-left-gap {
 	margin-left: 6rpx;
 }
 
-.u-label-postion-top {
+.uni-label-postion-top {
 	flex-direction: column;
 	align-items: flex-start;
 }
 
-.u-label {
+.uni-label {
 	width: 130rpx;
 	flex: 1 1 130rpx;
 	text-align: left;
@@ -337,17 +334,17 @@ export default {
 	align-items: center;
 }
 
-.u-required::before {
+.uni-required::before {
 	content: '*';
 	position: absolute;
 	left: -16rpx;
 	font-size: 14px;
-	color: $u-type-error;
+	color: $uni-type-error;
 	height: 9px;
 	line-height: 1;
 }
 
-.u-field__input-wrap {
+.uni-field__input-wrap {
 	position: relative;
 	overflow: hidden;
 	font-size: 28rpx;
@@ -356,13 +353,13 @@ export default {
 	width: auto;
 }
 
-.u-clear-icon {
+.uni-clear-icon {
 	display: flex;
 	align-items: center;
 }
 
-.u-error-message {
-	color: $u-type-error;
+.uni-error-message {
+	color: $uni-type-error;
 	font-size: 26rpx;
 	text-align: left;
 }
@@ -371,30 +368,30 @@ export default {
 	color: rgb(150, 151, 153);
 }
 
-.u-input-class {
+.uni-input-class {
 	font-size: 28rpx;
 }
 
-.u-button-wrap {
+.uni-button-wrap {
 	margin-left: 8rpx;
 }
 
 /* start--Retina 屏幕下的 1px 边框--start */
-.u-border,
-.u-border-bottom,
-.u-border-left,
-.u-border-right,
-.u-border-top,
-.u-border-top-bottom {
+.uni-border,
+.uni-border-bottom,
+.uni-border-left,
+.uni-border-right,
+.uni-border-top,
+.uni-border-top-bottom {
 	position: relative
 }
 
-.u-border-bottom:after,
-.u-border-left:after,
-.u-border-right:after,
-.u-border-top-bottom:after,
-.u-border-top:after,
-.u-border:after {
+.uni-border-bottom:after,
+.uni-border-left:after,
+.uni-border-right:after,
+.uni-border-top-bottom:after,
+.uni-border-top:after,
+.uni-border:after {
 	/* #ifndef APP-NVUE */
 	content: ' ';
 	/* #endif */
@@ -409,31 +406,31 @@ export default {
 	width: 199.8%;
 	height: 199.7%;
 	transform: scale(0.5, 0.5);
-	border: 0 solid $u-border-color;
+	border: 0 solid $uni-border-color;
 	z-index: 2;
 }
 
-.u-border-top:after {
+.uni-border-top:after {
 	border-top-width: 1px
 }
 
-.u-border-left:after {
+.uni-border-left:after {
 	border-left-width: 1px
 }
 
-.u-border-right:after {
+.uni-border-right:after {
 	border-right-width: 1px
 }
 
-.u-border-bottom:after {
+.uni-border-bottom:after {
 	border-bottom-width: 1px
 }
 
-.u-border-top-bottom:after {
+.uni-border-top-bottom:after {
 	border-width: 1px 0
 }
 
-.u-border:after {
+.uni-border:after {
 	border-width: 1px
 }
 /* end--Retina 屏幕下的 1px 边框--end */
