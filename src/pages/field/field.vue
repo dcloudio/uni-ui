@@ -14,6 +14,8 @@
         iconColor="#999"
         label-position="left"
         placeholder="请填写手机号"
+        error-message="请填写姓名"
+        
         type="text"
         :clearable="true"
      >
@@ -40,7 +42,6 @@
         type="textarea"
         label="家庭地址"
         placeholder="请填写详细住址"
-        error-message="请填写详细住址" 
      />
   </view>
 </template>

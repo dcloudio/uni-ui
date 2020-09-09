@@ -1,20 +1,24 @@
 <template>
 	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }" :style="[fieldStyle]">
 		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPosition]">
-			<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
-				justifyContent: justifyContent, 
-				flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1',
-                marginBottom: labelMarginBottom
-			}">
-				<view class="uni-icon-wrap" v-if="leftIcon">
-                    <uni-icons size="16" :type="leftIcon" :color="iconColor" />
-				</view>
-				<slot name="leftIcon"></slot>
-				<text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
+			<view :class="!errorBottom ? 'uni-error-in-label' : ''">
+                <view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
+                    justifyContent: justifyContent, 
+                    flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1',
+                    marginBottom: labelMarginBottom,
+                    width: errorWidth
+                }">
+                    <view class="uni-icon-wrap" v-if="leftIcon">
+                        <uni-icons size="16" :type="leftIcon" :color="iconColor" />
+                    </view>
+                    <slot name="leftIcon"></slot>
+                    <text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
+                </view>
                 <view v-if="!errorBottom" class="uni-error-message" :style="{
-                    paddingLeft: '4px'
-                }">{{ errorMessage }}</view>
-			</view>
+                        display: 'inline-block',
+                        paddingLeft: '4px'
+                    }">{{ errorMessage }}</view>
+            </view> 
 			<view class="fild-body">
 
 				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
@@ -189,24 +193,33 @@ export default {
 			focused: false,
             itemIndex: 0,
             errorBottom: false,
-            labelMarginBottom: ''
+            labelMarginBottom: '',
+            errorWidth: ''
 		};
 	},
 	computed: {
         fieldStyle() {
             let style = {}
+            if(this.labelPosition == 'top') {
+                style.padding = '10px 14px'
+                this.labelMarginBottom = '5px'
+            }
             if (this.labelPosition == 'left' && this.errorMessage !== false && this.errorMessage != '') {
                 style.paddingBottom = '0px'
                 this.errorBottom = true
+                this.errorTop = false
             } else if (this.labelPosition == 'top' && this.errorMessage !== false && this.errorMessage != '') {
-                style.padding = '10px 14px'
-                style.paddingBottom
-                this.labelWidth = 200
+                // style.paddingBottom
                 this.errorBottom = false 
-                this.labelMarginBottom = '5px'
+                this.errorTop = true
+                // this.errorWidth = '100%'
             }else {
-                style.paddingBottom = ''           
+                // style.paddingBottom = ''
+                this.errorTop = false
+                this.errorBottom = false
+
             }
+
             return style
         },
 		inputWrapStyle() {
@@ -216,7 +229,8 @@ export default {
 				style.margin = `0 4px`;
 			} else {
 				// 如果lable是top的，input的左边就没必要有间隙了
-				style.marginRight = `4px`;
+                style.marginRight = `4px`;
+                // this.fieldStyle.style.padding = '10px 14px'
 			}
 			return style;
 		},
@@ -337,6 +351,7 @@ export default {
 }
 
 .fild-body {
+    width: 100%;
 	display: flex;
 	flex: 1;
 	align-items: center;
@@ -356,11 +371,12 @@ export default {
 
 .uni-label-postion-top {
 	flex-direction: column;
-	align-items: flex-start;
+    align-items: flex-start;
+    flex: 1;
 }
 
 .uni-label {
-	width: 65px;
+	width: 75px;
 	flex: 1 1 65px;
 	text-align: left;
 	position: relative;
@@ -500,4 +516,12 @@ export default {
 .uni-flex-1 {
     flex: 1;
 }
+.uni-error-in-label {
+    // width: 100%;
+    display: flex;
+	flex-direction: row;
+    align-items: center;
+    // justify-content: space-between;
+}
+
 </style>
