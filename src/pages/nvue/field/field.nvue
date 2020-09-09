@@ -4,8 +4,7 @@
         v-model="name"
         label="姓名"
         placeholder="请填写姓名"
-        error-message="请填写姓名"
-        label-position="top"
+        :error-message="errorMessage"
       ></uni-field>
       <uni-field
         v-model="mobile"
@@ -14,8 +13,7 @@
         iconColor="#999"
         label-position="left"
         placeholder="请填写手机号"
-        error-message="请填写姓名"
-        
+        :error-message="errorMessage"
         type="text"
         :clearable="true"
      >
@@ -33,16 +31,17 @@
         :clearable="true"
         :password="false" 
         :disabled="false"
-        maxlength="5"
         confirmType="good"
-        error-message="请填写微信号"
+        :error-message="errorMessage" 
      />
      <uni-field
         v-model="message"
         type="textarea"
         label="家庭地址"
         placeholder="请填写详细住址"
+        :error-message="errorMessage" 
      />
+      <button type="error" @click="changeError">toggle errorMessage</button>
   </view>
 </template>
 
@@ -53,8 +52,15 @@ export default {
             name: '',
             mobile: '139 9999 9999',
             weixin: 'sskd',
-            message: ''
+            message: '',
+            errorMessage: ''
          }
+    },
+
+    methods: {
+      changeError () {
+         this.errorMessage = this.errorMessage ? '' : '6666666666'
+      }
     }
     
 }
