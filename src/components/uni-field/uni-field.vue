@@ -2,42 +2,29 @@
 	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }" :style="[fieldStyle]">
 		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPosition]">
 			<view :class="!errorBottom ? 'uni-error-in-label' : ''">
-                <view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
-                    justifyContent: justifyContent, 
+				<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
+                    justifyContent: justifyContent,
                     flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1',
                     marginBottom: labelMarginBottom,
                     width: errorWidth
                 }">
-                    <view class="uni-icon-wrap" v-if="leftIcon">
-                        <uni-icons size="16" :type="leftIcon" :color="iconColor" />
-                    </view>
-                    <slot name="leftIcon"></slot>
-                    <text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
-                </view>
-                <view v-if="!errorBottom" class="uni-error-message" :style="{
+					<view class="uni-icon-wrap" v-if="leftIcon">
+						<uni-icons size="16" :type="leftIcon" :color="iconColor" />
+					</view>
+					<slot name="leftIcon"></slot>
+					<text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
+				</view>
+				<view v-if="!errorBottom" class="uni-error-message" :style="{
                         display: 'inline-block',
                         paddingLeft: '4px'
                     }">{{ errorMessage }}</view>
-            </view> 
+			</view>
 			<view class="fild-body">
 
 				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
-					<textarea 
-                        v-if="type == 'textarea'" 
-                        class="uni-flex-1 uni-textarea-class"
-                        :name="name"
-                        :value="value"
-					    :placeholder="placeholder" 
-                        :placeholderStyle="placeholderStyle"
-                        :disabled="disabled"
-                        :maxlength="inputMaxlength"
-					    :focus="focus"
-                        :autoHeight="autoHeight"
-                        @input="onInput"
-                        @blur="onBlur"
-                        @focus="onFocus"
-                        @confirm="onConfirm"
-					    @tap="fieldClick" />
+					<textarea v-if="type == 'textarea'" class="uni-flex-1 uni-textarea-class" :name="name" :value="value" :placeholder="placeholder"
+					 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" :autoHeight="autoHeight"
+					 @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm" @tap="fieldClick" />
 					<input
 						v-else
 						:type="type"
@@ -95,7 +82,7 @@
  * @property {Boolean} trim 是否自动去除两端的空格
  * @property {String} name 表单域的属性名，在使用校验规则时必填
  * @property {Array} rules 单行表单验证规则，接受一个数组
- * 
+ *
  * @property {Boolean} border-bottom 是否显示field的下边框（默认true）
  * @property {Boolean} border-top 是否显示field的上边框（默认false）
  * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效（默认true）
@@ -137,10 +124,10 @@ export default {
 			type: Boolean,
 			default: true
 		},
-		errorMessage: {
-			type: [String, Boolean],
-			default: ''
-		},
+		// errorMessage: {
+		// 	type: [String, Boolean],
+		// 	default: ''
+		// },
 		placeholder: String,
 		placeholderStyle: String,
         focus: Boolean,
@@ -194,8 +181,15 @@ export default {
             itemIndex: 0,
             errorBottom: false,
             labelMarginBottom: '',
-            errorWidth: ''
+            errorWidth: '',
+			val: '' ,// 绑定输入值
+			errorMessage:'' , // 错误提示
 		};
+	},
+	watch:{
+		value(newVal) {
+			this.val = newVal
+		}
 	},
 	computed: {
         fieldStyle() {
@@ -210,7 +204,7 @@ export default {
                 this.errorTop = false
             } else if (this.labelPosition == 'top' && this.errorMessage !== false && this.errorMessage != '') {
                 // style.paddingBottom
-                this.errorBottom = false 
+                this.errorBottom = false
                 this.errorTop = true
                 // this.errorWidth = '100%'
             }else {
@@ -266,28 +260,59 @@ export default {
 			} else {
 				style.flexDirection = 'column';
 			}
-			
+
 			return style;
 		}
 	},
+	created() {
+		this.form = this.getForm()
+		this.formRules = []
+		if (this.form) {
+			this.form.childrens.push(this)
+			if (this.form.formRules) {
+				this.formRules = this.form.formRules[this.name]
+			}
+			this.validator = this.form.validator
+		}
+	},
 	methods: {
+		/**
+		 * 获取父元素实例
+		 */
+		getForm() {
+			let parent = this.$parent;
+			let parentName = parent.$options.name;
+			while (parentName !== 'uniForms') {
+				parent = parent.$parent;
+				if (!parent) return false
+				parentName = parent.$options.name;
+			}
+			return parent;
+		},
 		onInput(event) {
 			let value = event.detail.value;
 			// 判断是否去除空格
 			if(this.trim) value = this.trimStr(value);
 			this.$emit('input', value);
+			// 校验输入
+			this.val = value
+			this.triggerValidator('change', value)
 		},
 		onFocus(event) {
 			this.focused = true;
 			this.$emit('focus', event);
 		},
 		onBlur(event) {
+			let value = event.detail.value
 			// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
 			// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
 			setTimeout(() => {
 				this.focused = false;
 			}, 100)
 			this.$emit('blur', event);
+
+			// 校验输入
+			this.triggerValidator('blur', value)
 		},
 		onConfirm(e) {
 			this.$emit('confirm', e.detail.value);
@@ -295,6 +320,7 @@ export default {
 		onClear(event) {
             console.log('====== event =======', event)
 			this.$emit('input', '');
+			this.clearValidate()
 		},
 		rightIconClick() {
 			this.$emit('right-icon-click');
@@ -315,13 +341,57 @@ export default {
             } else {
                 return str;
             }
-        }
+        },
+		/**
+		 * 移除该表单项的校验结果
+		 */
+		clearValidate(){
+			this.errorMessage = ''
+		},
+		/**
+		 * 父组件处理函数
+		 * @param {Object} callback
+		 */
+		parentVal(callback) {
+			if (this.type === 'number') {
+				this.val = this.val === '' ? this.val : Number(this.val)
+			}
+			typeof(callback) === 'function' && callback({
+				[this.name]: this.val
+			}, this.name)
+		},
+		/**
+		 * 触发校验
+		 * @param {Object} trigger
+		 * @param {Object} value
+		 */
+		triggerValidator(trigger, value) {
+			// 如果 name 不存在，则不开启校验
+			this.formRules && this.formRules.forEach(item => {
+				if (item.trigger !== trigger) return
+				this.triggerCheck(value)
+			})
+		},
+		/**
+		 * 校验规则
+		 * @param {Object} value
+		 */
+		triggerCheck(value) {
+			// 输入值为 number
+			if (this.type === 'number') {
+				value = value === '' ? value : Number(value)
+			}
+			const result = this.validator.validate({
+				[this.name]: value
+			})
+			this.errorMessage = !result ? '' : result.message
+		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-	
+
 .uni-field {
     padding: 20px 14px;
     // padding: 0 14px;

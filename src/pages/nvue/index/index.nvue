@@ -51,6 +51,10 @@
 					{
 						name: 'Section 标题栏',
 						url: 'section'
+					},
+					{
+						name: 'Form 表单',
+						url: 'form'
 					}
 				],
 				views: [{
