@@ -1,17 +1,22 @@
 <template>
-	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }">
+	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }" :style="[fieldStyle]">
 		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPosition]">
 			<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
 				justifyContent: justifyContent, 
-				flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1'
+				flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1',
+                marginBottom: labelMarginBottom
 			}">
 				<view class="uni-icon-wrap" v-if="leftIcon">
                     <uni-icons size="16" :type="leftIcon" :color="iconColor" />
 				</view>
 				<slot name="leftIcon"></slot>
 				<text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
+                <view v-if="!errorBottom" class="uni-error-message" :style="{
+                    paddingLeft: '4px'
+                }">{{ errorMessage }}</view>
 			</view>
 			<view class="fild-body">
+
 				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
 					<textarea 
                         v-if="type == 'textarea'" 
@@ -49,13 +54,13 @@
 						@tap="fieldClick"
 					/>
 				</view>
-                <uni-icons :size="clearSize" v-if="clearable && value != '' && focused" type="clear" color="#c0c4cc" @click="onClear" />
+                <uni-icons :size="clearSize" v-if="clearable && value != '' && focused" type="clear" color="#c0c4cc" @click="onClear" class="u-clear-icon" />
 				<view class="uni-button-wrap"><slot name="right" /></view>
                 <uni-icons v-if="rightIcon" size="16" @click="rightIconClick" :type="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" />
         	</view>
 		</view>
-		<view v-if="errorMessage !== false && errorMessage != ''" class="uni-error-message" :style="{
-			paddingLeft: labelWidth + 'px'
+		<view v-if="errorBottom" class="uni-error-message" :style="{
+			paddingLeft: labelWidth + 4 + 'px'
 		}">{{ errorMessage }}</view>
 	</view>
 </template>
@@ -113,7 +118,7 @@ export default {
 		// 左边标题的宽度单位px
 		labelWidth: {
 			type: [Number, String],
-			default: 65
+			default: 75
 		},
 		// 对齐方式，left|center|right
 		labelAlign: {
@@ -182,10 +187,28 @@ export default {
 	data() {
 		return {
 			focused: false,
-			itemIndex: 0,
+            itemIndex: 0,
+            errorBottom: false,
+            labelMarginBottom: ''
 		};
 	},
 	computed: {
+        fieldStyle() {
+            let style = {}
+            if (this.labelPosition == 'left' && this.errorMessage !== false && this.errorMessage != '') {
+                style.paddingBottom = '0px'
+                this.errorBottom = true
+            } else if (this.labelPosition == 'top' && this.errorMessage !== false && this.errorMessage != '') {
+                style.padding = '10px 14px'
+                style.paddingBottom
+                this.labelWidth = 200
+                this.errorBottom = false 
+                this.labelMarginBottom = '5px'
+            }else {
+                style.paddingBottom = ''           
+            }
+            return style
+        },
 		inputWrapStyle() {
 			let style = {};
 			// 判断lable的位置，如果是left的话，让input左边两边有间隙
@@ -286,11 +309,16 @@ export default {
 <style lang="scss" scoped>
 	
 .uni-field {
-	font-size: 14px;
-	padding: 10px 14px;
+    padding: 20px 14px;
+    // padding: 0 14px;
+    // min-height: 62px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
 	text-align: left;
-	position: relative;
+	// position: relative;
 	color: #333;
+	font-size: 14px;
 }
 
 .uni-field-inner {
@@ -304,7 +332,7 @@ export default {
 
 .uni-textarea-class {
 	min-height: 48px;
-	// width: auto;
+	width: auto;
 	font-size: 14px;
 }
 
@@ -345,7 +373,7 @@ export default {
 	position: absolute;
 	left: -8px;
 	font-size: 14px;
-	color: red;
+	color: $uni-color-error;
 	height: 9px;
 	line-height: 1;
 }
@@ -365,8 +393,9 @@ export default {
 }
 
 .uni-error-message {
-	color: red;
-	font-size: 13px;
+    padding-bottom: 3px;
+	color: $uni-color-error;
+	font-size: 12px;
 	text-align: left;
 }
 
@@ -412,7 +441,7 @@ export default {
 	width: 199.8%;
 	height: 199.7%;
 	transform: scale(0.5, 0.5);
-	border: 0 solid #666;
+	border: 0 solid $uni-border-color;
 	z-index: 2;
 }
 
@@ -442,7 +471,8 @@ export default {
 /* end--Retina 屏幕下的 1px 边框--end */
 
 .uni-icon-wrap {
-    // padding-right: 6px;
+    padding-left: 3px;
+    padding-right: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -453,5 +483,21 @@ export default {
     display: flex;
     align-items: right;
     justify-content: center;
+}
+.uni-clear-icon {
+	display: flex;
+	align-items: center;
+}
+
+.uni-flex {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	align-items: center;
+}
+
+.uni-flex-1 {
+    flex: 1;
 }
 </style>
