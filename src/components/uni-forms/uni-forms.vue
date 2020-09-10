@@ -100,7 +100,7 @@
 
 				this.$emit('submit', {
 					value,
-					validate: result
+					validate: result.length === 0 ? true : result
 				})
 			},
 			// 表单重置
@@ -108,6 +108,7 @@
 				this.childrens.forEach(item => {
 					item.errorMessage = ''
 					item.val = ''
+					item.$emit('input', '')
 				})
 				this.$emit('reset', event)
 			},
@@ -117,15 +118,18 @@
 			 * @param {Object} validate
 			 */
 			validateCheck(validate) {
+				if (validate === null) validate = true
 				this.$emit('validate', validate)
 			},
 
 			/**
 			 * 校验所有或者部分表单
 			 */
-			validateAll(invalidFields) {
+			validateAll(invalidFields, type) {
 				if (!this.validator) return
-				this.resetForm()
+				this.childrens.forEach(item => {
+					item.errorMessage = ''
+				})
 				const result = this.validator.validateAll(invalidFields)
 				let example = null
 				result.forEach(item => {
@@ -134,11 +138,15 @@
 				})
 
 				typeof callback === 'function' && callback(!result, invalidFields)
-
-				this.$emit('submit', {
-					value: invalidFields,
-					validate: result
-				})
+				console.log(type);
+				if (type === 'submit') {
+					this.$emit('submit', {
+						value:invalidFields,
+						validate: result.length === 0 ? true : result
+					})
+				} else {
+					this.$emit('validate', result.length === 0 ? true : result)
+				}
 			},
 
 			/**
@@ -152,7 +160,7 @@
 						invalidFields = Object.assign({}, invalidFields, val)
 					})
 				})
-				this.validateAll(invalidFields)
+				this.validateAll(invalidFields, 'submit')
 			},
 
 			/**
@@ -185,6 +193,7 @@
 			 */
 			clearValidate(props) {
 				props = [].concat(props);
+				console.log(props)
 				this.childrens.forEach(item => {
 					if (props.length === 0) {
 						item.errorMessage = ''
@@ -204,6 +213,5 @@
 <style lang="scss">
 	.uni-form {
 		// border: 1px red solid;
-		background-color: #FFFCF7;
 	}
 </style>

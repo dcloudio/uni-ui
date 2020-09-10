@@ -43,15 +43,25 @@ class SchemaValidator {
     var options = {
       message: SchemaValidator.message
     }
+
     for (var i = 0; i < rules.length; i++) {
       let rule = rules[i]
       let vt = this._getValidateType(rule)
-      if (validator[vt]) {
-        var v = validator[vt](rule, value, options)
-        if (v != null) {
-          result = v
+      if (!vt) {
+        continue
+      }
+
+      var v = validator[vt](rule, value, options)
+      if (v != null) {
+        result = v
+        break
+      }
+
+      if (rule.validator) {
+        var res = rule.validator(rule, value)
+        if (!res) {
+          result = validatorHelper.format(rule, rule.message || options.message[vt] || options.message['default'])
           break
-        } else {
         }
       }
     }
@@ -62,11 +72,14 @@ class SchemaValidator {
     var result = ''
     if (rule.required) {
       result = 'required'
-    } else if (rule.type) {
-      result = 'type'
     } else if (rule.enum || rule.maximum || rule.minimum || rule.maxLength || rule.minLength) {
       result = 'range'
+    } else if (rule.type || rule.format) {
+      result = 'type'
+    } else if (rule.pattern) {
+      result = 'pattern'
     }
+
     return result
   }
 }
@@ -95,9 +108,7 @@ function isEmptyValue(value, type) {
 const validator = {
   required(rule, value, options) {
     if (rule.required && isEmptyValue(value, rule.type)) {
-      return validatorHelper.format({
-        s: ""
-      }, rule.message || options.messages.required);
+      return validatorHelper.format(rule, rule.message || options.message.required);
     }
 
     return null
@@ -129,9 +140,17 @@ const validator = {
     return null
   },
 
+  pattern(rule, value, options) {
+    if (!types['pattern'](value)) {
+      return validatorHelper.format(rule, rule.message || options.message.pattern.mismatch);
+    }
+
+    return null
+  },
+
   type(rule, value, options) {
     var customTypes = Object.keys(types);
-    var ruleType = rule.type;
+    var ruleType = rule.type || rule.format;
 
     if (customTypes.indexOf(ruleType) > -1) {
       if (!types[ruleType](value)) {
@@ -168,7 +187,7 @@ const types = {
   url(value) {
     return typeof value === 'string' && !!value.match(pattern.url);
   },
-  regexp(value) {
+  pattern(value) {
     if (value instanceof RegExp) {
       return true;
     }
@@ -186,6 +205,10 @@ const types = {
 
 const validatorHelper = {
   format(args, resources) {
+    if (args.label === undefined) {
+      args.label = ''
+    }
+
     let str = resources
     for (let key in args) {
       let reg = new RegExp('{' + key + '}')
@@ -197,42 +220,42 @@ const validatorHelper = {
 
 function Message() {
   return {
-    default: 'field 验证错误 {s}',
-    required: '{s} 必填',
-    enum: '{s} 必须在{s}和{s}之间',
-    whitespace: '{s} 不能为空',
+    default: '验证错误 {s}',
+    required: '{label}必填',
+    enum: '{label}必须在{min}和{max}之间',
+    whitespace: '{label}不能为空',
     date: {
-      format: '{s} date {s} is invalid for format {s}',
-      parse: '{s} date could not be parsed, {s} is invalid ',
-      invalid: '{s} date {s} is invalid',
+      format: '{label}日期{value}格式无效',
+      parse: '{label}日期无法解析,{value}无效',
+      invalid: '{label}日期{value}无效'
     },
     types: {
-      string: '{s} 不是 {s}',
-      array: '{s} 不是 {s}',
-      object: '{s} 不是 {s}',
-      number: '{s} 不是 {s}',
-      date: '{s} 不是 {s}',
-      boolean: '{s} 不是 {s}',
-      integer: '{s} 不是 {s}',
-      float: '{s} 不是 {s}',
-      regexp: '{s} 不是有效的 {s}',
-      email: '{s} 不是有效的 {s}',
-      url: '{s} 不是有效的 {s}'
+      string: '{label}不是{value}',
+      array: '{label}不是{value}',
+      object: '{label}不是{value}',
+      number: '{label}不是{value}',
+      date: '{label}不是{value}',
+      boolean: '{label}不是{value}',
+      integer: '{label}不是{value}',
+      float: '{label}不是{value}',
+      regexp: '{label}不是有效的{value}',
+      email: '{label}不是有效的{value}',
+      url: '{label}不是有效的{value}'
     },
     string: {
-      len: '{label} must be exactly {s} characters',
-      min: '{label} 不能少于 {minLength} 个字符',
-      max: '{label} 不能超过 {maxLength} 个字符',
-      range: '{label} 必须介于 {minLength} 和 {maxLength} 个字符之间'
+      len: '{label}必须为{length}个字符',
+      min: '{label}不能少于 {minLength}个字符',
+      max: '{label}不能超过 {maxLength}个字符',
+      range: '{label}必须介于 {minLength}和{maxLength}个字符之间'
     },
     number: {
-      len: '{label} must equal {s}',
-      min: '{label} 不能小于 {minimum}',
-      max: '{label} 不能大于 {maximum}',
-      range: '{label} must be between {s} and {s}',
+      len: '{label}必须等于{length}',
+      min: '{label}不能小于{minimum}',
+      max: '{label}不能大于{maximum}',
+      range: '{label}必须介于{minimum}and{maximum}之间'
     },
     pattern: {
-      mismatch: '{s} value {s} does not match pattern {s}',
+      mismatch: '{label} value {value} does not match pattern {pattern}'
     }
   };
 }

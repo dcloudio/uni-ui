@@ -1,16 +1,31 @@
 <template>
 	<view>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" :form-rules="rules" @submit="submit">
-			<uni-field label-class="htclass" label="姓名" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
-			<uni-field type="number" label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
-			<uni-field type="text" label="邮箱" name="email" v-model="formData.age" placeholder="请输入电子邮箱" />
-			<uni-field type="number" label="体重" name="size" v-model="formData.size" placeholder="请输入年龄" />
+		<uni-forms ref="form" :form-rules="rules" @submit="submit" @reset="reset" @validate="validate">
+			<uni-group>
+				<uni-field label="姓名" name="name" :rules="[
+					{
+							maxLength: 2,
+							message: '组件内校验，最大长度不超过2',
+							trigger: 'change'
+					}
+				]"
+				 v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
+				<uni-field type="number" label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
+			</uni-group>
+			<uni-group>
+				<uni-field type="text" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
+				<uni-field type="number" label="体重" name="size" v-model="formData.size" placeholder="请输入年龄" />
+			</uni-group>
+
 			<button class="button" form-type="submit">Submit</button>
 			<button form-type="reset">Reset</button>
+
 			<button class="button" @click="submitForm('form')">手动提交</button>
 			<button @click="validateField('form')">校验部分表单</button>
-			<button @click="clearValidate('form')">移除部分表单校验结果</button>
+			<button @click="clearValidate('form','name')">移除部分表单校验结果</button>
+			<button @click="clearValidate('form')">移除全部表单校验结果</button>
+			<button @click="resetFields('form')">手动重置表单</button>
 		</uni-forms>
 	</view>
 </template>
@@ -73,19 +88,68 @@
 			}
 		},
 		methods: {
+			/**
+			 * 触发校验
+			 * @param {Object} event
+			 */
+			validate(event) {
+				console.log('触发校验：', event);
+			},
+
+			/**
+			 * 表单提交
+			 * @param {Object} event
+			 */
 			submit(event) {
 				console.log(event)
 			},
+
+			/**
+			 * 手动提交
+			 * @param {Object} event
+			 */
+			reset(event) {
+				console.log('表单重置：', event);
+			},
+
+			/**
+			 * 手动提交
+			 * @param {Object} form
+			 */
 			submitForm(form) {
 				this.$refs[form].validate((valid, rules) => {
-					console.log('--页面数据', valid, rules)
+					if (valid) {
+						console.log('校验通过')
+					} else {
+						console.error('校验失败', rules);
+					}
 				})
 			},
+
+			/**
+			 * 部分表单校验
+			 * @param {Object} form
+			 */
 			validateField(form) {
 				this.$refs[form].validateField('name')
 			},
-			clearValidate(form) {
-				this.$refs[form].clearValidate(['name', 'age'])
+
+			/**
+			 * 清除表单校验
+			 * @param {Object} form
+			 * @param {Object} name
+			 */
+			clearValidate(form, name) {
+				if (!name) name = []
+				this.$refs[form].clearValidate(name)
+			},
+
+			/**
+			 * 手动重置表单
+			 * @param {Object} form
+			 */
+			resetFields(form) {
+				this.$refs[form].resetFields()
 			}
 		}
 	}
