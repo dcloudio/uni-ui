@@ -1,0 +1,11 @@
+{
+	"id": "9999",
+	"name": "Forms",
+	"desc": "表单",
+	"edition": "1.0.0",
+	"url": "forms",
+	"type": "布局组件",
+	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
+	"update_log": "",
+	"hidden": true
+}
