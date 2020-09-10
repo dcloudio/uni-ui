@@ -9,6 +9,7 @@
       <uni-field
         v-model="mobile"
         label="手机号"
+         labelWidth="120"
         left-icon="camera"
         iconColor="#999"
         label-position="left"
@@ -59,7 +60,7 @@ export default {
 
    methods: {
       changeError () {
-         this.errorMessage = this.errorMessage ? '' : '6666666666'
+         this.errorMessage = this.errorMessage ? '' : '请填写对应内容'
       }
    }
     

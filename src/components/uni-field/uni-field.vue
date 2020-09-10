@@ -51,7 +51,7 @@
         	</view>
 		</view>
 		<view v-if="errorBottom" class="uni-error-message" :style="{
-			paddingLeft: labelWid + 4 + 'px'
+			paddingLeft: Number(labelWid) + 4 + 'px'
 		}">{{ errorMessage }}</view>
 	</view>
 </template>
