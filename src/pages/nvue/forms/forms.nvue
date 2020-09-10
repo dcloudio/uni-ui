@@ -1,19 +1,12 @@
 <template>
 	<view>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" :form-rules="rules" @submit="submit" @reset="reset" @validate="validate">
-			<uni-group>
-				<uni-field label="姓名" name="name" :rules="[
-					{
-							maxLength: 2,
-							message: '组件内校验，最大长度不超过2',
-							trigger: 'change'
-					}
-				]"
-				 v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
-				<uni-field type="number" label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
+		<uni-forms ref="form" labelPosition="left" labelAlign="left" :labelWidth="100" :form-rules="rules" @submit="submit" @reset="reset" @validate="validate">
+			<uni-group title="基本信息">
+				<uni-field labelPosition="left" label="姓名" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
+				<uni-field type="number" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
 			</uni-group>
-			<uni-group>
+			<uni-group title="详细信息">
 				<uni-field type="text" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
 				<uni-field type="number" label="体重" name="size" v-model="formData.size" placeholder="请输入年龄" />
 			</uni-group>

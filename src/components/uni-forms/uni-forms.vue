@@ -26,7 +26,7 @@
 			// label 宽度，单位 px
 			labelWidth: {
 				type: [String, Number],
-				default: 120
+				default: 75
 			},
 			// label 居中方式，可选值 left/center/right
 			labelAlign: {

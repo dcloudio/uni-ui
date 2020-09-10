@@ -1,12 +1,12 @@
 <template>
 	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }" :style="[fieldStyle]">
-		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPosition]">
+		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPos]">
 			<view :class="errorTop ? 'uni-error-in-label' : ''">
 				<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
                     justifyContent: justifyContent,
-                    flex: labelPosition == 'left' ? `0 0 ${labelWidth}px` : '1',
+                    width: labelWid +'px',
                     marginBottom: labelMarginBottom,
-                    width: errorWidth
+                    width: labelWid +'px'
                 }">
 					<view class="uni-icon-wrap" v-if="leftIcon">
 						<uni-icons size="16" :type="leftIcon" :color="iconColor" />
@@ -51,7 +51,7 @@
         	</view>
 		</view>
 		<view v-if="errorBottom" class="uni-error-message" :style="{
-			paddingLeft: labelWidth + 4 + 'px'
+			paddingLeft: labelWid + 4 + 'px'
 		}">{{ errorMessage }}</view>
 	</view>
 </template>
@@ -60,38 +60,37 @@
 /**
  * field 输入框
  * @description 此组件可以实现表单的输入， 有"text"和"textarea"类型。
- * @property {String} type 输入框的类型（默认text）
- * @property {Boolean} required 是否必填，左边您显示红色"*"号（默认false）
- * @property {String} leftIcon label左边的图标，限uni-ui的图标名称
- * @property {String} iconColor 左边通过icon配置的图标的颜色（默认#606266）
- * @property {Boolean} rightIcon 输入框右边的图标名称，限uni-ui的图标名称（默认false）
- * @property {String} label 输入框左边的文字提示
- * @property {Number String} labelWidth label的宽度，单位px（默认65）
- * @property {String} labelAlign label的文字对齐方式（默认left）
- * @property {String} labelPosition label的文字的位置（默认left）
- * @property {Boolean} clearable 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容（默认true）
- * @property {String} placeholder 输入框的提示文字
- * @property {String} placeholderStyle placeholder的样式(内联样式，字符串)，如"color: #ddd"
- * @property {Boolean} password 是否密码输入方式(用点替换文字)，type为text时有效（默认false）
- * @property {Boolean} focus 是否自动获得焦点（默认false）
- * @property {Boolean} disabled 是否不可输入（默认false）
- * @property {Number String} maxlength 最大输入长度，设置为 -1 的时候不限制最大长度（默认140）
- * @property {String} confirmType 设置键盘右下角按钮的文字，仅在type="text"时生效（默认done）
- * @property {String Boolean} errorMessage 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
- * @property {Number | String} clearSize 清除图标的大小，单位px（默认15）
- * @property {Boolean} trim 是否自动去除两端的空格
- * @property {String} name 表单域的属性名，在使用校验规则时必填
- * @property {Array} rules 单行表单验证规则，接受一个数组
- *
- * @property {Boolean} border-bottom 是否显示field的下边框（默认true）
- * @property {Boolean} border-top 是否显示field的上边框（默认false）
- * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效（默认true）
- * @event {Function} input 输入框内容发生变化时触发
- * @event {Function} focus 输入框获得焦点时触发
- * @event {Function} blur 输入框失去焦点时触发
- * @event {Function} confirm 点击完成按钮时触发
- * @event {Function} right-icon-click 通过right-icon生成的图标被点击时触发
- * @event {Function} click 输入框被点击或者通过right-icon生成的图标被点击时触发，这样设计是考虑到传递右边的图标，一般都为需要弹出"picker"等操作时的场景，点击倒三角图标，理应发出此事件，见上方说明
+ * @property {String } 	type 				输入框的类型（默认text）
+ * @property {Boolean} 	required 			是否必填，左边您显示红色"*"号（默认false）
+ * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
+ * @property {String } 	iconColor 			左边通过icon配置的图标的颜色（默认#606266）
+ * @property {Boolean} 	rightIcon 			输入框右边的图标名称，限uni-ui的图标名称（默认false）
+ * @property {String } 	label 				输入框左边的文字提示
+ * @property {Number } 	labelWidth 			label的宽度，单位px（默认65）
+ * @property {String } 	labelAlign 			label的文字对齐方式（默认left）
+ * @property {String } 	labelPosition 		label的文字的位置（默认left）
+ * @property {Boolean} 	clearable 			是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容（默认true）
+ * @property {String } 	placeholder 		输入框的提示文字
+ * @property {String } 	placeholderStyle 	placeholder的样式(内联样式，字符串)，如"color: #ddd"
+ * @property {Boolean} 	password 			是否密码输入方式(用点替换文字)，type为text时有效（默认false）
+ * @property {Boolean} 	focus 				是否自动获得焦点（默认false）
+ * @property {Boolean} 	disabled 			是否不可输入（默认false）
+ * @property {Number } 	maxlength 			最大输入长度，设置为 -1 的时候不限制最大长度（默认140）
+ * @property {String } 	confirmType 		设置键盘右下角按钮的文字，仅在type="text"时生效（默认done）
+ * @property {String } 	errorMessage 		显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
+ * @property {Number } 	clearSize 			清除图标的大小，单位px（默认15）
+ * @property {Boolean} 	trim 				是否自动去除两端的空格
+ * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
+ * @property {Array  }  rules 				单行表单验证规则，接受一个数组
+ * @property {Boolean} 	border-bottom 		是否显示field的下边框（默认true）
+ * @property {Boolean} 	border-top 			是否显示field的上边框（默认false）
+ * @property {Boolean} 	auto-height 		是否自动增高输入区域，type为textarea时有效（默认true）
+ * @event {Function} 	input 				输入框内容发生变化时触发
+ * @event {Function} 	focus 				输入框获得焦点时触发
+ * @event {Function} 	blur 				输入框失去焦点时触发
+ * @event {Function} 	confirm 			点击完成按钮时触发
+ * @event {Function} 	right-icon-click 	通过right-icon生成的图标被点击时触发
+ * @event {Function} 	click 				输入框被点击或者通过right-icon生成的图标被点击时触发，这样设计是考虑到传递右边的图标，一般都为需要弹出"picker"等操作时的场景，点击倒三角图标，理应发出此事件，见上方说明
  * @example <uni-field v-model="mobile" label="手机号" required :error-message="errorMessage"></uni-field>
  */
 export default {
@@ -115,12 +114,12 @@ export default {
 		// 左边标题的宽度单位px
 		labelWidth: {
 			type: [Number, String],
-			default: 75
+			default: ''
 		},
 		// 对齐方式，left|center|right
 		labelAlign: {
 			type: String,
-			default: 'left'
+			default: ''
 		},
 		iconColor: {
 			type: String,
@@ -158,7 +157,7 @@ export default {
 		// lable的位置，可选为 left-左边，top-上边
 		labelPosition: {
 			type: String,
-			default: 'left'
+			default: ''
 		},
 		// 清除按钮的大小
 		clearSize: {
@@ -191,20 +190,23 @@ export default {
             errorWidth: '',
 			errorMessage: '',
 			val:'',
+			labelPos:'',
+			labelWid:'',
+			labelAli:''
 		};
 	},
 	computed: {
         fieldStyle() {
             let style = {}
-            if(this.labelPosition == 'top') {
+            if(this.labelPos == 'top') {
                 style.padding = '10px 14px'
                 this.labelMarginBottom = '3px'
             }
-            if (this.labelPosition == 'left' && this.errorMessage !== false && this.errorMessage != '') {
+            if (this.labelPos == 'left' && this.errorMessage !== false && this.errorMessage != '') {
                 style.paddingBottom = '0px'
                 this.errorBottom = true
                 this.errorTop = false
-            } else if (this.labelPosition == 'top' && this.errorMessage !== false && this.errorMessage != '') {
+            } else if (this.labelPos == 'top' && this.errorMessage !== false && this.errorMessage != '') {
                 this.errorBottom = false
                 this.errorTop = true
             }else {
@@ -219,7 +221,7 @@ export default {
 		inputWrapStyle() {
 			let style = {};
 			// 判断lable的位置，如果是left的话，让input左边两边有间隙
-			if(this.labelPosition == 'left') {
+			if(this.labelPos == 'left') {
 				style.margin = `0 4px`;
 			} else {
 				// 如果lable是top的，input的左边就没必要有间隙了
@@ -237,16 +239,16 @@ export default {
 		},
 		labelStyle() {
 			let style = {};
-			if(this.labelAlign == 'left') style.justifyContent = 'flext-start';
-			if(this.labelAlign == 'center') style.justifyContent = 'center';
-			if(this.labelAlign == 'right') style.justifyContent = 'flext-end';
+			if(this.labelAli == 'left') style.justifyContent = 'flext-start';
+			if(this.labelAli == 'center') style.justifyContent = 'center';
+			if(this.labelAli == 'right') style.justifyContent = 'flext-end';
 			return style;
 		},
 		// uni不支持在computed中写style.justifyContent = 'center'的形式，故用此方法
 		justifyContent() {
-			if(this.labelAlign == 'left') return 'flex-start';
-			if(this.labelAlign == 'center') return 'center';
-			if(this.labelAlign == 'right') return 'flex-end';
+			if(this.labelAli == 'left') return 'flex-start';
+			if(this.labelAli == 'center') return 'center';
+			if(this.labelAli == 'right') return 'flex-end';
 		},
 		// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
 		inputMaxlength() {
@@ -255,7 +257,7 @@ export default {
 		// label的位置
 		fieldInnerStyle() {
 			let style = {};
-			if(this.labelPosition == 'left') {
+			if(this.labelPos == 'left') {
 				style.flexDirection = 'row';
 			} else {
 				style.flexDirection = 'column';
@@ -267,18 +269,29 @@ export default {
 	created() {
 		this.form = this.getForm()
 		this.formRules = []
+
+
 		if (this.form) {
 			this.form.childrens.push(this)
+			console.log(this.form.labelWidth )
+			this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
+			this.labelWid = this.labelWidth    ? this.labelWidth    : this.form.labelWidth
+			this.labelAli = this.labelAlign	   ? this.labelAlign    : this.form.labelAlign
+
 			if (this.form.formRules) {
 				this.formRules = this.form.formRules[this.name]
 			}
 			this.validator = this.form.validator
+		}else{
+			this.labelPos = this.labelPosition 	|| 'left'
+			this.labelWid = this.labelWidth 	|| 75
+			this.labelAli = this.labelAlign		|| 'left'
 		}
-		
+
 		if(this.rules.length > 0){
-			
+
 		}
-		
+
 	},
 	methods: {
 		/**
@@ -321,14 +334,14 @@ export default {
 			// 如果 name 不存在，则不开启校验
 			this.formRules && this.formRules.forEach(item => {
 				if (item.trigger !== trigger) return
-				this.triggerCheck(value)
+				this.triggerCheck(value,item)
 			})
 		},
 		/**
 		 * 校验规则
 		 * @param {Object} value
 		 */
-		triggerCheck(value) {
+		triggerCheck(value,item) {
 			// 输入值为 number
 			if (this.type === 'number') {
 				value = value === '' ? value : Number(value)
