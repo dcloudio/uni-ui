@@ -4,11 +4,12 @@
         v-model="name"
         label="姓名"
         placeholder="请填写姓名"
-        :error-message="errorMessage"
+        :error-message="6666666666"
       ></uni-field>
       <uni-field
         v-model="mobile"
         label="手机号"
+         labelWidth="120"
         left-icon="camera"
         iconColor="#999"
         label-position="left"
