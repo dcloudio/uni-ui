@@ -17,7 +17,7 @@
         type="text"
         :clearable="true"
      >
-        <button v-if="true" slot="right" size="mini" type="success">发送验证码</button>
+        <button v-if="true" type="primary" slot="right" size="mini">发送验证码</button>
      </uni-field>
      <uni-field
         v-model="weixin"
@@ -47,21 +47,21 @@
 
 <script>
 export default {
-    data() {
-        return {
-            name: '',
-            mobile: '139 9999 9999',
-            weixin: 'sskd',
-            message: '',
-            errorMessage: ''
-         }
-    },
+   data() {
+      return {
+         name: '',
+         mobile: '139 9999 9999',
+         weixin: 'sskd',
+         message: '',
+         errorMessage: ''
+      }
+   },
 
-    methods: {
+   methods: {
       changeError () {
          this.errorMessage = this.errorMessage ? '' : '6666666666'
       }
-    }
+   }
     
 }
 </script>

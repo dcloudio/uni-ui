@@ -56,7 +56,7 @@ class SchemaValidator {
         result = v
         break
       }
-
+	  console.log('-0----',rule,value)
       if (rule.validator) {
         var res = rule.validator(rule, value)
         if (!res) {
@@ -155,7 +155,9 @@ const validator = {
     if (customTypes.indexOf(ruleType) > -1) {
       if (!types[ruleType](value)) {
         return validatorHelper.format(rule, rule.message || options.message[ruleType]);
-      }
+      } else {
+		  return null
+	  }
     }
 
     return null

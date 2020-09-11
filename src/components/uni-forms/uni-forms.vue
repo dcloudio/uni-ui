@@ -18,6 +18,10 @@
 					return {}
 				}
 			},
+			trigger: {
+				type: String,
+				default: 'blur'
+			},
 			// label 位置，可选值 top/left
 			labelPosition: {
 				type: String,
@@ -60,6 +64,7 @@
 			}
 		},
 		created() {
+			console.log(this.trigger)
 			this.childrens = []
 			this.init(this.formRules)
 		},
@@ -141,7 +146,7 @@
 				console.log(type);
 				if (type === 'submit') {
 					this.$emit('submit', {
-						value:invalidFields,
+						value: invalidFields,
 						validate: result.length === 0 ? true : result
 					})
 				} else {
