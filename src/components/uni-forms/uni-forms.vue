@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-form">
-		<form @submit="submitForm" @reset="resetForm">
+		<form  @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
 		</form>
 	</view>
@@ -64,7 +64,6 @@
 			}
 		},
 		created() {
-			console.log(this.trigger)
 			this.childrens = []
 			this.init(this.formRules)
 		},
@@ -80,8 +79,6 @@
 					value
 				} = event.detail
 
-				console.log(event)
-
 				let example = null
 				// 未开启校验规则
 				if (!this.validator) {
@@ -90,6 +87,9 @@
 					})
 					return
 				}
+				this.childrens.forEach(item => {
+					item.errorMessage = ''
+				})
 				for (let i in value) {
 					example = this.childrens.find(child => child.name === i)
 					// 校验 number 的类型
@@ -98,15 +98,13 @@
 					}
 				}
 				const result = this.validator.validateAll(value)
+				
 				result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
 					example.errorMessage = item.message
 				})
-
-				this.$emit('submit', {
-					value,
-					validate: result.length === 0 ? true : result
-				})
+				event.detail.errors = result.length === 0 ? null : result
+				this.$emit('submit', event)
 			},
 			// 表单重置
 			resetForm(event) {
@@ -143,7 +141,6 @@
 				})
 
 				typeof callback === 'function' && callback(!result, invalidFields)
-				console.log(type);
 				if (type === 'submit') {
 					this.$emit('submit', {
 						value: invalidFields,
@@ -198,7 +195,6 @@
 			 */
 			clearValidate(props) {
 				props = [].concat(props);
-				console.log(props)
 				this.childrens.forEach(item => {
 					if (props.length === 0) {
 						item.errorMessage = ''

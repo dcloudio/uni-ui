@@ -47,16 +47,15 @@ class SchemaValidator {
     for (var i = 0; i < rules.length; i++) {
       let rule = rules[i]
       let vt = this._getValidateType(rule)
-      if (!vt) {
-        continue
+
+      if (validator[vt]) {
+        var v = validator[vt](rule, value, options)
+        if (v != null) {
+          result = v
+          break
+        }
       }
 
-      var v = validator[vt](rule, value, options)
-      if (v != null) {
-        result = v
-        break
-      }
-	  console.log('-0----',rule,value)
       if (rule.validator) {
         var res = rule.validator(rule, value)
         if (!res) {
@@ -69,17 +68,18 @@ class SchemaValidator {
   }
 
   _getValidateType(rule) {
-    var result = ''
+    var result = '[]'
     if (rule.required) {
       result = 'required'
     } else if (rule.enum || rule.maximum || rule.minimum || rule.maxLength || rule.minLength) {
       result = 'range'
-    } else if (rule.type || rule.format) {
-      result = 'type'
+    } else if (rule.format) {
+      result = 'format'
     } else if (rule.pattern) {
       result = 'pattern'
+    } else if (rule.validate) {
+      result = 'validate'
     }
-
     return result
   }
 }
@@ -107,7 +107,7 @@ function isEmptyValue(value, type) {
 
 const validator = {
   required(rule, value, options) {
-    if (rule.required && isEmptyValue(value, rule.type)) {
+    if (rule.required && isEmptyValue(value, rule.format)) {
       return validatorHelper.format(rule, rule.message || options.message.required);
     }
 
@@ -121,10 +121,10 @@ const validator = {
 
     var key = ['string', 'number'][type];
     var val = type ? value : value.length;
-    var enum_value = rule.enum;
+    var enumValue = rule.enum;
 
-    if (enum_value) {
-      if (enum_value.indexOf(value) < 0) {
+    if (enumValue) {
+      if (enumValue.indexOf(value) < 0) {
         return validatorHelper.format(rule, options.message[key].len);
       } else {
         return null;
@@ -148,16 +148,14 @@ const validator = {
     return null
   },
 
-  type(rule, value, options) {
+  format(rule, value, options) {
     var customTypes = Object.keys(types);
-    var ruleType = rule.type || rule.format;
+    var format = rule.format;
 
-    if (customTypes.indexOf(ruleType) > -1) {
-      if (!types[ruleType](value)) {
-        return validatorHelper.format(rule, rule.message || options.message[ruleType]);
-      } else {
-		  return null
-	  }
+    if (customTypes.indexOf(format) > -1) {
+      if (!types[format](value)) {
+        return validatorHelper.format(rule, rule.message || options.message[format]);
+      }
     }
 
     return null
@@ -222,9 +220,9 @@ const validatorHelper = {
 
 function Message() {
   return {
-    default: '验证错误 {s}',
+    default: '验证错误',
     required: '{label}必填',
-    enum: '{label}必须在{min}和{max}之间',
+    'enum': '{label}不合法',
     whitespace: '{label}不能为空',
     date: {
       format: '{label}日期{value}格式无效',
