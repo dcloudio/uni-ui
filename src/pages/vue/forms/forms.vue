@@ -1,15 +1,15 @@
 <template>
 	<view>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" labelPosition="left" labelAlign="left" :labelWidth="100" :form-rules="rules" @submit="submit"
+		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
 		 @reset="reset" @validate="validate">
 			<uni-group title="基本信息">
-				<uni-field labelPosition="left" label="姓名" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
-				<uni-field type="number" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
+				<uni-field label="姓名" :input-border="true" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
+				<uni-field type="number" :input-border="true" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
 			</uni-group>
 			<uni-group title="详细信息">
-				<uni-field type="text" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
-				<uni-field type="number" label="体重" name="size" v-model="formData.size" placeholder="请输入年龄" />
+				<uni-field type="text" :input-border="true" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
+				<uni-field type="textarea" :input-border="true" label="体重" name="size" v-model="formData.size" placeholder="请输入体重" />
 			</uni-group>
 
 			<button class="button" form-type="submit">Submit</button>
@@ -66,7 +66,7 @@
 					}],
 					size: [{
 						format: 'number',
-						message: '年龄必须是数字',
+						message: '体重必须是数字',
 						// trigger: 'blur'
 					}, {
 						minimum: 100,

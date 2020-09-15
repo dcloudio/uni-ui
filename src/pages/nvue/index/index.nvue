@@ -54,7 +54,15 @@
 					},
 					{
 						name: 'Form 表单',
-						url: 'form'
+						url: 'forms'
+					},
+					{
+						name: 'Field 字段',
+						url: 'field'
+					},
+					{
+						name: 'Group 分组',
+						url: 'group'
 					}
 				],
 				views: [{

@@ -1,5 +1,10 @@
 <template>
   <view>
+      <uni-group 
+         title="field 组件主要用于实现表单的输入与校验"
+         :top="20"
+      />
+
       <uni-field
         v-model="name"
         label="姓名"
@@ -9,9 +14,6 @@
       <uni-field
         v-model="mobile"
         label="手机号"
-         labelWidth="120"
-        left-icon="camera"
-        iconColor="#999"
         label-position="left"
         placeholder="请填写手机号"
         :error-message="errorMessage"
@@ -23,7 +25,6 @@
      <uni-field
         v-model="weixin"
         label="微信号"
-        left-icon="camera"
         label-position="left"
         placeholder="请填写微信号"
         :required="false"
@@ -42,7 +43,7 @@
         placeholder="请填写详细住址"
         :error-message="errorMessage" 
      />
-      <button type="error" @click="changeError">toggle errorMessage</button>
+      <button type="error" @click="changeError" style="margin-top: 50px">toggle errorMessage</button>
   </view>
 </template>
 
@@ -52,7 +53,7 @@ export default {
       return {
          name: '',
          mobile: '139 9999 9999',
-         weixin: 'sskd',
+         weixin: 'test123',
          message: '',
          errorMessage: ''
       }

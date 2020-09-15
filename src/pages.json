@@ -6,6 +6,24 @@
 			}
 		},
 		{
+			"path": "pages/vue/forms/forms",
+			"style": {
+				"navigationBarTitleText": "Form 表单"
+			}
+		},
+		{
+			"path": "pages/vue/field/field",
+			"style": {
+				"navigationBarTitleText": "Field 字段"
+			}
+		},
+		{
+			"path": "pages/vue/group/group",
+			"style": {
+				"navigationBarTitleText": "Group 分组"
+			}
+		},
+		{
 			"path": "pages/vue/badge/badge",
 			"style": {
 				"navigationBarTitleText": "Badge 数字角标"

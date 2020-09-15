@@ -6,7 +6,6 @@
                     justifyContent: justifyContent,
                     width: labelWid +'px',
                     marginBottom: labelMarginBottom,
-                    width: labelWid +'px'
                 }">
 					<view class="uni-icon-wrap" v-if="leftIcon">
 						<uni-icons size="16" :type="leftIcon" :color="iconColor" />
@@ -14,17 +13,27 @@
 					<slot name="leftIcon"></slot>
 					<text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
 				</view>
-				<view v-if="errorTop" class="uni-error-message" :style="{
-                        display: 'inline-block',
-                        paddingLeft: '4px'
-                    }">{{ errorMessage }}</view>
+				<view v-if="errorTop" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ errorMessage }}</view>
 			</view>
-			<view class="fild-body">
-
+			<view class="fild-body" :class="[inputBorder ? 'uni-input-border' : '']" :style="[borderEixstTextareaStyle]">
 				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
-					<textarea v-if="type == 'textarea'" class="uni-flex-1 uni-textarea-class" :name="name" :value="value" :placeholder="placeholder"
-					 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" :autoHeight="autoHeight"
-					 @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm" @tap="fieldClick" />
+					<textarea
+						v-if="type == 'textarea'"
+						class="uni-flex-1 uni-textarea-class"
+						:name="name"
+						:value="value"
+						:placeholder="placeholder"
+					 	:placeholderStyle="placeholderStyle"
+						:disabled="disabled"
+						:maxlength="inputMaxlength"
+						:focus="focus"
+						:autoHeight="autoHeight"
+					 	@input="onInput"
+						@blur="onBlur"
+						@focus="onFocus"
+						@confirm="onConfirm"
+						@tap="fieldClick" 
+					/>
 					<input
 						v-else
 						:type="type"
@@ -44,8 +53,8 @@
 						@confirm="onConfirm"
 						@tap="fieldClick"
 					/>
+                	<uni-icons :size="clearSize" v-if="clearable && value != ''" type="clear" color="#c0c4cc" @click="onClear" class="uni-clear-icon" />
 				</view>
-                <uni-icons :size="clearSize" v-if="clearable && value != '' && focused" type="clear" color="#c0c4cc" @click="onClear" class="u-clear-icon" />
 				<view class="uni-button-wrap"><slot name="right" /></view>
                 <uni-icons v-if="rightIcon" size="16" @click="rightIconClick" :type="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" />
         	</view>
@@ -59,7 +68,7 @@
 <script>
 /**
  * field 输入框
- * @description 此组件可以实现表单的输入， 有"text"和"textarea"类型。
+ * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
  * @property {String } 	type 				输入框的类型（默认text）
  * @property {Boolean} 	required 			是否必填，左边您显示红色"*"号（默认false）
  * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
@@ -82,6 +91,7 @@
  * @property {Boolean} 	trim 				是否自动去除两端的空格
  * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
  * @property {Array  }  rules 				单行表单验证规则，接受一个数组
+ * @property {Boolean} 	inputBorder 		是否显示input输入框的边框（默认false）
  * @property {Boolean} 	border-bottom 		是否显示field的下边框（默认true）
  * @property {Boolean} 	border-top 			是否显示field的上边框（默认false）
  * @property {Boolean} 	auto-height 		是否自动增高输入区域，type为textarea时有效（默认true）
@@ -164,6 +174,11 @@ export default {
 			type: [Number, String],
 			default: 15
 		},
+		// 是否显示 input 边框
+		inputBorder: {
+			type: Boolean,
+			default: false
+		},
 		// 是否显示上边框
 		borderTop: {
 			type: Boolean,
@@ -189,6 +204,7 @@ export default {
             labelMarginBottom: '',
             errorWidth: '',
 			errorMessage: '',
+			errorBorderColor: false,
 			val:'',
 			labelPos:'',
 			labelWid:'',
@@ -200,7 +216,7 @@ export default {
             let style = {}
             if(this.labelPos == 'top') {
                 style.padding = '10px 14px'
-                this.labelMarginBottom = '3px'
+                this.labelMarginBottom = '6px'
             }
             if (this.labelPos == 'left' && this.errorMessage !== false && this.errorMessage != '') {
                 style.paddingBottom = '0px'
@@ -217,7 +233,21 @@ export default {
             }
 
             return style
-        },
+		},
+
+		borderEixstTextareaStyle() {
+			let style = {}
+			if (this.inputBorder) {
+				if (this.type === 'textarea') {
+					style.minHeight = '60px'
+				}
+				if (this.errorMessage !== false && this.errorMessage != '') {
+					style.borderColor = '#dd524d'
+				}
+			}
+			return style
+		},
+		
 		inputWrapStyle() {
 			let style = {};
 			// 判断lable的位置，如果是left的话，让input左边两边有间隙
@@ -273,7 +303,6 @@ export default {
 
 		if (this.form) {
 			this.form.childrens.push(this)
-			console.log(this.form.labelWidth )
 			this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
 			this.labelWid = this.labelWidth    ? this.labelWidth    : this.form.labelWidth
 			this.labelAli = this.labelAlign	   ? this.labelAlign    : this.form.labelAlign
@@ -284,7 +313,7 @@ export default {
 			this.validator = this.form.validator
 		}else{
 			this.labelPos = this.labelPosition 	|| 'left'
-			this.labelWid = this.labelWidth 	|| 75
+			this.labelWid = this.labelWidth 	|| 65
 			this.labelAli = this.labelAlign		|| 'left'
 		}
 
@@ -307,7 +336,7 @@ export default {
 			}
 			return parent;
 		},
-				/**
+		/**
 		 * 移除该表单项的校验结果
 		 */
 		clearValidate(){
@@ -382,7 +411,6 @@ export default {
 			this.$emit('confirm', e.detail.value);
 		},
 		onClear(event) {
-            console.log('====== event =======', event)
 			this.val = ''
 			this.$emit('input', '');
 			this.clearValidate()
@@ -414,17 +442,10 @@ export default {
 <style lang="scss" scoped>
 
 .uni-field {
-    padding: 15px 14px;
-    // padding: 0 14px;
-    // min-height: 62px;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
+    padding: 16px 14px;
 	text-align: left;
-	// position: relative;
 	color: #333;
 	font-size: 14px;
-	background-color: #FFFCF7;
 }
 
 .uni-field-inner {
@@ -468,7 +489,7 @@ export default {
 }
 
 .uni-label {
-	width: 75px;
+	width: 65px;
 	flex: 1 1 65px;
 	text-align: left;
 	position: relative;
@@ -502,10 +523,15 @@ export default {
 
 .uni-error-message {
     line-height: 12px;
-    padding-bottom: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 	color: $uni-color-error;
 	font-size: 12px;
 	text-align: left;
+}
+
+.uni-input-error-border {
+	border-color: $uni-color-error;
 }
 
 .placeholder-style {
@@ -554,6 +580,34 @@ export default {
 	z-index: 2;
 }
 
+.uni-input-border {
+	min-height: 34px;
+	padding-left: 4px;
+	border: 1px solid $uni-border-color;
+	border-radius: 6px;
+	box-sizing: border-box;
+}
+
+// .uni-input-border:after {
+// 	/* #ifndef APP-NVUE */
+// 	content: ' ';
+// 	/* #endif */
+// 	position: absolute;
+// 	left: 0;
+// 	top: 0;
+// 	pointer-events: none;
+// 	box-sizing: border-box;
+// 	-webkit-transform-origin: 0 0;
+// 	transform-origin: 0 0;
+// 	// 多加0.1%，能解决有时候边框缺失的问题
+// 	width: 199.8%;
+// 	height: 199.7%;
+// 	transform: scale(0.5, 0.5);
+// 	border: 1px solid $uni-border-color;
+// 	border-radius: 6px;
+// 	z-index: 2;
+// }
+
 .uni-border-top:after {
 	border-top-width: 1px
 }
@@ -588,7 +642,6 @@ export default {
 }
 
 .uni-button-wrap {
-    // padding-right: 6px;
     display: flex;
     align-items: right;
     justify-content: center;
@@ -596,6 +649,7 @@ export default {
 .uni-clear-icon {
 	display: flex;
 	align-items: center;
+	margin-left: 4px;
 }
 
 .uni-flex {
@@ -610,11 +664,8 @@ export default {
     flex: 1;
 }
 .uni-error-in-label {
-    // width: 100%;
     display: flex;
 	flex-direction: row;
-    align-items: center;
-    // justify-content: space-between;
 }
 
 </style>

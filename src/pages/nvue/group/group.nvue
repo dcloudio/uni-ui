@@ -2,9 +2,9 @@
 	<view class="uni-wrap">
 		<scroll-view class="scroll" scroll-y>
 			<view class="example-info">
-				<text class="example-info-text"> uni-form-group 组件主要用于表单分组 </text>
+				<text class="example-info-text"> uni-group 组件主要用于表单分组 </text>
 			</view>
-	        <uni-form-group title="field group" margin-top="20">
+	        <uni-group title="field group" margin-top="20">
                 <uni-field
                     v-model="name"
                     label="姓名"
@@ -21,10 +21,10 @@
                     :clearable="true"
                 >
                 </uni-field>
-            </uni-form-group>
+            </uni-group>
 
 
-           <uni-form-group title="field group">
+           <uni-group title="field group">
                 <uni-field
                     v-model="name"
                     label="姓名"
@@ -43,9 +43,9 @@
                 >
                     <button v-if="true" type="primary" slot="right" size="mini">发送验证码</button>
                 </uni-field>
-            </uni-form-group>
+            </uni-group>
 
-            <uni-form-group title="field group">
+            <uni-group title="field group">
                 <uni-field
                     v-model="name"
                     label="姓名"
@@ -87,7 +87,7 @@
                     placeholder="请填写详细住址"
                     :error-message="errorMessage" 
                 />
-            </uni-form-group>
+            </uni-group>
 		</scroll-view>
 	</view>
 </template>
