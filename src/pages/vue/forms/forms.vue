@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
-		 @reset="reset" @validate="validate">
+		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit" @reset="reset"
+		 @validate="validate">
 			<uni-group title="基本信息">
 				<uni-field label="姓名" :input-border="true" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
 				<uni-field type="number" :input-border="true" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
@@ -35,45 +35,49 @@
 					size: ''
 				},
 				rules: {
-					name: [{
-						required: true,
-						message: '请输入姓名',
-						trigger: 'blur'
-					}, {
-						minLength: 3,
-						maxLength: 5,
-						message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-						trigger: 'change'
-					}],
-					email: [{
-						format: 'email',
-						message: '请输入正确的邮箱地址',
-						trigger: 'blur'
-					}],
-					age: [{
-						required: true,
-						message: '请填写年龄',
-						trigger: "blur"
-					}, {
-						format: 'number',
-						message: '年龄必须是数字',
-						// trigger: 'blur'
-					}, {
-						minimum: 18,
-						maximum: 30,
-						message: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
-						// trigger: 'blur'
-					}],
-					size: [{
-						format: 'number',
-						message: '体重必须是数字',
-						// trigger: 'blur'
-					}, {
-						minimum: 100,
-						maximum: 200,
-						message: '体重应该大于 {minimum} 斤，小于 {maximum} 斤',
-						// trigger: 'change'
-					}]
+					name: {
+						rules: [{
+							required: true,
+							errorMessage: '请输入姓名',
+							trigger: 'blur'
+						}, {
+							minLength: 3,
+							maxLength: 5,
+							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+							trigger: 'change'
+						}]
+					},
+					email: {
+						rules: [{
+							format: 'email',
+							errorMessage: '请输入正确的邮箱地址',
+							trigger: 'blur'
+						}]
+					},
+					age: {
+						rules: [{
+							required: true,
+							errorMessage: '请填写年龄',
+							trigger: "blur"
+						}, {
+							format: 'number',
+							errorMessage: '年龄必须是数字',
+							// trigger: 'blur'
+						}, {
+							minimum: 18,
+							maximum: 30,
+							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
+							// trigger: 'blur'
+						}]
+					},
+					size: {
+						rules: [{
+							minimum: 100,
+							maximum: 200,
+							errorMessage: '体重应该大于 {minimum} 斤，小于 {maximum} 斤',
+							// trigger: 'change'
+						}]
+					}
 				}
 			}
 		},

@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-form">
-		<form  @submit.stop="submitForm" @reset="resetForm">
+		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
 		</form>
 	</view>
@@ -18,9 +18,10 @@
 					return {}
 				}
 			},
+			// 校验触发器方式，默认 关闭
 			trigger: {
 				type: String,
-				default: 'blur'
+				default: ''
 			},
 			// label 位置，可选值 top/left
 			labelPosition: {
@@ -61,6 +62,9 @@
 		watch: {
 			formRules(newVal) {
 				this.init(newVal)
+			},
+			trigger(trigger) {
+				this.formTrigger = trigger
 			}
 		},
 		created() {
@@ -70,6 +74,7 @@
 		methods: {
 			init(formRules) {
 				if (Object.keys(formRules).length > 0) {
+					this.formTrigger = this.trigger
 					this.validator = new Validator(formRules)
 				}
 			},
@@ -98,15 +103,18 @@
 					}
 				}
 				const result = this.validator.validateAll(value)
-				
+
 				result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
-					example.errorMessage = item.message
+					example.errorMessage = item.errorMessage
 				})
 				event.detail.errors = result.length === 0 ? null : result
 				this.$emit('submit', event)
 			},
-			// 表单重置
+			/**
+			 * 表单重置
+			 * @param {Object} event
+			 */
 			resetForm(event) {
 				this.childrens.forEach(item => {
 					item.errorMessage = ''
@@ -137,7 +145,7 @@
 				let example = null
 				result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
-					example.errorMessage = item.message
+					example.errorMessage = item.errorMessage
 				})
 
 				typeof callback === 'function' && callback(!result, invalidFields)
@@ -153,7 +161,7 @@
 
 			/**
 			 * 校验表单
-			 * 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise	Function(callback: Function(boolean, object))
+			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
 			validate(callback) {
 				let invalidFields = {}

@@ -17,23 +17,9 @@
 			</view>
 			<view class="fild-body" :class="[inputBorder ? 'uni-input-border' : '']" :style="[borderEixstTextareaStyle]">
 				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
-					<textarea
-						v-if="type == 'textarea'"
-						class="uni-flex-1 uni-textarea-class"
-						:name="name"
-						:value="value"
-						:placeholder="placeholder"
-					 	:placeholderStyle="placeholderStyle"
-						:disabled="disabled"
-						:maxlength="inputMaxlength"
-						:focus="focus"
-						:autoHeight="autoHeight"
-					 	@input="onInput"
-						@blur="onBlur"
-						@focus="onFocus"
-						@confirm="onConfirm"
-						@tap="fieldClick" 
-					/>
+					<textarea v-if="type == 'textarea'" class="uni-flex-1 uni-textarea-class" :name="name" :value="value" :placeholder="placeholder"
+					 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" :autoHeight="autoHeight"
+					 @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm" @tap="fieldClick" />
 					<input
 						v-else
 						:type="type"
@@ -106,11 +92,15 @@
 export default {
 	name:"uni-field",
 	props: {
-		rules:{
-			type:Array,
-			default(){
-				return []
-			}
+		// rules:{
+		// 	type:Array,
+		// 	default(){
+		// 		return []
+		// 	}
+		// },
+		trigger: {
+			type: String,
+			default: ''
 		},
 		leftIcon: String,
 		rightIcon: String,
@@ -229,9 +219,7 @@ export default {
                 // style.paddingBottom = ''
                 this.errorTop = false
                 this.errorBottom = false
-
             }
-
             return style
 		},
 
@@ -247,7 +235,7 @@ export default {
 			}
 			return style
 		},
-		
+
 		inputWrapStyle() {
 			let style = {};
 			// 判断lable的位置，如果是left的话，让input左边两边有间隙
@@ -296,10 +284,15 @@ export default {
 			return style;
 		}
 	},
+	watch:{
+		trigger(trigger){
+			this.formTrigger = trigger
+		}
+	},
 	created() {
 		this.form = this.getForm()
 		this.formRules = []
-
+		this.formTrigger = this.trigger
 
 		if (this.form) {
 			this.form.childrens.push(this)
@@ -317,9 +310,9 @@ export default {
 			this.labelAli = this.labelAlign		|| 'left'
 		}
 
-		if(this.rules.length > 0){
+		// if(this.rules.length > 0){
 
-		}
+		// }
 
 	},
 	methods: {
@@ -361,7 +354,9 @@ export default {
 		 */
 		triggerValidator(trigger, value) {
 			// 如果 name 不存在，则不开启校验
-			this.formRules && this.formRules.forEach(item => {
+			this.formRules && this.formRules.rules.forEach(item => {
+				item.trigger = this.isTrigger(this.form.formTrigger , this.formTrigger ,item.trigger)
+				console.log('---触发时机---',item.trigger)
 				if (item.trigger !== trigger) return
 				this.triggerCheck(value,item)
 			})
@@ -375,12 +370,33 @@ export default {
 			if (this.type === 'number') {
 				value = value === '' ? value : Number(value)
 			}
-			const result = this.validator.validate({
+			const result = this.validator.validateUpdate({
 				[this.name]: value
 			})
-			this.errorMessage = !result ? '' : result.message
+			console.log('---',result)
+			this.errorMessage = !result ? '' : result.errorMessage
 			this.form.validateCheck(result)
 		},
+		/**
+		 * 触发时机
+		 * @param {Object} event
+		 */
+		isTrigger(parentRule,itemRlue,rule){
+			let rl = 'none'
+			console.log(rule,itemRlue,parentRule);
+			if(rule){
+				rl= rule
+			}else if(itemRlue){
+				rl= itemRlue
+			}else if(parentRule){
+				rl= parentRule
+			}else{
+				rl= 'blur'
+			}
+			console.log(rl)
+			return rl
+		},
+
 		onInput(event) {
 			let value = event.detail.value;
 			// 判断是否去除空格

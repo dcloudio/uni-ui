@@ -11,8 +11,8 @@ class SchemaValidator {
     this._schema = schema
   }
 
-  validate(data, rules) {
-    var result = this._invokeValidate(data, false, rules)
+  validate(data) {
+    var result = this._invokeValidate(data, false)
     return result.length ? result[0] : null
   }
 
@@ -20,33 +20,65 @@ class SchemaValidator {
     return this._invokeValidate(data, true)
   }
 
-  _invokeValidate(data, all, rules) {
+  validateUpdate(data) {
+    var result = this._invokeValidateUpdate(data, false)
+    return result.length ? result[0] : null
+  }
+
+  _invokeValidate(data, all) {
     let result = []
 
-    for (let key in data) {
-      let vir = this._validateInternal(rules || this._schema[key], data[key])
+    let schema = this._schema
+    for (let key in schema) {
+      let vir = this._validateInternal(schema[key], data[key], data)
       if (vir != null) {
         result.push({
           key: key,
-          message: vir
+          errorMessage: vir
         })
-      }
 
-      if (!all) break
+        if (!all) break
+      }
     }
 
     return result
   }
 
-  _validateInternal(rules, value, delegate) {
+  _invokeValidateUpdate(data, all) {
+    let result = []
+
+    for (let key in data) {
+      let vir = this._validateInternal(this._schema[key], data[key], data)
+      if (vir != null) {
+        result.push({
+          key: key,
+          errorMessage: vir
+        })
+        if (!all) break
+      }
+    }
+
+    return result
+  }
+
+  _validateInternal(key, value, data) {
+    let rules = key.rules
     var result = null
     var options = {
       message: SchemaValidator.message
     }
 
+    if (rules === undefined) {
+      return options.message['default']
+    }
+
     for (var i = 0; i < rules.length; i++) {
       let rule = rules[i]
       let vt = this._getValidateType(rule)
+
+      if (key.label !== undefined) {
+        Object.assign(rule, { label: key.label })
+      }
 
       if (validator[vt]) {
         var v = validator[vt](rule, value, options)
@@ -57,13 +89,14 @@ class SchemaValidator {
       }
 
       if (rule.validator) {
-        var res = rule.validator(rule, value)
+        var res = rule.validator(rule, value, data)
         if (!res) {
-          result = validatorHelper.format(rule, rule.message || options.message[vt] || options.message['default'])
+          result = validatorHelper.format(rule, rule.errorMessage || options.message[vt] || options.message['default'])
           break
         }
       }
     }
+
     return result
   }
 
@@ -84,9 +117,15 @@ class SchemaValidator {
   }
 }
 
+const FORMAT_MAPPING = {
+  int: 'number',
+  double: 'number',
+  long: 'number'
+}
+
 var pattern = {
   email: /^\S+?@\S+?\.\S+?$/,
-  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$",'i')
+  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", 'i')
 };
 
 function isEmptyValue(value, type) {
@@ -108,7 +147,7 @@ function isEmptyValue(value, type) {
 const validator = {
   required(rule, value, options) {
     if (rule.required && isEmptyValue(value, rule.format)) {
-      return validatorHelper.format(rule, rule.message || options.message.required);
+      return validatorHelper.format(rule, rule.errorMessage || options.message.required);
     }
 
     return null
@@ -130,11 +169,11 @@ const validator = {
         return null;
       }
     } else if (min && !max && val < min) {
-      return validatorHelper.format(rule, rule.message || options.message[key].min)
+      return validatorHelper.format(rule, rule.errorMessage || options.message[key].min)
     } else if (max && !min && val > max) {
-      return validatorHelper.format(rule, rule.message || options.message[key].max)
+      return validatorHelper.format(rule, rule.errorMessage || options.message[key].max)
     } else if (min && max && (val < min || val > max)) {
-      return validatorHelper.format(rule, rule.message || options.message[key].range)
+      return validatorHelper.format(rule, rule.errorMessage || options.message[key].range)
     }
 
     return null
@@ -142,7 +181,7 @@ const validator = {
 
   pattern(rule, value, options) {
     if (!types['pattern'](value)) {
-      return validatorHelper.format(rule, rule.message || options.message.pattern.mismatch);
+      return validatorHelper.format(rule, rule.errorMessage || options.message.pattern.mismatch);
     }
 
     return null
@@ -150,11 +189,11 @@ const validator = {
 
   format(rule, value, options) {
     var customTypes = Object.keys(types);
-    var format = rule.format;
+    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format;
 
     if (customTypes.indexOf(format) > -1) {
       if (!types[format](value)) {
-        return validatorHelper.format(rule, rule.message || options.message[format]);
+        return validatorHelper.format(rule, rule.errorMessage || options.message[format]);
       }
     }
 
@@ -172,7 +211,7 @@ const types = {
     }
     return typeof value === 'number';
   },
-  "float": function(value) {
+  "float": function (value) {
     return types.number(value) && !types.integer(value);
   },
   array(value) {
@@ -262,5 +301,7 @@ function Message() {
 
 
 SchemaValidator.message = new Message();
+
+//window.SchemaValidator = SchemaValidator
 
 export default SchemaValidator
