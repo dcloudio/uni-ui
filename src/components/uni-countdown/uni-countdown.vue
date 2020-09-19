@@ -126,7 +126,7 @@
 				let seconds = this.seconds
 				let [day, hour, minute, second] = [0, 0, 0, 0]
 				if (seconds > 0) {
-					day = Math.floor(seconds / (60 * 60 * 24))
+					day = this.showDay ? Math.floor(seconds / (60 * 60 * 24)) : 0
 					hour = Math.floor(seconds / (60 * 60)) - (day * 24)
 					minute = Math.floor(seconds / 60) - (day * 24 * 60) - (hour * 60)
 					second = Math.floor(seconds) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60)
