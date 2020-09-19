@@ -100,6 +100,9 @@
 			},
 			second(val) {
 				this.changeFlag()
+			},
+			timestamp(val) {
+				this.changeFlag()
 			}
 		},
 		created: function(e) {
