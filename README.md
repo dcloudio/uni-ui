@@ -73,7 +73,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui -D
+npm install @dcloudio/uni-ui
 ```
 
 
@@ -81,7 +81,7 @@ npm install @dcloudio/uni-ui -D
 
 ```javascript
 import {uniBadge} from '@dcloudio/uni-ui'
-//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
+//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' // 如果是 TypeScript 项目，可使用此方式引入组件
 export default {
     components: {uniBadge}
 }
@@ -95,6 +95,24 @@ export default {
 <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
 ```
 
+如果不想在每次使用时手动引入组件，那么可以通过如下配置，使用 [`easycom`](https://uniapp.dcloud.io/collocation/pages?id=easycom) 实现自动导入：
+
+编辑 src 目录下的 pages.json 文件，加入 `easycom` 字段：
+
+```javascript
+{
+	//	其他内容
+    "easycom": {
+			"autoscan": true,
+			"custom": {
+					// uni-ui 规则如下配置
+					"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+			}
+	},
+}
+```
+
+配置完成之后，即可在页面中直接使用 uni-ui 组件，无需手动引入。
 
 #### uni-ui 已支持的组件列表 
 组件名|组件说明
@@ -135,7 +153,7 @@ uniTransition|[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)
 - uni-ui 是全端兼容的基于flex布局的、无dom的ui库
 - uni-ui 是uni-app内置组件的扩展。注意与web开发不同，uni-ui不包括基础组件，它是基础组件的补充。web开发中有的开发者习惯用一个ui库完成所有开发，但在uni-app体系中，推荐开发者首先使用性能更高的基础组件，然后按需引入必要的扩展组件。
 - uni-ui 不支持使用 Vue.use() 的方式安装
-- uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要在项目下npm安装 node-sass 和 sass-loader
+- uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要在项目下npm安装 sass 和 sass-loader
 - `CLI` 引用方式 `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用 [easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom) 的方式引用组件
 
 ### 贡献代码
