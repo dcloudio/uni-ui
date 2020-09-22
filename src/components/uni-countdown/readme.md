@@ -19,7 +19,9 @@ export default {
 ```html
 <!-- 一般用法 -->
 <uni-countdown :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
-<uni-countdown :timestamp="90732"></uni-countdown>
+
+<!-- 使用时间戳 -->
+<uni-countdown :timestamp="parseInt(new Date().getTime() / 1000) + 90732"></uni-countdown>
 
 <!-- 不显示天数 -->
 <uni-countdown :show-day="false" :hour="12" :minute="12" :second="12"></uni-countdown>
@@ -39,7 +41,7 @@ export default {
 |hour				|Number	|0		|小时				|
 |minute				|Number	|0		|分钟				|
 |second				|Number	|0		|秒					|
-|timestamp          |Number |0      |时间戳，单位为秒   |
+|timestamp          |Number |0      |结束时间的时间戳，单位为秒 |
 |showDay			|Boolean|true	|是否显示天数		|
 |showColon			|Boolean|true	|是否以冒号为分隔符	|
 
