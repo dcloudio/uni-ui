@@ -58,6 +58,7 @@ import uniBadge from '../uni-badge/uni-badge.vue';
  * @property {String} 	rightText 						右侧文字内容
  * @property {Boolean} 	disabled = [true|false]			是否禁用
  * @property {Boolean} 	clickable = [true|false] 		是否开启点击反馈
+ * @property {Boolean} 	showArrow = [true|false] 		是否显示箭头图标
  * @property {String} 	link = [navigateTo|redirectTo|reLaunch|switchTab] 是否展示右侧箭头并开启点击反馈
  *  @value 	navigateTo 	同 uni.navigateTo()
  * 	@value redirectTo 	同 uni.redirectTo()

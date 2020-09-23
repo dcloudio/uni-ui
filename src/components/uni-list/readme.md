@@ -233,7 +233,7 @@ badgeText		|String		|-			|	数字角标内容
 badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)					
 rightText		|String		|-			|	右侧文字内容
 disabled		|Boolean	|false		|	是否禁用	
-showArrow 		|Boolean	|true		|	是否显示箭头图标			
+showArrow 		|Boolean	|false		|	是否显示箭头图标			
 link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
 clickable		|Boolean	|false		|	是否开启点击反馈
 to				|String		|-			|	跳转页面地址，如填写此属性，click 会返回页面是否跳转成功			
