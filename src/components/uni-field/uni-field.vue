@@ -11,7 +11,7 @@
 						<uni-icons size="16" :type="leftIcon" :color="iconColor" />
 					</view>
 					<slot name="leftIcon"></slot>
-					<text class="uni-label-text" :class="[this.$slots.leftIcon || leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
+					<text class="uni-label-text" :class="[leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
 				</view>
 				<view v-if="errorTop" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ errorMessage }}</view>
 			</view>
