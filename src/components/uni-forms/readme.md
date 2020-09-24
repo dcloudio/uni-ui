@@ -127,20 +127,31 @@ export default {
 
 
 ### uni-forms 属性说明
-列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
 
-**uniList 属性说明：**
+**uni-forms 属性说明：**
 
-属性名			| 类型			|默认值	 | 可选值						| 说明
----				| ----			|---	| ---							| ---	
-formRules		| Object		| -		| -								| 表单校验规则	
-trigger			| String		| blur	| blur/change/submit   			| 校验触发器方式
-labelPosition	| String		| left 	| top/left						| label 位置
-labelWidth		| String/Number	| 75	| -								| label 宽度，单位 px	
-labelAlign		| String		| left	| left/center/right				| label 居中方式
-errorMessageType|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
+属性名				| 类型			|默认值	 | 可选值						| 说明
+---					| ----			|---	| ---							| ---	
+formRules			| Object		| -		| -								| 表单校验规则	
+trigger				| String		| blur	| blur/change/submit   			| 校验触发器方式
+labelPosition		| String		| left 	| top/left						| label 位置
+labelWidth			| String/Number	| 75	| -								| label 宽度，单位 px	
+labelAlign			| String		| left	| left/center/right				| label 居中方式
+errorMessageType	|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
 
-d
+**uni-forms 事件说明：**
+事件称名			|说明									|返回参数			
+---				|---									|---				
+validate		| 任意表单项被校验后触发					| 全部成功返回null，任意失败返回 event = {key(校验失败的字段名):value(校验失败的错误信息)}
+
+**uni-forms 方法说明：**
+方法称名			| 说明				| 返回参数			
+---				| ---				| ---
+validate 		| 对整个表单进行校验	| 全部成功返回null，任意失败返回 event = {key(校验失败的字段名):value(校验失败的错误信息)}
+validateField	| 部分表单进行校验		| 全部成功返回null，任意失败返回 event = {key(校验失败的字段名):value(校验失败的错误信息)}
+resetFields		| 对整个表单进行重置	| -
+clearValidate	| 移除表单的校验结果	| -
+
 ### 表单校验
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误， `uni-Forms` 组件提供了表单验证的功能。
 
@@ -217,21 +228,23 @@ d
 
 ```json
 rules: {
-	name: [
-		// 对name字段进行必填验证
-		{
-			required: true,
-			message: '请填写姓名',
-			trigger: 'blur'
-		},
-		// 对name字段进行长度验证
-		{
-			minLength: 3,
-			maxLength: 5,
-			message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-			trigger: 'change'
-		}
-	]
+	name: {
+		rules:[
+			// 对name字段进行必填验证
+			{
+				required: true,
+				message: '请填写姓名',
+				trigger: 'blur'
+			},
+			// 对name字段进行长度验证
+			{
+				minLength: 3,
+				maxLength: 5,
+				message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+				trigger: 'change'
+			}
+		]
+	}
 }
 
 ```
@@ -239,27 +252,30 @@ rules: {
 #### 校验规则属性
 每一个验证规则中，可以配置多个属性，下面是一些常见规则属性
 
-属性名				|类型		|	说明																									
----					|----		|	---	
-required			|Boolean	|	是否必填
-format				|String		| 	内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
-pattern				|String		| 	
-maximum				|Number		|	校验最大值(大于)
-exclusiveMaximum	|Boolean	|	是否排除 maximum
-minimum				|Number		|	校验最小值(小于)
-exclusiveMinimum	|Boolean	|	是否排除 minimum
-minLength			|Number		|	校验最小长度
-maxLength			|Number		|	校验最大长度
-message				|String	 	|	校验失败提示信息语，可添加属性占位符，见下文
+属性名				| 类型			| 默认值	|可选值					| 说明			
+---					| ----			|---	|---					| ---	
+required			| Boolean		| -		|						|是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置uni-field的required为true
+range				| Array			| -		| -						|数组至少要有一个元素，且数组内的每一个元素都是唯一的。
+format				| String		| - 	| -						|内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
+pattern				| String		| - 	| -						|正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"
+maximum				| Number		| -		| -						|校验最大值(大于)
+minimum				| Number		| -		| -						|校验最小值(小于)
+minLength			| Number		| -		| -						|校验数据最小长度
+maxLength			| Number		| -		| -					 	|校验数据最大长度
+errorMessage		| String	 	| -		| -					 	|校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符
+trigger				| String	 	| blur 	| blur/change/submit 	|校验触发时机
 
 **format属性值说明**
 
-
-
-
-
-**message属性占位符**
-
+属性名	| 说明	
+---		| ---	
+string	| 必须是 string 类型，默认类型
+number	| 必须是 number 类型
+boolean	| 必须是 boolean 类型
+array	| 必须是 array 类型
+object	| 必须是 object 类型
+url		| 必须是 url 类型
+email	| 必须是 email 类型
 
 
 ### 插件预览地址

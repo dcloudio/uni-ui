@@ -124,7 +124,7 @@
 			 * @param {Object} validate
 			 */
 			validateCheck(validate) {
-				if (validate === null) validate = true
+				if (validate === null) validate = null
 				this.$emit('validate', validate)
 			},
 
@@ -147,10 +147,10 @@
 				if (type === 'submit') {
 					this.$emit('submit', {
 						value: invalidFields,
-						validate: result.length === 0 ? true : result
+						validate: result.length === 0 ? null : result
 					})
 				} else {
-					this.$emit('validate', result.length === 0 ? true : result)
+					this.$emit('validate', result.length === 0 ? null : result)
 				}
 			},
 
