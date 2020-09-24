@@ -12,9 +12,10 @@
 				<uni-field type="text" :input-border="true" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
 				<uni-field type="textarea" :input-border="true" label="体重" name="size" v-model="formData.size" placeholder="请输入体重" />
 			</uni-group>
-
-			<button class="button" form-type="submit">Submit</button>
-			<button class="button" form-type="reset">Reset</button>
+			
+			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
+			<!-- <button class="button" form-type="submit">Submit</button>
+			<button class="button" form-type="reset">Reset</button> -->
 
 			<button class="button" @click="submitForm('form')">手动提交</button>
 			<button class="button" @click="validateField('form')">校验部分表单</button>

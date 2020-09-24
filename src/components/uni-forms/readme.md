@@ -84,7 +84,7 @@ export default {
 ### 基本用法 
 
 ```html
-<uni-forms ref="form" @submit="submit" @reset="reset">
+<uni-forms ref="form">
 	<uni-field  label="姓名" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
 	<uni-group title="基本信息">
 		<uni-field type="number" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
@@ -94,8 +94,8 @@ export default {
 		<uni-field type="number" label="体重" name="size" v-model="formData.size" placeholder="请输入年龄" />
 	</uni-group>
 
-	<button form-type="submit">Submit</button>
-	<button form-type="reset">Reset</button>
+	<button @click="submit('form')">Submit</button>
+	<button @click="reset('form')">Reset</button>
 </uni-forms>
 <script>
 	export default {
@@ -111,11 +111,18 @@ export default {
 		},
 		methods: {
 			// 提交表单
-			submit(event) {
-				console.log('提交表单：',event)
+			submit(form) {
+				this.$refs[form].validate((valid, rules) => {
+					if (valid) {
+						console.log('校验通过')
+					} else {
+						console.error('校验失败', rules);
+					}
+				})
 			},
 			// 重置表单
-			reset(event) {
+			reset(form) {
+				this.$refs[form].resetFields()
 				console.log('表单重置：', event);
 			}
 
@@ -171,8 +178,8 @@ clearValidate	| 移除表单的校验结果	| -
 <uni-forms :form-rules="rules" @submit="submit" @reset="reset">
 	<uni-field label="姓名" name="name"  v-model="formData.name"  placeholder="请输入姓名" 	/>
 	<uni-field label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
-	<button form-type="submit">Submit</button>
-	<button form-type="reset">Reset</button>
+	<button @click="submit('form')">Submit</button>
+	<button @click="reset('form')">Reset</button>
 </uni-forms>
 <script>
 	export default {
@@ -210,11 +217,18 @@ clearValidate	| 移除表单的校验结果	| -
 		},
 		methods: {
 			// 提交表单
-			submit(event) {
-				console.log('提交表单：',event)
+			submit(form) {
+				this.$refs[form].validate((valid, rules) => {
+					if (valid) {
+						console.log('校验通过')
+					} else {
+						console.error('校验失败', rules);
+					}
+				})
 			},
 			// 重置表单
-			reset(event) {
+			reset(form) {
+				this.$refs[form].resetFields()
 				console.log('表单重置：', event);
 			}
 

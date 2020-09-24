@@ -257,10 +257,6 @@
             "path" : "pages/vue/test/test",
             "style" : {}
         }
-        ,{
-            "path" : "pages/vue/forms/forms",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

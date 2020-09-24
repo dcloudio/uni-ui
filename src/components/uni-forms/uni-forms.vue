@@ -2,6 +2,7 @@
 	<view class="uni-form">
 		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
+			<button class="button" form-type="reset">Reset</button>
 		</form>
 	</view>
 </template>
@@ -123,6 +124,7 @@
 			 * @param {Object} event
 			 */
 			resetForm(event) {
+				console.log(123,event);
 				this.childrens.forEach(item => {
 					item.errorMessage = ''
 					item.val = ''

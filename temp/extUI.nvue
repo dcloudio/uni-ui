@@ -16,10 +16,15 @@
 	</view>
 </template>
 <script>
+	import uLink from "@/components/uLink.vue"
 	export default {
+		components: {
+			uLink
+		},
 		data() {
 			return {
-				 /*lists*/
+				navigateFlag: false,
+				/*lists*/
 			};
 		},
 		onLoad() {},
@@ -27,11 +32,10 @@
 			// #ifdef APP-NVUE
 			uni.preloadPage({
 				url: "/pages/extUI/calendar/calendar",
-				success(){
+				success() {
 					console.log("preloadPage /pages/extUI/calendar/calendar")
 				},
-				fail(){
-				}
+				fail() {}
 			})
 			// #endif
 		},
@@ -48,9 +52,16 @@
 		},
 		methods: {
 			goDetailPage(path) {
+				if (this.navigateFlag) {
+					return;
+				}
+				this.navigateFlag = true;
 				uni.navigateTo({
 					url: '/pages/extUI/' + path + '/' + path
 				});
+				setTimeout(() => {
+					this.navigateFlag = false;
+				}, 200)
 			}
 		}
 	}

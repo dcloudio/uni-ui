@@ -7,5 +7,5 @@
 	"type": "布局组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
 	"update_log": ["- 修复 校验逻辑"],
-	"hidden": true
+	"suffix": "vue"
 }

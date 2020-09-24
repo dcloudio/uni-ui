@@ -5,6 +5,7 @@
 	"url": "popup",
 	"type": "功能组件",
 	"edition": "1.2.5",
+	"compilation":"#ifndef QUICKAPP-WEBVIEW-HUAWEI",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
 	"update_log": [
 		"- 优化 uni-popup-message 、uni-popup-dialog等扩展组件支持 easycom",
