@@ -2,7 +2,7 @@
 	<view class="uni-field" :class="{'uni-border-top': borderTop, 'uni-border-bottom': borderBottom }" :style="[fieldStyle]">
 		<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPos]">
 			<view :class="errorTop ? 'uni-error-in-label' : ''">
-				<view class="uni-label" :class="[required ? 'uni-required' : '']" :style="{
+				<view class="uni-field-label" :class="[required ? 'uni-required' : '']" :style="{
                     justifyContent: justifyContent,
                     width: labelWid +'px',
                     marginBottom: labelMarginBottom,
@@ -500,7 +500,7 @@ export default {
     flex: 1;
 }
 
-.uni-label {
+.uni-field-label {
 	width: 65px;
 	flex: 1 1 65px;
 	text-align: left;
