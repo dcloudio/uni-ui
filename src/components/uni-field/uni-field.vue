@@ -356,7 +356,7 @@ export default {
 		triggerValidator(trigger, value) {
 			let isValid = false
 			// 如果 name 不存在，则不开启校验
-			this.formRules && this.formRules.rules.forEach(item => {
+			this.formRules && this.formRules.rules && this.formRules.rules.forEach(item => {
 				item.trigger = this.isTrigger(this.form.formTrigger , this.formTrigger ,item.trigger)
 				if (item.trigger !== trigger || item.trigger === 'submit') return
 				isValid = true
