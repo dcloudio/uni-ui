@@ -53,8 +53,9 @@
 
 <script>
 /**
- * field 输入框
+ * Field 输入框
  * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
+ * @tutorial https://ext.dcloud.net.cn/plugin?id=21001
  * @property {String } 	type 				输入框的类型（默认text）
  * @property {Boolean} 	required 			是否必填，左边您显示红色"*"号（默认false）
  * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
@@ -602,26 +603,6 @@ export default {
 	border-radius: 6px;
 	box-sizing: border-box;
 }
-
-// .uni-input-border:after {
-// 	/* #ifndef APP-NVUE */
-// 	content: ' ';
-// 	/* #endif */
-// 	position: absolute;
-// 	left: 0;
-// 	top: 0;
-// 	pointer-events: none;
-// 	box-sizing: border-box;
-// 	-webkit-transform-origin: 0 0;
-// 	transform-origin: 0 0;
-// 	// 多加0.1%，能解决有时候边框缺失的问题
-// 	width: 199.8%;
-// 	height: 199.7%;
-// 	transform: scale(0.5, 0.5);
-// 	border: 1px solid $uni-border-color;
-// 	border-radius: 6px;
-// 	z-index: 2;
-// }
 
 .uni-border-top:after {
 	border-top-width: 1px

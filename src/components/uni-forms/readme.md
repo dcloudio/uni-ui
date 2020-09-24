@@ -127,9 +127,9 @@ export default {
 
 
 ### uni-forms 属性说明
-列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
+列表组件的父组件，所有列表组件都需要放到 uni-forms 中，才能正常显示
 
-**uniList 属性说明：**
+**uniForms 属性说明：**
 
 属性名			| 类型			|默认值	 | 可选值						| 说明
 ---				| ----			|---	| ---							| ---	
@@ -140,7 +140,6 @@ labelWidth		| String/Number	| 75	| -								| label 宽度，单位 px
 labelAlign		| String		| left	| left/center/right				| label 居中方式
 errorMessageType|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
 
-d
 ### 表单校验
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误， `uni-Forms` 组件提供了表单验证的功能。
 

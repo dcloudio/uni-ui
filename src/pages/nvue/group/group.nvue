@@ -4,7 +4,7 @@
 			<view class="example-info">
 				<text class="example-info-text"> uni-group 组件主要用于表单分组 </text>
 			</view>
-	        <uni-group title="field group" margin-top="20">
+	        <uni-group title="group 1" margin-top="20">
                 <uni-field
                     v-model="name"
                     label="姓名"
@@ -14,27 +14,6 @@
                 <uni-field
                     v-model="mobile"
                     label="手机号"
-                    label-position="left"
-                    placeholder="请填写手机号"
-                    :error-message="errorMessage"
-                    type="text"
-                    :clearable="true"
-                >
-                </uni-field>
-            </uni-group>
-
-
-           <uni-group title="field group">
-                <uni-field
-                    v-model="name"
-                    label="姓名"
-                    placeholder="请填写姓名"
-                    :error-message="errorMessage"
-                ></uni-field>
-                <uni-field
-                    v-model="mobile"
-                    label="手机号"
-                    iconColor="#999"
                     label-position="left"
                     placeholder="请填写手机号"
                     :error-message="errorMessage"
@@ -45,30 +24,40 @@
                 </uni-field>
             </uni-group>
 
-            <uni-group title="field group">
+
+           <uni-group title="group 2">
                 <uni-field
                     v-model="name"
-                    label="姓名"
-                    placeholder="请填写姓名"
+                    label="身高"
+                    placeholder="请填写身高"
                     :error-message="errorMessage"
                 ></uni-field>
                 <uni-field
                     v-model="mobile"
-                    label="手机号"
-                    left-icon="camera"
-                    iconColor="#999"
+                    label="体重"
                     label-position="left"
-                    placeholder="请填写手机号"
+                    placeholder="请填写体重"
                     :error-message="errorMessage"
                     type="text"
                     :clearable="true"
                 >
-                    <button v-if="true" type="primary" slot="right" size="mini">发送验证码</button>
+                </uni-field>
+            </uni-group>
+
+            <uni-group title="group 3">
+                <uni-field
+                    v-model="mobile"
+                    label="邮箱"
+                    label-position="left"
+                    placeholder="请填写邮箱"
+                    :error-message="errorMessage"
+                    type="text"
+                    :clearable="true"
+                >
                 </uni-field>
                 <uni-field
                     v-model="weixin"
                     label="微信号"
-                    left-icon="camera"
                     label-position="left"
                     placeholder="请填写微信号"
                     :required="false"

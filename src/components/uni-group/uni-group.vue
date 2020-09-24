@@ -8,40 +8,41 @@
 </template>
 
 <script>
-	/**
-	 * uni-group 分组
-	 * @description 表单字段分组
-	 * @property {String} title 主标题
-	 * @property {Number} top 分组间隔
-	 */
-	export default {
-		name: 'UniFormGroup',
-		props: {
-			title: {
-				type: String,
-				default: ''
-			},
-			top: {
-				type: [Number, String],
-				default: 10
-			}
+/**
+ * Group 分组
+ * @description 表单字段分组
+ * @tutorial https://ext.dcloud.net.cn/plugin?id=21002
+ * @property {String} title 主标题
+ * @property {Number} top 分组间隔
+ */
+export default {
+	name: 'UniFormGroup',
+	props: {
+		title: {
+			type: String,
+			default: ''
 		},
-		data() {
-			return {}
-		},
-		watch: {
-			title(newVal) {
-				if (uni.report && newVal !== '') {
-					uni.report('title', newVal)
-				}
-			}
-		},
-		methods: {
-			onClick() {
-				this.$emit('click')
+		top: {
+			type: [Number, String],
+			default: 10
+		}
+	},
+	data() {
+		return {}
+	},
+	watch: {
+		title(newVal) {
+			if (uni.report && newVal !== '') {
+				uni.report('title', newVal)
 			}
 		}
+	},
+	methods: {
+		onClick() {
+			this.$emit('click')
+		}
 	}
+}
 </script>
 <style lang="scss" scoped>
 	.uni-group {
@@ -56,7 +57,6 @@
 		align-items: center;
 		padding-left: 15px;
 		height: 40px;
-        // padding: 10px 10px;
 		background-color: $uni-bg-color-grey;
 		font-weight: normal;
 		color: $uni-text-color;
