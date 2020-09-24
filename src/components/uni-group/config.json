@@ -4,7 +4,7 @@
 	"desc": "分组",
 	"edition": "1.0.0",
 	"url": "group",
-	"type": "基础组件",
+	"type": "表单组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=21002",
 	"update_log": ""
 }

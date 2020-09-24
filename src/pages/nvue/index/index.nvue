@@ -95,7 +95,7 @@
 						url: 'forms'
 					},
 					{
-						name: 'Field 字段',
+						name: 'Field 输入框',
 						url: 'field'
 					},
 					{

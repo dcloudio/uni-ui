@@ -148,11 +148,13 @@ labelAlign			| String		| left	| left/center/right				| label 居中方式
 errorMessageType	|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
 
 **uni-forms 事件说明：**
+
 事件称名			|说明									|返回参数			
 ---				|---									|---				
 validate		| 任意表单项被校验后触发					| 全部成功返回null，任意失败返回 event = {key(校验失败的字段名):value(校验失败的错误信息)}
 
 **uni-forms 方法说明：**
+
 方法称名			| 说明				| 返回参数			
 ---				| ---				| ---
 validate 		| 对整个表单进行校验	| 全部成功返回null，任意失败返回 event = {key(校验失败的字段名):value(校验失败的错误信息)}
@@ -280,7 +282,9 @@ maxLength			| Number		| -		| -					 	|校验数据最大长度
 errorMessage		| String	 	| -		| -					 	|校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符
 trigger				| String	 	| blur 	| blur/change/submit 	|校验触发时机
 
+
 **format属性值说明**
+
 
 属性名	| 说明	
 ---		| ---	
@@ -292,6 +296,3 @@ object	| 必须是 object 类型
 url		| 必须是 url 类型
 email	| 必须是 email 类型
 
-### 插件预览地址
-
-[]()

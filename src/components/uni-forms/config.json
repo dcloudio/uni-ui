@@ -2,10 +2,10 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.1",
+	"edition": "1.0.3",
 	"url": "forms",
-	"type": "布局组件",
+	"type": "表单组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 修复 校验逻辑"],
+	"update_log": ["- 优化 校验方式，可在组件配置trigger属性控制校验时机"],
 	"suffix": "vue"
 }

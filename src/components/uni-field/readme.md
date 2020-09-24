@@ -1,6 +1,6 @@
-### Field 数字角标
+### Field 输入框
 
-字段组件一般和表单控件 uni-form 配合使用，也可以单独使用，用于实现输入与校验，包括 "text" 和 "textarea" 类型，组件名：``uni-field``，代码块： uField。
+输入框组件一般和表单控件 uni-form 配合使用，也可以单独使用，用于实现输入与校验，包括 "text" 和 "textarea" 类型，组件名：``uni-field``，代码块： uField。
 
 ### 平台差异说明
 
