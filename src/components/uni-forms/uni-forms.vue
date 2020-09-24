@@ -38,11 +38,6 @@
 				type: String,
 				default: 'left'
 			},
-			// 是否显示必须字段旁边的星号
-			hideRequiredAsterisk: {
-				type: Boolean,
-				default: false
-			},
 			// 错误提示类型 可选值 none/ top / bottom /toast / alert
 			errorMessageType: {
 				type: String,

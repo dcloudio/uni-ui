@@ -353,13 +353,15 @@ export default {
 		 * @param {Object} value
 		 */
 		triggerValidator(trigger, value) {
+			let isValid = false
 			// 如果 name 不存在，则不开启校验
 			this.formRules && this.formRules.rules.forEach(item => {
 				item.trigger = this.isTrigger(this.form.formTrigger , this.formTrigger ,item.trigger)
-				console.log('---触发时机---',item.trigger)
-				if (item.trigger !== trigger) return
-				this.triggerCheck(value,item)
+				if (item.trigger !== trigger || item.trigger === 'submit') return
+				isValid = true
 			})
+
+			isValid && this.triggerCheck(value)
 		},
 		/**
 		 * 校验规则
@@ -373,7 +375,6 @@ export default {
 			const result = this.validator.validateUpdate({
 				[this.name]: value
 			})
-			console.log('---',result)
 			this.errorMessage = !result ? '' : result.errorMessage
 			this.form.validateCheck(result)
 		},
@@ -383,7 +384,6 @@ export default {
 		 */
 		isTrigger(parentRule,itemRlue,rule){
 			let rl = 'none'
-			console.log(rule,itemRlue,parentRule);
 			if(rule){
 				rl= rule
 			}else if(itemRlue){
@@ -393,7 +393,6 @@ export default {
 			}else{
 				rl= 'blur'
 			}
-			console.log(rl)
 			return rl
 		},
 

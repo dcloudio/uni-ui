@@ -44,7 +44,7 @@
 							minLength: 3,
 							maxLength: 5,
 							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-							trigger: 'change'
+							trigger: 'submit'
 						}]
 					},
 					email: {
@@ -67,7 +67,7 @@
 							minimum: 18,
 							maximum: 30,
 							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
-							// trigger: 'blur'
+							trigger: 'change'
 						}]
 					},
 					size: {

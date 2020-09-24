@@ -125,10 +125,26 @@ export default {
 ```
 
 
+
+### uni-forms 属性说明
+列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
+
+**uniList 属性说明：**
+
+属性名			| 类型			|默认值	 | 可选值						| 说明
+---				| ----			|---	| ---							| ---	
+formRules		| Object		| -		| -								| 表单校验规则	
+trigger			| String		| blur	| blur/change/submit   			| 校验触发器方式
+labelPosition	| String		| left 	| top/left						| label 位置
+labelWidth		| String/Number	| 75	| -								| label 宽度，单位 px	
+labelAlign		| String		| left	| left/center/right				| label 居中方式
+errorMessageType|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
+
+d
 ### 表单校验
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误， `uni-Forms` 组件提供了表单验证的功能。
 
->，只需要通过 form-rules 属性传入约定的验证规则，并将 uni-filed 的 name 属性设置为需校验的字段名即可。
+只需要通过 form-rules 属性传入约定的验证规则，并将 uni-filed 的 name 属性设置为需校验的字段名即可。
 
 #### 如何使用 
 
@@ -245,14 +261,6 @@ message				|String	 	|	校验失败提示信息语，可添加属性占位符，
 **message属性占位符**
 
 
-### uni-forms 属性说明
-列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
-
-**uniList 属性说明：**
-
-属性名			|类型		|默认值		|	说明																									
----				|----		|---		|	---	
-border			|Boolean	|true		|	是否显示边框
 
 ### 插件预览地址
 
