@@ -2,7 +2,6 @@
 	<view class="uni-form">
 		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
-			<button class="button" form-type="reset">Reset</button>
 		</form>
 	</view>
 </template>
