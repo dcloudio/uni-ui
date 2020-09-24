@@ -123,7 +123,6 @@
 			 * @param {Object} event
 			 */
 			resetForm(event) {
-				console.log(123,event);
 				this.childrens.forEach(item => {
 					item.errorMessage = ''
 					item.val = ''
