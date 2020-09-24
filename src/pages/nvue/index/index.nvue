@@ -17,6 +17,10 @@
 		<uni-list>
 			<uni-list-item v-for="(view, index) in views" :key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
 		</uni-list>
+		<uni-section title="表单组件" type="line"></uni-section>
+		<uni-list>
+			<uni-list-item v-for="(view, index) in forms" :key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
+		</uni-list>
 		<uni-section title="功能组件" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item v-for="(func, index) in functionals" :key="index" :title="func.name" link :to='`/pages/${platform}/${func.url}/${func.url}`' />
@@ -51,19 +55,8 @@
 					{
 						name: 'Section 标题栏',
 						url: 'section'
-					},
-					{
-						name: 'Form 表单',
-						url: 'forms'
-					},
-					{
-						name: 'Field 字段',
-						url: 'field'
-					},
-					{
-						name: 'Group 分组',
-						url: 'group'
 					}
+
 				],
 				views: [{
 						name: 'Badge 数字角标',
@@ -95,6 +88,19 @@
 					}, {
 						name: 'Transition 过渡动画',
 						url: 'transition'
+					}
+				],
+				forms: [{
+						name: 'Form 表单',
+						url: 'forms'
+					},
+					{
+						name: 'Field 字段',
+						url: 'field'
+					},
+					{
+						name: 'Group 分组',
+						url: 'group'
 					}
 				],
 				functionals: [{
@@ -172,10 +178,10 @@
 					}
 				],
 				// #ifdef APP-NVUE
-				platform:'nvue',
+				platform: 'nvue',
 				// #endif
 				// #ifndef APP-NVUE
-				platform:'vue'
+				platform: 'vue'
 				// #endif
 			}
 		},

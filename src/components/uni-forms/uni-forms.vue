@@ -7,6 +7,18 @@
 </template>
 
 <script>
+	/**
+	 * Forms 自动校验的表单
+	 * @description 由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=2773
+	 * @property {Object} formRules  表单校验规则
+	 * @property {String} trigger  校验触发器方式 默认 blur 可选 [blur|change|submit]
+	 * @property {String} labelPosition	 label 位置 默认 left 可选 [top|left]
+	 * @property {String|Number} labelWidth  label 宽度，默认 65px
+	 * @property {String} labelAlign  label 居中方式  默认 left 可选 [left|center|right]
+	 * @property {String} errorMessageType  错误提示类型 默认 bottom 可选 [none|top|bottom|toast|alert]
+	 */
+
 	import Validator from './schema-validator.js'
 	export default {
 		name: 'uniForms',
@@ -31,7 +43,7 @@
 			// label 宽度，单位 px
 			labelWidth: {
 				type: [String, Number],
-				default: 75
+				default: 65
 			},
 			// label 居中方式，可选值 left/center/right
 			labelAlign: {
@@ -127,7 +139,6 @@
 				if (validate === null) validate = null
 				this.$emit('validate', validate)
 			},
-
 			/**
 			 * 校验所有或者部分表单
 			 */
@@ -153,6 +164,7 @@
 					this.$emit('validate', result.length === 0 ? null : result)
 				}
 			},
+
 
 			/**
 			 * 校验表单

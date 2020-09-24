@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit" @reset="reset"
 		 @validate="validate">
@@ -13,13 +14,13 @@
 			</uni-group>
 
 			<button class="button" form-type="submit">Submit</button>
-			<button form-type="reset">Reset</button>
+			<button class="button" form-type="reset">Reset</button>
 
 			<button class="button" @click="submitForm('form')">手动提交</button>
-			<button @click="validateField('form')">校验部分表单</button>
-			<button @click="clearValidate('form','name')">移除部分表单校验结果</button>
-			<button @click="clearValidate('form')">移除全部表单校验结果</button>
-			<button @click="resetFields('form')">手动重置表单</button>
+			<button class="button" @click="validateField('form')">校验部分表单</button>
+			<button class="button" @click="clearValidate('form','name')">移除部分表单校验结果</button>
+			<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
+			<button class="button" @click="resetFields('form')">手动重置表单</button>
 		</uni-forms>
 	</view>
 </template>
@@ -149,8 +150,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
 	.button {
-		margin-top: 15px;
+		margin: 10px 15px;
 	}
 </style>

@@ -11,7 +11,6 @@
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
 
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
-- 在 `HBuilderX` 低版本中，可能会出现组件显示 `undefined` 的问题，请升级最新的 `HBuilderX` 或者 `cli`
 - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 
 ### 使用方式
@@ -171,6 +170,3 @@ export default {
 title|String|主标题|
 top|Number|分组间隔|
 
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/group/group](https://uniapp.dcloud.io/h5/pages/extUI/group/group)
