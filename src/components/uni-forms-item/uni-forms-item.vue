@@ -16,33 +16,7 @@
 				<view v-if="errorTop" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ errorMessage }}</view>
 			</view>
 			<view class="fild-body" :class="[inputBorder ? 'uni-input-border' : '']" :style="[borderEixstTextareaStyle]">
-				<view class="uni-flex-1 uni-flex" :style="[inputWrapStyle]">
-					<textarea v-if="type == 'textarea'" class="uni-flex-1 uni-textarea-class" :name="name" :value="value" :placeholder="placeholder"
-					 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" :autoHeight="autoHeight"
-					 @input="onInput" @blur="onBlur" @focus="onFocus" @confirm="onConfirm" @tap="fieldClick" />
-					<input
-						v-else
-						:type="type"
-						class="uni-flex-1 uni-field__input-wrap"
-                        :name="name"
-						:value="value"
-						:password="password || this.type === 'password'"
-						:placeholder="placeholder"
-						:placeholderStyle="placeholderStyle"
-						:disabled="disabled"
-						:maxlength="inputMaxlength"
-						:focus="focus"
-						:confirmType="confirmType"
-						@focus="onFocus"
-						@blur="onBlur"
-						@input="onInput"
-						@confirm="onConfirm"
-						@tap="fieldClick"
-					/>
-                	<uni-icons :size="clearSize" v-if="clearable && value != ''" type="clear" color="#c0c4cc" @click="onClear" class="uni-clear-icon" />
-				</view>
-				<view class="uni-button-wrap"><slot name="right" /></view>
-                <uni-icons v-if="rightIcon" size="16" @click="rightIconClick" :type="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" />
+				<slot></slot>
         	</view>
 		</view>
 		<view v-if="errorBottom" class="uni-error-message" :style="{
@@ -305,6 +279,9 @@ export default {
 				this.formRules = this.form.formRules[this.name]
 			}
 			this.validator = this.form.validator
+			
+			this.form.formData[this.name] = ''
+			
 		}else{
 			this.labelPos = this.labelPosition 	|| 'left'
 			this.labelWid = this.labelWidth 	|| 65
@@ -391,62 +368,8 @@ export default {
 				rl= 'blur'
 			}
 			return rl
-		},
+		}
 
-		onInput(event) {
-			let value = event.detail.value;
-			// 判断是否去除空格
-			if(this.trim) value = this.trimStr(value);
-			this.$emit('input', value);
-			// 校验输入
-			this.val = value
-			this.triggerValidator('change', value)
-		},
-
-		onFocus(event) {
-			this.focused = true;
-			this.$emit('focus', event);
-		},
-		onBlur(event) {
-			let value = event.detail.value
-			// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
-			// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
-			setTimeout(() => {
-				this.focused = false;
-			}, 100)
-			this.$emit('blur', event);
-
-			// 校验输入
-			this.triggerValidator('blur', value)
-		},
-		onConfirm(e) {
-			this.$emit('confirm', e.detail.value);
-		},
-		onClear(event) {
-			this.val = ''
-			this.$emit('input', '');
-			this.clearValidate()
-		},
-		rightIconClick() {
-			this.$emit('right-icon-click');
-			this.$emit('click');
-		},
-		fieldClick() {
-			this.$emit('click');
-        },
-        trimStr(str, pos = 'both') {
-            if (pos == 'both') {
-                return str.replace(/^\s+|\s+$/g, "");
-            } else if (pos == "left") {
-                return str.replace(/^\s*/, '');
-            } else if (pos == 'right') {
-                return str.replace(/(\s*$)/g, "");
-            } else if (pos == 'all') {
-                return str.replace(/\s+/g, "");
-            } else {
-                return str;
-            }
-        }
 	}
 };
 </script>

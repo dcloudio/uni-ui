@@ -2,8 +2,11 @@
 ## List 列表
 > 组件名：``uni-list``、``uni-list-item``，代码块： uList、uListItem。
 
-list 列表组件一般用于导航菜单、列表、设置页排版等，可以在其中使用图标、略缩图或放置任何你想放的元素
+List 列表组件一般用于导航菜单、列表、设置页排版等，可以在其中使用图标、略缩图或放置任何你想放的元素
 
+本组件提供了常用的列表布局方式，可以覆盖绝大多数的使用场景
+
+如果内置样式无法满足某些业务场景，同样也提供了许多的基于uni-list的页面模板，见最下方 `基于uni-list扩展的页面模板`
 
 ### 平台差异说明
 
@@ -16,7 +19,7 @@ list 列表组件一般用于导航菜单、列表、设置页排版等，可以
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
 - 组件内部依赖 `'uni-icons'` 、`uni-badge` 组件
 - `uni-list` 和 `uni-list-item` 需要配套使用，暂不支持单独使用 `uni-list-item`
-- 开启点击反馈后，会有点击选中效果
+- 只有开启点击反馈后，会有点击选中效果
 - 使用插槽时，可以完全自定义内容
 - note 、rightText 属性暂时没做限制，不支持文字溢出隐藏，使用时应该控制长度显示或通过默认插槽自行扩展
 - 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
@@ -28,7 +31,7 @@ list 列表组件一般用于导航菜单、列表、设置页排版等，可以
 
 #### 方式1 (推荐)
 
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
+`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[uni-ui组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
 
 `easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
 
@@ -254,14 +257,49 @@ reLaunch	|	同 uni.reLaunch()
 switchTab  	|	同 uni.switchTab()
 
 
-**插槽**
+### uni-list-item 插槽说明
 > 注意：与之前的插槽不兼容，left 更改为 header ， right 更改为 footer
+
+如果	`List` 组件内置属性样式无法满足开发者需求的时候，可以使用插槽来自定义列表的全部内容
+
+当 `direction` 属性为 `row` 时表示水平排列，此时 `header` 表示列表的左边部分，`body` 表示列表的中间部分，`footer` 表示列表的右边部分
+
+当 `direction` 属性为 `column` 时表示垂直排列，此时 `header` 表示列表的上边部分，`body` 表示列表的中间部分，`footer` 表示列表的下边部分
+
+**Tips**
+
+需要注意的是当使用插槽时，内置样式将会失效，只保留排版样式，此时的样式需要开发者自己实现
+
+**插槽**
 
 名称	 	|	说明					
 :-		|	:-						
 header	|	左/上内容插槽，可完全自定义默认显示
-body	|	中间内容插槽，可完全自定义左侧内容				
-footer	|	右/下内容插槽，可完全自定义右侧内容			
+body	|	中间内容插槽，可完全自定义中间内容				
+footer	|	右/下内容插槽，可完全自定义右侧内容		
+	
+**示例**
+
+```html
+<uni-list>
+	<uni-list-item title="自定义右侧插槽" note="列表描述信息" link>
+		<template slot="header">
+			<image class="slot-image" src="/static/logo.png" mode="widthFix"></image>
+		</template>
+	</uni-list-item>
+	<uni-list-item>
+		<!-- 自定义 header -->
+		<view slot="header" class="slot-box"><image class="slot-image" src="/static/logo.png" mode="widthFix"></image></view>
+		<!-- 自定义 body -->
+		<text slot="body" class="slot-box slot-text">自定义插槽</text>
+		<!-- 自定义 footer-->
+		<template slot="footer">
+			<image class="slot-image" src="/static/logo.png" mode="widthFix"></image>
+		</template>
+	</uni-list-item>
+</uni-list>
+```
+
 
 **uniListItem 事件说明：**
 
@@ -303,7 +341,7 @@ reLaunch	|	同 uni.reLaunch()
 switchTab  	|	同 uni.switchTab()
 
 
-**插槽**
+### uni-list-chat 插槽说明
 
 名称	 	|	说明					
 :-		|	:-						

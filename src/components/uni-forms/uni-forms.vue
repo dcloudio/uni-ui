@@ -63,7 +63,8 @@
 		},
 		data() {
 			return {
-				rules: {}
+				rules: {},
+				formData:{}
 			};
 		},
 		watch: {
@@ -85,7 +86,23 @@
 					this.validator = new Validator(formRules)
 				}
 			},
-			// 表单提交
+
+			/**
+			 * 公开给用户使用
+			 * 设置自定义表单组件 value 值
+			 *  @param {String} name 字段名称
+			 *  @param {String} value 字段值
+			 */
+			setValue(name,value){
+				console.log(name,value);
+				this.formData[name] = value
+				console.log(this.formData);
+			},
+
+			/**
+			 * 表单提交
+			 * @param {Object} event
+			 */
 			submitForm(event) {
 				const {
 					value
@@ -151,6 +168,8 @@
 				let example = null
 				result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
+
+					console.log('forms',example);
 					example.errorMessage = item.errorMessage
 				})
 
@@ -164,7 +183,6 @@
 					this.$emit('validate', result.length === 0 ? null : result)
 				}
 			},
-
 
 			/**
 			 * 校验表单
