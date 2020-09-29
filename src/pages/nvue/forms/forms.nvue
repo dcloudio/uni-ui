@@ -5,13 +5,13 @@
 		<uni-forms ref="form" data="formData" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
 		 @reset="reset" @validate="validate">
 			<uni-forms-item name="name" label="用户名">
-				<input type="text"  placeholder="请输入用户名" @input="input('form','name',$event.detail.value)">
+				<input type="text"  placeholder="请输入用户名" @blur="input('form','name',$event.detail.value)">
 			</uni-forms-item>
-			<uni-forms-item name="age" label="年龄">
+			<uni-forms-item type="number" name="age" label="年龄">
 				<input type="text" placeholder="请输入年龄" @input="input('form','age',$event.detail.value)">
 			</uni-forms-item>
 			<uni-forms-item name="email" label="邮箱">
-				<input type="text" placeholder="请输入邮箱" @input="input('form','email',$event.detail.value)">
+				<input type="text" placeholder="请输入邮箱" @blur="input('form','email',$event.detail.value)">
 			</uni-forms-item>
 			<uni-field label="体重" :input-border="true" name="size"  placeholder="请输入姓名" errorMessage="姓名不能为空" />
 			<uni-field label="身份证" :input-border="true" name="card"  placeholder="请输入姓名" errorMessage="姓名不能为空" />
@@ -57,7 +57,7 @@
 							minLength: 3,
 							maxLength: 5,
 							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-							trigger: 'submit'
+							trigger: 'blur'
 						}]
 					},
 					email: {
@@ -111,6 +111,7 @@
 		},
 		methods: {
 			input(form, name, value) {
+				console.log(123);
 				this.$refs[form].setValue(name, value)
 			},
 			/**

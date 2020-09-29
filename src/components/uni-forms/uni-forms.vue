@@ -64,7 +64,7 @@
 		data() {
 			return {
 				rules: {},
-				formData:{}
+				formData: {}
 			};
 		},
 		watch: {
@@ -93,10 +93,11 @@
 			 *  @param {String} name 字段名称
 			 *  @param {String} value 字段值
 			 */
-			setValue(name,value){
-				console.log(name,value);
+			setValue(name, value, callback) {
 				this.formData[name] = value
-				console.log(this.formData);
+				let example = this.childrens.find(child => child.name === name)
+				example.val = value
+				return example.triggerCheck(value, callback)
 			},
 
 			/**
@@ -104,9 +105,7 @@
 			 * @param {Object} event
 			 */
 			submitForm(event) {
-				const {
-					value
-				} = event.detail
+				const value = event.detail.value
 
 				let example = null
 				// 未开启校验规则
@@ -116,8 +115,9 @@
 					})
 					return
 				}
+
 				this.childrens.forEach(item => {
-					item.errorMessage = ''
+					item.errMsg = ''
 				})
 				for (let i in value) {
 					example = this.childrens.find(child => child.name === i)
@@ -130,7 +130,7 @@
 
 				result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
-					example.errorMessage = item.errorMessage
+					example.errMsg = item.errorMessage
 				})
 				event.detail.errors = result.length === 0 ? null : result
 				this.$emit('submit', event)
@@ -141,7 +141,7 @@
 			 */
 			resetForm(event) {
 				this.childrens.forEach(item => {
-					item.errorMessage = ''
+					item.errMsg = ''
 					item.val = ''
 					item.$emit('input', '')
 				})
@@ -159,32 +159,67 @@
 			/**
 			 * 校验所有或者部分表单
 			 */
-			validateAll(invalidFields, type) {
-				if (!this.validator) return
+			validateAll(invalidFields, type, callback) {
+				if (!this.validator) {
+					this.$emit('submit', {
+						value: invalidFields,
+						validate: null
+					})
+					return
+				}
 				this.childrens.forEach(item => {
-					item.errorMessage = ''
+					item.errMsg = ''
 				})
-				const result = this.validator.validateAll(invalidFields)
+
+				let promise;
+				// if no callback, return promise
+				if (callback && typeof callback !== 'function' && Promise) {
+					promise = new Promise((resolve, reject) => {
+						callback = function(valid, invalidFields) {
+							!valid ? resolve(invalidFields) : reject(valid);
+						};
+					});
+				}
+
+				let result = this.validator.validateAll(invalidFields)
+				if (Array.isArray(result)) {
+					if (result.length === 0) result = null
+				}
 				let example = null
-				result.forEach(item => {
+				result && result.forEach(item => {
 					example = this.childrens.find(child => child.name === item.key)
-
-					console.log('forms',example);
-					example.errorMessage = item.errorMessage
+					if (example) example.errMsg = item.errorMessage
 				})
 
-				typeof callback === 'function' && callback(!result, invalidFields)
 				if (type === 'submit') {
 					this.$emit('submit', {
 						value: invalidFields,
-						validate: result.length === 0 ? null : result
+						validate: result
 					})
 				} else {
-					this.$emit('validate', result.length === 0 ? null : result)
+					this.$emit('validate', result)
 				}
+				callback && typeof callback === 'function' && callback(result ? true : false, result ? result : invalidFields)
+				if (promise && callback) return promise
 			},
 
 			/**
+			 * 外部调用方法
+			 * 手动提交校验表单
+			 * 对整个表单进行校验的方法，参数为一个回调函数。
+			 */
+			submit() {
+				let invalidFields = {}
+				this.childrens.forEach(item => {
+					item.parentVal((val) => {
+						invalidFields = Object.assign({}, invalidFields, val)
+					})
+				})
+				return this.validateAll(this.formData, 'submit')
+			},
+
+			/**
+			 * 外部调用方法
 			 * 校验表单
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
@@ -195,7 +230,7 @@
 						invalidFields = Object.assign({}, invalidFields, val)
 					})
 				})
-				this.validateAll(invalidFields, 'submit')
+				return this.validateAll(this.formData, '', callback)
 			},
 
 			/**
@@ -213,7 +248,7 @@
 						}
 					})
 				})
-				this.validateAll(invalidFields)
+				return this.validateAll(invalidFields, '', callback)
 			},
 
 			/**
@@ -230,10 +265,10 @@
 				props = [].concat(props);
 				this.childrens.forEach(item => {
 					if (props.length === 0) {
-						item.errorMessage = ''
+						item.errMsg = ''
 					} else {
 						if (props.indexOf(item.name) !== -1) {
-							item.errorMessage = ''
+							item.errMsg = ''
 						}
 					}
 
@@ -245,7 +280,5 @@
 </script>
 
 <style lang="scss">
-	.uni-form {
-		// border: 1px red solid;
-	}
+	.uni-form {}
 </style>
