@@ -101,39 +101,12 @@
 			},
 
 			/**
-			 * 表单提交
+			 * TODO 表单提交， 小程序暂不支持这种用法
 			 * @param {Object} event
 			 */
 			submitForm(event) {
 				const value = event.detail.value
-
-				let example = null
-				// 未开启校验规则
-				if (!this.validator) {
-					this.$emit('submit', {
-						value
-					})
-					return
-				}
-
-				this.childrens.forEach(item => {
-					item.errMsg = ''
-				})
-				for (let i in value) {
-					example = this.childrens.find(child => child.name === i)
-					// 校验 number 的类型
-					if (example.type === 'number') {
-						value[i] = value[i] === '' ? value[i] : Number(value[i])
-					}
-				}
-				const result = this.validator.validateAll(value)
-
-				result.forEach(item => {
-					example = this.childrens.find(child => child.name === item.key)
-					example.errMsg = item.errorMessage
-				})
-				event.detail.errors = result.length === 0 ? null : result
-				this.$emit('submit', event)
+				return this.validateAll(value || this.formData, 'submit')
 			},
 			/**
 			 * 表单重置
@@ -162,8 +135,10 @@
 			validateAll(invalidFields, type, callback) {
 				if (!this.validator) {
 					this.$emit('submit', {
-						value: invalidFields,
-						validate: null
+						detail: {
+							value: invalidFields,
+							errors: null
+						}
 					})
 					return
 				}
@@ -181,7 +156,8 @@
 					});
 				}
 
-				let result = this.validator.validateAll(invalidFields)
+				let result = this.validator.invokeValidateUpdate(invalidFields,true)
+				console.log('-=-=-',invalidFields,result);
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
@@ -193,13 +169,15 @@
 
 				if (type === 'submit') {
 					this.$emit('submit', {
-						value: invalidFields,
-						validate: result
+						detail: {
+							value: invalidFields,
+							errors: result
+						}
 					})
 				} else {
 					this.$emit('validate', result)
 				}
-				callback && typeof callback === 'function' && callback(result ? true : false, result ? result : invalidFields)
+				callback && typeof callback === 'function' && callback(result ? false : true, result ? result : invalidFields)
 				if (promise && callback) return promise
 			},
 
@@ -209,12 +187,12 @@
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
 			submit() {
-				let invalidFields = {}
-				this.childrens.forEach(item => {
-					item.parentVal((val) => {
-						invalidFields = Object.assign({}, invalidFields, val)
-					})
-				})
+				// let invalidFields = {}
+				// this.childrens.forEach(item => {
+				// 	item.parentVal((val) => {
+				// 		invalidFields = Object.assign({}, invalidFields, val)
+				// 	})
+				// })
 				return this.validateAll(this.formData, 'submit')
 			},
 
@@ -224,12 +202,6 @@
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
 			validate(callback) {
-				let invalidFields = {}
-				this.childrens.forEach(item => {
-					item.parentVal((val) => {
-						invalidFields = Object.assign({}, invalidFields, val)
-					})
-				})
 				return this.validateAll(this.formData, '', callback)
 			},
 
@@ -238,16 +210,18 @@
 			 * @param {Object} props
 			 * @param {Object} cb
 			 */
-			validateField(props) {
+			validateField(props, callback) {
 				props = [].concat(props);
 				let invalidFields = {}
 				this.childrens.forEach(item => {
-					item.parentVal((val, name) => {
-						if (props.indexOf(name) !== -1) {
-							invalidFields = Object.assign({}, invalidFields, val)
-						}
-					})
+					// item.parentVal((val, name) => {
+					if (props.indexOf(item.name) !== -1) {
+						invalidFields = Object.assign({}, invalidFields,{ [item.name]:this.formData[item.name]})
+					}
+					// })
+
 				})
+				console.log(invalidFields);
 				return this.validateAll(invalidFields, '', callback)
 			},
 

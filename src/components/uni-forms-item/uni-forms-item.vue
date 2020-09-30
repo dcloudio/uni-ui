@@ -2,7 +2,7 @@
 	<view class="uni-field" :class="{'uni-border-top': borderTop &&!custom, 'uni-border-bottom': borderBottom &&!custom ,'uni-field-custom':custom}"
 	 :style="[fieldStyle]">
 		<template v-if="!custom">
-			<view class="uni-field-inner" :class="[type == 'textarea' ? 'uni-textarea-inner' : '', 'uni-label-postion-' + labelPos]">
+			<view class="uni-field-inner" :class="[ 'uni-label-postion-' + labelPos]">
 				<view :class="errorTop ? 'uni-error-in-label' : ''">
 					<view class="uni-field-label" :class="[required ? 'uni-required' : '']" :style="{
 			            justifyContent: justifyContent,
@@ -17,7 +17,7 @@
 					</view>
 					<view v-if="errorTop && showMessage" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ msg }}</view>
 				</view>
-				<view class="fild-body" :class="[inputBorder ? 'uni-input-border' : '']" :style="[borderEixstTextareaStyle]">
+				<view class="fild-body">
 					<slot></slot>
 				</view>
 			</view>
@@ -36,42 +36,21 @@
 	 * Field 输入框
 	 * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=21001
-	 * @property {String } 	type 				输入框的类型（默认text）
-	 * @property {Boolean} 	required 			是否必填，左边您显示红色"*"号（默认false）
+	 * @property {Boolean} 	required 			是否必填，左边显示红色"*"号（默认false）
+	 * @property {Boolean} 	trigger 			表单校验时机（默认blur）
 	 * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
 	 * @property {String } 	iconColor 			左边通过icon配置的图标的颜色（默认#606266）
-	 * @property {Boolean} 	rightIcon 			输入框右边的图标名称，限uni-ui的图标名称（默认false）
 	 * @property {String } 	label 				输入框左边的文字提示
 	 * @property {Number } 	labelWidth 			label的宽度，单位px（默认65）
 	 * @property {String } 	labelAlign 			label的文字对齐方式（默认left）
 	 * @property {String } 	labelPosition 		label的文字的位置（默认left）
-	 * @property {Boolean} 	clearable 			是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容（默认true）
-	 * @property {String } 	placeholder 		输入框的提示文字
-	 * @property {String } 	placeholderStyle 	placeholder的样式(内联样式，字符串)，如"color: #ddd"
-	 * @property {Boolean} 	password 			是否密码输入方式(用点替换文字)，type为text时有效（默认false）
-	 * @property {Boolean} 	focus 				是否自动获得焦点（默认false）
-	 * @property {Boolean} 	disabled 			是否不可输入（默认false）
-	 * @property {Number } 	maxlength 			最大输入长度，设置为 -1 的时候不限制最大长度（默认140）
-	 * @property {String } 	confirmType 		设置键盘右下角按钮的文字，仅在type="text"时生效（默认done）
 	 * @property {String } 	errorMessage 		显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
-	 * @property {Number } 	clearSize 			清除图标的大小，单位px（默认15）
-	 * @property {Boolean} 	trim 				是否自动去除两端的空格
 	 * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
-	 * @property {Array  }  rules 				单行表单验证规则，接受一个数组
-	 * @property {Boolean} 	inputBorder 		是否显示input输入框的边框（默认false）
 	 * @property {Boolean} 	border-bottom 		是否显示field的下边框（默认true）
 	 * @property {Boolean} 	border-top 			是否显示field的上边框（默认false）
-	 * @property {Boolean} 	auto-height 		是否自动增高输入区域，type为textarea时有效（默认true）
-	 * @event {Function} 	input 				输入框内容发生变化时触发
-	 * @event {Function} 	focus 				输入框获得焦点时触发
-	 * @event {Function} 	blur 				输入框失去焦点时触发
-	 * @event {Function} 	confirm 			点击完成按钮时触发
-	 * @event {Function} 	right-icon-click 	通过right-icon生成的图标被点击时触发
-	 * @event {Function} 	click 				输入框被点击或者通过right-icon生成的图标被点击时触发，这样设计是考虑到传递右边的图标，一般都为需要弹出"picker"等操作时的场景，点击倒三角图标，理应发出此事件，见上方说明
-	 * @example <uni-field v-model="mobile" label="手机号" required :error-message="errorMessage"></uni-field>
 	 */
 	export default {
-		name: "uni-field",
+		name: "uniFormsItem",
 		props: {
 			// 自定义内容
 			custom: {
@@ -83,19 +62,17 @@
 				type: Boolean,
 				default: true
 			},
+			required: Boolean,
 			trigger: {
 				type: String,
 				default: ''
 			},
 			leftIcon: String,
-			rightIcon: String,
-			required: Boolean,
-			label: String,
-			password: Boolean,
-			clearable: {
-				type: Boolean,
-				default: true
+			iconColor: {
+				type: String,
+				default: '#606266'
 			},
+			label: String,
 			// 左边标题的宽度单位px
 			labelWidth: {
 				type: [Number, String],
@@ -106,54 +83,16 @@
 				type: String,
 				default: ''
 			},
-			iconColor: {
-				type: String,
-				default: '#606266'
-			},
-			autoHeight: {
-				type: Boolean,
-				default: true
-			},
-			errorMessage: {
-				type: [String, Boolean],
-				default: ''
-			},
-			placeholder: String,
-			placeholderStyle: String,
-			focus: Boolean,
-			name: String,
-			value: [Number, String],
-			type: {
-				type: String,
-				default: 'text'
-			},
-			disabled: {
-				type: Boolean,
-				default: false
-			},
-			maxlength: {
-				type: [Number, String],
-				default: 140
-			},
-			confirmType: {
-				type: String,
-				default: 'done'
-			},
 			// lable的位置，可选为 left-左边，top-上边
 			labelPosition: {
 				type: String,
 				default: ''
 			},
-			// 清除按钮的大小
-			clearSize: {
-				type: [Number, String],
-				default: 15
+			errorMessage: {
+				type: [String, Boolean],
+				default: ''
 			},
-			// 是否显示 input 边框
-			inputBorder: {
-				type: Boolean,
-				default: false
-			},
+			name: String,
 			// 是否显示上边框
 			borderTop: {
 				type: Boolean,
@@ -163,23 +102,15 @@
 			borderBottom: {
 				type: Boolean,
 				default: true
-			},
-			// 是否自动去除两端的空格
-			trim: {
-				type: Boolean,
-				default: true
 			}
 		},
 		data() {
 			return {
-				focused: false,
-				itemIndex: 0,
 				errorTop: false,
 				errorBottom: false,
 				labelMarginBottom: '',
 				errorWidth: '',
 				errMsg: '',
-				errorBorderColor: false,
 				val: '',
 				labelPos: '',
 				labelWid: '',
@@ -211,66 +142,13 @@
 				return style
 			},
 
-			borderEixstTextareaStyle() {
-				let style = {}
-				if (this.inputBorder) {
-					if (this.type === 'textarea') {
-						style.minHeight = '60px'
-					}
-					if (this.msg !== false && this.msg != '') {
-						style.borderColor = '#dd524d'
-					}
-				}
-				return style
-			},
-
-			inputWrapStyle() {
-				let style = {};
-				// 判断lable的位置，如果是left的话，让input左边两边有间隙
-				if (this.labelPos == 'left') {
-					style.margin = `0 4px`;
-				} else {
-					// 如果lable是top的，input的左边就没必要有间隙了
-					style.marginRight = `4px`;
-					// this.fieldStyle.style.padding = '10px 14px'
-				}
-				return style;
-			},
-			rightIconStyle() {
-				let style = {};
-				if (this.arrowDirection == 'top') style.transform = 'roate(-90deg)';
-				if (this.arrowDirection == 'bottom') style.transform = 'roate(90deg)';
-				else style.transform = 'roate(0deg)';
-				return style;
-			},
-			labelStyle() {
-				let style = {};
-				if (this.labelAli == 'left') style.justifyContent = 'flext-start';
-				if (this.labelAli == 'center') style.justifyContent = 'center';
-				if (this.labelAli == 'right') style.justifyContent = 'flext-end';
-				return style;
-			},
 			// uni不支持在computed中写style.justifyContent = 'center'的形式，故用此方法
 			justifyContent() {
 				if (this.labelAli == 'left') return 'flex-start';
 				if (this.labelAli == 'center') return 'center';
 				if (this.labelAli == 'right') return 'flex-end';
-			},
-			// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
-			inputMaxlength() {
-				return Number(this.maxlength)
-			},
-			// label的位置
-			fieldInnerStyle() {
-				let style = {};
-				if (this.labelPos == 'left') {
-					style.flexDirection = 'row';
-				} else {
-					style.flexDirection = 'column';
-				}
-
-				return style;
 			}
+
 		},
 		watch: {
 			trigger(trigger) {
@@ -281,28 +159,28 @@
 			this.form = this.getForm()
 			this.formRules = []
 			this.formTrigger = this.trigger
-
-			if (this.form) {
-				this.form.childrens.push(this)
-				this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
-				this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
-				this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign
-
-				if (this.form.formRules) {
-					this.formRules = this.form.formRules[this.name]
-				}
-				this.validator = this.form.validator
-
-				this.form.formData[this.name] = this.value || ''
-
-			} else {
-				this.labelPos = this.labelPosition || 'left'
-				this.labelWid = this.labelWidth || 65
-				this.labelAli = this.labelAlign || 'left'
-			}
+			this.init()
 
 		},
 		methods: {
+			init() {
+				if (this.form) {
+					this.form.childrens.push(this)
+					this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
+					this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
+					this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign
+					if (this.form.formRules) {
+						this.formRules = this.form.formRules[this.name]
+					}
+					this.validator = this.form.validator
+
+					this.form.formData[this.name] = ''
+				} else {
+					this.labelPos = this.labelPosition || 'left'
+					this.labelWid = this.labelWidth || 65
+					this.labelAli = this.labelAlign || 'left'
+				}
+			},
 			/**
 			 * 获取父元素实例
 			 */
@@ -326,28 +204,20 @@
 			 * 父组件处理函数
 			 * @param {Object} callback
 			 */
-			parentVal(callback) {
-				if (this.type === 'number') {
-					this.val = this.val === '' ? this.val : Number(this.val)
-				}
-				typeof(callback) === 'function' && callback({
-					[this.name]: this.val
-				}, this.name)
-			},
+			// parentVal(callback) {
+			// 	typeof(callback) === 'function' && callback({
+			// 		[this.name]: this.form.formData[this.name]
+			// 	}, this.name)
+			// },
 
 			/**
 			 * 校验规则
 			 * @param {Object} value
 			 */
 			triggerCheck(value, callback) {
-				// 输入值为 number
-				if (this.type === 'number') {
-					value = value === '' ? value : Number(value)
-				}
-
 				let promise;
 				// if no callback, return promise
-				if (typeof callback !== 'function' && Promise) {
+				if (callback && typeof callback !== 'function' && Promise) {
 					promise = new Promise((resolve, reject) => {
 						callback = function(valid) {
 							!valid ? resolve(valid) : reject(valid)
@@ -355,14 +225,24 @@
 					});
 				}
 
+				if (!this.validator) {
+					typeof callback === 'function' && callback(null);
+					if (promise) return promise
+				}
 
+				const rules = this.formRules.rules
+				const rule = rules.find(item => item.format && item.format === 'number')
+				// 输入值为 number
+				if (rule) {
+					value = value === '' ? value : Number(value)
+				}
+				this.form.formData[this.name] = value
 				const result = this.validator && this.validator.validateUpdate({
 					[this.name]: value
 				})
 				this.errMsg = !result ? '' : result.errorMessage
 				this.form.validateCheck(result ? result : null)
 				typeof callback === 'function' && callback(result ? result : null);
-
 				if (promise) return promise
 
 			},

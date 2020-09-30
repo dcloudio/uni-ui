@@ -83,16 +83,15 @@ export default {
 
 `uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套原生 `input`、`radio`、`checkbox`、`textarea`、`switch` 等原生表单组件，通过 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
 
-- 当`uni-forms-item`内包含 `input`、`textarea`时，其内容与 `uni-field`组件高度相似，可以考虑使用 `uni-field` 代码，减少代码书写，并内置了相关方法，不需要再次调用 `setValue`
+- 如需 `submit` 事件返回表单值，必须要指定 `name` 属性
 
 ```html
 <template>
-	<uni-forms ref="form" @submit="submitForm">
-		<uni-field required label="姓名" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
+	<uni-forms ref="form" @submit="submit">
 		<uni-forms-item  label="年龄" name="age"  placeholder="请输入年龄">
-			<input class="input" type="text" placeholder="请输入用户名" @input="input('age', $event.detail.value)" />
+			<input class="input" type="text" placeholder="请输入用户名" @input="validate('age', $event.detail.value)" />
 		<uni-forms-item>
-		<button @click="submit">Submit</button>
+		<button @click="submitForm">Submit</button>
 		<button @click="reset">Reset</button>
 	</uni-forms>
 </template>
@@ -102,12 +101,12 @@ export default {
 			return {}
 		},
 		methods: {
-			input(){
+			validate(){
 				// 通过 input 事件设置表单指定 name 的值
 				this.$refs.form.setValue(name, value)
 			},
 			// 提交表单
-			submitForm(e){
+			submit(e){
 				/**
 				 * validate 校验信息
 				 * value 表单数据
@@ -115,7 +114,7 @@ export default {
 				const {validate , value } = e
 				console.log('表单数据：', value);
 			},
-			submit(form) {
+			submitForm(form) {
 				// 手动提交表单
 				this.$refs[form].submit()
 			},
@@ -138,20 +137,22 @@ export default {
 
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误， `uni-Forms` 组件提供了表单验证的功能。
 
-只需要通过 form-rules 属性传入约定的验证规则，并将 `uni-filed`、`uni-forms-item` 的 `name` 属性设置为需校验的字段名即可。
-
 ### 如何使用 
 
-1. `uni-forms` 需要通过 `form-rules` 属性传入约定的验证规则校验规则下文会详细描述
-2. `uni-field`、`uni-forms-item` 需要设置 `name` 属性为当前字段名，字段为 `String` 类型而非变量
+1. `uni-forms` 需要通过 `form-rules` 属性传入约定的验证规则校验规则(下文会详细描述)
+2. `uni-forms-item` 需要设置 `name` 属性为当前字段名，字段为 `String` 类型而非变量
 3. 通过 `button` 按钮调用 `uni-forms` 的 `submit` 事件来校验并提交整个表单
 
 
 ```html
 <template>
 	<uni-forms :form-rules="rules" @submit="submitForm" @reset="reset">
-		<uni-field label="姓名" name="name" placeholder="请输入姓名" 	/>
-		<uni-field label="邮箱" name="email" placeholder="请输入电子邮箱" />
+		<uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
+			<input class="input" type="text" placeholder="请输入用户名" @input="validate('name', $event.detail.value)" />
+		<uni-forms-item>
+		<uni-forms-item  label="邮箱" name="email"  placeholder="请输入年龄">
+			<input class="input" type="text" placeholder="请输入用户名" @input="validate('email', $event.detail.value)" />
+		<uni-forms-item>
 		<button @click="submit">Submit</button>
 		<button @click="reset">Reset</button>
 	</uni-forms>
@@ -175,7 +176,8 @@ export default {
 								message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
 								trigger: 'change'
 							}
-						]
+						],
+						label:'姓名'
 					},
 					// 对email字段进行必填验证
 					email:{
@@ -183,21 +185,29 @@ export default {
 							type: 'email',
 							message: '请输入正确的邮箱地址',
 							trigger: 'change'
-						}]
+						}],
+						label:'邮箱'
 					}
 				}
 			}
 		},
 		methods: {
+			/**
+			 * 设置表单域的值
+			 * @param {String} name 字段名称
+			 * @param {String} value 表单域的值
+			 */
+			validate(name,value){
+				// 通过 input 事件设置表单指定 name 的值
+				this.$refs.form.setValue(name, value)
+			},
 			// 提交表单
 			submitForm(e){
-				/**
-				 * validate 校验信息
-				 * value 表单数据
-				 */
-				const {validate , value } = e
-				console.log('表单是否校验通过：', value);
+				// value 表单数据,errors 校验信息
+				const {value ，errors} = e
+				console.log('表单是否校验通过：', errors);
 				console.log('表单数据信息：', value);
+				// ... 提交逻辑
 			},
 			// 触发提交表单
 			submit() {
@@ -213,9 +223,19 @@ export default {
 
 
 ### 校验规则
-校验规则中，每个字段可以同时对应多个规则，每个字段的验证规则为一个数组，数组的每个元素对象为其中一条规则
+校验规则接受一个 `Object` 类型的值，通过传入不同的规则来表示每个表单域的值该如何校验
 
-```json
+对象的 `key` 表示当前表单域的字段名，`value` 为具体的校验规则
+
+以下为 `value` 所包含的内容：
+
+属性名	| 类型	| 说明
+--- 	|---	| ---
+rules	| Array	| 校验规则，见下方 `rules 属性说明`  
+label	| String| 当前表单域的字段中文名，多用于 `errorMessage` 的显示，可不填
+
+
+```javascript
 rules: {
 	// 对name字段进行必填验证
 	name: {
@@ -231,16 +251,18 @@ rules: {
 			{
 				minLength: 3,
 				maxLength: 5,
-				message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+				message: '{label}长度在 {minLength} 到 {maxLength} 个字符',
 				trigger: 'change'
 			}
-		]
+		],
+		label:'姓名'
 	}
 }
 
 ```
 
-### 校验规则属性
+
+### rules 属性说明
 每一个验证规则中，可以配置多个属性，下面是一些常见规则属性
 
 属性名				| 类型			| 默认值	|可选值					| 说明			
@@ -275,13 +297,13 @@ email	| 必须是 email 类型
 
 同一个时刻，只会有一个 `trigger` 发生作用，它的作用权重为 
 
-`规则 > uni-forms-item/uni-field > uni-forms `
+**`规则 > uni-forms-item > uni-forms `**
 
 - 如果规则里配置 `trigger` ，则优先使用规则里的 `trigger` 属性来触发校验规则
-- 如果规则里没有配置 `trigger` ，则优先使用 `uni-forms-item/uni-field` 的 `trigger` 属性来触发校验规则
-- 如果 `uni-forms-item/uni-field` 组件里没有配置 `trigger` ，则优先使用 `uni-forms` 的 `trigger` 属性来触发校验规则
+- 如果规则里没有配置 `trigger` ，则优先使用 `uni-forms-item` 的 `trigger` 属性来触发校验规则
+- 如果 `uni-forms-item` 组件里没有配置 `trigger` ，则优先使用 `uni-forms` 的 `trigger` 属性来触发校验规则
 - 以此类推，如果都没有使用 `trigger` 属性，则会使用 `uni-forms` 的 `trigger` 属性默认值来触发校验规则
-- 需要注意的是： 如果手动调用了 `uni-forms` 的 `setValue` 方法，则所有 `trigger` 属性会失效，方法每调用一次，则会触发一次校验 
+- 需要注意的是： 如果手动调用了 `uni-forms` 的 `setValue` 方法，则所有 `trigger` 属性将会失效，方法每调用一次，则会触发一次校验 
 
 
 ## API
@@ -290,12 +312,12 @@ email	| 必须是 email 类型
 
 属性名				| 类型			|默认值	 | 可选值						| 说明
 ---					| ----			|---	| ---							| ---	
-formRules			| Object		| -		| -								| 表单校验规则，数据格式见**表单校验说明**	
-trigger				| String		| blur	| blur/change/submit   			| 校验触发器方式
+formRules			| Object		| -		| -								| 表单校验规则	
+trigger				| String		| blur	| blur/change/submit   			| 表单校验时机
 labelPosition		| String		| left 	| top/left						| label 位置
 labelWidth			| String/Number	| 75	| -								| label 宽度，单位 px	
 labelAlign			| String		| left	| left/center/right				| label 居中方式
-errorMessageType	|String			|bottom	| none/top /bottom/toast/alert	| 错误提示类型
+errorMessageType	|String			|bottom	| none/top /bottom				| 错误提示类型
 
 ### Forms Events
 
@@ -315,11 +337,20 @@ validateField	| 部分表单进行校验		| Function(props: array | string, call
 resetFields		| 对整个表单进行重置	| -
 clearValidate	| 移除表单的校验结果	| Function(props: array | string)
 
-**Tips**
+### FormsItem Props
 
-- forms-item 需要调用 setValue 来触发校验，此时所有 tirgger 属性将失效
-- forms-item type 只有 number 一个值 ，只有需要校验的内容为number 时才生效
-- 自定义 message 的时候，通过方法的回调返回，custom 同理
-- forms 的 submit 方法可以是 callback 如果没有callback 可以使用promise ，callback 返回两个参数，第一个参数表示是否校验成功，第二个根据第一个参数发生变化 ，如果为true 则返回提交信息，如果为false 返回校验错误信息
-- 如果 forms item 规则里需要传入 number 类型的化 ，需要在调用 setValue 之前手动格式化，否则返回值始终为 string 类型
-- 如果调用 setValue 方法，会马上触发校验，此时tirrger 属性将失效
+属性名				|类型	|默认值	 	|可选值	|说明
+:-					|:-		|:-			|---	|:-
+required			|Boolean| false		|					| 是否必填，左边显示红色"*"号
+trigger				|String | blur		|blur/change/submit	| 表单校验时机
+leftIcon			|String | -			|- 					| label左边的图标，限uni-ui的图标名称
+iconColor			|String | #606266	|- 					| 左边通过icon配置的图标的颜色
+label				|String	| -			|-					| 输入框左边的文字提示
+label-width			|Number	| 65		|-					| label的宽度，单位px
+label-align			|String	| left		|left/center/right	| label的文字对齐方式
+label-position		|String	| left		|top/left			| label的文字的位置
+errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
+name				|String	| -			|-					| 表单域的属性名，在使用校验规则时必填
+border-bottom		|Boolean| true		|-					| 是否显示field的下边框
+border-top			|Boolean| false		|-					| 是否显示field的上边框
+

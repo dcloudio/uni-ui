@@ -5,34 +5,23 @@
 		<uni-forms ref="form" data="formData" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
 		 @reset="reset" @validate="validate">
 			<uni-forms-item name="name" label="用户名">
-				<input type="text"  placeholder="请输入用户名" @blur="input('form','name',$event.detail.value)">
+				<input type="text" placeholder="请输入用户名" @blur="input('form','name',$event.detail.value)">
 			</uni-forms-item>
-			<uni-forms-item type="number" name="age" label="年龄">
+			<uni-forms-item name="age" label="年龄">
 				<input type="text" placeholder="请输入年龄" @input="input('form','age',$event.detail.value)">
 			</uni-forms-item>
 			<uni-forms-item name="email" label="邮箱">
 				<input type="text" placeholder="请输入邮箱" @blur="input('form','email',$event.detail.value)">
 			</uni-forms-item>
-			<uni-field label="体重" :input-border="true" name="size"  placeholder="请输入姓名" errorMessage="姓名不能为空" />
-			<uni-field label="身份证" :input-border="true" name="card"  placeholder="请输入姓名" errorMessage="姓名不能为空" />
-			<!-- <uni-group title="基本信息">
-				<uni-field label="姓名" :input-border="true" name="name" v-model="formData.name" placeholder="请输入姓名" errorMessage="姓名不能为空" />
-				<uni-field type="number" :input-border="true" required label="年龄" name="age" v-model="formData.age" placeholder="请输入年龄" />
-			</uni-group>
-			<uni-group title="详细信息">
-				<uni-field type="text" :input-border="true" label="邮箱" name="email" v-model="formData.email" placeholder="请输入电子邮箱" />
-				<uni-field type="textarea" :input-border="true" label="体重" name="size" v-model="formData.size" placeholder="请输入体重" />
-			</uni-group> -->
-
+			
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
 			<!-- <button class="button" form-type="submit">Submit</button>
 			<button class="button" form-type="reset">Reset</button> -->
 
 			<button class="button" @click="submitForm('form')">校验表单</button>
-			<!-- <button class="button" @click="validateField('form')">校验部分表单</button>
+			<button class="button" @click="validateField('form')">校验部分表单</button>
 			<button class="button" @click="clearValidate('form','name')">移除部分表单校验结果</button>
 			<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
-			<button class="button" @click="resetFields('form')">手动重置表单</button> -->
 		</uni-forms>
 	</view>
 </template>
@@ -60,13 +49,7 @@
 							trigger: 'blur'
 						}]
 					},
-					email: {
-						rules: [{
-							format: 'email',
-							errorMessage: '请输入正确的邮箱地址',
-							trigger: 'blur'
-						}]
-					},
+
 					age: {
 						rules: [{
 							required: true,
@@ -83,27 +66,11 @@
 							trigger: 'change'
 						}]
 					},
-					size: {
+					email: {
 						rules: [{
-							minimum: 100,
-							maximum: 200,
-							errorMessage: '体重应该大于 {minimum} 斤，小于 {maximum} 斤',
-							// trigger: 'change'
-						}]
-					},
-					size: {
-						rules: [{
-							minimum: 100,
-							maximum: 200,
-							errorMessage: '体重应该大于 {minimum} 斤，小于 {maximum} 斤',
-							// trigger: 'change'
-						}]
-					},
-					card: {
-						rules: [{
-							required:true,
-							errorMessage: '请输入身份证',
-							// trigger: 'change'
+							format: 'email',
+							errorMessage: '请输入正确的邮箱地址',
+							trigger: 'blur'
 						}]
 					}
 				}
@@ -111,7 +78,6 @@
 		},
 		methods: {
 			input(form, name, value) {
-				console.log(123);
 				this.$refs[form].setValue(name, value)
 			},
 			/**
@@ -157,7 +123,9 @@
 			 * @param {Object} form
 			 */
 			validateField(form) {
-				this.$refs[form].validateField('name')
+				this.$refs[form].validateField(['name', 'email'], (error) => {
+					console.log(error);
+				})
 			},
 
 			/**
@@ -168,14 +136,6 @@
 			clearValidate(form, name) {
 				if (!name) name = []
 				this.$refs[form].clearValidate(name)
-			},
-
-			/**
-			 * 手动重置表单
-			 * @param {Object} form
-			 */
-			resetFields(form) {
-				this.$refs[form].resetFields()
 			}
 		}
 	}
