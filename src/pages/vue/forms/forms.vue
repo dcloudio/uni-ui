@@ -2,7 +2,7 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" data="formData" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
+		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
 		 @reset="reset" @validate="validate">
 			<uni-forms-item name="name" label="用户名">
 				<input type="text" placeholder="请输入用户名" @blur="input('form','name',$event.detail.value)">

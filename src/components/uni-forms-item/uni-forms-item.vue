@@ -1,10 +1,10 @@
 <template>
-	<view class="uni-field" :class="{'uni-border-top': borderTop &&!custom, 'uni-border-bottom': borderBottom &&!custom ,'uni-field-custom':custom}"
+	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom}"
 	 :style="[fieldStyle]">
 		<template v-if="!custom">
-			<view class="uni-field-inner" :class="[ 'uni-label-postion-' + labelPos]">
+			<view class="uni-forms-item-inner" :class="[ 'uni-label-postion-' + labelPos]">
 				<view :class="errorTop ? 'uni-error-in-label' : ''">
-					<view class="uni-field-label" :class="[required ? 'uni-required' : '']" :style="{
+					<view class="uni-forms-item-label" :class="[required ? 'uni-required' : '']" :style="{
 			            justifyContent: justifyContent,
 			            width: labelWid +'px',
 			            marginBottom: labelMarginBottom,
@@ -170,11 +170,12 @@
 					this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
 					this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign
 					if (this.form.formRules) {
-						this.formRules = this.form.formRules[this.name]
+						this.formRules = this.form.formRules[this.name] || {}
 					}
 					this.validator = this.form.validator
-
-					this.form.formData[this.name] = ''
+					if(this.name){
+						this.form.formData[this.name] = ''
+					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
 					this.labelWid = this.labelWidth || 65
@@ -230,13 +231,14 @@
 					if (promise) return promise
 				}
 
-				const rules = this.formRules.rules
+				const rules = this.formRules.rules || []
 				const rule = rules.find(item => item.format && item.format === 'number')
 				// 输入值为 number
 				if (rule) {
 					value = value === '' ? value : Number(value)
 				}
 				this.form.formData[this.name] = value
+                this.errMsg = ''
 				const result = this.validator && this.validator.validateUpdate({
 					[this.name]: value
 				})
@@ -269,15 +271,16 @@
 </script>
 
 <style lang="scss" scoped>
-	.uni-field {
-		padding: 16px 14px;
+	.uni-forms-item {
+		position: relative;
+		// padding: 10px 14px;
 		text-align: left;
 		color: #333;
 		font-size: 14px;
-		background-color: #fff;
+		margin-bottom: 22px;
 	}
 
-	.uni-field-inner {
+	.uni-forms-item-inner {
 		display: flex;
 		align-items: center;
 	}
@@ -317,7 +320,7 @@
 		flex: 1;
 	}
 
-	.uni-field-label {
+	.uni-forms-item-label {
 		width: 65px;
 		flex: 1 1 65px;
 		text-align: left;
@@ -336,7 +339,7 @@
 		line-height: 1;
 	}
 
-	.uni-field__input-wrap {
+	.uni-forms-item__input-wrap {
 		position: relative;
 		overflow: hidden;
 		font-size: 14px;
@@ -351,9 +354,12 @@
 	}
 
 	.uni-error-message {
+		position: absolute;
+		bottom: -17px;
+		left: 0;
 		line-height: 12px;
-		padding-top: 2px;
-		padding-bottom: 2px;
+		// padding-top: 2px;
+		// padding-bottom: 2px;
 		color: $uni-color-error;
 		font-size: 12px;
 		text-align: left;
@@ -480,7 +486,7 @@
 		flex-direction: row;
 	}
 
-	.uni-field-custom {
+	.uni-forms-item-custom {
 		padding: 0;
 		border: none;
 	}

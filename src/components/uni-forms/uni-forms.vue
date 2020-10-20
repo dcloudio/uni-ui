@@ -18,8 +18,24 @@
 	 * @property {String} labelAlign  label 居中方式  默认 left 可选 [left|center|right]
 	 * @property {String} errorMessageType  错误提示类型 默认 bottom 可选 [none|top|bottom|toast|alert]
 	 */
+	import Vue from 'vue'
+	Vue.prototype.uniFormsValidate = function(name, value,formName) {
+		if(formName){
+			this.$refs[formName].setValue(name, value)
+		}else{
+			const children = this.$children[0].$children
+			for(let i = 0 ; i< children.length ;i++){
+				const item = children[i]
+				const componentName = item.$options.name
+				if(componentName === 'uniForms'){
+						item.setValue(name, value)
+						break
+					}
+			}
+		}
+	}
+	import Validator from './validateFunction.js'
 
-	import Validator from './schema-validator.js'
 	export default {
 		name: 'uniForms',
 		props: {
@@ -76,8 +92,11 @@
 			}
 		},
 		created() {
+			let _this = this
 			this.childrens = []
+
 			this.init(this.formRules)
+
 		},
 		methods: {
 			init(formRules) {
@@ -155,9 +174,9 @@
 						};
 					});
 				}
+				
+				let result = this.validator.invokeValidateUpdate(invalidFields, true)
 
-				let result = this.validator.invokeValidateUpdate(invalidFields,true)
-				console.log('-=-=-',invalidFields,result);
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
@@ -187,12 +206,6 @@
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
 			submit() {
-				// let invalidFields = {}
-				// this.childrens.forEach(item => {
-				// 	item.parentVal((val) => {
-				// 		invalidFields = Object.assign({}, invalidFields, val)
-				// 	})
-				// })
 				return this.validateAll(this.formData, 'submit')
 			},
 
@@ -216,12 +229,13 @@
 				this.childrens.forEach(item => {
 					// item.parentVal((val, name) => {
 					if (props.indexOf(item.name) !== -1) {
-						invalidFields = Object.assign({}, invalidFields,{ [item.name]:this.formData[item.name]})
+						invalidFields = Object.assign({}, invalidFields, {
+							[item.name]: this.formData[item.name]
+						})
 					}
 					// })
 
 				})
-				console.log(invalidFields);
 				return this.validateAll(invalidFields, '', callback)
 			},
 

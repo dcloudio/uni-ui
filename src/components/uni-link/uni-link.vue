@@ -67,10 +67,12 @@
 </script>
 
 <style>
-    .uni-link {
-        cursor: pointer;
-    }
+	/* #ifndef APP-NVUE */
+	.uni-link {
+	    cursor: pointer;
+	}
+	/* #endif */
 	.uni-link--withline {
 		text-decoration: underline;
-	}  
+	}
 </style>
