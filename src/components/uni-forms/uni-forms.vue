@@ -268,5 +268,7 @@
 </script>
 
 <style lang="scss">
-	.uni-form {}
+	.uni-form {
+		background-color: #fff;
+	}
 </style>

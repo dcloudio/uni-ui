@@ -2,27 +2,29 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
-		 @reset="reset" @validate="validate">
-			<uni-forms-item name="name" label="用户名">
-				<input type="text" placeholder="请输入用户名" @blur="input('form','name',$event.detail.value)">
-			</uni-forms-item>
-			<uni-forms-item name="age" label="年龄">
-				<input type="text" placeholder="请输入年龄" @input="input('form','age',$event.detail.value)">
-			</uni-forms-item>
-			<uni-forms-item name="email" label="邮箱">
-				<input type="text" placeholder="请输入邮箱" @blur="input('form','email',$event.detail.value)">
-			</uni-forms-item>
-			
-			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-			<!-- <button class="button" form-type="submit">Submit</button>
-			<button class="button" form-type="reset">Reset</button> -->
+		<view class="example-info">
+			<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit"
+			 @reset="reset" @validate="validate">
+				<uni-forms-item name="name" label="用户名">
+					<input type="text" class="uni-input-border" placeholder="请输入用户名" @blur="uniFormsValidate('name',$event.detail.value)">
+				</uni-forms-item>
+				<uni-forms-item name="age" label="年龄">
+					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="uniFormsValidate('age',$event.detail.value)">
+				</uni-forms-item>
+				<uni-forms-item name="email" label="邮箱">
+					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="uniFormsValidate('email',$event.detail.value)">
+				</uni-forms-item>
 
-			<button class="button" @click="submitForm('form')">校验表单</button>
-			<button class="button" @click="validateField('form')">校验部分表单</button>
-			<button class="button" @click="clearValidate('form','name')">移除部分表单校验结果</button>
-			<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
-		</uni-forms>
+				<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
+				<!-- <button class="button" form-type="submit">Submit</button>
+				<button class="button" form-type="reset">Reset</button> -->
+
+				<button class="button" @click="submitForm('form')">校验表单</button>
+				<button class="button" @click="validateField('form')">校验部分表单</button>
+				<button class="button" @click="clearValidate('form','name')">移除部分表单校验结果</button>
+				<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
+			</uni-forms>
+		</view>
 	</view>
 </template>
 
@@ -77,9 +79,6 @@
 			}
 		},
 		methods: {
-			input(form, name, value) {
-				this.$refs[form].setValue(name, value)
-			},
 			/**
 			 * 触发校验
 			 * @param {Object} event
@@ -144,7 +143,18 @@
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
 
+	.uni-input-border {
+		padding: 0 10px;
+		height: 35px;
+		width: 100%;
+		font-size: 14px;
+		color: #666;
+		border: 1px #e5e5e5 solid;
+		border-radius: 5px;
+		box-sizing: border-box;
+	}
+
 	.button {
-		margin: 10px 15px;
+		margin: 10px auto;
 	}
 </style>

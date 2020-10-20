@@ -51,6 +51,7 @@ class RuleValidator {
 
   validateRule(key, value, data) {
     var result = null
+
     let rules = key.rules
 
     let hasRequired = rules.findIndex((item) => { return item.required })
@@ -80,8 +81,8 @@ class RuleValidator {
         }
       }
 
-      if (rule.validator) {
-        var res = rule.validator(rule, value, data)
+      if (rule.validateFunction) {
+        var res = rule.validateFunction(rule, value, data)
         if (!res) {
           result = formatMessage(rule, rule.errorMessage || message[vt] || message['default'])
           break
@@ -273,7 +274,7 @@ class SchemaValidator extends RuleValidator {
     let schema = this._schema
     for (let key in schema) {
       let value = schema[key]
-			if(!data[key]) continue
+
       let vir = this.validateRule(value, data[key], data)
       if (vir != null) {
         result.push({
@@ -284,11 +285,13 @@ class SchemaValidator extends RuleValidator {
         if (!all) break
       }
     }
+
     return result
   }
 
   invokeValidateUpdate(data, all) {
     let result = []
+
     for (let key in data) {
       let vir = this.validateRule(this._schema[key], data[key], data)
       if (vir != null) {
@@ -340,9 +343,9 @@ function Message() {
     },
     string: {
       len: '{label}必须为{length}个字符',
-      min: '{label}不能少于 {minLength}个字符',
-      max: '{label}不能超过 {maxLength}个字符',
-      range: '{label}必须介于 {minLength}和{maxLength}个字符之间'
+      min: '{label}不能少于{minLength}个字符',
+      max: '{label}不能超过{maxLength}个字符',
+      range: '{label}必须介于{minLength}和{maxLength}个字符之间'
     },
     number: {
       len: '{label}必须等于{length}',
@@ -351,10 +354,11 @@ function Message() {
       range: '{label}必须介于{minimum}and{maximum}之间'
     },
     pattern: {
-      mismatch: '{label} 格式不匹配'
+      mismatch: '{label}格式不匹配'
     }
   };
 }
+
 
 SchemaValidator.message = new Message();
 
