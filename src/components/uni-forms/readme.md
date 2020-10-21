@@ -81,7 +81,7 @@ export default {
 
 ### 基本用法 
 
-`uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套原生 `input`、`radio`、`checkbox`、`textarea`、`switch` 等原生表单组件，通过 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
+`uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套原生 `input`、`radio`、`checkbox`、`textarea`、`switch` 等原生表单组件，通过 `uniFormsValidate` 或者 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
 
 - 如需 `submit` 事件返回表单值，必须要指定 `name` 属性
 
@@ -89,7 +89,7 @@ export default {
 <template>
 	<uni-forms ref="form" @submit="submit">
 		<uni-forms-item  label="年龄" name="age"  placeholder="请输入年龄">
-			<input class="input" type="text" placeholder="请输入用户名" @input="validate('age', $event.detail.value)" />
+			<input class="input" type="text" placeholder="请输入用户名" @input="uniFormsValidate('age',$event.detail.value)" />
 		<uni-forms-item>
 		<button @click="submitForm">Submit</button>
 		<button @click="reset">Reset</button>
@@ -101,10 +101,6 @@ export default {
 			return {}
 		},
 		methods: {
-			validate(){
-				// 通过 input 事件设置表单指定 name 的值
-				this.$refs.form.setValue(name, value)
-			},
 			// 提交表单
 			submit(e){
 				/**
@@ -151,7 +147,7 @@ export default {
 
 ```html
 <template>
-	<uni-forms :form-rules="rules" @submit="submitForm" @reset="reset">
+	<uni-forms :form-rules="rules" @submit="submitForm">
 		<uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
 			<input class="input" type="text" placeholder="请输入用户名" @input="uniFormsValidate('name',$event.detail.value)" />
 		<uni-forms-item>
@@ -228,6 +224,7 @@ export default {
 
 
 ### 校验规则
+
 校验规则接受一个 `Object` 类型的值，通过传入不同的规则来表示每个表单域的值该如何校验
 
 对象的 `key` 表示当前表单域的字段名，`value` 为具体的校验规则
@@ -235,7 +232,7 @@ export default {
 以下为 `value` 所包含的内容：
 
 属性名	| 类型	| 说明
---- 	|---	| ---
+--- 	| ---	| ---
 rules	| Array	| 校验规则，见下方 `rules 属性说明`  
 label	| String| 当前表单域的字段中文名，多用于 `errorMessage` 的显示，可不填
 
@@ -271,17 +268,17 @@ rules: {
 每一个验证规则中，可以配置多个属性，下面是一些常见规则属性
 
 属性名				| 类型			| 默认值	|可选值					| 说明			
----					| ----			|---	|---					| ---	
-required			| Boolean		| -		|						|是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`、`uni-field`组件的的required为true
-range				| Array			| -		| -						|数组至少要有一个元素，且数组内的每一个元素都是唯一的。
-format				| String		| - 	| -						|内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
-pattern				| String		| - 	| -						|正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"
-maximum				| Number		| -		| -						|校验最大值(大于)
-minimum				| Number		| -		| -						|校验最小值(小于)
-minLength			| Number		| -		| -						|校验数据最小长度
-maxLength			| Number		| -		| -					 	|校验数据最大长度
-errorMessage		| String	 	| -		| -					 	|校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符
-trigger				| String	 	| blur 	| blur/change/submit 	|校验触发时机
+---					| ----			| ---	|---					| ---	
+required			| Boolean		| -		|						| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`、`uni-field`组件的的required为true
+range				| Array			| -		| -						| 数组至少要有一个元素，且数组内的每一个元素都是唯一的。
+format				| String		| - 	| -						| 内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
+pattern				| String		| - 	| -						| 正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"
+maximum				| Number		| -		| -						| 校验最大值(大于)
+minimum				| Number		| -		| -						| 校验最小值(小于)
+minLength			| Number		| -		| -						| 校验数据最小长度
+maxLength			| Number		| -		| -					 	| 校验数据最大长度
+errorMessage		| String	 	| -		| -					 	| 校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符
+trigger				| String	 	| blur 	| blur/change/submit 	| 校验触发时机
 
 
 **format属性值说明**
@@ -322,7 +319,6 @@ trigger				| String		| blur	| blur/change/submit   			| 表单校验时机
 labelPosition		| String		| left 	| top/left						| label 位置
 labelWidth			| String/Number	| 75	| -								| label 宽度，单位 px	
 labelAlign			| String		| left	| left/center/right				| label 居中方式
-errorMessageType	|String			|bottom	| none/top /bottom				| 错误提示类型
 
 ### Forms Events
 
@@ -336,16 +332,17 @@ validate		| 任意表单项被校验后触发，返回表单校验信息		| Func
 方法称名			| 说明								| 返回参数			
 ---				| ---								| ---
 submit 			| 提交表单，触发 Forms 的 submit 事件	| -
-setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用｜Function(porps: (name,value))
+setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|Function(porps: (name,value))
 validate 		| 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：第一个参数为表单校验是否通过，第二参数如果通过则返回表单数据，不通过则返回错误信息。若不传入回调函数，则会返回一个 promise	| Function(callback: Function(boolean, object))
-validateField	| 部分表单进行校验		| Function(props: array | string, callback: Function(errorMessage: string))
+validateField	| 部分表单进行校验		| Function(props: array \ string, callback: Function(errorMessage: string))
 resetFields		| 对整个表单进行重置	| -
-clearValidate	| 移除表单的校验结果	| Function(props: array | string)
+clearValidate	| 移除表单的校验结果	| Function(props: array \ string)
 
 ### FormsItem Props
 
 属性名				|类型	|默认值	 	|可选值	|说明
 :-					|:-		|:-			|---	|:-
+name				|String	| -			|-					| 表单域的属性名，在使用校验规则时必填
 required			|Boolean| false		|					| 是否必填，左边显示红色"*"号
 trigger				|String | blur		|blur/change/submit	| 表单校验时机
 leftIcon			|String | -			|- 					| label左边的图标，限uni-ui的图标名称
@@ -355,7 +352,5 @@ label-width			|Number	| 65		|-					| label的宽度，单位px
 label-align			|String	| left		|left/center/right	| label的文字对齐方式
 label-position		|String	| left		|top/left			| label的文字的位置
 errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
-name				|String	| -			|-					| 表单域的属性名，在使用校验规则时必填
-border-bottom		|Boolean| true		|-					| 是否显示field的下边框
-border-top			|Boolean| false		|-					| 是否显示field的上边框
+
 

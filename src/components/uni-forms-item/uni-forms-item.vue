@@ -42,12 +42,15 @@
 	 * @property {String } 	iconColor 			左边通过icon配置的图标的颜色（默认#606266）
 	 * @property {String } 	label 				输入框左边的文字提示
 	 * @property {Number } 	labelWidth 			label的宽度，单位px（默认65）
-	 * @property {String } 	labelAlign 			label的文字对齐方式（默认left）
-	 * @property {String } 	labelPosition 		label的文字的位置（默认left）
+	 * @property {String } 	labelAlign = [left|center|right] label的文字对齐方式（默认left）
+	 * 	@value left		label 左侧显示
+	 * 	@value center	label 居中
+	 * 	@value right	label 右侧对齐
+	 * @property {String } 	labelPosition = [top|left] label的文字的位置（默认left）
+	 * 	@value top	顶部显示 label
+	 * 	@value left	左侧显示 label
 	 * @property {String } 	errorMessage 		显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
 	 * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
-	 * @property {Boolean} 	border-bottom 		是否显示field的下边框（默认true）
-	 * @property {Boolean} 	border-top 			是否显示field的上边框（默认false）
 	 */
 	export default {
 		name: "uniFormsItem",
@@ -62,6 +65,7 @@
 				type: Boolean,
 				default: true
 			},
+			name: String,
 			required: Boolean,
 			trigger: {
 				type: String,
@@ -91,17 +95,6 @@
 			errorMessage: {
 				type: [String, Boolean],
 				default: ''
-			},
-			name: String,
-			// 是否显示上边框
-			borderTop: {
-				type: Boolean,
-				default: false
-			},
-			// 是否显示下边框
-			borderBottom: {
-				type: Boolean,
-				default: true
 			}
 		},
 		data() {
