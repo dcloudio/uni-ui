@@ -366,11 +366,15 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 
 .flex--direction {
 	flex-direction: column;
+	/* #ifndef APP-NVUE */
 	align-items: initial;
+	/* #endif */
 }
 
 .flex--justify {
+	/* #ifndef APP-NVUE */
 	justify-content: initial;
+	/* #endif */
 }
 
 .uni-list--lg {
