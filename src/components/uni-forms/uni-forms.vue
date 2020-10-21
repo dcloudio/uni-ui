@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-form">
+	<view class="uni-forms">
 		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
 		</form>
@@ -27,19 +27,17 @@
 	 */
 	import Vue from 'vue'
 	Vue.prototype.uniFormsValidate = function(name, value, formName) {
-		if (formName) {
-			this.$refs[formName].setValue(name, value)
-		} else {
-			const children = this.$children[0].$children
-			for (let i = 0; i < children.length; i++) {
-				const item = children[i]
-				const componentName = item.$options.name
-				if (componentName === 'uniForms') {
-					item.setValue(name, value)
-					break
-				}
-			}
-		}
+	    if (formName) {
+	        this.$refs[formName].setValue(name, value)
+	    } else {
+	        let refName = null
+	        for(let  i in this.$refs){
+	            refName= i
+	            break
+	        }
+	        if(!refName) return console.error('当前 uni-froms 组件缺少 ref 属性')
+	        this.$refs[refName].setValue(name, value)
+	    }
 	}
 	import Validator from './validateFunction.js'
 
@@ -74,14 +72,8 @@
 				default: 'left'
 			}
 		},
-		provide() {
-			return {
-				form: this
-			}
-		},
 		data() {
 			return {
-				rules: {},
 				formData: {}
 			};
 		},
@@ -96,7 +88,7 @@
 		created() {
 			let _this = this
 			this.childrens = []
-
+			this.rules = []
 			this.init(this.formRules)
 
 		},
@@ -104,10 +96,20 @@
 			init(formRules) {
 				if (Object.keys(formRules).length > 0) {
 					this.formTrigger = this.trigger
+					this.rules = formRules
 					this.validator = new Validator(formRules)
+					this.childrens.forEach((item)=>{
+						item.init()
+					})
 				}
 			},
-
+			/**
+			 * 设置校验规则
+			 * @param {Object} formRules
+			 */
+			setRules(formRules){
+				this.init(formRules)
+			},
 			/**
 			 * 公开给用户使用
 			 * 设置自定义表单组件 value 值
@@ -168,7 +170,6 @@
 				})
 
 				let promise;
-				// if no callback, return promise
 				if (callback && typeof callback !== 'function' && Promise) {
 					promise = new Promise((resolve, reject) => {
 						callback = function(valid, invalidFields) {
@@ -176,8 +177,15 @@
 						};
 					});
 				}
-
-				let result = this.validator.invokeValidateUpdate(invalidFields, true)
+				let fieldsValue = {}
+				for(let i in this.rules){
+					for(let j in invalidFields){
+						if(i === j){
+							fieldsValue[i] = invalidFields[i]
+						}
+					}
+				}
+				let result = this.validator.invokeValidateUpdate( fieldsValue, true)
 
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
@@ -270,7 +278,7 @@
 </script>
 
 <style lang="scss">
-	.uni-form {
+	.uni-forms {
 		background-color: #fff;
 	}
 </style>

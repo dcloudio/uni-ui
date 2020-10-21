@@ -152,13 +152,26 @@
 			this.form = this.getForm()
 			this.formRules = []
 			this.formTrigger = this.trigger
+			if(this.form){
+				this.form.childrens.push(this)
+			}
 			this.init()
-
+		},
+		destroyed() {
+			if(this.name){
+				delete this.form.formData[this.name]
+			}
+			if(this.form){
+				this.form.childrens.forEach((item,index)=>{
+					if(item === this){
+						this.form.childrens.splice(index,1)
+					}
+				})
+			}
 		},
 		methods: {
 			init() {
 				if (this.form) {
-					this.form.childrens.push(this)
 					this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
 					this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
 					this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign

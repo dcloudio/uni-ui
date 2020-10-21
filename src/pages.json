@@ -257,6 +257,15 @@
             "path" : "pages/vue/test/test",
             "style" : {}
         }
+        ,{
+            "path" : "pages/vue/table/table",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

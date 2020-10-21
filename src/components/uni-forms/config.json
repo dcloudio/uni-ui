@@ -2,10 +2,10 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.9",
+	"edition": "1.0.10",
 	"url": "forms",
 	"type": "表单组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 优化 组件使用文档"],
+	"update_log": ["- 新增 setRules 方法，支持自定义校验规则"],
 	"suffix": "vue"
 }

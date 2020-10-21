@@ -6,6 +6,12 @@
 </template>
 
 <script>
+	/**
+	 * Td 单元格
+	 * @description 表格中的标准单元格组件
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=
+	 * @property {Number} 	align = [left|center|right]	单元格对齐方式
+	 */
 	export default {
 		name: 'uniTd',
 		options: {

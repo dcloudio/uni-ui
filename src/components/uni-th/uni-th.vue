@@ -5,6 +5,17 @@
 </template>
 
 <script>
+	/**
+	 * Th 表头
+	 * @description 表格内的表头单元格组件
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=
+	 * @property {Number} 	width 						单元格宽度
+	 * @property {Number} 	align = [left|center|right]	单元格对齐方式
+	 * @value left   	单元格文字左侧对齐
+	 * @value center	单元格文字居中
+	 * @value right		单元格文字右侧对齐
+	 */
+
 	export default {
 		name: 'uniTh',
 		options: {

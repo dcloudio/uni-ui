@@ -13,18 +13,23 @@
 </template>
 
 <script>
+	/**
+	 * Table 表格
+	 * @description 用于展示多条结构类似的数据
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=
+	 * @property {Boolean} 	border 				是否带有纵向边框
+	 * @property {Boolean} 	stripe 				是否显示斑马线
+	 * @property {Boolean} 	type 				是否开启多选
+	 * @property {String} 	emptyText 			空数据时显示的文本内容
+	 * @property {Boolean} 	loading 			显示加载中
+	 * @event {Function} 	selection-change 	开启多选时，当选择项发生变化时会触发该事件
+	 */
     export default {
         name: 'uniTable',
         options: {
             virtualHost: true
         },
         props: {
-            data: {
-                type: Array,
-                default () {
-                    return []
-                }
-            },
             // 是否有竖线
             border: {
                 type: Boolean,
@@ -131,7 +136,7 @@
         border-radius: 5px;
         box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
         overflow-x: auto;
-
+		background-color: #fff;
         /deep/ .uni-table-tr:nth-child(n+2) {
             &:hover {
                 background-color: #f5f7fa;

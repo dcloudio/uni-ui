@@ -10,6 +10,11 @@
 </template>
 
 <script>
+	/**
+	 * Tr 表格行组件
+	 * @description 表格行组件 仅包含 th,td 组件
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=
+	 */
     export default {
         name: 'uniTr',
         options: {
