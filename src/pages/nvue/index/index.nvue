@@ -166,6 +166,10 @@
 					{
 						name: 'SearchBar 搜索栏',
 						url: 'search-bar'
+					},
+					{
+						name: 'Dateformat 日期格式化',
+						url: 'dateformat'
 					}
 				],
 				navigations: [{
