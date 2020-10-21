@@ -33,7 +33,7 @@
 			threshold: {
 				type: Array,
 				default () {
-					return [60000, 3600000]
+					return [0, 0]
 				}
 			},
 			format: {

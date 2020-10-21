@@ -4,8 +4,6 @@
 		<uni-section title="基础用法" type="line"></uni-section>
 		<view class="example-body">
 			<uni-dateformat :date="now - 7200000"></uni-dateformat>
-			<uni-dateformat :date="now - 1200000"></uni-dateformat>
-			<uni-dateformat :date="now - 30000"></uni-dateformat>
 			<uni-dateformat date="2020/12/12"></uni-dateformat>
 		</view>
 		<uni-section title="设置阈值" type="line"></uni-section>
@@ -16,9 +14,9 @@
 		</view>
 		<uni-section title="使用英文" type="line"></uni-section>
 		<view class="example-body">
-			<uni-dateformat :date="now - 1200000" locale="en"></uni-dateformat>
-			<uni-dateformat :date="now - 30000" locale="en"></uni-dateformat>
-			<uni-dateformat :date="now - 80000" locale="en"></uni-dateformat>
+			<uni-dateformat :date="now - 1200000" :threshold="[60000,3600000]" locale="en"></uni-dateformat>
+			<uni-dateformat :date="now - 30000" :threshold="[60000,3600000]" locale="en"></uni-dateformat>
+			<uni-dateformat :date="now - 80000" :threshold="[60000,3600000]" locale="en"></uni-dateformat>
 		</view>
 	</view>
 </template>
