@@ -3,22 +3,23 @@
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<view class="example-info">
-			<uni-forms ref="form" labelPosition="left" labelAlign="left" :form-rules="rules" @submit="submit" @validate="validate">
+			<!-- :rules="rules" -->
+			<uni-forms ref="form" validateTrigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
 				<uni-forms-item name="name" label="用户名">
-					<input type="text" class="uni-input-border" placeholder="请输入用户名" @blur="uniFormsValidate('name',$event.detail.value)">
+					<input type="text" class="uni-input-border" placeholder="请输入用户名"  @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item name="age" label="年龄">
-					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="uniFormsValidate('age',$event.detail.value)">
+					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱">
-					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="uniFormsValidate('email',$event.detail.value)">
+					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item label="高级选项">
 					<switch @change="change" />
 				</uni-forms-item>
 				<template v-if="show">
 					<uni-forms-item name="sex" label="性别">
-						<radio-group @change="uniFormsValidate('sex',$event.detail.value)">
+						<radio-group @change="binddata('sex',$event.detail.value)">
 							<label class="label-box">
 								<radio class="transform-scale" value="0" /><text>男</text>
 							</label>
@@ -28,17 +29,20 @@
 						</radio-group>
 					</uni-forms-item>
 					<uni-forms-item name="hobby" label="兴趣爱好">
-						<checkbox-group @change="uniFormsValidate('hobby',$event.detail.value)">
+						<checkbox-group @change="binddata('hobby',$event.detail.value)">
 							<label class="label-box">
 								<checkbox class="transform-scale" value="0" /><text>足球</text>
 							</label>
 							<label class="label-box">
 								<checkbox class="transform-scale" value="1" /><text>篮球</text>
 							</label>
+							<label class="label-box">
+								<checkbox class="transform-scale" value="1" /><text>游泳</text>
+							</label>
 						</checkbox-group>
 					</uni-forms-item>
 					<uni-forms-item name="remarks" label="备注">
-						<textarea type="text" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注" @input="uniFormsValidate('remarks',$event.detail.value)"></textarea>
+						<textarea type="text" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注" @input="binddata('remarks',$event.detail.value)"></textarea>
 					</uni-forms-item>
 				</template>
 
@@ -59,24 +63,18 @@
 	export default {
 		data() {
 			return {
-				formData: {
-					name: '',
-					age: '',
-					email: '',
-					size: ''
-				},
+				formData: {},
 				show: false,
 				rules: {
+
 					name: {
 						rules: [{
 							required: true,
 							errorMessage: '请输入姓名',
-							trigger: 'blur'
 						}, {
 							minLength: 3,
 							maxLength: 5,
 							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-							trigger: 'blur'
 						}]
 					},
 
@@ -84,16 +82,13 @@
 						rules: [{
 							required: true,
 							errorMessage: '请填写年龄',
-							trigger: "blur"
 						}, {
 							format: 'number',
 							errorMessage: '年龄必须是数字',
-							trigger: 'blur'
 						}, {
 							minimum: 18,
 							maximum: 30,
 							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
-							trigger: 'change'
 						}]
 					},
 					email: {
@@ -115,6 +110,14 @@
 							required: true,
 							errorMessage: '请选择兴趣',
 							trigger: "blur"
+						},{
+							validateFunction:function(rule,value,data,callback){
+								console.log(data);
+								if(value.length < 2){
+									callback(new Error('请至少勾选两个兴趣爱好'))
+								}
+								return true
+							}
 						}]
 					},
 					remarks: {
@@ -133,6 +136,9 @@
 					}
 				}
 			}
+		},
+		onReady() {
+			this.$refs.form.setRules(this.rules)
 		},
 		methods: {
 			change(event) {

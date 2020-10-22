@@ -36,7 +36,11 @@ function isEmptyValue(value, type) {
     return true;
   }
 
-  if (type === 'array' && Array.isArray(value) && !value.length) {
+  if (Array.isArray(value) && !value.length) {
+    return true;
+  }
+
+  if (type === 'object' && !Object.keys(value).length) {
     return true;
   }
 
@@ -82,9 +86,17 @@ class RuleValidator {
       }
 
       if (rule.validateFunction) {
-        var res = rule.validateFunction(rule, value, data)
+        let callback = null
+        let callbackMessage = null
+        var res = rule.validateFunction(rule, value, data, (message) => {
+          callback = message
+        })
+        if (callback) {
+          res = !(callback instanceof Error)
+          callbackMessage = res ? callback : callback.message
+        }
         if (!res) {
-          result = formatMessage(rule, rule.errorMessage || message[vt] || message['default'])
+          result = formatMessage(rule, callbackMessage || rule.errorMessage || message[vt] || message['default'])
           break
         }
       }
@@ -113,7 +125,7 @@ class RuleValidator {
 
 const RuleValidatorHelper = {
   required(rule, value, message) {
-    if (rule.required && isEmptyValue(value, rule.format)) {
+    if (rule.required && isEmptyValue(value, rule.format || typeof value)) {
       return formatMessage(rule, rule.errorMessage || message.required);
     }
 
@@ -121,25 +133,30 @@ const RuleValidatorHelper = {
   },
 
   range(rule, value, message) {
-    var type = (rule.maximum || rule.minimum) ? 1 : 0
-    var min = type ? rule.minimum : rule.minLength;
-    var max = type ? rule.maximum : rule.maxLength;
+    let type = (rule.maximum || rule.minimum) ? 1 : 0
+    let min = type ? (rule.exclusiveMinimum ? rule.minimum + 1 : rule.minimum) : rule.minLength;
+    let max = type ? (rule.exclusiveMaximum ? rule.maximum - 1 : rule.maximum) : rule.maxLength;
 
-    var key = ['string', 'number'][type];
-    var val = type ? value : value.length;
-    var enumValue = rule.enum;
+    let valueTypes = ['string', 'number']
+    let key = valueTypes[type];
+    let val = type ? value : value.length;
+    let enumValue = rule.enum;
+
+    if (!enumValue && key !== typeof value) {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
 
     if (enumValue) {
       if (enumValue.indexOf(value) < 0) {
-        return formatMessage(rule, message[key].len);
+        return formatMessage(rule, message['enum']);
       } else {
         return null;
       }
-    } else if (min && !max && val < min) {
+    } else if (max !== undefined && val < min) {
       return formatMessage(rule, rule.errorMessage || message[key].min)
-    } else if (max && !min && val > max) {
+    } else if (min !== undefined && val > max) {
       return formatMessage(rule, rule.errorMessage || message[key].max)
-    } else if (min && max && (val < min || val > max)) {
+    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
       return formatMessage(rule, rule.errorMessage || message[key].range)
     }
 
@@ -321,7 +338,7 @@ function Message() {
     default: '验证错误',
     defaultInvalid: '非法字段',
     required: '{label}必填',
-    'enum': '{label}不合法',
+    'enum': '{label}超出范围',
     whitespace: '{label}不能为空',
     date: {
       format: '{label}日期{value}格式无效',
@@ -358,7 +375,6 @@ function Message() {
     }
   };
 }
-
 
 SchemaValidator.message = new Message();
 

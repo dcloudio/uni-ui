@@ -1,10 +1,10 @@
 {
-	"id": "9999",
+	"id": "3270",
 	"name": "Table",
 	"desc": "表格",
 	"url": "table",
 	"type": "功能组件",
-	"edition": "1.0.0",
-	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
+	"edition": "1.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=3270",
 	"update_log": "- 新增 初始化"
 }

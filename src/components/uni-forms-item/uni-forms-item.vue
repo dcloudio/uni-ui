@@ -1,6 +1,5 @@
 <template>
-	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom}"
-	 :style="[fieldStyle]">
+	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom}" :style="[fieldStyle]">
 		<template v-if="!custom">
 			<view class="uni-forms-item-inner" :class="[ 'uni-label-postion-' + labelPos]">
 				<view :class="errorTop ? 'uni-error-in-label' : ''">
@@ -15,7 +14,7 @@
 						<slot name="leftIcon"></slot>
 						<text class="uni-label-text" :class="[leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
 					</view>
-					<view v-if="errorTop && showMessage" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ msg }}</view>
+					<view v-if="errorTop && showMessage" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ showMsg === 'undertext' ? msg:'' }}</view>
 				</view>
 				<view class="fild-body">
 					<slot></slot>
@@ -23,7 +22,7 @@
 			</view>
 			<view v-if="errorBottom && showMessage" class="uni-error-message" :style="{
 				paddingLeft: Number(labelWid) + 4 + 'px'
-			}">{{ msg }}</view>
+			}">{{ showMsg === 'undertext' ? msg:'' }}</view>
 		</template>
 		<template v-else>
 			<slot></slot>
@@ -37,7 +36,9 @@
 	 * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=21001
 	 * @property {Boolean} 	required 			是否必填，左边显示红色"*"号（默认false）
-	 * @property {Boolean} 	trigger 			表单校验时机（默认blur）
+	 * @property {String} validateTrigger = [bind|submit]	校验触发器方式 默认 submit 可选
+	 * 	@value bind 	发生变化时触发
+	 * 	@value submit 	提交时触发
 	 * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
 	 * @property {String } 	iconColor 			左边通过icon配置的图标的颜色（默认#606266）
 	 * @property {String } 	label 				输入框左边的文字提示
@@ -67,7 +68,7 @@
 			},
 			name: String,
 			required: Boolean,
-			trigger: {
+			validateTrigger: {
 				type: String,
 				default: ''
 			},
@@ -107,7 +108,8 @@
 				val: '',
 				labelPos: '',
 				labelWid: '',
-				labelAli: ''
+				labelAli: '',
+				showMsg: 'undertext'
 			};
 		},
 		computed: {
@@ -144,27 +146,27 @@
 
 		},
 		watch: {
-			trigger(trigger) {
+			validateTrigger(trigger) {
 				this.formTrigger = trigger
 			}
 		},
 		created() {
 			this.form = this.getForm()
 			this.formRules = []
-			this.formTrigger = this.trigger
-			if(this.form){
+			this.formTrigger = this.validateTrigger
+			if (this.form) {
 				this.form.childrens.push(this)
 			}
 			this.init()
 		},
 		destroyed() {
-			if(this.name){
+			if (this.name) {
 				delete this.form.formData[this.name]
 			}
-			if(this.form){
-				this.form.childrens.forEach((item,index)=>{
-					if(item === this){
-						this.form.childrens.splice(index,1)
+			if (this.form) {
+				this.form.childrens.forEach((item, index) => {
+					if (item === this) {
+						this.form.childrens.splice(index, 1)
 					}
 				})
 			}
@@ -175,11 +177,12 @@
 					this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
 					this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
 					this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign
+					this.showMsg = this.form.errShowType
 					if (this.form.formRules) {
 						this.formRules = this.form.formRules[this.name] || {}
 					}
 					this.validator = this.form.validator
-					if(this.name){
+					if (this.name) {
 						this.form.formData[this.name] = ''
 					}
 				} else {
@@ -244,10 +247,29 @@
 					value = value === '' ? value : Number(value)
 				}
 				this.form.formData[this.name] = value
-                this.errMsg = ''
-				const result = this.validator && this.validator.validateUpdate({
+				this.errMsg = ''
+				let result = this.validator && this.validator.validateUpdate({
 					[this.name]: value
 				})
+				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
+				if (!isTrigger) {
+					result = null
+				}
+				if (isTrigger && result&& result.errorMessage) {
+					if (this.form.errShowType === 'toast') {
+						uni.showToast({
+							title: result.errorMessage || '校验错误',
+							icon: 'none'
+						})
+					}
+					if (this.form.errShowType === 'modal') {
+						uni.showModal({
+							title: '提示',
+							content: result.errorMessage || '校验错误'
+						})
+					}
+				}
+
 				this.errMsg = !result ? '' : result.errorMessage
 				this.form.validateCheck(result ? result : null)
 				typeof callback === 'function' && callback(result ? result : null);
@@ -258,20 +280,24 @@
 			 * 触发时机
 			 * @param {Object} event
 			 */
-			isTrigger(parentRule, itemRlue, rule) {
-				let rl = 'none'
-				if (rule) {
-					rl = rule
-				} else if (itemRlue) {
-					rl = itemRlue
-				} else if (parentRule) {
-					rl = parentRule
-				} else {
-					rl = 'blur'
+			isTrigger(rule, itemRlue, parentRule) {
+				let rl = true;
+				//  bind  submit
+				if (rule === 'submit' || !rule) {
+					if (rule === undefined) {
+						if (itemRlue !== 'bind') {
+							if (!itemRlue) {
+								return parentRule === 'bind' ? true : false
+							}
+							return false
+						}
+						return true
+					}
+					return false
 				}
-				return rl
-			}
 
+				return true;
+			}
 		}
 	};
 </script>
