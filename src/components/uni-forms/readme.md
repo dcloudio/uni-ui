@@ -2,7 +2,19 @@
 ## Forms 表单
 > 组件名：``uni-forms``，代码块： `uForms`。
 
-由输入框、单选框、多选框等控件组成，用以收集、校验、提交数据
+uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
+
+然而几乎每个表单都需要做表单验证，为了方便做表单验证，减少重复开发，`uni ui` 又基于 `<form>`组件封装了 `<uni-form>`组件，内置了表单验证功能。
+
+`<uni-form>` 提供了 `form-rules`属性来描述校验规则、`<uni-form-item>`子组件来包裹具体的表单项，以及提供了 `uniFormsValidate()` 校验方法。
+
+每个要校验的表单项，不管input还是checkbox，都必须放在`<uni-form-item>`组件中，且一个`<uni-form-item>`组件只能放置一个表单项。
+
+`<uni-form-item>`组件内部预留了显示error message的区域，默认是在表单项的底部。
+
+`<uni-form>` 的 trigger 属性中可以设置校验时机，可选在表单提交时校验，或表单项输入时校验，或表单项失焦时校验。
+
+另外，`<uni-form>`组件下面的各个表单项，可以通过`<uni-group>`包裹为不同的分组。同一`<uni-group>`下的不同表单项目将聚拢在一起，同其他group保持垂直间距。`<uni-group>`仅影响视觉效果。
 
 ### 平台差异说明
 
@@ -77,11 +89,11 @@ export default {
 
 ```
 
-
+### 
 
 ### 基本用法 
 
-`uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套原生 `input`、`radio`、`checkbox`、`textarea`、`switch` 等原生表单组件，通过 `uniFormsValidate` 或者 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
+`uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套 `input`、`radio`、`checkbox`、`textarea`、`switch` 等uni-app的内置表单组件，通过 `uniFormsValidate` 或者 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
 
 - 如需 `submit` 事件返回表单值，必须要指定 `name` 属性
 
@@ -130,8 +142,6 @@ export default {
 
 
 ## 表单校验
-
-在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误， `uni-Forms` 组件提供了表单验证的功能。
 
 ### 如何使用 
 
@@ -265,7 +275,7 @@ rules: {
 
 
 ### rules 属性说明
-每一个验证规则中，可以配置多个属性，下面是一些常见规则属性
+每一个验证规则中，可以配置多个属性，下面是一些常见规则属性。实际上这里的规范，与uniCloud的[DB Schema](https://uniapp.dcloud.io/uniCloud/schema?id=validator)规范相同。
 
 属性名				| 类型			| 默认值	|可选值					| 说明			
 ---					| ----			| ---	|---					| ---	
@@ -352,5 +362,3 @@ label-width			|Number	| 65		|-					| label的宽度，单位px
 label-align			|String	| left		|left/center/right	| label的文字对齐方式
 label-position		|String	| left		|top/left			| label的文字的位置
 errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
-
-
