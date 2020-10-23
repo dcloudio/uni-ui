@@ -3,15 +3,15 @@
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<!-- :rules="rules" -->
-		<uni-forms ref="form" validateTrigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
+		<uni-forms ref="form" validate-trigger="submit" @submit="submit" err-show-type="toast" @validate="validate">
 			<uni-group title="基本信息" >
 				<uni-forms-item required name="name" label="用户名">
 					<input type="text" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item name="age" label="年龄">
+				<uni-forms-item required name="age" label="年龄">
 					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item name="email" label="邮箱">
+				<uni-forms-item required name="email" label="邮箱">
 					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item label="详细信息">
@@ -20,7 +20,7 @@
 			</uni-group>
 			<template v-if="show">
 				<uni-group title="详细信息"  >
-					<uni-forms-item name="sex" label="性别">
+					<uni-forms-item required name="sex" label="性别">
 						<radio-group @change="binddata('sex',$event.detail.value)">
 							<label class="label-box">
 								<radio class="transform-scale" value="0" /><text>男</text>
@@ -30,7 +30,7 @@
 							</label>
 						</radio-group>
 					</uni-forms-item>
-					<uni-forms-item name="hobby" label="兴趣爱好">
+					<uni-forms-item required name="hobby" label="兴趣爱好">
 						<checkbox-group @change="binddata('hobby',$event.detail.value)">
 							<label class="label-box">
 								<checkbox class="transform-scale" value="0" /><text>足球</text>
@@ -73,7 +73,7 @@
 					name: {
 						rules: [{
 							required: true,
-							errorMessage: '请输入姓名',
+							errorMessage: '请输入用户名',
 						}, {
 							minLength: 3,
 							maxLength: 5,
@@ -121,20 +121,6 @@
 								return true
 							}
 						}]
-					},
-					remarks: {
-						rules: [{
-								required: true,
-								errorMessage: '请输入备注',
-								trigger: "blur"
-							},
-							{
-								minLength: 5,
-								maxLength: 50,
-								errorMessage: '备注最小输入 {minLength} 个字符，最大输入 {maxLength} 个字符',
-								trigger: "blur"
-							}
-						]
 					}
 				}
 			}
@@ -186,8 +172,13 @@
 			 * @param {Object} form
 			 */
 			validateField(form) {
-				this.$refs[form].validateField(['name', 'email'], (error) => {
-					console.log(error);
+				this.$refs[form].validateField(['name', 'email'], (errors) => {
+					console.log(errors);
+					if(errors){
+						uni.showToast({
+							title: '验证成功'
+						})
+					}
 				})
 			},
 

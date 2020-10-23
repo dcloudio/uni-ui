@@ -149,6 +149,7 @@ const RuleValidatorHelper = {
   },
 
   rangeNumber(rule, value, message) {
+    // let { minimum, maximum, exclusiveMinimum, exclusiveMaximum } = rule;
     let min = rule.minimum;
     let max = rule.maximum;
     let exclusiveMin = rule.exclusiveMinimum;
@@ -162,9 +163,9 @@ const RuleValidatorHelper = {
     let _min = exclusiveMin ? val <= min : val < min;
     let _max = exclusiveMax ? val >= max : val > max;
 
-    if (max !== undefined && _min) {
+    if (min !== undefined && _min) {
       return formatMessage(rule, rule.errorMessage || message['number'].min)
-    } else if (min !== undefined && _max) {
+    } else if (max !== undefined && _max) {
       return formatMessage(rule, rule.errorMessage || message['number'].max)
     } else if (min !== undefined && max !== undefined && (_min || _max)) {
       return formatMessage(rule, rule.errorMessage || message['number'].range)
@@ -182,9 +183,9 @@ const RuleValidatorHelper = {
       return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
     }
 
-    if (max !== undefined && val < min) {
+    if (min !== undefined && val < min) {
       return formatMessage(rule, rule.errorMessage || message['string'].min)
-    } else if (min !== undefined && val > max) {
+    } else if (max !== undefined && val > max) {
       return formatMessage(rule, rule.errorMessage || message['string'].max)
     } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
       return formatMessage(rule, rule.errorMessage || message['string'].range)
@@ -405,7 +406,6 @@ function Message() {
     }
   };
 }
-
 
 SchemaValidator.message = new Message();
 
