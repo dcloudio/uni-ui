@@ -307,7 +307,4 @@
 </script>
 
 <style lang="scss">
-	.uni-forms {
-		background-color: #fff;
-	}
 </style>

@@ -110,8 +110,12 @@ class RuleValidator {
     var result = ''
     if (rule.required) {
       result = 'required'
-    } else if (rule.enum || rule.maximum || rule.minimum || rule.maxLength || rule.minLength) {
+    } else if (rule.enum) {
       result = 'range'
+    } else if (rule.maximum || rule.minimum) {
+      result = 'rangeNumber'
+    } else if (rule.maxLength || rule.minLength) {
+      result = 'rangeString'
     } else if (rule.format) {
       result = 'format'
     } else if (rule.pattern) {
@@ -133,31 +137,57 @@ const RuleValidatorHelper = {
   },
 
   range(rule, value, message) {
-    let type = (rule.maximum || rule.minimum) ? 1 : 0
-    let min = type ? (rule.exclusiveMinimum ? rule.minimum + 1 : rule.minimum) : rule.minLength;
-    let max = type ? (rule.exclusiveMaximum ? rule.maximum - 1 : rule.maximum) : rule.maxLength;
-
-    let valueTypes = ['string', 'number']
-    let key = valueTypes[type];
-    let val = type ? value : value.length;
-    let enumValue = rule.enum;
-
-    if (!enumValue && key !== typeof value) {
+    if (Array.isArray(value)) {
       return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
     }
 
-    if (enumValue) {
-      if (enumValue.indexOf(value) < 0) {
-        return formatMessage(rule, message['enum']);
-      } else {
-        return null;
-      }
-    } else if (max !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message[key].min)
+    if (rule.enum.indexOf(value) < 0) {
+      return formatMessage(rule, message['enum']);
+    }
+
+    return null
+  },
+
+  rangeNumber(rule, value, message) {
+    let min = rule.minimum;
+    let max = rule.maximum;
+    let exclusiveMin = rule.exclusiveMinimum;
+    let exclusiveMax = rule.exclusiveMaximum;
+    let val = value;
+
+    if (!types.number(val)) {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
+
+    let _min = exclusiveMin ? val <= min : val < min;
+    let _max = exclusiveMax ? val >= max : val > max;
+
+    if (max !== undefined && _min) {
+      return formatMessage(rule, rule.errorMessage || message['number'].min)
+    } else if (min !== undefined && _max) {
+      return formatMessage(rule, rule.errorMessage || message['number'].max)
+    } else if (min !== undefined && max !== undefined && (_min || _max)) {
+      return formatMessage(rule, rule.errorMessage || message['number'].range)
+    }
+
+    return null
+  },
+
+  rangeString(rule, value, message) {
+    let min = rule.minLength;
+    let max = rule.maxLength;
+    let val = value.length;
+
+    if (typeof value !== 'string') {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
+
+    if (max !== undefined && val < min) {
+      return formatMessage(rule, rule.errorMessage || message['string'].min)
     } else if (min !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message[key].max)
+      return formatMessage(rule, rule.errorMessage || message['string'].max)
     } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
-      return formatMessage(rule, rule.errorMessage || message[key].range)
+      return formatMessage(rule, rule.errorMessage || message['string'].range)
     }
 
     return null
@@ -375,6 +405,7 @@ function Message() {
     }
   };
 }
+
 
 SchemaValidator.message = new Message();
 

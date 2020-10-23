@@ -2,11 +2,11 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<view class="example-info">
-			<!-- :rules="rules" -->
-			<uni-forms ref="form" validateTrigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
-				<uni-forms-item name="name" label="用户名">
-					<input type="text" class="uni-input-border" placeholder="请输入用户名"  @input="binddata('name',$event.detail.value)">
+		<!-- :rules="rules" -->
+		<uni-forms ref="form" validateTrigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
+			<uni-group title="基本信息" >
+				<uni-forms-item required name="name" label="用户名">
+					<input type="text" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item name="age" label="年龄">
 					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
@@ -14,10 +14,12 @@
 				<uni-forms-item name="email" label="邮箱">
 					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item label="高级选项">
+				<uni-forms-item label="详细信息">
 					<switch @change="change" />
 				</uni-forms-item>
-				<template v-if="show">
+			</uni-group>
+			<template v-if="show">
+				<uni-group title="详细信息"  >
 					<uni-forms-item name="sex" label="性别">
 						<radio-group @change="binddata('sex',$event.detail.value)">
 							<label class="label-box">
@@ -44,18 +46,20 @@
 					<uni-forms-item name="remarks" label="备注">
 						<textarea type="text" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注" @input="binddata('remarks',$event.detail.value)"></textarea>
 					</uni-forms-item>
-				</template>
+				</uni-group>
 
-				<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-				<!-- <button class="button" form-type="submit">Submit</button>
+			</template>
+
+			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
+			<!-- <button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
-
+			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
 				<button class="button" @click="clearValidate('form','name')">移除用户名的校验结果</button>
 				<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
-			</uni-forms>
-		</view>
+			</view>
+		</uni-forms>
 	</view>
 </template>
 
@@ -66,7 +70,6 @@
 				formData: {},
 				show: false,
 				rules: {
-
 					name: {
 						rules: [{
 							required: true,
@@ -77,7 +80,6 @@
 							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
 						}]
 					},
-
 					age: {
 						rules: [{
 							required: true,
@@ -110,10 +112,10 @@
 							required: true,
 							errorMessage: '请选择兴趣',
 							trigger: "blur"
-						},{
-							validateFunction:function(rule,value,data,callback){
+						}, {
+							validateFunction: function(rule, value, data, callback) {
 								console.log(data);
-								if(value.length < 2){
+								if (value.length < 2) {
 									callback(new Error('请至少勾选两个兴趣爱好'))
 								}
 								return true
@@ -167,7 +169,7 @@
 					return
 				}
 				uni.showToast({
-					title:'验证成功'
+					title: '验证成功'
 				})
 			},
 
@@ -204,6 +206,10 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
+
+	.example {
+		padding: 0 10px 10px;
+	}
 
 	.uni-input-border,
 	.uni-textarea-border {

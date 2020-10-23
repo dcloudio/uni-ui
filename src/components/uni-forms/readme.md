@@ -34,7 +34,55 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-### 基本用法 
+
+## API
+
+### Forms Props
+
+属性名				| 类型			|默认值	 	| 可选值						| 说明
+---					| ----			|---		| ---						| ---	
+formRules			| Object		| -			| -							| 表单校验规则	
+validateTrigger		| String		| submit	| bind/submit				| 表单校验时机
+labelPosition		| String		| left 		| top/left					| label 位置
+labelWidth			| String/Number	| 75		| -							| label 宽度，单位 px	
+labelAlign			| String		| left		| left/center/right			| label 居中方式
+errShowType			| String		| undertext	| undertext/toast/modal		| 表单错误信息提示方式
+
+### Forms Events
+
+事件称名			|说明									| 返回参数			
+---				|---									| ---				
+submit			| 表单提交，返回表单校验是否通过以及表单数据	| Function(callback: Function(object={validate,value}))
+validate		| 任意表单项被校验后触发，返回表单校验信息		| Function(callback: Function(array=[{key:value}]))
+
+### Forms Methods
+
+方法称名			| 说明								| 返回参数			
+---				| ---								| ---
+submit 			| 提交表单，触发 Forms 的 submit 事件	| -
+setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|Function(porps: (name,value))
+validate 		| 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：第一个参数为表单校验是否通过，第二参数如果通过则返回表单数据，不通过则返回错误信息。若不传入回调函数，则会返回一个 promise	| Function(callback: Function(boolean, object))
+validateField	| 部分表单进行校验		| Function(props: array \ string, callback: Function(errorMessage: string))
+resetFields		| 对整个表单进行重置	| -
+clearValidate	| 移除表单的校验结果	| Function(props: array \ string)
+
+### FormsItem Props
+
+属性名				|类型	|默认值	 	|可选值	|说明
+:-					|:-		|:-			|---	|:-
+name				|String	| -			|-					| 表单域的属性名，在使用校验规则时必填
+required			|Boolean| false		|					| 左边显示红色"*"号，样式显示不会对校验规则产生效果
+validateTrigger		|String | submit	| bind/submit		| 表单校验时机
+leftIcon			|String | -			|- 					| label左边的图标，限uni-ui的图标名称
+iconColor			|String | #606266	|- 					| 左边通过icon配置的图标的颜色
+label				|String	| -			|-					| 输入框左边的文字提示
+label-width			|Number	| 65		|-					| label的宽度，单位px
+label-align			|String	| left		|left/center/right	| label的文字对齐方式
+label-position		|String	| left		|top/left			| label的文字的位置
+errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
+
+
+## 基本用法 
 
 `uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套 `input`、`radio`、`checkbox`、`textarea`、`switch` 等uni-app的内置表单组件，通过 `binddata` 或者 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，轻松完成表单的校验与提交（详见后文`表单校验` 部分）
 
@@ -216,7 +264,7 @@ rules: {
 
 属性名				| 类型			| 默认值	|可选值					| 说明			
 ---					| ----			| ---	|---					| ---	
-required			| Boolean		| -		|						| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`、`uni-field`组件的的required为true
+required			| Boolean		| -		|						| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`组件的的required为true
 range				| Array			| -		| -						| 数组至少要有一个元素，且数组内的每一个元素都是唯一的。
 format				| String		| - 	| -						| 内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
 pattern				| String		| - 	| -						| 正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"
@@ -350,48 +398,3 @@ email	| 必须是 email 类型
 - 如果 `uni-forms-item` 组件里没有配置 `validateTrigger` ，则优先使用 `uni-forms` 的 `validateTrigger` 属性来决定表单校验时机
 - 以此类推，如果都没有使用 `validateTrigger` 属性，则会使用 `uni-forms` 的 `validateTrigger` 属性默认值来决定表单校验时机
 
-## API
-
-### Forms Props
-
-属性名				| 类型			|默认值	 	| 可选值						| 说明
----					| ----			|---		| ---						| ---	
-formRules			| Object		| -			| -							| 表单校验规则	
-validateTrigger		| String		| submit	| bind/submit				| 表单校验时机
-labelPosition		| String		| left 		| top/left					| label 位置
-labelWidth			| String/Number	| 75		| -							| label 宽度，单位 px	
-labelAlign			| String		| left		| left/center/right			| label 居中方式
-errShowType			| String		| undertext	| undertext/toast/modal		| 表单错误信息提示方式
-
-### Forms Events
-
-事件称名			|说明									| 返回参数			
----				|---									| ---				
-submit			| 表单提交，返回表单校验是否通过以及表单数据	| Function(callback: Function(object={validate,value}))
-validate		| 任意表单项被校验后触发，返回表单校验信息		| Function(callback: Function(array=[{key:value}]))
-
-### Forms Methods
-
-方法称名			| 说明								| 返回参数			
----				| ---								| ---
-submit 			| 提交表单，触发 Forms 的 submit 事件	| -
-setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|Function(porps: (name,value))
-validate 		| 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：第一个参数为表单校验是否通过，第二参数如果通过则返回表单数据，不通过则返回错误信息。若不传入回调函数，则会返回一个 promise	| Function(callback: Function(boolean, object))
-validateField	| 部分表单进行校验		| Function(props: array \ string, callback: Function(errorMessage: string))
-resetFields		| 对整个表单进行重置	| -
-clearValidate	| 移除表单的校验结果	| Function(props: array \ string)
-
-### FormsItem Props
-
-属性名				|类型	|默认值	 	|可选值	|说明
-:-					|:-		|:-			|---	|:-
-name				|String	| -			|-					| 表单域的属性名，在使用校验规则时必填
-required			|Boolean| false		|					| 是否必填，左边显示红色"*"号
-validateTrigger		|String | submit	| bind/submit		| 表单校验时机
-leftIcon			|String | -			|- 					| label左边的图标，限uni-ui的图标名称
-iconColor			|String | #606266	|- 					| 左边通过icon配置的图标的颜色
-label				|String	| -			|-					| 输入框左边的文字提示
-label-width			|Number	| 65		|-					| label的宽度，单位px
-label-align			|String	| left		|left/center/right	| label的文字对齐方式
-label-position		|String	| left		|top/left			| label的文字的位置
-errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
