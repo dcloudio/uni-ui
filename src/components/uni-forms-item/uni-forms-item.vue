@@ -183,7 +183,7 @@
 					}
 					this.validator = this.form.validator
 					if (this.name) {
-						this.form.formData[this.name] = ''
+						this.form.formData[this.name] = this.form.model[this.name] || ''
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
@@ -226,6 +226,7 @@
 			 */
 			triggerCheck(value, callback) {
 				let promise;
+				this.errMsg = ''
 				// if no callback, return promise
 				if (callback && typeof callback !== 'function' && Promise) {
 					promise = new Promise((resolve, reject) => {
@@ -241,16 +242,31 @@
 				}
 
 				const rules = this.formRules.rules || []
-				const rule = rules.find(item => item.format && item.format === 'number')
+				const rule = rules.find(item => item.format && (item.format === 'int' || item.format === 'double' || item.format === 'number'))
+
+
 				// 输入值为 number
 				if (rule) {
 					value = value === '' ? value : Number(value)
 				}
+
+				let isNoField = false
+				for (let i = 0; i < rules.length; i++) {
+					const ruleData = rules[i]
+					if (ruleData.required) {
+						isNoField = true
+						break
+					}
+				}
+
 				this.form.formData[this.name] = value
-				this.errMsg = ''
 				let result = this.validator && this.validator.validateUpdate({
 					[this.name]: value
 				})
+				// 判断是否必填
+				if(!isNoField && !value){
+					result = null
+				}
 				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
 				if (!isTrigger) {
 					result = null

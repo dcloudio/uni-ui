@@ -2,10 +2,10 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.11",
+	"edition": "1.0.12",
 	"url": "forms",
 	"type": "表单组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 新增 serRules方法，支持自定义校验方法","- 新增 errshowtype 校验错误信息提示方式","-优化 formRules 属性更换为 rules","- 优化 组件示例"],
+	"update_log": ["- 新增 model 属性，解决了赋值初始值校验不通过的问题","- 优化 规则如果不配置 required 属性，可以通过校验"],
 	"suffix": "vue"
 }

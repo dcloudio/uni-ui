@@ -42,11 +42,31 @@
 			this.$refs[refName].setValue(name, value)
 		}
 	}
+
+	function _getValue(item, newVal) {
+		const rules = item.formRules.rules || []
+		const rule = rules.find(val => val.format && (val.format === 'int' || val.format === 'double' || val.format ===
+			'number'))
+
+		let value = newVal[item.name]
+		// 输入值为 number
+		if (rule) {
+			value = value === '' ? value : Number(value)
+		}
+		return value
+	}
+
 	import Validator from './validate.js'
 
 	export default {
 		name: 'uniForms',
 		props: {
+			model: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
 			// 表单校验规则
 			rules: {
 				type: Object,
@@ -90,6 +110,21 @@
 			},
 			trigger(trigger) {
 				this.formTrigger = trigger
+			},
+			model: {
+				handler(newVal) {
+					if (this.isChildEdit) {
+						this.isChildEdit = false
+						return
+					}
+					this.childrens.forEach((item) => {
+						if (item.name) {
+							this.formData[item.name] = _getValue(item, newVal)
+						}
+
+					})
+				},
+				deep: true
 			}
 		},
 		created() {
@@ -104,7 +139,9 @@
 				if (Object.keys(formRules).length > 0) {
 					this.formTrigger = this.trigger
 					this.formRules = formRules
-					this.validator = new Validator(formRules)
+					if (!this.validator) {
+						this.validator = new Validator(formRules)
+					}
 					this.childrens.forEach((item) => {
 						item.init()
 					})
@@ -126,6 +163,8 @@
 			setValue(name, value, callback) {
 				this.formData[name] = value
 				let example = this.childrens.find(child => child.name === name)
+				if (!example) return null
+				this.isChildEdit = true
 				example.val = value
 				return example.triggerCheck(value, callback)
 			},
@@ -185,6 +224,25 @@
 					});
 				}
 				let fieldsValue = {}
+
+				Object.keys(this.formRules).forEach(item => {
+					const values = this.formRules[item]
+					const rules = (values && values.rules) || []
+					let isNoField = false
+					for (let i = 0; i < rules.length; i++) {
+						const rule = rules[i]
+						if (rule.required) {
+							isNoField = true
+							break
+						}
+					}
+
+					// 如果存在 required 才会将内容插入校验对象
+					if (!isNoField && !invalidFields[item] ) {
+						delete invalidFields[item]
+					}
+				})
+				// 循环字段是否存在于校验规则中
 				for (let i in this.formRules) {
 					for (let j in invalidFields) {
 						if (i === j) {
@@ -192,6 +250,7 @@
 						}
 					}
 				}
+
 				let result = this.validator.invokeValidateUpdate(fieldsValue, true)
 
 				if (Array.isArray(result)) {

@@ -3,48 +3,44 @@
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<!-- :rules="rules" -->
-		<uni-forms ref="form" validate-trigger="submit" @submit="submit" err-show-type="toast" @validate="validate">
-			<uni-group title="基本信息" >
+		<uni-forms :model="formData" ref="form" validate-trigger="submit" @submit="submit" err-show-type="toast" @validate="validate">
+			<uni-group title="基本信息">
 				<uni-forms-item required name="name" label="用户名">
-					<input type="text" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
+					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item required name="age" label="年龄">
-					<input type="text" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
+					<input type="text" v-model="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item required name="email" label="邮箱">
-					<input type="text" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
+					<input type="text" v-model="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item label="详细信息">
 					<switch @change="change" />
 				</uni-forms-item>
 			</uni-group>
 			<template v-if="show">
-				<uni-group title="详细信息"  >
+				<uni-group title="详细信息">
 					<uni-forms-item required name="sex" label="性别">
 						<radio-group @change="binddata('sex',$event.detail.value)">
 							<label class="label-box">
-								<radio class="transform-scale" value="0" /><text>男</text>
+								<radio class="transform-scale" :checked="formData.sex === '0'" value="0" /><text>男</text>
 							</label>
 							<label class="label-box">
-								<radio class="transform-scale" value="1" /><text>女</text>
+								<radio class="transform-scale" :checked="formData.sex === '1'" value="1" /><text>女</text>
 							</label>
 						</radio-group>
 					</uni-forms-item>
 					<uni-forms-item required name="hobby" label="兴趣爱好">
 						<checkbox-group @change="binddata('hobby',$event.detail.value)">
-							<label class="label-box">
-								<checkbox class="transform-scale" value="0" /><text>足球</text>
+							<label class="label-box" v-for="item in hobby" :key="item.value">
+								<checkbox class="transform-scale" :checked="formData.hobby.indexOf(item.value) !== -1" :value="item.value" /><text>{{item.name}}</text>
 							</label>
-							<label class="label-box">
-								<checkbox class="transform-scale" value="1" /><text>篮球</text>
-							</label>
-							<label class="label-box">
-								<checkbox class="transform-scale" value="1" /><text>游泳</text>
-							</label>
+
 						</checkbox-group>
 					</uni-forms-item>
 					<uni-forms-item name="remarks" label="备注">
-						<textarea type="text" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注" @input="binddata('remarks',$event.detail.value)"></textarea>
+						<textarea type="text" v-model="formData.remarks" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注"
+						 @input="binddata('remarks',$event.detail.value)"></textarea>
 					</uni-forms-item>
 				</uni-group>
 
@@ -67,16 +63,43 @@
 	export default {
 		data() {
 			return {
-				formData: {},
+				formData: {
+					name: '',
+					age: '',
+					email: "",
+					sex: '',
+					hobby: [],
+					remarks: ""
+				},
+				hobby: [{
+					name: '足球',
+					value: "0"
+				}, {
+					name: '篮球',
+					value: "1"
+				}, {
+					name: '游泳',
+					value: "2"
+				}],
 				show: false,
 				rules: {
+					// name: {
+					// 	rules: [{
+					// 		// required: true,
+					// 		errorMessage: '请输入用户名',
+					// 	}, {
+					// 		minLength: 3,
+					// 		maxLength: 15,
+					// 		errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+					// 	}]
+					// },
 					name: {
 						rules: [{
-							required: true,
+							// required: true,
 							errorMessage: '请输入用户名',
 						}, {
 							minLength: 3,
-							maxLength: 5,
+							maxLength: 15,
 							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
 						}]
 					},
@@ -114,7 +137,6 @@
 							trigger: "blur"
 						}, {
 							validateFunction: function(rule, value, data, callback) {
-								console.log(data);
 								if (value.length < 2) {
 									callback(new Error('请至少勾选两个兴趣爱好'))
 								}
@@ -125,6 +147,24 @@
 				}
 			}
 		},
+		onLoad() {
+			uni.showLoading()
+			// this.formData 应该包含所有需要校验的表单
+			// 模拟异步请求数据
+			setTimeout(() => {
+
+				this.formData = {
+					name: 'LiMing',
+					age: 1,
+					email: "",
+					sex: '',
+					hobby: ['0', '2'],
+					remarks: "热爱学习，热爱生活"
+				}
+
+				uni.hideLoading()
+			}, 0)
+		},
 		onReady() {
 			this.$refs.form.setRules(this.rules)
 		},
@@ -132,6 +172,7 @@
 			change(event) {
 				this.show = event.detail.value
 			},
+
 			/**
 			 * 触发校验
 			 * @param {Object} event
@@ -145,7 +186,6 @@
 			 * @param {Object} event
 			 */
 			submit(event) {
-				console.log(event)
 				const {
 					errors,
 					value
@@ -174,7 +214,7 @@
 			validateField(form) {
 				this.$refs[form].validateField(['name', 'email'], (errors) => {
 					console.log(errors);
-					if(errors){
+					if (errors) {
 						uni.showToast({
 							title: '验证成功'
 						})

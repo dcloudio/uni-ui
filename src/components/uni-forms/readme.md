@@ -41,7 +41,8 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 属性名				| 类型			|默认值	 	| 可选值						| 说明
 ---					| ----			|---		| ---						| ---	
-formRules			| Object		| -			| -							| 表单校验规则	
+model				| Object		| -			| -							| 表单数据	
+rules				| Object		| -			| -							| 表单校验规则	
 validateTrigger		| String		| submit	| bind/submit				| 表单校验时机
 labelPosition		| String		| left 		| top/left					| label 位置
 labelWidth			| String/Number	| 75		| -							| label 宽度，单位 px	
@@ -145,15 +146,16 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 	- 第二个参数传入需要校验的值，内置组件可以通过 `$event.detail.value` 获取到组件的返回值，自定义组件传入需要校验的值即可
 	- 第三个参数传入 `uni-forms` 组件绑定属性 `ref` 的值，通常在多表单的时候需要传入，用来区分表单，如页面中仅有一个 `uni-forms` 可忽略
 6. 如果内置 `binddata` 方法无法满足需求，在当前页面的 `methods` 中复写此方法即可，复写此方法需要调用 `uni-forms` 的 `setValue` 来触发表单校验
+7. 如果需要设置默认值， `uni-forms` 还需要通过 `model` 属性传入表单绑定的数据对象，来初始化数据，否者提交表单的无法观测到数据变化
 
 ```html
 <template>
-	<uni-forms :rules="rules" @submit="submitForm">
+	<uni-forms :model="formData" :rules="rules" @submit="submitForm">
 		<uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
-			<input class="input" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
+			<input class="input" v-model="formData.name" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
 		<uni-forms-item>
 		<uni-forms-item  label="邮箱" name="email"  placeholder="请输入年龄">
-			<input class="input" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
+			<input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
 		<uni-forms-item>
 		<button @click="submit">Submit</button>
 		<button @click="reset">Reset</button>
@@ -163,6 +165,10 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 	export default {
 		data() {
 			return {
+				formData:{
+					name:'LiMing',
+					email:'dcloud@email.com'
+				},
 				rules: {
 					// 对name字段进行必填验证
 					name: {
