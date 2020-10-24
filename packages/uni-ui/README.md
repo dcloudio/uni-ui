@@ -50,21 +50,18 @@ ui是一种需求非常发散的产品，DCloud官方也无意用 `uni-ui` 压�
 
 ### uni-ui 使用说明
 
+#### 方式1 (推荐)
 
-
-#### **方式一 (推荐)**
-
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui`
+`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
 
 `easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
 
 
-
-#### **方式二（CLI）**
+#### 方式2（vue-cli）
 
 **初始化项目**
 
-在 HBuilderX 中新建 uni-app 项目，进入项目目录，执行：
+如果是使用 `HBuiderX` 创建的项目，需先执行以下命令初始化：
 
 ```
 npm init -y
@@ -79,22 +76,40 @@ npm install @dcloudio/uni-ui -D
 
 在 ``script`` 中引用组件：
 
+例如我们需要导入 `uni-badge` 组件
+
 ```javascript
-import {uniBadge} from '@dcloudio/uni-ui'
-//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
+import {unibadge} from '@dcloudio/uni-ui'
 export default {
-    components: {uniBadge}
+    components: {unibadge}
 }
 ```
 
-在 ``template`` 中使用组件：
+#### 方式3（vue-cli + easycom）
 
-```html
-<uni-badge text="1"></uni-badge>
-<uni-badge text="2" type="success" @click="bindClick"></uni-badge>
-<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
+使用 `方式2` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
+
+打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
+
+```javascript
+// pages.json
+
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	
+	// 其他内容
+	pages:[
+		// ...
+	]
+}
+
 ```
-
 
 #### uni-ui 已支持的组件列表 
 组件名|组件说明

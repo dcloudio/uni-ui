@@ -1,9 +1,13 @@
 <template>
-	<view class="uni-group" :style="{marginTop: `${top}px` }">
-		<view v-if="title" class="uni-group__content">
-			<text class="uni-group__content-title">{{ title }}</text>
+	<view class="uni-group" :class="['uni-group--'+mode]" :style="{marginTop: `${top}px` }">
+		<slot name="title">
+			<view v-if="title" class="uni-group__title">
+				<text class="uni-group__title-text">{{ title }}</text>
+			</view>
+		</slot>
+		<view class="uni-group__content">
+			<slot />
 		</view>
-		<slot />
 	</view>
 </template>
 
@@ -25,6 +29,10 @@ export default {
 		top: {
 			type: [Number, String],
 			default: 10
+		},
+		mode:{
+			type:String,
+			default:'default'
 		}
 	},
 	data() {
@@ -48,9 +56,10 @@ export default {
 	.uni-group {
         background: #fff;
         margin-top: 10px;
+		// border: 1px red solid;
     }
 
-	.uni-group__content {
+	.uni-group__title {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
@@ -61,8 +70,12 @@ export default {
 		font-weight: normal;
 		color: $uni-text-color;
 	}
-
-	.uni-group__content-title {
+	.uni-group__content {
+		padding: 15px;
+		padding-bottom: 5px;
+		background-color: #FFF;
+	}
+	.uni-group__title-text {
 		font-size: $uni-font-size-base;
 		color: $uni-text-color;
 	}
@@ -70,5 +83,11 @@ export default {
 	.distraction {
 		flex-direction: row;
 		align-items: center;
+	}
+	.uni-group--card {
+		margin: 10px;
+		border-radius: 5px;
+		overflow: hidden;
+		box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.08);
 	}
 </style>

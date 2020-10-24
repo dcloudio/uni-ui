@@ -11,10 +11,9 @@
 	 * Forms 表单
 	 * @description 由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=2773
-	 * @property {Object} formRules  							表单校验规则
-	 * @property {String} trigger = [blur|change|submit]	校验触发器方式 默认 blur 可选
-	 * 	@value blur 	失去焦点
-	 * 	@value change 	发生变化时触发
+	 * @property {Object} rules  							表单校验规则
+	 * @property {String} validateTrigger = [bind|submit]	校验触发器方式 默认 submit 可选
+	 * 	@value bind 	发生变化时触发
 	 * 	@value submit 	提交时触发
 	 * @property {String} labelPosition = [top|left]				label 位置 默认 left 可选
 	 * @value top		顶部显示 label
@@ -24,35 +23,59 @@
 	 * 	@value left		label 左侧显示
 	 * 	@value center	label 居中
 	 * 	@value right		label 右侧对齐
+	 * @property {String} errShowType = [undertext|toast|modal]	校验错误信息提示方式
+	 * 	@value undertext	错误信息在底部显示
+	 * 	@value toast		错误信息toast显示
+	 * 	@value modal		错误信息modal显示
 	 */
 	import Vue from 'vue'
-	Vue.prototype.uniFormsValidate = function(name, value, formName) {
-	    if (formName) {
-	        this.$refs[formName].setValue(name, value)
-	    } else {
-	        let refName = null
-	        for(let  i in this.$refs){
-	            refName= i
-	            break
-	        }
-	        if(!refName) return console.error('当前 uni-froms 组件缺少 ref 属性')
-	        this.$refs[refName].setValue(name, value)
-	    }
+	Vue.prototype.binddata = function(name, value, formName) {
+		if (formName) {
+			this.$refs[formName].setValue(name, value)
+		} else {
+			let refName = null
+			for (let i in this.$refs) {
+				refName = i
+				break
+			}
+			if (!refName) return console.error('当前 uni-froms 组件缺少 ref 属性')
+			this.$refs[refName].setValue(name, value)
+		}
 	}
-	import Validator from './validateFunction.js'
+
+	function _getValue(item, newVal) {
+		const rules = item.formRules.rules || []
+		const rule = rules.find(val => val.format && (val.format === 'int' || val.format === 'double' || val.format ===
+			'number'))
+
+		let value = newVal[item.name]
+		// 输入值为 number
+		if (rule) {
+			value = value === '' ? value : Number(value)
+		}
+		return value
+	}
+
+	import Validator from './validate.js'
 
 	export default {
 		name: 'uniForms',
 		props: {
+			model: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
 			// 表单校验规则
-			formRules: {
+			rules: {
 				type: Object,
 				default () {
 					return {}
 				}
 			},
 			// 校验触发器方式，默认 关闭
-			trigger: {
+			validateTrigger: {
 				type: String,
 				default: ''
 			},
@@ -70,6 +93,10 @@
 			labelAlign: {
 				type: String,
 				default: 'left'
+			},
+			errShowType: {
+				type: String,
+				default: 'undertext'
 			}
 		},
 		data() {
@@ -78,27 +105,44 @@
 			};
 		},
 		watch: {
-			formRules(newVal) {
+			rules(newVal) {
 				this.init(newVal)
 			},
 			trigger(trigger) {
 				this.formTrigger = trigger
+			},
+			model: {
+				handler(newVal) {
+					if (this.isChildEdit) {
+						this.isChildEdit = false
+						return
+					}
+					this.childrens.forEach((item) => {
+						if (item.name) {
+							this.formData[item.name] = _getValue(item, newVal)
+						}
+
+					})
+				},
+				deep: true
 			}
 		},
 		created() {
 			let _this = this
 			this.childrens = []
-			this.rules = []
-			this.init(this.formRules)
+			this.formRules = []
+			this.init(this.rules)
 
 		},
 		methods: {
 			init(formRules) {
 				if (Object.keys(formRules).length > 0) {
 					this.formTrigger = this.trigger
-					this.rules = formRules
-					this.validator = new Validator(formRules)
-					this.childrens.forEach((item)=>{
+					this.formRules = formRules
+					if (!this.validator) {
+						this.validator = new Validator(formRules)
+					}
+					this.childrens.forEach((item) => {
 						item.init()
 					})
 				}
@@ -107,7 +151,7 @@
 			 * 设置校验规则
 			 * @param {Object} formRules
 			 */
-			setRules(formRules){
+			setRules(formRules) {
 				this.init(formRules)
 			},
 			/**
@@ -119,6 +163,8 @@
 			setValue(name, value, callback) {
 				this.formData[name] = value
 				let example = this.childrens.find(child => child.name === name)
+				if (!example) return null
+				this.isChildEdit = true
 				example.val = value
 				return example.triggerCheck(value, callback)
 			},
@@ -178,23 +224,65 @@
 					});
 				}
 				let fieldsValue = {}
-				for(let i in this.rules){
-					for(let j in invalidFields){
-						if(i === j){
+
+				Object.keys(this.formRules).forEach(item => {
+					const values = this.formRules[item]
+					const rules = (values && values.rules) || []
+					let isNoField = false
+					for (let i = 0; i < rules.length; i++) {
+						const rule = rules[i]
+						if (rule.required) {
+							isNoField = true
+							break
+						}
+					}
+
+					// 如果存在 required 才会将内容插入校验对象
+					if (!isNoField && !invalidFields[item] ) {
+						delete invalidFields[item]
+					}
+				})
+				// 循环字段是否存在于校验规则中
+				for (let i in this.formRules) {
+					for (let j in invalidFields) {
+						if (i === j) {
 							fieldsValue[i] = invalidFields[i]
 						}
 					}
 				}
-				let result = this.validator.invokeValidateUpdate( fieldsValue, true)
+
+				let result = this.validator.invokeValidateUpdate(fieldsValue, true)
 
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
 				let example = null
-				result && result.forEach(item => {
-					example = this.childrens.find(child => child.name === item.key)
-					if (example) example.errMsg = item.errorMessage
-				})
+
+				if (result) {
+					for (let i = 0; i < result.length; i++) {
+						const item = result[i]
+						example = this.childrens.find(child => child.name === item.key)
+						if (this.errShowType === 'undertext') {
+							if (example) example.errMsg = item.errorMessage
+						} else {
+							if (this.errShowType === 'toast') {
+								uni.showToast({
+									title: item.errorMessage || '校验错误',
+									icon: 'none'
+								})
+								break
+							} else if (this.errShowType === 'modal') {
+								uni.showModal({
+									title: '提示',
+									content: item.errorMessage || '校验错误'
+								})
+								break
+							} else {
+								if (example) example.errMsg = item.errorMessage
+							}
+						}
+					}
+				}
 
 				if (type === 'submit') {
 					this.$emit('submit', {
@@ -278,7 +366,4 @@
 </script>
 
 <style lang="scss">
-	.uni-forms {
-		background-color: #fff;
-	}
 </style>
