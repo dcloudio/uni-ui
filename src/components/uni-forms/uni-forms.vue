@@ -35,8 +35,10 @@
 		} else {
 			let refName = null
 			for (let i in this.$refs) {
-				refName = i
-				break
+				if(this.$refs[i] && this.$refs[i].$options.name === 'uniForms'){
+					refName = i
+					break
+				}
 			}
 			if (!refName) return console.error('当前 uni-froms 组件缺少 ref 属性')
 			this.$refs[refName].setValue(name, value)

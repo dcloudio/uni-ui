@@ -5,6 +5,7 @@
 	"edition": "1.0.12",
 	"url": "forms",
 	"type": "表单组件",
+	"module":["uni-forms","uni-forms-item"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
 	"update_log": ["- 新增 model 属性，解决了赋值初始值校验不通过的问题","- 优化 规则如果不配置 required 属性，可以通过校验"],
 	"suffix": "vue"

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="example-info">
-			<text class="example-info-text">分组组件可用于将组件用于分组，添加间隔，以产生明显的区块</text>
+			<text class="example-info-text">分组组件可用于将组件分组，添加间隔，以产生明显的区块</text>
 		</view>
 		<uni-section title="基础分组" type="line"></uni-section>
 		<uni-group>

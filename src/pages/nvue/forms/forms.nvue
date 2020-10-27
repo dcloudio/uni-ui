@@ -15,10 +15,10 @@
 					<input type="text" v-model="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item label="详细信息">
-					<switch @change="change" />
+					<switch :checked="formData.checked" @change="change" />
 				</uni-forms-item>
 			</uni-group>
-			<template v-if="show">
+			<template v-if="formData.checked">
 				<uni-group title="详细信息">
 					<uni-forms-item required name="sex" label="性别">
 						<radio-group @change="binddata('sex',$event.detail.value)">
@@ -69,7 +69,8 @@
 					email: "",
 					sex: '',
 					hobby: [],
-					remarks: ""
+					remarks: "",
+					checked:false
 				},
 				hobby: [{
 					name: '足球',
@@ -159,7 +160,8 @@
 					email: "",
 					sex: '',
 					hobby: ['0', '2'],
-					remarks: "热爱学习，热爱生活"
+					remarks: "热爱学习，热爱生活",
+					checked:true
 				}
 
 				uni.hideLoading()
