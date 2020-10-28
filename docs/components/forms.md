@@ -135,6 +135,8 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 
 ## 表单校验
 
+同时还可以通过 `uniCloud web 控制台` 快速根据 `schema` 自动生成表单维护界面，比如新建页面和编辑页面，自动处理校验规则，更多参考[DB Schema](https://uniapp.dcloud.io/uniCloud/schema)
+
 ### 如何使用 
 
 1. `uni-forms` 需要通过 `rules` 属性传入约定的验证规则校验规则(下文会详细描述)

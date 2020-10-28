@@ -29,7 +29,6 @@ uniSwiperAction.vue
 
 
 ## 组件文件说明
-- readme.md 组件使用说明
 - config.js 组件配置
 - uni-xxx.vue 组件文件
 
@@ -42,12 +41,27 @@ uniSwiperAction.vue
 	"url":"collapse", // 组件地址 （为跳转地址，一般是组件名称，全消协）
 	"edition":"1.0.0", // 组件版本，每次修改版本号要递增
 	"path":"https://ext.dcloud.net.cn/plugin?id=23", // 插件市场地址
+	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"], // 组件包含依赖那些其他组件
 	"update_log":[], // 当前版本的更新日志，markdown 格式
-	"compilation":"#ifdef H5 || APP-PLUS || MP-WEIXIN" // 条件编译 ，在什么平台使用，或者在什么平台不使用这个组件
-  "update_log":"- 更新内容", // 组件更新日志，支持md格式，注意空格等，写完需要原样粘贴到 md 文件验证是否格式错误
-	"hidden":true // 同步后 ，是否隐藏组件（一般是组件为完成，但是需要同步的时候，需要设置为 true ，正常情况不需要写这个参数）
-	"suffix":"vue|nuve" // 同步后页面格式
+	"compilation":"#ifdef H5 || APP-PLUS || MP-WEIXIN", // 条件编译 ，在什么平台使用，或者在什么平台不使用这个组件
+	"update_log":["- 更新内容"], // 组件更新日志，只支持数组
+	"hidden":true, // 同步后 ，是否隐藏组件（一般是组件完成，但是需要同步的时候，需要设置为 true ，正常情况不需要写这个参数）
+	"suffix":"vue|nuve" // 同步后示例页面格式
 }
+
+
+
+"id": "2773",
+	"name": "Forms",
+	"desc": "表单",
+	"edition": "1.0.13",
+	"url": "forms",
+	"type": "表单组件",
+	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
+	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
+	"update_log": ["- 修复 错误的ref导致找不到表单实例的Bug"],
+	"suffix": "vue"
+
 
 ```
 

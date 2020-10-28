@@ -2,11 +2,11 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.12",
+	"edition": "1.0.13",
 	"url": "forms",
 	"type": "表单组件",
-	"module":["uni-forms","uni-forms-item"],
+	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 新增 model 属性，解决了赋值初始值校验不通过的问题","- 优化 规则如果不配置 required 属性，可以通过校验"],
+	"update_log": ["- 修复 错误的ref导致找不到表单实例的Bug"],
 	"suffix": "vue"
 }
