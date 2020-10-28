@@ -26,16 +26,19 @@ export default {
 	data () {
 	  return {
 	    options: [{
-	      icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/kefu.png',
-	      text: '客服'
-	    }, {
-	      icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/dianpu.png',
-	      text: '店铺'
-	    }, {
-	      icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/carts.png',
-	      text: '购物车',
-	      info: 2
-	    }],
+			icon: 'headphones',
+			text: '客服'
+		}, {
+			icon: 'shop',
+			text: '店铺',
+			info: 2,
+			infoBackgroundColor:'#007aff',
+			infoColor:"red"
+		}, {
+			icon: 'cart',
+			text: '购物车',
+			info: 2
+		}],
 	    buttonGroup: [{
 	      text: '加入购物车',
 	      backgroundColor: '#ff0000',
@@ -75,25 +78,27 @@ export default {
 
 **options 参数说明：**
 
-|属性名	|类型	|默认值	|说明								|
-|---	|----	|---	|---								|
-|icon	|String	|-		|显示图片，本地绝对路径或线上路径	|
-|text	|String	|-		|显示文字							|
-|info	|Number	|0		|右上角数字角标						|
+|属性名				|类型	|默认值	|说明													|
+|---				|----	|---	|---													|
+|text				|String	|-		|显示文字												    |
+|icon				|String	|		|图标，[参考](https://ext.dcloud.net.cn/plugin?id=28)	    |
+|info				|Number	|0		|右上角数字角标											|
+|infoBackgroundColor|String	|#ff0000|角标背景色												|
+|infoColor			|String	|#fff	|角标前景色												|
 
 **buttonGroup 参数说明：**
 
 |属性名				|类型	|默认值	|说明		|
 |---				|----	|---	|---		|
-|text				|String	|-		|按钮文字	|
-|background-color	|String	|-		|按钮背景色	|
-|color				|String	|-		|字体颜色	|
+|text				|String	|-		|按钮文字		|
+|backgroundColor	|String	|-		|按钮背景色	|
+|color				|String	|-		|字体颜色		|
 
 ### 事件说明
 
 |事件名			|说明				|返回值				|
 |---			|---				|---				|
-|@click			|左侧点击事件		|e = {index,content}|
+|@click			|左侧点击事件			|e = {index,content}|
 |@buttonClick	|右侧按钮组点击事件	|e = {index,content}|
 
 ### 插件预览地址

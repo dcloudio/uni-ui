@@ -2,7 +2,7 @@
 url : pages/vue/badge/badge
 ---
 
-# Badge 数字角标
+### Badge 数字角标
 *已经支持在nvue页面中使用*
 
 数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，组件名：``uni-badge``，代码块： uBadge。
