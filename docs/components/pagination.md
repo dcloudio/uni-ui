@@ -1,18 +1,19 @@
-### Pagination 分页器
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/pagination/pagination
+---
 
-分页器组件，用于展示页码、请求数据等。组件名：``uni-pagination``，代码块： uPagination。
+## Pagination 分页器
+> 组件名：``uni-pagination``，代码块： uPagination。
 
-### 使用方式
+分页器组件，用于展示页码、请求数据等。
 
-在 ``script`` 中引用组件 
+### 安装方式
 
-```javascript
-import uniPagination from '@/components/uni-pagination/uni-pagination.vue'
-export default {
-    components: {uniPagination}
-}
-```
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -21,7 +22,9 @@ export default {
 <uni-pagination title="标题文字" show-icon="true" total="50" current="2"></uni-pagination>
 ```
 
-### 属性说明
+## API
+
+### Pagination Props
 
 |属性名		|类型	|默认值	|说明						|
 |---		|----	|---	|---						|
@@ -33,12 +36,8 @@ export default {
 |showIcon	|Boolean|false	|是否以 icon 形式展示按钮	|
 
 
-### 事件说明
+### Pagination Events
 
-|事件称名	|说明				|返回参数																			|
+|事件称名	|说明				|返回值																		|
 |---		|----				|---																				|
-|@change		|点击页码按钮时触发	|e={type,current} current为当前页，type值为：next/prev，表示点击的是上一页还是下一个	|
-
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/pagination/pagination](https://uniapp.dcloud.io/h5/pages/extUI/pagination/pagination)
+|@change|点击页码按钮时触发	|e={type,current} current为当前页，type值为：next/prev，表示点击的是上一页还是下一个	|

@@ -5,6 +5,7 @@
 	"url": "swipe-action",
 	"type": "功能组件",
 	"edition": "1.1.6",
+	"module": ["uni-swipe-action", "uni-swipe-action-item"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=181",
 	"update_log": [
 		"- 新增 左侧滑动",

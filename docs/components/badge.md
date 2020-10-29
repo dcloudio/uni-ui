@@ -2,30 +2,17 @@
 url : pages/vue/badge/badge
 ---
 
-### Badge 数字角标
-*已经支持在nvue页面中使用*
+## Badge 数字角标
 
 数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，组件名：``uni-badge``，代码块： uBadge。
 
+### 安装方式
 
-::: warning 注意事项
-为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-- 组件需要依赖 `sass` 插件 ，请自行手动安装
-- 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
-:::
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-
-### 使用方式
-
-在 ``script`` 中引用组件 
-
-```javascript
-import uniBadge from '@/components/uni-badge/uni-badge.vue'
-export default {
-    components: {uniBadge}
-}
-```
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -35,22 +22,22 @@ export default {
 <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
 ```
 
-### 属性说明
+
+## API
+
+### Badge Props
 
 |属性名		|类型		|默认值	|说明																											|
-|---		|----		|---	|---																											|
+|---		|----		|---	|---					 																						|
 |text		|String		|-		|角标内容																										|
 |type		|String		|default|颜色类型，可选值：default（灰色）、primary（蓝色）、success（绿色）、warning(黄色)、error(红色)|
 |size		|String		|normal|Badge 大小，可取值：normal、small|
 |inverted	|Boolean	|false	|是否无需背景颜色，为 true 时，背景颜色将变为文字的字体颜色														|
 
-### 事件说明
+### Badge Events
 
 |事件名	|事件说明			|返回参数	|
 |---	|---				|---		|
 |@click	|点击 Badge 触发事件| -			|
 
 
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/badge/badge](https://uniapp.dcloud.io/h5/pages/extUI/badge/badge)

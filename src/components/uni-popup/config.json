@@ -5,6 +5,7 @@
 	"url": "popup",
 	"type": "功能组件",
 	"edition": "1.2.5",
+	"module": ["uni-popup","uni-transition", "uni-popup-dialog","uni-popup-message","uni-popup-share"],
 	"compilation":"#ifndef QUICKAPP-WEBVIEW-HUAWEI",
 	"path": "https://ext.dcloud.net.cn/plugin?id=329",
 	"update_log": [

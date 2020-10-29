@@ -1,31 +1,19 @@
-### SegmentedControl 分段器
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/segmented-control/segmented-control
+---
 
-用作不同视图的显示，组件名：``uni-segmented-control``，代码块： uSegmentedControl。
+## SegmentedControl 分段器
+> 组件名：``uni-segmented-control``，代码块： uSegmentedControl。
 
-### 使用方式
+用作不同视图的显示
 
-在 ``script`` 中引用组件 
+### 安装方式
 
-```javascript
-import uniSegmentedControl from '@/components/uni-segmented-control/uni-segmented-control.vue'
-export default {
-    components: {uniSegmentedControl},
-    data() {
-    	return {
-    		items: ['选项卡1','选项卡2','选项卡3'],
-    		current: 0
-    	}
-    },
-    methods: {
-    	onClickItem(e) {
-    		if (this.current !== e.currentIndex) {
-    			this.current = e.currentIndex;
-    		}
-    	}
-    }
-}
-```
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
 
 在 ``template`` 中的使用
 
@@ -48,22 +36,20 @@ export default {
 </template>
 ```
 
-### 属性说明
+## API
 
-|属性名			|类型				|默认值	|说明															|
-|---			|----				|---	|---															|
-|current		|Number				|0		|当前选中的tab索引值，从0计数									|
-|style-type		|String				|button	|分段器样式类型，可选值：button（按钮类型），text（文字类型）	|
-|active-color	|String				|#007aff|选中的标签背景色与边框颜色										|
-|values			|Array|-		|选项数组														|
+### SegmentedControl Props
 
-### 事件说明
+|属性名				|类型				|默认值	|说明															|
+|---					|----				|---	|---															|
+|current			|Number			|0		|当前选中的tab索引值，从0计数									|
+|styleType		|String			|button	|分段器样式类型，可选值：button（按钮类型），text（文字类型）	|
+|activeColor	|String			|#007aff|选中的标签背景色与边框颜色										|
+|values				|Array			|-		|选项数组														|
+
+### SegmentedControl Events
 
 |事件名		|说明					|返回值				|
 |---		|----					|---				|
 |@clickItem	|组件触发点击事件时触发	|e={currentIndex}	|
 
-
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control](https://uniapp.dcloud.io/h5/pages/extUI/segmented-control/segmented-control)

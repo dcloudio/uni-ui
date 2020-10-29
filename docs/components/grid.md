@@ -1,19 +1,28 @@
-### Grid 宫格
-*uni-grid-item 子组件新增 index 属性，是一个唯一标识，为必传项，如需要更新老版本grid，需要注意 index 属性，如不填写，点击grid将不会返回正确索引*
+---
+url : pages/vue/grid/grid
+---
+
+## Grid 宫格
 
 宫格组件，组件名：``uni-grid``，代码块： uGrid。
 
-### 使用方式
+::: warning 注意事项
+为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
+- 删除组件自带圆点角标效果，完全交给用户实现，示例有简单角标效果实现
+- Grid 组件仅在自定义组件模式下支持
+- column 属性最大值最好不要超过 5 个，如果超过，需要注意内容显示
+- 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： `详情 --> 项目配置 --> 启用 component2 编译`
+- 为了避免高度显示错误组件内必须要有内容
+:::
 
-在 ``script`` 中引用组件 
+### 安装方式
 
-```javascript
-import uniGrid from '@/components/uni-grid/uni-grid.vue'
-import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
-export default {
-    components: {uniGrid,uniGridItem}
-}
-```
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -54,7 +63,9 @@ export default {
 </uni-grid>
 ```
 
-### 属性说明
+## API
+
+### Grid Props
 
 **uni-grid 属性说明：**
 
@@ -66,26 +77,14 @@ export default {
 |square		|Boolean|true	|是否方形显示		|
 |highlight	|Boolean|true	|点击背景是否高亮	|
 
-### 事件说明
+### Grid Events
 |事件名	|说明			|返回值											|
 |---	|----			|---											|
 |@change|点击 grid 触发	|e={detail:{index:0}}，index 为当前点击 gird 下标|
 
-**uni-grid-item 属性说明：**
 
-|属性名	|类型	|默认值	|说明										|
-|---	|----	|---	|---										|
-|index	|Number	|-		|子组件的唯一标识 ，点击gird会返回当前的标识|
+### GridItem Props
 
-
-**Tips**
-
-- 删除组件自带圆点角标效果，完全交给用户实现，示例有简单角标效果实现
-- Grid 组件仅在自定义组件模式下支持
-- column 属性最大值最好不要超过 5 个，如果超过，注意内容显示
-- 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
-- 为了避免高度显示错误组件内必须要有内容
-
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/grid/grid](https://uniapp.dcloud.io/h5/pages/extUI/grid/grid)
+|属性名|类型		|默认值	|说明										|
+|---	|----		|---	|---										|
+|index|Number	|-		|子组件的唯一标识 ，点击gird会返回当前的标识|

@@ -1,5 +1,6 @@
-
-发现错误？想参与编辑？[在 GitHub 上编辑此页面！](https://github.com/dcloudio/uni-ui/blob/master/src/components/uni-swipe-action/readme.md)
+---
+url : pages/vue/swipe-action/swipe-action
+---
 
 ## SwipeAction 滑动操作
 > 组件名：``uni-swipe-action``、``uni-swipe-action-item``，代码块： uSwipeAction、uSwipeActionItem。
@@ -7,88 +8,28 @@
 通过滑动触发选项的容器
 
 
-### 平台差异说明
-
-如无特殊说明，则全平台支持
-
-### 组件使用注意事项
-
+::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
 
-- 组件需要依赖 `sass` 插件 ，请自行手动安装
 - 如果有动态显示隐藏组件之类的操作，请使用 `v-if` 而不是 `v-show`，因为组件内需要获取节点信息，v-show 之后不能正确获取
 - swiperaction的跟手联动是非常考验性能的。为了提高交互体验，本组件在 app 端 vue 页面、h5、微信小程序使用了wxs 技术，nvue 页面使用 bindingx 技术，可以达到流畅的体验。在其他小程序平台由于底层不支持优化技术，只能使用使用普通 js ，此时性能一般。
 - `uni-swipe-action` 和 `uni-swipe-action-item`
 - `uni-swipe-action` 不能嵌套在 `swiper` 中使用 
 - 长列表不建议使用 autoClose属性，会影响组件性能，造成卡顿，原因是打开之后要通知其他已经打开的组件关闭，会导致多个组件重新渲染
-- 事件中传入 $event 获取额外参数
+- 事件中传入 `$event` 获取额外参数
 - 向下兼容，需要将 `options` 属性替换成 `right-options`
+:::
 
-### 使用方式
+### 安装方式
 
-#### 方式1 (推荐)
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
-
-`easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
-
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
 
-#### 方式2（vue-cli）
+## 基本用法
 
-**初始化项目**
-
-如果是使用 `HBuiderX` 创建的项目，需先执行以下命令初始化：
-
-```
-npm init -y
-```
-
-**安装 uni-ui**
-
-```
-npm install @dcloudio/uni-ui -D
-```
-
-
-在 ``script`` 中引用组件：
-
-```javascript
-import {uniSwipeAction,uniSwipeActionItem} from '@dcloudio/uni-ui'
-export default {
-    components: {uniSwipeAction,uniSwipeActionItem}
-}
-```
-
-#### 方式3（vue-cli + easycom）
-
-使用 `方式2` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
-
-打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
-
-```javascript
-// pages.json
-
-{
-	"easycom": {
-		"autoscan": true,
-		"custom": {
-			// uni-ui 规则如下配置
-			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
-		}
-	},
-	
-	// 其他内容
-	pages:[
-		// ...
-	]
-}
-
-```
-
-
-
-### 基本用法
+在 ``template`` 中的使用
 
 ```html
 <uni-swipe-action>
@@ -171,41 +112,44 @@ export default {
 
 ```
 
+## API
 
-### 属性说明
+### SwipeAciton Props
 
-|属性名				|类型			|默认值	|是否必填	|说明		|
-|:--				|:--			|:--	|:--		|:--	|
-|show				|String			|none	|否			|开启关闭组件（只能打开右侧），auto-close = false 时生效,可选值，left\right\none	|
-|threshold			|Number			|20		|否			|滑动阙值																		|
-|disabled			|Boolean		|false	|否			|是否禁止滑动																	|
-|autoClose			|Boolean		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	【注意：长列表使用会有性能问题】				|
-|leftOptions		|Array\Object	|-		|否			|左侧选项内容及样式															|
-|rightOptions		|Array\Object	|-		|否			|右侧选项内容及样式															|
+|属性名						|类型					|可选值|默认值	|是否必填	|说明		|
+|:--							|:--					|:--	|:--	|:--		|:--	|
+|show							|String				|left/right/none		|none	|否		|开启关闭组件（只能打开右侧），auto-close = false 时生效,可选值，	|
+|threshold				|Number				|-		|20		|否			|滑动阙值																		|
+|disabled					|Boolean			|-		|false|否			|是否禁止滑动																	|
+|autoClose				|Boolean			|-		|true	|否			|其他组件开启的时候，当前组件是否自动关闭	【注意：长列表使用会有性能问题】				|
+|**leftOptions**	|Array/Object	|-		|-		|否			|左侧选项内容及样式															|
+|**rightOptions**	|Array/Object	|-		|-		|否			|右侧选项内容及样式															|
 
-**options 参数说明**
+#### LeftOptions & RightOptions Options
 
 |参数	|类型	|是否必填	|说明																													|
 |:--	|:--	|:--		|:--		|
 |text	|String	|是			|按钮的文字	|
 |style	|Object	|否			|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：14px	|
 
-### 插槽
 
-|名称		|说明										|
-|:--		|:--										|
-|-			|默认插槽自定义显示内容							|
-|left		|左侧滑动内容	，会覆盖	leftOptions 内容			|
-|right		|右侧滑动内容	，会覆盖	rightOptions 内容		|
 
-### 事件说明
+### SwipeAction Events
 
-|事件称名	|说明					|返回参数																		|
+|事件称名	|说明					|返回值																		|
 |:--		|:---				|:--																		|
 |@click		|点击选项按钮时触发事件	|e = {content,index} ，content（点击内容）、index（下标）、position (位置信息)	|
 |@change	|组件打开或关闭时触发	|left:左侧 ，right：右侧，none：关闭											|
 
-**Tips**
+### SwipeAction Slots
+
+|名称			|说明										|
+|:--			|:--										|
+|-				|默认插槽自定义显示内容							|
+|left			|左侧滑动内容	，会覆盖	leftOptions 内容			|
+|right		|右侧滑动内容	，会覆盖	rightOptions 内容		|
+
+::: tip 提示
 
 - iOS 端由于存在bounce效果，滑动体验略差，建议禁止bounce效果，禁止方式如下：
 
@@ -221,6 +165,7 @@ export default {
 	}
 }
 ```
+:::
 
 ### 插件预览地址 
 

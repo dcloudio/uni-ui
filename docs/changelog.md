@@ -6,6 +6,21 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+<log title="1.2.8" date="2020-10-23">
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-forms" /> 表单组件
+	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-field" /> 输入框组件
+	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-group" /> 分组组件
+	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-table" /> 表格组件
+	</log-item-text>
+</log>
+
 <log title="1.2.5" date="2020-08-14">
 	<log-item title="uni-list 组件更新">
 		<log-item-text tag-type="feat">

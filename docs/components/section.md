@@ -1,17 +1,18 @@
-### Section 标题栏
+---
+url : pages/vue/section/section
+---
+
+## Section 标题栏
 
 标题栏，用于显示标题，组件名：``uni-section``，代码块： uSection。
 
-### 使用方式
+### 安装方式
 
-在 ``script`` 中引用组件 
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-```javascript
-import uniSection from "@/components/uni-section/uni-section.vue"
-export default {
-    components: {uniSection}
-}
-```
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -21,7 +22,9 @@ export default {
 <uni-section title="圆形装饰" sub-title="副标题" type="circle"></uni-section>
 ```
 
-### 属性说明
+## API
+
+### Section Props
 
 |属性名		|类型	|默认值	|说明												|
 |---		|----	|---	|---												|

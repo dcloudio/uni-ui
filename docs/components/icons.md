@@ -1,18 +1,18 @@
-### Icons 图标
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/icons/icons
+---
+
+## Icons 图标
 
 用于展示 icons 图标，组件名：``uni-icons``，代码块： uIcons。
 
-### 使用方式
+### 安装方式
 
-在 ``script`` 中引用组件 
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-```javascript
-import uniIcons from '@/components/uni-icons/uni-icons.vue'
-export default {
-    components: {uniIcons}
-}
-```
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -20,7 +20,14 @@ export default {
 <uni-icons type="contact" size="30"></uni-icons>
 ```
 
-### 属性说明
+## 图标示例
+
+点击复制图标类型
+<icons-layouts></icons-layouts>
+
+## API
+
+### Icons Props
 
 |属性名	|类型		|默认值	|说明				|
 |---	|----		|---	|---				|
@@ -29,12 +36,8 @@ export default {
 |color	|String		|-		|图标颜色			|
 
 
-### 事件说明
+### Icons Events
 |事件名	|说明			|返回值|
 |---	|----			|---  |
 |@click|点击 Icon 触发事件|-    |
 
-
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/icon/icon](https://uniapp.dcloud.io/h5/pages/extUI/icon/icon)

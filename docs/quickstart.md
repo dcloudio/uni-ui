@@ -2,7 +2,7 @@
 
 ## 方式一 (推荐)
 
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui`
+`HBuilderX 2.5.5` 起支持 `easycom` 组件模式。在使用 `uni ui` 的时候，只要[`uni ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni ui`
 
 **目录示例：**
 ```json {1,2,3,4,5,6}
@@ -22,7 +22,7 @@
 
 ```
 
-::: tip
+::: tip 小提示
 `easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
 
 :::
@@ -43,6 +43,7 @@ npm init -y
 ```
 npm install @dcloudio/uni-ui -g
 ```
+
 
 **安装成功后目录示例：**
 ```json {1,8}
@@ -80,41 +81,31 @@ export default {
 - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用方式一 （[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
 :::
 
-### uni-ui 已支持的组件列表
+### 方式3（cli + easycom）
 
-#### uni-ui 已支持的组件列表 
-组件名								|	组件说明
----									|	---
-uniBadge						|	[数字角标](https://ext.dcloud.net.cn/plugin?id=21)
-uniCalendar					|	[日历](https://ext.dcloud.net.cn/plugin?id=56)
-uniCard							|	[卡片](https://ext.dcloud.net.cn/plugin?id=22)
-uniCollapse					|	[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)
-uniCombox						|	[组合框](https://ext.dcloud.net.cn/plugin?id=1261)
-uniCountdown				|	[倒计时](https://ext.dcloud.net.cn/plugin?id=25)
-uniDrawer						|	[抽屉](https://ext.dcloud.net.cn/plugin?id=26)
-uniFab							|	[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)
-uniFav							|	[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)
-uniGoodsNav					|	[商品导航](https://ext.dcloud.net.cn/plugin?id=865)
-uniGrid							|	[宫格](https://ext.dcloud.net.cn/plugin?id=27)
-uniIcons						|	[图标](https://ext.dcloud.net.cn/plugin?id=28)
-uniIndexedList			|	[索引列表](https://ext.dcloud.net.cn/plugin?id=375)
-uniLink							|	[超链接](https://ext.dcloud.net.cn/plugin?id=1182)
-uniList							|	[列表](https://ext.dcloud.net.cn/plugin?id=24)
-uniLoadMore					|	[加载更多](https://ext.dcloud.net.cn/plugin?id=29)
-uniNavBar						|	[自定义导航栏](https://ext.dcloud.net.cn/plugin?id=52)
-uniNoticeBar				|	[通告栏](https://ext.dcloud.net.cn/plugin?id=30)
-uniNumberBox				|	[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)
-uniPagination				|	[分页器](https://ext.dcloud.net.cn/plugin?id=32)
-uniPopUp						|	[弹出层](https://ext.dcloud.net.cn/plugin?id=329)
-uniRate							|	[评分](https://ext.dcloud.net.cn/plugin?id=33)
-uniSearchBar				|	[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)
-uniSegmentedControl	|	[分段器](https://ext.dcloud.net.cn/plugin?id=54)
-uniSteps						|	[步骤条](https://ext.dcloud.net.cn/plugin?id=34)
-uniSwipeAction			|	[滑动操作](https://ext.dcloud.net.cn/plugin?id=181)
-uniSwiperDot				|	[轮播图指示点](https://ext.dcloud.net.cn/plugin?id=284)
-uniTag							|	[标签](https://ext.dcloud.net.cn/plugin?id=35)
-uniTitle						|	[章节标题](https://ext.dcloud.net.cn/plugin?id=1066)
-uniTransition				|	[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)
+使用 `方式2` 安装好 `uni ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
+
+打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
+
+```javascript {8}
+// pages.json
+
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	
+	// 其他内容
+	pages:[
+		// ...
+	]
+}
+
+```
 
 
 ### 其他
