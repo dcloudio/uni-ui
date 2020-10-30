@@ -6,7 +6,7 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
-<log title="1.2.9" date="xxxx">
+<log title="1.2.9" date="未发布">
 	<log-item title="uni-forms 组件更新">
 		<log-item-text tag-type="perf">
 			 model 属性改为 v-model ，结合 binddata() 方法可实现双向修改数据

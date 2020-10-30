@@ -5,7 +5,7 @@
 			<span>{{title}}</span>
 			<Badge :text="date" type="warning" />
 		</div>
-		<slot><div class="children">嗯哈嗯哈</div></slot>
+		<slot><div class="children"></div></slot>
 	</div>
 </template>
 
