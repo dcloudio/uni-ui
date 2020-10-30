@@ -2,11 +2,11 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.13",
+	"edition": "1.0.14",
 	"url": "forms",
 	"type": "表单组件",
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 修复 错误的ref导致找不到表单实例的Bug"],
+	"update_log": ["- 优化 model 属性改为 v-model ，结合 binddata() 方法可实现双向绑定数据"],
 	"suffix": "vue"
 }

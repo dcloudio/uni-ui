@@ -183,7 +183,7 @@
 					}
 					this.validator = this.form.validator
 					if (this.name) {
-						this.form.formData[this.name] = this.form.model[this.name] || ''
+						this.form.formData[this.name] = this.form.value[this.name] || ''
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'

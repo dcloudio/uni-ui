@@ -3,16 +3,16 @@
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
 		<!-- :rules="rules" -->
-		<uni-forms :model="formData" ref="form" validate-trigger="submit" @submit="submit" err-show-type="toast" @validate="validate">
+		<uni-forms v-model="formData" ref="form" validate-trigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
 			<uni-group title="基本信息">
 				<uni-forms-item required name="name" label="用户名">
 					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item required name="age" label="年龄">
-					<input type="text" v-model="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
+					<input type="text" :value="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item required name="email" label="邮箱">
-					<input type="text" v-model="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
+					<input type="text" :value="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item label="详细信息">
 					<switch :checked="formData.checked" @change="change" />
@@ -70,7 +70,7 @@
 					sex: '',
 					hobby: [],
 					remarks: "",
-					checked:false
+					checked: false
 				},
 				hobby: [{
 					name: '足球',
@@ -84,16 +84,6 @@
 				}],
 				show: false,
 				rules: {
-					// name: {
-					// 	rules: [{
-					// 		// required: true,
-					// 		errorMessage: '请输入用户名',
-					// 	}, {
-					// 		minLength: 3,
-					// 		maxLength: 15,
-					// 		errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-					// 	}]
-					// },
 					name: {
 						rules: [{
 							// required: true,
@@ -161,18 +151,18 @@
 					sex: '',
 					hobby: ['0', '2'],
 					remarks: "热爱学习，热爱生活",
-					checked:true
+					checked: true
 				}
 
 				uni.hideLoading()
-			}, 0)
+			}, 1000)
 		},
 		onReady() {
 			this.$refs.form.setRules(this.rules)
 		},
 		methods: {
 			change(event) {
-				this.show = event.detail.value
+				this.formData.checked = event.detail.value
 			},
 
 			/**
@@ -180,7 +170,8 @@
 			 * @param {Object} event
 			 */
 			validate(event) {
-				console.log('触发校验：', event);
+				// TODO 返回校验结果
+				// console.log('触发校验：', event);
 			},
 
 			/**
@@ -199,6 +190,7 @@
 				uni.showToast({
 					title: '验证成功'
 				})
+				console.log("表单的值:", value);
 			},
 
 			/**

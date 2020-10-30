@@ -63,7 +63,7 @@
 	export default {
 		name: 'uniForms',
 		props: {
-			model: {
+			value: {
 				type: Object,
 				default () {
 					return {}
@@ -113,7 +113,7 @@
 			trigger(trigger) {
 				this.formTrigger = trigger
 			},
-			model: {
+			value: {
 				handler(newVal) {
 					if (this.isChildEdit) {
 						this.isChildEdit = false
@@ -123,7 +123,6 @@
 						if (item.name) {
 							this.formData[item.name] = _getValue(item, newVal)
 						}
-
 					})
 				},
 				deep: true
@@ -168,6 +167,7 @@
 				if (!example) return null
 				this.isChildEdit = true
 				example.val = value
+				this.$emit('input',Object.assign({},this.value,this.formData))
 				return example.triggerCheck(value, callback)
 			},
 

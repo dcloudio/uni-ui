@@ -41,7 +41,7 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 属性名				| 类型			|默认值	 	| 可选值						| 说明
 ---					| ----			|---		| ---						| ---	
-model				| Object		| -			| -							| 表单数据	
+v-model			| Object		| -			| -							| 表单数据	，结合 binddata() 方法可实现数据双向绑定
 rules				| Object		| -			| -							| 表单校验规则	
 validateTrigger		| String		| submit	| bind/submit				| 表单校验时机
 labelPosition		| String		| left 		| top/left					| label 位置
@@ -64,7 +64,7 @@ submit 			| 提交表单，触发 Forms 的 submit 事件	| -
 setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|Function(porps: (name,value))
 validate 		| 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：第一个参数为表单校验是否通过，第二参数如果通过则返回表单数据，不通过则返回错误信息。若不传入回调函数，则会返回一个 promise	| Function(callback: Function(boolean, object))
 validateField	| 部分表单进行校验		| Function(props: array \ string, callback: Function(errorMessage: string))
-resetFields		| 对整个表单进行重置	| -
+resetFields	(`暂不支持`)	| 对整个表单进行重置	| -
 clearValidate	| 移除表单的校验结果	| Function(props: array \ string)
 
 ### FormsItem Props
@@ -96,11 +96,13 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 			<input class="input" type="text" placeholder="请输入用户名" @input="binddata('age',$event.detail.value)" />
 		<uni-forms-item>
 		<button @click="submitForm">Submit</button>
-		<button @click="reset">Reset</button>
 	</uni-forms>
 </template>
-<script>
-	export default {
+			 
+```
+
+```javascript
+export default {
 		data() {
 			return {}
 		},
@@ -117,17 +119,10 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 			submitForm(form) {
 				// 手动提交表单
 				this.$refs[form].submit()
-			},
-			// 重置表单
-			reset(event) {
-				this.$refs.form.resetFields()
-				console.log('表单重置：', event);
 			}
-
 		}
 	}
-</script>
-			 
+
 ```
 
 
@@ -152,76 +147,79 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 
 ```html
 <template>
-	<uni-forms :model="formData" :rules="rules" @submit="submitForm">
-		<uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
-			<input class="input" v-model="formData.name" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
-		<uni-forms-item>
-		<uni-forms-item  label="邮箱" name="email"  placeholder="请输入年龄">
-			<input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
-		<uni-forms-item>
-		<button @click="submit">Submit</button>
-		<button @click="reset">Reset</button>
-	</uni-forms>
+	<view>
+    <uni-forms ref="form" :model="formData" :rules="rules" @submit="submitForm">
+        <uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
+            <input class="input" v-model="formData.name" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
+        </uni-forms-item>
+        <uni-forms-item  label="邮箱" name="email"  placeholder="请输入年龄">
+            <input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
+        </uni-forms-item>
+        <button @click="submit">Submit</button>
+    </uni-forms>
+	</view>
 </template>
-<script>
-	export default {
-		data() {
-			return {
-				formData:{
-					name:'LiMing',
-					email:'dcloud@email.com'
-				},
-				rules: {
-					// 对name字段进行必填验证
-					name: {
-						rules:[
-							{
-								required: true,
-								message: '请输入姓名',
-							},
-							{
-								minLength: 3,
-								maxLength: 5,
-								message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-							}
-						]
-					},
-					// 对email字段进行必填验证
-					email:{
-						rules: [{
-							type: 'email',
-							message: '请输入正确的邮箱地址',
-						}]
-					}
-				}
-			}
-		},
-		methods: {
-			/**
-			 * 复写 binddata 方法，如果只是为了校验，无复杂自定义操作，可忽略此方法
-			 * @param {String} name 字段名称
-			 * @param {String} value 表单域的值
-			 */
-			// binddata(name,value){
-				 // 通过 input 事件设置表单指定 name 的值
-			//	 this.$refs.form.setValue(name, value)
-			// },
-			// 提交表单
-			submitForm(e){
-				// value 表单数据,errors 校验信息
-				const {value ，errors} = e
-				console.log('表单是否校验通过：', errors);
-				console.log('表单数据信息：', value);
-				// ... 提交逻辑
-			},
-			// 触发提交表单
-			submit() {
-				this.$refs.form.submit()
-			}
-		}
-	}
-</script>
 			 
+```
+
+```javascript
+export default {
+	    data() {
+	        return {
+	            formData:{
+	                name:'LiMing',
+	                email:'dcloud@email.com'
+	            },
+	            rules: {
+	                // 对name字段进行必填验证
+	                name: {
+	                    rules:[
+	                        {
+	                            required: true,
+	                            message: '请输入姓名',
+	                        },
+	                        {
+	                            minLength: 3,
+	                            maxLength: 5,
+	                            message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+	                        }
+	                    ]
+	                },
+	                // 对email字段进行必填验证
+	                email:{
+	                    rules: [{
+	                        type: 'email',
+	                        message: '请输入正确的邮箱地址',
+	                    }]
+	                }
+	            }
+	        }
+	    },
+	    methods: {
+	        /**
+	         * 复写 binddata 方法，如果只是为了校验，无复杂自定义操作，可忽略此方法
+	         * @param {String} name 字段名称
+	         * @param {String} value 表单域的值
+	         */
+	        // binddata(name,value){
+	             // 通过 input 事件设置表单指定 name 的值
+	        //   this.$refs.form.setValue(name, value)
+	        // },
+	        // 提交表单
+	        submitForm(e){
+						console.log(e);
+	            // value 表单数据,errors 校验信息
+	            const {value ,errors} = e.detail
+	            console.log('表单是否校验通过：', errors);
+	            console.log('表单数据信息：', value);
+	            // ... 提交逻辑
+	        },
+	        // 触发提交表单
+	        submit() {
+	            this.$refs.form.submit()
+	        }
+	    }
+	}
 ```
 
 
@@ -334,8 +332,10 @@ email	| 必须是 email 类型
 	</view>
 </template>
 
-<script>
-	export default {
+```
+
+```javascript
+export default {
 		data() {
 			return {
 				rules: {
@@ -389,7 +389,6 @@ email	| 必须是 email 类型
 			}
 		}
 	}
-</script>
 
 ```
 
