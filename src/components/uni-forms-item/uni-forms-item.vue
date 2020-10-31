@@ -183,7 +183,7 @@
 					}
 					this.validator = this.form.validator
 					if (this.name) {
-						this.form.formData[this.name] = this.form.value[this.name] || ''
+						this.form.formData[this.name] =  this.form.value.hasOwnProperty(this.name)?this.form.value[this.name] : null
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
@@ -247,8 +247,10 @@
 
 				// 输入值为 number
 				if (rule) {
-					value = value === '' ? value : Number(value)
+					value = value === '' ? null : Number(value)
 				}
+				
+				
 
 				let isNoField = false
 				for (let i = 0; i < rules.length; i++) {

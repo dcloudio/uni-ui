@@ -53,14 +53,30 @@ class RuleValidator {
     this._message = message
   }
 
-  validateRule(key, value, data) {
+  async validateRule(key, value, data) {
+    return new Promise(async (resolve, reject) => {
+      let result = await this._invokeValidate(key, value, data)
+      if (result == null) {
+        resolve(1)
+      } else {
+        reject(new Error(result))
+      }
+    })
+  }
+
+  async _invokeValidate(key, value, data) {
     var result = null
 
     let rules = key.rules
 
     let hasRequired = rules.findIndex((item) => { return item.required })
-    if (value === undefined && hasRequired < 0) {
-      return result
+    if (hasRequired < 0) {
+      if (value === null || value === undefined) {
+        return result
+      }
+      if (typeof value === 'string' && !value.length) {
+        return result
+      }
     }
 
     var message = this._message
@@ -78,31 +94,54 @@ class RuleValidator {
       }
 
       if (RuleValidatorHelper[vt]) {
-        var v = RuleValidatorHelper[vt](rule, value, message)
-        if (v != null) {
-          result = v
+        result = RuleValidatorHelper[vt](rule, value, message)
+        if (result != null) {
           break
         }
       }
 
       if (rule.validateFunction) {
-        let callback = null
-        let callbackMessage = null
-        var res = rule.validateFunction(rule, value, data, (message) => {
-          callback = message
-        })
-        if (callback) {
-          res = !(callback instanceof Error)
-          callbackMessage = res ? callback : callback.message
-        }
-        if (!res) {
-          result = formatMessage(rule, callbackMessage || rule.errorMessage || message[vt] || message['default'])
+        result = await this._validateFunction(rule, value, data, vt)
+        if (result != null) {
           break
         }
       }
     }
 
     return result
+  }
+
+  async _validateFunction(rule, value, data, vt) {
+    let result = null
+    let isAsync = Object.prototype.toString.call(rule.validateFunction).includes('AsyncFunction')
+    if (isAsync) {
+      try {
+        const p = await rule.validateFunction(rule, value, data)
+        if (p) {
+          result = this._getMessage(rule, p, vt)
+        }
+      } catch (e) {
+        result = this._getMessage(rule, e.message, vt)
+      }
+    } else {
+      let callback = null
+      let callbackMessage = null
+      let res = rule.validateFunction(rule, value, data, (message) => {
+        callback = message
+      })
+      if (callback) {
+        res = !(callback instanceof Error)
+        callbackMessage = res ? callback : callback.message
+      }
+      if (!res) {
+        result = this._getMessage(rule, callbackMessage, vt)
+      }
+    }
+    return result
+  }
+
+  _getMessage(rule, message, vt) {
+    return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default'])
   }
 
   _getValidateType(rule) {
@@ -288,69 +327,67 @@ class SchemaValidator extends RuleValidator {
     this._schema = schema
   }
 
-  validate(data) {
+  async validate(data) {
     var checkResult = this._checkField(data)
     if (checkResult) {
       return checkResult
     }
 
-    var result = this.invokeValidate(data, false)
+    var result = await this.invokeValidate(data, false)
     return result.length ? result[0] : null
   }
 
-  validateAll(data) {
+  async validateAll(data) {
     var checkResult = this._checkField(data)
     if (checkResult) {
       return checkResult
     }
 
-    return this.invokeValidate(data, true)
+    return await this.invokeValidate(data, true)
   }
 
-  validateUpdate(data) {
+  async validateUpdate(data) {
     var checkResult = this._checkField(data)
     if (checkResult) {
       return checkResult
     }
 
-    var result = this.invokeValidateUpdate(data, false)
+    var result = await this.invokeValidateUpdate(data, false)
     return result.length ? result[0] : null
   }
 
-  invokeValidate(data, all) {
+  async invokeValidate(data, all) {
     let result = []
     let schema = this._schema
     for (let key in schema) {
       let value = schema[key]
 
-      let vir = this.validateRule(value, data[key], data)
-      if (vir != null) {
+      try {
+        await this.validateRule(value, data[key], data)
+      } catch (error) {
         result.push({
           key: key,
-          errorMessage: vir
+          errorMessage: error.message
         })
-
         if (!all) break
       }
     }
-
     return result
   }
 
-  invokeValidateUpdate(data, all) {
+  async invokeValidateUpdate(data, all) {
     let result = []
-
     for (let key in data) {
-      let vir = this.validateRule(this._schema[key], data[key], data)
-      if (vir != null) {
+      try {
+        await this.validateRule(this._schema[key], data[key], data)
+      } catch (error) {
         result.push({
           key: key,
-          errorMessage: vir
+          errorMessage: error.message
         })
         if (!all) break
       }
     }
-
     return result
   }
 
@@ -406,6 +443,7 @@ function Message() {
     }
   };
 }
+
 
 SchemaValidator.message = new Message();
 

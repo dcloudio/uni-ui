@@ -203,7 +203,7 @@
 			/**
 			 * 校验所有或者部分表单
 			 */
-			validateAll(invalidFields, type, callback) {
+			async validateAll(invalidFields, type, callback) {
 				if (!this.validator) {
 					this.$emit('submit', {
 						detail: {
@@ -225,7 +225,9 @@
 						};
 					});
 				}
+				
 				let fieldsValue = {}
+				let tempInvalidFields = Object.assign({},invalidFields)
 
 				Object.keys(this.formRules).forEach(item => {
 					const values = this.formRules[item]
@@ -240,20 +242,21 @@
 					}
 
 					// 如果存在 required 才会将内容插入校验对象
-					if (!isNoField && !invalidFields[item] ) {
-						delete invalidFields[item]
+					if (!isNoField && (!tempInvalidFields[item] && tempInvalidFields[item] !== false ) ) {
+						delete tempInvalidFields[item]
 					}
+					
 				})
 				// 循环字段是否存在于校验规则中
 				for (let i in this.formRules) {
-					for (let j in invalidFields) {
+					for (let j in tempInvalidFields) {
 						if (i === j) {
-							fieldsValue[i] = invalidFields[i]
+							fieldsValue[i] = tempInvalidFields[i]
 						}
 					}
 				}
 
-				let result = this.validator.invokeValidateUpdate(fieldsValue, true)
+				let result = await this.validator.invokeValidateUpdate(fieldsValue, true)
 
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null

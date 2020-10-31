@@ -49,6 +49,7 @@
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
 			<!-- <button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
+				
 			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
@@ -143,7 +144,6 @@
 			// this.formData 应该包含所有需要校验的表单
 			// 模拟异步请求数据
 			setTimeout(() => {
-
 				this.formData = {
 					name: 'LiMing',
 					age: 1,
