@@ -53,6 +53,9 @@
 	 * @property {String } 	errorMessage 		显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
 	 * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
 	 */
+
+
+
 	export default {
 		name: "uniFormsItem",
 		props: {
@@ -139,9 +142,9 @@
 
 			// uni不支持在computed中写style.justifyContent = 'center'的形式，故用此方法
 			justifyContent() {
-				if (this.labelAli == 'left') return 'flex-start';
-				if (this.labelAli == 'center') return 'center';
-				if (this.labelAli == 'right') return 'flex-end';
+				if (this.labelAli === 'left') return 'flex-start';
+				if (this.labelAli === 'center') return 'center';
+				if (this.labelAli === 'right') return 'flex-end';
 			}
 
 		},
@@ -160,9 +163,9 @@
 			this.init()
 		},
 		destroyed() {
-			if (this.name) {
-				delete this.form.formData[this.name]
-			}
+			// if (this.name) {
+			// 	delete this.form.formData[this.name]
+			// }
 			if (this.form) {
 				this.form.childrens.forEach((item, index) => {
 					if (item === this) {
@@ -174,16 +177,30 @@
 		methods: {
 			init() {
 				if (this.form) {
-					this.labelPos = this.labelPosition ? this.labelPosition : this.form.labelPosition
-					this.labelWid = this.labelWidth ? this.labelWidth : this.form.labelWidth
-					this.labelAli = this.labelAlign ? this.labelAlign : this.form.labelAlign
-					this.showMsg = this.form.errShowType
-					if (this.form.formRules) {
-						this.formRules = this.form.formRules[this.name] || {}
+					const {
+						formRules,
+						validator,
+						formData,
+						value,
+						labelPosition,
+						labelWidth,
+						labelAlign,
+						errShowType
+					} = this.form
+
+					this.labelPos = this.labelPosition ? this.labelPosition : labelPosition
+					this.labelWid = this.labelWidth ? this.labelWidth : labelWidth
+					this.labelAli = this.labelAlign ? this.labelAlign : labelAlign
+					this.showMsg = errShowType
+
+					if (formRules) {
+						this.formRules = formRules[this.name] || {}
 					}
-					this.validator = this.form.validator
+
+					this.validator = validator
+
 					if (this.name) {
-						this.form.formData[this.name] =  this.form.value.hasOwnProperty(this.name)?this.form.value[this.name] : null
+						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : null
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
@@ -225,7 +242,7 @@
 			 * @param {Object} value
 			 */
 			triggerCheck(value, callback) {
-				let promise;
+				let promise = null;
 				this.errMsg = ''
 				// if no callback, return promise
 				if (callback && typeof callback !== 'function' && Promise) {
@@ -240,40 +257,32 @@
 					typeof callback === 'function' && callback(null);
 					if (promise) return promise
 				}
-
-				const rules = this.formRules.rules || []
-				const rule = rules.find(item => item.format && (item.format === 'int' || item.format === 'double' || item.format === 'number'))
-
-
-				// 输入值为 number
-				if (rule) {
-					value = value === '' ? null : Number(value)
-				}
 				
-				
+				const isNoField = this.isRequired(this.formRules.rules || [])
+			
+				// const rules = this.formRules.rules || []
+				// const rule = rules.find(item => item.format && this.type_filter(item.format))
 
-				let isNoField = false
-				for (let i = 0; i < rules.length; i++) {
-					const ruleData = rules[i]
-					if (ruleData.required) {
-						isNoField = true
-						break
-					}
-				}
+				// // 输入值为 number
+				// if (rule) {
+				// 	value = value === '' ? null : Number(value)
+				// }
 
-				this.form.formData[this.name] = value
+				// this.form.formData[this.name] = value
+
 				let result = this.validator && this.validator.validateUpdate({
 					[this.name]: value
 				})
+
 				// 判断是否必填
-				if(!isNoField && !value){
+				if (!isNoField && !value) {
 					result = null
 				}
 				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
 				if (!isTrigger) {
 					result = null
 				}
-				if (isTrigger && result&& result.errorMessage) {
+				if (isTrigger && result && result.errorMessage) {
 					if (this.form.errShowType === 'toast') {
 						uni.showToast({
 							title: result.errorMessage || '校验错误',
@@ -313,8 +322,19 @@
 					}
 					return false
 				}
-
 				return true;
+			},
+			// 是否有必填字段
+			isRequired(rules) {
+				let isNoField = false
+				for (let i = 0; i < rules.length; i++) {
+					const ruleData = rules[i]
+					if (ruleData.required) {
+						isNoField = true
+						break
+					}
+				}
+				return isNoField
 			}
 		}
 	};
@@ -347,9 +367,9 @@
 
 	.fild-body {
 		width: 100%;
-		display: flex;
-		flex: 1;
-		align-items: center;
+		// display: flex;
+		// flex: 1;
+		// align-items: center;
 	}
 
 	.uni-arror-right {

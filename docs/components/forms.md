@@ -64,7 +64,7 @@ submit 			| 提交表单，触发 Forms 的 submit 事件	| -
 setValue		| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|Function(porps: (name,value))
 validate 		| 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：第一个参数为表单校验是否通过，第二参数如果通过则返回表单数据，不通过则返回错误信息。若不传入回调函数，则会返回一个 promise	| Function(callback: Function(boolean, object))
 validateField	| 部分表单进行校验		| Function(props: array \ string, callback: Function(errorMessage: string))
-resetFields	(`暂不支持`)	| 对整个表单进行重置	| -
+resetFields		| 对整个表单进行重置，必须绑定 v-model	| -
 clearValidate	| 移除表单的校验结果	| Function(props: array \ string)
 
 ### FormsItem Props

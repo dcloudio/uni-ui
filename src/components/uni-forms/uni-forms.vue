@@ -35,7 +35,7 @@
 		} else {
 			let refName = null
 			for (let i in this.$refs) {
-				if(this.$refs[i] && this.$refs[i].$options.name === 'uniForms'){
+				if (this.$refs[i] && this.$refs[i].$options.name === 'uniForms') {
 					refName = i
 					break
 				}
@@ -45,18 +45,7 @@
 		}
 	}
 
-	function _getValue(item, newVal) {
-		const rules = item.formRules.rules || []
-		const rule = rules.find(val => val.format && (val.format === 'int' || val.format === 'double' || val.format ===
-			'number'))
 
-		let value = newVal[item.name]
-		// 输入值为 number
-		if (rule) {
-			value = value === '' ? value : Number(value)
-		}
-		return value
-	}
 
 	import Validator from './validate.js'
 
@@ -121,7 +110,7 @@
 					}
 					this.childrens.forEach((item) => {
 						if (item.name) {
-							this.formData[item.name] = _getValue(item, newVal)
+							this.formData[item.name] = this._getValue(item, newVal[item.name])
 						}
 					})
 				},
@@ -162,12 +151,15 @@
 			 *  @param {String} value 字段值
 			 */
 			setValue(name, value, callback) {
-				this.formData[name] = value
 				let example = this.childrens.find(child => child.name === name)
 				if (!example) return null
 				this.isChildEdit = true
+				console.log(value);
+				value = this._getValue(example, value)
+				this.formData[name] = value
 				example.val = value
-				this.$emit('input',Object.assign({},this.value,this.formData))
+				console.log(value,Object.assign({}, this.value, this.formData));
+				this.$emit('input', Object.assign({}, this.value, this.formData))
 				return example.triggerCheck(value, callback)
 			},
 
@@ -189,6 +181,15 @@
 					item.val = ''
 					item.$emit('input', '')
 				})
+
+				this.isChildEdit = true
+				this.childrens.forEach((item) => {
+					if (item.name) {
+						this.formData[item.name] = this._getValue(item, '')
+					}
+				})
+
+				this.$emit('input', this.formData)
 				this.$emit('reset', event)
 			},
 
@@ -225,9 +226,9 @@
 						};
 					});
 				}
-				
+
 				let fieldsValue = {}
-				let tempInvalidFields = Object.assign({},invalidFields)
+				let tempInvalidFields = Object.assign({}, invalidFields)
 
 				Object.keys(this.formRules).forEach(item => {
 					const values = this.formRules[item]
@@ -242,10 +243,10 @@
 					}
 
 					// 如果存在 required 才会将内容插入校验对象
-					if (!isNoField && (!tempInvalidFields[item] && tempInvalidFields[item] !== false ) ) {
+					if (!isNoField && (!tempInvalidFields[item] && tempInvalidFields[item] !== false)) {
 						delete tempInvalidFields[item]
 					}
-					
+
 				})
 				// 循环字段是否存在于校验规则中
 				for (let i in this.formRules) {
@@ -362,10 +363,27 @@
 							item.errMsg = ''
 						}
 					}
-
 				})
+			},
+			// 把 value 转换成指定的类型
+			_getValue(item, value) {
+				const rules = item.formRules.rules || []
+				const isRuleNum = rules.find(val => val.format && this.type_filter(val.format))
+				const isRuleBool = rules.find(val => val.format && val.format === 'boolean' || val.format === 'bool')
+				// 输入值为 number
+				if (isRuleNum) {
+					value = value === '' ? null : Number(value)
+				}
+				// 简单判断真假值
+				if (isRuleBool) {
+					value = !value ? false : true
+				}
+				return value
+			},
+			// 过滤数字类型
+			type_filter(format) {
+				return format === 'int' || format === 'double' || format === 'number'
 			}
-
 		}
 	}
 </script>

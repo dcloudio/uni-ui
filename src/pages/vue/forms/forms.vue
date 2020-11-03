@@ -2,20 +2,27 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
+		{{formData}}
 		<!-- :rules="rules" -->
 		<uni-forms v-model="formData" ref="form" validate-trigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
 			<uni-group title="基本信息">
-				<uni-forms-item required name="name" label="用户名">
+				<uni-forms-item name="name" required label="用户名">
 					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item required name="age" label="年龄">
+				<uni-forms-item name="age" required label="年龄">
 					<input type="text" :value="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item required name="email" label="邮箱">
+				<uni-forms-item name="weight" label="体重">
+					<p v-if="formData.weight !== 0 || formData.weight !== '0'">当前体重 ： {{formData.weight}} 公斤</p>
+					<p v-else>请拖动选择体重</p>
+					<slider min="0" max="200" show-value :value="formData.weight" @change="binddata('weight',$event.detail.value)"
+					 step="5" />
+				</uni-forms-item>
+				<uni-forms-item name="email" label="邮箱">
 					<input type="text" :value="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
 				</uni-forms-item>
-				<uni-forms-item label="详细信息">
-					<switch :checked="formData.checked" @change="change" />
+				<uni-forms-item name="checked" label="详细信息">
+					<switch :checked="formData.checked" @change="binddata('checked',$event.detail.value)" />
 				</uni-forms-item>
 			</uni-group>
 			<template v-if="formData.checked">
@@ -29,6 +36,11 @@
 								<radio class="transform-scale" :checked="formData.sex === '1'" value="1" /><text>女</text>
 							</label>
 						</radio-group>
+					</uni-forms-item>
+					<uni-forms-item name="country" label="国家">
+						<picker :value="formData.country" :range="range" @change="binddata('country',$event.detail.value)">
+							<view>{{formData.country === -1? '请选择国家':range[formData.country]}}</view>
+						</picker>
 					</uni-forms-item>
 					<uni-forms-item required name="hobby" label="兴趣爱好">
 						<checkbox-group @change="binddata('hobby',$event.detail.value)">
@@ -49,12 +61,13 @@
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
 			<!-- <button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
-				
+
 			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
 				<button class="button" @click="clearValidate('form','name')">移除用户名的校验结果</button>
 				<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
+				<button class="button" @click="resetForm">重置表单</button>
 			</view>
 		</uni-forms>
 	</view>
@@ -71,7 +84,9 @@
 					sex: '',
 					hobby: [],
 					remarks: "",
-					checked: false
+					checked: false,
+					country: -1,
+					weight: 0
 				},
 				hobby: [{
 					name: '足球',
@@ -83,11 +98,12 @@
 					name: '游泳',
 					value: "2"
 				}],
+				range: ['中国', '美国', '澳大利亚'],
 				show: false,
 				rules: {
 					name: {
 						rules: [{
-							// required: true,
+							required: true,
 							errorMessage: '请输入用户名',
 						}, {
 							minLength: 3,
@@ -98,7 +114,7 @@
 					age: {
 						rules: [{
 							required: true,
-							errorMessage: '请填写年龄',
+							errorMessage: '请输入年龄',
 						}, {
 							format: 'number',
 							errorMessage: '年龄必须是数字',
@@ -108,11 +124,26 @@
 							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
 						}]
 					},
+					weight: {
+						rules: [{
+							format: 'number',
+							errorMessage: '体重必须是数字',
+						}, {
+							minimum: 100,
+							maximum: 200,
+							errorMessage: '体重应该大于 {minimum} 斤，小于 {maximum} 斤',
+						}]
+					},
 					email: {
 						rules: [{
 							format: 'email',
 							errorMessage: '请输入正确的邮箱地址',
 							trigger: 'blur'
+						}]
+					},
+					checked: {
+						rules: [{
+							format: 'bool',
 						}]
 					},
 					sex: {
@@ -151,7 +182,9 @@
 					sex: '',
 					hobby: ['0', '2'],
 					remarks: "热爱学习，热爱生活",
-					checked: true
+					checked: true,
+					country: 2,
+					weight: 120
 				}
 
 				uni.hideLoading()
@@ -161,6 +194,9 @@
 			this.$refs.form.setRules(this.rules)
 		},
 		methods: {
+			test(e) {
+				console.log('---', e.detail.value);
+			},
 			change(event) {
 				this.formData.checked = event.detail.value
 			},
@@ -184,6 +220,7 @@
 					value
 				} = event.detail
 				if (errors) {
+					console.log(value);
 					console.error('验证失败', errors);
 					return
 				}
@@ -201,6 +238,12 @@
 				this.$refs[form].submit()
 			},
 
+			/**
+			 * 手动重置表单
+			 */
+			resetForm() {
+				this.$refs.form.resetFields()
+			},
 			/**
 			 * 部分表单校验
 			 * @param {Object} form

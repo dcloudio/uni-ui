@@ -2,11 +2,11 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.15",
+	"edition": "1.0.16",
 	"url": "forms",
 	"type": "表单组件",
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 优化 表单校验类型默认值"],
+	"update_log": ["- 新增 重置表单方法","- 优化 组件示例"],
 	"suffix": "vue"
 }
