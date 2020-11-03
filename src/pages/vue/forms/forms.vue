@@ -2,7 +2,6 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		{{formData}}
 		<!-- :rules="rules" -->
 		<uni-forms v-model="formData" ref="form" validate-trigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
 			<uni-group title="基本信息">
