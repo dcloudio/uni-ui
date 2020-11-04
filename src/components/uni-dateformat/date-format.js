@@ -53,6 +53,9 @@ const parser = {
 }
 
 export function formatDate(date, format = 'yyyy/MM/dd hh:mm:ss') {
+	if (!date && date !== 0) {
+		return '-'
+	}
 	date = date instanceof Date ? date : new Date(date)
 	const dateObj = {
 		year: date.getFullYear(),
@@ -81,7 +84,9 @@ export function friendlyDate(time, {
 	threshold = [60000, 3600000],
 	format = 'yyyy/MM/dd hh:mm:ss'
 }) {
-
+	if (!time && time !== 0) {
+		return '-'
+	}
 	const localeText = {
 		zh: {
 			year: '年',
