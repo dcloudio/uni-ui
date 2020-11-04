@@ -154,11 +154,9 @@
 				let example = this.childrens.find(child => child.name === name)
 				if (!example) return null
 				this.isChildEdit = true
-				console.log(value);
 				value = this._getValue(example, value)
 				this.formData[name] = value
 				example.val = value
-				console.log(value,Object.assign({}, this.value, this.formData));
 				this.$emit('input', Object.assign({}, this.value, this.formData))
 				return example.triggerCheck(value, callback)
 			},
