@@ -79,6 +79,20 @@
                     this.noData = true
                 }
             },
+			/**
+			 * 清除选中
+			 */
+			resetCheck(){
+				this.trChildren.forEach((item, index) => {
+				    item.value = false
+				})
+				this.$emit('selection-change', {
+				    detail: {
+				        index: [],
+				        value: []
+				    }
+				})
+			},
             check(child, check) {
                 const childDom = this.trChildren.find((item, index) => child === item)
                 const childDomIndex = this.trChildren.findIndex((item, index) => child === item)
