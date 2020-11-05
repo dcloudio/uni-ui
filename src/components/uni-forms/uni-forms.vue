@@ -45,8 +45,6 @@
 		}
 	}
 
-
-
 	import Validator from './validate.js'
 
 	export default {
@@ -110,7 +108,8 @@
 					}
 					this.childrens.forEach((item) => {
 						if (item.name) {
-							this.formData[item.name] = this._getValue(item, newVal[item.name])
+							const formDataValue = newVal.hasOwnProperty(item.name) ? newVal[item.name] : null
+							this.formData[item.name] = this._getValue(item, formDataValue)
 						}
 					})
 				},
@@ -370,7 +369,7 @@
 				const isRuleBool = rules.find(val => val.format && val.format === 'boolean' || val.format === 'bool')
 				// 输入值为 number
 				if (isRuleNum) {
-					value = value === '' ? null : Number(value)
+					value = value === '' || value === null ? null : Number(value)
 				}
 				// 简单判断真假值
 				if (isRuleBool) {
