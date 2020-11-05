@@ -82,7 +82,7 @@
 			/**
 			 * 清除选中
 			 */
-			resetCheck(){
+			clearSelection(){
 				this.trChildren.forEach((item, index) => {
 				    item.value = false
 				})
