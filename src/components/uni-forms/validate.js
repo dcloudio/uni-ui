@@ -188,14 +188,14 @@ class RuleValidator {
     var result = ''
     if (rule.required) {
       result = 'required'
-    } else if (rule.enum) {
+    } else if (rule.format) {
+      result = 'format'
+    } else if (rule.range) {
       result = 'range'
     } else if (rule.maximum || rule.minimum) {
       result = 'rangeNumber'
     } else if (rule.maxLength || rule.minLength) {
-      result = 'rangeString'
-    } else if (rule.format) {
-      result = 'format'
+      result = 'rangeLength'
     } else if (rule.pattern) {
       result = 'pattern'
     }
@@ -213,53 +213,69 @@ const RuleValidatorHelper = {
   },
 
   range(rule, value, message) {
-    if (Array.isArray(value)) {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    const { range, errorMessage } = rule;
+
+    let list = new Array(range.length);
+    for (let i = 0; i < range.length; i++) {
+      const item = range[i];
+      if (types.object(item) && item.value !== undefined) {
+        list[i] = item.value;
+      } else {
+        list[i] = item;
+      }
     }
 
-    if (rule.enum.indexOf(value) < 0) {
-      return formatMessage(rule, message['enum']);
+    let result = false
+    if (Array.isArray(value)) {
+      result = (new Set(value.concat(list)).size === list.length);
+    } else {
+      if (list.indexOf(value) > -1) {
+        result = true;
+      }
+    }
+
+    if (!result) {
+      return formatMessage(rule, errorMessage || message['enum']);
     }
 
     return null
   },
 
   rangeNumber(rule, value, message) {
-    let { minimum, maximum, exclusiveMinimum, exclusiveMaximum } = rule;
-
     if (!types.number(value)) {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
     }
 
-    let _min = exclusiveMinimum ? value <= minimum : value < minimum;
-    let _max = exclusiveMaximum ? value >= maximum : value > maximum;
+    let { minimum, maximum, exclusiveMinimum, exclusiveMaximum } = rule;
+    let min = exclusiveMinimum ? value <= minimum : value < minimum;
+    let max = exclusiveMaximum ? value >= maximum : value > maximum;
 
-    if (minimum !== undefined && _min) {
+    if (minimum !== undefined && min) {
       return formatMessage(rule, rule.errorMessage || message['number'].min)
-    } else if (maximum !== undefined && _max) {
+    } else if (maximum !== undefined && max) {
       return formatMessage(rule, rule.errorMessage || message['number'].max)
-    } else if (minimum !== undefined && maximum !== undefined && (_min || _max)) {
+    } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
       return formatMessage(rule, rule.errorMessage || message['number'].range)
     }
 
     return null
   },
 
-  rangeString(rule, value, message) {
+  rangeLength(rule, value, message) {
+    if (!types.string(value) && !types.array(value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+
     let min = rule.minLength;
     let max = rule.maxLength;
     let val = value.length;
 
-    if (typeof value !== 'string') {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
-    }
-
     if (min !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message['string'].min)
+      return formatMessage(rule, rule.errorMessage || message['length'].min)
     } else if (max !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message['string'].max)
+      return formatMessage(rule, rule.errorMessage || message['length'].max)
     } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
-      return formatMessage(rule, rule.errorMessage || message['string'].range)
+      return formatMessage(rule, rule.errorMessage || message['length'].range)
     }
 
     return null
@@ -394,14 +410,12 @@ function Message() {
       email: '{label}类型无效',
       url: '{label}类型无效'
     },
-    string: {
-      len: '{label}必须为{length}个字符',
-      min: '{label}不能少于{minLength}个字符',
-      max: '{label}不能超过{maxLength}个字符',
-      range: '{label}必须介于{minLength}和{maxLength}个字符之间'
+    length: {
+      min: '长度{label}不能少于{minLength}',
+      max: '长度{label}不能超过{maxLength}',
+      range: '{label}必须介于{minLength}和{maxLength}之间'
     },
     number: {
-      len: '{label}必须等于{length}',
       min: '{label}不能小于{minimum}',
       max: '{label}不能大于{maximum}',
       range: '{label}必须介于{minimum}and{maximum}之间'
