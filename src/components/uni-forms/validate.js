@@ -47,214 +47,6 @@ function isEmptyValue(value, type) {
   return false;
 }
 
-class RuleValidator {
-
-  constructor(message) {
-    this._message = message
-  }
-
-  async validateRule(key, value, data) {
-    return new Promise(async (resolve, reject) => {
-      let result = await this._invokeValidate(key, value, data)
-      if (result == null) {
-        resolve(1)
-      } else {
-        reject(new Error(result))
-      }
-    })
-  }
-
-  async _invokeValidate(key, value, data) {
-    var result = null
-
-    let rules = key.rules
-
-    let hasRequired = rules.findIndex((item) => { return item.required })
-    if (hasRequired < 0) {
-      if (value === null || value === undefined) {
-        return result
-      }
-      if (typeof value === 'string' && !value.length) {
-        return result
-      }
-    }
-
-    var message = this._message
-
-    if (rules === undefined) {
-      return message['default']
-    }
-
-    for (var i = 0; i < rules.length; i++) {
-      let rule = rules[i]
-      let vt = this._getValidateType(rule)
-
-      if (key.label !== undefined) {
-        Object.assign(rule, { label: key.label })
-      }
-
-      if (RuleValidatorHelper[vt]) {
-        result = RuleValidatorHelper[vt](rule, value, message)
-        if (result != null) {
-          break
-        }
-      }
-
-      if (rule.validateFunction) {
-        result = await this._validateFunction(rule, value, data, vt)
-        if (result != null) {
-          break
-        }
-      }
-    }
-
-    return result
-  }
-
-  async _validateFunction(rule, value, data, vt) {
-    let result = null
-    let isAsync = Object.prototype.toString.call(rule.validateFunction).includes('AsyncFunction')
-    if (isAsync) {
-      try {
-        const p = await rule.validateFunction(rule, value, data)
-        if (p) {
-          result = this._getMessage(rule, p, vt)
-        }
-      } catch (e) {
-        result = this._getMessage(rule, e.message, vt)
-      }
-    } else {
-      let callback = null
-      let callbackMessage = null
-      let res = rule.validateFunction(rule, value, data, (message) => {
-        callback = message
-      })
-      if (callback) {
-        res = !(callback instanceof Error)
-        callbackMessage = res ? callback : callback.message
-      }
-      if (!res) {
-        result = this._getMessage(rule, callbackMessage, vt)
-      }
-    }
-    return result
-  }
-
-  _getMessage(rule, message, vt) {
-    return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default'])
-  }
-
-  _getValidateType(rule) {
-    // TODO
-    var result = ''
-    if (rule.required) {
-      result = 'required'
-    } else if (rule.enum) {
-      result = 'range'
-    } else if (rule.maximum || rule.minimum) {
-      result = 'rangeNumber'
-    } else if (rule.maxLength || rule.minLength) {
-      result = 'rangeString'
-    } else if (rule.format) {
-      result = 'format'
-    } else if (rule.pattern) {
-      result = 'pattern'
-    } else if (rule.validate) {
-      result = 'validate'
-    }
-    return result
-  }
-}
-
-const RuleValidatorHelper = {
-  required(rule, value, message) {
-    if (rule.required && isEmptyValue(value, rule.format || typeof value)) {
-      return formatMessage(rule, rule.errorMessage || message.required);
-    }
-
-    return null
-  },
-
-  range(rule, value, message) {
-    if (Array.isArray(value)) {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
-    }
-
-    if (rule.enum.indexOf(value) < 0) {
-      return formatMessage(rule, message['enum']);
-    }
-
-    return null
-  },
-
-  rangeNumber(rule, value, message) {
-    // let { minimum, maximum, exclusiveMinimum, exclusiveMaximum } = rule;
-    let min = rule.minimum;
-    let max = rule.maximum;
-    let exclusiveMin = rule.exclusiveMinimum;
-    let exclusiveMax = rule.exclusiveMaximum;
-    let val = value;
-
-    if (!types.number(val)) {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
-    }
-
-    let _min = exclusiveMin ? val <= min : val < min;
-    let _max = exclusiveMax ? val >= max : val > max;
-
-    if (min !== undefined && _min) {
-      return formatMessage(rule, rule.errorMessage || message['number'].min)
-    } else if (max !== undefined && _max) {
-      return formatMessage(rule, rule.errorMessage || message['number'].max)
-    } else if (min !== undefined && max !== undefined && (_min || _max)) {
-      return formatMessage(rule, rule.errorMessage || message['number'].range)
-    }
-
-    return null
-  },
-
-  rangeString(rule, value, message) {
-    let min = rule.minLength;
-    let max = rule.maxLength;
-    let val = value.length;
-
-    if (typeof value !== 'string') {
-      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
-    }
-
-    if (min !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message['string'].min)
-    } else if (max !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message['string'].max)
-    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
-      return formatMessage(rule, rule.errorMessage || message['string'].range)
-    }
-
-    return null
-  },
-
-  pattern(rule, value, message) {
-    if (!types['pattern'](rule.pattern, value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-
-    return null
-  },
-
-  format(rule, value, message) {
-    var customTypes = Object.keys(types);
-    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format;
-
-    if (customTypes.indexOf(format) > -1) {
-      if (!types[format](value)) {
-        return formatMessage(rule, rule.errorMessage || message.types[format]);
-      }
-    }
-
-    return null
-  }
-}
-
 const types = {
   integer(value) {
     return types.number(value) && parseInt(value, 10) === value;
@@ -314,6 +106,187 @@ const types = {
   }
 }
 
+class RuleValidator {
+
+  constructor(message) {
+    this._message = message
+  }
+
+  async validateRule(key, value, data, allData) {
+    var result = null
+
+    let rules = key.rules
+
+    let hasRequired = rules.findIndex((item) => {
+      return item.required
+    })
+    if (hasRequired < 0) {
+      if (value === null || value === undefined) {
+        return result
+      }
+      if (typeof value === 'string' && !value.length) {
+        return result
+      }
+    }
+
+    var message = this._message
+
+    if (rules === undefined) {
+      return message['default']
+    }
+
+    for (var i = 0; i < rules.length; i++) {
+      let rule = rules[i]
+      let vt = this._getValidateType(rule)
+
+      if (key.label !== undefined) {
+        Object.assign(rule, {
+          label: key.label
+        })
+      }
+
+      if (RuleValidatorHelper[vt]) {
+        result = RuleValidatorHelper[vt](rule, value, message)
+        if (result != null) {
+          break
+        }
+      }
+
+      if (rule.validateFunction) {
+        result = await this.validateFunction(rule, value, data, allData, vt)
+        if (result !== null) {
+          break
+        }
+      }
+    }
+
+    return result
+  }
+
+  async validateFunction(rule, value, data, allData, vt) {
+    let result = null
+    try {
+      let callbackMessage = null
+      const res = await rule.validateFunction(rule, value, allData || data, (message) => {
+        callbackMessage = message
+      })
+      if (callbackMessage || (typeof res === 'string' && res) || res === false) {
+        result = this._getMessage(rule, callbackMessage || res, vt)
+      }
+    } catch (e) {
+      result = this._getMessage(rule, e.message, vt)
+    }
+    return result
+  }
+
+  _getMessage(rule, message, vt) {
+    return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default'])
+  }
+
+  _getValidateType(rule) {
+    // TODO
+    var result = ''
+    if (rule.required) {
+      result = 'required'
+    } else if (rule.enum) {
+      result = 'range'
+    } else if (rule.maximum || rule.minimum) {
+      result = 'rangeNumber'
+    } else if (rule.maxLength || rule.minLength) {
+      result = 'rangeString'
+    } else if (rule.format) {
+      result = 'format'
+    } else if (rule.pattern) {
+      result = 'pattern'
+    }
+    return result
+  }
+}
+
+const RuleValidatorHelper = {
+  required(rule, value, message) {
+    if (rule.required && isEmptyValue(value, rule.format || typeof value)) {
+      return formatMessage(rule, rule.errorMessage || message.required);
+    }
+
+    return null
+  },
+
+  range(rule, value, message) {
+    if (Array.isArray(value)) {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
+
+    if (rule.enum.indexOf(value) < 0) {
+      return formatMessage(rule, message['enum']);
+    }
+
+    return null
+  },
+
+  rangeNumber(rule, value, message) {
+    let { minimum, maximum, exclusiveMinimum, exclusiveMaximum } = rule;
+
+    if (!types.number(value)) {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
+
+    let _min = exclusiveMinimum ? value <= minimum : value < minimum;
+    let _max = exclusiveMaximum ? value >= maximum : value > maximum;
+
+    if (minimum !== undefined && _min) {
+      return formatMessage(rule, rule.errorMessage || message['number'].min)
+    } else if (maximum !== undefined && _max) {
+      return formatMessage(rule, rule.errorMessage || message['number'].max)
+    } else if (minimum !== undefined && maximum !== undefined && (_min || _max)) {
+      return formatMessage(rule, rule.errorMessage || message['number'].range)
+    }
+
+    return null
+  },
+
+  rangeString(rule, value, message) {
+    let min = rule.minLength;
+    let max = rule.maxLength;
+    let val = value.length;
+
+    if (typeof value !== 'string') {
+      return formatMessage(rule, rule.errorMessage || message['pattern'].mismatch);
+    }
+
+    if (min !== undefined && val < min) {
+      return formatMessage(rule, rule.errorMessage || message['string'].min)
+    } else if (max !== undefined && val > max) {
+      return formatMessage(rule, rule.errorMessage || message['string'].max)
+    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
+      return formatMessage(rule, rule.errorMessage || message['string'].range)
+    }
+
+    return null
+  },
+
+  pattern(rule, value, message) {
+    if (!types['pattern'](rule.pattern, value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+
+    return null
+  },
+
+  format(rule, value, message) {
+    var customTypes = Object.keys(types);
+    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format;
+
+    if (customTypes.indexOf(format) > -1) {
+      if (!types[format](value)) {
+        return formatMessage(rule, rule.errorMessage || message.types[format]);
+      }
+    }
+
+    return null
+  }
+}
+
 class SchemaValidator extends RuleValidator {
 
   constructor(schema, options) {
@@ -327,84 +300,79 @@ class SchemaValidator extends RuleValidator {
     this._schema = schema
   }
 
-  async validate(data) {
-    var checkResult = this._checkField(data)
-    if (checkResult) {
-      return checkResult
+  async validate(data, allData) {
+    let result = this._checkFieldInSchema(data)
+    if (!result) {
+      result = await this.invokeValidate(data, false, allData)
     }
-
-    var result = await this.invokeValidate(data, false)
     return result.length ? result[0] : null
   }
 
-  async validateAll(data) {
-    var checkResult = this._checkField(data)
-    if (checkResult) {
-      return checkResult
+  async validateAll(data, allData) {
+    let result = this._checkFieldInSchema(data)
+    if (!result) {
+      result = await this.invokeValidate(data, true, allData)
     }
-
-    return await this.invokeValidate(data, true)
+    return result
   }
 
-  async validateUpdate(data) {
-    var checkResult = this._checkField(data)
-    if (checkResult) {
-      return checkResult
+  async validateUpdate(data, allData) {
+    let result = this._checkFieldInSchema(data)
+    if (!result) {
+      result = await this.invokeValidateUpdate(data, false, allData)
     }
-
-    var result = await this.invokeValidateUpdate(data, false)
     return result.length ? result[0] : null
   }
 
-  async invokeValidate(data, all) {
+  async invokeValidate(data, all, allData) {
     let result = []
     let schema = this._schema
     for (let key in schema) {
       let value = schema[key]
-
-      try {
-        await this.validateRule(value, data[key], data)
-      } catch (error) {
+      let errorMessage = await this.validateRule(value, data[key], data, allData)
+      if (errorMessage != null) {
         result.push({
-          key: key,
-          errorMessage: error.message
+          key,
+          errorMessage
         })
-        if (!all) break
       }
+      if (!all) break
     }
     return result
   }
 
-  async invokeValidateUpdate(data, all) {
+  async invokeValidateUpdate(data, all, allData) {
     let result = []
     for (let key in data) {
-      try {
-        await this.validateRule(this._schema[key], data[key], data)
-      } catch (error) {
+      let errorMessage = await this.validateRule(this._schema[key], data[key], data, allData)
+      if (errorMessage != null) {
         result.push({
-          key: key,
-          errorMessage: error.message
+          key,
+          errorMessage
         })
-        if (!all) break
       }
+      if (!all) break
     }
     return result
   }
 
-  _checkField(data) {
+  _checkFieldInSchema(data) {
     var keys = Object.keys(data)
     var keys2 = Object.keys(this._schema)
     if (new Set(keys.concat(keys2)).size === keys2.length) {
       return ''
     }
-    return [{ key: 'invalid', errorMessage: SchemaValidator.message['defaultInvalid'] }]
+    return [{
+      key: 'invalid',
+      errorMessage: SchemaValidator.message['defaultInvalid']
+    }]
   }
 }
 
 function Message() {
   return {
     default: '验证错误',
-    defaultInvalid: '非法字段',
+    defaultInvalid: '字段超出范围',
     required: '{label}必填',
     'enum': '{label}超出范围',
     whitespace: '{label}不能为空',

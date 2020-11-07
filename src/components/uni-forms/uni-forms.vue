@@ -131,10 +131,10 @@
 					if (!this.validator) {
 						this.validator = new Validator(formRules)
 					}
-					this.childrens.forEach((item) => {
-						item.init()
-					})
 				}
+				this.childrens.forEach((item) => {
+					item.init()
+				})
 			},
 			/**
 			 * 设置校验规则
@@ -254,38 +254,70 @@
 					}
 				}
 
-				let result = await this.validator.invokeValidateUpdate(fieldsValue, true)
+				let result = []
+				let example = null
+				if (this.validator) {
+					for (let i in fieldsValue) {
+						const resultData = await this.validator.validateUpdate({
+							[i]: fieldsValue[i]
+						}, this.formData)
+						if (resultData) {
+							example = this.childrens.find(child => child.name === resultData.key)
+							if (this.errShowType === 'undertext') {
+								if (example) example.errMsg = resultData.errorMessage
+							} else {
+								if (this.errShowType === 'toast') {
+									uni.showToast({
+										title: resultData.errorMessage || '校验错误',
+										icon: 'none'
+									})
+									break
+								} else if (this.errShowType === 'modal') {
+									uni.showModal({
+										title: '提示',
+										content: resultData.errorMessage || '校验错误'
+									})
+									break
+								} else {
+									if (example) example.errMsg = resultData.errorMessage
+								}
+							}
+							result.push(resultData)
+						}
+					}
+				}
+				// let result = await this.validator.invokeValidateUpdate(fieldsValue, true)
 
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
-				let example = null
 
-				if (result) {
-					for (let i = 0; i < result.length; i++) {
-						const item = result[i]
-						example = this.childrens.find(child => child.name === item.key)
-						if (this.errShowType === 'undertext') {
-							if (example) example.errMsg = item.errorMessage
-						} else {
-							if (this.errShowType === 'toast') {
-								uni.showToast({
-									title: item.errorMessage || '校验错误',
-									icon: 'none'
-								})
-								break
-							} else if (this.errShowType === 'modal') {
-								uni.showModal({
-									title: '提示',
-									content: item.errorMessage || '校验错误'
-								})
-								break
-							} else {
-								if (example) example.errMsg = item.errorMessage
-							}
-						}
-					}
-				}
+
+				// if (result) {
+				// 	for (let i = 0; i < result.length; i++) {
+				// 		const item = result[i]
+				// 		example = this.childrens.find(child => child.name === item.key)
+				// 		if (this.errShowType === 'undertext') {
+				// 			if (example) example.errMsg = item.errorMessage
+				// 		} else {
+				// 			if (this.errShowType === 'toast') {
+				// 				uni.showToast({
+				// 					title: item.errorMessage || '校验错误',
+				// 					icon: 'none'
+				// 				})
+				// 				break
+				// 			} else if (this.errShowType === 'modal') {
+				// 				uni.showModal({
+				// 					title: '提示',
+				// 					content: item.errorMessage || '校验错误'
+				// 				})
+				// 				break
+				// 			} else {
+				// 				if (example) example.errMsg = item.errorMessage
+				// 			}
+				// 		}
+				// 	}
+				// }
 
 				if (type === 'submit') {
 					this.$emit('submit', {

@@ -137,7 +137,6 @@
 						rules: [{
 							format: 'email',
 							errorMessage: '请输入正确的邮箱地址',
-							trigger: 'blur'
 						}]
 					},
 					checked: {
@@ -149,14 +148,12 @@
 						rules: [{
 							required: true,
 							errorMessage: '请选择性别',
-							trigger: "blur"
 						}]
 					},
 					hobby: {
 						rules: [{
 							required: true,
 							errorMessage: '请选择兴趣',
-							trigger: "blur"
 						}, {
 							validateFunction: function(rule, value, data, callback) {
 								if (value.length < 2) {

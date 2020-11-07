@@ -157,9 +157,9 @@
 			this.form = this.getForm()
 			this.formRules = []
 			this.formTrigger = this.validateTrigger
-			if (this.form) {
-				this.form.childrens.push(this)
-			}
+			// if (this.form) {
+			this.form.childrens.push(this)
+			// }
 			this.init()
 		},
 		destroyed() {
@@ -200,7 +200,7 @@
 					this.validator = validator
 
 					if (this.name) {
-						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : null
+						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : this.form._getValue(this,'')
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
@@ -227,21 +227,12 @@
 			clearValidate() {
 				this.errMsg = ''
 			},
-			/**
-			 * 父组件处理函数
-			 * @param {Object} callback
-			 */
-			// parentVal(callback) {
-			// 	typeof(callback) === 'function' && callback({
-			// 		[this.name]: this.form.formData[this.name]
-			// 	}, this.name)
-			// },
 
 			/**
 			 * 校验规则
 			 * @param {Object} value
 			 */
-			triggerCheck(value, callback) {
+			async triggerCheck(value, callback) {
 				let promise = null;
 				this.errMsg = ''
 				// if no callback, return promise
@@ -260,28 +251,21 @@
 				
 				const isNoField = this.isRequired(this.formRules.rules || [])
 			
-				// const rules = this.formRules.rules || []
-				// const rule = rules.find(item => item.format && this.type_filter(item.format))
-
-				// // 输入值为 number
-				// if (rule) {
-				// 	value = value === '' ? null : Number(value)
-				// }
-
-				// this.form.formData[this.name] = value
-
-				let result = this.validator && this.validator.validateUpdate({
-					[this.name]: value
-				})
-
+				
+				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
+				
+				let result = null
+				
+				if (!(!isTrigger )) {
+					result = this.validator && (await this.validator.validateUpdate({
+						[this.name]: value
+					},this.form.formData))
+				}
 				// 判断是否必填
 				if (!isNoField && !value) {
 					result = null
 				}
-				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
-				if (!isTrigger) {
-					result = null
-				}
+				
 				if (isTrigger && result && result.errorMessage) {
 					if (this.form.errShowType === 'toast') {
 						uni.showToast({

@@ -39,14 +39,14 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 ### Forms Props
 
-属性名				| 类型			|默认值	 	| 可选值						| 说明
----					| ----			|---		| ---						| ---	
-v-model			| Object		| -			| -							| 表单数据	，结合 binddata() 方法可实现数据双向绑定
-rules				| Object		| -			| -							| 表单校验规则	
-validateTrigger		| String		| submit	| bind/submit				| 表单校验时机
-labelPosition		| String		| left 		| top/left					| label 位置
+属性名						| 类型				|默认值	 		| 可选值						| 说明
+---							| ----			|---				| ---						| ---	
+v-model/value		| Object		| -					| -							| 表单数据	，结合 binddata() 方法可实现数据双向绑定
+rules						| Object		| -					| -							| 表单校验规则	
+validateTrigger	| String		| submit		| bind/submit				| 表单校验时机
+labelPosition		| String		| left 			| top/left					| label 位置
 labelWidth			| String/Number	| 75		| -							| label 宽度，单位 px	
-labelAlign			| String		| left		| left/center/right			| label 居中方式
+labelAlign			| String		| left			| left/center/right			| label 居中方式
 errShowType			| String		| undertext	| undertext/toast/modal		| 表单错误信息提示方式
 
 ### Forms Events
@@ -77,9 +77,9 @@ validateTrigger		|String | submit	| bind/submit		| 表单校验时机
 leftIcon			|String | -			|- 					| label左边的图标，限uni-ui的图标名称
 iconColor			|String | #606266	|- 					| 左边通过icon配置的图标的颜色
 label				|String	| -			|-					| 输入框左边的文字提示
-label-width			|Number	| 65		|-					| label的宽度，单位px
-label-align			|String	| left		|left/center/right	| label的文字对齐方式
-label-position		|String	| left		|top/left			| label的文字的位置
+labelWidth			|Number	| 65		|-					| label的宽度，单位px
+labelAlign			|String	| left		|left/center/right	| label的文字对齐方式
+labelposition		|String	| left		|top/left			| label的文字的位置
 errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
 
 
@@ -91,34 +91,39 @@ errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空�
 
 ```html
 <template>
-	<uni-forms ref="form" @submit="submit">
-		<uni-forms-item  label="年龄" name="age"  placeholder="请输入年龄">
-			<input class="input" type="text" placeholder="请输入用户名" @input="binddata('age',$event.detail.value)" />
-		<uni-forms-item>
-		<button @click="submitForm">Submit</button>
-	</uni-forms>
+	<view class="">
+		<uni-forms ref="form" @submit="submit">
+			<uni-forms-item label="年龄" name="age">
+				<input class="input" type="text" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)" />
+			</uni-forms-item>
+			<button @click="submitForm">Submit</button>
+		</uni-forms>
+	</view>
 </template>
 			 
 ```
 
 ```javascript
-export default {
+	export default {
 		data() {
 			return {}
 		},
 		methods: {
 			// 提交表单
-			submit(e){
+			submit(e) {
 				/**
 				 * validate 校验信息
 				 * value 表单数据
 				 */
-				const {validate , value } = e
+				const {
+					errors,
+					value
+				} = e.detail
 				console.log('表单数据：', value);
 			},
 			submitForm(form) {
 				// 手动提交表单
-				this.$refs[form].submit()
+				this.$refs.form.submit()
 			}
 		}
 	}
@@ -130,7 +135,7 @@ export default {
 
 ## 表单校验
 
-同时还可以通过 `uniCloud web 控制台` 快速根据 `schema` 自动生成表单维护界面，比如新建页面和编辑页面，自动处理校验规则，更多参考[DB Schema](https://uniapp.dcloud.io/uniCloud/schema)
+表单校验还可以直接通过 `uniCloud web 控制台` 快速根据 `schema` 自动生成表单维护界面，比如新建页面和编辑页面，自动处理校验规则，更多参考[DB Schema](https://uniapp.dcloud.io/uniCloud/schema)
 
 ### 如何使用 
 
@@ -143,20 +148,20 @@ export default {
 	- 第二个参数传入需要校验的值，内置组件可以通过 `$event.detail.value` 获取到组件的返回值，自定义组件传入需要校验的值即可
 	- 第三个参数传入 `uni-forms` 组件绑定属性 `ref` 的值，通常在多表单的时候需要传入，用来区分表单，如页面中仅有一个 `uni-forms` 可忽略
 6. 如果内置 `binddata` 方法无法满足需求，在当前页面的 `methods` 中复写此方法即可，复写此方法需要调用 `uni-forms` 的 `setValue` 来触发表单校验
-7. 如果需要设置默认值， `uni-forms` 还需要通过 `model` 属性传入表单绑定的数据对象，来初始化数据，否者提交表单的无法观测到数据变化
+7. 如果需要设置默认值， `uni-forms` 还需要通过 `v-model` 属性传入表单绑定的数据对象，来初始化数据，否者提交表单将无法观测到数据变化
 
 ```html
 <template>
 	<view>
-    <uni-forms ref="form" :model="formData" :rules="rules" @submit="submitForm">
-        <uni-forms-item  label="姓名" name="name"  placeholder="请输入年龄">
-            <input class="input" v-model="formData.name" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
-        </uni-forms-item>
-        <uni-forms-item  label="邮箱" name="email"  placeholder="请输入年龄">
-            <input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
-        </uni-forms-item>
-        <button @click="submit">Submit</button>
-    </uni-forms>
+		<uni-forms ref="form" v-model="formData" :rules="rules" @submit="submitForm">
+			<uni-forms-item label="姓名" name="name" placeholder="请输入年龄">
+				<input class="input" v-model="formData.name" type="text" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)" />
+			</uni-forms-item>
+			<uni-forms-item label="邮箱" name="email" placeholder="请输入年龄">
+				<input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
+			</uni-forms-item>
+			<button @click="submit">Submit</button>
+		</uni-forms>
 	</view>
 </template>
 			 
@@ -164,62 +169,64 @@ export default {
 
 ```javascript
 export default {
-	    data() {
-	        return {
-	            formData:{
-	                name:'LiMing',
-	                email:'dcloud@email.com'
-	            },
-	            rules: {
-	                // 对name字段进行必填验证
-	                name: {
-	                    rules:[
-	                        {
-	                            required: true,
-	                            message: '请输入姓名',
-	                        },
-	                        {
-	                            minLength: 3,
-	                            maxLength: 5,
-	                            message: '姓名长度在 {minLength} 到 {maxLength} 个字符',
-	                        }
-	                    ]
-	                },
-	                // 对email字段进行必填验证
-	                email:{
-	                    rules: [{
-	                        type: 'email',
-	                        message: '请输入正确的邮箱地址',
-	                    }]
-	                }
-	            }
-	        }
-	    },
-	    methods: {
-	        /**
-	         * 复写 binddata 方法，如果只是为了校验，无复杂自定义操作，可忽略此方法
-	         * @param {String} name 字段名称
-	         * @param {String} value 表单域的值
-	         */
-	        // binddata(name,value){
-	             // 通过 input 事件设置表单指定 name 的值
-	        //   this.$refs.form.setValue(name, value)
-	        // },
-	        // 提交表单
-	        submitForm(e){
-						console.log(e);
-	            // value 表单数据,errors 校验信息
-	            const {value ,errors} = e.detail
-	            console.log('表单是否校验通过：', errors);
-	            console.log('表单数据信息：', value);
-	            // ... 提交逻辑
-	        },
-	        // 触发提交表单
-	        submit() {
-	            this.$refs.form.submit()
-	        }
-	    }
+	data() {
+		return {
+			formData: {
+				name: 'LiMing',
+				email: 'dcloud@email.com'
+			},
+			rules: {
+				// 对name字段进行必填验证
+				name: {
+					rules: [{
+							required: true,
+							errorMessage: '请输入姓名',
+						},
+						{
+							minLength: 3,
+							maxLength: 5,
+							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符',
+						}
+					]
+				},
+				// 对email字段进行必填验证
+				email: {
+					rules: [{
+						format: 'email',
+						errorMessage: '请输入正确的邮箱地址',
+					}]
+				}
+			}
+		}
+	},
+	methods: {
+		/**
+		 * 复写 binddata 方法，如果只是为了校验，无复杂自定义操作，可忽略此方法
+		 * @param {String} name 字段名称
+		 * @param {String} value 表单域的值
+		 */
+		// binddata(name,value){
+		// 通过 input 事件设置表单指定 name 的值
+		//   this.$refs.form.setValue(name, value)
+		// },
+		// 提交表单
+		submitForm(e) {
+			console.log(e);
+			// value 表单数据,errors 校验信息
+			const {
+				value,
+				errors
+			} = e.detail
+			console.log('表单是否校验通过：', errors);
+			console.log('表单数据信息：', value);
+			// ... 提交逻辑
+		},
+		// 触发提交表单
+		submit() {
+			this.$refs.form.submit()
+		}
 	}
+}
 ```
 
 
@@ -233,11 +240,11 @@ export default {
 
 以下为 `value` 所包含的内容：
 
-属性名	| 类型	| 说明
---- 	| ---	| ---
-rules	| Array	| 校验规则，见下方 `rules 属性说明`  
-validateTrigger	| String	| 表单校验时机 
-label	| String| 当前表单域的字段中文名，多用于 `errorMessage` 的显示，可不填
+|属性名	| 类型	| 说明|
+|--- 		| ---	| ---|
+|rules	| Array	| 校验规则，见下方 `rules 属性说明`  |
+|validateTrigger	| String	| 表单校验时机 |
+|label	| String| 当前表单域的字段中文名，多用于 `errorMessage` 的显示，可不填|
 
 
 ```javascript
@@ -268,47 +275,49 @@ rules: {
 ### rules 属性说明
 每一个验证规则中，可以配置多个属性，下面是一些常见规则属性。实际上这里的规范，与uniCloud的[DB Schema](https://uniapp.dcloud.io/uniCloud/schema?id=validator)规范相同。
 
-属性名				| 类型			| 默认值	|可选值					| 说明			
----					| ----			| ---	|---					| ---	
-required			| Boolean		| -		|						| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`组件的的required为true
-range				| Array			| -		| -						| 数组至少要有一个元素，且数组内的每一个元素都是唯一的。
-format				| String		| - 	| -						| 内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则
-pattern				| String		| - 	| -						| 正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"
-maximum				| Number		| -		| -						| 校验最大值(大于)
-minimum				| Number		| -		| -						| 校验最小值(小于)
-minLength			| Number		| -		| -						| 校验数据最小长度
-maxLength			| Number		| -		| -					 	| 校验数据最大长度
-errorMessage		| String	 	| -		| -					 	| 校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符
-trigger				| String	 	| blur 	| blur/change/submit 	| 校验触发时机
-validateFunction	| Function	 	| - 	| - 					| 自定义校验规则
+|属性名						| 类型				| 默认值	|可选值					| 说明			|
+|---							| ----			| ---	|---					| ---	|
+|required					| Boolean		| -		|						| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`组件的的required为true|
+|range						| Array			| -		| -						| 数组至少要有一个元素，且数组内的每一个元素都是唯一的。|
+|format						| String		| - 	| -						| 内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则|
+|pattern					| String		| - 	| -						| 正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"|
+|maximum					| Number		| -		| -						| 校验最大值(大于)|
+|minimum					| Number		| -		| -						| 校验最小值(小于)|
+|minLength				| Number		| -		| -						| 校验数据最小长度|
+|maxLength				| Number		| -		| -					 	| 校验数据最大长度|
+|errorMessage			| String	 	| -			| -					 	| 校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符|
+|trigger					| String	 	| blur	| blur/change/submit 	| 校验触发时机|
+|validateFunction	| Function	| - 		| - 					| 自定义校验规则|
 
 
 **format属性值说明**
 
-属性名	| 说明	
----		| ---	
-string	| 必须是 string 类型，默认类型
-number	| 必须是 number 类型
-boolean	| 必须是 boolean 类型
-array	| 必须是 array 类型
-object	| 必须是 object 类型
-url		| 必须是 url 类型
-email	| 必须是 email 类型
+|属性名		| 说明	|
+|---			| ---	|
+|string	| 必须是 string 类型，默认类型|
+|number	| 必须是 number 类型|
+|boolean	| 必须是 boolean 类型|
+|array		| 必须是 array 类型|
+|object	| 必须是 object 类型|
+|url			| 必须是 url 类型|
+|email		| 必须是 email 类型|
 
 
 ### validateFunction 自定义校验规则使用说明
 `uni-forms` 的 `rules` 基础规则有时候不能满足项目的所有使用场景，这时候可以使用 `validateFunction` 来自定义校验规则
 
-`validateFunction` 方法返回四个参数 `validateFunction:function(rule,value,data,callback){}` ，当然返回参数名我们可以写自己满意的参数名：
- - rule : 当前校验字段在 rules 中所对应的校验规则
+`validateFunction` 方法返回四个参数 `validateFunction:function(rule,value,data,callback){}` ，当然返回参数名可以写自己满意的参数名：
+ - rule :  当前校验字段在 rules 中所对应的校验规则
  - value : 当前校验字段的值
- - data	: 当前校验字段的字段和值得对象
- - callback : 校验完成时的回调，一般无需执行callback，返回true(校验通过)或者false(校验失败)即可 ，如果需要显示不同的 `errMessage`，则不通过需要执行 callback(new Error('提示错误信息'))，如果校验通过，执行callback()即可
+ - data	:  所有校验字段的字段和值得对象
+ - callback : 校验完成时的回调，一般无需执行callback，返回true(校验通过)或者false(校验失败)即可 ，如果需要显示不同的 `errMessage`，如果校验不通过需要执行 callback('提示错误信息')，如果校验通过，执行callback()即可
 
 
 需要注意的是，如果需要使用 `validateFunction` 自定义校验规则,则不能采用 `uni-forms` 的 `rules` 属性来配置校验规则，这时候需要通过`ref`，在`onReady`生命周期调用组件的`setRules`方法绑定验证规则
 
 无法通过props传递变量，是因为微信小程序会过滤掉对象中的方法，导致自定义验证规则无效。
+
+
 
 ```html
 <template>
@@ -393,10 +402,92 @@ export default {
 ```
 
 
+### validateFunction 异步校验
 
+上面的自定义校验方式为同步校验 ，如果需要异步校验，`validateFunction` 需要返回一个 `Promise` ，校验不通过 执行 `reject(new Error('错误信息'))` 返回对应的错误信息，如果校验通过则直接执行 `resolve()` 即可，在异步校验方法中，不需要使用 `callback` 
+
+```html
+<template>
+	<view>
+		<uni-forms ref="form"  @submit="submit">
+			<uni-forms-item name="age" label="年龄">
+					<input class="input" v-model="formData.age" type="text" placeholder="请输入用年龄" @input="binddata('age',$event.detail.value)" />
+			</uni-forms-item>
+			<button class="button" @click="submitForm('form')">校验表单</button>
+		</uni-forms>
+	</view>
+</template>
+
+```
+
+```javascript
+export default {
+		data() {
+			return {
+				rules: {
+					age: {
+						rules: [{
+							required: true,
+							errorMessage: '请输入年龄',
+						},{
+							validateFunction: (rule, value, data, callback) => {
+								// 异步需要返回 Promise 对象
+								return new Promise((resolve, reject) => {
+									setTimeout(() => {
+										if (value > 10 ) {
+											// 通过返回 resolve
+											resolve()
+										} else {
+											// 不通过返回 reject(new Error('错误信息'))
+											reject(new Error('年龄必须大于十岁'))
+										}
+									}, 2000)
+								})
+							}
+						}]
+					}
+				}
+			}
+		},
+		onReady() {
+			// 需要在onReady中设置规则
+			this.$refs.form.setRules(this.rules)
+		},
+		methods: {
+			/**
+			 * 表单提交
+			 * @param {Object} event
+			 */
+			submit(event) {
+				console.log(event)
+				const {
+					errors,
+					value
+				} = event.detail
+				if (errors) {
+					console.error('验证失败', errors);
+					return
+				}
+				uni.showToast({
+					title:'验证成功'
+				})
+			},
+
+			/**
+			 * 手动提交
+			 * @param {Object} form
+			 */
+			submitForm(form) {
+				this.$refs[form].submit()
+			}
+		}
+	}
+
+```
+ 
 ### validateTrigger 属性说明
 
-不管是在规则里还是`uni-forms`、`uni-forms-item`里，都有 `validateTrigger` 属性， `validateTrigger` 属性规定了表单校验时机，即根据表单域绑定事件触发。同时只会有一个 `validateTrigger` 发生作用，它的作用权重为
+不管是在 `rules` 里还是`uni-forms`、`uni-forms-item`里，都有 `validateTrigger` 属性， `validateTrigger` 属性规定了表单校验时机，即根据表单域绑定事件触发。同时只会有一个 `validateTrigger` 发生作用，它的作用权重为：
 
 **`规则 > uni-forms-item > uni-forms `**
 
