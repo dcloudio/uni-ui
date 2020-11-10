@@ -117,7 +117,7 @@ export default {
 **uni-field 属性说明**
 
 属性名				|类型	|默认值		|说明
-:-					|:-		|:-			|:-
+:-:					|:-:	|:-:			|:-:
 type				|String	| text		| 输入框的类型
 required			|Boolean| false		| 是否必填，左边您显示红色"*"号
 left-icon			|String	| -			| label左边的图标，限uni-ui的图标名称
@@ -146,7 +146,7 @@ auto-height			|Boolean| true		| 是否自动增高输入区域，type为textarea
 **uni-field 事件说明**
 
 事件称名			|说明											| 返回参数			
----				|---											| ---		
+:-:				|:-:											| :-:		
 input			| 输入框内容发生变化时触发							| value 输入的值
 focus			| 输入框获得焦点时触发								| event 获取焦点的事件对象
 blur			| 输入框失去焦点时触发								| event 失去焦点的事件对象
@@ -157,7 +157,7 @@ click			| 输入框被点击或者通过right-icon生成的图标被点击时触
 **插槽**
 
 名称	 		|	说明					
-:-			|	:-						
+:-:			|	:-:						
 leftIcon	|	左侧插槽
 right		|	右侧插槽
 

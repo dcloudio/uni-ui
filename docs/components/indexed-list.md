@@ -25,7 +25,7 @@ url : pages/vue/indexed-list/indexed-list
 ### IndexedList Props
 
 |属性名		|类型	|默认值	|说明														|
-|---		|----	|---	|---														|
+|:-:		|:-:	|:-:	|:-:														|
 |options	|Object	|-		|索引列表需要的数据对象										|
 |showSelect	|Boolean|-		| 展示模式，true 为展示默认，false 为选择模式，默认为 false	|
 
@@ -57,5 +57,5 @@ url : pages/vue/indexed-list/indexed-list
 ### IndexedList Events
 
 |事件名	|说明															|返回值	|
-|---		|---															|---	|
+|:-:		|:-:															|:-:	|
 |click	|点击列表事件 ，返回当前选择项的事件对象	|-		|

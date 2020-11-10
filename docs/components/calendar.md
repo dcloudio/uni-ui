@@ -3,8 +3,9 @@ url : pages/vue/calendar/calendar
 ---
 
 ## Calendar 日历
+> 组件名：``uni-calendar``，代码块： uCalendar。  
 
-日历组件，组件名：``uni-calendar``，代码块： uCalendar。  
+日历组件
 
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。

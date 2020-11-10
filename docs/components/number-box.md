@@ -27,7 +27,7 @@ url : pages/vue/number-box/number-box
 ### NumberBox Props
 
 |属性名		|类型		|默认值	|说明								|
-|---			|----		|---		|---								|
+|:-:			|:-:		|:-:		|:-:								|
 |value		|Number	|0			|输入框当前值					|
 |min			|Number	|0			|最小值							|
 |max			|Number	|100		|最大值							|
@@ -37,5 +37,5 @@ url : pages/vue/number-box/number-box
 ### NumberBox Events
 
 |事件名称	|说明																				|返回值	|
-|---		|---																				|---		|
+|:-:		|:-:																				|:-:		|
 |change	|输入框值改变时触发的事件，参数为输入框当前的 value	|-			|

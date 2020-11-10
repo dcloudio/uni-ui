@@ -53,42 +53,42 @@ module.exports = {
 				children: [{
 						path: '/components/badge.md',
 						title: '数字角标',
-						subTitle: 'badge'
+						subTitle: 'Badge'
 					},
 					{
 						path: '/components/fab.md',
 						title: '悬浮按钮',
-						subTitle: 'fab'
+						subTitle: 'Fab'
 					},
 					{
 						path: '/components/fav.md',
 						title: '收藏按钮',
-						subTitle: 'fav'
+						subTitle: 'Fav'
 					},
 					{
 						path: '/components/icons.md',
 						title: '图标',
-						subTitle: 'icons'
+						subTitle: 'Icons'
 					},
 					{
 						path: '/components/notice-bar.md',
 						title: '通告栏',
-						subTitle: 'notice-bar'
+						subTitle: 'Notice-bar'
 					},
 					{
 						path: '/components/number-box.md',
 						title: '数字输入框',
-						subTitle: 'number-box'
+						subTitle: 'NumberBox'
 					},
 					{
 						path: '/components/tag.md',
 						title: '标签',
-						subTitle: 'tag'
+						subTitle: 'Tag'
 					},
 					{
 						path: '/components/transition.md',
 						title: '过度动画',
-						subTitle: 'transition'
+						subTitle: 'Transition'
 					}
 				]
 			},
@@ -98,28 +98,46 @@ module.exports = {
 				children: [{
 						path: '/components/card.md',
 						title: '卡片',
-						subTitle: 'card'
+						subTitle: 'Card'
 					},
 					{
 						path: '/components/grid.md',
 						title: '宫格',
-						subTitle: 'grid'
+						subTitle: 'Grid'
 					},
 					{
 						path: '/components/list.md',
 						title: '列表',
-						subTitle: 'list'
+						subTitle: 'List'
 					},
 					{
 						path: '/components/section.md',
 						title: '标题栏',
-						subTitle: 'section'
+						subTitle: 'Section'
 					},
 					{
 						path: '/components/title.md',
 						title: '章节标题',
-						subTitle: 'title'
+						subTitle: 'Title'
 					}
+				]
+			},
+			{
+				title: '表单组件',
+				collapsable: false, // 可选的, 默认值是 true,
+				children: [{
+						path: '/components/forms.md',
+						title: '表单',
+						subTitle: 'Forms'
+					},{
+						path: '/components/field.md',
+						title: '输入框',
+						subTitle: 'Field'
+					},{
+						path: '/components/data-checkbox.md',
+						title: '单选多选框',
+						subTitle: 'DataCheckbox'
+					},
 				]
 			},
 			{
@@ -128,82 +146,86 @@ module.exports = {
 				children: [{
 						path: '/components/calendar.md',
 						title: '日历',
-						subTitle: 'calendar'
+						subTitle: 'Calendar'
 					},
 					{
 						path: '/components/collapse.md',
 						title: '折叠面板',
-						subTitle: 'collapse'
+						subTitle: 'Collapse'
 					},
 					{
 						path: '/components/combox.md',
 						title: '组合框',
-						subTitle: 'combox'
+						subTitle: 'Combox'
 					},
 					{
 						path: '/components/countdown.md',
 						title: '倒计时',
-						subTitle: 'countdown'
+						subTitle: 'Countdown'
 					},
 					{
 						path: '/components/drawer.md',
 						title: '抽屉',
-						subTitle: 'drawer'
+						subTitle: 'Drawer'
+					},{
+						path: '/components/dateformat.md',
+						title: '时间格式化',
+						subTitle: 'Dateformat'
 					},
 					{
 						path: '/components/indexed-list.md',
 						title: '索引列表',
-						subTitle: 'indexed-list'
+						subTitle: 'IndexedList'
 					},
 					{
 						path: '/components/link.md',
 						title: '链接',
-						subTitle: 'link'
+						subTitle: 'Link'
 					},
 					{
 						path: '/components/load-more.md',
 						title: '加载更多',
-						subTitle: 'load-more'
+						subTitle: 'LoadMore'
 					},
 					{
 						path: '/components/pagination.md',
 						title: '分页器',
-						subTitle: 'pagination'
+						subTitle: 'Pagination'
 					},
 					{
 						path: '/components/popup.md',
 						title: '弹出层',
-						subTitle: 'popup'
+						subTitle: 'Popup'
 					},
 					{
 						path: '/components/rate.md',
 						title: '评分',
-						subTitle: 'rate'
+						subTitle: 'Rate'
 					},
 					{
 						path: '/components/search-bar.md',
 						title: '搜索栏',
-						subTitle: 'search-bar'
+						subTitle: 'SearchBar'
 					},
 					{
 						path: '/components/segmented-control.md',
 						title: '分段器',
-						subTitle: 'segmented-control'
+						subTitle: 'SegmentedControl'
 					},
 					{
 						path: '/components/steps.md',
 						title: '步骤条',
-						subTitle: 'steps'
+						subTitle: 'Steps'
 					},
 					{
 						path: '/components/swipe-action.md',
 						title: '滑动操作',
-						subTitle: 'swipe-action'
+						subTitle: 'SwipeAction'
 					},
 					{
 						path: '/components/swiper-dot.md',
 						title: '轮播图指示点',
-						subTitle: 'swiper-dot'
+						subTitle: 'SwiperDot'
 					}
 				]
 			}

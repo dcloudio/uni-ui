@@ -26,7 +26,7 @@ url : pages/vue/fav/fav
 ### Fav Props
 
 |属性名				|类型	|默认值												|说明				|
-|---				|----	|---												|---				|
+|:-:				|:-:	|:-:												|:-:				|
 |star				|Boolean|true												|按钮是否带星星		|
 |bgColor			|String	|#eeeeee											|未收藏时的背景色	|
 |bgColorChecked	|String	|#007aff											|已收藏时的背景色	|
@@ -40,5 +40,5 @@ url : pages/vue/fav/fav
 ### Fav Events
 
 |事件称名	|说明					|返回值	|
-|---		|----					|---	|
+|:-:		|:-:					|:-:	|
 |click		|点击 fav按钮 触发事件	|-		|

@@ -70,7 +70,7 @@ url : pages/vue/grid/grid
 **uni-grid 属性说明：**
 
 |属性名		|类型	|默认值	|说明				|
-|---		|----	|---	|---				|
+|:-:		|:-:	|:-:	|:-:				|
 |column		|Number	|3		|每列显示个数		|
 |borderColor|String	|#d0dee5|边框颜色			|
 |showBorder	|Boolean|true	|是否显示边框		|
@@ -79,12 +79,12 @@ url : pages/vue/grid/grid
 
 ### Grid Events
 |事件名	|说明			|返回值											|
-|---	|----			|---											|
+|:-:	|:-:			|:-:											|
 |@change|点击 grid 触发	|e={detail:{index:0}}，index 为当前点击 gird 下标|
 
 
 ### GridItem Props
 
 |属性名|类型		|默认值	|说明										|
-|---	|----		|---	|---										|
+|:-:	|:-:		|:-:	|:-:										|
 |index|Number	|-		|子组件的唯一标识 ，点击gird会返回当前的标识|

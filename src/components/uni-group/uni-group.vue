@@ -72,7 +72,7 @@ export default {
 	}
 	.uni-group__content {
 		padding: 15px;
-		padding-bottom: 5px;
+		// padding-bottom: 5px;
 		background-color: #FFF;
 	}
 	.uni-group__title-text {

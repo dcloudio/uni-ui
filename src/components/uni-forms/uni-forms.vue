@@ -1,4 +1,5 @@
 <template>
+	<!--  :class="{'uni-forms--top':!border}" -->
 	<view class="uni-forms">
 		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
@@ -13,20 +14,21 @@
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=2773
 	 * @property {Object} rules  							表单校验规则
 	 * @property {String} validateTrigger = [bind|submit]	校验触发器方式 默认 submit 可选
-	 * 	@value bind 	发生变化时触发
-	 * 	@value submit 	提交时触发
+	 * @value bind 	发生变化时触发
+	 * @value submit 	提交时触发
 	 * @property {String} labelPosition = [top|left]				label 位置 默认 left 可选
 	 * @value top		顶部显示 label
 	 * @value left		左侧显示 label
 	 * @property {String} labelWidth  							label 宽度，默认 65px
 	 * @property {String} labelAlign = [left|center|right]		label 居中方式  默认 left 可选
-	 * 	@value left		label 左侧显示
-	 * 	@value center	label 居中
-	 * 	@value right		label 右侧对齐
+	 * @value left		label 左侧显示
+	 * @value center	label 居中
+	 * @value right		label 右侧对齐
 	 * @property {String} errShowType = [undertext|toast|modal]	校验错误信息提示方式
-	 * 	@value undertext	错误信息在底部显示
-	 * 	@value toast		错误信息toast显示
-	 * 	@value modal		错误信息modal显示
+	 * @value undertext	错误信息在底部显示
+	 * @value toast		错误信息toast显示
+	 * @value modal		错误信息modal显示
+	 * @event {Function} submit 提交时触发
 	 */
 	import Vue from 'vue'
 	Vue.prototype.binddata = function(name, value, formName) {
@@ -86,6 +88,10 @@
 			errShowType: {
 				type: String,
 				default: 'undertext'
+			},
+			border: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -216,7 +222,7 @@
 				})
 
 				let promise;
-				if (callback && typeof callback !== 'function' && Promise) {
+				if (!callback && typeof callback !== 'function' && Promise) {
 					promise = new Promise((resolve, reject) => {
 						callback = function(valid, invalidFields) {
 							!valid ? resolve(invalidFields) : reject(valid);
@@ -263,6 +269,7 @@
 						}, this.formData)
 						if (resultData) {
 							example = this.childrens.find(child => child.name === resultData.key)
+							result.push(resultData)
 							if (this.errShowType === 'undertext') {
 								if (example) example.errMsg = resultData.errorMessage
 							} else {
@@ -282,42 +289,13 @@
 									if (example) example.errMsg = resultData.errorMessage
 								}
 							}
-							result.push(resultData)
 						}
 					}
 				}
-				// let result = await this.validator.invokeValidateUpdate(fieldsValue, true)
 
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
-
-
-				// if (result) {
-				// 	for (let i = 0; i < result.length; i++) {
-				// 		const item = result[i]
-				// 		example = this.childrens.find(child => child.name === item.key)
-				// 		if (this.errShowType === 'undertext') {
-				// 			if (example) example.errMsg = item.errorMessage
-				// 		} else {
-				// 			if (this.errShowType === 'toast') {
-				// 				uni.showToast({
-				// 					title: item.errorMessage || '校验错误',
-				// 					icon: 'none'
-				// 				})
-				// 				break
-				// 			} else if (this.errShowType === 'modal') {
-				// 				uni.showModal({
-				// 					title: '提示',
-				// 					content: item.errorMessage || '校验错误'
-				// 				})
-				// 				break
-				// 			} else {
-				// 				if (example) example.errMsg = item.errorMessage
-				// 			}
-				// 		}
-				// 	}
-				// }
 
 				if (type === 'submit') {
 					this.$emit('submit', {
@@ -329,8 +307,12 @@
 				} else {
 					this.$emit('validate', result)
 				}
-				callback && typeof callback === 'function' && callback(result ? false : true, result ? result : invalidFields)
-				if (promise && callback) return promise
+				callback && typeof callback === 'function' && callback(result, invalidFields)
+				if (promise && callback) {
+					return promise
+				}else{
+					return null
+				}
 			},
 
 			/**
@@ -338,8 +320,8 @@
 			 * 手动提交校验表单
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
-			submit() {
-				return this.validateAll(this.formData, 'submit')
+			submit(callback) {
+				return this.validateAll(this.formData, 'submit', callback)
 			},
 
 			/**
@@ -417,5 +399,8 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.uni-forms--top {
+		padding-top: 22px;
+	}
 </style>

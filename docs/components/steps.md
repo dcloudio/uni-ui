@@ -31,7 +31,7 @@ url : pages/vue/steps/steps
 ### Steps Props
 
 |属性名					|类型		|	可选值				|默认值	|说明																|
-|---						|----		|	---					|---		|---																|
+|:-:						|:-:		|	:-:					|:-:		|:-:																|
 |active					|Number	|	-						|0			|当前步骤															|
 |**direction**	|String	|	row/column	|row		|排列方向|
 |active-color		|String	|	-						|#1aad19|选中状态的颜色														|
@@ -39,6 +39,6 @@ url : pages/vue/steps/steps
 
 #### Direction Options
 | 属性名		| 说明		|
-| ---			| ---		|
+| :-:			| :-:		|
 | row			| 横向		|
 | column	| 纵向		|

@@ -33,7 +33,7 @@ url : pages/vue/search-bar/search-bar
 ### SearchBar Props
 
 |属性名				|类型		|可选值						|默认值	|说明							|
-|---					|----		|---							|---	|---								|
+|:-:					|:-:		|:-:							|:-:	|:-:								|
 |radius				|Number	|	-								|10		|搜索栏圆角，单位rpx		|
 |maxlength		|Number	|	-								|100	|输入最大长度					|
 |placeholder	|String	|	-								|搜索	|搜索栏Placeholder		|
@@ -45,7 +45,7 @@ url : pages/vue/search-bar/search-bar
 #### ClearButton Options
 
 | 属性名	| 说明							|
-| ---		| ---							|
+| :-:		| :-:							|
 | always| 一直显示					|
 | auto	| 输入框不为空时显示	|
 | none	| 一直不显示				|
@@ -53,7 +53,7 @@ url : pages/vue/search-bar/search-bar
 #### CancelButton Options
 
 | 属性名	| 说明							|
-| ---		| ---							|
+| :-:		| :-:							|
 | always| 一直显示					|
 | auto	| 输入框不为空时显示	|
 | none	| 一直不显示				|
@@ -62,7 +62,7 @@ url : pages/vue/search-bar/search-bar
 ### SearchBar Events
 
 |事件称名		|说明									|返回参数			|
-|---			|----									|---				|
+|:-:			|:-:									|:-:				|
 |@confirm	|输入框 confirm 事件		|e={value:Number}	|
 |@input		|value 改变时触发事件		|e={value:Number}	|
 |@cancel	|点击取消按钮时触发事件 	|e={value:Number}	|

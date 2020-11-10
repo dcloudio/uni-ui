@@ -27,7 +27,7 @@ url : pages/vue/section/section
 ### Section Props
 
 |属性名		|类型	|默认值	|说明												|
-|---		|----	|---	|---												|
+|:-:		|:-:	|:-:	|:-:												|
 |type		|String	|-		|标题装饰类型 ，可选值：line（竖线）、circle（圆形）|
 |title		|String	|-		|主标题												|
 |sub-title	|String	|-		|副标题												|

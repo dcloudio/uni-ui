@@ -2,8 +2,8 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<!-- :rules="rules" -->
-		<uni-forms v-model="formData" ref="form" validate-trigger="bind" @submit="submit" err-show-type="undertext" @validate="validate">
+		<!-- @submit="submit"-->
+		<uni-forms v-model="formData" ref="form" validate-trigger="bind" err-show-type="undertext" @validate="validate">
 			<uni-group title="基本信息">
 				<uni-forms-item name="name" required label="用户名">
 					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
@@ -12,8 +12,6 @@
 					<input type="text" :value="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
 				</uni-forms-item>
 				<uni-forms-item name="weight" label="体重">
-					<p v-if="formData.weight !== 0 || formData.weight !== '0'">当前体重 ： {{formData.weight}} 公斤</p>
-					<p v-else>请拖动选择体重</p>
 					<slider min="0" max="200" show-value :value="formData.weight" @change="binddata('weight',$event.detail.value)"
 					 step="5" />
 				</uni-forms-item>
@@ -38,16 +36,11 @@
 					</uni-forms-item>
 					<uni-forms-item name="country" label="国家">
 						<picker :value="formData.country" :range="range" @change="binddata('country',$event.detail.value)">
-							<view>{{formData.country === -1? '请选择国家':range[formData.country]}}</view>
+							<view>{{formData.country === ''? '请选择国家':range[formData.country]}}</view>
 						</picker>
 					</uni-forms-item>
 					<uni-forms-item required name="hobby" label="兴趣爱好">
-						<checkbox-group @change="binddata('hobby',$event.detail.value)">
-							<label class="label-box" v-for="item in hobby" :key="item.value">
-								<checkbox class="transform-scale" :checked="formData.hobby.indexOf(item.value) !== -1" :value="item.value" /><text>{{item.name}}</text>
-							</label>
-
-						</checkbox-group>
+						<uni-data-checkbox multiple :value="formData.hobby" :range="hobby" @change="binddata('hobby',$event.detail.value)" />
 					</uni-forms-item>
 					<uni-forms-item name="remarks" label="备注">
 						<textarea type="text" v-model="formData.remarks" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注"
@@ -60,7 +53,6 @@
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
 			<!-- <button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
-
 			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
@@ -88,14 +80,14 @@
 					weight: 0
 				},
 				hobby: [{
-					name: '足球',
-					value: "0"
+					text: '足球',
+					value: 0
 				}, {
-					name: '篮球',
-					value: "1"
+					text: '篮球',
+					value: 1
 				}, {
-					name: '游泳',
-					value: "2"
+					text: '游泳',
+					value: 2
 				}],
 				range: ['中国', '美国', '澳大利亚'],
 				show: false,
@@ -157,7 +149,7 @@
 						}, {
 							validateFunction: function(rule, value, data, callback) {
 								if (value.length < 2) {
-									callback(new Error('请至少勾选两个兴趣爱好'))
+									callback('请至少勾选两个兴趣爱好')
 								}
 								return true
 							}
@@ -176,7 +168,7 @@
 					age: 1,
 					email: "",
 					sex: '',
-					hobby: ['0', '2'],
+					hobby: [0, 2],
 					remarks: "热爱学习，热爱生活",
 					checked: true,
 					country: 2,
@@ -184,7 +176,7 @@
 				}
 
 				uni.hideLoading()
-			}, 1000)
+			}, 0)
 		},
 		onReady() {
 			this.$refs.form.setRules(this.rules)
@@ -207,31 +199,19 @@
 			},
 
 			/**
-			 * 表单提交
-			 * @param {Object} event
-			 */
-			submit(event) {
-				const {
-					errors,
-					value
-				} = event.detail
-				if (errors) {
-					console.log(value);
-					console.error('验证失败', errors);
-					return
-				}
-				uni.showToast({
-					title: '验证成功'
-				})
-				console.log("表单的值:", value);
-			},
-
-			/**
 			 * 手动提交
 			 * @param {Object} form
 			 */
 			submitForm(form) {
 				this.$refs[form].submit()
+					.then((res) => {
+						console.log('表单的值：', res);
+						uni.showToast({
+							title: '验证成功'
+						})
+					}).catch((errors) => {
+						console.error('验证失败：', errors);
+					})
 			},
 
 			/**
@@ -245,13 +225,13 @@
 			 * @param {Object} form
 			 */
 			validateField(form) {
-				this.$refs[form].validateField(['name', 'email'], (errors) => {
-					console.log(errors);
-					if (errors) {
-						uni.showToast({
-							title: '验证成功'
-						})
-					}
+				this.$refs[form].validateField(['name', 'email']).then((res) => {
+					uni.showToast({
+						title: '验证成功'
+					})
+					console.log('表单的值：', res);
+				}).catch((errors) => {
+					console.error('验证失败：', errors);
 				})
 			},
 

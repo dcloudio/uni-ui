@@ -74,7 +74,7 @@ url : pages/vue/card/card
 ### Card Props
 
 |属性名			|类型		|默认值	|说明																			|
-|---				|----		|---		|---																			|
+|:-:				|:-:		|:-:		|:-:																			|
 |title			|String	|-			|标题文字																			|
 |extra			|String	|-			|标题额外信息																		|
 |note				|String	|-			|底部信息																			|
@@ -87,12 +87,12 @@ url : pages/vue/card/card
 ### Card Events
 
 |事件称名	|事件说明						|返回参数	|
-|---		|---							|---		|
+|:-:		|:-:							|:-:		|
 |@click	|点击 Card 触发事件	|-			|
 
 
 ### Card Slots
 
 |插槽称名	|说明				|
-|---		|---				|
+|:-:		|:-:				|
 |footer	|卡片底部插槽 |

@@ -27,7 +27,7 @@ url : pages/vue/pagination/pagination
 ### Pagination Props
 
 |属性名		|类型	|默认值	|说明						|
-|---		|----	|---	|---						|
+|:-:		|:-:	|:-:	|:-:						|
 |prevText	|String	|上一页	|左侧按钮文字				|
 |nextText	|String	|下一页	|右侧按钮文字				|
 |current	|Number	|1		|当前页						|
@@ -39,5 +39,5 @@ url : pages/vue/pagination/pagination
 ### Pagination Events
 
 |事件称名	|说明				|返回值																		|
-|---		|----				|---																				|
+|:-:		|:-:				|:-:																				|
 |@change|点击页码按钮时触发	|e={type,current} current为当前页，type值为：next/prev，表示点击的是上一页还是下一个	|

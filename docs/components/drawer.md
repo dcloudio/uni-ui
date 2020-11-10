@@ -35,7 +35,7 @@ url : pages/vue/drawer/drawer
 ### Drawer Props
 
 |属性名			|类型	|默认值	|说明															|
-|---			|----	|---	|---															|
+|:-:			|:-:	|:-:	|:-:															|
 |mask			|Boolean|true	|是否显示遮罩													|
 |maskClick		|Boolean|true	|点击遮罩是否可以关闭抽屉										|
 |mode			|String	|left	|Drawe滑出位置，可选值：left（从左侧滑出）， right（从右侧滑出）|
@@ -47,13 +47,13 @@ url : pages/vue/drawer/drawer
 ### Drawer Props
 
 |事件名	|说明				|返回值	|
-|---		|----				|---	|
+|:-:		|:-:				|:-:	|
 |@change|抽屉状态发生变化触发事件	|true：抽屉已经打开；false：抽屉已经关闭；	|
 
 ### Drawer Methods
 
 |方法称名	|说明		|参数|
-|---		|---		|---|
+|:-:		|:-:		|:-:|
 |open		|打开抽屉	|-|
 |close	|关闭抽屉	|-|
 

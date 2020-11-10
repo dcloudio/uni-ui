@@ -1,5 +1,6 @@
 <template>
-	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom}" :style="[fieldStyle]">
+	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom,'uni-forms-item-border':border,'is-first-border':border&&isFirstBoder}"
+	 :style="[fieldStyle]">
 		<template v-if="!custom">
 			<view class="uni-forms-item-inner" :class="[ 'uni-label-postion-' + labelPos]">
 				<view :class="errorTop ? 'uni-error-in-label' : ''">
@@ -20,8 +21,9 @@
 					<slot></slot>
 				</view>
 			</view>
-			<view v-if="errorBottom && showMessage" class="uni-error-message" :style="{
-				paddingLeft: Number(labelWid) + 4 + 'px'
+			<!-- paddingLeft: Number(labelWid) + (border?0:15) + 'px' -->
+			<view v-if="errorBottom && showMessage" class="uni-error-message" :class="{'uni-error-msg--boeder':border}" :style="{
+				paddingLeft: Number(labelWid) + 'px'
 			}">{{ showMsg === 'undertext' ? msg:'' }}</view>
 		</template>
 		<template v-else>
@@ -112,7 +114,9 @@
 				labelPos: '',
 				labelWid: '',
 				labelAli: '',
-				showMsg: 'undertext'
+				showMsg: 'undertext',
+				border: false,
+				isFirstBoder: false
 			};
 		},
 		computed: {
@@ -191,6 +195,13 @@
 					this.labelPos = this.labelPosition ? this.labelPosition : labelPosition
 					this.labelWid = this.labelWidth ? this.labelWidth : labelWidth
 					this.labelAli = this.labelAlign ? this.labelAlign : labelAlign
+
+					if (!this.form.isFirstBorder) {
+						this.form.isFirstBorder = true
+						this.isFirstBorder = true
+					}
+
+					this.border = this.form.border
 					this.showMsg = errShowType
 
 					if (formRules) {
@@ -200,7 +211,7 @@
 					this.validator = validator
 
 					if (this.name) {
-						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : this.form._getValue(this,'')
+						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : this.form._getValue(this, '')
 					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
@@ -248,24 +259,24 @@
 					typeof callback === 'function' && callback(null);
 					if (promise) return promise
 				}
-				
+
 				const isNoField = this.isRequired(this.formRules.rules || [])
-			
-				
+
+
 				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
-				
+
 				let result = null
-				
-				if (!(!isTrigger )) {
+
+				if (!(!isTrigger)) {
 					result = this.validator && (await this.validator.validateUpdate({
 						[this.name]: value
-					},this.form.formData))
+					}, this.form.formData))
 				}
 				// 判断是否必填
 				if (!isNoField && !value) {
 					result = null
 				}
-				
+
 				if (isTrigger && result && result.errorMessage) {
 					if (this.form.errShowType === 'toast') {
 						uni.showToast({
@@ -327,7 +338,7 @@
 <style lang="scss" scoped>
 	.uni-forms-item {
 		position: relative;
-		// padding: 10px 14px;
+		// padding: 0 15px;
 		text-align: left;
 		color: #333;
 		font-size: 14px;
@@ -417,6 +428,12 @@
 		color: $uni-color-error;
 		font-size: 12px;
 		text-align: left;
+	}
+
+	.uni-error-msg--boeder {
+		position: relative;
+		bottom: 0;
+		line-height: 22px;
 	}
 
 	.uni-input-error-border {
@@ -542,6 +559,16 @@
 
 	.uni-forms-item-custom {
 		padding: 0;
+		border: none;
+	}
+
+	.uni-forms-item-border {
+		margin-bottom: 0;
+		padding: 10px 15px;
+		border-top: 1px #eee solid;
+	}
+
+	.is-first-border {
 		border: none;
 	}
 </style>

@@ -53,7 +53,7 @@ export default {
 ### Transition Props
 
 |属性名		|类型	|默认值	|说明					|
-|---	|---	|---					|---|
+|:-:	|:-:	|:-:					|:-:|
 |show		|Boolean|false	|控制组件显示或隐藏，	|
 |modeClass	|Array	|-		|过渡动画类型			|
 |duration	|Number	|300	|过渡动画持续时间		|
@@ -63,7 +63,7 @@ export default {
 **格式为** ：`['fade','slide-top']`
 
 |属性名			|说明			|
-|---			|---			|
+|:-:			|:-:			|
 |fade			|渐隐渐出过渡	|
 |slide-top		|由上至下过渡	|
 |slide-right	|由右至左过渡	|
@@ -79,6 +79,6 @@ export default {
 ### Transition Events
 
 |事件称名	|说明				|返回值			|
-|---		|---				|---			|
+|:-:		|:-:				|:-:			|
 |click		|点击组件触发		|-				|
 |change		|过渡动画结束时触发	| e = {detail:true}	|

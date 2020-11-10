@@ -32,7 +32,7 @@ url : pages/vue/countdown/countdown
 ### Countdown Props 
 
 |属性名				|类型	|默认值	|说明				|
-|---				|----	|---	|---				|
+|:-:				|:-:	|:-:	|:-:				|
 |backgroundColor	|String	|#FFFFFF|背景色				|
 |color				|String	|#000000|文字颜色			|
 |splitorColor		|String	|#000000|分割符号颜色			|
@@ -46,5 +46,5 @@ url : pages/vue/countdown/countdown
 ### Countdown Events
 
 |事件称名	|说明							|返回值	|
-|---		|----							|---		|
+|:-:		|:-:							|:-:		|
 |@timeup|倒计时时间到触发事件	|-			|

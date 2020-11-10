@@ -164,14 +164,14 @@ export default {
 ### List Props
 
 属性名			|类型		|默认值		|	说明																									
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 border			|Boolean	|true		|	是否显示边框
 
 
 ### ListItem Props
 
 属性名			|类型		|默认值		|	说明																					
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 title			|String		|-			|	标题
 note			|String		|-			|	描述
 ellipsis		|Number		|0			|	title 是否溢出隐藏，可选值，0:默认;  1:显示一行;	2:显示两行;【nvue 暂不支持】
@@ -196,7 +196,7 @@ direction		| String	|row		|	排版方向，可选值，row:水平排列;  column
 #### Link Options
 
 属性名				|	说明
----					|	---
+:-:					|	:-:
 navigateTo 	| 	同 uni.navigateTo()
 redirectTo 	|	同 uni.reLaunch()
 reLaunch		|	同 uni.reLaunch()
@@ -205,7 +205,7 @@ switchTab  	|	同 uni.switchTab()
 ### ListItem Events
 
 事件称名			|说明									|返回参数			
----				|---									|---				
+:-:				|:-:									|:-:				
 click			|点击 uniListItem 触发事件，需开启点击反馈	|-					
 switchChange	|点击切换 Switch 时触发，需显示 switch		|e={value:checked}	
 
@@ -214,7 +214,7 @@ switchChange	|点击切换 Switch 时触发，需显示 switch		|e={value:checke
 ### ListItem Slots
 
 名称	 	|	说明					
-:-		|	:-						
+:-:		|	:-:						
 header	|	左/上内容插槽，可完全自定义默认显示
 body	|	中间内容插槽，可完全自定义中间内容				
 footer	|	右/下内容插槽，可完全自定义右侧内容		
@@ -261,7 +261,7 @@ uni-list-item提供了3个可扩展的插槽：`header`、`body`、`footer`
 ### ListItemChat Props
 
 属性名			|类型		|默认值		|	说明																		
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 title 			|String		|-			|	标题
 note 			|String		|-			|	描述
 clickable		|Boolean	|false		|	是否开启点击反馈
@@ -278,7 +278,7 @@ avatarList 		|Array	 	|-			|	头像组，格式为 [{url:''}]
 #### Link Options
 
 属性名		|	说明
----			|	---
+:-:			|	:-:
 navigateTo 	| 	同 uni.navigateTo()
 redirectTo 	|	同 uni.reLaunch()
 reLaunch	|	同 uni.reLaunch()
@@ -292,7 +292,7 @@ default	|	自定义列表右侧内容（包括时间和角标显示）
 
 ### ListItemChat Events
 事件称名			|	说明						|	返回参数			
----				|	---						|	---	
+:-:				|	:-:						|	:-:	
 @click			|	点击 uniListChat 触发事件	|	{data:{}}	，如有 to 属性，会返回页面跳转信息	
 
 

@@ -168,7 +168,7 @@
 					age: 1,
 					email: "",
 					sex: '',
-					hobby: [0, 2],
+					hobby: [0,2],
 					remarks: "热爱学习，热爱生活",
 					checked: true,
 					country: 2,
@@ -203,15 +203,14 @@
 			 * @param {Object} form
 			 */
 			submitForm(form) {
-				this.$refs[form].submit()
-					.then((res) => {
-						console.log('表单的值：', res);
-						uni.showToast({
-							title: '验证成功'
-						})
-					}).catch((errors) => {
-						console.error('验证失败：', errors);
+				this.$refs[form].submit().then((res)=>{
+					uni.showToast({
+						title: '验证成功'
 					})
+					console.log('表单的值：', res);
+				}).catch((errors)=>{
+					console.error('验证失败：', errors);
+				})
 			},
 
 			/**
@@ -225,12 +224,12 @@
 			 * @param {Object} form
 			 */
 			validateField(form) {
-				this.$refs[form].validateField(['name', 'email']).then((res) => {
+				this.$refs[form].validateField(['name', 'email']).then((res)=>{
 					uni.showToast({
 						title: '验证成功'
 					})
 					console.log('表单的值：', res);
-				}).catch((errors) => {
+				}).catch((errors)=>{
 					console.error('验证失败：', errors);
 				})
 			},

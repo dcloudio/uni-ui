@@ -30,7 +30,7 @@ url : pages/vue/icons/icons
 ### Icons Props
 
 |属性名	|类型		|默认值	|说明				|
-|---	|----		|---	|---				|
+|:-:	|:-:		|:-:	|:-:				|
 |size	|Number		|24		|图标大小			|
 |type	|String		|-		|图标图案，参考示例	|
 |color	|String		|-		|图标颜色			|
@@ -38,6 +38,6 @@ url : pages/vue/icons/icons
 
 ### Icons Events
 |事件名	|说明			|返回值|
-|---	|----			|---  |
+|:-:	|:-:			|:-:  |
 |@click|点击 Icon 触发事件|-    |
 

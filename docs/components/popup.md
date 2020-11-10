@@ -58,7 +58,7 @@ export default {
 ### Popup Props 
 
 | 属性名		| 类型		| 默认值	| 说明					|
-| ---		| ---		| ---	| ---					|
+| :-:		| :-:		| :-:	| :-:					|
 | animation	| Boolean	|true	| 是否开启动画			|
 | type		| String	|center	| 弹出方式				|
 | maskClick	| Boolean	|true	| 蒙版点击是否关闭弹窗		|
@@ -66,7 +66,7 @@ export default {
 #### Type Options
 
 | 属性名		| 说明						|
-| ---		| ---						|
+| :-:		| :-:						|
 | top		| 顶部弹出					|
 | center	| 居中弹出					|
 | bottom	| 底部弹出					|
@@ -78,7 +78,7 @@ export default {
 ### Popup Methods
 
 |方法称名	|说明			|参数|
-|---		|---			|---|
+|:-:		|:-:			|:-:|
 |open		|打开弹出层	|-	|
 |close	|关闭弹出层	|-	|
 
@@ -86,7 +86,7 @@ export default {
 ### Popup Events
 
 |事件称名		|说明								|返回值			   				 							|
-|---			|---								|---																|
+|:-:			|:-:								|:-:																|
 |change		|组件状态发生变化触发		|e={show: true｜false,type:当前模式}	|
 
 
@@ -108,7 +108,7 @@ export default {
 ### uni-popup-message 属性说明
 
 | 属性名		| 类型		| 默认值	| 说明																		|
-| ---		| ---		| ---	| ---																		|
+| :-:		| :-:		| :-:	| :-:																		|
 | type		| String	|success| 消息提示主题，可选值： success/warn/info/error								|
 | message	| String	|-		| 消息提示文字																|
 | duration	| Number	|3000	| 消息显示时间，超过显示时间组件自动关闭，设置为0 将不会关闭，需手动调用 close 方法关闭	|
@@ -156,7 +156,7 @@ export default {
 ### uni-popup-dialog 属性说明
 
 | 属性名			| 类型			| 默认值	| 说明														|
-| ---			| ---			| ---	| ---														|
+| :-:			| :-:			| :-:	| :-:														|
 | type			| String		|success| 对话框标题主题，可选值： success/warn/info/error				|
 | mode			| String		|base	| 对话框模式，可选值：base（提示对话框）/input（可输入对话框）		|
 | title			| String		|-		| 对话框标题													|
@@ -168,7 +168,7 @@ export default {
 #### dialog 事件说明
 
 |事件称名		|说明					|返回值											|
-|---		|----					|---											|
+|:-:		|:-:					|:-:											|
 |close		|点击dialog取消按钮触发	|done:执行关闭对话框								|
 |confirm	|点击dialog确定按钮触发	|done:执行关闭对话框：value：input模式下输入框的值	|
 
@@ -188,13 +188,13 @@ export default {
 ### uni-popup-share 属性说明
 
 | 属性名| 类型		| 默认值	| 说明			|
-| ---	| ---		| ---	| ---			|
+| :-:	| :-:		| :-:	| :-:			|
 | title	| String	|		| 分享弹窗标题	|
 
 ### uni-popup-share 事件说明
 
 |事件称名		|说明		|返回值											|
-|---		|---		|---											|
+|:-:		|:-:		|:-:											|
 |select		|选择触发		|e = {item,index}：所选参数,done：执行关闭窗口	|
 
 **Tips**

@@ -28,7 +28,7 @@ export default {
 ### 属性说明
 
 |属性名		|类型							|默认值					|说明												|
-|---		|----							|---					|---												|
+|:-:		|:-:							|:-:					|:-:												|
 |date		|Object&#124;String&#124;Number	|Date.now()				|要格式化的日期对象/日期字符串/时间戳				|
 |threshold	|Array							|[0, 0]					|转化类型阈值										|
 |format		|String							|'yyyy/MM/dd hh:mm:ss'	|格式字符串											|

@@ -26,7 +26,7 @@ url : pages/vue/tag/tag
 ### Tag Props
 
 |属性名		|类型		|默认值	|说明																											|
-|---			|----		|---		|---																											|
+|:-:			|:-:		|:-:		|:-:																											|
 |text			|String	|-			|标签内容																										|
 |size			|String	|normal	|大小尺寸，可选值：normal、small																				|
 |type			|String	|default|颜色类型，可选值：default（灰色）、primary（蓝色）、success（绿色）、warning(黄色)、error(红色)、royal(紫色)	|
@@ -38,6 +38,6 @@ url : pages/vue/tag/tag
 ### Tag Events
 
 |事件称名		|说明							|返回值	|
-|---			|----							|---	|
+|:-:			|:-:							|:-:	|
 |@click		|点击 Tag 触发事件	|-		|
 

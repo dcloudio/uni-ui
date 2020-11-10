@@ -63,7 +63,7 @@ export default {
 ### SwiperDod Props
 
 |属性名		|类型	|默认值	|说明																			|
-|---		|----	|---	|---																			|
+|:-:		|:-:	|:-:	|:-:																			|
 |current	|Number	|0		|当前指示点索引，必须是通过 `swiper` 的 `change` 事件获取到的 `e.detail.current`|
 |mode		|String	|default|指示点的类型，可选值：default 、round 、nav	 、 indexes 						|
 |field		|String	|-		| mode 为 nav 时，显示的内容字段（mode = nav 时必填）							|
@@ -73,7 +73,7 @@ export default {
 #### dotsStyles Options
 
 |属性名					|类型	|默认值							|说明														|
-|---					|----	|---							|---														|
+|:-:					|:-:	|:-:							|:-:														|
 |width					|Number	| 8								|指示点宽度 **在 mode = nav、mode = indexes 时不生效**		|
 |bottom					|Number	| 10							|指示点距 `swiper` 底部的高度								|
 |color					|Color	| '#fff'						|指示点前景色，**只在 mode = nav ，mode = indexes 时生效**	|

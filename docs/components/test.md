@@ -209,7 +209,7 @@ export default {
 **uniList 属性说明：**
 
 属性名			|类型		|默认值		|	说明																									
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 title			|Boolean	|true		|	是否显示边框
 
 
@@ -220,7 +220,7 @@ title			|Boolean	|true		|	是否显示边框
 **uniListItem 属性说明：**
 
 属性名			|类型		|默认值		|	说明																									
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 title			|String		|-			|	标题
 note			|String		|-			|	描述
 thumb			|String		|-			|	左侧缩略图，若thumb有值，则不会显示扩展图标
@@ -243,7 +243,7 @@ extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',si
 **link 属性说明：**
 
 属性名		|	说明
----			|	---
+:-:			|	:-:
 navigateTo 	| 	同 uni.navigateTo()
 redirectTo 	|	同 uni.reLaunch()
 reLaunch	|	同 uni.reLaunch()
@@ -260,7 +260,7 @@ right	|	右侧插槽
 **uniListItem 事件说明：**
 
 事件称名			|说明						|返回参数			
----				|---						|---				
+:-:				|:-:						|:-:				
 click			|点击 uniListItem 触发事件	|-					
 switchChange	|点击切换 Switch 时触发		|e={value:checked}	
 
@@ -272,7 +272,7 @@ switchChange	|点击切换 Switch 时触发		|e={value:checked}
 **uniListChat 属性说明：**
 
 属性名			|类型		|默认值		|	说明																									
----				|----		|---		|	---	
+:-:				|:-:		|:-:		|	:-:	
 title 			|String		|-			|	标题
 note 			|String		|-			|	描述
 clickable		|Boolean	|false		|	是否开启点击反馈
@@ -289,7 +289,7 @@ avatarList 		|Array	 	|-			|	头像组，格式为 [{url:''}]
 **link 属性说明：**
 
 属性名		|	说明
----			|	---
+:-:			|	:-:
 navigateTo 	| 	同 uni.navigateTo()
 redirectTo 	|	同 uni.reLaunch()
 reLaunch	|	同 uni.reLaunch()
@@ -299,13 +299,13 @@ switchTab  	|	同 uni.switchTab()
 **插槽**
 
 名称	 	|	说明					
-:-		|	:-						
+:-:		|	:-:						
 default	|	自定义列表右侧内容（包括时间和角标显示）
 
 **uniListChat 事件说明：**
 
 事件称名			|	说明						|	返回参数			
----				|	---						|	---	
+:-:				|	:-:						|	:-:	
 click			|	点击 uniListChat 触发事件	|	-		
 
 **Tips**

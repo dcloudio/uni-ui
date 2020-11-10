@@ -3,8 +3,9 @@ url : pages/vue/badge/badge
 ---
 
 ## Badge 数字角标
+> 组件名：``uni-badge``，代码块： uBadge。
 
-数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，组件名：``uni-badge``，代码块： uBadge。
+数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，
 
 ### 安装方式
 
@@ -28,7 +29,7 @@ url : pages/vue/badge/badge
 ### Badge Props
 
 |属性名		|类型		|默认值	|说明																											|
-|---		|----		|---	|---					 																						|
+|:-:		|:-:		|:-:	|:-:					 																						|
 |text		|String		|-		|角标内容																										|
 |type		|String		|default|颜色类型，可选值：default（灰色）、primary（蓝色）、success（绿色）、warning(黄色)、error(红色)|
 |size		|String		|normal|Badge 大小，可取值：normal、small|
@@ -37,7 +38,7 @@ url : pages/vue/badge/badge
 ### Badge Events
 
 |事件名	|事件说明			|返回参数	|
-|---	|---				|---		|
+|:-:	|:-:				|:-:		|
 |@click	|点击 Badge 触发事件| -			|
 
 

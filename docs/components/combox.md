@@ -28,7 +28,7 @@ url : pages/vue/combox/combox
 ### Combox Props
 
 |属性名		|类型			|默认值		|说明								|
-|---		|----			|---		|---								|
+|:-:		|:-:			|:-:		|:-:								|
 |label		|String			|-			|标签文字							|
 |value		|String			|-			|combox的值							|
 |labelWidth	|String			|auto		|标签宽度，有单位字符串，如:'100px'	|
@@ -39,7 +39,7 @@ url : pages/vue/combox/combox
 ### Combox Events
 
 |事件称名	|说明					|返回值												|
-|---		|----					|---													|
+|:-:		|:-:					|:-:													|
 |@input	|combox输入事件	|返回combox值|
 
 

@@ -41,7 +41,7 @@ url : pages/vue/segmented-control/segmented-control
 ### SegmentedControl Props
 
 |属性名				|类型				|默认值	|说明															|
-|---					|----				|---	|---															|
+|:-:					|:-:				|:-:	|:-:															|
 |current			|Number			|0		|当前选中的tab索引值，从0计数									|
 |styleType		|String			|button	|分段器样式类型，可选值：button（按钮类型），text（文字类型）	|
 |activeColor	|String			|#007aff|选中的标签背景色与边框颜色										|
@@ -50,6 +50,6 @@ url : pages/vue/segmented-control/segmented-control
 ### SegmentedControl Events
 
 |事件名		|说明					|返回值				|
-|---		|----					|---				|
+|:-:		|:-:					|:-:				|
 |@clickItem	|组件触发点击事件时触发	|e={currentIndex}	|
 

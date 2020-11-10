@@ -12,7 +12,7 @@ url : pages/vue/swipe-action/swipe-action
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
 
 - 如果有动态显示隐藏组件之类的操作，请使用 `v-if` 而不是 `v-show`，因为组件内需要获取节点信息，v-show 之后不能正确获取
-- swiperaction的跟手联动是非常考验性能的。为了提高交互体验，本组件在 app 端 vue 页面、h5、微信小程序使用了wxs 技术，nvue 页面使用 bindingx 技术，可以达到流畅的体验。在其他小程序平台由于底层不支持优化技术，只能使用使用普通 js ，此时性能一般。
+- swipeAction的跟手联动是非常考验性能的。为了提高交互体验，本组件在 app 端 vue 页面、h5、微信小程序使用了wxs 技术，nvue 页面使用 bindingx 技术，可以达到流畅的体验。在其他小程序平台由于底层不支持优化技术，只能使用使用普通 js ，此时性能一般。
 - `uni-swipe-action` 和 `uni-swipe-action-item`
 - `uni-swipe-action` 不能嵌套在 `swiper` 中使用 
 - 长列表不建议使用 autoClose属性，会影响组件性能，造成卡顿，原因是打开之后要通知其他已经打开的组件关闭，会导致多个组件重新渲染
@@ -117,7 +117,7 @@ export default {
 ### SwipeAciton Props
 
 |属性名						|类型					|可选值|默认值	|是否必填	|说明		|
-|:--							|:--					|:--	|:--	|:--		|:--	|
+|:-:							|:-:					|:-:	|:-:	|:-:		|:-:	|
 |show							|String				|left/right/none		|none	|否		|开启关闭组件（只能打开右侧），auto-close = false 时生效,可选值，	|
 |threshold				|Number				|-		|20		|否			|滑动阙值																		|
 |disabled					|Boolean			|-		|false|否			|是否禁止滑动																	|
@@ -128,7 +128,7 @@ export default {
 #### LeftOptions & RightOptions Options
 
 |参数	|类型	|是否必填	|说明																													|
-|:--	|:--	|:--		|:--		|
+|:-:	|:-:	|:-:		|:-:		|
 |text	|String	|是			|按钮的文字	|
 |style	|Object	|否			|按钮样式{backgroundColor,color,fontSize}，backgroundColor默认为：#C7C6CD，color默认为：#FFFFFF，fontSize默认为：14px	|
 
@@ -137,14 +137,14 @@ export default {
 ### SwipeAction Events
 
 |事件称名	|说明					|返回值																		|
-|:--		|:---				|:--																		|
+|:-:		|:-:				|:-:																		|
 |@click		|点击选项按钮时触发事件	|e = {content,index} ，content（点击内容）、index（下标）、position (位置信息)	|
 |@change	|组件打开或关闭时触发	|left:左侧 ，right：右侧，none：关闭											|
 
 ### SwipeAction Slots
 
 |名称			|说明										|
-|:--			|:--										|
+|:-:			|:-:										|
 |-				|默认插槽自定义显示内容							|
 |left			|左侧滑动内容	，会覆盖	leftOptions 内容			|
 |right		|右侧滑动内容	，会覆盖	rightOptions 内容		|
@@ -166,7 +166,3 @@ export default {
 }
 ```
 :::
-
-### 插件预览地址 
-
-[https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action](https://uniapp.dcloud.io/h5/pages/extUI/swipe-action/swipe-action)

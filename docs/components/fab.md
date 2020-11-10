@@ -46,7 +46,7 @@ url : pages/vue/fab/fab
 ### Fab Props
 
 |  属性名	|    类型	| 默认值		| 说明															|
-| ---		| ---		| ---			| ---															|
+| :-:		| :-:		| :-:			| :-:															|
 | pattern	| Object	| -				| 可选样式配置项												|
 | horizontal| String	| 'left'		| 水平对齐方式。`left`:左对齐，`right`：右对齐					|
 | vertical	| String	| 'bottom'		| 垂直对齐方式。`bottom`:下对齐，`top`：上对齐					|
@@ -59,7 +59,7 @@ url : pages/vue/fab/fab
 **pattern配置项：**
 
 |  参数				|    类型	| 默认值	| 说明				|
-| ---				|  ---		| ---		| ---				|
+| :-:				|  :-:		| :-:		| :-:				|
 | color				| String	| #3c3e49	| 文字默认颜色		|
 | selectedColor		| String	| #007AFF	| 文字选中时的颜色	|
 | backgroundColor	| String	| #ffffff	| 背景色			|
@@ -68,7 +68,7 @@ url : pages/vue/fab/fab
 **content配置项：**
 
 |  参数				|    类型	| 说明			|
-| ---				|  ---				| ---		| ---			|
+| :-:				|  :-:				| :-:		| :-:			|
 | iconPath			| String	| 图片路径		|
 | selectedIconPath	| String	| 选中后图片路径|
 | text				| String	| 文字			|
@@ -77,7 +77,7 @@ url : pages/vue/fab/fab
 ### Fab Events
 
 |  参数		|    类型	| 说明							|
-| ---		|  ---		| ---							|
+| :-:		|  :-:		| :-:							|
 | @trigger	| Function	| 展开菜单点击事件，返回点击信息|
 | @fabClick	| Function	| 悬浮按钮点击事件				|
 

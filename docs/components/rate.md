@@ -82,7 +82,7 @@ export default {
 ### Rate Props
 
 属性名			|	类型			|	默认值	|	说明																									
----				|	----		|	---		|	---	
+:-:				|	:-:		|	:-:		|	:-:	
 value/v-model	|	Number 	 	| 1			|	当前评分
 color 			|	String 	 	| #ececec	|	未选中状态的星星颜色
 activeColor 	|	String 	 	| #ffca3e	|	选中状态的星星颜色
@@ -99,5 +99,5 @@ touchable		|	Boolean 	| true		|	是否支持滑动手势
 ### Rate Events
 
 事件称名			|	说明						|	返回参数			
----				|	---						|	---	
+:-:				|	:-:						|	:-:	
 @change			|	改变 value 的值返回		|	e = { value:number }		

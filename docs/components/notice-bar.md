@@ -43,7 +43,7 @@ url : pages/vue/notice-bar/notice-bar
 ### NoticeBar Props
 
 |属性名				|类型	|默认值	|说明												|
-|---				|----	|---	|---												|
+|:-:				|:-:	|:-:	|:-:												|
 |speed				|Number	|100	|文字滚动的速度，默认100px/秒						|
 |text				|String	|-		|显示文字											|
 |background-color	|String	|#fffbe8|背景颜色											|
@@ -59,7 +59,7 @@ url : pages/vue/notice-bar/notice-bar
 ### NoticeBar Events
 
 |事件名称	|说明						|返回值	|
-|---		|---						|---	|
+|:-:		|:-:						|:-:	|
 |@click		|点击 NoticeBar 触发事件	|-		|
 |@close		|关闭 NoticeBar 触发事件	|-		|
 |@getmore	|点击”查看更多“时触发事件	|-		|

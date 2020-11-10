@@ -73,21 +73,21 @@ url : pages/vue/collapse/collapse
 ### Collapse Props
 
 |属性名		|类型	|默认值	|说明				|
-|---		|----	|---	|---				|
+|:-:		|:-:	|:-:	|:-:				|
 |accordion	|Boolean|false	|是否开启手风琴效果	|
 
 
 ### Collapse Event
 
 |事件称名	|说明			|返回值												|
-|---		|----			|---													|
+|:-:		|:-:			:-:													|
 |@change	|切换面板时触发	|activeNames（Array）：展开状态的uniCollapseItem的name值|
 
 
 ### Collapse Methods
 
 |方法名称	|说明														|
-|---		|---														|
+|:-:		|:-:														|
 |resize	|更新当前列表高度，只有 `animation:true` 下生效|
 
 
@@ -99,7 +99,7 @@ url : pages/vue/collapse/collapse
 ### CollapseItem Props
 
 |属性名		|类型	|默认值	|说明			|
-|---		|----	|---	|---			|
+|:-:		|:-:	|:-:	|:-:			|
 |title		|String	|-		|标题文字		|
 |thumb		|String	|-		|标题左侧缩略图	|
 |disabled	|Boolean|false	|是否禁用		|

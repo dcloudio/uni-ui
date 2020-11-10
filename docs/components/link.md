@@ -25,7 +25,7 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 ### Link Props
 
 |属性名				|类型		|默认值										|说明							|
-|---					|----		|---										|---							|
+|:-:					|:-:		|:-:										|:-:							|
 |href					|String	|-											|链接地址						|
 |text					|String	|-											|显示文字						|
 |showUnderLine|Boolean|true										|是否显示下划线					|

@@ -74,7 +74,7 @@
 ### Table Props
 
 属性名		| 类型			|默认值	 		| 可选值	| 说明
----			| ----			|---			| ---	| ---	
+:-:			| :-:			|:-:			| :-:	| :-:	
 border		| Boolean		| false			| -		| 是否带有纵向边框	
 stripe		| Boolean		| false			| -		| 是否显示斑马线样式	
 type		| Boolean		| false			| -		| 是否开启多选	
@@ -84,19 +84,19 @@ loading		| Boolean		| false			| -		| 显示加载中
 ### Table Events
 
 事件称名				|说明									| 返回参数			
----					|---									| ---				
+:-:					|:-:									| :-:				
 selection-change	| 开启多选时，当选择项发生变化时会触发该事件	| Function(Object)
 
 
 ### Th Props
 
 属性名	|类型	|默认值	 	|可选值				|说明
-:-		|:-		|:-			|---				|:-
+:-:		|:-:		|:-:		|:-:				|:-:
 width	|String	| -			|-					| 单元格宽度
 align	|Boolean| left		|left/center/right	| 表头对齐方式
 
 ### Td Props
 
 属性名	|类型	|默认值	 	|可选值				|说明
-:-		|:-		|:-			|---				|:-
+:-:		|:-:		|:-:			|:-:				|:-:
 align	|Boolean| left		|left/center/right	| 单元格对齐方式
