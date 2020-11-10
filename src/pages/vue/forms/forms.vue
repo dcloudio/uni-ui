@@ -2,8 +2,7 @@
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 		<uni-section title="基础用法" type="line"></uni-section>
-		<!-- @submit="submit"-->
-		<uni-forms v-model="formData" ref="form" validate-trigger="bind" err-show-type="undertext" @validate="validate">
+		<uni-forms v-model="formData" border ref="form" validate-trigger="bind" err-show-type="undertext" @validate="validate">
 			<uni-group title="基本信息">
 				<uni-forms-item name="name" required label="用户名">
 					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
@@ -138,14 +137,12 @@
 					},
 					sex: {
 						rules: [{
-							required: true,
-							errorMessage: '请选择性别',
+							format: "string"
 						}]
 					},
 					hobby: {
 						rules: [{
-							required: true,
-							errorMessage: '请选择兴趣',
+							format: "array"
 						}, {
 							validateFunction: function(rule, value, data, callback) {
 								if (value.length < 2) {

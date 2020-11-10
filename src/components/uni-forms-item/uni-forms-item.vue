@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom,'uni-forms-item-border':border,'is-first-border':border&&isFirstBoder}"
+	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom,'uni-forms-item-border':border,'is-first-border':border&&isFirstBorder}"
 	 :style="[fieldStyle]">
 		<template v-if="!custom">
 			<view class="uni-forms-item-inner" :class="[ 'uni-label-postion-' + labelPos]">
@@ -116,7 +116,7 @@
 				labelAli: '',
 				showMsg: 'undertext',
 				border: false,
-				isFirstBoder: false
+				isFirstBorder: false
 			};
 		},
 		computed: {
@@ -159,6 +159,7 @@
 		},
 		created() {
 			this.form = this.getForm()
+			this.group = this.getForm('uniGroup')
 			this.formRules = []
 			this.formTrigger = this.validateTrigger
 			// if (this.form) {
@@ -167,9 +168,6 @@
 			this.init()
 		},
 		destroyed() {
-			// if (this.name) {
-			// 	delete this.form.formData[this.name]
-			// }
 			if (this.form) {
 				this.form.childrens.forEach((item, index) => {
 					if (item === this) {
@@ -196,10 +194,20 @@
 					this.labelWid = this.labelWidth ? this.labelWidth : labelWidth
 					this.labelAli = this.labelAlign ? this.labelAlign : labelAlign
 
+					// 判断第一个 item
 					if (!this.form.isFirstBorder) {
 						this.form.isFirstBorder = true
 						this.isFirstBorder = true
 					}
+					// 判断 group 里的第一个 item
+					console.log(this.group.isFirstBorder);
+					if (this.group) {
+						if (!this.group.isFirstBorder) {
+							this.group.isFirstBorder = true
+							this.isFirstBorder = true
+						}
+					}
+
 
 					this.border = this.form.border
 					this.showMsg = errShowType
@@ -222,10 +230,10 @@
 			/**
 			 * 获取父元素实例
 			 */
-			getForm() {
+			getForm(name = 'uniForms') {
 				let parent = this.$parent;
 				let parentName = parent.$options.name;
-				while (parentName !== 'uniForms') {
+				while (parentName !== name) {
 					parent = parent.$parent;
 					if (!parent) return false
 					parentName = parent.$options.name;
@@ -343,6 +351,7 @@
 		color: #333;
 		font-size: 14px;
 		margin-bottom: 22px;
+		margin-top: 12px;
 	}
 
 	.uni-forms-item-inner {
@@ -563,7 +572,8 @@
 	}
 
 	.uni-forms-item-border {
-		margin-bottom: 0;
+		margin: 0;
+		// margin-bottom: 0;
 		padding: 10px 15px;
 		border-top: 1px #eee solid;
 	}

@@ -1,63 +1,90 @@
 <template>
-	<view class="uni-group" :class="['uni-group--'+mode]" :style="{marginTop: `${top}px` }">
+	<view class="uni-group" :class="['uni-group--'+mode ,margin?'group-margin':'']" :style="{marginTop: `${top}px` }">
 		<slot name="title">
-			<view v-if="title" class="uni-group__title">
+			<view v-if="title" class="uni-group__title" :style="{'padding-left':border?'30px':'15px'}">
 				<text class="uni-group__title-text">{{ title }}</text>
 			</view>
 		</slot>
-		<view class="uni-group__content">
+		<view class="uni-group__content" :class="{'group-conent-padding':border}">
 			<slot />
 		</view>
 	</view>
 </template>
 
 <script>
-/**
- * Group 分组
- * @description 表单字段分组
- * @tutorial https://ext.dcloud.net.cn/plugin?id=21002
- * @property {String} title 主标题
- * @property {Number} top 分组间隔
- */
-export default {
-	name: 'UniFormGroup',
-	props: {
-		title: {
-			type: String,
-			default: ''
+	/**
+	 * Group 分组
+	 * @description 表单字段分组
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=21002
+	 * @property {String} title 主标题
+	 * @property {Number} top 分组间隔
+	 */
+	export default {
+		name: 'uniGroup',
+		props: {
+			title: {
+				type: String,
+				default: ''
+			},
+			top: {
+				type: [Number, String],
+				default: 10
+			},
+			mode: {
+				type: String,
+				default: 'default'
+			}
 		},
-		top: {
-			type: [Number, String],
-			default: 10
+		data() {
+			return {
+				margin: false,
+				border: false
+			}
 		},
-		mode:{
-			type:String,
-			default:'default'
-		}
-	},
-	data() {
-		return {}
-	},
-	watch: {
-		title(newVal) {
-			if (uni.report && newVal !== '') {
-				uni.report('title', newVal)
+		watch: {
+			title(newVal) {
+				if (uni.report && newVal !== '') {
+					uni.report('title', newVal)
+				}
+			}
+		},
+		created() {
+			this.form = this.getForm()
+			if (this.form) {
+				this.margin = true
+				this.border = this.form.border
+			}
+		},
+		methods: {
+			/**
+			 * 获取父元素实例
+			 */
+			getForm() {
+				let parent = this.$parent;
+				let parentName = parent.$options.name;
+				while (parentName !== 'uniForms') {
+					parent = parent.$parent;
+					if (!parent) return false
+					parentName = parent.$options.name;
+				}
+				return parent;
+			},
+			onClick() {
+				this.$emit('click')
 			}
 		}
-	},
-	methods: {
-		onClick() {
-			this.$emit('click')
-		}
 	}
-}
 </script>
 <style lang="scss" scoped>
 	.uni-group {
-        background: #fff;
-        margin-top: 10px;
+		background: #fff;
+		margin-top: 10px;
 		// border: 1px red solid;
-    }
+	}
+
+	.group-margin {
+		margin: 0 -15px;
+	}
 
 	.uni-group__title {
 		/* #ifndef APP-NVUE */
@@ -70,11 +97,17 @@ export default {
 		font-weight: normal;
 		color: $uni-text-color;
 	}
+
 	.uni-group__content {
 		padding: 15px;
 		// padding-bottom: 5px;
 		background-color: #FFF;
 	}
+
+	.group-conent-padding {
+		padding: 0 15px;
+	}
+
 	.uni-group__title-text {
 		font-size: $uni-font-size-base;
 		color: $uni-text-color;
@@ -84,6 +117,7 @@ export default {
 		flex-direction: row;
 		align-items: center;
 	}
+
 	.uni-group--card {
 		margin: 10px;
 		border-radius: 5px;

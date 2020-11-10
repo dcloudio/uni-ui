@@ -1,6 +1,6 @@
 <template>
-	<!--  :class="{'uni-forms--top':!border}" -->
-	<view class="uni-forms">
+	<!--   -->
+	<view class="uni-forms" :class="{'uni-forms--top':!border}">
 		<form @submit.stop="submitForm" @reset="resetForm">
 			<slot></slot>
 		</form>
@@ -259,7 +259,6 @@
 						}
 					}
 				}
-
 				let result = []
 				let example = null
 				if (this.validator) {
@@ -296,7 +295,7 @@
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
-
+				console.log(invalidFields);
 				if (type === 'submit') {
 					this.$emit('submit', {
 						detail: {
@@ -400,7 +399,13 @@
 </script>
 
 <style lang="scss" scoped>
+	.uni-forms {
+		background-color: #fff;
+		overflow: hidden;
+		// padding: 10px 15px;
+	}
 	.uni-forms--top {
-		padding-top: 22px;
+		padding: 10px 15px;
+		// padding-top: 22px;
 	}
 </style>
