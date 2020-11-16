@@ -1,21 +1,21 @@
 <template>
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
-		<uni-section title="基础用法" type="line"></uni-section>
-		<uni-forms v-model="formData" border ref="form" validate-trigger="bind" err-show-type="undertext" @validate="validate">
-			<uni-group title="基本信息">
+		<uni-forms :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
+			<uni-group title="基本信息" top="0">
 				<uni-forms-item name="name" required label="用户名">
-					<input type="text" v-model="formData.name" class="uni-input-border" placeholder="请输入用户名" @input="binddata('name',$event.detail.value)">
+					<uni-easyinput type="text" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
 				</uni-forms-item>
+				<!-- 使用原生input，需要绑定binddata -->
 				<uni-forms-item name="age" required label="年龄">
-					<input type="text" :value="formData.age" class="uni-input-border" placeholder="请输入年龄" @input="binddata('age',$event.detail.value)">
+					<input type="text" v-model="formData.age" class="uni-input-border" placeholder="请输入年龄">
 				</uni-forms-item>
 				<uni-forms-item name="weight" label="体重">
 					<slider min="0" max="200" show-value :value="formData.weight" @change="binddata('weight',$event.detail.value)"
 					 step="5" />
 				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱">
-					<input type="text" :value="formData.email" class="uni-input-border" placeholder="请输入邮箱" @blur="binddata('email',$event.detail.value)">
+					<uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="checked" label="详细信息">
 					<switch :checked="formData.checked" @change="binddata('checked',$event.detail.value)" />
@@ -24,14 +24,7 @@
 			<template v-if="formData.checked">
 				<uni-group title="详细信息">
 					<uni-forms-item required name="sex" label="性别">
-						<radio-group @change="binddata('sex',$event.detail.value)">
-							<label class="label-box">
-								<radio class="transform-scale" :checked="formData.sex === '0'" value="0" /><text>男</text>
-							</label>
-							<label class="label-box">
-								<radio class="transform-scale" :checked="formData.sex === '1'" value="1" /><text>女</text>
-							</label>
-						</radio-group>
+						<uni-data-checkbox v-model="formData.sex" :localdata="sex"></uni-data-checkbox>
 					</uni-forms-item>
 					<uni-forms-item name="country" label="国家">
 						<picker :value="formData.country" :range="range" @change="binddata('country',$event.detail.value)">
@@ -39,11 +32,10 @@
 						</picker>
 					</uni-forms-item>
 					<uni-forms-item required name="hobby" label="兴趣爱好">
-						<uni-data-checkbox multiple :value="formData.hobby" :range="hobby" @change="binddata('hobby',$event.detail.value)" />
+						<uni-data-checkbox multiple v-model="formData.hobby" :localdata="hobby"/>
 					</uni-forms-item>
 					<uni-forms-item name="remarks" label="备注">
-						<textarea type="text" v-model="formData.remarks" :maxlength="50" class="uni-textarea-border" placeholder="请输入备注"
-						 @input="binddata('remarks',$event.detail.value)"></textarea>
+						 <uni-easyinput type="textarea" v-model="formData.remarks" :maxlength="50" placeholder="请输入备注"></uni-easyinput>
 					</uni-forms-item>
 				</uni-group>
 
@@ -52,6 +44,7 @@
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
 			<!-- <button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
+
 			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
@@ -78,6 +71,16 @@
 					country: -1,
 					weight: 0
 				},
+				sex: [{
+					text: '男',
+					value: '0'
+				}, {
+					text: '女',
+					value: '1'
+				}, {
+					text: '未知',
+					value: '2'
+				}],
 				hobby: [{
 					text: '足球',
 					value: 0
@@ -164,7 +167,7 @@
 					name: 'LiMing',
 					age: 1,
 					email: "",
-					sex: '',
+					sex: '0',
 					hobby: [0, 2],
 					remarks: "热爱学习，热爱生活",
 					checked: true,
@@ -184,15 +187,6 @@
 			},
 			change(event) {
 				this.formData.checked = event.detail.value
-			},
-
-			/**
-			 * 触发校验
-			 * @param {Object} event
-			 */
-			validate(event) {
-				// TODO 返回校验结果
-				// console.log('触发校验：', event);
 			},
 
 			/**

@@ -8,7 +8,8 @@ const FORMAT_MAPPING = {
   "int": 'number',
   "bool": 'boolean',
   "double": 'number',
-  "long": 'number'
+  "long": 'number',
+  "password": 'string'
 }
 
 function formatMessage(args, resources) {
@@ -148,6 +149,15 @@ class RuleValidator {
       if (RuleValidatorHelper[vt]) {
         result = RuleValidatorHelper[vt](rule, value, message)
         if (result != null) {
+          break
+        }
+      }
+
+      if (rule.validateExpr) {
+        let now = Date.now()
+        let resultExpr = rule.validateExpr(value, allData, now)
+        if (resultExpr === false) {
+          result = this._getMessage(rule, rule.errorMessage || this._message['default'])
           break
         }
       }
@@ -351,8 +361,8 @@ class SchemaValidator extends RuleValidator {
           key,
           errorMessage
         })
+        if (!all) break
       }
-      if (!all) break
     }
     return result
   }
@@ -366,8 +376,8 @@ class SchemaValidator extends RuleValidator {
           key,
           errorMessage
         })
+        if (!all) break
       }
-      if (!all) break
     }
     return result
   }
@@ -411,8 +421,8 @@ function Message() {
       url: '{label}类型无效'
     },
     length: {
-      min: '长度{label}不能少于{minLength}',
-      max: '长度{label}不能超过{maxLength}',
+      min: '{label}长度不能少于{minLength}',
+      max: '{label}长度不能超过{maxLength}',
       range: '{label}必须介于{minLength}和{maxLength}之间'
     },
     number: {

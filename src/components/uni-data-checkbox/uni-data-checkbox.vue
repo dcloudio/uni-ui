@@ -1,29 +1,38 @@
 <template>
 	<view class="uni-data-checklist">
-		<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
-			<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
-				<checkbox hidden :disabled="!!item.disable" :value="item.value+''" :checked="item.selected" />
-				<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner" :class="item.checkboxBgClass">
-					<view class="checkbox__inner-icon" :class="item.checkboxClass"></view>
-				</view>
-				<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-					<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
-					<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
-				</view>
-			</label>
-		</checkbox-group>
-		<radio-group v-else class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
-			<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
-				<radio hidden :disabled="item.disable" :value="item.value+''" :checked="item.selected" />
-				<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner" :class="item.checkboxBgClass">
-					<view class="radio__inner-icon" :class="item.checkboxClass"></view>
-				</view>
-				<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-					<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
-					<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
-				</view>
-			</label>
-		</radio-group>
+		<template v-if="loading">
+			<view class="uni-data-loading">
+				<uni-load-more status="loading" iconType="snow" :iconSize="18" :content-text="contentText"></uni-load-more>
+			</view>
+		</template>
+		<template v-else>
+			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
+				<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
+					<checkbox hidden :disabled="!!item.disable" :value="item.value+''" :checked="item.selected" />
+					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"
+					 :class="item.checkboxBgClass">
+						<view class="checkbox__inner-icon" :class="item.checkboxClass"></view>
+					</view>
+					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
+						<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
+						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
+					</view>
+				</label>
+			</checkbox-group>
+			<radio-group v-else class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
+				<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
+					<radio hidden :disabled="item.disable" :value="item.value+''" :checked="item.selected" />
+					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner"
+					 :class="item.checkboxBgClass">
+						<view class="radio__inner-icon" :class="item.checkboxClass"></view>
+					</view>
+					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
+						<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
+						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
+					</view>
+				</label>
+			</radio-group>
+		</template>
 	</view>
 </template>
 
@@ -49,8 +58,10 @@
 	 * @event {Function} change  选中发生变化触发
 	 */
 
+	import clientdb from './clientdb.js'
 	export default {
 		name: 'uniDataChecklist',
+		mixins: [clientdb],
 		props: {
 			mode: {
 				type: String,
@@ -66,7 +77,7 @@
 					return ''
 				}
 			},
-			range: {
+			localdata: {
 				type: Array,
 				default () {
 					return []
@@ -84,43 +95,86 @@
 				type: Boolean,
 				default: false
 			},
-			icon:{
+			icon: {
 				type: String,
 				default: 'left'
-			}
-			// style:{
-			// 	type : Object,
-			// 	default(){
-			// 		return {}
-			// 	}
-			// }
+			},
 		},
 		watch: {
-			range: {
+			localdata: {
 				handler(newVal) {
 					this.dataList = this.getDataList(this.getSelectedValue(newVal))
 				},
 				deep: true
 			},
+			// range: {
+			// 	handler(newVal) {
+			// 		this.range = newVal
+			// 		this.dataList = this.getDataList(this.getSelectedValue(newVal))
+			// 	},
+			// 	deep: true
+			// },
+			listData(newVal) {
+				this.range = newVal
+				this.dataList = this.getDataList(this.getSelectedValue(newVal))
+				// console.log('----listData', this.dataList);
+			},
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
+				this.formItem.setValue(newVal)
 			}
 		},
 		data() {
 			return {
 				dataList: [],
+				range: [],
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				},
 				styles: {
 					selectedBackgroudColor: 'red',
 					selectedColor: 'blue',
 					backgroundColor: '#ffffff',
-					color: '#333'
+					color: '#333',
+
 				}
 			};
 		},
 		created() {
-			this.dataList = this.getDataList(this.getSelectedValue(this.range))
+			this.formItem = this.getForm('uniFormsItem')
+			this.formItem.setValue(this.value)
+			if (this.localdata && this.localdata.length !== 0) {
+				this.range = this.localdata
+				this.dataList = this.getDataList(this.getSelectedValue(this.range))
+			} else {
+				if (this.collection) {
+					this.loadData()
+				}
+			}
 		},
 		methods: {
+			init(range) {
+				// if(!this.range || this.range.length === 0){
+				// 	this.loadData()
+				// }else{
+				// 	this.dataList = this.getDataList(this.getSelectedValue(range))
+				// }
+			},
+			/**
+			 * 获取父元素实例
+			 */
+			getForm(name = 'uniForms') {
+				let parent = this.$parent;
+				let parentName = parent.$options.name;
+				while (parentName !== name) {
+					parent = parent.$parent;
+					if (!parent) return false
+					parentName = parent.$options.name;
+				}
+				return parent;
+			},
 			chagne(e) {
 				const values = e.detail.value
 
@@ -145,6 +199,7 @@
 						}
 					}
 				}
+				this.formItem.setValue(detail.value)
 				this.$emit('input', detail.value)
 				this.$emit('change', {
 					detail
@@ -152,7 +207,7 @@
 				if (this.multiple) {
 					// 如果 v-model 没有绑定 ，则走内部逻辑
 					// if (this.value.length === 0) {
-						this.dataList = this.getDataList(detail.value, true)
+					this.dataList = this.getDataList(detail.value, true)
 					// }
 				} else {
 					this.dataList = this.getDataList(detail.value)
@@ -218,6 +273,8 @@
 			 * @param {Object} value 选中内容
 			 */
 			getDataList(value) {
+				console.log('value:', value);
+				console.log(this.range);
 				// 解除引用关系，破坏原引用关系，避免污染源数据
 				let dataList = JSON.parse(JSON.stringify(this.range))
 				let list = []
@@ -297,7 +354,7 @@
 				item.disable && classes.push('is-' + name + '-disabled' + type)
 				item.selected && classes.push('is-' + name + '-checked' + type)
 
-				if(this.mode !== 'button' || name === 'button'){
+				if (this.mode !== 'button' || name === 'button') {
 					item.selected && item.disable && classes.push('is-' + name + '-disabled-checked' + type)
 				}
 
@@ -322,6 +379,18 @@
 </script>
 
 <style>
+	.uni-data-checklist {
+		/* min-height: 36px; */
+	}
+
+	.uni-data-loading {
+		display: flex;
+		align-items: center;
+		/* justify-content: center; */
+		height: 36px;
+		padding-left: 10px;
+	}
+
 	.checklist-group {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -582,6 +651,7 @@
 		opacity: 1;
 		transform: rotate(45deg) scaleY(1);
 	}
+
 	.is-list-disabled-checked {
 		opacity: 0.4;
 	}
@@ -593,6 +663,7 @@
 	.is-default-multiple-disabled-checked-list {
 		opacity: 0.4;
 	}
+
 	.is-button-checked {
 		border-color: #007aff;
 	}

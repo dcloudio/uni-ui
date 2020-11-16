@@ -125,9 +125,9 @@
 		created() {
 			let _this = this
 			this.childrens = []
+			this.inputChildrens = []
 			this.formRules = []
 			this.init(this.rules)
-
 		},
 		methods: {
 			init(formRules) {
@@ -208,15 +208,7 @@
 			 * 校验所有或者部分表单
 			 */
 			async validateAll(invalidFields, type, callback) {
-				if (!this.validator) {
-					this.$emit('submit', {
-						detail: {
-							value: invalidFields,
-							errors: null
-						}
-					})
-					return
-				}
+
 				this.childrens.forEach(item => {
 					item.errMsg = ''
 				})
@@ -268,6 +260,10 @@
 						}, this.formData)
 						if (resultData) {
 							example = this.childrens.find(child => child.name === resultData.key)
+							const inputComp = this.inputChildrens.find(child=>child.rename === example.name)
+							if(inputComp){
+								inputComp.errMsg = resultData.errorMessage
+							}
 							result.push(resultData)
 							if (this.errShowType === 'undertext') {
 								if (example) example.errMsg = resultData.errorMessage
@@ -295,7 +291,6 @@
 				if (Array.isArray(result)) {
 					if (result.length === 0) result = null
 				}
-				console.log(invalidFields);
 				if (type === 'submit') {
 					this.$emit('submit', {
 						detail: {
@@ -320,6 +315,7 @@
 			 * 对整个表单进行校验的方法，参数为一个回调函数。
 			 */
 			submit(callback) {
+				// Object.assign(this.formData,formData)
 				return this.validateAll(this.formData, 'submit', callback)
 			},
 
@@ -364,15 +360,15 @@
 			 * 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
 			 */
 			clearValidate(props) {
-				props = [].concat(props);
+				props = [].concat(props||[]);
 				this.childrens.forEach(item => {
-					if (props.length === 0) {
-						item.errMsg = ''
-					} else {
+					// if (props.length === 0) {
+					// 	item.errMsg = ''
+					// } else {
 						if (props.indexOf(item.name) !== -1) {
 							item.errMsg = ''
 						}
-					}
+					// }
 				})
 			},
 			// 把 value 转换成指定的类型
@@ -400,9 +396,9 @@
 
 <style lang="scss" scoped>
 	.uni-forms {
-		background-color: #fff;
 		overflow: hidden;
 		// padding: 10px 15px;
+		// background-color: #fff;
 	}
 	.uni-forms--top {
 		padding: 10px 15px;

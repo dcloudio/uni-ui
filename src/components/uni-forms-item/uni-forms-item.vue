@@ -1,34 +1,20 @@
 <template>
-	<view class="uni-forms-item" :class="{'uni-forms-item-custom':custom,'uni-forms-item-border':border,'is-first-border':border&&isFirstBorder}"
-	 :style="[fieldStyle]">
-		<template v-if="!custom">
-			<view class="uni-forms-item-inner" :class="[ 'uni-label-postion-' + labelPos]">
-				<view :class="errorTop ? 'uni-error-in-label' : ''">
-					<view class="uni-forms-item-label" :class="[required ? 'uni-required' : '']" :style="{
-			            justifyContent: justifyContent,
-			            width: labelWid +'px',
-			            marginBottom: labelMarginBottom,
-			        }">
-						<view class="uni-icon-wrap" v-if="leftIcon">
-							<uni-icons size="16" :type="leftIcon" :color="iconColor" />
-						</view>
-						<slot name="leftIcon"></slot>
-						<text class="uni-label-text" :class="[leftIcon ? 'uni-label-left-gap' : '']">{{ label }}</text>
-					</view>
-					<view v-if="errorTop && showMessage" class="uni-error-message" :style="{paddingLeft: '4px'}">{{ showMsg === 'undertext' ? msg:'' }}</view>
-				</view>
-				<view class="fild-body">
-					<slot></slot>
-				</view>
+	<view class="uni-forms-item" :class="{'uni-forms-item--border':border,'is-first-border':border&&isFirstBorder,'uni-forms-item-error':msg}">
+		<view class="uni-forms-item__inner" :class="['is-direction-'+labelPos,]">
+			<view v-if="label" class="uni-forms-item__label" :style="{width:labelWid+'px',justifyContent: justifyContent}">
+				<slot name="left">
+					<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
+					<text>{{label}}</text>
+					<text v-if="required" class="is-required">*</text>
+				</slot>
 			</view>
-			<!-- paddingLeft: Number(labelWid) + (border?0:15) + 'px' -->
-			<view v-if="errorBottom && showMessage" class="uni-error-message" :class="{'uni-error-msg--boeder':border}" :style="{
-				paddingLeft: Number(labelWid) + 'px'
-			}">{{ showMsg === 'undertext' ? msg:'' }}</view>
-		</template>
-		<template v-else>
-			<slot></slot>
-		</template>
+			<view class="uni-forms-item__content" :class="{'is-input-error-border': msg}">
+				<slot></slot>
+			</view>
+		</view>
+		<view class="uni-error-message" :class="{'uni-error-msg--boeder':border}" :style="{
+			paddingLeft: (labelPos === 'left'? Number(labelWid)+5:5) + 'px'
+		}">{{ showMsg === 'undertext' ? msg:'' }}</view>
 	</view>
 </template>
 
@@ -41,7 +27,7 @@
 	 * @property {String} validateTrigger = [bind|submit]	校验触发器方式 默认 submit 可选
 	 * 	@value bind 	发生变化时触发
 	 * 	@value submit 	提交时触发
-	 * @property {String } 	leftIcon 			label左边的图标，限uni-ui的图标名称
+	 * @property {String } 	leftIcon 			label左边的图标，限 uni-ui 的图标名称
 	 * @property {String } 	iconColor 			左边通过icon配置的图标的颜色（默认#606266）
 	 * @property {String } 	label 				输入框左边的文字提示
 	 * @property {Number } 	labelWidth 			label的宽度，单位px（默认65）
@@ -126,7 +112,7 @@
 			fieldStyle() {
 				let style = {}
 				if (this.labelPos == 'top') {
-					style.padding = '10px 14px'
+					style.padding = '0 0'
 					this.labelMarginBottom = '6px'
 				}
 				if (this.labelPos == 'left' && this.msg !== false && this.msg != '') {
@@ -179,7 +165,7 @@
 		methods: {
 			init() {
 				if (this.form) {
-					const {
+					let {
 						formRules,
 						validator,
 						formData,
@@ -200,14 +186,12 @@
 						this.isFirstBorder = true
 					}
 					// 判断 group 里的第一个 item
-					console.log(this.group.isFirstBorder);
 					if (this.group) {
 						if (!this.group.isFirstBorder) {
 							this.group.isFirstBorder = true
 							this.isFirstBorder = true
 						}
 					}
-
 
 					this.border = this.form.border
 					this.showMsg = errShowType
@@ -246,7 +230,12 @@
 			clearValidate() {
 				this.errMsg = ''
 			},
-
+			setValue(value){
+				if (this.name) {
+					if(this.errMsg) this.errMsg = ''
+					this.form.formData[this.name] =  this.form._getValue(this, value)
+				}
+			},
 			/**
 			 * 校验规则
 			 * @param {Object} value
@@ -346,85 +335,68 @@
 <style lang="scss" scoped>
 	.uni-forms-item {
 		position: relative;
-		// padding: 0 15px;
+		// padding: 16px 14px;
 		text-align: left;
 		color: #333;
 		font-size: 14px;
 		margin-bottom: 22px;
-		margin-top: 12px;
 	}
 
-	.uni-forms-item-inner {
+	.uni-forms-item__inner {
+		/* #ifndef APP-NVUE */
 		display: flex;
-		align-items: center;
-	}
-
-	.uni-textarea-inner {
-		align-items: flex-start;
-	}
-
-	.uni-textarea-class {
-		min-height: 48px;
-		width: auto;
-		font-size: 14px;
-	}
-
-	.fild-body {
-		width: 100%;
-		// display: flex;
-		// flex: 1;
+		/* #endif */
+		// flex-direction: row;
 		// align-items: center;
 	}
 
-	.uni-arror-right {
-		margin-left: 4px;
+	.is-direction-left {
+		flex-direction: row;
 	}
 
-	.uni-label-text {
-		display: inline-block;
-	}
-
-	.uni-label-left-gap {
-		margin-left: 3px;
-	}
-
-	.uni-label-postion-top {
+	.is-direction-top {
 		flex-direction: column;
-		align-items: flex-start;
-		flex: 1;
 	}
 
-	.uni-forms-item-label {
+	.uni-forms-item__label {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-shrink: 0;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		font-size: 14px;
+		color: #333;
 		width: 65px;
-		flex: 1 1 65px;
-		text-align: left;
-		position: relative;
-		display: flex;
-		align-items: center;
+		// line-height: 2;
+		// margin-top: 3px;
+		padding: 5px 0;
+		box-sizing: border-box;
+		height: 36px;
+		margin-right: 5px;
 	}
 
-	.uni-required::before {
-		content: '*';
-		position: absolute;
-		left: -8px;
-		font-size: 14px;
+	.uni-forms-item__content {
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		// display: flex;
+		/* #endif */
+		// flex: 1;
+		// flex-direction: row;
+		// align-items: center;
+		box-sizing: border-box;
+		min-height: 36px;
+	}
+
+
+	.label-icon {
+		margin-right: 5px;
+		margin-top: -1px;
+	}
+
+	// 必填
+	.is-required {
 		color: $uni-color-error;
-		height: 9px;
-		line-height: 1;
-	}
-
-	.uni-forms-item__input-wrap {
-		position: relative;
-		overflow: hidden;
-		font-size: 14px;
-		height: 24px;
-		flex: 1;
-		width: auto;
-	}
-
-	.uni-clear-icon {
-		display: flex;
-		align-items: center;
 	}
 
 	.uni-error-message {
@@ -432,8 +404,6 @@
 		bottom: -17px;
 		left: 0;
 		line-height: 12px;
-		// padding-top: 2px;
-		// padding-bottom: 2px;
 		color: $uni-color-error;
 		font-size: 12px;
 		text-align: left;
@@ -445,137 +415,19 @@
 		line-height: 22px;
 	}
 
-	.uni-input-error-border {
+	.is-input-error-border {
 		border-color: $uni-color-error;
 	}
 
-	.placeholder-style {
-		color: rgb(150, 151, 153);
-	}
-
-	.uni-input-class {
-		font-size: 14px;
-	}
-
-	.uni-button-wrap {
-		margin-left: 4px;
-	}
-
-	/* start--Retina 屏幕下的 1px 边框--start */
-	.uni-border,
-	.uni-border-bottom,
-	.uni-border-left,
-	.uni-border-right,
-	.uni-border-top,
-	.uni-border-top-bottom {
-		position: relative
-	}
-
-	.uni-border-bottom:after,
-	.uni-border-left:after,
-	.uni-border-right:after,
-	.uni-border-top-bottom:after,
-	.uni-border-top:after,
-	.uni-border:after {
-		/* #ifndef APP-NVUE */
-		content: ' ';
-		/* #endif */
-		position: absolute;
-		left: 0;
-		top: 0;
-		pointer-events: none;
-		box-sizing: border-box;
-		-webkit-transform-origin: 0 0;
-		transform-origin: 0 0;
-		// 多加0.1%，能解决有时候边框缺失的问题
-		width: 199.8%;
-		height: 199.7%;
-		transform: scale(0.5, 0.5);
-		border: 0 solid $uni-border-color;
-		z-index: 2;
-	}
-
-	.uni-input-border {
-		min-height: 34px;
-		padding-left: 4px;
-		border: 1px solid $uni-border-color;
-		border-radius: 6px;
-		box-sizing: border-box;
-	}
-
-	.uni-border-top:after {
-		border-top-width: 1px
-	}
-
-	.uni-border-left:after {
-		border-left-width: 1px
-	}
-
-	.uni-border-right:after {
-		border-right-width: 1px
-	}
-
-	.uni-border-bottom:after {
-		border-bottom-width: 1px
-	}
-
-	.uni-border-top-bottom:after {
-		border-width: 1px 0
-	}
-
-	.uni-border:after {
-		border-width: 1px
-	}
-
-	/* end--Retina 屏幕下的 1px 边框--end */
-
-	.uni-icon-wrap {
-		padding-left: 3px;
-		padding-right: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.uni-button-wrap {
-		display: flex;
-		align-items: right;
-		justify-content: center;
-	}
-
-	.uni-clear-icon {
-		display: flex;
-		align-items: center;
-		margin-left: 4px;
-	}
-
-	.uni-flex {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		align-items: center;
-	}
-
-	.uni-flex-1 {
-		flex: 1;
-	}
-
-	.uni-error-in-label {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.uni-forms-item-custom {
-		padding: 0;
-		border: none;
-	}
-
-	.uni-forms-item-border {
-		margin: 0;
-		// margin-bottom: 0;
+	.uni-forms-item--border {
+		margin-bottom: 0;
 		padding: 10px 15px;
+		// padding-bottom: 0;
 		border-top: 1px #eee solid;
+	}
+
+	.uni-forms-item-error {
+		padding-bottom: 0;
 	}
 
 	.is-first-border {

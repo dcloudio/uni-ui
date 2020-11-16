@@ -2,10 +2,10 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.21",
+	"edition": "1.0.22",
 	"url": "forms",
 	"type": "表单组件",
-	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons","uni-data-checkbox"],
+	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons","uni-easyinput","uni-data-checkbox"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 修复 err-show-type 属性为 toast 时，校验异常的问题"]
+	"update_log": ["- 新增 border 属性，可选择是否选择分隔线","- 优化 支持 uni-esayinput、uni-data-checkbox"]
 }
