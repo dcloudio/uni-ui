@@ -83,6 +83,10 @@
 		position: fixed;
 		left: 0;
 		right: 0;
+		/* #ifdef H5 */
+		left: var(--window-left);
+		right: var(--window-right);
+		/* #endif */
 		bottom: 0;
 	}
 </style>

@@ -7,5 +7,6 @@
 	"type": "表单组件",
 	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=21001",
-	"update_log": ""
+	"update_log": "",
+	"hidden": true
 }

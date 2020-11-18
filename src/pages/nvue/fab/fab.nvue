@@ -100,7 +100,7 @@
 	@import '@/common/uni-nvue.scss';
 
 
-	/* #ifndef APP-NVUE */
+	/* #ifndef APP-NVUE || H5 */
 	page {
 		height: 100vh;
 	}

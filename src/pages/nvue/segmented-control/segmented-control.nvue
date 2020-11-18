@@ -102,7 +102,7 @@
 	}
 
 	.uni-padding-wrap {
-		width: 750rpx;
+		// width: 750rpx;
 		padding: 0px 30px;
 	}
 

@@ -5,6 +5,7 @@
 	"edition": "1.0.22",
 	"url": "forms",
 	"type": "表单组件",
+	"suffix": "vue",
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons","uni-easyinput","uni-data-checkbox"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
 	"update_log": ["- 新增 border 属性，可选择是否选择分隔线","- 优化 支持 uni-esayinput、uni-data-checkbox"]
