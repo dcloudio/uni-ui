@@ -1,10 +1,17 @@
 <template>
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
-		<uni-forms :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
+		
+		<uni-forms ref="form">
+			<uni-easyinput v-model="name" placeholder="请输入用户名" />
+			<uni-easyinput v-model="age" placeholder="请输入用年龄" />
+			<button  @click="submitForm">提交</button>
+		</uni-forms>
+		
+		<uni-forms :value="formData" ref="form" validate-trigger="bind" err-show-type="toast">
 			<uni-group title="基本信息" top="0">
 				<uni-forms-item name="name" required label="用户名">
-					<uni-easyinput type="text" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
+					<uni-easyinput type="text" :inputBorder="true" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
 				</uni-forms-item>
 				<!-- 使用原生input，需要绑定binddata -->
 				<uni-forms-item name="age" required label="年龄">

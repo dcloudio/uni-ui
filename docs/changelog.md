@@ -7,20 +7,21 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <log title="1.2.9" date="未发布">
-	<log-item title="uni-forms 组件更新">
-		<log-item-text tag-type="perf">
-			 model 属性改为 v-model ，结合 binddata() 方法可实现双向修改数据
-		</log-item-text>
-	</log-item>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-easyinput" /> 增强输入框
+	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-data-checkbox" /> 数据驱动的单选复选框
+	</log-item-text>
 </log>
 
 <log title="1.2.8" date="2020-10-23">
 	<log-item-text tag-type="feat" only>
 		<highlight text="uni-forms" /> 表单组件
 	</log-item-text>
-	<log-item-text tag-type="feat" only>
+	<!-- <log-item-text tag-type="feat" only>
 		<highlight text="uni-field" /> 输入框组件
-	</log-item-text>
+	</log-item-text> -->
 	<log-item-text tag-type="feat" only>
 		<highlight text="uni-group" /> 分组组件
 	</log-item-text>

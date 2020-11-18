@@ -91,18 +91,18 @@
 					}
 				],
 				forms: [{
-						name: 'Form 表单',
-						url: 'forms'
-					},
-					{
-						name: 'Field 输入框',
-						url: 'field'
-					},
-					{
-						name: 'Group 分组',
-						url: 'group'
-					}
-				],
+					name: 'DataCheckbox 单选复选框',
+					url: 'data-checkbox'
+				}, {
+					name: 'Easyinput 增强输入框',
+					url: 'easyinput'
+				}, {
+					name: 'Form 表单',
+					url: 'forms'
+				}, {
+					name: 'Group 分组',
+					url: 'group'
+				}],
 				functionals: [{
 						name: 'Calendar 日历',
 						url: 'calendar'

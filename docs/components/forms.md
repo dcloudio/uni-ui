@@ -1,6 +1,10 @@
 ## Forms 表单
-> 组件名：``uni-forms``，代码块： `uForms`，关联组件：`uni-forms-item`、`uni-easyinput`、`uni-data-checkbox`、`uni-group`。
 
+::: tip 组件名：uni-forms
+代码块： `uForms`
+
+关联组件：`uni-forms-item`、`uni-easyinput`、`uni-data-checkbox`、`uni-group`。
+:::
 uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 然而几乎每个表单都需要做表单验证，为了方便做表单验证，减少重复开发，`uni ui` 又基于 `<form>`组件封装了 `<uni-forms>`组件，内置了表单验证功能。
@@ -13,17 +17,19 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 另外，`<uni-forms>`组件下面的各个表单项，可以通过`<uni-group>`包裹为不同的分组。同一`<uni-group>`下的不同表单项目将聚拢在一起，同其他group保持垂直间距。`<uni-group>`仅影响视觉效果。
 
-### 平台差异说明
-
-暂不支持在nvue页面中使用
-
-### 组件使用注意事项
+::: warning 注意事项
 
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
 
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
 - 如果配置 `validateTrigger` 属性为 `bind` 且表单域组件使用 `input` 事件触发会耗损部分性能，请谨慎使用
 - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
+:::
+
+
+### 平台差异说明
+
+暂不支持在nvue页面中使用
 
 ### 安装方式
 

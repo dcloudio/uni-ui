@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-easyinput" :class="{'uni-easyinput-error':msg}">
-		<view class="uni-easyinput__content" :class="{'is-input-border':inputBorder ,'is-input-error-border':inputBorder && msg,'is-textarea':type==='textarea'}">
+		<view class="uni-easyinput__content" :class="{'is-input-border':inputBorder ,'is-input-error-border':inputBorder && msg,'is-textarea':type==='textarea','is-disabled':disabled}">
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc"></uni-icons>
 			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea" :class="{'input-padding':inputBorder}"
 			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled"
@@ -9,7 +9,8 @@
 			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input"
 			 :style="{
 				 'padding-right':type === 'password' ||clearable || prefixIcon?'':'10px',
-				 'padding-left':prefixIcon?'':'10px'
+				 'padding-left':prefixIcon?'':'10px',
+				 'color':msg?'#dd524d':''
 			 }"
 			 :name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
 			 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" @focus="onFocus"
@@ -19,7 +20,7 @@
 				 :size="18" color="#c0c4cc" @click="onEyes"></uni-icons>
 			</template>
 			<template v-else-if="suffixIcon">
-				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc"></uni-icons>
+				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" color="#c0c4cc"></uni-icons>
 			</template>
 			<template v-else>
 				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
@@ -34,35 +35,42 @@
 	 * Field 输入框
 	 * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=21001
+	 * @property {String| Number} 	value 				输入内容
 	 * @property {String } 	type 				输入框的类型（默认text） password/text/textarea/..
+	 * @value text		文本输入键盘
+	 * @value textarea 	多行文本输入键盘
+	 * @value password 	密码输入键盘
+	 * @value number	数字输入键盘，注意iOS上app-vue弹出的数字键盘并非9宫格方式
+	 * @value idcard	身份证输入键盘，信、支付宝、百度、QQ小程序
+	 * @value digit		带小数点的数字键盘	，App的nvue页面、微信、支付宝、百度、头条、QQ小程序支持
 	 * @property {Boolean} 	clearable 			是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容（默认true）
+	 * @property {Boolean} 	autoHeight 		是否自动增高输入区域，type为textarea时有效（默认true）
 	 * @property {String } 	placeholder 		输入框的提示文字
 	 * @property {String } 	placeholderStyle 	placeholder的样式(内联样式，字符串)，如"color: #ddd"
 	 * @property {Boolean} 	focus 				是否自动获得焦点（默认false）
 	 * @property {Boolean} 	disabled 			是否不可输入（默认false）
 	 * @property {Number } 	maxlength 			最大输入长度，设置为 -1 的时候不限制最大长度（默认140）
 	 * @property {String } 	confirmType 		设置键盘右下角按钮的文字，仅在type="text"时生效（默认done）
-	 * @property {String } 	errorMessage 		显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
 	 * @property {Number } 	clearSize 			清除图标的大小，单位px（默认15）
+	 * @property {String} 	prefixIcon			输入框头部图标
+	 * @property {String} 	suffixIcon			输入框尾部图标
 	 * @property {Boolean} 	trim 				是否自动去除两端的空格
-	 * @property {String } 	name 				表单域的属性名，在使用校验规则时必填
-	 * @property {Array  }  rules 				单行表单验证规则，接受一个数组
 	 * @property {Boolean} 	inputBorder 		是否显示input输入框的边框（默认false）
-	 * @property {Boolean} 	auto-height 		是否自动增高输入区域，type为textarea时有效（默认true）
 	 * @event {Function} 	input 				输入框内容发生变化时触发
 	 * @event {Function} 	focus 				输入框获得焦点时触发
 	 * @event {Function} 	blur 				输入框失去焦点时触发
 	 * @event {Function} 	confirm 			点击完成按钮时触发
-	 * @example <uni-easyinput v-model="mobile" label="手机号" required :error-message="errorMessage"></uni-easyinput>
+	 * @example <uni-easyinput v-model="mobile"></uni-easyinput>
 	 */
 	export default {
 		name: 'uni-easyinput',
 		props: {
+			name:String,
+			value: [Number, String],
 			type: {
 				type: String,
 				default: 'text'
 			},
-			password: Boolean,
 			clearable: {
 				type: Boolean,
 				default: true
@@ -74,8 +82,6 @@
 			placeholder: String,
 			placeholderStyle: String,
 			focus: Boolean,
-			name: String,
-			value: [Number, String],
 			disabled: {
 				type: Boolean,
 				default: false
@@ -280,7 +286,7 @@
 		padding-bottom: 10px;
 		box-sizing: border-box;
 		min-height: 80px;
-		height: 80px;
+		// height: 80px;
 	}
 
 	.input-padding {
@@ -351,4 +357,9 @@
 	.is-first-border {
 		border: none;
 	}
+
+	.is-disabled {
+		background-color: #eee;
+	}
+
 </style>

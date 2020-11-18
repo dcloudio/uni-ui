@@ -46,9 +46,9 @@
 	 * @value list		列表模式
 	 * @value button	按钮模式
 	 * @value tag 		标签模式
-	 * @property {Boolean} multiple  是否多选
+	 * @property {Boolean} multiple = [true|false] 是否多选
 	 * @property {Array|String|Number} value 默认值
-	 * @property {Array} range 范围数据 ，格式 [{text:'',value:''}]
+	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Number|String} min 最小选择个数 ，multiple为true时生效
 	 * @property {Number|String} max 最大选择个数 ，multiple为true时生效
 	 * @property {Boolean} wrap 是否换行显示
@@ -121,7 +121,7 @@
 			},
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
-				this.formItem.setValue(newVal)
+				this.formItem&&this.formItem.setValue(newVal)
 			}
 		},
 		data() {
@@ -144,7 +144,7 @@
 		},
 		created() {
 			this.formItem = this.getForm('uniFormsItem')
-			this.formItem.setValue(this.value)
+			this.formItem && this.formItem.setValue(this.value)
 			if (this.localdata && this.localdata.length !== 0) {
 				this.range = this.localdata
 				this.dataList = this.getDataList(this.getSelectedValue(this.range))
@@ -199,7 +199,7 @@
 						}
 					}
 				}
-				this.formItem.setValue(detail.value)
+				this.formItem&&this.formItem.setValue(detail.value)
 				this.$emit('input', detail.value)
 				this.$emit('change', {
 					detail
@@ -273,8 +273,6 @@
 			 * @param {Object} value 选中内容
 			 */
 			getDataList(value) {
-				console.log('value:', value);
-				console.log(this.range);
 				// 解除引用关系，破坏原引用关系，避免污染源数据
 				let dataList = JSON.parse(JSON.stringify(this.range))
 				let list = []

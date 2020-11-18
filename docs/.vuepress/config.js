@@ -130,9 +130,9 @@ module.exports = {
 						title: '表单',
 						subTitle: 'Forms'
 					},{
-						path: '/components/field.md',
+						path: '/components/easyinput.md',
 						title: '输入框',
-						subTitle: 'Field'
+						subTitle: 'Easyinput'
 					},{
 						path: '/components/data-checkbox.md',
 						title: '单选多选框',
