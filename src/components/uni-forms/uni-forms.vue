@@ -35,15 +35,16 @@
 		if (formName) {
 			this.$refs[formName].setValue(name, value)
 		} else {
-			let refName = null
+			let formVm
 			for (let i in this.$refs) {
-				if (this.$refs[i] && this.$refs[i].$options.name === 'uniForms') {
-					refName = i
+				const vm = this.$refs[i]
+				if (vm && vm.$options && vm.$options.name === 'uniForms') {
+					formVm = vm
 					break
 				}
 			}
-			if (!refName) return console.error('当前 uni-froms 组件缺少 ref 属性')
-			this.$refs[refName].setValue(name, value)
+			if (!formVm) return console.error('当前 uni-froms 组件缺少 ref 属性')
+			formVm.setValue(name, value)
 		}
 	}
 

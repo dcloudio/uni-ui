@@ -89,4 +89,18 @@
 		/* #endif */
 		bottom: 0;
 	}
+		
+	/* #ifdef H5 */
+	@media screen and (min-width: 768px, max-width: 1425px) {
+		.swiper {
+			height: 630px;
+		}
+	}
+	@media screen and (min-width: 1425px) {
+		.swiper {
+			height: 830px;
+		}
+	}
+	/* #endif */
+
 </style>
