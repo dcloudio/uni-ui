@@ -1,0 +1,12 @@
+{
+	"id": "21001",
+	"name": "Field",
+	"desc": "输入框",
+	"edition": "1.0.0",
+	"url": "field",
+	"type": "表单组件",
+	"suffix": "vue",
+	"path": "https://ext.dcloud.net.cn/plugin?id=21001",
+	"update_log": "",
+	"hidden":true
+}

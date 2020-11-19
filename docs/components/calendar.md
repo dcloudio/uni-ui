@@ -1,10 +1,30 @@
-# Calendar 日历
-> 组件名：``uni-calendar``，代码块： `uCalendar`。
+---
+url : pages/vue/calendar/calendar
+---
+
+## Calendar 日历
+> 组件名：``uni-calendar``，代码块： uCalendar。  
 
 日历组件
 
-### 调用方式
+::: warning 注意事项
+为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
+- 本组件农历转换使用的js是 [@1900-2100区间内的公历、农历互转](https://github.com/jjonline/calendar.js)  
+- 仅支持自定义组件模式
+- `date`属性传入的应该是一个 String ，如： 2019-06-27 ，而不是 new Date()
+- 通过 `insert` 属性来确定当前的事件是 @change 还是 @confirm 。理应合并为一个事件，但是为了区分模式，现使用两个事件，这里需要注意
+- 弹窗模式下无法阻止后面的元素滚动，如有需要阻止，请在弹窗弹出后，手动设置滚动元素为不可滚动
+:::
 
+### 安装方式
+
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
+
+在 ``template`` 中使用组件
 
 ```html
 <view>
@@ -18,54 +38,10 @@
 </view>
 ```
 
-```javascript
+### 通过方法打开日历
 
-import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
-export default {
-	components: {
-		uniCalendar
-	},
-	data() {
-		return {};
-	},
-	methods: {
-		change(e) {
-			console.log(e);
-		}
-	}
-};
+需要设置 `insert` 为 `false`
 
-```
-
-### 属性说明
-
-|  属性名	|    类型	| 默认值| 说明																													|
-| ---		| ---		| ---	| ---																													|
-| date		| String	|-		| 自定义当前时间，默认为今天																							|
-| lunar		| Boolean	| false	| 显示农历																												|
-| startDate	| String	|-		| 日期选择范围-开始日期																									|
-| endDate	| String	|-		| 日期选择范围-结束日期																									|
-| range		| Boolean	| false	| 范围选择																												|
-| insert	| Boolean	| false	| 插入模式,可选值，ture：弹窗模式；false：插入模式；默认为插入模式														|
-| selected	| Array		|-		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
-|showMonth	|Boolean	| false	| 是否显示月份为背景																									|
-
-### 事件说明
-
-|  事件名		| 说明								|
-| ---			| ---								|
-| @change		|  日期改变，`insert :ture` 时生效	|
-| @confirm		|  确认选择`insert :false` 时生效	|
-| @monthSwitch	| 切换月份时触发					|
-
-### 方法说明
-在 `calendar` 组件上定义 `ref` 属性，通过 `ref` 属性使用方法。
-
-|  属性名	|    类型	| 说明									|
-| ---		| ---		| ---									|
-| open		| function	| 弹出日历组件，`insert :false` 时生效，通过 `ref` 触发	|
-
-**代码示例**
 ```html
 <view>
 	<uni-calendar 
@@ -79,11 +55,7 @@ export default {
 
 ```javascript
 
-import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
 export default {
-	components: {
-		uniCalendar
-	},
 	data() {
 		return {};
 	},
@@ -100,7 +72,32 @@ export default {
 ```
 
 
-### 事件返回属性说明
+## API
+
+### Calendar Props
+
+|  属性名	|    类型	| 默认值| 说明																													|
+| ---		| ---		| ---	| ---																													|
+| date		| String	|-		| 自定义当前时间，默认为今天																							|
+| lunar		| Boolean	| false	| 显示农历																												|
+| startDate	| String	|-		| 日期选择范围-开始日期																									|
+| endDate	| String	|-		| 日期选择范围-结束日期																									|
+| range		| Boolean	| false	| 范围选择																												|
+| insert	| Boolean	| false	| 插入模式,可选值，ture：插入模式；false：弹窗模式；默认为插入模式														|
+|clearDate	|Boolean	|true	|弹窗模式是否清空上次选择内容	|
+| selected	| Array		|-		| 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]	|
+|showMonth	| Boolean	| true	| 是否显示月份为背景																									|
+
+### Calendar Events
+
+|  事件名		| 说明								|返回值|
+| ---			| ---								|---|
+| @change		|  日期改变，`insert :ture` 时生效	|见 `Events Return value`|
+| @confirm		|  确认选择`insert :false` 时生效	|见 `Events Return value`|
+| @monthSwitch	| 切换月份时触发					|见 `Events Return value`|
+| @close		| 关闭日历弹窗触发					|见 `Events Return value`|
+
+### Events Return value
 
 ```javascript
 
@@ -178,14 +175,11 @@ export default {
 
 ```
 
+### Calendar Methods
 
-本组件农历转换使用的js是 [@1900-2100区间内的公历、农历互转](https://github.com/jjonline/calendar.js)  
+| 方法名	|    说明	| 			参数						|
+| ---		| ---		| ---									|
+| open	| 弹出日历组件，`insert :false` 时生效|- 	|
 
-Tips:
-- 仅支持自定义组件模式
-- date 传入的应该是一个 String ，如： 2019-06-27 ，而不是 new Date()
-- insert 属性，确定当前的事件是 @change 还是 @confirm 。理应合并为一个事件，但是为了区分模式，现使用两个事件，这里需要注意
 
-### 插件预览地址
 
-[https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar](https://uniapp.dcloud.io/h5/pages/extUI/calendar/calendar)

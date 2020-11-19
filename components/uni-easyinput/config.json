@@ -1,0 +1,11 @@
+{
+	"id": "3455",
+	"name": "Easyinput",
+	"desc": "增强输入框",
+	"edition": "0.0.3",
+	"url": "easyinput",
+	"type": "表单组件",
+	"suffix": "vue",
+	"path": "https://ext.dcloud.net.cn/plugin?id=3455",
+	"update_log": ["- 修复 focus 属性不生效的Bug","- 优化 使用文档"]
+}
