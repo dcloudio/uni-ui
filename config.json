@@ -2,7 +2,7 @@
 	"id": "55",
 	"name": "uni-ui",
 	"desc": "基于 uni-app 的 UI 组件库",
-	"edition": "1.2.7",
+	"edition": "1.2.8",
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
 		"- 新增 uni-data-checkbox 数据驱动的单选复选框",
