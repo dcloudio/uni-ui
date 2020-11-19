@@ -143,8 +143,17 @@
 			};
 		},
 		created() {
+			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			this.formItem && this.formItem.setValue(this.value)
+
+			if (this.formItem) {
+				if(this.formItem.name){
+					this.rename = this.formItem.name
+					this.form.inputChildrens.push(this)
+				}
+			}
+
 			if (this.localdata && this.localdata.length !== 0) {
 				this.range = this.localdata
 				this.dataList = this.getDataList(this.getSelectedValue(this.range))

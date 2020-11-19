@@ -4,7 +4,7 @@
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc"></uni-icons>
 			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea" :class="{'input-padding':inputBorder}"
 			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled"
-			 :maxlength="inputMaxlength" :focus="focus" :autoHeight="autoHeight" @input="onInput" @blur="onBlur" @focus="onFocus"
+			 :maxlength="inputMaxlength" :focus="focused" :autoHeight="autoHeight" @input="onInput" @blur="onBlur" @focus="onFocus"
 			 @confirm="onConfirm"></textarea>
 			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input"
 			 :style="{
@@ -13,7 +13,7 @@
 				 'color':msg?'#dd524d':''
 			 }"
 			 :name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
-			 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focus" @focus="onFocus"
+			 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focused" @focus="onFocus"
 			 @blur="onBlur" @input="onInput" @confirm="onConfirm" />
 			<template v-if="type === 'password'">
 				<uni-icons v-if="val != '' " class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" :type="showPassword?'eye-slash-filled':'eye-filled'"
@@ -77,11 +77,14 @@
 			},
 			autoHeight: {
 				type: Boolean,
-				default: true
+				default: false
 			},
 			placeholder: String,
 			placeholderStyle: String,
-			focus: Boolean,
+			focus: {
+				type:Boolean,
+				default:false
+			},
 			disabled: {
 				type: Boolean,
 				default: false
@@ -145,6 +148,12 @@
 				if (this.formItem) {
 					this.formItem.setValue(newVal)
 				}
+			},
+			focus(newVal){
+				console.log(newVal);
+				this.$nextTick(()=>{
+					this.focused = this.focus
+				})
 			}
 		},
 		created() {
@@ -157,6 +166,12 @@
 					this.form.inputChildrens.push(this)
 				}
 			}
+
+		},
+		mounted() {
+			this.$nextTick(()=>{
+				this.focused = this.focus
+			})
 		},
 		methods: {
 			/**
@@ -284,9 +299,9 @@
 		// padding-right: 10px;
 		padding-top: 6px;
 		padding-bottom: 10px;
-		box-sizing: border-box;
+		// box-sizing: border-box;
 		min-height: 80px;
-		// height: 80px;
+		height: 80px;
 	}
 
 	.input-padding {

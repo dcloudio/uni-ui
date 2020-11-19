@@ -88,14 +88,11 @@ export default {
 		let db = null;
 		let dbCmd = null;
 		
-		try {
+		if(this.collection){
 			this.db = uniCloud.database();
 			this.dbCmd = db.command;
-		} catch (err) {
-			this.db = null
-			this.dbCmd = null
 		}
-		
+
 		this._isEnded = false
 
 		this.$watch(() => {
