@@ -30,6 +30,7 @@ export default {
 			type: String,
 			default: 'feat'
 		},
+		// 单独使用的情况下，左侧留空白
 		only: {
 			type: Boolean,
 			default: false

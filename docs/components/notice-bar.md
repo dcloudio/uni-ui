@@ -1,18 +1,18 @@
-### NoticeBar 通告栏
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/notice-bar/notice-bar
+---
+
+## NoticeBar 通告栏
 
 通告栏组件，组件名：``uni-notice-bar``，代码块： uNoticeBar。
 
-### 使用方式
+### 安装方式
 
-在 ``script`` 中引用组件 
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-```javascript
-import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
-export default {
-    components: {uniNoticeBar}
-}
-```
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+ 
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -34,14 +34,16 @@ export default {
  <uni-notice-bar @getmore="getMore" :showGetMore="true" moreText="查看更多" single="true" text="[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"></uni-notice-bar>
 ```
 
-**注意**
-
+::: warning 注意
 如果需要异步获取内容后展示需要使用`v-if`进行控制，`<uni-notice-bar v-if="text" :text="text"></uni-notice-bar>`
+:::
 
-### 属性说明
+## NoticeBar API
+
+### NoticeBar Props
 
 |属性名				|类型	|默认值	|说明												|
-|---				|----	|---	|---												|
+|:-:				|:-:	|:-:	|:-:												|
 |speed				|Number	|100	|文字滚动的速度，默认100px/秒						|
 |text				|String	|-		|显示文字											|
 |background-color	|String	|#fffbe8|背景颜色											|
@@ -54,14 +56,10 @@ export default {
 |showClose			|Boolean|false	|是否显示左侧关闭按钮								|
 |showGetMore		|Boolean|false	|是否显示右侧查看更多图标，为true时，NoticeBar为单行|
 
-### 事件说明
+### NoticeBar Events
 
 |事件名称	|说明						|返回值	|
-|---		|---						|---	|
+|:-:		|:-:						|:-:	|
 |@click		|点击 NoticeBar 触发事件	|-		|
 |@close		|关闭 NoticeBar 触发事件	|-		|
 |@getmore	|点击”查看更多“时触发事件	|-		|
-
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/notice-bar/notice-bar](https://uniapp.dcloud.io/h5/pages/extUI/notice-bar/notice-bar)

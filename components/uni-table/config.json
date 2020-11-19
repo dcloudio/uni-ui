@@ -1,0 +1,13 @@
+{
+	"id": "3270",
+	"name": "Table",
+	"desc": "表格",
+	"url": "table",
+	"type": "功能组件",
+	"edition": "1.0.1",
+	"module": ["uni-table", "uni-tr","uni-th","uni-td"],
+	"path": "https://ext.dcloud.net.cn/plugin?id=3270",
+	"update_log": "- 新增 初始化",
+	"hidden":true,
+	"suffix": "vue"
+}

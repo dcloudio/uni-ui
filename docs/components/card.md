@@ -1,18 +1,23 @@
-# Card 卡片
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/card/card 
+---
+
+## Card 卡片
 
 卡片视图组件，组件名：``uni-card``，代码块： uCard。
 
-## 使用方式
+::: warning 注意事项
+为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
+- 因为平台兼容问题 ， 目前 APP-NVUE 安卓平台下不支持阴影
+:::
 
-在 ``script`` 中引用组件 
+### 安装方式
 
-```javascript
-import uniCard from '@/components/uni-card/uni-card.vue'
-export default {
-    components: {uniCard}
-}
-```
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+## 基本用法
 
 在 ``template`` 中使用组件
 
@@ -64,31 +69,30 @@ export default {
 </uni-card>
 ```
 
+## API
 
-### 属性说明
+### Card Props
 
-|属性名		|类型	|默认值	|说明																		|
-|---		|----	|---	|---																		|
-|title		|String	|-		|标题文字																	|
-|extra		|String	|-		|标题额外信息																|
-|note		|String	|-		|底部信息																	|
-|thumbnail	|String	|-		|标题左侧缩略图,支持网络图片，本地图片，本图片需要传入一个绝对路径，如：`/static/xxx.png`															|
-|mode		|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片	|
-|isFull	|Boolean|false	|卡片内容是否通栏，为true时将去除padding值									|
-|isShadow	|Boolean|false	|卡片内容是否开启阴影														|
+|属性名			|类型		|默认值	|说明																			|
+|:-:				|:-:		|:-:		|:-:																			|
+|title			|String	|-			|标题文字																			|
+|extra			|String	|-			|标题额外信息																		|
+|note				|String	|-			|底部信息																			|
+|thumbnail	|String	|-			|标题左侧缩略图,支持网络图片，本地图片，本图片需要传入一个绝对路径，如：`/static/xxx.png`	|
+|mode				|String	|basic	|卡片模式 ，可选值， basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片				|
+|isFull			|Boolean|false	|卡片内容是否通栏，为true时将去除padding值											|
+|isShadow		|Boolean|false	|卡片内容是否开启阴影																|
 
 
-### 事件说明
+### Card Events
 
-|事件称名	|事件说明			|返回参数	|
-|---		|---				|---		|
-|@click		|点击 Card 触发事件	|-			|
+|事件称名	|事件说明						|返回参数	|
+|:-:		|:-:							|:-:		|
+|@click	|点击 Card 触发事件	|-			|
 
-**Tips**
-- 因为平台兼容问题 ， 目前 APP-NVUE 安卓平台下不支持阴影
-- 自定义底部按钮，必须指定 `<template v-slot:footer> </template>` 。此时 `note` 随意指定内容即可。
 
-### 插件预览地址
+### Card Slots
 
-[https://uniapp.dcloud.io/h5/pages/extUI/card/card](https://uniapp.dcloud.io/h5/pages/extUI/card/card)
-
+|插槽称名	|说明				|
+|:-:		|:-:				|
+|footer	|卡片底部插槽 |

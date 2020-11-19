@@ -1,0 +1,317 @@
+{
+	"pages": [{
+			"path": "pages/vue/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/vue/forms/forms",
+			"style": {
+				"navigationBarTitleText": "Form 表单"
+			}
+		},
+		{
+			"path": "pages/vue/field/field",
+			"style": {
+				"navigationBarTitleText": "Field 字段"
+			}
+		},
+		{
+			"path": "pages/vue/group/group",
+			"style": {
+				"navigationBarTitleText": "Group 分组"
+			}
+		},
+		{
+			"path": "pages/vue/badge/badge",
+			"style": {
+				"navigationBarTitleText": "Badge 数字角标"
+			}
+		},
+		{
+			"path": "pages/vue/countdown/countdown",
+			"style": {
+				"navigationBarTitleText": "Countdown 倒计时"
+			}
+		},
+		{
+			"path": "pages/vue/drawer/drawer",
+			"style": {
+				"navigationBarTitleText": "Drawer 抽屉",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "\ue563",
+							"fontSrc": "/static/uni.ttf",
+							"fontSize": "22px"
+						}]
+					},
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/vue/icons/icons",
+			"style": {
+				"navigationBarTitleText": "Icons 图标"
+			}
+		},
+		{
+			"path": "pages/vue/load-more/load-more",
+			"style": {
+				"navigationBarTitleText": "LoadMore 加载更多"
+			}
+		},
+		{
+			"path": "pages/vue/nav-bar/nav-bar",
+			"style": {
+				"navigationBarTitleText": "NavBar 导航栏",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"style": "circle",
+						"offset": "70px"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/vue/number-box/number-box",
+			"style": {
+				"navigationBarTitleText": "NumberBox 数字输入框"
+			}
+		},
+		{
+			"path": "pages/vue/popup/popup",
+			"style": {
+				"navigationBarTitleText": "Popup 弹出层",
+				"app-plus": {
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+		{
+			"path": "pages/vue/segmented-control/segmented-control",
+			"style": {
+				"navigationBarTitleText": "SegmentedControl 分段器"
+			}
+		},
+		{
+			"path": "pages/vue/tag/tag",
+			"style": {
+				"navigationBarTitleText": "Tag 标签"
+			}
+		},
+		{
+			"path": "pages/vue/list/list",
+			"style": {
+				"navigationBarTitleText": "List 列表"
+			}
+		},
+		{
+			"path": "pages/vue/card/card",
+			"style": {
+				"navigationBarTitleText": "Card 卡片"
+			}
+		},
+		{
+			"path": "pages/vue/collapse/collapse",
+			"style": {
+				"navigationBarTitleText": "Collapse 折叠面板"
+
+			}
+		},
+		{
+			"path": "pages/vue/pagination/pagination",
+			"style": {
+				"navigationBarTitleText": "Pagination 分页器"
+			}
+		},
+		{
+			"path": "pages/vue/swiper-dot/swiper-dot",
+			"style": {
+				"navigationBarTitleText": "SwiperDot 轮播图指示点",
+				"mp-baidu": {
+					"disableSwipeBack": true
+				}
+			}
+		},
+		{
+			"path": "pages/vue/grid/grid",
+			"style": {
+				"navigationBarTitleText": "Grid 宫格"
+			}
+		},
+		{
+			"path": "pages/vue/rate/rate",
+			"style": {
+				"navigationBarTitleText": "Rate 评分"
+			}
+		},
+		{
+			"path": "pages/vue/steps/steps",
+			"style": {
+				"navigationBarTitleText": "Steps 步骤条"
+			}
+		},
+		{
+			"path": "pages/vue/notice-bar/notice-bar",
+			"style": {
+				"navigationBarTitleText": "NoticeBar 通告栏"
+			}
+		},
+		{
+			"path": "pages/vue/swipe-action/swipe-action",
+			"style": {
+				"navigationBarTitleText": "SwipeAction 滑动操作",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/vue/search-bar/search-bar",
+			"style": {
+				"navigationBarTitleText": "SearchBar 搜索栏"
+			}
+		},
+		{
+			"path": "pages/vue/calendar/calendar",
+			"style": {
+				"navigationBarTitleText": "Calendar 日历"
+			}
+		},
+		{
+			"path": "pages/vue/indexed-list/indexed-list",
+			"style": {
+				"navigationBarTitleText": "IndexedList 索引列表",
+				"mp-weixin": {
+					"disableScroll": true
+				},
+				"app-plus": {
+					"bounce": "none"
+				},
+				"mp-alipay": {
+					"allowsBounceVertical": "NO"
+				},
+				"mp-baidu": {
+					"disableScroll": true
+				}
+			}
+		},
+		{
+			"path": "pages/vue/fab/fab",
+			"style": {
+				"navigationBarTitleText": "Fab 悬浮按钮"
+			}
+		},
+		{
+			"path": "pages/vue/fav/fav",
+			"style": {
+				"navigationBarTitleText": "Fav 收藏按钮"
+			}
+		},
+		{
+			"path": "pages/vue/goods-nav/goods-nav",
+			"style": {
+				"navigationBarTitleText": "GoodsNav 商品导航"
+			}
+		},
+		{
+			"path": "pages/vue/section/section",
+			"style": {
+				"navigationBarTitleText": "Section 章节标题"
+			}
+		}, {
+			"path": "pages/vue/transition/transition",
+			"style": {
+				"navigationBarTitleText": "Transition 过渡动画"
+			}
+		}, {
+			"path": "pages/vue/title/title",
+			"style": {
+				"navigationBarTitleText": "Title 章节标题"
+			}
+		}, {
+			"path": "pages/vue/link/link",
+			"style": {
+				"navigationBarTitleText": "Link 链接"
+			}
+		}, {
+			"path": "pages/vue/combox/combox",
+			"style": {
+				"navigationBarTitleText": "Combox 组合框"
+			}
+		}, {
+			"path": "pages/vue/list/ad",
+			"style": {}
+		}, {
+			"path": "pages/vue/list/chat",
+			"style": {}
+		}, {
+			"path": "pages/vue/test/test",
+			"style": {}
+		}, {
+			"path": "pages/vue/table/table",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/vue/dateformat/dateformat",
+			"style": {
+				"navigationBarTitleText": "Dateformat 日期格式化",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/vue/data-checkbox/data-checkbox",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vue/easyinput/easyinput",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+			"pagePath": "pages/vue/index/index",
+			"iconPath": "static/component.png",
+			"selectedIconPath": "static/componentHL.png",
+			"text": "VUE"
+		}, {
+			"pagePath": "pages/nvue/index/index",
+			"iconPath": "static/component.png",
+			"selectedIconPath": "static/componentHL.png",
+			"text": "NUVE"
+		}]
+	}
+}
