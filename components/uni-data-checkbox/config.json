@@ -1,0 +1,10 @@
+{
+	"id": "3456",
+	"name": "DataCheckbox",
+	"desc": "数据选择器",
+	"url": "data-checkbox",
+	"type": "功能组件",
+	"edition": "0.0.2",
+	"path": "https://ext.dcloud.net.cn/plugin?id=3456",
+	"update_log": ["- 优化 项目示例"]
+}

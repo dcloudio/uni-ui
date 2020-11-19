@@ -1,0 +1,12 @@
+{
+	"id": "2773",
+	"name": "Forms",
+	"desc": "表单",
+	"edition": "1.0.23",
+	"url": "forms",
+	"type": "表单组件",
+	"suffix": "vue",
+	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons","uni-easyinput","uni-data-checkbox"],
+	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
+	"update_log": ["- 修复 app 端 binddata 方法报错的Bug"]
+}

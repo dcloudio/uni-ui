@@ -20,15 +20,93 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 
 本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
 ### 基本用法
 
-在 ``template`` 中使用组件
+输入内容后，输入框尾部会显示清除按钮，点击可清除内容，如不需要展示图标，`clearable` 属性设置为 `false` 即可
+
+`clearable` 属性设置为 `true` ，输入框聚焦且内容不为空时，才会显示内容
 
 ```html
-<uni-easyinput type="text" v-model="name"></uni-easyinput>
+	<uni-easyinput v-model="value" placeholder="请输入内容"></uni-easyinput>
 ```
+
+
+### 输入框带左右图标
+
+设置 `prefixIcon` 属性来显示输入框的头部图标
+
+设置 `suffixIcon` 属性来显示输入框的尾部图标 
+
+注意图标当前只支持 `uni-icons` 内置的图标，当配置 `suffixIcon` 属性后，会覆盖 `:clearable="true"` 和 `type="password"` 时的原有图标
+
+```html
+
+	<!-- 输入框头部图标 -->
+	<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容"></uni-easyinput>
+	<!-- 展示输入框尾部图标 -->
+	<uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容"></uni-easyinput>
+```
+
+### 输入框禁用
+
+设置 `disable` 属性可以禁用输入框，此时输入框不可编辑
+
+```html
+<uni-easyinput disabled  v-model="value" placeholder="请输入内容"></uni-easyinput>
+```
+
+### 密码框
+
+设置 `type="password"` 时，输入框内容将会不可见，由实心点代替，同时输入框尾部会显示眼睛图标，点击可切换内容显示状态
+
+```html
+<uni-easyinput type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
+```
+
+### 输入框聚焦
+
+设置 `focus` 属性可以使输入框聚焦
+
+如果页面存在多个设置 `focus` 属性的输入框，只有最后一个输入框的 `focus` 属性会生效
+
+```html
+<uni-easyinput focus v-model="password" placeholder="请输入内容"></uni-easyinput>
+```
+
+
+### 多行文本
+
+设置 `type="textarea"` 时可输入多行文本
+
+```html
+<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容"></uni-easyinput>
+```
+
+### 多行文本自动高度
+
+设置 `type="textarea"` 时且设置 `autoHeight` 属性，可使用多行文本的自动高度，会跟随内容调整输入框的显示高度
+
+```html
+<uni-easyinput type="textarea" autoHeight v-model="value" placeholder="请输入内容"></uni-easyinput>
+```
+
+### 取消边框
+
+设置 `:inputBorder="false"` 时可取消输入框的边框显示，同时搭配 `uni-forms` 的 `:border="true"` 有较好的效果
+
+```html
+<uni-forms border>
+	<uni-forms-item label="姓名">
+		<uni-easyinput :inputBorder="false" placeholder="请输入姓名"></uni-easyinput>
+	</uni-forms-item>
+	<uni-forms-item label="年龄">
+		<uni-easyinput :inputBorder="false" placeholder="请输入年龄"></uni-easyinput>
+	</uni-forms-item>
+</uni-forms>
+```
+
 
 ## API
 
@@ -39,19 +117,18 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |value 							|String/ Number	| -				 	|	-									|输入内容|
 |type	   						|String 				| 见 type Options |text| 				输入框的类型（默认text） |
 |clearable	   			|Boolean				|-	|true| 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容|
-|autoHeight	   			|Boolean				| -	|true|	是否自动增高输入区域，type为textarea时有效|
+|autoHeight	   			|Boolean				| -	|false|	是否自动增高输入区域，type为textarea时有效|
 |placeholder	   		|String 				| -	|-|	输入框的提示文字|
 |placeholderStyle 	|String 				| -	|-|	placeholder的样式(内联样式，字符串)，如"color: #ddd"|
 |focus	   					|Boolean				| -	|false|	是否自动获得焦点|
 |disabled	   				|Boolean				| -	|false|	是否不可输入|
-|maxlength	   			|Number | -	|140|	最大输入长度，设置为 -1 的时候不限制最大长度|
-|confirmType	   		|String | -	|done|	设置键盘右下角按钮的文字，仅在type="text"时生效|
-|errorMessage	  		|String | -	|-|	显示的错误提示内容，如果为空字符串或者false，则不显示错误信息|
-|clearSize	   			|Number | -	|15|	清除图标的大小，单位px|
-|prefixIcon	   			|String	| -	|-|输入框头部图标	|
-|suffixIcon	   			|String	| -	|-|输入框尾部图标|
-|trim	   						|Boolean| -	|-|	是否自动去除两端的空格|
-|inputBorder	   		|Boolean| -	|false|	是否显示input输入框的边框|
+|maxlength	   			|Number 				| -	|140|	最大输入长度，设置为 -1 的时候不限制最大长度|
+|confirmType	   		|String 				| -	|done|	设置键盘右下角按钮的文字，仅在type="text"时生效|
+|clearSize	   			|Number 				| -	|15|	清除图标的大小，单位px|
+|prefixIcon	   			|String					| -	|-|输入框头部图标	|
+|suffixIcon	   			|String					| -	|-|输入框尾部图标|
+|trim	   						|Boolean				| -	|-|	是否自动去除两端的空格|
+|inputBorder	   		|Boolean				| -	|false|	是否显示input输入框的边框|
 
 
 #### Type Options
@@ -77,11 +154,13 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |go			|右下角按钮为“前往”	|																																																			
 |done		|右下角按钮为“完成”	|
 	
-
 ### Easyinput Events
 
-|事件称名			|说明																	|								
-|:-:				|:-:																	|										
-|input			|任意表单项被校验后触发，返回表单校验信息		|
+|事件称名			| 说明											|	返回值	|						
+|:-:				| :-:											|	:-:		|							
+|@input 		|	输入框内容发生变化时触发		| -			|	
+|@focus 		|	输入框获得焦点时触发				| -			|	
+|@blur 			|	输入框失去焦点时触发				| -			|	
+|@confirm 	|	点击完成按钮时触发					| -			|	
 
 

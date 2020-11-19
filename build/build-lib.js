@@ -4,8 +4,8 @@ const glob = require("glob")
 const exec = require('child_process').exec
 const argv = process.argv.splice(2)[0]
 
-const packages = path.join(__dirname, '../src/components')
-const uniui = path.join(__dirname, '../packages/uni-ui')
+const packages = path.join(__dirname, '../components')
+const uniui = path.join(__dirname, '../packages')
 const lib = path.join(uniui, 'lib')
 const root = path.join(__dirname, '../')
 
