@@ -5,7 +5,14 @@ url : pages/vue/data-checkbox/data-checkbox
 ## DataCheckbox 数据驱动的单选复选框
 > 组件名：``uni-data-checkbox``，代码块： uDataCheckbox。
 
-通过数据驱动的单选框和复选框，可直接通过连接 `uniCloud` 获取数据，同时可以配合表单组件[uni-forms](https://ext.dcloud.net.cn/plugin?id=2773)使用
+本组件是基于uni-app基础组件checkbox的封装。本组件要解决问题包括：
+
+1. 数据绑定型组件：给本组件绑定一个data，会自动渲染一组候选内容。再以往，开发者需要编写不少代码实现类似功能
+2. 自动的表单校验：组件绑定了data，且符合[uni-forms](https://ext.dcloud.net.cn/plugin?id=2773)组件的表单校验规范，搭配使用会自动实现表单校验
+3. 本组件合并了单选多选
+4. 本组件有若干风格选择，如普通的单选多选框、并列button风格、tag风格。开发者可以快速选择需要的风格。但作为一个封装组件，样式代码虽然不用自己写了，却会牺牲一定的样式自定义性
+
+在uniCloud开发中，`DB Schema`中配置了enum枚举等类型后，在web控制台的[自动生成表单](https://uniapp.dcloud.io/uniCloud/schema?id=autocode)功能中，会自动生成``uni-data-checkbox``组件并绑定好data
 
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
