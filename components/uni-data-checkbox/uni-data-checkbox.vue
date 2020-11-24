@@ -7,28 +7,29 @@
 		</template>
 		<template v-else>
 			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
-				<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
+				<label class="checklist-box" :class="item.labelClass" :style="[item.styleBackgroud]" v-for="(item,index) in dataList"
+				 :key="index">
 					<checkbox hidden :disabled="!!item.disable" :value="item.value+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"
-					 :class="item.checkboxBgClass">
+					 :class="item.checkboxBgClass" :style="[item.styleIcon]">
 						<view class="checkbox__inner-icon" :class="item.checkboxClass"></view>
 					</view>
 					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-						<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
-						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
+						<text class="checklist-text" :class="item.textClass" :style="[item.styleIconText]">{{item.text}}</text>
+						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass" :style="[item.styleBackgroud]"></view>
 					</view>
 				</label>
 			</checkbox-group>
 			<radio-group v-else class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
-				<label class="checklist-box" :class="item.labelClass" v-for="(item,index) in dataList" :key="index">
+				<label class="checklist-box" :class="item.labelClass" :style="[item.styleBackgroud]" v-for="(item,index) in dataList" :key="index">
 					<radio hidden :disabled="item.disable" :value="item.value+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner"
-					 :class="item.checkboxBgClass">
-						<view class="radio__inner-icon" :class="item.checkboxClass"></view>
+					 :class="item.checkboxBgClass" :style="[item.styleBackgroud]">
+						<view class="radio__inner-icon" :class="item.checkboxClass" :style="[item.styleIcon]"></view>
 					</view>
 					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-						<text class="checklist-text" :class="item.textClass">{{item.text}}</text>
-						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass"></view>
+						<text class="checklist-text" :class="item.textClass" :style="[item.styleIconText]">{{item.text}}</text>
+						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :class="item.listClass" :style="[item.styleRightIcon]"></view>
 					</view>
 				</label>
 			</radio-group>
@@ -53,11 +54,13 @@
 	 * @property {Number|String} max 最大选择个数 ，multiple为true时生效
 	 * @property {Boolean} wrap 是否换行显示
 	 * @property {String} icon = [left|right]  list 列表模式下icon显示位置
+	 * @property {Boolean} selectedColor 选中颜色
+	 * @property {Boolean} selectedTextColor 选中文本颜色，如不填写则自动显示
 	 * @value left 左侧显示
 	 * @value right 右侧显示
 	 * @event {Function} change  选中发生变化触发
 	 */
-
+	
 	import clientdb from './clientdb.js'
 	export default {
 		name: 'uniDataChecklist',
@@ -99,6 +102,14 @@
 				type: String,
 				default: 'left'
 			},
+			selectedColor:{
+				type: String,
+				default: ''
+			},
+			selectedTextColor:{
+				type: String,
+				default: ''
+			}
 		},
 		watch: {
 			localdata: {
@@ -107,13 +118,7 @@
 				},
 				deep: true
 			},
-			// range: {
-			// 	handler(newVal) {
-			// 		this.range = newVal
-			// 		this.dataList = this.getDataList(this.getSelectedValue(newVal))
-			// 	},
-			// 	deep: true
-			// },
+			
 			listData(newVal) {
 				this.range = newVal
 				this.dataList = this.getDataList(this.getSelectedValue(newVal))
@@ -121,7 +126,7 @@
 			},
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
-				this.formItem&&this.formItem.setValue(newVal)
+				this.formItem && this.formItem.setValue(newVal)
 			}
 		},
 		data() {
@@ -134,10 +139,12 @@
 					contentnomore: '没有更多'
 				},
 				styles: {
-					selectedBackgroudColor: 'red',
-					selectedColor: 'blue',
-					backgroundColor: '#ffffff',
-					color: '#333',
+					// selectedBackgroudColor: '#007aff',
+					// selectedBackgroudColor: 'red',
+					selectedColor: 'red',
+					// selectedTextColor:'blue'
+					// backgroundColor: 'blue',
+					// color: 'red',
 
 				}
 			};
@@ -146,9 +153,13 @@
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			this.formItem && this.formItem.setValue(this.value)
-
+			this.styles = {
+				selectedColor: this.selectedColor,
+				selectedTextColor: this.selectedTextColor
+			}
+			
 			if (this.formItem) {
-				if(this.formItem.name){
+				if (this.formItem.name) {
 					this.rename = this.formItem.name
 					this.form.inputChildrens.push(this)
 				}
@@ -164,13 +175,7 @@
 			}
 		},
 		methods: {
-			init(range) {
-				// if(!this.range || this.range.length === 0){
-				// 	this.loadData()
-				// }else{
-				// 	this.dataList = this.getDataList(this.getSelectedValue(range))
-				// }
-			},
+			init(range) {},
 			/**
 			 * 获取父元素实例
 			 */
@@ -208,7 +213,7 @@
 						}
 					}
 				}
-				this.formItem&&this.formItem.setValue(detail.value)
+				this.formItem && this.formItem.setValue(detail.value)
 				this.$emit('input', detail.value)
 				this.$emit('change', {
 					detail
@@ -352,6 +357,12 @@
 				item.textClass = this.getTextClass(item)
 				// 设置 list 对勾右侧样式
 				item.listClass = this.getCheckboxClass(item, '-list')
+
+				//  设置自定义样式
+				item.styleBackgroud = this.setStyleBackgroud(item)
+				item.styleIcon = this.setStyleIcon(item)
+				item.styleIconText = this.setStyleIconText(item)
+				item.styleRightIcon = this.setStyleRightIcon(item)
 			},
 			/**
 			 * 获取 class
@@ -380,6 +391,57 @@
 					}
 				})
 				return this.value.length > 0 ? this.value : selectedArr
+			},
+
+			/**
+			 * 设置背景样式
+			 */
+			setStyleBackgroud(item) {
+				let styles = {}
+
+				if (item.selected) {
+					if (this.mode !== 'list') {
+						styles.borderColor = this.styles.selectedColor
+					}
+					if (this.mode === 'tag') {
+						styles.backgroundColor = this.styles.selectedColor
+					}
+				}
+				return styles
+			},
+			setStyleIcon(item) {
+				let styles = {}
+
+				if (item.selected) {
+					styles.backgroundColor = this.styles.selectedColor
+					styles.borderColor = this.styles.selectedColor
+				} 
+				return styles
+			},
+			setStyleIconText(item) {
+				let styles = {}
+				if (item.selected) {
+					if (this.styles.selectedTextColor) {
+						styles.color = this.styles.selectedTextColor
+					} else {
+						if(this.mode === 'tag'){
+							styles.color = '#fff'
+						}else{
+							styles.color = this.styles.selectedColor
+						}
+					}
+				}
+				return styles
+			},
+			setStyleRightIcon(item){
+				let styles = {}
+				if (item.selected) {
+					if(this.mode === 'list'){
+						styles.borderColor = this.styles.selectedColor
+					}
+				}
+				
+				return styles
 			}
 		}
 	}

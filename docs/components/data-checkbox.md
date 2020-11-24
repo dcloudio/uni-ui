@@ -170,6 +170,39 @@ url : pages/vue/data-checkbox/data-checkbox
 	}
 ```
 
+
+### 自定义选中颜色
+
+设置 `selectedColor` 属性，可以修改组件选中后的图标及边框颜色
+
+设置 `selectedTextColor` 属性，可以修改组件选中后的文字颜色，如不填写默认同 `selectedColor` 属性 ，`mode` 属性为 `tag` 时，默认为白色
+
+```html
+<template>
+	<view>
+		<uni-data-checkbox　selectedColor＝"red" selectedTextColor="red" multiple v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
+
+```
+
+```javascript
+
+	export default {
+		data() { 
+			return {
+				value: [0,2],
+				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+			}
+		},
+		methods: {
+			change(e){
+				console.log('e:',e);
+			}
+		}
+	}
+```
+
 ### 更多模式
 
 设置 `mode` 属性，可以设置更多显示样式，目前内置样式有四种 `default/list/button/tag` 
