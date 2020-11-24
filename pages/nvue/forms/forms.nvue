@@ -18,7 +18,7 @@
 					<uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput>
 				</uni-forms-item>
 				<uni-forms-item name="time" label="创建时间">
-					<uni-datetime-picker v-model="formData.time" :minYear="2000" :maxYear="2030" :timestamp="true" @change="datetimeChange"></uni-datetime-picker>
+					<uni-datetime-picker v-model="formData.time" :min-year="2000" :max-year="2030" :timestamp="true" @change="datetimeChange"></uni-datetime-picker>
 				</uni-forms-item>
 				<uni-forms-item name="checked" label="详细信息">
 					<switch :checked="formData.checked" @change="change('checked',$event.detail.value)" />
