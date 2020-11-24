@@ -60,7 +60,7 @@
 	 * @value right 右侧显示
 	 * @event {Function} change  选中发生变化触发
 	 */
-	
+
 	import clientdb from './clientdb.js'
 	export default {
 		name: 'uniDataChecklist',
@@ -118,7 +118,7 @@
 				},
 				deep: true
 			},
-			
+
 			listData(newVal) {
 				this.range = newVal
 				this.dataList = this.getDataList(this.getSelectedValue(newVal))
@@ -139,13 +139,8 @@
 					contentnomore: '没有更多'
 				},
 				styles: {
-					// selectedBackgroudColor: '#007aff',
-					// selectedBackgroudColor: 'red',
-					selectedColor: 'red',
-					// selectedTextColor:'blue'
-					// backgroundColor: 'blue',
-					// color: 'red',
-
+					selectedColor: '#007aff',
+					selectedTextColor: '#333',
 				}
 			};
 		},
@@ -157,7 +152,7 @@
 				selectedColor: this.selectedColor,
 				selectedTextColor: this.selectedTextColor
 			}
-			
+
 			if (this.formItem) {
 				if (this.formItem.name) {
 					this.rename = this.formItem.name
@@ -415,7 +410,7 @@
 				if (item.selected) {
 					styles.backgroundColor = this.styles.selectedColor
 					styles.borderColor = this.styles.selectedColor
-				} 
+				}
 				return styles
 			},
 			setStyleIconText(item) {
@@ -440,7 +435,7 @@
 						styles.borderColor = this.styles.selectedColor
 					}
 				}
-				
+
 				return styles
 			}
 		}

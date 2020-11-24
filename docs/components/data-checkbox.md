@@ -15,7 +15,7 @@ url : pages/vue/data-checkbox/data-checkbox
 在uniCloud开发中，`DB Schema`中配置了enum枚举等类型后，在web控制台的[自动生成表单](https://uniapp.dcloud.io/uniCloud/schema?id=autocode)功能中，会自动生成``uni-data-checkbox``组件并绑定好data
 
 ::: warning 注意事项
-为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些必要的错误使用。
+为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
 - 本组件为数据驱动，目的是快速投入使用，只可通过 style 覆盖有限样式，不支持自定义更多样式
@@ -259,6 +259,8 @@ url : pages/vue/data-checkbox/data-checkbox
 |max					|String/Number			|-											|-			|最大选择个数 ，multiple为true时生效		|
 |wrap					|Boolean						|-											|-			|是否换行显示				|
 |icon					|String							|left/right							|left		|list 列表模式下 icon 显示的位置	|
+|selectedColor|String							|-											|#007aff|选中颜色|
+|selectedTextColor|String					|-											|#333		|选中文本颜色，如不填写则自动显示|
 
 #### Localdata Options
 
