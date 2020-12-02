@@ -4,11 +4,10 @@
 	"desc": "列表",
 	"url": "list",
 	"type": "布局组件",
-	"edition": "1.0.11",
+	"edition": "1.0.12",
 	"module": ["uni-list", "uni-list-item","uni-badge","uni-icons","uni-list-chat","uni-list-ad"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
 	"update_log": [
-		"- 新增 direction属性",
-		"- 优化 插槽的使用方式"
+		"- 修复 provide/inject 报错的问题"
 	]
 }

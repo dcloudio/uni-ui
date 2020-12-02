@@ -7,5 +7,5 @@
 	"type": "表单组件",
 	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=3455",
-	"update_log": ["- 修复 focus 属性不生效的Bug","- 优化 使用文档"]
+	"update_log": ["- 优化 返回事件进行节流处理"]
 }
