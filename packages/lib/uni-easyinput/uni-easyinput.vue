@@ -6,8 +6,7 @@
 			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled"
 			 :maxlength="inputMaxlength" :focus="focused" :autoHeight="autoHeight" @input="onInput" @blur="onBlur" @focus="onFocus"
 			 @confirm="onConfirm"></textarea>
-			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input"
-			 :style="{
+			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input" :style="{
 				 'padding-right':type === 'password' ||clearable || prefixIcon?'':'10px',
 				 'padding-left':prefixIcon?'':'10px',
 				 'color':msg?'#dd524d':''
@@ -24,7 +23,7 @@
 			</template>
 			<template v-else>
 				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
-				 v-if="clearable && focused && val != '' " color="#c0c4cc" @click="onClear"></uni-icons>
+				 v-if="clearable && focused && val " color="#c0c4cc" @click="onClear"></uni-icons>
 			</template>
 		</view>
 	</view>
@@ -62,10 +61,16 @@
 	 * @event {Function} 	confirm 			点击完成按钮时触发
 	 * @example <uni-easyinput v-model="mobile"></uni-easyinput>
 	 */
+
+	import {
+		debounce,
+		throttle
+	} from './common.js'
+
 	export default {
 		name: 'uni-easyinput',
 		props: {
-			name:String,
+			name: String,
 			value: [Number, String],
 			type: {
 				type: String,
@@ -82,8 +87,8 @@
 			placeholder: String,
 			placeholderStyle: String,
 			focus: {
-				type:Boolean,
-				default:false
+				type: Boolean,
+				default: false
 			},
 			disabled: {
 				type: Boolean,
@@ -107,11 +112,11 @@
 				type: Boolean,
 				default: true
 			},
-			prefixIcon :{
+			prefixIcon: {
 				type: String,
 				default: ''
 			},
-			suffixIcon : {
+			suffixIcon: {
 				type: String,
 				default: ''
 			},
@@ -149,9 +154,8 @@
 					this.formItem.setValue(newVal)
 				}
 			},
-			focus(newVal){
-				console.log(newVal);
-				this.$nextTick(()=>{
+			focus(newVal) {
+				this.$nextTick(() => {
 					this.focused = this.focus
 				})
 			}
@@ -161,7 +165,7 @@
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			if (this.formItem) {
-				if(this.formItem.name){
+				if (this.formItem.name) {
 					this.rename = this.formItem.name
 					this.form.inputChildrens.push(this)
 				}
@@ -169,7 +173,8 @@
 
 		},
 		mounted() {
-			this.$nextTick(()=>{
+			// this.onInput = throttle(this.input, 500)
+			this.$nextTick(() => {
 				this.focused = this.focus
 			})
 		},
@@ -376,5 +381,4 @@
 	.is-disabled {
 		background-color: #eee;
 	}
-
 </style>

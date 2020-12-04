@@ -4,7 +4,8 @@
 	"desc": "数据选择器",
 	"url": "data-checkbox",
 	"type": "功能组件",
-	"edition": "0.0.2",
+	"edition": "0.0.5",
+	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=3456",
-	"update_log": ["- 优化 项目示例"]
+	"update_log": ["- 优化 文档示例"]
 }

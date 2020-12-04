@@ -79,11 +79,7 @@ npm install @dcloudio/uni-ui -D
 例如我们需要导入 `uni-badge` 组件
 
 ```javascript
-import {uniBadge} from '@dcloudio/uni-ui'
-
-// TypeScript 项目可使用此方式引入组件，可以避免 TS 的类型校验（如果是通过 cli 创建的项目，推荐使用方式三，可以拥有更好的开发体验）
-//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue'
-
+import {unibadge} from '@dcloudio/uni-ui'
 export default {
     components: {unibadge}
 }

@@ -6353,9 +6353,9 @@ pretty-time@^1.1.0:
   integrity sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==
 
 prismjs@^1.13.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.22.0.tgz#73c3400afc58a823dd7eed023f8e1ce9fd8977fa"
-  integrity sha512-lLJ/Wt9yy0AiSYBf212kK3mM5L8ycwlyTlSxHBAneXLR0nzFMlZ5y7riFPF3E33zXOF2IH95xdY5jIyZbM9z/w==
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.20.0.tgz#9b685fc480a3514ee7198eac6a3bf5024319ff03"
+  integrity sha512-AEDjSrVNkynnw6A+B1DsFkd6AVdTnp+/WoUixFRULlCLZVRZlVQMVWio/16jv7G1FscUxQxOQhWwApgbnxr6kQ==
   optionalDependencies:
     clipboard "^2.0.0"
 
@@ -8184,8 +8184,8 @@ vuepress-html-webpack-plugin@^3.2.0:
 
 vuepress-plugin-code-copy@^1.0.6:
   version "1.0.6"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-code-copy/-/vuepress-plugin-code-copy-1.0.6.tgz#6431dab764b48b5b203e4936d98b1943651ce4ad"
-  integrity sha512-FiqwMtlb4rEsOI56O6sSkekcd3SlESxbkR2IaTIQxsMOMoalKfW5R9WlR1Pjm10v6jmU661Ex8MR11k9IzrNUg==
+  resolved "https://registry.npm.taobao.org/vuepress-plugin-code-copy/download/vuepress-plugin-code-copy-1.0.6.tgz#6431dab764b48b5b203e4936d98b1943651ce4ad"
+  integrity sha1-ZDHat2S0i1sgPkk22YsZQ2Uc5K0=
 
 vuepress-plugin-container@^2.0.2:
   version "2.1.4"

@@ -17,6 +17,9 @@
 				<uni-forms-item name="email" label="邮箱">
 					<uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput>
 				</uni-forms-item>
+				<uni-forms-item name="time" label="创建时间">
+					<uni-datetime-picker v-model="formData.time" :min-year="2000" :max-year="2030" :timestamp="true" @change="datetimeChange"></uni-datetime-picker>
+				</uni-forms-item>
 				<uni-forms-item name="checked" label="详细信息">
 					<switch :checked="formData.checked" @change="change('checked',$event.detail.value)" />
 				</uni-forms-item>
@@ -42,7 +45,7 @@
 			</template>
 
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-			<!-- <button class="button" form-type="submit">Submit</button>
+<!-- 			<button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
 
 			<view class="example">
@@ -61,6 +64,7 @@
 		data() {
 			return {
 				formData: {
+					time: '',
 					name: '',
 					age: '',
 					email: "",
@@ -165,6 +169,7 @@
 			setTimeout(() => {
 				this.formData = {
 					name: 'LiMing',
+					time: '',
 					age: 1,
 					email: "",
 					sex: '0',
@@ -235,6 +240,9 @@
 			clearValidate(form, name) {
 				if (!name) name = []
 				this.$refs[form].clearValidate(name)
+			},
+			datetimeChange(e){
+				this.formData.time = e
 			}
 		}
 	}

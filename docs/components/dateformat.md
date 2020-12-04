@@ -1,15 +1,15 @@
-### DateFormate 日期格式化
+### DateFormat 日期格式化
 
-日期格式化组件，组件名：`uni-dateformate`，代码块： uDateformate。
+日期格式化组件，组件名：`uni-dateformat`，代码块： uDateformat。
 
 ### 使用方式
 
 在 ``script`` 中引用组件 
 
 ```javascript
-import uniDateformate from "@/components/uni-dateformate/uni-dateformate.vue"
+import uniDateformat from "@/components/uni-dateformat/uni-dateformat.vue"
 export default {
-    components: {uniDateformate}
+    components: {uniDateformat}
 }
 ```
 
@@ -19,10 +19,10 @@ export default {
 
 ```html
 <!-- 一般用法 -->
-<uni-dateformate date="2020/10/20 20:20:20"></uni-dateformate>
+<uni-dateformat date="2020/10/20 20:20:20"></uni-dateformat>
 
 <!-- 不显示刚刚/马上/xx分钟前 -->
-<uni-dateformate date="2020/10/20 20:20:20" :threshold="[0,0]"></uni-dateformate>
+<uni-dateformat date="2020/10/20 20:20:20" :threshold="[0,0]"></uni-dateformat>
 ```
 
 ### 属性说明
@@ -69,4 +69,4 @@ format接收字符以及含义如下：
 
 ### 插件预览地址
 
-[https://uniapp.dcloud.io/h5/pages/extUI/count-dateformate/count-dateformate](https://uniapp.dcloud.io/h5/pages/extUI/count-dateformate/count-dateformate)
+[https://uniapp.dcloud.io/h5/pages/extUI/count-dateformat/count-dateformat](https://uniapp.dcloud.io/h5/pages/extUI/count-dateformat/count-dateformat)

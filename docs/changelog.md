@@ -6,7 +6,7 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
-<log title="1.2.9" date="未发布">
+<log title="1.2.9" date="2020-12-04">
 	<log-item-text tag-type="feat" only>
 		<highlight text="uni-easyinput" /> 增强输入框
 	</log-item-text>
