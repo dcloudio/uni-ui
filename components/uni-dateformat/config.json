@@ -4,7 +4,7 @@
 	"desc": "日期格式化",
 	"url": "dateformat",
 	"type": "功能组件",
-	"edition": "0.0.1",
+	"edition": "0.0.2",
 	"path": "https://ext.dcloud.net.cn/plugin?id=3279",
-	"update_log": ["- 初始化项目"]
+	"update_log": ["- 修复 iOS 平台日期格式化出错的问题"]
 }

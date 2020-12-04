@@ -2,10 +2,10 @@
 	"id": "3455",
 	"name": "Easyinput",
 	"desc": "增强输入框",
-	"edition": "0.0.3",
+	"edition": "0.0.4",
 	"url": "easyinput",
 	"type": "表单组件",
 	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=3455",
-	"update_log": ["- 优化 返回事件进行节流处理"]
+	"update_log": ["- 修复 校验返回值与实际返回值不一致的问题"]
 }

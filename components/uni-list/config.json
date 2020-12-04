@@ -4,10 +4,10 @@
 	"desc": "列表",
 	"url": "list",
 	"type": "布局组件",
-	"edition": "1.0.12",
+	"edition": "1.0.14",
 	"module": ["uni-list", "uni-list-item","uni-badge","uni-icons","uni-list-chat","uni-list-ad"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=24",
 	"update_log": [
-		"- 修复 provide/inject 报错的问题"
+		"- 修复 uni-list-chat 角标显示不正常的问题"
 	]
 }

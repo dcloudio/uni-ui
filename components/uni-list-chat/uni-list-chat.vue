@@ -495,7 +495,7 @@
 
 	.uni-badge--single {
 		/* #ifndef APP-NVUE */
-		left: calc(#{$avatar-width} + 7px + #{$badge-left});
+		// left: calc(#{$avatar-width} + 7px + #{$badge-left});
 		/* #endif */
 		width: $badge-size;
 		height: $badge-size;

@@ -2,15 +2,12 @@
 	"id": "55",
 	"name": "uni-ui",
 	"desc": "基于 uni-app 的 UI 组件库",
-	"edition": "1.2.8",
+	"edition": "1.2.9",
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
-		"- 新增 uni-data-checkbox 数据驱动的单选复选框",
-		"- 新增 uni-easyinput 增强输入框",
-		"- uni-forms 新增 border 属性，可控制是否选择分隔线",
-		"- uni-forms 新增 异步校验方法",
-		"- uni-forms 修复 在 err-show-type 属性为 toast 时，校验错误的Bug",
-		"- uni-forms 优化  支持 uni-data-checkbox、uni-easyinput",
-		"- uni-forms 优化  项目示例"
+		"- uni-easyinput 修复 校验返回值与实际返回值不一致的问题",
+		"- uni-forms 修复 不设置 label 属性的时候 errorMessage 位置错误的问题",
+		"- uni-list 修复 uni-list-chat 扩展组件角标显示不正常的问题",
+		"- uni-dateformat 修复 iOS 平台日期格式化出错的问题"
 	]
 }
