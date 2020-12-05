@@ -151,7 +151,7 @@
         box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
         overflow-x: auto;
 		background-color: #fff;
-        /deep/ .uni-table-tr:nth-child(n+2) {
+        ::v-deep .uni-table-tr:nth-child(n+2) {
             &:hover {
                 background-color: #f5f7fa;
             }
@@ -167,7 +167,7 @@
     }
 
     .table--stripe {
-        /deep/ .uni-table-tr:nth-child(2n+3) {
+        ::v-deep .uni-table-tr:nth-child(2n+3) {
             background-color: #fafafa;
         }
 

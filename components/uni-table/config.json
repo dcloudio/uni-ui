@@ -8,6 +8,6 @@
 	"module": ["uni-table", "uni-tr","uni-th","uni-td"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=3270",
 	"update_log": "- 新增 初始化",
-	"hidden":true,
+	"compilation":"#ifdef H5",
 	"suffix": "vue"
 }
