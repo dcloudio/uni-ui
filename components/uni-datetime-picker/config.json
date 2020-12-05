@@ -1,0 +1,11 @@
+{
+	"id": "9999",
+	"name": "DatetimePicker",
+	"desc": "日期格式化",
+	"url": "datetime-picker",
+	"type": "功能组件",
+	"edition": "0.0.1",
+	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
+	"hidden": true,
+	"update_log": []
+}

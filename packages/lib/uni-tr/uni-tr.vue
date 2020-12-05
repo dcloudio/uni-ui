@@ -99,12 +99,12 @@
     }
 
     .uni-table-tr {
-        /deep/ .uni-table-th {
+        ::v-deep .uni-table-th {
             &.table--border:last-child {
                 border-right: none;
             }
         }
-        /deep/ .uni-table-td {
+        ::v-deep .uni-table-td {
             &.table--border:last-child {
                 border-right: none;
             }
