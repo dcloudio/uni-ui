@@ -149,6 +149,7 @@
 		},
 		watch: {
 			value(newVal) {
+				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
 				if (this.formItem) {
 					this.formItem.setValue(newVal)
