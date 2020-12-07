@@ -13,6 +13,14 @@
 	<log-item-text tag-type="feat" only>
 		<highlight text="uni-data-checkbox" /> 数据驱动的单选复选框
 	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-dateformat" /> 日期格式化
+	</log-item-text>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			uni-list-chat 扩展组件角标显示不正常的问题
+		</log-item-text>
+	</log-item>
 </log>
 
 <log title="1.2.8" date="2020-10-23">
