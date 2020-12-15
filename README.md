@@ -70,7 +70,11 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui -D
+npm i @dcloudio/uni-ui --save
+
+npm i sass -D
+
+npm i sass-loader -D
 ```
 
 
