@@ -83,9 +83,9 @@ npm i sass-loader -D
 例如我们需要导入 `uni-badge` 组件
 
 ```javascript
-import {unibadge} from '@dcloudio/uni-ui'
+import {uniBadge} from '@dcloudio/uni-ui'
 export default {
-    components: {unibadge}
+    components: {uniBadge}
 }
 ```
 
