@@ -41,12 +41,14 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 
 注意图标当前只支持 `uni-icons` 内置的图标，当配置 `suffixIcon` 属性后，会覆盖 `:clearable="true"` 和 `type="password"` 时的原有图标
 
+绑定 `@iconClick` 事件可以触发图标的点击 ，返回 `prefix` 表示点击左侧图标，返回 `suffix` 表示点击右侧图标
+
 ```html
 
 	<!-- 输入框头部图标 -->
-	<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容"></uni-easyinput>
+	<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
 	<!-- 展示输入框尾部图标 -->
-	<uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容"></uni-easyinput>
+	<uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
 ```
 
 ### 输入框禁用
@@ -116,19 +118,20 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |:-:								| :-:						|:-:				| :-:								| :-:	|	
 |value 							|String/ Number	| -				 	|	-									|输入内容|
 |type	   						|String 				| 见 type Options |text| 				输入框的类型（默认text） |
-|clearable	   			|Boolean				|-	|true| 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容|
+|clearable	   			|Boolean				| -	|true| 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容|
 |autoHeight	   			|Boolean				| -	|false|	是否自动增高输入区域，type为textarea时有效|
-|placeholder	   		|String 				| -	|-|	输入框的提示文字|
-|placeholderStyle 	|String 				| -	|-|	placeholder的样式(内联样式，字符串)，如"color: #ddd"|
+|placeholder	   		|String 				| -	| - |	输入框的提示文字|
+|placeholderStyle 	|String 				| -	| - |	placeholder的样式(内联样式，字符串)，如"color: #ddd"|
 |focus	   					|Boolean				| -	|false|	是否自动获得焦点|
 |disabled	   				|Boolean				| -	|false|	是否不可输入|
 |maxlength	   			|Number 				| -	|140|	最大输入长度，设置为 -1 的时候不限制最大长度|
 |confirmType	   		|String 				| -	|done|	设置键盘右下角按钮的文字，仅在type="text"时生效|
 |clearSize	   			|Number 				| -	|15|	清除图标的大小，单位px|
-|prefixIcon	   			|String					| -	|-|输入框头部图标	|
-|suffixIcon	   			|String					| -	|-|输入框尾部图标|
-|trim	   						|Boolean				| -	|-|	是否自动去除两端的空格|
+|prefixIcon	   			|String					| -	| - |输入框头部图标	|
+|suffixIcon	   			|String					| -	| - |输入框尾部图标|
+|trim	   						|Boolean				| -	| - |	是否自动去除两端的空格|
 |inputBorder	   		|Boolean				| -	|false|	是否显示input输入框的边框|
+|styles				   		|Object					| -	| - |	样式自定义|
 
 
 #### Type Options
@@ -151,16 +154,26 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |send		|右下角按钮为“发送”	|
 |search	|右下角按钮为“搜索”	|
 |next		|右下角按钮为“下一个”|
-|go			|右下角按钮为“前往”	|																																																			
+|go			|右下角按钮为“前往”	|											
 |done		|右下角按钮为“完成”	|
 	
+
+#### Styles Options 
+	
+|属性名				| 默认值 	|说明																			|
+|:-:					| :-:		 	| :-:																		|
+|color				| #333   	|	输入文字颜色														|
+|disableColor	|#eee			|	输入框禁用背景色													|
+|borderColor	|#e5e5e5	|	边框颜色												|
+
 ### Easyinput Events
 
-|事件称名			| 说明											|	返回值	|						
-|:-:				| :-:											|	:-:		|							
-|@input 		|	输入框内容发生变化时触发		| -			|	
-|@focus 		|	输入框获得焦点时触发				| -			|	
-|@blur 			|	输入框失去焦点时触发				| -			|	
-|@confirm 	|	点击完成按钮时触发					| -			|	
+|事件称名		| 说明										|返回值					|
+|:-:				| :-:											|:-:						|
+|@input			|输入框内容发生变化时触发	| -							|
+|@focus			|输入框获得焦点时触发			| -							|
+|@blur			|输入框失去焦点时触发			| -							|
+|@confirm		|点击完成按钮时触发				| -							|
+|@iconClick	|点击图标时触发						| prefix/suffix	|
 
 

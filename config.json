@@ -6,6 +6,8 @@
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
 		"- uni-easyinput 修复 校验返回值与实际返回值不一致的问题",
+		"- uni-easyinput 新增 styles 属性，可以自定义部分样式",
+		"- uni-easyinput 新增 图标点击事件",
 		"- uni-forms 修复 不设置 label 属性的时候 errorMessage 位置错误的问题",
 		"- uni-list 修复 uni-list-chat 扩展组件角标显示不正常的问题",
 		"- uni-dateformat 修复 iOS 平台日期格式化出错的问题",
