@@ -9,7 +9,7 @@
 			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
 				<label class="checklist-box" :class="item.labelClass" :style="[item.styleBackgroud]" v-for="(item,index) in dataList"
 				 :key="index">
-					<checkbox hidden :disabled="!!item.disabled" :value="item.value+''" :checked="item.selected" />
+					<checkbox class="hidden" hidden :disabled="!!item.disabled" :value="item.value+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"
 					 :class="item.checkboxBgClass" :style="[item.styleIcon]">
 						<view class="checkbox__inner-icon" :class="item.checkboxClass"></view>
@@ -109,11 +109,63 @@
 			selectedTextColor:{
 				type: String,
 				default: ''
+			},
+			// clientDB 相关
+			options: {
+				type: [Object, Array],
+				default () {
+					return {}
+				}
+			},
+			collection: {
+				type: String,
+				default: ''
+			},
+			action: {
+				type: String,
+				default: ''
+			},
+			field: {
+				type: String,
+				default: ''
+			},
+			pageData: {
+				type: String,
+				default: 'add'
+			},
+			pageCurrent: {
+				type: Number,
+				default: 1
+			},
+			pageSize: {
+				type: Number,
+				default: 20
+			},
+			getcount: {
+				type: [Boolean, String],
+				default: false
+			},
+			orderby: {
+				type: String,
+				default: ''
+			},
+			where: {
+				type: [String, Object],
+				default: ''
+			},
+			getone: {
+				type: [Boolean, String],
+				default: false
+			},
+			manual: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {
 			localdata: {
 				handler(newVal) {
+					this.range = newVal
 					this.dataList = this.getDataList(this.getSelectedValue(newVal))
 				},
 				deep: true
@@ -122,7 +174,6 @@
 			listData(newVal) {
 				this.range = newVal
 				this.dataList = this.getDataList(this.getSelectedValue(newVal))
-				// console.log('----listData', this.dataList);
 			},
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
@@ -445,6 +496,8 @@
 
 <style>
 	.uni-data-checklist {
+		position: relative;
+		z-index: 0;
 		/* min-height: 36px; */
 	}
 
@@ -763,5 +816,11 @@
 
 	.is-wrap {
 		flex-direction: column;
+	}
+	
+	.hidden {
+		 /* #ifdef MP-ALIPAY */
+		 display: none;
+		 /* #endif */
 	}
 </style>
