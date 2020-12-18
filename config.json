@@ -2,7 +2,7 @@
 	"id": "55",
 	"name": "uni-ui",
 	"desc": "基于 uni-app 的 UI 组件库",
-	"edition": "1.2.9",
+	"edition": "1.2.10",
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
 		"- uni-easyinput 修复 校验返回值与实际返回值不一致的问题",
@@ -14,6 +14,7 @@
 		"- uni-data-checkbox 修复 异步获取数据渲染失败的Bug",
 		"- uni-data-checkbox 修复 支付宝小程序端报错且显示不正常的Bug",
 		"- uni-data-checkbox 修复 z-index 错误的Bug",
-		"- uni-data-checkbox 优化 兼容属性 disabled"
+		"- uni-data-checkbox 优化 兼容属性 disabled",
+		"- uni-indexed-list 修复 easyCom 模式下，找不到子组件的问题"
 	]
 }

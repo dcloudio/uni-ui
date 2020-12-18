@@ -9,7 +9,7 @@
 			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
 				<label class="checklist-box" :class="item.labelClass" :style="[item.styleBackgroud]" v-for="(item,index) in dataList"
 				 :key="index">
-					<checkbox hidden :disabled="!!item.disable" :value="item.value+''" :checked="item.selected" />
+					<checkbox class="hidden" hidden :disabled="!!item.disabled" :value="item.value+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"
 					 :class="item.checkboxBgClass" :style="[item.styleIcon]">
 						<view class="checkbox__inner-icon" :class="item.checkboxClass"></view>
@@ -22,7 +22,7 @@
 			</checkbox-group>
 			<radio-group v-else class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
 				<label class="checklist-box" :class="item.labelClass" :style="[item.styleBackgroud]" v-for="(item,index) in dataList" :key="index">
-					<radio hidden :disabled="item.disable" :value="item.value+''" :checked="item.selected" />
+					<radio hidden :disabled="item.disabled" :value="item.value+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner"
 					 :class="item.checkboxBgClass" :style="[item.styleBackgroud]">
 						<view class="radio__inner-icon" :class="item.checkboxClass" :style="[item.styleIcon]"></view>
@@ -109,11 +109,63 @@
 			selectedTextColor:{
 				type: String,
 				default: ''
+			},
+			// clientDB 相关
+			options: {
+				type: [Object, Array],
+				default () {
+					return {}
+				}
+			},
+			collection: {
+				type: String,
+				default: ''
+			},
+			action: {
+				type: String,
+				default: ''
+			},
+			field: {
+				type: String,
+				default: ''
+			},
+			pageData: {
+				type: String,
+				default: 'add'
+			},
+			pageCurrent: {
+				type: Number,
+				default: 1
+			},
+			pageSize: {
+				type: Number,
+				default: 20
+			},
+			getcount: {
+				type: [Boolean, String],
+				default: false
+			},
+			orderby: {
+				type: String,
+				default: ''
+			},
+			where: {
+				type: [String, Object],
+				default: ''
+			},
+			getone: {
+				type: [Boolean, String],
+				default: false
+			},
+			manual: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {
 			localdata: {
 				handler(newVal) {
+					this.range = newVal
 					this.dataList = this.getDataList(this.getSelectedValue(newVal))
 				},
 				deep: true
@@ -122,7 +174,6 @@
 			listData(newVal) {
 				this.range = newVal
 				this.dataList = this.getDataList(this.getSelectedValue(newVal))
-				// console.log('----listData', this.dataList);
 			},
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
@@ -226,7 +277,7 @@
 				let classes = []
 				switch (this.mode) {
 					case 'default':
-						item.disable && classes.push('disabled-cursor')
+						item.disabled && classes.push('disabled-cursor')
 						break
 					case 'button':
 						classes.push(...['is-button', ...this.getClasses(item, 'button')])
@@ -237,7 +288,7 @@
 						} else {
 							classes.push('is-list-box')
 						}
-						item.disable && classes.push('is-list-disabled')
+						item.disabled && classes.push('is-list-disabled')
 						index !== 0 && classes.push('is-list-border')
 						break
 					case 'tag':
@@ -292,6 +343,7 @@
 					}
 				}
 				dataList.forEach((item, index) => {
+					item.disabled = item.disable || item.disabled || false
 					if (this.multiple) {
 						if (value.length > 0) {
 							let have = value.find(val => val === item.value)
@@ -320,14 +372,14 @@
 						if (selectList.length <= min) {
 							let have = selectList.find(val => val.value === item.value)
 							if (have !== undefined) {
-								item.disable = true
+								item.disabled = true
 							}
 						}
 
 						if (selectList.length >= max && max !== '') {
 							let have = selectList.find(val => val.value === item.value)
 							if (have === undefined) {
-								item.disable = true
+								item.disabled = true
 							}
 						}
 					}
@@ -364,11 +416,11 @@
 			 */
 			getClasses(item, name, type = '') {
 				let classes = []
-				item.disable && classes.push('is-' + name + '-disabled' + type)
+				item.disabled && classes.push('is-' + name + '-disabled' + type)
 				item.selected && classes.push('is-' + name + '-checked' + type)
 
 				if (this.mode !== 'button' || name === 'button') {
-					item.selected && item.disable && classes.push('is-' + name + '-disabled-checked' + type)
+					item.selected && item.disabled && classes.push('is-' + name + '-disabled-checked' + type)
 				}
 
 				return classes
@@ -444,6 +496,8 @@
 
 <style>
 	.uni-data-checklist {
+		position: relative;
+		z-index: 0;
 		/* min-height: 36px; */
 	}
 
@@ -762,5 +816,11 @@
 
 	.is-wrap {
 		flex-direction: column;
+	}
+	
+	.hidden {
+		 /* #ifdef MP-ALIPAY */
+		 display: none;
+		 /* #endif */
 	}
 </style>
