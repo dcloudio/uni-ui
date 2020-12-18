@@ -70,7 +70,11 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui -D
+npm i @dcloudio/uni-ui --save
+
+npm i sass -D
+
+npm i sass-loader -D
 ```
 
 
@@ -79,9 +83,9 @@ npm install @dcloudio/uni-ui -D
 例如我们需要导入 `uni-badge` 组件
 
 ```javascript
-import {unibadge} from '@dcloudio/uni-ui'
+import {uniBadge} from '@dcloudio/uni-ui'
 export default {
-    components: {unibadge}
+    components: {uniBadge}
 }
 ```
 

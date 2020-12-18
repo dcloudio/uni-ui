@@ -6,6 +6,50 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+<log title="1.2.10" date="2020-12-18">
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			不设置 label 属性的时候 errorMessage 位置错误的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			uni-list-chat 扩展组件角标显示不正常的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			styles 属性，可以自定义部分样式
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			图标点击事件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			校验返回值与实际返回值不一致的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			异步获取数据渲染失败的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			支付宝小程序端报错且显示不正常的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			z-index 错误的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			兼容属性 disabled
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-indexed-list 组件更新">
+		<log-item-text tag-type="fix">
+			easyCom 模式下，找不到子组件的问题
+		</log-item-text>
+	</log-item>
+	
+</log>
+
 <log title="1.2.9" date="2020-12-04">
 	<log-item-text tag-type="feat" only>
 		<highlight text="uni-easyinput" /> 增强输入框
