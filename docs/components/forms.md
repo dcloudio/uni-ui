@@ -1,7 +1,11 @@
+---
+url : pages/vue/forms/forms
+---
+
 ## Forms 表单
 
 ::: tip 组件名：uni-forms
-代码块： `uForms`
+代码块： `uForms`、`uni-forms-item`
 
 关联组件：`uni-forms-item`、`uni-easyinput`、`uni-data-checkbox`、`uni-group`。
 :::
@@ -40,7 +44,7 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法 
+### 基本用法 
 
 `uni-forms` 组件通常用来做表单校验和提交。每一个 `uni-forms-item` 是它的一个表单域组件，用来承载表单具体内容，`uni-forms-item` 中可以嵌套 `uni-easyinput`、`uni-data-checkbox` 和 uni-app内置的表单组件 ，不过 uni-app 的内置表单组件需要通过 `binddata` 或者 `uni-forms` 提供的 `setValue` 方法，将内容与 `uni-forms` 关联，才可完成表单的校验与提交（详见后文`表单校验` 部分）
 
@@ -67,34 +71,34 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 ```
 
 ```javascript
-	export default {
-		data() {
-			return {
-				formData:{
-					name:'',
-					age:''
-				},
-				hobby: [{
-					text: '足球',
-					value: 0
-				}, {
-					text: '篮球',
-					value: 1
-				}, {
-					text: '游泳',
-					value: 2
-				}]
-			}
-		},
-		methods: {
-			submitForm(form) {
-				// 手动提交表单
-				this.$refs.form.submit().then((res)=>{
-					console.log('表单返回得值：', res)
-				})
-			}
+export default {
+	data() {
+		return {
+			formData:{
+				name:'',
+				age:''
+			},
+			hobby: [{
+				text: '足球',
+				value: 0
+			}, {
+				text: '篮球',
+				value: 1
+			}, {
+				text: '游泳',
+				value: 2
+			}]
+		}
+	},
+	methods: {
+		submitForm(form) {
+			// 手动提交表单
+			this.$refs.form.submit().then((res)=>{
+				console.log('表单返回得值：', res)
+			})
 		}
 	}
+}
 
 ```
 
@@ -303,39 +307,39 @@ rules: {
 
 ```javascript
 export default {
-		data() {
-			return {
-				rules: {
-					hobby: {
-						rules: [{
-							required: true,
-							errorMessage: '请选择兴趣',
-						},{
-							validateFunction:function(rule,value,data,callback){
-								if (value.length < 2) {
-									callback('请至少勾选两个兴趣爱好')
-								}
-								return true
+	data() {
+		return {
+			rules: {
+				hobby: {
+					rules: [{
+						required: true,
+						errorMessage: '请选择兴趣',
+					},{
+						validateFunction:function(rule,value,data,callback){
+							if (value.length < 2) {
+								callback('请至少勾选两个兴趣爱好')
 							}
-						}]
-					}
+							return true
+						}
+					}]
 				}
 			}
-		},
-		onReady() {
-			// 需要在onReady中设置规则
-			this.$refs.form.setRules(this.rules)
-		},
-		methods: {
-			submit(form) {
-				this.$refs.form.submit().then(res=>{
-					console.log('表单数据信息：', res);
-				}).catch(err =>{
-					console.log('表单错误信息：', err);
-				})
-			}
+		}
+	},
+	onReady() {
+		// 需要在onReady中设置规则
+		this.$refs.form.setRules(this.rules)
+	},
+	methods: {
+		submit(form) {
+			this.$refs.form.submit().then(res=>{
+				console.log('表单数据信息：', res);
+			}).catch(err =>{
+				console.log('表单错误信息：', err);
+			})
 		}
 	}
+}
 
 ```
 
@@ -360,54 +364,54 @@ export default {
 
 ```javascript
 export default {
-		data() {
-			return {
-				rules: {
-					age: {
-						rules: [{
-							required: true,
-							errorMessage: '请输入年龄',
-						},{
-							validateFunction: (rule, value, data, callback) => {
-								// 异步需要返回 Promise 对象
-								return new Promise((resolve, reject) => {
-									setTimeout(() => {
-										if (value > 10 ) {
-											// 通过返回 resolve
-											resolve()
-										} else {
-											// 不通过返回 reject(new Error('错误信息'))
-											reject(new Error('年龄必须大于十岁'))
-										}
-									}, 2000)
-								})
-							}
-						}]
-					}
+	data() {
+		return {
+			rules: {
+				age: {
+					rules: [{
+						required: true,
+						errorMessage: '请输入年龄',
+					},{
+						validateFunction: (rule, value, data, callback) => {
+							// 异步需要返回 Promise 对象
+							return new Promise((resolve, reject) => {
+								setTimeout(() => {
+									if (value > 10 ) {
+										// 通过返回 resolve
+										resolve()
+									} else {
+										// 不通过返回 reject(new Error('错误信息'))
+										reject(new Error('年龄必须大于十岁'))
+									}
+								}, 2000)
+							})
+						}
+					}]
 				}
 			}
-		},
-		onReady() {
-			// 需要在onReady中设置规则
-			this.$refs.form.setRules(this.rules)
-		},
-		methods: {
-			/**
-			 * 表单提交
-			 * @param {Object} event
-			 */
-			submit() {
-				uni.showLoading()
-				this.$refs.form.submit().then(res => {
-					uni.hideLoading()
-					console.log('表单数据信息：', res);
-				}).catch(err => {
-					uni.hideLoading()
-					console.log('表单错误信息：', err);
-				})
-			}
+		}
+	},
+	onReady() {
+		// 需要在onReady中设置规则
+		this.$refs.form.setRules(this.rules)
+	},
+	methods: {
+		/**
+		 * 表单提交
+		 * @param {Object} event
+		 */
+		submit() {
+			uni.showLoading()
+			this.$refs.form.submit().then(res => {
+				uni.hideLoading()
+				console.log('表单数据信息：', res);
+			}).catch(err => {
+				uni.hideLoading()
+				console.log('表单错误信息：', err);
+			})
 		}
 	}
+}
 
 ```
 

@@ -1,3 +1,7 @@
+---
+url : pages/vue/group/group
+---
+
 ### Group 分组
 
 分组组件可用于将组件分组，添加间隔，以产生明显的区块，组件名：``uni-group``，代码块： uGroup。

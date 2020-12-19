@@ -3,7 +3,9 @@ url : pages/vue/steps/steps
 ---
 
 ## Steps 步骤条
-> 组件名：``uni-steps``，代码块： uSteps。
+::: tip 组件名：uni-steps
+代码块： `uSteps`
+:::
 
 步骤条，常用于显示进度
 
@@ -13,7 +15,7 @@ url : pages/vue/steps/steps
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中的使用
 

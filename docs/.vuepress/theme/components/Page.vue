@@ -34,7 +34,7 @@ export default {
 	},
 	computed:{
 		path(){
-			return '//uniui.dcloud.net.cn/h5/#/' + this.url
+			return 'https://uniui.dcloud.net.cn/h5/#/' + this.url +'?v='+new Date().getTime()
 		}
 	},
 	watch: {
@@ -69,11 +69,11 @@ export default {
 	.simulator-box
 		position -webkit-sticky
 		position sticky
-		top 130px
+		top 0px
 		z-index 9
 		display flex
 		flex-direction column
-		margin-top 130px
+		margin-top 80px
 		// margin-left 50px
 		flex-shrink 0
 		width 400px
@@ -81,14 +81,15 @@ export default {
 		border-radius 20px
 		background-color #333
 		box-shadow 0px 0px 10px 2px rgba(0, 0, 0, 0.2)
+		border 1px blue solid
 		transform scale(0.8)
+		box-sizing border-box
 		.simulator-top
 			display flex
 			justify-content center
 			align-items center
 			flex-shrink 0
 			height 36px
-			// border 1px red solid
 			.simulator-top_box
 				width 55px
 				height 14px
@@ -97,10 +98,12 @@ export default {
 				box-shadow -1px -2px 1px 0px rgba(255, 255, 255, 0.4) inset
 		.simulator-content
 			position relative
-			height 100%
+			flex 1
+			// height 100%
 			margin 0 20px
 			border-radius 5px
 			background-color #FFFFFF
+			overflow hidden
 			// .simulator-seat
 			// 	position absolute
 			// 	left 0px
@@ -109,6 +112,7 @@ export default {
 			// 	height 44px
 			// 	background-color rgb(0, 122, 255)
 			.simulator-iframe
+				margin -2px 0
 				width 100%
 				height 100%
 				border none

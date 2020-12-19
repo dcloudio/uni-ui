@@ -3,7 +3,9 @@ url : pages/vue/segmented-control/segmented-control
 ---
 
 ## SegmentedControl 分段器
-> 组件名：``uni-segmented-control``，代码块： uSegmentedControl。
+::: tip 组件名：uni-segmented-control
+代码块： `uSegmentedControl`
+:::
 
 用作不同视图的显示
 
@@ -13,7 +15,7 @@ url : pages/vue/segmented-control/segmented-control
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中的使用
 

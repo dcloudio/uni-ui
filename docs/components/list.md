@@ -3,7 +3,11 @@ url : pages/vue/list/list
 ---
 
 ## List 列表
-> 组件名：``uni-list``、``uni-list-item``，代码块： uList、uListItem。
+::: tip 组件名：uni-list
+代码块： `uList`、`uListItem`
+
+关联组件：`uni-list-item`、`uni-badge`、`uni-icons`、`uni-list-chat`、`uni-list-ad`
+:::
 
 List 列表组件，包含基本列表样式、可扩展插槽机制、长列表性能优化、多端兼容。
 
@@ -21,6 +25,13 @@ uni-list-item有很多风格，uni-list-item组件通过内置的属性，满足
 
 uni-list不包含下拉刷新和上拉翻页。上拉翻页另见组件：[uni-load-more](https://ext.dcloud.net.cn/plugin?id=29)
 
+
+### 安装方式
+
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 
@@ -36,37 +47,55 @@ uni-list不包含下拉刷新和上拉翻页。上拉翻页另见组件：[uni-l
 - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 ::: 
 
-### 安装方式
+### 基本用法 
 
-本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
-
-如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
-
-## 基本用法 
+- 设置 `title` 属性，可以显示列表标题
+- 设置 `disabled` 属性，可以禁用当前项
 
 ```html
-<!-- 单行内容显示 -->
 <uni-list>
 	<uni-list-item  title="列表文字" ></uni-list-item>
 	<uni-list-item :disabled="true" title="列表禁用状态" ></uni-list-item>
 </uni-list>
-<!-- 多行内容显示 -->
+			 
+```
+
+### 多行内容显示
+
+- 设置 `note` 属性 ，可以在第二行显示描述文本信息
+
+```html
 <uni-list>
 	<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
 	<uni-list-item :disabled="true" title="列表文字" note="列表禁用状态"></uni-list-item>
 </uni-list>
-<!-- 右侧显示角标、switch -->
+
+```
+
+### 右侧显示角标、switch
+
+- 设置 `show-badge` 属性 ，可以显示角标内容
+- 设置 `show-switch` 属性，可以显示 switch 开关
+
+```html
 <uni-list>
 	<uni-list-item  title="列表右侧显示角标" :show-badge="true" badge-text="12" ></uni-list-item>
 	<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" ></uni-list-item>
 </uni-list>
- <!-- 左侧显示略缩图、图标 -->
+
+```
+
+### 左侧显示略缩图、图标  
+
+- 设置 `thumb` 属性 ，可以在列表左侧显示略缩图
+- 设置 `show-extra-icon` 属性，并指定 `extra-icon` 可以在左侧显示图标
+
+```html
  <uni-list>
  	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"
  	 thumb-size="lg" rightText="右侧文字"></uni-list-item>
  	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" ></uni-list-item>
 </uni-list>
-			 
 ```
 
 ### 开启点击反馈和右侧箭头

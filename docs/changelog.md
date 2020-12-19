@@ -6,6 +6,19 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+
+<log title="官网更新" date="2020-12-19">
+	<log-item-text tag-type="docs" only>
+		整理组件文档
+	</log-item-text>
+	<log-item-text tag-type="docs" only>
+		右侧编辑器跟随滚动，适应小屏设备
+	</log-item-text>
+	<log-item-text tag-type="docs" only>
+		优化 md 的代码块显示样式
+	</log-item-text>
+</log>
+
 <log title="1.2.10" date="2020-12-18">
 	<log-item title="uni-forms 组件更新">
 		<log-item-text tag-type="fix">

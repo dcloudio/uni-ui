@@ -3,7 +3,7 @@ module.exports = {
 	description: 'uni-ui 的描述',
 	markdown: {
 		// 显示行号
-		lineNumbers: true,
+		lineNumbers: false,
 		extractHeaders: ['h2', 'h3', 'h4']
 	},
 	themeConfig: {
@@ -232,6 +232,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		['vuepress-plugin-code-copy', true]
+		['vuepress-plugin-code-copy', true],
+		require('./plugins/mdstyles')
 	]
 }

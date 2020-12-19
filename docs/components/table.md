@@ -1,3 +1,7 @@
+---
+url : pages/vue/table/table
+---
+
 ## Table 表单
 > 组件名：``uni-table``，代码块： `uTable`。
 

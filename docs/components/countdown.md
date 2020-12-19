@@ -3,8 +3,11 @@ url : pages/vue/countdown/countdown
 ---
 
 ## CountDown 倒计时
+::: tip 组件名：uni-countdown
+代码块： `uCountDown`
+:::
 
-倒计时组件，组件名：``uni-countdown``，代码块： uCountDown。
+倒计时组件。
 
 ### 安装方式
 
@@ -12,7 +15,7 @@ url : pages/vue/countdown/countdown
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

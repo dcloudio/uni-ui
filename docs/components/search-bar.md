@@ -3,7 +3,9 @@ url : pages/vue/search-bar/search-bar
 ---
 
 ## SearchBar 搜索栏
-> 组件名：``uni-search-bar``，代码块： uSearchBar。
+::: tip 组件名：uni-search-bar
+代码块： `uSearchBar`
+:::
 
 搜索栏组件
 
@@ -13,7 +15,7 @@ url : pages/vue/search-bar/search-bar
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

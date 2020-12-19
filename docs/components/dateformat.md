@@ -1,21 +1,23 @@
+---
+url : pages/vue/dateformat/dateformat
+---
+
 ### DateFormat 日期格式化
+::: tip 组件名：uni-dateformat
+代码块： `uDateformat`
+:::
 
-日期格式化组件，组件名：`uni-dateformat`，代码块： uDateformat。
+日期格式化组件。
 
-### 使用方式
+### 安装方式
 
-在 ``script`` 中引用组件 
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
 
-```javascript
-import uniDateformat from "@/components/uni-dateformat/uni-dateformat.vue"
-export default {
-    components: {uniDateformat}
-}
-```
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
+
+### 基本用法
 
 在 ``template`` 中使用组件
-
-
 
 ```html
 <!-- 一般用法 -->
@@ -25,7 +27,9 @@ export default {
 <uni-dateformat date="2020/10/20 20:20:20" :threshold="[0,0]"></uni-dateformat>
 ```
 
-### 属性说明
+## API
+
+### Dateformat Props
 
 |属性名		|类型							|默认值					|说明												|
 |:-:		|:-:							|:-:					|:-:												|
@@ -34,7 +38,8 @@ export default {
 |format		|String							|'yyyy/MM/dd hh:mm:ss'	|格式字符串											|
 |locale		|String							|zh						|格式化使用的语言，目前支持zh（中文）、en（英文）	|
 
-#### threshold
+
+#### Threshold Options
 
 格式化组件会对时间进行用户友好转化，threshold就是用来控制转化的时间阈值的。
 
@@ -46,7 +51,7 @@ export default {
 
 如果不想转化为“马上|刚刚”可以传入`:threshold = "[0,3600000]"`。默认值`[0,0]`既不会转换为“马上|刚刚”也不会转化为“xx分钟前|xx分钟后”
 
-#### format
+#### Format Options
 
 format接收字符以及含义如下：
 
@@ -67,6 +72,3 @@ format接收字符以及含义如下：
 |SSS	|三位毫秒（不足三位在前面补0）	|
 |S		|毫秒，不自动补0				|
 
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/count-dateformat/count-dateformat](https://uniapp.dcloud.io/h5/pages/extUI/count-dateformat/count-dateformat)

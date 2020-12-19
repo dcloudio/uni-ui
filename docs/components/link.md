@@ -3,8 +3,11 @@ url : pages/vue/link/link
 ---
 
 ## Link 链接
+::: tip 组件名：uni-link
+代码块： `uLink`
+:::
 
-uni-link是一个外部网页超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打开新网页。组件名：``uni-link``，代码块： uLink。
+uni-link是一个外部网页超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打开新网页。
 
 ### 安装方式
 
@@ -12,7 +15,7 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 
