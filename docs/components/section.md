@@ -3,8 +3,11 @@ url : pages/vue/section/section
 ---
 
 ## Section 标题栏
+::: tip 组件名：uni-section
+代码块： `uSection`
+:::
 
-标题栏，用于显示标题，组件名：``uni-section``，代码块： uSection。
+标题栏，用于显示标题。
 
 ### 安装方式
 
@@ -12,7 +15,7 @@ url : pages/vue/section/section
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

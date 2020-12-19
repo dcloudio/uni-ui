@@ -3,7 +3,9 @@ url : pages/vue/data-checkbox/data-checkbox
 ---
 
 ## DataCheckbox 数据驱动的单选复选框
-> 组件名：``uni-data-checkbox``，代码块： uDataCheckbox。
+::: tip 组件名：uni-data-checkbox
+代码块： `uDataCheckbox`
+:::
 
 本组件是基于uni-app基础组件checkbox的封装。本组件要解决问题包括：
 
@@ -45,19 +47,19 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: 0,
-				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: 0,
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 ### 多选框
@@ -77,19 +79,19 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: [0,2],
-				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 ### 设置最大最小值
@@ -111,19 +113,19 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: [0,2],
-				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 ### 设置禁用
@@ -141,33 +143,33 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: 0,
-				range: [{
-						"value": 0,
-						"text": "篮球"
-					},
-					{
-						"value": 1,
-						"text": "足球",
-						// 禁用当前项
-						"disable":true
-					},
-					{
-						"value": 2,
-						"text": "游泳"
-					}
-				]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: 0,
+			range: [{
+					"value": 0,
+					"text": "篮球"
+				},
+				{
+					"value": 1,
+					"text": "足球",
+					// 禁用当前项
+					"disable":true
+				},
+				{
+					"value": 2,
+					"text": "游泳"
+				}
+			]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 
@@ -188,19 +190,19 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: [0,2],
-				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 ### 更多模式
@@ -229,19 +231,19 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ```javascript
 
-	export default {
-		data() { 
-			return {
-				value: 0,
-				range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
-			}
-		},
-		methods: {
-			change(e){
-				console.log('e:',e);
-			}
+export default {
+	data() { 
+		return {
+			value: 0,
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
+}
 ```
 
 

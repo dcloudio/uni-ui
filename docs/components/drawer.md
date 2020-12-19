@@ -3,8 +3,11 @@ url : pages/vue/drawer/drawer
 ---
 
 ## Drawer 抽屉
+::: tip 组件名：uni-drawer
+代码块： `uDrawer`
+:::
 
-抽屉侧滑菜单，组件名：``uni-drawer``，代码块： uDrawer。
+抽屉侧滑菜单。
 
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
@@ -17,7 +20,7 @@ url : pages/vue/drawer/drawer
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 
 在 ``template`` 中使用组件
@@ -44,7 +47,7 @@ url : pages/vue/drawer/drawer
 
 
 
-### Drawer Props
+### Drawer Events
 
 |事件名	|说明				|返回值	|
 |:-:		|:-:				|:-:	|
@@ -58,6 +61,3 @@ url : pages/vue/drawer/drawer
 |close	|关闭抽屉	|-|
 
 
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/drawer/drawer](https://uniapp.dcloud.io/h5/pages/extUI/drawer/drawer)

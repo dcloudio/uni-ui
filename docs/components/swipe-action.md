@@ -3,10 +3,11 @@ url : pages/vue/swipe-action/swipe-action
 ---
 
 ## SwipeAction 滑动操作
-> 组件名：``uni-swipe-action``、``uni-swipe-action-item``，代码块： uSwipeAction、uSwipeActionItem。
+::: tip 组件名：uni-swipe-action
+代码块： `uSwipeAction`、`uSwipeActionItem`
+:::
 
 通过滑动触发选项的容器
-
 
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
@@ -149,7 +150,7 @@ export default {
 |left			|左侧滑动内容	，会覆盖	leftOptions 内容			|
 |right		|右侧滑动内容	，会覆盖	rightOptions 内容		|
 
-::: tip 提示
+::: warning 提示
 
 - iOS 端由于存在bounce效果，滑动体验略差，建议禁止bounce效果，禁止方式如下：
 

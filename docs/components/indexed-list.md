@@ -3,8 +3,11 @@ url : pages/vue/indexed-list/indexed-list
 ---
 
 ## IndexedList 索引列表
+::: tip 组件名：uni-indexed-list
+代码块： `uIndexedList`
+:::
 
-用于展示索引列表，组件名：``uni-indexed-list``，代码块： uIndexedList。
+用于展示索引列表。
 
 ### 安装方式
 
@@ -12,7 +15,7 @@ url : pages/vue/indexed-list/indexed-list
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-### 使用方式
+### 基本用法
 
 在 ``template`` 中使用组件
 

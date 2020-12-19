@@ -3,8 +3,12 @@ url : pages/vue/collapse/collapse
 ---
 
 ## Collapse 折叠面板
+::: tip 组件名：uni-collapse
+代码块： `uCollapse`
+关联组件：`uni-collapse-item`、`uni-icons`。
+:::
 
-展示可以折叠 / 展开的内容区域，组件名：``uni-collapse``、``uni-collapse-item``，代码块： uCollapse。
+展示可以折叠 / 展开的内容区域。
 
 ### 安装方式
 
@@ -12,7 +16,7 @@ url : pages/vue/collapse/collapse
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中引用组件 
 

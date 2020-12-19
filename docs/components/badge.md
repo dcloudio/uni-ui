@@ -3,7 +3,9 @@ url : pages/vue/badge/badge
 ---
 
 ## Badge 数字角标
-> 组件名：``uni-badge``，代码块： uBadge。
+::: tip 组件名：uni-badge
+代码块： `uBadge`
+:::
 
 数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景，
 
@@ -13,7 +15,7 @@ url : pages/vue/badge/badge
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

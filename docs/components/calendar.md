@@ -3,7 +3,9 @@ url : pages/vue/calendar/calendar
 ---
 
 ## Calendar 日历
-> 组件名：``uni-calendar``，代码块： uCalendar。  
+::: tip 组件名：uni-calendar
+代码块： `uCalendar`
+:::
 
 日历组件
 
@@ -22,7 +24,7 @@ url : pages/vue/calendar/calendar
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

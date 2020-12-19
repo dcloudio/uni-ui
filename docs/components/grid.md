@@ -3,8 +3,17 @@ url : pages/vue/grid/grid
 ---
 
 ## Grid 宫格
+::: tip 组件名：uni-grid
+代码块： `uGrid`
+:::
 
-宫格组件，组件名：``uni-grid``，代码块： uGrid。
+宫格组件。
+
+### 安装方式
+
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
+
+如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
 ::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
@@ -15,14 +24,7 @@ url : pages/vue/grid/grid
 - 为了避免高度显示错误组件内必须要有内容
 :::
 
-### 安装方式
-
-本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
-
-如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
-
-
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

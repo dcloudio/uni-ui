@@ -3,8 +3,11 @@ url : pages/vue/title/title
 ---
 
 ## Title 章节标题
+::: tip 组件名：uni-title
+代码块： `uTitle`
+:::
 
-章节标题，通常用于记录页面标题，使用当前组件，uni-app 如果开启统计，将会自动统计页面标题，组件名：``uni-title``，代码块： uTitle。
+章节标题，通常用于记录页面标题，使用当前组件，uni-app 如果开启统计，将会自动统计页面标题 。
 
 ### 安装方式
 
@@ -12,7 +15,7 @@ url : pages/vue/title/title
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 
@@ -26,7 +29,7 @@ url : pages/vue/title/title
 
 
 
-## 标题统计
+### 标题统计
 title 组件可以与 uni统计集合使用，只要开启uni统计，即可自动采集标题
 
 - 如果不写 type 属性， 为上报标题。这是标题统计的默认用法，页面会优先上报组件传入的title值为统计上报数据 

@@ -1,3 +1,6 @@
+---
+url : pages/vue/goods-nav/goods-nav
+---
 
 ### GoodsNav 商品导航
 *已经支持在nvue页面中使用*

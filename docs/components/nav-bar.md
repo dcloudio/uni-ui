@@ -1,3 +1,7 @@
+---
+url : pages/vue/nav-bar/nav-bar
+---
+
 ### NavBar 导航栏
 *已经支持在nvue页面中使用*
 

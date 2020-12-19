@@ -3,8 +3,11 @@ url : pages/vue/combox/combox
 ---
 
 ## Combox 组合框
+::: tip 组件名：uni-combox
+代码块： `uCombox`
+:::
 
-组合框组件，组件名：`uni-combox`，代码块： uCombox。
+组合框组件。
 
 ### 平台兼容性说明
 
@@ -16,7 +19,7 @@ url : pages/vue/combox/combox
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 ```html
@@ -43,6 +46,4 @@ url : pages/vue/combox/combox
 |@input	|combox输入事件	|返回combox值|
 
 
-### 插件预览地址
 
-[https://uniapp.dcloud.io/h5/pages/extUI/combox/combox](https://uniapp.dcloud.io/h5/pages/extUI/combox/combox)

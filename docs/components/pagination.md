@@ -3,7 +3,9 @@ url : pages/vue/pagination/pagination
 ---
 
 ## Pagination 分页器
-> 组件名：``uni-pagination``，代码块： uPagination。
+::: tip 组件名：uni-pagination
+代码块： `uPagination`
+:::
 
 分页器组件，用于展示页码、请求数据等。
 
@@ -13,7 +15,7 @@ url : pages/vue/pagination/pagination
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-## 基本用法
+### 基本用法
 
 在 ``template`` 中使用组件
 

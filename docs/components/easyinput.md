@@ -1,5 +1,11 @@
+---
+url : pages/vue/easyinput/easyinput
+---
+
 ### Easyinput 增强输入框
-``uni-easyinput``，代码块： uEasyinput。
+::: tip 组件名：uni-easyinput
+代码块： `uEasyinput`
+:::
 
 easyinput 组件是对原生input组件的增强 ，是专门为配合表单组件[uni-forms](https://ext.dcloud.net.cn/plugin?id=2773)而设计的，easyinput 内置了边框，图标等，同时包含 input 所有功能
 
@@ -29,7 +35,7 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 `clearable` 属性设置为 `true` ，输入框聚焦且内容不为空时，才会显示内容
 
 ```html
-	<uni-easyinput v-model="value" placeholder="请输入内容"></uni-easyinput>
+<uni-easyinput v-model="value" placeholder="请输入内容"></uni-easyinput>
 ```
 
 
@@ -45,10 +51,10 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 
 ```html
 
-	<!-- 输入框头部图标 -->
-	<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
-	<!-- 展示输入框尾部图标 -->
-	<uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
+<!-- 输入框头部图标 -->
+<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
+<!-- 展示输入框尾部图标 -->
+<uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
 ```
 
 ### 输入框禁用
