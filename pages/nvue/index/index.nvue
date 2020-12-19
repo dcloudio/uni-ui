@@ -102,6 +102,9 @@
 				}, {
 					name: 'Group 分组',
 					url: 'group'
+				}, {
+					name: 'DataIndexedList 数据驱动的索引列表',
+					url: 'data-indexed-list'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',
