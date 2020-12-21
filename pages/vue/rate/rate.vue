@@ -28,7 +28,7 @@
 		></uni-section>
 		<view class="example-body">
 			<uni-rate
-			    :size="18"
+			    size="18"
 			    :value="5"
 			/>
 		</view>
