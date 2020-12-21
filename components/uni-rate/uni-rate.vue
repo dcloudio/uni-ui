@@ -204,17 +204,21 @@
 			 * 获取星星个数
 			 */
 			_getRateCount(clientX) {
+				const size = Number(this.size)
+				if(size === NaN){
+					return new Error('size 属性只能设置为数字')
+				}
 				const rateMoveRange = clientX - this._rateBoxLeft
-				let index = parseInt(rateMoveRange / (this.size + this.margin))
+				let index = parseInt(rateMoveRange / (size + this.margin))
 				index = index < 0 ? 0 : index;
 				index = index > this.max ? this.max : index;
-				const range = parseInt(rateMoveRange - (this.size + this.margin) * index);
+				const range = parseInt(rateMoveRange - (size + this.margin) * index);
 				let value = 0;
 				if (this._oldValue === index) return;
 				this._oldValue = index;
 
 				if (this.allowHalf) {
-					if (range > (this.size / 2)) {
+					if (range > (size / 2)) {
 						value = index + 1
 					} else {
 						value = index + 0.5

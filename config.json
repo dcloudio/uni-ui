@@ -5,16 +5,6 @@
 	"edition": "1.2.10",
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
-		"- uni-easyinput 修复 校验返回值与实际返回值不一致的问题",
-		"- uni-easyinput 新增 styles 属性，可以自定义部分样式",
-		"- uni-easyinput 新增 图标点击事件",
-		"- uni-forms 修复 不设置 label 属性的时候 errorMessage 位置错误的问题",
-		"- uni-list 修复 uni-list-chat 扩展组件角标显示不正常的问题",
-		"- uni-dateformat 修复 iOS 平台日期格式化出错的问题",
-		"- uni-data-checkbox 修复 异步获取数据渲染失败的Bug",
-		"- uni-data-checkbox 修复 支付宝小程序端报错且显示不正常的Bug",
-		"- uni-data-checkbox 修复 z-index 错误的Bug",
-		"- uni-data-checkbox 优化 兼容属性 disabled",
-		"- uni-indexed-list 修复 easyCom 模式下，找不到子组件的问题"
+		"- uni-rate 修复 size 属性设置 String 类型值，只能选择1星的Bug"
 	]
 }
