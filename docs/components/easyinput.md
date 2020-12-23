@@ -135,7 +135,7 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |clearSize	   			|Number 				| -	|15|	清除图标的大小，单位px|
 |prefixIcon	   			|String					| -	| - |输入框头部图标	|
 |suffixIcon	   			|String					| -	| - |输入框尾部图标|
-|trim	   						|Boolean				| -	| - |	是否自动去除两端的空格|
+|trim	   						|Boolean/String	| 见 trim Options	| false |	是否自动去除空格，传入类型为 Boolean 时，自动去除前后空格|
 |inputBorder	   		|Boolean				| -	|false|	是否显示input输入框的边框|
 |styles				   		|Object					| -	| - |	样式自定义|
 
@@ -171,6 +171,19 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |color				| #333   	|	输入文字颜色														|
 |disableColor	|#eee			|	输入框禁用背景色													|
 |borderColor	|#e5e5e5	|	边框颜色												|
+
+#### Trim Options
+
+传入类型为 `Boolean` 时，自动去除前后空格,传入类型为 `String` 时，可以单独控制，下面是可选值
+
+|属性名				 	|说明																			|
+|:-:		| :-:																		|
+|both		|	去除两端空格														|
+|left		|	去除左侧空格													|
+|right	|	去除右侧空格												|
+|all	 |	去除所有空格												|
+|none	 |	不去除空格												|
+
 
 ### Easyinput Events
 
