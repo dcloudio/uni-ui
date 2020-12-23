@@ -124,7 +124,7 @@
 			},
 			// 是否自动去除两端的空格
 			trim: {
-				type: Boolean,
+				type: [Boolean, String],
 				default: true
 			},
 			// 自定义样式
@@ -222,7 +222,14 @@
 			onInput(event) {
 				let value = event.detail.value;
 				// 判断是否去除空格
-				if (this.trim) value = this.trimStr(value);
+				if (this.trim) {
+					if (typeof(this.trim) === 'boolean' && this.trim) {
+						value = this.trimStr(value)
+					}
+					if (typeof(this.trim) === 'string') {
+						value = this.trimStr(value, this.trim)
+					}
+				};
 				if (this.errMsg) this.errMsg = ''
 				this.val = value
 				this.$emit('input', value);
@@ -252,17 +259,18 @@
 				this.$emit('click');
 			},
 			trimStr(str, pos = 'both') {
-				if (pos == 'both') {
-					return str.replace(/^\s+|\s+$/g, '');
-				} else if (pos == 'left') {
-					return str.replace(/^\s*/, '');
-				} else if (pos == 'right') {
-					return str.replace(/(\s*$)/g, '');
-				} else if (pos == 'all') {
+				if (pos === 'both') {
+					return str.trim();
+				} else if (pos === 'left') {
+					return str.trimLeft();
+				} else if (pos === 'right') {
+					return str.trimRight();
+				} else if (pos === 'all') {
 					return str.replace(/\s+/g, '');
-				} else {
+				} else if (pos === 'none') {
 					return str;
 				}
+				return str;
 			}
 		}
 	};

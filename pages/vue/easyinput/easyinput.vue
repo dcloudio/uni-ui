@@ -5,6 +5,14 @@
 		<view class="example">
 			<uni-easyinput v-model="value" focus placeholder="请输入内容" @input="input"></uni-easyinput>
 		</view>
+
+		<uni-section title="去除空格" type="line"></uni-section>
+		<view class="example">
+			<view>输入内容："{{ value }}"</view>
+			<uni-easyinput trim="all" v-model="value" focus placeholder="请输入内容" @input="input"></uni-easyinput>
+		</view>
+
+
 		<uni-section title="自定义样式" type="line"></uni-section>
 		<view class="example">
 			<uni-easyinput v-model="value" :styles="styles" :placeholderStyle="placeholderStyle" focus placeholder="请输入内容"
@@ -16,7 +24,7 @@
 		</view>
 		<uni-section title="右图标" type="line"></uni-section>
 		<view class="example">
-			<uni-easyinput suffixIcon="search" v-model="value" placeholder="请输入内容"  @iconClick="iconClick"></uni-easyinput>
+			<uni-easyinput suffixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="iconClick"></uni-easyinput>
 		</view>
 		<uni-section title="禁用" type="line"></uni-section>
 		<view class="example">
@@ -59,10 +67,10 @@
 			input(e) {
 				console.log('输入内容：', e);
 			},
-			iconClick(type){
+			iconClick(type) {
 				uni.showToast({
-					title:`点击了${type==='prefix'?'左侧':'右侧'}的图标`,
-					icon:'none'
+					title: `点击了${type==='prefix'?'左侧':'右侧'}的图标`,
+					icon: 'none'
 				})
 			}
 		}

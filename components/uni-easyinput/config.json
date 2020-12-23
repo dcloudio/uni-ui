@@ -2,10 +2,10 @@
 	"id": "3455",
 	"name": "Easyinput",
 	"desc": "增强输入框",
-	"edition": "0.0.5",
+	"edition": "0.0.6",
 	"url": "easyinput",
 	"type": "表单组件",
 	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=3455",
-	"update_log": ["- 新增 styles 属性，可以自定义部分样式","-新增 图标点击事件"]
+	"update_log": ["- 优化 trim 属性，可以单独去除左侧右侧和中间部分的空格"]
 }
