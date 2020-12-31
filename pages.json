@@ -287,6 +287,12 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
+		}, {
+			"path": "pages/vue/data-picker/data-picker",
+			"style": {
+				"navigationBarTitleText": "级联选择",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {

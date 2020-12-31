@@ -103,8 +103,8 @@
 					name: 'Group 分组',
 					url: 'group'
 				}, {
-					name: 'DataIndexedList 数据驱动的索引列表',
-					url: 'data-indexed-list'
+					name: 'DataPicker 级联选择',
+					url: 'data-picker'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',
