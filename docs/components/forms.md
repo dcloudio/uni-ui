@@ -243,7 +243,7 @@ rules: {
 |required					| Boolean	| -			|										| 是否必填，配置此参数不会显示输入框左边的必填星号，如需要，请配置`uni-forms-item`组件的的required为true|
 |range						| Array		| -			| -									| 数组至少要有一个元素，且数组内的每一个元素都是唯一的。	|
 |format						| String	| -			| -									| 内置校验规则，如这些规则无法满足需求，可以使用正则匹配或者自定义规则	|
-|pattern					| String	| -			| -									| 正则表达式，如验证邮箱："/^\S+?@\S+?\.\S+?$/"		|
+|pattern					| RegExp	| -			| -									| 正则表达式，如验证邮箱：/^\S+?@\S+?\.\S+?$/ （注意不带引号）,或使用 "^\\S+?@\\S+?\\.\\S+?$"（注意带引号需要使用 `\` 转义）		|
 |maximum					| Number	| -			| -									| 校验最大值(大于)|
 |minimum					| Number	| -			| -									| 校验最小值(小于)		|
 |maxLength				| Number	| -			| -									| 校验数据最大长度		|
