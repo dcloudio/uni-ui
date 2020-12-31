@@ -1,70 +1,74 @@
----
-url : pages/vue/search-bar/search-bar
----
+### SearchBar 搜索栏
+*已经支持在nvue页面中使用*
 
-## SearchBar 搜索栏
-::: tip 组件名：uni-search-bar
-代码块： `uSearchBar`
-:::
+评分组件，组件名：``uni-search-bar``，代码块： uSearchBar。
 
-搜索栏组件
+### 使用方式
 
-### 安装方式
+在 ``script`` 中引用组件 
 
-本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
-
-如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
-
-### 基本用法
+```javascript
+import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
+export default {
+    components: {uniSearchBar}
+}
+```
 
 在 ``template`` 中使用组件
 
 ```html
 <!-- 基本用法 -->
-<uni-search-bar @confirm="search" @input="input" />
+<uni-search-bar @confirm="search" @input="input" ></uni-search-bar>
 
 <!-- 自定义Placeholder -->
-<uni-search-bar placeholder="自定placeholder" @confirm="search"/>
+<uni-search-bar placeholder="自定placeholder" @confirm="search"></uni-search-bar>
 
 <!-- 设置圆角 -->
-<uni-search-bar :radius="100" @confirm="search"/>
+<uni-search-bar :radius="100" @confirm="search"></uni-search-bar>
 ```
 
-## API
+### 属性说明
 
-### SearchBar Props
+|属性名			|类型	|默认值	|说明																					|
+|---			|----	|---	|---																					|
+|placeholder	|String	|搜索	|搜索栏Placeholder																		|
+|radius			|Number	|10		|搜索栏圆角，单位rpx																	|
+|clearButton	|String	|auto	|是否显示清除按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
+|cancelButton	|String	|auto	|是否显示取消按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
+|cancelText		|String	|取消	|取消按钮的文字																			|
+|bgColor		|String	|#F8F8F8|输入框背景颜色																			|
+|maxlength		|Number	|100	|输入最大长度																			|
+|focus		|Boolean	|false	|																	|
 
-|属性名				|类型		|可选值						|默认值	|说明							|
-|:-:					|:-:		|:-:							|:-:	|:-:								|
-|radius				|Number	|	-								|10		|搜索栏圆角，单位rpx		|
-|maxlength		|Number	|	-								|100	|输入最大长度					|
-|placeholder	|String	|	-								|搜索	|搜索栏Placeholder		|
-|**clearButton**	|String	|	always/auto/none|auto	|是否显示清除按钮			|
-|**cancelButton**	|String	|	always/auto/none|auto	|是否显示取消按钮			|
-|cancelText		|String	|	-								|取消	|取消按钮的文字				|
-|bgColor			|String	|	-								|#F8F8F8|输入框背景颜色			|
+### 事件说明
 
-#### ClearButton Options
+|事件称名	|说明																|返回参数			|
+|---		|----																|---				|
+|confirm	|uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value	|e={value:Number}	|
+|input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|e=value	|
+|cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|clear		|点击清除按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|blur			|input失去焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
 
-| 属性名	| 说明							|
-| :-:		| :-:							|
-| always| 一直显示					|
-| auto	| 输入框不为空时显示	|
-| none	| 一直不显示				|
+### 替换 icon 的 slot 插槽
 
-#### CancelButton Options
+|插槽称名	|说明																|
+|---		|----																|
+|searchIcon	|替换组件的搜索图标|
+|clearIcon	|替换组件的清除图标|
 
-| 属性名	| 说明							|
-| :-:		| :-:							|
-| always| 一直显示					|
-| auto	| 输入框不为空时显示	|
-| none	| 一直不显示				|
+```html
+<!-- 替换组件的搜索图标 -->
+<uni-search-bar placeholder="自定义searchIcon" @confirm="search" @cancel="cancel" cancel-text="cancel">
+	<uni-icons slot="searchIcon" color="#999999" size="18" type="home" />
+</uni-search-bar>
 
+<!-- 替换组件的清除图标 -->
+<uni-search-bar placeholder="自定义clearIcon" @confirm="search" @cancel="cancel" cancel-text="cancel">
+	<view slot="clearIcon" style="color: #999999" >X</view>
+</uni-search-bar>
 
-### SearchBar Events
+```
+### 插件预览地址
 
-|事件称名		|说明									|返回参数			|
-|:-:			|:-:									|:-:				|
-|@confirm	|输入框 confirm 事件		|e={value:Number}	|
-|@input		|value 改变时触发事件		|e={value:Number}	|
-|@cancel	|点击取消按钮时触发事件 	|e={value:Number}	|
+[https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar](https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar)

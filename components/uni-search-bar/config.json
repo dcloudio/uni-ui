@@ -4,7 +4,14 @@
 	"desc": "搜索栏",
 	"url": "search-bar",
 	"type": "功能组件",
-	"edition": "1.0.3",
+	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=866",
-	"update_log": "- 修复 不设置maxlength时app-nvue不能正常输入的Bug"
+	"update_log": [
+		"- 新增 支持双向绑定",
+		"- 更改 input 事件的返回值，e={value:Number} --> e=value",
+		"- 新增 支持图标插槽",
+		"- 新增 支持 clear、blur 事件",
+		"- 新增 支持 focus 属性",
+		"- 去掉组件背景色"
+	]
 }
