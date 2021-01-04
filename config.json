@@ -5,6 +5,7 @@
 	"edition": "1.2.10",
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
-		"- uni-easyinput - 优化 trim 属性，可以单独去除左侧右侧和中间部分的空格"
+		"- 新增 uni-data-picker 数据驱动的picker选择器",
+		"- uni-easyinput 优化 trim 属性，可以单独去除左侧右侧和中间部分的空格"
 	]
 }

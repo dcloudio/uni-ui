@@ -29,7 +29,7 @@ module.exports = {
 			apiKey: '48a1bc6e7170949bb834becb9d8815e5',
 			indexName: 'dcloud_uniui'
 		},
-		base:'/uni-ui/'
+		base:'/uni-ui/',
 		repo: 'dcloudio/uni-ui', // git 仓库
 		repoLabel: '查看源码', // git 仓库显示文字
 		docsDir: 'docs',
@@ -138,7 +138,11 @@ module.exports = {
 						path: '/components/data-checkbox.md',
 						title: '单选多选框',
 						subTitle: 'DataCheckbox'
-					},
+					},{
+						path: '/components/data-picker.md',
+						title: '数据驱动的picker',
+						subTitle: 'DataPicker'
+					}
 				]
 			},
 			{
