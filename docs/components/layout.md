@@ -26,35 +26,37 @@
 
 ##### `uni-row`
 
-| 属性名  | App | H5  |     微信小程序     | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
-| :-----: | :-: | :-: | :----------------: | :----------: | :--------: | :------------: | :-------: |
-| gutter  |  -  |  √  |         √          |      √       |     √      |       √        |     √     |
-| justify |  √  |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        |     -     |
-|  align  |  √  |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        |     -     |
+| 属性名  |  App(nvue)   | App(vue) | H5  |     微信小程序     | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
+| :-----: | :----------: | :------: | :-: | :----------------: | :----------: | :--------: | :------------: | --------- |
+|  type   | -(只用 flex) |    √     |  √  |         √          |      √       |     √      |       √        | √         |
+| gutter  |      -       |    √     |  √  |         √          |      √       |     √      |       √        | √         |
+| justify |      √       |    √     |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        | -         |
+|  align  |      √       |    √     |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        | -         |
 
 ##### `uni-col`
 
-| 属性名 | App | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
-| :----: | :-: | :-: | :--------: | :----------: | :--------: | :------------: | :-------: |
-|  span  |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-| offset |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|  push  |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|  pull  |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|   xs   |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|   sm   |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|   md   |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|   lg   |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
-|   xl   |  -  |  √  |     √      |      √       |     √      |       √        |     √     |
+| 属性名 | App(nvue) | App(vue) | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
+| :----: | :-------: | :------: | :-: | :--------: | :----------: | :--------: | :------------: | :-------: |
+|  span  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+| offset |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|  push  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|  pull  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|   xs   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|   sm   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|   md   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|   lg   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|   xl   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
 
 ## API
 
 ### Row Props
 
-| 属性名  |  类型  |                   可选值                    | 默认值 | 必填 |          说明           |
-| :-----: | :----: | :-----------------------------------------: | :----: | :--: | :---------------------: |
-| gutter  | Number |                      -                      |   -    |  否  |        栅格间隔         |
-| justify | String  | start/end/center/space-around/space-between | start  |  否  | flex 布局的水平排列方式 |
-|  align  | String  |              top/middle/bottom              |  top   |  否  | flex 布局的垂直排列方式 |
+| 属性名  |  类型  |                   可选值                    | 默认值 | 必填 |            说明            |
+| :-----: | :----: | :-----------------------------------------: | :----: | :--: | :------------------------: |
+|  type   | String |                    flex                     |   -    |  否  | 布局模式，现代浏览器下有效 |
+| gutter  | Number |                      -                      |   -    |  否  |          栅格间隔          |
+| justify | String | start/end/center/space-around/space-between | start  |  否  |  flex 布局的水平排列方式   |
+|  align  | String |              top/middle/bottom              |  top   |  否  |  flex 布局的垂直排列方式   |
 
 ### Col Props
 
@@ -169,7 +171,7 @@
 `对齐方式`: 共五个响应尺寸：xs、sm、md、lg 和 xl
 
 ```html
-<uni-row class="row-bg demo-uni-row" justify="center">
+<uni-row class="row-bg demo-uni-row" type="flex" justify="center">
 	<template v-for="i in 3">
 		<!-- #ifndef APP-NVUE -->
 		<uni-col :span="6" :key="i">
@@ -184,7 +186,7 @@
 	</template>
 </uni-row>
 
-<uni-row class="demo-uni-row" justify="end">
+<uni-row class="demo-uni-row" type="flex" justify="end">
 	<template v-for="i in 3">
 		<!-- #ifndef APP-NVUE -->
 		<uni-col :span="6" :key="i">
@@ -199,7 +201,7 @@
 	</template>
 </uni-row>
 
-<uni-row class="demo-uni-row" justify="space-between">
+<uni-row class="demo-uni-row" type="flex" justify="space-between">
 	<template v-for="i in 3">
 		<!-- #ifndef APP-NVUE -->
 		<uni-col :span="6" :key="i">
@@ -214,7 +216,7 @@
 	</template>
 </uni-row>
 
-<uni-row class="demo-uni-row" justify="space-around">
+<uni-row class="demo-uni-row" type="flex" justify="space-around">
 	<template v-for="i in 3">
 		<!-- #ifndef APP-NVUE -->
 		<uni-col :span="6" :key="i">

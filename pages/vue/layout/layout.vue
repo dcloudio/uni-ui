@@ -164,7 +164,7 @@
 		<!-- #ifndef MP-QQ || MP-TOUTIAO || MP-BAIDU -->
 		<uni-section title="对齐方式" subTitle="通过 flex 布局来对分栏进行灵活的对齐" type="line"></uni-section>
 		<view class="example-body">
-			<uni-row class="demo-uni-row" justify="center">
+			<uni-row class="demo-uni-row" type="flex" justify="center">
 				<template v-for="i in 3">
 					<!-- #ifndef APP-NVUE -->
 					<uni-col :span="6" :key="i">
@@ -230,28 +230,6 @@
 </template>
 
 <script>
-	/*
-		// 属性
-		uni-row
-		type			String	nvue:flex
-		gutter		Number/String
-		justify		String	start、end、center、space-between、space-around		(flex)
-		align			String	top、middle、bottom		(flex)
-
-		uni-col
-		span、offset、pull、push		Number
-		xs、sm、md、lg、xl  				Number、Object({ span:2,offset:4 ... })
-
-		// 使用
-		uni-row
-			uni-col
-				view...
-
-		// 平台差异
-		H5、微信（虚拟化组件节点2.11.2+）、阿里小程序，支持所有功能
-		字节、QQ、百度小程序，不支持flex模式
-		nvue不支持百分比width，只有flex模式
-	 */
 	export default {
 		data() {
 			return {
