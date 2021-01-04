@@ -1,0 +1,12 @@
+{
+	"id": "-1",
+	"name": "Row",
+	"desc": "布局-行",
+	"edition": "1.0.0",
+	"url": "row",
+	"type": "布局组件",
+	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"update_log": [
+		"- 新增uni-row组件"
+	]
+}
