@@ -3,14 +3,19 @@
 		<view
 		    ref="uni-rate"
 		    class="uni-rate"
+				@mouseleave="mouseleave"
 		>
 			<view
-			    class="uni-rate__icon"
-			    :style="{ 'margin-right': margin + 'px' }"
-			    v-for="(star, index) in stars"
-			    :key="index"
-			    @touchstart.stop="touchstart"
-			    @touchmove.stop="touchmove"
+					v-if=""
+					class="uni-rate__icon"
+					:style="{ 'margin-right': margin + 'px' }"
+					v-for="(star, index) in stars"
+					:key="index"
+					@touchstart.stop="touchstart"
+					@touchmove.stop="touchmove"
+					@mousedown.stop="mousedown"
+					@mousemove.stop="mousemove"
+
 			>
 				<uni-icons
 				    :color="color"
@@ -140,7 +145,10 @@
 		},
 		data() {
 			return {
-				valueSync: ""
+				valueSync: "",
+				PC: true,
+				userRated: false,
+				userLastRate: 1
 			};
 		},
 		watch: {
@@ -184,6 +192,9 @@
 		},
 		methods: {
 			touchstart(e) {
+				// #ifdef H5
+				if( this.IsPC() ) return
+				// #endif
 				if (this.readonly || this.disabled) return
 				const {
 					clientX,
@@ -193,6 +204,9 @@
 				this._getRateCount(clientX || screenX)
 			},
 			touchmove(e) {
+				// #ifdef H5
+				if( this.IsPC() ) return
+				// #endif
 				if (this.readonly || this.disabled || !this.touchable) return
 				const {
 					clientX,
@@ -200,6 +214,58 @@
 				} = e.changedTouches[0]
 				this._getRateCount(clientX || screenX)
 			},
+
+			/**
+			 * 兼容 PC @tian
+			 */
+
+			mousedown(e) {
+				// #ifdef H5
+				if( !this.IsPC() ) return
+				if (this.readonly || this.disabled) return
+				const {
+					clientX,
+				} = e
+				this.userLastRate = this.valueSync
+				this._getRateCount(clientX)
+				this.userRated = true
+				// #endif
+			},
+			mousemove(e) {
+				// #ifdef H5
+				if( !this.IsPC() ) return
+				if( this.userRated ) return
+				if (this.readonly || this.disabled || !this.touchable) return
+				const {
+					clientX,
+				} = e
+				this._getRateCount(clientX)
+				// #endif
+			},
+			mouseleave(e) {
+				// #ifdef H5
+				if( !this.IsPC() ) return
+				if (this.readonly || this.disabled || !this.touchable) return
+				if( this.userRated ) {
+					this.userRated = false
+					return
+				}
+				this.valueSync = this.userLastRate
+				// #endif
+			},
+			IsPC() {
+			    var userAgentInfo = navigator.userAgent;
+			    var Agents = ["Android", "iPhone","SymbianOS", "Windows Phone","iPad", "iPod"];
+			    var flag = true;
+			    for (var v = 0; v < Agents.length; v++) {
+			        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+			            flag = false;
+			            break;
+			        }
+			    }
+			    return flag;
+			},
+
 			/**
 			 * 获取星星个数
 			 */
@@ -216,7 +282,6 @@
 				let value = 0;
 				if (this._oldValue === index) return;
 				this._oldValue = index;
-
 				if (this.allowHalf) {
 					if (range > (size / 2)) {
 						value = index + 1
