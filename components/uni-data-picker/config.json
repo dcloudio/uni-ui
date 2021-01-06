@@ -4,7 +4,7 @@
 	"desc": "数据驱动的picker选择器",
 	"url": "data-picker",
 	"type": "表单组件",
-	"edition": "0.0.3",
+	"edition": "0.0.5",
 	"suffix": "vue",
 	"module": ["uni-data-picker","uni-data-pickerview","uni-load-more"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=3796",

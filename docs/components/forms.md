@@ -416,6 +416,10 @@ export default {
 ```
 
 
+### 表单校验时机说明
+
+
+
 ## API
 
 ### Forms Props
@@ -424,11 +428,11 @@ export default {
 | :-:							| :-:				|:-:				| :-:								| :-:		|
 | v-model/value		| Object		| -					| -									| 表单数据|
 | rules						| Object		| -					| -									| 表单校验规则	|
-| validateTrigger	| String		| submit		| bind/submit				| 表单校验时机，监听 `binddata()` 时生效|
-| labelPosition		| String		| left 			| top/left					| label 位置
-| labelWidth			| String/Number	| 75		| -											| label 宽度，单位 px	|
-| labelAlign			| String		| left			| left/center/right			| label 居中方式|
-| errShowType			| String		| undertext	| undertext/toast/modal	| 表单错误信息提示方式|
+| validate-trigger| String		| submit		| bind/submit				| 表单校验时机|
+| label-position	| String		| left 			| top/left					| label 位置
+| label-width			| String/Number	| 75		| -											| label 宽度，单位 px	|
+| label-align			| String		| left			| left/center/right			| label 居中方式|
+| err-show-type		| String		| undertext	| undertext/toast/modal	| 表单错误信息提示方式|
 | border					| Boolean		|false			|-											|是否显示分格线|
 
 ### Forms Events
@@ -491,11 +495,11 @@ this.$refs.form.clearValidate(['name', 'email'])
 | :-:							|:-:		|:-:			|:-:		|:-:	|
 | name						|String	| -				|-					| 表单域的属性名，在使用校验规则时必填|
 | required				|Boolean| false		|					| 左边显示红色"*"号，样式显示不会对校验规则产生效果|
-| validateTrigger	|String | submit	| bind/submit		| 表单校验时机，监听 `binddata()` 时生效|
-| leftIcon				|String | -				|- 					| label左边的图标，限uni-ui的图标名称|
-| iconColor				|String | #606266	|- 					| 左边通过icon配置的图标的颜色|
+| validate-trigger|String | submit	| bind/submit		| 表单校验时机|
+| left-icon				|String | -				|- 					| label左边的图标，限uni-ui的图标名称|
+| icon-color			|String | #606266	|- 					| 左边通过icon配置的图标的颜色|
 | label						|String	| -			|-					| 输入框左边的文字提示|
-| labelWidth			|Number	| 65		|-					| label的宽度，单位px|
-| labelAlign			|String	| left		|left/center/right	| label的文字对齐方式|
-| labelposition		|String	| left		|top/left			| label的文字的位置|
-| errorMessage		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息|
+| label-width			|Number	| 65		|-					| label的宽度，单位px|
+| label-align			|String	| left		|left/center/right	| label的文字对齐方式|
+| label-position	|String	| left		|top/left			| label的文字的位置|
+| error-message		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息|
