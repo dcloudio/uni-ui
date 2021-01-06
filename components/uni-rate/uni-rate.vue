@@ -3,7 +3,6 @@
 		<view
 		    ref="uni-rate"
 		    class="uni-rate"
-				@mouseleave="mouseleave"
 		>
 			<view
 					v-if=""
@@ -15,7 +14,7 @@
 					@touchmove.stop="touchmove"
 					@mousedown.stop="mousedown"
 					@mousemove.stop="mousemove"
-
+					@mouseleave="mouseleave"
 			>
 				<uni-icons
 				    :color="color"
@@ -146,7 +145,7 @@
 		data() {
 			return {
 				valueSync: "",
-				PC: true,
+				userMouseFristMove: true,
 				userRated: false,
 				userLastRate: 1
 			};
@@ -154,7 +153,7 @@
 		watch: {
 			value(newVal) {
 				this.valueSync = Number(newVal);
-			}
+			},
 		},
 		computed: {
 			stars() {
@@ -189,6 +188,9 @@
 			setTimeout(() => {
 				this._getSize()
 			}, 100)
+			// #ifdef H5
+			this.PC = this.IsPC()
+			// #endif
 		},
 		methods: {
 			touchstart(e) {
@@ -235,6 +237,11 @@
 				// #ifdef H5
 				if( !this.IsPC() ) return
 				if( this.userRated ) return
+				if( this.userMouseFristMove ) {
+					console.log('---mousemove----', this.valueSync);
+						this.userLastRate = this.valueSync
+						this.userMouseFristMove = false
+				}
 				if (this.readonly || this.disabled || !this.touchable) return
 				const {
 					clientX,
@@ -250,9 +257,10 @@
 					this.userRated = false
 					return
 				}
-				this.valueSync = this.userLastRate
+					this.valueSync = this.userLastRate
 				// #endif
 			},
+			// #ifdef H5
 			IsPC() {
 			    var userAgentInfo = navigator.userAgent;
 			    var Agents = ["Android", "iPhone","SymbianOS", "Windows Phone","iPad", "iPod"];
@@ -265,6 +273,7 @@
 			    }
 			    return flag;
 			},
+			// #endif
 
 			/**
 			 * 获取星星个数
@@ -280,7 +289,7 @@
 				index = index > this.max ? this.max : index;
 				const range = parseInt(rateMoveRange - (size + this.margin) * index);
 				let value = 0;
-				if (this._oldValue === index) return;
+				if (this._oldValue === index && !this.PC) return;
 				this._oldValue = index;
 				if (this.allowHalf) {
 					if (range > (size / 2)) {

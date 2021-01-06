@@ -1,23 +1,26 @@
 <template>
-  <view>
-		<text class="example-info"> 通过数据驱动的picker选择器，可以关联uniCloud,快速实现picker类数据的级联操作，使用场景如：省市区选择等</text>
+  <view class="container">
+    <!-- <view class="title">
+      <text>uni-data-picker</text>
+    </view>
+    <uni-data-picker placeholder="请选择地址" popup-title="请选择所在地区" :preload="true" :step-searh="true" self-field="code"
+      parent-field="parent_code" collection="opendb-city-china" orderby="value asc" field="code as value, name as text" @nodeclick="onnodeclick" @change="onchange">
+    </uni-data-picker>
 
-		<uni-group title="基础用法-本地数据">
-			<uni-data-picker placeholder="请选择班级" popup-title="请选择班级" :localdata="dataTree">
-			</uni-data-picker>
-		</uni-group>
-		<uni-group title="有默认值">
-			<uni-data-picker v-model="classes" placeholder="请选择班级" popup-title="请选择班级" :localdata="dataTree">
-			</uni-data-picker>
-		</uni-group>
-		<!-- 以下注释内容需要关联服务空间 -->
-    <!--
-		<uni-group title="使用 uniCloud">
-			<uni-data-picker placeholder="请选择地址" popup-title="请选择所在地区" :preload="true" :step-searh="true" self-field="code"
-			  parent-field="parent_code" collection="opendb-city-china" orderby="value asc" field="code as value, name as text" @nodeclick="onnodeclick" @change="onchange">
-			</uni-data-picker>
-		</uni-group>
--->
+    <view class="title">
+      <text>uni-data-picker 有默认值</text>
+    </view>
+    <uni-data-picker placeholder="请选择地址" popup-title="请选择所在地区" :preload="true" :step-searh="true" self-field="code"
+      parent-field="parent_code" collection="opendb-city-china" orderby="value asc" field="code as value, name as text"
+      v-model="address">
+    </uni-data-picker> -->
+
+    <view class="title">
+      <text>uni-data-picker 本地数据</text>
+    </view>
+    <uni-data-picker placeholder="请选择班级" popup-title="请选择所在地区" :localdata="dataTree" v-model="classes">
+    </uni-data-picker>
+
   </view>
 </template>
 
@@ -25,32 +28,27 @@
   export default {
     data() {
       return {
-        classes: '',
-				address:'',
+        classes: '1-2',
         dataTree: [{
             text: "一年级",
             value: "1-0",
             children: [{
                 text: "1.1班",
-                value: "1-1",
-                isLeaf: true
+                value: "1-1"
               },
               {
                 text: "1.2班",
-                value: "1-2",
-                isLeaf: true
+                value: "1-2"
               }
             ]
           },
           {
             text: "二年级",
-            value: "2-0",
-            isLeaf: true
+            value: "2-0"
           },
           {
             text: "三年级",
-            value: "3-0",
-            isLeaf: true
+            value: "3-0"
           }
         ]
       }
@@ -59,19 +57,24 @@
       onnodeclick(e) {
         console.log(e);
       },
-      onchange(e) {
-				console.log(e);
-      }
+      onchange(e) {}
     }
   }
 </script>
 
-<style lang="scss">
-  @import '@/common/uni-nvue.scss';
+<style>
+  .container {
+    height: 100%;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+  }
 
-  .example {
-  	padding: 10px;
-  	background-color: #fff;
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px 0 5px 0;
   }
 
   .data-pickerview {
