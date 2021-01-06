@@ -1,11 +1,16 @@
-### SearchBar 搜索栏
-*已经支持在nvue页面中使用*
+---
+url : pages/vue/search-bar/search-bar
+---
 
-评分组件，组件名：``uni-search-bar``，代码块： uSearchBar。
+## SearchBar 搜索栏
 
-### 使用方式
+::: tip 组件名：uni-search-bar
+代码块： `uSearchBar`
+:::
 
-在 ``script`` 中引用组件 
+评分组件
+
+### 安装方式
 
 本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`components`。
 
@@ -26,10 +31,12 @@
 <uni-search-bar :radius="100" @confirm="search"></uni-search-bar>
 ```
 
-### 属性说明
+
+## API
+### SearchBar Props
 
 |属性名			|类型	|默认值	|说明																					|
-|---			|----	|---	|---																					|
+|:-:			|:-:	|:-:	|:-:																					|
 |placeholder	|String	|搜索	|搜索栏Placeholder																		|
 |radius			|Number	|10		|搜索栏圆角，单位rpx																	|
 |clearButton	|String	|auto	|是否显示清除按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
@@ -39,20 +46,21 @@
 |maxlength		|Number	|100	|输入最大长度																			|
 |focus		|Boolean	|false	|																	|
 
-### 事件说明
+
+### SearchBar Events
 
 |事件称名	|说明																|返回参数			|
-|---		|----																|---				|
-|confirm	|uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value	|e={value:Number}	|
-|input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|e=value	|
-|cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
-|clear		|点击清除按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
-|blur			|input失去焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|:-:		|:-:																|:-:				|
+|@confirm	|uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value	|e={value:Number}	|
+|@input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|e=value	|
+|@cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|@clear		|点击清除按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|@blur			|input失去焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
 
 ### 替换 icon 的 slot 插槽
 
 |插槽称名	|说明																|
-|---		|----																|
+|:-:		|:-:																|
 |searchIcon	|替换组件的搜索图标|
 |clearIcon	|替换组件的清除图标|
 
@@ -68,6 +76,3 @@
 </uni-search-bar>
 
 ```
-### 插件预览地址
-
-[https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar](https://uniapp.dcloud.io/h5/pages/extUI/search-bar/search-bar)

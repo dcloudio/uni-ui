@@ -6,6 +6,7 @@
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
 		"- 新增 uni-data-picker 数据驱动的picker选择器",
-		"- uni-easyinput 优化 trim 属性，可以单独去除左侧右侧和中间部分的空格"
+		"- 修复 uni-forms 偶发性获取表单值错误的Bug",
+		"- 优化 uni-forms 实时校验"
 	]
 }
