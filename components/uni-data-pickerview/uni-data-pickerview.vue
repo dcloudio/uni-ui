@@ -108,7 +108,7 @@
         } = this._updateBindData()
 
         if (this.isLocaldata && (!hasNodes || isLeaf)) {
-          this.onSelectedChange(node, isLeaf)
+          this.onSelectedChange(node, true)
           return
         }
 
