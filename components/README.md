@@ -38,7 +38,7 @@ uniSwiperAction.vue
 {
 	"name":"Collapse", // 组件名称
 	"desc":"折叠面板", // 组件中文名称
-	"url":"collapse", // 组件地址 （为跳转地址，一般是组件名称，全消协）
+	"url":"collapse", // 组件地址 （为跳转地址，一般是组件名称，全小写）
 	"edition":"1.0.0", // 组件版本，每次修改版本号要递增
 	"path":"https://ext.dcloud.net.cn/plugin?id=23", // 插件市场地址
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"], // 组件包含依赖那些其他组件

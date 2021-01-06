@@ -2,6 +2,9 @@
   <view class="uni-data-tree">
     <view class="uni-data-tree-input" @click="handleInput">
       <slot :options="options" :data="inputSelected" :error="errorMessage">
+        <!-- <view class="input-value">
+          <uni-load-more class="load-more" :contentText="loadMore" status="loading"></uni-load-more>
+        </view> -->
         <view v-if="errorMessage" class="input-value">
           <text class="error-text">{{errorMessage}}</text>
         </view>
@@ -29,17 +32,16 @@
           <view class="dialog-close-plus dialog-close-rotate" data-id="close"></view>
         </view>
       </view>
-      <data-picker-view class="picker-view" ref="pickerView" v-model="value" :localdata="localdata" :preload="preload" :collection="collection" :field="field"
-        :orderby="orderby" :where="where" :step-searh="stepSearh" :self-field="selfField"
-        :parent-field="parentField" :managed-mode="true" @nodeclick="onnodeclick" @change="onchange" @datachange="ondatachange"></data-picker-view>
+      <data-picker-view class="picker-view" ref="pickerView" v-model="value" :localdata="localdata" :preload="preload"
+        :collection="collection" :field="field" :orderby="orderby" :where="where" :step-searh="stepSearh" :self-field="selfField"
+        :parent-field="parentField" :managed-mode="true" @change="onchange" @datachange="ondatachange"></data-picker-view>
     </view>
   </view>
 </template>
 
 <script>
-  import DataPicker from "../uni-data-pickerview/uni-data-picker.js"
+  import dataPicker from "../uni-data-pickerview/uni-data-picker.js"
   import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
-  import DataPickerProps from "../uni-data-pickerview/uni-data-picker-props.js"
 
   /**
    * uni-data-picker
@@ -67,7 +69,7 @@
    */
   export default {
     name: 'UniDataPicker',
-    mixins: [DataPickerProps],
+    mixins: [dataPicker],
     components: {
       DataPickerView
     },
@@ -94,35 +96,6 @@
       }
     },
     created() {
-      this._dataPicker = new DataPicker()
-      DataPicker.Properties.forEach((p) => {
-        this._dataPicker[p] = this[p]
-      })
-      this._dataPicker.onloading = (e) => {
-        this.loading = e
-      }
-      this._dataPicker.onerror = (e) => {
-        this.errorMessage = e
-      }
-
-      this.$watch(() => {
-        var al = []
-        this._attrs.forEach(key => {
-          al.push(this[key])
-        })
-        return al
-      }, (newValue, oldValue) => {
-        this._dataPicker.reset()
-        DataPicker.Properties.forEach((p) => {
-          this._dataPicker[p] = this[p]
-        })
-        this.loadData()
-      })
-
-      this.$nextTick(() => {
-        this.loadData()
-      })
-
       this.form = this.getForm('uniForms')
       this.formItem = this.getForm('uniFormsItem')
       if (this.formItem) {
@@ -131,8 +104,27 @@
           this.form.inputChildrens.push(this)
         }
       }
+
+      this.$nextTick(() => {
+        this.load()
+      })
     },
     methods: {
+      onPropsChange() {
+        this._treeData = []
+        this.selectedIndex = 0
+        this.load()
+      },
+      load() {
+        if (this.isLocaldata) {
+          this.loadData()
+          this.inputSelected = this.selected.slice(0)
+        } else if (this.value.length) {
+          this.getTreePath(() => {
+            this.inputSelected = this.selected.slice(0)
+          })
+        }
+      },
       getForm(name = 'uniForms') {
         let parent = this.$parent;
         let parentName = parent.$options.name;
@@ -143,25 +135,18 @@
         }
         return parent;
       },
-      loadData() {
-        if (this.isLocalData) {
-          this._dataPicker.loadData()
-        } else if (this.value.length) {
-          this._dataPicker.getTreePath((res) => {
-            this.inputSelected = res.slice(0)
-          })
-        }
-      },
       show() {
         this.isOpened = true
         this.$nextTick(() => {
-          this.$refs.pickerView.updateDataPicker(this._dataPicker)
+          this.$refs.pickerView.updateData({
+            treeData: this._treeData,
+            selected: this.selected,
+            selectedIndex: this.selectedIndex
+          })
         })
-        this.$emit('popupopened')
       },
       hide() {
         this.isOpened = false
-        this.$emit('popupclosed')
       },
       handleInput() {
         this.show()
@@ -169,29 +154,26 @@
       handleClose(e) {
         this.hide()
       },
-      onnodeclick(e) {
-        this.$emit('nodeclick', e)
-      },
       ondatachange(e) {
-        this._dataPicker.value = e.value
-        this._dataPicker.treeData = e.treeData
-        this._dataPicker.dataList = e.dataList
-        this._dataPicker.selected = e.selected
-        this._dataPicker.selectedIndex = e.selectedIndex
+        this._treeData = this.$refs.pickerView._treeData
       },
       onchange(e) {
         this.hide()
-        const value = e.detail.value
-        this.inputSelected = value
-        this._dispatchEvent(value)
+        this.inputSelected = e
+        this._dispatchEvent(e)
       },
       _dispatchEvent(selected) {
-        if (this.formItem) {
-          const item = selected[selected.length - 1]
-          this.formItem.setValue(item.value)
+        var value = new Array(selected.length)
+        for (var i = 0; i < selected.length; i++) {
+          value[i] = selected[i].value
         }
 
-        this.$emit('change', selected)
+        if (this.formItem) {
+          const v = value[value.length - 1]
+          this.formItem.setValue(v)
+        }
+
+        this.$emit('change', value)
       }
     }
   }
@@ -202,7 +184,7 @@
     position: relative;
     font-size: 14px;
   }
-  
+
   .error-text {
     color: #DD524D;
   }
@@ -235,7 +217,7 @@
   .input-value-item {
     padding: 0 1px;
   }
-  
+
   .placeholder {
     opacity: .5;
   }
@@ -316,8 +298,9 @@
   /* #ifdef H5 */
   @media all and (min-width: 768px) {
     .uni-data-tree-cover {
-        background-color: transparent;
+      background-color: transparent;
     }
+
     .uni-data-tree-dialog {
       position: absolute;
       top: 100%;
@@ -326,11 +309,13 @@
       max-height: 50vh;
       background-color: #fff;
       border-radius: 5px;
-      box-shadow: 0 0 20px 5px rgba(0,0,0,.3);
+      box-shadow: 0 0 20px 5px rgba(0, 0, 0, .3);
     }
+
     .dialog-caption {
       display: none;
     }
   }
+
   /* #endif */
 </style>

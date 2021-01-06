@@ -2,15 +2,15 @@
   <view class="uni-data-pickerview">
     <scroll-view class="selected-area" scroll-x="true">
       <view class="selected-list">
-        <view class="selected-item" :class="{'selected-item-active':index==tabIndex}" v-for="(item,index) in selected"
+        <view class="selected-item" :class="{'selected-item-active':index==selectedIndex}" v-for="(item,index) in selected"
           :key="index" v-if="item.text" @click="handleSelect(index)">
           <text class="">{{item.text}}</text>
         </view>
       </view>
     </scroll-view>
     <view class="tab-c">
-      <scroll-view class="list" v-for="(child, i) in dataList" :key="i" v-if="i==tabIndex" scroll-y="false">
-        <view class="item" v-for="(item, j) in child" :key="j" @click="handleNode(i, j)">
+      <scroll-view class="list" v-for="(child, i) in dataList" :key="i" v-if="i==selectedIndex" scroll-y="false">
+        <view class="item" v-for="(item, j) in child" :key="j" @click="handleNodeClick(i, j)">
           <text class="item-text">{{item.text}}</text>
           <view class="check" v-if="selected.length > i && item.value == selected[i].value"></view>
         </view>
@@ -26,8 +26,7 @@
 </template>
 
 <script>
-  import DataPicker from "./uni-data-picker.js"
-  import DataPickerProps from "./uni-data-picker-props.js"
+  import dataPicker from "./uni-data-picker.js"
 
   /**
    * uni-data-pickerview
@@ -39,9 +38,6 @@
    * @value false 关闭分布查询，一次查询出所有数据
    * @property {String|DBFieldString} self-field 分布查询当前字段名称
    * @property {String|DBFieldString} parent-field 分布查询父字段名称
-   * @property {Boolean} array2tree = [true|false] 是否查询出树结构数据
-   * @value true 
-   * @value false 
    * @property {String|DBCollectionString} collection 表名
    * @property {String|DBFieldString} field 查询字段，多个字段用 `,` 分割
    * @property {String} orderby 排序字段及正序倒叙设置
@@ -49,7 +45,7 @@
    */
   export default {
     name: 'UniDataPickerView',
-    mixins: [DataPickerProps],
+    mixins: [dataPicker],
     props: {
       managedMode: {
         type: Boolean,
@@ -58,90 +54,101 @@
     },
     data() {
       return {
-        selected: [],
-        dataList: [],
-        tabIndex: 0
       }
     },
     created() {
-      this._dataPicker = new DataPicker()
-      DataPicker.Properties.forEach((p) => {
-        this._dataPicker[p] = this[p]
-      })
-      this._dataPicker.onloading = (e) => {
-        this.loading = e
-      }
-      this._dataPicker.onerror = (e) => {
-        this.errorMessage = e
-      }
-      this._dataPicker.onchange = this.onDataPickerChange.bind(this)
-
-      this.$watch(() => {
-        var al = []
-        this._attrs.forEach(key => {
-          al.push(this[key])
-        })
-        return al
-      }, (newValue, oldValue) => {
-        this._dataPicker.reset()
-        DataPicker.Properties.forEach((p) => {
-          this._dataPicker[p] = this[p]
-        })
-        this.loadData()
-      })
-
       if (this.managedMode) {
         return
       }
 
-      if (this.value.length) {
-        this._dataPicker.getTreePath((res) => {
-          this.loadData()
-        })
-      } else {
-        this.loadData()
-      }
+      this.$nextTick(() => {
+        this.load()
+      })
     },
     methods: {
-      loadData() {
-        this.errorMessage = ''
-        this._dataPicker.loadData(() => {})
+      onPropsChange() {
+        this._treeData = []
+        this.selectedIndex = 0
+        this.load()
       },
-      updateDataPicker(options) {
-        this._dataPicker.value = options.value
-        this._dataPicker.treeData = options.treeData
-        this._dataPicker.dataList = options.dataList
-        this._dataPicker.selected = options.selected
-        this._dataPicker.selectedIndex = options.selectedIndex
-        this._updateData(this._dataPicker)
-        if (!this._dataPicker.dataList.length) {
+      load() {
+        if (this.isLocaldata) {
           this.loadData()
+        } else if (this.value.length) {
+          this.getTreePath((res) => {
+            this.loadData()
+          })
         }
       },
       handleSelect(index) {
-        this.tabIndex = index
-        this.$emit('tabindex', index)
+        this.selectedIndex = index
       },
-      handleNode(i, j) {
-        this._dataPicker.selectedNode(i, j)
+      handleNodeClick(i, j) {
+        const node = this.dataList[i][j]
+        const {
+          value,
+          text
+        } = node
+
+        if (i < this.selected.length - 1) {
+          this.selected.splice(i, this.selected.length - i)
+          this.selected.push(node)
+        } else if (i === this.selected.length - 1) {
+          this.selected[i] = node
+        }
+
+        if (node.isLeaf) {
+          this.onSelectedChange(node, node.isLeaf)
+          return
+        }
+
+        const {
+          isLeaf,
+          hasNodes
+        } = this._updateBindData()
+
+        if (this.isLocaldata && (!hasNodes || isLeaf)) {
+          this.onSelectedChange(node, isLeaf)
+          return
+        }
+
+        if (!isLeaf && !hasNodes) {
+          this._loadNodeData((data) => {
+            if (!data.length) {
+              node.isLeaf = true
+            } else {
+              this._treeData.push(...data)
+              this._updateBindData(node)
+            }
+            this.onSelectedChange(node, node.isLeaf)
+          }, this.nodeWhere)
+          return
+        }
+
+        this.onSelectedChange(node, false)
       },
-      onDataPickerChange(e, isLeaf) {
-        this._updateData(this._dataPicker)
-        this.$emit('datachange', this._dataPicker)
-        if (isLeaf) {
-          this._dispatchEvent()
-        } else if (e) {
-          this.$emit('nodeclick', e)
+      updateData(data) {
+        this._treeData = data.treeData
+        this.selected = data.selected
+        if (!this._treeData.length) {
+          this.loadData()
+        } else {
+          //this.selected = data.selected
+          this._updateBindData()
         }
       },
-      _updateData(dataPicker) {
-        this.dataList = dataPicker.dataList
-        this.selected = dataPicker.selected
-        this.tabIndex = dataPicker.selectedIndex
+      onDataChange() {
+        this.$emit('datachange')
+      },
+      onSelectedChange(node, isLeaf) {
+        if (isLeaf) {
+          this._dispatchEvent()
+        } else if (node) {
+          this.$emit('nodeclick', node)
+        }
       },
       _dispatchEvent() {
-        const data = this._dataPicker.selected.slice(0)
-        this.$emit('change', { detail: { value: data } })
+        this.$emit('change', this.selected.slice(0))
       }
     }
   }
@@ -158,7 +165,7 @@
   .error-text {
     color: #DD524D;
   }
-  
+
   .loading-cover {
     position: absolute;
     left: 0;
@@ -175,7 +182,7 @@
   .load-more {
     margin: auto;
   }
-  
+
   .error-message {
     background-color: #fff;
     position: absolute;

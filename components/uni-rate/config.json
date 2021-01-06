@@ -7,6 +7,6 @@
 	"edition": "1.0.6",
 	"path": "https://ext.dcloud.net.cn/plugin?id=33",
 	"update_log":[
-		"- 修复 size 属性设置 String 类型值，只能选择1星的Bug"
+		"- 支持 pc 端可用"
 	]
 }

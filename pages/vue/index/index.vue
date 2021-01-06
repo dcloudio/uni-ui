@@ -55,6 +55,10 @@
 					{
 						name: 'Section 标题栏',
 						url: 'section'
+					},
+					{
+						name: 'Layout 布局',
+						url: 'layout'
 					}
 
 				],
