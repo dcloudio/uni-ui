@@ -6,5 +6,8 @@
 	"type": "功能组件",
 	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=284",
-	"update_log": "- 优化 可在nvue页面中使用"
+	"update_log": [
+		"- 新增 clickItem 事件，支持指示点控制",
+		"- 新增 支持 pc 可用"
+	]
 }
