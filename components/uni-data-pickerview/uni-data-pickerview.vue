@@ -36,7 +36,7 @@
    * @property {Boolean} step-searh = [true|false] 是否分布查询
    * @value true 启用分布查询，仅查询当前选中节点
    * @value false 关闭分布查询，一次查询出所有数据
-   * @property {String|DBFieldString} child-field 分布查询当前字段名称
+   * @property {String|DBFieldString} self-field 分布查询当前字段名称
    * @property {String|DBFieldString} parent-field 分布查询父字段名称
    * @property {String|DBCollectionString} collection 表名
    * @property {String|DBFieldString} field 查询字段，多个字段用 `,` 分割
@@ -57,29 +57,29 @@
       }
     },
     created() {
-      // this.$watch(() => {
-      //   var al = []
-      //   this._attrs.forEach(key => {
-      //     al.push(this[key])
-      //   })
-      //   return al
-      // }, (newValue, oldValue) => {
-      //   this.loadData()
-      // })
-
       if (this.managedMode) {
         return
       }
 
-      if (this.isLocaldata) {
-        this.loadData()
-      } else if (this.value.length) {
-        this.$nextTick(() => {
-          this.getTreePath()
-        })
-      }
+      this.$nextTick(() => {
+        this.load()
+      })
     },
     methods: {
+      onPropsChange() {
+        this._treeData = []
+        this.selectedIndex = 0
+        this.load()
+      },
+      load() {
+        if (this.isLocaldata) {
+          this.loadData()
+        } else if (this.value.length) {
+          this.getTreePath((res) => {
+            this.loadData()
+          })
+        }
+      },
       handleSelect(index) {
         this.selectedIndex = index
       },

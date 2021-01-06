@@ -141,10 +141,45 @@ export default {
     }
   },
   created() {
+    this.$watch(() => {
+      var al = [];
+      ['pageCurrent',
+        'pageSize',
+        'value',
+        'localdata',
+        'collection',
+        'action',
+        'field',
+        'orderby',
+        'where',
+        'getont',
+        'getcount',
+        'gettree'
+      ].forEach(key => {
+        al.push(this[key])
+      });
+      return al
+    }, (newValue, oldValue) => {
+      let needReset = false
+      for (let i = 2; i < newValue.length; i++) {
+        if (newValue[i] != oldValue[i]) {
+          needReset = true
+          break
+        }
+      }
+      if (newValue[0] != oldValue[0]) {
+        this.page.current = this.pageCurrent
+      }
+      this.page.size = this.pageSize
+
+      this.onPropsChange()
+    })
     this._treeData = []
   },
   methods: {
-    _onPropsChange() {},
+    onPropsChange() {
+      this._treeData = []
+    },
     getCommand(options = {}) {
       /* eslint-disable no-undef */
       let db = uniCloud.database()

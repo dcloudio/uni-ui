@@ -55,7 +55,7 @@
    * @property {Boolean} step-searh = [true|false] 是否分布查询
    * @value true 启用分布查询，仅查询当前选中节点
    * @value false 关闭分布查询，一次查询出所有数据
-   * @property {String|DBFieldString} child-field 分布查询当前字段名称
+   * @property {String|DBFieldString} self-field 分布查询当前字段名称
    * @property {String|DBFieldString} parent-field 分布查询父字段名称
    * @property {Boolean} array2tree = [true|false] 是否查询出树结构数据
    * @value true
@@ -105,18 +105,26 @@
         }
       }
 
-      if (this.isLocaldata) {
-        this.loadData()
-        this.inputSelected = this.selected.slice(0)
-      } else if (this.value.length) {
-        this.$nextTick(() => {
+      this.$nextTick(() => {
+        this.load()
+      })
+    },
+    methods: {
+      onPropsChange() {
+        this._treeData = []
+        this.selectedIndex = 0
+        this.load()
+      },
+      load() {
+        if (this.isLocaldata) {
+          this.loadData()
+          this.inputSelected = this.selected.slice(0)
+        } else if (this.value.length) {
           this.getTreePath(() => {
             this.inputSelected = this.selected.slice(0)
           })
-        })
-      }
-    },
-    methods: {
+        }
+      },
       getForm(name = 'uniForms') {
         let parent = this.$parent;
         let parentName = parent.$options.name;
