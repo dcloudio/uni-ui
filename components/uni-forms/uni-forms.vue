@@ -269,7 +269,6 @@
 					newFormData[v.name] = invalidFields[v.name] || this._getValue(v.name, '')
 				})
 				if (this.validator) {
-					console.log(fieldsValue);
 					for (let i in fieldsValue) {
 						// 循环校验，目的是异步校验
 						const resultData = await this.validator.validateUpdate({

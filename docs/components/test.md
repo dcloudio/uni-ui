@@ -105,7 +105,7 @@ export default {
 </uni-list>
  <!-- 左侧显示略缩图、图标 -->
  <uni-list>
- 	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png"
+ 	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png"
  	 thumb-size="lg" rightText="右侧文字"/>
  	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" />
 </uni-list>
@@ -141,13 +141,13 @@ export default {
 <uni-list>
 	<uni-list :border="true">
 		<!-- 显示圆形头像 -->
-		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" />
+		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" />
 		<!-- 右侧带角标 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"/>
+		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"/>
 		<!-- 头像显示圆点 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
+		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
 		<!-- 头像显示角标 -->
-		<uni-list-chat title="uni-app" avatar="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"/>
+		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"/>
 		<!-- 显示多头像 -->
 		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
 		<!-- 自定义右侧内容 -->
@@ -170,11 +170,11 @@ export default {
 	data() {
 		return {
 			avatarList: [{
-				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
 			}, {
-				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
 			}, {
-				url: 'https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png'
+				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
 			}]
 		}
 	}

@@ -44,17 +44,17 @@
 			return {
 				info: [{
 						colorClass: 'uni-bg-red',
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',
+						url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
 						content: '内容 A'
 					},
 					{
 						colorClass: 'uni-bg-green',
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
+						url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
 						content: '内容 B'
 					},
 					{
 						colorClass: 'uni-bg-blue',
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg',
+						url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg',
 						content: '内容 C'
 					}
 				],

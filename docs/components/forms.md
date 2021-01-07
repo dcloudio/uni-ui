@@ -128,7 +128,7 @@ export default {
 			<uni-forms-item label="姓名" name="name">
 				<uni-easyinput type="text" v-model="formData.name" placeholder="请输入姓名" />
 			</uni-forms-item>
-			<uni-forms-item label="邮箱" name="email" placeholder="请输入年龄">
+			<uni-forms-item label="邮箱" name="email">
 				<input class="input" v-model="formData.email" type="text" placeholder="请输入用户名" @input="binddata('email',$event.detail.value)" />
 			</uni-forms-item>
 			<button @click="submit">Submit</button>
@@ -206,7 +206,7 @@ export default {
 |属性名					| 类型	| 说明																												|
 |:-:						| :-:		| :-:																													|
 |rules					| Array	| 校验规则，见下方 `rules 属性说明`														|
-|validateTrigger| String| 表单校验时机，监听 `binddata()` 时生效	|
+|validateTrigger| String| 表单校验时机|
 |label					| String| 当前表单域的字段中文名，多用于 `errorMessage` 的显示，可不填|
 
 
@@ -418,6 +418,41 @@ export default {
 
 ### 表单校验时机说明
 
+不管是在规则里还是`uni-forms`、`uni-forms-item`里，都有 `validateTrigger` 属性， `validateTrigger` 属性规定了表单校验时机，当前只有 `bind`、`submit` 两个值域
+
+- `bind` ： 数据绑定时触发校验，`uni-esayinput` 、`uni-data-checkbox` 组件表现为数据发生变化时。其他内置或三方组件为 `binddata` 事件执行时机
+
+```html
+
+<template>
+	<view>
+		<uni-forms  ref="form" :value="formData" validate-trigger="bind">
+			<uni-forms-item name="age" label="年龄">
+				<!-- uni-easyinput 的校验时机是数据发生变化， 即触发 input 时 -->
+				<uni-easyinput v-model="formData.age" type="text" placeholder="请输入年龄" />
+			</uni-forms-item>
+			<uni-forms-item  name="email" label="邮箱">
+			 <!-- input 的校验时机是触发 binddata 时， 即触发 blur 时 -->
+				<input v-model="formData.email"  @blur="binddata('email',$event.detail.value)" />
+			</uni-forms-item>
+			<button class="button" @click="submit">校验表单</button>
+		</uni-forms>
+	</view>
+</template>
+
+```
+
+- `submit`： 只有提交表单才会触发表单校验
+
+
+对于表单校验时机，同时只会有一个 `validateTrigger` 发生作用，它的作用权重为
+
+**`规则 > uni-forms-item > uni-forms `**
+
+- 如果规则里配置 `validateTrigger` ，则优先使用规则里的 `validateTrigger` 属性来决定表单校验时机
+- 如果规则里没有配置 `validateTrigger` ，则优先使用 `uni-forms-item` 的 `validateTrigger` 属性来决定表单校验时机
+- 如果 `uni-forms-item` 组件里没有配置 `validateTrigger` ，则优先使用 `uni-forms` 的 `validateTrigger` 属性来决定表单校验时机
+- 以此类推，如果都没有使用 `validateTrigger` 属性，则会使用 `uni-forms` 的 `validateTrigger` 属性默认值来决定表单校验时机
 
 
 ## API
