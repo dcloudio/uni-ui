@@ -5,6 +5,14 @@
 关联组件：`uni-data-pickerview`、`uni-load-more`。
 :::
 
+`<uni-data-picker>` 是一个选择组件，支持单列、级联选择
+
+`<uni-data-picker>` 支持本地数据、云端静态数据(json)，云端数据库数据
+
+`<uni-data-picker>` 可以直连数据库表，如果使用[DB Schema](https://uniapp.dcloud.net.cn/uniCloud/schema)，还支持服务器端校验
+
+`<uni-data-picker>` 组件尤其适用于地址选择、分类选择等。
+
 
 ::: warning 注意事项
 
