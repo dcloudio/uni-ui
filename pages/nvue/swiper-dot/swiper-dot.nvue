@@ -104,7 +104,6 @@
 				this.dotsStyles = this.dotStyle[0]
 			},
 			clickItem(e) {
-				console.log(11111111, e);
 				this.swiperDotIndex = e
 			}
 		}
