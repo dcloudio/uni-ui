@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
-		<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
-			<swiper class="swiper-box" @change="change">
+		<uni-swiper-dot @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
+			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in info" :key="index">
 					<view :class="item.colorClass" class="swiper-item">
 						<image class="image" :src="item.url" mode="aspectFill" />
@@ -84,7 +84,8 @@
 				styleIndex: -1,
 				current: 0,
 				mode: 'default',
-				dotsStyles: {}
+				dotsStyles: {},
+				swiperDotIndex: 0
 			}
 		},
 		onLoad() {},
@@ -101,6 +102,9 @@
 				this.modeIndex = index
 				this.styleIndex = -1
 				this.dotsStyles = this.dotStyle[0]
+			},
+			clickItem(e) {
+				this.swiperDotIndex = e
 			}
 		}
 	}
