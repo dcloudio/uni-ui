@@ -4,7 +4,7 @@
 	"desc": "悬浮按钮",
 	"url": "fab",
 	"type": "基础组件",
-	"edition": "1.0.5",
+	"edition": "1.0.6",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
-	"update_log": "- 修复 tabbar页面底部位置不正确的Bug"
+	"update_log": "- 新增 支持 PC 端"
 }
