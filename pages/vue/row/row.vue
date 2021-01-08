@@ -1,5 +1,12 @@
 <template>
-	<view class="container">
+	<view class="warp">
+		<!-- #ifndef APP-NVUE -->
+		<text class="example-info">流式栅格系统，随着屏幕或视口分为 24 份，可以迅速简便地创建布局</text>
+		<!-- #endif -->
+		<!-- #ifdef APP-NVUE -->
+		<text class="example-info">流式栅格系统，在nvue只可使用flex布局</text>
+		<!-- #endif -->
+
 		<!-- #ifndef APP-NVUE -->
 		<uni-section title="基础布局" subTitle="使用单一分栏创建基础的栅格布局" type="line"></uni-section>
 		<view class="example-body">
@@ -116,7 +123,7 @@
 				<uni-col :span="8">
 					<view class="demo-uni-col dark"></view>
 				</uni-col>
-				<uni-col :span="8" :offset="6">
+				<uni-col :span="8" style="margin-left: 80rpx;">
 					<view class="demo-uni-col dark"></view>
 				</uni-col>
 			</uni-row>
@@ -134,9 +141,12 @@
 				<uni-col :span="12" :pull="6">
 					<view class="demo-uni-col dark"></view>
 				</uni-col>
+				<uni-col :span="6" :push="6">
+					<view class="demo-uni-col dark"></view>
+				</uni-col>
 			</uni-row>
 			<uni-row class="demo-uni-row" :gutter="gutter">
-				<uni-col :span="12" :push="6">
+				<uni-col :span="12" :offset="6">
 					<view class="demo-uni-col dark"></view>
 				</uni-col>
 			</uni-row>
@@ -164,65 +174,22 @@
 		<!-- #ifndef MP-QQ || MP-TOUTIAO || MP-BAIDU -->
 		<uni-section title="对齐方式" subTitle="通过 flex 布局来对分栏进行灵活的对齐" type="line"></uni-section>
 		<view class="example-body">
-			<uni-row class="demo-uni-row" type="flex" justify="center">
-				<template v-for="i in 3">
-					<!-- #ifndef APP-NVUE -->
-					<uni-col :span="6" :key="i">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-					<!-- #ifdef APP-NVUE -->
-					<uni-col :style="{width: nvueWidth}">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-				</template>
-			</uni-row>
-
-			<uni-row class="demo-uni-row" type="flex" justify="end">
-				<template v-for="i in 3">
-					<!-- #ifndef APP-NVUE -->
-					<uni-col :span="6" :key="i">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-					<!-- #ifdef APP-NVUE -->
-					<uni-col :style="{width: nvueWidth}">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-				</template>
-			</uni-row>
-
-			<uni-row class="demo-uni-row" type="flex" justify="space-between">
-				<template v-for="i in 3">
-					<!-- #ifndef APP-NVUE -->
-					<uni-col :span="6" :key="i">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-					<!-- #ifdef APP-NVUE -->
-					<uni-col :style="{width: nvueWidth}">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-				</template>
-			</uni-row>
-
-			<uni-row class="demo-uni-row" type="flex" justify="space-around">
-				<template v-for="i in 3">
-					<!-- #ifndef APP-NVUE -->
-					<uni-col :span="6" :key="i">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-					<!-- #ifdef APP-NVUE -->
-					<uni-col :style="{width: nvueWidth}">
-						<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-					</uni-col>
-					<!-- #endif -->
-				</template>
-			</uni-row>
+			<template v-for="flexItem in ['start','center','end','space-between','space-around']">
+				<uni-row class="demo-uni-row" type="flex" :justify="flexItem">
+					<template v-for="i in 3">
+						<!-- #ifndef APP-NVUE -->
+						<uni-col :span="6" :key="i">
+							<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
+						</uni-col>
+						<!-- #endif -->
+						<!-- #ifdef APP-NVUE -->
+						<uni-col :style="{width: nvueWidth}">
+							<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
+						</uni-col>
+						<!-- #endif -->
+					</template>
+				</uni-row>
+			</template>
 		</view>
 		<!-- #endif -->
 
@@ -233,7 +200,7 @@
 	export default {
 		data() {
 			return {
-				nvueWidth: '187rpx',
+				nvueWidth: '187.5rpx',
 				gutter: 10
 			}
 		},
@@ -251,15 +218,16 @@
 	.demo-uni-row {
 		margin-bottom: 10px;
 
+		// 组件在小程序端display为inline
 		// QQ、字节小程序文档写有 :host，但实测不生效
-		// 百度小程序没有 :host，需要设置block
+		// 百度小程序没有 :host
 		/* #ifdef MP-TOUTIAO || MP-QQ || MP-BAIDU */
 		display: block;
 		/* #endif */
 	}
 
 	// 支付宝小程序没有 demo-uni-row 层级
-	// 微信使用了虚拟化节点，也没有 demo-uni-row 层级
+	// 微信小程序使用了虚拟化节点，没有 demo-uni-row 层级
 	/* #ifdef MP-ALIPAY || MP-WEIXIN */
 	/deep/ .uni-row {
 		margin-bottom: 10px;

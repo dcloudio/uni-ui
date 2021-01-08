@@ -6,6 +6,7 @@
 	"url": "row",
 	"type": "布局组件",
 	"path": "https://ext.dcloud.net.cn/plugin?id=",
+	"module": ["uni-row", "uni-col"],
 	"update_log": [
 		"- 新增uni-row组件"
 	],

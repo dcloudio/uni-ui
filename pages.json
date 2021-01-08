@@ -295,7 +295,7 @@
 			}
 		},
 		{
-			"path" : "pages/vue/layout/layout",
+			"path" : "pages/vue/row/row",
 			"style" : {
 					"navigationBarTitleText": "layout 布局",
 					"enablePullDownRefresh": false
