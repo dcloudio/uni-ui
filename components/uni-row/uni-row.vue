@@ -10,7 +10,7 @@
 <script>
 	/**
 	 * uni-row	布局-行
-	 * @description	流式栅格系统，随着屏幕或视口，分为 24 份，可以迅速简便地创建布局。
+	 * @description	流式栅格系统，随着屏幕或视口分为 24 份，可以迅速简便地创建布局。
 	 * @tutorial	https://ext.dcloud.net.cn/plugin?id=
 	 *
 	 * @property	{gutter} type = Number 栅格间隔
@@ -106,19 +106,20 @@
 	#{$row} {
 		position: relative;
 
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
 		/* #endif */
 
-		// 在QQ、字节、百度小程序平台，编译后使用shadow dom，不可使用flex布局，使用float
-		/* #ifdef MP-QQ || MP-TOUTIAO || MP-BAIDU */
-		// @include utils-clearfix;
-		/* #endif */
-
+		// 非nvue使用float布局
 		/* #ifndef APP-NVUE */
 		@include utils-clearfix;
 		/* #endif */
 
+		// 在QQ、字节、百度小程序平台，编译后使用shadow dom，不可使用flex布局，使用float
 		/* #ifndef MP-QQ || MP-TOUTIAO || MP-BAIDU */
 		@at-root {
 			#{& + $modifier-separator}flex {

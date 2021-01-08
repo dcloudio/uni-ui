@@ -136,7 +136,12 @@
 	$col: $layout-namespace+"col";
 
 	@function getSize($size) {
+		/* #ifndef APP-NVUE */
 		@return 1 / 24 * $size * 100 * 1%;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		@return 1 / 24 * $size * 100 * 0.01 * 730rpx;
+		/* #endif */
 	}
 
 	@mixin res($key, $map:$breakpoints) {
@@ -151,32 +156,18 @@
 		}
 	}
 
-	@mixin uni-hidden {
-		/* #ifndef APP-NVUE */
-		display: none;
-		/* #endif */
-		/* #ifndef APP-NVUE */
-		width: 0px;
-		height: 0px;
-		margin: 0px;
-		padding: 0px;
-		border-width: 0px;
-		/* #endif */
-	}
-
+	/* #ifndef APP-NVUE */
 	#{$col} {
 		/* #ifdef MP-QQ || MP-TOUTIAO || MP-BAIDU */
 		/* float: left; */
 		/* #endif */
 
-		/* #ifndef APP-NVUE */
 		float: left;
 		box-sizing: border-box;
-		/* #endif */
 	}
 
 	#{$col}-0 {
-		@include uni-hidden;
+		display: none;
 	}
 
 	@for $i from 0 through 24 {
@@ -202,7 +193,7 @@
 	@each $point in map-keys($breakpoints) {
 		@include res($point) {
 			#{$col}-#{$point}-0 {
-				@include uni-hidden;
+				display: none;
 			}
 
 			@for $i from 0 through 24 {
@@ -226,4 +217,6 @@
 			}
 		}
 	}
+
+	/* #endif */
 </style>

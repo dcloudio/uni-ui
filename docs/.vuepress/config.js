@@ -120,6 +120,11 @@ module.exports = {
 						path: '/components/title.md',
 						title: '章节标题',
 						subTitle: 'Title'
+					},
+					{
+						path: '/components/layout.md',
+						title: 'Layout 布局',
+						subTitle: 'Layout'
 					}
 				]
 			},
