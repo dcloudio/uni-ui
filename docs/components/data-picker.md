@@ -7,11 +7,11 @@
 
 `<uni-data-picker>` 是一个选择组件，支持单列、级联选择
 
-`<uni-data-picker>` 支持本地数据、云端静态数据(json)，云端数据库数据
+`<uni-data-picker>` 支持本地数据、云端静态数据(json)，uniCloud云数据库数据
 
-`<uni-data-picker>` 可以直连数据库表，如果使用[DB Schema](https://uniapp.dcloud.net.cn/uniCloud/schema)，还支持服务器端校验
+`<uni-data-picker>` 可以通过JQL直连uniCloud云数据库，配套[DB Schema](https://uniapp.dcloud.net.cn/uniCloud/schema)，可在schema2code中自动生成前端页面，还支持服务器端校验
 
-`<uni-data-picker>` 组件尤其适用于地址选择、分类选择等。
+`<uni-data-picker>` 组件尤其适用于地址选择、分类选择等选择类。
 
 
 ::: warning 注意事项
