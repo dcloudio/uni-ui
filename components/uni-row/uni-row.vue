@@ -105,6 +105,7 @@
 
 	#{$row} {
 		position: relative;
+		flex-direction: row;
 
 		/* #ifdef APP-NVUE */
 		flex: 1;
