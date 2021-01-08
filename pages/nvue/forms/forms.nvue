@@ -1,17 +1,18 @@
 <template>
 	<view>
 		<text class="example-info"> uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
-		<uni-forms :value="formData" ref="form" validate-trigger="bind" err-show-type="toast">
+
+		<uni-forms :rules="rules" :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
 			<uni-group title="基本信息" top="0">
 				<uni-forms-item name="name" required label="用户名">
-					<uni-easyinput type="text" :inputBorder="true" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
+					<uni-easyinput type="text"  :inputBorder="true" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
 				</uni-forms-item>
 				<!-- 使用原生input，需要绑定binddata -->
 				<uni-forms-item name="age" required label="年龄">
-					<input type="text" v-model="formData.age" class="uni-input-border" placeholder="请输入年龄">
+					<input type="text" v-model="formData.age" class="uni-input-border" @blur="binddata('age',$event.detail.value)" placeholder="请输入年龄">
 				</uni-forms-item>
 				<uni-forms-item name="weight" label="体重">
-					<slider min="0" max="200" show-value :value="formData.weight" @change="binddata('weight',$event.detail.value)"
+					<slider min="0" max="200" show-value v-model="formData.weight" @change="binddata('weight',$event.detail.value)" 　
 					 step="5" />
 				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱">
@@ -33,17 +34,17 @@
 						</picker>
 					</uni-forms-item>
 					<uni-forms-item required name="hobby" label="兴趣爱好">
-						<uni-data-checkbox multiple v-model="formData.hobby" :localdata="hobby"/>
+						<uni-data-checkbox multiple v-model="formData.hobby" :localdata="hobby" />
 					</uni-forms-item>
 					<uni-forms-item name="remarks" label="备注">
-						 <uni-easyinput type="textarea" v-model="formData.remarks" :maxlength="50" placeholder="请输入备注"></uni-easyinput>
+						<uni-easyinput type="textarea" v-model="formData.remarks" :maxlength="50" placeholder="请输入备注"></uni-easyinput>
 					</uni-forms-item>
 				</uni-group>
 
 			</template>
 
 			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-<!-- 			<button class="button" form-type="submit">Submit</button>
+			<!-- 			<button class="button" form-type="submit">Submit</button>
 				<button class="button" form-type="reset">Reset</button> -->
 
 			<view class="example">
@@ -96,6 +97,7 @@
 				show: false,
 				rules: {
 					name: {
+						// validateTrigger:'submit',
 						rules: [{
 							required: true,
 							errorMessage: '请输入用户名',
@@ -107,16 +109,18 @@
 					},
 					age: {
 						rules: [{
-							required: true,
-							errorMessage: '请输入年龄',
-						}, {
-							format: 'number',
-							errorMessage: '年龄必须是数字',
-						}, {
-							minimum: 18,
-							maximum: 30,
-							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
-						}]
+								required: true,
+								errorMessage: '请输入年龄',
+							},
+							{
+								format: 'int',
+								errorMessage: '年龄必须是数字',
+							}, {
+								minimum: 18,
+								maximum: 30,
+								errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁',
+							}
+						]
 					},
 					weight: {
 						rules: [{
@@ -166,12 +170,12 @@
 			setTimeout(() => {
 				this.formData = {
 					name: 'LiMing',
-					age: 1,
+					age: 12,
 					email: "",
 					sex: '0',
 					hobby: [0, 2],
 					remarks: "热爱学习，热爱生活",
-					checked: true,
+					checked: false,
 					country: 2,
 					weight: 120
 				}
@@ -179,12 +183,12 @@
 			}, 500)
 		},
 		onReady() {
-			this.$refs.form.setRules(this.rules)
+			// this.$refs.form.setRules(this.rules)
 		},
 		methods: {
-			change(name,value) {
+			change(name, value) {
 				this.formData.checked = value
-				this.$refs.form.setValue(name,value)
+				this.$refs.form.setValue(name, value)
 			},
 
 			/**
@@ -192,7 +196,7 @@
 			 * @param {Object} form
 			 */
 			submitForm(form) {
-				console.log(this.formData);
+				// console.log(this.formData);
 				this.$refs[form].submit()
 					.then((res) => {
 						console.log('表单的值：', res);

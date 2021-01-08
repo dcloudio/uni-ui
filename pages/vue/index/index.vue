@@ -55,6 +55,10 @@
 					{
 						name: 'Section 标题栏',
 						url: 'section'
+					},
+					{
+						name: 'Layout 布局',
+						url: 'layout'
 					}
 
 				],
@@ -102,6 +106,9 @@
 				}, {
 					name: 'Group 分组',
 					url: 'group'
+				}, {
+					name: 'DataPicker 级联选择',
+					url: 'data-picker'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',

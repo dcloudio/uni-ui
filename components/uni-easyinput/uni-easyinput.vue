@@ -54,6 +54,13 @@
 	 * @property {String} 	prefixIcon				输入框头部图标
 	 * @property {String} 	suffixIcon				输入框尾部图标
 	 * @property {Boolean} 	trim 							是否自动去除两端的空格
+	 * @value both	去除两端空格
+	 * @value left	去除左侧空格
+	 * @value right	去除右侧空格
+	 * @value start	去除左侧空格
+	 * @value end		去除右侧空格
+	 * @value all		去除全部空格
+	 * @value none	不去除空格
 	 * @property {Boolean} 	inputBorder 			是否显示input输入框的边框（默认false）
 	 * @property {Object} 	styles 						自定义颜色
 	 * @event {Function} 		input 						输入框内容发生变化时触发
@@ -164,7 +171,7 @@
 			value(newVal) {
 				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
-				if (this.formItem) {
+				if (this.form && this.formItem) {
 					this.formItem.setValue(newVal)
 				}
 			},
@@ -178,13 +185,12 @@
 			this.val = this.value
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
-			if (this.formItem) {
+			if (this.form && this.formItem) {
 				if (this.formItem.name) {
 					this.rename = this.formItem.name
 					this.form.inputChildrens.push(this)
 				}
 			}
-
 		},
 		mounted() {
 			// this.onInput = throttle(this.input, 500)
@@ -265,6 +271,10 @@
 					return str.trimLeft();
 				} else if (pos === 'right') {
 					return str.trimRight();
+				} else if (pos === 'start') {
+					return str.trimStart()
+				} else if (pos === 'end') {
+					return str.trimEnd()
 				} else if (pos === 'all') {
 					return str.replace(/\s+/g, '');
 				} else if (pos === 'none') {

@@ -5,7 +5,7 @@
 		</view>
 		<view class="uni-dialog-content">
 			<text class="uni-dialog-content-text" v-if="mode === 'base'">{{content}}</text>
-			<input v-else class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" >
+			<input v-else class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus">
 		</view>
 		<view class="uni-dialog-button-group">
 			<view class="uni-dialog-button" @click="close">
@@ -15,7 +15,9 @@
 				<text class="uni-dialog-button-text uni-button-color">确定</text>
 			</view>
 		</view>
-
+		<view v-if="popup.isDesktop" class="uni-popup-dialog__close" @click="close">
+			<span class="uni-popup-dialog__close-icon "></span>
+		</view>
 	</view>
 </template>
 
@@ -150,7 +152,7 @@
 <style lang="scss" scoped>
 	.uni-popup-dialog {
 		width: 300px;
-		border-radius: 15px;
+		border-radius: 5px;
 		background-color: #fff;
 	}
 
@@ -239,5 +241,29 @@
 
 	.uni-popup__info {
 		color: #909399;
+	}
+
+	.uni-popup-dialog__close {
+		cursor: pointer;
+		position: absolute;
+		top: 9px;
+		right: 17px;
+	}
+
+	.uni-popup-dialog__close-icon {
+		display: inline-block;
+		width: 13px;
+		height: 1px;
+		background: #909399;
+		transform: rotate(45deg);
+	}
+
+	.uni-popup-dialog__close-icon::after {
+		content: '';
+		display: block;
+		width: 13px;
+		height: 1px;
+		background: #909399;
+		transform: rotate(-90deg);
 	}
 </style>
