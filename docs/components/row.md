@@ -41,48 +41,12 @@
 </uni-row>
 ```
 
-### 分栏间隔
-
-###### 分栏之间存在间隔
-
-```html
-<uni-row class="demo-uni-row" :gutter="10">
-	<uni-col :span="16">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-	<uni-col :span="8">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-</uni-row>
-```
-
-### 混合布局
-
-###### 通过基础的 1/24 分栏任意扩展组合形成较为复杂的混合布局
-
-```html
-<uni-row class="demo-uni-row" :gutter="10">
-	<uni-col :span="8">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-	<uni-col :span="8">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-	<uni-col :span="4">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-	<uni-col :span="4">
-		<view class="demo-uni-col dark"></view>
-	</uni-col>
-</uni-row>
-```
-
 ### 分栏偏移
 
 ###### 支持偏移指定的栏数
 
 ```html
-<uni-row class="demo-uni-row" :gutter="10">
+<uni-row class="demo-uni-row">
 	<uni-col :span="8">
 		<view class="demo-uni-col dark"></view>
 	</uni-col>
@@ -91,13 +55,13 @@
 	</uni-col>
 </uni-row>
 
-<uni-row class="demo-uni-row" :gutter="10">
+<uni-row class="demo-uni-row">
 	<uni-col :span="12" :pull="6">
 		<view class="demo-uni-col dark"></view>
 	</uni-col>
 </uni-row>
 
-<uni-row class="demo-uni-row" :gutter="10">
+<uni-row class="demo-uni-row">
 	<uni-col :span="12" :push="6">
 		<view class="demo-uni-col dark"></view>
 	</uni-col>
@@ -109,7 +73,7 @@
 ###### 共五个响应尺寸：xs、sm、md、lg 和 xl
 
 ```html
-<uni-row class="demo-uni-row" :gutter="10">
+<uni-row class="demo-uni-row">
 	<uni-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
 		<view class="demo-uni-col dark"></view>
 	</uni-col>
@@ -123,31 +87,6 @@
 		<view class="demo-uni-col light"></view>
 	</uni-col>
 </uni-row>
-```
-
-### 对齐方式
-
-###### 通过 flex 布局来对分栏进行灵活的对齐
-
-```html
-<template
-	v-for="flexItem in ['start','center','end','space-between','space-around']"
->
-	<uni-row class="demo-uni-row" type="flex" :justify="flexItem" :key="flexItem">
-		<template v-for="i in 3">
-			<!-- #ifndef APP-NVUE -->
-			<uni-col :span="6" :key="i">
-				<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-			</uni-col>
-			<!-- #endif -->
-			<!-- #ifdef APP-NVUE -->
-			<uni-col :style="{width: nvueWidth}">
-				<view :class="['demo-uni-col',i%2 === 0 ? 'dark' : 'light']"></view>
-			</uni-col>
-			<!-- #endif -->
-		</template>
-	</uni-row>
-</template>
 ```
 
 ###### 使用到的 CSS
@@ -190,23 +129,14 @@
 
 ### 平台差异说明
 
-### `uni-row`
-
-| 属性名  |  App(nvue)   | App(vue) | H5  |     微信小程序     | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
-| :-----: | :----------: | :------: | :-: | :----------------: | :----------: | :--------: | :------------: | :-------: |
-|  type   | -(只有 flex) |    √     |  √  |         √          |      √       |     √      |       √        |     √     |
-| gutter  |      -       |    √     |  √  |         √          |      √       |     √      |       √        |     √     |
-| justify |      √       |    √     |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        |     -     |
-|  align  |      √       |    √     |  √  | √(基础库`2.11.2+`) |      √       |     -      |       -        |     -     |
-
 ### `uni-col`
 
 | 属性名 | App(nvue) | App(vue) | H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 字节跳动小程序 | QQ 小程序 |
 | :----: | :-------: | :------: | :-: | :--------: | :----------: | :--------: | :------------: | :-------: |
-|  span  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
-| offset |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
-|  push  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
-|  pull  |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|  span  |     √     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+| offset |     √     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|  push  |     √     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
+|  pull  |     √     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
 |   xs   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
 |   sm   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
 |   md   |     -     |    √     |  √  |     √      |      √       |     √      |       √        |     √     |
@@ -217,12 +147,13 @@
 
 ### Row Props
 
-| 属性名  |  类型  |                   可选值                    | 默认值 | 必填 |                    说明                     |
-| :-----: | :----: | :-----------------------------------------: | :----: | :--: | :-----------------------------------------: |
-|  type   | String |                    flex                     |   -    |  否  | 布局模式，现代浏览器下有效，`nvue`只有 flex |
-| gutter  | Number |                      -                      |   -    |  否  |                  栅格间隔                   |
-| justify | String | start/end/center/space-around/space-between | start  |  否  |           flex 布局的水平排列方式           |
-|  align  | String |              top/middle/bottom              |  top   |  否  |           flex 布局的垂直排列方式           |
+`其他平台`
+无
+
+`nvue平台`
+| 属性名 | 类型 | 可选值 | 默认值 | 必填 | 说明 |
+| :----: | :-----------: | :----: | :----: | :--: | :----------------------------------------------------------------------------: |
+| width | Number/String | - | `750rpx` | 否 | nvue 中无百分比 width，使用 span 等属性时，需配置此项`rpx值`。此项不会影响其他平台展示效果 |
 
 ### Col Props
 

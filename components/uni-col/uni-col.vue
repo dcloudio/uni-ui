@@ -1,10 +1,26 @@
 <template>
-	<view :class="['uni-col', sizeClassList, pointClassList]" :style="{
+	<!-- #ifndef APP-NVUE -->
+	<view :class="['uni-col', sizeClass, pointClassList]" :style="{
 		paddingLeft:`${Number(gutter)}rpx`,
 		paddingRight:`${Number(gutter)}rpx`,
 	}">
 		<slot></slot>
 	</view>
+	<!-- #endif -->
+	<!-- #ifdef APP-NVUE -->
+	<!-- 在nvue上，类名样式不生效，换为style -->
+	<!-- 设置right正值失效，设置 left 负值 -->
+	<view :class="['uni-col']" :style="{
+		paddingLeft:`${Number(gutter)}rpx`,
+		paddingRight:`${Number(gutter)}rpx`,
+		width:`${nvueWidth}rpx`,
+		position:'relative',
+		marginLeft:`${marginLeft}rpx`,
+		left:`${right === 0 ? left : -right}rpx`
+	}">
+		<slot></slot>
+	</view>
+	<!-- #endif -->
 </template>
 
 <script>
@@ -64,7 +80,13 @@
 		},
 		data() {
 			return {
-				gutter: 0
+				gutter: 0,
+				sizeClass: '',
+				parentWidth: 0,
+				nvueWidth: 0,
+				marginLeft: 0,
+				right: 0,
+				left: 0
 			}
 		},
 		created() {
@@ -76,29 +98,34 @@
 			}
 
 			this.updateGutter(parent.gutter)
-
 			parent.$watch('gutter', (gutter) => {
 				this.updateGutter(gutter)
 			})
+
+			// #ifdef APP-NVUE
+			this.updateNvueWidth(parent.width)
+			parent.$watch('width', (width) => {
+				this.updateNvueWidth(width)
+			})
+			// #endif
 		},
 		computed: {
-			sizeClassList() {
-				let classList = [];
+			sizeList() {
+				let {
+					span,
+					offset,
+					pull,
+					push
+				} = this;
 
-				['span', 'offset', 'pull', 'push'].forEach(size => {
-					const curSize = this[size];
-					if ((curSize || curSize === 0) && curSize !== -1) {
-						classList.push(
-							size === 'span' ?
-							`${ComponentClass}-${curSize}` :
-							`${ComponentClass}-${size}-${curSize}`
-						)
-					}
-				});
-
-				// 支付宝小程序使用 :class=[ ['a','b'] ]，渲染错误
-				return classList.join(' ');
+				return {
+					span,
+					offset,
+					pull,
+					push
+				}
 			},
+			// #ifndef APP-NVUE
 			pointClassList() {
 				let classList = [];
 
@@ -120,12 +147,65 @@
 				// 支付宝小程序使用 :class=[ ['a','b'] ]，渲染错误
 				return classList.join(' ');
 			}
+			// #endif
 		},
 		methods: {
 			updateGutter(parentGutter) {
 				parentGutter = Number(parentGutter);
 				if (!isNaN(parentGutter)) {
 					this.gutter = parentGutter / 2
+				}
+			},
+			// #ifdef APP-NVUE
+			updateNvueWidth(width) {
+				// 用于在nvue端，span，offset，pull，push的计算
+				this.parentWidth = width;
+				['span', 'offset', 'pull', 'push'].forEach(size => {
+					const curSize = this[size];
+					if ((curSize || curSize === 0) && curSize !== -1) {
+						let RPX = 1 / 24 * curSize * width
+						RPX = Number(RPX);
+						switch (size) {
+							case 'span':
+								this.nvueWidth = RPX
+								break;
+							case 'offset':
+								this.marginLeft = RPX
+								break;
+							case 'pull':
+								this.right = RPX
+								break;
+							case 'push':
+								this.left = RPX
+								break;
+						}
+					}
+				});
+			}
+			// #endif
+		},
+		watch: {
+			sizeList: {
+				immediate: true,
+				handler(newVal) {
+					// #ifndef APP-NVUE
+					let classList = [];
+					for (let size in newVal) {
+						const curSize = newVal[size];
+						if ((curSize || curSize === 0) && curSize !== -1) {
+							classList.push(
+								size === 'span' ?
+								`${ComponentClass}-${curSize}` :
+								`${ComponentClass}-${size}-${curSize}`
+							)
+						}
+					}
+					// 支付宝小程序使用 :class=[ ['a','b'] ]，渲染错误
+					this.sizeClass = classList.join(' ');
+					// #endif
+					// #ifdef APP-NVUE
+					this.updateNvueWidth(this.parentWidth);
+					// #endif
 				}
 			}
 		}
@@ -136,12 +216,7 @@
 	$col: $layout-namespace+"col";
 
 	@function getSize($size) {
-		/* #ifndef APP-NVUE */
 		@return 1 / 24 * $size * 100 * 1%;
-		/* #endif */
-		/* #ifdef APP-NVUE */
-		@return 1 / 24 * $size * 100 * 0.01 * 730rpx;
-		/* #endif */
 	}
 
 	@mixin res($key, $map:$breakpoints) {
@@ -158,16 +233,22 @@
 
 	/* #ifndef APP-NVUE */
 	#{$col} {
-		/* #ifdef MP-QQ || MP-TOUTIAO || MP-BAIDU */
-		/* float: left; */
-		/* #endif */
-
 		float: left;
 		box-sizing: border-box;
 	}
 
 	#{$col}-0 {
+		/* #ifdef APP-NVUE */
+		width: 0;
+		height: 0;
+		margin-top: 0;
+		margin-right: 0;
+		margin-bottom: 0;
+		margin-left: 0;
+		/* #endif */
+		/* #ifndef APP-NVUE */
 		display: none;
+		/* #endif */
 	}
 
 	@for $i from 0 through 24 {
