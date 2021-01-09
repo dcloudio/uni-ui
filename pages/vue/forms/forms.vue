@@ -15,6 +15,9 @@
 					<slider min="0" max="200" show-value v-model="formData.weight" @change="binddata('weight',$event.detail.value)" 　
 					 step="5" />
 				</uni-forms-item>
+				<uni-forms-item name="birth" label="出生日期">
+					<uni-datetime-picker timestamp v-model="formData.birth" @change="birthChange"></uni-datetime-picker>
+				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱">
 					<uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput>
 				</uni-forms-item>
@@ -71,7 +74,8 @@
 					remarks: "",
 					checked: false,
 					country: -1,
-					weight: 0
+					weight: 0,
+					birth:''
 				},
 				sex: [{
 					text: '男',
@@ -97,7 +101,6 @@
 				show: false,
 				rules: {
 					name: {
-						// validateTrigger:'submit',
 						rules: [{
 							required: true,
 							errorMessage: '请输入用户名',
@@ -177,7 +180,8 @@
 					remarks: "热爱学习，热爱生活",
 					checked: false,
 					country: 2,
-					weight: 120
+					weight: 120,
+					birth:''
 				}
 				uni.hideLoading()
 			}, 500)
@@ -186,6 +190,9 @@
 			// this.$refs.form.setRules(this.rules)
 		},
 		methods: {
+			birthChange(e){
+				console.log(e);
+			},
 			change(name, value) {
 				this.formData.checked = value
 				this.$refs.form.setValue(name, value)
