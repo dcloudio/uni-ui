@@ -7,5 +7,5 @@
 	"edition": "0.0.1",
 	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
 	"hidden": true,
-	"update_log": []
+	"update_log": "- 添加文档、示例"
 }

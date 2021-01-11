@@ -7,7 +7,7 @@ url : pages/vue/datetime-picker/datetime-picker
 代码块： `uDatetimePicker`
 :::
 
-可以同时选择日期和时间选择器。
+可以同时选择日期和时间的选择器。
 
 ### 安装方式
 
