@@ -109,6 +109,9 @@
 				}, {
 					name: 'DataPicker 级联选择',
 					url: 'data-picker'
+				}, {
+					name: 'DatetimePicker 日期时间选择',
+					url: 'datetime-picker'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',

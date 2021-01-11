@@ -293,8 +293,13 @@
 				"navigationBarTitleText": "级联选择",
 				"enablePullDownRefresh": false
 			}
-		},
-		{
+		}, {
+			"path": "pages/vue/datetime-picker/datetime-picker",
+			"style": {
+				"navigationBarTitleText": "日期时间",
+				"enablePullDownRefresh": false
+			}
+		}, {
 			"path" : "pages/vue/row/row",
 			"style" : {
 					"navigationBarTitleText": "layout 布局",
