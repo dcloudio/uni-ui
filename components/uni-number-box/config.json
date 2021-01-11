@@ -6,5 +6,9 @@
 	"type": "基础组件",
 	"edition": "1.0.4",
 	"path": "https://ext.dcloud.net.cn/plugin?id=31",
-	"update_log": "- 修复 初始值超出边界时不可使用的Bug"
+	"update_log": [
+		"- 新增 支持 v-model",
+		"- 新增 支持 focus、blur 事件",
+		"- 新增 支持 PC 端"
+	]
 }

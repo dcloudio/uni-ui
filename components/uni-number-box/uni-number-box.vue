@@ -3,7 +3,7 @@
 		<view @click="_calcValue('minus')" class="uni-numbox__minus">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
-		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
 		<view @click="_calcValue('plus')" class="uni-numbox__plus">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
 		</view>
@@ -59,6 +59,7 @@
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
 					this.$emit("change", newVal);
+					this.$emit("input", newVal);
 				}
 			}
 		},
@@ -102,6 +103,7 @@
 				return scale;
 			},
 			_onBlur(event) {
+				this.$emit('blur', event)
 				let value = event.detail.value;
 				if (!value) {
 					// this.inputValue = 0;
@@ -114,6 +116,9 @@
 					value = this.min;
 				}
 				this.inputValue = value;
+			},
+			_onFocus(event) {
+				this.$emit('focus', event)
 			}
 		}
 	};
@@ -190,7 +195,7 @@
 	}
 
 	.uni-numbox--text {
-		font-size: 40rpx;
+		font-size: 20px;
 		color: $uni-text-color;
 	}
 
