@@ -208,6 +208,8 @@
 			},
 			clearTime() {
 				this.time = ''
+				this.formItem && this.formItem.setValue(this.time)
+				this.$emit('change', this.time)
 				this.tiggerTimePicker()
 			},
 			initTime() {
