@@ -1,4 +1,11 @@
 {
+	"leftWindow": {
+		"path": "windows/left-window.vue",
+		"style": {
+			"width": "350px"
+		}
+	},
+
 	"pages": [{
 			"path": "pages/vue/index/index",
 			"style": {
@@ -306,6 +313,14 @@
 					"enablePullDownRefresh": false
 			}
 		}
+		// #ifdef H5
+		, {
+			"path": "pages/error/404",
+			"style": {
+				"navigationBarTitleText": "Not Found"
+			}
+		}
+		// #endif
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -314,6 +329,9 @@
 		"backgroundColor": "#FFFFFF",
 		"app-plus": {
 			"background": "#efeff4"
+		},
+		"h5": {
+			"maxWidth": 1190
 		}
 	},
 	"tabBar": {
