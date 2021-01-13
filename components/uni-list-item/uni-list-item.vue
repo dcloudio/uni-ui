@@ -375,6 +375,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	/* #endif */
 	height: $uni-img-size-base;
 	width: $uni-img-size-base;
+	marin-right: 10px;
 }
 
 .uni-icon-wrapper {
