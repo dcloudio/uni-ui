@@ -185,6 +185,9 @@
 		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-navbar__header-btns-left {

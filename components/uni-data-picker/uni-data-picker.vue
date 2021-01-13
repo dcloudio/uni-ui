@@ -176,6 +176,10 @@
   .uni-data-tree {
     position: relative;
     font-size: 14px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
+
   }
 
   .error-text {

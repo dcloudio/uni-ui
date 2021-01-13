@@ -146,6 +146,9 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 0 10px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-tab__icon {
@@ -172,6 +175,9 @@
 		flex: 1;
 		justify-content: center;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-tab__cart-button-right-text {

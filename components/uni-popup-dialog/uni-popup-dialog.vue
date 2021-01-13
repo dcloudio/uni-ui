@@ -206,6 +206,9 @@
 		justify-content: center;
 		align-items: center;
 		height: 45px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-border-left {
