@@ -7,6 +7,12 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 
+<log title="1.2.11" date="2021-1-19">
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-row" /> 栅格系统（文档：Layout 布局）
+	</log-item-text>
+</log>
+
 <log title="官网更新" date="2020-12-19">
 	<log-item-text tag-type="docs" only>
 		整理组件文档
