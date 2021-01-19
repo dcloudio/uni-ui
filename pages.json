@@ -313,14 +313,6 @@
 					"enablePullDownRefresh": false
 			}
 		}
-		// #ifdef H5
-		, {
-			"path": "pages/error/404",
-			"style": {
-				"navigationBarTitleText": "Not Found"
-			}
-		}
-		// #endif
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

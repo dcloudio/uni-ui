@@ -2,12 +2,20 @@
 url : pages/vue/datetime-picker/datetime-picker
 ---
 
-## DatetimePicker 数字输入框
+## DatetimePicker 时间选择器
 ::: tip 组件名：uni-datetime-picker
 代码块： `uDatetimePicker`
 :::
 
 可以同时选择日期和时间的选择器。
+
+点击 picker 默认值规则：
+
+- 用户设置初始值 value, 并会显示在 picker 显示框中； 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
+	- 设置了起始时间 start、终止时间 end，并 start < value < end，初始值为 value， 否则初始值为 start
+	- 只设置了起始时间 start，并 start < value，初始值为 value，否则初始值为 start
+	- 只设置了终止时间 end，并 value < end，初始值为 value，否则初始值为 end
+	- 无起始终止时间，则初始值为 value
 
 ### 安装方式
 
@@ -21,21 +29,27 @@ url : pages/vue/datetime-picker/datetime-picker
 
 ```html
 <uni-datetime-picker></uni-datetime-picker>
-<uni-datetime-picker :minYear="2000" :maxYear="2030"></uni-datetime-picker>
-<uni-datetime-picker timestamp v-model="formData.birth" @change="birthChange"></uni-datetime-picker>
+<uni-datetime-picker v-model="vModelDatetime" start="2010-6-10 08:30:30" end="2021-6-10 08:30:30"></uni-datetime-picker>
+<uni-datetime-picker :value="timestamp" return-type="timestamp" start="1276129830000" end="1623285030000" @change="timestampChange"></uni-datetime-picker>
+<uni-datetime-picker type="date" :value="date" start="2020-6-15" end="2025-6-15" @change="dateChange"></uni-datetime-picker>
+<uni-datetime-picker type="time" :value="time" start="06:30:30" end="12:30:30" @change="timeChange"></uni-datetime-picker>
 ```
-
+2020-01-14 14:20:30
 ## API
 
 ### DatetimePicker Props
 
-|属性名		|类型		|默认值					|说明								|
-|:-:			|:-:		|:-:						|:-:								|
-|type			|String	|datetime-local	|选择器类型					|
-|value		|Number	|								|输入框当前值				|
-|minYear	|Number	|1900						|最小值							|
-|maxYear	|Number	|2100						|最大值							|
-|timestamp|Boolean|false					|是否使用时间戳格式	|
+|属性名			|类型						|默认值		|值域									|说明																											|
+|:-:				|:-:						|:-:			|											|:-:																											|
+|type				|String					|datetime	|datetime、date、time	|选择器类型																								|
+|value			|String、Number	|					|											|输入框当前值																							|
+|start			|String、Number	|					|											|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
+|end				|String、Number	|					|											|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
+|return-type|String					|timestamp|timestamp 、string		|返回值格式																								|
+
+
+
+注：如 type 为 time 类型，无对应的时间戳，则返回值格式 return-type 无论为何值，都会返回 string
 
 ### DatetimePicker Events
 

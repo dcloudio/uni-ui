@@ -1,17 +1,33 @@
 <template>
 	<view class="page">
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
-		<uni-section :title="'基本用法：' + date" type="line"></uni-section>
+		<uni-section :title="'基本用法：' + datetime" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker :value="date" @change="dateChange"></uni-datetime-picker>
+			<uni-datetime-picker :value="datetime" @change="datetimeChange"></uni-datetime-picker>
+		</view>
+		<uni-section :title="'v-model用法：' + vModelDatetime" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker v-model="vModelDatetime" start="2010-6-10 08:30:30" end="2015-6-10 08:30:30"></uni-datetime-picker>
+		</view>
+		<uni-section :title="'disabled用法：' + disDatetime" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker disabled v-model="vModelDatetime"></uni-datetime-picker>
 		</view>
 		<uni-section :title="'时间戳用法：' + timestamp" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker timestamp :value="timestamp" @change="timestampChange"></uni-datetime-picker>
+			<uni-datetime-picker :value="timestamp" return-type="timestamp" start="1276129830000" end="1623285030000" @change="timestampChange"></uni-datetime-picker>
 		</view>
-		<uni-section :title="'限制年份, 最早 2000 年:' + timeArea" type="line"></uni-section>
+		<uni-section :title="'选择日期用法：' + date" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker :value="timeArea" minYear="2000"  @change="timeAreaChange"></uni-datetime-picker>
+			<uni-datetime-picker type="date" :value="date" start="2020-2-31" end="2025-2-30" @change="dateChange"></uni-datetime-picker>
+		</view>
+		<uni-section :title="'选择时间用法：' + time" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker type="time" :value="time" start="16:30:30" end="20:30:30" return-type="timestamp" @change="timeChange"></uni-datetime-picker>
+		</view>
+		<uni-section :title="'（2010-06-01 06:30:30） ~ （2021-06-01 06:30:30） 区间用法：' + timeArea" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker :value="timeArea" start="2010-06-01 06:30:30" end="2021-06-01 06:30:30" @change="timeAreaChange"></uni-datetime-picker>
 		</view>
 	</view>
 </template>
@@ -20,14 +36,29 @@
 	export default {
 		data() {
 			return {
-				date: '2020-10-1 12:30:00',
+				datetime: '2021/02/013 09:30:00',
+				vModelDatetime: '',
+				disDatetime: '2021-02-013 00:00:00',
+				date: '2000-6-15',
+				time: '',
 				timestamp: 1610364547000,
-				timeArea: '2000-10-1 12:30:01'
+				timeArea: ''
 			}
 		},
+		mounted() {
+			setTimeout(() => {
+				this.vModelDatetime ='2021-03-01'
+			}, 3000)
+		},
 		methods: {
+			datetimeChange(e) {
+				this.datetime = e
+			},
 			dateChange(e) {
 				this.date = e
+			},
+			timeChange(e) {
+				this.time = e
 			},
 			timestampChange(e) {
 				this.timestamp = e
@@ -41,5 +72,4 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
-
 </style>
