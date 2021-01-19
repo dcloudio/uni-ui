@@ -6,6 +6,7 @@
 	"path": "https://ext.dcloud.net.cn/plugin?id=55",
 	"update_log": [
 		"- 新增 uni-data-picker 数据驱动的picker选择器",
+		"- 新增 uni-row 栅格系统",
 		"- 修复 uni-forms 偶发性获取表单值错误的Bug",
 		"- 优化 uni-forms 实时校验"
 	]
