@@ -89,6 +89,9 @@
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-size: $bage-size;
 		padding: 0px 6px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-badge--inverted {

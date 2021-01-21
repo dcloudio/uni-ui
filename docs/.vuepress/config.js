@@ -122,7 +122,7 @@ module.exports = {
 						subTitle: 'Title'
 					},
 					{
-						path: '/components/layout.md',
+						path: '/components/row.md',
 						title: 'Layout 布局',
 						subTitle: 'Layout'
 					}

@@ -153,7 +153,7 @@
 		position: relative;
 		background-color: $uni-bg-color;
 		overflow: hidden;
-		width: 750rpx;
+		// width: 750rpx;
 	}
 
 	.uni-navbar__content_view {
@@ -185,6 +185,9 @@
 		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-navbar__header-btns-left {

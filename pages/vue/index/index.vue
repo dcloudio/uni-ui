@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="index-box">
+		<view class="index-box hideOnPc">
 			<!-- #ifdef APP-NVUE -->
 			<text class="index-text">当前页面为 nvue 页面引用 uni-ui 组件示例</text>
 			<!-- #endif -->
@@ -9,7 +9,7 @@
 			<!-- #endif -->
 		</view>
 
-		<uni-section title="布局组件" type="line"></uni-section>
+		<uni-section title="布局组件" type="line" style="margin-top: 0;"></uni-section>
 		<uni-list>
 			<uni-list-item v-for="(layout, index) in layouts" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 		</uni-list>
@@ -58,7 +58,7 @@
 					},
 					{
 						name: 'Layout 布局',
-						url: 'layout'
+						url: 'row'
 					}
 
 				],
@@ -109,6 +109,9 @@
 				}, {
 					name: 'DataPicker 级联选择',
 					url: 'data-picker'
+				}, {
+					name: 'DatetimePicker 日期时间选择',
+					url: 'datetime-picker'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',

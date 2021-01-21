@@ -7,6 +7,7 @@
 			<view
 					v-if=""
 					class="uni-rate__icon"
+					:class="{'uni-cursor-not-allowed': disabled}"
 					:style="{ 'margin-right': margin + 'px' }"
 					v-for="(star, index) in stars"
 					:key="index"
@@ -355,6 +356,9 @@
 		line-height: 1;
 		font-size: 0;
 		flex-direction: row;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-rate__icon {
@@ -370,5 +374,11 @@
 		left: 0;
 		line-height: 1;
 		text-align: left;
+	}
+
+	.uni-cursor-not-allowed {
+		/* #ifdef H5 */
+		cursor: not-allowed !important;
+		/* #endif */
 	}
 </style>

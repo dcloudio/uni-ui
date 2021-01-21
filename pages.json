@@ -1,4 +1,11 @@
 {
+	"leftWindow": {
+		"path": "windows/left-window.vue",
+		"style": {
+			"width": "350px"
+		}
+	},
+
 	"pages": [{
 			"path": "pages/vue/index/index",
 			"style": {
@@ -293,9 +300,14 @@
 				"navigationBarTitleText": "级联选择",
 				"enablePullDownRefresh": false
 			}
-		},
-		{
-			"path" : "pages/vue/layout/layout",
+		}, {
+			"path": "pages/vue/datetime-picker/datetime-picker",
+			"style": {
+				"navigationBarTitleText": "日期时间",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path" : "pages/vue/row/row",
 			"style" : {
 					"navigationBarTitleText": "layout 布局",
 					"enablePullDownRefresh": false
@@ -309,6 +321,9 @@
 		"backgroundColor": "#FFFFFF",
 		"app-plus": {
 			"background": "#efeff4"
+		},
+		"h5": {
+			"maxWidth": 1190
 		}
 	},
 	"tabBar": {

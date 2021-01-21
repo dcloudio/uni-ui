@@ -18,4 +18,23 @@ page {
 	background-color: #efeff4;
 }
 /* #endif */
+
+/* #ifdef H5 */
+
+// @media screen and (min-width: 768px) {
+// 	body{
+// 		overflow-y: scroll;
+// 	}
+// }
+
+.uni-app--showleftwindow .hideOnPc {
+	display: none !important;
+}
+
+.uni-app--showleftwindow uni-page-body {
+		background-color: #F5F5F5 !important;
+		min-height: 100% !important;
+	}
+
+/* #endif */
 </style>
