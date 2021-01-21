@@ -1,4 +1,11 @@
 {
+	"leftWindow": {
+		"path": "windows/left-window.vue",
+		"style": {
+			"width": "350px"
+		}
+	},
+
 	"pages": [{
 			"path": "pages/vue/index/index",
 			"style": {
@@ -314,6 +321,9 @@
 		"backgroundColor": "#FFFFFF",
 		"app-plus": {
 			"background": "#efeff4"
+		},
+		"h5": {
+			"maxWidth": 1190
 		}
 	},
 	"tabBar": {

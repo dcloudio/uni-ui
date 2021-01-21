@@ -319,6 +319,9 @@
 		flex: 1;
 		align-items: center;
 		justify-content: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-indexed-list__menu-text {

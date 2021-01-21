@@ -14,7 +14,7 @@
 				<uni-forms-item name="weight" label="体重">
 					<slider min="0" max="200" step="5" show-value v-model="formData.weight" @change="binddata('weight', $event.detail.value)"></slider>
 				</uni-forms-item>
-				<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker timestamp v-model="formData.birth"></uni-datetime-picker></uni-forms-item>
+				<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item>
 				<uni-forms-item name="email" label="邮箱"><uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput></uni-forms-item>
 				<uni-forms-item name="checked" label="详细信息"><switch :checked="formData.checked" @change="change('checked', $event.detail.value)" /></uni-forms-item>
 			</uni-group>
