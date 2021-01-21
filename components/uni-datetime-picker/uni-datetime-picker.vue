@@ -166,6 +166,23 @@
 				},
 				immediate: true
 			},
+
+			// 月、日、时、分、秒可选范围变化后，检查当前值是否在范围内，不在则当前值重置为可选范围第一项
+			months(newVal) {
+				this.checkValue('month', this.month, newVal)
+			},
+			days(newVal) {
+				this.checkValue('day', this.day, newVal)
+			},
+			hours(newVal) {
+				this.checkValue('hour', this.hour, newVal)
+			},
+			minutes(newVal) {
+				this.checkValue('minute', this.minute, newVal)
+			},
+			seconds(newVal) {
+				this.checkValue('second', this.second, newVal)
+			}
 		},
 		created() {
 			this.form = this.getForm('uniForms')
@@ -488,7 +505,7 @@
 			 */
 			superTimeStamp(value) {
 				let dateBase = ''
-				if (this.type === 'time' && value && typeof value === 'string' ) {
+				if (this.type === 'time' && value && typeof value === 'string') {
 					const now = new Date()
 					const year = now.getFullYear()
 					const month = now.getMonth() + 1
@@ -558,6 +575,13 @@
 						this[pointType + 'Minute'] = pointDate.getMinutes()
 						this[pointType + 'Second'] = pointDate.getSeconds()
 					}
+				}
+			},
+
+			// 检查当前值是否在范围内，不在则当前值重置为可选范围第一项
+			checkValue(name, value, values) {
+				if (values.indexOf(value) === -1) {
+					this[name] = values[0]
 				}
 			},
 
@@ -647,44 +671,44 @@
 				this.hour = this.hours[val[0]]
 				this.minute = this.minutes[val[1]]
 				this.second = this.seconds[val[2]]
-			},
+	},
 
-			/**
-			 * 初始化弹出层
-			 */
-			initTimePicker() {
-				if (this.disabled) return
-				const value = this.fixIosDateFormat(this.value)
-				this.initPickerValue(value)
-				this.visible = !this.visible
-			},
+	/**
+	 * 初始化弹出层
+	 */
+	initTimePicker() {
+			if (this.disabled) return
+			const value = this.fixIosDateFormat(this.value)
+			this.initPickerValue(value)
+			this.visible = !this.visible
+		},
 
-			/**
-			 * 触发或关闭弹框
-			 */
-			tiggerTimePicker() {
-				this.visible = !this.visible
-			},
+		/**
+		 * 触发或关闭弹框
+		 */
+		tiggerTimePicker() {
+			this.visible = !this.visible
+		},
 
-			/**
-			 * 用户点击“清空”按钮，清空当前值
-			 */
-			clearTime() {
-				this.time = ''
-				this.formItem && this.formItem.setValue(this.time)
-				this.$emit('change', this.time)
-				this.$emit('input', this.time)
-				this.tiggerTimePicker()
-			},
+		/**
+		 * 用户点击“清空”按钮，清空当前值
+		 */
+		clearTime() {
+			this.time = ''
+			this.formItem && this.formItem.setValue(this.time)
+			this.$emit('change', this.time)
+			this.$emit('input', this.time)
+			this.tiggerTimePicker()
+		},
 
-			/**
-			 * 用户点击“确定”按钮
-			 */
-			setTime() {
-				this.initTime()
-				this.tiggerTimePicker()
-			}
+		/**
+		 * 用户点击“确定”按钮
+		 */
+		setTime() {
+			this.initTime()
+			this.tiggerTimePicker()
 		}
+	}
 	}
 </script>
 
