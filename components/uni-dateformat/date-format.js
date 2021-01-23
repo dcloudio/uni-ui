@@ -98,7 +98,7 @@ export function friendlyDate(time, {
 	format = 'yyyy/MM/dd hh:mm:ss'
 }) {
 	if (!time && time !== 0) {
-		return '-'
+		return ''
 	}
 	const localeText = {
 		zh: {
