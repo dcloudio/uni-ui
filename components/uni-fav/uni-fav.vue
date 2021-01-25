@@ -110,6 +110,9 @@
 		line-height: $fav-height;
 		text-align: center;
 		border-radius: 3px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-fav--circle {

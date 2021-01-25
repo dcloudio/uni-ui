@@ -11,6 +11,10 @@
 		    @touchstart="swipe.touchstart"
 		    @touchmove="swipe.touchmove"
 		    @touchend="swipe.touchend"
+				@mousedown="swipe.mousedown"
+				@mousemove="swipe.mousemove"
+				@mouseup="swipe.mouseup"
+				@mouseleave="swipe.mouseleave"
 		>
 			<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
 			<view class="uni-swipe_button-group button-group--left">
@@ -26,13 +30,16 @@
 					    class="uni-swipe_button button-hock"
 					    @touchstart="appTouchStart"
 					    @touchend="appTouchEnd($event,index,item,'left')"
+							@click.stop="onClickForPC(index,item,'left')"
 					><text
 						    class="uni-swipe_button-text"
 						    :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}"
 						>{{ item.text }}</text></view>
 				</slot>
 			</view>
-			<slot></slot>
+			<view class="uni-swipe_text--center">
+				<slot></slot>
+			</view>
 			<view class="uni-swipe_button-group button-group--right">
 				<slot name="right">
 					<view
@@ -46,6 +53,7 @@
 					    class="uni-swipe_button button-hock"
 					    @touchstart="appTouchStart"
 					    @touchend="appTouchEnd($event,index,item,'right')"
+							@click.stop="onClickForPC(index,item,'right')"
 					><text
 						    class="uni-swipe_button-text"
 						    :style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}"
@@ -281,6 +289,11 @@
 		// border: 1px red solid;
 	}
 
+	.uni-swipe_text--center {
+		width:100%;
+		cursor: grab;
+	}
+
 	.uni-swipe_button-group {
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
@@ -290,6 +303,9 @@
 		position: absolute;
 		top: 0;
 		bottom: 0;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.button-group--left {

@@ -17,14 +17,8 @@
 			</cell>
 		</list>
 		<!-- #endif -->
-		<view
-		 class="uni-indexed-list__menu"
-		 :class="touchmove ? 'uni-indexed-list__menu--active' : ''"
-		 @touchstart="touchStart"
-		 @touchmove.stop.prevent="touchMove"
-		 @touchend="touchEnd"
-		 @mousedown.stop="mousedown"
-		 @mousemove.stop.prevent="mousemove"
+		<view class="uni-indexed-list__menu" :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart"
+		 @touchmove.stop.prevent="touchMove" @touchend="touchEnd" @mousedown.stop="mousedown" @mousemove.stop.prevent="mousemove"
 		 @mouseleave.stop="mouseleave">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
@@ -226,30 +220,30 @@
 			 */
 
 			mousedown(e) {
-				if( !this.isPC ) return
+				if (!this.isPC) return
 				this.touchStart(e)
 			},
 			mousemove(e) {
-				if( !this.isPC ) return
+				if (!this.isPC) return
 				this.touchMove(e)
 			},
 			mouseleave(e) {
-				if( !this.isPC ) return
+				if (!this.isPC) return
 				this.touchEnd(e)
 			},
 
 			// #ifdef H5
 			IsPC() {
-			    var userAgentInfo = navigator.userAgent;
-			    var Agents = ["Android", "iPhone","SymbianOS", "Windows Phone","iPad", "iPod"];
-			    var flag = true;
-			    for (var v = 0; v < Agents.length; v++) {
-			        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-			            flag = false;
-			            break;
-			        }
-			    }
-			    return flag;
+				var userAgentInfo = navigator.userAgent;
+				var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+				var flag = true;
+				for (let v = 0; v < Agents.length - 1; v++) {
+					if (userAgentInfo.indexOf(Agents[v]) > 0) {
+						flag = false;
+						break;
+					}
+				}
+				return flag;
 			},
 			// #endif
 

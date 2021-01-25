@@ -1,3 +1,4 @@
+import { isPC } from "./isPC"
 export default {
 	data() {
 		return {
@@ -73,6 +74,9 @@ export default {
 		},
 
 		appTouchStart(e) {
+			// #ifdef H5
+			if(isPC()) return
+			// #endif
 			const {
 				clientX
 			} = e.changedTouches[0]
@@ -80,6 +84,9 @@ export default {
 			this.timestamp = new Date().getTime()
 		},
 		appTouchEnd(e, index, item, position) {
+			// #ifdef H5
+			if(isPC()) return
+			// #endif
 			const {
 				clientX
 			} = e.changedTouches[0]
@@ -93,7 +100,21 @@ export default {
 					position
 				})
 			}
+			console.log(1111111);
 		},
+		// #ifdef H5
+		onClickForPC(index, item, position) {
+			// #ifdef H5
+			if(!isPC()) return
+			// #endif
+			this.$emit('click', {
+				content: item,
+				index,
+				position
+			})
+			console.log(222222222);
+		},
+		// #endif
 		getButtonSize() {
 			const views = uni.createSelectorQuery().in(this)
 			views

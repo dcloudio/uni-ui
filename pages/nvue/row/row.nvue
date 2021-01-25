@@ -189,7 +189,7 @@
 	// 支付宝小程序没有 demo-uni-row 层级
 	// 微信小程序使用了虚拟化节点，没有 demo-uni-row 层级
 	/* #ifdef MP-ALIPAY || MP-WEIXIN */
-	/deep/ .uni-row {
+  ::v-deep .uni-row {
 		margin-bottom: 10px;
 	}
 

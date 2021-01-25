@@ -3,8 +3,8 @@
 		<uni-swiper-dot @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in info" :key="index">
-					<view :class="item.colorClass" class="swiper-item">
-						<image class="image" :src="item.url" mode="aspectFill" />
+					<view draggable="false" :class="item.colorClass" class="swiper-item">
+						<image class="image" :src="item.url" mode="aspectFill" draggable="false" />
 					</view>
 				</swiper-item>
 			</swiper>
@@ -130,6 +130,14 @@
 
 	.image {
 		width: 750rpx;
+	}
+
+	/deep/ .image img {
+		-webkit-user-drag: none;
+		-khtml-user-drag: none;
+		-moz-user-drag: none;
+		-o-user-drag: none;
+		user-drag: none;
 	}
 
 	.uni-bg-red {
