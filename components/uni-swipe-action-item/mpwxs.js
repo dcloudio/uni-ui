@@ -100,7 +100,6 @@ export default {
 					position
 				})
 			}
-			console.log(1111111);
 		},
 		// #ifdef H5
 		onClickForPC(index, item, position) {
@@ -112,7 +111,6 @@ export default {
 				index,
 				position
 			})
-			console.log(222222222);
 		},
 		// #endif
 		getButtonSize() {

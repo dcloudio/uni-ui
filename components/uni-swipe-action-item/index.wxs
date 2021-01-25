@@ -32,7 +32,6 @@ function sizeReady(newValue, oldValue, ownerInstance, instance) {
  * @param {Object} ins
  */
 function touchstart(e, ins) {
-	console.log('######touchstart');
 	var instance = e.instance;
 	var disabled = instance.getDataset().disabled
 	var state = instance.getState();
@@ -57,7 +56,6 @@ function touchstart(e, ins) {
  * @param {Object} ownerInstance
  */
 function touchmove(e, ownerInstance) {
-	console.log('------touchstart');
 	var instance = e.instance;
 	var disabled = instance.getDataset().disabled
 	var state = instance.getState()
