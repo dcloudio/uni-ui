@@ -274,6 +274,9 @@
 
 	.content-box {
 		flex: 1;
+		/* #ifdef APP-NVUE */
+		justify-content: center;
+		/* #endif */
 		height: 44px;
 		line-height: 44px;
 		padding: 0 15px;

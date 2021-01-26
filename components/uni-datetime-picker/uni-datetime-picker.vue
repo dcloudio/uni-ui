@@ -196,11 +196,37 @@
 			}
 		},
 		computed: {
+			// 当前年、月、日、时、分、秒选择范围
+			years() {
+				return this.getCurrentRange('year')
+			},
+
+			months() {
+				return this.getCurrentRange('month')
+			},
+
+			days() {
+				return this.getCurrentRange('day')
+			},
+
+			hours() {
+				return this.getCurrentRange('hour')
+			},
+
+			minutes() {
+				return this.getCurrentRange('minute')
+			},
+
+			seconds() {
+				return this.getCurrentRange('second')
+			},
+
+			// picker 当前值数组
 			ymd() {
-				return [this.year - this.startYear, this.month - this.minOfMonths, this.day - this.minOfDays]
+				return [this.year - this.minYear, this.month - this.minMonth, this.day - this.minDay]
 			},
 			hms() {
-				return [this.hour - this.minOfHours, this.minute - this.minOfMintues, this.second - this.minOfSeconds]
+				return [this.hour - this.minHour, this.minute - this.minMinute, this.second - this.minSecond]
 			},
 
 			// 当前 date 是 start
@@ -213,209 +239,127 @@
 				return this.year === this.endYear && this.month === this.endMonth && this.day === this.endDay
 			},
 
-			// 当前年、月、日、时、分、秒选择范围
-			years() {
-				const yearsRange = []
-				for (let i = this.startYear; i <= this.endYear; i++) {
-					yearsRange.push(i)
-				}
-				return yearsRange
+			// 当前年、月、日、时、分、秒的最小值和最大值
+			minYear() {
+				return this.startYear
 			},
-
-			months() {
-				const monthsRange = []
+			maxYear() {
+				return this.endYear
+			},
+			minMonth() {
 				if (this.year === this.startYear) {
-
-					for (let i = this.startMonth; i <= 12; i++) {
-						monthsRange.push(i)
-					}
-				} else if (this.year === this.endYear) {
-					for (let i = 1; i <= this.endMonth; i++) {
-						monthsRange.push(i)
-					}
+					return this.startMonth
 				} else {
-					for (let i = 1; i <= 12; i++) {
-						monthsRange.push(i)
-					}
+					return 1
 				}
-				return monthsRange
 			},
-
-			days() {
-				const daysRange = []
-				const trueDays = this.daysInMonth(this.year, this.month)
+			maxMonth() {
+				if (this.year === this.endYear) {
+					return this.endMonth
+				} else {
+					return 12
+				}
+			},
+			minDay() {
 				if (this.year === this.startYear && this.month === this.startMonth) {
-					for (let i = this.startDay; i <= trueDays; i++) {
-						daysRange.push(i)
-					}
-				} else if (this.year === this.endYear && this.month === this.endMonth) {
-					for (let i = 1; i <= this.endDay; i++) {
-						daysRange.push(i)
-					}
+					return this.startDay
 				} else {
-					for (let i = 1; i <= trueDays; i++) {
-						daysRange.push(i)
-					}
+					return 1
 				}
-				return daysRange
 			},
-
-			hours() {
-				const hoursRange = []
-				if (this.type === 'datetime') {
-					if (this.currentDateIsStart) {
-						for (let i = this.startHour; i <= 23; i++) {
-							hoursRange.push(i)
-						}
-					} else if (this.currentDateIsEnd) {
-						for (let i = 0; i <= this.endHour; i++) {
-							hoursRange.push(i)
-						}
-					} else {
-						for (let i = 0; i <= 23; i++) {
-							hoursRange.push(i)
-						}
-					}
+			maxDay() {
+				if (this.year === this.endYear && this.month === this.endMonth) {
+					return this.endDay
+				} else {
+					return this.daysInMonth(this.year, this.month)
 				}
-
-				if (this.type === 'time') {
-					for (let i = this.startHour; i <= this.endHour; i++) {
-						hoursRange.push(i)
-					}
-				}
-
-				return hoursRange
 			},
-
-			minutes() {
-				const minutesRange = []
-				if (this.type === 'datetime') {
-					if (this.currentDateIsStart && this.hour === this.startHour) {
-						for (let i = this.startMinute; i <= 59; i++) {
-							minutesRange.push(i)
-						}
-					} else if (this.currentDateIsEnd && this.hour === this.endHour) {
-						for (let i = 0; i <= this.endMinute; i++) {
-							minutesRange.push(i)
-						}
-					} else {
-						for (let i = 0; i <= 59; i++) {
-							minutesRange.push(i)
-						}
-					}
-				}
-
-				if (this.type === 'time') {
-					if (this.hour === this.startHour) {
-						for (let i = this.startMinute; i <= 59; i++) {
-							minutesRange.push(i)
-						}
-					} else if (this.hour === this.endHour) {
-						for (let i = 0; i <= this.endMinute; i++) {
-							minutesRange.push(i)
-						}
-					} else {
-						for (let i = 0; i <= 59; i++) {
-							minutesRange.push(i)
-						}
-					}
-				}
-
-				return minutesRange
-			},
-
-			seconds() {
-				const secondsRange = []
-				if (this.type === 'datetime') {
-					if (this.currentDateIsStart && this.hour === this.startHour && this.minute === this.startMinute) {
-						for (let i = this.startSecond; i <= 59; i++) {
-							secondsRange.push(i)
-						}
-					} else if (this.currentDateIsEnd && this.hour === this.endHour && this.minute === this.endMinute) {
-						for (let i = 0; i <= this.endSecond; i++) {
-							secondsRange.push(i)
-						}
-					} else {
-						for (let i = 0; i <= 59; i++) {
-							secondsRange.push(i)
-						}
-					}
-				}
-
-				if (this.type === 'time') {
-					if (this.hour === this.startHour && this.minute === this.startMinute) {
-						for (let i = this.startSecond; i <= 59; i++) {
-							secondsRange.push(i)
-						}
-					} else if (this.hour === this.endHour && this.minute === this.endMinute) {
-						for (let i = 0; i <= this.endSecond; i++) {
-							secondsRange.push(i)
-						}
-					} else {
-						for (let i = 0; i <= 59; i++) {
-							secondsRange.push(i)
-						}
-					}
-				}
-
-				return secondsRange
-			},
-
-
-			// 当前可选最小年、月、日
-			minOfMonths() {
-				return this.year === this.startYear ? this.startMonth : 1
-			},
-			minOfDays() {
-				return this.year === this.startYear && this.month === this.startMonth ? this.startDay : 1
-			},
-
-			// 当前可选最小时、分、秒
-			minOfHours() {
+			minHour() {
 				if (this.type === 'datetime') {
 					if (this.currentDateIsStart) {
 						return this.startHour
 					} else {
 						return 0
 					}
-				} else if (this.type === 'time') {
+				}
+				if (this.type === 'time') {
 					return this.startHour
-				} else {
-					return 0
 				}
 			},
-			minOfMintues() {
+			maxHour() {
+				if (this.type === 'datetime') {
+					if (this.currentDateIsEnd) {
+						return this.endHour
+					} else {
+						return 23
+					}
+				}
+				if (this.type === 'time') {
+					return this.endHour
+				}
+			},
+			minMinute() {
 				if (this.type === 'datetime') {
 					if (this.currentDateIsStart && this.hour === this.startHour) {
 						return this.startMinute
 					} else {
 						return 0
 					}
-				} else if (this.type === 'time') {
+				}
+				if (this.type === 'time') {
 					if (this.hour === this.startHour) {
 						return this.startMinute
 					} else {
 						return 0
 					}
-				} else {
-					return 0
 				}
 			},
-			minOfSeconds() {
+			maxMinute() {
+				if (this.type === 'datetime') {
+					if (this.currentDateIsEnd && this.hour === this.startHour) {
+						return this.endMinute
+					} else {
+						return 59
+					}
+				}
+				if (this.type === 'time') {
+					if (this.hour === this.endHour) {
+						return this.endMinute
+					} else {
+						return 59
+					}
+				}
+			},
+			minSecond() {
 				if (this.type === 'datetime') {
 					if (this.currentDateIsStart && this.hour === this.startHour && this.minute === this.startMinute) {
 						return this.startSecond
 					} else {
 						return 0
 					}
-				} else if (this.type === 'time') {
+				}
+				if (this.type === 'time') {
 					if (this.hour === this.startHour && this.minute === this.startMinute) {
 						return this.startSecond
 					} else {
 						return 0
 					}
-				} else {
-					return 0
+				}
+			},
+			maxSecond() {
+				if (this.type === 'datetime') {
+					if (this.currentDateIsEnd && this.hour === this.startHour && this.minute === this.endMinute) {
+						return this.endSecond
+					} else {
+						return 59
+					}
+				}
+				if (this.type === 'time') {
+					if (this.hour === this.endHour && this.minute === this.endMinute) {
+						return this.endSecond
+					} else {
+						return 59
+					}
 				}
 			}
 		},
@@ -578,6 +522,20 @@
 				}
 			},
 
+			// 获取 年、月、日、时、分、秒 当前可选范围
+			getCurrentRange(value) {
+				const range = []
+				for (let i = this['min' + this.capitalize(value)]; i <= this['max' + this.capitalize(value)]; i++) {
+					range.push(i)
+				}
+				return range
+			},
+
+			// 字符串首字母大写
+			capitalize(str) {
+				return str.charAt(0).toUpperCase() + str.slice(1)
+			},
+
 			// 检查当前值是否在范围内，不在则当前值重置为可选范围第一项
 			checkValue(name, value, values) {
 				if (values.indexOf(value) === -1) {
@@ -671,44 +629,44 @@
 				this.hour = this.hours[val[0]]
 				this.minute = this.minutes[val[1]]
 				this.second = this.seconds[val[2]]
-	},
+			},
 
-	/**
-	 * 初始化弹出层
-	 */
-	initTimePicker() {
-			if (this.disabled) return
-			const value = this.fixIosDateFormat(this.value)
-			this.initPickerValue(value)
-			this.visible = !this.visible
-		},
+			/**
+			 * 初始化弹出层
+			 */
+			initTimePicker() {
+				if (this.disabled) return
+				const value = this.fixIosDateFormat(this.value)
+				this.initPickerValue(value)
+				this.visible = !this.visible
+			},
 
-		/**
-		 * 触发或关闭弹框
-		 */
-		tiggerTimePicker() {
-			this.visible = !this.visible
-		},
+			/**
+			 * 触发或关闭弹框
+			 */
+			tiggerTimePicker() {
+				this.visible = !this.visible
+			},
 
-		/**
-		 * 用户点击“清空”按钮，清空当前值
-		 */
-		clearTime() {
-			this.time = ''
-			this.formItem && this.formItem.setValue(this.time)
-			this.$emit('change', this.time)
-			this.$emit('input', this.time)
-			this.tiggerTimePicker()
-		},
+			/**
+			 * 用户点击“清空”按钮，清空当前值
+			 */
+			clearTime() {
+				this.time = ''
+				this.formItem && this.formItem.setValue(this.time)
+				this.$emit('change', this.time)
+				this.$emit('input', this.time)
+				this.tiggerTimePicker()
+			},
 
-		/**
-		 * 用户点击“确定”按钮
-		 */
-		setTime() {
-			this.initTime()
-			this.tiggerTimePicker()
+			/**
+			 * 用户点击“确定”按钮
+			 */
+			setTime() {
+				this.initTime()
+				this.tiggerTimePicker()
+			}
 		}
-	}
 	}
 </script>
 
