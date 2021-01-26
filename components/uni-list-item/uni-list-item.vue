@@ -250,8 +250,12 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	font-size: $uni-font-size-lg;
 	position: relative;
 	justify-content: space-between;
+	align-items: center;
 	background-color: #fff;
 	flex-direction: row;
+	/* #ifdef H5 */
+	cursor: pointer;
+	/* #endif */
 }
 
 .uni-list-item--disabled {
@@ -371,6 +375,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	/* #endif */
 	height: $uni-img-size-base;
 	width: $uni-img-size-base;
+	marin-right: 10px;
 }
 
 .uni-icon-wrapper {

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="uni-cursor-point">
 		<view v-if="popMenu && (leftBottom||rightBottom||leftTop||rightTop) && content.length > 0" :class="{
         'uni-fab--leftBottom': leftBottom,
         'uni-fab--rightBottom': rightBottom,
@@ -221,6 +221,12 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 10;
+	}
+	
+	.uni-cursor-point {
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-fab--active {

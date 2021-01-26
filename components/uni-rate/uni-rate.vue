@@ -7,6 +7,7 @@
 			<view
 					v-if=""
 					class="uni-rate__icon"
+					:class="{'uni-cursor-not-allowed': disabled}"
 					:style="{ 'margin-right': margin + 'px' }"
 					v-for="(star, index) in stars"
 					:key="index"
@@ -262,16 +263,16 @@
 			},
 			// #ifdef H5
 			IsPC() {
-			    var userAgentInfo = navigator.userAgent;
-			    var Agents = ["Android", "iPhone","SymbianOS", "Windows Phone","iPad", "iPod"];
-			    var flag = true;
-			    for (var v = 0; v < Agents.length; v++) {
-			        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-			            flag = false;
-			            break;
-			        }
-			    }
-			    return flag;
+				var userAgentInfo = navigator.userAgent;
+				var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+				var flag = true;
+				for (let v = 0; v < Agents.length - 1; v++) {
+					if (userAgentInfo.indexOf(Agents[v]) > 0) {
+						flag = false;
+						break;
+					}
+				}
+				return flag;
 			},
 			// #endif
 
@@ -355,6 +356,9 @@
 		line-height: 1;
 		font-size: 0;
 		flex-direction: row;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-rate__icon {
@@ -370,5 +374,11 @@
 		left: 0;
 		line-height: 1;
 		text-align: left;
+	}
+
+	.uni-cursor-not-allowed {
+		/* #ifdef H5 */
+		cursor: not-allowed !important;
+		/* #endif */
 	}
 </style>

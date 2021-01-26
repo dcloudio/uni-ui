@@ -149,6 +149,9 @@
 		border-width: 1px;
 		border-style: solid;
 		border-color: $uni-border-color;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-pagination__child-btn {
@@ -195,6 +198,9 @@
 
 	.uni-pagination--disabled {
 		opacity: 0.3;
+		/* #ifdef H5 */
+		cursor: not-allowed;
+		/* #endif */
 	}
 
 	.uni-pagination--hover {
