@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<uni-swiper-dot @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
+		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in info" :key="index">
 					<view draggable="false" :class="item.colorClass" class="swiper-item">
@@ -112,7 +112,6 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
-
 	.swiper-box {
 		height: 200px;
 	}
@@ -131,6 +130,19 @@
 	.image {
 		width: 750rpx;
 	}
+
+	@media screen and (min-width: 500px) {
+				.uni-swiper-dot-box {
+					width: 400px;
+					margin: 0 auto;
+					margin-top: 8px;
+				}
+
+				.image {
+					width: 100%;
+				}
+	}
+
 
 	/deep/ .image img {
 		-webkit-user-drag: none;
