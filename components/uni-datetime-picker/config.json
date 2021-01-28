@@ -4,11 +4,8 @@
 	"desc": "日期选择器",
 	"url": "datetime-picker",
 	"type": "功能组件",
-	"edition": "0.0.2",
+	"edition": "0.0.3",
 	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
 	"hidden": true,
-	"update_log": [
-		"- 修复 safari 日期对象不支持'-'",
-		"- 修复 值可能超出的可选范围的 bug，主要出现微信小程序平台"
-	]
+	"update_log": "- 修复 start 和 end 重合造成的日期范围错误的 bug"
 }
