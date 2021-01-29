@@ -1,5 +1,6 @@
 <template>
-	<view v-if="showPopup" class="uni-popup" :class="[popupstyle, isDesktop ? 'fixforpc-z-index' : '']" @touchmove.stop.prevent="clear">
+	<view v-if="showPopup" class="uni-popup" :class="[popupstyle, isDesktop ? 'fixforpc-z-index' : '']"
+	 @touchmove.stop.prevent="clear">
 		<uni-transition v-if="maskShow" class="uni-mask--hook" :mode-class="['fade']" :styles="maskClass" :duration="duration"
 		 :show="showTrans" @click="onTap" />
 		<uni-transition :mode-class="ani" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
@@ -7,12 +8,18 @@
 				<slot />
 			</view>
 		</uni-transition>
+		<!-- #ifdef H5 -->
+		<keypress v-if="maskShow" @esc="onTap" />
+		<!-- #endif -->
 	</view>
 </template>
 
 <script>
 	import uniTransition from '../uni-transition/uni-transition.vue'
 	import popup from './popup.js'
+	// #ifdef H5
+	import keypress from './keypress.js'
+	// #endif
 	/**
 	 * PopUp 弹出层
 	 * @description 弹出层组件，为了解决遮罩弹层的问题
@@ -32,7 +39,10 @@
 	export default {
 		name: 'UniPopup',
 		components: {
-			uniTransition
+			uniTransition,
+			// #ifdef H5
+			keypress
+			// #endif
 		},
 		props: {
 			// 开启动画
@@ -64,7 +74,7 @@
 			 */
 			type: {
 				handler: function(newVal) {
-						this[this.config[newVal]]()
+					this[this.config[newVal]]()
 				},
 				immediate: true
 			},
