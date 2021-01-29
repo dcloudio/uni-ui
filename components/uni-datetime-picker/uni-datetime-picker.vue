@@ -48,10 +48,17 @@
 				</view>
 			</view>
 		</view>
+		<!-- #ifdef H5 -->
+		<keypress v-if="visible" @esc="tiggerTimePicker" @enter="setTime"/>
+		<!-- #endif -->
 	</view>
 </template>
 
 <script>
+	// #ifdef H5
+	import keypress from './keypress'
+	// #endif
+
 	/**
 	 * DatetimePicker 时间选择器
 	 * @description 可以同时选择日期和时间的选择器
@@ -66,6 +73,12 @@
 	 */
 
 	export default {
+		name: 'UniDatetimePicker',
+		components: {
+			// #ifdef H5
+			keypress
+			// #endif
+		},
 		data() {
 			return {
 				indicatorStyle: `height: 50px;`,
@@ -644,7 +657,7 @@
 			/**
 			 * 触发或关闭弹框
 			 */
-			tiggerTimePicker() {
+			tiggerTimePicker(e) {
 				this.visible = !this.visible
 			},
 

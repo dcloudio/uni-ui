@@ -36,12 +36,18 @@
         :collection="collection" :field="field" :orderby="orderby" :where="where" :step-searh="stepSearh" :self-field="selfField"
         :parent-field="parentField" :managed-mode="true" @change="onchange" @datachange="ondatachange"></data-picker-view>
     </view>
+		<!-- #ifdef H5 -->
+		<keypress v-if="isOpened" @esc="handleClose" />
+		<!-- #endif -->
   </view>
 </template>
 
 <script>
   import dataPicker from "../uni-data-pickerview/uni-data-picker.js"
   import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
+	// #ifdef H5
+	import keypress from './keypress.js'
+	// #endif
 
   /**
    * uni-data-picker
@@ -68,7 +74,10 @@
     name: 'UniDataPicker',
     mixins: [dataPicker],
     components: {
-      DataPickerView
+      DataPickerView,
+			// #ifdef H5
+			keypress
+			// #endif
     },
     props: {
       popupTitle: {
