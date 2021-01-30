@@ -10,7 +10,7 @@
     </scroll-view>
     <view class="tab-c">
       <scroll-view class="list" v-for="(child, i) in dataList" :key="i" v-if="i==selectedIndex" :scroll-y="true">
-        <view class="item" v-for="(item, j) in child" :key="j" @click="handleNodeClick(i, j)">
+        <view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in child" :key="j" @click="handleNodeClick(item, i, j)">
           <text class="item-text">{{item.text}}</text>
           <view class="check" v-if="selected.length > i && item.value == selected[i].value"></view>
         </view>
@@ -82,7 +82,11 @@
       handleSelect(index) {
         this.selectedIndex = index
       },
-      handleNodeClick(i, j) {
+      handleNodeClick(item, i, j) {
+        if (item.disable) {
+          return
+        }
+
         const node = this.dataList[i][j]
         const {
           value,
@@ -242,6 +246,10 @@
     border-bottom: 1px solid #f0f0f0;
     display: flex;
     flex-direction: row;
+  }
+  
+  .is-disabled {
+    opacity: .5;
   }
 
   .item-text {
