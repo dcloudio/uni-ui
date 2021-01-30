@@ -35,8 +35,8 @@
 | mode					| String	| list	| list/grid						| 选择文件后的文件列表样式								|
 | file-mediatype| String	| image	| image/video/file		| 选择文件类型													|
 | file-extname	| Array		| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同|
-| list-styles	  | Array		| -			| -										| `mode:list` 时的样式			|
-| image-styles	| Array		| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同	|
+| list-styles	  | Object	| -			| -										| `mode:list` 时的样式			|
+| image-styles	| Object	| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同	|
 
 
 ### value 格式 

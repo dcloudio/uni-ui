@@ -22,6 +22,49 @@
 </template>
 
 <script>
+
+	/**
+	 * FilePicker
+	 * @description 文件选择上传组件，可以选择图片、视频等任意文件并上传到当前绑定的服务空间
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=-1
+	 * @property {Object|Array}	value	组件数据，通常用来回显 ,类型由return-type属性决定
+	 * @property {Boolean}	disabled=[true|false]	组件禁用
+	 * 	@value true 	禁用
+	 * 	@value false 	取消禁用
+	 * @property {Boolean}	readonly=[true|false]	组件只读，不可选择，不显示进度，不显示删除按钮
+	 * 	@value true 	只读
+	 * 	@value false 	取消只读
+	 * @property {String}	return-type=[array|object]	限制 value 格式，当为 object 时 ，组件只能单选，且会覆盖
+	 * 	@value array	规定 value 属性的类型为数组
+	 * 	@value object	规定 value 属性的类型为对象
+	 * @property {Boolean}	disable-preview=[true|false]	禁用图片预览，仅 mode:grid 时生效
+	 * 	@value true 	禁用图片预览
+	 * 	@value false 	取消禁用图片预览
+	 * @property {Boolean}	del-icon=[true|false]	是否显示删除按钮
+	 * 	@value true 	显示删除按钮
+	 * 	@value false 	不显示删除按钮
+	 * @property {Boolean}	auto-upload=[true|false]	是否自动上传，值为true则只触发@select,可自行上传
+	 * 	@value true 	自动上传
+	 * 	@value false 	取消自动上传
+	 * @property {Number|String}	limit	最大选择个数 ，h5 会自动忽略多选的部分
+	 * @property {String}	title	组件标题，右侧显示上传计数
+	 * @property {String}	mode=[list|grid]	选择文件后的文件列表样式
+	 * 	@value list 	列表显示
+	 * 	@value grid 	宫格显示
+	 * @property {String}	file-mediatype=[image|video|all]	选择文件类型
+	 * 	@value image	只选择图片
+	 * 	@value video	只选择视频
+	 * 	@value all		选择所有文件
+	 * @property {Array}	file-extname	选择文件后缀，根据 file-mediatype 属性而不同
+	 * @property {Object}	list-style	mode:list 时的样式
+	 * @property {Object}	image-styles	选择文件后缀，根据 file-mediatype 属性而不同
+	 * @event {Function} select 	选择文件后触发
+	 * @event {Function} progress 文件上传时触发
+	 * @event {Function} success 	上传成功触发
+	 * @event {Function} fail 		上传失败触发
+	 * @event {Function} delete 	文件从列表移除时触发
+	 */
+
 	import {
 		chooseAndUploadFile
 	} from './choose-and-upload-file.js'
