@@ -25,7 +25,7 @@
 		<view class="example-body">
 			<uni-datetime-picker type="time" :value="time" start="16:30:30" end="20:30:30" return-type="timestamp" @change="timeChange"></uni-datetime-picker>
 		</view>
-		<uni-section :title="'（2020-06-01 06:30:30） ~ （2021-06-01 06:30:30） 起始日期用法：' + timeArea" type="line"></uni-section>
+		<uni-section :title="'（2021-06-01 06:30:20） ~ （2021-06-01 06:30:30） 起始日期用法：' + timeArea" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker :value="timeArea" start="2021-06-01 06:30:20" end="2021-06-01 06:30:30" @change="timeAreaChange"></uni-datetime-picker>
 		</view>

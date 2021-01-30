@@ -5,7 +5,8 @@
 	"url": "datetime-picker",
 	"type": "功能组件",
 	"edition": "0.0.3",
+	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=9999",
-	"hidden": true,
+	"hidden": false,
 	"update_log": "- 修复 start 和 end 重合造成的日期范围错误的 bug"
 }

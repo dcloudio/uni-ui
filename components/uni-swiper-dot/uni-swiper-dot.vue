@@ -150,10 +150,12 @@
 		margin-left: 6px;
 		background-color: $uni-bg-color-mask;
 		cursor: pointer;
-		border-width: 5px 0;
-		border-style: solid;
-		border-color: transparent;
-		background-clip: padding-box;
+		/* #ifdef H5 */
+		// border-width: 5px 0;
+		// border-style: solid;
+		// border-color: transparent;
+		// background-clip: padding-box;
+		/* #endif */
 		// transition: width 0.2s linear;  不要取消注释，不然会不能变色
 	}
 
