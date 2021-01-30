@@ -58,7 +58,7 @@
 			},
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
-					this.$emit("change", newVal);
+					this.$emit("change", +newVal);
 				}
 			}
 		},
