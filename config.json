@@ -12,6 +12,16 @@
 		"- uni-forms 优化 实时校验",
 		"- uni-forms 优化 兼容nvue页面",
 		"- uni-easyinput 优化 兼容nvue页面",
-		"- uni-group 优化 兼容nvue页面"
+		"- uni-group 优化 兼容nvue页面",
+		"- uni-popup 优化 组件适配 PC",
+		"- uni-fab 优化 适配 PC",
+		"- uni-swiper-dot 优化 适配 PC",
+		"- uni-rate 优化 适配 PC",
+		"- uni-notice-bar 优化 适配 PC",
+		"- uni-indexed-list 优化 适配 PC",
+		"- uni-combox 优化 适配 PC",
+		"- uni-transition 优化 适配 PC",
+		"- uni-nav-bar 优化 适配 PC",
+		"- uni-swipe-action 优化 适配 PC"
 	]
 }
