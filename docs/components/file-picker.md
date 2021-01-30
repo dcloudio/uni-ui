@@ -13,6 +13,7 @@
 
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
 - 使用组件需要绑定服务空间
+- 选择文件目前只支持 `H5` 和 `微信小程序平台` ，且 `微信小程序平台` 使用 `wx.chooseMessageFile()`
 - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 :::
 
@@ -33,10 +34,10 @@
 | limit					| Number\String	| 9	| -									| 最大选择个数 ，h5 会自动忽略多选的部分			|
 | title					| String	| -			| -										| 组件标题，右侧显示上传计数			|
 | mode					| String	| list	| list/grid						| 选择文件后的文件列表样式								|
-| file-mediatype| String	| image	| image/video/file		| 选择文件类型													|
+| file-mediatype| String	| image	| image/video/all			| 选择文件类型,all 只支持 H5 和微信小程序平台	|
 | file-extname	| Array		| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同|
 | list-styles	  | Object	| -			| -										| `mode:list` 时的样式			|
-| image-styles	| Object	| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同	|
+| image-styles	| Object	| -			| -										| `mode:grid` 时的样式	|
 
 
 ### value 格式 

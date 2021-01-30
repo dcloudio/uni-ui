@@ -32,9 +32,6 @@
 		<log-item-text tag-type="perf">
 			背景色调整
 		</log-item-text>
-		<log-item-text tag-type="perf">
-			兼容pc端
-		</log-item-text>
 	</log-item>
 	<log-item title="组件 NVUE 化">
 		<log-item-text tag-type="perf">
@@ -45,6 +42,32 @@
 		</log-item-text>
 		<log-item-text tag-type="perf">
 			<highlight text="uni-group" /> 分组
+		</log-item-text>
+	</log-item>
+	<log-item title="组件适配 PC">
+		<log-item-text tag-type="perf">
+			<highlight text="uni-fab" /> 悬浮按钮
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-swiper-dot" /> 轮播图指示点
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-rate" /> 评分
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-notice-bar" /> 通告栏
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-indexed-list" /> 索引列表
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-combox" /> 组合框
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-transition" /> 动画
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-swipe-action" /> 滑动操作
 		</log-item-text>
 	</log-item>
 </log>
