@@ -9,6 +9,7 @@
 		"- uni-row 新增 栅格系统",
 		"- uni-forms 修复 偶发性获取表单值错误的Bug",
 		"- uni-forms 修复 校验 uni-data-picker value 为 0 时，返回值错误的Bug",
+		"- uni-forms 修复 uni-forms-item 组件隐藏时依然触发校验的bug",
 		"- uni-forms 优化 实时校验",
 		"- uni-forms 优化 兼容nvue页面",
 		"- uni-easyinput 优化 兼容nvue页面",

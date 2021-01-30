@@ -24,6 +24,9 @@
 		<log-item-text tag-type="fix">
 			校验 uni-data-picker value 为 0 时，返回值错误的Bug
 		</log-item-text>
+		<log-item-text tag-type="fix">
+			uni-forms-item 组件隐藏时依然触发校验的bug
+		</log-item-text>
 		<log-item-text tag-type="perf">
 			实时校验
 		</log-item-text>

@@ -257,7 +257,8 @@
 				// 循环字段是否存在于校验规则中
 				for (let i in this.formRules) {
 					for (let j in tempInvalidFields) {
-						if (i === j) {
+						const index = this.childrens.findIndex(v=>v.name === j)
+						if (i === j && index !== -1) {
 							fieldsValue[i] = tempInvalidFields[i]
 						}
 					}
@@ -341,6 +342,12 @@
 			 */
 			submit(callback) {
 				// Object.assign(this.formData,formData)
+				for (let i in this.value) {
+					const itemData = this.childrens.find(v => v.name === i)
+					if (itemData) {
+						this.formData[i] = this.value[i]
+					}
+				}
 				return this.validateAll(this.formData, 'submit', callback)
 			},
 

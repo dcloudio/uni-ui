@@ -2,11 +2,11 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.36",
+	"edition": "1.0.37",
 	"url": "forms",
 	"type": "表单组件",
 	"suffix": "vue",
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 优化 兼容 nvue 页面"]
+	"update_log": ["- 修复 uni-forms-item 组件隐藏时依然触发校验的bug"]
 }

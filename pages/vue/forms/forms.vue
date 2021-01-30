@@ -148,10 +148,6 @@ export default {
 						{
 							required: true,
 							errorMessage: '请选择时间'
-						},
-						{
-							format: 'timestamp',
-							errorMessage: '必须是时间戳'
 						}
 					]
 				},
@@ -205,7 +201,7 @@ export default {
 				age: 21,
 				email: '',
 				sex: '0',
-				hobby: [0, 2],
+				hobby: [],
 				remarks: '热爱学习，热爱生活',
 				checked: false,
 				country: 2,
@@ -216,7 +212,7 @@ export default {
 		}, 500)
 	},
 	onReady() {
-		// this.$refs.form.setRules(this.rules)
+		this.$refs.form.setRules(this.rules)
 	},
 	methods: {
 		birthChange(e) {
