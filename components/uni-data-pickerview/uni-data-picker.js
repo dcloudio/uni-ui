@@ -1,7 +1,7 @@
 export default {
   props: {
     localdata: {
-      type: Array,
+      type: [Array, Object],
       default () {
         return []
       }
@@ -75,6 +75,10 @@ export default {
     parentField: {
       type: String,
       default: ''
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

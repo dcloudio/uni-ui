@@ -2,7 +2,7 @@
   <view class="uni-data-tree">
     <view class="uni-data-tree-input" @click="handleInput">
       <slot :options="options" :data="inputSelected" :error="errorMessage">
-        <view class="input-value">
+        <view class="input-value" :class="{'input-value-border': border}">
           <text v-if="errorMessage" class="selected-area error-text">{{errorMessage}}</text>
           <view v-else-if="loading && !isOpened" class="selected-area">
             <uni-load-more class="load-more" :contentText="loadMore" status="loading"></uni-load-more>
@@ -10,12 +10,12 @@
           <scroll-view v-else-if="inputSelected.length" class="selected-area" scroll-x="true">
             <view class="selected-list">
               <view class="selected-item" v-for="(item,index) in inputSelected" :key="index">
-                <text>{{item.text}}</text><text v-if="index<inputSelected.length-1" class="input-split-line">/</text>
+                <text>{{item.text}}</text><text v-if="index<inputSelected.length-1" class="input-split-line">{{split}}</text>
               </view>
             </view>
           </scroll-view>
           <text v-else class="selected-area placeholder">{{placeholder}}</text>
-          <view class="arrow-area">
+          <view class="arrow-area" v-if="!readonly">
             <view class="input-arrow"></view>
           </view>
         </view>
@@ -49,6 +49,8 @@
    * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-data-picker
    * @property {String} popup-title 弹出窗口标题
    * @property {Array} localdata 本地数据，参考
+   * @property {Boolean} border = [true|false] 是否有边框
+   * @property {Boolean} readonly = [true|false] 是否仅读
    * @property {Boolean} preload = [true|false] 是否预加载数据
    * @value true 开启预加载数据，点击弹出窗口后显示已加载数据
    * @value false 关闭预加载数据，点击弹出窗口后开始加载数据
@@ -71,6 +73,12 @@
       DataPickerView
     },
     props: {
+      options: {
+        type: [Object, Array],
+        default () {
+          return {}
+        }
+      },
       popupTitle: {
         type: String,
         default: '请选择'
@@ -83,11 +91,17 @@
         type: String,
         default: ''
       },
-      options: {
-        type: [Object, Array],
-        default () {
-          return {}
-        }
+      readonly: {
+        type: Boolean,
+        default: false
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      split: {
+        type: String,
+        default: '/'
       }
     },
     data() {
@@ -117,6 +131,11 @@
         this.load()
       },
       load() {
+        if (this.readonly) {
+          this._processReadonly(this.localdata, this.value)
+          return
+        }
+
         if (this.isLocaldata) {
           this.loadData()
           this.inputSelected = this.selected.slice(0)
@@ -150,7 +169,9 @@
         this.isOpened = false
       },
       handleInput() {
-        console.log('handleInput');
+        if (this.readonly) {
+          return
+        }
         this.show()
       },
       handleClose(e) {
@@ -164,6 +185,48 @@
         this.inputSelected = e
         this._dispatchEvent(e)
       },
+      _processReadonly(dataList, valueArray) {
+        var isTree = dataList.findIndex((item) => {
+          return item.children
+        })
+        if (isTree > -1) {
+          if (Array.isArray(valueArray)) {
+            let inputValue = valueArray[valueArray.length - 1]
+            if (typeof inputValue === 'object' && inputValue.value) {
+              inputValue = inputValue.value
+            }
+          }
+          this.inputSelected = this._findNodePath(inputValue, this.localdata)
+          return
+        }
+
+        let result = []
+        for (let i = 0; i < valueArray.length; i++) {
+          var value = valueArray[i]
+          var item = dataList.find((v) => {
+            return v.value == value
+          })
+          if (item) {
+            result.push(item)
+          }
+        }
+        if (result.length) {
+          this.inputSelected = result
+        }
+      },
+      _filterForArray(data, valueArray) {
+        var result = []
+        for (let i = 0; i < valueArray.length; i++) {
+          var value = valueArray[i]
+          var found = data.find((item) => {
+            return item.value == value
+          })
+          if (found) {
+            result.push(found)
+          }
+        }
+        return result
+      },
       _dispatchEvent(selected) {
         var value = new Array(selected.length)
         for (var i = 0; i < selected.length; i++) {
@@ -171,11 +234,15 @@
         }
 
         if (this.formItem) {
-          const v = value[value.length - 1]
-          this.formItem.setValue(v)
+          const item = selected[selected.length - 1]
+          this.formItem.setValue(item.value)
         }
 
-        this.$emit('change', value)
+        this.$emit('change', {
+          detail: {
+            value: selected
+          }
+        })
       }
     }
   }
@@ -185,10 +252,6 @@
   .uni-data-tree {
     position: relative;
     font-size: 14px;
-		/* #ifdef H5 */
-		cursor: pointer;
-		/* #endif */
-
   }
 
   .error-text {
@@ -202,8 +265,6 @@
     flex-wrap: nowrap;
     font-size: 14px;
     line-height: 38px;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
     padding: 0 5px;
     overflow: hidden;
     /* #ifdef APP-NVUE */
@@ -211,9 +272,18 @@
     /* #endif */
   }
 
+  .input-value-border {
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+  }
+
   .selected-area {
     flex: 1;
     overflow: hidden;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: row;
   }
 
   .load-more {
@@ -251,7 +321,7 @@
     display: flex;
     justify-content: center;
     transform: rotate(-45deg);
-    transform-origin: 2px;
+    transform-origin: center;
   }
 
   .input-arrow {
