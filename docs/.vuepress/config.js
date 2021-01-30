@@ -147,6 +147,10 @@ module.exports = {
 						path: '/components/data-picker.md',
 						title: '数据驱动的picker',
 						subTitle: 'DataPicker'
+					},{
+						path: '/components/file-picker.md',
+						title: '文件选择上传',
+						subTitle: 'FilePicker'
 					}
 				]
 			},

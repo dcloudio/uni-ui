@@ -1,0 +1,12 @@
+{
+	"id": "-1",
+	"name": "Forms",
+	"desc": "表单",
+	"edition": "0.0.1",
+	"url": "forms",
+	"type": "表单组件",
+	"suffix": "vue",
+	"module": ["uni-file-picker"],
+	"path": "https://ext.dcloud.net.cn/plugin?id=-1",
+	"update_log": ["- 新增 uni-file-picker 文件上传组件"]
+}

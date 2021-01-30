@@ -2,10 +2,10 @@
 	"id": "21002",
 	"name": "Group",
 	"desc": "分组",
-	"edition": "1.0.0",
+	"edition": "1.0.1",
 	"url": "group",
 	"type": "表单组件",
 	"suffix": "vue",
 	"path": "https://ext.dcloud.net.cn/plugin?id=21002",
-	"update_log": ""
+	"update_log": ["- 优化 兼容 nvue 页面"]
 }

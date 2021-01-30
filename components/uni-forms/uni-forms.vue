@@ -434,11 +434,10 @@
 	.uni-forms {
 		// overflow: hidden;
 		// padding: 10px 15px;
-		// background-color: #fff;
 	}
 
 	.uni-forms--top {
-		padding: 10px 15px;
+		// padding: 10px 15px;
 		// padding-top: 22px;
 	}
 </style>

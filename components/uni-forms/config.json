@@ -2,11 +2,11 @@
 	"id": "2773",
 	"name": "Forms",
 	"desc": "表单",
-	"edition": "1.0.35",
+	"edition": "1.0.36",
 	"url": "forms",
 	"type": "表单组件",
 	"suffix": "vue",
 	"module": ["uni-forms", "uni-forms-item", "uni-group","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=2773",
-	"update_log": ["- 修复 校验 uni-data-picker value 为 0 时，返回值错误的Bug"]
+	"update_log": ["- 优化 兼容 nvue 页面"]
 }
