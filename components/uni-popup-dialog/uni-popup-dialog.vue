@@ -258,6 +258,7 @@
 	}
 
 	.uni-popup-dialog__close {
+		display: block;
 		cursor: pointer;
 		position: absolute;
 		top: 9px;
