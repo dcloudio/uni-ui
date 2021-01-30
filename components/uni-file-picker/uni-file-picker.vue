@@ -230,9 +230,9 @@
 			chooseFiles() {
 
 				// API 正式发布前，使用本地API上传函数
-				// if(!uniCloud.chooseAndUploadFile){
-				uniCloud.chooseAndUploadFile = chooseAndUploadFile
-				// }
+				if(!uniCloud.chooseAndUploadFile){
+					uniCloud.chooseAndUploadFile = chooseAndUploadFile
+				}
 
 				uniCloud.chooseAndUploadFile({
 					type: this.fileMediatype,

@@ -27,19 +27,6 @@
 		<log-item-text tag-type="perf">
 			实时校验
 		</log-item-text>
-		<log-item-text tag-type="perf">
-			兼容nvue页面
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-easyinput 组件更新">
-		<log-item-text tag-type="perf">
-			兼容nvue页面
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-group 组件更新">
-		<log-item-text tag-type="perf">
-			兼容nvue页面
-		</log-item-text>
 	</log-item>
 	<log-item title="uni-fab 组件更新">
 		<log-item-text tag-type="perf">
@@ -47,6 +34,17 @@
 		</log-item-text>
 		<log-item-text tag-type="perf">
 			兼容pc端
+		</log-item-text>
+	</log-item>
+	<log-item title="组件 NVUE 化">
+		<log-item-text tag-type="perf">
+			<highlight text="uni-forms" /> 表单
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-easyinput" /> 输入框
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-group" /> 分组
 		</log-item-text>
 	</log-item>
 </log>
