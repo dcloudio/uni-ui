@@ -138,7 +138,9 @@
 					this.formRules = formRules
 					if (!this.validator) {
 						this.validator = new Validator(formRules)
-					}
+					} else {
+            this.validator.updateSchema(formRules)
+          }
 				}
 				this.childrens.forEach((item) => {
 					item.init()
