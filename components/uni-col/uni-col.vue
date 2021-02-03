@@ -211,7 +211,20 @@
 		}
 	}
 </script>
+
 <style lang='scss' scoped>
+	/* breakpoints */
+	$--sm: 768px !default;
+	$--md: 992px !default;
+	$--lg: 1200px !default;
+	$--xl: 1920px !default;
+
+	$breakpoints: ('xs' : (max-width: $--sm - 1),
+	'sm' : (min-width: $--sm),
+	'md' : (min-width: $--md),
+	'lg' : (min-width: $--lg),
+	'xl' : (min-width: $--xl));
+
 	$layout-namespace: ".uni-";
 	$col: $layout-namespace+"col";
 

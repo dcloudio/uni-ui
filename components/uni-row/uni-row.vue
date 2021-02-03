@@ -77,6 +77,7 @@
 		}
 	};
 </script>
+
 <style lang="scss">
 	$layout-namespace: ".uni-";
 	$row:$layout-namespace+"row";
@@ -87,6 +88,7 @@
 
 		@at-root {
 
+			/* #ifndef APP-NVUE */
 			#{$selector}::before,
 			#{$selector}::after {
 				display: table;
@@ -96,7 +98,10 @@
 			#{$selector}::after {
 				clear: both;
 			}
+
+			/* #endif */
 		}
+
 	}
 
 	@mixin utils-flex ($direction: row) {
@@ -107,7 +112,7 @@
 	}
 
 	@mixin set-flex($state) {
-		@at-root #{& + "-" + $state} {
+		@at-root &-#{$state} {
 			@content
 		}
 	}
@@ -125,25 +130,23 @@
 		/* #endif */
 
 		// 非nvue使用float布局
-		/* #ifndef APP-NVUE */
 		@include utils-clearfix;
-		/* #endif */
 
 		// 在QQ、字节、百度小程序平台，编译后使用shadow dom，不可使用flex布局，使用float
-		/* #ifndef MP-QQ || MP-TOUTIAO || MP-BAIDU */
 		@at-root {
-			#{& + $modifier-separator}flex {
+
+			/* #ifndef MP-QQ || MP-TOUTIAO || MP-BAIDU */
+			&#{$modifier-separator}flex {
 				@include utils-flex;
 				flex-wrap: wrap;
 				flex: 1;
 
-				/* #ifndef APP-NVUE */
 				&:before,
 				&:after {
+					/* #ifndef APP-NVUE */
 					display: none;
+					/* #endif */
 				}
-
-				/* #endif */
 
 				@include set-flex(justify-center) {
 					justify-content: center;
@@ -169,9 +172,10 @@
 					align-items: flex-end;
 				}
 			}
+
+			/* #endif */
 		}
 
-		/* #endif */
 	}
 
 	// 字节、QQ配置后不生效
