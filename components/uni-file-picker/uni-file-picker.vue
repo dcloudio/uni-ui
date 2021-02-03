@@ -281,7 +281,7 @@
 					type: this.fileMediatype,
 					compressed: false,
 					// TODO 如果为空，video 有问题
-					extension: this.fileExtname || [],
+					extension: this.fileExtname.length> 0 ? this.fileExtname: undefined,
 					count: this.limitLength - this.files.length, //默认9
 					onChooseFile: async (res) => {
 						if ((Number(this.limitLength) === 1 && this.disablePreview && !this.disabled) || this.returnType === 'object') {
