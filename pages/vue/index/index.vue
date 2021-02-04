@@ -112,6 +112,9 @@
 				}, {
 					name: 'DatetimePicker 日期时间选择',
 					url: 'datetime-picker'
+				}, {
+					name: 'FilePicker 文件选择上传',
+					url: 'file-picker'
 				}],
 				functionals: [{
 						name: 'Calendar 日历',

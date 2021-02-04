@@ -9,8 +9,70 @@
 
 <log title="1.2.11" date="2021-1-19">
 	<log-item-text tag-type="feat" only>
-		<highlight text="uni-row" /> 栅格系统（文档：Layout 布局）
+		<highlight text="uni-row" /> 栅格系统
 	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-data-picker" /> 数据驱动的picker选择器
+	</log-item-text>
+	<log-item-text tag-type="feat" only>
+		<highlight text="uni-file-picker" /> 文件选择上传
+	</log-item-text>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			偶发性获取表单值错误的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			校验 uni-data-picker value 为 0 时，返回值错误的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			uni-forms-item 组件隐藏时依然触发校验的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			实时校验
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="perf">
+			背景色调整
+		</log-item-text>
+	</log-item>
+	<log-item title="组件 NVUE 化">
+		<log-item-text tag-type="perf">
+			<highlight text="uni-forms" /> 表单
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-easyinput" /> 输入框
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-group" /> 分组
+		</log-item-text>
+	</log-item>
+	<log-item title="组件适配 PC">
+		<log-item-text tag-type="perf">
+			<highlight text="uni-fab" /> 悬浮按钮
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-swiper-dot" /> 轮播图指示点
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-rate" /> 评分
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-notice-bar" /> 通告栏
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-indexed-list" /> 索引列表
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-combox" /> 组合框
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-transition" /> 动画
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			<highlight text="uni-swipe-action" /> 滑动操作
+		</log-item-text>
+	</log-item>
 </log>
 
 <log title="官网更新" date="2020-12-19">

@@ -3,8 +3,8 @@
 		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in info" :key="index">
-					<view draggable="false" :class="item.colorClass" class="swiper-item">
-						<image class="image" :src="item.url" mode="aspectFill" draggable="false" />
+					<view :class="item.colorClass" class="swiper-item">
+						<image class="image" :src="item.url" mode="aspectFill" :draggable="false" @click="onBanner(index)" />
 					</view>
 				</swiper-item>
 			</swiper>
@@ -105,6 +105,9 @@
 			},
 			clickItem(e) {
 				this.swiperDotIndex = e
+			},
+			onBanner(index) {
+				console.log(22222, index);
 			}
 		}
 	}
@@ -131,6 +134,14 @@
 		width: 750rpx;
 	}
 
+	/deep/ .image img {
+		-webkit-user-drag: none;
+		-khtml-user-drag: none;
+		-moz-user-drag: none;
+		-o-user-drag: none;
+		user-drag: none;
+	}
+
 	@media screen and (min-width: 500px) {
 				.uni-swiper-dot-box {
 					width: 400px;
@@ -141,15 +152,6 @@
 				.image {
 					width: 100%;
 				}
-	}
-
-
-	/deep/ .image img {
-		-webkit-user-drag: none;
-		-khtml-user-drag: none;
-		-moz-user-drag: none;
-		-o-user-drag: none;
-		user-drag: none;
 	}
 
 	.uni-bg-red {

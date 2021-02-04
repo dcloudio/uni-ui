@@ -6,5 +6,5 @@
 	"type": "基础组件",
 	"edition": "1.0.6",
 	"path": "https://ext.dcloud.net.cn/plugin?id=144",
-	"update_log": "- 新增 支持 PC 端"
+	"update_log": ["- 优化 按钮背景色调整","- 优化 兼容pc端"]
 }

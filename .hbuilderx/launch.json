@@ -6,7 +6,7 @@
      	{
      		"launchtype" : "remote"
      	},
-     	"provider" : "aliyun,tcb",
+     	"provider" : "tcb",
      	"type" : "uniCloud"
      }
     ]
