@@ -345,7 +345,7 @@
 				for (let i in this.value) {
 					const itemData = this.childrens.find(v => v.name === i)
 					if (itemData) {
-						this.formData[i] = this.value[i]
+						this.formData[i] = this._getValue(i,this.value[i])
 					}
 				}
 				return this.validateAll(this.formData, 'submit', callback)
