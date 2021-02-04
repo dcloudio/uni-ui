@@ -1,0 +1,3 @@
+- 新增 支持 v-model
+- 新增 支持 focus、blur 事件
+- 新增 支持 PC 端

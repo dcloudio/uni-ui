@@ -6,6 +6,7 @@
 	"url": "easyinput",
 	"type": "表单组件",
 	"suffix": "vue",
+	"module": ["uni-easyinput","uni-icons"],
 	"path": "https://ext.dcloud.net.cn/plugin?id=3455",
 	"update_log": ["- 优化 兼容 nvue 页面"]
 }

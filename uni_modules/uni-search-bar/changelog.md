@@ -1,0 +1,6 @@
+- 新增 支持双向绑定
+- 更改 input 事件的返回值，e={value:Number} --> e=value
+- 新增 支持图标插槽
+- 新增 支持 clear、blur 事件
+- 新增 支持 focus 属性
+- 去掉组件背景色

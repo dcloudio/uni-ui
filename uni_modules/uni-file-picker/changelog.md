@@ -1,0 +1,1 @@
+- 修复 微信小程序不指定 fileExtname 属性选择失败的Bug

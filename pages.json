@@ -261,7 +261,10 @@
 			"style": {}
 		}, {
 			"path": "pages/vue/test/test",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "test",
+				"a":"test"
+			}
 		}, {
 			"path": "pages/vue/table/table",
 			"style": {
@@ -315,14 +318,14 @@
 		}
 	    ,{
             "path" : "pages/vue/file-picker/file-picker",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
-        
+
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
