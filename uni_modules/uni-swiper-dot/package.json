@@ -2,10 +2,14 @@
   "id": "uni-swiper-dot",
   "displayName": "SwiperDot 轮播图指示点",
   "version": "1.0.5",
-  "description": "",
+  "description": "自定义轮播图指示点组件",
   "keywords": [
-    ""
-  ],
+    "uni-swiper-dot",
+    "轮播图指示点",
+    "swiperDot",
+    "dot",
+    "swiper"
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""
@@ -41,33 +45,33 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "y",
+        "aliyun": "y"
       },
       "client": {
         "App": {
-          "app-vue": "u",
-          "app-nvue": "u"
+          "app-vue": "y",
+          "app-nvue": "y"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
         },
         "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u"
+          "微信": "y",
+          "阿里": "y",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y"
         },
         "快应用": {
           "华为": "u",

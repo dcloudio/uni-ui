@@ -1,11 +1,16 @@
 {
   "id": "uni-forms",
   "displayName": "Forms 表单",
-  "version": "1.0.38",
-  "description": "",
+  "version": "1.0.39",
+  "description": "由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据",
   "keywords": [
-    ""
-  ],
+    "",
+    "uni-forms",
+    "form",
+    "表单",
+    "表单校验",
+    "表单验证"
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""
@@ -43,33 +48,33 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "y",
+        "aliyun": "y"
       },
       "client": {
         "App": {
-          "app-vue": "u",
-          "app-nvue": "u"
+          "app-vue": "y",
+          "app-nvue": "y"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
         },
         "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u"
+          "微信": "y",
+          "阿里": "y",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y"
         },
         "快应用": {
           "华为": "u",

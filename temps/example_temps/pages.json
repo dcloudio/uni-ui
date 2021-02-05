@@ -1,10 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/datetime-picker/datetime-picker",
+      "path": "pages/collapse/collapse",
       "style": {
-        "navigationBarTitleText": "日期时间",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "Collapse 折叠面板"
       }
     }
   ],

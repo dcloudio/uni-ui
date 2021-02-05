@@ -1,11 +1,14 @@
 {
   "id": "uni-link",
   "displayName": "Link 超链接",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "uni-link是一个外部网页超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打",
   "keywords": [
-    ""
-  ],
+    "",
+    "link",
+    "超链接",
+    "ulink"
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": ""
@@ -41,8 +44,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "y",
+        "aliyun": "y"
       },
       "client": {
         "App": {

@@ -1,12 +1,13 @@
 {
-  "id": "uni-datetime-picker",
-  "displayName": "DatetimePicker 日期选择器",
-  "version": "0.0.3",
-  "description": "DatetimePicker 可以同时选择日期和时间的选择器",
+  "id": "uni-collapse",
+  "displayName": "Collapse 折叠面板",
+  "version": "1.1.5",
+  "description": " collapse uni-ui 折叠面板 手风琴",
   "keywords": [
-    "DatetimePicker",
-    "uni-ui",
-    "日期时间选择器"
+    "Collapse",
+    "组件，可以折叠",
+    "/",
+    "展开的内容区域。"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
@@ -39,7 +40,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+      "uni-icons"
+    ],
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -49,7 +52,7 @@
       "client": {
         "App": {
           "app-vue": "y",
-          "app-nvue": "n"
+          "app-nvue": "y"
         },
         "H5-mobile": {
           "Safari": "y",
