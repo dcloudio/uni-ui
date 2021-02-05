@@ -26,7 +26,6 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	/**
 	 * GoodsNav 商品导航
 	 * @description 商品加入购物车、立即购买等
@@ -40,9 +39,6 @@
 	 */
 	export default {
 		name: 'UniGoodsNav',
-		components: {
-			uniIcons
-		},
 		props: {
 			options: {
 				type: Array,
@@ -146,6 +142,9 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 0 10px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-tab__icon {
@@ -172,6 +171,9 @@
 		flex: 1;
 		justify-content: center;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-tab__cart-button-right-text {

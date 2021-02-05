@@ -39,8 +39,7 @@
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue';
-import uniBadge from '../uni-badge/uni-badge.vue';
+
 
 /**
  * ListItem 列表子组件
@@ -77,10 +76,6 @@ import uniBadge from '../uni-badge/uni-badge.vue';
  */
 export default {
 	name: 'UniListItem',
-	components: {
-		uniIcons,
-		uniBadge
-	},
 	props: {
 		direction: {
 			type: String,
@@ -250,8 +245,12 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	font-size: $uni-font-size-lg;
 	position: relative;
 	justify-content: space-between;
+	align-items: center;
 	background-color: #fff;
 	flex-direction: row;
+	/* #ifdef H5 */
+	cursor: pointer;
+	/* #endif */
 }
 
 .uni-list-item--disabled {
@@ -371,6 +370,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	/* #endif */
 	height: $uni-img-size-base;
 	width: $uni-img-size-base;
+	marin-right: 10px;
 }
 
 .uni-icon-wrapper {

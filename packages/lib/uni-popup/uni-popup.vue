@@ -1,18 +1,24 @@
 <template>
-	<view v-if="showPopup" class="uni-popup" :class="[popupstyle]" @touchmove.stop.prevent="clear">
-		<uni-transition v-if="maskShow" class="uni-mask--hook" :mode-class="['fade']" :styles="maskClass" :duration="duration" :show="showTrans"
-		 @click="onTap" />
+	<view v-if="showPopup" class="uni-popup" :class="[popupstyle, isDesktop ? 'fixforpc-z-index' : '']"
+	 @touchmove.stop.prevent="clear">
+		<uni-transition v-if="maskShow" class="uni-mask--hook" :mode-class="['fade']" :styles="maskClass" :duration="duration"
+		 :show="showTrans" @click="onTap" />
 		<uni-transition :mode-class="ani" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
 			<view class="uni-popup__wrapper-box" @click.stop="clear">
 				<slot />
 			</view>
 		</uni-transition>
+		<!-- #ifdef H5 -->
+		<keypress v-if="maskShow" @esc="onTap" />
+		<!-- #endif -->
 	</view>
 </template>
 
 <script>
-	import uniTransition from '../uni-transition/uni-transition.vue'
 	import popup from './popup.js'
+	// #ifdef H5
+	import keypress from './keypress.js'
+	// #endif
 	/**
 	 * PopUp 弹出层
 	 * @description 弹出层组件，为了解决遮罩弹层的问题
@@ -32,7 +38,9 @@
 	export default {
 		name: 'UniPopup',
 		components: {
-			uniTransition
+			// #ifdef H5
+			keypress
+			// #endif
 		},
 		props: {
 			// 开启动画
@@ -68,6 +76,12 @@
 				},
 				immediate: true
 			},
+			isDesktop: {
+				handler: function(newVal) {
+					this[this.config[this.type]]()
+				},
+				immediate: true
+			},
 			/**
 			 * 监听遮罩是否可点击
 			 * @param {Object} val
@@ -100,7 +114,7 @@
 				},
 				maskShow: true,
 				mkclick: true,
-				popupstyle: 'top'
+				popupstyle: this.isDesktop ? 'fixforpc-top' : 'top'
 			}
 		},
 		created() {
@@ -164,7 +178,7 @@
 			 * 顶部弹出样式处理
 			 */
 			top() {
-				this.popupstyle = 'top'
+				this.popupstyle = this.isDesktop ? 'fixforpc-top' : 'top'
 				this.ani = ['slide-top']
 				this.transClass = {
 					'position': 'fixed',
@@ -216,6 +230,12 @@
 		/* #endif */
 	}
 
+	.fixforpc-z-index {
+		/* #ifndef APP-NVUE */
+		z-index: 999;
+		/* #endif */
+	}
+
 	.uni-popup__mask {
 		position: absolute;
 		top: 0;
@@ -257,6 +277,10 @@
 		/* #ifndef H5 */
 		top: 0;
 		/* #endif */
+	}
+
+	.fixforpc-top {
+		top: 0;
 	}
 
 	.bottom {

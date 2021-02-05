@@ -1,20 +1,22 @@
 <template>
 	<view class="uni-forms-item" :class="{'uni-forms-item--border':border,'is-first-border':border&&isFirstBorder,'uni-forms-item-error':msg}">
-		<view class="uni-forms-item__inner" :class="['is-direction-'+labelPos,]">
-			<view v-if="label" class="uni-forms-item__label" :style="{width:labelWid+'px',justifyContent: justifyContent}">
-				<slot name="left">
-					<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
-					<text>{{label}}</text>
-					<text v-if="required" class="is-required">*</text>
-				</slot>
+		<view class="uni-forms-item__box">
+			<view class="uni-forms-item__inner" :class="['is-direction-'+labelPos,]">
+				<view v-if="label" class="uni-forms-item__label" :style="{width:labelWid+'px',justifyContent: justifyContent}">
+					<slot name="left">
+						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
+						<text class="label-text">{{label}}</text>
+						<text v-if="required" class="is-required">*</text>
+					</slot>
+				</view>
+				<view class="uni-forms-item__content" :class="{'is-input-error-border': msg}">
+					<slot></slot>
+				</view>
 			</view>
-			<view class="uni-forms-item__content" :class="{'is-input-error-border': msg}">
-				<slot></slot>
-			</view>
+			<view v-if="msg" class="uni-error-message" :class="{'uni-error-msg--boeder':border}" :style="{
+				paddingLeft: (labelPos === 'left'? Number(labelWid)+5:5) + 'px'
+			}"><text class="uni-error-message-text">{{ showMsg === 'undertext' ? msg:'' }}</text></view>
 		</view>
-		<view class="uni-error-message" :class="{'uni-error-msg--boeder':border}" :style="{
-			paddingLeft: (labelPos === 'left'? Number(labelWid)+5:5) + 'px'
-		}">{{ showMsg === 'undertext' ? msg:'' }}</view>
 	</view>
 </template>
 
@@ -136,7 +138,6 @@
 				if (this.labelAli === 'center') return 'center';
 				if (this.labelAli === 'right') return 'flex-end';
 			}
-
 		},
 		watch: {
 			validateTrigger(trigger) {
@@ -148,9 +149,9 @@
 			this.group = this.getForm('uniGroup')
 			this.formRules = []
 			this.formTrigger = this.validateTrigger
-			// if (this.form) {
+			if (this.form) {
 			this.form.childrens.push(this)
-			// }
+			}
 			this.init()
 		},
 		destroyed() {
@@ -158,6 +159,7 @@
 				this.form.childrens.forEach((item, index) => {
 					if (item === this) {
 						this.form.childrens.splice(index, 1)
+						delete this.form.formData[item.name]
 					}
 				})
 			}
@@ -179,11 +181,13 @@
 					this.labelPos = this.labelPosition ? this.labelPosition : labelPosition
 					this.labelWid = this.label ? (this.labelWidth ? this.labelWidth : labelWidth):0
 					this.labelAli = this.labelAlign ? this.labelAlign : labelAlign
+
 					// 判断第一个 item
 					if (!this.form.isFirstBorder) {
 						this.form.isFirstBorder = true
 						this.isFirstBorder = true
 					}
+
 					// 判断 group 里的第一个 item
 					if (this.group) {
 						if (!this.group.isFirstBorder) {
@@ -200,10 +204,6 @@
 					}
 
 					this.validator = validator
-
-					if (this.name) {
-						formData[this.name] = value.hasOwnProperty(this.name) ? value[this.name] : this.form._getValue(this, '')
-					}
 				} else {
 					this.labelPos = this.labelPosition || 'left'
 					this.labelWid = this.labelWidth || 65
@@ -223,18 +223,23 @@
 				}
 				return parent;
 			},
+
 			/**
 			 * 移除该表单项的校验结果
 			 */
 			clearValidate() {
 				this.errMsg = ''
 			},
+
 			setValue(value){
 				if (this.name) {
 					if(this.errMsg) this.errMsg = ''
-					this.form.formData[this.name] =  this.form._getValue(this, value)
+					this.form.formData[this.name] =  this.form._getValue(this.name, value)
+					if(!this.formRules || (typeof(this.formRules) && JSON.stringify(this.formRules) === '{}')) return
+					this.triggerCheck(this.form._getValue(this.name, value))
 				}
 			},
+
 			/**
 			 * 校验规则
 			 * @param {Object} value
@@ -243,37 +248,35 @@
 				let promise = null;
 				this.errMsg = ''
 				// if no callback, return promise
-				if (callback && typeof callback !== 'function' && Promise) {
-					promise = new Promise((resolve, reject) => {
-						callback = function(valid) {
-							!valid ? resolve(valid) : reject(valid)
-						};
-					});
-				}
-
-				if (!this.validator) {
-					typeof callback === 'function' && callback(null);
-					if (promise) return promise
-				}
-
+				// if (callback && typeof callback !== 'function' && Promise) {
+				// 	promise = new Promise((resolve, reject) => {
+				// 		callback = function(valid) {
+				// 			!valid ? resolve(valid) : reject(valid)
+				// 		};
+				// 	});
+				// }
+				// if (!this.validator) {
+				// 	typeof callback === 'function' && callback(null);
+				// 	if (promise) return promise
+				// }
+				if (!this.validator) return
 				const isNoField = this.isRequired(this.formRules.rules || [])
-
-
 				let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger)
-
 				let result = null
-
 				if (!(!isTrigger)) {
-					result = this.validator && (await this.validator.validateUpdate({
+					result = await this.validator.validateUpdate({
 						[this.name]: value
-					}, this.form.formData))
+					}, this.form.formData)
 				}
 				// 判断是否必填
 				if (!isNoField && !value) {
 					result = null
 				}
-
 				if (isTrigger && result && result.errorMessage) {
+					const inputComp = this.form.inputChildrens.find(child => child.rename === this.name)
+					if (inputComp) {
+						inputComp.errMsg = result.errorMessage
+					}
 					if (this.form.errShowType === 'toast') {
 						uni.showToast({
 							title: result.errorMessage || '校验错误',
@@ -289,9 +292,10 @@
 				}
 
 				this.errMsg = !result ? '' : result.errorMessage
+				// 触发validate事件
 				this.form.validateCheck(result ? result : null)
-				typeof callback === 'function' && callback(result ? result : null);
-				if (promise) return promise
+				// typeof callback === 'function' && callback(result ? result : null);
+				// if (promise) return promise
 
 			},
 			/**
@@ -334,20 +338,24 @@
 <style lang="scss" scoped>
 	.uni-forms-item {
 		position: relative;
-		// padding: 16px 14px;
+		padding: 0px;
 		text-align: left;
 		color: #333;
 		font-size: 14px;
-		margin-bottom: 22px;
-		background-color: #fff;
+		// margin-bottom: 22px;
 	}
+	.uni-forms-item__box {
+		position: relative;
 
+	}
 	.uni-forms-item__inner {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		// flex-direction: row;
 		// align-items: center;
+		padding-bottom: 22px;
+		// margin-bottom: 22px;
 	}
 
 	.is-direction-left {
@@ -362,30 +370,29 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		flex-shrink: 0;
+		box-sizing: border-box;
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
-		font-size: 14px;
-		color: #333;
 		width: 65px;
 		// line-height: 2;
 		// margin-top: 3px;
 		padding: 5px 0;
-		box-sizing: border-box;
 		height: 36px;
 		margin-right: 5px;
+		.label-text {
+			font-size: 14px;
+			color: #333;
+		}
 	}
 
 	.uni-forms-item__content {
 		/* #ifndef APP-NVUE */
 		width: 100%;
-		// display: flex;
-		/* #endif */
-		// flex: 1;
-		// flex-direction: row;
-		// align-items: center;
 		box-sizing: border-box;
 		min-height: 36px;
+		/* #endif */
+		flex: 1;
 	}
 
 
@@ -401,12 +408,14 @@
 
 	.uni-error-message {
 		position: absolute;
-		bottom: -17px;
+		bottom: 0px;
 		left: 0;
-		line-height: 12px;
+		text-align: left;
+	}
+	.uni-error-message-text {
+		line-height: 22px;
 		color: $uni-color-error;
 		font-size: 12px;
-		text-align: left;
 	}
 
 	.uni-error-msg--boeder {
@@ -421,9 +430,12 @@
 
 	.uni-forms-item--border {
 		margin-bottom: 0;
-		padding: 10px 15px;
+		padding: 10px 0;
 		// padding-bottom: 0;
 		border-top: 1px #eee solid;
+		.uni-forms-item__inner {
+			padding: 0;
+		}
 	}
 
 	.uni-forms-item-error {
@@ -431,6 +443,11 @@
 	}
 
 	.is-first-border {
+		/* #ifndef APP-NVUE */
 		border: none;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		border-width: 0;
+		/* #endif */
 	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<view v-if="show" class="uni-noticebar" :style="{ backgroundColor: backgroundColor }" @click="onClick">
 		<!-- #ifdef MP-ALIPAY -->
-		<view v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" @click="close">
+		<view v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close uni-cursor-point" @click="close">
 			<uni-icons type="closeempty" :color="color" size="12" />
 		</view>
 		<view v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon">
@@ -9,7 +9,7 @@
 		</view>
 		<!-- #endif -->
 		<!-- #ifndef MP-ALIPAY -->
-		<uni-icons v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close" type="closeempty" :color="color"
+		<uni-icons v-if="showClose === true || showClose === 'true'" class="uni-noticebar-close uni-cursor-point" type="closeempty" :color="color"
 		 size="12" @click="close" />
 		<uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound" :color="color"
 		 size="14" />
@@ -20,7 +20,7 @@
 				 :style="{color:color, width:wrapWidth+'px', 'animationDuration': animationDuration, '-webkit-animationDuration': animationDuration ,animationPlayState: webviewHide?'paused':animationPlayState,'-webkit-animationPlayState':webviewHide?'paused':animationPlayState, animationDelay: animationDelay, '-webkit-animationDelay':animationDelay}">{{text}}</text>
 			</view>
 		</view>
-		<view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar__more" @click="clickMore">
+		<view v-if="showGetMore === true || showGetMore === 'true'" class="uni-noticebar__more uni-cursor-point" @click="clickMore">
 			<text v-if="moreText" :style="{ color: moreColor }" class="uni-noticebar__more-text">{{ moreText }}</text>
 			<uni-icons type="arrowright" :color="moreColor" size="14" />
 		</view>
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	// #ifdef APP-NVUE
 	const dom = weex.requireModule('dom');
 	const animation = weex.requireModule('animation');
@@ -56,9 +55,6 @@
 
 	export default {
 		name: 'UniNoticeBar',
-		components: {
-			uniIcons
-		},
 		props: {
 			text: {
 				type: String,
@@ -281,6 +277,12 @@
 		align-items: center;
 		padding: 6px 12px;
 		margin-bottom: 10px;
+	}
+
+	.uni-cursor-point {
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-noticebar-close {

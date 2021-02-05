@@ -1,16 +1,15 @@
 <template>
 	<view class="uni-numbox">
-		<view @click="_calcValue('minus')" class="uni-numbox__minus">
+		<view @click="_calcValue('minus')" class="uni-numbox__minus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
-		<input :disabled="disabled" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
-		<view @click="_calcValue('plus')" class="uni-numbox__plus">
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue" />
+		<view @click="_calcValue('plus')" class="uni-numbox__plus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
 		</view>
 	</view>
 </template>
 <script>
-
 	/**
 	 * NumberBox 数字输入框
 	 * @description 带加减按钮的数字输入框
@@ -59,6 +58,7 @@
 			inputValue(newVal, oldVal) {
 				if (+newVal !== +oldVal) {
 					this.$emit("change", newVal);
+					this.$emit("input", newVal);
 				}
 			}
 		},
@@ -102,6 +102,7 @@
 				return scale;
 			},
 			_onBlur(event) {
+				this.$emit('blur', event)
 				let value = event.detail.value;
 				if (!value) {
 					// this.inputValue = 0;
@@ -114,6 +115,9 @@
 					value = this.min;
 				}
 				this.inputValue = value;
+			},
+			_onFocus(event) {
+				this.$emit('focus', event)
 			}
 		}
 	};
@@ -134,6 +138,12 @@
 		height: $box-height;
 		line-height: $box-height;
 		width: 120px;
+	}
+
+	.uni-cursor-point {
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-numbox__value {
@@ -190,11 +200,14 @@
 	}
 
 	.uni-numbox--text {
-		font-size: 40rpx;
+		font-size: 20px;
 		color: $uni-text-color;
 	}
 
 	.uni-numbox--disabled {
 		color: $uni-text-color-disable;
+		/* #ifdef H5 */
+		cursor: not-allowed;
+		/* #endif */
 	}
 </style>

@@ -17,8 +17,9 @@
 			</cell>
 		</list>
 		<!-- #endif -->
-		<view :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart" @touchmove.stop.prevent="touchMove"
-		 @touchend="touchEnd" class="uni-indexed-list__menu">
+		<view class="uni-indexed-list__menu" :class="touchmove ? 'uni-indexed-list__menu--active' : ''" @touchstart="touchStart"
+		 @touchmove.stop.prevent="touchMove" @touchend="touchEnd" @mousedown.stop="mousedown" @mousemove.stop.prevent="mousemove"
+		 @mouseleave.stop="mouseleave">
 			<view v-for="(list, key) in lists" :key="key" class="uni-indexed-list__menu-item">
 				<text class="uni-indexed-list__menu-text" :class="touchmoveIndex == key ? 'uni-indexed-list__menu-text--active' : ''">{{ list.key }}</text>
 			</view>
@@ -29,7 +30,6 @@
 	</view>
 </template>
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	import indexedListItem from './uni-indexed-list-item.vue'
 	// #ifdef APP-NVUE
 	const dom = weex.requireModule('dom');
@@ -85,7 +85,6 @@
 	export default {
 		name: 'UniIndexedList',
 		components: {
-			uniIcons,
 			indexedListItem
 		},
 		props: {
@@ -109,8 +108,9 @@
 				touchmove: false,
 				touchmoveIndex: -1,
 				scrollViewId: '',
-				touchmoveTimeout: '',
-				loaded: false
+				touchmovable: true,
+				loaded: false,
+				isPC: false
 			}
 		},
 		watch: {
@@ -122,6 +122,9 @@
 			}
 		},
 		mounted() {
+			// #ifdef H5
+			this.isPC = this.IsPC()
+			// #endif
 			setTimeout(() => {
 				this.setList()
 			}, 50)
@@ -175,7 +178,7 @@
 			},
 			touchStart(e) {
 				this.touchmove = true
-				let pageY = e.touches[0].pageY
+				let pageY = this.isPC ? e.pageY : e.touches[0].pageY
 				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 				let item = this.lists[index]
 				if (item) {
@@ -190,7 +193,7 @@
 			},
 			touchMove(e) {
 				// #ifndef APP-PLUS
-				let pageY = e.touches[0].pageY
+				let pageY = this.isPC ? e.pageY : e.touches[0].pageY
 				let index = Math.floor((pageY - this.winOffsetY) / this.itemHeight)
 				if (this.touchmoveIndex === index) {
 					return false
@@ -209,6 +212,40 @@
 				this.touchmove = false
 				this.touchmoveIndex = -1
 			},
+
+			/**
+			 * 兼容 PC @tian
+			 */
+
+			mousedown(e) {
+				if (!this.isPC) return
+				this.touchStart(e)
+			},
+			mousemove(e) {
+				if (!this.isPC) return
+				this.touchMove(e)
+			},
+			mouseleave(e) {
+				if (!this.isPC) return
+				this.touchEnd(e)
+			},
+
+			// #ifdef H5
+			IsPC() {
+				var userAgentInfo = navigator.userAgent;
+				var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+				var flag = true;
+				for (let v = 0; v < Agents.length - 1; v++) {
+					if (userAgentInfo.indexOf(Agents[v]) > 0) {
+						flag = false;
+						break;
+					}
+				}
+				return flag;
+			},
+			// #endif
+
+
 			onClick(e) {
 				let {
 					idx,
@@ -274,6 +311,9 @@
 		flex: 1;
 		align-items: center;
 		justify-content: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-indexed-list__menu-text {

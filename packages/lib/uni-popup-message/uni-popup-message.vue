@@ -1,11 +1,12 @@
 <template>
-	<view class="uni-popup-message" :class="'uni-popup__'+[type]">
-		<text class="uni-popup-message-text" :class="'uni-popup__'+[type]+'-text'">{{message}}</text>
+	<view class="uni-popup-message">
+		<view class="uni-popup-message__box fixforpc-width" :class="'uni-popup__'+[type]">
+			<text class="uni-popup-message-text" :class="'uni-popup__'+[type]+'-text'">{{message}}</text>
+		</view>
 	</view>
 </template>
 
 <script>
-	
 	/**
 	 * PopUp 弹出层-消息提示
 	 * @description 弹出层-消息提示
@@ -18,7 +19,7 @@
 	 * @property {String} message 消息提示文字
 	 * @property {String} duration 显示时间，设置为 0 则不会自动关闭
 	 */
-	
+
 	export default {
 		name: 'UniPopupMessage',
 		props: {
@@ -71,12 +72,33 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
+		justify-content: center;
+	}
+
+	.uni-popup-message__box {
 		background-color: #e1f3d8;
 		padding: 10px 15px;
 		border-color: #eee;
 		border-style: solid;
 		border-width: 1px;
+		flex: 1;
 	}
+
+	@media screen and (min-width: 500px) {
+		.fixforpc-width {
+			margin-top: 20px;
+			border-radius: 4px;
+			flex: none;
+			min-width: 380px;
+			/* #ifndef APP-NVUE */
+			max-width: 50%;
+			/* #endif */
+			/* #ifdef APP-NVUE */
+			max-width: 500px;
+			/* #endif */
+		}
+	}
+
 	.uni-popup-message-text {
 		font-size: 14px;
 		padding: 0;

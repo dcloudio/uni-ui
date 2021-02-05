@@ -74,6 +74,9 @@
 		height: 100%;
 		display: flex;
 		/* #endif */
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-grid-item__box {

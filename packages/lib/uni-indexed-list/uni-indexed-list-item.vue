@@ -19,12 +19,8 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	export default {
 		name: 'UniIndexedList',
-		components: {
-			uniIcons
-		},
 		props: {
 			loaded: {
 				type: Boolean,
@@ -90,6 +86,9 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-indexed-list__item-border {

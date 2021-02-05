@@ -15,7 +15,6 @@
 </template>
 
 <script>
-	import uniIcons from "../uni-icons/uni-icons.vue";
 
 	/**
 	 * Fav 收藏按钮
@@ -34,9 +33,6 @@
 	 */
 	export default {
 		name: "UniFav",
-		components: {
-			uniIcons
-		},
 		props: {
 			star: {
 				type: [Boolean, String],
@@ -110,6 +106,9 @@
 		line-height: $fav-height;
 		text-align: center;
 		border-radius: 3px;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-fav--circle {

@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-easyinput" :class="{'uni-easyinput-error':msg}" :style="{color:inputBorder && msg?'#dd524d':styles.color}">
 		<view class="uni-easyinput__content" :class="{'is-input-border':inputBorder ,'is-input-error-border':inputBorder && msg,'is-textarea':type==='textarea','is-disabled':disabled}"
-		 :style="{'border-color':inputBorder && msg?'#dd524d':styles.borderColor,'background-color':disabled?styles.disableColor:'#fff'}">
+		 :style="{'border-color':inputBorder && msg?'#dd524d':styles.borderColor,'background-color':disabled?styles.disableColor:''}">
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc" @click="onClickIcon('prefix')"></uni-icons>
 			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea" :class="{'input-padding':inputBorder}"
 			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled"
@@ -25,6 +25,7 @@
 				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
 				 v-if="clearable && focused && val " color="#c0c4cc" @click="onClear"></uni-icons>
 			</template>
+			<slot name="right"></slot>
 		</view>
 	</view>
 </template>
@@ -54,6 +55,13 @@
 	 * @property {String} 	prefixIcon				输入框头部图标
 	 * @property {String} 	suffixIcon				输入框尾部图标
 	 * @property {Boolean} 	trim 							是否自动去除两端的空格
+	 * @value both	去除两端空格
+	 * @value left	去除左侧空格
+	 * @value right	去除右侧空格
+	 * @value start	去除左侧空格
+	 * @value end		去除右侧空格
+	 * @value all		去除全部空格
+	 * @value none	不去除空格
 	 * @property {Boolean} 	inputBorder 			是否显示input输入框的边框（默认false）
 	 * @property {Object} 	styles 						自定义颜色
 	 * @event {Function} 		input 						输入框内容发生变化时触发
@@ -124,7 +132,7 @@
 			},
 			// 是否自动去除两端的空格
 			trim: {
-				type: Boolean,
+				type: [Boolean, String],
 				default: true
 			},
 			// 自定义样式
@@ -164,7 +172,7 @@
 			value(newVal) {
 				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
-				if (this.formItem) {
+				if (this.form && this.formItem) {
 					this.formItem.setValue(newVal)
 				}
 			},
@@ -178,17 +186,18 @@
 			this.val = this.value
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
-			if (this.formItem) {
+			if (this.form && this.formItem) {
 				if (this.formItem.name) {
 					this.rename = this.formItem.name
 					this.form.inputChildrens.push(this)
 				}
 			}
-
 		},
 		mounted() {
 			// this.onInput = throttle(this.input, 500)
 			this.$nextTick(() => {
+				// setTimeout(()=>{
+				// },1000)
 				this.focused = this.focus
 			})
 		},
@@ -222,23 +231,28 @@
 			onInput(event) {
 				let value = event.detail.value;
 				// 判断是否去除空格
-				if (this.trim) value = this.trimStr(value);
+				if (this.trim) {
+					if (typeof(this.trim) === 'boolean' && this.trim) {
+						value = this.trimStr(value)
+					}
+					if (typeof(this.trim) === 'string') {
+						value = this.trimStr(value, this.trim)
+					}
+				};
 				if (this.errMsg) this.errMsg = ''
 				this.val = value
 				this.$emit('input', value);
 			},
 
 			onFocus(event) {
-				this.focused = true;
+				// this.focused = true;
 				this.$emit('focus', event);
 			},
 			onBlur(event) {
 				let value = event.detail.value;
-				// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
-				// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
-				setTimeout(() => {
-					this.focused = false;
-				}, 100);
+				// setTimeout(() => {
+				// this.focused = false;
+				// }, 100);
 				this.$emit('blur', event);
 			},
 			onConfirm(e) {
@@ -252,17 +266,22 @@
 				this.$emit('click');
 			},
 			trimStr(str, pos = 'both') {
-				if (pos == 'both') {
-					return str.replace(/^\s+|\s+$/g, '');
-				} else if (pos == 'left') {
-					return str.replace(/^\s*/, '');
-				} else if (pos == 'right') {
-					return str.replace(/(\s*$)/g, '');
-				} else if (pos == 'all') {
+				if (pos === 'both') {
+					return str.trim();
+				} else if (pos === 'left') {
+					return str.trimLeft();
+				} else if (pos === 'right') {
+					return str.trimRight();
+				} else if (pos === 'start') {
+					return str.trimStart()
+				} else if (pos === 'end') {
+					return str.trimEnd()
+				} else if (pos === 'all') {
 					return str.replace(/\s+/g, '');
-				} else {
+				} else if (pos === 'none') {
 					return str;
 				}
+				return str;
 			}
 		}
 	};
@@ -286,18 +305,20 @@
 		/* #ifndef APP-NVUE */
 		width: 100%;
 		display: flex;
+		box-sizing: border-box;
+		min-height: 36px;
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
-		box-sizing: border-box;
-		min-height: 36px;
 	}
 
 	.uni-easyinput__content-input {
+		/* #ifndef APP-NVUE */
+		width: auto;
+		/* #endif */
 		position: relative;
 		overflow: hidden;
 		flex: 1;
-		width: auto;
 		line-height: 2;
 		font-size: 14px;
 		// padding-right: 10px;
@@ -315,15 +336,15 @@
 		position: relative;
 		overflow: hidden;
 		flex: 1;
-		width: auto;
 		line-height: 1.5;
 		font-size: 14px;
-		// padding-right: 10px;
 		padding-top: 6px;
 		padding-bottom: 10px;
-		// box-sizing: border-box;
-		min-height: 80px;
 		height: 80px;
+		/* #ifndef APP-NVUE */
+		min-height: 80px;
+		width: auto;
+		/* #endif */
 	}
 
 	.input-padding {
@@ -343,12 +364,12 @@
 	.is-input-border {
 		/* #ifndef APP-NVUE */
 		display: flex;
+		box-sizing: border-box;
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
 		border: 1px solid $uni-border-color;
 		border-radius: 4px;
-		box-sizing: border-box;
 	}
 
 	.uni-easyinput__right {
@@ -392,7 +413,12 @@
 	}
 
 	.is-first-border {
+		/* #ifndef APP-NVUE */
 		border: none;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		border-width: 0;
+		/* #endif */
 	}
 
 	.is-disabled {

@@ -4,7 +4,7 @@ const glob = require("glob")
 const exec = require('child_process').exec
 const argv = process.argv.splice(2)[0]
 
-const packages = path.join(__dirname, '../components')
+const packages = path.join(__dirname, '../uni_modules')
 const uniui = path.join(__dirname, '../packages')
 const lib = path.join(uniui, 'lib')
 const root = path.join(__dirname, '../')
@@ -20,31 +20,33 @@ uniuiPackageData = JSON.parse(uniuiPackageData)
 uniuiPackageData.version = uniuiData.version
 fs.outputFileSync(uniuiPackagePath, JSON.stringify(uniuiPackageData, '', 2))
 fs.copySync(path.join(root, 'README.md'), path.join(uniui, 'README.md'))
-fs.removeSync(lib)
+const exists = fs.existsSync(lib)
+if (exists) {
+	fs.removeSync(lib)
+}
 
-fs.copy(packages, lib).then(() => {
-	console.log('---- 同步完成 ----');
-	const delFileLists = glob.sync(lib + '/**/*.{json,md,bak}')
-	// 删除json  md 等不必要文件
-	delFileLists.reduce((promise, fileName) => {
-		return promise.then(() => {
-			return fs.remove(fileName)
-		})
-	}, Promise.resolve([])).then(() => {
-		// 删除所有文件成功之后，开始去同步 npm
-		console.log('----- 生成 uni-ui 成功 -----');
-		if (argv === 'npm') {
-			console.log('----- 开始上传 npm -----');
-			start()
-		}
-	})
-
+const packagesLists = fs.readdirSync(packages)
+packagesLists.reduce((promise, item) => {
+	const comPath = path.join(packages, item, 'components')
+	const coms = fs.readdirSync(comPath)
+	return coms.reduce((promise, item) => {
+		const componentsPath = path.join(comPath, item)
+		fs.copySync(componentsPath, path.join(lib, item))
+		console.log(item + ' 组件同步成功');
+		return promise
+	}, promise)
+}, Promise.resolve([])).then(() => {
+	console.log('SUCCESS');
+	if (argv === 'npm') {
+		console.log('----- 开始上传 npm -----');
+		start()
+	}
 })
 
 function start() {
 	// 任何你期望执行的cmd命令，ls都可以
 	let cmdStr1 = 'npm publish'
-	let cmdPath = path.join(__dirname, '..' ,'packages','uni-ui')
+	let cmdPath = path.join(__dirname, '..', 'packages', 'uni-ui')
 	let workerProcess = null
 	console.log(cmdPath);
 	// 子进程名称
@@ -57,12 +59,12 @@ function runExec(cmdStr, cmdPath, workerProcess) {
 	})
 	// 打印正常的后台可执行程序输出
 	workerProcess.stdout.on('data', function(data) {
-		console.log('---',data)
+		console.log('---', data)
 		process.stdout.write(data)
 	})
 	// 打印错误的后台可执行程序输出
 	workerProcess.stderr.on('data', function(data) {
-		console.log('++',data)
+		console.log('++', data)
 		process.stdout.write(data)
 	})
 	// 退出之后的输出
