@@ -15,7 +15,7 @@
     "HBuilderX": ""
   },
   "directories": {
-    "example": "../../temps/example_temps"
+    "example": "../../temps/example"
   },
   "dcloudext": {
     "category": [

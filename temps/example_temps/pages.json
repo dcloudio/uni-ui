@@ -1,9 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/collapse/collapse",
+      "path": "pages/file-picker/file-picker",
       "style": {
-        "navigationBarTitleText": "Collapse 折叠面板"
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
       }
     }
   ],
