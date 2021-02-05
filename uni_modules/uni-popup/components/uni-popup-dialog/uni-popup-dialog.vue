@@ -258,15 +258,19 @@
 	}
 
 	.uni-popup-dialog__close {
+		/* #ifndef APP-NVUE */
 		display: block;
 		cursor: pointer;
+		/* #endif */
 		position: absolute;
 		top: 9px;
 		right: 17px;
 	}
 
 	.uni-popup-dialog__close-icon {
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		width: 13px;
 		height: 1px;
 		background: #909399;
@@ -274,8 +278,10 @@
 	}
 
 	.uni-popup-dialog__close-icon::after {
+		/* #ifndef APP-NVUE */
 		content: '';
 		display: block;
+		/* #endif */
 		width: 13px;
 		height: 1px;
 		background: #909399;

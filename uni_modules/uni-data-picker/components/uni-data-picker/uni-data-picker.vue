@@ -289,9 +289,11 @@
 	}
 
 	.load-more {
-		margin-right: auto;
 		/* #ifdef APP-NVUE */
 		width: 40px;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		margin-right: auto;
 		/* #endif */
 	}
 
@@ -307,7 +309,9 @@
 	.selected-item {
 		flex-direction: row;
 		padding: 0 1px;
+		/* #ifndef APP-NVUE */
 		white-space: nowrap;
+		/* #endif */
 	}
 
 	.placeholder {
@@ -320,10 +324,10 @@
 
 	.arrow-area {
 		position: relative;
-		margin-left: auto;
 		width: 20px;
 		/* #ifndef APP-NVUE */
 		display: flex;
+		margin-left: auto;
 		/* #endif */
 		justify-content: center;
 		transform: rotate(-45deg);
@@ -383,9 +387,9 @@
 	.title-area {
 		/* #ifndef APP-NVUE */
 		display: flex;
+		margin: auto;
 		/* #endif */
 		align-items: center;
-		margin: auto;
 		padding: 0 10px;
 	}
 

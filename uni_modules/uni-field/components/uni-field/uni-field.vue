@@ -485,7 +485,9 @@ export default {
 }
 
 .uni-field-inner {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	align-items: center;
 }
 
@@ -494,14 +496,18 @@ export default {
 }
 
 .uni-textarea-class {
+	/* #ifndef APP-NVUE */
 	min-height: 48px;
 	width: auto;
+	/* #endif */
 	font-size: 14px;
 }
 
 .fild-body {
-	width: 100%;
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
+	width: 100%;
 	flex: 1;
 	align-items: center;
 }
@@ -511,7 +517,9 @@ export default {
 }
 
 .uni-label-text {
+	/* #ifndef APP-NVUE */
 	display: inline-block;
+	/* #endif */
 }
 
 .uni-label-left-gap {
@@ -526,15 +534,19 @@ export default {
 
 .uni-field-label {
 	width: 65px;
+	/* #ifndef APP-NVUE */
+	display: flex;
 	flex: 1 1 65px;
+	/* #endif */
 	text-align: left;
 	position: relative;
-	display: flex;
 	align-items: center;
 }
 
 .uni-required::before {
+	/* #ifndef APP-NVUE */
 	content: '*';
+	/* #endif */
 	position: absolute;
 	left: -8px;
 	font-size: 14px;
@@ -549,11 +561,15 @@ export default {
 	font-size: 14px;
 	height: 24px;
 	flex: 1;
+	/* #ifndef APP-NVUE */
 	width: auto;
+	/* #endif */
 }
 
 .uni-clear-icon {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	align-items: center;
 }
 
@@ -600,13 +616,13 @@ export default {
 .uni-border:after {
 	/* #ifndef APP-NVUE */
 	content: ' ';
+	box-sizing: border-box;
+	pointer-events: none;
+	-webkit-transform-origin: 0 0;
 	/* #endif */
 	position: absolute;
 	left: 0;
 	top: 0;
-	pointer-events: none;
-	box-sizing: border-box;
-	-webkit-transform-origin: 0 0;
 	transform-origin: 0 0;
 	// 多加0.1%，能解决有时候边框缺失的问题
 	width: 199.8%;
@@ -617,11 +633,13 @@ export default {
 }
 
 .uni-input-border {
-	min-height: 34px;
 	padding-left: 4px;
 	border: 1px solid $uni-border-color;
 	border-radius: 6px;
+	/* #ifndef APP-NVUE */
+	min-height: 34px;
 	box-sizing: border-box;
+	/* #endif */
 }
 
 .uni-border-top:after {
@@ -650,20 +668,26 @@ export default {
 /* end--Retina 屏幕下的 1px 边框--end */
 
 .uni-icon-wrap {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
 	padding-left: 3px;
 	padding-right: 3px;
-	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .uni-button-wrap {
+	/* #ifndef APP-NVUE */
 	display: flex;
-	align-items: right;
+	/* #endif */
+	align-items: flex-end;
 	justify-content: center;
 }
 .uni-clear-icon {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	align-items: center;
 	margin-left: 4px;
 }
@@ -680,7 +704,9 @@ export default {
 	flex: 1;
 }
 .uni-error-in-label {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	flex-direction: row;
 }
 </style>
