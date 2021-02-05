@@ -63,14 +63,16 @@
 <style lang="scss">
 	.uni-table-th {
 		padding: 12px 10px;
+		/* #ifndef APP-NVUE */
 		display: table-cell;
-		// text-align: center;
+		box-sizing: border-box;
+		/* #endif */
 		color: #333;
 		font-weight: 500;
-		border-bottom: 1px #ddd solid;
 		font-size: 14px;
-        // background-color: #efefef;
-        box-sizing: border-box;
+		border-bottom: 1px #ddd solid;
+		// text-align: center;
+		// background-color: #efefef;
 	}
 	.table--border {
 		border-right: 1px #ddd solid;

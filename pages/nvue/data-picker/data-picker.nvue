@@ -66,9 +66,11 @@
   .container {
     height: 100%;
     padding: 0 15px;
-    display: flex;
-    flex-direction: column;
+		/* #ifndef APP-NVUE */
+		display: flex;
     max-width: 500px;
+		/* #endif */
+    flex-direction: column;
   }
 
   .title {

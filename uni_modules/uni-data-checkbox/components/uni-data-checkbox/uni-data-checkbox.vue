@@ -502,7 +502,9 @@
 	}
 
 	.uni-data-loading {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		align-items: center;
 		/* justify-content: center; */
 		height: 36px;
@@ -597,11 +599,13 @@
 	}
 
 	.checkbox__inner {
+		/* #ifndef APP-NVUE */
 		flex-shrink: 0;
+		box-sizing: border-box;
+		/* #endif */
 		position: relative;
 		border: 1px solid #DCDFE6;
 		border-radius: 2px;
-		box-sizing: border-box;
 		width: 16px;
 		height: 16px;
 		background-color: #fff;
@@ -625,16 +629,16 @@
 	}
 
 	.radio__inner {
-		flex-shrink: 0;
 		/* #ifndef APP-NVUE */
+		flex-shrink: 0;
 		display: flex;
+		box-sizing: border-box;
 		/* #endif */
 		justify-content: center;
 		align-items: center;
 		position: relative;
 		border: 1px solid #DCDFE6;
 		border-radius: 2px;
-		box-sizing: border-box;
 		width: 16px;
 		height: 16px;
 		border-radius: 16px;
@@ -659,7 +663,9 @@
 		width: 6px;
 		transform-origin: center;
 		opacity: 0;
+		/* #ifndef APP-NVUE */
 		transition: all 0.3s;
+		/* #endif */
 		transform: rotate(45deg);
 	}
 
@@ -817,7 +823,7 @@
 	.is-wrap {
 		flex-direction: column;
 	}
-	
+
 	.hidden {
 		 /* #ifdef MP-ALIPAY */
 		 display: none;

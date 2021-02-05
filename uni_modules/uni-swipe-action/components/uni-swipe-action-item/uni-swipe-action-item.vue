@@ -291,7 +291,9 @@
 
 	.uni-swipe_text--center {
 		width:100%;
+		/* #ifndef APP-NVUE */
 		cursor: grab;
+		/* #endif */
 	}
 
 	.uni-swipe_button-group {

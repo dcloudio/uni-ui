@@ -75,7 +75,9 @@
 	@import '@/common/uni-nvue.scss';
 
 	.custom-image-box {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;

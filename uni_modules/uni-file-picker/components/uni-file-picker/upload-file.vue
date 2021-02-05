@@ -177,7 +177,9 @@
 
 <style lang="scss">
 	.uni-file-picker__files {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		flex-direction: column;
 		justify-content: flex-start;
 	}
@@ -193,7 +195,9 @@
 	}
 
 	.file-picker__mask {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		justify-content: center;
 		align-items: center;
 		position: absolute;
@@ -211,7 +215,9 @@
 	}
 
 	.uni-file-picker__item {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		align-items: center;
 		padding: 8px 10px;
 		padding-right: 5px;
@@ -227,13 +233,17 @@
 		font-size: 14px;
 		color: #666;
 		margin-right: 25px;
+		/* #ifndef APP-NVUE */
 		word-break: break-all;
 		word-wrap: break-word
+		/* #endif */
 	}
 
 	.icon-files {
+		/* #ifndef APP-NVUE */
 		position: static;
 		background-color: initial;
+		/* #endif */
 	}
 
 	// .icon-files .icon-del {
@@ -279,7 +289,10 @@
 	}
 
 	.icon-del-box {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		margin: auto 0;
+		/* #endif */
 		align-items: center;
 		justify-content: center;
 		position: absolute;
@@ -288,7 +301,6 @@
 		right: 5px;
 		height: 26px;
 		width: 26px;
-		margin: auto 0;
 		// border-radius: 50%;
 		// background-color: rgba(0, 0, 0, 0.5);
 		z-index: 2;

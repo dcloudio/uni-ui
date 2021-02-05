@@ -134,6 +134,7 @@
 		width: 750rpx;
 	}
 
+	/* #ifndef APP-NVUE */
 	/deep/ .image img {
 		-webkit-user-drag: none;
 		-khtml-user-drag: none;
@@ -141,6 +142,7 @@
 		-o-user-drag: none;
 		user-drag: none;
 	}
+	/* #endif */
 
 	@media screen and (min-width: 500px) {
 				.uni-swiper-dot-box {
