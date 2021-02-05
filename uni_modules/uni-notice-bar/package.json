@@ -1,7 +1,7 @@
 {
   "id": "uni-notice-bar",
   "displayName": "NoticeBar 通告栏",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "NoticeBar 通告栏组件，常用于展示公告信息，可设为滚动公告",
   "keywords": [
     "noticebar",

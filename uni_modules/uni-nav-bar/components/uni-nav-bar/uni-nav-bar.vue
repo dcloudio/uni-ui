@@ -41,8 +41,7 @@
 </template>
 
 <script>
-	import uniStatusBar from "../uni-status-bar/uni-status-bar.vue";
-	import uniIcons from "../uni-icons/uni-icons.vue";
+	import uniStatusBar from "./uni-status-bar.vue";
 
 	/**
 	 * NavBar 自定义导航栏
@@ -65,8 +64,7 @@
 	export default {
 		name: "UniNavBar",
 		components: {
-			uniStatusBar,
-			uniIcons
+			uniStatusBar
 		},
 		props: {
 			title: {

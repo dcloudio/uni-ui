@@ -22,7 +22,6 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	/**
 	 * Combox 组合输入框
 	 * @description 组合输入框一般用于既可以输入也可以选择的场景
@@ -36,9 +35,6 @@
 	 */
 	export default {
 		name: 'uniCombox',
-		components: {
-			uniIcons
-		},
 		props: {
 			label: {
 				type: String,

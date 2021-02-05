@@ -56,7 +56,6 @@
 	// #ifdef APP-NVUE
 	const dom = uni.requireNativePlugin('dom');
 	// #endif
-	import uniIcons from "../uni-icons/uni-icons.vue";
 	/**
 	 * Rate 评分
 	 * @description 评分组件
@@ -77,9 +76,6 @@
 	 */
 
 	export default {
-		components: {
-			uniIcons
-		},
 		name: "UniRate",
 		props: {
 			isFill: {

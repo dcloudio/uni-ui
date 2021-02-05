@@ -21,7 +21,6 @@
 </template>
 
 <script>
-	import uniIcons from "../uni-icons/uni-icons.vue";
 
 	/**
 	 * SearchBar 搜索栏
@@ -50,9 +49,6 @@
 
 	export default {
 		name: "UniSearchBar",
-		components: {
-			uniIcons
-		},
 		props: {
 			placeholder: {
 				type: String,

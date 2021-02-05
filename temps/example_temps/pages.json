@@ -1,10 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/file-picker/file-picker",
+      "path": "pages/steps/steps",
       "style": {
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "Steps 步骤条"
       }
     }
   ],

@@ -1,7 +1,7 @@
 {
   "id": "uni-collapse",
   "displayName": "Collapse 折叠面板",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": " collapse uni-ui 折叠面板 手风琴",
   "keywords": [
     "Collapse",

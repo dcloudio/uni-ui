@@ -6,6 +6,11 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+<log title="组件工程调整" date="2020-02-05">
+	<log-item-text tag-type="docs" only>
+		支持uni_modules
+	</log-item-text>
+</log>
 
 <log title="1.2.11" date="2021-1-19">
 	<log-item-text tag-type="feat" only>

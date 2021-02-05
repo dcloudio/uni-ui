@@ -25,7 +25,6 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 
 	/**
 	 * Pagination 分页器
@@ -42,9 +41,6 @@
 
 	export default {
 		name: 'UniPagination',
-		components: {
-			uniIcons
-		},
 		props: {
 			prevText: {
 				type: String,

@@ -39,8 +39,7 @@
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue';
-import uniBadge from '../uni-badge/uni-badge.vue';
+
 
 /**
  * ListItem 列表子组件
@@ -77,10 +76,6 @@ import uniBadge from '../uni-badge/uni-badge.vue';
  */
 export default {
 	name: 'UniListItem',
-	components: {
-		uniIcons,
-		uniBadge
-	},
 	props: {
 		direction: {
 			type: String,

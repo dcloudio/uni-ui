@@ -33,13 +33,7 @@
 </template>
 
 <script>
-	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
-	import uniSection from '@/components/uni-section/uni-section.vue'
 	export default {
-		components: {
-			uniSearchBar,
-			uniSection
-		},
 		data() {
 			return {
 				searchValue: '123123'

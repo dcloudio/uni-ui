@@ -1,7 +1,7 @@
 {
   "id": "uni-indexed-list",
   "displayName": "IndexedList 索引列表",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "索引列表",
   "keywords": [
     "uni-ui",

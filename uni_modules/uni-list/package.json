@@ -1,7 +1,7 @@
 {
   "id": "uni-list",
   "displayName": "List 列表",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "List 组件 ，帮助使用者快速构建列表。",
   "keywords": [
     "",

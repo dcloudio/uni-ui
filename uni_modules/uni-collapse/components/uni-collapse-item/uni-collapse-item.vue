@@ -24,7 +24,6 @@
 </template>
 
 <script>
-	import uniIcons from '../uni-icons/uni-icons.vue'
 	/**
 	 * CollapseItem 折叠面板子组件
 	 * @description 折叠面板子组件
@@ -35,9 +34,6 @@
 	 */
 	export default {
 		name: 'UniCollapseItem',
-		components: {
-			uniIcons
-		},
 		props: {
 			title: {
 				// 列表标题
