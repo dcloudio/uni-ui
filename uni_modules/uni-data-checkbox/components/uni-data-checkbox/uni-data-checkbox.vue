@@ -33,6 +33,9 @@
 					</view>
 				</label>
 			</radio-group>
+			<template v-if="!dataList.length">
+				<view class="uni-data-empty">暂无数据</view>
+			</template>
 		</template>
 	</view>
 </template>
@@ -509,6 +512,17 @@
 		/* justify-content: center; */
 		height: 36px;
 		padding-left: 10px;
+	}
+
+	.uni-data-empty {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		align-items: center;
+		/* justify-content: center; */
+		height: 36px;
+		padding-left: 10px;
+		color: #333;
 	}
 
 	.checklist-group {

@@ -1,9 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/steps/steps",
+      "path": "pages/data-checkbox/data-checkbox",
       "style": {
-        "navigationBarTitleText": "Steps 步骤条"
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
       }
     }
   ],
