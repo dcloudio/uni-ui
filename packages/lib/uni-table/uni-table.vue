@@ -139,24 +139,27 @@
 <style lang="scss">
 	.uni-table-scroll {
 		width: 100%;
+		/* #ifndef APP-NVUE */
 		overflow-x: auto;
+		/* #endif */
 	}
 
 	.uni-table {
 		position: relative;
 		width: 100%;
-		display: table;
-		box-sizing: border-box;
 		border-radius: 5px;
 		box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
-		overflow-x: auto;
 		background-color: #fff;
-
+		/* #ifndef APP-NVUE */
+		box-sizing: border-box;
+		display: table;
+		overflow-x: auto;
 		::v-deep .uni-table-tr:nth-child(n+2) {
 			&:hover {
 				background-color: #f5f7fa;
 			}
 		}
+		/* #endif */
 	}
 
 	.table--border {
@@ -164,20 +167,25 @@
 	}
 
 	.border-none {
+		/* #ifndef APP-NVUE */
 		border-bottom: none;
+		/* #endif */
 	}
 
 	.table--stripe {
+		/* #ifndef APP-NVUE */
 		::v-deep .uni-table-tr:nth-child(2n+3) {
 			background-color: #fafafa;
 		}
-
+		/* #endif */
 	}
 
 	/* 表格加载、无数据样式 */
 	.uni-table-loading {
 		position: relative;
+		/* #ifndef APP-NVUE */
 		display: table-row;
+		/* #endif */
 		height: 50px;
 		line-height: 50px;
 	}
@@ -197,13 +205,15 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		margin: auto;
 		background-color: rgba(255, 255, 255, 0.8);
 		z-index: 99;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		margin: auto;
+		transition: all 0.5s;
+		/* #endif */
 		justify-content: center;
 		align-items: center;
-		transition: all 0.5s;
 	}
 
 	.uni-table--loader {
@@ -212,7 +222,9 @@
 		border: 2px solid #aaa;
 		// border-bottom-color: transparent;
 		border-radius: 50%;
+		/* #ifndef APP-NVUE */
 		animation: 2s uni-table--loader linear infinite;
+		/* #endif */
 		position: relative;
 	}
 

@@ -188,7 +188,9 @@
 	}
 
 	.load-more {
+		/* #ifndef APP-NVUE */
 		margin: auto;
+		/* #endif */
 	}
 
 	.error-message {
@@ -224,7 +226,9 @@
 		margin-left: 10px;
 		margin-right: 10px;
 		padding: 12px 0;
+		/* #ifndef APP-NVUE */
 		white-space: nowrap;
+		/* #endif */
 	}
 
 	.selected-item-active {
@@ -275,7 +279,9 @@
 		height: 12px;
 		width: 6px;
 		transform-origin: center;
+		/* #ifndef APP-NVUE */
 		transition: all 0.3s;
+		/* #endif */
 		transform: rotate(45deg);
 	}
 </style>

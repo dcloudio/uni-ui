@@ -688,7 +688,9 @@
 		width: 100%;
 		height: 130px;
 		margin-top: 30px;
+		/* #ifndef APP-NVUE */
 		cursor: pointer;
+		/* #endif */
 	}
 
 	.uni-datetime-picker-item {
@@ -698,14 +700,18 @@
 
 	.uni-datetime-picker-btn {
 		margin-top: 60px;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		cursor: pointer;
+		/* #endif */
 		justify-content: space-between;
 		color: #007AFF;
-		cursor: pointer;
 	}
 
 	.uni-datetime-picker-btn-group {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 	}
 
 	.uni-datetime-picker-cancel {
@@ -741,14 +747,18 @@
 	}
 
 	.uni-datetime-picker-colon::after {
+		/* #ifndef APP-NVUE */
 		content: ':';
+		/* #endif */
 		position: absolute;
 		top: 53px;
 		right: 0;
 	}
 
 	.uni-datetime-picker-hyphen::after {
+		/* #ifndef APP-NVUE */
 		content: '-';
+		/* #endif */
 		position: absolute;
 		top: 53px;
 		right: -2px;
@@ -758,21 +768,27 @@
 		border: 1px solid #E5E5E5;
 		border-radius: 5px;
 		padding: 7px 10px;
+		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
 		cursor: pointer;
+		/* #endif */
 	}
 
 	// 下箭头
 	.uni-datetime-picker-down-arrow {
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		position: relative;
 		width: 20px;
 		height: 15px;
 	}
 
 	.uni-datetime-picker-down-arrow::after {
+		/* #ifndef APP-NVUE */
 		display: inline-block;
 		content: " ";
+		/* #endif */
 		height: 9px;
 		width: 9px;
 		border-width: 0 1px 1px 0;
@@ -788,7 +804,9 @@
 	}
 
 	.uni-datetime-picker-flex {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		justify-content: space-between;
 	}
 

@@ -76,28 +76,33 @@
 
 <style lang="scss">
     .uni-table-tr {
+			/* #ifndef APP-NVUE */
         display: table-row;
         transition: all .3s;
         box-sizing: border-box;
+				/* #endif */
     }
 
     .checkbox {
         padding: 12px 8px;
         width: 26px;
         padding-left: 12px;
+			/* #ifndef APP-NVUE */
         display: table-cell;
-        // text-align: center;
         vertical-align: middle;
+				/* #endif */
         color: #333;
         font-weight: 500;
         border-bottom: 1px #ddd solid;
         font-size: 14px;
+        // text-align: center;
     }
 
     .tr-table--border {
         border-right: 1px #ddd solid;
     }
 
+		/* #ifndef APP-NVUE */
     .uni-table-tr {
         ::v-deep .uni-table-th {
             &.table--border:last-child {
@@ -110,6 +115,7 @@
             }
         }
     }
+		/* #endif */
 
 
 

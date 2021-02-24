@@ -28,8 +28,6 @@
 比如导航栏navbar组件，会自动处理不同端的状态栏。
 比如swiperaction组件，在app和微信小程序上会使用交互体验更好的wxs技术，但在不支持wxs的其他小程序端会使用js模拟类似效果。
 
- `uni-ui` 还支持nvue原生渲染，[详见](https://github.com/dcloudio/uni-ui/tree/nvue-uni-ui)
-
 未来 `uni-ui` 还会支持pc等大屏设备。
 
 3. 与uni统计自动集成实现免打点
