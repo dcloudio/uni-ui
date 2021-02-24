@@ -17,6 +17,8 @@
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 本组件为数据驱动，目的是快速投入使用，只可通过 style 覆盖有限样式，不支持自定义更多样式
 > - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
+> - 组件支持 nvue ，需要在 `manifest.json > app-plus` 节点下配置 `"nvueStyleCompiler" : "uni-app"` 
+> - 如组件显示有问题 ，请升级 `HBuilderX` 为 `v3.1.0` 以上
 
 
 ### 安装方式
@@ -258,6 +260,7 @@ export default {
 |icon					|String							|left/right							|left		|list 列表模式下 icon 显示的位置	|
 |selectedColor|String							|-											|#007aff|选中颜色|
 |selectedTextColor|String					|-											|#333		|选中文本颜色，如不填写则自动显示|
+|emptyText 	|String					|-											|暂无数据		|没有数据时显示的文字 ，本地数据无效|
 
 #### Localdata Options
 

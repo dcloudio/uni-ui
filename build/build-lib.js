@@ -59,12 +59,10 @@ function runExec(cmdStr, cmdPath, workerProcess) {
 	})
 	// 打印正常的后台可执行程序输出
 	workerProcess.stdout.on('data', function(data) {
-		console.log('---', data)
 		process.stdout.write(data)
 	})
 	// 打印错误的后台可执行程序输出
 	workerProcess.stderr.on('data', function(data) {
-		console.log('++', data)
 		process.stdout.write(data)
 	})
 	// 退出之后的输出

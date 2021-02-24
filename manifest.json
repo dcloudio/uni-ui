@@ -8,6 +8,7 @@
 	// "debug":true,
 	"app-plus": {
 		"nvueCompiler": "uni-app",
+		"nvueStyleCompiler" : "uni-app",
 		"compilerVersion": 3,
 		"modules": {},
 		"distribute": {

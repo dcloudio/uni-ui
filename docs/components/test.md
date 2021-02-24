@@ -1,319 +1,295 @@
-发现错误？想参与编辑？[在 GitHub 上编辑此页面！](https://github.com/dcloudio/uni-ui/blob/master/src/components/uni-list/readme.md)
-## List 列表
-> 组件名：``uni-list``、``uni-list-item``，代码块： uList、uListItem。
+---
+url : pages/vue/data-checkbox/data-checkbox
+---
 
-list 列表组件一般用于导航菜单、列表、设置页排版等，可以在其中使用图标、略缩图或放置任何你想放的元素
+## DataCheckbox 数据驱动的单选复选框
+::: tip 组件名：uni-data-checkbox
+代码块： `uDataCheckbox`
+:::
 
+本组件是基于uni-app基础组件checkbox的封装。本组件要解决问题包括：
 
-### 平台差异说明
+1. 数据绑定型组件：给本组件绑定一个data，会自动渲染一组候选内容。再以往，开发者需要编写不少代码实现类似功能
+2. 自动的表单校验：组件绑定了data，且符合[uni-forms](https://ext.dcloud.net.cn/plugin?id=2773)组件的表单校验规范，搭配使用会自动实现表单校验
+3. 本组件合并了单选多选
+4. 本组件有若干风格选择，如普通的单选多选框、并列button风格、tag风格。开发者可以快速选择需要的风格。但作为一个封装组件，样式代码虽然不用自己写了，却会牺牲一定的样式自定义性
 
-如无特殊说明，则全平台支持
+在uniCloud开发中，`DB Schema`中配置了enum枚举等类型后，在web控制台的[自动生成表单](https://uniapp.dcloud.io/uniCloud/schema?id=autocode)功能中，会自动生成``uni-data-checkbox``组件并绑定好data
 
-### 组件使用注意事项
-
+::: warning 注意事项
 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 
 - 组件需要依赖 `sass` 插件 ，请自行手动安装
-- 组件内部依赖 `'uni-icons'` 、`uni-badge` 组件
-- `uni-list` 和 `uni-list-item` 需要配套使用，暂不支持单独使用 `uni-list-item`
-- 开启点击反馈后，会有点击选中效果
-- 使用左侧插槽时，不设置 title 、 note 等属性，可以完全自定义左侧内容，右侧插槽同理
-- 如需设置一个星星表示多分，如：显示5个星星，最高分10分。这种情况请在 change 事件监听中自行处理，获取到的值乘以你的基数就可以，默认组件是一星一分
-- 当前版本暂不支持修改图标，后续版本会继续优化
+- 本组件为数据驱动，目的是快速投入使用，只可通过 style 覆盖有限样式，不支持自定义更多样式
+- 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
+- 组件支持 nvue ，需要在 `manifest.json > app-plus` 节点下配置 `"nvueStyleCompiler" : "uni-app"` 
+- 如组件显示有问题 ，请升级 `HBuilderX` 为 `v3.1.0` 以上
+:::
 
-### 使用方式
+### 安装方式
 
-#### 方式1 (推荐)
+本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`components`。
 
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
+如需通过`npm`方式使用`uni-ui`组件，另行文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
-`easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
+### 基本用法
 
+设置 `localdata` 属性后，组件会通过数据渲染出对应的内容，默认显示的是单选框 
 
+需要注意 `:multiple="false"` 时（单选） ， `value/v-model` 的值是 `String|Number` 类型
 
-#### 方式2（vue-cli）
-
-**初始化项目**
-
-如果是使用 `HBuiderX` 创建的项目，需先执行以下命令初始化：
-
-```
-npm init -y
-```
-
-**安装 uni-ui**
+```html
+<template>
+	<view>
+		<uni-data-checkbox v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
 
 ```
-npm install @dcloudio/uni-ui
-```
-
-
-在 ``script`` 中引用组件：
 
 ```javascript
-import {uniList,uniListItem} from '@dcloudio/uni-ui'
+
 export default {
-    components: {uniPopup,uniListItem}
-}
-```
-
-#### 方式3（vue-cli + easycom）
-
-使用 `方式2` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
-
-打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
-
-```javascript
-// pages.json
-
-{
-	"easycom": {
-		"autoscan": true,
-		"custom": {
-			// uni-ui 规则如下配置
-			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+	data() { 
+		return {
+			value: 0,
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
 		}
 	},
-	
-	// 其他内容
-	pages:[
-		// ...
-	]
-}
-
-```
-
-
-
-### 基本用法 
-
-```html
-<!-- 单行内容显示 -->
-<uni-list>
-	<uni-list-item  title="列表文字" />
-	<uni-list-item :disabled="true" title="列表禁用状态" />
-</uni-list>
-<!-- 多行内容显示 -->
-<uni-list>
-	<uni-list-item title="列表文字" note="列表描述信息"/>
-	<uni-list-item :disabled="true" title="列表文字" note="列表禁用状态"/>
-</uni-list>
-<!-- 右侧显示角标、switch -->
-<uni-list>
-	<uni-list-item  title="列表右侧显示角标" :show-badge="true" badge-text="12" />
-	<uni-list-item title="列表右侧显示 switch"  :show-switch="true"  @switchChange="switchChange" />
-</uni-list>
- <!-- 左侧显示略缩图、图标 -->
- <uni-list>
- 	<uni-list-item title="列表左侧带略缩图" note="列表描述信息" thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png"
- 	 thumb-size="lg" rightText="右侧文字"/>
- 	<uni-list-item :show-extra-icon="true" :extra-icon="extraIcon1" title="列表左侧带扩展图标" />
-</uni-list>
-			 
-```
-
-### 开启点击反馈和右侧箭头
-- 设置 `clickable` 为 `true` ，则表示这是一个可点击的列表，会默认给一个点击效果，并可以监听 `click` 事件
-- 设置 `link` 属性，会自动开启点击反馈，并给列表右侧添加一个箭头
-- 设置 `to` 属性，可以跳转页面，`link` 的值表示跳转方式，如果不指定，默认为 `navigateTo`
-
-```html
-
-<uni-list>
-	<uni-list-item title="开启点击反馈" clickable  @click="onClick" />
-	<uni-list-item title="默认 navigateTo 方式跳转页面" link to="/pages/vue/index/index" @click="onClick($event,1)" />
-	<uni-list-item title="reLaunch 方式跳转页面" link="reLaunch" to="/pages/vue/index/index" @click="onClick($event,1)" />
-</uni-list>
-
-```
-
-
-### 聊天列表展示
-- 设置 `clickable` 为 `true` ，则表示这是一个可点击的列表，会默认给一个点击效果，并可以监听 `click` 事件
-- 设置 `link` 属性，会自动开启点击反馈，`link` 的值表示跳转方式，如果不指定，默认为 `navigateTo`
-- 设置 `to` 属性，可以跳转页面
-- `time` 属性，通常会设置成时间显示，但是这个属性不仅仅可以设置时间，你可以传入任何文本，注意文本长度可能会影响显示
-- `avatar` 和 `avatarList` 属性同时只会有一个生效，同时设置的话，`avatarList` 属性的长度大于1 ，`avatar` 属性将失效
-- 可以通过默认插槽自定义列表右侧内容
-
-```html
-
-<uni-list>
-	<uni-list :border="true">
-		<!-- 显示圆形头像 -->
-		<uni-list-chat :avatar-circle="true" title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" />
-		<!-- 右侧带角标 -->
-		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-text="12"/>
-		<!-- 头像显示圆点 -->
-		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
-		<!-- 头像显示角标 -->
-		<uni-list-chat title="uni-app" avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="99"/>
-		<!-- 显示多头像 -->
-		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot"/>
-		<!-- 自定义右侧内容 -->
-		<uni-list-chat title="uni-app" :avatar-list="avatarList" note="您收到一条新的消息" time="2020-02-02 20:20" badge-positon="left" badge-text="dot">
-			<view class="chat-custom-right">
-				<text class="chat-custom-text">刚刚</text>
-				<!-- 需要使用 uni-icons 请自行引入 -->
-				<uni-icons type="star-filled" color="#999" size="18"></uni-icons>
-			</view>
-		</uni-list-chat>
-	</uni-list>
-</uni-list>
-
-```
-
-```javascript
-
-export default {
-	components: {},
-	data() {
-		return {
-			avatarList: [{
-				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
-			}, {
-				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
-			}, {
-				url: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png'
-			}]
+	methods: {
+		change(e){
+			console.log('e:',e);
 		}
 	}
 }
+```
+
+### 多选框
+
+设置 `multiple` 属性，组件显示为多选框
+
+需要注意 `:multiple="true"` 时（多选） ， `value/v-model` 的值是 `Array` 类型
+
+```html
+<template>
+	<view>
+		<uni-data-checkbox multiple v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
 
 ```
 
+```javascript
 
-```css
-
-.chat-custom-right {
-	flex: 1;
-	/* #ifndef APP-NVUE */
-	display: flex;
-	/* #endif */
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-end;
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
+		}
+	}
 }
+```
 
-.chat-custom-text {
-	font-size: 12px;
-	color: #999;
-}
+### 设置最大最小值
+
+设置 `:multiple="true"` 时（多选） ，可以设置 `min`、`max` 属性 
+
+如果选中个数小于 `min` 属性设置的值，那么选中内容将不可取消，只有当选中个数大于等于 `min`且小于 `max` 时，才可取消选中
+
+如果选中个数大于等于 `max` 属性设置的值，那么其他未选中内容将不可选
+
+```html
+<template>
+	<view>
+		<uni-data-checkbox min="1" max="2" multiple v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
 
 ```
 
+```javascript
 
-### uni-list 属性说明
-列表组件的父组件，所有列表组件都需要放到 uni-list 中，才能正常显示
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
+		}
+	}
+}
+```
 
-**uniList 属性说明：**
+### 设置禁用
 
-属性名			|类型		|默认值		|	说明																									
-:-:				|:-:		|:-:		|	:-:	
-title			|Boolean	|true		|	是否显示边框
+如果需要禁用某项，需要在 `localdata` 属性的数据源中添加 `disable` 属性，而不是在组件中添加 `disable` 属性
 
+```html
+<template>
+	<view>
+		<uni-data-checkbox v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
 
-### uni-list-item 属性说明
+```
 
-常用于基础列表的展示使用，不适合复杂的列表场景使用
+```javascript
 
-**uniListItem 属性说明：**
-
-属性名			|类型		|默认值		|	说明																									
-:-:				|:-:		|:-:		|	:-:	
-title			|String		|-			|	标题
-note			|String		|-			|	描述
-thumb			|String		|-			|	左侧缩略图，若thumb有值，则不会显示扩展图标
-thumbSize		|String 	|medium 	|	略缩图尺寸，可选值，lg:大图;  medium:一般;	sm:小图;
-badgeText		|String		|-			|	数字角标内容
-badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)									
-rightText		|String		|-			|	右侧文字内容
-disabled		|Boolean	|false		|	是否禁用	
-clickable		|Boolean	|false		|	是否开启点击反馈
-link			|String 	|navigateTo	|	是否展示右侧箭头并开启点击反馈，可选值见下表
-to				|String		|-			|	跳转页面地址
-showArrow【废弃】	|Boolean	|true		|	是否显示箭头图标																						
-showBadge		|Boolean	|false		|	是否显示数字角标																						
-showSwitch	    |Boolean	|false		|	是否显示Switch																						
-switchChecked	|Boolean	|false		|	Switch是否被选中																						
-showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																					
-extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	
-
-
-**link 属性说明：**
-
-属性名		|	说明
-:-:			|	:-:
-navigateTo 	| 	同 uni.navigateTo()
-redirectTo 	|	同 uni.reLaunch()
-reLaunch	|	同 uni.reLaunch()
-switchTab  	|	同 uni.switchTab()
-
-
-**插槽**
-
-名称	 	|	说明					
-:-		|	:-						
-default	|	显示在title位置的插槽
-right	|	右侧插槽				
-
-**uniListItem 事件说明：**
-
-事件称名			|说明						|返回参数			
-:-:				|:-:						|:-:				
-click			|点击 uniListItem 触发事件	|-					
-switchChange	|点击切换 Switch 时触发		|e={value:checked}	
-
-
-### uni-list-chat 属性说明
-
-用于聊天类型的列表展示，提供了基础角标、头像的展示
-
-**uniListChat 属性说明：**
-
-属性名			|类型		|默认值		|	说明																									
-:-:				|:-:		|:-:		|	:-:	
-title 			|String		|-			|	标题
-note 			|String		|-			|	描述
-clickable		|Boolean	|false		|	是否开启点击反馈
-badgeText		|String		|-			|	数字角标内容，设置为 `dot` 将显示圆点
-badgePositon 	|String		|right		|	角标位置
-link			|String 	|navigateTo	|	开启点击反馈，并设置跳转方式，可选值见下表
-to  			|String 	|-			|	跳转目标页面
-time			|String 	|-			|	右侧时间显示
-avatarCircle 	|Boolean 	|false		|	是否显示圆形头像
-avatar			|String 	|-			|	头像地址，avatarCircle 不填时生效
-avatarList 		|Array	 	|-			|	头像组，格式为 [{url:''}]
+export default {
+	data() { 
+		return {
+			value: 0,
+			range: [{
+					"value": 0,
+					"text": "篮球"
+				},
+				{
+					"value": 1,
+					"text": "足球",
+					// 禁用当前项
+					"disable":true
+				},
+				{
+					"value": 2,
+					"text": "游泳"
+				}
+			]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
+		}
+	}
+}
+```
 
 
-**link 属性说明：**
+### 自定义选中颜色
 
-属性名		|	说明
-:-:			|	:-:
-navigateTo 	| 	同 uni.navigateTo()
-redirectTo 	|	同 uni.reLaunch()
-reLaunch	|	同 uni.reLaunch()
-switchTab  	|	同 uni.switchTab()
+设置 `selectedColor` 属性，可以修改组件选中后的图标及边框颜色
+
+设置 `selectedTextColor` 属性，可以修改组件选中后的文字颜色，如不填写默认同 `selectedColor` 属性 ，`mode` 属性为 `tag` 时，默认为白色
+
+```html
+<template>
+	<view>
+		<uni-data-checkbox　selectedColor＝"red" selectedTextColor="red" multiple v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
+
+```
+
+```javascript
+
+export default {
+	data() { 
+		return {
+			value: [0,2],
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
+		}
+	}
+}
+```
+
+### 更多模式
+
+设置 `mode` 属性，可以设置更多显示样式，目前内置样式有四种 `default/list/button/tag` 
+
+如果需要禁用某项，需要在 `localdata` 属性的数据源中添加 `disable` 属性，而不是在组件中添加 `disable` 属性
+
+```html
+<template>
+	<view>
+		<!-- 默认 default -->
+		<uni-data-checkbox v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+		<!-- 列表 list ，显示左侧图标 -->
+		<uni-data-checkbox mode="list" icon="left" v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+		<!-- 列表 list ，显示右侧图标 -->
+		<uni-data-checkbox mode="list" icon="right" v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+		<!-- 按钮 button -->
+		<uni-data-checkbox mode="button" v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+		<!-- 标签 tag -->
+		<uni-data-checkbox mode="tag" v-model="value" :localdata="range" @change="change"></uni-data-checkbox>
+	</view>
+</template>
+
+```
+
+```javascript
+
+export default {
+	data() { 
+		return {
+			value: 0,
+			range: [{"value": 0,"text": "篮球"	},{"value": 1,"text": "足球"},{"value": 2,"text": "游泳"}]
+		}
+	},
+	methods: {
+		change(e){
+			console.log('e:',e);
+		}
+	}
+}
+```
 
 
-**插槽**
+## API
 
-名称	 	|	说明					
-:-:		|	:-:						
-default	|	自定义列表右侧内容（包括时间和角标显示）
+### DataCheckbox Props
 
-**uniListChat 事件说明：**
+| 属性名			| 类型							|可选值									| 默认值| 说明																													|
+| :-:					| :-:								|:-:										|:-:		| :-:																														|
+|value/v-model|Array/String/Number|-											|-			|默认值，multiple=true时为 Array类型，否则为 String或Number类型	|
+|localdata		|Array							|-											|-			|本地渲染数据，												|
+|mode					| String						|default/list/button/tag|default|显示模式			|
+|multiple			|Boolean						|-											|false	|是否多选		|
+|min					|String/Number			|-											|-			|最小选择个数 ，multiple为true时生效		|
+|max					|String/Number			|-											|-			|最大选择个数 ，multiple为true时生效		|
+|wrap					|Boolean						|-											|-			|是否换行显示				|
+|icon					|String							|left/right							|left		|list 列表模式下 icon 显示的位置	|
+|selectedColor|String							|-											|#007aff|选中颜色|
+|selectedTextColor|String					|-											|#333		|选中文本颜色，如不填写则自动显示|
 
-事件称名			|	说明						|	返回参数			
-:-:				|	:-:						|	:-:	
-click			|	点击 uniListChat 触发事件	|	-		
+#### Localdata Options
 
-**Tips**
+`localdata` 属性的格式为数组，数组内每项是对象，需要严格遵循如下格式
 
-- 支付宝小程序平台需要在支付宝小程序开发者工具里开启 component2 编译模式，开启方式： 详情 --> 项目配置 --> 启用 component2 编译
-- 在 `HBuilderX` 低版本中，可能会出现组件显示 `undefined` 的问题，请升级最新的 `HBuilderX` 或者 `cli` 
-- 如果需要修改 `switch`、`badge` 样式，请使用插槽自定义
+|属性名		| 说明				|
+|:-:			| :-:				|
+|text			|显示文本			|
+|value		|选中后的值		|
+|disable	|是否禁用			|
 
-### 插件预览地址
+#### Mode Options 
 
-[https://uniapp.dcloud.io/h5/pages/extUI/list/list](https://uniapp.dcloud.io/h5/pages/extUI/list/list)
+|属性名		| 说明							|
+|:-:			| :-:							|
+|default	|默认值，横向显示		|
+|list			|列表							|
+|button		|按钮							|
+|tag			|标签							|
+
+
+### DataCheckbox Events
+
+| 事件名	| 事件说明								| 返回参数|
+| :-:		| :-:									| :-:			|
+| @chage| 选中状态改变时触发事件	| -				|
+
+

@@ -7,19 +7,31 @@ const comPath = path.join(__dirname, '..', 'uni_modules')
 console.error('upload.js - modulesId :' + process.env.UNI_MODULES_ID);
 const packageJson = getPackage(modulesId, comPath)
 const examplePath = path.join(__dirname, '..', 'temps')
+
+// 同步 readme.md
+// md 地址
+const readmePath = path.join(__dirname, '..', 'docs', 'components', comName + '.md')
+
+
+const mdExists = fs.existsSync(readmePath)
+if (mdExists) {
+	const content = handleReadme(readmePath)
+	fs.outputFileSync(path.join(__dirname, '..', 'uni_modules',modulesId,'readme.md'), content)
+}
+
 let relationComponents = []
 
 // 将示例拷贝到临时目录
 const tempExamplePath = path.join(examplePath, 'example_temps')
 const exampleExists = fs.existsSync(tempExamplePath)
-if(exampleExists){
+if (exampleExists) {
 	fs.removeSync(tempExamplePath)
 }
 
 fs.copySync(path.join(examplePath, 'example'), tempExamplePath)
 
 // 将组件拷贝到临时目录
-fs.copySync(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules',modulesId))
+fs.copySync(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
 
 handlePageJson(comName, tempExamplePath)
 
@@ -31,14 +43,14 @@ if (packageJson && packageJson.uni_modules && packageJson.uni_modules.dependenci
 // 同步依赖组件
 if (relationComponents && relationComponents.length > 0) {
 	relationComponents.reduce((promise, item) => {
-		return fs.copy(getModulesPath(item), path.join(tempExamplePath, 'uni_modules',item)).then(res => {
+		return fs.copy(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item)).then(res => {
 			console.error(item + '组件同步完成');
 		})
 	}, Promise.resolve([])).then(res => {
 		console.error('所有依赖组件同步完成');
 		setPageComponents(modulesId, comName)
 	})
-}else{
+} else {
 	setPageComponents(modulesId, comName)
 }
 
@@ -53,7 +65,7 @@ function setPageComponents(modulesId, comName) {
 			const inputPath = getModulesPath(item)
 			const exists = fs.existsSync(inputPath)
 			if (item === modulesId || !exists) return promise
-			return fs.copy(inputPath, path.join(tempExamplePath, 'uni_modules',item)).then(res => {
+			return fs.copy(inputPath, path.join(tempExamplePath, 'uni_modules', item)).then(res => {
 				console.error(item + '组件同步完成');
 			})
 		}, Promise.resolve([])).then(res => {
@@ -138,4 +150,20 @@ function handlePageJson(comName, tempExamplePath) {
 function getModulesPath(name) {
 	return path.join(comPath, name)
 }
+
+/**
+ * 处理 readme.md
+ * @param {Object} readmePath
+ */
+function handleReadme(readmePath) {
+	let content = fs.readFileSync(readmePath, 'utf-8')
+	// 删除头部额外信息，在其他平台不支持，只在 uni ui 中支持
+	content = content.replace(/---([\s\S]*?)---/ig, '')
+	// 转换 ::: 语法
+	content = content.replace(/::: (.*?)\n([\s\S]*?):::/ig, function(_, $1, $2) {
+		return $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
+	})
+	return content
+}
+
 console.error('-------- upload.js end --------');
