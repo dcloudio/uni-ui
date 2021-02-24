@@ -30,29 +30,35 @@ if (exampleExists) {
 
 fs.copySync(path.join(examplePath, 'example'), tempExamplePath)
 
-// 将组件拷贝到临时目录
-fs.copySync(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
+if(modulesId === 'uni-ui'){
+	fs.copySync(comPath, path.join(tempExamplePath, 'uni_modules'))
 
-handlePageJson(comName, tempExamplePath)
+}else{
+	// 将组件拷贝到临时目录
+	fs.copySync(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
 
-// 获取关联组件
-if (packageJson && packageJson.uni_modules && packageJson.uni_modules.dependencies.length > 0) {
-	relationComponents = packageJson.uni_modules.dependencies
-}
+	handlePageJson(comName, tempExamplePath)
 
-// 同步依赖组件
-if (relationComponents && relationComponents.length > 0) {
-	relationComponents.reduce((promise, item) => {
-		return fs.copy(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item)).then(res => {
-			console.error(item + '组件同步完成');
+	// 获取关联组件
+	if (packageJson && packageJson.uni_modules && packageJson.uni_modules.dependencies.length > 0) {
+		relationComponents = packageJson.uni_modules.dependencies
+	}
+
+	// 同步依赖组件
+	if (relationComponents && relationComponents.length > 0) {
+		relationComponents.reduce((promise, item) => {
+			return fs.copy(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item)).then(res => {
+				console.error(item + '组件同步完成');
+			})
+		}, Promise.resolve([])).then(res => {
+			console.error('所有依赖组件同步完成');
+			setPageComponents(modulesId, comName)
 		})
-	}, Promise.resolve([])).then(res => {
-		console.error('所有依赖组件同步完成');
+	} else {
 		setPageComponents(modulesId, comName)
-	})
-} else {
-	setPageComponents(modulesId, comName)
+	}
 }
+
 
 function setPageComponents(modulesId, comName) {
 	const pagePath = path.join(__dirname, '..', 'pages', 'vue', comName, comName + '.vue')
