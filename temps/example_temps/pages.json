@@ -1,17 +1,26 @@
 {
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
-		}
-	}],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"background": "#efeff4"
-		}
-	}
+  "pages": [
+    {
+      "path": "pages/nav-bar/nav-bar",
+      "style": {
+        "navigationBarTitleText": "NavBar 导航栏",
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": true,
+        "app-plus": {
+          "titleNView": false,
+          "bounce": "none",
+          "pullToRefresh": {
+            "style": "circle",
+            "offset": "70px"
+          }
+        }
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
 }
