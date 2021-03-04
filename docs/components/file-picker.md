@@ -190,7 +190,7 @@ export default {
 	v-model="imageValue"  
 	file-mediatype="image"
 	mode="grid"
-	file-extname="['png','jpg']"
+	:file-extname="['png','jpg']"
 	:limit="1"
 	@progress="progress" 
 	@success="success" 
