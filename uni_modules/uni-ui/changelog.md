@@ -1,3 +1,6 @@
+## 1.2.12
+- uni-forms 修复 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug
+
 ## 1.2.11（2021-02-24）
 - 调整为uni_modules目录规范
 - uni-data-picker 新增  数据驱动的picker选择器
