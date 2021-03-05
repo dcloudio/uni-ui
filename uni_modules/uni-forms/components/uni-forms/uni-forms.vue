@@ -249,7 +249,11 @@
 						}
 					}
 					// 如果存在 required 才会将内容插入校验对象
-					if (!isNoField && (!tempInvalidFields[item] && tempInvalidFields[item] !== false)) {
+					if (!isNoField &&
+						((tempInvalidFields[item] === undefined ||
+								tempInvalidFields[item] === '') &&
+							tempInvalidFields[item] !== false
+						)) {
 						delete tempInvalidFields[item]
 					}
 				})
@@ -257,7 +261,7 @@
 				// 循环字段是否存在于校验规则中
 				for (let i in this.formRules) {
 					for (let j in tempInvalidFields) {
-						const index = this.childrens.findIndex(v=>v.name === j)
+						const index = this.childrens.findIndex(v => v.name === j)
 						if (i === j && index !== -1) {
 							fieldsValue[i] = tempInvalidFields[i]
 						}
@@ -268,7 +272,7 @@
 
 				let newFormData = {}
 				this.childrens.forEach(v => {
-					newFormData[v.name] = this._getValue(v.name,invalidFields[v.name])
+					newFormData[v.name] = this._getValue(v.name, invalidFields[v.name])
 				})
 				if (this.validator) {
 					for (let i in fieldsValue) {
