@@ -6,7 +6,7 @@ var pattern = {
 };
 
 const FORMAT_MAPPING = {
-  "int": 'number',
+  "int": 'integer',
   "bool": 'boolean',
   "double": 'number',
   "long": 'number',
@@ -82,7 +82,6 @@ const types = {
     if (!this.integer(value) || Math.abs(value).toString().length > 16) {
       return false
     }
-
     return true;
   },
   file(value) {
