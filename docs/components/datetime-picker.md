@@ -12,8 +12,6 @@ url : pages/vue/datetime-picker/datetime-picker
 若只是需要单独选择日期和时间，不需要时间戳输入和输出，可使用原生的 picker 组件。
 
 
-注：暂不支持 nvue
-
 ___点击 picker 默认值规则：___
 
 - 若设置初始值 value, 会显示在 picker 显示框中； 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
@@ -47,6 +45,7 @@ ___点击 picker 默认值规则：___
 |属性名			|类型						|默认值		|值域									|说明																											|
 |:-:				|:-:						|:-:			|											|:-:																											|
 |type				|String					|datetime	|datetime、date、time	|选择器类型																								|
+|border			|Boolean				|true			|											|是否有边框																								|
 |value			|String、Number	|-				|-										|输入框当前值																							|
 |start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end				|String、Number	|-				|-										|最大值，可以使用日期的字符串（String）、时间戳（Number）	|

@@ -2,7 +2,7 @@
 	<view class="uni-datetime-picker">
 		<view @click="initTimePicker">
 			<slot>
-				<view class="uni-datetime-picker-timebox" :class="{'uni-datetime-picker-disabled': disabled}">
+				<view class="uni-datetime-picker-timebox-pointer" :class="{'uni-datetime-picker-disabled': disabled, 'uni-datetime-picker-timebox': border}">
 					<text class="uni-datetime-picker-text">{{time}}</text>
 					<view v-if="!time" class="uni-datetime-picker-time">
 						<text class="uni-datetime-picker-text">选择{{title}}</text>
@@ -173,6 +173,10 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			border: {
+				type: Boolean,
+				default: true
 			}
 		},
 		watch: {
@@ -836,6 +840,13 @@
 		cursor: pointer;
 		/* #endif */
 	}
+
+	.uni-datetime-picker-timebox-pointer {
+		/* #ifndef APP-NVUE */
+		cursor: pointer;
+		/* #endif */
+	}
+
 
 	.uni-datetime-picker-disabled {
 		opacity: 0.4;

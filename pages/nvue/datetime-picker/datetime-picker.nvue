@@ -9,6 +9,10 @@
 		<view class="example-body">
 			<uni-datetime-picker v-model="vModelDatetime" start="2010-6-10 08:30:30" end="2015-6-10 08:30:30"></uni-datetime-picker>
 		</view>
+		<uni-section :title="'无边框用法：' + vModelDatetime" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker v-model="vModelDatetime" :border="false" start="2010-6-10 08:30:30" end="2015-6-10 08:30:30"></uni-datetime-picker>
+		</view>
 		<uni-section :title="'disabled用法：' + disDatetime" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker disabled v-model="disDatetime"></uni-datetime-picker>
