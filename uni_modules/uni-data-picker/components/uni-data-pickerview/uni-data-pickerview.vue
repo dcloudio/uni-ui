@@ -124,7 +124,7 @@
 							this._updateBindData(node)
 						}
 						this.onSelectedChange(node, node.isleaf)
-					}, this.nodeWhere)
+					}, this._nodeWhere())
 					return
 				}
 
