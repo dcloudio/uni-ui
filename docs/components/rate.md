@@ -1,5 +1,5 @@
 ---
-url : pages/vue/popup/popup
+url : pages/vue/rate/rate
 ---
 
 ## Rate 评分
