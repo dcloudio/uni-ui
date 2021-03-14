@@ -97,7 +97,8 @@
 					this.selected.splice(i, this.selected.length - i)
 					this.selected.push(node)
 				} else if (i === this.selected.length - 1) {
-					this.selected[i] = node
+					// this.selected[i] = node
+					this.$set(this.selected, i, node)
 				}
 
 				if (node.isleaf) {
