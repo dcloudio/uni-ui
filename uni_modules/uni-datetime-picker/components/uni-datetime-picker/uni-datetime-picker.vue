@@ -179,7 +179,7 @@
 				handler(newVal, oldVal) {
 					if (newVal) {
 						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
-						this.initTime()
+						this.initTime(false)
 					} else {
 						this.parseValue(Date.now())
 					}
@@ -366,7 +366,7 @@
 			},
 			maxMinute() {
 				if (this.type === 'datetime') {
-					if (this.currentDateIsEnd && this.hour === this.startHour) {
+					if (this.currentDateIsEnd && this.hour === this.endHour) {
 						return this.endMinute
 					} else {
 						return 59
@@ -398,7 +398,7 @@
 			},
 			maxSecond() {
 				if (this.type === 'datetime') {
-					if (this.currentDateIsEnd && this.hour === this.startHour && this.minute === this.endMinute) {
+					if (this.currentDateIsEnd && this.hour === this.endHour && this.minute === this.endMinute) {
 						return this.endSecond
 					} else {
 						return 59
@@ -676,8 +676,9 @@
 			/**
 			 * 初始化返回值，并抛出 change 事件
 			 */
-			initTime() {
+			initTime(emit = true) {
 				this.time = this.createDomSting()
+				if (!emit) return
 				if (this.returnType === 'timestamp' && this.type !== 'time') {
 					this.formItem && this.formItem.setValue(this.createTimeStamp(this.time))
 					this.$emit('change', this.createTimeStamp(this.time))

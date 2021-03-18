@@ -11,7 +11,7 @@
 		</view>
 		<uni-section :title="'无边框用法：' + vModelDatetime" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="vModelDatetime" :border="false" start="2010-6-10 08:30:30" end="2015-6-10 08:30:30"></uni-datetime-picker>
+			<uni-datetime-picker v-model="vModelDatetime" :border="false" start="2010-6-10 09:30:30" end="2015-6-10 08:30:30"></uni-datetime-picker>
 		</view>
 		<uni-section :title="'不选秒（没有秒）用法：' + noSecond" type="line"></uni-section>
 		<view class="example-body">
