@@ -45,11 +45,13 @@ ___点击 picker 默认值规则：___
 |属性名			|类型						|默认值		|值域									|说明																											|
 |:-:				|:-:						|:-:			|											|:-:																											|
 |type				|String					|datetime	|datetime、date、time	|选择器类型																								|
-|border			|Boolean				|true			|											|是否有边框																								|
 |value			|String、Number	|-				|-										|输入框当前值																							|
 |start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end				|String、Number	|-				|-										|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
 |return-type|String					|timestamp|timestamp 、string		|返回值格式																								|
+|border			|Boolean、String|true			|											|是否有边框																								|
+|hide-second|Boolean、String|false		|											|是否隐藏秒																								|
+|disabled		|Boolean、String|false		|											|是否不可选择																							|
 
 
 

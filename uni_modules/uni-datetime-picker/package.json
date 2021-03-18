@@ -1,12 +1,13 @@
 {
   "id": "uni-datetime-picker",
   "displayName": "DatetimePicker 日期选择器",
-  "version": "0.0.3",
+  "version": "1.0.6",
   "description": "DatetimePicker 可以同时选择日期和时间的选择器",
   "keywords": [
     "DatetimePicker",
     "uni-ui",
-    "日期时间选择器"
+    "日期时间选择器",
+    "日期时间"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
