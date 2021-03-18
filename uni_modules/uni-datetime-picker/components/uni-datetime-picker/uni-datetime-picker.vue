@@ -2,7 +2,8 @@
 	<view class="uni-datetime-picker">
 		<view @click="initTimePicker">
 			<slot>
-				<view class="uni-datetime-picker-timebox-pointer" :class="{'uni-datetime-picker-disabled': disabled, 'uni-datetime-picker-timebox': border}">
+				<view class="uni-datetime-picker-timebox-pointer"
+					:class="{'uni-datetime-picker-disabled': disabled, 'uni-datetime-picker-timebox': border}">
 					<text class="uni-datetime-picker-text">{{time}}</text>
 					<view v-if="!time" class="uni-datetime-picker-time">
 						<text class="uni-datetime-picker-text">选择{{title}}</text>
@@ -11,66 +12,56 @@
 			</slot>
 		</view>
 		<view v-if="visible" id="mask" class="uni-datetime-picker-mask" @click="tiggerTimePicker"></view>
-		<view v-if="visible" class="uni-datetime-picker-popup" :style="fixNvueBug">
+		<view v-if="visible" class="uni-datetime-picker-popup" :class="[dateShow && timeShow ? '' : 'fix-nvue-height']" :style="fixNvueBug">
 			<view class="uni-title">
 				<text class="uni-datetime-picker-text">设置{{title}}</text>
 			</view>
-			<picker-view v-show="dateShow" class="uni-datetime-picker-view" :indicator-style="indicatorStyle" :value="ymd"
-			 @change="bindDateChange">
-				<picker-view-column class="uni-datetime-picker-hyphen">
-					<view class="uni-datetime-picker-item" v-for="(item,index) in years" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item">
-						<text class="uni-datetime-picker-item">-</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column class="uni-datetime-picker-hyphen">
-					<view class="uni-datetime-picker-item" v-for="(item,index) in months" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item">
-						<text class="uni-datetime-picker-item">-</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item" v-for="(item,index) in days" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-			</picker-view>
-			<picker-view v-show="timeShow" class="uni-datetime-picker-view" :indicator-style="indicatorStyle" :value="hms"
-			 @change="bindTimeChange">
-				<picker-view-column class="uni-datetime-picker-colon">
-					<view class="uni-datetime-picker-item" v-for="(item,index) in hours" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item">
-						<text class="uni-datetime-picker-item">:</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column class="uni-datetime-picker-colon">
-					<view class="uni-datetime-picker-item" v-for="(item,index) in minutes" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item">
-						<text class="uni-datetime-picker-item">:</text>
-					</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="uni-datetime-picker-item" v-for="(item,index) in seconds" :key="index">
-						<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
-					</view>
-				</picker-view-column>
-			</picker-view>
+			<view v-if="dateShow" class="uni-datetime-picker__container-box">
+				<picker-view class="uni-datetime-picker-view" :indicator-style="indicatorStyle" :value="ymd"
+					@change="bindDateChange">
+					<picker-view-column>
+						<view class="uni-datetime-picker-item" v-for="(item,index) in years" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="uni-datetime-picker-item" v-for="(item,index) in months" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="uni-datetime-picker-item" v-for="(item,index) in days" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+				</picker-view>
+				<!-- 兼容 nvue 不支持伪类 -->
+				<text class="uni-datetime-picker-sign sign-left">-</text>
+				<text class="uni-datetime-picker-sign sign-right">-</text>
+			</view>
+			<view v-if="timeShow" class="uni-datetime-picker__container-box">
+				<picker-view class="uni-datetime-picker-view" :class="[hideSecond ? 'time-hide-second' : '']"
+					:indicator-style="indicatorStyle" :value="hms" @change="bindTimeChange">
+					<picker-view-column>
+						<view class="uni-datetime-picker-item" v-for="(item,index) in hours" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="uni-datetime-picker-item" v-for="(item,index) in minutes" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+					<picker-view-column v-if="!hideSecond">
+						<view class="uni-datetime-picker-item" v-for="(item,index) in seconds" :key="index">
+							<text class="uni-datetime-picker-item">{{lessThanTen(item)}}</text>
+						</view>
+					</picker-view-column>
+				</picker-view>
+				<!-- 兼容 nvue 不支持伪类 -->
+				<text class="uni-datetime-picker-sign" :class="[hideSecond ? 'sign-center' : 'sign-left']">:</text>
+				<text v-if="!hideSecond" class="uni-datetime-picker-sign sign-right">:</text>
+			</view>
 			<view class="uni-datetime-picker-btn">
 				<view @click="clearTime">
 					<text class="uni-datetime-picker-btn-text">清空</text>
@@ -171,12 +162,16 @@
 				default: 'string'
 			},
 			disabled: {
-				type: Boolean,
+				type: [Boolean, String],
 				default: false
 			},
 			border: {
-				type: Boolean,
+				type: [Boolean, String],
 				default: true
+			},
+			hideSecond: {
+				type: [Boolean, String],
+				default: false
 			}
 		},
 		watch: {
@@ -559,6 +554,9 @@
 						this.second = defaultDate.getSeconds()
 					}
 				}
+				if (this.hideSecond) {
+					this.second = 0
+				}
 			},
 
 			/**
@@ -581,7 +579,8 @@
 					}
 					// datetime 的 end 没有时分秒, 则不限制
 					const hasTime = /[0-9]:[0-9]/
-					if (this.type === 'datetime' && pointType === 'end' && typeof point === 'string' && !hasTime.test(point)) {
+					if (this.type === 'datetime' && pointType === 'end' && typeof point === 'string' && !hasTime.test(
+							point)) {
 						point = point + ' 23:59:59'
 					}
 					const pointDate = new Date(point)
@@ -653,15 +652,17 @@
 			createDomSting() {
 				const yymmdd = this.year +
 					'-' +
-					(this.month < 10 ? '0' + this.month : this.month) +
+					this.lessThanTen(this.month) +
 					'-' +
-					(this.day < 10 ? '0' + this.day : this.day)
+					this.lessThanTen(this.day)
 
-				const hhmmss = (this.hour < 10 ? '0' + this.hour : this.hour) +
+				let hhmmss = this.lessThanTen(this.hour) +
 					':' +
-					(this.minute < 10 ? '0' + this.minute : this.minute) +
-					':' +
-					(this.second < 10 ? '0' + this.second : this.second)
+					this.lessThanTen(this.minute)
+
+				if(!this.hideSecond) {
+					hhmmss = hhmmss + ':' + this.lessThanTen(this.second)
+				}
 
 				if (this.type === 'date') {
 					return yymmdd
@@ -752,14 +753,8 @@
 	}
 
 	.uni-datetime-picker-view {
-		/* #ifndef APP-NVUE */
-		width: 100%;
-		/* #endif */
-		/* #ifdef APP-NVUE */
-		width: 210px;
-		/* #endif */
 		height: 130px;
-		margin-top: 30px;
+		width: 270px;
 		/* #ifndef APP-NVUE */
 		cursor: pointer;
 		/* #endif */
@@ -813,6 +808,12 @@
 		border-radius: 8px;
 		padding: 30px;
 		width: 270px;
+		/* #ifdef APP-NVUE */
+		height: 500px;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		width: 330px;
+		/* #endif */
 		background-color: #fff;
 		position: fixed;
 		top: 50%;
@@ -820,6 +821,12 @@
 		transform: translate(-50%, -50%);
 		transition-duration: 0.3s;
 		z-index: 999;
+	}
+
+	.fix-nvue-height {
+		/* #ifdef APP-NVUE */
+		height: 330px;
+		/* #endif */
 	}
 
 	.uni-datetime-picker-time {
@@ -857,5 +864,39 @@
 
 	.uni-datetime-picker-text {
 		font-size: 14px;
+	}
+
+	.uni-datetime-picker-sign {
+		position: absolute;
+		top: 53px;
+		/* 减掉 10px 的元素高度，兼容nvue */
+		color: #999;
+		/* #ifdef APP-NVUE */
+		font-size: 16px;
+		/* #endif */
+	}
+
+	.sign-left {
+		left: 86px;
+	}
+
+	.sign-right {
+		right: 86px;
+	}
+
+	.sign-center {
+		left: 135px;
+	}
+
+	.uni-datetime-picker__container-box {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 40px;
+	}
+
+	.time-hide-second {
+		width: 180px;
 	}
 </style>
