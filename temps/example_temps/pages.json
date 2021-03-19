@@ -1,9 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/table/table",
+      "path": "pages/datetime-picker/datetime-picker",
       "style": {
-        "navigationBarTitleText": "",
+        "navigationBarTitleText": "日期时间",
         "enablePullDownRefresh": false
       }
     }

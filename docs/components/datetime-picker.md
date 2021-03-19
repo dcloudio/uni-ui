@@ -14,11 +14,15 @@ url : pages/vue/datetime-picker/datetime-picker
 
 ___点击 picker 默认值规则：___
 
-- 若设置初始值 value, 会显示在 picker 显示框中； 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
-	- 设置了起始时间 start、终止时间 end，并 start < value < end，初始值为 value， 否则初始值为 start
-	- 只设置了起始时间 start，并 start < value，初始值为 value，否则初始值为 start
-	- 只设置了终止时间 end，并 value < end，初始值为 value，否则初始值为 end
-	- 无起始终止时间，则初始值为 value
+- 若设置初始值 value, 会显示在 picker 显示框中
+- 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
+
+___默认值和起始时间比较规则：___
+
+- 设置了起始时间 start、终止时间 end，并 start < value < end，初始值为 value， 否则初始值为 start
+- 只设置了起始时间 start，并 start < value，初始值为 value，否则初始值为 start
+- 只设置了终止时间 end，并 value < end，初始值为 value，否则初始值为 end
+- 无起始终止时间，则初始值为 value
 
 ### 安装方式
 
