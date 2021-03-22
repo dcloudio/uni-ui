@@ -1,9 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/forms/forms",
+      "path": "pages/data-picker/data-picker",
       "style": {
-        "navigationBarTitleText": "Form 表单"
+        "navigationBarTitleText": "级联选择",
+        "enablePullDownRefresh": false
       }
     }
   ],
