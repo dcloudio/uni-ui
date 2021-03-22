@@ -1,9 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/data-picker/data-picker",
+      "path": "pages/table/table",
       "style": {
-        "navigationBarTitleText": "级联选择",
+        "navigationBarTitleText": "",
         "enablePullDownRefresh": false
       }
     }
