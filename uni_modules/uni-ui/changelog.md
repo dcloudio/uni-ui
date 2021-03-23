@@ -10,8 +10,6 @@
 - ``uni-table`` 新增 示例demo
 - ``cli 项目`` 建议使用 easycom 方式引用组件，如使用按需引用，需手动维护组件内部引用
 
-
-
 ## 1.2.11（2021-02-24）
 - 调整为uni_modules目录规范
 - uni-data-picker 新增  数据驱动的picker选择器

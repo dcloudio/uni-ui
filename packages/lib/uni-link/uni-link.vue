@@ -1,6 +1,9 @@
 <template>
-	<text class="uni-link" :class="{'uni-link--withline':showUnderLine===true||showUnderLine==='true'}" :style="{color,fontSize:fontSize+'px'}"
-	 @click="openURL">{{text}}</text>
+	<a v-if="isShowA" class="uni-link" :href="href"
+		:class="{'uni-link--withline':showUnderLine===true||showUnderLine==='true'}"
+		:style="{color,fontSize:fontSize+'px'}">{{text}}</a>
+	<text v-else class="uni-link" :class="{'uni-link--withline':showUnderLine===true||showUnderLine==='true'}"
+		:style="{color,fontSize:fontSize+'px'}" @click="openURL">{{text}}</text>
 </template>
 
 <script>
@@ -44,10 +47,34 @@
 				default: 14
 			}
 		},
+		computed: {
+			isShowA() {
+				// #ifdef H5
+				this._isH5 = true;
+				// #endif
+				if ((this.isMail() || this.isTel()) && this._isH5 === true) {
+					return true;
+				}
+				return false;
+			}
+		},
+		created() {
+			this._isH5 = null;
+		},
 		methods: {
+			isMail() {
+				return this.href.startsWith('mailto:');
+			},
+			isTel() {
+				return this.href.startsWith('tel:');
+			},
 			openURL() {
 				// #ifdef APP-PLUS
-				plus.runtime.openURL(this.href)
+				if (this.isTel()) {
+					this.makePhoneCall(this.href.replace('tel:', ''));
+				} else {
+					plus.runtime.openURL(this.href);
+				}
 				// #endif
 				// #ifdef H5
 				window.open(this.href)
@@ -61,6 +88,11 @@
 					showCancel: false
 				});
 				// #endif
+			},
+			makePhoneCall(phoneNumber) {
+				uni.makePhoneCall({
+					phoneNumber
+				})
 			}
 		}
 	}
@@ -69,8 +101,9 @@
 <style>
 	/* #ifndef APP-NVUE */
 	.uni-link {
-	    cursor: pointer;
+		cursor: pointer;
 	}
+
 	/* #endif */
 	.uni-link--withline {
 		text-decoration: underline;
