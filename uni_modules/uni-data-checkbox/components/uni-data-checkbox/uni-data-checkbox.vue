@@ -9,9 +9,9 @@
 		<template v-else>
 			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list' || wrap}" @change="chagne">
 				<!-- :class="item.labelClass"  -->
-				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',!!item.disabled?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
+				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',(disabled || !!item.disabled)?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
 				 :style="item.styleBackgroud" v-for="(item,index) in dataList" :key="index">
-					<checkbox class="hidden" hidden :disabled="!!item.disabled" :value="item.value+''" :checked="item.selected" />
+					<checkbox class="hidden" hidden :disabled="disabled || !!item.disabled" :value="item.value+''" :checked="item.selected" />
 					<!-- :style="item.styleIcon" -->
 
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"  :style="item.styleIcon">
@@ -28,9 +28,9 @@
 			</checkbox-group>
 			<radio-group v-else class="checklist-group" :class="{'is-list':mode==='list','is-wrap':wrap}" @change="chagne">
 				<!-- -->
-				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',!!item.disabled?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
+				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',(disabled || !!item.disabled)?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
 				 :style="item.styleBackgroud" v-for="(item,index) in dataList" :key="index">
-					<radio class="hidden" hidden :disabled="item.disabled" :value="item.value+''" :checked="item.selected" />
+					<radio class="hidden" hidden :disabled="disabled || item.disabled" :value="item.value+''" :checked="item.selected" />
 					<!-- :class="item.checkboxBgClass"  -->
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner"
 					 :style="item.styleBackgroud">
@@ -127,6 +127,10 @@
 			emptyText:{
 				type: String,
 				default: '暂无数据'
+			},
+			disabled:{
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {

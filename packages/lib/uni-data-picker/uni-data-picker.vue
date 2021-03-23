@@ -34,7 +34,7 @@
 			</view>
 			<data-picker-view class="picker-view" ref="pickerView" v-model="value" :localdata="localdata" :preload="preload"
 			 :collection="collection" :field="field" :orderby="orderby" :where="where" :step-searh="stepSearh" :self-field="selfField"
-			 :parent-field="parentField" :managed-mode="true" @change="onchange" @datachange="ondatachange"></data-picker-view>
+			 :parent-field="parentField" :managed-mode="true" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick"></data-picker-view>
 		</view>
 	</view>
 </template>
@@ -63,8 +63,8 @@
 	 * @property {String|DBFieldString} field 查询字段，多个字段用 `,` 分割
 	 * @property {String} orderby 排序字段及正序倒叙设置
 	 * @property {String|JQLString} where 查询条件
-	 * @event {Function} onpopupshow 弹出的选择窗口打开时触发此事件
-	 * @event {Function} onpopuphide 弹出的选择窗口关闭时触发此事件
+	 * @event {Function} popupshow 弹出的选择窗口打开时触发此事件
+	 * @event {Function} popuphide 弹出的选择窗口关闭时触发此事件
 	 */
 	export default {
 		name: 'UniDataPicker',
@@ -164,9 +164,11 @@
 						selectedIndex: this.selectedIndex
 					})
 				})
+				this.$emit('popupopened')
 			},
 			hide() {
 				this.isOpened = false
+				this.$emit('popupclosed')
 			},
 			handleInput() {
 				if (this.readonly) {
@@ -176,6 +178,9 @@
 			},
 			handleClose(e) {
 				this.hide()
+			},
+			onnodeclick(e) {
+				this.$emit('nodeclick', e)
 			},
 			ondatachange(e) {
 				this._treeData = this.$refs.pickerView._treeData
@@ -289,11 +294,11 @@
 	}
 
 	.load-more {
-		/* #ifdef APP-NVUE */
-		width: 40px;
-		/* #endif */
 		/* #ifndef APP-NVUE */
 		margin-right: auto;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		width: 40px;
 		/* #endif */
 	}
 
@@ -326,8 +331,8 @@
 		position: relative;
 		width: 20px;
 		/* #ifndef APP-NVUE */
-		display: flex;
 		margin-left: auto;
+		display: flex;
 		/* #endif */
 		justify-content: center;
 		transform: rotate(-45deg);
@@ -387,9 +392,11 @@
 	.title-area {
 		/* #ifndef APP-NVUE */
 		display: flex;
-		margin: auto;
 		/* #endif */
 		align-items: center;
+		/* #ifndef APP-NVUE */
+		margin: auto;
+		/* #endif */
 		padding: 0 10px;
 	}
 

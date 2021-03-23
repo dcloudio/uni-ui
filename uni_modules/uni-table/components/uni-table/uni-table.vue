@@ -99,7 +99,7 @@
 				if (childDomIndex === 0) {
 					if (childDom.value !== check) {
 						this.backData = []
-						this.trChildren.map((item, index) => item.value = check)
+						this.trChildren.map((item, index) => item.selectable ? item.value = check : '')
 					}
 					this.trChildren.forEach((item, index) => {
 						if (index > 0 && item.value) {
