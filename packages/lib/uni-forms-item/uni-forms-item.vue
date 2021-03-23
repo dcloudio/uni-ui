@@ -268,8 +268,8 @@
 						[this.name]: value
 					}, this.form.formData)
 				}
-				// 判断是否必填
-				if (!isNoField && !value) {
+				// 判断是否必填,非必填，不填不校验，填写才校验
+				if (!isNoField && (value === undefined || value === '')) {
 					result = null
 				}
 				if (isTrigger && result && result.errorMessage) {

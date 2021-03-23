@@ -6,7 +6,7 @@ var pattern = {
 };
 
 const FORMAT_MAPPING = {
-  "int": 'number',
+  "int": 'integer',
   "bool": 'boolean',
   "double": 'number',
   "long": 'number',
@@ -82,8 +82,7 @@ const types = {
     if (!this.integer(value) || Math.abs(value).toString().length > 16) {
       return false
     }
-
-    return this.date(value);
+    return true;
   },
   file(value) {
     return typeof value.url === 'string';
@@ -278,9 +277,9 @@ const RuleValidatorHelper = {
     let max = exclusiveMaximum ? value >= maximum : value > maximum;
 
     if (minimum !== undefined && min) {
-      return formatMessage(rule, rule.errorMessage || message['number'].min)
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMinimum ? 'exclusiveMinimum' : 'minimum'])
     } else if (maximum !== undefined && max) {
-      return formatMessage(rule, rule.errorMessage || message['number'].max)
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMaximum ? 'exclusiveMaximum' : 'maximum'])
     } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
       return formatMessage(rule, rule.errorMessage || message['number'].range)
     }
@@ -298,9 +297,9 @@ const RuleValidatorHelper = {
     let val = value.length;
 
     if (min !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message['length'].min)
+      return formatMessage(rule, rule.errorMessage || message['length'].minLength)
     } else if (max !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message['length'].max)
+      return formatMessage(rule, rule.errorMessage || message['length'].maxLength)
     } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
       return formatMessage(rule, rule.errorMessage || message['length'].range)
     }
@@ -450,13 +449,15 @@ function Message() {
       invalid: '{label}日期{value}无效'
     },
     length: {
-      min: '{label}长度不能少于{minLength}',
-      max: '{label}长度不能超过{maxLength}',
+      minLength: '{label}长度不能少于{minLength}',
+      maxLength: '{label}长度不能超过{maxLength}',
       range: '{label}必须介于{minLength}和{maxLength}之间'
     },
     number: {
-      min: '{label}不能小于{minimum}',
-      max: '{label}不能大于{maximum}',
+      minimum: '{label}不能小于{minimum}',
+      maximum: '{label}不能大于{maximum}',
+      exclusiveMinimum: '{label}不能小于等于{minimum}',
+      exclusiveMaximum: '{label}不能大于等于{maximum}',
       range: '{label}必须介于{minimum}and{maximum}之间'
     },
     pattern: {

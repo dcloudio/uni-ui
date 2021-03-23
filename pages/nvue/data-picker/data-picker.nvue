@@ -82,10 +82,10 @@
 <style>
 	.container {
 		height: 100%;
-		padding: 0 15px;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		max-width: 500px;
+		padding: 0 15px;
 		/* #endif */
 		flex-direction: column;
 	}

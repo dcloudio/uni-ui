@@ -106,35 +106,6 @@ export default {
     },
     postField() {
       return `${this.field}, ${this.parentField} as parent_value`
-    },
-    postWhere() {
-      let result = []
-      let selected = this.selected
-      result.push(`${this.parentField} == null`)
-      if (selected.length) {
-        for (var i = 0; i < selected.length - 1; i++) {
-          result.push(`${this.parentField} == '${selected[i].value}'`)
-        }
-      }
-
-      if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
-      }
-
-      return result.join(' || ')
-    },
-    nodeWhere() {
-      let result = []
-      let selected = this.selected
-      if (selected.length) {
-        result.push(`${this.parentField} == '${selected[selected.length - 1].value}'`)
-      }
-
-      if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
-      }
-
-      return result.join(' || ')
     }
   },
   created() {
@@ -298,7 +269,7 @@ export default {
 
       this.getCommand({
         field: this.postField,
-        where: pw || this.postWhere,
+        where: pw || this._postWhere(),
         pageSize: 500
       }).then((res) => {
         this.loading = false
@@ -308,6 +279,35 @@ export default {
         this.loading = false
         this.errorMessage = err
       })
+    },
+    _postWhere() {
+      let result = []
+      let selected = this.selected
+      result.push(`${this.parentField} == null`)
+      if (selected.length) {
+        for (var i = 0; i < selected.length - 1; i++) {
+          result.push(`${this.parentField} == '${selected[i].value}'`)
+        }
+      }
+
+      if (this.where) {
+        return `(${this.where}) && (${result.join(' || ')})`
+      }
+
+      return result.join(' || ')
+    },
+    _nodeWhere() {
+      let result = []
+      let selected = this.selected
+      if (selected.length) {
+        result.push(`${this.parentField} == '${selected[selected.length - 1].value}'`)
+      }
+
+      if (this.where) {
+        return `(${this.where}) && (${result.join(' || ')})`
+      }
+
+      return result.join(' || ')
     },
     _updateSelected() {
       var dl = this.dataList
@@ -461,7 +461,7 @@ export default {
           inputValue = inputValue.value
         }
       }
-      
+
       this.selected = this._findNodePath(inputValue, this.localdata)
     }
   }
