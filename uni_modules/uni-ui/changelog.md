@@ -1,5 +1,16 @@
-## 1.2.12
-- uni-forms 修复 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug
+## 1.2.12（2021-03-23）
+- ``uni-forms`` 修复 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug，schema 默认提示语不准确的问题
+- ``uni-tr``  添加 selectable 属性，用于 type=selection 时，设置某行是否可由全选按钮控制
+- ``uni-datetime-picker`` 新增: hide-second 属性; border 属性; 修复 选择跟显示的日期不一样的 bug， change事件触发2次的 bug; 分、秒 end 范围错误的 bug
+- ``uni-data-checkbox`` 新增 disabled属性，支持nvue；优化 无选项时提示“暂无数据”，默认颜色显示
+- ``uni-nav-bar`` 修复 easycom 下，找不到 uni-status-bar 的bug
+- ``uni-data-picker`` 修复 微信小程序某些情况下无法选择的问题，事件无法触发的问题
+- ``uni-link``  新增 href 属性支持 tel:|mailto:
+- ``uni-easyinput`` 修复 示例在 qq 小程序上的bug
+- ``uni-table`` 新增 示例demo
+- ``cli 项目`` 建议使用 easycom 方式引用组件，如使用按需引用，需手动维护组件内部引用
+
+
 
 ## 1.2.11（2021-02-24）
 - 调整为uni_modules目录规范

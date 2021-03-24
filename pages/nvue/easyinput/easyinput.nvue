@@ -8,7 +8,7 @@
 
 		<uni-section title="去除空格" type="line"></uni-section>
 		<view class="example">
-			<text class="text">输入内容："{{ value }}"</text>
+			<text class="text">输入内容：{{ '"'+value+'"' }}</text>
 			<uni-easyinput trim="all" v-model="value"  placeholder="请输入内容" @input="input"></uni-easyinput>
 		</view>
 

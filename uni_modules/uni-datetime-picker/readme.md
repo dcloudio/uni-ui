@@ -9,8 +9,6 @@
 若只是需要单独选择日期和时间，不需要时间戳输入和输出，可使用原生的 picker 组件。
 
 
-注：暂不支持 nvue
-
 ___点击 picker 默认值规则：___
 
 - 若设置初始值 value, 会显示在 picker 显示框中； 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
@@ -48,6 +46,9 @@ ___点击 picker 默认值规则：___
 |start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end				|String、Number	|-				|-										|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
 |return-type|String					|timestamp|timestamp 、string		|返回值格式																								|
+|border			|Boolean、String|true			|											|是否有边框																								|
+|hide-second|Boolean、String|false		|											|是否隐藏秒																								|
+|disabled		|Boolean、String|false		|											|是否不可选择																							|
 
 
 
