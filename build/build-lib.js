@@ -1,6 +1,5 @@
 const fs = require('fs-extra')
 const path = require('path')
-const glob = require("glob")
 const exec = require('child_process').exec
 const argv = process.argv.splice(2)[0]
 

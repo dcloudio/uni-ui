@@ -4,6 +4,7 @@ const modulesId = 'uni-ui'
 
 const comName = modulesId.replace(/uni-/, '')
 const modulesPath = path.join(__dirname, '..', 'uni_modules')
+const docsChangeLog = path.join(__dirname, '..', 'docs','changelog.md')
 const argv = process.argv.splice(2)[0]
 
 if (argv === 'release') {
@@ -36,14 +37,15 @@ function syncUniuiChangeLog() {
 			const mds = versionAll(changeMd, syncVersionsData[id])
 			let content = ''
 			mds.forEach(md => {
-				md = md.replace(/- /g, `- ${id} `)
-				content += (md + '\n')
+				md = md.replace(/- /g, `- ${id} `).trim()
+				content += (md.trim() + '\n')
 			})
-			uniuimd += (content + '\n')
+			uniuimd += (content.trim() + '\n')
 		}
 		syncVersion[id] = version
 	})
-	console.log(uniuimd);
+	// console.log(uniuimd);
+	uniuimd = uniuimd.trim()
 	if (uniuimd) {
 		let uniuiPackage = path.join(modulesPath, modulesId, 'package.json')
 		uniuiPackage = JSON.parse(fs.readFileSync(uniuiPackage).toString())
@@ -51,15 +53,16 @@ function syncUniuiChangeLog() {
 		let newVersion = uniuiPackage.version.split('.')
 		newVersion[2] = Number(newVersion[2]) + 1
 		newVersion = newVersion.join('.')
+		buildDocsChangeLog(uniuimd, newVersion)
 		const uniuiChangelog = updateChangelogFile(
 			mdpath,
 			newVersion,
 			uniuimd
 		)
-		fs.writeFileSync(mdpath, uniuiChangelog)
+		// fs.writeFileSync(mdpath, uniuiChangelog)
 	}
 	// 将最新的个组件写入缓存区域
-	fs.writeFileSync(path.join(__dirname, '..' ,'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
+	// fs.writeFileSync(path.join(__dirname, '..' ,'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
 }
 
 
@@ -78,10 +81,10 @@ function getAllComponentsList(modulesPath) {
 			return
 		}
 		const packagePath = path.join(modulesPath, name, 'package.json')
-		try{
+		try {
 			let data = fs.readFileSync(packagePath).toString()
 			content.push(JSON.parse(data))
-		}catch(err){
+		} catch (err) {
 			console.log(packagePath + '不存在');
 		}
 	})
@@ -229,12 +232,68 @@ function versionAll(md, oldVersion, mds = []) {
 	return mds
 }
 
+function buildDocsChangeLog(md, version) {
+	console.log('开始文档日志更新...');
+	let date = new Date()
+	date = `${date.getFullYear()}-${padZero(date.getMonth() + 1)}-${padZero(date.getDate())}`
+	md = md.replace(/\r\n/ig, '\n')
+	const mds = md.split('\n')
+	let content = `<!-- 更新占位 -->\n<log title="${version}" date="${date}">\n`
+	let arrs = {}
+	mds.forEach(v => {
+		const nameRE = /-\s+([a-z\-]+ (优化|新增|修复)?).*/g
+		const curNameMatch = nameRE.exec(v)
+		let curName = {
+			name: curNameMatch[1].replace(curNameMatch[2], '').trim(),
+			line: curNameMatch[0],
+			status: curNameMatch[2] || null
+		}
+		const statusName = curName.status || curName.name
+		let line = curName.line.indexOf(statusName)
+		curName.line = curName.line.substr(line + statusName.length, curName.line.length)
+		if (!arrs[curName.name]) {
+			arrs[curName.name] = []
+		}
+		arrs[curName.name].push(curName)
+	})
+	for (let i in arrs) {
+		const item = arrs[i]
+		content += `	<log-item title="${i} 组件更新">\n`
+		item.forEach(v => {
+			let status = ''
+			switch (v.status) {
+				case '新增':
+					status = 'feat'
+					break;
+				case '修复':
+					status = 'fix'
+					break
+				case '优化':
+					status = 'perf'
+					break
+				default:
+					status = 'perf'
+			}
+			content += `		<log-item-text tag-type="${status}">\n`
+			content += '			'+v.line + '\n'
+			content += `		</log-item-text>\n`
+
+		})
+		content += '	</log-item>\n'
+	}
+	content += '</log>\n'
+
+	let docsMd = fs.readFileSync(docsChangeLog).toString()
+	docsMd = docsMd.replace('<!-- 更新占位 -->',content)
+	fs.writeFileSync(docsChangeLog, docsMd)
+	console.log('文档日志更新完成');
+}
+
 function compareVersion(a, b) {
-	console.log(a, b);
 	a = a.split('.')
 	b = b.split('.')
 	if (a.length !== b.length) {
-		console.error('版本号格式不正确')
+		// console.error('版本号格式不正确')
 		return false
 	}
 	if (a[0] !== b[0]) {

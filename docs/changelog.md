@@ -6,7 +6,7 @@
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
-
+<!-- 更新占位 -->
 <log title="组件工程调整" date="2020-02-05">
 	<log-item title="uni-forms 组件更新">
 		<log-item-text tag-type="fix">

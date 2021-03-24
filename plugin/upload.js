@@ -236,6 +236,8 @@ function getModulesPath(name) {
  */
 function handleReadme(readmePath) {
 	let content = fs.readFileSync(readmePath, 'utf-8')
+	// 兼容 windows ，将 \r\n 全部替换成 \n
+	content = content.replace(/\r\n/ig, '\n')
 	// 删除头部额外信息，在其他平台不支持，只在 uni ui 中支持
 	content = content.replace(/---([\s\S]*?)---/ig, '')
 	// 转换 ::: 语法
