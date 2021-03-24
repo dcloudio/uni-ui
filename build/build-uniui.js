@@ -78,8 +78,12 @@ function getAllComponentsList(modulesPath) {
 			return
 		}
 		const packagePath = path.join(modulesPath, name, 'package.json')
-		let data = fs.readFileSync(packagePath).toString()
-		content.push(JSON.parse(data))
+		try{
+			let data = fs.readFileSync(packagePath).toString()
+			content.push(JSON.parse(data))
+		}catch(err){
+			console.log(packagePath + '不存在');
+		}
 	})
 
 	return content
