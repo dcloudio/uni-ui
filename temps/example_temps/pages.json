@@ -1,10 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/table/table",
+      "path": "pages/test/test",
       "style": {
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "test",
+        "a": "test"
       }
     }
   ],
