@@ -7,6 +7,7 @@ if(argv === 'lib'){
 	buildLib()
 }
 if(argv === 'release'){
+	buildReadme()
 	buildChangeLog()
 }
 

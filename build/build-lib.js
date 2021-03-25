@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const util = require('./util.js')
-
+const buildReadme = require('./build-readme.js')
 function buildLib(callback) {
 	const root = path.join(__dirname, '..')
 	const uniui = path.join(root, 'uni_modules')
@@ -30,6 +30,7 @@ function buildLib(callback) {
 	// // 根目录版本更新
 	util.write(rootPath, JSON.stringify(rootPackage, null, '\t'))
 	// 同步文档
+	buildReadme()
 	util.copyFile(path.join(root, 'README.md'), path.join(packages, 'README.md'))
 
 	const exists = fs.existsSync(lib)
