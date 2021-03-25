@@ -10,9 +10,9 @@
 		"url": "https://github.com/dcloudio/uni-ui"
 	},
 	"scripts": {
-		"build:lib": "node build/build-lib.js lib",
-		"build:npm": "node build/build-lib.js npm",
-		"build:release": "node build/build-uniui.js release",
+		"build:lib": "node build/index.js lib",
+		"build:npm": "node build/index.js npm",
+		"build:release": "node build/index.js release",
 		"dev:docs": "vuepress dev docs",
 		"build:docs": "vuepress build docs"
 	},

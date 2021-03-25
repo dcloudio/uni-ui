@@ -1,22 +1,11 @@
 const path = require('path')
 const fs = require('fs')
 const modulesId = 'uni-ui'
-
-const comName = modulesId.replace(/uni-/, '')
 const modulesPath = path.join(__dirname, '..', 'uni_modules')
-const docsChangeLog = path.join(__dirname, '..', 'docs','changelog.md')
-const argv = process.argv.splice(2)[0]
+const docsChangeLog = path.join(__dirname, '..', 'docs', 'changelog.md')
 
-if (argv === 'release') {
-	// 同步 release
-	syncUniuiChangeLog()
-}
+function buildChangeLog(callback) {
 
-/**
- * 同步所有更新日志
- */
-
-function syncUniuiChangeLog() {
 	let componentsPackageJsons = getAllComponentsList(modulesPath)
 	const syncVersions = path.join(__dirname, '..', 'temps', 'sync-version.json')
 	let syncVersionsData = fs.readFileSync(syncVersions).toString()
@@ -47,22 +36,29 @@ function syncUniuiChangeLog() {
 	// console.log(uniuimd);
 	uniuimd = uniuimd.trim()
 	if (uniuimd) {
-		let uniuiPackage = path.join(modulesPath, modulesId, 'package.json')
-		uniuiPackage = JSON.parse(fs.readFileSync(uniuiPackage).toString())
+		let uniuiPackagePath = path.join(modulesPath, modulesId, 'package.json')
+		uniuiPackage = JSON.parse(fs.readFileSync(uniuiPackagePath).toString())
 		let mdpath = path.join(modulesPath, modulesId, 'changelog.md')
 		let newVersion = uniuiPackage.version.split('.')
 		newVersion[2] = Number(newVersion[2]) + 1
 		newVersion = newVersion.join('.')
+		uniuiPackage.version = newVersion
 		buildDocsChangeLog(uniuimd, newVersion)
 		const uniuiChangelog = updateChangelogFile(
 			mdpath,
 			newVersion,
 			uniuimd
 		)
-		// fs.writeFileSync(mdpath, uniuiChangelog)
+		// 修改合并后的 release
+		fs.writeFileSync(mdpath, uniuiChangelog)
+		// package.json 版本号 +1
+		fs.writeFileSync(uniuiPackagePath, JSON.stringify(uniuiPackage, null, 2))
 	}
-	// 将最新的个组件写入缓存区域
-	// fs.writeFileSync(path.join(__dirname, '..' ,'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
+	// 将最新的组件写入缓存区域
+	// fs.writeFileSync(path.join(__dirname, '..', 'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
+
+	typeof callback === 'function' && callback()
+
 }
 
 
@@ -275,7 +271,7 @@ function buildDocsChangeLog(md, version) {
 					status = 'perf'
 			}
 			content += `		<log-item-text tag-type="${status}">\n`
-			content += '			'+v.line + '\n'
+			content += '			' + v.line + '\n'
 			content += `		</log-item-text>\n`
 
 		})
@@ -284,7 +280,7 @@ function buildDocsChangeLog(md, version) {
 	content += '</log>\n'
 
 	let docsMd = fs.readFileSync(docsChangeLog).toString()
-	docsMd = docsMd.replace('<!-- 更新占位 -->',content)
+	docsMd = docsMd.replace('<!-- 更新占位 -->', content)
 	fs.writeFileSync(docsChangeLog, docsMd)
 	console.log('文档日志更新完成');
 }
@@ -307,3 +303,5 @@ function compareVersion(a, b) {
 	}
 	return false
 }
+
+module.exports = buildChangeLog
