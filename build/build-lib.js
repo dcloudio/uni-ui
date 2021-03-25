@@ -15,8 +15,21 @@ function buildLib(callback) {
 	let uniuiPackageData = util.read(uniuiPackagePath)
 	uniuiData = JSON.parse(uniuiData)
 	uniuiPackageData = JSON.parse(uniuiPackageData)
+	if (uniuiPackageData.version === uniuiData.version) {
+		console.log('当前版本号一致，请先执行 npm run build:release 更新 uni-ui 组件后再次执行当前命令');
+		return
+	}
+
 	uniuiPackageData.version = uniuiData.version
+	// uni-ui 版本更新
 	util.write(uniuiPackagePath, JSON.stringify(uniuiPackageData, null, 2))
+	let rootPath = path.join(root, 'package.json')
+	let rootPackage = util.read(rootPath)
+	rootPackage = JSON.parse(rootPackage)
+	rootPackage.version = uniuiData.version
+	// // 根目录版本更新
+	util.write(rootPath, JSON.stringify(rootPackage, null, '\t'))
+	// 同步文档
 	util.copyFile(path.join(root, 'README.md'), path.join(packages, 'README.md'))
 
 	const exists = fs.existsSync(lib)
@@ -32,7 +45,7 @@ function buildLib(callback) {
 		return coms.reduce((promise, item) => {
 			const componentsPath = path.join(comPath, item)
 			util.copyDir(componentsPath, path.join(lib, item))
-			console.log(item + ' 组件同步成功');
+			// console.log(item + ' 组件同步成功');
 			return promise
 		}, promise)
 	}, Promise.resolve([])).then(() => {

@@ -88,7 +88,7 @@ class Util {
 	 * @param {Object} callback
 	 */
 	copyDir(src, dist, callback) {
-		this.copyDir(src, dist);
+		this._copyDir(src, dist);
 		if (callback) {
 			callback();
 		}
@@ -128,14 +128,14 @@ class Util {
 
 	_copy(src, dist) {
 		var paths = fs.readdirSync(src)
-		paths.forEach(function(p) {
+		paths.forEach((p)=> {
 			var _src = src + '/' + p;
 			var _dist = dist + '/' + p;
 			var stat = fs.statSync(_src)
 			if (stat.isFile()) { // 判断是文件还是目录
 				fs.writeFileSync(_dist, fs.readFileSync(_src));
 			} else if (stat.isDirectory()) {
-				this.copyDir(_src, _dist) // 当是目录是，递归复制
+				this._copyDir(_src, _dist) // 当是目录是，递归复制
 			}
 		})
 	}
@@ -145,7 +145,7 @@ class Util {
 	 * @param src {String} 要复制的目录
 	 * @param dist {String} 复制到目标目录
 	 */
-	copyDir(src, dist) {
+	_copyDir(src, dist) {
 		var b = fs.existsSync(dist)
 		if (!b) {
 			this.mkdirsSync(dist); //创建目录

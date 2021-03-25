@@ -54,9 +54,13 @@ function buildChangeLog(callback) {
 		fs.writeFileSync(mdpath, uniuiChangelog)
 		// package.json 版本号 +1
 		fs.writeFileSync(uniuiPackagePath, JSON.stringify(uniuiPackage, null, 2))
+		console.log('文档日志更新完成，更新内容如下：');
+		console.log(uniuimd);
+	}else{
+		console.log('当前是最新版本，无需更新');
 	}
 	// 将最新的组件写入缓存区域
-	// fs.writeFileSync(path.join(__dirname, '..', 'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
+	fs.writeFileSync(path.join(__dirname, '..', 'temps', 'sync-version.json'), JSON.stringify(syncVersion, null, 2))
 
 	typeof callback === 'function' && callback()
 
@@ -74,7 +78,7 @@ function getAllComponentsList(modulesPath) {
 	const fileLists = fs.readdirSync(modulesPath);
 	let content = []
 	fileLists.forEach(name => {
-		if (name === modulesId || name === 'uni-ui') {
+		if (name === modulesId || name === 'uni-test') {
 			return
 		}
 		const packagePath = path.join(modulesPath, name, 'package.json')
@@ -283,7 +287,7 @@ function buildDocsChangeLog(md, version) {
 	let docsMd = fs.readFileSync(docsChangeLog).toString()
 	docsMd = docsMd.replace('<!-- 更新占位 -->', content)
 	fs.writeFileSync(docsChangeLog, docsMd)
-	console.log('文档日志更新完成');
+
 }
 
 function compareVersion(a, b) {
