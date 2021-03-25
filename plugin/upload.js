@@ -235,14 +235,15 @@ function getModulesPath(name) {
  * @param {Object} readmePath
  */
 function handleReadme(readmePath) {
-	let content = fs.readFileSync(readmePath, 'utf-8')
+	let content = this.read(readmePath)
 	// 兼容 windows ，将 \r\n 全部替换成 \n
 	content = content.replace(/\r\n/ig, '\n')
 	// 删除头部额外信息，在其他平台不支持，只在 uni ui 中支持
 	content = content.replace(/---([\s\S]*?)---/ig, '')
 	// 转换 ::: 语法
 	content = content.replace(/::: (.*?)\n([\s\S]*?):::/ig, function(_, $1, $2) {
-		return $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
+		$1 = $1.replace(/(tip|danger|warning)+ /,'')
+		return '> **'+ $1 +'**\n'+ $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
 	})
 	return content
 }

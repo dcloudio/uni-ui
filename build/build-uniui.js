@@ -1,13 +1,14 @@
 const path = require('path')
 const fs = require('fs')
 const modulesId = 'uni-ui'
-const modulesPath = path.join(__dirname, '..', 'uni_modules')
-const docsChangeLog = path.join(__dirname, '..', 'docs', 'changelog.md')
+const root = path.join(__dirname, '..')
+const modulesPath = path.join(root, 'uni_modules')
+const docsChangeLog = path.join(root, 'docs', 'changelog.md')
 
 function buildChangeLog(callback) {
 
 	let componentsPackageJsons = getAllComponentsList(modulesPath)
-	const syncVersions = path.join(__dirname, '..', 'temps', 'sync-version.json')
+	const syncVersions = path.join(root, 'temps', 'sync-version.json')
 	let syncVersionsData = fs.readFileSync(syncVersions).toString()
 	syncVersionsData = JSON.parse(syncVersionsData)
 

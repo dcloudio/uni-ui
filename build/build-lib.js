@@ -3,9 +3,9 @@ const path = require('path')
 const util = require('./util.js')
 
 function buildLib(callback) {
-	const root = path.join(__dirname, '../')
-	const uniui = path.join(__dirname, '../uni_modules')
-	const packages = path.join(__dirname, '../packages')
+	const root = path.join(__dirname, '..')
+	const uniui = path.join(root, 'uni_modules')
+	const packages = path.join(root, 'packages')
 	const lib = path.join(packages, 'lib')
 	var filenames = []
 	var filenamesUpper = []

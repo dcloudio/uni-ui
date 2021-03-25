@@ -13,6 +13,7 @@
 		"build:lib": "node build/index.js lib",
 		"build:npm": "node build/index.js npm",
 		"build:release": "node build/index.js release",
+		"build:readme": "node build/index.js readme",
 		"dev:docs": "vuepress dev docs",
 		"build:docs": "vuepress build docs"
 	},
