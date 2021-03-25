@@ -1,7 +1,8 @@
+# uni-ui 介绍
 
-### uni-ui产品特点
+## uni-ui产品特点
 
-1. 高性能
+### 1. 高性能
 
 目前为止，在小程序和混合app领域，暂时还没有比 `uni-ui` 更高性能的框架。
 - 自动差量更新数据
@@ -21,16 +22,18 @@
 
 而 `uni-ui` 的组件，会自动判断自己的显示状态，在组件不再可见时，不会再消耗硬件资源。
 
-2. 全端
+### 2. 全端
 
  `uni-ui` 的组件都是多端自适应的，底层会抹平很多小程序平台的差异或bug。
 
 比如导航栏navbar组件，会自动处理不同端的状态栏。
 比如swiperaction组件，在app和微信小程序上会使用交互体验更好的wxs技术，但在不支持wxs的其他小程序端会使用js模拟类似效果。
 
+ `uni-ui` 还支持nvue原生渲染，[详见](https://github.com/dcloudio/uni-ui/tree/nvue-uni-ui)
+
 未来 `uni-ui` 还会支持pc等大屏设备。
 
-3. 与uni统计自动集成实现免打点
+### 3. 与uni统计自动集成实现免打点
 
 uni统计是优秀的多端统计平台，见[tongji.dcloud.net.cn](https://tongji.dcloud.net.cn)。
 
@@ -38,7 +41,7 @@ uni统计是优秀的多端统计平台，见[tongji.dcloud.net.cn](https://tong
 比如使用 `uni-ui` 的navbar标题栏、收藏、购物车等组件，均可实现自动打点，统计页面标题等各种行为数据。
 当然你也可以关闭uni统计，这不是强制的。
 
-4. 主题扩展
+### 4. 主题扩展
 
  `uni-ui` 支持[uni.scss](https://uniapp.dcloud.io/collocation/uni-scss)，可以方便的切换App的风格。
 
@@ -46,54 +49,102 @@ ui是一种需求非常发散的产品，DCloud官方也无意用 `uni-ui` 压�
 
 我们欢迎更多优秀的ui组件出现，也欢迎更多人贡献 `uni-ui` 的主题风格，满足更多用户的需求。
 
-### uni-ui 使用说明
 
-#### 方式1 (推荐)
+# 快速开始
 
-`HBuilderX 2.5.5`起支持 `easycom` 组件模式。在使用 `uni-ui` 的时候，只要[`uni-ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni-ui` 组件
+## 使用uni_modules安装uni-ui (推荐)
 
-`easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
+使用 `uni_modules` 方式安装组件库，可以直接通过插件市场导入，通过右键菜单快速更新组件，不需要引用、注册，直接在页面中使用 `uni-ui` 组件。[点击安装 uni-ui 组件库](https://ext.dcloud.net.cn/plugin?id=55)
+
+**注意：下载最新的组件目前仅支持 uni_modules ,非uni_modules版本最高支持到组件的1.2.10版本**
+
+如不能升级到 `uni_modules` 版本，可以使用 `uni_modules` 安装好对应组件，将组件拷贝到对应目录。
+
+例如需更新 `uni-list`和`uni-badge` ,将 `uni_modules>uni-list>components`和`uni_modules>uni-badege>components`下所有目录拷贝到如下目录即可：
+
+**目录示例**
+```json {2,3,4,5,6,7}
+┌─components              组件目录
+│  ├─uni-list             list 列表目录
+│  │  └─uni-list.vue      list 组件文件
+│  ├─uni-list-item        list-item 列表目录
+│  │  └─uni-list-item.vue list 组件文件
+│  ├─uni-badge         	  badge 角标目录
+│  │  └─uni-badge.vue     badge 组件文件
+│  └─ //....              更多组件文件
+├─pages                   业务页面文件存放的目录
+│  ├─index
+│  │  └─index.vue         index示例页面
+├─main.js                 Vue初始化入口文件
+├─App.vue                 应用配置，用来配置App全局样式以及监听 应用生命周期
+├─manifest.json           配置应用名称、appid、logo、版本等打包信息，详见
+└─pages.json              配置页
+
+```
 
 
-#### 方式2（vue-cli）
+## 使用 npm 安装
+
+在 `vue-cli` 项目中可以使用 `npm` 安装 `uni-ui` 库 ，或者直接在 `HBuilderX` 项目中使用 `npm` 。（不推荐后一种方式）
 
 **初始化项目**
 
-如果是使用 `HBuiderX` 创建的项目，需先执行以下命令初始化：
+在 HBuilderX 中新建 uni-app 项目，进入项目目录，执行：
 
 ```
-npm init -y
+npm init -y 
 ```
 
 **安装 uni-ui**
 
 ```
-npm i @dcloudio/uni-ui --save
+npm install @dcloudio/uni-ui -d
+```
 
-npm i sass -D
 
-npm i sass-loader -D
+**安装成功后目录示例：**
+```json {1,8}
+┌─node_modules            组件依赖
+├─pages                   业务页面文件存放的目录
+│  ├─index
+│  │  └─index.vue         index示例页面
+├─main.js                 Vue初始化入口文件
+├─App.vue                 应用配置，用来配置App全局样式以及监听 应用生命周期
+├─manifest.json           配置应用名称、appid、logo、版本等打包信息，详见
+├─package.json            npm 配置文件
+└─pages.json              配置页
+
 ```
 
 
 在 ``script`` 中引用组件：
 
-例如我们需要导入 `uni-badge` 组件
-
 ```javascript
 import {uniBadge} from '@dcloudio/uni-ui'
+//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
 export default {
     components: {uniBadge}
 }
 ```
 
-#### 方式3（vue-cli + easycom）
+在 ``template`` 中使用组件： 
 
-使用 `方式2` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
+```html
+<uni-badge text="1"></uni-badge>
+<uni-badge text="2" type="success" @click="bindClick"></uni-badge>
+<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
+```
+> **注意**
+> - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用方式一 （[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
+
+
+## 使用 npm + easycom 
+
+使用 `npm` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
 
 打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
 
-```javascript
+```javascript {8}
 // pages.json
 
 {
@@ -113,55 +164,64 @@ export default {
 
 ```
 
-#### uni-ui 已支持的组件列表 
-组件名|组件说明
----|---
-uniBadge|[数字角标](https://ext.dcloud.net.cn/plugin?id=21)
-uniCalendar|[日历](https://ext.dcloud.net.cn/plugin?id=56)
-uniCard|[卡片](https://ext.dcloud.net.cn/plugin?id=22)
-uniCollapse|[折叠面板](https://ext.dcloud.net.cn/plugin?id=23)
-uniCombox|[组合框](https://ext.dcloud.net.cn/plugin?id=1261)
-uniCountdown|[倒计时](https://ext.dcloud.net.cn/plugin?id=25)
-uniDataCheckbox|[数据选择器](https://ext.dcloud.net.cn/plugin?id=3456)
-uniDateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?id=3279)
-uniDatetimePicker|[日期格式化](https://ext.dcloud.net.cn/plugin?id=9999)
-uniDrawer|[抽屉](https://ext.dcloud.net.cn/plugin?id=26)
-uniEasyinput|[增强输入框](https://ext.dcloud.net.cn/plugin?id=3455)
-uniFab|[悬浮按钮](https://ext.dcloud.net.cn/plugin?id=144)
-uniFav|[收藏按钮](https://ext.dcloud.net.cn/plugin?id=864)
-uniField|[输入框](https://ext.dcloud.net.cn/plugin?id=21001)
-uniForms|[表单](https://ext.dcloud.net.cn/plugin?id=2773)
-uniGoodsNav|[商品导航](https://ext.dcloud.net.cn/plugin?id=865)
-uniGrid|[宫格](https://ext.dcloud.net.cn/plugin?id=27)
-uniGroup|[分组](https://ext.dcloud.net.cn/plugin?id=21002)
-uniIcons|[图标](https://ext.dcloud.net.cn/plugin?id=28)
-uniIndexedList|[索引列表](https://ext.dcloud.net.cn/plugin?id=375)
-uniLink|[超链接](https://ext.dcloud.net.cn/plugin?id=1182)
-uniList|[列表](https://ext.dcloud.net.cn/plugin?id=24)
-uniLoadMore|[加载更多](https://ext.dcloud.net.cn/plugin?id=29)
-uniNavBar|[自定义导航栏](https://ext.dcloud.net.cn/plugin?id=52)
-uniNoticeBar|[通告栏](https://ext.dcloud.net.cn/plugin?id=30)
-uniNumberBox|[数字输入框](https://ext.dcloud.net.cn/plugin?id=31)
-uniPagination|[分页器](https://ext.dcloud.net.cn/plugin?id=32)
-uniPopUp|[弹出层](https://ext.dcloud.net.cn/plugin?id=329)
-uniRate|[评分](https://ext.dcloud.net.cn/plugin?id=33)
-uniSearchBar|[搜索栏](https://ext.dcloud.net.cn/plugin?id=866)
-uniSegmentedControl|[分段器](https://ext.dcloud.net.cn/plugin?id=54)
-uniSteps|[步骤条](https://ext.dcloud.net.cn/plugin?id=34)
-uniSwipeAction|[滑动操作](https://ext.dcloud.net.cn/plugin?id=181)
-uniSwiperDot|[轮播图指示点](https://ext.dcloud.net.cn/plugin?id=284)
-uniTable|[表格](https://ext.dcloud.net.cn/plugin?id=3270)
-uniTag|[标签](https://ext.dcloud.net.cn/plugin?id=35)
-uniTitle|[章节标题](https://ext.dcloud.net.cn/plugin?id=1066)
-uniTransition|[过渡动画](https://ext.dcloud.net.cn/plugin?id=985)
+### uni-ui 已支持的组件列表
+|组件名|组件说明|
+|---|---|
+|uniBadge|[数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge)|
+|uniCalendar|[日历](https://ext.dcloud.net.cn/plugin?name=uni-calendar)|
+|uniCard|[卡片](https://ext.dcloud.net.cn/plugin?name=uni-card)|
+|uniCollapse|[折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse)|
+|uniCombox|[组合框](https://ext.dcloud.net.cn/plugin?name=uni-combox)|
+|uniCountdown|[倒计时](https://ext.dcloud.net.cn/plugin?name=uni-countdown)|
+|uniDataCheckbox|[数据选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-checkbox)|
+|uniDataPicker|[数据驱动的picker选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-picker)|
+|uniDateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?name=uni-dateformat)|
+|uniDatetimePicker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-datetime-picker)|
+|uniDrawer|[抽屉](https://ext.dcloud.net.cn/plugin?name=uni-drawer)|
+|uniEasyinput|[增强输入框](https://ext.dcloud.net.cn/plugin?name=uni-easyinput)|
+|uniFab|[悬浮按钮](https://ext.dcloud.net.cn/plugin?name=uni-fab)|
+|uniFav|[收藏按钮](https://ext.dcloud.net.cn/plugin?name=uni-fav)|
+|uniField|[输入框](https://ext.dcloud.net.cn/plugin?name=uni-field)|
+|uniFilePicker|[文件选择上传](https://ext.dcloud.net.cn/plugin?name=uni-file-picker)|
+|uniForms|[表单](https://ext.dcloud.net.cn/plugin?name=uni-forms)|
+|uniGoodsNav|[商品导航](https://ext.dcloud.net.cn/plugin?name=uni-goods-nav)|
+|uniGrid|[宫格](https://ext.dcloud.net.cn/plugin?name=uni-grid)|
+|uniGroup|[分组](https://ext.dcloud.net.cn/plugin?name=uni-group)|
+|uniIcons|[图标](https://ext.dcloud.net.cn/plugin?name=uni-icons)|
+|uniIndexedList|[索引列表](https://ext.dcloud.net.cn/plugin?name=uni-indexed-list)|
+|uniLink|[超链接](https://ext.dcloud.net.cn/plugin?name=uni-link)|
+|uniList|[列表](https://ext.dcloud.net.cn/plugin?name=uni-list)|
+|uniLoadMore|[加载更多](https://ext.dcloud.net.cn/plugin?name=uni-load-more)|
+|uniNavBar|[自定义导航栏](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar)|
+|uniNoticeBar|[通告栏](https://ext.dcloud.net.cn/plugin?name=uni-notice-bar)|
+|uniNumberBox|[数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box)|
+|uniPagination|[分页器](https://ext.dcloud.net.cn/plugin?name=uni-pagination)|
+|uniPopUp|[弹出层](https://ext.dcloud.net.cn/plugin?name=uni-popup)|
+|uniRate|[评分](https://ext.dcloud.net.cn/plugin?name=uni-rate)|
+|uniRow|[布局-行](https://ext.dcloud.net.cn/plugin?name=uni-row)|
+|uniSearchBar|[搜索栏](https://ext.dcloud.net.cn/plugin?name=uni-search-bar)|
+|uniSection|[标题栏](https://ext.dcloud.net.cn/plugin?name=uni-section)|
+|uniSegmentedControl|[分段器](https://ext.dcloud.net.cn/plugin?name=uni-segmented-control)|
+|uniSteps|[步骤条](https://ext.dcloud.net.cn/plugin?name=uni-steps)|
+|uniSwipeAction|[滑动操作](https://ext.dcloud.net.cn/plugin?name=uni-swipe-action)|
+|uniSwiperDot|[轮播图指示点](https://ext.dcloud.net.cn/plugin?name=uni-swiper-dot)|
+|uniTable|[表格](https://ext.dcloud.net.cn/plugin?name=uni-table)|
+|uniTag|[标签](https://ext.dcloud.net.cn/plugin?name=uni-tag)|
+|uniTitle|[章节标题](https://ext.dcloud.net.cn/plugin?name=uni-title)|
+|uniTransition|[过渡动画](https://ext.dcloud.net.cn/plugin?name=uni-transition)|
 
-#### 其他
+
+### 其他
 
 - uni-ui 是全端兼容的基于flex布局的、无dom的ui库
 - uni-ui 是uni-app内置组件的扩展。注意与web开发不同，uni-ui不包括基础组件，它是基础组件的补充。web开发中有的开发者习惯用一个ui库完成所有开发，但在uni-app体系中，推荐开发者首先使用性能更高的基础组件，然后按需引入必要的扩展组件。
-- uni-ui 不支持使用 Vue.use() 的方式安装
-- uni-ui 依赖 scss，若是 HBuilderX 中创建的 uni-app 项目，需要在 HBuilderX 中安装 scss 插件；如果是使用 cli 创建的 uni-app 项目，需要在项目下npm安装 node-sass 和 sass-loader
-- `CLI` 引用方式 `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用 [easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom) 的方式引用组件
+
+
+> **注意**
+> - `uni-ui` 不支持使用 `Vue.use()` 的方式安装
+> - `uni-ui` 依赖 `scss`，若是 `HBuilderX` 中创建的 `uni-app` 项目，需要在 `HBuilderX` 中安装 `scss` 插件；如果是使用 `cli` 创建的 `uni-app` 项目，需要在项目下`npm`安装 `node-sass` 和 `sass-loader`
+
+
 
 ### 贡献代码
 在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
