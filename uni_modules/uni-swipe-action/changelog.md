@@ -1,3 +1,5 @@
+## 1.1.8（2021-03-26）
+- 修复 微信小程序 nv_navigator is not defined 报错的bug
 ## 1.1.7（2021-02-05）
 - 调整为uni_modules目录规范
 - 新增 左侧滑动

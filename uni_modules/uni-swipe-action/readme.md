@@ -1,11 +1,13 @@
 
 
 ## SwipeAction 滑动操作
+> **组件名：uni-swipe-action**
 > 代码块： `uSwipeAction`、`uSwipeActionItem`
 
 
 通过滑动触发选项的容器
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 如果有动态显示隐藏组件之类的操作，请使用 `v-if` 而不是 `v-show`，因为组件内需要获取节点信息，v-show 之后不能正确获取
 > - swipeAction的跟手联动是非常考验性能的。为了提高交互体验，本组件在 app 端 vue 页面、h5、微信小程序使用了wxs 技术，nvue 页面使用 bindingx 技术，可以达到流畅的体验。在其他小程序平台由于底层不支持优化技术，只能使用使用普通 js ，此时性能一般。
@@ -145,6 +147,7 @@ export default {
 |left			|左侧滑动内容	，会覆盖	leftOptions 内容			|
 |right		|右侧滑动内容	，会覆盖	rightOptions 内容		|
 
+> **提示**
 > - iOS 端由于存在bounce效果，滑动体验略差，建议禁止bounce效果，禁止方式如下：
 > ```javascript
 > {
