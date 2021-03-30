@@ -1,22 +1,26 @@
 console.error('-------- upload.js start--------');
+
 const path = require('path')
-const fs = require('fs-extra')
+const fs = require('fs')
+const util = require('../build/util.js')
+const buildReadme = require('../build/build-readme.js')
+const root = path.join(__dirname,'..')
+// const modulesId = 'uni-test'
 const modulesId = process.env.UNI_MODULES_ID
 const comName = modulesId.replace(/uni-/, '')
-const comPath = path.join(__dirname, '..', 'uni_modules')
-console.error('upload.js - modulesId :' + process.env.UNI_MODULES_ID);
+const comPath = path.join(root, 'uni_modules')
+console.error('upload.js - modulesId :' + modulesId);
 const packageJson = getPackage(modulesId, comPath)
-const examplePath = path.join(__dirname, '..', 'temps')
+const examplePath = path.join(root, 'temps')
 
 // 同步 readme.md
 // md 地址
-const readmePath = path.join(__dirname, '..', 'docs', 'components', comName + '.md')
-
+const readmePath = path.join(root, 'docs', 'components', comName + '.md')
 
 const mdExists = fs.existsSync(readmePath)
 if (mdExists) {
 	const content = handleReadme(readmePath)
-	fs.outputFileSync(path.join(__dirname, '..', 'uni_modules',modulesId,'readme.md'), content)
+	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
 }
 
 let relationComponents = []
@@ -25,18 +29,21 @@ let relationComponents = []
 const tempExamplePath = path.join(examplePath, 'example_temps')
 const exampleExists = fs.existsSync(tempExamplePath)
 if (exampleExists) {
-	fs.removeSync(tempExamplePath)
+	// 删除临时目录
+	util.deleteFolder(tempExamplePath)
 }
 
-fs.copySync(path.join(examplePath, 'example'), tempExamplePath)
+// 同步临时项目目录
+util.copyDir(path.join(examplePath, 'example'), tempExamplePath)
 
-if(modulesId === 'uni-ui'){
-	fs.copySync(comPath, path.join(tempExamplePath, 'uni_modules'))
-
-}else{
+if (modulesId === 'uni-ui') {
+	buildReadme()
+	util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
+	// 同步 uni-ui 示例
+	util.copyDir(comPath, path.join(tempExamplePath, 'uni_modules'))
+} else {
 	// 将组件拷贝到临时目录
-	fs.copySync(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
-
+	util.copyDir(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
 	handlePageJson(comName, tempExamplePath)
 
 	// 获取关联组件
@@ -47,8 +54,8 @@ if(modulesId === 'uni-ui'){
 	// 同步依赖组件
 	if (relationComponents && relationComponents.length > 0) {
 		relationComponents.reduce((promise, item) => {
-			return fs.copy(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item)).then(res => {
-				console.error(item + '组件同步完成');
+			return new Promise((resolve, reject) => {
+				util.copyDir(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item))
 			})
 		}, Promise.resolve([])).then(res => {
 			console.error('所有依赖组件同步完成');
@@ -59,20 +66,19 @@ if(modulesId === 'uni-ui'){
 	}
 }
 
-
 function setPageComponents(modulesId, comName) {
-	const pagePath = path.join(__dirname, '..', 'pages', 'vue', comName, comName + '.vue')
-	const pageContent = fs.readFileSync(pagePath, 'utf8')
+	const pagePath = path.join(root, 'pages', 'vue', comName, comName + '.vue')
+	const pageContent = fs.readFileSync(pagePath).toString()
 	const pageContents = getComName(pageContent)
-	console.error('组件名称:' + pageContents.length);
+	console.error('组件名称:' + pageContents);
 
 	if (pageContents.length > 0) {
 		pageContents.reduce((promise, item) => {
 			const inputPath = getModulesPath(item)
 			const exists = fs.existsSync(inputPath)
 			if (item === modulesId || !exists) return promise
-			return fs.copy(inputPath, path.join(tempExamplePath, 'uni_modules', item)).then(res => {
-				console.error(item + '组件同步完成');
+			return new Promise((resolve, reject) => {
+				util.copyDir(inputPath, path.join(tempExamplePath, 'uni_modules', item))
 			})
 		}, Promise.resolve([])).then(res => {
 			console.error('所有依赖组件同步完成');
@@ -112,9 +118,8 @@ function getComName(dataFile) {
 
 function handlePageJson(comName, tempExamplePath) {
 	// 处理 pages.json 文件
-	// const pages = fs.readdirSync(inputIndexPages)
-	const uniUiPagesJson = path.join(__dirname, '..', 'pages.json')
-	let pageJsonData = fs.readFileSync(uniUiPagesJson, 'utf8')
+	const uniUiPagesJson = path.join(root, 'pages.json')
+	let pageJsonData = util.read(uniUiPagesJson)
 	// 避免unicode转为实体字符
 	pageJsonData = pageJsonData.replace(/\\u/, '\\\\u')
 	const pagesJson = JSON.parse(pageJsonData)
@@ -143,14 +148,15 @@ function handlePageJson(comName, tempExamplePath) {
 	pageJson = pageJson.replace(/\\\\u/, '\\u')
 
 	// 同步 json 文件
-	fs.outputFileSync(path.join(tempExamplePath, 'pages.json'), pageJson)
+	util.write(path.join(tempExamplePath, 'pages.json'), pageJson)
 	const outPath = path.join(tempExamplePath, 'pages')
 	const exists = fs.existsSync(outPath)
 	if (exists) {
-		fs.removeSync(outPath)
+		util.deleteFolder(outPath)
 	}
-	fs.copySync(path.join(__dirname, '..', 'pages', 'vue', comName), path.join(tempExamplePath, 'pages', comName))
-	fs.copySync(path.join(__dirname, '..', 'common'), path.join(tempExamplePath, 'common'))
+	util.copyDir(path.join(root, 'pages', 'vue', comName), path.join(tempExamplePath, 'pages', comName))
+	util.copyDir(path.join(root, 'common'), path.join(tempExamplePath, 'common'))
+
 }
 
 function getModulesPath(name) {
@@ -162,12 +168,15 @@ function getModulesPath(name) {
  * @param {Object} readmePath
  */
 function handleReadme(readmePath) {
-	let content = fs.readFileSync(readmePath, 'utf-8')
+	let content = util.read(readmePath)
+	// 兼容 windows ，将 \r\n 全部替换成 \n
+	content = content.replace(/\r\n/ig, '\n')
 	// 删除头部额外信息，在其他平台不支持，只在 uni ui 中支持
 	content = content.replace(/---([\s\S]*?)---/ig, '')
 	// 转换 ::: 语法
 	content = content.replace(/::: (.*?)\n([\s\S]*?):::/ig, function(_, $1, $2) {
-		return $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
+		$1 = $1.replace(/(tip|danger|warning)+ /,'')
+		return '> **'+ $1 +'**\n'+ $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
 	})
 	return content
 }

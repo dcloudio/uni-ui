@@ -1,14 +1,22 @@
 # 快速开始
 
-## 方式一 (推荐)
+## 使用uni_modules安装uni-ui (推荐)
 
-`HBuilderX 2.5.5` 起支持 `easycom` 组件模式。在使用 `uni ui` 的时候，只要[`uni ui` 组件](https://ext.dcloud.net.cn/plugin?id=55) 安装在项目的 `components` 目录下,并符合 `components/组件名称/组件名称.vue` 目录结构。就可以不用引用、注册，直接在页面中使用 `uni ui`
+使用 `uni_modules` 方式安装组件库，可以直接通过插件市场导入，通过右键菜单快速更新组件，不需要引用、注册，直接在页面中使用 `uni-ui` 组件。[点击安装 uni-ui 组件库](https://ext.dcloud.net.cn/plugin?id=55)
 
-**目录示例：**
-```json {1,2,3,4,5,6}
+**注意：下载最新的组件目前仅支持 uni_modules ,非uni_modules版本最高支持到组件的1.2.10版本**
+
+如不能升级到 `uni_modules` 版本，可以使用 `uni_modules` 安装好对应组件，将组件拷贝到对应目录。
+
+例如需更新 `uni-list`和`uni-badge` ,将 `uni_modules>uni-list>components`和`uni_modules>uni-badege>components`下所有目录拷贝到如下目录即可：
+
+**目录示例**
+```json {2,3,4,5,6,7}
 ┌─components              组件目录
 │  ├─uni-list             list 列表目录
 │  │  └─uni-list.vue      list 组件文件
+│  ├─uni-list-item        list-item 列表目录
+│  │  └─uni-list-item.vue list 组件文件
 │  ├─uni-badge         	  badge 角标目录
 │  │  └─uni-badge.vue     badge 组件文件
 │  └─ //....              更多组件文件
@@ -22,13 +30,10 @@
 
 ```
 
-::: tip 小提示
-`easycom` 组件模式的好处在于不管 `components` 目录下安装了多少组件，`easycom` 打包后会自动剔除没有使用的组件，对组件库的使用尤为友好,组件库批量安装，随意使用，自动按需打包。 关于 `easycom` 更详细内容 [参考文档](https://uniapp.dcloud.io/collocation/pages?id=easycom)
 
-:::
+## 使用 npm 安装
 
-
-### 方式二（CLI）
+在 `vue-cli` 项目中可以使用 `npm` 安装 `uni-ui` 库 ，或者直接在 `HBuilderX` 项目中使用 `npm` 。（不推荐后一种方式）
 
 **初始化项目**
 
@@ -41,7 +46,7 @@ npm init -y
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui -g
+npm install @dcloudio/uni-ui -d
 ```
 
 
@@ -70,7 +75,7 @@ export default {
 }
 ```
 
-在 ``template`` 中使用组件：
+在 ``template`` 中使用组件： 
 
 ```html
 <uni-badge text="1"></uni-badge>
@@ -81,9 +86,9 @@ export default {
 - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用方式一 （[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
 :::
 
-### 方式3（cli + easycom）
+## 使用 npm + easycom 
 
-使用 `方式2` 安装好 `uni ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
+使用 `npm` 安装好 `uni-ui` 之后，需要配置 `easycom` 规则，让 `npm` 安装的组件支持  `easycom`
 
 打开项目根目录下的 `pages.json` 并添加 `easycom` 节点：
 
@@ -107,6 +112,7 @@ export default {
 
 ```
 
+<!-- 组件列表占位 -->
 
 ### 其他
 

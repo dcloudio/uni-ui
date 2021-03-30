@@ -1,72 +1,59 @@
-const fs = require('fs-extra')
+const fs = require('fs')
 const path = require('path')
-const glob = require("glob")
-const exec = require('child_process').exec
-const argv = process.argv.splice(2)[0]
+const util = require('./util.js')
+const buildReadme = require('./build-readme.js')
+function buildLib(callback) {
+	const root = path.join(__dirname, '..')
+	const uniui = path.join(root, 'uni_modules')
+	const packages = path.join(root, 'packages')
+	const lib = path.join(packages, 'lib')
+	var filenames = []
+	var filenamesUpper = []
 
-const packages = path.join(__dirname, '../uni_modules')
-const uniui = path.join(__dirname, '../packages')
-const lib = path.join(uniui, 'lib')
-const root = path.join(__dirname, '../')
-
-var filenames = []
-var filenamesUpper = []
-
-const uniuiPackagePath = path.join(uniui, 'package.json')
-let uniuiData = fs.readFileSync(path.join(root, 'package.json'), 'utf-8')
-uniuiData = JSON.parse(uniuiData)
-let uniuiPackageData = fs.readFileSync(uniuiPackagePath, 'utf-8')
-uniuiPackageData = JSON.parse(uniuiPackageData)
-uniuiPackageData.version = uniuiData.version
-fs.outputFileSync(uniuiPackagePath, JSON.stringify(uniuiPackageData, '', 2))
-fs.copySync(path.join(root, 'README.md'), path.join(uniui, 'README.md'))
-const exists = fs.existsSync(lib)
-if (exists) {
-	fs.removeSync(lib)
-}
-
-const packagesLists = fs.readdirSync(packages)
-packagesLists.reduce((promise, item) => {
-	const comPath = path.join(packages, item, 'components')
-	const coms = fs.readdirSync(comPath)
-	return coms.reduce((promise, item) => {
-		const componentsPath = path.join(comPath, item)
-		fs.copySync(componentsPath, path.join(lib, item))
-		console.log(item + ' 组件同步成功');
-		return promise
-	}, promise)
-}, Promise.resolve([])).then(() => {
-	console.log('SUCCESS');
-	if (argv === 'npm') {
-		console.log('----- 开始上传 npm -----');
-		start()
+	const uniuiPackagePath = path.join(packages, 'package.json')
+	let uniuiData = util.read(path.join(uniui, 'uni-ui', 'package.json'))
+	let uniuiPackageData = util.read(uniuiPackagePath)
+	uniuiData = JSON.parse(uniuiData)
+	uniuiPackageData = JSON.parse(uniuiPackageData)
+	if (uniuiPackageData.version === uniuiData.version) {
+		console.log('当前版本号一致，请先执行 npm run build:release 更新 uni-ui 组件后再次执行当前命令');
+		return
 	}
-})
 
-function start() {
-	// 任何你期望执行的cmd命令，ls都可以
-	let cmdStr1 = 'npm publish'
-	let cmdPath = path.join(__dirname, '..', 'packages', 'uni-ui')
-	let workerProcess = null
-	console.log(cmdPath);
-	// 子进程名称
-	runExec(cmdStr1, cmdPath, workerProcess)
+	uniuiPackageData.version = uniuiData.version
+	// uni-ui 版本更新
+	util.write(uniuiPackagePath, JSON.stringify(uniuiPackageData, null, 2))
+	let rootPath = path.join(root, 'package.json')
+	let rootPackage = util.read(rootPath)
+	rootPackage = JSON.parse(rootPackage)
+	rootPackage.version = uniuiData.version
+	// // 根目录版本更新
+	util.write(rootPath, JSON.stringify(rootPackage, null, '\t'))
+	// 同步文档
+	buildReadme()
+	util.copyFile(path.join(root, 'README.md'), path.join(packages, 'README.md'))
+
+	const exists = fs.existsSync(lib)
+	if (exists) {
+		util.deleteFolder(lib)
+	}
+	const packagesLists = fs.readdirSync(uniui)
+	packagesLists.reduce((promise, item) => {
+		if (item === 'uni-test' || item === 'uni-ui') return promise
+		const comPath = path.join(uniui, item, 'components')
+		const coms = fs.readdirSync(comPath)
+
+		return coms.reduce((promise, item) => {
+			const componentsPath = path.join(comPath, item)
+			util.copyDir(componentsPath, path.join(lib, item))
+			// console.log(item + ' 组件同步成功');
+			return promise
+		}, promise)
+	}, Promise.resolve([])).then(() => {
+		console.log('SUCCESS');
+		typeof callback === 'function' && callback()
+	})
+
 }
 
-function runExec(cmdStr, cmdPath, workerProcess) {
-	workerProcess = exec(cmdStr, {
-		cwd: cmdPath
-	})
-	// 打印正常的后台可执行程序输出
-	workerProcess.stdout.on('data', function(data) {
-		process.stdout.write(data)
-	})
-	// 打印错误的后台可执行程序输出
-	workerProcess.stderr.on('data', function(data) {
-		process.stdout.write(data)
-	})
-	// 退出之后的输出
-	workerProcess.on('close', function(code) {
-		console.log(code)
-	})
-}
+module.exports = buildLib

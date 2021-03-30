@@ -4,7 +4,7 @@ url : pages/vue/data-checkbox/data-checkbox
 
 ## DataCheckbox 数据驱动的单选复选框
 ::: tip 组件名：uni-data-checkbox
-代码块： `uDataCheckbox`
+代码块： `uDataCheckbox`123
 :::
 
 本组件是基于uni-app基础组件checkbox的封装。本组件要解决问题包括：
