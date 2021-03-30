@@ -1,12 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/swipe-action/swipe-action",
+      "path": "pages/load-more/load-more",
       "style": {
-        "navigationBarTitleText": "SwipeAction 滑动操作",
-        "app-plus": {
-          "bounce": "none"
-        }
+        "navigationBarTitleText": "LoadMore 加载更多"
       }
     }
   ],

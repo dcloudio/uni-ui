@@ -1,6 +1,7 @@
 
 
 ### LoadMore 加载更多
+> **组件名：uni-load-more**
 > 代码块： `uLoadMore`
 
 
@@ -27,7 +28,7 @@
 |属性名			|类型		|	可选值											|默认值	|说明	|
 |:-:				|:-:		|:-:												|:-:		|:-:														|
 |iconSize		|Number	|-													|24			|指定图标大小			|
-|status			|String	|more/loading/moMore				|more		|loading 的状态		|
+|status			|String	|more/loading/noMore				|more		|loading 的状态		|
 |showIcon		|Boolean|-													|true		|是否显示 loading 图标				|
 |iconType		|String	|snow/circle/auto						|auto		|指定图标样式|
 |color			|String	|-													|#777777	|图标和文字颜色		|
@@ -51,6 +52,7 @@
 
 
 
+> **说明**
 > `iconType`为`snow`时，在`APP-NVUE`平台不可设置大小，在非`APP-NVUE`平台不可设置颜色
 
 

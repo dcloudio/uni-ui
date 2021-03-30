@@ -30,7 +30,7 @@ url : pages/vue/load-more/load-more
 |属性名			|类型		|	可选值											|默认值	|说明	|
 |:-:				|:-:		|:-:												|:-:		|:-:														|
 |iconSize		|Number	|-													|24			|指定图标大小			|
-|status			|String	|more/loading/moMore				|more		|loading 的状态		|
+|status			|String	|more/loading/noMore				|more		|loading 的状态		|
 |showIcon		|Boolean|-													|true		|是否显示 loading 图标				|
 |iconType		|String	|snow/circle/auto						|auto		|指定图标样式|
 |color			|String	|-													|#777777	|图标和文字颜色		|
