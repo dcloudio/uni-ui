@@ -1,12 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/swipe-action/swipe-action",
+      "path": "pages/pagination/pagination",
       "style": {
-        "navigationBarTitleText": "SwipeAction 滑动操作",
-        "app-plus": {
-          "bounce": "none"
-        }
+        "navigationBarTitleText": "Pagination 分页器"
       }
     }
   ],
