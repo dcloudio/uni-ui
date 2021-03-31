@@ -1,9 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/load-more/load-more",
+      "path": "pages/pagination/pagination",
       "style": {
-        "navigationBarTitleText": "LoadMore 加载更多"
+        "navigationBarTitleText": "Pagination 分页器"
       }
     }
   ],

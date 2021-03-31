@@ -1,6 +1,7 @@
 
 
 ## Pagination 分页器
+> **组件名：uni-pagination**
 > 代码块： `uPagination`
 
 

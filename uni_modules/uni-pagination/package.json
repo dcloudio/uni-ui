@@ -40,7 +40,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": ["uni-icons"],
     "encrypt": [],
     "platforms": {
       "cloud": {
