@@ -1,9 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/pagination/pagination",
+      "path": "pages/data-picker/data-picker",
       "style": {
-        "navigationBarTitleText": "Pagination 分页器"
+        "navigationBarTitleText": "级联选择",
+        "enablePullDownRefresh": false
       }
     }
   ],
