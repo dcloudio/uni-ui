@@ -139,6 +139,10 @@
 				if (this.isLocaldata) {
 					this.loadData()
 					this.inputSelected = this.selected.slice(0)
+				} else if (!this.parentField && !this.selfField) {
+					this.getNodeData(() => {
+						this.inputSelected = this.selected.slice(0)
+					})
 				} else if (this.value.length) {
 					this.getTreePath(() => {
 						this.inputSelected = this.selected.slice(0)

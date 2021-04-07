@@ -105,7 +105,11 @@ export default {
       return this.localdata.length > 0
     },
     postField() {
-      return `${this.field}, ${this.parentField} as parent_value`
+			let fields = [this.field];
+			if (this.parentField) {
+				fields.push(`${this.parentField} as parent_value`);
+			}
+      return fields.join(',');
     }
   },
   created() {
@@ -192,6 +196,23 @@ export default {
 
       return db
     },
+		getNodeData(callback) {
+		  if (this.loading) {
+		    return
+		  }
+		  this.loading = true
+		  this.getCommand({
+		    field: this.postField,
+				where: this._pathWhere()
+		  }).then((res) => {
+		    this.loading = false
+		    this.selected = res.result.data
+		    callback && callback()
+		  }).catch((err) => {
+		    this.loading = false
+		    this.errorMessage = err
+		  })
+		},
     getTreePath(callback) {
       if (this.loading) {
         return
@@ -280,13 +301,29 @@ export default {
         this.errorMessage = err
       })
     },
+    _pathWhere() {
+      let result = []
+      let where_field = this._getParentNameByField();
+      if (where_field) {
+        result.push(`${where_field} == '${this.value}'`)
+      }
+
+      if (this.where) {
+        return `(${this.where}) && (${result.join(' || ')})`
+      }
+
+      return result.join(' || ')
+    },
     _postWhere() {
       let result = []
       let selected = this.selected
-      result.push(`${this.parentField} == null`)
+      let parentField = this.parentField
+      if (parentField) {
+        result.push(`${parentField} == null || ${parentField} == ""`)
+      }
       if (selected.length) {
         for (var i = 0; i < selected.length - 1; i++) {
-          result.push(`${this.parentField} == '${selected[i].value}'`)
+          result.push(`${parentField} == '${selected[i].value}'`)
         }
       }
 
@@ -308,6 +345,24 @@ export default {
       }
 
       return result.join(' || ')
+    },
+    _getParentNameByField() {
+      const fields = this.field.split(',');
+      let where_field = null;
+      for (let i = 0; i < fields.length; i++) {
+        const items = fields[i].split('as');
+        if (items.length < 2) {
+          continue;
+        }
+        if (items[1].trim() === 'value') {
+          where_field = items[0].trim();
+          break;
+        }
+      }
+      return where_field
+    },
+    _isTreeView() {
+      return (this.parentField && this.selfField)
     },
     _updateSelected() {
       var dl = this.dataList
@@ -388,7 +443,7 @@ export default {
             child[key] = node[key]
           }
         }
-        if (parent_value !== null) {
+        if (parent_value !== undefined) {
           child.parent_value = parent_value
         }
         result.push(child)
