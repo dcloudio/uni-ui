@@ -1,7 +1,7 @@
 {
   "pages": [
     {
-      "path": "pages/file-picker/file-picker",
+      "path": "pages/data-checkbox/data-checkbox",
       "style": {
         "navigationBarTitleText": "",
         "enablePullDownRefresh": false
