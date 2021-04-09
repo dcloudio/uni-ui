@@ -1,7 +1,7 @@
 {
   "id": "uni-data-checkbox",
   "displayName": "DataCheckbox 数据选择器",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "通过数据驱动的单选框和复选框",
   "keywords": [
     "checkbox",

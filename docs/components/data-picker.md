@@ -90,12 +90,14 @@
 ```html
 <template>
   <view>
-    <uni-data-picker placeholder="请选择地址" popup-title="请选择城市" collection="opendb-city-china" field="code as value, name as text" orderby="value asc" :step-searh="true" :self-field="code" parent-field="parent_code"
+    <uni-data-picker placeholder="请选择地址" popup-title="请选择城市" collection="opendb-city-china" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"
  @change="onchange" @nodeclick="onnodeclick">
     </uni-data-picker>
   </view>
 </template>
+```
 
+```js
 <script>
   export default {
     data() {
@@ -125,7 +127,9 @@
     <uni-data-picker :localdata="items" popup-title="请选择班级" @change="onchange" @nodeclick="onnodeclick"></uni-data-picker>
   </view>
 </template>
+```
 
+```js
 <script>
   export default {
     data() {
@@ -201,7 +205,9 @@
 		</uni-data-picker>
 	</view>
 </template>
+```
 
+```js
 <script>
 	export default {
 		data() {

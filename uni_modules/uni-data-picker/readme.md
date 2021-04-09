@@ -1,4 +1,5 @@
 ## DataPicker 级联选择
+> **组件名：uni-data-picker**
 > 代码块： `uDataPicker`
 > 关联组件：`uni-data-pickerview`、`uni-load-more`。
 
@@ -18,6 +19,7 @@
 在uniCloud数据表中新建表“uni-id-address”和“opendb-city-china”，这2个表的schema自带foreignKey关联。在“uni-id-address”表的表结构页面使用schema2code生成前端页面，会自动生成地址管理的维护页面，自动从“opendb-city-china”表包含的中国所有省市区信息里选择地址。
 
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
@@ -55,6 +57,7 @@
 |popup-title					|String					| 					 |							|弹出层标题|
 
 
+> ****
 > `collection/where/orderby` 和 `<unicloud-db>` 的用法一致，[详情](https://uniapp.dcloud.net.cn/uniCloud/unicloud-db)
 
 
@@ -75,6 +78,7 @@
 
 #### 云端数据
 
+> **注意事项**
 > - 云端数据需要关联服务空间
 > - 下面示例中使用的表 `opendb-city-china`(中国城市省市区数据，含港澳台), 在[uniCloud控制台](https://unicloud.dcloud.net.cn/)使用opendb创建，[详情](https://gitee.com/dcloud/opendb)
 
@@ -82,12 +86,14 @@
 ```html
 <template>
   <view>
-    <uni-data-picker placeholder="请选择地址" popup-title="请选择城市" collection="opendb-city-china" field="code as value, name as text" orderby="value asc" :step-searh="true" :self-field="code" parent-field="parent_code"
+    <uni-data-picker placeholder="请选择地址" popup-title="请选择城市" collection="opendb-city-china" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"
  @change="onchange" @nodeclick="onnodeclick">
     </uni-data-picker>
   </view>
 </template>
+```
 
+```js
 <script>
   export default {
     data() {
@@ -117,7 +123,9 @@
     <uni-data-picker :localdata="items" popup-title="请选择班级" @change="onchange" @nodeclick="onnodeclick"></uni-data-picker>
   </view>
 </template>
+```
 
+```js
 <script>
   export default {
     data() {
@@ -178,6 +186,7 @@
 ```
 
 
+> **注意事项**
 > `localdata` 和 `collection` 同时配置时，`localdata` 优先
 
 
@@ -192,7 +201,9 @@
 		</uni-data-picker>
 	</view>
 </template>
+```
 
+```js
 <script>
 	export default {
 		data() {

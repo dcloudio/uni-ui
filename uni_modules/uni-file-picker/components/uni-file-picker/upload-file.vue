@@ -145,7 +145,6 @@
 				for (let i in obj) {
 					classles += `${i}:${obj[i]};`
 				}
-				console.log(classles);
 				return classles
 			}
 		},

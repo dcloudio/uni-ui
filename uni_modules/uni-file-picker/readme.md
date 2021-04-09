@@ -1,11 +1,13 @@
 
 ## FilePicker 文件选择上传
 
+> **组件名：uni-file-picker**
 >  代码块： `uFilePicker`
 
 
 文件选择上传组件，可以选择图片、视频等任意文件并上传到当前绑定的服务空间
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 使用组件需要绑定服务空间
@@ -31,7 +33,7 @@
 | title					| String	| -			| -										| 组件标题，右侧显示上传计数			|
 | mode					| String	| list	| list/grid						| 选择文件后的文件列表样式								|
 | file-mediatype| String	| image	| image/video/all			| 选择文件类型,all 只支持 H5 和微信小程序平台	|
-| file-extname	| Array		| -			| -										| 选择文件后缀，根据 `file-mediatype` 属性而不同|
+| file-extname	| Array\String		| -			| -						| 选择文件后缀，字符串的情况下需要用逗号分隔（推荐使用字符串），根据 `file-mediatype` 属性而不同|
 | list-styles	  | Object	| -			| -										| `mode:list` 时的样式			|
 | image-styles	| Object	| -			| -										| `mode:grid` 时的样式	|
 
@@ -174,7 +176,7 @@ export default {
 
 配置 `file-mediatype` 属性为 `image`，限定只选择图片
 
-配置 `file-extname` 属性为 `['png','jpg']`，限定只选择 `png`和`jpg`后缀的图片
+配置 `file-extname` 属性为 `'png,jpg'`，限定只选择 `png`和`jpg`后缀的图片
 
 配置 `limit` 属性为 1 ，则最多选择一张图片
 
@@ -186,7 +188,7 @@ export default {
 	v-model="imageValue"  
 	file-mediatype="image"
 	mode="grid"
-	file-extname="['png','jpg']"
+	file-extname="png,jpg"
 	:limit="1"
 	@progress="progress" 
 	@success="success" 
