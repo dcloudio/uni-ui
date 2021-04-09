@@ -242,7 +242,7 @@ export default {
 	created() {
 		// this.files = Object.assign([], this.value)
 		this.tempData = {}
-		
+
 	},
 	methods: {
 		/**
@@ -348,7 +348,7 @@ export default {
 							tempFiles: currentData,
 							tempFilePaths: filePaths
 						})
-
+						res.tempFiles = files
 						// 停止自动上传
 						if (!this.autoUpload) {
 							res.tempFiles = []
