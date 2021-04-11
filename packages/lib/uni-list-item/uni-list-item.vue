@@ -20,7 +20,7 @@
 				<slot name="body">
 					<view class="uni-list-item__content" :class="{ 'uni-list-item__content--center': thumb || showExtraIcon || showBadge || showSwitch }">
 						<text v-if="title" class="uni-list-item__content-title" :class="[ellipsis !== 0 && ellipsis <= 2 ? 'uni-ellipsis-' + ellipsis : '']">{{ title }}</text>
-						<text v-if="note" class="uni-list-item__content-note">{{ note }}</text>
+						<text v-if="note" class="uni-list-item__content-note" :class="[noteEllipsis !== 0 && noteEllipsis <= 2 ? 'uni-ellipsis-' + noteEllipsis : '']">{{ note }}</text>
 					</view>
 				</slot>
 				<slot name="footer">
@@ -71,6 +71,7 @@
  * @value column 		垂直排列
  * @event {Function} 	click 							点击 uniListItem 触发事件
  * @event {Function} 	switchChange 					点击切换 Switch 时触发
+ * @property {Number} 	noteEllipsis 				note 是否溢出隐藏，可选值，0:默认; 1:显示一行; 2:显示两行;【nvue 暂不支持】
  */
 export default {
 	name: 'UniListItem',
@@ -88,6 +89,10 @@ export default {
 			default: ''
 		},
 		ellipsis: {
+			type: [Number],
+			default: 0
+		},
+		noteEllipsis: {
 			type: [Number],
 			default: 0
 		},
