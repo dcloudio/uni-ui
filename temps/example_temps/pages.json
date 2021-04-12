@@ -1,10 +1,9 @@
 {
   "pages": [
     {
-      "path": "pages/file-picker/file-picker",
+      "path": "pages/pagination/pagination",
       "style": {
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
+        "navigationBarTitleText": "Pagination 分页器"
       }
     }
   ],
