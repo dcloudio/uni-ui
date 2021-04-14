@@ -175,6 +175,7 @@ export default {
 |uniCountdown|[倒计时](https://ext.dcloud.net.cn/plugin?name=uni-countdown)|
 |uniDataCheckbox|[数据选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-checkbox)|
 |uniDataPicker|[数据驱动的picker选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-picker)|
+|uniDatePicker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-date-picker)|
 |uniDateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?name=uni-dateformat)|
 |uniDatetimePicker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-datetime-picker)|
 |uniDrawer|[抽屉](https://ext.dcloud.net.cn/plugin?name=uni-drawer)|

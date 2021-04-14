@@ -7,6 +7,49 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.2.15" date="2021-04-14">
+	<log-item title="uni-date-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 发布第一版
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.2.14" date="2021-04-14">
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="feat">
+			 PC 和 移动端适配不同的 ui
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.2.13" date="2021-04-14">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 下无法选中的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 支持云端非树形表结构数据
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 根节点 parent_field 字段等于null时选择界面错乱问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 选择的文件非 file-extname 字段指定的扩展名报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更新组件示例
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="组件工程调整" date="2020-02-05">
 	<log-item-text tag-type="docs" only>
 		支持uni_modules

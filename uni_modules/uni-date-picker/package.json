@@ -1,18 +1,19 @@
 {
-  "id": "uni-ui",
-  "displayName": "uni-ui",
-  "version": "1.2.15",
-  "description": "基于 uni-app 的 UI 组件库",
+  "id": "uni-date-picker",
+  "displayName": "DatePicker 日期选择器",
+  "version": "1.0.0",
+  "description": "日期选择器",
   "keywords": [
+    "期选择器",
+    "日历",
+    "范围选择",
+    "uni-date-picker",
     "uni-ui",
-    "UI组件库",
-    "uniui",
-    "ui框架",
-    "ui库"
-  ],
+    ""
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": "^3.1.0"
+    "HBuilderX": ""
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -41,48 +42,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [
-      "uni-badge",
-      "uni-calendar",
-      "uni-card",
-      "uni-collapse",
-      "uni-combox",
-      "uni-countdown",
-      "uni-data-checkbox",
-      "uni-data-picker",
-      "uni-dateformat",
-      "uni-datetime-picker",
-      "uni-drawer",
-      "uni-easyinput",
-      "uni-fab",
-      "uni-fav",
-      "uni-file-picker",
-      "uni-forms",
-      "uni-goods-nav",
-      "uni-grid",
-      "uni-group",
-      "uni-icons",
-      "uni-indexed-list",
-      "uni-link",
-      "uni-list",
-      "uni-load-more",
-      "uni-nav-bar",
-      "uni-notice-bar",
-      "uni-number-box",
-      "uni-pagination",
-      "uni-popup",
-      "uni-rate",
-      "uni-row",
-      "uni-search-bar",
-      "uni-segmented-control",
-      "uni-steps",
-      "uni-swipe-action",
-      "uni-swiper-dot",
-      "uni-table",
-      "uni-tag",
-      "uni-title",
-      "uni-transition"
-    ],
+    "dependencies": [],
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -92,7 +52,7 @@
       "client": {
         "App": {
           "app-vue": "y",
-          "app-nvue": "y"
+          "app-nvue": "n"
         },
         "H5-mobile": {
           "Safari": "y",

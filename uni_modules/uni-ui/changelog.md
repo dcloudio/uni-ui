@@ -1,3 +1,14 @@
+## 1.2.15（2021-04-14）
+- uni-date-picker 发布第一版
+## 1.2.14（2021-04-14）
+- uni-pagination 新增 PC 和 移动端适配不同的 ui
+## 1.2.13（2021-04-14）
+- uni-data-checkbox 修复 nvue 下无法选中的问题
+- uni-data-picker 新增 支持云端非树形表结构数据
+- uni-data-picker 修复 根节点 parent_field 字段等于null时选择界面错乱问题
+- uni-file-picker 修复 选择的文件非 file-extname 字段指定的扩展名报错的Bug
+- uni-file-picker 优化 更新组件示例
+- uni-file-picker 优化 file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
 ## 1.2.12（2021-03-23）
   + uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性; 
   + uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug， 
