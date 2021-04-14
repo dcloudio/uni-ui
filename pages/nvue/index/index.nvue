@@ -110,6 +110,9 @@
 					name: 'DataPicker 级联选择',
 					url: 'data-picker'
 				}, {
+					name: 'DatePicker 日期选择',
+					url: 'date-picker'
+				}, {
 					name: 'DatetimePicker 日期时间选择',
 					url: 'datetime-picker'
 				}, {
