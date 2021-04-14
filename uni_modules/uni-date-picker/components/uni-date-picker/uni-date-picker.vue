@@ -63,7 +63,7 @@
 
 	export default {
 		components: {
-			uniCalendar 
+			uniCalendar
 		},
 		data() {
 			return {
@@ -97,7 +97,7 @@
 				type: String,
 				default: 'date'
 			},
-			value: {	
+			value: {
 				type: [String, Number, Array],
 				default: ''
 			},
@@ -206,11 +206,19 @@
 					this.$refs.mobile.open()
 					return
 				}
+				let left
+				const leftWindowInfo = uni.getLeftWindowStyle()
 				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
 				dateEditor.boundingClientRect(rect => {
+					console.log(22222222, rect);
+					if (leftWindowInfo.errMsg) {
+						left = rect.left + 'px'
+					} else {
+						left = '15px'
+					}
 					this.popover = {
 						top: rect.top + rect.height + 15 + 'px',
-						left: rect.left + 'px',
+						left: left,
 					}
 				}).exec()
 				setTimeout(() => {
@@ -360,7 +368,7 @@
 		color: #666;
 		font-size: 14px;
 	}
-	
+
 	 .uni-date-x--border {
 		box-sizing: border-box;
 		border-radius: 4px;
