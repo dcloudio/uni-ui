@@ -2,6 +2,7 @@
 
 ## SearchBar 搜索栏
 
+> **组件名：uni-search-bar**
 > 代码块： `uSearchBar`
 
 
@@ -21,6 +22,9 @@
 <!-- 基本用法 -->
 <uni-search-bar @confirm="search" @input="input" ></uni-search-bar>
 
+<!-- v-model 用法 -->
+<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @change="change" @clear="clear">
+
 <!-- 自定义Placeholder -->
 <uni-search-bar placeholder="自定placeholder" @confirm="search"></uni-search-bar>
 
@@ -34,8 +38,9 @@
 
 |属性名			|类型	|默认值	|说明																					|
 |:-:			|:-:	|:-:	|:-:																					|
+|value/v-model	|StringNumber	|	|搜索栏绑定值																		|
 |placeholder	|String	|搜索	|搜索栏Placeholder																		|
-|radius			|Number	|10		|搜索栏圆角，单位rpx																	|
+|radius			|Number	|10		|搜索栏圆角，单位px																	|
 |clearButton	|String	|auto	|是否显示清除按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
 |cancelButton	|String	|auto	|是否显示取消按钮，可选值`always`-一直显示、`auto`-输入框不为空时显示、`none`-一直不显示	|
 |cancelText		|String	|取消	|取消按钮的文字																			|
@@ -52,7 +57,8 @@
 |@input		|uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value|e=value	|
 |@cancel		|点击取消按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
 |@clear		|点击清除按钮时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
-|@blur			|input失去焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|@focus			|input 获取焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
+|@blur			|input 失去焦点时触发事件，返回参数为uniSearchBar的value				|e={value:Number}	|
 
 ### 替换 icon 的 slot 插槽
 

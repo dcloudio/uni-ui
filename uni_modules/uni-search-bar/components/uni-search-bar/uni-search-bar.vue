@@ -7,12 +7,12 @@
 				</slot>
 			</view>
 			<input v-if="show || searchVal" :focus="showSync" :placeholder="placeholder" :maxlength="maxlength" class="uni-searchbar__box-search-input"
-			 confirm-type="search" type="text" v-model="searchVal" @confirm="confirm" @blur="blur" />
+			 confirm-type="search" type="text" v-model="searchVal" @confirm="confirm" @blur="blur" @focus="emitFocus" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear"
 			 @click="clear">
 				<slot name="clearIcon">
-					<uni-icons color="#c0c4cc" size="18" type="clear" />
+					<uni-icons color="#c0c4cc" size="15" type="clear" />
 				</slot>
 			</view>
 		</view>
@@ -170,6 +170,9 @@
 				this.$emit("blur", {
 					value: this.searchVal
 				})
+			},
+			emitFocus(e) {
+				this.$emit("focus", e.detail)
 			}
 		}
 	};
