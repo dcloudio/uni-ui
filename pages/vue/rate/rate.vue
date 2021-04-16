@@ -49,7 +49,7 @@
 		<view class="example-body">
 			<uni-rate
 			    :value="4"
-			    :margin="20"
+			    margin="20"
 			/>
 		</view>
 		<uni-section

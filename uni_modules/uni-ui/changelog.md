@@ -1,30 +1,34 @@
-## 1.2.15（2021-04-14）
-- uni-date-picker 发布第一版
-## 1.2.14（2021-04-14）
-- uni-pagination 新增 PC 和 移动端适配不同的 ui
 ## 1.2.13（2021-04-14）
-- uni-data-checkbox 修复 nvue 下无法选中的问题
-- uni-data-picker 新增 支持云端非树形表结构数据
-- uni-data-picker 修复 根节点 parent_field 字段等于null时选择界面错乱问题
-- uni-file-picker 修复 选择的文件非 file-extname 字段指定的扩展名报错的Bug
-- uni-file-picker 优化 更新组件示例
-- uni-file-picker 优化 file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
++ uni-ui 新增 日期区间选择器 uni-date-picker 组件
++ uni-ui 新增 uni-data-picker 支持云端非树形表结构数据
++ uni-ui 修复 uni-data-checkbox nvue 下无法选中的问题
++ uni-ui 修复 uni-data-picker 根节点 parent_field 字段等于null时选择界面错乱问题
++ uni-ui 修复 uni-file-picker 选择的文件非 file-extname 字段指定的扩展名报错的Bug
++ uni-ui 修复 uni-swipe-action 报错 nv_navigator is not defined 的bug
++ uni-ui 修复 uni-load-more 在首页使用时，h5 平台报 'uni is not defined' 的 bug
++ uni-ui 优化 uni-file-picker file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
++ uni-ui 优化 uni-pagination PC 和 移动端适配不同的 ui
++ uni-ui 更新 uni-file-picker 组件示例
++ uni-ui 修复 uni-nav-bar 当 fixed 属性为 true 时铺不满屏幕的 bug
++ uni-ui 新增 uni-search-bar 的 focus 事件
++ uni-ui 修复 uni-rate 属性 margin 值为 string 组件失效的 bug
+
 ## 1.2.12（2021-03-23）
-  + uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性; 
-  + uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug， 
-  + uni-ui 修复 uni-datetime-picker change事件触发2次的 bug
-  + uni-ui 修复 uni-datetime-picker 分、秒 end 范围错误的 bug
-  + uni-ui 新增 uni-tr selectable 属性，用于 type=selection 时，设置某行是否可由全选按钮控制
-  + uni-ui 新增 uni-data-checkbox 新增 disabled属性，支持nvue
-  + uni-ui 优化 uni-data-checkbox  无选项时提示“暂无数据”
-  + uni-ui 优化 uni-data-checkbox  默认颜色显示
-  + uni-ui 新增 uni-link href 属性支持 tel:|mailto:
-  + uni-ui 新增 uni-table 示例demo
-  + uni-ui 修复 uni-data-picker 微信小程序某些情况下无法选择的问题，事件无法触发的问题
-  + uni-ui 修复 uni-nav-bar easycom 下，找不到 uni-status-bar 的bug
-  + uni-ui 修复 uni-easyinput 示例在 qq 小程序上的bug
-  + uni-ui 修复 uni-forms 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug
-  + uni-ui 调整 cli 项目 建议使用 easycom 方式引用组件，如使用按需引用，需手动维护组件内部引用
++ uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性; 
++ uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug， 
++ uni-ui 修复 uni-datetime-picker change事件触发2次的 bug
++ uni-ui 修复 uni-datetime-picker 分、秒 end 范围错误的 bug
++ uni-ui 新增 uni-tr selectable 属性，用于 type=selection 时，设置某行是否可由全选按钮控制
++ uni-ui 新增 uni-data-checkbox 新增 disabled属性，支持nvue
++ uni-ui 优化 uni-data-checkbox  无选项时提示“暂无数据”
++ uni-ui 优化 uni-data-checkbox  默认颜色显示
++ uni-ui 新增 uni-link href 属性支持 tel:|mailto:
++ uni-ui 新增 uni-table 示例demo
++ uni-ui 修复 uni-data-picker 微信小程序某些情况下无法选择的问题，事件无法触发的问题
++ uni-ui 修复 uni-nav-bar easycom 下，找不到 uni-status-bar 的bug
++ uni-ui 修复 uni-easyinput 示例在 qq 小程序上的bug
++ uni-ui 修复 uni-forms 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug
++ uni-ui 调整 cli 项目 建议使用 easycom 方式引用组件，如使用按需引用，需手动维护组件内部引用
 
 ## 1.2.11（2021-02-24）
 - 调整为uni_modules目录规范
