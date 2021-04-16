@@ -1,7 +1,7 @@
 {
   "id": "uni-data-picker",
   "displayName": "DataPicker 数据驱动的picker选择器",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Picker选择器",
   "keywords": [
     "",

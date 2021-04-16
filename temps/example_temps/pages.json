@@ -1,19 +1,10 @@
 {
   "pages": [
     {
-      "path": "pages/nav-bar/nav-bar",
+      "path": "pages/table/table",
       "style": {
-        "navigationBarTitleText": "NavBar 导航栏",
-        "navigationStyle": "custom",
-        "enablePullDownRefresh": true,
-        "app-plus": {
-          "titleNView": false,
-          "bounce": "none",
-          "pullToRefresh": {
-            "style": "circle",
-            "offset": "70px"
-          }
-        }
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
       }
     }
   ],
