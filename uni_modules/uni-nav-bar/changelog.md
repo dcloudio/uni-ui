@@ -1,6 +1,10 @@
+## 1.0.8（2021-04-14）
+- uni-ui 修复 uni-nav-bar 当 fixed 属性为 true 时铺不满屏幕的 bug
 ## 1.0.7（2021-02-25）
 - 修复 easycom 下，找不到 uni-status-bar 的bug
+
 ## 1.0.6（2021-02-05）
 - 优化 组件引用关系，通过uni_modules引用组件
+
 ## 1.0.5（2021-02-05）
 - 调整为uni_modules目录规范

@@ -470,7 +470,7 @@
 
 				.hidden {
 					position: absolute;
-					transform: scale(0);
+					// transform: scale(0);
 					opacity: 0;
 				}
 

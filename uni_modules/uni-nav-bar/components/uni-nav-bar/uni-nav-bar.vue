@@ -227,6 +227,8 @@
 	.uni-navbar--fixed {
 		position: fixed;
 		z-index: 998;
+		left: var(--window-left);
+		right: var(--window-right);
 	}
 
 	.uni-navbar--shadow {

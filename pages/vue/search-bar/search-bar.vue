@@ -2,7 +2,7 @@
 	<view>
 		<uni-section title="基本用法" type="line"></uni-section>
 		<view class="example-body">
-			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @input="input" @cancel="cancel" @change="change" @clear="clear">
+			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @change="change" @clear="clear">
 			</uni-search-bar>
 			<view class="search-result">
 				<text class="search-result-text">当前输入为：{{ searchValue }}</text>
@@ -51,13 +51,19 @@
 			},
 			clear(res) {
 				uni.showToast({
-					title: 'clear事件，输入值为：' + res.value,
+					title: 'clear事件，清除值为：' + res.value,
 					icon: 'none'
 				})
 			},
 			blur(res) {
 				uni.showToast({
 					title: 'blur事件，输入值为：' + res.value,
+					icon: 'none'
+				})
+			},
+			focus(e) {
+				uni.showToast({
+					title: 'focus事件，输出值为：' + e.value,
 					icon: 'none'
 				})
 			},

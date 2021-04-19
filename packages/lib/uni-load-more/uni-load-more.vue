@@ -28,7 +28,10 @@
 </template>
 
 <script>
-	const platform = uni.getSystemInfoSync().platform
+	let platform
+	setTimeout(() => {
+			platform = uni.getSystemInfoSync().platform
+	}, 16)
 
 	/**
 	 * LoadMore 加载更多

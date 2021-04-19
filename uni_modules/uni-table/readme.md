@@ -75,13 +75,13 @@
 
 ### Table Props
 
-属性名		| 类型			|默认值	 		| 可选值	| 说明
-:-:			| :-:			|:-:			| :-:	| :-:	
-border		| Boolean		| false			| -		| 是否带有纵向边框	
-stripe		| Boolean		| false			| -		| 是否显示斑马线样式	
-type		| Boolean		| false			| -		| 是否开启多选	
-emptyText	| String		| 没有更多数据	| -		| 空数据时显示的文本内容	
-loading		| Boolean		| false			| -		| 显示加载中	
+|属性名		| 类型			|默认值	 		| 可选值	| 说明|
+|:-:			| :-:			|:-:			| :-:	| :-:	|
+|border		| Boolean		| false			| -		| 是否带有纵向边框	|
+|stripe		| Boolean		| false			| -		| 是否显示斑马线样式	|
+|type			| String		| ''			| -			| 值为type="selection" 时开启多选|
+|emptyText	| String		| 没有更多数据	| -		| 空数据时显示的文本内容	|
+|loading		| Boolean		| false			| -		| 显示加载中|	
 
 ### Table Events
 
@@ -89,16 +89,35 @@ loading		| Boolean		| false			| -		| 显示加载中
 :-:					|:-:									| :-:				
 selection-change	| 开启多选时，当选择项发生变化时会触发该事件	| Function(Object)
 
+### Table Methods
+**Tips: 因微信小程序框架问题，暂不支持如下方法**
+
+|方法称名							|说明				|参数|
+|:-:								|:-:				|:-:|
+|selectionAll				|选中全部行	|-	|
+|toggleRowSelection	|用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中）	| Function(Array:[行索引],Boolean:selected)	|
+|clearSelection	|用于多选表格，清空用户的选择	|-	|
+|toggleAllSelection	|用于多选表格，切换所有行的选中状态	|-	|
+
+
 
 ### Th Props
 
-属性名	|类型	|默认值	 	|可选值				|说明
-:-:		|:-:		|:-:		|:-:				|:-:
-width	|String	| -			|-					| 单元格宽度
-align	|Boolean| left		|left/center/right	| 表头对齐方式
+|属性名		|类型		|默认值	 	|可选值				|说明|
+|:-:			|:-:		|:-:			|	:-:				|:-:|
+|width		|String	| -				|-					| 单元格宽度|
+|align		|String	| left		|left/center/right	| 表头对齐方式|
+|sortable |Boolean| false		|- 	| 是否启用排序|
+
+### Th Events
+
+|事件称名				|说明									| 返回参数			|
+|:-:					|:-:									| :-:				|
+||sort-change	| 点击排序时会触发该事件	| Function(Object)|
+
 
 ### Td Props
 
-属性名	|类型	|默认值	 	|可选值				|说明
-:-:		|:-:		|:-:			|:-:				|:-:
-align	|Boolean| left		|left/center/right	| 单元格对齐方式
+|属性名	|类型	|默认值	 	|可选值				|说明|
+|:-:		|:-:		|:-:			|:-:				|:-:|
+|align	|Boolean| left		|left/center/right	| 单元格对齐方式|

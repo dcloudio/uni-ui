@@ -110,6 +110,11 @@
           hasNodes
         } = this._updateBindData()
 
+        if (!this._isTreeView()) {
+          this.onSelectedChange(node, true)
+          return
+        }
+
         if (this.isLocaldata && (!hasNodes || isleaf)) {
           this.onSelectedChange(node, true)
           return
