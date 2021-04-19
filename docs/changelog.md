@@ -7,21 +7,6 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
-<log title="1.2.15" date="2021-04-14">
-	<log-item title="uni-date-picker 组件更新">
-		<log-item-text tag-type="perf">
-			 发布第一版
-		</log-item-text>
-	</log-item>
-</log>
-
-<log title="1.2.14" date="2021-04-14">
-	<log-item title="uni-pagination 组件更新">
-		<log-item-text tag-type="feat">
-			 PC 和 移动端适配不同的 ui
-		</log-item-text>
-	</log-item>
-</log>
 
 <log title="1.2.13" date="2021-04-14">
 	<log-item title="uni-data-checkbox 组件更新">
@@ -46,6 +31,44 @@
 		</log-item-text>
 		<log-item-text tag-type="perf">
 			 file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="feat">
+			 PC 和 移动端适配不同的 ui
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-date-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 发布第一版
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 本地数据概率无法回显时问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 uni-ui 修复 uni-nav-bar 当 fixed 属性为 true 时铺不满屏幕的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-rate 属性 margin 值为 string 组件失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 uni-ui 新增 uni-search-bar 的 focus 事件
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="feat">
+			 sortable 属性，是否开启单列排序
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 表格多选逻辑
 		</log-item-text>
 	</log-item>
 </log>

@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.2.15",
+  "version": "1.2.13",
   "description": "基于 uni-app 的 UI 组件库",
   "keywords": [
     "uni-ui",
@@ -9,10 +9,10 @@
     "uniui",
     "ui框架",
     "ui库"
-  ],
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": "^3.1.0"
+    "HBuilderX": ""
   },
   "directories": {
     "example": "../../temps/example_temps"

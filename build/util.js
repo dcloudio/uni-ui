@@ -127,6 +127,9 @@ class Util {
 	}
 
 	_copy(src, dist) {
+		if(fs.statSync(src).isFile()) {
+			return
+		}
 		var paths = fs.readdirSync(src)
 		paths.forEach((p)=> {
 			var _src = src + '/' + p;
