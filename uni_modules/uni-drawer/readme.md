@@ -1,11 +1,13 @@
 
 
 ## Drawer 抽屉
+> **组件名：uni-drawer**
 > 代码块： `uDrawer`
 
 
 抽屉侧滑菜单。
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - `width` 属性仅在 `vue` 页面生效，`nvue` 页面因性能问题，不支持动态设置宽度，如需修改，请下载组件修改源码
 
@@ -22,11 +24,31 @@
 在 ``template`` 中使用组件
 
 ```html
-<uni-drawer :visible="true">
-    <view style="padding:15px;">
-        <view class="uni-title">抽屉式导航</view>
-    </view>
-</uni-drawer>
+<template>
+	<view>
+		<button @click="showDrawer" type="primary">右侧弹出 显示Drawer</button>
+		<uni-drawer ref="showRight" mode="right" :mask-click="false">
+			<scroll-view style="height: 100%;" scroll-y="true">
+				<button @click="closeDrawer" type="primary">关闭Drawer</button>
+				<view v-for="item in 60" :key="item">可滚动内容 {{ item }}</view>
+			</scroll-view>
+		</uni-drawer>
+	</view>
+</template>
+
+<script>
+	export default {
+		methods: {
+			showDrawer() {
+				this.$refs.showRight.open();
+			},
+			closeDrawer() {
+				this.$refs.showRight.close();
+			}
+
+		}
+	}
+</script
 ```
 
 ## API
