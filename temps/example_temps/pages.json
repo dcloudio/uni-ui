@@ -1,17 +1,16 @@
 {
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
-		}
-	}],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"background": "#efeff4"
-		}
-	}
+  "pages": [
+    {
+      "path": "pages/number-box/number-box",
+      "style": {
+        "navigationBarTitleText": "NumberBox 数字输入框"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
 }
