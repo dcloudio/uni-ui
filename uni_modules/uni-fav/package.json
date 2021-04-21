@@ -1,7 +1,7 @@
 {
   "id": "uni-fav",
   "displayName": "Fav 收藏按钮",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": " Fav 收藏组件，可自定义颜色、大小。",
   "keywords": [
     "fav",
@@ -39,7 +39,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {

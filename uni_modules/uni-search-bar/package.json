@@ -1,7 +1,7 @@
 {
   "id": "uni-search-bar",
   "displayName": "SearchBar 搜索栏",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "搜索栏组件，通常用于搜索商品、文章等",
   "keywords": [
     "search-bar",
@@ -40,7 +40,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {

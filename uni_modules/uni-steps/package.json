@@ -1,7 +1,7 @@
 {
   "id": "uni-steps",
   "displayName": "Steps 步骤条",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "步骤条组件，提供横向和纵向两种布局格式。",
   "keywords": [
     "steps",
@@ -40,7 +40,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {
