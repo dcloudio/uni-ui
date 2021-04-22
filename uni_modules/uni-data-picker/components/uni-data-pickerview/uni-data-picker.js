@@ -327,11 +327,15 @@ export default {
         }
       }
 
+      let where = []
       if (this.where) {
-        return `(${this.where}) && (${result.join(' || ')})`
+        where.push(`(${this.where})`)
+      }
+      if (result.length) {
+        where.push(`(${result.join(' || ')})`)
       }
 
-      return result.join(' || ')
+      return where.join(' && ')
     },
     _nodeWhere() {
       let result = []
