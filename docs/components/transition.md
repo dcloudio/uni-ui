@@ -394,18 +394,3 @@ this.$refs.ani.step({
 })
 ```
 
-**倾斜：**
-
-|属性名|值|说明|平台差异|
-|:-:|:-:|:-:|:-:|
-|skew|ax,[ay]|参数范围-180~180；一个参数时，Y轴坐标不变，X轴坐标延顺时针倾斜ax度；两个参数时，分别在X轴倾斜ax度，在Y轴倾斜ay度|nvue不支持|
-|skewX|ax|	参数范围-180~180；Y轴坐标不变，X轴坐标延顺时针倾斜ax度|nvue不支持|
-|skewY|ay|	参数范围-180~180；X轴坐标不变，Y轴坐标延顺时针倾斜ay度|nvue不支持|
-
-
-**矩阵变形：**
-
-|属性名|值|说明|平台差异|
-|:-:|:-:|:-:|:-:|
-|matrix|(a,b,c,d,tx,ty)|同 [transform-function matrix](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix())|nvue不支持|
-|matrix3d|同 [transform-function matrix3d](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d())|nvue不支持|
