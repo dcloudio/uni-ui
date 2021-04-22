@@ -97,7 +97,7 @@ export default {
 		// 动画默认配置
 		this.config = {
 			duration: this.duration,
-			timingFunction: 'linear',
+			timingFunction: 'ease',
 			transformOrigin: '50% 50%',
 			delay: 0
 		}

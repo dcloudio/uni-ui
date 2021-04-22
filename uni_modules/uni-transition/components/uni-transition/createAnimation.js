@@ -110,7 +110,6 @@ const animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom']
 animateTypes1.concat(animateTypes2, animateTypes3).forEach(type => {
 	MPAnimation.prototype[type] = function(...args) {
 		// #ifndef APP-NVUE
-		console.log(...args);
 		this.animation[type](...args)
 		// #endif
 		// #ifdef APP-NVUE
