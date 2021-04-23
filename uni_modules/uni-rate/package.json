@@ -1,7 +1,7 @@
 {
   "id": "uni-rate",
   "displayName": "Rate 评分",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Rate 评分组件，可自定义评分星星图标的大小、间隔、评分数。",
   "keywords": [
     "rate",
@@ -39,7 +39,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {

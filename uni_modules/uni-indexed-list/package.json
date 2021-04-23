@@ -1,7 +1,7 @@
 {
   "id": "uni-indexed-list",
   "displayName": "IndexedList 索引列表",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "索引列表",
   "keywords": [
     "uni-ui",
@@ -40,7 +40,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {

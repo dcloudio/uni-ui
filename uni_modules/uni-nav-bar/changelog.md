@@ -1,5 +1,8 @@
+## 1.0.9（2021-04-21）
+- 优化 添加依赖 uni-icons, 导入后自动下载依赖
 ## 1.0.8（2021-04-14）
 - uni-ui 修复 uni-nav-bar 当 fixed 属性为 true 时铺不满屏幕的 bug
+
 ## 1.0.7（2021-02-25）
 - 修复 easycom 下，找不到 uni-status-bar 的bug
 

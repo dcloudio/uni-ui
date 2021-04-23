@@ -21,6 +21,7 @@ url : pages/vue/number-box/number-box
 
 ```html
 <uni-number-box></uni-number-box>
+<uni-number-box v-model = "vModelValue" />
 <uni-number-box :min="0" :max="9"></uni-number-box>
 <uni-number-box @change="bindChange"></uni-number-box>
 ```
@@ -29,13 +30,13 @@ url : pages/vue/number-box/number-box
 
 ### NumberBox Props
 
-|属性名		|类型		|默认值	|说明								|
-|:-:			|:-:		|:-:		|:-:								|
-|value		|Number	|0			|输入框当前值					|
-|min			|Number	|0			|最小值							|
-|max			|Number	|100		|最大值							|
-|step			|Number	|1			|每次点击改变的间隔大小	|
-|disabled	|Boolean|false	|是否为禁用状态				|
+|属性名				|类型		|默认值	|说明										|
+|:-:					|:-:		|:-:		|:-:										|
+|value/v-model|Number	|0			|输入框当前值						|
+|min					|Number	|0			|最小值									|
+|max					|Number	|100		|最大值									|
+|step					|Number	|1			|每次点击改变的间隔大小	|
+|disabled			|Boolean|false	|是否为禁用状态					|
 
 ### NumberBox Events
 

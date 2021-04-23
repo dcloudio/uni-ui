@@ -1,10 +1,10 @@
 # 快速开始
 
-## 使用uni_modules安装uni-ui (推荐)
+## 方式一：使用 uni_modules 安装（推荐）
 
 使用 `uni_modules` 方式安装组件库，可以直接通过插件市场导入，通过右键菜单快速更新组件，不需要引用、注册，直接在页面中使用 `uni-ui` 组件。[点击安装 uni-ui 组件库](https://ext.dcloud.net.cn/plugin?id=55)
 
-**注意：下载最新的组件目前仅支持 uni_modules ,非uni_modules版本最高支持到组件的1.2.10版本**
+**注意：下载最新的组件目前仅支持 uni_modules ,非 uni_modules 版本最高支持到组件的1.2.10版本**
 
 如不能升级到 `uni_modules` 版本，可以使用 `uni_modules` 安装好对应组件，将组件拷贝到对应目录。
 
@@ -31,38 +31,33 @@
 ```
 
 
-## 使用 npm 安装
+## 方式二：使用 npm 安装
 
 在 `vue-cli` 项目中可以使用 `npm` 安装 `uni-ui` 库 ，或者直接在 `HBuilderX` 项目中使用 `npm` 。（不推荐后一种方式）
 
-**初始化项目**
+**准备 sass**
 
-在 HBuilderX 中新建 uni-app 项目，进入项目目录，执行：
+`vue-cli` 项目请先安装 sass 及 sass-loader，如在 HBuliderX 中使用，可跳过此步。
 
+- 安装 sass
 ```
-npm init -y 
+ npm i sass -D   或   yarn add sass -D  
 ```
+
+- 安装 sass-loader
+```
+npm i sass-loader@10.1.1 -D   或   yarn add sass-loader@10.1.1 -D
+```
+
+> sass-loader 请使用低于 @11.0.0 的版本，[sass-loader@11.0.0 不支持 vue@2.6.12 ](https://stackoverflow.com/questions/66082397/typeerror-this-getoptions-is-not-a-function)
+
 
 **安装 uni-ui**
 
 ```
-npm install @dcloudio/uni-ui -d
+npm i @dcloudio/uni-ui   或   yarn add @dcloudio/uni-ui
 ```
 
-
-**安装成功后目录示例：**
-```json {1,8}
-┌─node_modules            组件依赖
-├─pages                   业务页面文件存放的目录
-│  ├─index
-│  │  └─index.vue         index示例页面
-├─main.js                 Vue初始化入口文件
-├─App.vue                 应用配置，用来配置App全局样式以及监听 应用生命周期
-├─manifest.json           配置应用名称、appid、logo、版本等打包信息，详见
-├─package.json            npm 配置文件
-└─pages.json              配置页
-
-```
 
 
 在 ``script`` 中引用组件：
@@ -75,6 +70,7 @@ export default {
 }
 ```
 
+
 在 ``template`` 中使用组件： 
 
 ```html
@@ -83,7 +79,7 @@ export default {
 <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
 ```
 ::: danger 注意
-- `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用方式一 （[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
+- `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用（[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
 :::
 
 ## 使用 npm + easycom 
@@ -122,7 +118,6 @@ export default {
 
 ::: danger 注意
 - `uni-ui` 不支持使用 `Vue.use()` 的方式安装
-- `uni-ui` 依赖 `scss`，若是 `HBuilderX` 中创建的 `uni-app` 项目，需要在 `HBuilderX` 中安装 `scss` 插件；如果是使用 `cli` 创建的 `uni-app` 项目，需要在项目下`npm`安装 `node-sass` 和 `sass-loader`
 :::
 
 

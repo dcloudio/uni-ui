@@ -1,7 +1,7 @@
 {
   "id": "uni-goods-nav",
   "displayName": "GoodsNav 商品导航",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "商品导航组件主要用于电商类应用底部导航，可自定义加入购物车，购买等操作",
   "keywords": [
     "goods-nav",
@@ -39,7 +39,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+				"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {

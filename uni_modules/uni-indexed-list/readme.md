@@ -1,6 +1,7 @@
 
 
 ## IndexedList 索引列表
+> **组件名：uni-indexed-list**
 > 代码块： `uIndexedList`
 
 
