@@ -280,6 +280,7 @@
 			 * 获取星星个数
 			 */
 			_getRateCount(clientX) {
+				this._getSize()
 				const size = Number(this.size)
 				if(size === NaN){
 					return new Error('size 属性只能设置为数字')

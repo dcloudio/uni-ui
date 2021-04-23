@@ -1,3 +1,24 @@
+## 1.3.0（2021-04-23）
+- 同步示例工程
+## 1.2.14（2021-04-23）
+- uni-combox 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-data-picker 修复 非树形数据有 where 属性查询报错的问题
+- uni-fav 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-goods-nav 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-nav-bar 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-notice-bar 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-number-box 修复 uni-number-box 浮点数运算不精确的 bug
+- uni-number-box 修复 uni-number-box change 事件触发不正确的 bug
+- uni-number-box 新增 uni-number-box v-model 双向绑定
+- uni-rate 修复 布局变化后 uni-rate  星星计算不准确的 bug
+- uni-rate 优化 添加依赖 uni-icons, 导入 uni-rate 自动下载依赖
+- uni-search-bar 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-steps 优化 添加依赖 uni-icons, 导入后自动下载依赖
+- uni-transition 新增 通过方法自定义动画
+- uni-transition 新增 custom-class 非 NVUE 平台支持自定义 class 定制样式
+- uni-transition 优化 动画触发逻辑，使动画更流畅
+- uni-transition 优化 支持单独的动画类型
+- uni-transition 优化 文档示例
 ## 1.2.13（2021-04-16）
 - uni-ui 新增 uni-data-picker 支持云端非树形表结构数据
 - uni-ui 修复 uni-data-checkbox nvue 下无法选中的问题

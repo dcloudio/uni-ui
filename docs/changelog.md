@@ -7,6 +7,85 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.2.14" date="2021-04-23">
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 非树形数据有 where 属性查询报错的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fav 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-goods-nav 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-number-box 浮点数运算不精确的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-number-box change 事件触发不正确的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-number-box v-model 双向绑定
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="fix">
+			 布局变化后 uni-rate  星星计算不准确的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入 uni-rate 自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="perf">
+			 添加依赖 uni-icons, 导入后自动下载依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="feat">
+			 通过方法自定义动画
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 custom-class 非 NVUE 平台支持自定义 class 定制样式
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 动画触发逻辑，使动画更流畅
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 支持单独的动画类型
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档示例
+		</log-item-text>
+	</log-item>
+</log>
+
 
 <log title="1.2.13" date="2021-04-14">
 	<log-item title="uni-data-checkbox 组件更新">

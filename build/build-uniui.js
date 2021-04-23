@@ -242,6 +242,7 @@ function buildDocsChangeLog(md, version) {
 	let content = `<!-- 更新占位 -->\n<log title="${version}" date="${date}">\n`
 	let arrs = {}
 	mds.forEach(v => {
+		if (!v) return
 		const nameRE = /-\s+([a-z\-]+ (优化|新增|修复)?).*/g
 		const curNameMatch = nameRE.exec(v)
 		let curName = {
