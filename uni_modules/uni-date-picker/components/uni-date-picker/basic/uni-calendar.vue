@@ -4,14 +4,7 @@
 			@click="clean"></view>
 		<view v-if="insert || show" class="uni-calendar__content"
 			:class="{'uni-calendar--fixed':!insert,'uni-calendar--ani-show':aniMaskShow}">
-			<view v-if="!insert" class="uni-calendar__header uni-calendar--fixed-top">
-				<view class="uni-calendar__header-btn-box" @click="close">
-					<text class="uni-calendar__header-text uni-calendar--fixed-width">取消</text>
-				</view>
-				<view class="uni-calendar__header-btn-box" @click="confirm">
-					<text class="uni-calendar__header-text uni-calendar--fixed-width">确定</text>
-				</view>
-			</view>
+
 			<view class="uni-calendar__header">
 				<view v-if="left" class="uni-calendar__header-btn-box" @click.stop="pre">
 					<view class="uni-calendar__header-btn uni-calendar--left"></view>
@@ -60,6 +53,39 @@
 							@handleMouse="handleMouse">
 						</calendar-item>
 					</view>
+				</view>
+			</view>
+			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
+				style="padding: 0 40px;">
+				<text class="uni-date-changed--time-date">{{calendar.fullDate,}}</text>
+				<uni-datetime-picker type="time" v-model="time" :border="false" class="time-picker-style">
+				</uni-datetime-picker>
+			</view>
+
+			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
+				<view class="uni-date-changed--time-start">
+					<text
+						class="uni-date-changed--time-date">{{cale.multipleStatus.before ? cale.multipleStatus.before : '起始日期'}}</text>
+					<uni-datetime-picker type="time" v-model="timeRange.startTime" :border="false"
+						class="time-picker-style">
+					</uni-datetime-picker>
+				</view>
+				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
+				<view class="uni-date-changed--time-end">
+					<text
+						class="uni-date-changed--time-date">{{cale.multipleStatus.after ? cale.multipleStatus.after : '结束日期'}}</text>
+					<uni-datetime-picker type="time" v-model="timeRange.endTime" :border="false"
+						class="time-picker-style">
+					</uni-datetime-picker>
+				</view>
+			</view>
+
+			<view v-if="!insert" class="uni-date-changed uni-calendar__header" @click="confirm">
+				<!-- 				<view class="uni-calendar__header-btn-box" @click="close">
+					<text class="uni-calendar__header-text uni-calendar--fixed-width">取消</text>
+				</view> -->
+				<view class="uni-calendar__header-btn-box">
+					<text class="uni-calendar__button-text uni-calendar--fixed-width">确定</text>
 				</view>
 			</view>
 		</view>
@@ -120,6 +146,10 @@
 				type: Boolean,
 				default: false
 			},
+			typeHasTime: {
+				type: Boolean,
+				default: false
+			},
 			insert: {
 				type: Boolean,
 				default: true
@@ -163,14 +193,19 @@
 				calendar: {},
 				nowDate: '',
 				aniMaskShow: false,
-				firstEnter: true
+				firstEnter: true,
+				time: '',
+				timeRange: {
+					startTime: '',
+					endTime: ''
+				}
 			}
 		},
 		watch: {
 			date(newVal, oldVal) {
-					
-					// this.cale.setDate(newVal)
-					this.init(newVal)
+
+				// this.cale.setDate(newVal)
+				this.init(newVal)
 			},
 			startDate(val) {
 				this.cale.resetSatrtDate(val)
@@ -226,11 +261,11 @@
 				startDate: this.startDate,
 				endDate: this.endDate,
 				range: this.range,
-				// multipleStatus: this.pleStatus	
+				// multipleStatus: this.pleStatus
 			})
 			// 选中某一天
 			// this.cale.setDate(this.date)
-			
+
 			this.init(this.date)
 			// this.setDay
 		},
@@ -263,7 +298,10 @@
 			},
 
 			// 取消穿透
-			clean() {},
+			clean() {
+				this.close()
+			},
+
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
 				console.log(this.cale.getDate(value));
@@ -274,7 +312,7 @@
 			 * @param {Object} date
 			 */
 			init(date) {
-				
+
 				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
 				this.nowDate = this.calendar = this.cale.getInfo(date)
@@ -353,6 +391,8 @@
 					year,
 					month,
 					date,
+					time: this.time,
+					timeRange: this.timeRange,
 					fulldate: fullDate,
 					lunar,
 					extraInfo: extraInfo || {}
@@ -481,9 +521,9 @@
 		justify-content: center;
 		align-items: center;
 		height: 50px;
-		border-bottom-color: $uni-border-color;
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
+		// border-bottom-color: $uni-border-color;
+		// border-bottom-style: solid;
+		// border-bottom-width: 1px;
 	}
 
 	.uni-calendar--fixed-top {
@@ -522,6 +562,14 @@
 		width: 100px;
 		font-size: $uni-font-size-base;
 		color: $uni-text-color;
+	}
+
+	.uni-calendar__button-text {
+		text-align: center;
+		width: 100px;
+		font-size: $uni-font-size-base;
+		color: #007aff;
+		letter-spacing: 3px;
 	}
 
 	.uni-calendar__header-btn-box {
@@ -611,5 +659,62 @@
 		/* #ifndef APP-NVUE */
 		line-height: 1;
 		/* #endif */
+	}
+
+	.uni-date-changed {
+		padding: 0 10px;
+		// line-height: 50px;
+		text-align: center;
+		color: #333;
+		border-top-color: $uni-border-color;
+		border-top-style: solid;
+		border-top-width: 1px;
+	}
+
+
+	.uni-date-changed--time text {
+		// padding: 0 20px;
+		// height: 50px;
+		line-height: 50px;
+	}
+
+	.uni-date-changed {
+		flex: 1;
+	}
+
+	.uni-date-changed--time {
+		display: flex;
+		flex: 1;
+	}
+
+	.uni-date-changed--time-start {
+		display: flex;
+		justify-content: right;
+		align-items: center;
+		// flex: 1;
+	}
+
+	.uni-date-changed--time-end {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		// flex: 1;
+	}
+
+	.uni-date-changed--time-date {
+		color: #999;
+		line-height: 50px;
+		// opacity: 0.6;
+	}
+
+	.time-picker-style {
+		width: 62px;
+		display: flex;
+		justify-content: center;
+		align-items: center
+	}
+
+	.mr-10 {
+		margin-right: 10px;
 	}
 </style>

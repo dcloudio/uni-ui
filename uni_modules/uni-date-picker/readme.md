@@ -56,16 +56,16 @@
 
 ### DatePicker Props
 
-|属性名				|类型			|默认值		|值域																		|说明							|
-|:-:				|:-:			|:-:		|																			|:-:							|
-|type				|String			|date	|date/daterange	|选择器类型						|
-|value/v-model		|String、Array	|-			|-																			|绑定值							|
-|placeholder		|String			|-			|-																			|单选择时的占位内容			|
-|start-placeholder	|String			|-			|-																			|范围选择时开始日期的占位内容	|
-|end-placeholder	|String			|-			|-																			|范围选择时结束日期的占位内容	|
-|range-separator	|String			|-			|-																			|选择范围时的分隔符	|
-|border				|Boolean|true		|																			|是否有边框						|
-|disabled			|Boolean|false		|																			|是否禁用					|
+|属性名						|类型					|默认值	|值域						|说明													|
+|:-:							|:-:					|:-:		|								|:-:													|
+|type							|String				|date		|date/daterange/datetime/datetimerange	|选择器类型										|
+|value/v-model		|String、Array|-			|-							|绑定值												|
+|placeholder			|String				|-			|-							|单选择时的占位内容						|
+|start-placeholder|String				|-			|-							|范围选择时开始日期的占位内容	|
+|end-placeholder	|String				|-			|-							|范围选择时结束日期的占位内容	|
+|range-separator	|String				|-			|-							|选择范围时的分隔符						|
+|border						|Boolean			|true		|								|是否有边框										|
+|disabled					|Boolean			|false	|								|是否禁用											|
 
 
 ### DatePicker Events

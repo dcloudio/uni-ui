@@ -5,11 +5,11 @@
 		<view class="example-body">
 			<uni-date-picker v-model="single" />
 		</view>
-		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
+		<!--<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker type="datetime" v-model="datetimesingle" />
 		</view>
-		<uni-section :title="'v-model用法：' + single" type="line"></uni-section>
+		 <uni-section :title="'v-model用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="single" />
 		</view>
@@ -21,10 +21,14 @@
 		<view class="example-body">
 			<uni-date-picker v-model="single" :disabled="false" />
 		</view>
-		<uni-section :title="'范围选用法：' + range" type="line"></uni-section>
+		<uni-section :title="'日期范围用法：' + range" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="range" type="daterange" rangeSeparator="至" />
 		</view>
+		<uni-section :title="'日期时间范围用法：' + datetimerange" type="line"></uni-section>
+		<view class="example-body">
+			<uni-date-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
+		</view>-->
 	</view>
 </template>
 
@@ -34,7 +38,8 @@
 			return {
 				single: '2010-02-3',
 				'datetimesingle': '2010-03-1 00:00:00',
-				range: ['2020-10-8',  '2021-4-20']
+				range: ['2020-10-8',  '2021-4-20'],
+				datetimerange: ['2020-03-10', '2021-05-10']
 			}
 		},
 
@@ -42,8 +47,14 @@
 			single(newval) {
 				console.log('单选:', this.single);
 			},
+			datetimesingle(newval) {
+				console.log('单选:', this.datetimesingle);
+			},
 			range(newval) {
 				console.log('范围选:', this.range);
+			},
+			datetimerange(newval) {
+				console.log('范围选:', this.datetimerange);
 			}
 		}
 	}

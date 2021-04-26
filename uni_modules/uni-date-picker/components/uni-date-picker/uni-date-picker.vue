@@ -6,41 +6,80 @@
 				<view class="uni-date__icon-logo">
 					<image class="uni-date-editor--logo" src="./icon/cale-50.png" mode=""></image>
 				</view>
-				<input class="uni-date__input" type="text" :value="displayValue" :placeholder="placeholder" :disabled="true" />
+				<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
+					:disabled="true" />
 			</view>
 			<view v-else class="uni-date-x uni-date-range" @click="show">
 				<view class="uni-date__icon-logo">
 					<image class="uni-date-editor--logo" src="./icon/cale-50.png" mode=""></image>
 				</view>
-				<input class="uni-date__input uni-date-range__input" type="text" :value="range.startVal"
+				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
 					:placeholder="startPlaceholder" :disabled="true" />
 				<slot>
 					<view class="">{{rangeSeparator}}</view>
 				</slot>
-				<input class="uni-date__input uni-date-range__input" type="text" :value="range.endVal"
+				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
 					:placeholder="endPlaceholder" :disabled="true" />
 			</view>
-			<view v-show="!disabled && (displayValue || (range.startVal && range.endVal))" class="uni-date__icon-clear" @click="clear">
+			<view v-show="!disabled && (singleVal || (range.startDate && range.endDate))" class="uni-date__icon-clear"
+				@click="clear">
 				<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 			</view>
 		</view>
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
 		<view ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
-				<uni-calendar ref="pcSingle" :showMonth="false" :date="defaultSingleValue" @change="change" />
+				<view v-show="hasTime" class="uni-date-changed popup-x-header">
+					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
+						placeholder="选择日期" />
+					<uni-datetime-picker type="time" v-model="time" :border="false">
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="time"
+							placeholder="选择时间" />
+					</uni-datetime-picker>
+				</view>
+				<uni-calendar ref="pcSingle" :showMonth="false" :date="defaultSingleValue" @change="singleChange" />
+				<view v-if="hasTime" class="popup-x-footer">
+					<text class="">此刻</text>
+					<text class="confirm" @click="confirmSingleChange">确定</text>
+				</view>
 			</view>
 
 			<view v-else class="uni-date-range--x" :style="popover">
-				<uni-calendar ref="left" :showMonth="false" :range="true" @change="leftChange"
-					:pleStatus="endMultipleStatus" @firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch"
-					style="padding-right: 16px;" />
-				<uni-calendar ref="right" :showMonth="false" :range="true" @change="rightChange"
-					:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale" @monthSwitch="rightMonthSwitch"
-					style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
+				<view v-show="hasTime" class="popup-x-header uni-date-changed">
+					<view class="popup-x-header--datetime">
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
+							placeholder="开始日期" />
+						<uni-datetime-picker type="time" v-model="tempRange.startTime" :border="false">
+							<input class="uni-date__input uni-date-range__input" type="text"
+								v-model="tempRange.startTime" placeholder="开始时间" />
+						</uni-datetime-picker>
+					</view>
+					<uni-icons type="arrowthinright" color="#999" style="line-height: 40px;"></uni-icons>
+					<view class="popup-x-header--datetime">
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
+							placeholder="结束日期" />
+						<uni-datetime-picker type="time" v-model="tempRange.endTime" :border="false">
+							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
+								placeholder="结束时间" />
+						</uni-datetime-picker>
+					</view>
+				</view>
+				<view class="popup-x-body">
+					<uni-calendar ref="left" :showMonth="false" :range="true" @change="leftChange"
+						:pleStatus="endMultipleStatus" @firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch"
+						style="padding-right: 16px;" />
+					<uni-calendar ref="right" :showMonth="false" :range="true" @change="rightChange"
+						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
+						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
+				</view>
+				<view v-if="hasTime" class="popup-x-footer">
+					<text class="" @click="clear">清空</text>
+					<text class="confirm" @click="confirmRangeChange">确定</text>
+				</view>
 			</view>
 		</view>
 		<uni-calendar ref="mobile" :clearDate="false" :date="defaultSingleValue" :pleStatus="endMultipleStatus"
-			:showMonth="false" :range="isRange" @change="" :insert="false" @confirm="mobileChange" />
+			:showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false" @confirm="mobileChange" />
 	</view>
 </template>
 <script>
@@ -68,10 +107,19 @@
 		data() {
 			return {
 				isRange: false,
+				hasTime: false,
 				mobileRange: false,
 				range: {
-					startVal: '',
-					endVal: ''
+					startDate: '',
+					startTime: '',
+					endDate: '',
+					endTime: ''
+				},
+				tempRange: {
+					startDate: '',
+					startTime: '',
+					endDate: '',
+					endTime: ''
 				},
 				startMultipleStatus: {
 					before: '',
@@ -88,8 +136,10 @@
 				visible: false,
 				popup: false,
 				popover: null,
-				displayValue: '',
-				defaultSingleValue: ''
+				singleVal: '',
+				tempSingleDate: '',
+				defaultSingleValue: '',
+				time: '00:00:00'
 			}
 		},
 		props: {
@@ -130,10 +180,13 @@
 			type: {
 				immediate: true,
 				handler(newVal, oldVal) {
-					if (newVal === 'date') {
-						this.isRange = false
-					} else if (newVal === 'daterange') {
+					if (newVal.indexOf('time') !== -1) {
+						this.hasTime = true
+					}
+					if (newVal.indexOf('range') !== -1) {
 						this.isRange = true
+					} else {
+						this.isRange = false
 					}
 				}
 			},
@@ -142,14 +195,14 @@
 				handler(newVal, oldVal) {
 					if (newVal) {
 						if (!Array.isArray(newVal) && this.isRange === false) {
-							this.displayValue = newVal
+							this.singleVal = newVal
 							this.defaultSingleValue = newVal
 						} else {
 							if (oldVal) return // 只初始默认值
 							const [before, after] = newVal
 							if (!before && !after) return
-							this.range.startVal = before
-							this.range.endVal = after
+							this.range.startDate = before
+							this.range.endDate = after
 							const defaultRange = {
 								before: before,
 								after: after
@@ -210,7 +263,7 @@
 				const leftWindowInfo = uni.getLeftWindowStyle()
 				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
 				dateEditor.boundingClientRect(rect => {
-					console.log(22222222, rect);
+					// console.log(22222222, rect);
 					if (leftWindowInfo.errMsg) {
 						left = rect.left + 'px'
 					} else {
@@ -234,11 +287,20 @@
 				}, 20)
 			},
 
-			change(e) {
-				// console.log('change 返回:', e)
-				this.displayValue = e.fulldate
-				this.$emit('change', this.displayValue)
-				this.$emit('input', this.displayValue)
+			singleChange(e) {
+				this.tempSingleDate = e.fulldate
+				if (this.hasTime) return
+				this.confirmSingleChange()
+			},
+
+			confirmSingleChange() {
+				if (this.hasTime) {
+					this.singleVal = this.tempSingleDate + ' ' + this.time
+				} else {
+					this.singleVal = this.tempSingleDate
+				}
+				this.$emit('change', this.singleVal)
+				this.$emit('input', this.singleVal)
 				this.popup = false
 			},
 
@@ -247,7 +309,7 @@
 					before,
 					after
 				} = e.range
-				this.handleStartAndEnd(before, after)
+				this.rangeChange(before, after)
 				const obj = {
 					before: e.range.before,
 					after: e.range.after,
@@ -263,7 +325,7 @@
 					before,
 					after
 				} = e.range
-				this.handleStartAndEnd(before, after)
+				this.rangeChange(before, after)
 				const obj = {
 					before: e.range.before,
 					after: e.range.after,
@@ -280,27 +342,61 @@
 						before,
 						after
 					} = e.range
-					this.handleStartAndEnd(before, after)
+					this.handleStartAndEnd(before, after, true)
+					if (this.hasTime) {
+						console.log(11111, e);
+						const {
+							startTime,
+							endTime
+						} = e.timeRange
+						this.tempRange.startTime = startTime
+						this.tempRange.endTime = endTime
+					}
+					this.confirmRangeChange()
+
 				} else {
-					this.displayValue = e.fulldate
-					this.$emit('change', this.displayValue)
-					this.$emit('input', this.displayValue)
+					if (this.hasTime) {
+						this.singleVal = e.fulldate + ' ' + e.time
+					} else {
+						this.singleVal = e.fulldate
+					}
+					this.$emit('change', this.singleVal)
+					this.$emit('input', this.singleVal)
 				}
 				this.$refs.mobile.close()
 			},
-			handleStartAndEnd(before, after) {
-				if (before && after) {
-					if (this.dateCompare(before, after)) {
-						this.range.startVal = before
-						this.range.endVal = after
-					} else {
-						this.range.startVal = after
-						this.range.endVal = before
-					}
-					const displayRange = [this.range.startVal, this.range.endVal]
-					this.$emit('change', displayRange)
-					this.$emit('input', displayRange)
-					this.popup = false
+
+			rangeChange(before, after) {
+				if (!(before && after)) return
+				this.handleStartAndEnd(before, after, true)
+				if (this.hasTime) return
+				this.confirmRangeChange()
+			},
+
+			confirmRangeChange() {
+				let start, end
+				if (!this.hasTime) {
+					start = this.range.startDate = this.tempRange.startDate
+					end = this.range.endDate = this.tempRange.endDate
+				} else {
+					start = this.range.startDate =  this.tempRange.startDate + ' ' + this.tempRange.startTime
+					end = this.range.endDate =  this.tempRange.endDate + ' ' + this.tempRange.endTime
+				}
+				const displayRange = [start, end]
+				this.$emit('change', displayRange)
+				this.$emit('input', displayRange)
+				this.popup = false
+			},
+
+			handleStartAndEnd(before, after, temp = false) {
+				if (!(before && after)) return
+				const type = temp ? 'tempRange' : 'range'
+				if (this.dateCompare(before, after)) {
+					this[type].startDate = before
+					this[type].endDate = after
+				} else {
+					this[type].startDate = after
+					this[type].endDate = before
 				}
 			},
 
@@ -321,14 +417,14 @@
 
 			clear() {
 				if (!this.isRange) {
-					this.displayValue = ''
+					this.singleVal = ''
 					this.$refs.pcSingle.calendar.fullDate = ''
 					this.$refs.pcSingle.setDate()
 					this.$emit('change', '')
 					this.$emit('input', '')
 				} else {
-					this.range.startVal = ''
-					this.range.endVal = ''
+					this.range.startDate = ''
+					this.range.endDate = ''
 					this.$refs.left.cale.multipleStatus.before = ''
 					this.$refs.left.cale.multipleStatus.after = ''
 					this.$refs.left.cale.multipleStatus.data = []
@@ -343,9 +439,8 @@
 					this.$emit('change', ['', ''])
 					this.$emit('input', ['', ''])
 				}
+				// if (this.popup) this.popup = false
 			},
-
-
 
 			leftMonthSwitch(e) {
 				// console.log('leftMonthSwitch 返回:', e)
@@ -369,11 +464,11 @@
 		font-size: 14px;
 	}
 
-	 .uni-date-x--border {
+	.uni-date-x--border {
 		box-sizing: border-box;
 		border-radius: 4px;
-	 	border: 1px solid #dcdfe6;
-	 }
+		border: 1px solid #dcdfe6;
+	}
 
 	.uni-date-editor--x {
 		position: relative;
@@ -408,16 +503,16 @@
 		text-align: center;
 	}
 
-	/* .uni-date-picker__container {
-		position: fixed;
+	.uni-date-picker__container {
+		/* 		position: fixed;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
 		box-sizing: border-box;
 		z-index: 996;
-		font-size: 14px;
-	} */
+		font-size: 14px; */
+	}
 
 	.uni-date-mask {
 		position: fixed;
@@ -437,16 +532,16 @@
 		z-index: 999;
 		width: 375px;
 		border: 1px solid #F1F1F1;
+		border-radius: 4px;
 	}
 
 	.uni-date-range--x {
 		background-color: #fff;
-		display: flex;
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 999;
-		width: 733px;
+		/* width: 733px; */
 		border: 1px solid #F1F1F1;
 		border-radius: 4px;
 	}
@@ -455,9 +550,83 @@
 		opacity: 0.4;
 		cursor: default;
 	}
+
 	.uni-date-editor--logo {
 		width: 16px;
 		height: 16px;
 		vertical-align: middle;
+	}
+
+	/* 添加时间 */
+	.popup-x-header {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		/* justify-content: space-between; */
+	}
+
+	.popup-x-header--datetime {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		flex: 1;
+	}
+
+	.popup-x-body {
+		display: flex;
+	}
+
+	.popup-x-footer {
+		padding: 0 15px;
+		border-top-color: #F1F1F1;
+		border-top-style: solid;
+		border-top-width: 1px;
+		background-color: #fff;
+		line-height: 40px;
+		text-align: right;
+		color: #666;
+	}
+
+	.popup-x-footer text:hover {
+		color: #007aff;
+		cursor: pointer;
+		opacity: 0.8;
+	}
+
+	.popup-x-footer .confirm {
+		margin-left: 20px;
+		color: #007aff;
+	}
+
+	.uni-date-changed {
+		background-color: #fff;
+		text-align: center;
+		color: #333;
+		border-bottom-color: #F1F1F1;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		/* padding: 0 50px; */
+	}
+
+	.uni-date-changed--time text {
+		/* padding: 0 20px; */
+		height: 50px;
+		line-height: 50px;
+	}
+
+	.uni-date-changed .uni-date-changed--time {
+		/* display: flex; */
+		flex: 1;
+	}
+
+	.uni-date-changed--time-date {
+		color: #333;
+		opacity: 0.6;
+	}
+
+	.mr-50 {
+		margin-right: 50px;
 	}
 </style>
