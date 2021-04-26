@@ -26,6 +26,7 @@
 				<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 			</view>
 		</view>
+
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
 		<view ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
@@ -37,7 +38,8 @@
 							placeholder="选择时间" />
 					</uni-datetime-picker>
 				</view>
-				<uni-calendar ref="pcSingle" :showMonth="false" :date="defaultSingleValue" @change="singleChange" />
+				<uni-calendar ref="pcSingle" :showMonth="false" start-date="2021-4-12" end-date="2021-5-28"
+					:date="defSingleDate" @change="singleChange" />
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="">此刻</text>
 					<text class="confirm" @click="confirmSingleChange">确定</text>
@@ -65,12 +67,13 @@
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<uni-calendar ref="left" :showMonth="false" :range="true" @change="leftChange"
-						:pleStatus="endMultipleStatus" @firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch"
-						style="padding-right: 16px;" />
-					<uni-calendar ref="right" :showMonth="false" :range="true" @change="rightChange"
-						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
-						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
+					<uni-calendar ref="left" :showMonth="false" start-date="2021-3-12" end-date="2021-5-28"
+						:range="true" @change="leftChange" :pleStatus="endMultipleStatus"
+						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding-right: 16px;" />
+					<uni-calendar ref="right" :showMonth="false" start-date="2021-3-12" end-date="2021-5-28"
+						:range="true" @change="rightChange" :pleStatus="startMultipleStatus"
+						@firstEnterCale="updateLeftCale" @monthSwitch="rightMonthSwitch"
+						style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="" @click="clear">清空</text>
@@ -78,7 +81,7 @@
 				</view>
 			</view>
 		</view>
-		<uni-calendar ref="mobile" :clearDate="false" :date="defaultSingleValue" :pleStatus="endMultipleStatus"
+		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :pleStatus="endMultipleStatus"
 			:showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false" @confirm="mobileChange" />
 	</view>
 </template>
@@ -138,7 +141,7 @@
 				popover: null,
 				singleVal: '',
 				tempSingleDate: '',
-				defaultSingleValue: '',
+				defSingleDate: '',
 				time: '00:00:00'
 			}
 		},
@@ -150,6 +153,18 @@
 			value: {
 				type: [String, Number, Array],
 				default: ''
+			},
+			start: {
+				type: [Number, String],
+				default: ''
+			},
+			end: {
+				type: [Number, String],
+				default: ''
+			},
+			returnType: {
+				type: String,
+				default: 'string'
 			},
 			placeholder: {
 				type: String,
@@ -193,27 +208,41 @@
 			value: {
 				immediate: true,
 				handler(newVal, oldVal) {
-					if (newVal) {
-						if (!Array.isArray(newVal) && this.isRange === false) {
-							this.singleVal = newVal
-							this.defaultSingleValue = newVal
-						} else {
-							if (oldVal) return // 只初始默认值
-							const [before, after] = newVal
-							if (!before && !after) return
-							this.range.startDate = before
-							this.range.endDate = after
-							const defaultRange = {
-								before: before,
-								after: after
-							}
-							this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, defaultRange, {
-								which: 'right'
-							})
-							this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, defaultRange, {
-								which: 'left'
-							})
+					if (!newVal) return
+					if (!Array.isArray(newVal) && this.isRange === false) {
+						const {defDate, defTime} = this.parseDate(newVal)
+						this.singleVal = defDate
+						this.tempSingleDate = defDate
+						this.defSingleDate = defDate
+						if (this.hasTime) {
+							this.singleVal = defDate + ' ' + defTime
+							this.time = defTime
 						}
+					} else {
+						if (oldVal) return // 只初始默认值
+						const [before, after] = newVal
+						if (!before && !after) return
+						const defBefore = this.parseDate(before)
+						const defAfter = this.parseDate(after)
+						this.range.startDate = this.tempRange.startDate = defBefore.defDate
+						this.range.endDate = this.tempRange.endDate = defAfter.defDate
+						
+						if (this.hasTime) {
+							this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
+							this.range.endDate = defAfter.defDate + ' ' + defAfter.defTime
+							this.tempRange.startTime = defBefore.defTime
+							this.tempRange.endTime = defAfter.defTime
+						}
+						const defaultRange = {
+							before: defBefore.defDate,
+							after: defAfter.defDate
+						}
+						this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, defaultRange, {
+							which: 'right'
+						})
+						this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, defaultRange, {
+							which: 'left'
+						})
 					}
 				}
 			}
@@ -379,8 +408,8 @@
 					start = this.range.startDate = this.tempRange.startDate
 					end = this.range.endDate = this.tempRange.endDate
 				} else {
-					start = this.range.startDate =  this.tempRange.startDate + ' ' + this.tempRange.startTime
-					end = this.range.endDate =  this.tempRange.endDate + ' ' + this.tempRange.endTime
+					start = this.range.startDate = this.tempRange.startDate + ' ' + this.tempRange.startTime
+					end = this.range.endDate = this.tempRange.endDate + ' ' + this.tempRange.endTime
 				}
 				const displayRange = [start, end]
 				this.$emit('change', displayRange)
@@ -441,6 +470,23 @@
 				}
 				// if (this.popup) this.popup = false
 			},
+
+			parseDate(date) {
+				const defVal = new Date(date)
+				const year = defVal.getFullYear()
+				const month = defVal.getMonth() + 1
+				const day = defVal.getDate()
+				const hour = defVal.getHours()
+				const minute = defVal.getMinutes()
+				const second = defVal.getSeconds()
+				const defDate = year + '-' + month + '-' + day
+				const defTime = hour + ':' + minute + ':' + second
+				return {
+					defDate,
+					defTime
+				}
+			},
+
 
 			leftMonthSwitch(e) {
 				// console.log('leftMonthSwitch 返回:', e)

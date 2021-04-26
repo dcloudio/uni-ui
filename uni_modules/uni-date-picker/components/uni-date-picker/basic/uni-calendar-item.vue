@@ -116,10 +116,11 @@
 	.uni-calendar-item__weeks-box .uni-calendar-item--disable {
 		// background-color: rgba(249, 249, 249, $uni-opacity-disabled);
 		color: $uni-text-color-disable;
+		cursor: default;
 	}
 
 	.uni-calendar-item--isDay-text {
-		color: $uni-color-primary;
+		color: $uni-color-primary !important;
 	}
 
 	.uni-calendar-item--isDay {

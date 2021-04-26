@@ -5,11 +5,11 @@
 		<view class="example-body">
 			<uni-date-picker v-model="single" />
 		</view>
-		<!--<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
+		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker type="datetime" v-model="datetimesingle" />
 		</view>
-		 <uni-section :title="'v-model用法：' + single" type="line"></uni-section>
+		 <!--<uni-section :title="'v-model用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="single" />
 		</view>
@@ -20,7 +20,7 @@
 		<uni-section :title="'disabled用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="single" :disabled="false" />
-		</view>
+		</view>-->
 		<uni-section :title="'日期范围用法：' + range" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="range" type="daterange" rangeSeparator="至" />
@@ -28,7 +28,7 @@
 		<uni-section :title="'日期时间范围用法：' + datetimerange" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
-		</view>-->
+		</view>
 	</view>
 </template>
 
@@ -36,10 +36,10 @@
 	export  default {
 		data() {
 			return {
-				single: '2010-02-3',
-				'datetimesingle': '2010-03-1 00:00:00',
-				range: ['2020-10-8',  '2021-4-20'],
-				datetimerange: ['2020-03-10', '2021-05-10']
+				single: '2021-04-3',
+				'datetimesingle': '2021-04-3 20:10:10',
+				range: ['2021-03-8',  '2021-4-20'],
+				datetimerange: ['2021-03-20 20:10:10', '2021-05-10 20:10:10']
 			}
 		},
 
