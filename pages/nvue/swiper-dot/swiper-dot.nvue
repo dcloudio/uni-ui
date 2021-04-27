@@ -135,7 +135,7 @@
 	}
 
 	/* #ifndef APP-NVUE */
-	/deep/ .image img {
+	::v-deep .image img {
 		-webkit-user-drag: none;
 		-khtml-user-drag: none;
 		-moz-user-drag: none;

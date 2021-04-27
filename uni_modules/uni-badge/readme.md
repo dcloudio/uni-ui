@@ -1,6 +1,7 @@
 
 
 ## Badge 数字角标
+> **组件名：uni-badge**
 > 代码块： `uBadge`
 
 
