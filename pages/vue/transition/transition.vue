@@ -149,7 +149,7 @@ export default {
 }
 
 /* #ifndef APP-NVUE */
-.example /deep/ .transition {
+.example v-deep .transition {
 	/* #ifndef APP-NVUE */
 	display: flex;
 	/* #endif */
