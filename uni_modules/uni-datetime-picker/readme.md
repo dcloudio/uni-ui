@@ -1,4 +1,5 @@
 
+> `通知：组件将有重要升级，更新 1.1.0 后，支持范围选择，组件 ui 将使用日历选择日期, 同时支持 PC 和 移动端。此次并非破坏性更新，但 ui 变化较大，固提前告知`[更新后样式参考](https://ext.dcloud.net.cn/plugin?id=4700)
 
 ## DatetimePicker 时间选择器
 > **组件名：uni-datetime-picker**
