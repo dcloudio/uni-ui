@@ -12,7 +12,8 @@
 			</slot>
 		</view>
 		<view v-if="visible" id="mask" class="uni-datetime-picker-mask" @click="tiggerTimePicker"></view>
-		<view v-if="visible" class="uni-datetime-picker-popup" :class="[dateShow && timeShow ? '' : 'fix-nvue-height']" :style="fixNvueBug">
+		<view v-if="visible" class="uni-datetime-picker-popup" :class="[dateShow && timeShow ? '' : 'fix-nvue-height']"
+			:style="fixNvueBug">
 			<view class="uni-title">
 				<text class="uni-datetime-picker-text">设置{{title}}</text>
 			</view>
@@ -564,7 +565,27 @@
 			 * @param {Object} defaultTime
 			 */
 			parseDatetimeRange(point, pointType) {
-				if (point && this.type === 'time') {
+				// 时间为空，则重置为初始值
+				if (!point) {
+					if (pointType === 'start') {
+						this.startYear = 1920
+						this.startMonth = 1
+						this.startDay = 1
+						this.startHour = 0
+						this.startMinute = 0
+						this.startSecond = 0
+					}
+					if (pointType === 'end') {
+						this.endYear = 120
+						this.endMonth = 12
+						this.endDay = 31
+						this.endHour = 23
+						this.endMinute = 59
+						this.endSecond = 59
+					}
+					return
+				}
+				if (this.type === 'time') {
 					const pointArr = point.split(':')
 					this[pointType + 'Hour'] = Number(pointArr[0])
 					this[pointType + 'Minute'] = Number(pointArr[1])
@@ -660,7 +681,7 @@
 					':' +
 					this.lessThanTen(this.minute)
 
-				if(!this.hideSecond) {
+				if (!this.hideSecond) {
 					hhmmss = hhmmss + ':' + this.lessThanTen(this.second)
 				}
 
