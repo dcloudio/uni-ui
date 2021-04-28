@@ -1,15 +1,15 @@
 <template>
 	<view class="page">
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
-		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
+		<!--<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-date-picker v-model="single" />
+			 <uni-date-picker v-model="single" start="2021-3-20" end="2021-5-20" />
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
-			<uni-date-picker type="datetime" v-model="datetimesingle" />
+			<uni-date-picker type="datetime" v-model="datetimesingle" start="2021-3-20 12:00:00" end="2021-5-20 20:00:00" />
 		</view>
-		 <!--<uni-section :title="'v-model用法：' + single" type="line"></uni-section>
+		 <uni-section :title="'v-model用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="single" />
 		</view>
@@ -20,14 +20,14 @@
 		<uni-section :title="'disabled用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-date-picker v-model="single" :disabled="false" />
-		</view>-->
+		</view> -->
 		<uni-section :title="'日期范围用法：' + range" type="line"></uni-section>
 		<view class="example-body">
-			<uni-date-picker v-model="range" type="daterange" rangeSeparator="至" />
+			<uni-date-picker v-model="range" type="daterange" start="2021-3-20" end="2021-5-20" rangeSeparator="至" />
 		</view>
 		<uni-section :title="'日期时间范围用法：' + datetimerange" type="line"></uni-section>
 		<view class="example-body">
-			<uni-date-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
+			<uni-date-picker v-model="datetimerange" type="datetimerange" start="2021-5-20 12:00:00" end="2021-5-20 20:00:00" rangeSeparator="至" />
 		</view>
 	</view>
 </template>

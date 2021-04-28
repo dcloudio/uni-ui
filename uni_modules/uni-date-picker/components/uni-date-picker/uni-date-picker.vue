@@ -33,13 +33,14 @@
 				<view v-show="hasTime" class="uni-date-changed popup-x-header">
 					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
 						placeholder="选择日期" />
-					<uni-datetime-picker type="time" v-model="time" :border="false">
+					<uni-datetime-picker type="time" v-model="time" :border="false" :start="reactStartTime"
+						:end="reactEndTime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="time"
 							placeholder="选择时间" />
 					</uni-datetime-picker>
 				</view>
-				<uni-calendar ref="pcSingle" :showMonth="false" start-date="2021-4-12" end-date="2021-5-28"
-					:date="defSingleDate" @change="singleChange" />
+				<uni-calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
+					:end-date="caleRange.endDate" :date="defSingleDate" @change="singleChange" />
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="">此刻</text>
 					<text class="confirm" @click="confirmSingleChange">确定</text>
@@ -51,7 +52,8 @@
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							placeholder="开始日期" />
-						<uni-datetime-picker type="time" v-model="tempRange.startTime" :border="false">
+						<uni-datetime-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :end="reactEndTime"
+							:border="false">
 							<input class="uni-date__input uni-date-range__input" type="text"
 								v-model="tempRange.startTime" placeholder="开始时间" />
 						</uni-datetime-picker>
@@ -60,20 +62,21 @@
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
 							placeholder="结束日期" />
-						<uni-datetime-picker type="time" v-model="tempRange.endTime" :border="false">
+						<uni-datetime-picker type="time" v-model="tempRange.endTime" :start="reactStartTime" :end="reactEndTime"
+							:border="false">
 							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
 								placeholder="结束时间" />
 						</uni-datetime-picker>
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<uni-calendar ref="left" :showMonth="false" start-date="2021-3-12" end-date="2021-5-28"
-						:range="true" @change="leftChange" :pleStatus="endMultipleStatus"
+					<uni-calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
+						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
 						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding-right: 16px;" />
-					<uni-calendar ref="right" :showMonth="false" start-date="2021-3-12" end-date="2021-5-28"
-						:range="true" @change="rightChange" :pleStatus="startMultipleStatus"
-						@firstEnterCale="updateLeftCale" @monthSwitch="rightMonthSwitch"
-						style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
+					<uni-calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
+						:end-date="caleRange.endDate" :range="true" @change="rightChange"
+						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
+						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="" @click="clear">清空</text>
@@ -81,8 +84,10 @@
 				</view>
 			</view>
 		</view>
-		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :pleStatus="endMultipleStatus"
-			:showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false" @confirm="mobileChange" />
+		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :start-date="caleRange.startDate"
+			:end-date="caleRange.endDate" :start-time="caleRange.startTime" :end-time="caleRange.endTime"
+			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
+			@confirm="mobileChange" />
 	</view>
 </template>
 <script>
@@ -112,11 +117,23 @@
 				isRange: false,
 				hasTime: false,
 				mobileRange: false,
-				range: {
+				// 单选
+				singleVal: '',
+				tempSingleDate: '',
+				defSingleDate: '',
+				time: '00:00:00',
+				// 范围选
+				caleRange: {
 					startDate: '',
 					startTime: '',
 					endDate: '',
 					endTime: ''
+				},
+				range: {
+					startDate: '',
+					// startTime: '',
+					endDate: '',
+					// endTime: ''
 				},
 				tempRange: {
 					startDate: '',
@@ -124,6 +141,7 @@
 					endDate: '',
 					endTime: ''
 				},
+				// 左右日历同步数据
 				startMultipleStatus: {
 					before: '',
 					after: '',
@@ -138,11 +156,7 @@
 				},
 				visible: false,
 				popup: false,
-				popover: null,
-				singleVal: '',
-				tempSingleDate: '',
-				defSingleDate: '',
-				time: '00:00:00'
+				popover: null
 			}
 		},
 		props: {
@@ -209,8 +223,11 @@
 				immediate: true,
 				handler(newVal, oldVal) {
 					if (!newVal) return
-					if (!Array.isArray(newVal) && this.isRange === false) {
-						const {defDate, defTime} = this.parseDate(newVal)
+					if (!Array.isArray(newVal) && !this.isRange) {
+						const {
+							defDate,
+							defTime
+						} = this.parseDate(newVal)
 						this.singleVal = defDate
 						this.tempSingleDate = defDate
 						this.defSingleDate = defDate
@@ -226,7 +243,7 @@
 						const defAfter = this.parseDate(after)
 						this.range.startDate = this.tempRange.startDate = defBefore.defDate
 						this.range.endDate = this.tempRange.endDate = defAfter.defDate
-						
+
 						if (this.hasTime) {
 							this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
 							this.range.endDate = defAfter.defDate + ' ' + defAfter.defTime
@@ -245,10 +262,49 @@
 						})
 					}
 				}
-			}
+			},
+
+			start: {
+				immediate: true,
+				handler(newVal, oldVal) {
+					if (!newVal) return
+					const {
+						defDate,
+						defTime
+					} = this.parseDate(newVal)
+					this.caleRange.startDate = defDate
+					if (this.hasTime) {
+						this.caleRange.startTime = defTime
+					}
+				}
+			},
+
+			end: {
+				immediate: true,
+				handler(newVal, oldVal) {
+					if (!newVal) return
+					const {
+						defDate,
+						defTime
+					} = this.parseDate(newVal)
+					this.caleRange.endDate = defDate
+					if (this.hasTime) {
+						this.caleRange.endTime = defTime
+					}
+				}
+			},
 		},
 		computed: {
-
+			reactStartTime() {
+				const activeDate = this.isRange ? this.tempRange.startDate : this.tempSingleDate
+				const res = activeDate === this.caleRange.startDate ? this.caleRange.startTime : ''
+				return res
+			},
+			reactEndTime() {
+				const activeDate = this.isRange ? this.tempRange.endDate : this.tempSingleDate
+				const res = activeDate === this.caleRange.endDate ? this.caleRange.endTime : ''
+				return res
+			}
 		},
 		mounted() {
 			if (this.isRange) {
@@ -479,12 +535,16 @@
 				const hour = defVal.getHours()
 				const minute = defVal.getMinutes()
 				const second = defVal.getSeconds()
-				const defDate = year + '-' + month + '-' + day
-				const defTime = hour + ':' + minute + ':' + second
+				const defDate = year + '-' + this.lessTen(month) + '-' + this.lessTen(day)
+				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + ':' + this.lessTen(second)
 				return {
 					defDate,
 					defTime
 				}
+			},
+
+			lessTen(item) {
+				return item < 10 ? '0' + item : item
 			},
 
 
