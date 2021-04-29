@@ -1,7 +1,7 @@
 {
   "id": "uni-popup",
   "displayName": "PopUp 弹出层",
-  "version": "1.2.9",
+  "version": "1.4.0 ",
   "description": " Popup 组件，提供常用的弹层",
   "keywords": [
     "popup",
