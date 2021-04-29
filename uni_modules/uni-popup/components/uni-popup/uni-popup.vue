@@ -1,8 +1,11 @@
 <template>
 	<view v-if="showPopup" class="uni-popup" :class="[popupstyle, isDesktop ? 'fixforpc-z-index' : '']" @touchmove.stop.prevent="clear">
-		<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass" :duration="duration" :show="showTrans" @click="onTap" />
+		<view @touchstart="touchstart" >
+				<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass" :duration="duration" :show="showTrans" @click="onTap" />
+		</view>
+	
 		<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
-			<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click.stop="clear"><slot /></view>
+			<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear"><slot /></view>
 		</uni-transition>
 		<!-- #ifdef H5 -->
 		<keypress v-if="maskShow" @esc="onTap" />
@@ -178,6 +181,8 @@ export default {
 		}
 		// TODO 处理 message 组件生命周期异常的问题
 		this.messageChild = null
+		// TODO 解决头条冒泡的问题
+		this.clearPropagation = false
 	},
 	methods: {
 		/**
@@ -194,8 +199,12 @@ export default {
 		},
 		// TODO nvue 取消冒泡
 		clear(e) {
+			// #ifndef APP-NVUE
 			e.stopPropagation()
+			// #endif
+			this.clearPropagation = true
 		},
+		
 		open(direction) {
 			let innerType = ['top', 'center', 'bottom', 'left', 'right', 'message', 'dialog', 'share']
 			if (!(direction && innerType.indexOf(direction) !== -1)) {
@@ -224,7 +233,13 @@ export default {
 				this.showPopup = false
 			}, 300)
 		},
+		// TODO 处理冒泡事件，头条的冒泡事件有问题 ，先这样兼容
+		touchstart(){
+			this.clearPropagation = false
+		},
+		
 		onTap() {
+			if(this.clearPropagation) return
 			if (!this.mkclick) return
 			this.close()
 		},
