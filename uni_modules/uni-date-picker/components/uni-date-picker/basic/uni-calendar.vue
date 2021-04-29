@@ -57,25 +57,24 @@
 			</view>
 			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
 				style="padding: 0 40px;">
-				<text class="uni-date-changed--time-date">{{calendar.fullDate,}}</text>
-				<uni-datetime-picker type="time" v-model="time" :border="false" class="time-picker-style">
+				<text class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : '选择日期'}}</text>
+				<uni-datetime-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time" :disabled="!tempSingleDate"
+					:border="false" class="time-picker-style">
 				</uni-datetime-picker>
 			</view>
 
 			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
-					<text
-						class="uni-date-changed--time-date">{{cale.multipleStatus.before ? cale.multipleStatus.before : '起始日期'}}</text>
-					<uni-datetime-picker type="time" v-model="timeRange.startTime" :border="false"
-						class="time-picker-style">
+					<text class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : '开始日期'}}</text>
+					<uni-datetime-picker type="time" :start="reactStartTime" v-model="timeRange.startTime"
+						:border="false" :disabled="!tempRange.before" class="time-picker-style">
 					</uni-datetime-picker>
 				</view>
 				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
 				<view class="uni-date-changed--time-end">
-					<text
-						class="uni-date-changed--time-date">{{cale.multipleStatus.after ? cale.multipleStatus.after : '结束日期'}}</text>
-					<uni-datetime-picker type="time" v-model="timeRange.endTime" :border="false"
-						class="time-picker-style">
+					<text class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : '结束日期'}}</text>
+					<uni-datetime-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
+						:disabled="!tempRange.after" class="time-picker-style">
 					</uni-datetime-picker>
 				</view>
 			</view>
@@ -123,6 +122,16 @@
 			date: {
 				type: String,
 				default: ''
+			},
+			defTime: {
+				type: [String, Object],
+				default: ''
+			},
+			selectableTimes: {
+				type: [Object],
+				default () {
+					return {}
+				}
 			},
 			selected: {
 				type: Array,
@@ -194,16 +203,20 @@
 				nowDate: '',
 				aniMaskShow: false,
 				firstEnter: true,
-				time: '',
+				time: this.defTime ? this.defTime : '',
 				timeRange: {
-					startTime: '',
-					endTime: ''
+					startTime: this.defTime.start ? this.defTime.start : '',
+					endTime: this.defTime.end ? this.defTime.end : ''
+				},
+				tempSingleDate: this.date,
+				tempRange: {
+					before: '',
+					after: ''
 				}
 			}
 		},
 		watch: {
 			date(newVal, oldVal) {
-
 				// this.cale.setDate(newVal)
 				this.init(newVal)
 			},
@@ -217,6 +230,14 @@
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
 				this.weeks = this.cale.weeks
 			},
+			// tempRange: {
+			// 	immediate: true,
+			// 	handler(newVal, oldVal) {debugger
+			// 		if (!oldVal) return
+			// 		if (!newVal.before) this.timeRange.startTime = ''
+			// 		if (!newVal.after) this.timeRange.endTime = ''
+			// 	}
+			// },
 			pleStatus: {
 				immediate: true,
 				handler(newVal, oldVal) {
@@ -226,6 +247,8 @@
 						fulldate,
 						which
 					} = newVal
+					this.tempRange.before = before
+					this.tempRange.after = after
 					setTimeout(() => {
 						if (fulldate) {
 							this.cale.setHoverMultiple(fulldate)
@@ -251,6 +274,18 @@
 						}
 					}, 16)
 				}
+			}
+		},
+		computed: {
+			reactStartTime() {
+				const activeDate = this.range ? this.tempRange.before : this.calendar.fullDate
+				const res = activeDate === this.startDate ? this.selectableTimes.start : ''
+				return res
+			},
+			reactEndTime() {
+				const activeDate = this.range ? this.tempRange.after : this.calendar.fullDate
+				const res = activeDate === this.endDate ? this.selectableTimes.end : ''
+				return res
 			}
 		},
 		created() {
@@ -408,6 +443,9 @@
 				// 设置多选
 				this.cale.setMultiple(this.calendar.fullDate, true)
 				this.weeks = this.cale.weeks
+				this.tempSingleDate = this.calendar.fullDate
+				this.tempRange.before = this.cale.multipleStatus.before
+				this.tempRange.after = this.cale.multipleStatus.after
 				this.change()
 			},
 			/**

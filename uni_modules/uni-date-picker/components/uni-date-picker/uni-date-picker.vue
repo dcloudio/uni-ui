@@ -33,10 +33,10 @@
 				<view v-show="hasTime" class="uni-date-changed popup-x-header">
 					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
 						placeholder="选择日期" />
-					<uni-datetime-picker type="time" v-model="time" :border="false" :start="reactStartTime"
+					<uni-datetime-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate" :start="reactStartTime"
 						:end="reactEndTime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="time"
-							placeholder="选择时间" />
+							placeholder="选择时间" :disabled="!tempSingleDate" />
 					</uni-datetime-picker>
 				</view>
 				<uni-calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
@@ -52,20 +52,20 @@
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							placeholder="开始日期" />
-						<uni-datetime-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :end="reactEndTime"
-							:border="false">
+						<uni-datetime-picker type="time" v-model="tempRange.startTime" :start="reactStartTime"
+							:border="false" :disabled="!tempRange.startDate">
 							<input class="uni-date__input uni-date-range__input" type="text"
-								v-model="tempRange.startTime" placeholder="开始时间" />
+								v-model="tempRange.startTime" placeholder="开始时间" :disabled="!tempRange.startDate"/>
 						</uni-datetime-picker>
 					</view>
 					<uni-icons type="arrowthinright" color="#999" style="line-height: 40px;"></uni-icons>
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
 							placeholder="结束日期" />
-						<uni-datetime-picker type="time" v-model="tempRange.endTime" :start="reactStartTime" :end="reactEndTime"
-							:border="false">
+						<uni-datetime-picker type="time" v-model="tempRange.endTime"
+							:end="reactEndTime" :border="false" :disabled="!tempRange.endDate">
 							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
-								placeholder="结束时间" />
+								placeholder="结束时间" :disabled="!tempRange.endDate" />
 						</uni-datetime-picker>
 					</view>
 				</view>
@@ -84,10 +84,10 @@
 				</view>
 			</view>
 		</view>
-		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :start-date="caleRange.startDate"
-			:end-date="caleRange.endDate" :start-time="caleRange.startTime" :end-time="caleRange.endTime"
-			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
-			@confirm="mobileChange" />
+		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+			:start-date="caleRange.startDate" :end-date="caleRange.endDate"
+			:selectableTimes="mobSelectableTime" :pleStatus="endMultipleStatus" :showMonth="false"
+			:range="isRange" :typeHasTime="hasTime" :insert="false" @confirm="mobileChange" />
 	</view>
 </template>
 <script>
@@ -121,7 +121,7 @@
 				singleVal: '',
 				tempSingleDate: '',
 				defSingleDate: '',
-				time: '00:00:00',
+				time: '',
 				// 范围选
 				caleRange: {
 					startDate: '',
@@ -304,6 +304,18 @@
 				const activeDate = this.isRange ? this.tempRange.endDate : this.tempSingleDate
 				const res = activeDate === this.caleRange.endDate ? this.caleRange.endTime : ''
 				return res
+			},
+			reactMobDefTime() {
+				return this.isRange ? {
+					start: this.tempRange.startTime,
+					end: this.tempRange.endTime
+				} : this.time
+			},
+			mobSelectableTime() {
+				return {
+					start: this.caleRange.startTime,
+					end: this.caleRange.endTime
+				}
 			}
 		},
 		mounted() {
