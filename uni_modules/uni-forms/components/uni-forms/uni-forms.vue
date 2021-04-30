@@ -125,9 +125,9 @@
 				if (Object.keys(formRules).length > 0) {
 					this.formTrigger = this.trigger
 					this.formRules = formRules
-					if (!this.validator) {
+					// if (!this.validator) {
 						this.validator = new Validator(formRules)
-					}
+					// }
 				} else {
 					return
 				}
