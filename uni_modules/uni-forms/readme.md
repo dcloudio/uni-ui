@@ -2,6 +2,7 @@
 
 ## Forms 表单
 
+> **组件名：uni-forms**
 > 代码块： `uForms`、`uni-forms-item`
 > 关联组件：`uni-forms-item`、`uni-easyinput`、`uni-data-checkbox`、`uni-group`。
 
@@ -18,6 +19,7 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 
 另外，`<uni-forms>`组件下面的各个表单项，可以通过`<uni-group>`包裹为不同的分组。同一`<uni-group>`下的不同表单项目将聚拢在一起，同其他group保持垂直间距。`<uni-group>`仅影响视觉效果。
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - `focus` 属性在开发者工具从不生效，需要真机测试
@@ -477,7 +479,7 @@ validate		| 任意表单项被校验后触发，返回表单校验信息
 | setValue			| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|
 | validateField	| 部分表单进行校验		|
 | clearValidate	| 移除表单的校验结果	|
-| resetFields   | 重置表单|
+| resetFields   | 重置表单, 需要把 `uni-forms` 的`value`属性改为 `v-model` ,且对内置组件可能不生效|
 
 
 ```javascript

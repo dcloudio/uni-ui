@@ -294,7 +294,6 @@
 		/* #endif */
 		flex: 1;
 		position: relative;
-		// padding: 16px 14px;
 		text-align: left;
 		color: #333;
 		font-size: 14px;
@@ -306,10 +305,11 @@
 		width: 100%;
 		display: flex;
 		box-sizing: border-box;
-		min-height: 36px;
 		/* #endif */
+		min-height: 36px;
 		flex-direction: row;
 		align-items: center;
+		border: 1px red solid;
 	}
 
 	.uni-easyinput__content-input {
@@ -319,9 +319,8 @@
 		position: relative;
 		overflow: hidden;
 		flex: 1;
-		line-height: 2;
+		line-height: 1;
 		font-size: 14px;
-		// padding-right: 10px;
 	}
 
 	.is-textarea {
