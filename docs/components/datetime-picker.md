@@ -1,8 +1,7 @@
 ---
 url : pages/vue/datetime-picker/datetime-picker
 ---
-> `通知：组件将有重要升级，更新 1.1.0 后，支持范围选择，组件 ui 将使用日历选择日期, 同时支持 PC 和 移动端。此次并非破坏性更新，但 ui 变化较大，固提前告知`[更新后样式参考](https://ext.dcloud.net.cn/plugin?id=4700)
-
+> `重要通知：组件升级更新 2.0.0 后，支持日期+时间范围选择，组件 ui 将使用日历选择日期，ui 变化较大，同时支持 PC 和 移动端。此版本不向后兼容，不再支持单独的时间选择（type=time）及相关的 hide-second 属性（时间选可使用内置组件 picker）。若仍需使用旧版本，可在插件市场下载*非uni_modules版本*，旧版本将不再维护`
 ## DatetimePicker 时间选择器
 ::: tip 组件名：uni-datetime-picker
 代码块： `uDatetimePicker`
@@ -57,7 +56,6 @@ range|选择器类型																								|
 
 
 
-注：如 type 为 time 类型，无对应的时间戳，则返回值格式 return-type 无论为何值，都会返回 string
 
 ### DatetimePicker Events
 

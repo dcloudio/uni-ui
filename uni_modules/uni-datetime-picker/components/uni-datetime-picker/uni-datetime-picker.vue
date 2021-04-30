@@ -79,7 +79,7 @@
 						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
-					<!-- <text class="" @click="clear">清空</text> -->
+					<text class="" @click="clear">清空</text>
 					<text class="confirm" @click="confirmRangeChange">确定</text>
 				</view>
 			</view>
@@ -411,6 +411,10 @@
 			},
 
 			confirmSingleChange() {
+				if (!this.tempSingleDate) {
+					this.popup = false
+					return
+				}
 				if (this.hasTime) {
 					this.singleVal = this.tempSingleDate + ' ' + (this.time ? this.time : '00:00:00')
 				} else {
@@ -488,6 +492,10 @@
 			},
 
 			confirmRangeChange() {
+				if (!this.tempRange.startDate && !this.tempRange.endDate) {
+					this.popup = false
+					return
+				}
 				let start, end
 				if (!this.hasTime) {
 					start = this.range.startDate = this.tempRange.startDate

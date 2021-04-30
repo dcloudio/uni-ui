@@ -1,7 +1,7 @@
 {
   "id": "uni-datetime-picker",
   "displayName": "DatetimePicker 日期选择器",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "DatetimePicker 可以同时选择日期和时间的选择器",
   "keywords": [
     "DatetimePicker",
