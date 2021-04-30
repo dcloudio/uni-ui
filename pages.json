@@ -298,12 +298,6 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/vue/date-picker/date-picker",
-			"style": {
-				"navigationBarTitleText": "日期选择",
-				"enablePullDownRefresh": false
-			}
-		}, {
 			"path": "pages/vue/datetime-picker/datetime-picker",
 			"style": {
 				"navigationBarTitleText": "日期时间",

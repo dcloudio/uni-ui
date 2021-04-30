@@ -18,12 +18,6 @@ ___点击 picker 默认值规则：___
 - 若设置初始值 value, 会显示在 picker 显示框中
 - 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
 
-___默认值和起始时间比较规则：___
-
-- 设置了起始时间 start、终止时间 end，并 start < value < end，初始值为 value， 否则初始值为 start
-- 只设置了起始时间 start，并 start < value，初始值为 value，否则初始值为 start
-- 只设置了终止时间 end，并 value < end，初始值为 value，否则初始值为 end
-- 无起始终止时间，则初始值为 value
 
 ### 安装方式
 
@@ -49,13 +43,16 @@ ___默认值和起始时间比较规则：___
 
 |属性名			|类型						|默认值		|值域									|说明																											|
 |:-:				|:-:						|:-:			|											|:-:																											|
-|type				|String					|datetime	|datetime、date、time	|选择器类型																								|
+|type				|String					|date	|date/daterange/datetime/datetimerange
+range|选择器类型																								|
 |value			|String、Number	|-				|-										|输入框当前值																							|
 |start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end				|String、Number	|-				|-										|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
 |return-type|String					|timestamp|timestamp 、string		|返回值格式																								|
 |border			|Boolean、String|true			|											|是否有边框																								|
-|hide-second|Boolean、String|false		|											|是否隐藏秒																								|
+|placeholder		|String			|-			|-																			|非范围选择时的占位内容			|
+|start-placeholder	|String			|-			|-																			|范围选择时开始日期的占位内容	|
+|end-placeholder	|String			|-			|-																			|范围选择时结束日期的占位内容	|
 |disabled		|Boolean、String|false		|											|是否不可选择																							|
 
 
@@ -64,6 +61,6 @@ ___默认值和起始时间比较规则：___
 
 ### DatetimePicker Events
 
-|事件名称	|说明																				|返回值	|
-|:-:		|:-:																				|:-:		|
-|change	|确定日期时间时触发的事件，参数为当前选择的 value	|-			|
+|事件名称	|说明												|返回值	|
+|:-:		|:-:												|:-:	|
+|change		|确定日期时间时触发的事件，参数为当前选择的日期对象	|	单选返回日期字符串，如：'2010-02-3'；范围选返回日期字符串数组，如：['2020-10-1',  '2021-4-1']	|

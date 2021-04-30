@@ -58,24 +58,24 @@
 			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
 				style="padding: 0 40px;">
 				<text class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : '选择日期'}}</text>
-				<uni-datetime-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time" :disabled="!tempSingleDate"
+				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time" :disabled="!tempSingleDate"
 					:border="false" class="time-picker-style">
-				</uni-datetime-picker>
+				</time-picker>
 			</view>
 
 			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
 					<text class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : '开始日期'}}</text>
-					<uni-datetime-picker type="time" :start="reactStartTime" v-model="timeRange.startTime"
+					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime"
 						:border="false" :disabled="!tempRange.before" class="time-picker-style">
-					</uni-datetime-picker>
+					</time-picker>
 				</view>
 				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
 				<view class="uni-date-changed--time-end">
 					<text class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : '结束日期'}}</text>
-					<uni-datetime-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
+					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
 						:disabled="!tempRange.after" class="time-picker-style">
-					</uni-datetime-picker>
+					</time-picker>
 				</view>
 			</view>
 
@@ -94,6 +94,7 @@
 <script>
 	import Calendar from './util.js';
 	import calendarItem from './uni-calendar-item.vue'
+	import timePicker from './time-picker/components/time-picker/time-picker.vue'
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
@@ -116,7 +117,8 @@
 	 */
 	export default {
 		components: {
-			calendarItem
+			calendarItem,
+			timePicker
 		},
 		props: {
 			date: {
