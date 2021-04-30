@@ -79,7 +79,7 @@
 						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
-					<text class="" @click="clear">清空</text>
+					<!-- <text class="" @click="clear">清空</text> -->
 					<text class="confirm" @click="confirmRangeChange">确定</text>
 				</view>
 			</view>
@@ -613,7 +613,7 @@
 
 	.uni-date-editor--x:hover .uni-date__icon-clear {
 		position: absolute;
-		top: 0;
+		top: 5px;
 		right: 0;
 		display: inline-block;
 		box-sizing: border-box;
