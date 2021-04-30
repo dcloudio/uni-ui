@@ -35,6 +35,7 @@
 |max					|Number	|100		|最大值									|
 |step					|Number	|1			|每次点击改变的间隔大小	|
 |disabled			|Boolean|false	|是否为禁用状态					|
+|digit        |Boolean|false  |键盘是否包含小数点     |
 
 ### NumberBox Events
 
