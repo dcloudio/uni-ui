@@ -1,6 +1,8 @@
 <template>
 	<view class="uni-pagination">
+		<!-- #ifndef APP-NVUE -->
 		<view class="uni-pagination__total is-phone-hide">共 {{ total }} 条</view>
+		<!-- #endif -->
 		<view
 			class="uni-pagination__btn"
 			:class="currentIndex === 1 ? 'uni-pagination--disabled' : 'uni-pagination--enabled'"
@@ -20,7 +22,7 @@
 			<view class="uni-pagination__num-current">
 				<text class="uni-pagination__num-current-text is-pc-hide" style="color:#409EFF">{{ currentIndex }}</text>
 				<text class="uni-pagination__num-current-text is-pc-hide">/{{ maxPage || 0 }}</text>
-
+				<!-- #ifndef APP-NVUE -->
 				<view
 					v-for="(item, index) in paper"
 					:key="index"
@@ -30,6 +32,8 @@
 				>
 					<text>{{ item }}</text>
 				</view>
+				<!-- #endif -->
+				
 			</view>
 		</view>
 		<view
@@ -361,7 +365,7 @@ export default {
 	color: #fff;
 }
 
-/* #ifdef H5 */
+/* #ifndef APP-NVUE */
 .is-pc-hide {
 	display: block;
 }
