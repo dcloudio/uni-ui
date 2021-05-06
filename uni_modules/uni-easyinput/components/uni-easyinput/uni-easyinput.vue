@@ -23,7 +23,7 @@
 			</template>
 			<template v-else>
 				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
-				 v-if="clearable && focused && val " color="#c0c4cc" @click="onClear"></uni-icons>
+				 v-if="clearable && val " color="#c0c4cc" @click="onClear"></uni-icons>
 			</template>
 			<slot name="right"></slot>
 		</view>
@@ -62,7 +62,7 @@
 	 * @value end		去除右侧空格
 	 * @value all		去除全部空格
 	 * @value none	不去除空格
-	 * @property {Boolean} 	inputBorder 			是否显示input输入框的边框（默认false）
+	 * @property {Boolean} 	inputBorder 			是否显示input输入框的边框（默认true）
 	 * @property {Object} 	styles 						自定义颜色
 	 * @event {Function} 		input 						输入框内容发生变化时触发
 	 * @event {Function} 		focus 						输入框获得焦点时触发
@@ -309,7 +309,6 @@
 		min-height: 36px;
 		flex-direction: row;
 		align-items: center;
-		border: 1px red solid;
 	}
 
 	.uni-easyinput__content-input {

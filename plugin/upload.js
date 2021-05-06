@@ -1,4 +1,4 @@
-console.error('-------- upload.js start--------');
+// console.error('-------- upload.js start--------');
 
 const path = require('path')
 const fs = require('fs')
@@ -9,7 +9,7 @@ const root = path.join(__dirname,'..')
 const modulesId = process.env.UNI_MODULES_ID
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
-console.error('upload.js - modulesId :' + modulesId);
+// console.error('upload.js - modulesId :' + modulesId);
 const packageJson = getPackage(modulesId, comPath)
 const examplePath = path.join(root, 'temps')
 
@@ -58,7 +58,7 @@ if (modulesId === 'uni-ui') {
 				util.copyDir(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item))
 			})
 		}, Promise.resolve([])).then(res => {
-			console.error('所有依赖组件同步完成');
+			// console.error('所有依赖组件同步完成');
 			setPageComponents(modulesId, comName)
 		})
 	} else {
@@ -70,7 +70,7 @@ function setPageComponents(modulesId, comName) {
 	const pagePath = path.join(root, 'pages', 'vue', comName, comName + '.vue')
 	const pageContent = fs.readFileSync(pagePath).toString()
 	const pageContents = getComName(pageContent)
-	console.error('组件名称:' + pageContents);
+	// console.error('组件名称:' + pageContents);
 
 	if (pageContents.length > 0) {
 		pageContents.reduce((promise, item) => {
@@ -81,7 +81,7 @@ function setPageComponents(modulesId, comName) {
 				util.copyDir(inputPath, path.join(tempExamplePath, 'uni_modules', item))
 			})
 		}, Promise.resolve([])).then(res => {
-			console.error('所有依赖组件同步完成');
+			// console.error('所有依赖组件同步完成');
 		})
 	}
 }
@@ -181,4 +181,4 @@ function handleReadme(readmePath) {
 	return content
 }
 
-console.error('-------- upload.js end --------');
+// console.error('-------- upload.js end --------');
