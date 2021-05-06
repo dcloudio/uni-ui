@@ -1,4 +1,5 @@
-const fs = require('fs-extra')
+const fs = require('fs')
+const util = require('../build/util.js')
 const path = require('path')
 
 class CopyPlugin {
@@ -11,7 +12,7 @@ class CopyPlugin {
     const fromFiles = fs.readdirSync(from)
     const exists = fs.existsSync(to)
     if (exists) {
-      fs.removeSync(to)
+      util.deleteFolder(to)
     }
     fromFiles.forEach(pathName => {
       if(pathName === '.DS_Store') return
@@ -19,7 +20,8 @@ class CopyPlugin {
       const subFileLists = fs.readdirSync(path.join(from, pathName))
       subFileLists.forEach((item) => {
         const basename = path.basename(item, '.vue')
-        fs.copySync(path.join(from, pathName, item), path.join(to, pathName, basename + '.nvue'))
+				util.mkdirsSync(path.join(to, pathName))
+				util.copyFile(path.join(from, pathName, item), path.join(to, pathName, basename + '.nvue'))
       })
     })
 
@@ -47,13 +49,11 @@ class CopyPlugin {
         // 获取要copy 的路径
         const toFilePath = path.join(to, name, '..', basename + '.nvue')
 
-        // console.log(path.join(filePath, '..'))
-        // console.log(from)
         if (path.join(filePath, '..').indexOf(from) === -1) {
           // console.log('不修改这个文件', filePath)
         } else {
           // console.log('同步文件到:', toFilePath)
-          fs.copySync(filePath, toFilePath)
+          util.copyFile(filePath, toFilePath)
         }
 
       })
