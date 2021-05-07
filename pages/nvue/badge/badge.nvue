@@ -25,6 +25,11 @@
 			<uni-badge class="uni-badge-left-margin" text="45" type="warning" size="small" />
 			<uni-badge class="uni-badge-left-margin" text="123" type="error" size="small" />
 		</view>
+		<uni-section title="自定义样式" type="line"></uni-section>
+		<view class="example-body">
+			<uni-badge class="uni-badge-left-margin" text="2" type="primary" customStyle="background-color: #2C405A; color: #fff;" />
+			<uni-badge class="uni-badge-left-margin" text="2" type="primary" customStyle="background-color: #2C405A; color: red;" />
+		</view>
 	</view>
 </template>
 

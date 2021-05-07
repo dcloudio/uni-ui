@@ -40,6 +40,10 @@
 			size: {
 				type: String,
 				default: 'normal'
+			},
+			customStyle: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
@@ -57,7 +61,7 @@
 		},
 		methods: {
 			setStyle() {
-				this.badgeStyle = `width: ${String(this.text).length * 8 + 12}px`
+				this.badgeStyle = `width: ${String(this.text).length * 8 + 12}px;` + this.customStyle
 			},
 			onClick() {
 				this.$emit('click');
@@ -72,10 +76,10 @@
 	$bage-height: 20px;
 
 	.uni-badge {
-		/* #ifndef APP-PLUS */
+		/* #ifndef APP-NVUE */
 		display: flex;
-		box-sizing: border-box;
 		overflow: hidden;
+		box-sizing: border-box;
 		/* #endif */
 		justify-content: center;
 		flex-direction: row;
@@ -88,7 +92,6 @@
 		text-align: center;
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-size: $bage-size;
-		padding: 0px 6px;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */
