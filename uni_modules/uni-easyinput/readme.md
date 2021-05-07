@@ -132,7 +132,7 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |prefixIcon	   			|String					| -	| - |输入框头部图标	|
 |suffixIcon	   			|String					| -	| - |输入框尾部图标|
 |trim	   						|Boolean/String	| 见 trim Options	| false |	是否自动去除空格，传入类型为 Boolean 时，自动去除前后空格|
-|inputBorder	   		|Boolean				| -	|false|	是否显示input输入框的边框|
+|inputBorder	   		|Boolean				| -	|true|	是否显示input输入框的边框|
 |styles				   		|Object					| -	| - |	样式自定义|
 
 
