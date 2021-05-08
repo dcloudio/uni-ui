@@ -43,6 +43,7 @@
 |second				|Number	|0		|秒					|
 |showDay			|Boolean|true	|是否显示天数		|
 |showColon			|Boolean|true	|是否以冒号为分隔符	|
+|start			|Boolean|true	|是否初始化组件后就开始倒计时|
 
 ### Countdown Events
 
