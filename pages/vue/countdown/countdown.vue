@@ -5,7 +5,11 @@
 		<view class="example-body">
 			<uni-countdown :day="1" :hour="1" :minute="12" :second="40" />
 		</view>
-		<uni-section title="不显示天数" type="line"></uni-section>
+		<uni-section title="自由控制开始/暂停" type="line"></uni-section>
+		<view class="example-body">
+			<uni-countdown :start="start" :day="1" :hour="1" :minute="12" :second="40" />
+		</view>
+		<!--<uni-section title="不显示天数" type="line"></uni-section>
 		<view class="example-body">
 			<uni-countdown :show-day="false" :hour="12" :minute="12" :second="12" />
 		</view>
@@ -24,7 +28,7 @@
 		<uni-section title="动态赋值" type="line"></uni-section>
 		<view class="example-body">
 			<uni-countdown  :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond" />
-		</view>
+		</view> -->
 	</view>
 </template>
 <script>
@@ -34,7 +38,8 @@
 			return {
 				testHour: 0,
 				testMinute: 0,
-				testSecond: 0
+				testSecond: 0,
+				start: false
 			}
 		},
 		created() {
@@ -42,7 +47,11 @@
 				this.testHour = 1
 				this.testMinute = 1
 				this.testSecond = 0
-			}, 2000)
+				this.start = true
+			}, 3000)
+			setTimeout(() => {
+				this.start = false
+			}, 10000)
 		},
 		methods: {
 			timeup() {
