@@ -164,7 +164,7 @@
 		props: {
 			type: {
 				type: String,
-				default: 'date'
+				default: 'datetime'
 			},
 			value: {
 				type: [String, Number, Array],
@@ -358,21 +358,23 @@
 					this.$refs.mobile.open()
 					return
 				}
-				let left
-				const leftWindowInfo = uni.getLeftWindowStyle()
-				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
-				dateEditor.boundingClientRect(rect => {
-					// console.log(22222222, rect);
-					if (leftWindowInfo.errMsg) {
-						left = rect.left + 'px'
-					} else {
-						left = '15px'
-					}
-					this.popover = {
-						top: rect.top + rect.height + 15 + 'px',
-						left: left,
-					}
-				}).exec()
+				this.popover = {
+					top: '10px'
+				}
+				// const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
+				// dateEditor.boundingClientRect(rect => {
+				// 	console.log(22222222, rect);
+				// 	if (leftWindowInfo.errMsg) {
+				// 		left = rect.left + 'px'
+				// 	} else {
+				// 		left = '15px'
+				// 	}
+				// 	this.popover = {
+				// 		// top: rect.top + rect.height + 15 + 'px',
+				// 		top: '40px',
+				// 		left: 0,
+				// 	}
+				// }).exec()
 				setTimeout(() => {
 					this.popup = !this.popup
 					// this.visible = true
@@ -649,6 +651,7 @@
 	}
 
 	.uni-date-picker__container {
+		position: relative;
 		/* 		position: fixed;
 		left: 0;
 		right: 0;
@@ -675,7 +678,7 @@
 		top: 0;
 		left: 0;
 		z-index: 999;
-		width: 375px;
+		/* width: 375px; */
 		border: 1px solid #F1F1F1;
 		border-radius: 4px;
 	}

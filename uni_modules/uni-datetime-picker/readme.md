@@ -40,7 +40,7 @@ ___点击 picker 默认值规则：___
 
 |属性名			|类型						|默认值		|值域									|说明																											|
 |:-:				|:-:						|:-:			|											|:-:																											|
-|type				|String					|date	|date/daterange/datetime/datetimerange
+|type				|String					|datetime	|date/daterange/datetime/datetimerange
 range|选择器类型																								|
 |value			|String、Number	|-				|-										|输入框当前值																							|
 |start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
