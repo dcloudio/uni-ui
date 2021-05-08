@@ -1,11 +1,11 @@
 {
   "id": "uni-notice-bar",
-  "displayName": "NoticeBar 通告栏",
+  "displayName": "uni-notice-bar 通告栏",
   "version": "1.0.8",
   "description": "NoticeBar 通告栏组件，常用于展示公告信息，可设为滚动公告",
   "keywords": [
-    "noticebar",
     "uni-ui",
+    "uniui",
     "通告栏",
     "公告",
     "跑马灯"

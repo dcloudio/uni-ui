@@ -1,14 +1,15 @@
 {
   "id": "uni-dateformat",
-  "displayName": "Dateformat 日期格式化",
+  "displayName": "uni-dateformat 日期格式化",
   "version": "0.0.3",
   "description": "日期格式化组件，可以将日期格式化为1分钟前、刚刚等形式",
   "keywords": [
+    "uni-ui",
+    "uniui",
     "日期格式化",
     "时间格式化",
     "格式化时间",
-    "",
-    "date-format"
+    ""
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

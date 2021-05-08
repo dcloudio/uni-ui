@@ -1,6 +1,7 @@
 
 
 ## Card 卡片
+> **组件名：uni-card**
 > 代码块： `uCard`
 
 
@@ -12,6 +13,7 @@
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 因为平台兼容问题 ， 目前 APP-NVUE 安卓平台下不支持阴影
 

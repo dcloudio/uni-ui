@@ -1,11 +1,12 @@
 {
   "id": "uni-fav",
-  "displayName": "Fav 收藏按钮",
+  "displayName": "uni-fav 收藏按钮",
   "version": "1.0.5",
   "description": " Fav 收藏组件，可自定义颜色、大小。",
   "keywords": [
     "fav",
     "uni-ui",
+    "uniui",
     "收藏"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

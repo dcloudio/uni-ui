@@ -1,11 +1,11 @@
 {
   "id": "uni-number-box",
-  "displayName": "NumberBox 数字输入框",
+  "displayName": "uni-number-box 数字输入框",
   "version": "1.0.6",
   "description": "NumberBox 带加减按钮的数字输入框组件，用户可以控制每次点击增加的数值，支持小数。",
   "keywords": [
-    "numberbox",
     "uni-ui",
+    "uniui",
     "数字输入框"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

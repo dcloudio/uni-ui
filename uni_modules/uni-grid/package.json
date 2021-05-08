@@ -1,11 +1,11 @@
 {
   "id": "uni-grid",
-  "displayName": "Grid 宫格",
+  "displayName": "uni-grid 宫格",
   "version": "1.2.3",
   "description": "Grid 宫格组件，提供移动端常见的宫格布局，如九宫格。",
   "keywords": [
-    "grid",
     "uni-ui",
+    "uniui",
     "九宫格",
     "表格"
 ],

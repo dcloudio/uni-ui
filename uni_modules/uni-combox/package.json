@@ -1,12 +1,13 @@
 {
   "id": "uni-combox",
-  "displayName": "Combox 组合框",
+  "displayName": "uni-combox 组合框",
   "version": "0.0.5",
   "description": "可以选择也可以输入的表单项 ",
   "keywords": [
+    "uni-ui",
+    "uniui",
     "combox",
     "组合框",
-    "可下拉输入框",
     "select"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

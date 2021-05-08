@@ -1,12 +1,11 @@
 {
   "id": "uni-indexed-list",
-  "displayName": "IndexedList 索引列表",
+  "displayName": "uni-indexed-list 索引列表",
   "version": "1.0.10",
   "description": "索引列表",
   "keywords": [
     "uni-ui",
-    "indexed-list",
-    "uni-indexed-list",
+    "uniui",
     "索引列表"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

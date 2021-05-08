@@ -1,5 +1,6 @@
 ## Layout 布局
 
+> **组件名 uni-row、uni-col**
 > 代码块： `uRow`、`uCol`
 
 
@@ -11,6 +12,7 @@
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 如使用过程中有任何问题，或者您对 uni-ui 有一些好的建议，欢迎加入 uni-ui 交流群：871950839

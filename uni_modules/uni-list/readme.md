@@ -1,6 +1,7 @@
 
 
 ## List 列表
+> **组件名：uni-list**
 > 代码块： `uList`、`uListItem`
 > 关联组件：`uni-list-item`、`uni-badge`、`uni-icons`、`uni-list-chat`、`uni-list-ad`
 
@@ -28,6 +29,7 @@ uni-list不包含下拉刷新和上拉翻页。上拉翻页另见组件：[uni-l
 
 如需通过`npm`方式使用`uni-ui`组件，另见文档：[https://ext.dcloud.net.cn/plugin?id=55](https://ext.dcloud.net.cn/plugin?id=55)
 
+> **注意事项**
 > 为了避免错误使用，给大家带来不好的开发体验，请在使用组件前仔细阅读下面的注意事项，可以帮你避免一些错误。
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 组件内部依赖 `'uni-icons'` 、`uni-badge` 组件
@@ -243,6 +245,7 @@ body	|	中间内容插槽，可完全自定义中间内容
 footer	|	右/下内容插槽，可完全自定义右侧内容		
 
 
+> **通过插槽扩展**
 > 需要注意的是当使用插槽时，内置样式将会失效，只保留排版样式，此时的样式需要开发者自己实现
 > 如果	`uni-list-item` 组件内置属性样式无法满足需求，可以使用插槽来自定义uni-list-item里的内容。
 > uni-list-item提供了3个可扩展的插槽：`header`、`body`、`footer`

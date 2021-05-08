@@ -1,14 +1,14 @@
 {
   "id": "uni-drawer",
-  "displayName": "Drawer 抽屉",
+  "displayName": "uni-drawer 抽屉",
   "version": "1.0.6",
   "description": "抽屉式导航，用于展示侧滑菜单，侧滑导航。",
   "keywords": [
-    "drawer",
     "uni-ui",
+    "uniui",
+    "drawer",
     "抽屉",
-    "侧滑导航",
-    "侧滑"
+    "侧滑导航"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

@@ -1,13 +1,13 @@
 {
   "id": "uni-file-picker",
-  "displayName": "FilePicker 文件选择上传",
+  "displayName": "uni-file-picker 文件选择上传",
   "version": "0.0.6",
   "description": "文件选择上传组件，可以选择图片、视频等任意文件并上传到当前绑定的服务空间",
   "keywords": [
     "uni-ui",
+    "uniui",
     "图片上传",
-    "文件上传",
-    "uni-file-picker"
+    "文件上传"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

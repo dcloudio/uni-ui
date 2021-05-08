@@ -1,6 +1,7 @@
 
 
 ## CountDown 倒计时
+> **组件名：uni-countdown**
 > 代码块： `uCountDown`
 
 

@@ -1,6 +1,7 @@
 
 
 ## Icons 图标
+> **组件名：uni-icons**
 > 代码块： `uIcons`
 
 

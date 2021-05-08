@@ -1,6 +1,7 @@
 
 
 ## SegmentedControl 分段器
+> **组件名：uni-segmented-control**
 > 代码块： `uSegmentedControl`
 
 

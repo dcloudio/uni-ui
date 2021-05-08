@@ -1,12 +1,13 @@
 {
   "id": "uni-transition",
-  "displayName": "Transition 过渡动画",
+  "displayName": "uni-transition 过渡动画",
   "version": "1.1.0",
   "description": "元素的简单过渡动画",
   "keywords": [
+    "uni-ui",
+    "uniui",
     "动画",
     "过渡",
-    "uni-transition",
     "过渡动画"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

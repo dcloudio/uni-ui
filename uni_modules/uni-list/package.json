@@ -1,12 +1,14 @@
 {
   "id": "uni-list",
-  "displayName": "List 列表",
+  "displayName": "uni-list 列表",
   "version": "1.0.16",
   "description": "List 组件 ，帮助使用者快速构建列表。",
   "keywords": [
     "",
+    "uni-ui",
+    "uniui",
     "列表",
-    "uni-list",
+    "",
     "list"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
