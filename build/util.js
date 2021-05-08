@@ -15,7 +15,6 @@ class Util {
 		let cmdStr1 = cmd
 		let cmdPath = path.join(__dirname, '..', 'packages')
 		let workerProcess = null
-		console.log(cmdPath);
 		// 子进程名称
 		this.runExec(cmdStr1, cmdPath, workerProcess)
 	}
@@ -34,7 +33,6 @@ class Util {
 		})
 		// 退出之后的输出
 		workerProcess.on('close', function(code) {
-			console.log(code)
 		})
 	}
 	/**

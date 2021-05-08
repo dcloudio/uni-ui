@@ -80,6 +80,13 @@ export default {
 ```
 ::: danger 注意
 - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用（[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
+- 使用 npm 安装的组件，默认情况下 babel-loader 会忽略所有 node_modules 中的文件 ，导致条件编译失效，需要通过配置 `vue.config.js` 解决：
+```javascript
+// 在根目录创建 vue.config.js 文件，并配置如下
+module.exports = {
+	transpileDependencies: ['@dcloudio/uni-ui']
+}
+```
 :::
 
 ## 使用 npm + easycom 

@@ -132,6 +132,13 @@ export default {
 ```
 > **注意**
 > - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用（[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
+> - 使用 npm 安装的组件，默认情况下 babel-loader 会忽略所有 node_modules 中的文件 ，导致条件编译失效，需要通过配置 `vue.config.js` 解决：
+> ```javascript
+> // 在根目录创建 vue.config.js 文件，并配置如下
+> module.exports = {
+> 	transpileDependencies: ['@dcloudio/uni-ui']
+> }
+> ```
 
 
 ## 使用 npm + easycom 
@@ -163,47 +170,47 @@ export default {
 ### uni-ui 已支持的组件列表
 |组件名|组件说明|
 |---|---|
-|uniuni-badge|[数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge)|
-|uniuni-calendar|[日历](https://ext.dcloud.net.cn/plugin?name=uni-calendar)|
-|uniuni-card|[卡片](https://ext.dcloud.net.cn/plugin?name=uni-card)|
-|uniuni-collapse|[折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse)|
-|uniuni-combox|[组合框](https://ext.dcloud.net.cn/plugin?name=uni-combox)|
-|uniuni-countdown|[倒计时](https://ext.dcloud.net.cn/plugin?name=uni-countdown)|
-|uniuni-data-checkbox|[数据选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-checkbox)|
-|uniuni-data-picker|[数据驱动的picker选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-picker)|
-|uniuni-dateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?name=uni-dateformat)|
-|uniuni-datetime-picker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-datetime-picker)|
-|uniuni-drawer|[抽屉](https://ext.dcloud.net.cn/plugin?name=uni-drawer)|
-|uniuni-easyinput|[增强输入框](https://ext.dcloud.net.cn/plugin?name=uni-easyinput)|
-|uniuni-fab|[悬浮按钮](https://ext.dcloud.net.cn/plugin?name=uni-fab)|
-|uniuni-fav|[收藏按钮](https://ext.dcloud.net.cn/plugin?name=uni-fav)|
-|uniuni-file-picker|[文件选择上传](https://ext.dcloud.net.cn/plugin?name=uni-file-picker)|
-|uniuni-forms|[表单](https://ext.dcloud.net.cn/plugin?name=uni-forms)|
-|uniuni-goods-nav|[商品导航](https://ext.dcloud.net.cn/plugin?name=uni-goods-nav)|
-|uniuni-grid|[宫格](https://ext.dcloud.net.cn/plugin?name=uni-grid)|
-|uniuni-group|[分组](https://ext.dcloud.net.cn/plugin?name=uni-group)|
-|uniuni-icons|[图标](https://ext.dcloud.net.cn/plugin?name=uni-icons)|
-|uniuni-indexed-list|[索引列表](https://ext.dcloud.net.cn/plugin?name=uni-indexed-list)|
-|uniuni-link|[超链接](https://ext.dcloud.net.cn/plugin?name=uni-link)|
-|uniuni-list|[列表](https://ext.dcloud.net.cn/plugin?name=uni-list)|
-|uniuni-load-more|[加载更多](https://ext.dcloud.net.cn/plugin?name=uni-load-more)|
-|uniuni-nav-bar|[自定义导航栏](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar)|
-|uniuni-notice-bar|[通告栏](https://ext.dcloud.net.cn/plugin?name=uni-notice-bar)|
-|uniuni-number-box|[数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box)|
-|uniuni-pagination|[分页器](https://ext.dcloud.net.cn/plugin?name=uni-pagination)|
-|uniuni-popup|[弹出层](https://ext.dcloud.net.cn/plugin?name=uni-popup)|
-|uniuni-rate|[评分](https://ext.dcloud.net.cn/plugin?name=uni-rate)|
-|uniuni-row|[布局-行](https://ext.dcloud.net.cn/plugin?name=uni-row)|
-|uniuni-search-bar|[搜索栏](https://ext.dcloud.net.cn/plugin?name=uni-search-bar)|
-|uniSection|[标题栏](https://ext.dcloud.net.cn/plugin?name=uni-section)|
-|uniuni-segmented-control|[分段器](https://ext.dcloud.net.cn/plugin?name=uni-segmented-control)|
-|uniuni-steps|[步骤条](https://ext.dcloud.net.cn/plugin?name=uni-steps)|
-|uniuni-swipe-action|[滑动操作](https://ext.dcloud.net.cn/plugin?name=uni-swipe-action)|
-|uniuni-swiper-dot|[轮播图指示点](https://ext.dcloud.net.cn/plugin?name=uni-swiper-dot)|
-|uniuni-table|[表格](https://ext.dcloud.net.cn/plugin?name=uni-table)|
-|uniuni-tag|[标签](https://ext.dcloud.net.cn/plugin?name=uni-tag)|
-|uniuni-title|[章节标题](https://ext.dcloud.net.cn/plugin?name=uni-title)|
-|uniuni-transition|[过渡动画](https://ext.dcloud.net.cn/plugin?name=uni-transition)|
+|uni-badge|[数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge)|
+|uni-calendar|[日历](https://ext.dcloud.net.cn/plugin?name=uni-calendar)|
+|uni-card|[卡片](https://ext.dcloud.net.cn/plugin?name=uni-card)|
+|uni-collapse|[折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse)|
+|uni-combox|[组合框](https://ext.dcloud.net.cn/plugin?name=uni-combox)|
+|uni-countdown|[倒计时](https://ext.dcloud.net.cn/plugin?name=uni-countdown)|
+|uni-data-checkbox|[数据选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-checkbox)|
+|uni-data-picker|[数据驱动的picker选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-picker)|
+|uni-dateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?name=uni-dateformat)|
+|uni-datetime-picker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-datetime-picker)|
+|uni-drawer|[抽屉](https://ext.dcloud.net.cn/plugin?name=uni-drawer)|
+|uni-easyinput|[增强输入框](https://ext.dcloud.net.cn/plugin?name=uni-easyinput)|
+|uni-fab|[悬浮按钮](https://ext.dcloud.net.cn/plugin?name=uni-fab)|
+|uni-fav|[收藏按钮](https://ext.dcloud.net.cn/plugin?name=uni-fav)|
+|uni-file-picker|[文件选择上传](https://ext.dcloud.net.cn/plugin?name=uni-file-picker)|
+|uni-forms|[表单](https://ext.dcloud.net.cn/plugin?name=uni-forms)|
+|uni-goods-nav|[商品导航](https://ext.dcloud.net.cn/plugin?name=uni-goods-nav)|
+|uni-grid|[宫格](https://ext.dcloud.net.cn/plugin?name=uni-grid)|
+|uni-group|[分组](https://ext.dcloud.net.cn/plugin?name=uni-group)|
+|uni-icons|[图标](https://ext.dcloud.net.cn/plugin?name=uni-icons)|
+|uni-indexed-list|[索引列表](https://ext.dcloud.net.cn/plugin?name=uni-indexed-list)|
+|uni-link|[超链接](https://ext.dcloud.net.cn/plugin?name=uni-link)|
+|uni-list|[列表](https://ext.dcloud.net.cn/plugin?name=uni-list)|
+|uni-load-more|[加载更多](https://ext.dcloud.net.cn/plugin?name=uni-load-more)|
+|uni-nav-bar|[自定义导航栏](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar)|
+|uni-notice-bar|[通告栏](https://ext.dcloud.net.cn/plugin?name=uni-notice-bar)|
+|uni-number-box|[数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box)|
+|uni-pagination|[分页器](https://ext.dcloud.net.cn/plugin?name=uni-pagination)|
+|uni-popup|[弹出层](https://ext.dcloud.net.cn/plugin?name=uni-popup)|
+|uni-rate|[评分](https://ext.dcloud.net.cn/plugin?name=uni-rate)|
+|uni-row|[布局-行](https://ext.dcloud.net.cn/plugin?name=uni-row)|
+|uni-search-bar|[搜索栏](https://ext.dcloud.net.cn/plugin?name=uni-search-bar)|
+|Section|[标题栏](https://ext.dcloud.net.cn/plugin?name=uni-section)|
+|uni-segmented-control|[分段器](https://ext.dcloud.net.cn/plugin?name=uni-segmented-control)|
+|uni-steps|[步骤条](https://ext.dcloud.net.cn/plugin?name=uni-steps)|
+|uni-swipe-action|[滑动操作](https://ext.dcloud.net.cn/plugin?name=uni-swipe-action)|
+|uni-swiper-dot|[轮播图指示点](https://ext.dcloud.net.cn/plugin?name=uni-swiper-dot)|
+|uni-table|[表格](https://ext.dcloud.net.cn/plugin?name=uni-table)|
+|uni-tag|[标签](https://ext.dcloud.net.cn/plugin?name=uni-tag)|
+|uni-title|[章节标题](https://ext.dcloud.net.cn/plugin?name=uni-title)|
+|uni-transition|[过渡动画](https://ext.dcloud.net.cn/plugin?name=uni-transition)|
 
 
 ### 其他
