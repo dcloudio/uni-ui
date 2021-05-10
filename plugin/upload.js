@@ -5,8 +5,8 @@ const fs = require('fs')
 const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
-// const modulesId = 'uni-test'
 const modulesId = process.env.UNI_MODULES_ID
+// const modulesId = 'uni-icons'
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
@@ -19,7 +19,7 @@ const readmePath = path.join(root, 'docs', 'components', comName + '.md')
 
 const mdExists = fs.existsSync(readmePath)
 if (mdExists) {
-	const content = handleReadme(readmePath)
+	const content = handleReadme(readmePath,comName)
 	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
 }
 
@@ -45,21 +45,22 @@ if (modulesId === 'uni-ui') {
 	// 将组件拷贝到临时目录
 	util.copyDir(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
 	handlePageJson(comName, tempExamplePath)
-
 	// 获取关联组件
 	if (packageJson && packageJson.uni_modules && packageJson.uni_modules.dependencies.length > 0) {
 		relationComponents = packageJson.uni_modules.dependencies
 	}
-
 	// 同步依赖组件
 	if (relationComponents && relationComponents.length > 0) {
 		relationComponents.reduce((promise, item) => {
 			return new Promise((resolve, reject) => {
 				util.copyDir(getModulesPath(item), path.join(tempExamplePath, 'uni_modules', item))
+				resolve()
 			})
 		}, Promise.resolve([])).then(res => {
 			// console.error('所有依赖组件同步完成');
 			setPageComponents(modulesId, comName)
+		}).catch((err)=>{
+			console.log('error',err);
 		})
 	} else {
 		setPageComponents(modulesId, comName)
@@ -167,17 +168,21 @@ function getModulesPath(name) {
  * 处理 readme.md
  * @param {Object} readmePath
  */
-function handleReadme(readmePath) {
+function handleReadme(readmePath,comName) {
 	let content = util.read(readmePath)
 	// 兼容 windows ，将 \r\n 全部替换成 \n
 	content = content.replace(/\r\n/ig, '\n')
 	// 删除头部额外信息，在其他平台不支持，只在 uni ui 中支持
-	content = content.replace(/---([\s\S]*?)---/ig, '')
+	content = content.replace(/---([\s\S]*?)---/ig, '').replace(/## 图标示例([\s\S]*?)\<\/icons-layouts\>/ig, '')
+
 	// 转换 ::: 语法
 	content = content.replace(/::: (.*?)\n([\s\S]*?):::/ig, function(_, $1, $2) {
 		$1 = $1.replace(/(tip|danger|warning)+ /,'')
 		return '> **'+ $1 +'**\n'+ $2.split('\n').filter(item => item !== '').map(item => `> ${item}\n`).join('')
 	})
+
+	content += `\n\n## 组件示例\n\n点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/${comName}/${comName}](https://hellouniapp.dcloud.net.cn/pages/extUI/${comName}/${comName})`
+
 	return content
 }
 

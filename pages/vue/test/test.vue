@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<text class="example-info">uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
+
 		<uni-forms :rules="rules" :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
 			<uni-group title="基本信息" top="0">
 				<uni-forms-item name="name" required label="用户名">
@@ -9,9 +10,6 @@
 				<!-- 使用原生input，需要绑定binddata -->
 				<uni-forms-item name="age" required label="年龄">
 					<input type="text" v-model="formData.age" class="uni-input-border" @blur="binddata('age', $event.detail.value)" placeholder="请输入年龄" />
-				</uni-forms-item>
-				<uni-forms-item name="weight" label="体重">
-					<slider min="0" max="200" step="5" show-value v-model="formData.weight" @change="binddata('weight', $event.detail.value)"></slider>
 				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱"><uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput></uni-forms-item>
 				<!-- #ifndef APP-NVUE -->
@@ -65,7 +63,6 @@ export default {
 				remarks: '',
 				checked: false,
 				country: -1,
-				weight: 0,
 				birth: ''
 			},
 			sex: [
@@ -126,19 +123,6 @@ export default {
 							minimum: 18,
 							maximum: 30,
 							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁'
-						}
-					]
-				},
-				weight: {
-					rules: [
-						{
-							format: 'number',
-							errorMessage: '体重必须是数字'
-						},
-						{
-							minimum: 100,
-							maximum: 200,
-							errorMessage: '体重应该大于 {minimum} 斤，小于 {maximum} 斤'
 						}
 					]
 				},
@@ -204,7 +188,6 @@ export default {
 				remarks: '热爱学习，热爱生活',
 				checked: false,
 				country: 2,
-				weight: 120,
 				birth: ''
 			}
 			uni.hideLoading()
