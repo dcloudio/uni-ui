@@ -90,12 +90,12 @@
 
 	.uni-tag {
 		/* #ifndef APP-NVUE */
-		display: flex;
+		// display: flex;
 		/* #endif */
 		padding: $tag-pd;
 		height: 30px;
 		line-height: 30px;
-		justify-content: center;
+		// justify-content: center;
 		color: $uni-text-color;
 		border-radius: $uni-border-radius-base;
 		background-color: $uni-bg-color-grey;
@@ -123,7 +123,7 @@
 		/* #ifdef H5 */
 		cursor: not-allowed;
 		/* #endif */
-	
+
 	}
 
 	.uni-tag--small {
@@ -134,6 +134,11 @@
 	}
 
 	.uni-tag--default {
+		color: $uni-text-color;
+		font-size: $uni-font-size-base;
+	}
+
+	.uni-tag--royal {
 		color: $uni-text-color;
 		font-size: $uni-font-size-base;
 	}
@@ -162,6 +167,11 @@
 	.uni-tag-text--error {
 		color: $uni-color-error !important;
 	}
+
+	.uni-tag-text--royal {
+		color: $uni-color-royal !important;
+	}
+
 
 	.uni-tag--primary {
 		color: $uni-text-color-inverse;
@@ -225,6 +235,22 @@
 		border-width: 1rpx;
 		border-style: solid;
 		border-color: $uni-color-error;
+	}
+
+	.uni-tag--royal {
+		color: $uni-text-color-inverse;
+		background-color: $uni-color-royal;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: $uni-color-royal;
+	}
+
+	.royal-uni-tag--inverted {
+		color: $uni-color-royal;
+		background-color: $uni-bg-color;
+		border-width: 1rpx;
+		border-style: solid;
+		border-color: $uni-color-royal;
 	}
 
 	.uni-tag--inverted {
