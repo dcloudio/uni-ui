@@ -50,3 +50,8 @@
 |事件称名	|说明							|返回值	|
 |:-:		|:-:							|:-:		|
 |@timeup|倒计时时间到触发事件	|-			|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/countdown/countdown](https://hellouniapp.dcloud.net.cn/pages/extUI/countdown/countdown)

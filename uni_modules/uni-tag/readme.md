@@ -42,3 +42,8 @@
 |:-:			|:-:							|:-:	|
 |@click		|点击 Tag 触发事件	|-		|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/tag/tag](https://hellouniapp.dcloud.net.cn/pages/extUI/tag/tag)
