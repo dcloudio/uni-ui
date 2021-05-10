@@ -45,6 +45,7 @@
 					<!-- <text class="">此刻</text> -->
 					<text class="confirm" @click="confirmSingleChange">确定</text>
 				</view>
+				<view class="uni-date-popper__arrow"></view>
 			</view>
 
 			<view v-else class="uni-date-range--x" :style="popover">
@@ -52,8 +53,8 @@
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							placeholder="开始日期" />
-						<time-picker type="time" v-model="tempRange.startTime" :start="reactStartTime"
-							:border="false" :disabled="!tempRange.startDate">
+						<time-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :border="false"
+							:disabled="!tempRange.startDate">
 							<input class="uni-date__input uni-date-range__input" type="text"
 								v-model="tempRange.startTime" placeholder="开始时间" :disabled="!tempRange.startDate" />
 						</time-picker>
@@ -393,18 +394,22 @@
 						if (!this.hasTime) {
 							value = value + ' ' + '00:00:00'
 						}
-						value = Date.parse(new Date(value))
+						value = this.createTimestamp(value)
 					} else {
 						if (!this.hasTime) {
 							value[0] = value[0] + ' ' + '00:00:00'
 							value[1] = value[1] + ' ' + '00:00:00'
 						}
-						value[0] = Date.parse(new Date(value[0]))
-						value[1] = Date.parse(new Date(value[1]))
+						value[0] = this.createTimestamp(value[0])
+						value[1] = this.createTimestamp(value[1])
 					}
 				}
 				this.$emit('change', value)
 				this.$emit('input', value)
+			},
+			createTimestamp(date) {
+				date = this.fixIosDateFormat(date)
+				return Date.parse(new Date(date))
 			},
 			singleChange(e) {
 				this.tempSingleDate = e.fulldate
@@ -569,6 +574,7 @@
 			},
 
 			parseDate(date) {
+				date = this.fixIosDateFormat(date)
 				const defVal = new Date(date)
 				const year = defVal.getFullYear()
 				const month = defVal.getMonth() + 1
@@ -588,6 +594,13 @@
 				return item < 10 ? '0' + item : item
 			},
 
+			//兼容 iOS、safari 日期格式
+			fixIosDateFormat(value) {
+				if (typeof value === 'string') {
+					value = value.replace(/-/g, '/')
+				}
+				return value
+			},
 
 			leftMonthSwitch(e) {
 				// console.log('leftMonthSwitch 返回:', e)
@@ -674,23 +687,27 @@
 	}
 
 	.uni-date-single--x {
+		/* padding: 0 8px; */
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 999;
 		/* width: 375px; */
-		border: 1px solid #F1F1F1;
+		border: 1px solid #e4e7ed;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
 	}
 
 	.uni-date-range--x {
+		padding: 0 8px;
 		background-color: #fff;
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 999;
 		/* width: 733px; */
-		border: 1px solid #F1F1F1;
+		border: 1px solid #e4e7ed;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
 	}
 
@@ -774,7 +791,29 @@
 		opacity: 0.6;
 	}
 
+	/* .uni-date-popper__arrow {
+			width: 10px;
+			height: 10px;
+	    top: -6px;
+	    left: 35px;
+	    margin-right: 3px;
+	    border-top-width: 0;
+	    border-bottom-color: #ebeef5;
+	    border-width: 6px;
+	    filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
+	}
+	.uni-date-popper__arrow:after {
+			content: " ";
+	    position: absolute;
+	    display: block;
+	    width: 0;
+	    height: 0;
+	    border-color: transparent;
+	    border-style: solid;
+	} */
+
 	.mr-50 {
 		margin-right: 50px;
 	}
+
 </style>
