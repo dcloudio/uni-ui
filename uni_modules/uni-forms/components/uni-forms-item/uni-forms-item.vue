@@ -43,9 +43,6 @@
 	 * @value left 	左侧显示 label
 	 * @property {String} error-message	显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
 	 */
-
-
-
 	export default {
 		name: "uniFormsItem",
 		props: {

@@ -36,10 +36,10 @@
 	 * @value bind 		发生变化时触发
 	 * @value submit 	提交时触发
 	 * @property {String} labelPosition = [top|left]	label 位置 默认 left 可选
-	 * @value top			顶部显示 label
-	 * @value left		左侧显示 label
+	 * @value top		顶部显示 label
+	 * @value left	左侧显示 label
 	 * @property {String} labelWidth	label 宽度，默认 65px
-	 * @property {String} labelAlign = [left|center|right]		label 居中方式  默认 left 可选
+	 * @property {String} labelAlign = [left|center|right]	label 居中方式  默认 left 可选
 	 * @value left		label 左侧显示
 	 * @value center	label 居中
 	 * @value right		label 右侧对齐
@@ -49,7 +49,7 @@
 	 * @value modal	错误信息modal显示
 	 * @event {Function} submit 提交时触发
 	 */
-	
+
 	export default {
 		name: 'uniForms',
 		props: {
