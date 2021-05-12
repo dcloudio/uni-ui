@@ -1,13 +1,14 @@
 {
   "id": "uni-fab",
-  "displayName": "Fab 悬浮按钮",
+  "displayName": "uni-fab 悬浮按钮",
   "version": "1.0.6",
   "description": "悬浮按钮 fab button ，点击可展开一个图标按钮菜单。",
   "keywords": [
+    "uni-ui",
+    "uniui",
     "按钮",
     "悬浮按钮",
-    "fab",
-    "uni-fab"
+    "fab"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

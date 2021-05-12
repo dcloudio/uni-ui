@@ -1,6 +1,7 @@
 
 
 ## Link 链接
+> **组件名：uni-link**
 > 代码块： `uLink`
 
 
@@ -33,9 +34,3 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 |color				|String	|#999999								|链接文字颜色					|
 |fontSize			|String	|14											|链接文字大小，单位px			|
 
-### href属性对tel和mailto格式说明
-
-|值									|说明							|平台					|
-|:-:								|:-:							|:-:					|
-|tel:xxxxxxxxxxx		|拨打电话					|H5，App			|
-|mailto:xxx@xxx.xxx	|发送邮件					|H5						|

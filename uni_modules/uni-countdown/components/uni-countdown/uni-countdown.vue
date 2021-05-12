@@ -1,12 +1,16 @@
 <template>
 	<view class="uni-countdown">
-		<text v-if="showDay" :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ d }}</text>
+		<text v-if="showDay" :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }"
+			class="uni-countdown__number">{{ d }}</text>
 		<text v-if="showDay" :style="{ color: splitorColor }" class="uni-countdown__splitor">天</text>
-		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ h }}</text>
+		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }"
+			class="uni-countdown__number">{{ h }}</text>
 		<text :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '时' }}</text>
-		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ i }}</text>
+		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }"
+			class="uni-countdown__number">{{ i }}</text>
 		<text :style="{ color: splitorColor }" class="uni-countdown__splitor">{{ showColon ? ':' : '分' }}</text>
-		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }" class="uni-countdown__number">{{ s }}</text>
+		<text :style="{ borderColor: borderColor, color: color, backgroundColor: backgroundColor }"
+			class="uni-countdown__number">{{ s }}</text>
 		<text v-if="!showColon" :style="{ color: splitorColor }" class="uni-countdown__splitor">秒</text>
 	</view>
 </template>
@@ -36,6 +40,10 @@
 				default: true
 			},
 			showColon: {
+				type: Boolean,
+				default: true
+			},
+			start: {
 				type: Boolean,
 				default: true
 			},
@@ -100,10 +108,23 @@
 			},
 			second(val) {
 				this.changeFlag()
+			},
+			start: {
+				immediate: true,
+				handler(newVal, oldVal) {
+					if (newVal) {
+						this.startData();
+					} else {
+						if (!oldVal) return
+						clearInterval(this.timer)
+					}
+				}
+
 			}
 		},
 		created: function(e) {
-			this.startData();
+			this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second)
+			this.countDown()
 		},
 		beforeDestroy() {
 			clearInterval(this.timer)

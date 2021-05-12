@@ -1,6 +1,7 @@
 
 
 ## CountDown 倒计时
+> **组件名：uni-countdown**
 > 代码块： `uCountDown`
 
 
@@ -42,9 +43,15 @@
 |second				|Number	|0		|秒					|
 |showDay			|Boolean|true	|是否显示天数		|
 |showColon			|Boolean|true	|是否以冒号为分隔符	|
+|start			|Boolean|true	|是否初始化组件后就开始倒计时|
 
 ### Countdown Events
 
 |事件称名	|说明							|返回值	|
 |:-:		|:-:							|:-:		|
 |@timeup|倒计时时间到触发事件	|-			|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/countdown/countdown](https://hellouniapp.dcloud.net.cn/pages/extUI/countdown/countdown)

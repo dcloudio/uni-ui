@@ -1,11 +1,13 @@
 {
   "id": "uni-card",
-  "displayName": "Card 卡片",
+  "displayName": "uni-card 卡片",
   "version": "1.1.6",
   "description": "Card 组件，提供常见的卡片样式。",
   "keywords": [
-    "card",
     "uni-ui",
+    "uniui",
+    "card",
+    "",
     "卡片"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

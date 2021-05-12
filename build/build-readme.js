@@ -16,11 +16,10 @@ function buildReadme() {
 		let packageData = util.read(path.join(uniui,item,'package.json'))
 		packageData = JSON.parse(packageData)
 		let componentsName = packageData.displayName.split(' ')
-		componentsLists += `|uni${componentsName[0]}|[${componentsName[1]}](https://ext.dcloud.net.cn/plugin?name=${item})|\n`
+		componentsLists += `|${componentsName[0]}|[${componentsName[1]}](https://ext.dcloud.net.cn/plugin?name=${item})|\n`
 	})
 	quickstartContent = quickstartContent.replace('<!-- 组件列表占位 -->',componentsLists)
 	util.write(path.join(root,'README.md'),readmeContent+'\n'+quickstartContent)
-	console.log('README 同步成功');
 }
 
 module.exports = buildReadme

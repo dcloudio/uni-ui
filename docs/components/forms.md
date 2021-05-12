@@ -484,7 +484,7 @@ validate		| 任意表单项被校验后触发，返回表单校验信息
 | setValue			| 设置表单某一项 name 的对应值，通常在 uni-forms-item 和自定表单组件中使用|
 | validateField	| 部分表单进行校验		|
 | clearValidate	| 移除表单的校验结果	|
-| resetFields   | 重置表单|
+| resetFields   | 重置表单, 需要把 `uni-forms` 的`value`属性改为 `v-model` ,且对内置组件可能不生效|
 
 
 ```javascript

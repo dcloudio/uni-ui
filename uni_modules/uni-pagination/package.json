@@ -1,11 +1,11 @@
 {
   "id": "uni-pagination",
-  "displayName": "Pagination 分页器",
+  "displayName": "uni-pagination 分页器",
   "version": "1.0.6",
   "description": "Pagination 分页器组件，用于展示页码、请求数据等。",
   "keywords": [
-    "pagination",
     "uni-ui",
+    "uniui",
     "分页器",
     "页码"
 ],

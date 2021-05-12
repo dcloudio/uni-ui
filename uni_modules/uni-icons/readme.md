@@ -1,6 +1,7 @@
 
 
 ## Icons 图标
+> **组件名：uni-icons**
 > 代码块： `uIcons`
 
 
@@ -20,10 +21,7 @@
 <uni-icons type="contact" size="30"></uni-icons>
 ```
 
-## 图标示例
 
-点击复制图标类型
-<icons-layouts></icons-layouts>
 
 ## API
 
@@ -41,3 +39,8 @@
 |:-:	|:-:			|:-:  |
 |@click|点击 Icon 触发事件|-    |
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/icons/icons](https://hellouniapp.dcloud.net.cn/pages/extUI/icons/icons)

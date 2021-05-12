@@ -1,13 +1,12 @@
 {
   "id": "uni-popup",
-  "displayName": "PopUp 弹出层",
-  "version": "1.2.9",
+  "displayName": "uni-popup 弹出层",
+  "version": "1.4.1",
   "description": " Popup 组件，提供常用的弹层",
   "keywords": [
-    "popup",
     "uni-ui",
-    "弹出层",
-    "uni-popup"
+    "uniui",
+    "弹出层"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

@@ -1,13 +1,12 @@
 {
   "id": "uni-table",
-  "displayName": "Table 表格",
+  "displayName": "uni-table 表格",
   "version": "1.0.3",
   "description": "用于展示多条结构类似的数据",
   "keywords": [
     "uni-ui",
-    "ui",
+    "uniui",
     "table",
-    "uni-table",
     "表格"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

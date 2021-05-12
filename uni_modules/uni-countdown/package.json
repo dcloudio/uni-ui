@@ -1,11 +1,12 @@
 {
   "id": "uni-countdown",
-  "displayName": "Countdown 倒计时",
-  "version": "1.0.2",
+  "displayName": "uni-countdown 倒计时",
+  "version": "1.0.3",
   "description": "CountDown 倒计时组件",
   "keywords": [
-    "countdown",
     "uni-ui",
+    "uniui",
+    "countdown",
     "倒计时"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",

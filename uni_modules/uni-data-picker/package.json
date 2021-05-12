@@ -1,15 +1,15 @@
 {
   "id": "uni-data-picker",
-  "displayName": "DataPicker 数据驱动的picker选择器",
+  "displayName": "uni-data-picker 数据驱动的picker选择器",
   "version": "0.3.2",
   "description": "Picker选择器",
   "keywords": [
-    "",
+    "uni-ui",
+    "uniui",
     "picker",
     "级联",
-    "uni-data-picker",
-    "省市区选择",
-    "地址选择"
+    "省市区",
+    ""
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {

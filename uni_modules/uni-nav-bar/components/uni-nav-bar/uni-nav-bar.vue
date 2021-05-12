@@ -133,7 +133,6 @@
 
 <style lang="scss" scoped>
 	$nav-height: 44px;
-
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
 		font-size: 34rpx;
@@ -227,8 +226,15 @@
 	.uni-navbar--fixed {
 		position: fixed;
 		z-index: 998;
+		/* #ifdef H5 */
 		left: var(--window-left);
 		right: var(--window-right);
+		/* #endif */
+		/* #ifndef H5 */
+		left:0;
+		right: 0;
+		/* #endif */
+
 	}
 
 	.uni-navbar--shadow {

@@ -1,11 +1,11 @@
 {
   "id": "uni-search-bar",
-  "displayName": "SearchBar 搜索栏",
+  "displayName": "uni-search-bar 搜索栏",
   "version": "1.0.8",
   "description": "搜索栏组件，通常用于搜索商品、文章等",
   "keywords": [
-    "search-bar",
     "uni-ui",
+    "uniui",
     "搜索框",
     "搜索栏"
 ],

@@ -19,12 +19,6 @@
 			}
 		},
 		{
-			"path": "pages/vue/field/field",
-			"style": {
-				"navigationBarTitleText": "Field 字段"
-			}
-		},
-		{
 			"path": "pages/vue/group/group",
 			"style": {
 				"navigationBarTitleText": "Group 分组"

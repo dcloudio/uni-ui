@@ -1,11 +1,12 @@
 {
   "id": "uni-datetime-picker",
-  "displayName": "DatetimePicker 日期选择器",
-  "version": "1.0.6",
-  "description": "DatetimePicker 可以同时选择日期和时间的选择器",
+  "displayName": "uni-datetime-picker 日期选择器",
+  "version": "2.0.3",
+  "description": "uni-datetime-picker 日期时间选择器，支持日历，支持范围选择",
   "keywords": [
-    "DatetimePicker",
+    "uni-datetime-picker",
     "uni-ui",
+    "uniui",
     "日期时间选择器",
     "日期时间"
 ],
