@@ -42,3 +42,8 @@
 | :-:			| :-:		|
 | row			| 横向		|
 | column	| 纵向		|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/steps/steps](https://hellouniapp.dcloud.net.cn/pages/extUI/steps/steps)

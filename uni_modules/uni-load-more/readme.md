@@ -63,3 +63,8 @@
 |:-:						|:-:				|:-:						|
 |clickLoadMore	|点击加载更多时触发	|e.detail={status:'loading'}|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/load-more/load-more](https://hellouniapp.dcloud.net.cn/pages/extUI/load-more/load-more)

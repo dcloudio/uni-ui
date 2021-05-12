@@ -1,7 +1,7 @@
 {
   "id": "uni-table",
   "displayName": "uni-table 表格",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "用于展示多条结构类似的数据",
   "keywords": [
     "uni-ui",

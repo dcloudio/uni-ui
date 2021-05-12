@@ -97,3 +97,7 @@
 |插槽称名	|说明				|
 |:-:		|:-:				|
 |footer	|卡片底部插槽 |
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/card/card](https://hellouniapp.dcloud.net.cn/pages/extUI/card/card)

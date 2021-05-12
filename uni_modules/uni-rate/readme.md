@@ -100,3 +100,8 @@ touchable		|	Boolean 	| true		|	是否支持滑动手势
 事件称名			|	说明						|	返回参数			
 :-:				|	:-:						|	:-:	
 @change			|	改变 value 的值返回		|	e = { value:number }		
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/rate/rate](https://hellouniapp.dcloud.net.cn/pages/extUI/rate/rate)

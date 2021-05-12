@@ -65,3 +65,7 @@ export default {
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/nav-bar/nav-bar](https://uniapp.dcloud.io/h5/pages/extUI/nav-bar/nav-bar)
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/nav-bar/nav-bar](https://hellouniapp.dcloud.net.cn/pages/extUI/nav-bar/nav-bar)

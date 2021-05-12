@@ -34,3 +34,8 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 |color				|String	|#999999								|链接文字颜色					|
 |fontSize			|String	|14											|链接文字大小，单位px			|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/link/link](https://hellouniapp.dcloud.net.cn/pages/extUI/link/link)

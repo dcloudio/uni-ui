@@ -46,3 +46,8 @@
 title|String|主标题|
 top|Number|分组间隔|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/group/group](https://hellouniapp.dcloud.net.cn/pages/extUI/group/group)

@@ -107,3 +107,7 @@
 |disabled	|Boolean|false	|是否禁用		|
 |open		|Boolean|false	|是否展开面板	|
 |showAnimation	|Boolean	|false	|开启动画		|
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/collapse/collapse](https://hellouniapp.dcloud.net.cn/pages/extUI/collapse/collapse)

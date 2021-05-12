@@ -287,3 +287,8 @@ export default {
 ## 帮助
 在使用中如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 给我们。
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/popup/popup](https://hellouniapp.dcloud.net.cn/pages/extUI/popup/popup)

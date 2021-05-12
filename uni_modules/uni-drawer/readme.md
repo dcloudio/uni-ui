@@ -79,3 +79,8 @@
 |close	|关闭抽屉	|-|
 
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/drawer/drawer](https://hellouniapp.dcloud.net.cn/pages/extUI/drawer/drawer)

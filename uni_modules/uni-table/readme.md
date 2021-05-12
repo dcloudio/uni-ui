@@ -121,3 +121,8 @@ selection-change	| 开启多选时，当选择项发生变化时会触发该事�
 |属性名	|类型	|默认值	 	|可选值				|说明|
 |:-:		|:-:		|:-:			|:-:				|:-:|
 |align	|Boolean| left		|left/center/right	| 单元格对齐方式|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/table/table](https://hellouniapp.dcloud.net.cn/pages/extUI/table/table)

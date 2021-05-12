@@ -41,3 +41,8 @@
 |事件称名	|说明				|返回值																		|
 |:-:		|:-:				|:-:																				|
 |@change|点击页码按钮时触发	|e={type,current} current为当前页，type值为：next/prev，表示点击的是上一页还是下一个	|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/pagination/pagination](https://hellouniapp.dcloud.net.cn/pages/extUI/pagination/pagination)

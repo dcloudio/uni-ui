@@ -390,3 +390,8 @@ this.$refs.ani.step({
 })
 ```
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/transition/transition](https://hellouniapp.dcloud.net.cn/pages/extUI/transition/transition)

@@ -88,3 +88,8 @@
 |属性名|类型		|默认值	|说明										|
 |:-:	|:-:		|:-:	|:-:										|
 |index|Number	|-		|子组件的唯一标识 ，点击gird会返回当前的标识|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/grid/grid](https://hellouniapp.dcloud.net.cn/pages/extUI/grid/grid)
