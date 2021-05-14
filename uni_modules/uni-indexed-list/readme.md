@@ -60,3 +60,8 @@
 |事件名	|说明															|返回值	|
 |:-:		|:-:															|:-:	|
 |click	|点击列表事件 ，返回当前选择项的事件对象	|-		|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/indexed-list/indexed-list](https://hellouniapp.dcloud.net.cn/pages/extUI/indexed-list/indexed-list)

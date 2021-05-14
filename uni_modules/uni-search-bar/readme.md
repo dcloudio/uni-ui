@@ -79,3 +79,8 @@
 </uni-search-bar>
 
 ```
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/search-bar/search-bar](https://hellouniapp.dcloud.net.cn/pages/extUI/search-bar/search-bar)

@@ -262,3 +262,8 @@
 </script>
 
 ```
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/data-picker/data-picker](https://hellouniapp.dcloud.net.cn/pages/extUI/data-picker/data-picker)

@@ -192,3 +192,8 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |@iconClick	|点击图标时触发						| prefix/suffix	|
 
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/easyinput/easyinput](https://hellouniapp.dcloud.net.cn/pages/extUI/easyinput/easyinput)

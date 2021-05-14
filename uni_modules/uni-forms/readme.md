@@ -533,3 +533,8 @@ this.$refs.form.clearValidate(['name', 'email'])
 | label-align			|String	| left		|left/center/right	| label的文字对齐方式|
 | label-position	|String	| left		|top/left			| label的文字的位置|
 | error-message		|String	| -			|-					| 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/forms/forms](https://hellouniapp.dcloud.net.cn/pages/extUI/forms/forms)

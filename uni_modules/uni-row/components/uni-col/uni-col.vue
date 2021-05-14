@@ -25,9 +25,9 @@
 
 <script>
 	/**
-	 * uni-col	布局-列
+	 * Col	布局-列
 	 * @description	搭配uni-row使用，构建布局。
-	 * @tutorial	https://ext.dcloud.net.cn/plugin?id=
+	 * @tutorial	https://ext.dcloud.net.cn/plugin?id=3958
 	 *
 	 * @property	{span} type = Number 栅格占据的列数
 	 * 						默认 24

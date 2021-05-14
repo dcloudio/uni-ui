@@ -64,3 +64,8 @@
 |@click		|点击 NoticeBar 触发事件	|-		|
 |@close		|关闭 NoticeBar 触发事件	|-		|
 |@getmore	|点击”查看更多“时触发事件	|-		|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/notice-bar/notice-bar](https://hellouniapp.dcloud.net.cn/pages/extUI/notice-bar/notice-bar)

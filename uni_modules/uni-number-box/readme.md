@@ -43,3 +43,8 @@
 |change	|输入框值改变时触发的事件，参数为输入框当前的 value	|-			|
 |focus	|输入框聚焦时触发的事件，参数为 event 对象	|-			|
 |blur	|输入框失焦时触发的事件，参数为 event 对象	|-			|
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/number-box/number-box](https://hellouniapp.dcloud.net.cn/pages/extUI/number-box/number-box)

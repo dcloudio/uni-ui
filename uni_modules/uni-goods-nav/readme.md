@@ -105,3 +105,7 @@ export default {
 ### 插件预览地址
 
 [https://uniapp.dcloud.io/h5/pages/extUI/goods-nav/goods-nav](https://uniapp.dcloud.io/h5/pages/extUI/goods-nav/goods-nav)
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/goods-nav/goods-nav](https://hellouniapp.dcloud.net.cn/pages/extUI/goods-nav/goods-nav)

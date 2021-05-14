@@ -84,3 +84,8 @@ export default {
 |selectedBackgroundColor|Color	| '#333'						|已选择指示点背景色，**在 mode = nav 时不生效**				|
 |selectedBorder			|Border	| '1px rgba(0, 0, 0, .9) solid'	|已选择指示点边框样式，**在 mode = nav 时不生效**			|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/swiper-dot/swiper-dot](https://hellouniapp.dcloud.net.cn/pages/extUI/swiper-dot/swiper-dot)

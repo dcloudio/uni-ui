@@ -53,3 +53,8 @@
 |:-:		|:-:					|:-:				|
 |@clickItem	|组件触发点击事件时触发	|e={currentIndex}	|
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/segmented-control/segmented-control](https://hellouniapp.dcloud.net.cn/pages/extUI/segmented-control/segmented-control)

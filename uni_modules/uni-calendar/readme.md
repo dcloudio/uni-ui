@@ -96,3 +96,8 @@ export default {
 
 
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/calendar/calendar](https://hellouniapp.dcloud.net.cn/pages/extUI/calendar/calendar)

@@ -29,9 +29,9 @@
   import dataPicker from "./uni-data-picker.js"
 
   /**
-   * uni-data-pickerview
+   * DataPickerview
    * @description uni-data-pickerview
-   * @tutorial https://uniapp.dcloud.net.cn/uniCloud/uni-data-picker
+   * @tutorial https://ext.dcloud.net.cn/plugin?id=3796
    * @property {Array} localdata 本地数据，参考
    * @property {Boolean} step-searh = [true|false] 是否分布查询
    * @value true 启用分布查询，仅查询当前选中节点

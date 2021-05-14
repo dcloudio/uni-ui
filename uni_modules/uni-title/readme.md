@@ -65,3 +65,7 @@ title 组件可以与 uni统计集合使用，只要开启uni统计，即可自�
 |align	|String	|-		|对齐方式，可选值 left:左对齐；center:居中；right:右对齐；												|
 |color	|String	|-		|字体颜色																								|
 |stat	|Boolean|-		|是否开启统计功能呢，如不填写type值，默认为开启，填写 type 属性，默认为关闭														|
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/title/title](https://hellouniapp.dcloud.net.cn/pages/extUI/title/title)

@@ -60,3 +60,7 @@ range|选择器类型																								|
 |事件名称	|说明												|返回值	|
 |:-:		|:-:												|:-:	|
 |change		|确定日期时间时触发的事件，参数为当前选择的日期对象	|	单选返回日期字符串，如：'2010-02-3'；范围选返回日期字符串数组，如：['2020-10-1',  '2021-4-1']	|
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/datetime-picker/datetime-picker](https://hellouniapp.dcloud.net.cn/pages/extUI/datetime-picker/datetime-picker)

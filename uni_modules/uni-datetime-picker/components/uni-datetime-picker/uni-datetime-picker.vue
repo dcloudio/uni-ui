@@ -96,9 +96,9 @@
 	import timePicker from './basic/time-picker/components/time-picker/time-picker.vue'
 
 	/**
-	 * uni-date-picker
+	 * DatetimePicker 时间选择器
 	 * @description 同时支持 PC 和移动端使用日历选择日期和日期范围
-	 * @tutorial https://ext.dcloud.net.cn/plugin?id=4700
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=3962
 	 * @property {String} type 选择器类型
 	 * @property {String|Array} value 绑定值
 	 * @property {String} placeholder 单选择时的占位内容
@@ -111,6 +111,7 @@
 	 **/
 
 	export default {
+		name:'UniDatetimePicker',
 		components: {
 			uniCalendar,
 			timePicker

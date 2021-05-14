@@ -162,3 +162,8 @@ export default {
 > }
 > ```
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/swipe-action/swipe-action](https://hellouniapp.dcloud.net.cn/pages/extUI/swipe-action/swipe-action)

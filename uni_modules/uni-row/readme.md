@@ -176,3 +176,8 @@
 |   md   | Number/object |   -    |   -    |  否  |                      屏幕宽度`≥992px`时，要显示的栅格规则                       |
 |   lg   | Number/object |   -    |   -    |  否  |                      屏幕宽度`≥1200px`时，要显示的栅格规则                      |
 |   xl   | Number/object |   -    |   -    |  否  |                      屏幕宽度`≥1920px`时，要显示的栅格规则                      |
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/row/row](https://hellouniapp.dcloud.net.cn/pages/extUI/row/row)
