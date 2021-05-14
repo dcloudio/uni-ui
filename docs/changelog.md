@@ -7,6 +7,295 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.1" date="2021-05-14">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-badge 的 absolute 属性，支持定位
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-badge 的 offset 属性，支持定位偏移
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-badge 的 is-dot 属性，支持仅显示有一个小点
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-badge 的 max-num 属性，支持自定义封顶的数字值，超过 99 显示99+
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-badge 属性 custom-style， 支持以对象形式自定义样式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-badge 在 App 端，数字小于10时不是圆形的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-badge 在父元素不是 flex 布局时，宽度缩小的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-badge 属性 custom-style， 支持自定义样式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-card 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-countdown 不能控制倒计时的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-dateformat 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ios 下不识别 '-' 日期格式的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 pc 下弹出层添加边框和阴影
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 admin 中获取弹出层定位错误的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 type 属性向下兼容，默认值从 date 变更为 datetime
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 支持日历形式的日期+时间的范围选择
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-drawer 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fav 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 自定义检验器失效的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-goods-nav 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-grid 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-group 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-indexed-list 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 href 属性支持 tel:|mailto:
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 组件内放置 input 、textarea 组件，无法聚焦的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 type 属性的 left\right 值，支持左右弹出
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 open(String:type) 方法参数 ，可以省略 type 属性 ，直接传入类型打开指定弹窗
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 backgroundColor 属性，可定义主窗口背景色,默认不显示背景色
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 safeArea 属性，是否适配底部安全区
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 App\h5\微信小程序底部安全区占位不对的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 App 端弹出等待的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 提升低配设备性能，优化动画卡顿问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更简单的组件自定义方式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-row 组件更新">
+		<log-item-text tag-type="feat">
+			 组件示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 项目示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="feat">
+			 项目示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="feat">
+			 项目示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-steps 横向布局时，多行文字高度不合理的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="feat">
+			 项目示例地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swiper-dot 组件更新">
+		<log-item-text tag-type="feat">
+			 示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例项目缺少组件的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="feat">
+			 示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例项目缺少组件的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="fix">
+			 royal 类型无效的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-tag 宽度不自适应的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-tag 支持属性 custom-style 自定义样式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-title 组件更新">
+		<log-item-text tag-type="feat">
+			 示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例项目缺少组件的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="feat">
+			 示例地址
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例项目缺少组件的Bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.2.14" date="2021-04-23">
 	<log-item title="uni-combox 组件更新">
 		<log-item-text tag-type="perf">

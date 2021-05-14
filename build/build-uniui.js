@@ -244,6 +244,7 @@ function buildDocsChangeLog(md, version) {
 		if (!v) return
 		const nameRE = /-\s+([a-z\-]+ (优化|新增|修复)?).*/g
 		const curNameMatch = nameRE.exec(v)
+		if (!curNameMatch) return
 		let curName = {
 			name: curNameMatch[1].replace(curNameMatch[2], '').trim(),
 			line: curNameMatch[0],

@@ -234,7 +234,7 @@
 		margin-right: 25px;
 		/* #ifndef APP-NVUE */
 		word-break: break-all;
-		word-wrap: break-word
+		word-wrap: break-word;
 		/* #endif */
 	}
 
