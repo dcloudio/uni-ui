@@ -40,7 +40,7 @@
 </template>
 
 <script>
-	import { chooseAndUploadFile } from './choose-and-upload-file.js'
+
 	import uploadImage from './upload-image.vue'
 	import uploadFile from './upload-file.vue'
 	let fileInput = null
@@ -294,10 +294,6 @@ export default {
 		 * 选择文件并上传
 		 */
 		chooseFiles() {
-			// API 正式发布前，使用本地API上传函数
-			if (!uniCloud.chooseAndUploadFile) {
-				uniCloud.chooseAndUploadFile = chooseAndUploadFile
-			}
 
 			uniCloud
 				.chooseAndUploadFile({
@@ -469,6 +465,9 @@ export default {
 				tempFilePath: this.files[index].url
 			})
 			this.files.splice(index, 1)
+			this.$nextTick(()=>{
+				this.setEmit()
+			})
 		},
 
 		/**
