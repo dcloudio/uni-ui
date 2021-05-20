@@ -94,7 +94,7 @@
 <script>
 	import Calendar from './util.js';
 	import calendarItem from './uni-calendar-item.vue'
-	import timePicker from './time-picker/components/time-picker/time-picker.vue'
+	import timePicker from './time-picker.vue'
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
