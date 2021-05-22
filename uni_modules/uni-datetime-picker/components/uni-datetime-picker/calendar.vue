@@ -93,7 +93,7 @@
 
 <script>
 	import Calendar from './util.js';
-	import calendarItem from './uni-calendar-item.vue'
+	import calendarItem from './calendar-item.vue'
 	import timePicker from './time-picker.vue'
 	/**
 	 * Calendar 日历

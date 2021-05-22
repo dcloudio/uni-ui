@@ -4,14 +4,14 @@
 		'uni-date-x--border': border}">
 			<view v-if="!isRange" class="uni-date-x uni-date-single" @click="show">
 				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" src="./cale-50.png" mode=""></image>
+					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 				</view>
 				<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
 					:disabled="true" />
 			</view>
 			<view v-else class="uni-date-x uni-date-range" @click="show">
 				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" src="./cale-50.png" mode=""></image>
+					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 				</view>
 				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
 					:placeholder="startPlaceholder" :disabled="true" />
@@ -39,7 +39,7 @@
 							placeholder="选择时间" :disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
-				<uni-calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
+				<calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
 					:end-date="caleRange.endDate" :date="defSingleDate" @change="singleChange" />
 				<view v-if="hasTime" class="popup-x-footer">
 					<!-- <text class="">此刻</text> -->
@@ -71,10 +71,10 @@
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<uni-calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
+					<calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
 						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding-right: 16px;" />
-					<uni-calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
+					<calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="rightChange"
 						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
 						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
@@ -85,14 +85,14 @@
 				</view>
 			</view>
 		</view>
-		<uni-calendar ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			@confirm="mobileChange" />
 	</view>
 </template>
 <script>
-	import uniCalendar from './uni-calendar.vue'
+	import calendar from './calendar.vue'
 	import timePicker from './time-picker.vue'
 
 	/**
@@ -113,7 +113,7 @@
 	export default {
 		name:'UniDatetimePicker',
 		components: {
-			uniCalendar,
+			calendar,
 			timePicker
 		},
 		data() {
@@ -160,7 +160,8 @@
 				},
 				visible: false,
 				popup: false,
-				popover: null
+				popover: null,
+				iconBase64: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACVklEQVRoge2Zv2vTQRTAP4oWJQQskmolBAnSQVMcSxbp4ubmIEWETu0oIjg5iIOgpLNunfQfMHToUgpOVgfRqRAL4q8WRLQVq4sOdyHPL9/7evfNJReS+8DB433v7r37fl/eu9xBJBKUB0BLt+uDaOOQZb8SUNXyuKuRftg46NeXcBww6M8AC0ANOAycAyb1s7e6+SbNxi/gBfAQ2HadcA7YB/4MUPsKzLos4jzwewAcNy3mhMnx5I/9BiqUAD4DDWAXmAfqWt8Enlq+GBfSbEwAt4AicAxYBO7aTPaGzhu4KvTLQn/Hh9cpmGzcFvqmaXAyaxWE/MGTg93yXsgFUyfbOrJCJ2s8y+tRP21s0fmMTlmih8zT8WnN1GloCmJWaF0CpvrlSAb1/3fJXshNT470hZEIrZeoahqaU8BZ10Exa4XGtiCaKKL+EIHaMX8U81ZEP7ntrwi7n4CfWi7p+UCFdFdh7Rpaps9+mn93rjY2THut0QqtoVlIkpi1QjNyCzEdnl0W+idCXxb6VmKudaGfsbBhRbcHdEWhf5eYt0o6FVR6BjhqYcOKoQkt2y/SAB5rWVbpVeCilmUl3hb6JNeAI1p+ZWEjFzH9hsY2tEwHdHX9DGATWNLyceCeGL/YhY+58LWhy9o0uhJDKw3T4dlr4L6WZab5JvRBGJqs9UPI5R44lQfpx56pUzK0NlA3R6AK1Engu1+/nGhfK7R5bjtwGnXdFfpSJ6190Quz5grqQCC048lFXMhy2nQZWkUVsRowZv8OvLOPCvdHwE5APyKRSMQzfwE22DtT3T5PPwAAAABJRU5ErkJggg=='
 			}
 		},
 		props: {
