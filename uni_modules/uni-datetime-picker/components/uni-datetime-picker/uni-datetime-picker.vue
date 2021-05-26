@@ -617,6 +617,7 @@
 <style>
 	.uni-date-x {
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		justify-content: center;
 		padding: 0 10px;
