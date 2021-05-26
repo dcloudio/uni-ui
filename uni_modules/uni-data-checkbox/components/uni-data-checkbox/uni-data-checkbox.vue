@@ -76,7 +76,7 @@
 
 	export default {
 		name: 'uniDataCheckbox',
-		mixins: [uniCloud.mixinDatacom],
+		mixins: [uniCloud.mixinDatacom || {}],
 		props: {
 			mode: {
 				type: String,
