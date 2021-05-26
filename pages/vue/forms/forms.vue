@@ -2,18 +2,19 @@
 	<view>
 		<text class="example-info">uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
 
-		<uni-forms :rules="rules" :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
+		<uni-forms :rules="rules" v-model="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
 			<uni-group title="基本信息" top="0">
 				<uni-forms-item name="name" required label="用户名">
 					<uni-easyinput type="text" :inputBorder="true" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
 				</uni-forms-item>
 				<!-- 使用原生input，需要绑定binddata -->
-				<uni-forms-item name="age" required label="年龄">
+				<!-- TODO 不兼容 vue3 -->
+				<!-- <uni-forms-item name="age" required label="年龄">
 					<input type="text" v-model="formData.age" class="uni-input-border" @blur="binddata('age', $event.detail.value)" placeholder="请输入年龄" />
-				</uni-forms-item>
+				</uni-forms-item> -->
 				<uni-forms-item name="email" label="邮箱"><uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput></uni-forms-item>
 				<!-- #ifndef APP-NVUE -->
-					<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker type="date" v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item>
+				<!-- 	<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker type="date" v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item> -->
 					<uni-forms-item name="checked" label="详细信息"><switch :checked="formData.checked" @change="change('checked', $event.detail.value)" /></uni-forms-item>
 				<!-- #endif -->
 			</uni-group>
@@ -33,12 +34,6 @@
 				</uni-group>
 			</template>
 			<!-- #endif -->
-
-
-			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-			<!-- 			<button class="button" form-type="submit">Submit</button>
-				<button class="button" form-type="reset">Reset</button> -->
-
 			<view class="example">
 				<button class="button" @click="submitForm('form')">校验表单</button>
 				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>

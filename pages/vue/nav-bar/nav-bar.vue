@@ -12,12 +12,12 @@
 		<uni-section title="插入slot" type="line"></uni-section>
 		<view class="example-body">
 			<uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan" @clickLeft="showCity" @clickRight="scan">
-				<block slot="left">
+				<block v-slot:left>
 					<view class="city">
 						<view>
 							<text class="uni-nav-bar-text">{{ city }}</text>
 						</view>
-						<uni-icons type="arrowdown" color="#333333" size="22" />
+						<uni-icons type="arrowdown" color="#333333" size="14" />
 					</view>
 				</block>
 				<view class="input-view">
@@ -39,9 +39,7 @@ export default {
 	},
 	methods: {
 		back() {
-			uni.navigateBack({
-				delta: 1
-			})
+			uni.navigateBack()
 		},
 		showMenu() {
 			uni.showToast({

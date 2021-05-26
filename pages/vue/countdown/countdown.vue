@@ -44,7 +44,6 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				console.log(1111);
 				this.testHour = 1
 				this.testMinute = 1
 				this.testSecond = 0

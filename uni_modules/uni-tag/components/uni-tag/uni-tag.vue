@@ -98,7 +98,7 @@
 <style lang="scss" scoped>
 	$tag-pd: 0px 16px;
 	$tag-small-pd: 0px 8px;
-
+	$uni-color-royal:#4335d6;
 	.uni-tag {
 		/* #ifndef APP-NVUE */
 		display: inline-block;

@@ -4,7 +4,7 @@
 		 class="uni-navbar__content">
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
-				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
+				<view @click.stop="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
@@ -14,14 +14,14 @@
 					</view>
 					<slot name="left" />
 				</view>
-				<view class="uni-navbar__header-container uni-navbar__content_view" @tap="onClickTitle">
+				<view class="uni-navbar__header-container uni-navbar__content_view" @click="onClickTitle">
 					<view class="uni-navbar__header-container-inner uni-navbar__content_view" v-if="title.length">
 						<text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
 					</view>
 					<!-- 标题插槽 -->
 					<slot />
 				</view>
-				<view :class="title.length ? 'uni-navbar__header-btns-right' : ''" @tap="onClickRight" class="uni-navbar__header-btns uni-navbar__content_view">
+				<view :class="title.length ? 'uni-navbar__header-btns-right' : ''" @click="onClickRight" class="uni-navbar__header-btns uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="rightIcon.length">
 						<uni-icons :color="color" :type="rightIcon" size="24" />
 					</view>

@@ -3,11 +3,11 @@
 		<text class="example-info">折叠面板用来折叠/显示过长的内容或者是列表。通常是在多内容分类项使用，折叠不重要的内容，显示重要内容。点击可以展开折叠部分。</text>
 		<view v-for="(item, index) in list" :key="index">
 			<uni-section :title="item.name" type="line"></uni-section>
-			<uni-collapse ref="add" class="warp" @change="change">
+			<uni-collapse  class="warp" @change="change">
 				<uni-collapse-item v-for="(sub, key) in item.data" :key="key" :open="sub.open" :show-animation="sub.showAnimation"
 				 :disabled="sub.disabled" :title="sub.subName">
 					<text class="content">{{ sub.content }}</text>
-				</uni-collapse-item>
+				</uni-collapse-item> 
 			</uni-collapse>
 		</view>
 		<uni-section title="手风琴效果（展开一个会收起其他）" type="line"></uni-section>

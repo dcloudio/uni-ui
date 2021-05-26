@@ -45,6 +45,10 @@
 	 */
 	export default {
 		name: "uniFormsItem",
+		compatConfig:{
+			MODE:3,
+			OPTIONS_DESTROYED:'suppress-warning'
+		},
 		props: {
 			// 自定义内容
 			custom: {
@@ -151,7 +155,21 @@
 			}
 			this.init()
 		},
+		// TODO vue2
 		destroyed() {
+			if(this.__isUnmounted) return
+			if (this.form) {
+				this.form.childrens.forEach((item, index) => {
+					if (item === this) {
+						this.form.childrens.splice(index, 1)
+						delete this.form.formData[item.name]
+					}
+				})
+			}
+		},
+		// TODO vue3
+		unmounted(){
+			this.__isUnmounted = true
 			if (this.form) {
 				this.form.childrens.forEach((item, index) => {
 					if (item === this) {
@@ -168,7 +186,7 @@
 						formRules,
 						validator,
 						formData,
-						value,
+						modelValue,
 						labelPosition,
 						labelWidth,
 						labelAlign,

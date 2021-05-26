@@ -71,14 +71,15 @@
 			fill: {
 				type: Boolean,
 				default: false
-			}
+			},
+			
 		},
+		emits: ['click','buttonClick'],
 		methods: {
 			onClick(index, item) {
 				this.$emit('click', {
 					index,
 					content: item,
-
 				})
 			},
 			buttonClick(index, item) {

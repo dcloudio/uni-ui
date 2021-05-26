@@ -78,9 +78,17 @@
 
 	export default {
 		name: 'uni-easyinput',
+		"compatConfig": {
+		    "MODE": 3,
+			 COMPONENT_V_MODEL: false
+		},
+		model:{
+			prop: 'modelValue',
+			event: 'update:modelValue'
+		},
 		props: {
 			name: String,
-			value: [Number, String],
+			modelValue: [Number, String],
 			type: {
 				type: String,
 				default: 'text'
@@ -160,15 +168,16 @@
 		},
 		computed: {
 			msg() {
-				return this.errorMessage || this.errMsg;
+				return this.errMsg;
 			},
 			// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
 			inputMaxlength() {
 				return Number(this.maxlength);
-			},
+			}
 		},
 		watch: {
-			value(newVal) {
+			modelValue(newVal){
+				console.log(1);
 				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
 				if (this.form && this.formItem) {
@@ -182,7 +191,7 @@
 			}
 		},
 		created() {
-			this.val = this.value
+			this.val = this.modelValue
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			if (this.form && this.formItem) {
@@ -240,7 +249,10 @@
 				};
 				if (this.errMsg) this.errMsg = ''
 				this.val = value
+				// TODO 兼容 vue2
 				this.$emit('input', value);
+				// TODO 兼容 vue3
+				this.$emit('update:modelValue', value);
 			},
 
 			onFocus(event) {
@@ -259,7 +271,11 @@
 			},
 			onClear(event) {
 				this.val = '';
+				// TODO 兼容 vue2
 				this.$emit('input', '');
+				// TODO 兼容 vue3
+				this.$emit('update:modelValue', '');
+				
 			},
 			fieldClick() {
 				this.$emit('click');

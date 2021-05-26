@@ -8,14 +8,14 @@
 			<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear"><slot /></view>
 		</uni-transition>
 		<!-- #ifdef H5 -->
-		<keypress v-if="maskShow" @esc="onTap" />
+		<!-- <keypress v-if="maskShow" @esc="onTap" /> -->
 		<!-- #endif -->
 	</view>
 </template>
 
 <script>
 // #ifdef H5
-import keypress from './keypress.js'
+// import keypress from './keypress.js'
 // #endif
 
 /**
@@ -42,7 +42,7 @@ export default {
 	name: 'uniPopup',
 	components: {
 		// #ifdef H5
-		keypress
+		// keypress
 		// #endif
 	},
 	props: {
@@ -162,10 +162,10 @@ export default {
 		}
 		fixSize()
 		// #ifdef H5
-		window.addEventListener('resize', fixSize)
-		this.$once('hook:beforeDestroy', () => {
-			window.removeEventListener('resize', fixSize)
-		})
+		// window.addEventListener('resize', fixSize)
+		// this.$once('hook:beforeDestroy', () => {
+		// 	window.removeEventListener('resize', fixSize)
+		// })
 		// #endif
 	},
 	created() {

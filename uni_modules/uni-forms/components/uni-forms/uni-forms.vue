@@ -8,24 +8,24 @@
 </template>
 
 <script>
-	import Vue from 'vue'
+	// import Vue from 'vue'
 	import Validator from './validate.js'
-	Vue.prototype.binddata = function(name, value, formName) {
-		if (formName) {
-			this.$refs[formName].setValue(name, value)
-		} else {
-			let formVm
-			for (let i in this.$refs) {
-				const vm = this.$refs[i]
-				if (vm && vm.$options && vm.$options.name === 'uniForms') {
-					formVm = vm
-					break
-				}
-			}
-			if (!formVm) return console.error('当前 uni-froms 组件缺少 ref 属性')
-			formVm.setValue(name, value)
-		}
-	}
+	// Vue.prototype.binddata = function(name, value, formName) {
+	// 	if (formName) {
+	// 		this.$refs[formName].setValue(name, value)
+	// 	} else {
+	// 		let formVm
+	// 		for (let i in this.$refs) {
+	// 			const vm = this.$refs[i]
+	// 			if (vm && vm.$options && vm.$options.name === 'uniForms') {
+	// 				formVm = vm
+	// 				break
+	// 			}
+	// 		}
+	// 		if (!formVm) return console.error('当前 uni-froms 组件缺少 ref 属性')
+	// 		formVm.setValue(name, value)
+	// 	}
+	// }
 
 	/**
 	 * Forms 表单
@@ -52,8 +52,17 @@
 
 	export default {
 		name: 'uniForms',
+		compatConfig:{
+			MODE:3,
+			COMPONENT_V_MODEL: false
+		},
+		model:{
+			prop: 'modelValue',
+			event: 'update:modelValue'
+		},
 		props: {
-			value: {
+			// TODO vue3
+			modelValue: {
 				type: Object,
 				default () {
 					return {}
@@ -132,23 +141,22 @@
 					return
 				}
 				// 判断表单存在那些实例
-				for (let i in this.value) {
+				for (let i in this.modelValue) {
 					const itemData = this.childrens.find(v => v.name === i)
 					if (itemData) {
-						this.formData[i] = this.value[i]
+						this.formData[i] = this.modelValue[i]
 						itemData.init()
 					}
 				}
-
 				// watch 每个属性 ，需要知道具体那个属性发变化
-				Object.keys(this.value).forEach((key) => {
-					this.$watch('value.' + key, (newVal) => {
+				Object.keys(this.modelValue).forEach((key) => {
+					this.$watch('modelValue.' + key, (newVal) => {
 						const itemData = this.childrens.find(v => v.name === key)
 						if (itemData) {
 							this.formData[key] = this._getValue(key, newVal)
 							itemData.init()
 						} else {
-							this.formData[key] = this.value[key] || null
+							this.formData[key] = this.modelValue[key] || null
 						}
 					})
 				})
@@ -172,10 +180,14 @@
 				value = this._getValue(example.name, value)
 				this.formData[name] = value
 				example.val = value
-				this.$emit('input', Object.assign({}, this.value, this.formData))
+				this.setEmit(Object.assign({}, this.modelValue, this.formData))
 				return example.triggerCheck(value, callback)
 			},
-
+			setEmit(value){
+				this.$emit('input',value)
+				// TODO 兼容 vue3
+				this.$emit("update:modelValue",value)
+			},
 			/**
 			 * TODO 表单提交， 小程序暂不支持这种用法
 			 * @param {Object} event
@@ -204,8 +216,10 @@
 						this.formData[item.name] = this._getValue(item.name, '')
 					}
 				})
-
+				// TODO 兼容 vue2
 				this.$emit('input', this.formData)
+				// TODO 兼容 vue3
+				this.$emit('update:modelValue', this.formData)
 				this.$emit('reset', event)
 			},
 
@@ -347,11 +361,11 @@
 			 */
 			submit(callback) {
 				// Object.assign(this.formData,formData)
-				for (let i in this.value) {
+				for (let i in this.modelValue) {
 					const itemData = this.childrens.find(v => v.name === i)
 					if (itemData) {
 						if (this.formData[i] === undefined) {
-							this.formData[i] = this._getValue(i, this.value[i])
+							this.formData[i] = this._getValue(i, this.modelValue[i])
 						}
 					}
 				}

@@ -149,7 +149,7 @@ export default {
 }
 
 /* #ifndef APP-NVUE */
-.example ::v-deep .transition {
+.example :deep(.transition) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
