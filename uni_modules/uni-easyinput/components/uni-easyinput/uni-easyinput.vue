@@ -23,7 +23,7 @@
 			</template>
 			<template v-else>
 				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
-				 v-if="clearable && val " color="#c0c4cc" @click="onClear"></uni-icons>
+				 v-if="clearable && focused && val" color="#c0c4cc" @click="onClear"></uni-icons>
 			</template>
 			<slot name="right"></slot>
 		</view>
@@ -244,10 +244,11 @@
 			},
 
 			onFocus(event) {
-				// this.focused = true;
+				this.focused = true;
 				this.$emit('focus', event);
 			},
 			onBlur(event) {
+				this.focused = false;
 				let value = event.detail.value;
 				// setTimeout(() => {
 				// this.focused = false;
