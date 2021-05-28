@@ -242,11 +242,13 @@
 					value[i] = selected[i].value
 				}
 
+        const item = selected[selected.length - 1]
+
 				if (this.formItem) {
-					const item = selected[selected.length - 1]
 					this.formItem.setValue(item.value)
 				}
 
+        this.$emit('input', item.value)
 				this.$emit('change', {
 					detail: {
 						value: selected
