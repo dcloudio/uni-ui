@@ -1,36 +1,33 @@
 {
-	"id": "55",
-	"name": "@dcloudio/uni-ui",
-	"version": "1.2.13",
-	"description": "",
-	"author": "dcloud",
-	"license": "Apache-2.0",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dcloudio/uni-ui"
-	},
-	"scripts": {
-		"build:lib": "node build/index.js lib",
-		"build:npm": "node build/index.js npm",
-		"build:release": "node build/index.js release",
-		"build:readme": "node build/index.js readme",
-		"dev:docs": "vuepress dev docs",
-		"build:docs": "vuepress build docs"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"node-sass": "^4.14.1",
-		"postcss-comment": "^2.0.0",
-		"sass-loader": "^8.0.2",
-		"vue-template-compiler": "^2.6.11",
-		"vuepress": "^1.5.2",
-		"vuepress-plugin-code-copy": "^1.0.6"
-	},
-	"browserslist": [
-		"Android >= 4",
-		"ios >= 8"
-	],
-	"uni-app": {
-		"scripts": {}
-	}
+   "name": "uni-preset-vue",
+   "version": "0.0.0",
+   "scripts": {
+      "dev": "uni",
+      "build": "uni build",
+      "dev:ssr": "uni --ssr",
+      "build:ssr": "uni build --ssr"
+   },
+   "dependencies": {
+      "@dcloudio/uni-app": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-cloud": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-components": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-h5": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-h5-vue": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-i18n": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/uni-shared": "^3.0.0-alpha-3000020210521001",
+      "@vue/shared": "^3.1.0-beta.3",
+      "vue": "^3.1.0-beta.3",
+      "vue-router": "^4.0.7",
+      "vuex": "^4.0.0"
+   },
+   "devDependencies": {
+      "@dcloudio/uni-cli-shared": "^3.0.0-alpha-3000020210521001",
+      "@dcloudio/vite-plugin-uni": "^3.0.0-alpha-3000020210521001",
+      "@vitejs/plugin-vue": "^1.2.2",
+      "@vue/compiler-sfc": "^3.1.0-beta.3",
+      "@vue/server-renderer": "^3.1.0-beta.3",
+      "sass": "^1.33.0",
+      "sass-loader": "^11.1.1",
+      "vite": "^2.3.2"
+   }
 }

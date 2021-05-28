@@ -1,0 +1,56 @@
+## 1.2.13（2021-04-16）
+- uni-ui 新增 uni-data-picker 支持云端非树形表结构数据
+- uni-ui 修复 uni-data-checkbox nvue 下无法选中的问题
+- uni-ui 修复 uni-data-picker 根节点 parent_field 字段等于null时选择界面错乱问题
+- uni-ui 修复 uni-file-picker 选择的文件非 file-extname 字段指定的扩展名报错的Bug
+- uni-ui 修复 uni-swipe-action 报错 nv_navigator is not defined 的bug
+- uni-ui 修复 uni-load-more 在首页使用时，h5 平台报 'uni is not defined' 的 bug
+- uni-ui 优化 uni-file-picker file-extname 字段支持字符串写法，多个扩展名需要用逗号分隔
+- uni-ui 优化 uni-pagination PC 和 移动端适配不同的 ui
+- uni-ui 更新 uni-file-picker 组件示例
+- uni-ui 修复 uni-nav-bar 当 fixed 属性为 true 时铺不满屏幕的 bug
+- uni-ui 新增 uni-search-bar 的 focus 事件
+- uni-ui 修复 uni-rate 属性 margin 值为 string 组件失效的 bug
+- uni-data-picker 修复 本地数据概率无法回显时问题
+- uni-table 新增 sortable 属性，是否开启单列排序
+- uni-table 优化 表格多选逻辑
+## 1.2.12（2021-03-23）
+- uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性; 
+- uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug， 
+- uni-ui 修复 uni-datetime-picker change事件触发2次的 bug
+- uni-ui 修复 uni-datetime-picker 分、秒 end 范围错误的 bug
+- uni-ui 新增 uni-tr selectable 属性，用于 type=selection 时，设置某行是否可由全选按钮控制
+- uni-ui 新增 uni-data-checkbox 新增 disabled属性，支持nvue
+- uni-ui 优化 uni-data-checkbox  无选项时提示“暂无数据”
+- uni-ui 优化 uni-data-checkbox  默认颜色显示
+- uni-ui 新增 uni-link href 属性支持 tel:|mailto:
+- uni-ui 新增 uni-table 示例demo
+- uni-ui 修复 uni-data-picker 微信小程序某些情况下无法选择的问题，事件无法触发的问题
+- uni-ui 修复 uni-nav-bar easycom 下，找不到 uni-status-bar 的bug
+- uni-ui 修复 uni-easyinput 示例在 qq 小程序上的bug
+- uni-ui 修复 uni-forms 动态显示uni-forms-item的情况下，submit 方法获取值错误的Bug
+- uni-ui 调整 cli 项目 建议使用 easycom 方式引用组件，如使用按需引用，需手动维护组件内部引用
+
+## 1.2.11（2021-02-24）
+- 调整为uni_modules目录规范
+- uni-data-picker 新增  数据驱动的picker选择器
+- uni-file-picker 新增  文件选择上传
+- uni-row 新增 栅格系统
+- uni-data-checkbox 优化 支持 nvue
+- uni-forms 修复 偶发性获取表单值错误的Bug
+- uni-forms 修复 校验 uni-data-picker value 为 0 时，返回值错误的Bug
+- uni-forms 修复 uni-forms-item 组件隐藏时依然触发校验的bug
+- uni-forms 优化 实时校验
+- uni-forms 优化 兼容nvue页面
+- uni-easyinput 优化 兼容nvue页面
+- uni-group 优化 兼容nvue页面
+- uni-popup 优化 组件适配 PC
+- uni-fab 优化 适配 PC
+- uni-swiper-dot 优化 适配 PC
+- uni-rate 优化 适配 PC
+- uni-notice-bar 优化 适配 PC
+- uni-indexed-list 优化 适配 PC
+- uni-combox 优化 适配 PC
+- uni-transition 优化 适配 PC
+- uni-nav-bar 优化 适配 PC
+- uni-swipe-action 优化 适配 PC

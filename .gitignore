@@ -1,6 +1,3 @@
-node_modules/
-.project
-unpackage/
-temps/example_temps/
 .DS_Store
-dist/
+node_modules
+.history
