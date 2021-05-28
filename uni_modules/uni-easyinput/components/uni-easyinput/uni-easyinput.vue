@@ -248,11 +248,10 @@
 				this.$emit('focus', event);
 			},
 			onBlur(event) {
-				this.focused = false;
+				setTimeout(() => {
+					this.focused = false;
+				}, 100);
 				let value = event.detail.value;
-				// setTimeout(() => {
-				// this.focused = false;
-				// }, 100);
 				this.$emit('blur', event);
 			},
 			onConfirm(e) {
