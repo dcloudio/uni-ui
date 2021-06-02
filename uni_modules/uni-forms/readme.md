@@ -71,7 +71,8 @@ export default {
 		return {
 			formData:{
 				name:'',
-				age:''
+				age:'',
+				hobby:[]
 			},
 			hobby: [{
 				text: '足球',
