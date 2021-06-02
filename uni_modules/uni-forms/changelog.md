@@ -1,4 +1,4 @@
-## 1.0.44
+## 1.0.44（2021-06-02）
 - 新增 uni-forms-item 可以设置单独的 rules
 - 新增 validate 事件增加 keepitem 参数，可以选择那些字段不过滤
 - 优化 submit 事件重命名为 validate

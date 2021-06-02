@@ -31,14 +31,11 @@ componentsPackageJsons.forEach(item => {
 
 let uniuiPackage = path.join(modulesPath, 'uni-ui', 'package.json')
 uniuiPackage = JSON.parse(fs.readFileSync(uniuiPackage).toString())
-console.log(uniuiPackage.version);
 const uniuiChangelog =  updateChangelogFile(
 	path.join(modulesPath, 'uni-ui', 'changelog.md'),
 	uniuiPackage.id,
 	uniuimd
 )
-
-console.log(uniuiChangelog)
 
 // // 将最新的个组件写入缓存区域
 // fs.writeFileSync(path.join(__dirname,'temps','sync-version.json'),JSON.stringify(syncVersion,null,2))

@@ -227,7 +227,14 @@ export default {
 		 * 校验所有或者部分表单
 		 */
 		async validateAll(invalidFields, type, keepitem, callback) {
-			const childrens = this.childrens;
+			// const childrens = this.childrens;
+			let childrens = []
+			for(let i in invalidFields){
+				const item = this.childrens.find(v=>v.name === i)
+				if(item) {
+					childrens.push(item)
+				}
+			}
 			// childrens.forEach(item => {
 			// 	item.errMsg = '';
 			// });
@@ -306,7 +313,6 @@ export default {
 		 * 对整个表单进行校验的方法，参数为一个回调函数。
 		 */
 		submit(keepitem, callback, type) {
-			console.log(this.modelValue);
 			for (let i in this.modelValue) {
 				const itemData = this.childrens.find(v => v.name === i);
 				if (itemData) {
@@ -345,7 +351,7 @@ export default {
 					});
 				}
 			});
-			return this.validateAll(invalidFields, '', callback);
+			return this.validateAll(invalidFields,'submit', [], callback);
 		},
 
 		/**
