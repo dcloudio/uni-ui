@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     isLocaldata() {
-      return this.localdata.length > 0
+      return !this.collection.length
     },
     postField() {
 			let fields = [this.field];

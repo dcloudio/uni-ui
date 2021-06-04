@@ -110,7 +110,7 @@
           hasNodes
         } = this._updateBindData()
 
-        if (!this._isTreeView()) {
+        if (!this._isTreeView() && !hasNodes) {
           this.onSelectedChange(node, true)
           return
         }

@@ -304,8 +304,8 @@
 		width: 100%;
 		display: flex;
 		box-sizing: border-box;
-		/* #endif */
 		min-height: 36px;
+		/* #endif */
 		flex-direction: row;
 		align-items: center;
 	}

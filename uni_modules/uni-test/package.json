@@ -1,7 +1,7 @@
 {
   "id": "uni-test",
   "displayName": "Test 测试插件",
-  "version": "0.0.37",
+  "version": "2.0.6",
   "description": "测试插件 ",
   "keywords": [
     "test"

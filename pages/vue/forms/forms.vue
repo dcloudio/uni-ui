@@ -180,6 +180,7 @@ export default {
 		// 模拟异步请求数据
 		setTimeout(() => {
 			this.formData = {
+				id:'testId',
 				name: 'DCloud',
 				age: 21,
 				email: '',
@@ -210,9 +211,8 @@ export default {
 		 * @param {Object} form
 		 */
 		submitForm(form) {
-			// console.log(this.formData);
 			this.$refs[form]
-				.submit()
+				.validate(['id','remarks'])
 				.then(res => {
 					console.log('表单的值：', res)
 					uni.showToast({

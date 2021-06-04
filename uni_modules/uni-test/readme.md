@@ -290,3 +290,8 @@ export default {
 | @chage| 选中状态改变时触发事件	| -				|
 
 
+
+
+## 组件示例
+
+点击查看：[https://hellouniapp.dcloud.net.cn/pages/extUI/test/test](https://hellouniapp.dcloud.net.cn/pages/extUI/test/test)
