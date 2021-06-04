@@ -3,8 +3,8 @@
 		<view @touchstart="touchstart" >
 				<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass" :duration="duration" :show="showTrans" @click="onTap" />
 		</view>
-	
-		<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
+
+		<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration" :show="showTrans" @touchstart="touchstart" @click="onTap">
 			<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear"><slot /></view>
 		</uni-transition>
 		<!-- #ifdef H5 -->
@@ -200,7 +200,7 @@ export default {
 			// #endif
 			this.clearPropagation = true
 		},
-		
+
 		open(direction) {
 			let innerType = ['top', 'center', 'bottom', 'left', 'right', 'message', 'dialog', 'share']
 			if (!(direction && innerType.indexOf(direction) !== -1)) {
@@ -233,7 +233,7 @@ export default {
 		touchstart(){
 			this.clearPropagation = false
 		},
-		
+
 		onTap() {
 			if(this.clearPropagation) return
 			if (!this.mkclick) return
@@ -369,8 +369,8 @@ export default {
 		position: relative;
 		/* iphonex 等安全区设置，底部安全区适配 */
 		/* #ifndef APP-NVUE */
-		padding-bottom: constant(safe-area-inset-bottom);
-		padding-bottom: env(safe-area-inset-bottom);
+		// padding-bottom: constant(safe-area-inset-bottom);
+		// padding-bottom: env(safe-area-inset-bottom);
 		/* #endif */
 		&.left,
 		&.right {
