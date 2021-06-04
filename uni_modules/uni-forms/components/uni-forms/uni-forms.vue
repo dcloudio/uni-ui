@@ -1,5 +1,4 @@
 <template>
-	<!--   -->
 	<view class="uni-forms" :class="{ 'uni-forms--top': !border }">
 		<form @submit.stop="submitForm" @reset="resetForm"><slot></slot></form>
 	</view>
@@ -111,6 +110,15 @@ export default {
 			formData: {}
 		};
 	},
+	computed:{
+		dataValue(){
+			if(JSON.stringify(this.modelValue ) === '{}'){
+				return this.value
+			}else{
+				return this.modelValue
+			}
+		}
+	},
 	watch: {
 		rules(newVal) {
 			// 如果规则发生变化，要初始化组件
@@ -146,10 +154,11 @@ export default {
 			// 取消监听,避免多次调用 init 重复执行 $watch
 			this.unwatchs.forEach(v => v());
 			// watch 每个属性 ，需要知道具体那个属性发变化
-			Object.keys(this.modelValue).forEach(key => {
+			Object.keys(this.dataValue).forEach(key => {
 				let watch = this.$watch(
-					'modelValue.' + key,
+					'dataValue.' + key,
 					value => {
+						if(!value) return
 						// 如果是对象 ，则平铺内容
 						if (value.toString() === '[object Object]') {
 							for (let i in value) {
@@ -188,6 +197,7 @@ export default {
 			this.formData[name] = value;
 			example.val = value;
 			this.$emit('input', Object.assign({}, this.value, this.formData));
+			this.$emit('update:modelValue', Object.assign({}, this.value, this.formData));
 			return example.triggerCheck(value, callback);
 		},
 
@@ -212,6 +222,7 @@ export default {
 			});
 
 			this.$emit('input', this.formData);
+			this.$emit('update:modelValue', this.formData);
 			this.$emit('reset', event);
 		},
 
@@ -283,7 +294,7 @@ export default {
 
 			if (Array.isArray(keepitem)) {
 				keepitem.forEach(v => {
-					newFormData[v] = this.modelValue[v];
+					newFormData[v] = this.dataValue[v];
 				});
 			}
 
@@ -313,11 +324,11 @@ export default {
 		 * 对整个表单进行校验的方法，参数为一个回调函数。
 		 */
 		submit(keepitem, callback, type) {
-			for (let i in this.modelValue) {
+			for (let i in this.dataValue) {
 				const itemData = this.childrens.find(v => v.name === i);
 				if (itemData) {
 					if (this.formData[i] === undefined) {
-						this.formData[i] = this._getValue(i, this.modelValue[i]);
+						this.formData[i] = this._getValue(i, this.dataValue[i]);
 					}
 				}
 			}
