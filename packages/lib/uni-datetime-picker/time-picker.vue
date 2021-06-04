@@ -78,7 +78,7 @@
 			</view>
 		</view>
 		<!-- #ifdef H5 -->
-		<keypress v-if="visible" @esc="tiggerTimePicker" @enter="setTime" />
+		<!-- <keypress v-if="visible" @esc="tiggerTimePicker" @enter="setTime" /> -->
 		<!-- #endif -->
 	</view>
 </template>

@@ -99,10 +99,6 @@ export default {
 				this.mkclick = val
 			},
 			immediate: true
-		},
-		safeArea: {
-			type: Boolean,
-			default: true
 		}
 	},
 	data() {

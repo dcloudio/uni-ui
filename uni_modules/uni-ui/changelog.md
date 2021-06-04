@@ -1,3 +1,19 @@
+## 1.3.2（2021-06-04）
+- uni-data-checkbox 新增 map 属性，可以方便映射text/value属性
+- uni-data-checkbox 修复 不关联服务空间的情况下组件报错的Bug
+- uni-data-picker 修复 上个版本引出的本地数据无法选择带有children的2级节点
+- uni-forms 修复 动态删减数据导致报错的问题
+- uni-forms 新增 modelValue 属性 ，value 即将废弃
+- uni-forms 新增 uni-forms-item 可以设置单独的 rules
+- uni-forms 新增 validate 事件增加 keepitem 参数，可以选择那些字段不过滤
+- uni-forms 优化 submit 事件重命名为 validate
+- uni-data-picker 修复 无法加载云端数据的问题
+- uni-data-picker 修复 v-model无效问题
+- uni-data-picker 修复 loaddata 为空数据组时加载时间过长问题
+- uni-datetime-picker 修复 图标在小程序上不显示的 bug
+- uni-datetime-picker 优化 重命名引用组件，避免潜在组件命名冲突
+- uni-datetime-picker 优化 代码目录扁平化
+- uni-tag 修复 未定义 sass 变量 "$uni-color-royal" 的bug
 ## 1.3.1（2021-05-14）
 - uni-badge 新增 uni-badge 的 absolute 属性，支持定位
 - uni-badge 新增 uni-badge 的 offset 属性，支持定位偏移

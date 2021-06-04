@@ -7,6 +7,64 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.2" date="2021-06-04">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="feat">
+			 map 属性，可以方便映射text/value属性
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 不关联服务空间的情况下组件报错的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 无法加载云端数据的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 v-model无效问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 loaddata 为空数据组时加载时间过长问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 上个版本引出的本地数据无法选择带有children的2级节点
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 图标在小程序上不显示的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 重命名引用组件，避免潜在组件命名冲突
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 代码目录扁平化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 动态删减数据导致报错的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 modelValue 属性 ，value 即将废弃
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-forms-item 可以设置单独的 rules
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 validate 事件增加 keepitem 参数，可以选择那些字段不过滤
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 submit 事件重命名为 validate
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="fix">
+			 未定义 sass 变量 "$uni-color-royal" 的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.1" date="2021-05-14">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="feat">

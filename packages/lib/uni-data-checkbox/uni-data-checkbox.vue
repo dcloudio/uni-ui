@@ -8,20 +8,14 @@
 		</template>
 		<template v-else>
 			<checkbox-group v-if="multiple" class="checklist-group" :class="{'is-list':mode==='list' || wrap}" @change="chagne">
-				<!-- :class="item.labelClass"  -->
 				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',(disabled || !!item.disabled)?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
 				 :style="item.styleBackgroud" v-for="(item,index) in dataList" :key="index">
-					<checkbox class="hidden" hidden :disabled="disabled || !!item.disabled" :value="item.value+''" :checked="item.selected" />
-					<!-- :style="item.styleIcon" -->
-
+					<checkbox class="hidden" hidden :disabled="disabled || !!item.disabled" :value="item[map.value]+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="checkbox__inner"  :style="item.styleIcon">
-						<!-- :class="item.checkboxClass" -->
 						<view class="checkbox__inner-icon"></view>
 					</view>
 					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-						<!-- :class="item.textClass" -->
-						<text class="checklist-text" :style="item.styleIconText">{{item.text}}</text>
-						<!-- :class="item.listClass"  -->
+						<text class="checklist-text" :style="item.styleIconText">{{item[map.text]}}</text>
 						<view v-if="mode === 'list' && icon === 'right'" class="checkobx__list" :style="item.styleBackgroud"></view>
 					</view>
 				</label>
@@ -30,17 +24,13 @@
 				<!-- -->
 				<label class="checklist-box" :class="['is--'+mode,item.selected?'is-checked':'',(disabled || !!item.disabled)?'is-disable':'',index!==0&&mode==='list'?'is-list-border':'']"
 				 :style="item.styleBackgroud" v-for="(item,index) in dataList" :key="index">
-					<radio class="hidden" hidden :disabled="disabled || item.disabled" :value="item.value+''" :checked="item.selected" />
-					<!-- :class="item.checkboxBgClass"  -->
+					<radio class="hidden" hidden :disabled="disabled || item.disabled" :value="item[map.value]+''" :checked="item.selected" />
 					<view v-if="(mode !=='tag' && mode !== 'list') || ( mode === 'list' && icon === 'left')" class="radio__inner"
 					 :style="item.styleBackgroud">
-						<!-- :class="item.checkboxClass"  -->
 						<view class="radio__inner-icon" :style="item.styleIcon"></view>
 					</view>
 					<view class="checklist-content" :class="{'list-content':mode === 'list' && icon ==='left'}">
-						<!-- :class="item.textClass" -->
-						<text class="checklist-text" :style="item.styleIconText">{{item.text}}</text>
-						<!-- :class="item.listClass" -->
+						<text class="checklist-text" :style="item.styleIconText">{{item[map.text]}}</text>
 						<view v-if="mode === 'list' && icon === 'right'" :style="item.styleRightIcon" class="checkobx__list"></view>
 					</view>
 				</label>
@@ -51,9 +41,9 @@
 
 <script>
 	/**
-	 * DataCheckbox 数据选择器
+	 * DataChecklist 数据选择器
 	 * @description 通过数据渲染 checkbox 和 radio
-	 * @tutorial https://ext.dcloud.net.cn/plugin?id=3456
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=xxx
 	 * @property {String} mode = [default| list | button | tag] 显示模式
 	 * @value default  	默认横排模式
 	 * @value list		列表模式
@@ -74,9 +64,11 @@
 	 * @event {Function} change  选中发生变化触发
 	 */
 
+	// import clientdb from './clientdb.js'
 	export default {
-		name: 'uniDataCheckbox',
-		mixins: [uniCloud.mixinDatacom],
+		name: 'uniDataChecklist',
+		// mixins: [clientdb],
+		mixins: [uniCloud.mixinDatacom || {}],
 		props: {
 			mode: {
 				type: String,
@@ -129,6 +121,15 @@
 			disabled:{
 				type: Boolean,
 				default: false
+			},
+			map:{
+				type: Object,
+				default(){
+					return {
+						text:'text',
+						value:'value'
+					}
+				}
 			}
 		},
 		watch: {
@@ -167,7 +168,7 @@
 		created() {
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
-			this.formItem && this.formItem.setValue(this.value)
+			// this.formItem && this.formItem.setValue(this.value)
 
 			if (this.formItem) {
 				if (this.formItem.name) {
@@ -224,16 +225,17 @@
 
 				if (this.multiple) {
 					this.range.forEach(item => {
-						if (values.includes(item.value + '')) {
-							detail.value.push(item.value)
+						
+						if (values.includes(item[this.map.value] + '')) {
+							detail.value.push(item[this.map.value])
 							detail.data.push(item)
 						}
 					})
 				} else {
-					const range = this.range.find(item => (item.value + '') === values)
+					const range = this.range.find(item => (item[this.map.value] + '') === values)
 					if (range) {
 						detail = {
-							value: range.value,
+							value: range[this.map.value],
 							data: range
 						}
 					}
@@ -270,13 +272,13 @@
 					item.disabled = item.disable || item.disabled || false
 					if (this.multiple) {
 						if (value.length > 0) {
-							let have = value.find(val => val === item.value)
+							let have = value.find(val => val === item[this.map.value])
 							item.selected = have !== undefined
 						} else {
 							item.selected = false
 						}
 					} else {
-						item.selected = value === item.value
+						item.selected = value === item[this.map.value]
 					}
 
 					list.push(item)
@@ -294,14 +296,14 @@
 				list.forEach((item, index) => {
 					if (this.multiple) {
 						if (selectList.length <= min) {
-							let have = selectList.find(val => val.value === item.value)
+							let have = selectList.find(val => val[this.map.value] === item[this.map.value])
 							if (have !== undefined) {
 								item.disabled = true
 							}
 						}
 
 						if (selectList.length >= max && max !== '') {
-							let have = selectList.find(val => val.value === item.value)
+							let have = selectList.find(val => val[this.map.value] === item[this.map.value])
 							if (have === undefined) {
 								item.disabled = true
 							}
@@ -335,7 +337,7 @@
 				let selectedArr = []
 				range.forEach((item) => {
 					if (item.selected) {
-						selectedArr.push(item.value)
+						selectedArr.push(item[this.map.value])
 					}
 				})
 				return this.value.length > 0 ? this.value : selectedArr
