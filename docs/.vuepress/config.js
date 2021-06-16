@@ -8,11 +8,11 @@ module.exports = {
 	},
 	themeConfig: {
 		logo: {
-			img: '//img-cdn-qiniu.dcloud.net.cn/uniapp/doc/uniapp4@2x.png',
+			img: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-f184e7c3-1912-41b2-b81f-435d1b37c7b4/738873d6-ac99-4811-aafc-ab1ebc97a419.png',
 			link: 'https://uniapp.dcloud.io'
 		},
 		subLogo: {
-			img: '//img-cdn-qiniu.dcloud.net.cn/uniapp/doc/logo2@2x.png',
+			img: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-f184e7c3-1912-41b2-b81f-435d1b37c7b4/055240f8-880f-4c1a-b909-c64cb4894fa0.png',
 			link: 'https://dcloud.io'
 		},
 		nav: [{

@@ -81,7 +81,6 @@ export default {
 		border-radius 20px
 		background-color #333
 		box-shadow 0px 0px 10px 2px rgba(0, 0, 0, 0.2)
-		border 1px blue solid
 		transform scale(0.8)
 		box-sizing border-box
 		.simulator-top
