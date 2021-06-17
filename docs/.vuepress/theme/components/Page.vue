@@ -81,7 +81,7 @@ export default {
 		border-radius 20px
 		background-color #333
 		box-shadow 0px 0px 10px 2px rgba(0, 0, 0, 0.2)
-		transform scale(0.8)
+		transform scale(0.85)
 		box-sizing border-box
 		.simulator-top
 			display flex
