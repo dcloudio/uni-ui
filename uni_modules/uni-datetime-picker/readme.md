@@ -30,27 +30,26 @@ ___点击 picker 默认值规则：___
 <uni-datetime-picker></uni-datetime-picker>
 <uni-datetime-picker v-model="vModelDatetime" start="2010-6-10 08:30:30" end="2021-6-10 08:30:30"></uni-datetime-picker>
 <uni-datetime-picker :value="timestamp" return-type="timestamp" start="1276129830000" end="1623285030000" @change="timestampChange"></uni-datetime-picker>
-<uni-datetime-picker type="date" :value="date" start="2020-6-15" end="2025-6-15" @change="dateChange"></uni-datetime-picker>
-<uni-datetime-picker type="time" :value="time" start="06:30:30" end="12:30:30" @change="timeChange"></uni-datetime-picker>
+<uni-datetime-picker type="date" :value="2020-6-25" start="2020-6-15" end="2025-6-15" @change="dateChange"></uni-datetime-picker>
 ```
 
 ## API
 
 ### DatetimePicker Props
 
-|属性名			|类型						|默认值		|值域									|说明																											|
-|:-:				|:-:						|:-:			|											|:-:																											|
-|type				|String					|datetime	|date/daterange/datetime/datetimerange
-range|选择器类型																								|
-|value			|String、Number	|-				|-										|输入框当前值																							|
-|start			|String、Number	|-				|-										|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
-|end				|String、Number	|-				|-										|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
-|return-type|String					|timestamp|timestamp 、string		|返回值格式																								|
-|border			|Boolean、String|true			|											|是否有边框																								|
-|placeholder		|String			|-			|-																			|非范围选择时的占位内容			|
-|start-placeholder	|String			|-			|-																			|范围选择时开始日期的占位内容	|
-|end-placeholder	|String			|-			|-																			|范围选择时结束日期的占位内容	|
-|disabled		|Boolean、String|false		|											|是否不可选择																							|
+|属性名						|类型						|默认值		|值域																	|说明																											|
+|:-:							|:-:						|:-:			|																			|:-:																											|
+|type							|String					|datetime	|date/daterange/datetime/datetimerange|选择器类型																								|
+|value						|String、Number	|-				|-																		|输入框当前值																							|
+|start						|String、Number	|-				|-																		|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
+|end							|String、Number	|-				|-																		|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
+|return-type			|String					|timestamp|timestamp 、string										|返回值格式																								|
+|border						|Boolean、String|true			|																			|是否有边框																								|
+|rangeSeparator		|String					|'-'			|-																		|选择范围时的分隔符																				|
+|placeholder			|String					|-				|-																		|非范围选择时的占位内容																		|
+|start-placeholder|String					|-				|-																		|范围选择时开始日期的占位内容															|
+|end-placeholder	|String					|-				|-																		|范围选择时结束日期的占位内容															|
+|disabled					|Boolean、String|false		|																			|是否不可选择																							|
 
 
 
