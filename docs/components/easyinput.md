@@ -138,7 +138,7 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |trim|Boolean/String|见 trim Options	| false |	是否自动去除空格，传入类型为 Boolean 时，自动去除前后空格|
 |inputBorder|Boolean|-|true|是否显示input输入框的边框|
 |styles|Object|-|-|	样式自定义|
-|passwrodIcon|Boolean|-| true |	type=password 时，是否显示小眼睛图标|
+|passwordIcon|Boolean|-| true |	type=password 时，是否显示小眼睛图标|
 
 
 #### Type Options

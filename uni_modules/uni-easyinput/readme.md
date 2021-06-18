@@ -116,82 +116,81 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 
 ### Easyinput Props
 
-|属性名							| 类型						|	可选值 		| 		默认值					| 说明|
-|:-:								| :-:						|:-:				| :-:								| :-:	|	
-|value 							|String/ Number	| -				 	|	-									|输入内容|
-|type	   						|String 				| 见 type Options |text| 				输入框的类型（默认text） |
-|clearable	   			|Boolean				| -	|true| 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容|
-|autoHeight	   			|Boolean				| -	|false|	是否自动增高输入区域，type为textarea时有效|
-|placeholder	   		|String 				| -	| - |	输入框的提示文字|
-|placeholderStyle 	|String 				| -	| - |	placeholder的样式(内联样式，字符串)，如"color: #ddd"|
-|focus	   					|Boolean				| -	|false|	是否自动获得焦点|
-|disabled	   				|Boolean				| -	|false|	是否不可输入|
-|maxlength	   			|Number 				| -	|140|	最大输入长度，设置为 -1 的时候不限制最大长度|
-|confirmType	   		|String 				| -	|done|	设置键盘右下角按钮的文字，仅在type="text"时生效|
-|clearSize	   			|Number 				| -	|15|	清除图标的大小，单位px|
-|prefixIcon	   			|String					| -	| - |输入框头部图标	|
-|suffixIcon	   			|String					| -	| - |输入框尾部图标|
-|trim	   						|Boolean/String	| 见 trim Options	| false |	是否自动去除空格，传入类型为 Boolean 时，自动去除前后空格|
-|inputBorder	   		|Boolean				| -	|true|	是否显示input输入框的边框|
-|styles				   		|Object					| -	| - |	样式自定义|
+|属性名| 类型|	可选值|默认值|说明|
+|:-:|:-:|:-:|:-:|:-:|
+|value|String/ Number|-|-|输入内容|
+|type|String|见 type Options|text|输入框的类型（默认text）|
+|clearable|Boolean|-|true| 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容|
+|autoHeight|Boolean|-|false|	是否自动增高输入区域，type为textarea时有效|
+|placeholder|String |-| - |	输入框的提示文字|
+|placeholderStyle|String| -	| - |	placeholder的样式(内联样式，字符串)，如"color: #ddd"|
+|focus|Boolean|-|false|是否自动获得焦点|
+|disabled|Boolean|-|false|是否不可输入|
+|maxlength|Number|-|140|最大输入长度，设置为 -1 的时候不限制最大长度|
+|confirmType|String|-|done|设置键盘右下角按钮的文字，仅在type="text"时生效|
+|clearSize|Number|-|15|清除图标的大小，单位px|
+|prefixIcon|String|-|-|输入框头部图标	|
+|suffixIcon|String|-|-|输入框尾部图标|
+|trim|Boolean/String|见 trim Options	| false |	是否自动去除空格，传入类型为 Boolean 时，自动去除前后空格|
+|inputBorder|Boolean|-|true|是否显示input输入框的边框|
+|styles|Object|-|-|	样式自定义|
+|passwordIcon|Boolean|-| true |	type=password 时，是否显示小眼睛图标|
 
 
 #### Type Options
 
-|属性名		| 说明																								|
-|:-:			| :-:																								|
-|text			|文本输入键盘																					|
-|textarea	|多行文本输入键盘																			|
-|password	|密码输入键盘																					|
-|number		|数字输入键盘，注意iOS上app-vue弹出的数字键盘并非9宫格方式	|
-|idcard		|身份证输入键盘，仅支持微信、支付宝、百度、QQ小程序					|
-|digit		|带小数点的数字键盘，仅支持微信、支付宝、百度、头条、QQ小程序	|
+|属性名| 说明|
+|:-:| :-:|
+|text|文本输入键盘|
+|textarea	|多行文本输入键盘|
+|password	|密码输入键盘|
+|number|数字输入键盘，注意iOS上app-vue弹出的数字键盘并非9宫格方式	|
+|idcard|身份证输入键盘，仅支持微信、支付宝、百度、QQ小程序|
+|digit|带小数点的数字键盘，仅支持微信、支付宝、百度、头条、QQ小程序	|
 
 #### ConfirmType Options
 
 平台差异与 [input](https://uniapp.dcloud.io/component/input) 相同
 
-|属性名	| 说明							|
-|:-:		| :-:							|
-|send		|右下角按钮为“发送”	|
+|属性名	| 说明|
+|:-:| :-:|
+|send|右下角按钮为“发送”	|
 |search	|右下角按钮为“搜索”	|
-|next		|右下角按钮为“下一个”|
-|go			|右下角按钮为“前往”	|											
-|done		|右下角按钮为“完成”	|
+|next|右下角按钮为“下一个”|
+|go|右下角按钮为“前往”	|											
+|done|右下角按钮为“完成”	|
 	
 
 #### Styles Options 
 	
-|属性名				| 默认值 	|说明																			|
-|:-:					| :-:		 	| :-:																		|
-|color				| #333   	|	输入文字颜色														|
-|disableColor	|#eee			|	输入框禁用背景色													|
-|borderColor	|#e5e5e5	|	边框颜色												|
+|属性名| 默认值 	|说明|
+|:-:| :-:| :-:|
+|color| #333|	输入文字颜色|
+|disableColor	|#eee|	输入框禁用背景色|
+|borderColor	|#e5e5e5	|	边框颜色|
 
 #### Trim Options
 
 传入类型为 `Boolean` 时，自动去除前后空格,传入类型为 `String` 时，可以单独控制，下面是可选值
 
-|属性名				 	|说明																			|
-|:-:		| :-:																		|
-|both		|	去除两端空格														|
-|left		|	去除左侧空格													|
-|right	|	去除右侧空格												|
-|all	 |	去除所有空格												|
-|none	 |	不去除空格												|
+|属性名|说明|
+|:-:| :-:|
+|both|去除两端空格|
+|left|去除左侧空格|
+|right|去除右侧空格|
+|all|去除所有空格|
+|none|不去除空格|
 
 
 ### Easyinput Events
 
-|事件称名		| 说明										|返回值					|
-|:-:				| :-:											|:-:						|
-|@input			|输入框内容发生变化时触发	| -							|
-|@focus			|输入框获得焦点时触发			| -							|
-|@blur			|输入框失去焦点时触发			| -							|
-|@confirm		|点击完成按钮时触发				| -							|
-|@iconClick	|点击图标时触发						| prefix/suffix	|
-
-
+|事件称名| 说明|返回值|
+|:-:| :-:|:-:|
+|@input|输入框内容发生变化时触发| -|
+|@focus|输入框获得焦点时触发| -|
+|@blur|输入框失去焦点时触发| -|
+|@confirm|点击完成按钮时触发| -|
+|@iconClick	|点击图标时触发| prefix/suffix	|
 
 
 ## 组件示例
