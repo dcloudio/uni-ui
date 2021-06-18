@@ -7,6 +7,39 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.3" date="2021-06-18">
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 passwordIcon 属性，当type=password时是否显示小眼睛图标
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 confirmType 属性不生效的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 disabled 状态可清出内容的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 删除文件时无法触发 v-model 的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 H5平台中间弹出后，点击内容，再点击遮罩无法关闭的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 错误的 watch 字段
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 safeArea 属性不生效的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 点击内容，再点击遮罩无法关闭的Bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.2" date="2021-06-04">
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="feat">
