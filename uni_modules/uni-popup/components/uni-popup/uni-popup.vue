@@ -1,12 +1,11 @@
 <template>
 	<view v-if="showPopup" class="uni-popup" :class="[popupstyle, isDesktop ? 'fixforpc-z-index' : '']" @touchmove.stop.prevent="clear">
 		<view @touchstart="touchstart" >
-				<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass" :duration="duration" :show="showTrans" @click="onTap" />
+			<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass" :duration="duration" :show="showTrans" @click="onTap" />
+			<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
+				<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear"><slot /></view>
+			</uni-transition>
 		</view>
-
-		<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration" :show="showTrans" @touchstart="touchstart" @click="onTap">
-			<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear"><slot /></view>
-		</uni-transition>
 		<!-- #ifdef H5 -->
 		<keypress v-if="maskShow" @esc="onTap" />
 		<!-- #endif -->
