@@ -3,7 +3,7 @@
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" start="2021-3-20" end="2021-5-20" @change="change" />
+			<uni-datetime-picker type="date" value="2021-3-26" start="2021-3-20" end="2021-5-20" @change="change" />
 		</view>
 		<uni-section :title="'时间戳用法：' + single" type="line"></uni-section>
 		<view class="example-body">
@@ -11,8 +11,7 @@
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="datetime" v-model="datetimesingle" start="2021-3-20 12:00:00"
-				end="2021-5-20 20:00:00" />
+			<uni-datetime-picker type="datetime" v-model="datetimesingle"/>
 		</view>
 		<uni-section :title="'v-model用法：' + single" type="line"></uni-section>
 		<view class="example-body">
