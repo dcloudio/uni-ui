@@ -1,3 +1,12 @@
+## 1.3.3（2021-06-18）
+- uni-easyinput 新增 passwordIcon 属性，当type=password时是否显示小眼睛图标
+- uni-easyinput 修复 confirmType 属性不生效的问题
+- uni-easyinput 修复 disabled 状态可清出内容的 bug
+- uni-file-picker 修复 删除文件时无法触发 v-model 的Bug
+- uni-popup 修复 H5平台中间弹出后，点击内容，再点击遮罩无法关闭的Bug
+- uni-popup 修复 错误的 watch 字段
+- uni-popup 修复 safeArea 属性不生效的问题
+- uni-popup 修复 点击内容，再点击遮罩无法关闭的Bug
 ## 1.3.2（2021-06-04）
 - uni-data-checkbox 新增 map 属性，可以方便映射text/value属性
 - uni-data-checkbox 修复 不关联服务空间的情况下组件报错的Bug
