@@ -7,6 +7,7 @@
 						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
 						<text class="label-text">{{ label }}</text>
 						<text v-if="required" class="is-required">*</text>
+						<view v-if="label" class="label-seat"></view>
 					</slot>
 				</view>
 				<view class="uni-forms-item__content" :class="{ 'is-input-error-border': msg }"><slot></slot></view>
@@ -415,11 +416,14 @@ export default {
 	// margin-top: 3px;
 	padding: 5px 0;
 	height: 36px;
-	margin-right: 5px;
+	// margin-right: 5px;
 
 	.label-text {
 		font-size: 14px;
 		color: #333;
+	}
+	.label-seat {
+		margin-right: 5px;
 	}
 }
 
