@@ -25,6 +25,7 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 > - `focus` 属性在开发者工具从不生效，需要真机测试
 > - `resetFields` 方法不会重置原生组件和三方组件的值
 > - 如果配置 `validateTrigger` 属性为 `bind` 且表单域组件使用 `input` 事件触发会耗损部分性能，请谨慎使用
+> - 组件支持 nvue ，需要在 `manifest.json > app-plus` 节点下配置 `"nvueStyleCompiler" : "uni-app"` 
 > - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 
 
