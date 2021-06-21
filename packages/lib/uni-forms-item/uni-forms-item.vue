@@ -2,7 +2,7 @@
 	<view class="uni-forms-item" :class="{ 'uni-forms-item--border': border, 'is-first-border': border && isFirstBorder, 'uni-forms-item-error': msg }">
 		<view class="uni-forms-item__box">
 			<view class="uni-forms-item__inner" :class="['is-direction-' + labelPos]">
-				<view class="uni-forms-item__label" :style="{ width: labelWid + 'px', justifyContent: justifyContent }">
+				<view class="uni-forms-item__label" :style="{ width: labelWid , justifyContent: justifyContent }">
 					<slot name="left">
 						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
 						<text class="label-text">{{ label }}</text>
@@ -192,7 +192,18 @@ export default {
 			if (this.form) {
 				let { formRules, validator, formData, value, labelPosition, labelWidth, labelAlign, errShowType } = this.form;
 				this.labelPos = this.labelPosition ? this.labelPosition : labelPosition;
-				this.labelWid = this.label ? (this.labelWidth ? this.labelWidth : labelWidth) : 0;
+
+				if(this.label){
+					this.labelWid = (this.labelWidth ? this.labelWidth : (labelWidth||65))
+				}else{
+					this.labelWid =( this.labelWidth ? this.labelWidth : (labelWidth||'auto'))
+				}
+				if(this.labelWid && this.labelWid !=='auto') {
+					this.labelWid +='px'
+				}
+				console.log(this.labelWid);
+				// this.labelWid = (this.labelWidth ? this.labelWidth : labelWidth) + 'px'
+				// this.labelWid = this.label ? (this.labelWidth ? this.labelWidth : labelWidth) : 0;
 				this.labelAli = this.labelAlign ? this.labelAlign : labelAlign;
 
 				// 判断第一个 item

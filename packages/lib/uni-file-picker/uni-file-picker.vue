@@ -460,10 +460,8 @@ export default {
 		 * @param {Object} index
 		 */
 		delFile(index) {
-			this.$emit('delete', {
-				tempFile: this.files[index],
-				tempFilePath: this.files[index].url
-			})
+			let fileData = this.files[index]
+			this.$emit('delete', fileData)
 			this.files.splice(index, 1)
 			this.$nextTick(()=>{
 				this.setEmit()

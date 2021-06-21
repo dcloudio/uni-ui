@@ -89,7 +89,7 @@ export default {
 		// label 宽度，单位 px
 		labelWidth: {
 			type: [String, Number],
-			default: 65
+			default: ''
 		},
 		// label 居中方式，可选值 left/center/right
 		labelAlign: {
