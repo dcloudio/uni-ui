@@ -14,7 +14,7 @@
 			 :name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
 			 :placeholderStyle="placeholderStyle" :disabled="disabled" :maxlength="inputMaxlength" :focus="focused" :confirmType="confirmType" @focus="onFocus"
 			 @blur="onBlur" @input="onInput" @confirm="onConfirm" />
-			<template v-if="type === 'password' && passwrodIcon" >
+			<template v-if="type === 'password' && passwordIcon" >
 				<uni-icons v-if="val != '' " class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" :type="showPassword?'eye-slash-filled':'eye-filled'"
 				 :size="18" color="#c0c4cc" @click="onEyes"></uni-icons>
 			</template>
@@ -67,7 +67,7 @@
 	 * @value all		去除全部空格
 	 * @value none	不去除空格
 	 * @property {Boolean}	inputBorder	是否显示input输入框的边框（默认true）
-	 * @property {Boolean}	passwrodIcon	type=password时是否显示小眼睛图标
+	 * @property {Boolean}	passwordIcon	type=password时是否显示小眼睛图标
 	 * @property {Object}	styles	自定义颜色
 	 * @event {Function}	input	输入框内容发生变化时触发
 	 * @event {Function}	focus	输入框获得焦点时触发
@@ -132,7 +132,7 @@
 				type: [Boolean, String],
 				default: true
 			},
-			passwrodIcon:{
+			passwordIcon:{
 				type: Boolean,
 				default: true
 			},
