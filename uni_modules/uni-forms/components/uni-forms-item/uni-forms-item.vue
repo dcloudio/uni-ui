@@ -17,7 +17,7 @@
 				class="uni-error-message"
 				:class="{ 'uni-error-msg--boeder': border }"
 				:style="{
-					paddingLeft: (labelPos === 'left' ? Number(labelWid) + 5 : 5) + 'px'
+					paddingLeft: labelLeft
 				}"
 			>
 				<text class="uni-error-message-text">{{ showMsg === 'undertext' ? msg : '' }}</text>
@@ -150,6 +150,9 @@ export default {
 			if (this.labelAli === 'left') return 'flex-start';
 			if (this.labelAli === 'center') return 'center';
 			if (this.labelAli === 'right') return 'flex-end';
+		},
+		labelLeft(){
+			return (this.labelPos === 'left' ? parseInt(this.labelWid) + 5 : 5) + 'px'
 		}
 	},
 	watch: {
