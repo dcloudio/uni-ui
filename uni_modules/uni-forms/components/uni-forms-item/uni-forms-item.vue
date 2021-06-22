@@ -308,7 +308,7 @@ export default {
 				result = null;
 			}
 			const inputComp = this.form.inputChildrens.find(child => child.rename === this.name);
-			if (isTrigger && result && result.errorMessage) {
+			if ((isTrigger ||　formTrigger) && result && result.errorMessage) {
 				if (inputComp) {
 					inputComp.errMsg = result.errorMessage;
 				}

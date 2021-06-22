@@ -1,3 +1,5 @@
+## 1.1.1（2021-06-22）
+- 修复 validate-trigger属性为submit且err-show-type属性为toast时不能弹出的Bug
 ## 1.1.0（2021-06-22）
 - 修复 只写setRules方法而导致校验不生效的Bug
 - 修复 由上个办法引发的错误提示文字错位的Bug
