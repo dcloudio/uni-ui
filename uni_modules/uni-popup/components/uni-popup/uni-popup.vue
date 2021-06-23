@@ -239,6 +239,7 @@ export default {
 				this.clearPropagation = false
 				return
 			}
+			this.$emit('maskClick')
 			if (!this.mkclick) return
 			this.close()
 		},
