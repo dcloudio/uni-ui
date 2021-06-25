@@ -609,7 +609,9 @@
 		width: 100px;
 		font-size: $uni-font-size-base;
 		color: #007aff;
+		/* #ifndef APP-NVUE */
 		letter-spacing: 3px;
+		/* #endif */
 	}
 
 	.uni-calendar__header-btn-box {
@@ -709,36 +711,21 @@
 		border-top-color: $uni-border-color;
 		border-top-style: solid;
 		border-top-width: 1px;
-	}
-
-
-	.uni-date-changed--time text {
-		// padding: 0 20px;
-		// height: 50px;
-		line-height: 50px;
-	}
-
-	.uni-date-changed {
-		flex: 1;
-	}
-
-	.uni-date-changed--time {
-		display: flex;
 		flex: 1;
 	}
 
 	.uni-date-changed--time-start {
+		/* #ifndef APP-NVUE */
 		display: flex;
-		justify-content: right;
+		/* #endif */
 		align-items: center;
-		// flex: 1;
 	}
 
 	.uni-date-changed--time-end {
+		/* #ifndef APP-NVUE */
 		display: flex;
-		justify-content: left;
+		/* #endif */
 		align-items: center;
-		// flex: 1;
 	}
 
 	.uni-date-changed--time-date {
@@ -749,7 +736,9 @@
 
 	.time-picker-style {
 		width: 62px;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		justify-content: center;
 		align-items: center
 	}

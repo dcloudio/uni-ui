@@ -70,7 +70,7 @@
 		computed: {
 			classes() {
 				const { type, disabled, inverted, circle, mark, size, isTrue } = this
-				return [
+				const classArr = [
 					'uni-tag--' + type,
 					isTrue(disabled) ? 'uni-tag--disabled' : '',
 					isTrue(inverted) ? type + '-uni-tag--inverted' : '',
@@ -81,6 +81,7 @@
 					isTrue(inverted) ? 'uni-tag-text--' + type : '',
 					size === 'small' ? 'uni-tag-text--small' : ''
 				]
+				return classArr.join(' ')
 			}
 		},
 		methods: {

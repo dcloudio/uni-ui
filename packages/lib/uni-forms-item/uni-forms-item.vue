@@ -7,6 +7,7 @@
 						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
 						<text class="label-text">{{ label }}</text>
 						<text v-if="required" class="is-required">*</text>
+						<view v-if="label" class="label-seat"></view>
 					</slot>
 				</view>
 				<view class="uni-forms-item__content" :class="{ 'is-input-error-border': msg }"><slot></slot></view>
@@ -16,7 +17,7 @@
 				class="uni-error-message"
 				:class="{ 'uni-error-msg--boeder': border }"
 				:style="{
-					paddingLeft: (labelPos === 'left' ? Number(labelWid) + 5 : 5) + 'px'
+					paddingLeft: labelLeft
 				}"
 			>
 				<text class="uni-error-message-text">{{ showMsg === 'undertext' ? msg : '' }}</text>
@@ -149,6 +150,9 @@ export default {
 			if (this.labelAli === 'left') return 'flex-start';
 			if (this.labelAli === 'center') return 'center';
 			if (this.labelAli === 'right') return 'flex-end';
+		},
+		labelLeft(){
+			return (this.labelPos === 'left' ? parseInt(this.labelWid) + 5 : 5) + 'px'
 		}
 	},
 	watch: {
@@ -304,7 +308,7 @@ export default {
 				result = null;
 			}
 			const inputComp = this.form.inputChildrens.find(child => child.rename === this.name);
-			if (isTrigger && result && result.errorMessage) {
+			if ((isTrigger ||　formTrigger) && result && result.errorMessage) {
 				if (inputComp) {
 					inputComp.errMsg = result.errorMessage;
 				}
@@ -415,11 +419,14 @@ export default {
 	// margin-top: 3px;
 	padding: 5px 0;
 	height: 36px;
-	margin-right: 5px;
+	// margin-right: 5px;
 
 	.label-text {
 		font-size: 14px;
 		color: #333;
+	}
+	.label-seat {
+		margin-right: 5px;
 	}
 }
 
