@@ -1,3 +1,5 @@
+## 1.1.2（2021-06-25）
+- 修复 pattern 属性在微信小程序平台无效的问题
 ## 1.1.1（2021-06-22）
 - 修复 validate-trigger属性为submit且err-show-type属性为toast时不能弹出的Bug
 ## 1.1.0（2021-06-22）
