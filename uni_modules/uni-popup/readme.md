@@ -146,6 +146,7 @@ export default {
 |事件称名|说明|返回值|
 |:-:|:-:|:-:|
 |change|组件状态发生变化触发|e={show: true｜false,type:当前模式}|
+|maskClick|点击遮罩层触发|-|
 
 
 ## 扩展组件说明

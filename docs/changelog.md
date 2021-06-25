@@ -7,6 +7,62 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.4" date="2021-06-25">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="perf">
+			 示例项目
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-countdown 重复赋值跳两秒的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 passwordIcon 属性拼写错误的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 validate-trigger属性为submit且err-show-type属性为toast时不能弹出的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 只写setRules方法而导致校验不生效的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 由上个办法引发的错误提示文字错位的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 不设置 label 属性 ，无法设置label插槽的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 不设置label属性，label-width属性不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 setRules 方法与rules属性冲突的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="feat">
+			 download 属性，H5平台下载文件名
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 mask-click 遮罩层点击事件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue 平台中间弹出后，点击内容，再点击遮罩无法关闭的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-tag 在字节跳动小程序上 css 类名编译错误的 bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.3" date="2021-06-18">
 	<log-item title="uni-easyinput 组件更新">
 		<log-item-text tag-type="feat">

@@ -1,3 +1,5 @@
+## 0.0.15（2021-06-21）
+- 修复 passwordIcon 属性拼写错误的 bug
 ## 0.0.14（2021-06-18）
 - 新增 passwordIcon 属性，当type=password时是否显示小眼睛图标
 - 修复 confirmType 属性不生效的问题

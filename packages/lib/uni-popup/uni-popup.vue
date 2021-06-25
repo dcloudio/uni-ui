@@ -234,7 +234,12 @@ export default {
 		},
 
 		onTap() {
-			if(this.clearPropagation) return
+			if (this.clearPropagation) {
+				// fix by mehaotian 兼容 nvue
+				this.clearPropagation = false
+				return
+			}
+			this.$emit('maskClick')
 			if (!this.mkclick) return
 			this.close()
 		},

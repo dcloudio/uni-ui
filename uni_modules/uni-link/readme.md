@@ -29,6 +29,7 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 |:-:					|:-:		|:-:										|:-:							|
 |href					|String	|-											|链接地址						|
 |text					|String	|-											|显示文字						|
+|download     |String |-                      |H5平台下载文件名        |
 |showUnderLine|Boolean|true										|是否显示下划线					|
 |copyTips			|String	|已自动复制网址，请在手机浏览器里粘贴该网址	|在小程序端复制链接时的提示语	|
 |color				|String	|#999999								|链接文字颜色					|

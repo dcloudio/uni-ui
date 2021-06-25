@@ -1,3 +1,17 @@
+## 1.3.4（2021-06-25）
+- uni-badge 优化 示例项目
+- uni-countdown 修复 uni-countdown 重复赋值跳两秒的 bug
+- uni-easyinput 修复 passwordIcon 属性拼写错误的 bug
+- uni-forms 修复 validate-trigger属性为submit且err-show-type属性为toast时不能弹出的Bug
+- uni-forms 修复 只写setRules方法而导致校验不生效的Bug
+- uni-forms 修复 由上个办法引发的错误提示文字错位的Bug
+- uni-forms 修复 不设置 label 属性 ，无法设置label插槽的问题
+- uni-forms 修复 不设置label属性，label-width属性不生效的bug
+- uni-forms 修复 setRules 方法与rules属性冲突的问题
+- uni-link 新增 download 属性，H5平台下载文件名
+- uni-popup 新增 mask-click 遮罩层点击事件
+- uni-popup 修复 nvue 平台中间弹出后，点击内容，再点击遮罩无法关闭的Bug
+- uni-tag 修复 uni-tag 在字节跳动小程序上 css 类名编译错误的 bug
 ## 1.3.3（2021-06-18）
 - uni-easyinput 新增 passwordIcon 属性，当type=password时是否显示小眼睛图标
 - uni-easyinput 修复 confirmType 属性不生效的问题
