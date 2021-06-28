@@ -127,6 +127,7 @@ filter-data 示例
 |事件称名				|说明									| 返回参数			|
 |:-:					|:-:									| :-:				|
 ||sort-change	| 点击排序时会触发该事件	| Function(Object)|
+||filter-change	| 筛选数据时会触发该事件	| Function(Object)|
 
 
 ### Td Props
