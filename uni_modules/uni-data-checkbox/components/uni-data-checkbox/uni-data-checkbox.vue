@@ -108,11 +108,11 @@
 			},
 			selectedColor: {
 				type: String,
-				default: '#007aff'
+				default: ''
 			},
 			selectedTextColor: {
 				type: String,
-				default: '#333'
+				default: ''
 			},
 			emptyText:{
 				type: String,
@@ -385,13 +385,20 @@
 				let classles = ''
 				// if (item.selected) {
 					// if (this.selectedTextColor) {
-					// 	styles.color = item.selected?this.selectedTextColor:'#999'
+					// 	if (this.mode === 'tag') {
+					// 		styles.color = item.selected?this.selectedTextColor:'#333'
+						
+					// 	} else {
+					// 		styles.color = item.selected?this.selectedTextColor:'#333'
+					// 	}
+					// 	if(!item.selected && item.disabled){
+					// 		styles.color = '#999'
+					// 	}
 					// } else {
 						if (this.mode === 'tag') {
-							styles.color = item.selected?'#fff':'#333'
-
+							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
 						} else {
-							styles.color = item.selected?this.selectedColor:'#333'
+							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:this.selectedColor):'#333'
 						}
 						if(!item.selected && item.disabled){
 							styles.color = '#999'
