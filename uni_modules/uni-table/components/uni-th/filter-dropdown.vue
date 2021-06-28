@@ -1,8 +1,8 @@
 <template>
 	<view class="uni-filter-dropdown">
 		<view class="dropdown-btn" @click="onDropdown">
-			<view class="icon-select" :class="{active: canReset}" v-if="type == 'select'"></view>
-			<view class="icon-search" :class="{active: canReset}" v-if="type == 'search'">
+			<view class="icon-select" :class="{active: canReset}" v-if="filterType == 'select'"></view>
+			<view class="icon-search" :class="{active: canReset}" v-if="filterType == 'search'">
 				<view class="icon-search-0"></view>
 				<view class="icon-search-1"></view>
 			</view>
@@ -58,11 +58,11 @@
 			virtualHost: true
 		},
 		props: {
-			type: {
+			filterType: {
 				type: String,
 				default: DropdownType.Select
 			},
-			filters: {
+			filterData: {
 				type: Array,
 				default () {
 					return []
@@ -84,10 +84,10 @@
 		},
 		computed: {
 			isSelect() {
-				return this.type === DropdownType.Select
+				return this.filterType === DropdownType.Select
 			},
 			isSearch() {
-				return this.type === DropdownType.Search
+				return this.filterType === DropdownType.Search
 			},
 			canReset() {
 				if (this.isSearch) {
@@ -122,7 +122,7 @@
 		},
 		methods: {
 			_copyFilters() {
-				let dl = JSON.parse(JSON.stringify(this.filters))
+				let dl = JSON.parse(JSON.stringify(this.filterData))
 				for (let i = 0; i < dl.length; i++) {
 					if (dl[i].checked === undefined) {
 						dl[i].checked = false

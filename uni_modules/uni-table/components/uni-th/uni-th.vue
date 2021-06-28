@@ -9,7 +9,7 @@
 					<text class="arrow down" :class="{ active: descending }" @click.stop="descendingFn"></text>
 				</view>
 			</view>
-			<dropdown v-if="filterType || filters.length" :filters="filters" :type="filterType" @change="ondropdown"></dropdown>
+			<dropdown v-if="filterType || filterData.length" :filterData="filterData" :filterType="filterType" @change="ondropdown"></dropdown>
 		</view>
 	</th>
 	<!-- #endif -->
@@ -30,7 +30,7 @@
  * @value left   	单元格文字左侧对齐
  * @value center	单元格文字居中
  * @value right		单元格文字右侧对齐
- * @property {Array}	filters 筛选数据
+ * @property {Array}	filterData 筛选数据
  * @property {String}	filterType	[search|select] 筛选类型
  * @value search	关键字搜素
  * @value select	条件选择
@@ -65,15 +65,15 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		filters: {
+		filterType: {
+			type: String,
+			default: ""
+		},
+		filterData: {
 			type: Array,
 			default () {
 				return []
 			}
-		},
-		filterType: {
-			type: String,
-			default: ""
 		}
 	},
 	data() {
@@ -198,6 +198,7 @@ $border-color: #ebeef5;
 .uni-table-th-content {
 	display: flex;
 	align-items: center;
+	flex: 1;
 }
 .arrow-box {
 }
