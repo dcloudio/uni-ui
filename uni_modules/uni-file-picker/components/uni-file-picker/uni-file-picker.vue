@@ -192,6 +192,7 @@ export default {
 					}
 					newFils.push(files ? files : v)
 				})
+				this.formItem && this.formItem.setValue(newFils)
 				this.files = newFils
 			},
 			immediate: true
@@ -241,9 +242,29 @@ export default {
 	created() {
 		// this.files = Object.assign([], this.value)
 		this.tempData = {}
-
+		this.form = this.getForm('uniForms')
+		this.formItem = this.getForm('uniFormsItem')
+		if (this.form && this.formItem) {
+			if (this.formItem.name) {
+				this.rename = this.formItem.name
+				this.form.inputChildrens.push(this)
+			}
+		}
 	},
 	methods: {
+		/**
+		 * 获取父元素实例
+		 */
+		getForm(name = 'uniForms') {
+			let parent = this.$parent;
+			let parentName = parent.$options.name;
+			while (parentName !== name) {
+				parent = parent.$parent;
+				if (!parent) return false;
+				parentName = parent.$options.name;
+			}
+			return parent;
+		},
 		/**
 		 * 继续上传
 		 */
@@ -460,8 +481,10 @@ export default {
 		 * @param {Object} index
 		 */
 		delFile(index) {
-			let fileData = this.files[index]
-			this.$emit('delete', fileData)
+			this.$emit('delete', {
+				tempFile: this.files[index],
+				tempFilePath: this.files[index].url
+			})
 			this.files.splice(index, 1)
 			this.$nextTick(()=>{
 				this.setEmit()
