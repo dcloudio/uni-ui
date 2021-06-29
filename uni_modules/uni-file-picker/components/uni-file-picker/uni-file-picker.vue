@@ -423,13 +423,14 @@ export default {
 					this.files[index].url = item.path
 					this.files[index].status = 'error'
 					this.files[index].errMsg = item.errMsg
-					this.files[index].progress = -1
+					// this.files[index].progress = -1
 					errorData.push(this.files[index])
 					errorTempFilePath.push(this.files[index].url)
 				} else {
 					this.files[index].errMsg = ''
 					this.files[index].url = item.url
 					this.files[index].status = 'success'
+					this.files[index].progress += 1
 					successData.push(this.files[index])
 					tempFilePath.push(this.files[index].url)
 				}
@@ -467,7 +468,8 @@ export default {
 				idx = this.files.findIndex(p => p.uuid === progressEvent.tempFile.uuid)
 			}
 			if (idx === -1 || !this.files[idx]) return
-			this.files[idx].progress = percentCompleted
+			// fix by mehaotian 100 就会消失，-1 是为了让进度条消失
+			this.files[idx].progress = percentCompleted - 1
 			// 上传中
 			this.$emit('progress', {
 				index: idx,
