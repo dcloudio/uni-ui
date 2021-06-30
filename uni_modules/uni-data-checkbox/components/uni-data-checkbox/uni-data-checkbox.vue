@@ -59,6 +59,7 @@
 	 * @property {Boolean} selectedColor 选中颜色
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {Boolean} selectedTextColor 选中文本颜色，如不填写则自动显示
+	 * @property {Object} map 字段映射， 默认 map={text:'text',value:'value'}
 	 * @value left 左侧显示
 	 * @value right 右侧显示
 	 * @event {Function} change  选中发生变化触发
