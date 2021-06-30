@@ -263,6 +263,7 @@ export default {
 |selectedColor|String							|-											|#007aff|选中颜色|
 |selectedTextColor|String					|-											|#333		|选中文本颜色，如不填写则自动显示|
 |emptyText 	|String					|-											|暂无数据		|没有数据时显示的文字 ，本地数据无效|
+|map 				|Object					|-											|{text:'text',value:'value'}		|字段映射，将text/value映射到数据中的其他字段|
 
 #### Localdata Options
 
