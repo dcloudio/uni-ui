@@ -192,7 +192,13 @@ export default {
 					}
 					newFils.push(files ? files : v)
 				})
-				this.formItem && this.formItem.setValue(newFils)
+				let data  = null
+				if (this.returnType === 'object') {
+					data = this.backObject(newFils)[0]
+				} else {
+					data = this.backObject(newFils)
+				}
+				this.formItem && this.formItem.setValue(data)
 				this.files = newFils
 			},
 			immediate: true
