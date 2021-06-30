@@ -26,7 +26,7 @@
 				<slot name="footer">
 					<view v-if="rightText || showBadge || showSwitch" class="uni-list-item__extra" :class="{ 'flex--justify': direction === 'column' }">
 						<text v-if="rightText" class="uni-list-item__extra-text">{{ rightText }}</text>
-						<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
+						<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" :custom-style="badgeStyle" />
 						<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked" @change="onSwitchChange" />
 					</view>
 				</slot>
@@ -52,6 +52,7 @@
  * 	@value 	 sm			小图
  * @property {String} 	badgeText						数字角标内容
  * @property {String} 	badgeType 						数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
+ * @property {Object}   badgeStyle                      数字角标样式
  * @property {String} 	rightText 						右侧文字内容
  * @property {Boolean} 	disabled = [true|false]			是否禁用
  * @property {Boolean} 	clickable = [true|false] 		是否开启点击反馈
@@ -130,6 +131,12 @@ export default {
 		badgeType: {
 			type: String,
 			default: 'success'
+		},
+		badgeStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
 		},
 		rightText: {
 			type: String,
