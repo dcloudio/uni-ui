@@ -41,7 +41,7 @@
 |max-num				|String/Numbuer|99	|展示封顶的数字值，超过 99 显示99+					|		
 |custom-style	|Object	|		{}		|自定义 Badge 样式, 样式对象语法																																|
 |inverted			|Boolean|false	|是否无需背景颜色，为 true 时，背景颜色将变为文字的字体颜色																			|
-|absolute			|String|	rightTop|开启绝对定位, 角标将定位到其包裹的标签的四个角上，可选值： rightTop(右上角)、rightBottom（右下角）、leftBottom（左下角）	、leftTop（左上角）	|
+|absolute	(不支持 nvue)	|String|	rightTop|开启绝对定位, 角标将定位到其包裹的标签的四个角上，可选值： rightTop(右上角)、rightBottom（右下角）、leftBottom（左下角）	、leftTop（左上角）	|
 |offset			|Array[number]|	[0, 0]|距定位角中心点的偏移量，[-10, -10] 表示向 absolute 指定的方向偏移 10px，[10, 10] 表示向 absolute 指定的反方向偏移 10px，只有存在 absolute 属性时有效，与absolute 的值一一对应（例如：值为rightTop， 对应 offset 为 [right, Top]）|
 
 ### Badge Events
