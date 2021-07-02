@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 const ERR_MSG_OK = 'chooseAndUploadFile:ok';
 const ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
 function chooseImage(opts) {
-    const { count, sizeType, sourceType, extension } = opts;
+		const { count, sizeType, sourceType = ['album', 'camera'], extension } = opts
     return new Promise((resolve, reject) => {
         uni.chooseImage({
             count,
@@ -24,7 +24,7 @@ function chooseImage(opts) {
     });
 }
 function chooseVideo(opts) {
-    const { camera, compressed, maxDuration, sourceType, extension } = opts;
+    const { camera, compressed, maxDuration, sourceType = ['album', 'camera'], extension } = opts;
     return new Promise((resolve, reject) => {
         uni.chooseVideo({
             camera,
