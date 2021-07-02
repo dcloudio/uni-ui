@@ -205,7 +205,6 @@ export default {
 				if(this.labelWid && this.labelWid !=='auto') {
 					this.labelWid +='px'
 				}
-				console.log(this.labelWid);
 				// this.labelWid = (this.labelWidth ? this.labelWidth : labelWidth) + 'px'
 				// this.labelWid = this.label ? (this.labelWidth ? this.labelWidth : labelWidth) : 0;
 				this.labelAli = this.labelAlign ? this.labelAlign : labelAlign;

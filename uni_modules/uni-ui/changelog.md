@@ -1,3 +1,14 @@
+## 1.3.5（2021-07-02）
+- uni-card 优化 图文卡片无图片加载时，提供占位图标
+- uni-card 新增 header 插槽，自定义卡片头部（ 图文卡片 mode="style" 时，不支持）
+- uni-card 修复 thumbnail 不存在仍然占位的 bug
+- uni-data-checkbox 修复 selectedTextColor 属性不生效的Bug
+- uni-datetime-picker 优化 添加 uni-icons 依赖
+- uni-easyinput 修复 confirmType 属性（仅 type="text" 生效）导致多行文本框无法换行的 bug
+- uni-file-picker 修复 由 0.0.10 版本引发的 returnType 属性失效的问题
+- uni-file-picker 优化 文件上传后进度条消失时机
+- uni-file-picker 修复 在uni-forms 中，删除文件 ，获取的值不对的Bug
+- uni-forms 修复 pattern 属性在微信小程序平台无效的问题
 ## 1.3.4（2021-06-25）
 - uni-badge 优化 示例项目
 - uni-countdown 修复 uni-countdown 重复赋值跳两秒的 bug

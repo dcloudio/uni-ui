@@ -7,6 +7,40 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.5" date="2021-07-02">
+	<log-item title="uni-card 组件更新">
+		<log-item-text tag-type="perf">
+			 图文卡片无图片加载时，提供占位图标
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 header 插槽，自定义卡片头部（ 图文卡片 mode="style" 时，不支持）
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 thumbnail 不存在仍然占位的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 selectedTextColor 属性不生效的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 添加 uni-icons 依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 confirmType 属性（仅 type="text" 生效）导致多行文本框无法换行的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 pattern 属性在微信小程序平台无效的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.4" date="2021-06-25">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="perf">

@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "基于 uni-app 的 UI 组件库",
   "keywords": [
     "uni-ui",

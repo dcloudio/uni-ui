@@ -59,6 +59,7 @@
 	 * @property {Boolean} selectedColor 选中颜色
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {Boolean} selectedTextColor 选中文本颜色，如不填写则自动显示
+	 * @property {Object} map 字段映射， 默认 map={text:'text',value:'value'}
 	 * @value left 左侧显示
 	 * @value right 右侧显示
 	 * @event {Function} change  选中发生变化触发
@@ -108,11 +109,11 @@
 			},
 			selectedColor: {
 				type: String,
-				default: '#007aff'
+				default: ''
 			},
 			selectedTextColor: {
 				type: String,
-				default: '#333'
+				default: ''
 			},
 			emptyText:{
 				type: String,
@@ -385,13 +386,20 @@
 				let classles = ''
 				// if (item.selected) {
 					// if (this.selectedTextColor) {
-					// 	styles.color = item.selected?this.selectedTextColor:'#999'
+					// 	if (this.mode === 'tag') {
+					// 		styles.color = item.selected?this.selectedTextColor:'#333'
+						
+					// 	} else {
+					// 		styles.color = item.selected?this.selectedTextColor:'#333'
+					// 	}
+					// 	if(!item.selected && item.disabled){
+					// 		styles.color = '#999'
+					// 	}
 					// } else {
 						if (this.mode === 'tag') {
-							styles.color = item.selected?'#fff':'#333'
-
+							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
 						} else {
-							styles.color = item.selected?this.selectedColor:'#333'
+							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:this.selectedColor):'#333'
 						}
 						if(!item.selected && item.disabled){
 							styles.color = '#999'
