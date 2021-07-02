@@ -102,6 +102,8 @@
 	 * @property {String} type 选择器类型
 	 * @property {String|Array} value 绑定值
 	 * @property {String} placeholder 单选择时的占位内容
+	 * @property {String} start 起始时间
+	 * @property {String} start 终止时间
 	 * @property {String} start-placeholder 范围选择时开始日期的占位内容
 	 * @property {String} end-placeholder 范围选择时结束日期的占位内容
 	 * @property {String} range-separator 选择范围时的分隔符

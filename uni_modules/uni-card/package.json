@@ -1,7 +1,7 @@
 {
   "id": "uni-card",
   "displayName": "uni-card 卡片",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Card 组件，提供常见的卡片样式。",
   "keywords": [
     "uni-ui",
@@ -41,7 +41,9 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": [
+			"uni-icons"
+		],
     "encrypt": [],
     "platforms": {
       "cloud": {
