@@ -310,7 +310,7 @@
 							}
 						}
 					}
-					this.setStyles(item, index)
+					this.setStyles(item, index)  
 					list[index] = item
 				})
 				return list
@@ -326,7 +326,6 @@
 				item.styleIcon = this.setStyleIcon(item)
 				item.styleIconText = this.setStyleIconText(item)
 				item.styleRightIcon = this.setStyleRightIcon(item)
-
 			},
 
 			/**
@@ -349,14 +348,13 @@
 			 */
 			setStyleBackgroud(item) {
 				let styles = {}
-				// if (item.selected) {
-					if (this.mode !== 'list') {
-						styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
-					}
-					if (this.mode === 'tag') {
-						styles['background-color'] = item.selected? this.selectedColor:'#f5f5f5'
-					}
-				// }
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff'
+				if (this.mode !== 'list') {
+					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
+				}
+				if (this.mode === 'tag') {
+					styles['background-color'] = item.selected? selectedColor:'#f5f5f5'
+				}
 				let classles = ''
 				for (let i in styles) {
 					classles += `${i}:${styles[i]};`
@@ -366,69 +364,51 @@
 			setStyleIcon(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					styles['background-color'] = item.selected?this.selectedColor:'#fff'
-					styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff' 
+				styles['background-color'] = item.selected?selectedColor:'#fff'
+				styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 
-					if(!item.selected && item.disabled){
-						styles['background-color'] = '#F2F6FC'
-						styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
-					}
+				if(!item.selected && item.disabled){
+					styles['background-color'] = '#F2F6FC'
+					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
+				}
 
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
+				console.log(classles);
 				return classles
 			},
 			setStyleIconText(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					// if (this.selectedTextColor) {
-					// 	if (this.mode === 'tag') {
-					// 		styles.color = item.selected?this.selectedTextColor:'#333'
-						
-					// 	} else {
-					// 		styles.color = item.selected?this.selectedTextColor:'#333'
-					// 	}
-					// 	if(!item.selected && item.disabled){
-					// 		styles.color = '#999'
-					// 	}
-					// } else {
-						if (this.mode === 'tag') {
-							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
-						} else {
-							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:this.selectedColor):'#333'
-						}
-						if(!item.selected && item.disabled){
-							styles.color = '#999'
-						}
-					// }
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
-
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff'
+				if (this.mode === 'tag') {
+					styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
+				} else {
+					styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:selectedColor):'#333'
+				}
+				if(!item.selected && item.disabled){
+					styles.color = '#999'
+				}
+				
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
 				return classles
 			},
 			setStyleRightIcon(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					if (this.mode === 'list') {
-						styles['border-color'] = item.selected?this.styles.selectedColor:'#DCDFE6'
-					}
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
+				if (this.mode === 'list') {
+					styles['border-color'] = item.selected?this.styles.selectedColor:'#DCDFE6'
+				}
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
 
 				return classles
 			}
-			// setColor(){
-			// 	return
-			// }
 		}
 	}
 </script>
@@ -478,7 +458,6 @@
 
 				.hidden {
 					position: absolute;
-					// transform: scale(0);
 					opacity: 0;
 				}
 
@@ -496,15 +475,16 @@
 						line-height: 14px;
 					}
 
-					// .list-content {
-					// 	margin-left: 15px;
-					// }
 					.checkobx__list {
-						border: 1px solid #fff;
-						border-left: 0;
-						border-top: 0;
-						height: 12px;
+						border-right-width: 1px;
+						border-right-color: #007aff;
+						border-right-style: solid;
+						border-bottom-width:1px;
+						border-bottom-color: #007aff; 
+						border-bottom-style: solid;
+						height: 12px; 
 						width: 6px;
+						left: -5px;
 						transform-origin: center;
 						transform: rotate(45deg);
 						opacity: 0;
@@ -535,9 +515,12 @@
 						left: 5px;
 						height: 8px;
 						width: 4px;
-						border: 1px solid #fff;
-						border-left: 0;
-						border-top: 0;
+						border-right-width: 1px;
+						border-right-color: #fff;
+						border-right-style: solid;
+						border-bottom-width:1px ;
+						border-bottom-color: #fff;
+						border-bottom-style: solid;
 						opacity: 0;
 						transform-origin: center;
 						transform: rotate(40deg);
@@ -616,12 +599,15 @@
 							color: $checked-color;
 						}
 						// 选中禁用
-						&.is-disable {
+						&.is-disable { 
 							.checkbox__inner {
 								opacity: $disable;
 							}
 
 							.checklist-text {
+								opacity: $disable;
+							}
+							.radio__inner {
 								opacity: $disable;
 							}
 						}
@@ -723,7 +709,7 @@
 						}
 					}
 				}
-
+				// 列表样式
 				&.is--list {
 					/* #ifndef APP-NVUE */
 					display: flex;
