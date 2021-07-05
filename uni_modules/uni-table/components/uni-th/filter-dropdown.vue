@@ -1,7 +1,8 @@
 <template>
 	<view class="uni-filter-dropdown">
 		<view class="dropdown-btn" @click="onDropdown">
-			<view class="icon-select" :class="{active: canReset}" v-if="filterType == 'select'"></view>
+			<view class="icon-select" :class="{active: canReset}"
+				v-if="filterType == 'select' || filterType == 'range'"></view>
 			<view class="icon-search" :class="{active: canReset}" v-if="filterType == 'search'">
 				<view class="icon-search-0"></view>
 				<view class="icon-search-1"></view>
@@ -9,6 +10,7 @@
 		</view>
 		<view class="uni-dropdown-cover" v-if="isOpened" @click="handleClose"></view>
 		<view class="dropdown-popup dropdown-popup-right" v-if="isOpened" @click.stop>
+			<!-- select-->
 			<view v-if="isSelect" class="list">
 				<label class="flex-r a-i-c list-item" v-for="(item,index) in dataList" :key="index"
 					@click="onItemClick($event, index)">
@@ -19,17 +21,32 @@
 				</label>
 			</view>
 			<view v-if="isSelect" class="flex-r opera-area">
-				<view class="flex-f btn btn-default" :class="{disable: !canReset}" @click="handleSelectReset">{{resource.reset}}</view>
+				<view class="flex-f btn btn-default" :class="{disable: !canReset}" @click="handleSelectReset">
+					{{resource.reset}}</view>
 				<view class="flex-f btn btn-submit" @click="handleSelectSubmit">{{resource.submit}}</view>
 			</view>
+			<!-- search -->
 			<view v-if="isSearch" class="search-area">
 				<input class="search-input" v-model="filterValue" />
 			</view>
 			<view v-if="isSearch" class="flex-r opera-area">
 				<view class="flex-f btn btn-submit" @click="handleSearchSubmit">{{resource.search}}</view>
-				<view class="flex-f btn btn-default":class="{disable: !canReset}" @click="handleSearchReset">{{resource.reset}}
-				</view>
+				<view class="flex-f btn btn-default" :class="{disable: !canReset}" @click="handleSearchReset">
+					{{resource.reset}}</view>
 			</view>
+			<!-- range -->
+			<view v-if="isRange">
+				<view class="input-label">{{resource.gt}}</view>
+				<input class="input" v-model="gtValue" />
+				<view class="input-label">{{resource.lt}}</view>
+				<input class="input" v-model="ltValue" />
+			</view>
+			<view v-if="isRange" class="flex-r opera-area">
+				<view class="flex-f btn btn-default" :class="{disable: !canReset}" @click="handleRangeReset">
+					{{resource.reset}}</view>
+				<view class="flex-f btn btn-submit" @click="handleRangeSubmit">{{resource.submit}}</view>
+			</view>
+			<!-- date -->
 		</view>
 	</view>
 </template>
@@ -41,12 +58,16 @@
 		"reset": "重置",
 		"search": "搜索",
 		"submit": "确定",
-		"filter": "筛选"
+		"filter": "筛选",
+		"gt": "大于等于",
+		"lt": "小于等于"
 	}
 
 	const DropdownType = {
 		Select: "select",
-		Search: "search"
+		Search: "search",
+		Range: "range",
+		Date: "date"
 	}
 
 	export default {
@@ -83,12 +104,6 @@
 			}
 		},
 		computed: {
-			isSelect() {
-				return this.filterType === DropdownType.Select
-			},
-			isSearch() {
-				return this.filterType === DropdownType.Search
-			},
 			canReset() {
 				if (this.isSearch) {
 					return this.filterValue.length > 0
@@ -96,7 +111,22 @@
 				if (this.isSelect) {
 					return this.checkedValues.length > 0
 				}
+				if (this.isRange) {
+					return (this.gtValue.length > 0 && this.ltValue.length > 0)
+				}
 				return false
+			},
+			isSelect() {
+				return this.filterType === DropdownType.Select
+			},
+			isSearch() {
+				return this.filterType === DropdownType.Search
+			},
+			isRange() {
+				return this.filterType === DropdownType.Range
+			},
+			isDate() {
+				return this.filterType === DropdownType.Date
 			}
 		},
 		watch: {
@@ -114,7 +144,9 @@
 				isOpened: false,
 				dataList: [],
 				filterValue: '',
-				checkedValues: []
+				checkedValues: [],
+				gtValue: '',
+				ltValue: ''
 			};
 		},
 		created() {
@@ -163,6 +195,7 @@
 			handleSelectSubmit() {
 				this.closePopup()
 				this.$emit('change', {
+					filterType: this.filterType,
 					filter: this.checkedValues
 				})
 			},
@@ -181,6 +214,7 @@
 			handleSearchSubmit() {
 				this.closePopup()
 				this.$emit('change', {
+					filterType: this.filterType,
 					filter: this.filterValue
 				})
 			},
@@ -190,6 +224,21 @@
 				}
 				this.filterValue = ''
 				this.handleSearchSubmit()
+			},
+			handleRangeSubmit(isReset) {
+				this.closePopup()
+				this.$emit('change', {
+					filterType: this.filterType,
+					filter: isReset === true ? [] : [parseInt(this.gtValue), parseInt(this.ltValue)]
+				})
+			},
+			handleRangeReset() {
+				if (!this.canReset) {
+					return;
+				}
+				this.gtValue = ''
+				this.ltValue = ''
+				this.handleRangeSubmit(true)
 			}
 		}
 	}
@@ -317,6 +366,22 @@
 	.search-input {
 		font-size: 12px;
 		border: 1px solid #f0f0f0;
+		border-radius: 3px;
+		padding: 2px 5px;
+		min-width: 150px;
+		text-align: left;
+	}
+
+	.input-label {
+		margin: 10px 10px 5px 10px;
+		text-align: left;
+	}
+
+	.input {
+		font-size: 12px;
+		border: 1px solid #f0f0f0;
+		border-radius: 3px;
+		margin: 10px;
 		padding: 2px 5px;
 		min-width: 150px;
 		text-align: left;
@@ -338,6 +403,7 @@
 	.btn-default {
 		border: 1px solid #ddd;
 	}
+
 	.btn-default.disable {
 		border-color: transparent;
 	}
