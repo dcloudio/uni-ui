@@ -17,6 +17,10 @@
 		<view class="example-body">
 			<uni-datetime-picker v-model="single" />
 		</view>
+		<uni-section :title="'插槽用法：' + single" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker v-model="single">我是一个插槽，点击我</uni-datetime-picker>
+		</view>
 		<uni-section :title="'无边框用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker v-model="single" :border="false" />

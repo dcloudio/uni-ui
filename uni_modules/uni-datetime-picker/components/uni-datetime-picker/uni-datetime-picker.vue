@@ -1,30 +1,34 @@
 <template>
 	<view class="uni-date">
-		<view class="uni-date-editor--x" :class="{'uni-date-editor--x__disabled': disabled,
+		<view @click="show">
+			<slot>
+				<view class="uni-date-editor--x" :class="{'uni-date-editor--x__disabled': disabled,
 		'uni-date-x--border': border}">
-			<view v-if="!isRange" class="uni-date-x uni-date-single" @click="show">
-				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+					<view v-if="!isRange" class="uni-date-x uni-date-single">
+						<view class="uni-date__icon-logo">
+							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+						</view>
+						<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
+							:disabled="true" />
+					</view>
+					<view v-else class="uni-date-x uni-date-range">
+						<view class="uni-date__icon-logo">
+							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+						</view>
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
+							:placeholder="startPlaceholder" :disabled="true" />
+						<slot>
+							<view class="">{{rangeSeparator}}</view>
+						</slot>
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
+							:placeholder="endPlaceholder" :disabled="true" />
+					</view>
+					<view v-show="!disabled && (singleVal || (range.startDate && range.endDate))"
+						class="uni-date__icon-clear" @click="clear">
+						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
+					</view>
 				</view>
-				<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
-					:disabled="true" />
-			</view>
-			<view v-else class="uni-date-x uni-date-range" @click="show">
-				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
-				</view>
-				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
-					:placeholder="startPlaceholder" :disabled="true" />
-				<slot>
-					<view class="">{{rangeSeparator}}</view>
-				</slot>
-				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
-					:placeholder="endPlaceholder" :disabled="true" />
-			</view>
-			<view v-show="!disabled && (singleVal || (range.startDate && range.endDate))" class="uni-date__icon-clear"
-				@click="clear">
-				<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
-			</view>
+			</slot>
 		</view>
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
@@ -113,7 +117,7 @@
 	 **/
 
 	export default {
-		name:'UniDatetimePicker',
+		name: 'UniDatetimePicker',
 		components: {
 			calendar,
 			timePicker
@@ -820,5 +824,4 @@
 	.mr-50 {
 		margin-right: 50px;
 	}
-
 </style>
