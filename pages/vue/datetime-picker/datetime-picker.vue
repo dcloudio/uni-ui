@@ -3,7 +3,7 @@
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" :value="single" start="2021-3-20" end="2021-6-20" @change="change" />
+			<uni-datetime-picker type="date" :value="single" start="2021-3-20" end="2021-6-20" @change="change" @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'时间戳用法：' + single" type="line"></uni-section>
 		<view class="example-body">
@@ -36,8 +36,7 @@
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimerange + ']' " type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="datetimerange" type="datetimerange"
-				start="2021-3-20 12:00:00" end="2021-6-20 20:00:00" rangeSeparator="至" />
+			<uni-datetime-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
 		</view>
 	</view>
 </template>
@@ -78,6 +77,9 @@
 			},
 			changeLog(e) {
 				console.log('----change事件:', e);
+			},
+			maskClick(e){
+				console.log('----maskClick事件:', e);
 			}
 		}
 	}

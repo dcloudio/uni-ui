@@ -394,6 +394,7 @@
 				setTimeout(() => {
 					this.popup = false
 					// this.visible = true
+					this.$emit('maskClick', this.value)
 				}, 20)
 			},
 			setEmit(value) {
@@ -575,8 +576,8 @@
 					this.$refs.right.cale.lastHover = false
 					this.$refs.right.setDate()
 					this.$refs.right.next()
-					this.$emit('change', ['', ''])
-					this.$emit('input', ['', ''])
+					this.$emit('change', [])
+					this.$emit('input', [])
 				}
 				// if (this.popup) this.popup = false
 			},

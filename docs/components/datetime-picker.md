@@ -129,7 +129,7 @@ ___点击 picker 默认值规则：___
 |value						|String、Number、Array(范围选择)|-				|-																		|输入框当前值																							|
 |start						|String、Number	|-				|-																		|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end							|String、Number	|-				|-																		|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
-|return-type			|String					|timestamp|timestamp 、string										|返回值格式																								|
+|return-type			|String					|string|timestamp 、string										|返回值格式																								|
 |border						|Boolean、String|true			|																			|是否有边框																								|
 |rangeSeparator		|String					|'-'			|-																		|选择范围时的分隔符																				|
 |placeholder			|String					|-				|-																		|非范围选择时的占位内容																		|
@@ -145,3 +145,11 @@ ___点击 picker 默认值规则：___
 |事件名称	|说明												|返回值	|
 |:-:		|:-:												|:-:	|
 |change		|确定日期时间时触发的事件，参数为当前选择的日期对象	|	单选返回日期字符串，如：'2010-02-3'；范围选返回日期字符串数组，如：['2020-10-1',  '2021-4-1']	|
+|maskClick|点击遮罩层触发|-|
+
+### Popup Methods
+
+|方法称名	|说明|参数|
+|:-:|:-:|:-:|
+|show|打开弹出层|-|
+|close|关闭弹出层	|-|
