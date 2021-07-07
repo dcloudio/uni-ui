@@ -21,7 +21,7 @@
 			date: {
 				type: [Object, String, Number],
 				default () {
-					return Date.now()
+					return '-'
 				}
 			},
 			locale: {
