@@ -155,7 +155,7 @@
 
 	.uni-calendar-item--multiple .uni-calendar-item--before-checked {
 		background-color: #409eff;
-		color: #fff;
+		color: #fff !important;
 		// border-radius: 50%;
 		box-sizing: border-box;
 		border: 6px solid #f2f6fc;
@@ -163,7 +163,7 @@
 
 	.uni-calendar-item--multiple .uni-calendar-item--after-checked {
 		background-color: #409eff;;
-		color: #fff;
+		color: #fff !important;
 		// border-radius: 50%;
 		box-sizing: border-box;
 		border: 6px solid #f2f6fc;

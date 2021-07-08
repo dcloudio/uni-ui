@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-date">
-		<view @click="show">
+		<view class="uni-date-editor" @click="show">
 			<slot>
 				<view class="uni-date-editor--x" :class="{'uni-date-editor--x__disabled': disabled,
 		'uni-date-x--border': border}">
@@ -327,6 +327,10 @@
 					start: this.caleRange.startTime,
 					end: this.caleRange.endTime
 				}
+			},
+			datePopupWidth() {
+				// todo
+				return this.isRange ? 653 : 301
 			}
 		},
 		mounted() {
@@ -370,20 +374,12 @@
 				this.popover = {
 					top: '10px'
 				}
-				// const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
-				// dateEditor.boundingClientRect(rect => {
-				// 	console.log(22222222, rect);
-				// 	if (leftWindowInfo.errMsg) {
-				// 		left = rect.left + 'px'
-				// 	} else {
-				// 		left = '15px'
-				// 	}
-				// 	this.popover = {
-				// 		// top: rect.top + rect.height + 15 + 'px',
-				// 		top: '40px',
-				// 		left: 0,
-				// 	}
-				// }).exec()
+				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor")
+				dateEditor.boundingClientRect(rect => {
+					if (systemInfo.windowWidth - rect.left < this.datePopupWidth) {
+						this.popover.left = `${systemInfo.windowWidth - rect.left - this.datePopupWidth - 20}px`
+					}
+				}).exec()
 				setTimeout(() => {
 					this.popup = !this.popup
 					// this.visible = true
@@ -453,7 +449,6 @@
 					fulldate: e.fulldate
 				}
 				this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, obj)
-				// console.log('startMultipleStatus 返回:', this.startMultipleStatus)
 			},
 
 			rightChange(e) {
@@ -469,7 +464,6 @@
 					fulldate: e.fulldate
 				}
 				this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, obj)
-				// console.log('endMultipleStatus 返回:', this.endMultipleStatus)
 			},
 
 			mobileChange(e) {
@@ -712,8 +706,8 @@
 		padding: 0 8px;
 		background-color: #fff;
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: 110;
+		left: 110;
 		z-index: 999;
 		/* width: 733px; */
 		border: 1px solid #e4e7ed;
