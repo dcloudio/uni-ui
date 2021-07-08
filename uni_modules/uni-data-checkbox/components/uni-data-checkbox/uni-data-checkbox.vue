@@ -376,7 +376,6 @@
 				for (let i in styles) {
 					classles += `${i}:${styles[i]};`
 				}
-				console.log(classles);
 				return classles
 			},
 			setStyleIconText(item) {
