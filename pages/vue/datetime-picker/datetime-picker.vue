@@ -31,8 +31,7 @@
 		</view>
 		<uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="range" type="daterange" start="2021-3-20" end="2021-5-20"
-				rangeSeparator="至" />
+			<uni-datetime-picker v-model="range" type="daterange" rangeSeparator="至" />
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimerange + ']' " type="line"></uni-section>
 		<view class="example-body">
@@ -47,8 +46,8 @@
 			return {
 				single: '2021-04-3',
 				datetimesingle: '2021-04-3',
-				range: ['2021-03-8', '2021-4-20'],
-				datetimerange: ['2021-03-20 20:10:10', '2021-05-10 10:10:10'],
+				range: ['2021-02-1', '2021-2-28'],
+				datetimerange: [],
 			}
 		},
 
@@ -67,6 +66,7 @@
 			setTimeout(() => {
 				this.datetimesingle = '2021-5-1'
 				this.single = '2021-5-1'
+				this.datetimerange = ["2021-07-08 0:00:00", "2021-08-08 23:59:59"]
 			},1000)
 		},
 

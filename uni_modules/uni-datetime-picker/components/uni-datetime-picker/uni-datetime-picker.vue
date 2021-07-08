@@ -247,13 +247,26 @@
 							this.time = defTime
 						}
 					} else {
-						if (oldVal) return // 只初始默认值
+						// if (oldVal) return // 只初始默认值
 						const [before, after] = newVal
 						if (!before && !after) return
 						const defBefore = this.parseDate(before)
 						const defAfter = this.parseDate(after)
-						this.range.startDate = this.tempRange.startDate = defBefore.defDate
-						this.range.endDate = this.tempRange.endDate = defAfter.defDate
+						const startDate = defBefore.defDate
+						const endDate = defAfter.defDate
+						this.range.startDate = this.tempRange.startDate = startDate
+						this.range.endDate = this.tempRange.endDate = endDate
+
+						setTimeout(() => {
+							if(startDate && endDate){
+								if (this.diffDate(startDate, endDate) < 30){
+									this.$refs.right.next()
+								}
+							} else {
+								this.$refs.right.next()
+								this.$refs.right.cale.lastHover = false
+							}
+						}, 100)
 
 						if (this.hasTime) {
 							this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
@@ -333,17 +346,7 @@
 				return this.isRange ? 653 : 301
 			}
 		},
-		mounted() {
-			if (this.isRange) {
-				if (!Array.isArray(this.value)) return
-				const [before, after] = this.value
-				if (before && after) return
-				setTimeout(() => {
-					this.$refs.right.next()
-					this.$refs.right.cale.lastHover = false
-				}, 20)
-			}
-		},
+		
 		methods: {
 			updateLeftCale(e) {
 				// console.log('----updateStartCale:', e);
@@ -359,9 +362,7 @@
 				right.cale.setHoverMultiple(e.after)
 				right.setDate(this.$refs.right.nowDate.fullDate)
 			},
-			getRef() {
-				this.$refs.left.pre()
-			},
+
 			show(event) {
 				if (this.disabled) {
 					return
@@ -546,6 +547,18 @@
 				} else {
 					return false
 				}
+			},
+
+			/**
+			 * 比较时间差
+			 */
+			diffDate(startDate, endDate) {
+				// 计算截止时间
+				startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
+				// 计算详细项的截止时间
+				endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
+				const diff = (endDate - startDate) / (24 * 60 * 60 * 1000)
+				return Math.abs(diff)
 			},
 
 			clear() {
