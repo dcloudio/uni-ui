@@ -377,7 +377,7 @@
 				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor")
 				dateEditor.boundingClientRect(rect => {
 					if (systemInfo.windowWidth - rect.left < this.datePopupWidth) {
-						this.popover.left = `${systemInfo.windowWidth - rect.left - this.datePopupWidth - 20}px`
+						this.popover.right = 0
 					}
 				}).exec()
 				setTimeout(() => {
@@ -694,9 +694,7 @@
 		/* padding: 0 8px; */
 		position: absolute;
 		top: 0;
-		left: 0;
 		z-index: 999;
-		/* width: 375px; */
 		border: 1px solid #e4e7ed;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
@@ -706,10 +704,8 @@
 		padding: 0 8px;
 		background-color: #fff;
 		position: absolute;
-		top: 110;
-		left: 110;
+		top: 0;
 		z-index: 999;
-		/* width: 733px; */
 		border: 1px solid #e4e7ed;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
