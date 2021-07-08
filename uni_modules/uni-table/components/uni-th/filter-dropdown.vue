@@ -1,11 +1,14 @@
 <template>
 	<view class="uni-filter-dropdown">
 		<view class="dropdown-btn" @click="onDropdown">
-			<view class="icon-select" :class="{active: canReset}"
-				v-if="filterType == 'select' || filterType == 'range'"></view>
-			<view class="icon-search" :class="{active: canReset}" v-if="filterType == 'search'">
+			<view class="icon-select" :class="{active: canReset}" v-if="isSelect || isRange"></view>
+			<view class="icon-search" :class="{active: canReset}" v-if="isSearch">
 				<view class="icon-search-0"></view>
 				<view class="icon-search-1"></view>
+			</view>
+			<view class="icon-calendar" :class="{active: canReset}" v-if="isDate">
+				<view class="icon-calendar-0"></view>
+				<view class="icon-calendar-1"></view>
 			</view>
 		</view>
 		<view class="uni-dropdown-cover" v-if="isOpened" @click="handleClose"></view>
@@ -47,6 +50,11 @@
 				<view class="flex-f btn btn-submit" @click="handleRangeSubmit">{{resource.submit}}</view>
 			</view>
 			<!-- date -->
+			<view v-if="isDate">
+				<uni-datetime-picker ref="datetimepicker" :value="dateRange" type="datetimerange" return-type="timestamp" @change="datetimechange" @maskClick="timepickerclose">
+					<view></view>
+				</uni-datetime-picker>
+			</view>
 		</view>
 	</view>
 </template>
@@ -60,14 +68,16 @@
 		"submit": "确定",
 		"filter": "筛选",
 		"gt": "大于等于",
-		"lt": "小于等于"
+		"lt": "小于等于",
+		"date": "日期范围"
 	}
 
 	const DropdownType = {
 		Select: "select",
 		Search: "search",
 		Range: "range",
-		Date: "date"
+		Date: "date",
+		Timestamp: "timestamp"
 	}
 
 	export default {
@@ -114,6 +124,9 @@
 				if (this.isRange) {
 					return (this.gtValue.length > 0 && this.ltValue.length > 0)
 				}
+				if (this.isDate) {
+					return this.dateSelect.length > 0
+				}
 				return false
 			},
 			isSelect() {
@@ -126,7 +139,7 @@
 				return this.filterType === DropdownType.Range
 			},
 			isDate() {
-				return this.filterType === DropdownType.Date
+				return (this.filterType === DropdownType.Date || this.filterType === DropdownType.Timestamp)
 			}
 		},
 		watch: {
@@ -146,7 +159,9 @@
 				filterValue: '',
 				checkedValues: [],
 				gtValue: '',
-				ltValue: ''
+				ltValue: '',
+				dateRange: [],
+				dateSelect: []
 			};
 		},
 		created() {
@@ -164,12 +179,25 @@
 			},
 			openPopup() {
 				this.isOpened = true
+				if (this.isDate) {
+					this.$nextTick(() => {
+						if (!this.dateRange.length) {
+							this.resetDate()
+						}
+						this.$refs.datetimepicker.show()
+					})
+				}
 			},
 			closePopup() {
 				this.isOpened = false
 			},
 			handleClose(e) {
 				this.closePopup()
+			},
+			resetDate() {
+				let date = new Date()
+				let dateText = date.toISOString().split('T')[0]
+				this.dateRange = [dateText + ' 0:00:00', dateText + ' 23:59:59']
 			},
 			onDropdown(e) {
 				this.openPopup()
@@ -191,6 +219,18 @@
 					}
 				}
 				this.checkedValues = checkvalues
+			},
+			datetimechange(e) {
+				this.closePopup()
+				this.dateRange = e
+				this.dateSelect = e
+				this.$emit('change', {
+					filterType: this.filterType,
+					filter: e
+				})
+			},
+			timepickerclose(e) {
+				this.closePopup()
 			},
 			handleSelectSubmit() {
 				this.closePopup()
@@ -306,6 +346,53 @@
 	}
 
 	.icon-search.active .icon-search-1 {
+		background-color: #1890ff;
+	}
+
+	.icon-calendar {
+		color: #ddd;
+		width: 14px;
+		height: 16px;
+	}
+
+	.icon-calendar-0 {
+		height: 4px;
+		margin-top: 3px;
+		margin-bottom: 1px;
+		background-color: #ddd;
+		border-radius: 2px 2px 1px 1px;
+		position: relative;
+	}
+	.icon-calendar-0:before, .icon-calendar-0:after {
+		content: '';
+		position: absolute;
+		top: -3px;
+		width: 4px;
+		height: 3px;
+		border-radius: 1px;
+		background-color: #ddd;
+	}
+	.icon-calendar-0:before {
+		left: 2px;
+	}
+	.icon-calendar-0:after {
+		right: 2px;
+	}
+
+	.icon-calendar-1 {
+		height: 9px;
+		background-color: #ddd;
+		border-radius: 1px 1px 2px 2px;
+	}
+
+	.icon-calendar.active {
+		color: #1890ff;
+	}
+
+	.icon-calendar.active .icon-calendar-0,
+	.icon-calendar.active .icon-calendar-1,
+	.icon-calendar.active .icon-calendar-0:before,
+	.icon-calendar.active .icon-calendar-0:after {
 		background-color: #1890ff;
 	}
 
