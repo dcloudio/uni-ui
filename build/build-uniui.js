@@ -19,12 +19,12 @@ function buildChangeLog(callback) {
 			id,
 			version
 		} = item
-
 		if (version !== syncVersionsData[id]) {
 			let changelog = path.join(modulesPath, id, 'changelog.md')
 			// let  = readChangelogFile(changelog)
 			let changeMd = fs.readFileSync(changelog).toString()
 			const mds = versionAll(changeMd, syncVersionsData[id])
+
 			let content = ''
 			mds.forEach(md => {
 				md = md.replace(/- /g, `- ${id} `).trim()
@@ -298,13 +298,13 @@ function compareVersion(a, b) {
 		return false
 	}
 	if (a[0] !== b[0]) {
-		return a[0] >= b[0]
+		return Number(a[0]) >= Number(b[0])
 	}
 	if (a[1] !== b[1]) {
-		return a[1] >= b[1]
+		return Number(a[1]) >= Number(b[1])
 	}
 	if (a[2] !== b[2]) {
-		return a[2] >= b[2]
+		return Number(a[2]) >= Number(b[2])
 	}
 	return false
 }

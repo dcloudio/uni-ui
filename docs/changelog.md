@@ -7,6 +7,102 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.6" date="2021-07-09">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="perf">
+			 删除无用日志
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 由 0.1.9 引起的非 nvue 端图标不显示的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue 黑框样式问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 范围选择不能动态赋值的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围选择的初始时间在一个月内时，造成无法选择的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 弹出层在超出视窗边缘定位不准确的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围起始点样式的背景色与今日样式的字体前景色融合，导致日期字体看不清的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 弹出层在超出视窗边缘被遮盖的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 maskClick 事件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 特殊情况日历 rpx 布局错误的 bug，rpx -> px
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围选择时清空返回值不合理的bug，['', ''] -> []
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 日期时间显示框支持插槽
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 sourceType 缺少默认值导致 ios 无法选择文件
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 解耦与uniCloud的强绑定关系 ，如不绑定服务空间，默认autoUpload为false且不可更改
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="feat">
+			 uni-th 支持 date 日期筛选范围
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-th 支持 range 筛选范围
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-th 筛选功能
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.3.5" date="2021-07-02">
+	<log-item title="uni-card 组件更新">
+		<log-item-text tag-type="perf">
+			 图文卡片无图片加载时，提供占位图标
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 header 插槽，自定义卡片头部（ 图文卡片 mode="style" 时，不支持）
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 thumbnail 不存在仍然占位的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 selectedTextColor 属性不生效的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 添加 uni-icons 依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 confirmType 属性（仅 type="text" 生效）导致多行文本框无法换行的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 pattern 属性在微信小程序平台无效的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.4" date="2021-06-25">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="perf">

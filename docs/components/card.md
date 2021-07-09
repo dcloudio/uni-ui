@@ -98,4 +98,5 @@ url : pages/vue/card/card
 
 |插槽称名	|说明				|
 |:-:		|:-:				|
+|header	|卡片头部插槽（ 图文卡片 mode="style" 时，不支持）|
 |footer	|卡片底部插槽 |

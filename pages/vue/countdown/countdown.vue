@@ -23,7 +23,7 @@
 		</view>
 		<uni-section title="倒计时回调事件" type="line"></uni-section>
 		<view class="example-body">
-			<uni-countdown :show-day="false" :second="10" @timeup="timeup" />
+			<uni-countdown :show-day="false" :second="timeupSecond" @timeup="timeup" />
 		</view>
 		<uni-section title="动态赋值" type="line"></uni-section>
 		<view class="example-body">
@@ -39,7 +39,8 @@
 				testHour: 1,
 				testMinute: 0,
 				testSecond: 0,
-				start: false
+				start: false,
+				timeupSecond: 10
 			}
 		},
 		mounted() {
@@ -58,6 +59,7 @@
 				uni.showToast({
 					title: '时间到'
 				})
+				this.timeupSecond = 29
 			}
 		}
 	}

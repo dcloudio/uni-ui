@@ -28,7 +28,7 @@
 在 ``template`` 中使用组件
 
 ```html
-<uni-group title="分组1" margin-top="20">
+<uni-group title="分组1" top="20">
     <view>分组1 的内容</view>
     <view>分组1 的内容</view>
 </uni-group>

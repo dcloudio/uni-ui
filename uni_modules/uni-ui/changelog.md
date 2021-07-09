@@ -1,3 +1,32 @@
+## 1.3.6（2021-07-09）
+- uni-data-checkbox 优化 删除无用日志
+- uni-data-checkbox 修复 由 0.1.9 引起的非 nvue 端图标不显示的问题
+- uni-data-checkbox 修复 nvue 黑框样式问题
+- uni-datetime-picker 修复 范围选择不能动态赋值的 bug
+- uni-datetime-picker 修复 范围选择的初始时间在一个月内时，造成无法选择的bug
+- uni-datetime-picker 优化 弹出层在超出视窗边缘定位不准确的问题
+- uni-datetime-picker 修复 范围起始点样式的背景色与今日样式的字体前景色融合，导致日期字体看不清的 bug
+- uni-datetime-picker 优化 弹出层在超出视窗边缘被遮盖的问题
+- uni-datetime-picker 新增 maskClick 事件
+- uni-datetime-picker 修复 特殊情况日历 rpx 布局错误的 bug，rpx -> px
+- uni-datetime-picker 修复 范围选择时清空返回值不合理的bug，['', ''] -> []
+- uni-datetime-picker 新增 日期时间显示框支持插槽
+- uni-file-picker 修复 sourceType 缺少默认值导致 ios 无法选择文件
+- uni-file-picker 优化 解耦与uniCloud的强绑定关系 ，如不绑定服务空间，默认autoUpload为false且不可更改
+- uni-table 新增 uni-th 支持 date 日期筛选范围
+- uni-table 新增 uni-th 支持 range 筛选范围
+- uni-table 新增 uni-th 筛选功能
+## 1.3.5（2021-07-02）
+- uni-card 优化 图文卡片无图片加载时，提供占位图标
+- uni-card 新增 header 插槽，自定义卡片头部（ 图文卡片 mode="style" 时，不支持）
+- uni-card 修复 thumbnail 不存在仍然占位的 bug
+- uni-data-checkbox 修复 selectedTextColor 属性不生效的Bug
+- uni-datetime-picker 优化 添加 uni-icons 依赖
+- uni-easyinput 修复 confirmType 属性（仅 type="text" 生效）导致多行文本框无法换行的 bug
+- uni-file-picker 修复 由 0.0.10 版本引发的 returnType 属性失效的问题
+- uni-file-picker 优化 文件上传后进度条消失时机
+- uni-file-picker 修复 在uni-forms 中，删除文件 ，获取的值不对的Bug
+- uni-forms 修复 pattern 属性在微信小程序平台无效的问题
 ## 1.3.4（2021-06-25）
 - uni-badge 优化 示例项目
 - uni-countdown 修复 uni-countdown 重复赋值跳两秒的 bug

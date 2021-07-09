@@ -94,13 +94,13 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 100rpx;
-		height: 100rpx;
+		width: 43px;
+		height: 43px;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */
 	}
-	
+
 
 	.uni-calendar-item__weeks-box-circle {
 		position: absolute;
@@ -142,7 +142,7 @@
 		color: #fff;
 		opacity: 0.8;
 	}
-	
+
 	.uni-calendar-item--multiple .uni-calendar-item--checked-range-text {
 		color: #333;
 	}
@@ -155,7 +155,7 @@
 
 	.uni-calendar-item--multiple .uni-calendar-item--before-checked {
 		background-color: #409eff;
-		color: #fff;
+		color: #fff !important;
 		// border-radius: 50%;
 		box-sizing: border-box;
 		border: 6px solid #f2f6fc;
@@ -163,18 +163,18 @@
 
 	.uni-calendar-item--multiple .uni-calendar-item--after-checked {
 		background-color: #409eff;;
-		color: #fff;
+		color: #fff !important;
 		// border-radius: 50%;
 		box-sizing: border-box;
 		border: 6px solid #f2f6fc;
 	}
-	
+
 	.uni-calendar-item--before-checked-x {
 		// border-top-left-radius: 25px;
 		// border-bottom-left-radius: 25px;
 		background-color: #f2f6fc;
 	}
-	
+
 	.uni-calendar-item--after-checked-x {
 		// border-top-right-radius: 25px;
 		// border-bottom-right-radius: 25px;

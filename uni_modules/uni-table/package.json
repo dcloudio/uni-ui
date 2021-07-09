@@ -1,7 +1,7 @@
 {
   "id": "uni-table",
   "displayName": "uni-table 表格",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "用于展示多条结构类似的数据",
   "keywords": [
     "uni-ui",
@@ -40,7 +40,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": ["uni-datetime-picker"],
     "encrypt": [],
     "platforms": {
       "cloud": {
