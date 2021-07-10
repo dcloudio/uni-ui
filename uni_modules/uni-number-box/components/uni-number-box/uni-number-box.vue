@@ -3,8 +3,9 @@
 		<view @click="_calcValue('minus')" class="uni-numbox__minus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
-		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number"
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" :type="digit ? 'digit' : 'number'"
 			v-model="inputValue" />
+
 		<view @click="_calcValue('plus')" class="uni-numbox__plus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
 		</view>
@@ -20,6 +21,7 @@
 	 * @property {Number} max 最大值
 	 * @property {Number} step 每次点击改变的间隔大小
 	 * @property {Boolean} disabled = [true|false] 是否为禁用状态
+	 * @property {Boolean} digit = [true|false] 键盘是否包含小数点
 	 * @event {Function} change 输入框值改变时触发的事件，参数为输入框当前的 value
 	 */
 
@@ -45,7 +47,11 @@
 			disabled: {
 				type: Boolean,
 				default: false
-			}
+			},
+			digit: {
+				type: Boolean,
+				default: false
+			},
 		},
 		data() {
 			return {
