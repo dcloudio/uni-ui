@@ -13,7 +13,7 @@
 				</uni-forms-item>
 				<uni-forms-item name="email" label="邮箱"><uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput></uni-forms-item>
 				<!-- #ifndef APP-NVUE -->
-					<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker type="date" v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item>
+				<!-- 	<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker type="date" v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item> -->
 					<uni-forms-item name="checked" label="详细信息"><switch :checked="formData.checked" @change="change('checked', $event.detail.value)" /></uni-forms-item>
 				<!-- #endif -->
 			</uni-group>
@@ -152,7 +152,8 @@ export default {
 				sex: {
 					rules: [
 						{
-							format: 'string'
+							required: true,
+							errorMessage: '请选择性别'
 						}
 					]
 				},

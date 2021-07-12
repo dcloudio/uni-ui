@@ -68,10 +68,12 @@
 		<uni-section title="使用插槽" type="line"></uni-section>
 		<uni-list>
 			<uni-list-item>
-				<view v-slot:body class="slot-box">
-					<text class="slot-text">默认插槽</text>
-					<uni-badge text="2" type="primary" />
-				</view>
+				<template v-slot:body>
+					<view  class="slot-box">
+						<text class="slot-text">默认插槽</text>
+						<uni-badge text="2" type="primary" />
+					</view>
+				</template>
 			</uni-list-item>
 			<uni-list-item title="自定义右侧插槽" note="列表描述信息" link>
 				<template v-slot:header>
