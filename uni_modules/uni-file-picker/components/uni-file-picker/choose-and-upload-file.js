@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
+// Object.defineProperty(exports, '__esModule', { value: true });
 
 const ERR_MSG_OK = 'chooseAndUploadFile:ok';
 const ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
@@ -139,4 +139,4 @@ function chooseAndUploadFile(opts = { type: 'all' }) {
     return uploadFiles(chooseAll(opts), opts);
 }
 
-export default chooseAndUploadFile;
+export {chooseAndUploadFile};

@@ -79,9 +79,14 @@
 
 	export default {
 		name: 'uni-easyinput',
+		model:{
+			prop:'modelValue',
+			event:'update:modelValue'
+		},
 		props: {
 			name: String,
 			value: [Number, String],
+			modelValue: [Number, String],
 			type: {
 				type: String,
 				default: 'text'
@@ -145,6 +150,10 @@
 						borderColor: '#e5e5e5'
 					}
 				}
+			},
+			errorMessage:{
+				type:String,
+				default:''
 			}
 		},
 		data() {
@@ -176,6 +185,13 @@
 					this.formItem.setValue(newVal)
 				}
 			},
+			modelValue(newVal) {
+				if (this.errMsg) this.errMsg = ''
+				this.val = newVal
+				if (this.form && this.formItem) {
+					this.formItem.setValue(newVal)
+				}
+			},
 			focus(newVal) {
 				this.$nextTick(() => {
 					this.focused = this.focus
@@ -183,7 +199,12 @@
 			}
 		},
 		created() {
-			this.val = this.value
+			if(!this.value){
+				this.val = this.modelValue
+			}
+			if(!this.modelValue){
+				this.val = this.value
+			}
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			if (this.form && this.formItem) {
@@ -241,7 +262,10 @@
 				};
 				if (this.errMsg) this.errMsg = ''
 				this.val = value
+				// TODO 兼容 vue2
 				this.$emit('input', value);
+				// TODO　兼容　vue3
+				this.$emit('update:modelValue',value)
 			},
 
 			onFocus(event) {
@@ -260,7 +284,11 @@
 			},
 			onClear(event) {
 				this.val = '';
+				// TODO 兼容 vue2
 				this.$emit('input', '');
+				// TODO 兼容 vue2
+				// TODO　兼容　vue3
+				this.$emit('update:modelValue','')
 			},
 			fieldClick() {
 				this.$emit('click');

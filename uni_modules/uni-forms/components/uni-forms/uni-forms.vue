@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// #ifndef VUE3
 import Vue from 'vue';
 Vue.prototype.binddata = function(name, value, formName) {
 	if (formName) {
@@ -22,6 +23,9 @@ Vue.prototype.binddata = function(name, value, formName) {
 		formVm.setValue(name, value);
 	}
 };
+// #endif
+
+
 
 import Validator from './validate.js';
 /**
@@ -126,6 +130,28 @@ export default {
 		}
 	},
 	created() {
+		// #ifdef VUE3
+		let getbinddata = getApp().$vm.$.appContext.config.globalProperties.binddata
+		if(!getbinddata){
+			getApp().$vm.$.appContext.config.globalProperties.binddata = function(name, value, formName){
+				if (formName) {
+					this.$refs[formName].setValue(name, value);
+				} else {
+					let formVm;
+					for (let i in this.$refs) {
+						const vm = this.$refs[i];
+						if (vm && vm.$options && vm.$options.name === 'uniForms') {
+							formVm = vm;
+							break;
+						}
+					}
+					if (!formVm) return console.error('当前 uni-froms 组件缺少 ref 属性');
+					formVm.setValue(name, value);
+				}
+			}
+		}
+		// #endif
+		
 		// 存放watch 监听数组
 		this.unwatchs = [];
 		// 存放子组件数组
@@ -320,7 +346,7 @@ export default {
 				return null;
 			}
 		},
-
+		submitForm(){},
 		/**
 		 * 外部调用方法
 		 * 手动提交校验表单

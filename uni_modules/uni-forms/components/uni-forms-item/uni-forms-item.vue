@@ -180,15 +180,28 @@ export default {
 		}
 		this.init();
 	},
+	// TODO vue2
 	destroyed() {
+		if(this.__isUnmounted) return
 		if (this.form) {
 			this.form.childrens.forEach((item, index) => {
 				if (item === this) {
-					this.form.childrens.splice(index, 1);
-					let name = item.isArray ? item.arrayField : item.name;
-					delete this.form.formData[name];
+					this.form.childrens.splice(index, 1)
+					delete this.form.formData[item.name]
 				}
-			});
+			})
+		}
+	},
+	// TODO vue3
+	unmounted(){
+		this.__isUnmounted = true
+		if (this.form) {
+			this.form.childrens.forEach((item, index) => {
+				if (item === this) {
+					this.form.childrens.splice(index, 1)
+					delete this.form.formData[item.name]
+				}
+			})
 		}
 	},
 	methods: {

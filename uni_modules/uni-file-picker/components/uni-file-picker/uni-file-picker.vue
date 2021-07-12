@@ -40,7 +40,7 @@
 </template>
 
 <script>
-	import chooseAndUploadFile from './choose-and-upload-file.js'
+	import {chooseAndUploadFile} from './choose-and-upload-file.js'
 	import uploadImage from './upload-image.vue'
 	import uploadFile from './upload-file.vue'
 	let fileInput = null
