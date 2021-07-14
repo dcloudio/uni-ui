@@ -39,6 +39,7 @@
 	 */
 	export default {
 		name: 'UniGoodsNav',
+		emits:['click','buttonClick'],
 		props: {
 			options: {
 				type: Array,
@@ -78,7 +79,6 @@
 				this.$emit('click', {
 					index,
 					content: item,
-
 				})
 			},
 			buttonClick(index, item) {

@@ -70,11 +70,16 @@
 		name: 'uniDataChecklist',
 		// mixins: [clientdb],
 		mixins: [uniCloud.mixinDatacom || {}],
+		// model: {
+		// 	prop: 'modelValue',
+		// 	event: 'update:modelValue'
+		// },
 		props: {
 			mode: {
 				type: String,
 				default: 'default'
 			},
+			
 			multiple: {
 				type: Boolean,
 				default: false
@@ -83,6 +88,13 @@
 				type: [Array, String, Number],
 				default () {
 					return ''
+				}
+			},
+			// TODO vue3
+			modelValue: {
+				type: [Array, String, Number],
+				default() {
+					return '';
 				}
 			},
 			localdata: {
@@ -148,6 +160,10 @@
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
 				this.formItem && this.formItem.setValue(newVal)
+			},
+			modelValue(newVal) {
+				this.dataList = this.getDataList(newVal);
+				this.formItem && this.formItem.setValue(newVal);
 			}
 		},
 		data() {
@@ -165,6 +181,11 @@
 					selectedTextColor: '#333',
 				}
 			};
+		},
+		computed:{
+			dataValue(){
+				return this.value || this.modelValue
+			}
 		},
 		created() {
 			this.form = this.getForm('uniForms')
@@ -242,7 +263,10 @@
 					}
 				}
 				this.formItem && this.formItem.setValue(detail.value)
-				this.$emit('input', detail.value)
+				// TODO 兼容 vue2
+				this.$emit('input', detail.value);
+				// // TOTO 兼容 vue3
+				this.$emit('update:modelValue', detail.value);
 				this.$emit('change', {
 					detail
 				})
@@ -333,14 +357,14 @@
 			 * @param {Object} range
 			 */
 			getSelectedValue(range) {
-				if (!this.multiple) return this.value
+				if (!this.multiple) return this.dataValue
 				let selectedArr = []
 				range.forEach((item) => {
 					if (item.selected) {
 						selectedArr.push(item[this.map.value])
 					}
 				})
-				return this.value.length > 0 ? this.value : selectedArr
+				return this.dataValue.length > 0 ? this.dataValue : selectedArr
 			},
 
 			/**

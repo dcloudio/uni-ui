@@ -3,8 +3,7 @@
 		<view @click="_calcValue('minus')" class="uni-numbox__minus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
-		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number"
-			v-model="inputValue" />
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" type="number" v-model="inputValue"/>
 		<view @click="_calcValue('plus')" class="uni-numbox__plus uni-cursor-point">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }">+</text>
 		</view>
@@ -27,6 +26,10 @@
 		name: "UniNumberBox",
 		props: {
 			value: {
+				type: [Number, String],
+				default: 1
+			},
+			modelValue:{
 				type: [Number, String],
 				default: 1
 			},
@@ -55,10 +58,18 @@
 		watch: {
 			value(val) {
 				this.inputValue = +val;
+			},
+			modelValue(val){
+				this.inputValue = +val;
 			}
 		},
 		created() {
-			this.inputValue = +this.value;
+			if(this.value === 1){
+				this.inputValue = +this.modelValue;
+			}
+			if(this.modelValue === 1){
+				this.inputValue = +this.value;
+			}
 		},
 		methods: {
 			_calcValue(type) {
@@ -90,7 +101,10 @@
 
 				this.inputValue = (value / scale).toFixed(String(scale).length - 1);
 				this.$emit("change", +this.inputValue);
+				// TODO vue2 兼容
 				this.$emit("input", +this.inputValue);
+				// TODO vue3 兼容
+				this.$emit("update:modelValue", +this.inputValue);
 			},
 			_getDecimalScale() {
 
