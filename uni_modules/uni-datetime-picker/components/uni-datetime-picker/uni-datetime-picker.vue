@@ -23,8 +23,8 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholder" :disabled="true" />
 					</view>
-					<view v-show="!disabled && (singleVal || (range.startDate && range.endDate))"
-						class="uni-date__icon-clear" @click="clear">
+					<view v-show="clearIcon && !disabled && !isPhone && (singleVal || (range.startDate && range.endDate))"
+						class="uni-date__icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 					</view>
 				</view>
@@ -32,7 +32,7 @@
 		</view>
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
-		<view ref="datePicker" v-show="popup" class="uni-date-picker__container">
+		<view v-if="!isPhone" ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
 				<view v-show="hasTime" class="uni-date-changed popup-x-header">
 					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
@@ -89,7 +89,7 @@
 				</view>
 			</view>
 		</view>
-		<calendar ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			@confirm="mobileChange" />
@@ -113,6 +113,7 @@
 	 * @property {String} range-separator 选择范围时的分隔符
 	 * @property {Boolean} border = [true|false] 是否有边框
 	 * @property {Boolean} disabled = [true|false] 是否禁用
+	 * @property {Boolean} clearIcon = [true|false] 是否显示清除按钮（仅PC端适用）
 	 * @event {Function} change 确定日期时触发的事件
 	 **/
 
@@ -168,6 +169,7 @@
 				popup: false,
 				popover: null,
 				isEmitValue: false,
+				isPhone: false,
 				iconBase64: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACVklEQVRoge2Zv2vTQRTAP4oWJQQskmolBAnSQVMcSxbp4ubmIEWETu0oIjg5iIOgpLNunfQfMHToUgpOVgfRqRAL4q8WRLQVq4sOdyHPL9/7evfNJReS+8DB433v7r37fl/eu9xBJBKUB0BLt+uDaOOQZb8SUNXyuKuRftg46NeXcBww6M8AC0ANOAycAyb1s7e6+SbNxi/gBfAQ2HadcA7YB/4MUPsKzLos4jzwewAcNy3mhMnx5I/9BiqUAD4DDWAXmAfqWt8Enlq+GBfSbEwAt4AicAxYBO7aTPaGzhu4KvTLQn/Hh9cpmGzcFvqmaXAyaxWE/MGTg93yXsgFUyfbOrJCJ2s8y+tRP21s0fmMTlmih8zT8WnN1GloCmJWaF0CpvrlSAb1/3fJXshNT470hZEIrZeoahqaU8BZ10Exa4XGtiCaKKL+EIHaMX8U81ZEP7ntrwi7n4CfWi7p+UCFdFdh7Rpaps9+mn93rjY2THut0QqtoVlIkpi1QjNyCzEdnl0W+idCXxb6VmKudaGfsbBhRbcHdEWhf5eYt0o6FVR6BjhqYcOKoQkt2y/SAB5rWVbpVeCilmUl3hb6JNeAI1p+ZWEjFzH9hsY2tEwHdHX9DGATWNLyceCeGL/YhY+58LWhy9o0uhJDKw3T4dlr4L6WZab5JvRBGJqs9UPI5R44lQfpx56pUzK0NlA3R6AK1Engu1+/nGhfK7R5bjtwGnXdFfpSJ6190Quz5grqQCC048lFXMhy2nQZWkUVsRowZv8OvLOPCvdHwE5APyKRSMQzfwE22DtT3T5PPwAAAABJRU5ErkJggg=='
 			}
 		},
@@ -215,6 +217,10 @@
 			disabled: {
 				type: [Boolean],
 				default: false
+			},
+			clearIcon: {
+				type: [Boolean],
+				default: true
 			}
 		},
 		watch: {
@@ -300,7 +306,9 @@
 				return this.isRange ? 653 : 301
 			}
 		},
-
+		mounted() {
+			this.platform()
+		},
 		methods: {
 			initPicker(newVal){
 				if (!newVal || Array.isArray(newVal) && !newVal.length) {
@@ -322,7 +330,6 @@
 						this.time = defTime
 					}
 				} else {
-					// if (oldVal) return // 只初始默认值
 					const [before, after] = newVal
 					if (!before && !after) return
 					const defBefore = this.parseDate(before)
@@ -362,26 +369,28 @@
 				}
 			},
 			updateLeftCale(e) {
-				// console.log('----updateStartCale:', e);
 				const left = this.$refs.left
 				// 设置范围选
 				left.cale.setHoverMultiple(e.after)
 				left.setDate(this.$refs.left.nowDate.fullDate)
 			},
 			updateRightCale(e) {
-				// console.log('----updateStartCale:', e);
 				const right = this.$refs.right
 				// 设置范围选
 				right.cale.setHoverMultiple(e.after)
 				right.setDate(this.$refs.right.nowDate.fullDate)
 			},
-
+			platform(){
+				const systemInfo = uni.getSystemInfoSync()
+				this.isPhone =  systemInfo.windowWidth <= 500
+				this.windowWidth = systemInfo.windowWidth
+			},
 			show(event) {
 				if (this.disabled) {
 					return
 				}
-				const systemInfo = uni.getSystemInfoSync()
-				if (systemInfo.windowWidth <= 500) {
+				this.platform()
+				if (this.isPhone) {
 					this.$refs.mobile.open()
 					return
 				}
@@ -390,7 +399,7 @@
 				}
 				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor")
 				dateEditor.boundingClientRect(rect => {
-					if (systemInfo.windowWidth - rect.left < this.datePopupWidth) {
+					if (this.windowWidth - rect.left < this.datePopupWidth) {
 						this.popover.right = 0
 					}
 				}).exec()
@@ -602,7 +611,6 @@
 						this.$emit('input', [])
 					}
 				}
-				// if (this.popup) this.popup = false
 			},
 
 			parseDate(date) {
@@ -819,27 +827,6 @@
 		color: #333;
 		opacity: 0.6;
 	}
-
-	/* .uni-date-popper__arrow {
-			width: 10px;
-			height: 10px;
-	    top: -6px;
-	    left: 35px;
-	    margin-right: 3px;
-	    border-top-width: 0;
-	    border-bottom-color: #ebeef5;
-	    border-width: 6px;
-	    filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
-	}
-	.uni-date-popper__arrow:after {
-			content: " ";
-	    position: absolute;
-	    display: block;
-	    width: 0;
-	    height: 0;
-	    border-color: transparent;
-	    border-style: solid;
-	} */
 
 	.mr-50 {
 		margin-right: 50px;
