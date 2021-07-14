@@ -224,22 +224,18 @@
 			},
 			startDate(val) {
 				this.cale.resetSatrtDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			endDate(val) {
 				this.cale.resetEndDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			selected(newVal) {
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
 				this.weeks = this.cale.weeks
 			},
-			// tempRange: {
-			// 	immediate: true,
-			// 	handler(newVal, oldVal) {debugger
-			// 		if (!oldVal) return
-			// 		if (!newVal.before) this.timeRange.startTime = ''
-			// 		if (!newVal.after) this.timeRange.endTime = ''
-			// 	}
-			// },
 			pleStatus: {
 				immediate: true,
 				handler(newVal, oldVal) {
@@ -269,8 +265,10 @@
 							this.cale.setDefaultMultiple(before, after)
 							if (which === 'left') {
 								this.setDate(before)
+								this.weeks = this.cale.weeks
 							} else {
 								this.setDate(after)
+								this.weeks = this.cale.weeks
 							}
 							this.cale.lastHover = true
 						}

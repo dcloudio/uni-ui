@@ -3,11 +3,11 @@
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" :value="single" start="2021-3-20" end="2021-6-20" @change="change" @maskClick="maskClick" />
+			<uni-datetime-picker type="date" :value="single" :start="start" :end="end" @change="change" @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'时间戳用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker returnType="timestamp" @change="changeLog($event)" start="2021-3-20" end="2021-5-20"  />
+			<uni-datetime-picker returnType="timestamp" :value="single" @change="changeLog($event)" start="2021-3-20" end="2021-5-20"  />
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
@@ -44,10 +44,12 @@
 	export default {
 		data() {
 			return {
-				single: '2021-04-3',
-				datetimesingle: '2021-04-3',
-				range: ['2021-02-1', '2021-2-28'],
+				single: '2021-7-3',
+				datetimesingle: '2021-07-3',
+				range: ['2021-02-1', '2021-3-28'],
 				datetimerange: [],
+				start: '2021-7-2',
+				end: '2021-7-29'
 			}
 		},
 
@@ -64,10 +66,13 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				this.datetimesingle = '2021-5-1'
-				this.single = '2021-5-1'
+				// this.datetimesingle = '2021-7-10'
+				// this.single = '2021-2-12'
+				this.range = ['2021-03-1', '2021-4-28']
 				this.datetimerange = ["2021-07-08 0:00:00", "2021-08-08 23:59:59"]
-			},1000)
+				this.start = '2021-07-10'
+				this.end = '2021-07-20'
+			},3000)
 		},
 
 		methods:{
