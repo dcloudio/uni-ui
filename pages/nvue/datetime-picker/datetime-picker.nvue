@@ -31,7 +31,7 @@
 		</view>
 		<uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="range" type="daterange" rangeSeparator="至" />
+			<uni-datetime-picker v-model="range" type="daterange" rangeSeparator="至" @maskClick="maskClick" />
 		</view>
  		<uni-section :title="'日期时间范围用法：' + '[' + datetimerange + ']' " type="line"></uni-section>
 		<view class="example-body">
