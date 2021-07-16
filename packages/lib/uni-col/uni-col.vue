@@ -229,7 +229,8 @@
 	$col: $layout-namespace+"col";
 
 	@function getSize($size) {
-		@return 1 / 24 * $size * 100 * 1%;
+		/* TODO 1/24 * $size * 100 * 1%; 使用计算后的值，为了解决 vue3 控制台报错 */
+		@return 0.04166666666 * $size * 100 * 1%;
 	}
 
 	@mixin res($key, $map:$breakpoints) {

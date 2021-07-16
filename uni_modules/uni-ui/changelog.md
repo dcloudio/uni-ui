@@ -1,3 +1,11 @@
+## 1.3.7（2021-07-16）
+- uni-ui 兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+- uni-datetime-picker 修复 单选日期类型，初始赋值后不在当前日历的 bug
+- uni-datetime-picker 新增 clearIcon 属性，显示框的清空按钮可配置显示隐藏（仅 pc 有效）
+- uni-datetime-picker 优化 移动端移除显示框的清空按钮，无实际用途
+- uni-datetime-picker 修复 组件赋值为空，界面未更新的 bug
+- uni-datetime-picker 修复 start 和 end 不能动态赋值的 bug
+- uni-datetime-picker 修复 范围选类型，用户选择后再次选择右侧日历（结束日期）显示不正确的 bug
 ## 1.3.6（2021-07-09）
 - uni-data-checkbox 优化 删除无用日志
 - uni-data-checkbox 修复 由 0.1.9 引起的非 nvue 端图标不显示的问题
