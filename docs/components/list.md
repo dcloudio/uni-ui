@@ -208,7 +208,8 @@ thumb			|String		|-			|	左侧缩略图，若thumb有值，则不会显示扩展
 thumbSize		|String 	|medium 	|	略缩图尺寸，可选值，lg:大图;  medium:一般;	sm:小图;
 showBadge		|Boolean	|false		|	是否显示数字角标	
 badgeText		|String		|-			|	数字角标内容
-badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)					
+badgeType		|String		|-			|	数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
+badgeStyle      |Object     |{}         |	数字角标样式				
 rightText		|String		|-			|	右侧文字内容
 disabled		|Boolean	|false		|	是否禁用	
 showArrow 		|Boolean	|true		|	是否显示箭头图标			
