@@ -174,6 +174,12 @@ export default {
 		returnType: {
 			type: String,
 			default: 'array'
+		},
+		sizeType:{
+			type: Array,
+			default(){
+				return ['original','compressed']
+			}
 		}
 	},
 	watch: {
@@ -301,7 +307,7 @@ export default {
 		 * 选择文件
 		 */
 		choose() {
-			
+
 			if (this.disabled) return
 			if (this.files.length >= Number(this.limitLength) && this.showType !== 'grid' && this.returnType === 'array') {
 				uni.showToast({
@@ -331,6 +337,7 @@ export default {
 				.chooseAndUploadFile({
 					type: this.fileMediatype,
 					compressed: false,
+					sizeType:this.sizeType,
 					// TODO 如果为空，video 有问题
 					extension: this.extname.length > 0 ? this.extname : undefined,
 					count: this.limitLength - this.files.length, //默认9

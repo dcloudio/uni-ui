@@ -5,7 +5,7 @@
 const ERR_MSG_OK = 'chooseAndUploadFile:ok';
 const ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
 function chooseImage(opts) {
-		const { count, sizeType, sourceType = ['album', 'camera'], extension } = opts
+		const { count, sizeType = ['original','compressed'], sourceType = ['album', 'camera'], extension } = opts
     return new Promise((resolve, reject) => {
         uni.chooseImage({
             count,
