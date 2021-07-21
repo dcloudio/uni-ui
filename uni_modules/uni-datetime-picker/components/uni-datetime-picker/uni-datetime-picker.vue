@@ -179,7 +179,7 @@
 				default: 'datetime'
 			},
 			value: {
-				type: [String, Number, Array],
+				type: [String, Number, Array, Date],
 				default: ''
 			},
 			start: {
@@ -415,12 +415,15 @@
 				}, 20)
 			},
 			setEmit(value) {
-				if (this.returnType === "timestamp") {
+				if (this.returnType === "timestamp" || this.returnType === "date") {
 					if (!Array.isArray(value)) {
 						if (!this.hasTime) {
 							value = value + ' ' + '00:00:00'
 						}
 						value = this.createTimestamp(value)
+						if (this.returnType === "date") {
+							value = new Date(value)
+						}
 					} else {
 						if (!this.hasTime) {
 							value[0] = value[0] + ' ' + '00:00:00'
@@ -428,6 +431,10 @@
 						}
 						value[0] = this.createTimestamp(value[0])
 						value[1] = this.createTimestamp(value[1])
+						if (this.returnType === "date") {
+							value[0] = new Date(value[0])
+							value[1] = new Date(value[1])
+						}
 					}
 				}
 				this.$emit('change', value)
