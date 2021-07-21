@@ -121,10 +121,10 @@ ___点击 picker 默认值规则：___
 |属性名						|类型														|默认值		|值域																	|说明																											|
 |:-:							|:-:														|:-:			|																			|:-:																											|
 |type							|String													|datetime	|date/daterange/datetime/datetimerange|选择器类型																								|
-|value						|String、Number、Array(范围选择)|-				|-																		|输入框当前值																							|
+|value						|String、Number、Array(范围选择)、Date|-				|-																		|输入框当前值																							|
 |start						|String、Number									|-				|-																		|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end							|String、Number									|-				|-																		|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
-|return-type			|String													|string		|timestamp 、string										|返回值格式																								|
+|return-type			|String													|string		|timestamp 、string、date										|返回值格式																								|
 |border						|Boolean、String								|true			|																			|是否有边框																								|
 |rangeSeparator		|String													|'-'			|-																		|选择范围时的分隔符																				|
 |placeholder			|String													|-				|-																		|非范围选择时的占位内容																		|
