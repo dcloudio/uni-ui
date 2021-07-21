@@ -34,11 +34,6 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 :::
 
-
-### 平台差异说明
-
-暂不支持在nvue页面中使用
-
 ### 安装方式
 
 本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`components`。
