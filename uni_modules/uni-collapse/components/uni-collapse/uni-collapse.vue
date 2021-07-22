@@ -113,7 +113,6 @@
 
 				if (this.accordion) {
 					activeItem = isOpen ? self.nameSync : ''
-					this.$emit('change', )
 				} else {
 					this.childrens.forEach((vm, index) => {
 						if (vm.isOpen) {
