@@ -1,3 +1,5 @@
+## 0.1.1
+- 优化 errorMessage 属性支持 Boolean 类型
 ## 0.1.0（2021-07-13）
 - 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 ## 0.0.16（2021-06-29）

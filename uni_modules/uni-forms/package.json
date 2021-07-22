@@ -1,12 +1,12 @@
 {
   "id": "uni-forms",
   "displayName": "uni-forms 表单",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据",
   "keywords": [
     "uni-ui",
-    "uniui",
     "表单",
+    "校验",
     "表单校验",
     "表单验证"
 ],
