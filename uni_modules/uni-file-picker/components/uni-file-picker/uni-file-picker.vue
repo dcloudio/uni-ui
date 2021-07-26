@@ -98,6 +98,12 @@ export default {
 				return []
 			}
 		},
+		modelValue: {
+			type: [Array, Object],
+			default() {
+				return []
+			}
+		},
 		disabled: {
 			type: Boolean,
 			default: false
@@ -185,27 +191,13 @@ export default {
 	watch: {
 		value: {
 			handler(newVal) {
-				let newFils = []
-				let newData = [].concat(newVal || [])
-				newData.forEach(v => {
-					const files = this.files.find(i => i.url === v.url)
-					const reg = /cloud:\/\/([\w.]+\/?)\S*/
-					if (!v.path) {
-						v.path = v.url
-					}
-					if (reg.test(v.url)) {
-						this.getTempFileURL(v, v.url)
-					}
-					newFils.push(files ? files : v)
-				})
-				let data  = null
-				if (this.returnType === 'object') {
-					data = this.backObject(newFils)[0]
-				} else {
-					data = this.backObject(newFils)
-				}
-				this.formItem && this.formItem.setValue(data)
-				this.files = newFils
+				this.setValue(newVal)
+			},
+			immediate: true
+		},
+		modelValue:{
+			handler(newVal) {
+				this.setValue(newVal)
 			},
 			immediate: true
 		}
@@ -268,6 +260,29 @@ export default {
 		}
 	},
 	methods: {
+		setValue(newVal){
+			let newFils = []
+			let newData = [].concat(newVal || [])
+			newData.forEach(v => {
+				const files = this.files.find(i => i.url === v.url)
+				const reg = /cloud:\/\/([\w.]+\/?)\S*/
+				if (!v.path) {
+					v.path = v.url
+				}
+				if (reg.test(v.url)) {
+					this.getTempFileURL(v, v.url)
+				}
+				newFils.push(files ? files : v)
+			})
+			let data  = null
+			if (this.returnType === 'object') {
+				data = this.backObject(newFils)[0]
+			} else {
+				data = this.backObject(newFils)
+			}
+			this.formItem && this.formItem.setValue(data)
+			this.files = newFils
+		},
 		/**
 		 * 获取父元素实例
 		 */

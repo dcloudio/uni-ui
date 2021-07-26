@@ -80,7 +80,7 @@
 				</uni-forms-item>
 				<template v-for="(item,index) in dynamicLists">
 					<uni-forms-item :label="item.label+' '+index" required
-						:rules="[{'required': true,errorMessage: '域名项必填'}]" :key="item.id"
+						:rules="item.rules" :key="item.id"
 						:name="'domains[' + item.id + ']'">
 						<view class="form-item">
 							<uni-easyinput v-model="dynamicFormData.domains[item.id]" placeholder="请输入域名" />
@@ -249,6 +249,7 @@
 			add() {
 				this.dynamicLists.push({
 					label: '域名',
+					rules:[{'required': true,errorMessage: '域名项必填'}],
 					id: Date.now()
 				})
 			},

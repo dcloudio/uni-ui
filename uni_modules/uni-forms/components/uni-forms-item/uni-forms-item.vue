@@ -179,30 +179,18 @@ export default {
 		}
 		this.init();
 	},
-	// TODO vue2
+	// #ifndef VUE3
 	destroyed() {
 		if(this.__isUnmounted) return
-		if (this.form) {
-			this.form.childrens.forEach((item, index) => {
-				if (item === this) {
-					this.form.childrens.splice(index, 1)
-					delete this.form.formData[item.name]
-				}
-			})
-		}
+		this.unInit()
 	},
-	// TODO vue3
+	// #endif
+	// #ifdef VUE3
 	unmounted(){
 		this.__isUnmounted = true
-		if (this.form) {
-			this.form.childrens.forEach((item, index) => {
-				if (item === this) {
-					this.form.childrens.splice(index, 1)
-					delete this.form.formData[item.name]
-				}
-			})
-		}
+		this.unInit()
 	},
+	// #endif
 	methods: {
 		init() {
 			if (this.form) {
@@ -247,12 +235,22 @@ export default {
 				if (this.rules.length > 0) {
 					validator.updateSchema(formRules);
 				}
-				
+
 				this.validator = validator;
 			} else {
 				this.labelPos = this.labelPosition || 'left';
 				this.labelWid = this.labelWidth || 65;
 				this.labelAli = this.labelAlign || 'left';
+			}
+		},
+		unInit(){
+			if (this.form) {
+				this.form.childrens.forEach((item, index) => {
+					if (item === this) {
+						this.form.childrens.splice(index, 1)
+						delete this.form.formData[item.name]
+					}
+				})
 			}
 		},
 		/**

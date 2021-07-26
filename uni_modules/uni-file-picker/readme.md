@@ -152,7 +152,7 @@ export default {
 			// 获取上传状态
 			select(e){
 				console.log('选择文件：',e)
-			}
+			},
 			// 获取上传进度
 			progress(e){
 				console.log('上传进度：',e)

@@ -252,6 +252,7 @@
 					if (inputComp) {
 						inputComp.errMsg = '';
 						inputComp.$emit('input', inputComp.multiple ? [] : '');
+						inputComp.$emit('update:modelValue', inputComp.multiple ? [] : '');
 					}
 				});
 
