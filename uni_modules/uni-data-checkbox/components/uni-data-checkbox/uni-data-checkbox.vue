@@ -184,7 +184,9 @@
 		},
 		computed:{
 			dataValue(){
-				return this.value || this.modelValue
+				if(this.value === '')return this.modelValue
+				if(this.modelValue === '') return this.value
+				return this.value
 			}
 		},
 		created() {

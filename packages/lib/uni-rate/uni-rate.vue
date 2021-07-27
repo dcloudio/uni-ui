@@ -5,7 +5,6 @@
 		    class="uni-rate"
 		>
 			<view
-					v-if=""
 					class="uni-rate__icon"
 					:class="{'uni-cursor-not-allowed': disabled}"
 					:style="{ 'margin-right': marginNumber + 'px' }"

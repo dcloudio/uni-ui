@@ -92,18 +92,24 @@ export default {
 		uploadFile
 	},
 	props: {
-		value: {
-			type: [Array, Object],
-			default() {
-				return []
-			}
-		},
+		// #ifdef VUE3
 		modelValue: {
 			type: [Array, Object],
 			default() {
 				return []
 			}
 		},
+		// #endif
+
+		// #ifndef VUE3
+		value: {
+			type: [Array, Object],
+			default() {
+				return []
+			}
+		},
+		// #endif
+
 		disabled: {
 			type: Boolean,
 			default: false
@@ -131,10 +137,6 @@ export default {
 			type: String,
 			default: 'grid'
 		},
-		// inputUrl: {
-		// 	type: Boolean,
-		// 	default: false
-		// },
 		// 选择文件类型  image/video/all
 		fileMediatype: {
 			type: String,
@@ -189,18 +191,23 @@ export default {
 		}
 	},
 	watch: {
+		// #ifndef VUE3
 		value: {
 			handler(newVal) {
 				this.setValue(newVal)
 			},
 			immediate: true
 		},
+		// #endif
+		// #ifdef VUE3
 		modelValue:{
 			handler(newVal) {
 				this.setValue(newVal)
 			},
 			immediate: true
-		}
+		},
+		// #endif
+
 	},
 	data() {
 		return {
@@ -281,7 +288,9 @@ export default {
 				data = this.backObject(newFils)
 			}
 			this.formItem && this.formItem.setValue(data)
-			this.files = newFils
+			if(newFils.length){
+				this.files = newFils
+			}
 		},
 		/**
 		 * 获取父元素实例
@@ -388,11 +397,10 @@ export default {
 							if (this.limitLength - this.files.length <= 0) break
 							files[i].uuid = Date.now()
 							let filedata = await this.getFileData(files[i], this.fileMediatype)
-							filedata.file = files[i]
 							filedata.progress = 0
 							filedata.status = 'ready'
 							this.files.push(filedata)
-							currentData.push(filedata)
+							currentData.push({...filedata,file:files[i]})
 						}
 						this.$emit('select', {
 							tempFiles: currentData,
@@ -570,7 +578,6 @@ export default {
 				uuid: files.uuid,
 				extname: extname || '',
 				cloudPath: files.cloudPath,
-				file:files.file,
 				fileType: files.fileType,
 				url: files.path || files.path,
 				size: files.size, //单位是字节
@@ -648,7 +655,12 @@ export default {
 			} else {
 				data = this.backObject(this.files)
 			}
+			// #ifdef VUE3
+			this.$emit('update:modelValue',data)
+			// #endif
+			// #ifndef VUE3
 			this.$emit('input', data)
+			// #endif
 		},
 		backObject(files) {
 			let newFilesData = JSON.parse(JSON.stringify(files))

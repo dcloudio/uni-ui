@@ -1,3 +1,29 @@
+## 1.3.7（2021-07-16）
+- uni-ui 兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+- uni-datetime-picker 修复 单选日期类型，初始赋值后不在当前日历的 bug
+- uni-datetime-picker 新增 clearIcon 属性，显示框的清空按钮可配置显示隐藏（仅 pc 有效）
+- uni-datetime-picker 优化 移动端移除显示框的清空按钮，无实际用途
+- uni-datetime-picker 修复 组件赋值为空，界面未更新的 bug
+- uni-datetime-picker 修复 start 和 end 不能动态赋值的 bug
+- uni-datetime-picker 修复 范围选类型，用户选择后再次选择右侧日历（结束日期）显示不正确的 bug
+## 1.3.6（2021-07-09）
+- uni-data-checkbox 优化 删除无用日志
+- uni-data-checkbox 修复 由 0.1.9 引起的非 nvue 端图标不显示的问题
+- uni-data-checkbox 修复 nvue 黑框样式问题
+- uni-datetime-picker 修复 范围选择不能动态赋值的 bug
+- uni-datetime-picker 修复 范围选择的初始时间在一个月内时，造成无法选择的bug
+- uni-datetime-picker 优化 弹出层在超出视窗边缘定位不准确的问题
+- uni-datetime-picker 修复 范围起始点样式的背景色与今日样式的字体前景色融合，导致日期字体看不清的 bug
+- uni-datetime-picker 优化 弹出层在超出视窗边缘被遮盖的问题
+- uni-datetime-picker 新增 maskClick 事件
+- uni-datetime-picker 修复 特殊情况日历 rpx 布局错误的 bug，rpx -> px
+- uni-datetime-picker 修复 范围选择时清空返回值不合理的bug，['', ''] -> []
+- uni-datetime-picker 新增 日期时间显示框支持插槽
+- uni-file-picker 修复 sourceType 缺少默认值导致 ios 无法选择文件
+- uni-file-picker 优化 解耦与uniCloud的强绑定关系 ，如不绑定服务空间，默认autoUpload为false且不可更改
+- uni-table 新增 uni-th 支持 date 日期筛选范围
+- uni-table 新增 uni-th 支持 range 筛选范围
+- uni-table 新增 uni-th 筛选功能
 ## 1.3.5（2021-07-02）
 - uni-card 优化 图文卡片无图片加载时，提供占位图标
 - uni-card 新增 header 插槽，自定义卡片头部（ 图文卡片 mode="style" 时，不支持）

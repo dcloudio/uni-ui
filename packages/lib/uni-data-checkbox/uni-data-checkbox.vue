@@ -70,11 +70,16 @@
 		name: 'uniDataChecklist',
 		// mixins: [clientdb],
 		mixins: [uniCloud.mixinDatacom || {}],
+		// model: {
+		// 	prop: 'modelValue',
+		// 	event: 'update:modelValue'
+		// },
 		props: {
 			mode: {
 				type: String,
 				default: 'default'
 			},
+			
 			multiple: {
 				type: Boolean,
 				default: false
@@ -83,6 +88,13 @@
 				type: [Array, String, Number],
 				default () {
 					return ''
+				}
+			},
+			// TODO vue3
+			modelValue: {
+				type: [Array, String, Number],
+				default() {
+					return '';
 				}
 			},
 			localdata: {
@@ -148,6 +160,10 @@
 			value(newVal) {
 				this.dataList = this.getDataList(newVal)
 				this.formItem && this.formItem.setValue(newVal)
+			},
+			modelValue(newVal) {
+				this.dataList = this.getDataList(newVal);
+				this.formItem && this.formItem.setValue(newVal);
 			}
 		},
 		data() {
@@ -165,6 +181,11 @@
 					selectedTextColor: '#333',
 				}
 			};
+		},
+		computed:{
+			dataValue(){
+				return this.value || this.modelValue
+			}
 		},
 		created() {
 			this.form = this.getForm('uniForms')
@@ -242,7 +263,10 @@
 					}
 				}
 				this.formItem && this.formItem.setValue(detail.value)
-				this.$emit('input', detail.value)
+				// TODO 兼容 vue2
+				this.$emit('input', detail.value);
+				// // TOTO 兼容 vue3
+				this.$emit('update:modelValue', detail.value);
 				this.$emit('change', {
 					detail
 				})
@@ -310,7 +334,7 @@
 							}
 						}
 					}
-					this.setStyles(item, index)
+					this.setStyles(item, index)  
 					list[index] = item
 				})
 				return list
@@ -326,7 +350,6 @@
 				item.styleIcon = this.setStyleIcon(item)
 				item.styleIconText = this.setStyleIconText(item)
 				item.styleRightIcon = this.setStyleRightIcon(item)
-
 			},
 
 			/**
@@ -334,14 +357,14 @@
 			 * @param {Object} range
 			 */
 			getSelectedValue(range) {
-				if (!this.multiple) return this.value
+				if (!this.multiple) return this.dataValue
 				let selectedArr = []
 				range.forEach((item) => {
 					if (item.selected) {
 						selectedArr.push(item[this.map.value])
 					}
 				})
-				return this.value.length > 0 ? this.value : selectedArr
+				return this.dataValue.length > 0 ? this.dataValue : selectedArr
 			},
 
 			/**
@@ -349,14 +372,13 @@
 			 */
 			setStyleBackgroud(item) {
 				let styles = {}
-				// if (item.selected) {
-					if (this.mode !== 'list') {
-						styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
-					}
-					if (this.mode === 'tag') {
-						styles['background-color'] = item.selected? this.selectedColor:'#f5f5f5'
-					}
-				// }
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff'
+				if (this.mode !== 'list') {
+					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
+				}
+				if (this.mode === 'tag') {
+					styles['background-color'] = item.selected? selectedColor:'#f5f5f5'
+				}
 				let classles = ''
 				for (let i in styles) {
 					classles += `${i}:${styles[i]};`
@@ -366,69 +388,50 @@
 			setStyleIcon(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					styles['background-color'] = item.selected?this.selectedColor:'#fff'
-					styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff' 
+				styles['background-color'] = item.selected?selectedColor:'#fff'
+				styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 
-					if(!item.selected && item.disabled){
-						styles['background-color'] = '#F2F6FC'
-						styles['border-color'] = item.selected?this.selectedColor:'#DCDFE6'
-					}
+				if(!item.selected && item.disabled){
+					styles['background-color'] = '#F2F6FC'
+					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
+				}
 
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
 				return classles
 			},
 			setStyleIconText(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					// if (this.selectedTextColor) {
-					// 	if (this.mode === 'tag') {
-					// 		styles.color = item.selected?this.selectedTextColor:'#333'
-						
-					// 	} else {
-					// 		styles.color = item.selected?this.selectedTextColor:'#333'
-					// 	}
-					// 	if(!item.selected && item.disabled){
-					// 		styles.color = '#999'
-					// 	}
-					// } else {
-						if (this.mode === 'tag') {
-							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
-						} else {
-							styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:this.selectedColor):'#333'
-						}
-						if(!item.selected && item.disabled){
-							styles.color = '#999'
-						}
-					// }
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
-
+				let selectedColor = this.selectedColor?this.selectedColor:'#007aff'
+				if (this.mode === 'tag') {
+					styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:'#fff'):'#333'
+				} else {
+					styles.color = item.selected?(this.selectedTextColor?this.selectedTextColor:selectedColor):'#333'
+				}
+				if(!item.selected && item.disabled){
+					styles.color = '#999'
+				}
+				
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
 				return classles
 			},
 			setStyleRightIcon(item) {
 				let styles = {}
 				let classles = ''
-				// if (item.selected) {
-					if (this.mode === 'list') {
-						styles['border-color'] = item.selected?this.styles.selectedColor:'#DCDFE6'
-					}
-					for (let i in styles) {
-						classles += `${i}:${styles[i]};`
-					}
-				// }
+				if (this.mode === 'list') {
+					styles['border-color'] = item.selected?this.styles.selectedColor:'#DCDFE6'
+				}
+				for (let i in styles) {
+					classles += `${i}:${styles[i]};`
+				}
 
 				return classles
 			}
-			// setColor(){
-			// 	return
-			// }
 		}
 	}
 </script>
@@ -478,7 +481,6 @@
 
 				.hidden {
 					position: absolute;
-					// transform: scale(0);
 					opacity: 0;
 				}
 
@@ -496,15 +498,16 @@
 						line-height: 14px;
 					}
 
-					// .list-content {
-					// 	margin-left: 15px;
-					// }
 					.checkobx__list {
-						border: 1px solid #fff;
-						border-left: 0;
-						border-top: 0;
-						height: 12px;
+						border-right-width: 1px;
+						border-right-color: #007aff;
+						border-right-style: solid;
+						border-bottom-width:1px;
+						border-bottom-color: #007aff; 
+						border-bottom-style: solid;
+						height: 12px; 
 						width: 6px;
+						left: -5px;
 						transform-origin: center;
 						transform: rotate(45deg);
 						opacity: 0;
@@ -535,9 +538,12 @@
 						left: 5px;
 						height: 8px;
 						width: 4px;
-						border: 1px solid #fff;
-						border-left: 0;
-						border-top: 0;
+						border-right-width: 1px;
+						border-right-color: #fff;
+						border-right-style: solid;
+						border-bottom-width:1px ;
+						border-bottom-color: #fff;
+						border-bottom-style: solid;
 						opacity: 0;
 						transform-origin: center;
 						transform: rotate(40deg);
@@ -616,12 +622,15 @@
 							color: $checked-color;
 						}
 						// 选中禁用
-						&.is-disable {
+						&.is-disable { 
 							.checkbox__inner {
 								opacity: $disable;
 							}
 
 							.checklist-text {
+								opacity: $disable;
+							}
+							.radio__inner {
 								opacity: $disable;
 							}
 						}
@@ -723,7 +732,7 @@
 						}
 					}
 				}
-
+				// 列表样式
 				&.is--list {
 					/* #ifndef APP-NVUE */
 					display: flex;

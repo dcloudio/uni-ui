@@ -1,34 +1,38 @@
 <template>
 	<view class="uni-date">
-		<view class="uni-date-editor--x" :class="{'uni-date-editor--x__disabled': disabled,
+		<view class="uni-date-editor" @click="show">
+			<slot>
+				<view class="uni-date-editor--x" :class="{'uni-date-editor--x__disabled': disabled,
 		'uni-date-x--border': border}">
-			<view v-if="!isRange" class="uni-date-x uni-date-single" @click="show">
-				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+					<view v-if="!isRange" class="uni-date-x uni-date-single">
+						<view class="uni-date__icon-logo">
+							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+						</view>
+						<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
+							:disabled="true" />
+					</view>
+					<view v-else class="uni-date-x uni-date-range">
+						<view class="uni-date__icon-logo">
+							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
+						</view>
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
+							:placeholder="startPlaceholder" :disabled="true" />
+						<slot>
+							<view class="">{{rangeSeparator}}</view>
+						</slot>
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
+							:placeholder="endPlaceholder" :disabled="true" />
+					</view>
+					<view v-show="clearIcon && !disabled && !isPhone && (singleVal || (range.startDate && range.endDate))"
+						class="uni-date__icon-clear" @click.stop="clear">
+						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
+					</view>
 				</view>
-				<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
-					:disabled="true" />
-			</view>
-			<view v-else class="uni-date-x uni-date-range" @click="show">
-				<view class="uni-date__icon-logo">
-					<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
-				</view>
-				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
-					:placeholder="startPlaceholder" :disabled="true" />
-				<slot>
-					<view class="">{{rangeSeparator}}</view>
-				</slot>
-				<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
-					:placeholder="endPlaceholder" :disabled="true" />
-			</view>
-			<view v-show="!disabled && (singleVal || (range.startDate && range.endDate))" class="uni-date__icon-clear"
-				@click="clear">
-				<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
-			</view>
+			</slot>
 		</view>
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
-		<view ref="datePicker" v-show="popup" class="uni-date-picker__container">
+		<view v-if="!isPhone" ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
 				<view v-show="hasTime" class="uni-date-changed popup-x-header">
 					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
@@ -85,7 +89,7 @@
 				</view>
 			</view>
 		</view>
-		<calendar ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			@confirm="mobileChange" />
@@ -109,11 +113,12 @@
 	 * @property {String} range-separator 选择范围时的分隔符
 	 * @property {Boolean} border = [true|false] 是否有边框
 	 * @property {Boolean} disabled = [true|false] 是否禁用
+	 * @property {Boolean} clearIcon = [true|false] 是否显示清除按钮（仅PC端适用）
 	 * @event {Function} change 确定日期时触发的事件
 	 **/
 
 	export default {
-		name:'UniDatetimePicker',
+		name: 'UniDatetimePicker',
 		components: {
 			calendar,
 			timePicker
@@ -163,6 +168,8 @@
 				visible: false,
 				popup: false,
 				popover: null,
+				isEmitValue: false,
+				isPhone: false,
 				iconBase64: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACVklEQVRoge2Zv2vTQRTAP4oWJQQskmolBAnSQVMcSxbp4ubmIEWETu0oIjg5iIOgpLNunfQfMHToUgpOVgfRqRAL4q8WRLQVq4sOdyHPL9/7evfNJReS+8DB433v7r37fl/eu9xBJBKUB0BLt+uDaOOQZb8SUNXyuKuRftg46NeXcBww6M8AC0ANOAycAyb1s7e6+SbNxi/gBfAQ2HadcA7YB/4MUPsKzLos4jzwewAcNy3mhMnx5I/9BiqUAD4DDWAXmAfqWt8Enlq+GBfSbEwAt4AicAxYBO7aTPaGzhu4KvTLQn/Hh9cpmGzcFvqmaXAyaxWE/MGTg93yXsgFUyfbOrJCJ2s8y+tRP21s0fmMTlmih8zT8WnN1GloCmJWaF0CpvrlSAb1/3fJXshNT470hZEIrZeoahqaU8BZ10Exa4XGtiCaKKL+EIHaMX8U81ZEP7ntrwi7n4CfWi7p+UCFdFdh7Rpaps9+mn93rjY2THut0QqtoVlIkpi1QjNyCzEdnl0W+idCXxb6VmKudaGfsbBhRbcHdEWhf5eYt0o6FVR6BjhqYcOKoQkt2y/SAB5rWVbpVeCilmUl3hb6JNeAI1p+ZWEjFzH9hsY2tEwHdHX9DGATWNLyceCeGL/YhY+58LWhy9o0uhJDKw3T4dlr4L6WZab5JvRBGJqs9UPI5R44lQfpx56pUzK0NlA3R6AK1Engu1+/nGhfK7R5bjtwGnXdFfpSJ6190Quz5grqQCC048lFXMhy2nQZWkUVsRowZv8OvLOPCvdHwE5APyKRSMQzfwE22DtT3T5PPwAAAABJRU5ErkJggg=='
 			}
 		},
@@ -210,6 +217,10 @@
 			disabled: {
 				type: [Boolean],
 				default: false
+			},
+			clearIcon: {
+				type: [Boolean],
+				default: true
 			}
 		},
 		watch: {
@@ -229,45 +240,11 @@
 			value: {
 				immediate: true,
 				handler(newVal, oldVal) {
-					if (!newVal) return
-					if (!Array.isArray(newVal) && !this.isRange) {
-						const {
-							defDate,
-							defTime
-						} = this.parseDate(newVal)
-						this.singleVal = defDate
-						this.tempSingleDate = defDate
-						this.defSingleDate = defDate
-						if (this.hasTime) {
-							this.singleVal = defDate + ' ' + defTime
-							this.time = defTime
-						}
-					} else {
-						if (oldVal) return // 只初始默认值
-						const [before, after] = newVal
-						if (!before && !after) return
-						const defBefore = this.parseDate(before)
-						const defAfter = this.parseDate(after)
-						this.range.startDate = this.tempRange.startDate = defBefore.defDate
-						this.range.endDate = this.tempRange.endDate = defAfter.defDate
-
-						if (this.hasTime) {
-							this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
-							this.range.endDate = defAfter.defDate + ' ' + defAfter.defTime
-							this.tempRange.startTime = defBefore.defTime
-							this.tempRange.endTime = defAfter.defTime
-						}
-						const defaultRange = {
-							before: defBefore.defDate,
-							after: defAfter.defDate
-						}
-						this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, defaultRange, {
-							which: 'right'
-						})
-						this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, defaultRange, {
-							which: 'left'
-						})
+					if (this.isEmitValue) {
+						this.isEmitValue = false
+						return
 					}
+					this.initPicker(newVal)
 				}
 			},
 
@@ -323,73 +300,118 @@
 					start: this.caleRange.startTime,
 					end: this.caleRange.endTime
 				}
+			},
+			datePopupWidth() {
+				// todo
+				return this.isRange ? 653 : 301
 			}
 		},
 		mounted() {
-			if (this.isRange) {
-				if (!Array.isArray(this.value)) return
-				const [before, after] = this.value
-				if (before && after) return
-				setTimeout(() => {
-					this.$refs.right.next()
-					this.$refs.right.cale.lastHover = false
-				}, 20)
-			}
+			this.platform()
 		},
 		methods: {
+			initPicker(newVal){
+				if (!newVal || Array.isArray(newVal) && !newVal.length) {
+					this.$nextTick(() => {
+						this.clear(false)
+					})
+					return
+				}
+				if (!Array.isArray(newVal) && !this.isRange) {
+					const {
+						defDate,
+						defTime
+					} = this.parseDate(newVal)
+					this.singleVal = defDate
+					this.tempSingleDate = defDate
+					this.defSingleDate = defDate
+					if (this.hasTime) {
+						this.singleVal = defDate + ' ' + defTime
+						this.time = defTime
+					}
+				} else {
+					const [before, after] = newVal
+					if (!before && !after) return
+					const defBefore = this.parseDate(before)
+					const defAfter = this.parseDate(after)
+					const startDate = defBefore.defDate
+					const endDate = defAfter.defDate
+					this.range.startDate = this.tempRange.startDate = startDate
+					this.range.endDate = this.tempRange.endDate = endDate
+
+					setTimeout(() => {
+						if (startDate && endDate) {
+							if (this.diffDate(startDate, endDate) < 30) {
+								this.$refs.right.next()
+							}
+						} else {
+							this.$refs.right.next()
+							this.$refs.right.cale.lastHover = false
+						}
+					}, 100)
+
+					if (this.hasTime) {
+						this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
+						this.range.endDate = defAfter.defDate + ' ' + defAfter.defTime
+						this.tempRange.startTime = defBefore.defTime
+						this.tempRange.endTime = defAfter.defTime
+					}
+					const defaultRange = {
+						before: defBefore.defDate,
+						after: defAfter.defDate
+					}
+					this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, defaultRange, {
+						which: 'right'
+					})
+					this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, defaultRange, {
+						which: 'left'
+					})
+				}
+			},
 			updateLeftCale(e) {
-				// console.log('----updateStartCale:', e);
 				const left = this.$refs.left
 				// 设置范围选
 				left.cale.setHoverMultiple(e.after)
 				left.setDate(this.$refs.left.nowDate.fullDate)
 			},
 			updateRightCale(e) {
-				// console.log('----updateStartCale:', e);
 				const right = this.$refs.right
 				// 设置范围选
 				right.cale.setHoverMultiple(e.after)
 				right.setDate(this.$refs.right.nowDate.fullDate)
 			},
-			getRef() {
-				this.$refs.left.pre()
+			platform(){
+				const systemInfo = uni.getSystemInfoSync()
+				this.isPhone =  systemInfo.windowWidth <= 500
+				this.windowWidth = systemInfo.windowWidth
 			},
 			show(event) {
 				if (this.disabled) {
 					return
 				}
-				const systemInfo = uni.getSystemInfoSync()
-				if (systemInfo.windowWidth <= 500) {
+				this.platform()
+				if (this.isPhone) {
 					this.$refs.mobile.open()
 					return
 				}
 				this.popover = {
 					top: '10px'
 				}
-				// const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor--x")
-				// dateEditor.boundingClientRect(rect => {
-				// 	console.log(22222222, rect);
-				// 	if (leftWindowInfo.errMsg) {
-				// 		left = rect.left + 'px'
-				// 	} else {
-				// 		left = '15px'
-				// 	}
-				// 	this.popover = {
-				// 		// top: rect.top + rect.height + 15 + 'px',
-				// 		top: '40px',
-				// 		left: 0,
-				// 	}
-				// }).exec()
+				const dateEditor = uni.createSelectorQuery().in(this).select(".uni-date-editor")
+				dateEditor.boundingClientRect(rect => {
+					if (this.windowWidth - rect.left < this.datePopupWidth) {
+						this.popover.right = 0
+					}
+				}).exec()
 				setTimeout(() => {
 					this.popup = !this.popup
-					// this.visible = true
 				}, 20)
 			},
 
 			close() {
 				setTimeout(() => {
 					this.popup = false
-					// this.visible = true
+					this.$emit('maskClick', this.value)
 				}, 20)
 			},
 			setEmit(value) {
@@ -410,6 +432,7 @@
 				}
 				this.$emit('change', value)
 				this.$emit('input', value)
+				this.isEmitValue = true
 			},
 			createTimestamp(date) {
 				date = this.fixIosDateFormat(date)
@@ -448,7 +471,6 @@
 					fulldate: e.fulldate
 				}
 				this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, obj)
-				// console.log('startMultipleStatus 返回:', this.startMultipleStatus)
 			},
 
 			rightChange(e) {
@@ -464,7 +486,6 @@
 					fulldate: e.fulldate
 				}
 				this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, obj)
-				// console.log('endMultipleStatus 返回:', this.endMultipleStatus)
 			},
 
 			mobileChange(e) {
@@ -549,13 +570,27 @@
 				}
 			},
 
-			clear() {
+			/**
+			 * 比较时间差
+			 */
+			diffDate(startDate, endDate) {
+				// 计算截止时间
+				startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
+				// 计算详细项的截止时间
+				endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
+				const diff = (endDate - startDate) / (24 * 60 * 60 * 1000)
+				return Math.abs(diff)
+			},
+
+			clear(needEmit = true) {
 				if (!this.isRange) {
 					this.singleVal = ''
 					this.$refs.pcSingle.calendar.fullDate = ''
 					this.$refs.pcSingle.setDate()
-					this.$emit('change', '')
-					this.$emit('input', '')
+					if (needEmit) {
+						this.$emit('change', '')
+						this.$emit('input', '')
+					}
 				} else {
 					this.range.startDate = ''
 					this.range.endDate = ''
@@ -571,10 +606,11 @@
 					this.$refs.right.cale.lastHover = false
 					this.$refs.right.setDate()
 					this.$refs.right.next()
-					this.$emit('change', ['', ''])
-					this.$emit('input', ['', ''])
+					if (needEmit) {
+						this.$emit('change', [])
+						this.$emit('input', [])
+					}
 				}
-				// if (this.popup) this.popup = false
 			},
 
 			parseDate(date) {
@@ -695,9 +731,7 @@
 		/* padding: 0 8px; */
 		position: absolute;
 		top: 0;
-		left: 0;
 		z-index: 999;
-		/* width: 375px; */
 		border: 1px solid #e4e7ed;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
@@ -708,9 +742,7 @@
 		background-color: #fff;
 		position: absolute;
 		top: 0;
-		left: 0;
 		z-index: 999;
-		/* width: 733px; */
 		border: 1px solid #e4e7ed;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		border-radius: 4px;
@@ -796,29 +828,7 @@
 		opacity: 0.6;
 	}
 
-	/* .uni-date-popper__arrow {
-			width: 10px;
-			height: 10px;
-	    top: -6px;
-	    left: 35px;
-	    margin-right: 3px;
-	    border-top-width: 0;
-	    border-bottom-color: #ebeef5;
-	    border-width: 6px;
-	    filter: drop-shadow(0 2px 12px rgba(0,0,0,.03));
-	}
-	.uni-date-popper__arrow:after {
-			content: " ";
-	    position: absolute;
-	    display: block;
-	    width: 0;
-	    height: 0;
-	    border-color: transparent;
-	    border-style: solid;
-	} */
-
 	.mr-50 {
 		margin-right: 50px;
 	}
-
 </style>
