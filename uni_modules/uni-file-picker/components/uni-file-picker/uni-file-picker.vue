@@ -92,12 +92,24 @@ export default {
 		uploadFile
 	},
 	props: {
+		// #ifdef VUE3
+		modelValue: {
+			type: [Array, Object],
+			default() {
+				return []
+			}
+		},
+		// #endif
+
+		// #ifndef VUE3
 		value: {
 			type: [Array, Object],
 			default() {
 				return []
 			}
 		},
+		// #endif
+
 		disabled: {
 			type: Boolean,
 			default: false
@@ -125,10 +137,6 @@ export default {
 			type: String,
 			default: 'grid'
 		},
-		// inputUrl: {
-		// 	type: Boolean,
-		// 	default: false
-		// },
 		// 选择文件类型  image/video/all
 		fileMediatype: {
 			type: String,
@@ -174,35 +182,32 @@ export default {
 		returnType: {
 			type: String,
 			default: 'array'
+		},
+		sizeType:{
+			type: Array,
+			default(){
+				return ['original','compressed']
+			}
 		}
 	},
 	watch: {
+		// #ifndef VUE3
 		value: {
 			handler(newVal) {
-				let newFils = []
-				let newData = [].concat(newVal || [])
-				newData.forEach(v => {
-					const files = this.files.find(i => i.url === v.url)
-					const reg = /cloud:\/\/([\w.]+\/?)\S*/
-					if (!v.path) {
-						v.path = v.url
-					}
-					if (reg.test(v.url)) {
-						this.getTempFileURL(v, v.url)
-					}
-					newFils.push(files ? files : v)
-				})
-				let data  = null
-				if (this.returnType === 'object') {
-					data = this.backObject(newFils)[0]
-				} else {
-					data = this.backObject(newFils)
-				}
-				this.formItem && this.formItem.setValue(data)
-				this.files = newFils
+				this.setValue(newVal)
 			},
 			immediate: true
-		}
+		},
+		// #endif
+		// #ifdef VUE3
+		modelValue:{
+			handler(newVal) {
+				this.setValue(newVal)
+			},
+			immediate: true
+		},
+		// #endif
+
 	},
 	data() {
 		return {
@@ -262,6 +267,31 @@ export default {
 		}
 	},
 	methods: {
+		setValue(newVal){
+			let newFils = []
+			let newData = [].concat(newVal || [])
+			newData.forEach(v => {
+				const files = this.files.find(i => i.url === v.url)
+				const reg = /cloud:\/\/([\w.]+\/?)\S*/
+				if (!v.path) {
+					v.path = v.url
+				}
+				if (reg.test(v.url)) {
+					this.getTempFileURL(v, v.url)
+				}
+				newFils.push(files ? files : v)
+			})
+			let data  = null
+			if (this.returnType === 'object') {
+				data = this.backObject(newFils)[0]
+			} else {
+				data = this.backObject(newFils)
+			}
+			this.formItem && this.formItem.setValue(data)
+			if(newFils.length){
+				this.files = newFils
+			}
+		},
 		/**
 		 * 获取父元素实例
 		 */
@@ -301,7 +331,7 @@ export default {
 		 * 选择文件
 		 */
 		choose() {
-			
+
 			if (this.disabled) return
 			if (this.files.length >= Number(this.limitLength) && this.showType !== 'grid' && this.returnType === 'array') {
 				uni.showToast({
@@ -331,6 +361,7 @@ export default {
 				.chooseAndUploadFile({
 					type: this.fileMediatype,
 					compressed: false,
+					sizeType:this.sizeType,
 					// TODO 如果为空，video 有问题
 					extension: this.extname.length > 0 ? this.extname : undefined,
 					count: this.limitLength - this.files.length, //默认9
@@ -366,11 +397,10 @@ export default {
 							if (this.limitLength - this.files.length <= 0) break
 							files[i].uuid = Date.now()
 							let filedata = await this.getFileData(files[i], this.fileMediatype)
-							filedata.file = files[i]
 							filedata.progress = 0
 							filedata.status = 'ready'
 							this.files.push(filedata)
-							currentData.push(filedata)
+							currentData.push({...filedata,file:files[i]})
 						}
 						this.$emit('select', {
 							tempFiles: currentData,
@@ -548,7 +578,6 @@ export default {
 				uuid: files.uuid,
 				extname: extname || '',
 				cloudPath: files.cloudPath,
-				file:files.file,
 				fileType: files.fileType,
 				url: files.path || files.path,
 				size: files.size, //单位是字节
@@ -626,7 +655,12 @@ export default {
 			} else {
 				data = this.backObject(this.files)
 			}
+			// #ifdef VUE3
+			this.$emit('update:modelValue',data)
+			// #endif
+			// #ifndef VUE3
 			this.$emit('input', data)
+			// #endif
 		},
 		backObject(files) {
 			let newFilesData = JSON.parse(JSON.stringify(files))
