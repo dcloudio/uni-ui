@@ -2,11 +2,10 @@
   "id": "uni-ui",
   "displayName": "uni-ui",
   "version": "1.3.7",
-  "description": "基于 uni-app 的 UI 组件库",
+  "description": "uni-ui 是一个基于uni-app全端兼容的高性能UI框架",
   "keywords": [
     "uni-ui",
     "uniui",
-    "",
     "UI组件库",
     "ui框架",
     "ui库"
