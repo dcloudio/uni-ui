@@ -37,3 +37,9 @@ uni-link是一个外部网页超链接组件，在小程序内复制url，在app
 |color				|String	|#999999								|链接文字颜色					|
 |fontSize			|String	|14											|链接文字大小，单位px			|
 
+
+### Link Slots
+
+|名称|说明|					
+|:-:|:-:|						
+|default|自定义内容，回覆盖原有的内容显示|
