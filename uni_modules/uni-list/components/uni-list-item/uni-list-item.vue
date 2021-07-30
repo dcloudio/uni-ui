@@ -74,6 +74,7 @@
  */
 export default {
 	name: 'UniListItem',
+	emits:['click','switchChange'],
 	props: {
 		direction: {
 			type: String,

@@ -43,8 +43,9 @@ url : pages/vue/group/group
 
 ### 属性说明
 
-属性名|类型|默认值|说明
-:-:|:-:|:-:|:-:
-title|String|主标题|
-top|Number|分组间隔|
+|属性名|类型|默认值|说明|
+|:-:|:-:|:-:|:-:|
+|title|String|-|主标题|
+|top|Number|-|分组间隔|
+|mode|String|''|模式 ，card 为卡片模式|
 

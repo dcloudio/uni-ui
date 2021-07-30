@@ -1,3 +1,7 @@
+## 1.1.5（2021-07-30）
+- 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+## 1.1.4
+- 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 ## 1.1.3（2021-06-24）
 - 优化 示例项目
 ## 1.1.1（2021-05-12）

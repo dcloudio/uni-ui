@@ -1,7 +1,7 @@
 {
   "id": "uni-swiper-dot",
   "displayName": "uni-swiper-dot 轮播图指示点",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "自定义轮播图指示点组件",
   "keywords": [
     "uni-ui",

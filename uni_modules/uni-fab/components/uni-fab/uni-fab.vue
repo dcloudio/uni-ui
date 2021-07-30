@@ -67,6 +67,7 @@
 	 */
 	export default {
 		name: 'UniFab',
+		emits:['fabClick','trigger'],
 		props: {
 			pattern: {
 				type: Object,

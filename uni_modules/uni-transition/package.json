@@ -1,7 +1,7 @@
 {
   "id": "uni-transition",
   "displayName": "uni-transition 过渡动画",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "元素的简单过渡动画",
   "keywords": [
     "uni-ui",

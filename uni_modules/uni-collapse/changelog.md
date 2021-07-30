@@ -1,3 +1,5 @@
+## 1.3.0（2021-07-30）
+- 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 ## 1.2.2（2021-07-21）
 - 修复 由1.2.0版本引起的 change 事件返回 undefined 的Bug
 ## 1.2.1（2021-07-21）

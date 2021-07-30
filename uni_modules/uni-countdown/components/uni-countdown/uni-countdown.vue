@@ -34,6 +34,7 @@
 	 */
 	export default {
 		name: 'UniCountdown',
+		emits:['timeup'],
 		props: {
 			showDay: {
 				type: Boolean,

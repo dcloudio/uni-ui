@@ -256,8 +256,7 @@
 		}, {
 			"path": "pages/vue/test/test",
 			"style": {
-				"navigationBarTitleText": "test",
-				"a":"test"
+				"navigationBarTitleText": "test"
 			}
 		}, {
 			"path": "pages/vue/table/table",

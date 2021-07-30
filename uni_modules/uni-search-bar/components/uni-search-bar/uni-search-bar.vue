@@ -49,6 +49,7 @@
 
 	export default {
 		name: "UniSearchBar",
+		emits:['input','update:modelValue','clear','cancel','confirm','blur','focus'],
 		props: {
 			placeholder: {
 				type: String,

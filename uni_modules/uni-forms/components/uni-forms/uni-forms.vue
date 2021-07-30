@@ -60,6 +60,7 @@
 			prop: 'modelValue',
 			event: 'update:modelValue'
 		},
+		emits:['update:modelValue','input','reset','validate','submit'],
 		props: {
 			// 即将弃用
 			value: {

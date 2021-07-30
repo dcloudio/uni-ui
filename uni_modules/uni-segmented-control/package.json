@@ -1,7 +1,7 @@
 {
   "id": "uni-segmented-control",
   "displayName": "uni-segmented-control 分段器",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "分段器由至少 2 个分段控件组成，用作不同视图的显示",
   "keywords": [
     "uni-ui",

@@ -103,7 +103,7 @@ export default {
       console.log('点击了'+(e.position === 'left' ? '左侧' : '右侧') + e.content.text + '按钮')
     },
     swipeChange(e,index){
-      console.log('当前状态：'+ open +'，下标：' + index)
+      console.log('当前状态：'+ e +'，下标：' + index)
     }
   }
 }

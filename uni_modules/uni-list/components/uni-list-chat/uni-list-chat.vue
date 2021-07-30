@@ -70,6 +70,7 @@
 	 */
 	export default {
 		name: 'UniListChat',
+		emits:['click'],
 		props: {
 			title: {
 				type: String,

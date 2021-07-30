@@ -44,6 +44,7 @@ export default {
 	components: {
 		dropdown
 	},
+	emits:['sort-change','filter-change'],
 	props: {
 		width: {
 			type: [String, Number],

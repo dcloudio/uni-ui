@@ -14,6 +14,7 @@
 	 */
 	export default {
 		name: 'uniCollapse',
+		emits:['change','activeItem','input','update:modelValue'],
 		props: {
 			value: {
 				type: [String, Array],
