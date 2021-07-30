@@ -509,9 +509,7 @@
 				let data = []
 				if (this.returnType === 'object') {
 					data = this.backObject(this.files)[0]
-					if (!this.localValue) {
-						this.localValue = {}
-					}
+					this.localValue = {}
 					Object.assign(this.localValue, data)
 				} else {
 					data = this.backObject(this.files)
