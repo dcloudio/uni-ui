@@ -319,7 +319,9 @@
 						// TODO 如果为空，video 有问题
 						extension: _extname.length > 0 ? _extname : undefined,
 						count: this.limitLength - this.files.length, //默认9
-						onChooseFile: this.chooseFileCallback,
+						onChooseFile: (res)=>{
+							this.chooseFileCallback(res)
+						},
 						onUploadProgress: progressEvent => {
 							this.setProgress(progressEvent, progressEvent.index)
 						}
@@ -545,7 +547,8 @@
 					fileList: [].concat(fileList)
 				}
 				const urls = await uniCloud.getTempFileURL(fileList)
-				file.path = urls.fileList[0].tempFileURL || ''
+				file.url = urls.fileList[0].tempFileURL || ''
+				file.path = file.url
 				const index = this.files.findIndex(v => v.path === file.path)
 				if (index !== -1) {
 					this.$set(this.files, index, file)
