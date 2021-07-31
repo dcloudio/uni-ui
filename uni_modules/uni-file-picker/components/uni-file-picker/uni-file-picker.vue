@@ -194,7 +194,7 @@
 			// #ifndef VUE3
 			value: {
 				handler(newVal, oldVal) {
-					this.localValue = newVal
+					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
@@ -202,14 +202,11 @@
 			// #ifdef VUE3
 			modelValue: {
 				handler(newVal, oldVal) {
-					this.localValue = newVal
+					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
 			// #endif
-			localValue(newVal, oldVal) {
-				this.setValue(newVal, oldVal)
-			}
 		},
 		computed: {
 			filesList() {
@@ -259,9 +256,7 @@
 				const newData = (v) => {
 					const files = this.files.find(i => i.url === v.url)
 					const reg = /cloud:\/\/([\w.]+\/?)\S*/
-					if (!v.path) {
-						v.path = v.url
-					}
+					v.path = v.url
 					if (reg.test(v.url)) {
 						this.getTempFileURL(v, v.url)
 					}
@@ -275,8 +270,8 @@
 						newData(v)
 					})
 				}
-
-				this.formItem && this.formItem.setValue(newVal)
+				this.localValue = newVal
+				this.formItem && this.formItem.setValue(this.localValue)
 				this.files = [].concat(newVal || [])
 			},
 
