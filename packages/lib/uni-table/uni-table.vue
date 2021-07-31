@@ -38,6 +38,7 @@ export default {
 	options: {
 		virtualHost: true
 	},
+	emits:['selection-change'],
 	props: {
 		data: {
 			type: Array,

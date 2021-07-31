@@ -47,6 +47,7 @@
 
 	export default {
 		name: 'UniSwiperDot',
+		emits:['clickItem'],
 		props: {
 			info: {
 				type: Array,

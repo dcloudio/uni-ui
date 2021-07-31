@@ -49,6 +49,7 @@
 
 	export default {
 		name: "UniSearchBar",
+		emits:['input','update:modelValue','clear','cancel','confirm','blur','focus'],
 		props: {
 			placeholder: {
 				type: String,
@@ -82,6 +83,10 @@
 				type: [Number, String],
 				default: ""
 			},
+			modelValue: {
+				type: [Number, String],
+				default: ""
+			},
 			focus: {
 				type: Boolean,
 				default: false
@@ -104,6 +109,15 @@
 					}
 				}
 			},
+			modelValue: {
+				immediate: true,
+				handler(newVal) {
+					this.searchVal = newVal
+					if (newVal) {
+						this.show = true
+					}
+				}
+			},
 			focus: {
 				immediate: true,
 				handler(newVal) {
@@ -117,6 +131,7 @@
 			},
 			searchVal(newVal, oldVal) {
 				this.$emit("input", newVal)
+				this.$emit("update:modelValue", newVal)
 			}
 		},
 		methods: {

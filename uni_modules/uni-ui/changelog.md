@@ -1,3 +1,30 @@
+## 1.3.8（2021-07-31）
+- uni-ui 组件兼容 vue3
+- uni-collapse 修复 由1.2.0版本引起的 change 事件返回 undefined 的Bug
+- uni-collapse 优化 组件示例
+- uni-collapse 新增 组件折叠动画
+- uni-collapse 新增 value\v-model 属性 ，动态修改面板折叠状态
+- uni-collapse 新增 title 插槽 ，可定义面板标题
+- uni-collapse 新增 border 属性 ，显示隐藏面板内容分隔线
+- uni-collapse 新增 title-border 属性 ，显示隐藏面板标题分隔线
+- uni-collapse 修复 resize 方法失效的Bug
+- uni-collapse 修复 change 事件返回参数不正确的Bug
+- uni-collapse 优化 H5、App 平台自动更具内容更新高度，无需调用 reszie() 方法
+- uni-data-checkbox 优化 在uni-forms组件，与label不对齐的问题
+- uni-data-checkbox 修复 单选默认值为0不能选中的Bug
+- uni-easyinput 优化 errorMessage 属性支持 Boolean 类型
+- uni-file-picker 修复 return-type为object下，返回值不正确的Bug
+- uni-file-picker 修复（重要） H5 平台下如果和uni-forms组件一同使用导致页面卡死的问题
+- uni-file-picker 优化 h5平台下上传文件导致页面卡死的问题
+- uni-forms 修复 vue2 下条件编译导致destroyed生命周期失效的Bug
+- uni-forms 修复 1.2.1 引起的示例在小程序平台报错的Bug
+- uni-forms 修复 动态校验表单，默认值为空的情况下校验失效的Bug
+- uni-forms 修复 不指定name属性时，运行报错的Bug
+- uni-forms 优化 label默认宽度从65调整至70，使required为true且四字时不换行
+- uni-forms 优化 组件示例，新增动态校验示例代码
+- uni-forms 优化 组件文档，使用方式更清晰
+- uni-list 修复 与其他组件嵌套使用时，点击失效的Bug
+- uni-swipe-action 修复 跨页面修改组件数据 ，导致不能滑动的问题
 ## 1.3.7（2021-07-16）
 - uni-ui 兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 - uni-datetime-picker 修复 单选日期类型，初始赋值后不在当前日历的 bug

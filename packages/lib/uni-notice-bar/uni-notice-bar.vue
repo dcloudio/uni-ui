@@ -55,6 +55,7 @@
 
 	export default {
 		name: 'UniNoticeBar',
+		emits:['click','getmore','close'],
 		props: {
 			text: {
 				type: String,

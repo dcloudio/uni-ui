@@ -28,6 +28,7 @@
 	 */
 	export default {
 		name: 'UniBadge',
+		emits:['click'],
 		props: {
 			type: {
 				type: String,

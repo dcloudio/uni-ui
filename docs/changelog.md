@@ -7,22 +7,96 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
-<log title="1.3.7" date="2021-07-16">
-	<log-item title="uni-card 组件更新">
+<log title="1.3.8" date="2021-07-31">
+	<log-item title="uni-ui">
 		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+			H5、微信小程序兼容VUE3
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 由1.2.0版本引起的 change 事件返回 undefined 的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 组件折叠动画
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 value\v-model 属性 ，动态修改面板折叠状态
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 title 插槽 ，可定义面板标题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 border 属性 ，显示隐藏面板内容分隔线
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 title-border 属性 ，显示隐藏面板标题分隔线
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 resize 方法失效的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 change 事件返回参数不正确的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 H5、App 平台自动更具内容更新高度，无需调用 reszie() 方法
 		</log-item-text>
 	</log-item>
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+			 在uni-forms组件，与label不对齐的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 单选默认值为0不能选中的Bug
 		</log-item-text>
 	</log-item>
-	<log-item title="uni-data-picker 组件更新">
+	<log-item title="uni-easyinput 组件更新">
 		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
+			 errorMessage 属性支持 Boolean 类型
 		</log-item-text>
 	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 return-type为object下，返回值不正确的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			（重要） H5 平台下如果和uni-forms组件一同使用导致页面卡死的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vue3 下赋值错误的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 vue2 下条件编译导致destroyed生命周期失效的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 1.2.1 引起的示例在小程序平台报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 动态校验表单，默认值为空的情况下校验失效的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 不指定name属性时，运行报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 label默认宽度从65调整至70，使required为true且四字时不换行
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件示例，新增动态校验示例代码
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件文档，使用方式更清晰
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 跨页面修改组件数据 ，导致不能滑动的问题
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.3.7" date="2021-07-16">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="fix">
 			 单选日期类型，初始赋值后不在当前日历的 bug
@@ -41,66 +115,6 @@
 		</log-item-text>
 		<log-item-text tag-type="fix">
 			 范围选类型，用户选择后再次选择右侧日历（结束日期）显示不正确的 bug
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-drawer 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-easyinput 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-fav 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-file-picker 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-forms 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-goods-nav 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-grid 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-list 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-number-box 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-popup 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-rate 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
-		</log-item-text>
-	</log-item>
-	<log-item title="uni-row 组件更新">
-		<log-item-text tag-type="perf">
-			 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 		</log-item-text>
 	</log-item>
 </log>
