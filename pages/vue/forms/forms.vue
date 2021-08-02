@@ -85,7 +85,6 @@
 						<button class="button" size="mini" type="default" @click="del(item.id)">删除</button>
 					</view>
 				</uni-forms-item>
-
 			</uni-forms>
 			<view class="button-group">
 				<button type="primary" size="mini" @click="add">新增域名</button>
@@ -192,18 +191,18 @@
 						}]
 					},
 					hobby: {
-						rules: [
-						{
-							format: 'array'
-						},
-						{
-							validateFunction: function(rule, value, data, callback) {
-								if (value.length < 2) {
-									callback('请至少勾选两个兴趣爱好')
+						rules: [{
+								format: 'array'
+							},
+							{
+								validateFunction: function(rule, value, data, callback) {
+									if (value.length < 2) {
+										callback('请至少勾选两个兴趣爱好')
+									}
+									return true
 								}
-								return true
 							}
-						}]
+						]
 					}
 
 				},
