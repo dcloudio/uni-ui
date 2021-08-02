@@ -7,6 +7,27 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.9" date="2021-08-02">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 return-type 属性支持返回 date 日期对象
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 fileExtname属性不指定值报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在某种场景下图片不回显的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="perf">
+			 支持自定义插槽
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.8" date="2021-07-31">
 	<log-item title="uni-ui">
 		<log-item-text tag-type="perf">

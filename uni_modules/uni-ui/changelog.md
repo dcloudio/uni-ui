@@ -1,3 +1,8 @@
+## 1.3.9（2021-08-02）
+- uni-datetime-picker 新增 return-type 属性支持返回 date 日期对象
+- uni-file-picker 修复 fileExtname属性不指定值报错的Bug
+- uni-file-picker 修复 在某种场景下图片不回显的Bug
+- uni-link 支持自定义插槽
 ## 1.3.8（2021-07-31）
 - uni-ui 组件兼容 vue3
 - uni-collapse 修复 由1.2.0版本引起的 change 事件返回 undefined 的Bug
