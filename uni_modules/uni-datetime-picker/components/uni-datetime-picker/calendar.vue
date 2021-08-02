@@ -221,6 +221,7 @@
 			date: {
 				immediate: true,
 				handler(newVal, oldVal) {
+					if (!this.range)
 					setTimeout(() => {
 						this.init(newVal)
 					}, 100)
