@@ -1,7 +1,7 @@
 {
   "id": "uni-dateformat",
   "displayName": "uni-dateformat 日期格式化",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "日期格式化组件，可以将日期格式化为1分钟前、刚刚等形式",
   "keywords": [
     "uni-ui",
