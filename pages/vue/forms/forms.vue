@@ -78,16 +78,13 @@
 				<uni-forms-item label="邮箱" required name="email">
 					<uni-easyinput v-model="dynamicFormData.email" placeholder="请输入姓名" />
 				</uni-forms-item>
-				<template v-for="(item,index) in dynamicLists" :key="item.id">
-					<uni-forms-item :label="item.label+' '+index" required
-						:rules="item.rules" 
-						:name="'domains[' + item.id + ']'">
-						<view class="form-item">
-							<uni-easyinput v-model="dynamicFormData.domains[item.id]" placeholder="请输入域名" />
-							<button class="button" size="mini" type="default" @click="del(item.id)">删除</button>
-						</view>
-					</uni-forms-item>
-				</template>
+				<uni-forms-item v-for="(item,index) in dynamicLists" :key="item.id" :label="item.label+' '+index"
+					required :rules="item.rules" :name="'domains[' + item.id + ']'">
+					<view class="form-item">
+						<uni-easyinput v-model="dynamicFormData.domains[item.id]" placeholder="请输入域名" />
+						<button class="button" size="mini" type="default" @click="del(item.id)">删除</button>
+					</view>
+				</uni-forms-item>
 
 			</uni-forms>
 			<view class="button-group">
@@ -249,7 +246,10 @@
 			add() {
 				this.dynamicLists.push({
 					label: '域名',
-					rules:[{'required': true,errorMessage: '域名项必填'}],
+					rules: [{
+						'required': true,
+						errorMessage: '域名项必填'
+					}],
 					id: Date.now()
 				})
 			},
