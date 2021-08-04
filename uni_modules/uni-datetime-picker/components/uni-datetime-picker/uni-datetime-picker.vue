@@ -310,7 +310,7 @@
 			this.platform()
 		},
 		methods: {
-			initPicker(newVal){
+			initPicker(newVal) {
 				if (!newVal || Array.isArray(newVal) && !newVal.length) {
 					this.$nextTick(() => {
 						this.clear(false)
@@ -339,16 +339,18 @@
 					this.range.startDate = this.tempRange.startDate = startDate
 					this.range.endDate = this.tempRange.endDate = endDate
 
-					setTimeout(() => {
-						if (startDate && endDate) {
-							if (this.diffDate(startDate, endDate) < 30) {
+					if (!this.isPhone) {
+						setTimeout(() => {
+							if (startDate && endDate) {
+								if (this.diffDate(startDate, endDate) < 30) {
+									this.$refs.right.next()
+								}
+							} else {
 								this.$refs.right.next()
+								this.$refs.right.cale.lastHover = false
 							}
-						} else {
-							this.$refs.right.next()
-							this.$refs.right.cale.lastHover = false
-						}
-					}, 100)
+						}, 100)
+					}
 
 					if (this.hasTime) {
 						this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
@@ -380,9 +382,9 @@
 				right.cale.setHoverMultiple(e.after)
 				right.setDate(this.$refs.right.nowDate.fullDate)
 			},
-			platform(){
+			platform() {
 				const systemInfo = uni.getSystemInfoSync()
-				this.isPhone =  systemInfo.windowWidth <= 500
+				this.isPhone = systemInfo.windowWidth <= 500
 				this.windowWidth = systemInfo.windowWidth
 			},
 			show(event) {
@@ -592,8 +594,12 @@
 			clear(needEmit = true) {
 				if (!this.isRange) {
 					this.singleVal = ''
-					this.$refs.pcSingle.calendar.fullDate = ''
-					this.$refs.pcSingle.setDate()
+					if (this.isPhone) {
+						this.defSingleDate = ''
+					} else {
+						this.$refs.pcSingle.calendar.fullDate = ''
+						this.$refs.pcSingle.setDate()
+					}
 					if (needEmit) {
 						this.$emit('change', '')
 						this.$emit('input', '')
@@ -602,17 +608,28 @@
 					this.range.startDate = ''
 					this.range.endDate = ''
 					this.tempRange = {}
-					this.$refs.left.cale.multipleStatus.before = ''
-					this.$refs.left.cale.multipleStatus.after = ''
-					this.$refs.left.cale.multipleStatus.data = []
-					this.$refs.left.cale.lastHover = false
-					this.$refs.left.setDate()
-					this.$refs.right.cale.multipleStatus.before = ''
-					this.$refs.right.cale.multipleStatus.after = ''
-					this.$refs.right.cale.multipleStatus.data = []
-					this.$refs.right.cale.lastHover = false
-					this.$refs.right.setDate()
-					this.$refs.right.next()
+					if (this.isPhone) {
+						this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, {
+							before: '',
+							after: '',
+							data: [],
+							fulldate: ''
+						}, {
+							which: 'left'
+						})
+					} else {
+						this.$refs.left.cale.multipleStatus.before = ''
+						this.$refs.left.cale.multipleStatus.after = ''
+						this.$refs.left.cale.multipleStatus.data = []
+						this.$refs.left.cale.lastHover = false
+						this.$refs.left.setDate()
+						this.$refs.right.cale.multipleStatus.before = ''
+						this.$refs.right.cale.multipleStatus.after = ''
+						this.$refs.right.cale.multipleStatus.data = []
+						this.$refs.right.cale.lastHover = false
+						this.$refs.right.setDate()
+						this.$refs.right.next()
+					}
 					if (needEmit) {
 						this.$emit('change', [])
 						this.$emit('input', [])
@@ -682,7 +699,7 @@
 		position: relative;
 	}
 
-	.uni-date-editor--x:hover .uni-date__icon-clear {
+	.uni-date-editor--x .uni-date__icon-clear {
 		position: absolute;
 		top: 5px;
 		right: 0;
@@ -693,10 +710,6 @@
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */
-	}
-
-	.uni-date__icon-clear {
-		display: none;
 	}
 
 	.uni-date__input {
