@@ -229,6 +229,8 @@
 				handler(newVal, oldVal) {
 					if (newVal.indexOf('time') !== -1) {
 						this.hasTime = true
+					} else {
+						this.hasTime = false
 					}
 					if (newVal.indexOf('range') !== -1) {
 						this.isRange = true
