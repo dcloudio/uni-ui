@@ -1,7 +1,7 @@
 {
   "id": "uni-calendar",
   "displayName": "uni-calendar 日历",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "日历组件",
   "keywords": [
     "uni-ui",
@@ -77,6 +77,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }
