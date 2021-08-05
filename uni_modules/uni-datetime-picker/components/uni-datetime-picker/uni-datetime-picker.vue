@@ -170,6 +170,7 @@
 				popover: null,
 				isEmitValue: false,
 				isPhone: false,
+				isFirstShow: true,
 				iconBase64: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACVklEQVRoge2Zv2vTQRTAP4oWJQQskmolBAnSQVMcSxbp4ubmIEWETu0oIjg5iIOgpLNunfQfMHToUgpOVgfRqRAL4q8WRLQVq4sOdyHPL9/7evfNJReS+8DB433v7r37fl/eu9xBJBKUB0BLt+uDaOOQZb8SUNXyuKuRftg46NeXcBww6M8AC0ANOAycAyb1s7e6+SbNxi/gBfAQ2HadcA7YB/4MUPsKzLos4jzwewAcNy3mhMnx5I/9BiqUAD4DDWAXmAfqWt8Enlq+GBfSbEwAt4AicAxYBO7aTPaGzhu4KvTLQn/Hh9cpmGzcFvqmaXAyaxWE/MGTg93yXsgFUyfbOrJCJ2s8y+tRP21s0fmMTlmih8zT8WnN1GloCmJWaF0CpvrlSAb1/3fJXshNT470hZEIrZeoahqaU8BZ10Exa4XGtiCaKKL+EIHaMX8U81ZEP7ntrwi7n4CfWi7p+UCFdFdh7Rpaps9+mn93rjY2THut0QqtoVlIkpi1QjNyCzEdnl0W+idCXxb6VmKudaGfsbBhRbcHdEWhf5eYt0o6FVR6BjhqYcOKoQkt2y/SAB5rWVbpVeCilmUl3hb6JNeAI1p+ZWEjFzH9hsY2tEwHdHX9DGATWNLyceCeGL/YhY+58LWhy9o0uhJDKw3T4dlr4L6WZab5JvRBGJqs9UPI5R44lQfpx56pUzK0NlA3R6AK1Engu1+/nGhfK7R5bjtwGnXdFfpSJ6190Quz5grqQCC048lFXMhy2nQZWkUVsRowZv8OvLOPCvdHwE5APyKRSMQzfwE22DtT3T5PPwAAAABJRU5ErkJggg=='
 			}
 		},
@@ -341,19 +342,6 @@
 					this.range.startDate = this.tempRange.startDate = startDate
 					this.range.endDate = this.tempRange.endDate = endDate
 
-					if (!this.isPhone) {
-						setTimeout(() => {
-							if (startDate && endDate) {
-								if (this.diffDate(startDate, endDate) < 30) {
-									this.$refs.right.next()
-								}
-							} else {
-								this.$refs.right.next()
-								this.$refs.right.cale.lastHover = false
-							}
-						}, 100)
-					}
-
 					if (this.hasTime) {
 						this.range.startDate = defBefore.defDate + ' ' + defBefore.defTime
 						this.range.endDate = defAfter.defDate + ' ' + defAfter.defTime
@@ -409,6 +397,19 @@
 				}).exec()
 				setTimeout(() => {
 					this.popup = !this.popup
+					if (!this.isPhone && this.isRange && this.isFirstShow) {
+						this.isFirstShow = false
+						const { startDate, endDate } = this.range
+							if (startDate && endDate) {
+								if (this.diffDate(startDate, endDate) < 30) {
+									this.$refs.right.next()
+								}
+							} else {
+								this.$refs.right.next()
+								this.$refs.right.cale.lastHover = false
+							}
+					}
+
 				}, 20)
 			},
 
