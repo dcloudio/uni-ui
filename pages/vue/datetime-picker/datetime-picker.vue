@@ -1,15 +1,15 @@
 <template>
 	<view class="page">
-		<text class="example-info">可以同时选择日期和时间的选择器</text>
+		<!-- <text class="example-info">可以同时选择日期和时间的选择器</text>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker type="date" :clearIcon="false" v-model="single" @maskClick="maskClick" />
-		</view>
+		</view> -->
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="datetime" v-model="datetimesingle" @change="changeLog" />
+			<uni-datetime-picker type="datetime" return-type="timestamp" v-model="datetimesingle" @change="changeLog" />
 		</view>
-		<uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
+		<!-- <uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker v-model="range" type="daterange" rangeSeparator="至" @maskClick="maskClick" />
 		</view>
@@ -40,7 +40,7 @@
 		<uni-section :title="'disabled用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker v-model="single" disabled />
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -49,7 +49,7 @@
 		data() {
 			return {
 				single: '2021-5-3',
-				datetimesingle: '2021-07-3',
+				datetimesingle: 1627529992399,
 				range: ['2021-02-1', '2021-3-28'],
 				datetimerange: [],
 				start: '2021-7-2',

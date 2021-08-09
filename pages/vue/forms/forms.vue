@@ -20,6 +20,9 @@
 				<uni-forms-item label="自我介绍">
 					<uni-easyinput type="textarea" v-model="baseFormData.introduction" placeholder="请输入自我介绍" />
 				</uni-forms-item>
+				<uni-forms-item label="日期时间">
+					<uni-datetime-picker type="datetime" return-type="timestamp" v-model="baseFormData.datetimesingle" @change="changeLog" />
+				</uni-forms-item>
 			</uni-forms>
 		</view>
 		<uni-section title="对齐方式" type="line"></uni-section>
@@ -105,7 +108,8 @@
 					age: '',
 					introduction: '',
 					sex: 2,
-					hobby: [5]
+					hobby: [5],
+					datetimesingle: 1627529992399
 				},
 				// 表单数据
 				alignmentFormData: {
