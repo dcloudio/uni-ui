@@ -23,7 +23,8 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholder" :disabled="true" />
 					</view>
-					<view v-show="clearIcon && !disabled && !isPhone && (singleVal || (range.startDate && range.endDate))"
+					<view
+						v-show="clearIcon && !disabled && !isPhone && (singleVal || (range.startDate && range.endDate))"
 						class="uni-date__icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 					</view>
@@ -39,8 +40,7 @@
 						placeholder="选择日期" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
 						:start="reactStartTime" :end="reactEndTime">
-						<input class="uni-date__input uni-date-range__input" type="text" v-model="time"
-							placeholder="选择时间" :disabled="!tempSingleDate" />
+						<input class="uni-date__input uni-date-range__input" type="text" v-model="time" placeholder="选择时间" :disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
 				<calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
@@ -309,10 +309,34 @@
 				return this.isRange ? 653 : 301
 			}
 		},
+		created() {
+			this.form = this.getForm('uniForms')
+			this.formItem = this.getForm('uniFormsItem')
+
+			// if (this.formItem) {
+			// 	if (this.formItem.name) {
+			// 		this.rename = this.formItem.name
+			// 		this.form.inputChildrens.push(this)
+			// 	}
+			// }
+		},
 		mounted() {
 			this.platform()
 		},
 		methods: {
+			/**
+			 * 获取父元素实例
+			 */
+			getForm(name = 'uniForms') {
+				let parent = this.$parent;
+				let parentName = parent.$options.name;
+				while (parentName !== name) {
+					parent = parent.$parent;
+					if (!parent) return false
+					parentName = parent.$options.name;
+				}
+				return parent;
+			},
 			initPicker(newVal) {
 				if (!newVal || Array.isArray(newVal) && !newVal.length) {
 					this.$nextTick(() => {
@@ -399,15 +423,18 @@
 					this.popup = !this.popup
 					if (!this.isPhone && this.isRange && this.isFirstShow) {
 						this.isFirstShow = false
-						const { startDate, endDate } = this.range
-							if (startDate && endDate) {
-								if (this.diffDate(startDate, endDate) < 30) {
-									this.$refs.right.next()
-								}
-							} else {
+						const {
+							startDate,
+							endDate
+						} = this.range
+						if (startDate && endDate) {
+							if (this.diffDate(startDate, endDate) < 30) {
 								this.$refs.right.next()
-								this.$refs.right.cale.lastHover = false
 							}
+						} else {
+							this.$refs.right.next()
+							this.$refs.right.cale.lastHover = false
+						}
 					}
 
 				}, 20)
@@ -442,6 +469,7 @@
 						}
 					}
 				}
+				this.formItem && this.formItem.setValue(value)
 				this.$emit('change', value)
 				this.$emit('input', value)
 				this.isEmitValue = true
@@ -604,6 +632,7 @@
 						this.$refs.pcSingle.setDate()
 					}
 					if (needEmit) {
+						this.formItem && this.formItem.setValue('')
 						this.$emit('change', '')
 						this.$emit('input', '')
 					}
@@ -634,6 +663,7 @@
 						this.$refs.right.next()
 					}
 					if (needEmit) {
+						this.formItem && this.formItem.setValue([])
 						this.$emit('change', [])
 						this.$emit('input', [])
 					}
