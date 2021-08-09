@@ -183,6 +183,10 @@
 				type: [String, Number, Array, Date],
 				default: ''
 			},
+			modelValue: {
+				type: [String, Number, Array, Date],
+				default: ''
+			},
 			start: {
 				type: [Number, String],
 				default: ''
@@ -472,6 +476,7 @@
 				this.formItem && this.formItem.setValue(value)
 				this.$emit('change', value)
 				this.$emit('input', value)
+				this.$emit('update:modelValue', value)
 				this.isEmitValue = true
 			},
 			createTimestamp(date) {
@@ -635,6 +640,7 @@
 						this.formItem && this.formItem.setValue('')
 						this.$emit('change', '')
 						this.$emit('input', '')
+						this.$emit('update:modelValue', '')
 					}
 				} else {
 					this.range.startDate = ''
@@ -666,6 +672,7 @@
 						this.formItem && this.formItem.setValue([])
 						this.$emit('change', [])
 						this.$emit('input', [])
+						this.$emit('update:modelValue', [])
 					}
 				}
 			},

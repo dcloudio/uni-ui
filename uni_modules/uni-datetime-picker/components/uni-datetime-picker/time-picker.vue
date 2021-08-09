@@ -150,6 +150,10 @@
 				type: [String, Number],
 				default: ''
 			},
+			modelValue: {
+				type: [String, Number],
+				default: ''
+			},
 			start: {
 				type: [Number, String],
 				default: ''
@@ -678,9 +682,11 @@
 				if (this.returnType === 'timestamp' && this.type !== 'time') {
 					this.$emit('change', this.createTimeStamp(this.time))
 					this.$emit('input', this.createTimeStamp(this.time))
+					this.$emit('update:modelValue', this.createTimeStamp(this.time))
 				} else {
 					this.$emit('change', this.time)
 					this.$emit('input', this.time)
+					this.$emit('update:modelValue', this.time)
 				}
 			},
 
@@ -725,6 +731,7 @@
 				this.time = ''
 				this.$emit('change', this.time)
 				this.$emit('input', this.time)
+				this.$emit('update:modelValue', this.time)
 				this.tiggerTimePicker()
 			},
 
