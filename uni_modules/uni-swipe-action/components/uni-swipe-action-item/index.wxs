@@ -95,8 +95,10 @@ function touchend(e, ownerInstance) {
 	disabled = (typeof(disabled) === 'string' ? JSON.parse(disabled) : disabled) || false;
 
 	if (disabled) return
-	// 滑动过程中触摸结束,通过阙值判断是开启还是关闭
-	moveDirection(state.left, instance, ownerInstance)
+	// fix by mehaotian 解决touchend 触发比 click 事件时机早的问题，主要是 ios 13
+	setTimeout(()=>{
+		moveDirection(state.left, instance, ownerInstance)
+	},50)
 
 }
 
