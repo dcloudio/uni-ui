@@ -239,7 +239,7 @@
 				example.val = value;
 				this.$emit('input', Object.assign({}, this.value, this.formData));
 				this.$emit('update:modelValue', Object.assign({}, this.value, this.formData));
-				return example.triggerCheck(value, true);
+				return example.triggerCheck(value, callback);
 			},
 
 			/**
