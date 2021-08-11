@@ -246,6 +246,8 @@
 					const inputComp = this.inputChildrens.find(child => child.rename === item.name);
 					if (inputComp) {
 						inputComp.errMsg = '';
+						// fix by mehaotian 不触发其他组件的 setValue
+						inputComp.is_reset = true
 						inputComp.$emit('input', inputComp.multiple ? [] : '');
 						inputComp.$emit('update:modelValue', inputComp.multiple ? [] : '');
 					}
