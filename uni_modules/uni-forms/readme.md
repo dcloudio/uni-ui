@@ -605,8 +605,8 @@ export default {
 
 |属性名|类型|默认值|可选值|说明|
 |:-:|:-:|:-:|:-:|:-:|
-|v-model/value [即将废弃]|Object|-|-| 表单数据|
-|v-model/modelValue|Object|-|-| 表单数据|
+|value [即将废弃]|Object|-|-| 表单数据|
+|modelValue|Object|-|-| 表单数据|
 |rules|Object|-|-|表单校验规则|
 |validate-trigger|String|submit|bind/submit| 表单校验时机|
 |label-position|String|left|top/left|label 位置|

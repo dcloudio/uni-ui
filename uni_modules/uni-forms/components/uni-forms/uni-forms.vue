@@ -56,11 +56,7 @@
 	export default {
 		name: 'uniForms',
 		components: {},
-		model: {
-			prop: 'modelValue',
-			event: 'update:modelValue'
-		},
-		emits:['update:modelValue','input','reset','validate','submit'],
+		emits:['input','reset','validate','submit'],
 		props: {
 			// 即将弃用
 			value: {
@@ -237,8 +233,6 @@
 				value = this._getValue(example.name, value);
 				this.formData[name] = value;
 				example.val = value;
-				this.$emit('input', Object.assign({}, this.value, this.formData));
-				this.$emit('update:modelValue', Object.assign({}, this.value, this.formData));
 				return example.triggerCheck(value, callback);
 			},
 
@@ -263,8 +257,6 @@
 					}
 				});
 
-				this.$emit('input', this.formData);
-				this.$emit('update:modelValue', this.formData);
 				this.$emit('reset', event);
 			},
 
