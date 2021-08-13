@@ -273,6 +273,8 @@
 				this.localValue = newVal
 				this.formItem && this.formItem.setValue(this.localValue)
 				this.files = [].concat(newVal || [])
+				let filesData = Object.keys(newVal).length > 0 ? newVal : []
+				this.files = [].concat(filesData)
 			},
 
 			/**
@@ -319,9 +321,7 @@
 						// TODO 如果为空，video 有问题
 						extension: _extname.length > 0 ? _extname : undefined,
 						count: this.limitLength - this.files.length, //默认9
-						onChooseFile: (res)=>{
-							this.chooseFileCallback(res)
-						},
+						onChooseFile: this.chooseFileCallback,
 						onUploadProgress: progressEvent => {
 							this.setProgress(progressEvent, progressEvent.index)
 						}

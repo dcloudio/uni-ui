@@ -1,3 +1,23 @@
+## 1.4.0（2021-08-13）
+- uni-calendar 修复 弹出层被 tabbar 遮盖 bug
+- uni-data-checkbox 修复 在 uni-forms 中重置表单，错误信息无法清除的问题
+- uni-dateformat 调整 默认时间不再是当前时间，而是显示'-'字符
+- uni-datetime-picker 新增 适配 vue3
+- uni-datetime-picker 新增 支持作为 uni-forms 子组件相关功能
+- uni-datetime-picker 修复 在 uni-forms 中使用时，选择时间报 NAN 错误的 bug
+- uni-datetime-picker 修复 type 属性动态赋值无效的 bug
+- uni-datetime-picker 修复 ‘确认’按钮被 tabbar 遮盖 bug
+- uni-datetime-picker 修复 组件未赋值时范围选左、右日历相同的 bug
+- uni-datetime-picker 修复 范围选未正确显示当前值的 bug
+- uni-datetime-picker 修复 h5 平台（移动端）报错 'cale' of undefined 的 bug
+- uni-easyinput 修复 在 uni-forms 中重置表单，错误信息无法清除的问题
+- uni-file-picker 修复 return-type="object" 时，无法删除文件的Bug
+- uni-file-picker 修复 auto-upload 属性失效的Bug
+- uni-forms 修复 没有添加校验规则的字段依然报错的Bug
+- uni-forms 修复 重置表单错误信息无法清除的问题
+- uni-forms 优化 组件文档
+- uni-forms 修复 表单验证只生效一次的问题
+- uni-tag type 不是 default 时，size 为 small 字体大小显示不正确
 ## 1.3.9（2021-08-02）
 - uni-datetime-picker 新增 return-type 属性支持返回 date 日期对象
 - uni-file-picker 修复 fileExtname属性不指定值报错的Bug

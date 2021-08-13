@@ -7,6 +7,82 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.3.10" date="2021-08-13">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出层被 tabbar 遮盖 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-dateformat 组件更新">
+		<log-item-text tag-type="perf">
+			 调整 默认时间不再是当前时间，而是显示'-'字符
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 适配 vue3
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持作为 uni-forms 子组件相关功能
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中使用时，选择时间报 NAN 错误的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 type 属性动态赋值无效的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ‘确认’按钮被 tabbar 遮盖 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 组件未赋值时范围选左、右日历相同的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围选未正确显示当前值的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5 平台（移动端）报错 'cale' of undefined 的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 return-type="object" 时，无法删除文件的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 auto-upload 属性失效的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 没有添加校验规则的字段依然报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 重置表单错误信息无法清除的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件文档
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 表单验证只生效一次的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="perf">
+			 type 不是 default 时，size 为 small 字体大小显示不正确
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.9" date="2021-08-02">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="feat">
