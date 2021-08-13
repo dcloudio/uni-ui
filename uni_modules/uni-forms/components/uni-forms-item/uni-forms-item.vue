@@ -7,7 +7,7 @@
 						<text v-if="required" class="is-required">*</text>
 						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
 						<text class="label-text">{{ label }}</text>
-						
+
 						<view v-if="label" class="label-seat"></view>
 					</slot>
 				</view>
@@ -294,7 +294,8 @@ export default {
 		async triggerCheck(value,formTrigger) {
 			let promise = null;
 			this.errMsg = '';
-			if (!this.validator) return;
+			// fix by mehaotian 解决没有检验规则的情况下，抛出错误的问题
+			if (!this.validator || Object.keys(this.formRules).length === 0) return;
 			const isNoField = this.isRequired(this.formRules.rules || []);
 			let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger);
 			let result = null;
