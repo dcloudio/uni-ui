@@ -262,18 +262,22 @@
 					}
 					return v
 				}
-				// let data = null
 				if (this.returnType === 'object') {
-					newData(newData)
+					if (newVal) {
+						newData(newData)
+					} else {
+						newVal = {}
+					}
 				} else {
+					if (newVal) newVal = []
 					newVal.forEach(v => {
 						newData(v)
 					})
 				}
 				this.localValue = newVal
 				this.formItem && this.formItem.setValue(this.localValue)
-				this.files = [].concat(newVal || [])
-				let filesData = Object.keys(newVal).length > 0 ? newVal : []
+				let filesData = Object.keys(newVal).length > 0 ? newVal : [];
+
 				this.files = [].concat(filesData)
 			},
 
@@ -395,7 +399,7 @@
 						this.setSuccessAndError(result)
 					})
 					.catch(err => {
-						console.log('err', err)
+						console.log(err)
 					})
 			},
 
@@ -485,7 +489,20 @@
 					this.setEmit()
 				})
 			},
-
+			clearFiles(index) {
+				console.log(index);
+				if (index !== 0 && !index) {
+					this.files = []
+					this.$nextTick(() => {
+						this.setEmit()
+					})
+				} else {
+					this.files.splice(index, 1)
+				}
+				this.$nextTick(() => {
+					this.setEmit()
+				})
+			},
 			/**
 			 * 获取文件名和后缀
 			 * @param {Object} name
