@@ -784,7 +784,11 @@
 								transform: rotate(45deg);
 							}
 						}
-
+						.radio__inner {
+							.radio__inner-icon {
+								opacity: 1;
+							}
+						}
 						.checklist-text {
 							color: $checked-color;
 						}
