@@ -11,7 +11,7 @@
 			    :right-options="options1"
 			    @click="bindClick"
 			>
-				<view class="content-box">
+				<view class="content-box" @click="contentClick">
 					<text class="content-text">使用数据填充</text>
 				</view>
 			</uni-swipe-action-item>
@@ -24,11 +24,11 @@
 						>置顶</text>
 					</view>
 				</template>
-				<view class="content-box">
-					<text class="content-text">使用插槽</text>
+				<view class="content-box" @click="contentClick">
+					<text class="content-text">使用左右插槽</text>
 				</view>
 				<template v-slot:right>
-					<view class="slot-button"><text class="slot-button-text">删除</text></view>
+					<view class="slot-button" @click="bindClick({position:'right',content:{text:'删除'}})"><text class="slot-button-text">删除</text></view>
 				</template>
 			</uni-swipe-action-item>
 			<uni-swipe-action-item
@@ -41,8 +41,8 @@
 						    @click="bindClick({position:'left',content:{text:'置顶'}})"
 						>置顶</text></view>
 				</template>
-				<view class="content-box">
-					<text class="content-text">混合使用</text>
+				<view class="content-box" @click="contentClick">
+					<text class="content-text">数据与插槽混合使用</text>
 				</view>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
@@ -88,7 +88,7 @@
 		    title="swipe-action 列表"
 		    type="line"
 		></uni-section>
-		<uni-swipe-action>
+		<uni-swipe-action ref="swipeAction">
 			<uni-swipe-action-item
 			    v-for="(item, index) in swipeList"
 			    :right-options="item.options"
@@ -127,14 +127,7 @@
 						}
 					}
 				],
-				swipeList: []
-			};
-		},
-		onReady() {
-			// 模拟延迟赋值
-			setTimeout(() => {
-				this.isOpened = 'right';
-				this.swipeList = [{
+				swipeList: [{
 						options: [{
 							text: '添加',
 							style: {
@@ -142,7 +135,7 @@
 							}
 						}],
 						id: 0,
-						content: 'item1'
+						content: '左滑点击添加新增一条数据'
 					},
 					{
 						id: 1,
@@ -179,10 +172,33 @@
 						content: 'item3'
 					}
 				]
+			};
+		},
+		onReady() {
+			// 模拟延迟赋值
+			setTimeout(() => {
+				this.isOpened = 'right';
 			}, 1000);
+			
+			uni.$on('update',res=>{
+				console.log(111);
+				this.swipeClick({
+					content:{
+						text:'添加'
+					}
+				})
+			})
 		},
 		methods: {
+			contentClick(){
+				console.log('点击内容');
+				uni.showToast({
+					title:'点击内容',
+					icon:'none'
+				})
+			},
 			bindClick(e) {
+				console.log(e);
 				uni.showToast({
 					title: `点击了${e.position === 'left' ? '左侧' : '右侧'} ${e.content.text}按钮`,
 					icon: 'none'
