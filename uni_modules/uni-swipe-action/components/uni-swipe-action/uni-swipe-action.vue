@@ -19,16 +19,26 @@
 			this.children = [];
 		},
 		methods: {
+			// 公开给用户使用，重制组件样式
+			resize(){
+				// wxs 会自己计算组件大小，所以无需执行下面代码
+				// #ifndef APP-VUE || H5 || MP-WEIXIN
+				this.children.forEach(vm=>{
+					vm.init()
+				})
+				// #endif
+			},
 			closeOther(vm) {
 				if (this.openItem && this.openItem !== vm) {
 					// #ifdef APP-VUE || H5 || MP-WEIXIN
-					this.openItem.button.show = 'none'
+					this.openItem.is_show = 'none'
 					// #endif
 
 					// #ifndef APP-VUE || H5 || MP-WEIXIN
 					this.openItem.close()
 					// #endif
 				}
+				// 记录上一个打开的 swipe-action-item ,用于 auto-close 
 				this.openItem = vm
 			}
 		}

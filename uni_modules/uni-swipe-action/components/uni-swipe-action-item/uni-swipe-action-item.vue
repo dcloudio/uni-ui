@@ -2,14 +2,18 @@
 	<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
 	<!-- #ifdef APP-VUE || MP-WEIXIN || H5 -->
 	<view class="uni-swipe">
-		<view class="uni-swipe_box" :data-threshold="threshold" :data-disabled="disabled" :change:prop="swipe.sizeReady"
-			:prop="btn" @touchstart="swipe.touchstart" @touchmove="swipe.touchmove" @touchend="swipe.touchend"
-			@mousedown="swipe.mousedown" @mousemove="swipe.mousemove" @mouseup="swipe.mouseup"
-			@mouseleave="swipe.mouseleave">
+		<!--  #ifdef MP-WEIXIN || VUE3 -->
+		<view class="uni-swipe_box" :change:prop="wxsswipe.showWatch"
+			:prop="is_show" :data-threshold="threshold" :data-disabled="disabled" @touchstart="wxsswipe.touchstart" @touchmove="wxsswipe.touchmove" @touchend="wxsswipe.touchend">
+		<!-- #endif -->
+		<!--  #ifndef MP-WEIXIN || VUE3 -->
+		<view class="uni-swipe_box" :change:prop="renderswipe.showWatch"
+			:prop="is_show" :data-threshold="threshold" :data-disabled="disabled+''" @touchstart="renderswipe.touchstart" @touchmove="renderswipe.touchmove" @touchend="renderswipe.touchend">
+		<!-- #endif -->
 			<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
 			<view class="uni-swipe_button-group button-group--left">
 				<slot name="left">
-					<view v-for="(item,index) in leftOptions" :data-button="btn" :key="index" :style="{
+					<view v-for="(item,index) in leftOptions"  :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
 					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
 					}" class="uni-swipe_button button-hock" @touchstart="appTouchStart"
@@ -24,7 +28,7 @@
 			</view>
 			<view class="uni-swipe_button-group button-group--right">
 				<slot name="right">
-					<view v-for="(item,index) in rightOptions" :data-button="btn" :key="index" :style="{
+					<view v-for="(item,index) in rightOptions"  :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
 					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
 					}" class="uni-swipe_button button-hock" @touchstart="appTouchStart"
@@ -69,10 +73,10 @@
 	<!-- #endif -->
 	<!-- 其他平台使用 js ，长列表性能可能会有影响-->
 	<!-- #ifdef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || MP-QQ -->
-	<view class="uni-swipe">
+	<view class="uni-swipe"> 
 		<view class="uni-swipe_box" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend"
 			:style="{transform:moveLeft}" :class="{ani:ani}">
-			<view class="uni-swipe_button-group button-group--left">
+			<view class="uni-swipe_button-group button-group--left" :class="[elClass]">
 				<slot name="left">
 					<view v-for="(item,index) in leftOptions" :data-button="btn" :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
@@ -84,7 +88,7 @@
 				</slot>
 			</view>
 			<slot></slot>
-			<view class="uni-swipe_button-group button-group--right">
+			<view class="uni-swipe_button-group button-group--right" :class="[elClass]">
 				<slot name="right">
 					<view v-for="(item,index) in rightOptions" :data-button="btn" :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
@@ -98,21 +102,36 @@
 		</view>
 	</view>
 	<!-- #endif -->
-
+ 
 </template>
-<script src="./index.wxs" module="swipe" lang="wxs"></script>
+<script src="./wx.wxs" module="wxsswipe" lang="wxs"></script>
+
+<script module="renderswipe" lang="renderjs">
+	import render from './render.js'
+	export default {
+		mounted(e,ins,owner) {
+			this.state = {}
+		},
+		methods:{
+			showWatch(newVal, oldVal, ownerInstance, instance){
+				render.showWatch(newVal, oldVal, ownerInstance, instance,this)
+			},
+			touchstart(e,ownerInstance){
+				render.touchstart(e,ownerInstance,this)
+			},
+			touchmove(e, ownerInstance){
+				render.touchmove(e,ownerInstance,this)
+			},
+			touchend(e,ownerInstance){
+				render.touchend(e,ownerInstance,this)
+			}
+		}
+	}
+</script>
 <script>
-	// #ifdef APP-VUE|| MP-WEIXIN || H5
 	import mpwxs from './mpwxs'
-	// #endif
-
-	// #ifdef APP-NVUE
 	import bindingx from './bindingx.js'
-	// #endif
-
-	// #ifndef APP-PLUS|| MP-WEIXIN  ||  H5
-	import mixins from './mpother'
-	// #endif
+	import mpother from './mpother'
 
 	/**
 	 * SwipeActionItem 滑动操作子组件
@@ -129,18 +148,8 @@
 	 */
 
 	export default {
-		// #ifdef APP-VUE|| MP-WEIXIN||H5
-		mixins: [mpwxs],
-		// #endif
-
-		// #ifdef APP-NVUE
-		mixins: [bindingx],
-		// #endif
-
-		// #ifndef APP-PLUS|| MP-WEIXIN ||  H5
-		mixins: [mixins],
-		// #endif
-
+		mixins: [mpwxs,bindingx,mpother],
+		emits:['click','change'],
 		props: {
 			// 控制开关
 			show: {
