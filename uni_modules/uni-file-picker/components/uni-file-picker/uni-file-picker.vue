@@ -269,7 +269,7 @@
 						newVal = {}
 					}
 				} else {
-					if (newVal) newVal = []
+					if (!newVal) newVal = []
 					newVal.forEach(v => {
 						newData(v)
 					})
