@@ -254,6 +254,7 @@ export default {
 |show-animation|Boolean|false|开启动画|
 |border|Boolean|true|折叠面板内容分隔线|
 |title-border|String|auto|折叠面板标题分隔线可选值见下方 **TitleBorder Params**|
+|show-arrow|Boolean|true|是否显示右侧箭头|
 
 #### TitleBorder Params
 
