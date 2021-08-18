@@ -8,19 +8,19 @@
 						<view class="uni-date__icon-logo">
 							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 						</view>
-						<input class="uni-date__input" type="text" v-model="singleVal" :placeholder="placeholder"
+						<input class="uni-date__x-input" type="text" v-model="singleVal" :placeholder="placeholder"
 							:disabled="true" />
 					</view>
 					<view v-else class="uni-date-x uni-date-range">
 						<view class="uni-date__icon-logo">
 							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 						</view>
-						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.startDate"
+						<input class="uni-date__x-input uni-date-range__input" type="text" v-model="range.startDate"
 							:placeholder="startPlaceholder" :disabled="true" />
 						<slot>
 							<view class="">{{rangeSeparator}}</view>
 						</slot>
-						<input class="uni-date__input uni-date-range__input" type="text" v-model="range.endDate"
+						<input class="uni-date__x-input uni-date-range__input" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholder" :disabled="true" />
 					</view>
 					<view
@@ -43,7 +43,7 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="time" placeholder="选择时间" :disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
-				<calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
+				<calendar ref="pcSingle" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
 					:end-date="caleRange.endDate" :date="defSingleDate" @change="singleChange" />
 				<view v-if="hasTime" class="popup-x-footer">
 					<!-- <text class="">此刻</text> -->
@@ -75,13 +75,13 @@
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
+					<calendar ref="left" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
-						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding-right: 16px;" />
-					<calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
+						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" />
+					<calendar ref="right" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="rightChange"
 						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
-						@monthSwitch="rightMonthSwitch" style="padding-left: 16px;border-left: 1px solid #F1F1F1;" />
+						@monthSwitch="rightMonthSwitch" style="border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="" @click="clear">清空</text>
@@ -752,10 +752,17 @@
 		/* #endif */
 	}
 
+	.uni-date__x-input {
+		padding: 0 8px;
+		height: 40px;
+		width: 100%;
+		line-height: 40px;
+		font-size: 14px;
+	}
+
 	.uni-date__input {
 		height: 40px;
 		width: 100%;
-		padding: 0 8px;
 		line-height: 40px;
 		font-size: 14px;
 	}
@@ -789,6 +796,7 @@
 
 	.uni-date-single--x {
 		/* padding: 0 8px; */
+		background-color: #fff;
 		position: absolute;
 		top: 0;
 		z-index: 999;
@@ -798,7 +806,7 @@
 	}
 
 	.uni-date-range--x {
-		padding: 0 8px;
+		/* padding: 0 8px; */
 		background-color: #fff;
 		position: absolute;
 		top: 0;
@@ -890,5 +898,8 @@
 
 	.mr-50 {
 		margin-right: 50px;
+	}
+	.uni-date_calendar-pc {
+		padding: 0 6px;
 	}
 </style>
