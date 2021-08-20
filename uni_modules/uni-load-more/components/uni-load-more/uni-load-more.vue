@@ -23,7 +23,7 @@
 						 mode="widthFix"></image>
 		</view>
 		<!-- #endif -->
-		<text class="uni-load-more__text" :style="{color: color}">{{ status === 'more' ? contentText.contentdown : status === 'loading' ? contentText.contentrefresh : contentText.contentnomore }}</text>
+		<text class="uni-load-more__text" :style="{color: color}">{{ status === 'more' ? contentdownText : status === 'loading' ? contentrefreshText : contentnomoreText }}</text>
 	</view>
 </template>
 
@@ -32,6 +32,12 @@
 	setTimeout(() => {
 			platform = uni.getSystemInfoSync().platform
 	}, 16)
+
+	import {
+	initVueI18n
+	} from '@dcloudio/uni-i18n'
+	import messages from '../../i18n/index.js'
+	const {	t	} = initVueI18n(messages)
 
 	/**
 	 * LoadMore 加载更多
@@ -97,6 +103,15 @@
 		computed:{
 			iconSnowWidth(){
 				return (Math.floor(this.iconSize/24)||1)*2
+			},
+			contentdownText() {
+				return this.contentText.contentdown || t("uni-load-more.contentdown")
+			},
+			contentrefreshText() {
+				return this.contentText.contentrefresh || t("uni-load-more.contentrefresh")
+			},
+			contentnomoreText() {
+				return this.contentText.contentnomore || t("uni-load-more.contentnomore")
 			}
 		},
 		// #endif
