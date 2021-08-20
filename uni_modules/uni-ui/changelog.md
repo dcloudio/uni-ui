@@ -1,3 +1,16 @@
+## 1.4.1（2021-08-20）
+- 新增 uni-ui 组件支持国际化 i18n
+- uni-collapse 优化 show-arrow 属性默认为true
+- uni-collapse 新增 show-arrow 属性，控制是否显示右侧箭头
+- uni-data-checkbox 修复 单选 list 模式下 ，icon 为 left 时，选中图标不显示的问题
+- uni-easyinput 修复 在 uni-forms 的动态表单中默认值校验不通过的 bug
+- uni-file-picker 修复 由于 0.2.11 版本引起的不能回显图片的Bug
+- uni-file-picker 新增 clearFiles(index) 方法，可以手动删除指定文件
+- uni-file-picker 修复 v-model 值设为 null 报错的Bug
+- uni-swipe-action 新增 close-all 方法，关闭所有已打开的组件
+- uni-swipe-action 新增 resize() 方法，在非微信小程序、h5、app-vue端出现不能滑动的问题的时候，重置组件
+- uni-swipe-action 修复 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题 
+- uni-swipe-action 优化 微信小程序、h5、app-vue 滑动逻辑，避免出现动态新增组件后不能滑动的问题
 ## 1.4.0（2021-08-13）
 - uni-calendar 修复 弹出层被 tabbar 遮盖 bug
 - uni-data-checkbox 修复 在 uni-forms 中重置表单，错误信息无法清除的问题
