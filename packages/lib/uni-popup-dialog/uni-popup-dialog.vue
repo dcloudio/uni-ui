@@ -26,6 +26,11 @@
 </template>
 
 <script>
+	import {
+	initVueI18n
+	} from '@dcloudio/uni-i18n'
+	import messages from '../../i18n/index.js'
+	const {	t	} = initVueI18n(messages)
 	import popup from '../uni-popup/popup.js'
 	/**
 	 * PopUp 弹出层-对话框样式
