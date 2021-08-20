@@ -30,7 +30,7 @@
 		props: {
 			title: {
 				type: String,
-				default: '分享到'
+				default: ''
 			},
 			beforeClose: {
 				type: Boolean,

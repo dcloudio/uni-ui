@@ -63,7 +63,7 @@
 			},
 			placeholder: {
 				type: [String, Number],
-				default: '请输入内容'
+				default: ''
 			},
 			type: {
 				type: String,
@@ -75,7 +75,7 @@
 			},
 			title: {
 				type: String,
-				default: '提示'
+				default: ''
 			},
 			content: {
 				type: String,
