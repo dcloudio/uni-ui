@@ -3,7 +3,7 @@
 		<text class="example-info">可以同时选择日期和时间的选择器</text>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" :clearIcon="false" v-model="single" @maskClick="maskClick" />
+			<uni-datetime-picker type="date" v-model="single" @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
@@ -37,6 +37,10 @@
 		<view class="example-body">
 			<uni-datetime-picker v-model="single" :border="false" />
 		</view>
+		<uni-section :title="'隐藏清除按钮用法：' + single" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker v-model="single" :clearIcon="false" />
+		</view>
 		<uni-section :title="'disabled用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker v-model="single" disabled />
@@ -49,7 +53,7 @@
 		data() {
 			return {
 				single: '2021-5-3',
-				datetimesingle: '2021-07-3',
+				datetimesingle: '',
 				range: ['2021-02-1', '2021-3-28'],
 				datetimerange: [],
 				start: '2021-7-2',
