@@ -146,7 +146,7 @@ export default {
 |方法称名	|说明|
 |:-:|:-:|
 |resize()|动态添加数据后，如不能正常滑动，需要主动调用此方法，微信小程序、h5、app-vue 不生效|
-
+|close-all()|关闭所有已经打开的组件|
 ### SwipeAction Slots
 
 |名称|说明|
