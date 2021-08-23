@@ -264,7 +264,7 @@
 				}
 				if (this.returnType === 'object') {
 					if (newVal) {
-						newData(newData)
+						newData(newVal)
 					} else {
 						newVal = {}
 					}
