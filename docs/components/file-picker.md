@@ -100,6 +100,8 @@
 
 #### Callback Params
 
+`**注意**：如果绑定的是腾讯云的服务空间 ，tempFilePaths 将返回 fileID`
+
 ```json
 {
 	"progress"			: Number, 		// 上传进度 ，仅 @progress 事件包含此字段
