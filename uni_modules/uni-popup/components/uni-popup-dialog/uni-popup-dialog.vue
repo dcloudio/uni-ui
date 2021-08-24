@@ -30,7 +30,7 @@
 	import {
 	initVueI18n
 	} from '@dcloudio/uni-i18n'
-	import messages from '../../i18n/index.js'
+	import messages from '../uni-popup/i18n/index.js'
 	const {	t	} = initVueI18n(messages)
 	/**
 	 * PopUp 弹出层-对话框样式
