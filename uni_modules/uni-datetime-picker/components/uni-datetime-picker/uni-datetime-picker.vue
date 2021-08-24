@@ -15,12 +15,12 @@
 						<view class="uni-date__icon-logo">
 							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 						</view>
-						<input class="uni-date__x-input uni-date-range__input" type="text" v-model="range.startDate"
+						<input class="uni-date__x-input t-c" type="text" v-model="range.startDate"
 							:placeholder="startPlaceholderText" :disabled="true" />
 						<slot>
 							<view class="">{{rangeSeparator}}</view>
 						</slot>
-						<input class="uni-date__x-input uni-date-range__input" type="text" v-model="range.endDate"
+						<input class="uni-date__x-input t-c" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholderText" :disabled="true" />
 					</view>
 					<view
@@ -36,11 +36,11 @@
 		<view v-if="!isPhone" ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
 				<view v-show="hasTime" class="uni-date-changed popup-x-header">
-					<input class="uni-date__input uni-date-range__input" type="text" v-model="tempSingleDate"
+					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
 						:start="reactStartTime" :end="reactEndTime">
-						<input class="uni-date__input uni-date-range__input" type="text" v-model="time" :placeholder="selectTimeText" :disabled="!tempSingleDate" />
+						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText" :disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
 				<calendar ref="pcSingle" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
@@ -801,6 +801,10 @@
 		font-size: 14px;
 	}
 
+	.t-c {
+		text-align: center;
+	}
+
 	.uni-date__input {
 		height: 40px;
 		width: 100%;
@@ -810,6 +814,7 @@
 
 	.uni-date-range__input {
 		text-align: center;
+		max-width: 152px;
 	}
 
 	.uni-date-picker__container {
