@@ -29,7 +29,7 @@
 	import {
 	initVueI18n
 	} from '@dcloudio/uni-i18n'
-	import messages from '../../i18n/index.js'
+	import messages from './i18n/index.js'
 	const {	t	} = initVueI18n(messages)
 	/**
 	 * GoodsNav 商品导航

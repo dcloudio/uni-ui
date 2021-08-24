@@ -1,4 +1,4 @@
-## 1.4.1（2021-08-20）
+## 1.4.2（2021-08-20）
 - 新增 uni-ui 组件支持国际化 i18n
 - uni-collapse 优化 show-arrow 属性默认为true
 - uni-collapse 新增 show-arrow 属性，控制是否显示右侧箭头
