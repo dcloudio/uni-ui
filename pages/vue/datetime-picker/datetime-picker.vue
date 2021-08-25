@@ -11,7 +11,7 @@
 		</view>
 		<uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="range" type="daterange" rangeSeparator="至" @maskClick="maskClick" />
+			<uni-datetime-picker v-model="range" type="daterange"  @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimerange + ']' " type="line"></uni-section>
 		<view class="example-body">
@@ -52,7 +52,7 @@
 	export default {
 		data() {
 			return {
-				single: '2021-5-3',
+				single: '',
 				datetimesingle: '',
 				range: ['2021-02-1', '2021-3-28'],
 				datetimerange: [],

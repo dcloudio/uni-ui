@@ -175,7 +175,8 @@ class Calendar {
 				month: full.month,
 				lunar: this.getlunar(full.year, full.month, i),
 				disable: !(disableBefore && disableAfter),
-				isDay
+				isDay,
+				userChecked: false
 			}
 			if (info) {
 				data.extraInfo = info

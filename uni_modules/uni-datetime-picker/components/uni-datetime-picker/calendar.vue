@@ -494,6 +494,7 @@
 			choiceDate(weeks) {
 				if (weeks.disable) return
 				this.calendar = weeks
+				this.calendar.userChecked = true
 				// 设置多选
 				this.cale.setMultiple(this.calendar.fullDate, true)
 				this.weeks = this.cale.weeks
