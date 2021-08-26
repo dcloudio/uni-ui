@@ -147,7 +147,7 @@
 		color: #333;
 	}
 
-	.uni-calendar-item__weeks-box .uni-calendar-item--multiple {
+	.uni-calendar-item--multiple {
 		background-color:  #f2f6fc;
 		// color: #fff;
 		opacity: 0.8;
