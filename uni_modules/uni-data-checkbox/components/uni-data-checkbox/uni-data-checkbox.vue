@@ -51,7 +51,7 @@
 	 * @value tag 		标签模式
 	 * @property {Boolean} multiple = [true|false] 是否多选
 	 * @property {Array|String|Number} value 默认值
-	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
+	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:'',color:''}]
 	 * @property {Number|String} min 最小选择个数 ，multiple为true时生效
 	 * @property {Number|String} max 最大选择个数 ，multiple为true时生效
 	 * @property {Boolean} wrap 是否换行显示
@@ -141,7 +141,8 @@
 				default(){
 					return {
 						text:'text',
-						value:'value'
+						value:'value',
+						color:'#007aff'
 					}
 				}
 			}
@@ -389,12 +390,12 @@
 			 */
 			setStyleBackgroud(item) {
 				let styles = {}
-				let selectedColor = this.selectedColor?this.selectedColor:'#007aff'
+				let selectedColor = this.selectedColor?this.selectedColor:item.color?item.color:'#007aff'
 				if (this.mode !== 'list') {
 					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 				}
 				if (this.mode === 'tag') {
-					styles['background-color'] = item.selected? selectedColor:'#f5f5f5'
+					styles['background-color'] = item.selected?selectedColor:'#f5f5f5'
 				}
 				let classles = ''
 				for (let i in styles) {
