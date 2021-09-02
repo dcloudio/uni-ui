@@ -770,7 +770,7 @@
 <style>
 	.uni-datetime-picker {
 		/* #ifndef APP-NVUE */
-		width: 100%;
+		/* width: 100%; */
 		/* #endif */
 	}
 

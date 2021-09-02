@@ -39,7 +39,7 @@
 					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
-						:start="reactStartTime" :end="reactEndTime">
+						:start="reactStartTime" :end="reactEndTime" style="width: 100%;">
 						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText" :disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
@@ -814,7 +814,7 @@
 
 	.uni-date-range__input {
 		text-align: center;
-		max-width: 152px;
+		max-width: 142px;
 	}
 
 	.uni-date-picker__container {

@@ -77,7 +77,8 @@
 	}
 
 	.uni-calendar-item__weeks-box-text {
-		font-size: $uni-font-size-base;
+		font-size: 12px;
+		// font-size: $uni-font-size-base;
 		// color: $uni-text-color;
 	}
 
@@ -94,8 +95,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 43px;
-		height: 43px;
+		width: 40px;
+		height: 40px;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */

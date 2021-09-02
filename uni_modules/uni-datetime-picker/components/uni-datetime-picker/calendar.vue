@@ -55,9 +55,8 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
-				style="padding: 0 40px;">
-				<text class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</text>
+			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top" style="padding: 0 80px;">
+				<view class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</view>
 				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time"
 					:disabled="!tempSingleDate" :border="false" class="time-picker-style">
 				</time-picker>
@@ -65,14 +64,14 @@
 
 			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
-					<text class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}</text>
+					<view class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}</view>
 					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false"
 						:disabled="!tempRange.before" class="time-picker-style">
 					</time-picker>
 				</view>
 				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
 				<view class="uni-date-changed--time-end">
-					<text class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : endDateText}}</text>
+					<view class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : endDateText}}</view>
 					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
 						:disabled="!tempRange.after" class="time-picker-style">
 					</time-picker>
@@ -676,14 +675,14 @@
 	}
 
 	.uni-calendar__header-btn {
-		width: 10px;
-		height: 10px;
+		width: 8px;
+		height: 8px;
 		border-left-color: $uni-text-color-placeholder;
 		border-left-style: solid;
-		border-left-width: 2px;
+		border-left-width: 1px;
 		border-top-color: $uni-color-subtitle;
 		border-top-style: solid;
-		border-top-width: 2px;
+		border-top-width: 1px;
 	}
 
 	.uni-calendar--left {
@@ -715,14 +714,14 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		height: 45px;
+		height: 40px;
 		border-bottom-color: #F5F5F5;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 	}
 
 	.uni-calendar__weeks-day-text {
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	.uni-calendar__box {
@@ -781,11 +780,12 @@
 	.uni-date-changed--time-date {
 		color: #999;
 		line-height: 50px;
+		margin-right: 5px;
 		// opacity: 0.6;
 	}
 
 	.time-picker-style {
-		width: 62px;
+		// width: 62px;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
