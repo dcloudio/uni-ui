@@ -321,7 +321,7 @@
 			 * for i18n
 			 */
 			singlePlaceholderText() {
-				return this.placeholder || this.type === 'date' ? this.selectDateText : t("uni-datetime-picker.selectDateTime")
+				return this.placeholder || (this.type === 'date' ? this.selectDateText : t("uni-datetime-picker.selectDateTime"))
 			},
 			startPlaceholderText() {
 				return this.startPlaceholder || this.startDateText
