@@ -295,7 +295,7 @@ class Calendar {
 				this.lastHover = true
 				return
 			}
-			this.multipleStatus.before = ''
+			this.multipleStatus.before = fullDate
 			this.multipleStatus.after = ''
 			this.multipleStatus.data = []
 			this.multipleStatus.fulldate = ''
