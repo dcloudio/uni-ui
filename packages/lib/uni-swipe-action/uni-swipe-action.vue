@@ -32,7 +32,7 @@
 			closeAll(){
 				this.children.forEach(vm=>{
 					// #ifdef APP-VUE || H5 || MP-WEIXIN
-					vm.openItem.is_show = 'none'
+					vm.is_show = 'none'
 					// #endif
 
 					// #ifndef APP-VUE || H5 || MP-WEIXIN

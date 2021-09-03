@@ -113,6 +113,7 @@
 			}
 		},
 		watch: {
+			// #ifndef VUE3
 			value: {
 				immediate: true,
 				handler(newVal) {
@@ -122,6 +123,8 @@
 					}
 				}
 			},
+			// #endif
+			// #ifdef VUE3
 			modelValue: {
 				immediate: true,
 				handler(newVal) {
@@ -131,6 +134,7 @@
 					}
 				}
 			},
+			// #endif
 			focus: {
 				immediate: true,
 				handler(newVal) {
@@ -143,8 +147,12 @@
 				}
 			},
 			searchVal(newVal, oldVal) {
+				// #ifndef VUE3
 				this.$emit("input", newVal)
+				// #endif
+				// #ifdef VUE3
 				this.$emit("update:modelValue", newVal)
+				// #endif
 			}
 		},
 		methods: {

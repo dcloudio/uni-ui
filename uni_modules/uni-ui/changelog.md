@@ -1,3 +1,17 @@
+## 1.4.3（2021-09-03）
+- uni-data-checkbox 修复 在uni-forms中 modelValue 中不存在当前字段，当前字段必填写也不参与校验的问题
+- uni-datetime-picker 优化 取消选中时（范围选）直接开始下一次选择, 避免多点一次
+- uni-datetime-picker 优化 移动端支持清除按钮，同时支持通过 ref 调用组件的 clear 方法
+- uni-datetime-picker 优化 调整字号大小，美化日历界面
+- uni-datetime-picker 修复 因国际化导致的 placeholder 失效的 bug
+- uni-file-picker 修复 return-type="object" 时且存在v-model时，无法删除文件的Bug
+- uni-file-picker 新增 参数中返回 fileID 字段
+- uni-file-picker 修复 腾讯云传入fileID 不能回显的bug
+- uni-file-picker 修复 选择图片后，不能放大的问题
+- uni-link 修复 在 nvue 下不显示的 bug
+- uni-list 修复 在vue3中to属性在发行应用的时候报错的bug
+- uni-search-bar 修复 value 属性与 modelValue 属性不兼容的Bug
+- uni-swipe-action 优化 close-all 方法
 ## 1.4.2（2021-08-20）
 - 新增 uni-ui 组件支持国际化 i18n
 - uni-collapse 优化 show-arrow 属性默认为true
