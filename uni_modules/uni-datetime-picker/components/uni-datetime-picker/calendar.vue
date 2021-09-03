@@ -10,8 +10,7 @@
 					<view class="uni-calendar__header-btn uni-calendar--left"></view>
 				</view>
 				<picker mode="date" :value="date" fields="month" @change="bindDateChange">
-					<text
-						class="uni-calendar__header-text">{{ (nowDate.year||'') +' / '+( nowDate.month||'')}}</text>
+					<text class="uni-calendar__header-text">{{ (nowDate.year||'') +' / '+( nowDate.month||'')}}</text>
 				</picker>
 				<view v-if="right" class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
@@ -55,7 +54,8 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top" style="padding: 0 80px;">
+			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
+				style="padding: 0 80px;">
 				<view class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</view>
 				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time"
 					:disabled="!tempSingleDate" :border="false" class="time-picker-style">
@@ -64,7 +64,8 @@
 
 			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
-					<view class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}</view>
+					<view class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}
+					</view>
 					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false"
 						:disabled="!tempRange.before" class="time-picker-style">
 					</time-picker>
@@ -77,7 +78,6 @@
 					</time-picker>
 				</view>
 			</view>
-
 			<view v-if="!insert" class="uni-date-changed uni-calendar__header" @click="confirm">
 				<view class="uni-calendar__header-btn-box">
 					<text class="uni-calendar__button-text uni-calendar--fixed-width">{{okText}}</text>
@@ -95,7 +95,9 @@
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
 	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	const {
+		t
+	} = initVueI18n(messages)
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
@@ -222,10 +224,11 @@
 			date: {
 				immediate: true,
 				handler(newVal, oldVal) {
-					if (!this.range)
-					setTimeout(() => {
-						this.init(newVal)
-					}, 100)
+					if (!this.range) {
+						setTimeout(() => {
+							this.init(newVal)
+						}, 100)
+					}
 				}
 			},
 			startDate(val) {
@@ -376,6 +379,24 @@
 			// 取消穿透
 			clean() {
 				this.close()
+			},
+
+			clearCalender() {
+				if (this.range) {
+					this.timeRange.startTime = ''
+					this.timeRange.endTime = ''
+					this.tempRange.before = ''
+					this.tempRange.after = ''
+					this.cale.multipleStatus.before = ''
+					this.cale.multipleStatus.after = ''
+					this.cale.multipleStatus.data = []
+					this.cale.lastHover = false
+				} else {
+					this.time = ''
+					this.tempSingleDate = ''
+				}
+				this.calendar.fullDate = ''
+				this.setDate()
 			},
 
 			bindDateChange(e) {
