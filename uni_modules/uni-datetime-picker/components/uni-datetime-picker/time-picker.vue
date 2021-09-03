@@ -124,7 +124,7 @@
 				// 输入框当前时间
 				time: '',
 				// 当前的年月日时分秒
-				year: 1900,
+				year: 1920,
 				month: 0,
 				day: 0,
 				hour: 0,
@@ -191,6 +191,7 @@
 						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
 						this.initTime(false)
 					} else {
+						this.time = ''
 						this.parseValue(Date.now())
 					}
 				},
@@ -538,7 +539,9 @@
 			 * @param {Object} defaultTime
 			 */
 			parseValue(value) {
-				if (!value) return
+				if (!value) {
+					return
+				}
 				if (this.type === 'time' && typeof value === "string") {
 					this.parseTimeType(value)
 				} else {
@@ -576,7 +579,7 @@
 						this.startSecond = 0
 					}
 					if (pointType === 'end') {
-						this.endYear = 120
+						this.endYear = 2120
 						this.endMonth = 12
 						this.endDay = 31
 						this.endHour = 23
@@ -770,7 +773,7 @@
 <style>
 	.uni-datetime-picker {
 		/* #ifndef APP-NVUE */
-		width: 100%;
+		/* width: 100%; */
 		/* #endif */
 	}
 

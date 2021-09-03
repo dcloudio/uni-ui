@@ -7,6 +7,62 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.3" date="2021-09-03">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 在uni-forms中 modelValue 中不存在当前字段，当前字段必填写也不参与校验的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 取消选中时（范围选）直接开始下一次选择, 避免多点一次
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移动端支持清除按钮，同时支持通过 ref 调用组件的 clear 方法
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整字号大小，美化日历界面
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 因国际化导致的 placeholder 失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 return-type="object" 时且存在v-model时，无法删除文件的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 参数中返回 fileID 字段
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 腾讯云传入fileID 不能回显的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 选择图片后，不能放大的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="fix">
+			 在 nvue 下不显示的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue3中to属性在发行应用的时候报错的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 value 属性与 modelValue 属性不兼容的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="perf">
+			 close-all 方法
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.1" date="2021-08-20">
 	<log-item title="uni-calendar 组件更新">
 		<log-item-text tag-type="feat">

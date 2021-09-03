@@ -206,6 +206,11 @@
 			if (this.formItem) {
 				this.isTop = 6
 				if (this.formItem.name) {
+					// 如果存在name添加默认值,否则formData 中不存在这个字段不校验
+					if(!this.is_reset){
+						this.is_reset = false
+						this.formItem.setValue(this.dataValue)
+					}
 					this.rename = this.formItem.name
 					this.form.inputChildrens.push(this)
 				}
