@@ -38,7 +38,7 @@
 					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
-						:start="reactStartTime" :end="reactEndTime" style="width: 100%;">
+						:start="reactStartTime" :end="reactEndTime" :hideSecond="hideSecond" style="width: 100%;">
 						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText"
 							:disabled="!tempSingleDate" />
 					</time-picker>
@@ -59,7 +59,7 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							:placeholder="startDateText" />
 						<time-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :border="false"
-							:disabled="!tempRange.startDate">
+							:disabled="!tempRange.startDate" :hideSecond="hideSecond">
 							<input class="uni-date__input uni-date-range__input" type="text"
 								v-model="tempRange.startTime" :placeholder="startTimeText"
 								:disabled="!tempRange.startDate" />
@@ -70,7 +70,7 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
 							:placeholder="endDateText" />
 						<time-picker type="time" v-model="tempRange.endTime" :end="reactEndTime" :border="false"
-							:disabled="!tempRange.endDate">
+							:disabled="!tempRange.endDate" :hideSecond="hideSecond">
 							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
 								:placeholder="endTimeText" :disabled="!tempRange.endDate" />
 						</time-picker>
@@ -235,6 +235,10 @@
 			clearIcon: {
 				type: [Boolean],
 				default: true
+			},
+			hideSecond: {
+				type: [Boolean],
+				default: false
 			}
 		},
 		watch: {
@@ -720,7 +724,7 @@
 				const minute = defVal.getMinutes()
 				const second = defVal.getSeconds()
 				const defDate = year + '-' + this.lessTen(month) + '-' + this.lessTen(day)
-				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + ':' + this.lessTen(second)
+				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + (this.hideSecond ? '' : (':' + this.lessTen(second)))
 				return {
 					defDate,
 					defTime

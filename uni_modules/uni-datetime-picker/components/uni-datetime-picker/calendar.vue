@@ -58,7 +58,7 @@
 				style="padding: 0 80px;">
 				<view class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</view>
 				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time"
-					:disabled="!tempSingleDate" :border="false" class="time-picker-style">
+					:disabled="!tempSingleDate" :border="false" :hide-second="hideSecond" class="time-picker-style">
 				</time-picker>
 			</view>
 
@@ -66,14 +66,14 @@
 				<view class="uni-date-changed--time-start">
 					<view class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}
 					</view>
-					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false"
+					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false" :hide-second="hideSecond"
 						:disabled="!tempRange.before" class="time-picker-style">
 					</time-picker>
 				</view>
 				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
 				<view class="uni-date-changed--time-end">
 					<view class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : endDateText}}</view>
-					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
+					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false" :hide-second="hideSecond"
 						:disabled="!tempRange.after" class="time-picker-style">
 					</time-picker>
 				</view>
@@ -187,6 +187,10 @@
 			checkHover: {
 				type: Boolean,
 				default: true
+			},
+			hideSecond: {
+				type: [Boolean],
+				default: false
 			},
 			pleStatus: {
 				type: Object,
