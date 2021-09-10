@@ -86,7 +86,7 @@ export default {
 
 属性名			|	类型			|	默认值	|	说明																									
 :-:				|	:-:		|	:-:		|	:-:	
-value/v-model	|	Number 	 	| 1			|	当前评分
+value/v-model	|	Number 	 	| 0			|	当前评分
 color 			|	String 	 	| #ececec	|	未选中状态的星星颜色
 activeColor 	|	String 	 	| #ffca3e	|	选中状态的星星颜色
 disabledColor 	|	String 	 	| #c0c0c0	|	禁用状态的星星颜色

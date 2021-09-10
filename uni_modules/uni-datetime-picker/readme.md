@@ -125,13 +125,14 @@ ___点击 picker 默认值规则：___
 |start						|String、Number									|-				|-																		|最小值，可以使用日期的字符串（String）、时间戳（Number）	|
 |end							|String、Number									|-				|-																		|最大值，可以使用日期的字符串（String）、时间戳（Number）	|
 |return-type			|String													|string		|timestamp 、string、date										|返回值格式																								|
-|border						|Boolean、String								|true			|																			|是否有边框																								|
+|border						|Boolean								|true			|																			|是否有边框																								|
 |rangeSeparator		|String													|'-'			|-																		|选择范围时的分隔符																				|
 |placeholder			|String													|-				|-																		|非范围选择时的占位内容																		|
 |start-placeholder|String													|-				|-																		|范围选择时开始日期的占位内容															|
 |end-placeholder	|String													|-				|-																		|范围选择时结束日期的占位内容															|
-|disabled					|Boolean、String								|false		|																			|是否不可选择																							|
-|clearIcon				|Boolean、String								|true			|																			|是否显示清除按钮（仅PC端适用）														|
+|disabled					|Boolean								|false		|																			|是否不可选择																							|
+|clear-icon				|Boolean								|true			|																			|是否显示清除按钮														|
+|hide-second			|Boolean								|false		|																			|是否显示秒，只显示时分												|
 
 
 

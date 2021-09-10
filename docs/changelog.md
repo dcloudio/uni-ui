@@ -7,6 +7,28 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.4" date="2021-09-10">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 hide-second 在移动端的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 单选赋默认值时，赋值日期未高亮的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 赋默认值时，移动端未正确显示时间的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 hide-second 属性，支持只使用时分，隐藏秒
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="perf">
+			 默认值修改为 0 颗星
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.3" date="2021-09-03">
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="fix">
