@@ -1,3 +1,10 @@
+## 1.4.4（2021-09-10）
+- uni-ui 修改平台兼容性
+- uni-datetime-picker 修复 hide-second 在移动端的 bug
+- uni-datetime-picker 修复 单选赋默认值时，赋值日期未高亮的 bug
+- uni-datetime-picker 修复 赋默认值时，移动端未正确显示时间的 bug
+- uni-datetime-picker 新增 hide-second 属性，支持只使用时分，隐藏秒
+- uni-rate 优化 默认值修改为 0 颗星
 ## 1.4.3（2021-09-03）
 - uni-data-checkbox 修复 在uni-forms中 modelValue 中不存在当前字段，当前字段必填写也不参与校验的问题
 - uni-datetime-picker 优化 取消选中时（范围选）直接开始下一次选择, 避免多点一次

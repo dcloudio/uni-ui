@@ -7,7 +7,7 @@
 		}" @click="choiceDate(weeks)" @mouseenter="handleMousemove(weeks)">
 		<view class="uni-calendar-item__weeks-box-item" :class="{
 				'uni-calendar-item--isDay-text': weeks.isDay,
-				'uni-calendar-item--checked':calendar.fullDate === weeks.fullDate && calendar.userChecked,
+				'uni-calendar-item--checked':calendar.fullDate === weeks.fullDate && (calendar.userChecked || !checkHover),
 				'uni-calendar-item--checked-range-text': checkHover,
 				'uni-calendar-item--before-checked':weeks.beforeMultiple,
 				'uni-calendar-item--multiple': weeks.multiple,
@@ -16,9 +16,6 @@
 				}">
 			<text v-if="selected&&weeks.extraInfo" class="uni-calendar-item__weeks-box-circle"></text>
 			<text class="uni-calendar-item__weeks-box-text">{{weeks.date}}</text>
-		<!-- 	<text v-if="!lunar&&!weeks.extraInfo && weeks.isDay" class="uni-calendar-item__weeks-lunar-text">今天</text>
-			<text v-if="lunar&&!weeks.extraInfo" class="uni-calendar-item__weeks-lunar-text" >{{weeks.isDay?'今天': (weeks.lunar.IDayCn === '初一'?weeks.lunar.IMonthCn:weeks.lunar.IDayCn)}}</text> -->
-			<!-- <text v-if="weeks.extraInfo&&weeks.extraInfo.info" class="uni-calendar-item__weeks-lunar-text">{{weeks.extraInfo.info}}</text> -->
 		</view>
 	</view>
 </template>
