@@ -310,10 +310,11 @@
 				return res
 			},
 			reactMobDefTime() {
-				return this.isRange ? {
+				const times = {
 					start: this.tempRange.startTime,
 					end: this.tempRange.endTime
-				} : this.time
+				}
+				return this.isRange ? times : this.time
 			},
 			mobSelectableTime() {
 				return {
@@ -697,7 +698,10 @@
 				} else {
 					this.range.startDate = ''
 					this.range.endDate = ''
-					this.tempRange = {}
+					this.tempRange.startDate= ''
+					this.tempRange.startTime= ''
+					this.tempRange.endDate= ''
+					this.tempRange.endTime= ''
 					if (this.isPhone) {
 						this.$refs.mobile.clearCalender()
 					} else {

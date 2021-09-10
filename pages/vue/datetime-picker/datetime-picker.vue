@@ -19,7 +19,7 @@
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimerange + ']' " type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" :hide-second="true" />
+			<uni-datetime-picker v-model="datetimerange" type="datetimerange" rangeSeparator="至" />
 		</view>
 		<uni-section :title="'v-model用法：' + single" type="line"></uni-section>
 		<view class="example-body">
@@ -78,10 +78,10 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				// this.datetimesingle = '2021-7-10'
-				// this.single = '2021-2-12'
+				this.datetimesingle = Date.now() - 2*24*3600*1000
+				this.single = '2021-2-12'
 				// this.range = ['2021-03-1', '2021-4-28']
-				// this.datetimerange = ["2021-07-08 0:01:10", "2021-08-08 23:59:59"]
+				this.datetimerange = ["2021-07-08 0:01:10", "2021-08-08 23:59:59"]
 				// this.start = '2021-07-10'
 				// this.end = '2021-07-20'
 			},3000)
@@ -104,4 +104,7 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
+	// ::v-deep .uni-calendar-item__weeks-box .uni-calendar-item--checked {
+	// 		background-color: green;
+	//}
 </style>

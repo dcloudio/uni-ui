@@ -212,12 +212,12 @@
 				nowDate: '',
 				aniMaskShow: false,
 				firstEnter: true,
-				time: this.defTime ? this.defTime : '',
+				time: '',
 				timeRange: {
-					startTime: this.defTime.start ? this.defTime.start : '',
-					endTime: this.defTime.end ? this.defTime.end : ''
+					startTime: '',
+					endTime: ''
 				},
-				tempSingleDate: this.date,
+				tempSingleDate: '',
 				tempRange: {
 					before: '',
 					after: ''
@@ -229,9 +229,22 @@
 				immediate: true,
 				handler(newVal, oldVal) {
 					if (!this.range) {
+						this.tempSingleDate = newVal
 						setTimeout(() => {
 							this.init(newVal)
 						}, 100)
+					}
+				}
+			},
+			defTime: {
+				immediate: true,
+				handler(newVal, oldVal) {
+					if (!this.range) {
+						this.time = newVal
+					} else {
+						// console.log('-----', newVal);
+						this.timeRange.startTime = newVal.start
+						this.timeRange.endTime = newVal.end
 					}
 				}
 			},
