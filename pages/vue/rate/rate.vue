@@ -119,7 +119,7 @@
 		onLoad() {
 			// 模拟动态赋值
 			setTimeout(()=>{
-				this.rateValue = 3
+				// this.rateValue = 3
 			},1000)
 		},
 		methods: {
