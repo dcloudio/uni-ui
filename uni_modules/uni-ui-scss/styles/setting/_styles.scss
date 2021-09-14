@@ -1,0 +1,7 @@
+.uni-button {
+	// border: 1px red solid;
+	// background-color: red;
+	&::after{
+		border: none;
+	}
+}

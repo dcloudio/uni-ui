@@ -1,3 +1,5 @@
+## 1.1.1（2021-08-11）
+- type 不是 default 时，size 为 small 字体大小显示不正确
 ## 1.1.0（2021-07-30）
 - 组件兼容 vue3，如何创建vue3项目，详见 [uni-app 项目支持 vue3 介绍](https://ask.dcloud.net.cn/article/37834)
 ## 1.0.7（2021-06-18）

@@ -1,7 +1,7 @@
 {
   "id": "uni-data-checkbox",
   "displayName": "uni-data-checkbox 数据选择器",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "description": "通过数据驱动的单选框和复选框",
   "keywords": [
     "uni-ui",
@@ -76,6 +76,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }

@@ -6,6 +6,14 @@
      	{
      		"launchtype" : "remote"
      	},
+     	"h5" : 
+     	{
+     		"launchtype" : "remote"
+     	},
+     	"mp-weixin" : 
+     	{
+     		"launchtype" : "remote"
+     	},
      	"provider" : "aliyun",
      	"type" : "uniCloud"
      }

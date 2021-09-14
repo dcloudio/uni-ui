@@ -1,7 +1,7 @@
 {
   "id": "uni-load-more",
   "displayName": "uni-load-more 加载更多",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "LoadMore 组件，常用在列表里面，做滚动加载使用。",
   "keywords": [
     "uni-ui",
@@ -75,6 +75,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }

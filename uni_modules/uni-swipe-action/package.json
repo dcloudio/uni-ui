@@ -1,7 +1,7 @@
 {
   "id": "uni-swipe-action",
   "displayName": "uni-swipe-action 滑动操作",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "SwipeAction 滑动操作操作组件",
   "keywords": [
     "",
@@ -76,6 +76,10 @@
         "快应用": {
           "华为": "y",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }

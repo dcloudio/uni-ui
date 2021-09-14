@@ -13,28 +13,8 @@ export default {
 </script>
 
 <style lang="scss">
-/* #ifndef APP-NVUE */
+@import '@/uni_modules/uni-ui-scss';
 page {
-	background-color: #efeff4;
+	background-color: #f5f5f5;
 }
-/* #endif */
-
-/* #ifdef H5 */
-
-// @media screen and (min-width: 768px) {
-// 	body{
-// 		overflow-y: scroll;
-// 	}
-// }
-
-.uni-app--showleftwindow .hideOnPc {
-	display: none !important;
-}
-
-.uni-app--showleftwindow uni-page-body {
-		background-color: #F5F5F5 !important;
-		min-height: 100% !important;
-	}
-
-/* #endif */
 </style>

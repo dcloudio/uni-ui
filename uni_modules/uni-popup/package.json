@@ -1,7 +1,7 @@
 {
 	"id": "uni-popup",
 	"displayName": "uni-popup 弹出层",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"description": " Popup 组件，提供常用的弹层",
 	"keywords": [
         "uni-ui",
@@ -78,7 +78,11 @@
 				"快应用": {
 					"华为": "u",
 					"联盟": "u"
-				}
+                },
+                "Vue": {
+                    "vue2": "y",
+                    "vue3": "u"
+                }
 			}
 		}
 	}

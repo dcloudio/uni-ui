@@ -11,7 +11,7 @@
 				</view>
 				<picker mode="date" :value="date" fields="month" @change="bindDateChange">
 					<text
-						class="uni-calendar__header-text">{{ (nowDate.year||'') +'年'+( nowDate.month||'') +'月'}}</text>
+						class="uni-calendar__header-text">{{ (nowDate.year||'') +' / '+( nowDate.month||'')}}</text>
 				</picker>
 				<view v-if="right" class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
@@ -25,25 +25,25 @@
 				</view>
 				<view class="uni-calendar__weeks">
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">日</text>
+						<text class="uni-calendar__weeks-day-text">{{SUNText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">一</text>
+						<text class="uni-calendar__weeks-day-text">{{monText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">二</text>
+						<text class="uni-calendar__weeks-day-text">{{TUEText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">三</text>
+						<text class="uni-calendar__weeks-day-text">{{WEDText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">四</text>
+						<text class="uni-calendar__weeks-day-text">{{THUText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">五</text>
+						<text class="uni-calendar__weeks-day-text">{{FRIText}}</text>
 					</view>
 					<view class="uni-calendar__weeks-day">
-						<text class="uni-calendar__weeks-day-text">六</text>
+						<text class="uni-calendar__weeks-day-text">{{SATText}}</text>
 					</view>
 				</view>
 				<view class="uni-calendar__weeks" v-for="(item,weekIndex) in weeks" :key="weekIndex">
@@ -57,7 +57,7 @@
 			</view>
 			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
 				style="padding: 0 40px;">
-				<text class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : '选择日期'}}</text>
+				<text class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</text>
 				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time"
 					:disabled="!tempSingleDate" :border="false" class="time-picker-style">
 				</time-picker>
@@ -65,14 +65,14 @@
 
 			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
-					<text class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : '开始日期'}}</text>
+					<text class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}</text>
 					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false"
 						:disabled="!tempRange.before" class="time-picker-style">
 					</time-picker>
 				</view>
 				<uni-icons type="arrowthinright" color="#999" style="line-height: 50px;"></uni-icons>
 				<view class="uni-date-changed--time-end">
-					<text class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : '结束日期'}}</text>
+					<text class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : endDateText}}</text>
 					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
 						:disabled="!tempRange.after" class="time-picker-style">
 					</time-picker>
@@ -80,11 +80,8 @@
 			</view>
 
 			<view v-if="!insert" class="uni-date-changed uni-calendar__header" @click="confirm">
-				<!-- 				<view class="uni-calendar__header-btn-box" @click="close">
-					<text class="uni-calendar__header-text uni-calendar--fixed-width">取消</text>
-				</view> -->
 				<view class="uni-calendar__header-btn-box">
-					<text class="uni-calendar__button-text uni-calendar--fixed-width">确定</text>
+					<text class="uni-calendar__button-text uni-calendar--fixed-width">{{okText}}</text>
 				</view>
 			</view>
 		</view>
@@ -95,6 +92,11 @@
 	import Calendar from './util.js';
 	import calendarItem from './calendar-item.vue'
 	import timePicker from './time-picker.vue'
+	import {
+		initVueI18n
+	} from '@dcloudio/uni-i18n'
+	import messages from './i18n/index.js'
+	const {	t	} = initVueI18n(messages)
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
@@ -291,7 +293,43 @@
 				const activeDate = this.range ? this.tempRange.after : this.calendar.fullDate
 				const res = activeDate === this.endDate ? this.selectableTimes.end : ''
 				return res
-			}
+			},
+			/**
+			 * for i18n
+			 */
+			selectDateText() {
+				return t("uni-datetime-picker.selectDate")
+			},
+			startDateText() {
+				return this.startPlaceholder || t("uni-datetime-picker.startDate")
+			},
+			endDateText() {
+				return this.endPlaceholder || t("uni-datetime-picker.endDate")
+			},
+			okText() {
+				return t("uni-datetime-picker.ok")
+			},
+			monText() {
+				return t("uni-calender.MON")
+			},
+			TUEText() {
+				return t("uni-calender.TUE")
+			},
+			WEDText() {
+				return t("uni-calender.WED")
+			},
+			THUText() {
+				return t("uni-calender.THU")
+			},
+			FRIText() {
+				return t("uni-calender.FRI")
+			},
+			SATText() {
+				return t("uni-calender.SAT")
+			},
+			SUNText() {
+				return t("uni-calender.SUN")
+			},
 		},
 		created() {
 			// 获取日历方法实例

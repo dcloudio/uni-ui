@@ -25,6 +25,7 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 > - `resetFields` 方法不会重置原生组件和三方组件的值
 > - 如果配置 `validateTrigger` 属性为 `bind` 且表单域组件使用 `input` 事件触发会耗损部分性能，请谨慎使用
 > - 组件支持 nvue ，需要在 `manifest.json > app-plus` 节点下配置 `"nvueStyleCompiler" : "uni-app"` 
+> - uni-forms 中不包含其他表单组件，如需使用 uni-easyinput、uni-data-checkbox 等组件，需要自行引入
 > - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 
 
@@ -250,7 +251,7 @@ rules: {
 |minimum|Number|-|-| 校验最小值(小于)		|
 |maxLength|Number|-|-| 校验数据最大长度		|
 |errorMessage|String|-|-|校验失败提示信息语，可添加属性占位符，当前表格内属性都可用作占位符|
-|trigger|String|blur| blur/change/submit|校验触发时机|
+|trigger|String|bind| bind/submit|校验触发时机|
 |validateFunction|Function|-|-|自定义校验规则	|
 
 
@@ -605,8 +606,8 @@ export default {
 
 |属性名|类型|默认值|可选值|说明|
 |:-:|:-:|:-:|:-:|:-:|
-|v-model/value [即将废弃]|Object|-|-| 表单数据|
-|v-model/modelValue|Object|-|-| 表单数据|
+|value [即将废弃]|Object|-|-| 表单数据|
+|modelValue|Object|-|-| 表单数据|
 |rules|Object|-|-|表单校验规则|
 |validate-trigger|String|submit|bind/submit| 表单校验时机|
 |label-position|String|left|top/left|label 位置|
@@ -642,7 +643,7 @@ export default {
 |keepItem|Array|保留不参与校验的字段|
 |callback|Function|校验完成返回函数|
 
-校验成功后，校验对象只保留指定了`name`的字段，如果需要保留其他字段，则需要 `keepItem` 属性
+校验成功后，校验对象只保留指定了`name`的字段（只要 ``uni-forms-item` 绑定了 `name`，哪怕不校验，也会返回），如果需要保留其他字段，则需要 `keepItem` 属性
 
 ```html
 

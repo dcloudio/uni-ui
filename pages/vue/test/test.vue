@@ -1,305 +1,201 @@
 <template>
-	<view>
-		<text class="example-info">uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
-
-		<uni-forms :rules="rules" :value="formData" ref="form" validate-trigger="bind" err-show-type="undertext">
-			<uni-group title="基本信息" top="0">
-				<uni-forms-item name="name" required label="用户名">
-					<uni-easyinput type="text" :inputBorder="true" v-model="formData.name" placeholder="请输入用户名"></uni-easyinput>
-				</uni-forms-item>
-				<!-- 使用原生input，需要绑定binddata -->
-				<uni-forms-item name="age" required label="年龄">
-					<input type="text" v-model="formData.age" class="uni-input-border" @blur="binddata('age', $event.detail.value)" placeholder="请输入年龄" />
-				</uni-forms-item>
-				<uni-forms-item name="email" label="邮箱"><uni-easyinput type="text" v-model="formData.email" placeholder="请输入邮箱"></uni-easyinput></uni-forms-item>
-				<!-- #ifndef APP-NVUE -->
-					<uni-forms-item required name="birth" label="出生日期"><uni-datetime-picker type="date" v-model="formData.birth" start="2000-06-01 06:30:30" end="2030-6-1" return-type="timestamp"></uni-datetime-picker></uni-forms-item>
-					<uni-forms-item name="checked" label="详细信息"><switch :checked="formData.checked" @change="change('checked', $event.detail.value)" /></uni-forms-item>
-				<!-- #endif -->
-			</uni-group>
-			<!-- #ifndef APP-NVUE -->
-			<template v-if="formData.checked">
-				<uni-group title="详细信息">
-					<uni-forms-item required name="sex" label="性别"><uni-data-checkbox v-model="formData.sex" :localdata="sex"></uni-data-checkbox></uni-forms-item>
-					<uni-forms-item name="country" label="国家">
-						<picker :value="formData.country" :range="range" @change="binddata('country', $event.detail.value)">
-							<view>{{ formData.country === '' ? '请选择国家' : range[formData.country] }}</view>
-						</picker>
-					</uni-forms-item>
-					<uni-forms-item required name="hobby" label="兴趣爱好"><uni-data-checkbox multiple v-model="formData.hobby" :localdata="hobby" /></uni-forms-item>
-					<uni-forms-item name="remarks" label="备注">
-						<uni-easyinput type="textarea" v-model="formData.remarks" :maxlength="50" placeholder="请输入备注"></uni-easyinput>
-					</uni-forms-item>
-				</uni-group>
-			</template>
-			<!-- #endif -->
-
-
-			<!-- 直接使用组件自带submit、reset 方法，小程序不生效 -->
-			<!-- 			<button class="button" form-type="submit">Submit</button>
-				<button class="button" form-type="reset">Reset</button> -->
-
-			<view class="example">
-				<button class="button" @click="submitForm('form')">校验表单</button>
-				<button class="button" @click="validateField('form')">只校验用户名和邮箱项</button>
-				<button class="button" @click="clearValidate('form', 'name')">移除用户名的校验结果</button>
-				<button class="button" @click="clearValidate('form')">移除全部表单校验结果</button>
-				<button class="button" @click="resetForm">重置表单</button>
+	<view class="content  uni-pa-10">
+		<view class="box primary   uni-radius">
+			<view class="item-box">primary</view>
+			<view class="item-box">
+				<view class="item  disable">disable</view>
+				<view class="item light">light</view>
 			</view>
-		</uni-forms>
+		</view>
+		<view class="box success uni-mt-2 uni-radius">
+			<view class="item-box">success</view>
+			<view class="item-box">
+				<view class="item disable">disable</view>
+				<view class="item light">light</view>
+			</view>
+		</view>
+
+		<view class="box warning uni-mt-2 uni-radius">
+			<view class="item-box">warning</view>
+			<view class="item-box">
+				<view class="item disable">disable</view>
+				<view class="item light">light</view>
+			</view>
+		</view>
+		<view class="box error uni-mt-2 uni-radius">
+			<view class="item-box">error</view>
+			<view class="item-box">
+				<view class="item disable">disable</view>
+				<view class="item light">light</view>
+			</view>
+		</view>
+		<view class="box info uni-mt-2 uni-radius">
+				<view class="item-box">info</view>
+				<view class="item-box">
+					<view class="item disable">disable</view>
+					<view class="item light">light</view>
+				</view>
+		</view>
+		<view class="box black uni-mt-2">black</view>
+		<view class="box main-color uni-mt-2">main-color</view>
+		<view class="box base-color uni-mt-2">base-color</view>
+		<view class="box secondary-color uni-mt-2">secondary-color</view>
+		<view class="box light-color uni-mt-2">light-color</view>
+		<view class="box border-1 uni-mt-2">border-1</view>
+		<view class="box border-2 uni-mt-2">border-2</view>
+		<view class="box border-3 uni-mt-2">border-3</view>
+		<view class="box border-4 uni-mt-2">border-4</view>
+		<view class="box bg-color uni-mt-2">bg-color</view>
+		<view class="box white uni-mt-2">white</view>
+		<view class="box transparent uni-mt-2">transparent</view>
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			formData: {
-				name: '',
-				age: '',
-				email: '',
-				sex: '',
-				hobby: [],
-				remarks: '',
-				checked: false,
-				country: -1,
-				birth: ''
-			},
-			sex: [
-				{
-					text: '男',
-					value: '0'
-				},
-				{
-					text: '女',
-					value: '1'
-				},
-				{
-					text: '未知',
-					value: '2'
-				}
-			],
-			hobby: [
-				{
-					text: '足球',
-					value: 0
-				},
-				{
-					text: '篮球',
-					value: 1
-				},
-				{
-					text: '游泳',
-					value: 2
-				}
-			],
-			range: ['中国', '美国', '澳大利亚'],
-			show: false,
-			rules: {
-				name: {
-					rules: [
-						{
-							required: true,
-							errorMessage: '请输入用户名'
-						},
-						{
-							minLength: 3,
-							maxLength: 15,
-							errorMessage: '姓名长度在 {minLength} 到 {maxLength} 个字符'
-						}
-					]
-				},
-				age: {
-					rules: [
-						{
-							required: true,
-							errorMessage: '请输入年龄'
-						},
-						{
-							format: 'int',
-							errorMessage: '年龄必须是数字'
-						},
-						{
-							minimum: 18,
-							maximum: 30,
-							errorMessage: '年龄应该大于 {minimum} 岁，小于 {maximum} 岁'
-						}
-					]
-				},
-				birth: {
-					rules: [
-						{
-							required: true,
-							errorMessage: '请选择时间'
-						}
-					]
-				},
-				email: {
-					rules: [
-						{
-							format: 'email',
-							errorMessage: '请输入正确的邮箱地址'
-						}
-					]
-				},
-				checked: {
-					rules: [
-						{
-							format: 'bool'
-						}
-					]
-				},
-				sex: {
-					rules: [
-						{
-							format: 'string'
-						}
-					]
-				},
-				hobby: {
-					rules: [
-						{
-							format: 'array'
-						},
-						{
-							validateFunction: function(rule, value, data, callback) {
-								if (value.length < 2) {
-									callback('请至少勾选两个兴趣爱好')
-								}
-								return true
-							}
-						}
-					]
-				}
+	export default {
+		data() {
+			return {}
+		},
+		computed:{
+		},
+		onLoad() {
+		},
+		methods: {
+			add(){
+
 			}
-		}
-	},
-	onLoad() {
-		uni.showLoading()
-		// this.formData 应该包含所有需要校验的表单
-		// 模拟异步请求数据
-		setTimeout(() => {
-			this.formData = {
-				name: 'DCloud',
-				age: 21,
-				email: '',
-				sex: '0',
-				hobby: [],
-				remarks: '热爱学习，热爱生活',
-				checked: false,
-				country: 2,
-				birth: ''
-			}
-			uni.hideLoading()
-		}, 500)
-	},
-	onReady() {
-		this.$refs.form.setRules(this.rules)
-	},
-	methods: {
-		birthChange(e) {
-			console.log(e)
-		},
-		change(name, value) {
-			this.formData.checked = value
-			this.$refs.form.setValue(name, value)
-		},
-
-		/**
-		 * 手动提交
-		 * @param {Object} form
-		 */
-		submitForm(form) {
-			// console.log(this.formData);
-			this.$refs[form]
-				.submit()
-				.then(res => {
-					console.log('表单的值：', res)
-					uni.showToast({
-						title: '验证成功'
-					})
-				})
-				.catch(errors => {
-					console.error('验证失败：', errors)
-				})
-		},
-
-		/**
-		 * 手动重置表单
-		 */
-		resetForm() {
-			this.$refs.form.resetFields()
-		},
-		/**
-		 * 部分表单校验
-		 * @param {Object} form
-		 */
-		validateField(form) {
-			this.$refs[form]
-				.validateField(['name', 'email'])
-				.then(res => {
-					uni.showToast({
-						title: '验证成功'
-					})
-					console.log('表单的值：', res)
-				})
-				.catch(errors => {
-					console.error('验证失败：', errors)
-				})
-		},
-
-		/**
-		 * 清除表单校验
-		 * @param {Object} form
-		 * @param {Object} name
-		 */
-		clearValidate(form, name) {
-			if (!name) name = []
-			this.$refs[form].clearValidate(name)
 		}
 	}
-}
 </script>
 
 <style lang="scss">
-@import '@/common/uni-nvue.scss';
+	@mixin flex {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.test {
+		width: 100px;
+		height: 100px;
+		border: 1px red solid;
+	}
+	.box {
+		@include flex;
+		flex-direction: column;
+		width: 200px;
+		min-height:30px;
+		color: #fff;
+		font-size: 14px;
+		overflow: hidden;
+		.item-box {
+			@include flex;
+			width: 100%;
+			height: 30px;
+			.item {
+				@include flex;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
 
-.example {
-	padding: 0 10px 10px;
-}
+	.primary {
+		background-color: $uni-primary;
+		.disable {
+			background-color:$uni-primary-disable
+		}
+		.light {
+			background-color: $uni-primary-light;
+		}
+		.disable-box {
+			background-color: #8fb8ff;
+		}
+		.light-box {
+			background-color: #a8c8ff;
+		}
+	}
+	.success {
+		background-color:$uni-success;
+		.disable {
+			background-color: $uni-success-disable;
+		}
+		.light {
+			background-color: $uni-success-light;
+		}
 
-.uni-input-border,
-.uni-textarea-border {
-	// width: 100%;
-	flex: 1;
-	font-size: 14px;
-	color: #666;
-	border: 1px #e5e5e5 solid;
-	border-radius: 5px;
-	/* #ifndef APP-NVUE */
-	box-sizing: border-box;
-	/* #endif */
-}
+	}
 
-.uni-input-border {
-	padding: 0 10px;
-	height: 35px;
-}
+	.warning {
+		background-color:$uni-warning;
+		.disable {
+			background-color: $uni-warning-disable;
+		}
+		.light {
+			background-color: $uni-warning-light;
+		}
+		.stress-box {
+			background-color: #e97511;
+		}
+		.disable-box {
+			background-color: #febf88;
+		}
+		.light-box {
+			background-color: #ffeedf;
+		}
+	}
+	.error {
+		background-color: $uni-error;
+		.disable {
+			background-color: $uni-error-disable;
+		}
+		.light {
+			background-color: $uni-error-light;
+		}
+	}
+	.info {
+		background-color: $uni-info;
+		.disable {
+			background-color: $uni-info-disable;
+		}
+		.light {
+			background-color: $uni-info-light;
+		}
+	}
+	.main-color {
+		background-color: $uni-main-color;
+	}
+	.base-color {
+		background-color: $uni-base-color;
+	}
+	.secondary-color {
+		background-color: $uni-secondary-color;
+	}
 
-.uni-textarea-border {
-	padding: 10px;
-	height: 80px;
-}
-
-.label-box {
-	margin-right: 10px;
-}
-
-.transform-scale {
-	transform: scale(0.7);
-}
-
-.button {
-	margin: 5px 10px;
-}
+	.light-color {
+		background-color: $uni-extra-color;
+	}
+	.bg-color {
+		background-color: $uni-bg-color;
+	}
+	.border-1 {
+		background-color: $uni-border-1;
+	}
+	.border-2 {
+		background-color: $uni-border-2;
+	}
+	.border-3 {
+		background-color: $uni-border-3;
+	}
+	.border-4 {
+		background-color: $uni-border-4;
+	}
+	.black {
+		background-color: $uni-black;
+	}
+	.white {
+		background-color: $uni-white;
+	}
+	.transparent {
+		background-color: $uni-transparent;
+	}
 </style>

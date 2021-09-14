@@ -1,7 +1,7 @@
 {
   "id": "uni-easyinput",
   "displayName": "uni-easyinput 增强输入框",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Easyinput 组件是对原生input组件的增强",
   "keywords": [
     "uni-ui",
@@ -78,6 +78,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }

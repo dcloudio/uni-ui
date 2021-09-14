@@ -1,7 +1,7 @@
 {
   "id": "uni-tag",
   "displayName": "uni-tag 标签",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Tag 组件，用于展示1个或多个文字标签，可点击切换选中、不选中的状态。",
   "keywords": [
     "uni-ui",
@@ -76,6 +76,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "u"
         }
       }
     }

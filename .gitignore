@@ -1,6 +1,7 @@
 node_modules/
-.project
 unpackage/
+package/
 temps/example_temps/
-.DS_Store
 dist/
+.project
+.DS_Store

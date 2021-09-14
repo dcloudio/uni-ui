@@ -1,6 +1,6 @@
 {
     "name" : "uni-ui",
-    "appid" : "__UNI__AA95E9C",
+    "appid" : "__UNI__FD40C16",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -46,7 +46,7 @@
     "h5" : {
         "router" : {
             "mode" : "hash",
-            "base" : "/h5"
+            "base" : ""
         },
         "title" : "uni-ui",
         "template" : "template.h5.html"

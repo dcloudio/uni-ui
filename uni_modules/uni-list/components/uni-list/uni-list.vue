@@ -37,6 +37,10 @@ export default {
 		border: {
 			type: Boolean,
 			default: true
+		},
+		borderFull: {
+			type: Boolean,
+			default: false
 		}
 	},
 	// provide() {
@@ -87,7 +91,7 @@ export default {
 	height: 1px;
 	-webkit-transform: scaleY(0.5);
 	transform: scaleY(0.5);
-	background-color: $uni-border-color;
+	background-color: #eee;
 	z-index: 1;
 }
 
@@ -99,7 +103,7 @@ export default {
 	height: 1px;
 	-webkit-transform: scaleY(0.5);
 	transform: scaleY(0.5);
-	background-color: $uni-border-color;
+	background-color: #eee;
 }
 
 /* #endif */

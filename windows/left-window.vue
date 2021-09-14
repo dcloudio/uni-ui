@@ -4,7 +4,7 @@
 	</view>
 </template>
 <script>
-	import indexPage from '@/pages/vue/index/index.vue'
+	import indexPage from '@/pages/index/index.vue'
 	export default {
 		components: { indexPage },
 		props: {

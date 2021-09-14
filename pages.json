@@ -6,8 +6,15 @@
 		}
 	},
 
-	"pages": [{
-			"path": "pages/vue/index/index",
+	"pages": [
+		// {
+		// 	"path": "pages/vue/test/test",
+		// 	"style": {
+		// 		"navigationBarTitleText": "test"
+		// 	}
+		// }, 
+		{
+			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
@@ -254,11 +261,6 @@
 			"path": "pages/vue/list/chat",
 			"style": {}
 		}, {
-			"path": "pages/vue/test/test",
-			"style": {
-				"navigationBarTitleText": "test"
-			}
-		}, {
 			"path": "pages/vue/table/table",
 			"style": {
 				"navigationBarTitleText": "",
@@ -325,28 +327,8 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#007AFF",
 		"backgroundColor": "#FFFFFF",
-		"app-plus": {
-			"background": "#efeff4"
-		},
 		"h5": {
 			"maxWidth": 1190
 		}
-	},
-	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#007AFF",
-		"borderStyle": "black",
-		"backgroundColor": "#F8F8F8",
-		"list": [{
-			"pagePath": "pages/vue/index/index",
-			"iconPath": "static/component.png",
-			"selectedIconPath": "static/componentHL.png",
-			"text": "VUE"
-		}, {
-			"pagePath": "pages/nvue/index/index",
-			"iconPath": "static/component.png",
-			"selectedIconPath": "static/componentHL.png",
-			"text": "NVUE"
-		}]
 	}
 }
