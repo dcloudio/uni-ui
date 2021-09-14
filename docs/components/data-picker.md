@@ -59,7 +59,7 @@
 |where								|String					| 					 |							|查询条件，内容较多，另见jql文档：[详情](https://uniapp.dcloud.net.cn/uniCloud/uni-clientDB?id=jsquery)|
 |orderby							|String					| 					 |							|排序字段及正序倒叙设置|
 |popup-title					|String					| 					 |							|弹出层标题|
-
+|map									|Object					|						 |{text:'text',value:'value'}|字段映射，将text/value映射到数据中的其他字段|
 
 ::: tip 
 

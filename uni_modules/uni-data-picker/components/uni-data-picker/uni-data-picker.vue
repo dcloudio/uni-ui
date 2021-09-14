@@ -36,7 +36,7 @@
 			<data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata"
 				:preload="preload" :collection="collection" :field="field" :orderby="orderby" :where="where"
 				:step-searh="stepSearh" :self-field="selfField" :parent-field="parentField" :managed-mode="true"
-				@change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick"></data-picker-view>
+				:map="map" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick"></data-picker-view>
 		</view>
 	</view>
 </template>
