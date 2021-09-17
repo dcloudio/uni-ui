@@ -13,6 +13,9 @@ export default {
 </script>
 
 <style lang="scss">
+// uni-icons 扩展图标库
+@import '@/static/iconfont.css';
+
 /* #ifndef APP-NVUE */
 page {
 	background-color: #efeff4;

@@ -1,5 +1,5 @@
 <template>
-	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" :class="[customIcons,customIcons?type:'']" @click="_onClick">{{icons[type]}}</text>
+	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" :class="[fontFamily,fontFamily?type:'']" @click="_onClick">{{fontFamily ? '' : icons[type]}}</text>
 </template>
 
 <script>
@@ -37,7 +37,7 @@
 				type: [Number, String],
 				default: 16
 			},
-			customIcons:{
+			fontFamily:{
 				type: String,
 				default: ''
 			}
