@@ -185,9 +185,13 @@
 			},
 			startDate(val){
 				this.cale.resetSatrtDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			endDate(val){
 				this.cale.resetEndDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			selected(newVal) {
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
