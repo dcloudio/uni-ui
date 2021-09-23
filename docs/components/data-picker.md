@@ -77,6 +77,23 @@
 |@popupopened			|EventHandle		| 弹出层弹出时触发																|
 |@popupclosed			|EventHandle		| 弹出层关闭时触发																|
 
+### DataPicker Methods
+
+|方法称名	|说明|参数|
+|:-:|:-:|:-:|
+|show|打开弹出层|-|
+|hide|关闭弹出层|-|
+
+**使用方法：**
+```js
+this.$refs.picker.show() // `picker` 为组件的 ref 名称
+```
+
+### DataPicker Slots
+
+|名称|说明|					
+|:-:|:-:|						
+|default|覆盖显示框内容|
 
 
 ### 基本用法
