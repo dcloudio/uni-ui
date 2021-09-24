@@ -3,7 +3,7 @@
     <scroll-view class="selected-area" scroll-x="true" scroll-y="false" :show-scrollbar="false">
       <view class="selected-list">
 	    <template v-for="(item,index) in selected">
-			<view class="selected-item" :class="{'selected-item-active':index==selectedIndex}"
+			<view class="selected-item selected-item-text-overflow" :class="{'selected-item-active':index==selectedIndex}"
 				:key="index" v-if="item.text" @click="handleSelect(index)">
 				<text class="">{{item.text}}</text>
 			</view>
@@ -14,12 +14,12 @@
 		<template v-for="(child, i) in dataList">
 			<scroll-view class="list"  :key="i" v-if="i==selectedIndex" :scroll-y="true">
 			  <view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in child" :key="j" @click="handleNodeClick(item, i, j)">
-			    <text class="item-text">{{item.text}}</text>
+			    <text class="item-text item-text-overflow">{{item.text}}</text>
 			    <view class="check" v-if="selected.length > i && item.value == selected[i].value"></view>
 			  </view>
 			</scroll-view>
 		</template>
-      
+
       <view class="loading-cover" v-if="loading">
         <uni-load-more class="load-more" :contentText="loadMore" status="loading"></uni-load-more>
       </view>
@@ -92,18 +92,13 @@
         if (item.disable) {
           return
         }
-
         const node = this.dataList[i][j]
-        const {
-          value,
-          text
-        } = node
-
         if (i < this.selected.length - 1) {
           this.selected.splice(i, this.selected.length - i)
           this.selected.push(node)
         } else if (i === this.selected.length - 1) {
-          this.selected[i] = node
+          // this.selected[i] = node
+          this.selected.splice(i, 1, node)
         }
 
         if (node.isleaf) {
@@ -239,10 +234,22 @@
     margin-left: 10px;
     margin-right: 10px;
     padding: 12px 0;
+		text-align: center;
 		/* #ifndef APP-NVUE */
 		white-space: nowrap;
 		/* #endif */
   }
+
+	.selected-item-text-overflow {
+		width: 168px;  /* fix nvue */
+		overflow: hidden;
+		/* #ifndef APP-NVUE */
+		width: 6em;
+	  white-space: nowrap;
+	  text-overflow: ellipsis;
+	  -o-text-overflow: ellipsis;
+		/* #endif */
+	}
 
   .selected-item-active {
     border-bottom: 2px solid #007aff;
@@ -273,6 +280,7 @@
     display: flex;
     /* #endif */
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .is-disabled {
@@ -280,8 +288,19 @@
   }
 
   .item-text {
-    flex: 1;
+    /* flex: 1; */
     color: #333333;
+  }
+
+  .item-text-overflow {
+		width: 280px;  /* fix nvue */
+    overflow: hidden;
+		/* #ifndef APP-NVUE */
+		width: 20em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+		/* #endif */
   }
 
   .check {

@@ -1,3 +1,11 @@
+## 1.4.5（2021-09-24）
+- uni-icons 新增 支持使用 css 图标库扩展组件（仅 vue 支持）
+- uni-badge 修复 在字节小程序上样式不生效的 bug
+- uni-calendar 修复 startDate、 endDate 属性失效的 bug
+- uni-data-picker 修复 某些情况下级联未触发的 bug
+- uni-data-picker 新增 提供 show 和 hide 方法，开发者可以通过 ref 调用
+- uni-data-picker 新增 选项内容过长自动添加省略号
+- uni-data-picker 新增 map 属性 字段映射，将 text/value 映射到数据中的其他字段
 ## 1.4.4（2021-09-10）
 - uni-ui 修改平台兼容性
 - uni-datetime-picker 修复 hide-second 在移动端的 bug
