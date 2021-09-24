@@ -92,18 +92,13 @@
         if (item.disable) {
           return
         }
-
         const node = this.dataList[i][j]
-        const {
-          value,
-          text
-        } = node
-
         if (i < this.selected.length - 1) {
           this.selected.splice(i, this.selected.length - i)
           this.selected.push(node)
         } else if (i === this.selected.length - 1) {
-          this.selected[i] = node
+          // this.selected[i] = node
+          this.selected.splice(i, 1, node)
         }
 
         if (node.isleaf) {
