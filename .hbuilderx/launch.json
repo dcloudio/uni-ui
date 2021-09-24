@@ -14,6 +14,14 @@
      	{
      		"launchtype" : "remote"
      	},
+     	"mp-kuaishou" : 
+     	{
+     		"launchtype" : "remote"
+     	},
+     	"mp-toutiao" : 
+     	{
+     		"launchtype" : "remote"
+     	},
      	"mp-weixin" : 
      	{
      		"launchtype" : "remote"

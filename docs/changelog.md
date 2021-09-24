@@ -7,6 +7,38 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.5" date="2021-09-24">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="fix">
+			 在字节小程序上样式不生效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 startDate、 endDate 属性失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况下级联未触发的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供 show 和 hide 方法，开发者可以通过 ref 调用
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 选项内容过长自动添加省略号
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 map 属性 字段映射，将 text/value 映射到数据中的其他字段
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="feat">
+			 支持使用 css 图标库扩展组件（仅 vue 支持）
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.4" date="2021-09-10">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="fix">

@@ -59,7 +59,7 @@
 |where								|String					| 					 |							|查询条件，内容较多，另见jql文档：[详情](https://uniapp.dcloud.net.cn/uniCloud/uni-clientDB?id=jsquery)|
 |orderby							|String					| 					 |							|排序字段及正序倒叙设置|
 |popup-title					|String					| 					 |							|弹出层标题|
-
+|map									|Object					|						 |{text:'text',value:'value'}|字段映射，将text/value映射到数据中的其他字段|
 
 ::: tip 
 
@@ -77,6 +77,23 @@
 |@popupopened			|EventHandle		| 弹出层弹出时触发																|
 |@popupclosed			|EventHandle		| 弹出层关闭时触发																|
 
+### DataPicker Methods
+
+|方法称名	|说明|参数|
+|:-:|:-:|:-:|
+|show|打开弹出层|-|
+|hide|关闭弹出层|-|
+
+**使用方法：**
+```js
+this.$refs.picker.show() // `picker` 为组件的 ref 名称
+```
+
+### DataPicker Slots
+
+|名称|说明|					
+|:-:|:-:|						
+|default|覆盖显示框内容|
 
 
 ### 基本用法
