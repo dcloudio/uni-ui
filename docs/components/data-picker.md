@@ -50,6 +50,8 @@
 |localdata						|Array					| 					 |							|数据，[详情](https://gitee.com/dcloud/datacom)|
 |preload 							|Boolean				| true/false |	false				|预加载数据|
 |readonly 						|Boolean				| true/false |	false				|是否禁用|
+|clear-icon 						|Boolean				| true/false |	true				|是否显示清除按钮|
+|ellipsis 						|Boolean				| true/false |	true				|是否隐藏 tab 标签过长的文本|
 |step-searh 					|Boolean				| true/false |	true				|分步查询时，点击节点请求数据|
 |step-search-url			|String					| 					 |							|分步查询时，动态加载云端数据url格式，`https://xxx.com/{parentValue}`(当前版本暂不支持，下版支持)|
 |self-field						|String					| 					 |							|分步查询时当前字段名称|
@@ -83,6 +85,7 @@
 |:-:|:-:|:-:|
 |show|打开弹出层|-|
 |hide|关闭弹出层|-|
+|clear|清除已选项|-|
 
 **使用方法：**
 ```js
