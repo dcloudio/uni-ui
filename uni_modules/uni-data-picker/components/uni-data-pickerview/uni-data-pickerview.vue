@@ -3,9 +3,9 @@
 		<scroll-view class="selected-area" scroll-x="true" scroll-y="false" :show-scrollbar="false">
 			<view class="selected-list">
 				<template v-for="(item,index) in selected">
-					<view class="selected-item selected-item-text-overflow"
-						:class="{'selected-item-active':index==selectedIndex}" :key="index" v-if="item.text"
-						@click="handleSelect(index)">
+					<view class="selected-item"
+						:class="{'selected-item-active':index==selectedIndex, 'selected-item-text-overflow': ellipsis}"
+						:key="index" v-if="item.text" @click="handleSelect(index)">
 						<text class="">{{item.text}}</text>
 					</view>
 				</template>
@@ -58,6 +58,10 @@
 			managedMode: {
 				type: Boolean,
 				default: false
+			},
+			ellipsis: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
