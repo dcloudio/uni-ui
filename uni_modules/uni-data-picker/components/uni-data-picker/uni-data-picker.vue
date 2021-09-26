@@ -20,7 +20,7 @@
 						@click.stop="clear">
 						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 					</view>
-					<view class="arrow-area" v-if="!readonly && !inputSelected.length">
+					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly ">
 						<view class="input-arrow"></view>
 					</view>
 				</view>
@@ -214,26 +214,29 @@
 				this.inputSelected = e
 				this._dispatchEvent(e)
 			},
-			_processReadonly(dataList, valueArray) {
+			_processReadonly(dataList, value) {
 				var isTree = dataList.findIndex((item) => {
 					return item.children
 				})
 				if (isTree > -1) {
-					if (Array.isArray(valueArray)) {
-						let inputValue = valueArray[valueArray.length - 1]
+					let inputValue
+					if (Array.isArray(value)) {
+						inputValue = value[value.length - 1]
 						if (typeof inputValue === 'object' && inputValue.value) {
 							inputValue = inputValue.value
 						}
+					} else {
+						inputValue = value
 					}
 					this.inputSelected = this._findNodePath(inputValue, this.localdata)
 					return
 				}
 
 				let result = []
-				for (let i = 0; i < valueArray.length; i++) {
-					var value = valueArray[i]
+				for (let i = 0; i < value.length; i++) {
+					var val = value[i]
 					var item = dataList.find((v) => {
-						return v.value == value
+						return v.value == val
 					})
 					if (item) {
 						result.push(item)
