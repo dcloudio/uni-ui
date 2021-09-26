@@ -16,7 +16,11 @@
 						</view>
 					</scroll-view>
 					<text v-else class="selected-area placeholder">{{placeholder}}</text>
-					<view class="arrow-area" v-if="!readonly">
+					<view v-show="clearIcon && !readonly && inputSelected.length" class="icon-clear"
+						@click.stop="clear">
+						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
+					</view>
+					<view class="arrow-area" v-if="!readonly && !inputSelected.length">
 						<view class="input-arrow"></view>
 					</view>
 				</view>
@@ -36,7 +40,8 @@
 			<data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata"
 				:preload="preload" :collection="collection" :field="field" :orderby="orderby" :where="where"
 				:step-searh="stepSearh" :self-field="selfField" :parent-field="parentField" :managed-mode="true"
-				:map="map" :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick"></data-picker-view>
+				:map="map" :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick">
+			</data-picker-view>
 		</view>
 	</view>
 </template>
@@ -70,7 +75,7 @@
 	 */
 	export default {
 		name: 'UniDataPicker',
-		emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change','update:modelValue'],
+		emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue'],
 		mixins: [dataPicker],
 		components: {
 			DataPickerView
@@ -97,6 +102,10 @@
 			readonly: {
 				type: Boolean,
 				default: false
+			},
+			clearIcon: {
+				type: Boolean,
+				default: true
 			},
 			border: {
 				type: Boolean,
@@ -132,6 +141,10 @@
 			})
 		},
 		methods: {
+			clear() {
+				this.inputSelected.splice(0)
+				this._dispatchEvent([])
+			},
 			onPropsChange() {
 				this._treeData = []
 				this.selectedIndex = 0
@@ -244,13 +257,16 @@
 				return result
 			},
 			_dispatchEvent(selected) {
-				var value = new Array(selected.length)
-				for (var i = 0; i < selected.length; i++) {
-					value[i] = selected[i].value
+				let item = {}
+				if (selected.length) {
+					var value = new Array(selected.length)
+					for (var i = 0; i < selected.length; i++) {
+						value[i] = selected[i].value
+					}
+					item = selected[selected.length - 1]
+				} else {
+					item.value = ''
 				}
-
-				const item = selected[selected.length - 1]
-
 				if (this.formItem) {
 					this.formItem.setValue(item.value)
 				}
@@ -470,6 +486,10 @@
 
 		.dialog-caption {
 			display: none;
+		}
+
+		.icon-clear {
+			margin-right: 5px;
 		}
 	}
 
