@@ -7,6 +7,23 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.6" date="2021-09-30">
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 清除已选项的功能（通过 clearIcon 属性配置是否显示按钮），同时提供 clear 方法以供调用，二者等效
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 readonly 为 true 时报错的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 上一版本造成的 map 属性失效的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 ellipsis 属性，支持配置 tab 选项长度过长时是否自动省略
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.5" date="2021-09-24">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="fix">

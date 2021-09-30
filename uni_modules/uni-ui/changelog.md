@@ -1,3 +1,8 @@
+## 1.4.6（2021-09-30）
+- uni-data-picker 新增 清除已选项的功能（通过 clearIcon 属性配置是否显示按钮），同时提供 clear 方法以供调用，二者等效
+- uni-data-picker 修复 readonly 为 true 时报错的 bug
+- uni-data-picker 修复 上一版本造成的 map 属性失效的bug
+- uni-data-picker 新增 ellipsis 属性，支持配置 tab 选项长度过长时是否自动省略
 ## 1.4.5（2021-09-24）
 - uni-icons 新增 支持使用 css 图标库扩展组件（仅 vue 支持）
 - uni-badge 修复 在字节小程序上样式不生效的 bug

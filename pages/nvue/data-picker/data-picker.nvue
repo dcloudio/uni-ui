@@ -71,7 +71,9 @@
 			onpopupclosed(e) {
 				console.log('popupclosed');
 			},
-			onchange(e) {}
+			onchange(e) {
+				console.log('---------onchange:', e);
+			}
 		}
 	}
 </script>
