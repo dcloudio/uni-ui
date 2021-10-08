@@ -60,7 +60,9 @@
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
 	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	const {
+		t
+	} = initVueI18n(messages)
 	export default {
 		name: 'UniPagination',
 		emits: ['update:modelValue', 'input', 'change'],
@@ -177,26 +179,27 @@
 			}
 		},
 		watch: {
-			current(val) {
-				this.currentIndex = val
-			},
-			value(val) {
-				if (val < 1) {
-					this.currentIndex = 1
-				} else {
-					this.currentIndex = val
+			current: {
+				immediate: true,
+				handler(val, old) {
+					if (val < 1) {
+						this.currentIndex = 1
+					} else {
+						this.currentIndex = val
+					}
 				}
 			},
-			modelValue(val) {
-				if (val < 1) {
-					this.currentIndex = 1
-				} else {
-					this.currentIndex = val
+			value: {
+				immediate: true,
+				handler(val) {
+					if (Number(this.current) !== 1) return
+					if (val < 1) {
+						this.currentIndex = 1
+					} else {
+						this.currentIndex = val
+					}
 				}
 			}
-		},
-		created() {
-			this.currentIndex = +this.value
 		},
 		methods: {
 			// 选择标签
