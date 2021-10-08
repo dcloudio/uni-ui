@@ -7,16 +7,16 @@
 	},
 
 	"pages": [
-		// {
-		// 	"path": "pages/vue/test/test",
-		// 	"style": {
-		// 		"navigationBarTitleText": "test"
-		// 	}
-		// }, 
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/vue/test/test",
+			"style": {
+				"navigationBarTitleText": "test"
 			}
 		},
 		{
@@ -321,6 +321,33 @@
 
         }
 
+        ,{
+            "path" : "pages/vue/styles/styles",
+            "style" :
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+
+        }
+        ,{
+            "path" : "pages/vue/font/font",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vue/color/color",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

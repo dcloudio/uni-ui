@@ -52,3 +52,15 @@ $uni-ui-color:(
 		background-color: $child;
 	}
 }
+.uni-shadow-sm {
+	box-shadow: $uni-shadow-sm;
+}
+.uni-shadow-base {
+	box-shadow: $uni-shadow-base;
+}
+.uni-shadow-lg {
+	box-shadow: $uni-shadow-lg;
+}
+.uni-mask {
+	background-color:$uni-mask;
+}

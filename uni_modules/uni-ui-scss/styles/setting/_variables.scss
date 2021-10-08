@@ -23,99 +23,63 @@ $body-font-family: 'Roboto', sans-serif !default;
 // 文本
 $heading-font-family: $body-font-family !default;
 $uni-headings: () !default;
+$letterSpacing: -0.01562em;
 $uni-headings: map-deep-merge(
   (
     'h1': (
-      'size': 44px,
-      'weight': 400,
-      'line-height': 52px,
-      'letter-spacing': -1.5px,
-      'font-family': $heading-font-family,
+      size: 32px,
+			weight: 300,
+			line-height: 50px,
+			letter-spacing:-0.01562em
     ),
     'h2': (
-      'size': 34px,
-      'weight': 400,
-      'line-height': 44px,
-      'letter-spacing': -0.5px,
-      'font-family': $heading-font-family,
+      size: 28px,
+      weight: 300,
+      line-height: 40px,
+      letter-spacing: -0.00833em
     ),
     'h3': (
-      'size': 26px,
-      'weight': 400,
-      'line-height': 36px,
-      'letter-spacing': normal,
-      'font-family': $heading-font-family,
+      size: 24px,
+      weight: 400,
+      line-height: 32px,
+      letter-spacing: normal
     ),
     'h4': (
-      'size': 20px,
-      'weight': 400,
-      'line-height': 28px,
-      'letter-spacing': .25px,
-      'font-family': $heading-font-family,
+      size: 20px,
+      weight: 400,
+      line-height: 30px,
+      letter-spacing: 0.00735em
     ),
     'h5': (
-      'size': 16px,
-      'weight': 400,
-      'line-height': 24px,
-      'letter-spacing': normal,
-      'font-family': $heading-font-family,
+      size: 16px,
+      weight: 400,
+      line-height: 24px,
+      letter-spacing: normal
     ),
     'h6': (
-      'size': 14px,
-      'weight': 400,
-      'line-height': 20px,
-      'letter-spacing': .25px,
-      'font-family': $heading-font-family,
+      size: 14px,
+      weight: 500,
+      line-height: 18px,
+      letter-spacing: 0.0125em,
     ),
-    'subtitle-1': (
-      'size': 16px,
-      'weight': normal,
-      'line-height': 28px,
-      'letter-spacing': 0.15px,
-      'font-family': $body-font-family,
+    'subtitle': (
+      size: 12px,
+      weight: 400,
+      line-height: 20px,
+      letter-spacing: 0.00937em
     ),
-    'subtitle-2': (
-      'size': 14px,
-      'weight': 400,
-      'line-height': 22px,
-      'letter-spacing': 0.1px,
-      'font-family': $body-font-family,
-    ),
-    'body-1': (
-      'size': 16px,
-      'weight': 400,
-      'line-height': 24px,
-      'letter-spacing': .5px,
-      'font-family': $body-font-family,
-    ),
-    'body-2': (
-      'size': 14px,
-      'weight': 400,
-      'line-height': 20px,
-      'letter-spacing': .25px,
-      'font-family': $body-font-family,
-    ),
-    'button-text': (
-      'size': 14px,
-      'weight': 500,
-      'line-height': 36px,
-      'letter-spacing': 1.25px,
-      'font-family': $body-font-family,
+    'body': (
+      font-size: 14px,
+			font-weight: 400,
+			line-height: 22px,
+			letter-spacing: 0.03125em
     ),
     'caption': (
       'size': 12px,
       'weight': 400,
       'line-height': 20px,
-      'letter-spacing': .4px,
-      'font-family': $body-font-family,
+      'letter-spacing': 0.03333em,
       'text-transform': false
-    ),
-    'overline': (
-      'size': 12px,
-      'weight': 500,
-      'line-height': 32px,
-      'letter-spacing': 2px,
-      'font-family': $body-font-family,
     )
   ),
   $uni-headings
@@ -168,14 +132,14 @@ $uni-transparent: rgba($color: #000000, $alpha: 0) !default;
 $uni-bg-color: #f7f7f7 !default;
 
 /* 水平间距 */
-$uni-spacing-sm: 8px;
-$uni-spacing-base: 15px;
-$uni-spacing-lg: 30px;
+$uni-spacing-sm: 8px !default;
+$uni-spacing-base: 15px !default;
+$uni-spacing-lg: 30px !default;
 
 // 阴影
-$uni-shadow-sm:0 1px 5px 0 rgba($color: #d8d8d8, $alpha: 0.5);
-$uni-shadow-base:0 1px 6px 1px rgba($color: #a5a5a5, $alpha: 0.2);
-$uni-shadow-lg:1 1px 10px 2px rgba($color: #a5a4a4, $alpha: 0.5);
+$uni-shadow-sm:0 0 5px rgba($color: #d8d8d8, $alpha: 0.5) !default;
+$uni-shadow-base:0 1px 8px 1px rgba($color: #a5a5a5, $alpha: 0.2) !default;
+$uni-shadow-lg:0px 1px 10px 2px rgba($color: #a5a4a4, $alpha: 0.5) !default;
 
 // 蒙版
-$uni-mask: rgba($color: #000000, $alpha: 0.4);
+$uni-mask: rgba($color: #000000, $alpha: 0.4) !default;

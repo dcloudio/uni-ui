@@ -76,8 +76,8 @@
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
-		padding: 0 10px;
-		height: 50px;
+		padding: 12px 10px;
+		// height: 50px;
 		// background-color: $uni-bg-color-grey;
 		font-weight: normal;
 	}
@@ -127,5 +127,7 @@
 	.uni-section__content-sub {
 		font-size: $uni-font-size-sm;
 		color: $uni-text-color-grey;
+		line-height: 16px;
+		margin-top: 5px;
 	}
 </style>

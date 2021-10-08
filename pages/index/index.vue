@@ -11,6 +11,10 @@
 
 		<view class="home-content">
 			<uni-card is-shadow padding="0" >
+				<uni-section title="内置样式" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
+				<uni-list>
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"  v-for="(layout, index) in styles" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
+				</uni-list>
 				<uni-section title="布局组件" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
 				<uni-list>
 					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"  v-for="(layout, index) in layouts" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
@@ -42,7 +46,16 @@
 		components: {},
 		data() {
 			return {
-
+					styles:[{
+						name: '字体',
+						url: 'font'
+					},{
+						name: '颜色',
+						url: 'color'
+					},{
+						name: '辅助样式',
+						url: 'styles'
+					}],
 					layouts: [{
 							name: 'Card 卡片',
 							url: 'card'
