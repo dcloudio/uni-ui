@@ -128,6 +128,6 @@
 		font-size: $uni-font-size-sm;
 		color: $uni-text-color-grey;
 		line-height: 16px;
-		margin-top: 5px;
+		margin-top: 2px;
 	}
 </style>

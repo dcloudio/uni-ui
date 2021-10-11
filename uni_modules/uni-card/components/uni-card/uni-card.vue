@@ -117,7 +117,7 @@
 
 <style lang="scss">
 	$uni-border-3: #EBEEF5 !default;
-	$uni-shadow-base:0 1px 6px 1px rgba($color: #a5a5a5, $alpha: 0.2) !default;
+	$uni-shadow-base:0 0px 6px 1px rgba($color: #a5a5a5, $alpha: 0.2) !default;
 	$uni-main-color: #3a3a3a !default;
 	$uni-base-color: #6a6a6a !default;
 	$uni-secondary-color: #909399 !default;

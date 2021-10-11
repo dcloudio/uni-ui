@@ -10,30 +10,44 @@
 		</view>
 
 		<view class="home-content">
-			<uni-card is-shadow padding="0" >
-				<uni-section title="内置样式" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
+			<uni-card is-shadow padding="0">
+				<uni-section title="辅助样式" sub-title="引入 uni-sass 后通过辅助样式提升快捷布局能力" color="#007aff" type="line"
+					style="margin-top: 0;"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"  v-for="(layout, index) in styles" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"
+						v-for="(layout, index) in styles" :key="index" :title="layout.name" link
+						:to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 				</uni-list>
-				<uni-section title="布局组件" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
+				<uni-section title="基础组件" sub-title="封装常用功能的组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"  v-for="(layout, index) in layouts" :key="index" :title="layout.name" link :to='`/pages/${platform}/${layout.url}/${layout.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'"
+						v-for="(view, index) in views" :key="index" :title="view.name" link
+						:to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
-				<uni-section title="基础组件" color="#007aff" type="line"></uni-section>
+				<uni-section title="布局组件" sub-title="使复杂的布局变得简单" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'" v-for="(view, index) in views" :key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"
+						v-for="(layout, index) in layouts" :key="index" :title="layout.name" link
+						:to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 				</uni-list>
+
 				<uni-section title="表单组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'" v-for="(view, index) in forms" :key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'"
+						v-for="(view, index) in forms" :key="index" :title="view.name" link
+						:to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
 				<uni-section title="功能组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+func.url+'.png'" v-for="(func, index) in functionals" :key="index" :title="func.name" link :to='`/pages/${platform}/${func.url}/${func.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+func.url+'.png'"
+						v-for="(func, index) in functionals" :key="index" :title="func.name" link
+						:to='`/pages/${platform}/${func.url}/${func.url}`' />
 				</uni-list>
 				<uni-section title="导航" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+navi.url+'.png'" v-for="(navi, index) in navigations" :key="index" :title="navi.name" link :to='`/pages/${platform}/${navi.url}/${navi.url}`' />
+					<uni-list-item show-arrow :thumb="'../../static/icons/'+navi.url+'.png'"
+						v-for="(navi, index) in navigations" :key="index" :title="navi.name" link
+						:to='`/pages/${platform}/${navi.url}/${navi.url}`' />
 				</uni-list>
 			</uni-card>
 		</view>
@@ -46,180 +60,177 @@
 		components: {},
 		data() {
 			return {
-					styles:[{
-						name: '字体',
-						url: 'font'
-					},{
-						name: '颜色',
-						url: 'color'
-					},{
-						name: '辅助样式',
-						url: 'styles'
-					}],
-					layouts: [{
-							name: 'Card 卡片',
-							url: 'card'
-						},
-						{
-							name: 'Grid 宫格',
-							url: 'grid'
-						},
-						{
-							name: 'List 列表',
-							url: 'list'
-						},
-						{
-							name: 'Title 章节标题',
-							url: 'title'
-						},
-						{
-							name: 'Section 标题栏',
-							url: 'section'
-						},
-						{
-							name: 'Layout 布局',
-							url: 'row'
-						}
+				styles: [{
+					name: '字体',
+					url: 'font'
+				}, {
+					name: '颜色',
+					url: 'color'
+				}, {
+					name: '间距',
+					url: 'space'
+				}],
+				layouts: [{
+						name: 'Card 卡片',
+						url: 'card'
+					},
+					{
+						name: 'Grid 宫格',
+						url: 'grid'
+					},
+					{
+						name: 'List 列表',
+						url: 'list'
+					},
+					{
+						name: 'Title 章节标题',
+						url: 'title'
+					},
+					{
+						name: 'Section 标题栏',
+						url: 'section'
+					},
+					{
+						name: 'Layout 布局',
+						url: 'row'
+					}
 
-					],
-					views: [{
-							name: 'Badge 数字角标',
-							url: 'badge'
-						},
-						{
-							name: 'Fab 悬浮按钮',
-							url: 'fab'
-						},
-						{
-							name: 'Fav 收藏按钮',
-							url: 'fav'
-						},
-						{
-							name: 'Icons 图标',
-							url: 'icons'
-						},
-						{
-							name: 'NoticeBar 通告栏',
-							url: 'notice-bar'
-						},
-						{
-							name: 'NumberBox 数字输入框',
-							url: 'number-box'
-						},
-						{
-							name: 'Tag 标签',
-							url: 'tag'
-						}, {
-							name: 'Transition 过渡动画',
-							url: 'transition'
-						}
-					],
-					forms: [{
-						name: 'DataCheckbox 单选复选框',
-						url: 'data-checkbox'
-					}, {
-						name: 'Easyinput 增强输入框',
-						url: 'easyinput'
-					}, {
-						name: 'Form 表单',
-						url: 'forms'
-					}, {
-						name: 'Group 分组',
-						url: 'group'
-					}, {
-						name: 'DataPicker 级联选择',
-						url: 'data-picker'
-					}, {
-						name: 'DatetimePicker 日期时间选择',
-						url: 'datetime-picker'
-					}, {
-						name: 'FilePicker 文件选择上传',
-						url: 'file-picker'
-					}],
-					functionals: [{
-							name: 'Calendar 日历',
-							url: 'calendar'
-						},
-						{
-							name: 'Collapse 折叠面板',
-							url: 'collapse'
-						},
-						// {
-						// 	name: 'Combox 组合输入框',
-						// 	url: 'combox'
-						// },
-						{
-							name: 'Drawer 抽屉',
-							url: 'drawer'
-						},
-						{
-							name: 'Pagination 分页器',
-							url: 'pagination'
-						},
-						{
-							name: 'SwiperDot 轮播图指示点',
-							url: 'swiper-dot'
-						},
-						{
-							name: 'Steps 步骤条',
-							url: 'steps'
-						},
-						{
-							name: 'SegmentedControl 分段器',
-							url: 'segmented-control'
-						},
-						{
-							name: 'Countdown 倒计时',
-							url: 'countdown'
-						},
-						{
-							name: 'Rate 评分',
-							url: 'rate'
-						},
-						{
-							name: 'Popup 弹出层',
-							url: 'popup'
-						},
-						{
-							name: 'IndexedList 索引列表',
-							url: 'indexed-list'
-						},
-						{
-							name: 'Link 超链接',
-							url: 'link'
-						},
-						{
-							name: 'LoadMore 加载更多',
-							url: 'load-more'
-						},
-						{
-							name: 'SwipeAction 滑动操作',
-							url: 'swipe-action'
-						},
-						{
-							name: 'SearchBar 搜索栏',
-							url: 'search-bar'
-						},
-						{
-							name: 'Dateformat 日期格式化',
-							url: 'dateformat'
-						}
-					],
-					navigations: [{
-							name: 'NavBar 导航栏',
-							url: 'nav-bar'
-						},
-						{
-							name: 'GoodsNav 商品导航',
-							url: 'goods-nav'
-						}
-					],
-					// #ifdef APP-NVUE
-					platform: 'nvue',
-					// #endif
-					// #ifndef APP-NVUE
-					platform: 'vue'
-					// #endif
+				],
+				views: [{
+					name: 'Badge 数字角标',
+					url: 'badge'
+				},
+				{
+					name: 'Fab 悬浮按钮',
+					url: 'fab'
+				},
+				{
+					name: 'Fav 收藏按钮',
+					url: 'fav'
+				},
+				{
+					name: 'Icons 图标',
+					url: 'icons'
+				},
+				{
+					name: 'NoticeBar 通告栏',
+					url: 'notice-bar'
+				},
+				{
+					name: 'Tag 标签',
+					url: 'tag'
+				}, {
+					name: 'Transition 过渡动画',
+					url: 'transition'
+				}],
+				forms: [{
+					name: 'DataCheckbox 单选复选框',
+					url: 'data-checkbox'
+				}, {
+					name: 'DataPicker 级联选择',
+					url: 'data-picker'
+				}, {
+					name: 'DatetimePicker 日期时间选择',
+					url: 'datetime-picker'
+				}, {
+					name: 'Easyinput 增强输入框',
+					url: 'easyinput'
+				}, {
+					name: 'Form 表单',
+					url: 'forms'
+				}, {
+					name: 'Group 分组',
+					url: 'group'
+				}, {
+					name: 'FilePicker 文件选择上传',
+					url: 'file-picker'
+				}, {
+					name: 'NumberBox 数字输入框',
+					url: 'number-box'
+				}],
+				functionals: [{
+						name: 'Calendar 日历',
+						url: 'calendar'
+					},
+					{
+						name: 'Collapse 折叠面板',
+						url: 'collapse'
+					},
+					// {
+					// 	name: 'Combox 组合输入框',
+					// 	url: 'combox'
+					// },
+					{
+						name: 'Drawer 抽屉',
+						url: 'drawer'
+					},
+					{
+						name: 'Pagination 分页器',
+						url: 'pagination'
+					},
+					{
+						name: 'SwiperDot 轮播图指示点',
+						url: 'swiper-dot'
+					},
+					{
+						name: 'Steps 步骤条',
+						url: 'steps'
+					},
+					{
+						name: 'SegmentedControl 分段器',
+						url: 'segmented-control'
+					},
+					{
+						name: 'Countdown 倒计时',
+						url: 'countdown'
+					},
+					{
+						name: 'Rate 评分',
+						url: 'rate'
+					},
+					{
+						name: 'Popup 弹出层',
+						url: 'popup'
+					},
+					{
+						name: 'IndexedList 索引列表',
+						url: 'indexed-list'
+					},
+					{
+						name: 'Link 超链接',
+						url: 'link'
+					},
+					{
+						name: 'LoadMore 加载更多',
+						url: 'load-more'
+					},
+					{
+						name: 'SwipeAction 滑动操作',
+						url: 'swipe-action'
+					},
+					{
+						name: 'SearchBar 搜索栏',
+						url: 'search-bar'
+					},
+					{
+						name: 'Dateformat 日期格式化',
+						url: 'dateformat'
+					}
+				],
+				navigations: [{
+					name: 'NavBar 导航栏',
+					url: 'nav-bar'
+				},
+				{
+					name: 'GoodsNav 商品导航',
+					url: 'goods-nav'
+				}],
+				// #ifdef APP-NVUE
+				platform: 'nvue',
+				// #endif
+				// #ifndef APP-NVUE
+				platform: 'vue'
+				// #endif
 
 			}
 		},
@@ -228,54 +239,60 @@
 </script>
 
 <style lang="scss">
-.home-container {
-	position: relative;
-	background-color: #fff;
-	overflow: hidden;
-}
-.home-header {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: #fff;
-	height: 260px;
-	box-sizing: border-box;
-
-	&__bg {
-		margin-top: 20px;
-		width: 100%;
-		height: 100%;
+	.home-container {
+		position: relative;
+		background-color: #fff;
+		overflow: hidden;
 	}
-	&__logo {
+
+	.home-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		height: 260px;
+		box-sizing: border-box;
+
+		&__bg {
+			margin-top: 20px;
+			width: 100%;
+			height: 100%;
+		}
+
+		&__logo {
 			position: absolute;
 			top: 22px;
 			left: 20px;
 			width: 70px;
 			height: 20px;
 			z-index: 1;
-	}
-	&__content {
-		position: absolute;
-		top: 58px;
-		left: 48px;
-		width: 200px;
-		z-index: 1;
-		&-title {
-			font-size: 16px;
-			font-weight: 600;
-			color: #1F1F1F;
 		}
-		&-subtitle {
-			margin-top: 8px;
-			font-size: 12px;
-			font-weight: 400;
-			color: #666;
+
+		&__content {
+			position: absolute;
+			top: 58px;
+			left: 48px;
+			width: 200px;
+			z-index: 1;
+
+			&-title {
+				font-size: 16px;
+				font-weight: 600;
+				color: #1F1F1F;
+			}
+
+			&-subtitle {
+				margin-top: 8px;
+				font-size: 12px;
+				font-weight: 400;
+				color: #666;
+			}
 		}
 	}
-}
-.home-content {
-	margin-top: 170px;
-	overflow: hidden;
-}
+
+	.home-content {
+		margin-top: 170px;
+		overflow: hidden;
+	}
 </style>
