@@ -259,6 +259,7 @@
 	}
 	.uni-list-item-box {
 		display: flex;
+		flex-direction: row;
 		flex: 1;
 		align-items: center;
 		padding: 0 15px;
