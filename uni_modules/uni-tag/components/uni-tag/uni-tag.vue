@@ -8,9 +8,10 @@
 	 * @description 用于展示1个或多个文字标签，可点击切换选中、不选中的状态
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=35
 	 * @property {String} text 标签内容
-	 * @property {String} size = [normal|small] 大小尺寸
-	 * 	@value normal 正常
+	 * @property {String} size = [default|small|mini] 大小尺寸
+	 * 	@value default 正常
 	 * 	@value small 小尺寸
+	 * 	@value mini 迷你尺寸
 	 * @property {String} type = [default|primary|success｜warning｜error]  颜色类型
 	 * 	@value default 灰色
 	 * 	@value primary 蓝色
