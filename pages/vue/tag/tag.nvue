@@ -18,9 +18,6 @@
 			<view class="tag-view">
 				<uni-tag text="标签" type="error" />
 			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="royal" />
-			</view>
 		</view>
 		<uni-section title="空心标签" type="line"></uni-section>
 		<view class="example-body">
@@ -39,8 +36,50 @@
 			<view class="tag-view">
 				<uni-tag :inverted="true" text="标签" type="error" />
 			</view>
+		</view>
+		<uni-section title="标签尺寸" type="line"></uni-section>
+		<view class="example-body">
 			<view class="tag-view">
-				<uni-tag :inverted="true" text="标签" type="royal" />
+				<uni-tag text="标签" type="primary" size="normal" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="primary" size="small" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="primary" size="mini" />
+			</view>
+		</view>
+		<view class="example-body">
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="normal" inverted="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="small" inverted="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="mini" inverted="true" />
+			</view>
+		</view>
+		<view class="example-body">
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="normal" inverted="true" :circle="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="small" inverted="true" :circle="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="mini" inverted="true" :circle="true" />
+			</view>
+		</view>
+		<view class="example-body">
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="normal" :mark="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="small" :mark="true" />
+			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" type="error" size="mini" :mark="true" />
 			</view>
 		</view>
 		<uni-section title="圆角样式" type="line"></uni-section>
@@ -56,9 +95,6 @@
 			</view>
 			<view class="tag-view">
 				<uni-tag :inverted="true" :circle="true" text="标签" type="error" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :circle="true" text="标签" type="royal" />
 			</view>
 		</view>
 		<uni-section title="自定义样式" type="line"></uni-section>
@@ -81,9 +117,6 @@
 			<view class="tag-view">
 				<uni-tag :mark="true" :circle="true" text="标签" type="error" />
 			</view>
-			<view class="tag-view">
-				<uni-tag :mark="true" :circle="true" text="标签" type="royal" />
-			</view>
 		</view>
 		<uni-section title="点击事件" type="line"></uni-section>
 		<view class="example-body">
@@ -94,26 +127,6 @@
 				<uni-tag :circle="true" :inverted="inverted" text="标签" type="primary" @click="setInverted" />
 			</view>
 		</view>
-
-		<uni-section title="小标签" type="line"></uni-section>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag text="标签" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="primary" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="success" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :mark="true" text="标签" type="warning" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :circle="true" text="标签" type="error" size="small" />
-			</view>
-		</view>
-
 		<uni-section title="不可点击状态" type="line"></uni-section>
 		<view class="example-body">
 			<view class="tag-view">
@@ -125,6 +138,9 @@
 			<view class="tag-view">
 				<uni-tag :inverted="true" :disabled="true" text="标签" type="error" size="small" />
 			</view>
+			<view class="tag-view">
+				<uni-tag :inverted="true" :disabled="true" text="标签" type="error" size="mini" />
+			</view>
 		</view>
 	</view>
 </template>
@@ -134,13 +150,13 @@
 		components: {},
 		data() {
 			return {
-				type: 'default',
-				inverted: false
+				type: "default",
+				inverted: false,
 			};
 		},
 		methods: {
 			setType() {
-				let types = ['default', 'primary', 'success', 'warning', 'error'];
+				let types = ["default", "primary", "success", "warning", "error"];
 				let index = types.indexOf(this.type);
 				types.splice(index, 1);
 				let randomIndex = Math.floor(Math.random() * 4);
@@ -148,13 +164,17 @@
 			},
 			setInverted() {
 				this.inverted = !this.inverted;
-			}
-		}
+			},
+		},
 	};
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
+	@import "@/common/uni-nvue.scss";
+
+	page {
+		background: #fff;
+	}
 
 	.example-body {
 		/* #ifndef APP-PLUS-NVUE */
