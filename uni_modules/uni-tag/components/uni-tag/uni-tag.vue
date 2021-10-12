@@ -1,5 +1,5 @@
 <template>
-	<text class="uni-tag" v-if="text" :class="classes" :style="customStyle" @click="onClick"><slot />{{text}}<slot name="right" /></text>
+	<text class="uni-tag" v-if="text" :class="classes" :style="customStyle" @click="onClick">{{text}}</text>
 </template>
 
 <script>
