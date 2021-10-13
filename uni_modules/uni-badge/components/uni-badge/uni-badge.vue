@@ -2,8 +2,7 @@
 	<view class="uni-badge--x">
 		<slot />
 		<text v-if="text" :class="classNames" :style="[badgeWidth, positionStyle, customStyle, dotStyle]"
-			class="uni-badge"
-			@click="onClick()">{{displayValue}}</text>
+			class="uni-badge" @click="onClick()">{{displayValue}}</text>
 	</view>
 </template>
 
@@ -28,7 +27,7 @@
 	 */
 	export default {
 		name: 'UniBadge',
-		emits:['click'],
+		emits: ['click'],
 		props: {
 			type: {
 				type: String,
@@ -90,7 +89,7 @@
 					'uni-badge--' + type,
 					'uni-badge--' + size,
 					absolute ? 'uni-badge--absolute' : ''
-				]
+				].join(' ')
 			},
 			positionStyle() {
 				if (!this.absolute) return {}
@@ -138,7 +137,11 @@
 				}
 			},
 			displayValue() {
-				const { isDot, text, maxNum } = this
+				const {
+					isDot,
+					text,
+					maxNum
+				} = this
 				return isDot ? '' : (Number(text) > maxNum ? `${maxNum}+` : text)
 			}
 		},
