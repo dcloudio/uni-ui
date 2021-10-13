@@ -4,9 +4,6 @@
 		<uni-section title="实心标签" type="line"></uni-section>
 		<view class="example-body">
 			<view class="tag-view">
-				<uni-tag text="标签" />
-			</view>
-			<view class="tag-view">
 				<uni-tag text="标签" type="primary" />
 			</view>
 			<view class="tag-view">
@@ -18,12 +15,12 @@
 			<view class="tag-view">
 				<uni-tag text="标签" type="error" />
 			</view>
+			<view class="tag-view">
+				<uni-tag text="标签" />
+			</view>
 		</view>
 		<uni-section title="空心标签" type="line"></uni-section>
 		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag :inverted="true" text="标签" />
-			</view>
 			<view class="tag-view">
 				<uni-tag :inverted="true" text="标签" type="primary" />
 			</view>
@@ -35,6 +32,9 @@
 			</view>
 			<view class="tag-view">
 				<uni-tag :inverted="true" text="标签" type="error" />
+			</view>
+			<view class="tag-view">
+				<uni-tag :inverted="true" text="标签" />
 			</view>
 		</view>
 		<uni-section title="标签尺寸" type="line"></uni-section>
@@ -49,73 +49,40 @@
 				<uni-tag text="标签" type="primary" size="mini" />
 			</view>
 		</view>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="normal" inverted="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="small" inverted="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="mini" inverted="true" />
-			</view>
-		</view>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="normal" inverted="true" :circle="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="small" inverted="true" :circle="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="mini" inverted="true" :circle="true" />
-			</view>
-		</view>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="normal" :mark="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="small" :mark="true" />
-			</view>
-			<view class="tag-view">
-				<uni-tag text="标签" type="error" size="mini" :mark="true" />
-			</view>
-		</view>
 		<uni-section title="圆角样式" type="line"></uni-section>
 		<view class="example-body">
+			<view class="tag-view">
+				<uni-tag :circle="true" text="标签" type="primary" />
+			</view>
 			<view class="tag-view">
 				<uni-tag :circle="true" text="标签" type="primary" size="small" />
 			</view>
 			<view class="tag-view">
-				<uni-tag :inverted="true" :circle="true" text="标签" type="success" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :circle="true" text="标签" type="warning" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :circle="true" text="标签" type="error" />
-			</view>
-		</view>
-		<uni-section title="自定义样式" type="line"></uni-section>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag text="我是自定义样式标签" custom-style="background-color: #000; color: #fff;"></uni-tag>
+				<uni-tag :circle="true" text="标签" type="primary" size="mini" />
 			</view>
 		</view>
 		<uni-section title="标记样式" type="line"></uni-section>
 		<view class="example-body">
 			<view class="tag-view">
+				<uni-tag :mark="true" text="标签" type="primary" size="default" />
+			</view>
+			<view class="tag-view">
 				<uni-tag :mark="true" text="标签" type="primary" size="small" />
 			</view>
 			<view class="tag-view">
-				<uni-tag :mark="true" text="标签" type="success" size="small" />
+				<uni-tag :mark="true" text="标签" type="primary" size="mini" />
 			</view>
+		</view>
+		<uni-section title="不可点击状态" type="line"></uni-section>
+		<view class="example-body">
 			<view class="tag-view">
-				<uni-tag :mark="true" text="标签" type="warning" />
+				<uni-tag :disabled="true" text="标签" type="primary"/>
 			</view>
+		</view>
+		<uni-section title="自定义样式" type="line"></uni-section>
+		<view class="example-body">
 			<view class="tag-view">
-				<uni-tag :mark="true" :circle="true" text="标签" type="error" />
+				<uni-tag text="我是自定义样式标签" custom-style="background-color: #4335d6a; border-color: #4335d6; color: #fff;"></uni-tag>
 			</view>
 		</view>
 		<uni-section title="点击事件" type="line"></uni-section>
@@ -125,21 +92,6 @@
 			</view>
 			<view class="tag-view">
 				<uni-tag :circle="true" :inverted="inverted" text="标签" type="primary" @click="setInverted" />
-			</view>
-		</view>
-		<uni-section title="不可点击状态" type="line"></uni-section>
-		<view class="example-body">
-			<view class="tag-view">
-				<uni-tag :disabled="true" text="标签" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :disabled="true" text="标签" type="primary" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :disabled="true" text="标签" type="error" size="small" />
-			</view>
-			<view class="tag-view">
-				<uni-tag :inverted="true" :disabled="true" text="标签" type="error" size="mini" />
 			</view>
 		</view>
 	</view>
