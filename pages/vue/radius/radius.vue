@@ -13,11 +13,11 @@
 				</view>
 			</view>
 			<view class="actions uni-mt-10">
-				<view class="action-label">位置</view>
+				<text class="action-label">位置</text>
 				<uni-data-checkbox  v-model="formData.direction" multiple :localdata="directionData" @change="change($event,1)"></uni-data-checkbox>
 			</view>
 			<view class="actions uni-mt-3 uni-mb-10">
-				<view class="action-label">大小</view>
+				<text class="action-label">大小</text>
 				<uni-data-checkbox v-model="formData.size" :localdata="sizeData" @change="change($event,2)"></uni-data-checkbox>
 			</view>
 		</uni-section>
@@ -120,5 +120,6 @@
 		flex-shrink: 0;
 		margin-left: 10px;
 		margin-right: 10px;
+		font-size: 12px;
 	}
 </style>

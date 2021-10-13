@@ -14,38 +14,38 @@
 				<uni-section title="辅助样式" sub-title="引入 uni-sass 后通过辅助样式提升快捷布局能力" color="#007aff" type="line"
 					style="margin-top: 0;"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+layout.url+'.png'"
 						v-for="(layout, index) in styles" :key="index" :title="layout.name" link
 						:to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 				</uni-list>
 				<uni-section title="基础组件" sub-title="封装常用功能的组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'"
 						v-for="(view, index) in views" :key="index" :title="view.name" link
 						:to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
 				<uni-section title="布局组件" sub-title="使复杂的布局变得简单" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+layout.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+layout.url+'.png'"
 						v-for="(layout, index) in layouts" :key="index" :title="layout.name" link
 						:to='`/pages/${platform}/${layout.url}/${layout.url}`' />
 				</uni-list>
 
 				<uni-section title="表单组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+view.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'"
 						v-for="(view, index) in forms" :key="index" :title="view.name" link
 						:to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
 				<uni-section title="功能组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+func.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+func.url+'.png'"
 						v-for="(func, index) in functionals" :key="index" :title="func.name" link
 						:to='`/pages/${platform}/${func.url}/${func.url}`' />
 				</uni-list>
 				<uni-section title="导航" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'../../static/icons/'+navi.url+'.png'"
+					<uni-list-item show-arrow :thumb="'/static/icons/'+navi.url+'.png'"
 						v-for="(navi, index) in navigations" :key="index" :title="navi.name" link
 						:to='`/pages/${platform}/${navi.url}/${navi.url}`' />
 				</uni-list>

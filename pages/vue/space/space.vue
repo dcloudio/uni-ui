@@ -16,22 +16,22 @@
 				</view>
 			</view>
 			<view class="actions uni-mt-10">
-				<view class="action-label">外边距</view>
+				<text class="action-label">外边距</text>
 				<uni-data-checkbox v-model="formData.margin" multiple :localdata="directionData"
 					@change="change($event,1)"></uni-data-checkbox>
 			</view>
 			<view class="actions uni-mt-3 uni-mb-10">
-				<view class="action-label">外边距大小</view>
+				<text class="action-label">外边距大小</text>
 				<uni-data-checkbox v-model="formData.marginSize" :localdata="sizeData" @change="change($event,1)">
 				</uni-data-checkbox>
 			</view>
 			<view class="actions">
-				<view class="action-label">内边距</view>
+				<text class="action-label">内边距</text>
 				<uni-data-checkbox v-model="formData.padding" multiple :localdata="directionData"
 					@change="change($event,2)"></uni-data-checkbox>
 			</view>
 			<view class="actions uni-mt-3 uni-mb-10">
-				<view class="action-label">内边距大小</view>
+				<text class="action-label">内边距大小</text>
 				<uni-data-checkbox v-model="formData.paddingSize" :localdata="sizeData" @change="change($event,3)">
 				</uni-data-checkbox>
 			</view>
@@ -129,9 +129,10 @@
 	}
 
 	.action-label {
-		width: 50px;
+		width: 70px;
 		flex-shrink: 0;
 		margin-left: 10px;
 		margin-right: 10px;
+		font-size: 12px;
 	}
 </style>

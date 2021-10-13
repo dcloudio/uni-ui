@@ -1,20 +1,16 @@
 <template>
-	<view class="page">
-		<view class="example-info">
-			<text class="example-info-text">图标组件方便用户在设计页面的时候，减少小图片的使用。可方便自定义图标单色、尺寸</text>
-		</view>
-		<uni-section title="基础图标" type="line">
-			<view class="uni-right">
-				<text class="uni-right-text">显示{{ checked?' unicode':'图标名' }}</text>
-				<switch :checked="checked" class="switch" @change="change" />
+	<view>
+		<uni-card :is-shadow="false" is-full>
+			图标组件方便用户在设计页面的时候，减少小图片的使用。可方便自定义图标单色、尺寸。
+		</uni-card>
+		<uni-section title="图标" type="line">
+			<view class="icon-content">
+				<view v-for="(item,index) in iconClassList" :key="index" class="icon-item" @click="switchActive(index)">
+					<uni-icons :type="item.name" :color="activeIndex === index?'#007aff':'#5e6d82'" size="30" />
+					<text :style="{color:activeIndex === index?'#007aff':'#5e6d82'}" class="uni-mt-5 uni-subtitle">{{ checked? item.unicode: item.name }}</text>
+				</view>
 			</view>
 		</uni-section>
-		<view class="example-body">
-			<view v-for="(item,index) in iconClassList" :key="index" class="icon-item" @click="switchActive(index)">
-				<uni-icons :type="item.name" :color="activeIndex === index?'#007aff':'#8f8f94'" size="25" />
-				<text :style="{color:activeIndex === index?'#007aff':'#8f8f94'}" class="icon-item-text">{{ checked? item.unicode: item.name }}</text>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -24,6 +20,42 @@
 		data() {
 			return {
 				iconClassList: [{
+					"name": "auth",
+					"unicode": "e6ab"
+				},{
+					"name": "tune",
+					"unicode": "e6aa;"
+				},{
+					"name": "folder-add",
+					"unicode": "e6a9"
+				},{
+					"name": "calendar",
+					"unicode": "e6a8"
+				},{
+					"name": "staff",
+					"unicode": "e6a7"
+				},{
+					"name": "notification",
+					"unicode": "e6a6"
+				},{
+					"name": "link",
+					"unicode": "e6a5"
+				},{
+					"name": "gift",
+					"unicode": "e6a4"
+				},{
+					"name": "font",
+					"unicode": "e6a3"
+				},{
+					"name": "medal",
+					"unicode": "e6a2"
+				},{
+					"name": "fire",
+					"unicode": "e6a1"
+				},{
+					"name": "calendar",
+					"unicode": "e6a0"
+				},{
 					"name": "arrowdown",
 					"unicode": "e581"
 				}, {
@@ -431,45 +463,21 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
-	.example-body {
-		padding: 0;
-		flex-direction: row;
-		flex-wrap: wrap;
-		// align-items: center;
-		// justify-content: center;
-	}
-
-	.uni-right {
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-		color: #666;
-	}
-
-	.uni-right-text {
-		font-size: 28rpx;
-	}
-
-	.switch {
-		transform: scale(0.8);
-		margin-left: 5px;
-	}
-
+.icon-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	.icon-item {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		box-sizing: border-box;
 		/* #endif */
-		width: 180rpx;
-		padding: 30rpx 10rpx;
+		align-items: center;
+		width: calc(100% / 4);
+		padding: 10px;
 		text-align: center;
 		flex-direction: column;
 	}
+}
 
-	.icon-item-text {
-		font-size: 24rpx;
-		text-align: center;
-	}
 </style>
