@@ -1,24 +1,6 @@
 <template>
 	<view class="page">
-		<text class="example-info">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
-		<uni-section title="定位: aboslute 属性" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" :text="value" absolute="rightTop" size="small">
-				<view class="box"><text class="box-text">右上</text></view>
-			</uni-badge>
-		</view>
-		<uni-section title="偏移: offset 属性(存在 aboslute)" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" :text="8" absolute="rightTop" :offset="[-5, -5]" size="small">
-				<view class="box"><text class="box-text">右上</text></view>
-			</uni-badge>
-		</view>
-		<uni-section title="仅显示点: is-dot 属性" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" :is-dot="true" :text="value" absolute="rightTop" size="small">
-				<view class="box"><text class="box-text">圆点</text></view>
-			</uni-badge>
-		</view>
+		<text class="example-info">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等1111111111111</text>
 		<uni-section title="有底色" type="line"></uni-section>
 		<view class="example-body">
 			<uni-badge class="uni-badge-left-margin" text="1" />
@@ -39,6 +21,24 @@
 		<view class="example-body">
 			<uni-badge class="uni-badge-left-margin" text="2" type="primary" :customStyle="{background: '#4335d6'}" />
 			<uni-badge class="uni-badge-left-margin" text="2" type="primary" :customStyle="customStyle" />
+		</view>
+		<uni-section title="定位: aboslute 属性" type="line"></uni-section>
+		<view class="example-body">
+			<uni-badge class="uni-badge-left-margin" :text="value" absolute="rightTop" size="small">
+				<view class="box"><text class="box-text">右上</text></view>
+			</uni-badge>
+		</view>
+		<uni-section title="偏移: offset 属性(存在 aboslute)" type="line"></uni-section>
+		<view class="example-body">
+			<uni-badge class="uni-badge-left-margin" :text="8" absolute="rightTop" :offset="[-5, -5]" size="small">
+				<view class="box"><text class="box-text">右上</text></view>
+			</uni-badge>
+		</view>
+		<uni-section title="仅显示点: is-dot 属性" type="line"></uni-section>
+		<view class="example-body">
+			<uni-badge class="uni-badge-left-margin" :is-dot="true" :text="value" absolute="rightTop" size="small">
+				<view class="box"><text class="box-text">圆点</text></view>
+			</uni-badge>
 		</view>
 	</view>
 </template>
