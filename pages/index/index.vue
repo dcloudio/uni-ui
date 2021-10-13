@@ -69,6 +69,9 @@
 				}, {
 					name: '间距',
 					url: 'space'
+				}, {
+					name: '圆角',
+					url: 'radius'
 				}],
 				layouts: [{
 						name: 'Card 卡片',
