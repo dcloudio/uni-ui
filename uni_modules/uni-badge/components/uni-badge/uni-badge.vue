@@ -12,15 +12,12 @@
 	 * @description 数字角标一般和其它控件（列表、9宫格等）配合使用，用于进行数量提示，默认为实心灰色背景
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=21
 	 * @property {String} text 角标内容
-	 * @property {String} type = [default|primary|success|warning|error] 颜色类型
+	 * @property {String} type = [info|primary|success|warning|error] 颜色类型
 	 * 	@value default 灰色
 	 * 	@value primary 蓝色
 	 * 	@value success 绿色
 	 * 	@value warning 黄色
 	 * 	@value error 红色
-	 * @property {String} size = [normal|small] Badge 大小
-	 * 	@value normal 一般尺寸
-	 * 	@value small 小尺寸
 	 * @property {String} inverted = [true|false] 是否无需背景颜色
 	 * @event {Function} click 点击 Badge 触发事件
 	 * @example <uni-badge text="1"></uni-badge>
@@ -31,7 +28,7 @@
 		props: {
 			type: {
 				type: String,
-				default: 'default'
+				default: 'error'
 			},
 			inverted: {
 				type: Boolean,
@@ -61,7 +58,7 @@
 			},
 			size: {
 				type: String,
-				default: 'normal'
+				default: 'small'
 			},
 			customStyle: {
 				type: Object,
@@ -154,6 +151,13 @@
 </script>
 
 <style lang="scss" scoped>
+	$uni-primary: #2979ff !default;
+	$uni-success: #4cd964 !default;
+	$uni-warning: #f0ad4e !default;
+	$uni-error: #dd524d !default;
+	$uni-info: #909399 !default;
+
+
 	$bage-size: 12px;
 	$bage-small: scale(0.8);
 	$bage-height: 20px;
@@ -172,6 +176,11 @@
 		position: absolute;
 	}
 
+	.uni-badge--small {
+		transform: $bage-small;
+		transform-origin: center center;
+	}
+
 	.uni-badge {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -182,75 +191,69 @@
 		flex-direction: row;
 		height: $bage-height;
 		line-height: $bage-height;
-		color: $uni-text-color;
+		color: #fff;
 		border-radius: 100px;
-		background-color: $uni-bg-color-hover;
+		background-color: $uni-info;
 		background-color: transparent;
 		text-align: center;
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-size: $bage-size;
 		/* #ifdef H5 */
+		z-index: 999;
 		cursor: pointer;
 		/* #endif */
+
+		&--info {
+			color: #fff;
+			background-color: $uni-info;
+		}
+
+		&--primary {
+			background-color: $uni-primary;
+		}
+
+		&--success {
+			background-color: $uni-success;
+		}
+
+		&--warning {
+			background-color: $uni-warning;
+		}
+
+		&--error {
+			background-color: $uni-error;
+		}
+
+		&--inverted {
+			padding: 0 5px 0 0;
+			color: $uni-info;
+		}
+
+		&--info-inverted {
+			color: $uni-info;
+			background-color: transparent;
+		}
+
+		&--primary-inverted {
+			color: $uni-primary;
+			background-color: transparent;
+		}
+
+		&--success-inverted {
+			color: $uni-success;
+			background-color: transparent;
+		}
+
+		&--warning-inverted {
+			color: $uni-warning;
+			background-color: transparent;
+		}
+
+		&--error-inverted {
+			color: $uni-error;
+			background-color: transparent;
+		}
+
 	}
 
-	.uni-badge--inverted {
-		padding: 0 5px 0 0;
-		color: $uni-bg-color-hover;
-	}
-
-	.uni-badge--default {
-		color: $uni-text-color;
-		background-color: $uni-bg-color-hover;
-	}
-
-	.uni-badge--default-inverted {
-		color: $uni-text-color-grey;
-		background-color: transparent;
-	}
-
-	.uni-badge--primary {
-		color: $uni-text-color-inverse;
-		background-color: $uni-color-primary;
-	}
-
-	.uni-badge--primary-inverted {
-		color: $uni-color-primary;
-		background-color: transparent;
-	}
-
-	.uni-badge--success {
-		color: $uni-text-color-inverse;
-		background-color: $uni-color-success;
-	}
-
-	.uni-badge--success-inverted {
-		color: $uni-color-success;
-		background-color: transparent;
-	}
-
-	.uni-badge--warning {
-		color: $uni-text-color-inverse;
-		background-color: $uni-color-warning;
-	}
-
-	.uni-badge--warning-inverted {
-		color: $uni-color-warning;
-		background-color: transparent;
-	}
-
-	.uni-badge--error {
-		color: $uni-text-color-inverse;
-		background-color: $uni-color-error;
-	}
-
-	.uni-badge--error-inverted {
-		color: $uni-color-error;
-		background-color: transparent;
-	}
-
-	.uni-badge--small {
-		transform: $bage-small;
-		transform-origin: center center;
-	}
 </style>
