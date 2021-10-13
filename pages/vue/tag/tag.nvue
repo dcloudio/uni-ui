@@ -82,7 +82,7 @@
 		<uni-section title="自定义样式" type="line"></uni-section>
 		<view class="example-body">
 			<view class="tag-view">
-				<uni-tag text="我是自定义样式标签" custom-style="background-color: #4335d6a; border-color: #4335d6; color: #fff;"></uni-tag>
+				<uni-tag text="我是自定义样式标签" custom-style="background-color: #4335d6; border-color: #4335d6; color: #fff;"></uni-tag>
 			</view>
 		</view>
 		<uni-section title="点击事件" type="line"></uni-section>
@@ -135,7 +135,7 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		flex-wrap: wrap;
-		padding: 20rpx;
+		padding: 10px;
 	}
 
 	.tag-view {
