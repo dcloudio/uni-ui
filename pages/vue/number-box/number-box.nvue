@@ -1,0 +1,57 @@
+<template>
+	<view class="page">
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">数字输入框组件多用于购物车加减商品等场景</text>
+		</uni-card>
+		<uni-section title="基本用法" type="line" padding>
+				<uni-number-box @change="changeValue" />
+		</uni-section>
+		<uni-section :title="'使用v-model : '+ vModelValue" type="line" padding>
+			<uni-number-box v-model = "vModelValue" @blur="blur" @focus="focus" @change="changeValue" />
+		</uni-section>
+		<uni-section title="设置最小值和最大值" type="line" padding>
+			<uni-number-box :min="2" :max="9" :value="555" />
+		</uni-section>
+		<uni-section title="设置步长（步长0.1)" type="line" padding>
+			<uni-number-box :value="1.1" :step="0.1" />
+		</uni-section>
+		<uni-section title="自定义背景" type="line" padding>
+			<uni-number-box :value="50" background="#ee0a24" color="#fff" />
+		</uni-section>
+		<uni-section title="禁用状态" type="line" padding>
+			<uni-number-box :disabled="true" />
+		</uni-section>
+		<uni-section :title="'获取输入的值 : '+ numberValue" type="line" padding>
+			<uni-number-box :value="numberValue" @change="change" />
+		</uni-section>
+	</view>
+</template>
+<script>
+	export default {
+		components: {},
+		data() {
+			return {
+				numberValue: 0,
+				vModelValue: 3
+			}
+		},
+		methods: {
+			change(value) {
+				this.numberValue = value
+			},
+			changeValue(value) {
+				console.log('返回数值：', value);
+			},
+			blur(e) {
+				console.log('-------blur:', e);
+			},
+			focus(e) {
+				console.log('-------focus:', e);
+			}
+
+		}
+	}
+</script>
+<style lang="scss">
+	@import '@/common/uni-nvue.scss';
+</style>
