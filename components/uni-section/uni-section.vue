@@ -9,7 +9,9 @@
 				<text v-if="subTitle" class="uni-section__content-sub">{{ subTitle }}</text>
 			</view>
 		</view>
-		<slot />
+		<view :style="padding && {padding: '10px'}">
+			<slot/>
+		</view>
 	</view>
 </template>
 
@@ -44,6 +46,10 @@
 			subTitle: {
 				type: String,
 				default: ''
+			},
+			padding: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {

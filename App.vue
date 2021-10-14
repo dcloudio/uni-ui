@@ -2,6 +2,9 @@
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
+		uni.navigateTo({
+			url: 'pages/vue/number-box/number-box'
+		})
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -20,4 +23,9 @@ page {
 	background-color: #f5f5f5;
 }
 /* #endif */
+.example-info {
+	font-size: 14px;
+	color: #333;
+	padding: 10px;
+}
 </style>
