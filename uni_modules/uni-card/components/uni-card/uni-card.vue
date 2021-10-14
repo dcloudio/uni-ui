@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-card" :class="{ 'uni-card--full': isFull, 'uni-card--shadow': isShadow,'uni-card--border':border}"
-		:style="{margin:isFull?0:margin,padding:spacing,'box-shadow':isShadow?shadow:'none'}">
+		:style="{margin:isFull?0:margin,padding:spacing,'box-shadow':isShadow?shadow:''}">
 		<!-- 封面 -->
 		<slot name="cover">
 			<view v-if="cover" class="uni-card__cover">
@@ -143,11 +143,14 @@
 		.uni-card__cover {
 			position: relative;
 			margin-top: $uni-card-spacing;
+			flex-direction: row;
 			overflow: hidden;
 			border-radius: 4px;
+			border: 1px red solid;
 
 			.uni-card__cover-image {
-				width: 100%;
+				flex: 1;
+				// width: 100%;
 				vertical-align: middle;
 			}
 		}
@@ -155,6 +158,7 @@
 		.uni-card__header {
 			display: flex;
 			border-bottom: 1px $uni-border-color solid;
+			flex-direction: row;
 			align-items: center;
 			padding: $uni-card-spacing;
 			overflow: hidden;
@@ -241,8 +245,8 @@
 
 	.uni-card--full {
 		margin: 0;
-		border-left: none;
-		border-right: none;
+		border-left-width: 0;
+		border-left-width: 0;
 		border-radius: 0;
 	}
 

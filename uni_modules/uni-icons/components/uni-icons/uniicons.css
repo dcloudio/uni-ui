@@ -1,3 +1,111 @@
+.uniui-location-filled:before {
+  content: "\e6af";
+}
+
+.uniui-person-filled:before {
+  content: "\e69d";
+}
+
+.uniui-personadd-filled:before {
+  content: "\e698";
+}
+
+.uniui-back:before {
+  content: "\e6b9";
+}
+
+.uniui-forward:before {
+  content: "\e6ba";
+}
+
+.uniui-arrow-right:before {
+  content: "\e6bb";
+}
+
+.uniui-arrow-left:before {
+  content: "\e6bc";
+}
+
+.uniui-arrow-up:before {
+  content: "\e6bd";
+}
+
+.uniui-arrow-down:before {
+  content: "\e6be";
+}
+
+.uniui-bottom:before {
+  content: "\e6b8";
+}
+
+.uniui-right:before {
+  content: "\e6b5";
+}
+
+.uniui-top:before {
+  content: "\e6b6";
+}
+
+.uniui-left:before {
+  content: "\e6b7";
+}
+
+.uniui-eye:before {
+  content: "\e651";
+}
+
+.uniui-eye-filled:before {
+  content: "\e66a";
+}
+
+.uniui-eye-slash:before {
+  content: "\e6b3";
+}
+
+.uniui-eye-slash-filled:before {
+  content: "\e6b4";
+}
+
+.uniui-info-filled:before {
+  content: "\e649";
+}
+
+.uniui-plus-filled:before {
+  content: "\e6b1";
+}
+
+.uniui-reload:before {
+  content: "\e6b2";
+}
+
+.uniui-micoff-filled:before {
+  content: "\e6b0";
+}
+
+.uniui-map-pin-ellipse:before {
+  content: "\e6ac";
+}
+
+.uniui-map-pin:before {
+  content: "\e6ad";
+}
+
+.uniui-location:before {
+  content: "\e6ae";
+}
+
+.uniui-starhalf:before {
+  content: "\e683";
+}
+
+.uniui-star:before {
+  content: "\e688";
+}
+
+.uniui-star-filled:before {
+  content: "\e68f";
+}
+
 .uniui-calendar:before {
   content: "\e6a0";
 }
@@ -62,10 +170,6 @@
   content: "\e69c";
 }
 
-.uniui-personadd-filled:before {
-  content: "\e69d";
-}
-
 .uniui-email:before {
   content: "\e69e";
 }
@@ -98,16 +202,8 @@
   content: "\e697";
 }
 
-.uniui-person-filled:before {
-  content: "\e698";
-}
-
 .uniui-upload-filled:before {
   content: "\e68e";
-}
-
-.uniui-starhalf:before {
-  content: "\e68f";
 }
 
 .uniui-upload:before {
@@ -130,12 +226,8 @@
   content: "\e681";
 }
 
-.uniui-pengyouquan:before {
+.uniui-pyq:before {
   content: "\e682";
-}
-
-.uniui-star:before {
-  content: "\e683";
 }
 
 .uniui-sound:before {
@@ -152,10 +244,6 @@
 
 .uniui-trash:before {
   content: "\e687";
-}
-
-.uniui-star-filled:before {
-  content: "\e688";
 }
 
 .uniui-videocam-filled:before {
@@ -262,10 +350,6 @@
   content: "\e669";
 }
 
-.uniui-info-filled:before {
-  content: "\e66a";
-}
-
 .uniui-locked:before {
   content: "\e66b";
 }
@@ -358,10 +442,6 @@
   content: "\e648";
 }
 
-.uniui-map-pin-ellipse:before {
-  content: "\e649";
-}
-
 .uniui-redo:before {
   content: "\e64a";
 }
@@ -390,10 +470,6 @@
   content: "\e650";
 }
 
-.uniui-map-pin:before {
-  content: "\e651";
-}
-
 .uniui-paperclip:before {
   content: "\e652";
 }
@@ -418,60 +494,28 @@
   content: "\e63a";
 }
 
-.uniui-eye-slash-filled:before {
-  content: "\e63b";
-}
-
-.uniui-hand-thumbsdown-filled:before {
+.uniui-hand-down-filled:before {
   content: "\e63c";
 }
 
-.uniui-hand-thumbsdown:before {
+.uniui-hand-down:before {
   content: "\e63d";
 }
 
-.uniui-hand-thumbsup-filled:before {
+.uniui-hand-up-filled:before {
   content: "\e63e";
 }
 
-.uniui-hand-thumbsup:before {
+.uniui-hand-up:before {
   content: "\e63f";
-}
-
-.uniui-eye-slash:before {
-  content: "\e640";
 }
 
 .uniui-heart-filled:before {
   content: "\e641";
 }
 
-.uniui-eye-filled:before {
-  content: "\e642";
-}
-
 .uniui-mail-open:before {
   content: "\e643";
-}
-
-.uniui-arrowright:before {
-  content: "\e634";
-}
-
-.uniui-arrowdown:before {
-  content: "\e635";
-}
-
-.uniui-arrowleft:before {
-  content: "\e636";
-}
-
-.uniui-arrowup:before {
-  content: "\e637";
-}
-
-.uniui-eye:before {
-  content: "\e638";
 }
 
 .uniui-heart:before {
@@ -480,14 +524,6 @@
 
 .uniui-loop:before {
   content: "\e633";
-}
-
-.uniui-forward:before {
-  content: "\e62d";
-}
-
-.uniui-back:before {
-  content: "\e62e";
 }
 
 .uniui-pulldown:before {
@@ -502,24 +538,8 @@
   content: "\e62a";
 }
 
-.uniui-arrowthindown:before {
-  content: "\e622";
-}
-
-.uniui-arrowthinleft:before {
-  content: "\e623";
-}
-
-.uniui-arrowthinright:before {
-  content: "\e625";
-}
-
 .uniui-bars:before {
   content: "\e627";
-}
-
-.uniui-arrowthinup:before {
-  content: "\e628";
 }
 
 .uniui-cart-filled:before {

@@ -12,7 +12,6 @@
 	// #ifdef APP-NVUE
 	var domModule = weex.requireModule('dom');
 	import iconUrl from './uniicons.ttf'
-	console.log('iconUrl'+iconUrl)
 	domModule.addRule('fontFace', {
 		'fontFamily': "uniicons",
 		'src': "url('"+iconUrl+"')"

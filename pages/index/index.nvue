@@ -1,11 +1,11 @@
 <template>
 	<view class="home-container">
 		<view class="home-header">
-			<image class="home-header__bg" src="../../static/image/uniui-header-bg.png" mode="aspectFit"></image>
+			<image class="home-header__bg" src="../../static/image/uniui-header-bg.png" mode="widthFix"></image>
 			<image class="home-header__logo" src="../../static/image/uniui-logo.png" mode="aspectFit"></image>
 			<view class="home-header__content">
 				<view class="home-header__content-title">全端兼容 高性能</view>
-				<view class="home-header__content-subtitle">uni-ui 是 DCloud 官方面向uni-app开发者提供的一套 ui 解决方案</view>
+				<view><text class="home-header__content-subtitle">uni-ui 是 DCloud 官方面向uni-app开发者提供的一套 ui 解决方案</text></view>
 			</view>
 		</view>
 
@@ -228,13 +228,7 @@
 					name: 'GoodsNav 商品导航',
 					url: 'goods-nav'
 				}],
-				// #ifdef APP-NVUE
-				platform: 'nvue',
-				// #endif
-				// #ifndef APP-NVUE
 				platform: 'vue'
-				// #endif
-
 			}
 		},
 		methods: {}
@@ -249,18 +243,23 @@
 	}
 
 	.home-header {
+		display: flex;
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100%;
+		right: 0;
 		background-color: #fff;
 		height: 260px;
+		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
-
+		/* #endif */
 		&__bg {
+			display: flex;
 			margin-top: 20px;
+			flex: 1;
+			/* #ifndef APP-NVUE */
 			width: 100%;
-			height: 100%;
+			/* #endif */
 		}
 
 		&__logo {

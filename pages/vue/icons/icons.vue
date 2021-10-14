@@ -56,28 +56,28 @@
 					"name": "calendar",
 					"unicode": "e6a0"
 				},{
-					"name": "arrowdown",
+					"name": "arrow-down",
 					"unicode": "e581"
 				}, {
-					"name": "arrowleft",
+					"name": "arrow-left",
 					"unicode": "e582"
 				}, {
-					"name": "arrowright",
+					"name": "arrow-right",
 					"unicode": "e583"
 				}, {
-					"name": "arrowup",
+					"name": "arrow-up",
 					"unicode": "e580"
 				}, {
-					"name": "arrowthindown",
+					"name": "bottom",
 					"unicode": "e585"
 				}, {
-					"name": "arrowthinleft",
+					"name": "left",
 					"unicode": "e586"
 				}, {
-					"name": "arrowthinright",
+					"name": "right",
 					"unicode": "e587"
 				}, {
-					"name": "arrowthinup",
+					"name": "top",
 					"unicode": "e584"
 				}, {
 					"name": "back",
@@ -188,16 +188,16 @@
 					"name": "eye-slash-filled",
 					"unicode": "e822"
 				}, {
-					"name": "hand-thumbsdown",
+					"name": "hand-down",
 					"unicode": "e83c"
 				}, {
-					"name": "hand-thumbsdown-filled",
+					"name": "hand-down-filled",
 					"unicode": "e83b"
 				}, {
-					"name": "hand-thumbsup",
+					"name": "hand-up",
 					"unicode": "e83f"
 				}, {
-					"name": "hand-thumbsup-filled",
+					"name": "hand-up-filled",
 					"unicode": "e83d"
 				}, {
 					"name": "gear",
@@ -281,7 +281,7 @@
 					"name": "micoff",
 					"unicode": "e360"
 				}, {
-					"name": "mic-slash-filled",
+					"name": "micoff-filled",
 					"unicode": "e892"
 				}, {
 					"name": "minus",
@@ -353,7 +353,7 @@
 					"name": "weixin",
 					"unicode": "e261"
 				}, {
-					"name": "pengyouquan",
+					"name": "pyq",
 					"unicode": "e262"
 				}, {
 					"name": "refresh",

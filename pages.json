@@ -355,7 +355,7 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#007AFF",
-		"backgroundColor": "#FFFFFF",
+		"backgroundColor": "#f5f5f5",
 		"h5": {
 			"maxWidth": 1190
 		}

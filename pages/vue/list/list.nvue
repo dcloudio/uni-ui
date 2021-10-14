@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-card :is-shadow="false" is-full>
-			列表组件可以在其中使用图标、略缩图或放置任何你想放的元素，使用场景如：导航菜单、列表、设置中心排版等
+			<text class="uni-h6">列表组件可以在其中使用图标、略缩图或放置任何你想放的元素，使用场景如：导航菜单、列表、设置中心排版等</text>
 		</uni-card>
 		<uni-section title="基础用法" type="line">
 			<uni-list>
@@ -100,7 +100,7 @@
 						<uni-card :is-shadow="false" :border="false" spacing="0" margin="0">
 							<image slot='cover' style="width: 100%;height: 140px;" :src="cover" mode="aspectFill">
 							</image>
-							这是一个带封面和操作栏的卡片示例，此示例展示了封面插槽和操作栏插槽的用法。
+							<text class="uni-body">这是一个带封面和操作栏的卡片示例，此示例展示了封面插槽和操作栏插槽的用法。</text>
 							<view slot="actions" class="card-actions">
 								<view class="card-actions-item" @click="actionsClick('分享')">
 									<uni-icons type="pengyouquan" size="18" color="#999"></uni-icons>

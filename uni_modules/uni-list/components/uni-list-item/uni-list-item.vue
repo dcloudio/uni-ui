@@ -1,4 +1,7 @@
 <template>
+	<!-- #ifdef APP-NVUE -->
+	<cell>
+		<!-- #endif -->
 	<view class="uni-list-item" :class="{'uni-list-item--dense': !border }">
 		<view v-if="!isFirstChild" class="uni-list-item__border" :class="{'uni-list--border': border ,'uni-border--full':borderFull}"></view>
 		<view class="uni-list-item-box" :class="{ 'uni-list-item--disabled': disabled }" :hover-class="!clickable || disabled || showSwitch ? '' : 'uni-list-item--hover'" @click="onClick">
@@ -12,8 +15,8 @@
 			</slot>
 			<slot>
 				<view class="uni-list-item__content">
-					<view class="uni-list-item__content-title" :class="[ellipsis !== 0 && ellipsis <= 2 ? 'uni-ellipsis-' + ellipsis : '']">{{title}}</view>
-					<view v-if="note" class="uni-list-item__content-subtitle uni-ellipsis-2">{{note}}</view>
+					<text class="uni-list-item__content-title" :class="[ellipsis !== 0 && ellipsis <= 2 ? 'uni-ellipsis-' + ellipsis : '']">{{title}}</text>
+					<text v-if="note" class="uni-list-item__content-subtitle uni-ellipsis-2">{{note}}</text>
 				</view>
 			</slot>
 			<slot name="actions">
@@ -24,6 +27,9 @@
 			<uni-icons v-if="showArrow" :size="16" class="uni-arrow-icon" color="#bbb" type="arrowright" />
 		</view>
 	</view>
+	<!-- #ifdef APP-NVUE -->
+	</cell>
+	<!-- #endif -->
 </template>
 
 <script>
@@ -184,6 +190,7 @@
 				return parent;
 			},
 			onClick() {
+				console.log(this.to);
 				if (this.to !== '') {
 					this.openPage();
 					return;
@@ -263,7 +270,6 @@
 		flex: 1;
 		align-items: center;
 		padding: 0 15px;
-
 		.uni-list-item__icon {
 			display: flex;
 			align-items: center;
