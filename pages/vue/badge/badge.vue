@@ -1,6 +1,8 @@
 <template>
 	<view class="page">
-		<text class="example-info">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等1111111111111</text>
+		<view class="example-info">
+			<text>数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
+		</view>
 		<uni-section title="有底色" type="line"></uni-section>
 		<view class="example-body">
 			<uni-badge class="uni-badge-left-margin" text="1" />
