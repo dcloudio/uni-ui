@@ -1,47 +1,52 @@
 <template>
 	<view class="page">
-		<view class="example-info">
-			<text>数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
-		</view>
-		<uni-section title="有底色" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" text="1" />
-			<uni-badge class="uni-badge-left-margin" text="2" type="primary" />
-			<uni-badge class="uni-badge-left-margin" text="34" type="success" />
-			<uni-badge class="uni-badge-left-margin" text="45" type="warning" />
-			<uni-badge class="uni-badge-left-margin" text="123" type="info" />
-		</view>
-		<uni-section title="无底色" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" :inverted="true" text="1" />
-			<uni-badge class="uni-badge-left-margin" :inverted="true" text="2" type="primary" />
-			<uni-badge class="uni-badge-left-margin" :inverted="true" text="34" type="success" />
-			<uni-badge class="uni-badge-left-margin" :inverted="true" text="45" type="warning" />
-			<uni-badge class="uni-badge-left-margin" :inverted="true" text="123" type="info" />
-		</view>
-		<uni-section title="自定义样式" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" text="2" type="primary" :customStyle="{background: '#4335d6'}" />
-			<uni-badge class="uni-badge-left-margin" text="2" type="primary" :customStyle="customStyle" />
-		</view>
-		<uni-section title="定位: aboslute 属性" type="line"></uni-section>
-		<view class="example-body">
-			<uni-badge class="uni-badge-left-margin" :text="value" absolute="rightTop" size="small">
-				<view class="box"><text class="box-text">右上</text></view>
-			</uni-badge>
-		</view>
-		<uni-section title="偏移: offset 属性(存在 aboslute)" type="line"></uni-section>
-		<view class="example-body">
+		<uni-card is-full>
+			<text class="uni-h6">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
+		</uni-card>
+		<uni-section title="有底色" type="line" padding>
+			<view class="example-body">
+				<uni-badge class="uni-badge-left-margin" text="1" />
+				<uni-badge class="uni-badge-left-margin" text="2" type="primary" />
+				<uni-badge class="uni-badge-left-margin" text="34" type="success" />
+				<uni-badge class="uni-badge-left-margin" text="45" type="warning" />
+				<uni-badge class="uni-badge-left-margin" text="123" type="info" />
+			</view>
+
+		</uni-section>
+		<uni-section title="无底色" type="line" padding>
+			<view class="example-body">
+				<uni-badge class="uni-badge-left-margin" :inverted="true" text="1" />
+				<uni-badge class="uni-badge-left-margin" :inverted="true" text="2" type="primary" />
+				<uni-badge class="uni-badge-left-margin" :inverted="true" text="34" type="success" />
+				<uni-badge class="uni-badge-left-margin" :inverted="true" text="45" type="warning" />
+				<uni-badge class="uni-badge-left-margin" :inverted="true" text="123" type="info" />
+			</view>
+		</uni-section>
+
+		<uni-section title="自定义样式" type="line" padding>
+			<view class="example-body">
+				<uni-badge class="uni-badge-left-margin" text="2" type="primary"
+					:customStyle="{background: '#4335d6'}" />
+				<uni-badge class="uni-badge-left-margin" text="2" type="primary" :customStyle="customStyle" />
+			</view>
+		</uni-section>
+
+		<uni-section title="定位: aboslute 属性" type="line" padding>
+				<uni-badge class="uni-badge-left-margin" :text="value" absolute="rightTop" size="small">
+					<view class="box"><text class="box-text">右上</text></view>
+				</uni-badge>
+		</uni-section>
+
+		<uni-section title="偏移: offset 属性(存在 aboslute)" type="line" padding>
 			<uni-badge class="uni-badge-left-margin" :text="8" absolute="rightTop" :offset="[-5, -5]" size="small">
 				<view class="box"><text class="box-text">右上</text></view>
 			</uni-badge>
-		</view>
-		<uni-section title="仅显示点: is-dot 属性" type="line"></uni-section>
-		<view class="example-body">
+		</uni-section>
+		<uni-section title="仅显示点: is-dot 属性" type="line" padding>
 			<uni-badge class="uni-badge-left-margin" :is-dot="true" :text="value" absolute="rightTop" size="small">
 				<view class="box"><text class="box-text">圆点</text></view>
 			</uni-badge>
-		</view>
+		</uni-section>
 	</view>
 </template>
 

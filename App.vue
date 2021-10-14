@@ -2,9 +2,6 @@
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
-		uni.navigateTo({
-			url: 'pages/vue/number-box/number-box'
-		})
 	},
 	onShow: function() {
 		console.log('App Show');
