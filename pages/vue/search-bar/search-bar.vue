@@ -1,34 +1,31 @@
 <template>
 	<view>
-		<uni-section title="基本用法" type="line"></uni-section>
-		<view class="example-body">
-			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel"  @clear="clear">
-			</uni-search-bar>
-			<view class="search-result">
-				<text class="search-result-text">当前输入为：{{ searchValue }}</text>
-			</view>
+		<uni-card is-full>
+			<text class="uni-h6">搜索栏组件，通常用于搜索商品、文章等</text>
+		</uni-card>
+
+		<uni-section title="基本用法" type="line" style="background-color: #f5f5f5;">
+		</uni-section>
+		<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input"
+			@cancel="cancel" @clear="clear">
+		</uni-search-bar>
+		<view class="search-result">
+			<text class="search-result-text">当前输入为：{{ searchValue }}</text>
 		</view>
-		<uni-section title="自定义样式" type="line"></uni-section>
-		<view class="example-body">
-			<uni-search-bar placeholder="自定义placeholder" @confirm="search" @cancel="cancel" cancel-text="cancel" />
+		<uni-section title="自定义样式" type="line" style="background-color: #f5f5f5;">
 			<uni-search-bar placeholder="自定义背景色" bgColor="#EEEEEE" @confirm="search" />
-			<uni-search-bar radius="100" placeholder="自定义圆角" @confirm="search" />
-		</view>
-		<uni-section title="自定义icon" type="line"></uni-section>
-		<view class="example-body">
+		</uni-section>
+		<uni-section title="自定义icon" type="line" style="background-color: #f5f5f5;">
 			<uni-search-bar placeholder="自定义searchIcon" @confirm="search" @cancel="cancel" cancel-text="cancel">
 				<uni-icons slot="searchIcon" color="#999999" size="18" type="home" />
 			</uni-search-bar>
-			<uni-search-bar placeholder="自定义clearIcon" @confirm="search" @cancel="cancel" cancel-text="cancel">
-				<view slot="clearIcon" style="color: #999999" >X</view>
-			</uni-search-bar>
-		</view>
-		<uni-section title="控制清除/取消按钮" type="line"></uni-section>
-		<view class="example-body">
-			<uni-search-bar radius="5" placeholder="一直显示" clearButton="always" cancelButton="always" @confirm="search" @cancel="cancel"/>
-			<uni-search-bar radius="5" placeholder="自动显示隐藏" clearButton="auto" cancelButton="none" @confirm="search" />
-			<uni-search-bar radius="100" placeholder="一直不显示" clearButton="none" cancelButton="none" @confirm="search" />
-		</view>
+		</uni-section>
+		<uni-section title="控制清除/取消按钮" type="line" style="background-color: #f5f5f5;">
+			<uni-search-bar radius="5" placeholder="一直显示" clearButton="always" cancelButton="always" @confirm="search"
+				@cancel="cancel" />
+			<uni-search-bar class="uni-mt-10" radius="5" placeholder="自动显示隐藏" clearButton="auto" cancelButton="none" @confirm="search" />
+			<uni-search-bar class="uni-mt-10" radius="100" placeholder="一直不显示" clearButton="none" cancelButton="none" @confirm="search" />
+		</uni-section>
 	</view>
 </template>
 
@@ -47,7 +44,7 @@
 				})
 			},
 			input(res) {
-				console.log('----input:',res)
+				console.log('----input:', res)
 			},
 			clear(res) {
 				uni.showToast({
@@ -101,5 +98,9 @@
 		display: block;
 		/* #endif */
 		padding: 0px;
+	}
+	
+	.uni-mt-10 {
+		margin-top: 10px;
 	}
 </style>

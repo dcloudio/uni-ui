@@ -1,4 +1,4 @@
-<template>
+s<template>
 	<view class="uni-searchbar">
 		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<view class="uni-searchbar__box-icon-search">
@@ -29,7 +29,7 @@
 
 	/**
 	 * SearchBar 搜索栏
-	 * @description 评分组件
+	 * @description 搜索栏组件，通常用于搜索商品、文章等
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=866
 	 * @property {Number} radius 搜索栏圆角
 	 * @property {Number} maxlength 输入最大长度
@@ -62,7 +62,7 @@
 			},
 			radius: {
 				type: [Number, String],
-				default: 5
+				default: 4
 			},
 			clearButton: {
 				type: String,
@@ -224,7 +224,7 @@
 		flex-direction: row;
 		position: relative;
 		padding: $uni-spacing-col-base;
-		// background-color: $uni-bg-color;
+		background-color: #fff;
 	}
 
 	.uni-searchbar__box {
@@ -240,9 +240,6 @@
 		align-items: center;
 		height: $uni-searchbar-height;
 		padding: 5px 8px 5px 0px;
-		border-width: 0.5px;
-		border-style: solid;
-		border-color: $uni-border-color;
 	}
 
 	.uni-searchbar__box-icon-search {
