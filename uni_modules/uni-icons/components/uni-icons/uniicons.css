@@ -1,3 +1,68 @@
+
+.uniui-settings-filled:before {
+  content: "\e6ce";
+}
+
+.uniui-auth-filled:before {
+  content: "\e6cc";
+}
+
+.uniui-shop-filled:before {
+  content: "\e6cd";
+}
+
+.uniui-staff-filled:before {
+  content: "\e6cb";
+}
+
+.uniui-vip-filled:before {
+  content: "\e6c6";
+}
+
+.uniui-plus-filled:before {
+  content: "\e6c7";
+}
+
+.uniui-folder-add-filled:before {
+  content: "\e6c8";
+}
+
+.uniui-yanse-filled:before {
+  content: "\e6c9";
+}
+
+.uniui-tune-filled:before {
+  content: "\e6ca";
+}
+
+.uniui-calendar-filled:before {
+  content: "\e6c0";
+}
+
+.uniui-notification-filled:before {
+  content: "\e6c1";
+}
+
+.uniui-wallet-filled:before {
+  content: "\e6c2";
+}
+
+.uniui-medal-filled:before {
+  content: "\e6c3";
+}
+
+.uniui-gift-filled:before {
+  content: "\e6c4";
+}
+
+.uniui-fire-filled:before {
+  content: "\e6c5";
+}
+
+.uniui-refreshempty:before {
+  content: "\e6bf";
+}
+
 .uniui-location-filled:before {
   content: "\e6af";
 }
@@ -68,10 +133,6 @@
 
 .uniui-info-filled:before {
   content: "\e649";
-}
-
-.uniui-plus-filled:before {
-  content: "\e6b1";
 }
 
 .uniui-reload:before {
@@ -528,10 +589,6 @@
 
 .uniui-pulldown:before {
   content: "\e632";
-}
-
-.uniui-refreshempty:before {
-  content: "\e624";
 }
 
 .uniui-scan:before {

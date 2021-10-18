@@ -7,7 +7,8 @@
 			<view class="icon-content">
 				<view v-for="(item,index) in iconClassList" :key="index" class="icon-item" @click="switchActive(index)">
 					<uni-icons :type="item.name" :color="activeIndex === index?'#007aff':'#5e6d82'" size="30" />
-					<text :style="{color:activeIndex === index?'#007aff':'#5e6d82'}" class="uni-mt-5 uni-subtitle">{{ checked? item.unicode: item.name }}</text>
+					<text :style="{color:activeIndex === index?'#007aff':'#5e6d82'}"
+						class="uni-mt-5 uni-subtitle">{{ checked? item.unicode: item.name }}</text>
 				</view>
 			</view>
 		</uni-section>
@@ -20,42 +21,6 @@
 		data() {
 			return {
 				iconClassList: [{
-					"name": "auth",
-					"unicode": "e6ab"
-				},{
-					"name": "tune",
-					"unicode": "e6aa;"
-				},{
-					"name": "folder-add",
-					"unicode": "e6a9"
-				},{
-					"name": "calendar",
-					"unicode": "e6a8"
-				},{
-					"name": "staff",
-					"unicode": "e6a7"
-				},{
-					"name": "notification",
-					"unicode": "e6a6"
-				},{
-					"name": "link",
-					"unicode": "e6a5"
-				},{
-					"name": "gift",
-					"unicode": "e6a4"
-				},{
-					"name": "font",
-					"unicode": "e6a3"
-				},{
-					"name": "medal",
-					"unicode": "e6a2"
-				},{
-					"name": "fire",
-					"unicode": "e6a1"
-				},{
-					"name": "calendar",
-					"unicode": "e6a0"
-				},{
 					"name": "arrow-down",
 					"unicode": "e581"
 				}, {
@@ -85,6 +50,66 @@
 				}, {
 					"name": "forward",
 					"unicode": "e470"
+				}, {
+					"name": "checkmarkempty",
+					"unicode": "e472"
+				}, {
+					"name": "closeempty",
+					"unicode": "e460"
+				}, {
+					"name": "tune",
+					"unicode": "e6aa;"
+				}, {
+					"name": "tune-filled",
+					"unicode": "e6ca"
+				}, {
+					"name": "settings",
+					"unicode": "e560"
+				}, {
+					"name": "settings-filled",
+					"unicode": "e6ce"
+				}, {
+					"name": "folder-add",
+					"unicode": "e6a9"
+				}, {
+					'name': 'folder-add-filled',
+					'unicode': 'e6c8'
+				}, {
+					"name": "calendar",
+					"unicode": "e6a8"
+				}, {
+					'name': 'calendar-filled',
+					'unicode': 'e6c0'
+				}, {
+					'name': 'vip',
+					'unicode': 'e6a8'
+				}, {
+					'name': 'vip-filled',
+					'unicode': 'e6c6'
+				}, {
+					"name": "notification",
+					"unicode": "e6a6"
+				}, {
+					'name': 'notification-filled',
+					'unicode': 'e6c1'
+				}, {
+					"name": "gift",
+					"unicode": "e6a4"
+				}, {
+					'name': 'gift-filled',
+					'unicode': 'e6c4'
+				}, {
+					"name": "medal",
+					"unicode": "e6a2"
+				}, {
+					'name': 'medal-filled',
+					'unicode': 'e6c3'
+				}, {
+					"name": "fire",
+					"unicode": "e6a1"
+				}, {
+					'name': 'fire-filled',
+					'unicode': 'e6c5'
 				}, {
 					"name": "camera",
 					"unicode": "e301"
@@ -116,6 +141,18 @@
 					"name": "chatbubble-filled",
 					"unicode": "e232"
 				}, {
+					"name": "minus",
+					"unicode": "e410"
+				}, {
+					"name": "minus-filled",
+					"unicode": "e440"
+				}, {
+					"name": "plus",
+					"unicode": "e409"
+				}, {
+					"name": "plus-filled",
+					"unicode": "e439"
+				}, {
 					"name": "checkbox",
 					"unicode": "e7fa"
 				}, {
@@ -134,11 +171,35 @@
 					"name": "circle-filled",
 					"unicode": "e441"
 				}, {
-					"name": "checkmarkempty",
-					"unicode": "e472"
+					"name": "help",
+					"unicode": "e505"
 				}, {
-					"name": "closeempty",
-					"unicode": "e460"
+					"name": "help-filled",
+					"unicode": "e535"
+				}, {
+					"name": "info",
+					"unicode": "e504"
+				}, {
+					"name": "info-filled",
+					"unicode": "e534"
+				}, {
+					"name": "smallcircle",
+					"unicode": "e868"
+				}, {
+					"name": "smallcircle-filled",
+					"unicode": "e801"
+				},{
+					"name": "upload",
+					"unicode": "e402"
+				}, {
+					"name": "upload-filled",
+					"unicode": "e8b1"
+				}, {
+					"name": "download",
+					"unicode": "e403"
+				}, {
+					"name": "download-filled",
+					"unicode": "e8a4"
 				}, {
 					"name": "cloud-download",
 					"unicode": "e8e4"
@@ -151,18 +212,6 @@
 				}, {
 					"name": "cloud-upload-filled",
 					"unicode": "e8e5"
-				}, {
-					"name": "contact",
-					"unicode": "e100"
-				}, {
-					"name": "contact-filled",
-					"unicode": "e130"
-				}, {
-					"name": "download",
-					"unicode": "e403"
-				}, {
-					"name": "download-filled",
-					"unicode": "e8a4"
 				}, {
 					"name": "email",
 					"unicode": "e201"
@@ -218,11 +267,11 @@
 					"name": "heart-filled",
 					"unicode": "e83e"
 				}, {
-					"name": "help",
-					"unicode": "e505"
+					"name": "home",
+					"unicode": "e500"
 				}, {
-					"name": "help-filled",
-					"unicode": "e535"
+					"name": "home-filled",
+					"unicode": "e530"
 				}, {
 					"name": "image",
 					"unicode": "e363"
@@ -236,29 +285,17 @@
 					"name": "images-filled",
 					"unicode": "e87a"
 				}, {
-					"name": "home",
-					"unicode": "e500"
+					"name": "locked",
+					"unicode": "e506"
 				}, {
-					"name": "home-filled",
-					"unicode": "e530"
-				}, {
-					"name": "info",
-					"unicode": "e504"
-				}, {
-					"name": "info-filled",
-					"unicode": "e534"
+					"name": "locked-filled",
+					"unicode": "e856"
 				}, {
 					"name": "location",
 					"unicode": "e303"
 				}, {
 					"name": "location-filled",
 					"unicode": "e333"
-				}, {
-					"name": "locked",
-					"unicode": "e506"
-				}, {
-					"name": "locked-filled",
-					"unicode": "e856"
 				}, {
 					"name": "map",
 					"unicode": "e364"
@@ -284,12 +321,6 @@
 					"name": "micoff-filled",
 					"unicode": "e892"
 				}, {
-					"name": "minus",
-					"unicode": "e410"
-				}, {
-					"name": "minus-filled",
-					"unicode": "e440"
-				}, {
 					"name": "more",
 					"unicode": "e507"
 				}, {
@@ -307,6 +338,24 @@
 				}, {
 					"name": "paperplane-filled",
 					"unicode": "e86e"
+				}, {
+					"name": "contact",
+					"unicode": "e100"
+				}, {
+					"name": "contact-filled",
+					"unicode": "e130"
+				}, {
+					"name": "auth",
+					"unicode": "e6ab"
+				}, {
+					"name": "auth-filled",
+					"unicode": "e6cc"
+				}, {
+					"name": "staff",
+					"unicode": "e6a7"
+				}, {
+					"name": "staff-filled",
+					"unicode": "e6cb"
 				}, {
 					"name": "person",
 					"unicode": "e101"
@@ -326,12 +375,12 @@
 					"name": "phone-filled",
 					"unicode": "e230"
 				}, {
-					"name": "plus",
-					"unicode": "e409"
+					"name": "refresh",
+					"unicode": "e407"
 				}, {
-					"name": "plus-filled",
-					"unicode": "e439"
-				}, {
+					"name": "refresh-filled",
+					"unicode": "e437"
+				},{
 					"name": "redo",
 					"unicode": "e405"
 				}, {
@@ -355,36 +404,18 @@
 				}, {
 					"name": "pyq",
 					"unicode": "e262"
-				}, {
-					"name": "refresh",
-					"unicode": "e407"
-				}, {
-					"name": "refresh-filled",
-					"unicode": "e437"
-				}, {
-					"name": "refreshempty",
-					"unicode": "e461"
-				}, {
-					"name": "reload",
-					"unicode": "e462"
-				}, {
-					"name": "upload",
-					"unicode": "e402"
-				}, {
-					"name": "upload-filled",
-					"unicode": "e8b1"
-				}, {
-					"name": "smallcircle",
-					"unicode": "e868"
-				}, {
-					"name": "smallcircle-filled",
-					"unicode": "e801"
-				}, {
+				},   {
 					"name": "sound",
 					"unicode": "e590"
 				}, {
 					"name": "sound-filled",
 					"unicode": "e8a1"
+				}, {
+					"name": "videocam",
+					"unicode": "e300"
+				}, {
+					"name": "videocam-filled",
+					"unicode": "e8af"
 				}, {
 					"name": "trash",
 					"unicode": "e401"
@@ -392,11 +423,11 @@
 					"name": "trash-filled",
 					"unicode": "e8dc"
 				}, {
-					"name": "videocam",
-					"unicode": "e300"
+					"name": "refreshempty",
+					"unicode": "e461"
 				}, {
-					"name": "videocam-filled",
-					"unicode": "e8af"
+					"name": "reload",
+					"unicode": "e462"
 				}, {
 					"name": "star",
 					"unicode": "e408"
@@ -410,14 +441,17 @@
 					"name": "spinner-cycle",
 					"unicode": "e465"
 				}, {
+					"name": "link",
+					"unicode": "e6a5"
+				}, {
+					"name": "font",
+					"unicode": "e6a3"
+				}, {
 					"name": "scan",
 					"unicode": "e612"
 				}, {
 					"name": "search",
 					"unicode": "e466"
-				}, {
-					"name": "settings",
-					"unicode": "e560"
 				}, {
 					"name": "compose",
 					"unicode": "e400"
@@ -445,6 +479,9 @@
 				}, {
 					"name": "shop",
 					"shop": "e609"
+				}, {
+					'name': 'shop-filled',
+					'unicode': 'e6cd'
 				}],
 				activeIndex: -1,
 				checked: false
@@ -463,21 +500,21 @@
 </script>
 
 <style lang="scss">
-.icon-content {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	.icon-item {
-		/* #ifndef APP-NVUE */
+	.icon-content {
 		display: flex;
-		box-sizing: border-box;
-		/* #endif */
-		align-items: center;
-		width: calc(100% / 4);
-		padding: 10px;
-		text-align: center;
-		flex-direction: column;
-	}
-}
+		flex-wrap: wrap;
+		justify-content: center;
 
+		.icon-item {
+			/* #ifndef APP-NVUE */
+			display: flex;
+			box-sizing: border-box;
+			/* #endif */
+			align-items: center;
+			width: calc(100% / 4);
+			padding: 10px;
+			text-align: center;
+			flex-direction: column;
+		}
+	}
 </style>
