@@ -127,15 +127,8 @@ export default {
       return fields.join(',');
     },
     dataValue() {
-      let isarr = Array.isArray(this.value) && this.value.length === 0
-      let isstr = typeof this.value === 'string' && !this.value
-      let isnum = typeof this.value === 'number' && !this.value
-
-      if(isarr || isstr || isnum) {
-        return this.modelValue
-      }
-
-      return this.value
+      let isModelValue = Array.isArray(this.modelValue) ? (this.modelValue.length > 0) : (this.modelValue !== null || this.modelValue !== undefined)
+      return isModelValue ? this.modelValue : this.value
     }
   },
   created() {
