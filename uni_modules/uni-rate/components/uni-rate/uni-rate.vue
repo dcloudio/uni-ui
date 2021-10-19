@@ -105,12 +105,12 @@
 			value: {
 				// 当前评分
 				type: [Number, String],
-				default: 1
+				default: 0
 			},
 			modelValue: {
 				// 当前评分
 				type: [Number, String],
-				default: 1
+				default: 0
 			},
 			max: {
 				// 最大评分
