@@ -1,6 +1,6 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
-	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" @click="_onClick">{{icons[type]}}</text>
+	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" @click="_onClick">{{unicode}}</text>
 	<!-- #endif -->
 	<!-- #ifndef APP-NVUE -->
 	<text :style="{ color: color, 'font-size': size + 'px' }" class="uni-icons" :class="['uniui-'+type,customPrefix,customPrefix?type:'']" @click="_onClick"></text>
@@ -51,7 +51,16 @@
 		},
 		data() {
 			return {
-				icons: icons
+				icons: icons.glyphs
+			}
+		},
+		computed:{
+			unicode(){
+				let code = this.icons.find(v=>v.font_class === this.type)
+				if(code){
+					return unescape(`%u${code.unicode}`)
+				}
+				return ''
 			}
 		},
 		methods: {

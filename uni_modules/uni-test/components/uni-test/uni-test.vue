@@ -10,6 +10,13 @@
 			return {
 				
 			};
+		},
+		onLoad() {
+			let fonts = []
+			let obj = {}
+			fonts.forEach(v=>{
+				obj[v.name] = '\\u'+v.unicode
+			})
 		}
 	}
 </script>

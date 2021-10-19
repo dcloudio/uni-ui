@@ -24,7 +24,7 @@
 					<text v-if="rightText" class="uni-list-item__actions-text">{{rightText}}</text>
 			</view>
 			</slot>
-			<uni-icons v-if="showArrow" :size="16" class="uni-arrow-icon" color="#bbb" type="arrowright" />
+			<uni-icons v-if="showArrow" :size="16" class="uni-arrow-icon" color="#bbb" type="right" />
 		</view>
 	</view>
 	<!-- #ifdef APP-NVUE -->
@@ -190,7 +190,6 @@
 				return parent;
 			},
 			onClick() {
-				console.log(this.to);
 				if (this.to !== '') {
 					this.openPage();
 					return;

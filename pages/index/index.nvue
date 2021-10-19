@@ -247,16 +247,14 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		right: 0;
+		right: 0; 
 		background-color: #fff;
-		height: 260px;
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
 		/* #endif */
 		&__bg {
 			display: flex;
 			margin-top: 20px;
-			flex: 1;
 			/* #ifndef APP-NVUE */
 			width: 100%;
 			/* #endif */

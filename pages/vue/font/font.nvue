@@ -1,7 +1,7 @@
 <template>
-	<view>
+	<view class="container">
 		<uni-card :is-shadow="false" is-full>
-			字体辅助样式提供了常见的字体样式类
+			<text class="uni-h6">字体辅助样式提供了常见的字体样式类</text>
 		</uni-card>
 		<uni-section title=".uni-h1" type="line">
 			<view class="uni-ma-5 uni-mb-5 uni-pl-10">
@@ -50,3 +50,4 @@
 		</uni-section>
 	</view>
 </template>
+<style></style>

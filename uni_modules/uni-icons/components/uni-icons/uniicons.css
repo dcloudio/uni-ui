@@ -1,3 +1,10 @@
+.uniui-color:before {
+  content: "\e6cf";
+}
+
+.uniui-wallet:before {
+  content: "\e6b1";
+}
 
 .uniui-settings-filled:before {
   content: "\e6ce";
@@ -27,7 +34,7 @@
   content: "\e6c8";
 }
 
-.uniui-yanse-filled:before {
+.uniui-color-filled:before {
   content: "\e6c9";
 }
 
