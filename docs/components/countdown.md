@@ -28,6 +28,8 @@ url : pages/vue/countdown/countdown
 
 <!-- 修改颜色 -->
 <uni-countdown color="#FFFFFF" background-color="#00B26A" border-color="#00B26A" :day="1" :hour="2" :minute="30" :second="0"></uni-countdown>
+<!-- 修改字体大小 -->
+<uni-countdown :font-size="30" :day="1" :hour="2" :minute="30" :second="0" />
 ```
 
 ## API
@@ -36,7 +38,8 @@ url : pages/vue/countdown/countdown
 
 |属性名				|类型	|默认值	|说明				|
 |:-:				|:-:	|:-:	|:-:				|
-|backgroundColor	|String	|#FFFFFF|背景色				|
+|font-size	|Number	| 14 |字体大小				|
+|background-color	|String	|#FFFFFF|背景色				|
 |color				|String	|#000000|文字颜色			|
 |splitorColor		|String	|#000000|分割符号颜色			|
 |day				|Number	|0		|天数				|
