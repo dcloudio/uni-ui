@@ -1,14 +1,21 @@
 <template>
 	<view>
-		<view class="uni-padding-wrap uni-common-mt">
-			<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor"
-			 @clickItem="onClickItem" />
-		</view>
-		<view class="content">
-			<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>
-			<view v-if="current === 1"><text class="content-text">选项卡2的内容</text></view>
-			<view v-if="current === 2"><text class="content-text">选项卡3的内容</text></view>
-		</view>
+		<uni-card is-full>
+			<text class="uni-h6">标签组件多用于商品分类、重点内容显示等场景。</text>
+		</uni-card>
+
+		<uni-section title="实心标签" type="line">
+			<view class="uni-padding-wrap uni-common-mt">
+				<uni-segmented-control :current="current" :values="items" :style-type="styleType"
+					:active-color="activeColor" @clickItem="onClickItem" />
+			</view>
+			<view class="content">
+				<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>
+				<view v-if="current === 1"><text class="content-text">选项卡2的内容</text></view>
+				<view v-if="current === 2"><text class="content-text">选项卡3的内容</text></view>
+			</view>
+		</uni-section>
+
 		<uni-section title="Style" type="line"></uni-section>
 		<view class="example-body">
 			<radio-group class="uni-list " @change="styleChange">
@@ -117,7 +124,7 @@
 	}
 
 	.content-text {
-		font-size: 18px;
+		font-size: 14px;
 		color: $uni-text-color;
 	}
 
