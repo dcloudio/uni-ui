@@ -1,4 +1,5 @@
 <script>
+
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
@@ -13,6 +14,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/static/customicons.css';
 @import '@/uni_modules/uni-ui-scss';
 /* #ifndef APP-NVUE */
 // 设置整个项目的背景色

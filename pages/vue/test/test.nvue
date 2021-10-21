@@ -1,0 +1,24 @@
+<template>
+	<view class="container">
+		<text class="title2">&#xe60e;</text>
+
+	</view>
+</template>
+
+<script>
+	// #ifdef APP-NVUE
+	const domModule = uni.requireNativePlugin('dom');
+	import iconUrl from '@/static/customicons.ttf'
+	domModule.addRule('fontFace', {
+		'fontFamily': "test",
+		'src': "url('" + iconUrl + "')"
+	});
+	// #endif
+	export default {}
+</script>
+
+<style>
+	.title2 {
+		font-family: test;
+	}
+</style>

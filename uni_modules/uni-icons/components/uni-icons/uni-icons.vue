@@ -71,7 +71,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	/* #ifndef APP-NVUE */
 	@import './uniicons.css';
 	@font-face {

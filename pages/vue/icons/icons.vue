@@ -12,6 +12,22 @@
 				</view>
 			</view>
 		</uni-section>
+		<uni-section title="自定义图标" subTitle="引入参考App.vue" type="line">
+			<view class="icon-content">
+				<view class="icon-item" >
+					<uni-icons customPrefix="customicons" type="youxi" color="#5e6d82" size="22" />
+					<text style="color:#5e6d82;">youxi</text>
+				</view>
+				<view class="icon-item" >
+					<uni-icons customPrefix="customicons" type="wenjian" color="#5e6d82" size="22" />
+					<text style="color:#5e6d82;">wenjian</text>
+				</view>
+				<view class="icon-item" >
+					<uni-icons customPrefix="customicons" type="zhuanfa" color="#5e6d82" size="22" />
+					<text style="color:#5e6d82;">zhuanfa</text>
+				</view>
+			</view>
+		</uni-section>
 	</view>
 </template>
 
@@ -512,6 +528,7 @@
 </script>
 
 <style lang="scss">
+
 	.icon-content {
 		display: flex;
 		flex-wrap: wrap;
