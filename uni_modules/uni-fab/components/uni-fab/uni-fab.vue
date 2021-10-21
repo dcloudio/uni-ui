@@ -223,7 +223,7 @@
 		align-items: center;
 		z-index: 10;
 	}
-	
+
 	.uni-cursor-point {
 		/* #ifdef H5 */
 		cursor: pointer;
@@ -388,7 +388,7 @@
 
 	.uni-fab__content--other-platform {
 		border-width: 0px;
-		box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+		box-shadow: 2px 1px 4px 1px rgba(229, 229, 229, 0.5);
 	}
 
 	.uni-fab__content--left {
