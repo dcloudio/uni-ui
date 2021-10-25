@@ -42,10 +42,11 @@
 |属性名								| 类型						|	可选值 		 | 		默认值			| 说明|
 |:-:									| :-:						|:-:				 | :-:					| :-:	|
 |v-model 							|String/ Number	| -				 	 |	-						|绑定数据|
+|spaceInfo            |Object         |            |              |服务空间配置，[详情](https://uniapp.dcloud.net.cn/uniCloud/init)|
 |localdata						|Array					| 					 |							|数据，[详情](https://gitee.com/dcloud/datacom)|
 |preload 							|Boolean				| true/false |	false				|预加载数据|
 |readonly 						|Boolean				| true/false |	false				|是否禁用|
-|clear-icon 						|Boolean				| true/false |	true				|是否显示清除按钮|
+|clear-icon 					|Boolean				| true/false |	true				|是否显示清除按钮|
 |ellipsis 						|Boolean				| true/false |	true				|是否隐藏 tab 标签过长的文本|
 |step-searh 					|Boolean				| true/false |	true				|分步查询时，点击节点请求数据|
 |step-search-url			|String					| 					 |							|分步查询时，动态加载云端数据url格式，`https://xxx.com/{parentValue}`(当前版本暂不支持，下版支持)|

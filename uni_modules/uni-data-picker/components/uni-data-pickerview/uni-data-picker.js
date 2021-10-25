@@ -6,6 +6,12 @@ export default {
         return []
       }
     },
+    spaceInfo: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
     collection: {
       type: String,
       default: ''
@@ -57,13 +63,13 @@ export default {
     value: {
       type: [Array, String, Number],
       default () {
-        return []
+        return null
       }
     },
     modelValue: {
       type: [Array, String, Number],
       default () {
-        return []
+        return null
       }
     },
     preload: {
@@ -136,6 +142,7 @@ export default {
       var al = [];
       ['pageCurrent',
         'pageSize',
+        'spaceInfo',
         'value',
         'modelValue',
         'localdata',
@@ -174,7 +181,7 @@ export default {
     },
     getCommand(options = {}) {
       /* eslint-disable no-undef */
-      let db = uniCloud.database()
+      let db = uniCloud.database(this.spaceInfo)
 
       const action = options.action || this.action
       if (action) {
@@ -261,7 +268,7 @@ export default {
         return
       }
 
-      if (this.dataValue.length) {
+      if (this.dataValue != null) {
         this._loadNodeData((data) => {
           this._treeData = data
           this._updateBindData()
@@ -531,7 +538,7 @@ export default {
     _processLocalData() {
       this._treeData = []
       this._extractTree(this.localdata, this._treeData)
-	
+
       var inputValue = this.dataValue
       if (inputValue === undefined) {
         return

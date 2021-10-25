@@ -163,7 +163,7 @@
 					this.getNodeData(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
-				} else if (this.dataValue.length) {
+				} else if (this.dataValue != null) {
 					this.getTreePath(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
