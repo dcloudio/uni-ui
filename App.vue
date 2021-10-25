@@ -3,6 +3,9 @@
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
+		uni.navigateTo({
+				url: 'pages/vue/notice-bar/notice-bar'
+			})
 	},
 	onShow: function() {
 		console.log('App Show');
