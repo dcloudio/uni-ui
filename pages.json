@@ -10,7 +10,9 @@
 	{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "uni-ui"
+			"navigationBarTitleText": "uni-ui",
+			"navigationBarTextStyle": "black",
+			"navigationBarBackgroundColor": "#fff"
 		}
 	},
 	{
