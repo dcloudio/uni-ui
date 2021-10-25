@@ -33,21 +33,21 @@
 					selectedColor: '#007AFF',
 				},
 				content: [{
-						iconPath: '/static/component.png',
-						selectedIconPath: '/static/componentHL.png',
-						text: '组件',
+						iconPath: '/static/image.png',
+						selectedIconPath: '/static/image-active.png',
+						text: '相册',
 						active: false
 					},
 					{
-						iconPath: '/static/api.png',
-						selectedIconPath: '/static/apiHL.png',
-						text: 'API',
+						iconPath: '/static/home.png',
+						selectedIconPath: '/static/home-active.png',
+						text: '首页',
 						active: false
 					},
 					{
-						iconPath: '/static/template.png',
-						selectedIconPath: '/static/templateHL.png',
-						text: '模版',
+						iconPath: '/static/star.png',
+						selectedIconPath: '/static/star-active.png',
+						text: '收藏',
 						active: false
 					}
 				]
@@ -136,6 +136,7 @@
 		margin-top: 20px;
 		width: 200px;
 	}
+
 	.word-btn-white {
 		color: #333;
 		font-size: 14px;

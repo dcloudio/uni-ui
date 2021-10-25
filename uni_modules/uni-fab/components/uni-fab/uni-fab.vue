@@ -432,9 +432,9 @@
 	}
 
 	.uni-fab__item-image {
-		width: 25px;
-		height: 25px;
-		margin-bottom: 3px;
+		width: 20px;
+		height: 20px;
+		margin-bottom: 2px;
 	}
 
 	.uni-fab__item-text {
