@@ -164,7 +164,7 @@
 
 	.uni-tab__text {
 		margin-top: 3px;
-		font-size: $uni-font-size-sm;
+		font-size: 12px;
 		color: #646566;
 	}
 
@@ -182,7 +182,7 @@
 	}
 
 	.uni-tab__cart-button-right-text {
-		font-size: $uni-font-size-base;
+		font-size: 14px;
 		color: #fff;
 	}
 
