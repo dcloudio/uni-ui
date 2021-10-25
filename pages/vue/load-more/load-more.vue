@@ -1,41 +1,24 @@
 <template>
 	<view>
 		<text class="example-info">加载更多组件用于页面加载更多数据时，页面底部显示内容等场景。</text>
-		<uni-section title="基本用法" type="line"></uni-section>
-		<view class="example-body">
+		<uni-section title="基本用法" type="line">
 			<uni-load-more :status="status" />
-		</view>
-		<uni-section title="修改默认文字" type="line"></uni-section>
-		<view class="example-body">
+		</uni-section>
+		<uni-section title="修改默认文字" type="line">
 			<uni-load-more :status="status" :content-text="contentText" />
-		</view>
-		<uni-section title="改变颜色" type="line"></uni-section>
-		<view class="example-body">
+		</uni-section>
+		<uni-section title="改变颜色" type="line">
 			<uni-load-more color="#007AFF" :status="status" />
-		</view>
+		</uni-section>
 		<!-- #ifndef APP-NVUE -->
-		<uni-section title="指定加载图标样式 - 按平台自动选择样式" type="line"></uni-section>
-		<view class="example-body">
+		<uni-section title="指定加载图标样式 - 按平台自动选择样式" type="line">
 			<uni-load-more iconType="auto" :status="status" />
-		</view>
-		<uni-section title="指定加载图标样式 - 环形" type="line"></uni-section>
-		<view class="example-body">
+		</uni-section>
+		<uni-section title="指定加载图标样式 - 环形" type="line">
 			<uni-load-more iconType="circle" :status="status" />
-		</view>
-		<uni-section title="指定加载图标样式 - 雪花" type="line"></uni-section>
-		<view class="example-body">
-			<uni-load-more iconType="snow" :status="status" />
-		</view>
-		<!-- #endif -->
-		<uni-section title="指定加载图标大小" type="line"></uni-section>
-		<view class="example-body">
-			<uni-load-more iconType="snow" :iconSize="36" :status="status" />
-		</view>
-		<uni-section title="点击事件" type="line"></uni-section>
-		<view class="example-body">
-			<uni-load-more :status="status" @clickLoadMore="clickLoadMore" />
-		</view>
-		<uni-section title="改变组件状态" type="line"></uni-section>
+		</uni-section>
+		
+		<uni-section title="改变组件状态" type="line">
 		<radio-group class="uni-list" @change="onChange">
 			<view v-for="(item, index) in statusTypes" :key="index" class="uni-list-item">
 				<view class="uni-list-item__container">
@@ -48,6 +31,8 @@
 				</view>
 			</view>
 		</radio-group>
+		</uni-section>
+
 	</view>
 </template>
 <script>
