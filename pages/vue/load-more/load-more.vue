@@ -1,6 +1,8 @@
 <template>
 	<view>
-		<text class="example-info">加载更多组件用于页面加载更多数据时，页面底部显示内容等场景。</text>
+		<uni-card is-full>
+			<text class="uni-h6">加载更多组件用于页面加载更多数据时，页面底部显示内容等场景</text>
+		</uni-card>	
 		<uni-section title="基本用法" type="line">
 			<uni-load-more :status="status" />
 		</uni-section>
@@ -10,14 +12,13 @@
 		<uni-section title="改变颜色" type="line">
 			<uni-load-more color="#007AFF" :status="status" />
 		</uni-section>
-		<!-- #ifndef APP-NVUE -->
 		<uni-section title="指定加载图标样式 - 按平台自动选择样式" type="line">
 			<uni-load-more iconType="auto" :status="status" />
 		</uni-section>
 		<uni-section title="指定加载图标样式 - 环形" type="line">
 			<uni-load-more iconType="circle" :status="status" />
 		</uni-section>
-		
+
 		<uni-section title="改变组件状态" type="line">
 		<radio-group class="uni-list" @change="onChange">
 			<view v-for="(item, index) in statusTypes" :key="index" class="uni-list-item">
