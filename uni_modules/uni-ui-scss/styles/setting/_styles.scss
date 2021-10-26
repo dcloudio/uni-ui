@@ -1,7 +1,76 @@
-.uni-button {
-	// border: 1px red solid;
-	// background-color: red;
+$-color-white:#fff;
+@mixin is-plain($color){
+	&.uni-btn-plain {
+		color:$color;
+		background-color: mix($-color-white, $color, 90%);
+		&::after{
+			border-color: mix($-color-white, $color, 60%);
+		}
+	}
+}
+.uni-btn[size=mini] {
+	margin: 5px;
+	font-size: 16px;
+	background-color: #fff;
+	color: #999;
+	font-weight: 200;
+	// TODO 暂时处理边框隐藏一边的问题
+	overflow: visible;
+	border-radius: 8px;
+	&.uni-btn-small {
+		font-size: 14px;
+	}
+	&.uni-btn-mini {
+		font-size: 12px;
+	}
 	&::after{
-		border: none;
+		border-color: $uni-border-1;
+		border-radius: 16px;
+	}
+	&.uni-btn-radius {
+		border-radius: 999px;
+		&::after{
+			border-radius: 999px;
+		}
+	}
+	&[type=primary] {
+		color: #fff;
+		background-color: $uni-primary;
+		&::after{
+			border-color: darken($uni-primary,10%);
+		}
+		@include is-plain($uni-primary)
+	}
+	&[type=success] {
+		color: #fff;
+		background-color: $uni-success;
+		&::after{
+			border-color: darken($uni-success,10%);
+		}
+		@include is-plain($uni-success)
+	}
+	&[type=error] {
+		color: #fff;
+		background-color: $uni-error;
+		&::after{
+			border-color: darken($uni-error,10%);
+		}
+		@include is-plain($uni-error)
+	}
+	&[type=warning] {
+		color: #fff;
+		background-color: $uni-warning;
+		&::after{
+			border-color: darken($uni-warning,10%);
+		}
+		@include is-plain($uni-warning)
+	}
+	&[type=info] {
+		color: #fff;
+		background-color: $uni-info;
+		&::after{
+			border-color: darken($uni-info,10%);
+		}
+		@include is-plain($uni-info)
 	}
 }

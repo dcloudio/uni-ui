@@ -72,6 +72,9 @@
 				}, {
 					name: '圆角',
 					url: 'radius'
+				}, {
+					name: 'Button 按钮',
+					url: 'button'
 				}],
 				layouts: [{
 						name: 'Card 卡片',
