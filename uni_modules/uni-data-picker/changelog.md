@@ -1,3 +1,5 @@
+## 0.4.8（2021-10-27）
+- 修复 v-model 概率无效的bug
 ## 0.4.7（2021-10-25）
 - 新增 属性 spaceInfo 服务空间配置 HBuilderX 3.2.11+
 - 修复 树型 uniCloud 数据类型为 int 时报错的bug

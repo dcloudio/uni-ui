@@ -135,6 +135,12 @@ export default {
     dataValue() {
       let isModelValue = Array.isArray(this.modelValue) ? (this.modelValue.length > 0) : (this.modelValue !== null || this.modelValue !== undefined)
       return isModelValue ? this.modelValue : this.value
+    },
+    hasValue() {
+      if (typeof this.dataValue === 'number') {
+        return true
+      }
+      return (this.dataValue != null) && (this.dataValue.length > 0)
     }
   },
   created() {

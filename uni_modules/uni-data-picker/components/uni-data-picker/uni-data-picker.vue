@@ -163,7 +163,7 @@
 					this.getNodeData(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
-				} else if (this.dataValue != null) {
+				} else if (this.hasValue) {
 					this.getTreePath(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
@@ -229,6 +229,11 @@
 						inputValue = value
 					}
 					this.inputSelected = this._findNodePath(inputValue, this.localdata)
+					return
+				}
+
+				if (!this.hasValue) {
+					this.inputSelected = []
 					return
 				}
 
