@@ -8,8 +8,8 @@
 						<view class="uni-date__icon-logo">
 							<image class="uni-date-editor--logo" :src="iconBase64" mode=""></image>
 						</view>
-						<input class="uni-date__x-input" type="text" v-model="singleVal" :placeholder="singlePlaceholderText"
-							:disabled="true" />
+						<input class="uni-date__x-input" type="text" v-model="singleVal"
+							:placeholder="singlePlaceholderText" :disabled="true" />
 					</view>
 					<view v-else class="uni-date-x uni-date-range">
 						<view class="uni-date__icon-logo">
@@ -23,8 +23,7 @@
 						<input class="uni-date__x-input t-c" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholderText" :disabled="true" />
 					</view>
-					<view
-						v-show="clearIcon && !disabled && !isPhone && (singleVal || (range.startDate && range.endDate))"
+					<view v-show="clearIcon && !disabled && (singleVal || (range.startDate && range.endDate))"
 						class="uni-date__icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
 					</view>
@@ -39,12 +38,14 @@
 					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
-						:start="reactStartTime" :end="reactEndTime">
-						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText" :disabled="!tempSingleDate" />
+						:start="reactStartTime" :end="reactEndTime" :hideSecond="hideSecond" style="width: 100%;">
+						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText"
+							:disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
-				<calendar ref="pcSingle" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
-					:end-date="caleRange.endDate" :date="defSingleDate" @change="singleChange" />
+				<calendar ref="pcSingle" class="uni-date_calendar-pc" :showMonth="false"
+					:start-date="caleRange.startDate" :end-date="caleRange.endDate" :date="defSingleDate"
+					@change="singleChange" />
 				<view v-if="hasTime" class="popup-x-footer">
 					<!-- <text class="">此刻</text> -->
 					<text class="confirm" @click="confirmSingleChange">{{okText}}</text>
@@ -58,9 +59,10 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							:placeholder="startDateText" />
 						<time-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :border="false"
-							:disabled="!tempRange.startDate">
+							:disabled="!tempRange.startDate" :hideSecond="hideSecond">
 							<input class="uni-date__input uni-date-range__input" type="text"
-								v-model="tempRange.startTime" :placeholder="startTimeText" :disabled="!tempRange.startDate" />
+								v-model="tempRange.startTime" :placeholder="startTimeText"
+								:disabled="!tempRange.startDate" />
 						</time-picker>
 					</view>
 					<uni-icons type="arrowthinright" color="#999" style="line-height: 40px;"></uni-icons>
@@ -68,19 +70,20 @@
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
 							:placeholder="endDateText" />
 						<time-picker type="time" v-model="tempRange.endTime" :end="reactEndTime" :border="false"
-							:disabled="!tempRange.endDate">
+							:disabled="!tempRange.endDate" :hideSecond="hideSecond">
 							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
 								:placeholder="endTimeText" :disabled="!tempRange.endDate" />
 						</time-picker>
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<calendar ref="left" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
-						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
-						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" />
-					<calendar ref="right" class="uni-date_calendar-pc" :showMonth="false" :start-date="caleRange.startDate"
-						:end-date="caleRange.endDate" :range="true" @change="rightChange"
-						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
+					<calendar ref="left" class="uni-date_calendar-pc" :showMonth="false"
+						:start-date="caleRange.startDate" :end-date="caleRange.endDate" :range="true"
+						@change="leftChange" :pleStatus="endMultipleStatus" @firstEnterCale="updateRightCale"
+						@monthSwitch="leftMonthSwitch" />
+					<calendar ref="right" class="uni-date_calendar-pc" :showMonth="false"
+						:start-date="caleRange.startDate" :end-date="caleRange.endDate" :range="true"
+						@change="rightChange" :pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
 						@monthSwitch="rightMonthSwitch" style="border-left: 1px solid #F1F1F1;" />
 				</view>
 				<view v-if="hasTime" class="popup-x-footer">
@@ -92,7 +95,7 @@
 		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
-			@confirm="mobileChange" />
+			:hideSecond="hideSecond" @confirm="mobileChange" />
 	</view>
 </template>
 <script>
@@ -119,7 +122,9 @@
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
 	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	const {
+		t
+	} = initVueI18n(messages)
 
 	export default {
 		name: 'UniDatetimePicker',
@@ -230,6 +235,10 @@
 			clearIcon: {
 				type: [Boolean],
 				default: true
+			},
+			hideSecond: {
+				type: [Boolean],
+				default: false
 			}
 		},
 		watch: {
@@ -301,10 +310,11 @@
 				return res
 			},
 			reactMobDefTime() {
-				return this.isRange ? {
+				const times = {
 					start: this.tempRange.startTime,
 					end: this.tempRange.endTime
-				} : this.time
+				}
+				return this.isRange ? times : this.time
 			},
 			mobSelectableTime() {
 				return {
@@ -321,7 +331,8 @@
 			 * for i18n
 			 */
 			singlePlaceholderText() {
-				return this.placeholder || this.type === 'date' ? this.selectDateText : t("uni-datetime-picker.selectDateTime")
+				return this.placeholder || (this.type === 'date' ? this.selectDateText : t(
+					"uni-datetime-picker.selectDateTime"))
 			},
 			startPlaceholderText() {
 				return this.startPlaceholder || this.startDateText
@@ -671,11 +682,12 @@
 			clear(needEmit = true) {
 				if (!this.isRange) {
 					this.singleVal = ''
+					this.tempSingleDate = ''
+					this.time = ''
 					if (this.isPhone) {
-						this.defSingleDate = ''
+						this.$refs.mobile.clearCalender()
 					} else {
-						this.$refs.pcSingle.calendar.fullDate = ''
-						this.$refs.pcSingle.setDate()
+						this.$refs.pcSingle.clearCalender()
 					}
 					if (needEmit) {
 						this.formItem && this.formItem.setValue('')
@@ -686,27 +698,15 @@
 				} else {
 					this.range.startDate = ''
 					this.range.endDate = ''
-					this.tempRange = {}
+					this.tempRange.startDate= ''
+					this.tempRange.startTime= ''
+					this.tempRange.endDate= ''
+					this.tempRange.endTime= ''
 					if (this.isPhone) {
-						this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, {
-							before: '',
-							after: '',
-							data: [],
-							fulldate: ''
-						}, {
-							which: 'left'
-						})
+						this.$refs.mobile.clearCalender()
 					} else {
-						this.$refs.left.cale.multipleStatus.before = ''
-						this.$refs.left.cale.multipleStatus.after = ''
-						this.$refs.left.cale.multipleStatus.data = []
-						this.$refs.left.cale.lastHover = false
-						this.$refs.left.setDate()
-						this.$refs.right.cale.multipleStatus.before = ''
-						this.$refs.right.cale.multipleStatus.after = ''
-						this.$refs.right.cale.multipleStatus.data = []
-						this.$refs.right.cale.lastHover = false
-						this.$refs.right.setDate()
+						this.$refs.left.clearCalender()
+						this.$refs.right.clearCalender()
 						this.$refs.right.next()
 					}
 					if (needEmit) {
@@ -728,7 +728,7 @@
 				const minute = defVal.getMinutes()
 				const second = defVal.getSeconds()
 				const defDate = year + '-' + this.lessTen(month) + '-' + this.lessTen(day)
-				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + ':' + this.lessTen(second)
+				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + (this.hideSecond ? '' : (':' + this.lessTen(second)))
 				return {
 					defDate,
 					defTime
@@ -814,7 +814,7 @@
 
 	.uni-date-range__input {
 		text-align: center;
-		max-width: 152px;
+		max-width: 142px;
 	}
 
 	.uni-date-picker__container {
@@ -945,6 +945,7 @@
 	.mr-50 {
 		margin-right: 50px;
 	}
+
 	.uni-date_calendar-pc {
 		padding: 0 6px;
 	}
