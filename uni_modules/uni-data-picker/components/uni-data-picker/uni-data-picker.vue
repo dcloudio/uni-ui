@@ -159,7 +159,7 @@
 				if (this.isLocaldata) {
 					this.loadData()
 					this.inputSelected = this.selected.slice(0)
-				} else if (!this.parentField && !this.selfField && this.dataValue) {
+				} else if (!this.parentField && !this.selfField && this.hasValue) {
 					this.getNodeData(() => {
 						this.inputSelected = this.selected.slice(0)
 					})

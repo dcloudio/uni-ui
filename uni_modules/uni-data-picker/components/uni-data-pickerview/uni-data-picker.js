@@ -63,13 +63,13 @@ export default {
     value: {
       type: [Array, String, Number],
       default () {
-        return null
+        return []
       }
     },
     modelValue: {
       type: [Array, String, Number],
       default () {
-        return null
+        return []
       }
     },
     preload: {
