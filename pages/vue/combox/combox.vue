@@ -3,18 +3,18 @@
 		<text class="example-info">组合框一般用于可以选择也可以输入的表单项</text>
 		<uni-section title="基本用法" type="line"></uni-section>
 		<view class="example-body">
-			<uni-combox label="所在城市" :candidates="candidates" placeholder="请选择所在城市" v-model="city"></uni-combox>
+			<uni-combox :candidates="candidates" placeholder="请选择所在城市" v-model="city"></uni-combox>
 			<view class="result-box">
 				<text>所选城市为：{{city}}</text>
 			</view>
 		</view>
-		<uni-section title="设置label宽度" type="line"></uni-section>
+		<uni-section title="无边框" type="line"></uni-section>
 		<view class="example-body">
-			<uni-combox label="所在城市" labelWidth="150px" :candidates="candidates" placeholder="请选择所在城市"></uni-combox>
+			<uni-combox :border="false" :candidates="candidates" placeholder="请选择所在城市"></uni-combox>
 		</view>
 		<uni-section title="设置无匹配项时的提示语" type="line"></uni-section>
 		<view class="example-body">
-			<uni-combox label="所在城市" emptyTips="这里啥都没有" placeholder="请选择所在城市"></uni-combox>
+			<uni-combox emptyTips="这里啥都没有" placeholder="请选择所在城市"></uni-combox>
 		</view>
 	</view>
 </template>

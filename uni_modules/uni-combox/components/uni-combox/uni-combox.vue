@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-combox">
+	<view class="uni-combox" :class="border ? '' : 'uni-combox__no-border'">
 		<view class="uni-combox__input-box">
 			<input class="uni-combox__input" type="text" :placeholder="placeholder"
 				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus"
@@ -27,8 +27,6 @@
 	 * Combox 组合输入框
 	 * @description 组合输入框一般用于既可以输入也可以选择的场景
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=1261
-	 * @property {String} label 左侧文字
-	 * @property {String} labelWidth 左侧内容宽度
 	 * @property {String} placeholder 输入框占位符
 	 * @property {Array} candidates 候选项列表
 	 * @property {String} emptyTips 筛选结果为空时显示的文字
@@ -38,13 +36,9 @@
 		name: 'uniCombox',
 		emits: ['input', 'update:modelValue'],
 		props: {
-			label: {
-				type: String,
-				default: ''
-			},
-			labelWidth: {
-				type: String,
-				default: 'auto'
+			border: {
+				type: Boolean,
+				default: true
 			},
 			placeholder: {
 				type: String,
@@ -80,12 +74,6 @@
 			}
 		},
 		computed: {
-			labelStyle() {
-				if (this.labelWidth === 'auto') {
-					return ""
-				}
-				return `width: ${this.labelWidth}`
-			},
 			filterCandidates() {
 				return this.candidates.filter((item) => {
 					return item.toString().indexOf(this.inputVal) > -1
@@ -245,5 +233,9 @@
 		margin-left: -6px;
 		border-top-width: 0;
 		border-bottom-color: #fff;
+	}
+
+	.uni-combox__no-border {
+		border: none;
 	}
 </style>
