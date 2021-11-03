@@ -38,7 +38,7 @@
 	@import '@/common/uni-nvue.scss';
 
 	.example-body {
-		padding: 0px 12px;
+		padding: 12px;
 		background-color: #FFFFFF;
 	}
 
