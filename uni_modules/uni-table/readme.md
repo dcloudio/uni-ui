@@ -105,7 +105,7 @@ selection-change	| 开启多选时，当选择项发生变化时会触发该事�
 
 |属性名		|类型		|默认值	 	|可选值				|说明|
 |:-:			|:-:		|:-:			|	:-:				|:-:|
-|width		|String	| -				|-					| 单元格宽度|
+|width		|String	| -				|-					| 单元格宽度。支持纯数字（px）、或携带单位px、rpx|
 |align		|String	| left		|left/center/right	| 表头对齐方式|
 |filter-type		|String	| 	|search/select/range/date	| 筛选类型，search关键字搜索，select类别选择|
 |filter-data		|Array	| 	|| 筛选数据|
