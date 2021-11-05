@@ -1,6 +1,8 @@
 <template>
-	<view class="page">
-		<text class="example-info">可以同时选择日期和时间的选择器</text>
+	<view class="page container">
+		<uni-card is-full>
+			<text class="uni-h6">可以同时选择日期和时间的选择器</text>
+		</uni-card>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker type="date" :clearIcon="false" v-model="single" @maskClick="maskClick" />
@@ -96,4 +98,8 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
+	.example-body {
+		background-color: #fff;
+		padding: 10px;
+	}
 </style>

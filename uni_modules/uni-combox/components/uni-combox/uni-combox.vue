@@ -207,6 +207,7 @@
 		/* #endif */
 	}
 
+// picker 弹出层通用的指示小三角
 	.uni-popper__arrow,
 	.uni-popper__arrow::after {
 		position: absolute;
