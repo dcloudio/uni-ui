@@ -307,7 +307,7 @@
 			flex: 1;
 			overflow: hidden;
 			&-title {
-				font-size: 15px;
+				font-size: 14px;
 				line-height: 20px;
 				color: #3b4144;
 				overflow: hidden;

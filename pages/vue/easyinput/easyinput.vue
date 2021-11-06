@@ -1,47 +1,68 @@
 <template>
 	<view>
-		<text class="example-info"> easyinput 组件是对原生input组件的增强 ，是专门为配合表单组件 uni-forms 而设计的，easyinput 内置了边框，图标等，同时包含 input 所有功能</text>
-		<uni-section title="默认" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput v-model="value" focus placeholder="请输入内容" @input="input"></uni-easyinput>
-		</view>
 
-		<uni-section title="去除空格" type="line"></uni-section>
-		<view class="example">
-			<text class="text">输入内容：{{ '"'+value+'"' }}</text>
-			<uni-easyinput trim="all" v-model="value"  placeholder="请输入内容" @input="input"></uni-easyinput>
-		</view>
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">easyinput 组件是对原生input组件的增强 ，是专门为配合表单组件 uni-forms 而设计的，easyinput 内置了边框，图标等，同时包含 input
+				所有功能</text>
+		</uni-card>
+		<uni-section title="默认" subTitle="使用 focus 属性自动获取输入框焦点" type="line">
+			<view class="uni-mx-5 uni-pb-5">
+				<uni-easyinput errorMessage v-model="value" focus placeholder="请输入内容" @input="input"></uni-easyinput>
+			</view>
 
-		<uni-section title="自定义样式" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput v-model="value" :styles="styles" :placeholderStyle="placeholderStyle"  placeholder="请输入内容"
-			 @input="input"></uni-easyinput>
-		</view>
-		<uni-section title="左图标" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="iconClick"></uni-easyinput>
-		</view>
-		<uni-section title="右图标" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput suffixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="iconClick"></uni-easyinput>
-		</view>
-		<uni-section title="禁用" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput disabled value="已禁用" placeholder="请输入内容"></uni-easyinput>
-		</view>
-		<uni-section title="密码框" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
-		</view>
-		<uni-section title="多行文本" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容"></uni-easyinput>
-		</view>
+		</uni-section>
 
-		<uni-section title="多行文本自动高度" type="line"></uni-section>
-		<view class="example">
-			<uni-easyinput type="textarea" autoHeight v-model="value" placeholder="请输入内容"></uni-easyinput>
-		</view>
+		<uni-section title="去除空格" subTitle="使用 trim 属性 ,可以控制返回内容的空格 " type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<text class="uni-subtitle">输入内容：{{ '"'+value+'"' }}</text>
+				<uni-easyinput class="uni-mt-5" trim="all" v-model="value" placeholder="请输入内容" @input="input"></uni-easyinput>
+			</view>
+		</uni-section>
+
+
+		<uni-section title="自定义样式" subTitle="使用 styles 属性 ,可以自定义输入框样式" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput v-model="value" :styles="styles" :placeholderStyle="placeholderStyle" placeholder="请输入内容"
+					@input="input"></uni-easyinput>
+			</view>
+		</uni-section>
+
+		<uni-section title="图标" subTitle="使用 prefixIcon / suffixIcon 属性 ,可以自定义输入框左右侧图标" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput prefixIcon="search" v-model="value" placeholder="左侧图标" @iconClick="iconClick">
+				</uni-easyinput>
+				<uni-easyinput class="uni-mt-5" suffixIcon="search" v-model="value" placeholder="右侧图标"
+					@iconClick="iconClick">
+				</uni-easyinput>
+			</view>
+		</uni-section>
+
+
+		<uni-section title="禁用" subTitle="使用 disabled 属性禁用输入框" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput disabled value="已禁用" placeholder="请输入内容"></uni-easyinput>
+			</view>
+		</uni-section>
+
+		<uni-section title="密码框" subTitle="指定属性 type=password 使用密码框,右侧会显示眼睛图标" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
+			</view>
+		</uni-section>
+
+		<uni-section title="多行文本" subTitle="指定属性 type=textarea 使用多行文本框" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput type="textarea" v-model="value" placeholder="请输入内容"></uni-easyinput>
+			</view>
+		</uni-section>
+
+
+		<uni-section title="多行文本自动高度" subTitle="使用属性 autoHeight 使多行文本框自动增高" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-easyinput type="textarea" autoHeight v-model="value" placeholder="请输入内容"></uni-easyinput>
+			</view>
+		</uni-section>
+
 
 	</view>
 </template>
@@ -77,16 +98,5 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 
-	.example {
-		padding: 10px;
-		background-color: #fff;
-	}
-
-	.text {
-		font-size: 14px;
-		color: #333;
-		margin-bottom: 10px;
-	}
 </style>
