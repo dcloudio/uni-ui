@@ -3,7 +3,7 @@
 		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem=clickItem :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in 3" :key="index">
-					<view  class="swiper-item" :class="`swiper-item${index}`">
+					<view  class="swiper-item" :class="'swiper-item' + index">
 						<text style="color: #fff; font-size: 32px;">{{index+1}}</text>
 					</view>
 				</swiper-item>
