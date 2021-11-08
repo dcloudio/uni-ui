@@ -77,7 +77,7 @@
 	 * @example <uni-easyinput v-model="mobile"></uni-easyinput>
 	 */
 
-	export default {
+	 export default {
 		name: 'uni-easyinput',
 		emits:['click','iconClick','update:modelValue','input','focus','blur','confirm'],
 		model:{
@@ -354,7 +354,7 @@
 	}
 	.uni-easyinput__placeholder-class {
 		color: #999;
-		font-size: 14px;
+		font-size: 12px;
 		font-weight: 200;
 	}
 	.is-textarea {

@@ -117,12 +117,14 @@
 					border
 				} = this.styles
 				let obj = {}
+				const widthDefaultValue = 1
+				const radiusDefaultValue = 3
 				if (typeof border === 'boolean') {
 					obj.border = border ? '1px #eee solid' : 'none'
 				} else {
-					let width = (border && border.width) || 1
+					let width = (border && border.width) || widthDefaultValue
 					width = this.value2px(width)
-					let radius = (border && border.radius) || 5
+					let radius = (border && border.radius) || radiusDefaultValue
 					radius = this.value2px(radius)
 					obj = {
 						'border-width': width,
@@ -206,7 +208,7 @@
 		left: 0;
 		margin: 5px;
 		border: 1px #eee solid;
-		border-radius: 8px;
+		border-radius: 5px;
 		overflow: hidden;
 	}
 
