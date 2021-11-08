@@ -77,7 +77,7 @@
 
 		<uni-section title="使用插槽" type="line" padding>
 			<uni-collapse>
-				<uni-collapse-item titleBorder="none">
+				<uni-collapse-item :titleBorder="false">
 					<template v-slot:title>
 						<uni-list>
 							<uni-list-item title="标题使用自定义标题插槽" :show-extra-icon="true" :extra-icon="extraIcon">

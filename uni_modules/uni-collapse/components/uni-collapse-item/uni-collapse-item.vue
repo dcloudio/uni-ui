@@ -88,7 +88,7 @@
 			},
 			// 标题分隔线显示类型
 			titleBorder: {
-				type: String,
+				type: Boolean,
 				default: true
 			},
 			border: {
