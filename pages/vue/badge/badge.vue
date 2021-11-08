@@ -3,7 +3,7 @@
 		<uni-card is-full>
 			<text class="uni-h6">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
 		</uni-card>
-		<uni-section title="有底色" type="line" padding>
+		<uni-section title="基础用法" type="line" padding>
 			<view class="example-body">
 				<uni-badge class="uni-badge-left-margin" text="1" />
 				<uni-badge class="uni-badge-left-margin" text="2" type="primary" />
@@ -11,7 +11,6 @@
 				<uni-badge class="uni-badge-left-margin" text="45" type="warning" />
 				<uni-badge class="uni-badge-left-margin" text="123" type="info" />
 			</view>
-
 		</uni-section>
 		<uni-section title="无底色" type="line" padding>
 			<view class="example-body">
@@ -31,14 +30,14 @@
 			</view>
 		</uni-section>
 
-		<uni-section title="定位: aboslute 属性" type="line" padding>
+		<uni-section title="定位: aboslute 属性" subTitle="注：在安卓端不支持 nvue" type="line" padding>
 				<uni-badge class="uni-badge-left-margin" :text="value" absolute="rightTop" size="small">
 					<view class="box"><text class="box-text">右上</text></view>
 				</uni-badge>
 		</uni-section>
 
 		<uni-section title="偏移: offset 属性(存在 aboslute)" type="line" padding>
-			<uni-badge class="uni-badge-left-margin" :text="8" absolute="rightTop" :offset="[-5, -5]" size="small">
+			<uni-badge class="uni-badge-left-margin" :text="8" absolute="rightTop" :offset="[-3, -3]" size="small">
 				<view class="box"><text class="box-text">右上</text></view>
 			</uni-badge>
 		</uni-section>
