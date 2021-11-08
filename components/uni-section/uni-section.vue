@@ -9,7 +9,7 @@
 				<text v-if="subTitle" class="uni-section__content-sub">{{ subTitle }}</text>
 			</view>
 		</view>
-		<view :style="padding && {padding: '10px'}">
+		<view :style="{padding: padding ? '10px' : ''}">
 			<slot/>
 		</view>
 	</view>
