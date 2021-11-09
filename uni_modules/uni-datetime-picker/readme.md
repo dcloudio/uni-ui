@@ -163,7 +163,7 @@
 |end |String、Number |- |- |最大值，可以使用日期的字符串（String）、时间戳（Number） |
 |return-type |String |string |timestamp 、string、date |返回值格式 |
 |border |Boolean |true | |是否有边框 |
-|rangeSeparator |String |'-' |- |选择范围时的分隔符 |
+|range-separator |String |'-' |- |选择范围时的分隔符 |
 |placeholder |String |- |- |非范围选择时的占位内容 |
 |start-placeholder|String |- |- |范围选择时开始日期的占位内容 |
 |end-placeholder |String |- |- |范围选择时结束日期的占位内容 |
