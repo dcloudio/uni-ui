@@ -27,38 +27,23 @@
 在 ``template`` 中使用组件
 
 ```html
-<!-- 一般用法 -->
-<uni-grid :column="3">
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
+<!-- 基础样式 -->
+<uni-grid :column="4" :highlight="true" >
+	<uni-grid-item v-for="(item, index) in 4" :index="index" :key="index">
+		<view class="grid-item-box" style="background-color: #fff;">
+			<uni-icons type="image" :size="30" color="#777" />
+			<text class="text">文本信息</text>
+		</view>
 	</uni-grid-item>
 </uni-grid>
 
-<!-- 不带边框并矩形显示 -->
-<uni-grid :column="3" :showBorder="false"  :square="false">
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
-	</uni-grid-item>
-	<uni-grid-item>
-		<text class="text">文本</text>
+<!-- 自定义列数 -->
+<uni-grid :column="4" :highlight="true" @change="change">
+	<uni-grid-item v-for="(item, index) in 8" :index="index" :key="index">
+		<view class="grid-item-box" style="background-color: #fff;">
+			<uni-icons type="image" :size="30" color="#777" />
+			<text class="text">文本信息</text>
+		</view>
 	</uni-grid-item>
 </uni-grid>
 ```
