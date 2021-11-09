@@ -108,10 +108,10 @@
 
 <style lang="scss" scoped>
 	$uni-primary: #2979ff !default;
-	$uni-success: #4cd964 !default;
-	$uni-warning: #f0ad4e !default;
-	$uni-error: #dd524d !default;
-	$uni-info: #909399 !default;
+	$uni-success: #18bc37 !default;
+	$uni-warning: #f3a73f !default;
+	$uni-error: #e43d33 !default;
+	$uni-info: #8f939c !default;
 
 
 	$tag-default-pd: 4px 7px;
