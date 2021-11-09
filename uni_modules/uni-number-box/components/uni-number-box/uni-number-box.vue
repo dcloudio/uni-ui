@@ -19,8 +19,12 @@
 	 * @property {Number} min 最小值
 	 * @property {Number} max 最大值
 	 * @property {Number} step 每次点击改变的间隔大小
+	 * @property {String} background 背景色
+	 * @property {String} color 字体颜色（前景色）
 	 * @property {Boolean} disabled = [true|false] 是否为禁用状态
 	 * @event {Function} change 输入框值改变时触发的事件，参数为输入框当前的 value
+	 * @event {Function} focus 输入框聚焦时触发的事件，参数为 event 对象
+	 * @event {Function} blur 输入框失焦时触发的事件，参数为 event 对象
 	 */
 
 	export default {

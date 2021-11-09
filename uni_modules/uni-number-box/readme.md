@@ -34,6 +34,8 @@
 |min					|Number	|0			|最小值									|
 |max					|Number	|100		|最大值									|
 |step					|Number	|1			|每次点击改变的间隔大小	|
+|background					|String	|#f5f5f5			|	背景色|
+|color					|String	|#333			|	字体颜色（前景色）|
 |disabled			|Boolean|false	|是否为禁用状态					|
 
 ### NumberBox Events
