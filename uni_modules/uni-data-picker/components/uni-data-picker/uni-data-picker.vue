@@ -28,6 +28,7 @@
 		</view>
 		<view class="uni-data-tree-cover" v-if="isOpened" @click="handleClose"></view>
 		<view class="uni-data-tree-dialog" v-if="isOpened">
+			<view class="uni-popper__arrow"></view>
 			<view class="dialog-caption">
 				<view class="title-area">
 					<text class="dialog-title">{{popupTitle}}</text>
@@ -488,8 +489,10 @@
 			min-height: 400px;
 			max-height: 50vh;
 			background-color: #fff;
-			border-radius: 5px;
-			box-shadow: 0 0 20px 5px rgba(0, 0, 0, .3);
+			border: 1px solid #EBEEF5;
+			box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			overflow: unset;
 		}
 
 		.dialog-caption {
@@ -502,4 +505,33 @@
 	}
 
 	/* #endif */
+
+	/* picker 弹出层通用的指示小三角, todo：扩展至上下左右方向定位 */
+	.uni-popper__arrow,
+	.uni-popper__arrow::after {
+		position: absolute;
+		display: block;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 6px;
+	}
+
+	.uni-popper__arrow {
+		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
+		top: -6px;
+		left: 10%;
+		margin-right: 3px;
+		border-top-width: 0;
+		border-bottom-color: #EBEEF5;
+	}
+
+	.uni-popper__arrow::after {
+		content: " ";
+		top: 1px;
+		margin-left: -6px;
+		border-top-width: 0;
+		border-bottom-color: #fff;
+	}
 </style>
