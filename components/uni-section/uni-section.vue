@@ -72,7 +72,7 @@
 <style lang="scss" scoped>
 	.uni-section {
 		background-color: #fff;
-		overflow: hidden;
+		// overflow: hidden;
 		margin-top: 10px;
 	}
 	.uni-section-header {

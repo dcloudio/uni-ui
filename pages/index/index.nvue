@@ -150,18 +150,21 @@
 					name: 'NumberBox 数字输入框',
 					url: 'number-box'
 				}],
-				functionals: [{
-						name: 'Calendar 日历',
-						url: 'calendar'
-					},
+				functionals: [
+					// {
+					// 	name: 'Calendar 日历',
+					// 	url: 'calendar'
+					// },
 					{
 						name: 'Collapse 折叠面板',
 						url: 'collapse'
 					},
+					// #ifndef APP-NVUE
 					{
 						name: 'Combox 组合输入框',
 						url: 'combox'
 					},
+					// #endif
 					{
 						name: 'Drawer 抽屉',
 						url: 'drawer'
@@ -246,7 +249,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		right: 0; 
+		right: 0;
 		background-color: #fff;
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;

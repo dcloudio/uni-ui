@@ -8,7 +8,7 @@
 			:hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'" :hover-start-time="20"
 			:hover-stay-time="70" @click="clickLeft">
 			<template v-if="showIcon === true || showIcon === 'true'">
-				<uni-icons color="#666" size="16" type="arrowleft" />
+				<uni-icons color="#666" size="16" type="left" />
 			</template>
 			<template v-else>
 				<text class="uni-pagination__child-btn">{{ prevPageText }}</text>
@@ -33,7 +33,7 @@
 			:hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20"
 			:hover-stay-time="70" @click="clickRight">
 			<template v-if="showIcon === true || showIcon === 'true'">
-				<uni-icons color="#666" size="16" type="arrowright" />
+				<uni-icons color="#666" size="16" type="right" />
 			</template>
 			<template v-else>
 				<text class="uni-pagination__child-btn">{{ nextPageText }}</text>

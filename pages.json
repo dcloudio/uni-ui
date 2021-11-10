@@ -46,17 +46,7 @@
 	{
 		"path": "pages/vue/drawer/drawer",
 		"style": {
-			"navigationBarTitleText": "Drawer 抽屉",
-			"app-plus": {
-				"titleNView": {
-					"buttons": [{
-						"text": "\ue563",
-						"fontSrc": "/static/uni.ttf",
-						"fontSize": "22px"
-					}]
-				},
-				"bounce": "none"
-			}
+			"navigationBarTitleText": "Drawer 抽屉"
 		}
 	},
 	{
@@ -352,12 +342,12 @@
 
 	}    ,{
             "path" : "pages/vue/button/button",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
+
         }
     ],
 	"globalStyle": {

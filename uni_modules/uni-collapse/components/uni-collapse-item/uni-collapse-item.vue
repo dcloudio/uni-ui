@@ -2,7 +2,7 @@
 	<view class="uni-collapse-item">
 		<!-- onClick(!isOpen) -->
 		<view @click="onClick(!isOpen)" class="uni-collapse-item__title"
-			:class="{'is-open':isOpen &&titleBorder === 'auto' ,'uni-collapse-item-border':titleBorder}">
+			:class="{'is-open':isOpen &&titleBorder === 'auto' ,'uni-collapse-item-border':titleBorder !== 'none'}">
 			<view class="uni-collapse-item__title-wrap">
 				<slot name="title">
 					<view class="uni-collapse-item__title-box" :class="{'is-disabled':disabled}">
@@ -11,10 +11,11 @@
 					</view>
 				</slot>
 			</view>
-			<view v-if="showArrow"
+			<view
+				v-if="showArrow"
 				:class="{ 'uni-collapse-item__title-arrow-active': isOpen, 'uni-collapse-item--animation': showAnimation === true }"
 				class="uni-collapse-item__title-arrow">
-				<uni-icons :color="disabled?'#ddd':'#bbb'" size="18" type="bottom" />
+				<uni-icons :color="disabled?'#ddd':'#bbb'" size="14" type="bottom" />
 			</view>
 		</view>
 		<view class="uni-collapse-item__wrap" :class="{'is--transition':showAnimation}"
@@ -88,14 +89,14 @@
 			},
 			// 标题分隔线显示类型
 			titleBorder: {
-				type: Boolean,
-				default: true
+				type: String,
+				default: 'auto'
 			},
 			border: {
 				type: Boolean,
 				default: true
 			},
-			showArrow: {
+			showArrow:{
 				type: Boolean,
 				default: true
 			}
@@ -114,15 +115,15 @@
 		watch: {
 			open(val) {
 				this.isOpen = val
-				this.onClick(val, 'init')
+				this.onClick(val,'init')
 			}
 		},
 		updated(e) {
-			this.$nextTick(() => {
+			this.$nextTick(()=> {
 				this.init(true)
 			})
 		},
-		created() {
+		created(){
 			this.collapse = this.getCollapse()
 			this.oldHeight = 0
 		},
@@ -180,14 +181,14 @@
 					})
 				}
 			},
-			onClick(isOpen, type) {
+			onClick(isOpen,type) {
 				if (this.disabled) return
 				this.isOpen = isOpen
 				if (this.isOpen && this.collapse) {
 					this.collapse.setAccordion(this)
 				}
-				if (type !== 'init') {
-					this.collapse.onChange(isOpen, this)
+				if(type !== 'init'){
+					this.collapse.onChange(isOpen,this)
 				}
 			},
 			getCollapseHeight(type, index = 0) {
@@ -212,7 +213,7 @@
 						// #endif
 						this.isheight = true
 						if (type) return
-						this.onClick(this.open, 'init')
+						this.onClick(this.open,'init')
 					})
 					.exec()
 			},
@@ -227,7 +228,7 @@
 						// #endif
 						this.isheight = true
 						if (type) return
-						this.onClick(this.open, 'init')
+						this.onClick(this.open,'init')
 					}
 				})
 			},
@@ -263,7 +264,6 @@
 			flex-direction: row;
 			align-items: center;
 			transition: border-bottom-color .3s;
-			background-color: #fff;
 
 			// transition-property: border-bottom-color;
 			// transition-duration: 5s;
@@ -274,7 +274,7 @@
 			}
 
 			&-box {
-				padding-right: 15px;
+				padding: 0 15px;
 				/* #ifndef APP-NVUE */
 				display: flex;
 				width: 100%;
@@ -286,14 +286,17 @@
 				height: 48px;
 				line-height: 48px;
 				background-color: #fff;
+				color: #303133;
+				font-size: 13px;
+				font-weight: 500;
 				/* #ifdef H5 */
 				cursor: pointer;
 				outline: none;
-				/* #endif */
 
+				/* #endif */
 				&.is-disabled {
 					.uni-collapse-item__title-text {
-						color: #c0c0c0;
+						color: $uni-text-color-disable;
 					}
 				}
 
@@ -308,17 +311,17 @@
 			}
 
 			&-img {
-				height: 32px;
-				width: 32px;
+				height: $uni-img-size-base;
+				width: $uni-img-size-base;
 				margin-right: 10px;
 			}
 
 			&-text {
 				flex: 1;
-				font-size: 14px;
-				color: #191919;
+				font-size: $uni-font-size-base;
 				/* #ifndef APP-NVUE */
 				white-space: nowrap;
+				color: inherit;
 				/* #endif */
 				/* #ifdef APP-NVUE */
 				lines: 1;
@@ -336,6 +339,7 @@
 				justify-content: center;
 				width: 20px;
 				height: 20px;
+				margin-right: 10px;
 				transform: rotate(0deg);
 
 				&-active {
