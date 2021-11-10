@@ -663,6 +663,7 @@
 
 	.uni-calendar__header-mobile {
 		padding: 10px;
+		padding-bottom: 0;
 	}
 
 	.uni-calendar--fixed-top {
@@ -776,7 +777,7 @@
 
 	.uni-calendar__box {
 		position: relative;
-		padding: 0 10px;
+		// padding: 0 10px;
 		padding-bottom: 7px;
 	}
 
@@ -817,7 +818,7 @@
 	}
 
 	.uni-date-btn--ok {
-		padding: 5px 15px;
+		padding: 20px 15px;
 	}
 
 	.uni-date-changed--time-start {
@@ -865,6 +866,7 @@
 		flex-direction: row;
 		align-items: center;
 		padding: 0 25px;
+		margin-top: 10px;
 	}
 
 	.dialog-close-plus {

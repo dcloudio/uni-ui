@@ -70,13 +70,13 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin: 3px 0;
+		margin: 1px 0;
 	}
 
 	.uni-calendar-item__weeks-box-text {
 		font-size: 14px;
 		// font-family: Lato-Bold, Lato;
-		// font-weight: bold;
+		font-weight: bold;
 		color: #455997;
 	}
 
@@ -152,7 +152,7 @@
 	}
 
 	.uni-calendar-item--multiple {
-		background-color:  #f2f6fc;
+		background-color:  #F6F7FC;
 		// color: #fff;
 	}
 
@@ -161,7 +161,7 @@
 		background-color: #409eff;
 		border-radius: 50%;
 		box-sizing: border-box;
-		border: 3px solid #f2f6fc;
+		border: 3px solid #F6F7FC;
 	}
 
 	.uni-calendar-item--before-checked .uni-calendar-item--checked-text,
@@ -173,12 +173,12 @@
 		border-top-left-radius: 50px;
 		border-bottom-left-radius: 50px;
 		box-sizing: border-box;
-		background-color: #f2f6fc;
+		background-color: #F6F7FC;
 	}
 
 	.uni-calendar-item--after-checked-x {
 		border-top-right-radius: 50px;
 		border-bottom-right-radius: 50px;
-		background-color: #f2f6fc;
+		background-color: #F6F7FC;
 	}
 </style>
