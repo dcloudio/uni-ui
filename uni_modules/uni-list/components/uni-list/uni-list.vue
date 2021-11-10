@@ -78,10 +78,10 @@
 	.uni-list--border {
 		position: relative;
 		/* #ifdef APP-NVUE */
-		border-top-color: #eee;
+		border-top-color: #DEDEDE;
 		border-top-style: solid;
 		border-top-width: 0.5px;
-		border-bottom-color: #eee;
+		border-bottom-color: #DEDEDE;
 		border-bottom-style: solid;
 		border-bottom-width: 0.5px;
 		/* #endif */
@@ -99,7 +99,7 @@
 		height: 1px;
 		-webkit-transform: scaleY(0.5);
 		transform: scaleY(0.5);
-		background-color: #eee;
+		background-color: #DEDEDE;
 		z-index: 1;
 	}
 
@@ -111,7 +111,7 @@
 		height: 1px;
 		-webkit-transform: scaleY(0.5);
 		transform: scaleY(0.5);
-		background-color: #eee;
+		background-color: #DEDEDE;
 	}
 
 	/* #endif */
