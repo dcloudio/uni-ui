@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="container">
 		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
 		</uni-card>
@@ -74,8 +74,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	/* #ifdef MP-ALIPAY */
 	.uni-badge {
 		margin-left: 20rpx;

@@ -73,10 +73,10 @@
 			return {
 				value: '',
 				password: '',
-				placeholderStyle: "color:#499721;font-size:16px",
+				placeholderStyle: "color:#2979FF;font-size:14px",
 				styles: {
-					color: 'blue',
-					borderColor: '#499721'
+					color: '#2979FF',
+					borderColor: '#2979FF'
 				}
 			}
 

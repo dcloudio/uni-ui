@@ -4,7 +4,7 @@
 		 :style="{'border-color':inputBorder && msg?'#dd524d':styles.borderColor,'background-color':disabled?styles.disableColor:''}">
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc" @click="onClickIcon('prefix')"></uni-icons>
 			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea" :class="{'input-padding':inputBorder}"
-			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled"
+			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled" placeholder-class="uni-easyinput__placeholder-class"
 			 :maxlength="inputMaxlength" :focus="focused" :autoHeight="autoHeight" @input="onInput" @blur="onBlur"  @focus="onFocus"
 			 @confirm="onConfirm"></textarea>
 			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input" :style="{
@@ -147,7 +147,7 @@
 				default () {
 					return {
 						color: '#333',
-						disableColor: '#eee',
+						disableColor: '#F7F6F6',
 						borderColor: '#e5e5e5'
 					}
 				}
@@ -450,7 +450,12 @@
 	}
 
 	.is-disabled {
-		background-color: #eee;
-		color: #999;
+		border-color: red;
+		background-color: #F7F6F6;
+		color: #D5D5D5;
+		.uni-easyinput__placeholder-class {
+			color: #D5D5D5;
+			font-size: 12px;
+		}
 	}
 </style>

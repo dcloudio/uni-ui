@@ -1,37 +1,42 @@
 <template>
-	<view>
-		<view class="example-info">
-			<text class="example-info-text">分组组件可用于将组件分组，添加间隔，以产生明显的区块</text>
-		</view>
-		<uni-section title="基础分组" type="line"></uni-section>
-		<uni-group>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-		</uni-group>
+	<view class="container">
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">分组组件可用于将组件分组，添加间隔，以产生明显的区块。</text>
+		</uni-card>
+		<uni-section title="基础分组" type="line">
+			<uni-group>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+			</uni-group>
+			<uni-group title="基本模式" margin-top="20">
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+			</uni-group>
+		</uni-section>
 
-		<uni-group title="基本模式" margin-top="20">
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-		</uni-group>
+
+
+
+		<uni-section title="卡片分组" type="line">
+			<uni-group mode="card">
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+			</uni-group>
+			
+			<uni-group title="card 模式" mode="card">
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+				<view> 分组内容 </view>
+			</uni-group>
+		</uni-section>
 		
-		<uni-section title="卡片分组" type="line"></uni-section>
-		<uni-group mode="card">
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-		</uni-group>
-
-		<uni-group title="card 模式" mode="card">
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-			<view> 分组内容 </view>
-		</uni-group>
 	</view>
 </template>
 

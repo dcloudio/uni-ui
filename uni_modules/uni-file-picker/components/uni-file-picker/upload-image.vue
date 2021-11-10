@@ -273,8 +273,8 @@
 		align-items: center;
 		justify-content: center;
 		position: absolute;
-		top: 5px;
-		right: 5px;
+		top: 3px;
+		right: 3px;
 		height: 26px;
 		width: 26px;
 		border-radius: 50%;
