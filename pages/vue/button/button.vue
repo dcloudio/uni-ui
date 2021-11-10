@@ -61,14 +61,14 @@
 		<uni-section title="禁用" sub-title="使用 disabled 属性 ,展示禁用按钮" type="line">
 			<view class="uni-ma-5">
 				<button class="uni-btn" type="primary" disabled>primary</button>
-				<button class="uni-btn uni-btn-plain" type="primary" disabled>primary</button>
+				<button class="uni-btn" plain type="primary" disabled>primary</button>
 				<button class="uni-btn uni-btn-radius" disabled>圆角</button>
 			</view>
 		</uni-section>
 		<uni-section title="禁用(size=mini)" sub-title="使用 disabled 属性 ,展示禁用按钮" type="line">
 			<view class="uni-ma-5">
 				<button class="uni-btn" type="primary" disabled size="mini">primary</button>
-				<button class="uni-btn uni-btn-plain" type="primary" disabled size="mini">primary</button>
+				<button class="uni-btn" plain type="primary" disabled size="mini">primary</button>
 				<button class="uni-btn uni-btn-radius" disabled size="mini">圆角</button>
 			</view>
 		</uni-section>

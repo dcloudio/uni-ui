@@ -64,10 +64,11 @@ $-color-black:#000;
 
 .uni-btn {
 	margin: 5px;
-	color: #999;
-	border:1px solid mix($-color-white, $-color-black, 92%);
+	color: #393939;
+	border:1px solid #ccc;
 	font-size: 16px;
 	font-weight: 200;
+	background-color: #F9F9F9;
 	// TODO 暂时处理边框隐藏一边的问题
 	overflow: visible;
 	&::after{

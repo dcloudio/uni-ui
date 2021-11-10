@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-card is-full>
+		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">标签组件多用于商品分类、重点内容显示等场景。</text>
 		</uni-card>
 
@@ -24,7 +24,7 @@
 			</view>
 		</uni-section>
 
-		<uni-section title="空心标签" type="line" padding>
+		<uni-section title="空心标签" subTitle="使用 inverted 属性显示空心表签" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
 					<uni-tag :inverted="true" text="标签" type="primary" />
@@ -44,7 +44,7 @@
 			</view>
 		</uni-section>
 
-		<uni-section title="标签尺寸" type="line" padding>
+		<uni-section title="标签尺寸" subTitle="使用 size 属性控制标签大小" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
 					<uni-tag text="标签" type="primary" size="normal" />
@@ -58,7 +58,7 @@
 			</view>
 		</uni-section>
 
-		<uni-section title="圆角样式" type="line" padding>
+		<uni-section title="圆角样式" subTitle="使用 circle 属性控制标签圆角" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
 					<uni-tag :circle="true" text="标签" type="primary" />
@@ -72,7 +72,7 @@
 			</view>
 		</uni-section>
 
-		<uni-section title="标记样式" type="line" padding>
+		<uni-section title="标记样式" subTitle="使用 mark 属性显示标记样式" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
 					<uni-tag :mark="true" text="标签" type="primary" size="default" />
@@ -85,18 +85,18 @@
 				</view>
 			</view>
 		</uni-section>
-		<uni-section title="不可点击状态" type="line" padding>
+		<uni-section title="不可点击状态" subTitle="使用 disabled 属性 显示禁用样式" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
-					<uni-tag :disabled="true" text="标签" type="primary" />
+					<uni-tag disabled text="标签" type="primary" />
 				</view>
 			</view>
 		</uni-section>
 
-		<uni-section title="自定义样式" type="line" padding>
+		<uni-section title="自定义样式" subTitle="使用 custom-style 属性自定义样式" type="line" padding>
 			<view class="example-body">
 				<view class="tag-view">
-					<uni-tag text="我是自定义样式标签"
+					<uni-tag text="自定义标签样式"
 						custom-style="background-color: #4335d6; border-color: #4335d6; color: #fff;">
 					</uni-tag>
 				</view>
@@ -141,7 +141,6 @@
 </script>
 
 <style lang="scss">
-	@import "@/common/uni-nvue.scss";
 
 	.example-body {
 		/* #ifndef APP-PLUS-NVUE */
@@ -149,8 +148,8 @@
 		/* #endif */
 		flex-direction: row;
 		justify-content: flex-start;
+		align-items: flex-end;
 		flex-wrap: wrap;
-		padding: 10px;
 	}
 
 	.tag-view {

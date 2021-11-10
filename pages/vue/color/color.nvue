@@ -55,12 +55,18 @@
 				<view class="box-base uni-radius uni-base-color-bg uni-mt-5 "><text class="uni-body uni-white">base-color</text></view>
 				<view class="box-base uni-radius uni-secondary-color-bg uni-mt-5" ><text class="uni-body uni-white">secondary-color</text></view>
 				<view class="box-base uni-radius uni-extra-color-bg uni-mt-5"><text class="uni-body uni-white">extra-color</text></view>
-				<view class="box-base uni-radius uni-border-1-bg uni-mt-5"><text class="uni-body uni-white">border-1</text></view>
-				<view class="box-base uni-radius uni-border-2-bg uni-mt-5"><text class="uni-body uni-white">border-2</text></view>
-				<view class="box-base uni-radius uni-border-3-bg uni-mt-5 "><text class="uni-body uni-secondary-color">border-3</text></view>
-				<view class="box-base uni-radius uni-border-4-bg uni-mt-5 "><text class="uni-body uni-secondary-color">border-4</text></view>
 			</view>
 		</uni-section>
+
+		<uni-section title="分隔线" sub-title="主要用于边框颜色" type="line">
+			<view class="uni-ma-5 uni-radius">
+				<view class="box-base uni-radius uni-border-4-bg uni-mt-5 "><text class="uni-body uni-secondary-color uni-white">border-4</text></view>
+				<view class="box-base uni-radius uni-border-3-bg uni-mt-5 "><text class="uni-body uni-secondary-color uni-white">border-3</text></view>
+				<view class="box-base uni-radius uni-border-2-bg uni-mt-5"><text class="uni-body uni-white">border-2</text></view>
+				<view class="box-base uni-radius uni-border-1-bg uni-mt-5"><text class="uni-body uni-white">border-1</text></view>
+			</view>
+		</uni-section>
+
 		<uni-section title="常规色" sub-title="中性色用于文本、背景和边框颜色。通过运用不同的中性色，来表现层次结构。" type="line">
 			<view class="uni-ma-5 uni-radius">
 				<view class="box-base uni-radius uni-border uni-white-bg uni-mt-5"><text class="uni-body uni-secondary-color">white</text></view>

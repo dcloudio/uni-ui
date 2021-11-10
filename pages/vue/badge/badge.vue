@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<uni-card is-full>
+		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">数字角标通用来标记重点信息使用，如接受到新消息、有未读消息等</text>
 		</uni-card>
 		<uni-section title="基础用法" type="line" padding>

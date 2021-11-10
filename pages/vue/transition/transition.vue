@@ -1,18 +1,24 @@
 <template>
 	<view>
-		<text class="example-info">过渡动画，通常用于元素的过渡效果，例如淡隐淡出效果，遮罩层的效果、放大缩小的效果等</text>
-		<uni-section title="示例" type="line"></uni-section>
-		<view class="example">
-			<uni-transition ref="ani" custom-class="transition" :mode-class="modeClass" :styles="styles" :show="show"><text class="text">示例元素</text></uni-transition>
-		</view>
-		<uni-section title="操作" type="line"></uni-section>
-		<view class="example-body">
-			<button class="transition-button" type="default" @click="handle('fade')">淡隐淡出</button>
-			<button class="transition-button" type="default" @click="handle(['fade', 'slide-top'])">由上至下</button>
-			<button class="transition-button" type="default" @click="handle(['fade', 'slide-right'])">由右至左过</button>
-			<button class="transition-button" type="default" @click="handle(['fade', 'zoom-in'])">由小到大过</button>
-			<button class="transition-button" type="default" @click="custom">自定义动画</button>
-		</view>
+		<uni-card is-full :is-shadow="false">
+			<text class="uni-h6">过渡动画，通常用于元素的过渡效果，例如淡隐淡出效果，遮罩层的效果、放大缩小的效果等</text>
+		</uni-card>
+		<uni-section title="示例" type="line">
+			<view class="example">
+				<uni-transition ref="ani" custom-class="transition" :mode-class="modeClass" :styles="styles" :show="show"><text class="text">示例元素</text></uni-transition>
+			</view>
+		</uni-section>
+
+		<uni-section title="操作" subTitle="点击按钮 ,切换动画效果" type="line">
+			<view class="example-body">
+				<button class="transition-button" type="primary" @click="handle('fade')">淡隐淡出</button>
+				<button class="transition-button" type="primary" @click="handle(['fade', 'slide-top'])">由上至下</button>
+				<button class="transition-button" type="primary" @click="handle(['fade', 'slide-right'])">由右至左过</button>
+				<button class="transition-button" type="primary" @click="handle(['fade', 'zoom-in'])">由小到大过</button>
+				<button class="transition-button" type="primary" @click="custom">自定义动画</button>
+			</view>
+		</uni-section>
+
 	</view>
 </template>
 

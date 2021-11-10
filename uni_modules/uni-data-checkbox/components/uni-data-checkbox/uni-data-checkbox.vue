@@ -471,7 +471,7 @@
 	.uni-data-checklist {
 		position: relative;
 		z-index: 0;
-
+		flex: 1;
 		// 多选样式
 		.checklist-group {
 			@include flex;
