@@ -1,8 +1,8 @@
 <template>
-	<view>
-		<uni-card is-full>
+	<view class="container">
+		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">加载更多组件用于页面加载更多数据时，页面底部显示内容等场景</text>
-		</uni-card>	
+		</uni-card>
 		<uni-section title="基本用法" type="line">
 			<uni-load-more :status="status" />
 		</uni-section>
@@ -77,23 +77,12 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
-	.uni-list {
-		background-color: #fff;
-	}
-
-	.example-body {
-		padding: 6px 15px;
-		/* #ifndef APP-NVUE */
-		display: block;
-		/* #endif */
-	}
 
 	.uni-list-item {
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-		border-bottom-color: $uni-border-color;
+		border-bottom-color: #eee;
+		font-size: 14px;
 	}
 
 	.uni-list-item__container {
@@ -111,6 +100,7 @@
 	}
 
 	.uni-list-item__content-title {
-		font-size: 16px;
+		font-size: 14px;
+		color: #666;
 	}
 </style>

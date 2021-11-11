@@ -1,38 +1,45 @@
 <template>
-	<view>
-		<text class="example-info">弹出层组件用于弹出一个覆盖到页面上的内容，使用场景如：底部弹出分享弹窗、页面插屏广告等。</text>
-		<uni-section title="基本示例" type="line"></uni-section>
-		<view class="example-body box">
-			<button class="button" type="primary" @click="toggle('top')"><text class="button-text">顶部</text></button>
-			<button class="button" type="primary" @click="toggle('bottom')"><text class="button-text">底部</text></button>
-			<button class="button" type="primary" @click="toggle('center')"><text class="button-text">居中</text></button>
-			<button class="button" type="primary" @click="toggle('left')"><text class="button-text">左侧</text></button>
-			<button class="button" type="primary" @click="toggle('right')"><text class="button-text">右侧</text></button>
-		</view>
-		<uni-section title="提示消息" type="line"></uni-section>
-		<view class="example-body box">
-			<button class="button popup-success" @click="messageToggle('success')"><text
-					class="button-text success-text">成功</text></button>
-			<button class="button popup-error" @click="messageToggle('error')"><text
-					class="button-text error-text">失败</text></button>
-			<button class="button popup-warn" @click="messageToggle('warn')"><text
-					class="button-text warn-text">警告</text></button>
-			<button class="button popup-info" @click="messageToggle('info')"><text
-					class="button-text info-text">信息</text></button>
-		</view>
+	<view class="container">
+		<uni-card is-full :is-shadow="false">
+			<text class="uni-h6">弹出层组件用于弹出一个覆盖到页面上的内容，使用场景如：底部弹出分享弹窗、页面插屏广告等。</text>
+		</uni-card>
+		<uni-section title="基本示例" type="line">
+			<view class="example-body box">
+				<button class="button" type="primary" @click="toggle('top')"><text class="button-text">顶部</text></button>
+				<button class="button" type="primary" @click="toggle('bottom')"><text class="button-text">底部</text></button>
+				<button class="button" type="primary" @click="toggle('center')"><text class="button-text">居中</text></button>
+				<button class="button" type="primary" @click="toggle('left')"><text class="button-text">左侧</text></button>
+				<button class="button" type="primary" @click="toggle('right')"><text class="button-text">右侧</text></button>
+			</view>
+		</uni-section>
 
-		<uni-section title="对话框示例" type="line" class="hideOnPc"></uni-section>
+		<uni-section title="提示消息" type="line">
+			<view class="example-body box">
+				<button class="button popup-success" @click="messageToggle('success')"><text
+						class="button-text success-text">成功</text></button>
+				<button class="button popup-error" @click="messageToggle('error')"><text
+						class="button-text error-text">失败</text></button>
+				<button class="button popup-warn" @click="messageToggle('warn')"><text
+						class="button-text warn-text">警告</text></button>
+				<button class="button popup-info" @click="messageToggle('info')"><text
+						class="button-text info-text">信息</text></button>
+			</view>
+		</uni-section>
 
-		<view class="example-body box">
-			<button class="button popup-success" @click="dialogToggle('success')"><text
-					class="button-text success-text">成功</text></button>
-			<button class="button popup-error" @click="dialogToggle('error')"><text
-					class="button-text error-text">失败</text></button>
-			<button class="button popup-warn" @click="dialogToggle('warn')"><text
-					class="button-text warn-text">警告</text></button>
-			<button class="button popup-info" @click="dialogToggle('info')"><text
-					class="button-text info-text">信息</text></button>
-		</view>
+
+		<uni-section title="对话框示例" type="line" class="hideOnPc">
+			<view class="example-body box">
+				<button class="button popup-success" @click="dialogToggle('success')"><text
+						class="button-text success-text">成功</text></button>
+				<button class="button popup-error" @click="dialogToggle('error')"><text
+						class="button-text error-text">失败</text></button>
+				<button class="button popup-warn" @click="dialogToggle('warn')"><text
+						class="button-text warn-text">警告</text></button>
+				<button class="button popup-info" @click="dialogToggle('info')"><text
+						class="button-text info-text">信息</text></button>
+			</view>
+		</uni-section>
+
 		<uni-section title="输入框示例" type="line" padding>
 			<view class="dialog-box">
 				<text class="dialog-text">输入内容：{{ value }}</text>
@@ -144,8 +151,6 @@
 	}
 </script>
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	@mixin flex {
 		/* #ifndef APP-NVUE */
 		display: flex;

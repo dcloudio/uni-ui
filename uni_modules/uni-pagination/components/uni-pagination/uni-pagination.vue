@@ -283,11 +283,12 @@
 		line-height: 30px;
 		font-size: $uni-font-size-base;
 		position: relative;
-		background-color: #f4f4f5;
+		background-color: #F0F0F0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		border-radius: 5px;
 		// border-width: 1px;
 		// border-style: solid;
 		// border-color: $uni-border-color;
@@ -303,6 +304,8 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		color: #0F1214;
+		font-size: 12px;
 	}
 
 	.uni-pagination__num {
@@ -331,6 +334,7 @@
 		line-height: 30px;
 		// border: 1px red solid;
 		color: #666;
+		border-radius: 4px;
 		// border-width: 1px;
 		// border-style: solid;
 		// border-color: $uni-border-color;

@@ -1,6 +1,8 @@
 <template>
 	<view>
-		<text class="example-info">日期格式化组件，通常用于需要展示友好的日期格式的场景</text>
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">日期格式化组件，通常用于需要展示友好的日期格式的场景。</text>
+		</uni-card>
 		<uni-section title="基础用法" type="line" padding>
 			<view class="example-body">
 				<uni-dateformat :date="now - 7200000"></uni-dateformat>
@@ -37,7 +39,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 	.example-body {
 		display: flex;
 		flex-direction: column;

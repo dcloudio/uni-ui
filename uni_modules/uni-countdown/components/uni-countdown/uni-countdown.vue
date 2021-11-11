@@ -30,7 +30,7 @@
 	 * @property {Number} second 秒
 	 * @property {Number} timestamp 时间戳
 	 * @property {Boolean} showDay = [true|false] 是否显示天数
-	 * @property {Boolean} showColon = [true|false] 是否以冒号为分隔符
+	 * @property {Boolean} show-colon = [true|false] 是否以冒号为分隔符
 	 * @property {String} splitorColor 分割符号颜色
 	 * @event {Function} timeup 倒计时时间到触发事件
 	 * @example <uni-countdown :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
@@ -125,7 +125,7 @@
 					fontSize: `${fontSize}px`,
 					width: `${fontSize * 22 / 14}px`, // 按字体大小为 14px 时的比例缩放
  					lineHeight: `${fontSize * 20 / 14}px`,
-					borderRadius: `${fontSize * 6 / 14}px`,
+					borderRadius: `${fontSize * 3 / 14}px`,
 				}
 			},
 			splitorStyle() {
@@ -258,7 +258,7 @@
 		}
 
 		&__number {
-			border-radius: 6px;
+			border-radius: 3px;
 			text-align: center;
 			font-size: $font-size;
 		}

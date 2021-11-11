@@ -3,7 +3,7 @@ s<template>
 		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<view class="uni-searchbar__box-icon-search">
 				<slot name="searchIcon">
-					<uni-icons color="#999999" size="18" type="search" />
+					<uni-icons color="#c0c4cc" size="18" type="search" />
 				</slot>
 			</view>
 			<input v-if="show || searchVal" :focus="showSync" :placeholder="placeholderText" :maxlength="maxlength" class="uni-searchbar__box-search-input"
@@ -12,7 +12,7 @@ s<template>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')" class="uni-searchbar__box-icon-clear"
 			 @click="clear">
 				<slot name="clearIcon">
-					<uni-icons color="#c0c4cc" size="15" type="clear" />
+					<uni-icons color="#c0c4cc" size="20" type="clear" />
 				</slot>
 			</view>
 		</view>
@@ -62,7 +62,7 @@ s<template>
 			},
 			radius: {
 				type: [Number, String],
-				default: 4
+				default: 5
 			},
 			clearButton: {
 				type: String,
@@ -223,8 +223,8 @@ s<template>
 		/* #endif */
 		flex-direction: row;
 		position: relative;
-		padding: $uni-spacing-col-base;
-		background-color: #fff;
+		padding: 10px;
+		// background-color: #fff;
 	}
 
 	.uni-searchbar__box {
@@ -251,13 +251,13 @@ s<template>
 		padding: 0 8px;
 		justify-content: center;
 		align-items: center;
-		color: $uni-text-color-placeholder;
+		color: #B3B3B3;
 	}
 
 	.uni-searchbar__box-search-input {
 		flex: 1;
-		font-size: $uni-font-size-base;
-		color: $uni-text-color;
+		font-size: 14px;
+		color: #333;
 	}
 
 	.uni-searchbar__box-icon-clear {
@@ -270,8 +270,8 @@ s<template>
 	}
 
 	.uni-searchbar__text-placeholder {
-		font-size: $uni-font-size-base;
-		color: $uni-text-color-placeholder;
+		font-size: 14px;
+		color: #B3B3B3;
 		margin-left: 5px;
 	}
 
@@ -279,7 +279,7 @@ s<template>
 		padding-left: 10px;
 		line-height: $uni-searchbar-height;
 		font-size: 14px;
-		color: $uni-text-color;
+		color: #333333;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */

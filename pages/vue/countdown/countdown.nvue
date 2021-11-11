@@ -6,22 +6,22 @@
 		<uni-section title="一般用法" type="line" padding>
 			<uni-countdown :day="1" :hour="1" :minute="12" :second="40" />
 		</uni-section>
-		<uni-section title="不显示天数" type="line" padding>
+		<uni-section title="不显示天数" subTitle="设置 show-day = false 不显示天" type="line" padding>
 			<uni-countdown :show-day="false" :hour="12" :minute="12" :second="12" />
 		</uni-section>
-		<uni-section title="文字分隔符" type="line" padding>
+		<uni-section title="文字分隔符" subTitle="设置 show-colon 属性设置分隔符样式" type="line" padding>
 			<uni-countdown :minute="30" :second="0" :show-colon="false" />
 		</uni-section>
-		<uni-section title="修改颜色" type="line" padding>
+		<uni-section title="修改颜色" subTitle="设置 color \ background 属性设置组件颜色" type="line" padding>
 			<uni-countdown :day="1" :hour="2" :minute="30" :second="0" color="#FFFFFF" background-color="#007AFF" />
 		</uni-section>
-		<uni-section title="修改字体大小" type="line" padding>
+		<uni-section title="修改字体大小" subTitle="设置 font-size 属性设置组件大小" type="line" padding>
 			<uni-countdown :font-size="30" :day="1" :hour="2" :minute="30" :second="0" />
 		</uni-section>
 		<uni-section title="修改颜色 + 字体大小" type="line" padding>
 			<uni-countdown :font-size="30" :day="1" :hour="2" :minute="30" :second="0" color="#FFFFFF" background-color="#007AFF" />
 		</uni-section>
-		<uni-section title="自由控制开始/暂停" type="line" padding>
+		<uni-section title="自由控制开始/暂停" subTitle="设置 start 属性控制是否自动开启" type="line" padding>
 			<uni-countdown :start="start" :day="1" :hour="1" :minute="12" :second="40" />
 		</uni-section>
 		<uni-section title="倒计时回调事件" type="line" padding>

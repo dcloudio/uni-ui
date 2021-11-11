@@ -249,6 +249,6 @@
 	.uni-navbar--border {
 		border-bottom-width: 1rpx;
 		border-bottom-style: solid;
-		border-bottom-color: #c8c7cc;
+		border-bottom-color: #eee;
 	}
 </style>

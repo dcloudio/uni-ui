@@ -2,31 +2,35 @@
 	<view class="container">
 		<uni-nav-bar :fixed="true" color="#ffffff" background-color="#007AFF" :status-bar="true" left-icon="arrowleft"
 			left-text="返回" title="uni-nav-bar 标题" @clickLeft="back" />
-		<uni-card is-full>
+		<uni-card is-full :isShadow="false">
 			<text
 				class="uni-h6">本导航栏为自定义组件，并非原生导航栏。除非原生导航栏无法满足需求，否则不推荐使用自定义导航栏组件。具体参考https://ask.dcloud.net.cn/article/34921</text>
 		</uni-card>
-		<uni-section title="基本用法" type="line" style="margin-bottom: 3px;"></uni-section>
-		<uni-nav-bar left-icon="left" title="标题" @clickLeft="back" />
-		<uni-section title="左右显示文字" type="line" style="margin-bottom: 3px;"></uni-section>
-		<uni-nav-bar left-icon="left" right-text="菜单" left-text="返回" title="标题" @clickLeft="back" />
-		<uni-section title="插入slot" type="line" style="margin-bottom: 3px;"></uni-section>
-		<uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan" @clickLeft="showCity"
-			@clickRight="scan">
-			<block slot="left">
-				<view class="city">
-					<view>
-						<text class="uni-nav-bar-text">{{ city }}</text>
+		<uni-section title="基本用法" type="line" style="margin-bottom: 3px;">
+			<uni-nav-bar left-icon="left" title="标题" @clickLeft="back" />
+		</uni-section>
+		<uni-section title="左右显示文字" type="line" style="margin-bottom: 3px;">
+			<uni-nav-bar left-icon="left" right-text="菜单" left-text="返回" title="标题" @clickLeft="back" />
+		</uni-section>
+		<uni-section title="插入slot" type="line" style="margin-bottom: 3px;">
+			<uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan" @clickLeft="showCity"
+				@clickRight="scan">
+				<block slot="left">
+					<view class="city">
+						<view>
+							<text class="uni-nav-bar-text">{{ city }}</text>
+						</view>
+						<uni-icons type="arrowdown" color="#333333" size="22" />
 					</view>
-					<uni-icons type="arrowdown" color="#333333" size="22" />
+				</block>
+				<view class="input-view">
+					<uni-icons class="input-uni-icon" type="search" size="18" color="#999" />
+					<input confirm-type="search" class="nav-bar-input" type="text" placeholder="输入搜索关键词"
+						@confirm="confirm" />
 				</view>
-			</block>
-			<view class="input-view">
-				<uni-icons class="input-uni-icon" type="search" size="18" color="#999" />
-				<input confirm-type="search" class="nav-bar-input" type="text" placeholder="输入搜索关键词"
-					@confirm="confirm" />
-			</view>
-		</uni-nav-bar>
+			</uni-nav-bar>
+		</uni-section>
+		
 	</view>
 </template>
 

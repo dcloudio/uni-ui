@@ -1,15 +1,15 @@
 <template>
 	<view>
-		<uni-card is-full>
+		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">分页器组件，用于展示页码、请求数据等</text>
 		</uni-card>
 		<uni-section title="默认样式" type="line" padding>
 			<uni-pagination :total="50" title="标题文字" />
 		</uni-section>
-		<uni-section title="修改按钮文字" type="line" padding>
+		<uni-section title="修改按钮文字" subTitle="使用 prev-text / next-text 属性修改按钮文字" type="line" padding>
 			<uni-pagination :total="50" title="标题文字" prev-text="前一页" next-text="后一页" />
 		</uni-section>
-		<uni-section title="图标样式" type="line" padding>
+		<uni-section title="图标样式" subTitle="使用 show-icon 属性显示图标按钮" type="line" padding>
 			<uni-pagination :show-icon="true" :total="50" title="标题文字" />
 		</uni-section>
 		<uni-section title="修改数据长度" type="line" padding>

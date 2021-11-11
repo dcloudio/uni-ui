@@ -1,6 +1,6 @@
 <template>
-	<view class="page">
-		<uni-card is-full>
+	<view class="container">
+		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打开新网页。</text>
 		</uni-card>
 		<uni-section title="基本示例" subTitle="打开外部连接" type="line" padding>
@@ -8,7 +8,7 @@
 		</uni-section>
 		<uni-section title="自定义颜色" type="line" padding>
 			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/"
-				color="#0000FF"></uni-link>
+				color="#007BFF"></uni-link>
 		</uni-section>
 		<uni-section title="自定义下划线" type="line" padding>
 			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/"
@@ -20,7 +20,7 @@
 		</uni-section>
 		<uni-section title="自定义插槽" type="line" padding>
 			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/" showUnderLine="false"
-				color="#0000FF">插槽内容</uni-link>
+				color="red">点击跳转</uni-link>
 		</uni-section>
 	</view>
 </template>

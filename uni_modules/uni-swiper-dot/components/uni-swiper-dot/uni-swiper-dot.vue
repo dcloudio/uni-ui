@@ -180,7 +180,8 @@
 
 	.uni-swiper__dots-nav {
 		bottom: 0px;
-		height: 26px;
+		// height: 26px;
+		padding: 8px 0;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
@@ -195,7 +196,7 @@
 		/* overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; */
-		font-size: 12px;
+		font-size: 14px;
 		color: #fff;
 		margin: 0 15px;
 	}
