@@ -19,7 +19,7 @@
 				<view v-for="(item, index) in content" :key="index" :class="{ 'uni-fab__item--active': isShow }"
 					class="uni-fab__item" @click="_onItemClick(index, item)">
 					<image :src="item.active ? item.selectedIconPath : item.iconPath" class="uni-fab__item-image"
-						mode="widthFix" />
+						mode="aspectFit" />
 					<text class="uni-fab__item-text"
 						:style="{ color: item.active ? styles.selectedColor : styles.color }">{{ item.text }}</text>
 				</view>
@@ -33,7 +33,7 @@
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
 		}" class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor }" @click="_onClick">
-			<uni-icons class="fab-circle-icon" type="plusempty" :color="styles.iconColor" size="26"
+			<uni-icons class="fab-circle-icon" type="plusempty" :color="styles.iconColor" size="32"
 				:class="{'uni-fab__plus--active': isShow && content.length > 0}"></uni-icons>
 			<!-- <view class="fab-circle-v"  :class="{'uni-fab__plus--active': isShow && content.length > 0}"></view>
 			<view class="fab-circle-h" :class="{'uni-fab__plus--active': isShow  && content.length > 0}"></view> -->
@@ -119,10 +119,10 @@
 		},
 		computed: {
 			contentWidth(e) {
-				return (this.content.length + 1) * 45 + 15 + 'px'
+				return (this.content.length + 1) * 55 + 15 + 'px'
 			},
 			contentWidthMin() {
-				return 45 + 'px'
+				return '55px'
 			},
 			// 动态计算宽度
 			boxWidth() {
@@ -289,8 +289,8 @@
 		/* #endif */
 		justify-content: center;
 		align-items: center;
-		width: 45px;
-		height: 45px;
+		width: 55px;
+		height: 55px;
 		background-color: #3c3e49;
 		border-radius: 45px;
 		z-index: 11;
@@ -353,37 +353,42 @@
 		font-weight: bold;
 	}
 
-	.fab-circle-v {
-		position: absolute;
-		width: 2px;
-		height: 24px;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
-		background-color: white;
-		transform: rotate(0deg);
-		transition: transform 0.3s;
-	}
+	// .fab-circle-v {
+	// 	position: absolute;
+	// 	width: 2px;
+	// 	height: 24px;
+	// 	left: 0;
+	// 	top: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	/* #ifndef APP-NVUE */
+	// 	margin: auto;
+	// 	/* #endif */
+	// 	background-color: white;
+	// 	transform: rotate(0deg);
+	// 	transition: transform 0.3s;
+	// }
 
-	.fab-circle-h {
-		position: absolute;
-		width: 24px;
-		height: 2px;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		margin: auto;
-		background-color: white;
-		transform: rotate(0deg);
-		transition: transform 0.3s;
-	}
+	// .fab-circle-h {
+	// 	position: absolute;
+	// 	width: 24px;
+	// 	height: 2px;
+	// 	left: 0;
+	// 	top: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	/* #ifndef APP-NVUE */
+	// 	margin: auto;
+	// 	/* #endif */
+	// 	background-color: white;
+	// 	transform: rotate(0deg);
+	// 	transition: transform 0.3s;
+	// }
 
 	.fab-circle-icon {
 		transform: rotate(0deg);
 		transition: transform 0.3s;
+		font-weight: 200;
 	}
 
 	.uni-fab__plus--active {
@@ -400,7 +405,7 @@
 		overflow: hidden;
 		transition-property: width, height;
 		transition-duration: 0.2s;
-		width: 45px;
+		width: 55px;
 		border-color: #DDDDDD;
 		border-width: 1rpx;
 		border-style: solid;
@@ -441,8 +446,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 45px;
-		height: 45px;
+		width: 55px;
+		height: 55px;
 		opacity: 0;
 		transition: opacity 0.2s;
 	}
@@ -452,9 +457,9 @@
 	}
 
 	.uni-fab__item-image {
-		width: 18px;
-		height: 18px;
-		margin-bottom: 2px;
+		width: 20px;
+		height: 20px;
+		margin-bottom: 4px;
 	}
 
 	.uni-fab__item-text {
@@ -465,6 +470,6 @@
 	}
 
 	.uni-fab__item--first {
-		width: 45px;
+		width: 55px;
 	}
 </style>

@@ -24,11 +24,10 @@
 		</uni-section>
 
 		<button class="button" type="primary" @click="add">动态修改内容</button>
-		<!-- #ifndef APP-PLUS -->
 		<!-- TODO app 端默认不使用动画，app在使用高度动画的时候会有性能开销问题，所以应该要酌情使用 -->
 		<uni-section title="使用动画效果" type="line">
 			<uni-collapse >
-				<uni-collapse-item title="使用动画">
+				<uni-collapse-item title="使用动画" :show-animation="true">
 					<view class="content">
 						<text class="text">默认开启组件动画，使用动画效果折叠内容会有一个从上到下的动画。</text>
 					</view>
@@ -40,8 +39,6 @@
 				</uni-collapse-item>
 			</uni-collapse>
 		</uni-section>
-
-		<!-- #endif -->
 		<uni-section title="手风琴效果（只会保留一个的打开状态）" type="line">
 			<uni-collapse  accordion v-model="accordionVal" @change="change">
 				<uni-collapse-item title="手风琴效果">

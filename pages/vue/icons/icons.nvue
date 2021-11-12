@@ -12,6 +12,7 @@
 				</view>
 			</view>
 		</uni-section>
+		<!-- #ifndef APP-PLUS -->
 		<uni-section title="自定义图标" subTitle="引入参考App.vue" type="line">
 			<view class="icon-content">
 				<view class="icon-item" >
@@ -28,6 +29,7 @@
 				</view>
 			</view>
 		</uni-section>
+		<!-- #endif -->
 	</view>
 </template>
 

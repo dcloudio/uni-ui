@@ -187,6 +187,6 @@
 		height: 150px;
 	}
 	.no-border {
-		border: none;
+		border-width: 0;
 	}
 </style>

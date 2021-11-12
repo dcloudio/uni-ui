@@ -12,7 +12,7 @@
 				<!-- 卡片标题 -->
 				<view class="uni-card__header-box" @click="onClick('title')">
 					<view v-if="thumbnail" class="uni-card__header-avatar">
-						<image class="uni-card__header-avatar-image" :src="thumbnail" mode="scaleToFill" />
+						<image class="uni-card__header-avatar-image" :src="thumbnail" mode="aspectFit" />
 					</view>
 					<view class="uni-card__header-content">
 						<text class="uni-card__header-content-title uni-ellipsis">{{ title }}</text>
@@ -149,7 +149,9 @@
 			.uni-card__cover-image {
 				flex: 1;
 				// width: 100%;
+				/* #ifndef APP-PLUS */
 				vertical-align: middle;
+				/* #endif */
 			}
 		}
 
@@ -177,11 +179,9 @@
 				overflow: hidden;
 				border-radius: 5px;
 				margin-right: $uni-card-spacing;
-
 				.uni-card__header-avatar-image {
-					display: flex;
+					flex: 1;
 					width: 40px;
-					height: 40px;
 				}
 			}
 

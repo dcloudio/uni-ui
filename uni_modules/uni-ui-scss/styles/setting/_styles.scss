@@ -1,3 +1,5 @@
+/* #ifndef APP-NVUE */
+
 $-color-white:#fff;
 $-color-black:#000;
 @mixin base-style($color) {
@@ -162,3 +164,4 @@ $-color-black:#000;
 		@include is-plain($uni-info)
 	}
 }
+/* #endif */

@@ -1,5 +1,6 @@
 <template>
 	<view class="container">
+		<!-- 暂时不支持 nvue -->
 		<uni-card :is-shadow="false" is-full>
 			<text class="uni-h6">使用 '.uni-btn' 样式，可对内置button组件设置样式</text>
 		</uni-card>

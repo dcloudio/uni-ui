@@ -110,7 +110,9 @@
 		overflow: hidden;
 		border-radius: 5px;
 		border: 1px #eee solid;
+		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
+		/* #endif */
 	}
 
 	.margin-item {
@@ -132,8 +134,10 @@
 	}
 
 	.action-label {
-		width: 50px;
+		/* #ifndef APP-NVUE */
 		flex-shrink: 0;
+		/* #endif */
+		width: 50px;
 		margin-left: 10px;
 		margin-right: 10px;
 		font-size: 12px;

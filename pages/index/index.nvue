@@ -257,6 +257,9 @@
 		&__bg {
 			display: flex;
 			margin-top: 20px;
+			/* #ifdef APP-NVUE */
+			flex: 1;
+			/* #endif */
 			/* #ifndef APP-NVUE */
 			width: 100%;
 			/* #endif */

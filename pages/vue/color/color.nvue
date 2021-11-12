@@ -78,9 +78,9 @@
 		</uni-section>
 
 		<uni-section title="阴影" type="line">
-			<view class="box-base uni-ma-5 uni-radius uni-shadow-sm  uni-mt-2"><text class="uni-body uni-secondary-color">shadow-sm</text></view>
-			<view class="box-base uni-ma-5 uni-radius uni-shadow-base uni-secondary-color uni-mt-2"><text class="uni-body uni-secondary-color">shadow-base</text></view>
-			<view class="box-base uni-ma-5 uni-radius uni-shadow-lg uni-secondary-color uni-mt-2"><text class="uni-body uni-secondary-color">shadow-lg</text></view>
+			<view class="box-base uni-white-bg uni-ma-5 uni-radius uni-shadow-sm  uni-mt-2"><text class="uni-body uni-secondary-color">shadow-sm</text></view>
+			<view class="box-base uni-white-bg uni-ma-5 uni-radius uni-shadow-base uni-secondary-color uni-mt-2"><text class="uni-body uni-secondary-color">shadow-base</text></view>
+			<view class="box-base uni-white-bg uni-ma-5 uni-radius uni-shadow-lg uni-secondary-color uni-mt-2"><text class="uni-body uni-secondary-color">shadow-lg</text></view>
 		</uni-section>
 	</view>
 </template>

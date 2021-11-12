@@ -280,10 +280,10 @@
 				/* #ifndef APP-NVUE */
 				display: block;
 				flex-shrink: 0;
+				vertical-align: middle;
 				/* #endif */
 				height: 32px;
 				width: 32px;
-				vertical-align: middle;
 				overflow: hidden;
 			}
 			.uni-list--lg {
@@ -330,7 +330,7 @@
 			&-text {
 				color: #8A8A8A;
 				font-size: 12px;
-				line-height: 1;
+				line-height: 12px;
 				margin-left: 10px;
 			}
 		}
@@ -350,6 +350,7 @@
 		/* #endif */
 		/* #ifdef APP-NVUE */
 		lines: 1;
+		text-overflow:ellipsis;
 		/* #endif */
 	}
 
@@ -364,6 +365,7 @@
 
 		/* #ifdef APP-NVUE */
 		lines: 2;
+		text-overflow:ellipsis;
 		/* #endif */
 	}
 	.uni-list-item--hover {

@@ -62,7 +62,7 @@
 			deactiveColor: {
 				// 未激活状态颜色
 				type: String,
-				default: '#B7BDC6999'
+				default: '#B7BDC6'
 			},
 			active: {
 				// 当前步骤
