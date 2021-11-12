@@ -18,7 +18,7 @@
 
 		<uni-section title="Style" type="line"></uni-section>
 		<view class="example-body">
-			<radio-group class="uni-list " @change="styleChange">
+			<radio-group class="uni-list" @change="styleChange">
 				<view v-for="(item, index) in styles" :key="index" class="uni-list-item">
 					<view class="uni-list-item__container">
 						<view class="uni-list-item__content">
@@ -161,10 +161,10 @@
 		align-items: center;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-		border-bottom-color: $uni-border-color;
+		border-bottom-color: #eee;
 	}
 
 	.uni-list-item__content-title {
-		font-size: 16px;
+		font-size: 14px;
 	}
 </style>
