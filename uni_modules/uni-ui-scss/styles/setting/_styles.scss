@@ -144,23 +144,23 @@ $-color-black:#000;
 		border-radius: 999px;
 	}
 	&[type=primary] {
-		@include is-color($uni-primary)
+		@include is-color($uni-primary);
 		@include is-plain($uni-primary)
 	}
 	&[type=success] {
-		@include is-color($uni-success)
+		@include is-color($uni-success);
 		@include is-plain($uni-success)
 	}
 	&[type=error] {
-		@include is-color($uni-error)
+		@include is-color($uni-error);
 		@include is-plain($uni-error)
 	}
 	&[type=warning] {
-		@include is-color($uni-warning)
+		@include is-color($uni-warning);
 		@include is-plain($uni-warning)
 	}
 	&[type=info] {
-		@include is-color($uni-info)
+		@include is-color($uni-info);
 		@include is-plain($uni-info)
 	}
 }

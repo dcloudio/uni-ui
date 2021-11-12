@@ -70,6 +70,8 @@
 	}
 </script>
 <style lang="scss" scoped>
+	$uni-primary: #2979ff !default;
+	
 	.uni-section {
 		background-color: #fff;
 		// overflow: hidden;
@@ -84,7 +86,6 @@
 		align-items: center;
 		padding: 12px 10px;
 		// height: 50px;
-		// background-color: $uni-bg-color-grey;
 		font-weight: normal;
 	}
 	.uni-section__head {
@@ -96,7 +97,7 @@
 
 	.line {
 		height: 12px;
-		background-color: $uni-color-primary;
+		background-color: $uni-primary;
 		border-radius: 10px;
 		width: 4px;
 	}
@@ -108,7 +109,7 @@
 		border-top-left-radius: 50px;
 		border-bottom-left-radius: 50px;
 		border-bottom-right-radius: 50px;
-		background-color: $uni-color-primary;
+		background-color: $uni-primary;
 	}
 
 	.uni-section__content {
@@ -117,12 +118,12 @@
 		/* #endif */
 		flex-direction: column;
 		flex: 1;
-		color: $uni-text-color;
+		color: #333;
 	}
 
 	.uni-section__content-title {
-		font-size: $uni-font-size-base;
-		color: $uni-color-primary;
+		font-size: 14px;
+		color: $uni-primary;
 	}
 
 	.distraction {
@@ -131,8 +132,8 @@
 	}
 
 	.uni-section__content-sub {
-		font-size: $uni-font-size-sm;
-		color: $uni-text-color-grey;
+		font-size: 12px;
+		color: #999;
 		line-height: 16px;
 		margin-top: 2px;
 	}
