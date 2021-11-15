@@ -1,9 +1,9 @@
 <template>
-	<view>
+	<view class="container">
 		<uni-card is-full>
 			<text class="uni-h6">倒计时组件主要用于促销商品剩余时间，发送短信验证等待时间等场景</text>
 		</uni-card>
-		<uni-section title="一般用法" type="line" padding>
+		 <uni-section title="一般用法" type="line" padding>
 			<uni-countdown :day="1" :hour="1" :minute="12" :second="40" />
 		</uni-section>
 		<uni-section title="不显示天数" subTitle="设置 show-day = false 不显示天" type="line" padding>
@@ -67,5 +67,4 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 </style>
