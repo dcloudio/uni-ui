@@ -1,5 +1,3 @@
-import CALENDAR from './calendar.js'
-
 class Calendar {
 	constructor({
 		date,
@@ -112,7 +110,6 @@ class Calendar {
 			dateArr.push({
 				date: beforeDate,
 				month: full.month - 1,
-				lunar: this.getlunar(full.year, full.month - 1, beforeDate),
 				disable: true
 			})
 		}
@@ -173,7 +170,6 @@ class Calendar {
 				beforeMultiple: this.isLogicBefore(nowDate, this.multipleStatus.before, this.multipleStatus.after),
 				afterMultiple: this.isLogicAfter(nowDate, this.multipleStatus.before, this.multipleStatus.after),
 				month: full.month,
-				lunar: this.getlunar(full.year, full.month, i),
 				disable: !(disableBefore && disableAfter),
 				isDay,
 				userChecked: false
@@ -195,7 +191,6 @@ class Calendar {
 			dateArr.push({
 				date: i,
 				month: Number(full.month) + 1,
-				lunar: this.getlunar(full.year, Number(full.month) + 1, i),
 				disable: true
 			})
 		}
@@ -284,19 +279,6 @@ class Calendar {
 			arr.push(this.getDate(new Date(parseInt(k))).fullDate)
 		}
 		return arr
-	}
-	/**
-	 * 计算阴历日期显示
-	 */
-	getlunar(year, month, date) {
-		return CALENDAR.solar2lunar(year, month, date)
-	}
-	/**
-	 * 设置打点
-	 */
-	setSelectInfo(data, value) {
-		this.selected = value
-		this._getWeek(data)
 	}
 
 	/**

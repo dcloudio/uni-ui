@@ -18,11 +18,19 @@
      	{
      		"launchtype" : "local"
      	},
+     	"mp-baidu" : 
+     	{
+     		"launchtype" : "local"
+     	},
      	"mp-feishu" : 
      	{
      		"launchtype" : "local"
      	},
      	"mp-kuaishou" : 
+     	{
+     		"launchtype" : "local"
+     	},
+     	"mp-qq" : 
      	{
      		"launchtype" : "local"
      	},

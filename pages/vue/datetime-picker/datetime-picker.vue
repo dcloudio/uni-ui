@@ -25,7 +25,7 @@
 		</view>
 		<uni-section :title="'时间戳用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker returnType="timestamp" v-model="single" @change="changeLog($event)" start="2021-3-20" end="2021-5-20"  />
+			<uni-datetime-picker returnType="timestamp" v-model="single" @change="changeLog($event)" />
 		</view>
 		<uni-section :title="'date 对象用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">

@@ -9,7 +9,8 @@
 					<view class="uni-calendar__header-btn uni-calendar--left"></view>
 				</view>
 				<picker mode="date" :value="date" fields="month" @change="bindDateChange">
-					<text class="uni-calendar__header-text">{{ (nowDate.year||'') + ' 年 ' + ( nowDate.month||'') +' 月'}}</text>
+					<text
+						class="uni-calendar__header-text">{{ (nowDate.year||'') + ' 年 ' + ( nowDate.month||'') +' 月'}}</text>
 				</picker>
 				<view v-if="right" class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
@@ -85,8 +86,7 @@
 				<!-- <view class="uni-calendar__header-btn-box">
 					<text class="uni-calendar__button-text uni-calendar--fixed-width">{{okText}}</text>
 				</view> -->
-				<button type="primary" class="uni-btn uni-btn-radius" hover-class="hover-class"
-					@click="confirm">确认</button>
+				<view class="uni-datetime-picker--btn" @click="confirm">确认</view>
 			</view>
 		</view>
 	</view>
@@ -366,7 +366,6 @@
 			})
 			// 选中某一天
 			// this.cale.setDate(this.date)
-
 			this.init(this.date)
 			// this.setDay
 		},
@@ -430,7 +429,6 @@
 			 * @param {Object} date
 			 */
 			init(date) {
-
 				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
 				this.nowDate = this.calendar = this.cale.getInfo(date)
@@ -881,4 +879,20 @@
 		position: absolute;
 		transform: rotate(-45deg);
 	}
+
+	.uni-datetime-picker--btn {
+		border-radius: 100px;
+		height: 40px;
+		line-height: 40px;
+		background-color: #007aff;
+		color: #fff;
+		font-size: 16px;
+		letter-spacing: 5px;
+	}
+
+	/* #ifndef APP-NVUE */
+	.uni-datetime-picker--btn:active {
+		opacity: 0.7;
+	}
+	/* #endif */
 </style>

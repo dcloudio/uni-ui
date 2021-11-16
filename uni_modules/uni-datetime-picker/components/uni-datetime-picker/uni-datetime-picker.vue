@@ -31,7 +31,7 @@
 		<view v-if="!isPhone" ref="datePicker" v-show="popup" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
 				<view class="uni-popper__arrow"></view>
-				<view v-show="hasTime" class="uni-date-changed popup-x-header">
+				<view v-if="hasTime" class="uni-date-changed popup-x-header">
 					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
@@ -52,7 +52,7 @@
 
 			<view v-else class="uni-date-range--x" :style="popover">
 				<view class="uni-popper__arrow"></view>
-				<view v-show="hasTime" class="popup-x-header uni-date-changed">
+				<view v-if="hasTime" class="popup-x-header uni-date-changed">
 					<view class="popup-x-header--datetime">
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
 							:placeholder="startDateText" />
@@ -90,7 +90,7 @@
 				</view>
 			</view>
 		</view>
-		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar v-show="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			:hideSecond="hideSecond" @confirm="mobileChange" />
@@ -685,9 +685,9 @@
 					this.tempSingleDate = ''
 					this.time = ''
 					if (this.isPhone) {
-						this.$refs.mobile.clearCalender()
+						this.$refs.mobile && this.$refs.mobile.clearCalender()
 					} else {
-						this.$refs.pcSingle.clearCalender()
+						this.$refs.pcSingle && this.$refs.pcSingle.clearCalender()
 					}
 					if (needEmit) {
 						this.formItem && this.formItem.setValue('')
@@ -703,11 +703,11 @@
 					this.tempRange.endDate = ''
 					this.tempRange.endTime = ''
 					if (this.isPhone) {
-						this.$refs.mobile.clearCalender()
+						this.$refs.mobile && this.$refs.mobile.clearCalender()
 					} else {
-						this.$refs.left.clearCalender()
-						this.$refs.right.clearCalender()
-						this.$refs.right.next()
+						this.$refs.left && this.$refs.left.clearCalender()
+						this.$refs.right && this.$refs.right.clearCalender()
+						this.$refs.right && this.$refs.right.next()
 					}
 					if (needEmit) {
 						this.formItem && this.formItem.setValue([])
