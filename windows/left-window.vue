@@ -4,7 +4,7 @@
 	</view>
 </template>
 <script>
-	import indexPage from '@/pages/index/index.nvue'
+	import indexPage from '@/pages/index/index'
 	export default {
 		components: { indexPage },
 		props: {
