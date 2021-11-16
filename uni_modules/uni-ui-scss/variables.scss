@@ -6,26 +6,26 @@ $uni-radius-root:5px;
 
 // 主色
 $uni-primary: #2979ff;
-$uni-primary-disable:lighten($uni-primary,20%);
-$uni-primary-light: lighten($uni-primary,25%);
+$uni-primary-disable:mix(#fff,$uni-primary,50%);
+$uni-primary-light: mix(#fff,$uni-primary,80%);
 
 // 辅助色
 // 除了主色外的场景色，需要在不同的场景中使用（例如危险色表示危险的操作）。
 $uni-success: #18bc37;
-$uni-success-disable:lighten($uni-success,20%);
-$uni-success-light: lighten($uni-success,25%);
+$uni-success-disable:mix(#fff,$uni-success,50%);
+$uni-success-light: mix(#fff,$uni-success,80%);
 
 $uni-warning: #f3a73f;
-$uni-warning-disable:lighten($uni-warning,20%);
-$uni-warning-light: lighten($uni-warning,25%);
+$uni-warning-disable:mix(#fff,$uni-warning,50%);
+$uni-warning-light: mix(#fff,$uni-warning,80%);
 
 $uni-error: #e43d33;
-$uni-error-disable:lighten($uni-error,20%);
-$uni-error-light: lighten($uni-error,25%);
+$uni-error-disable:mix(#fff,$uni-error,50%);
+$uni-error-light: mix(#fff,$uni-error,80%);
 
 $uni-info: #8f939c;
-$uni-info-disable:lighten($uni-info,20%);
-$uni-info-light: lighten($uni-info,25%);
+$uni-info-disable:mix(#fff,$uni-info,50%);
+$uni-info-light: mix(#fff,$uni-info,80%);
 
 // 中性色
 // 中性色用于文本、背景和边框颜色。通过运用不同的中性色，来表现层次结构。
