@@ -18,6 +18,14 @@
      	{
      		"launchtype" : "local"
      	},
+     	"mp-kuaishou" : 
+     	{
+     		"launchtype" : "local"
+     	},
+     	"mp-toutiao" : 
+     	{
+     		"launchtype" : "local"
+     	},
      	"mp-weixin" : 
      	{
      		"launchtype" : "local"
