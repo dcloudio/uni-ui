@@ -128,13 +128,20 @@
 				forms: [{
 					name: 'DataCheckbox 单选复选框',
 					url: 'data-checkbox'
-				}, {
+				},
+				// #ifndef MP-KUAISHOU
+				{
 					name: 'DataPicker 级联选择',
 					url: 'data-picker'
-				}, {
+				},
+				// #endif
+				// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-TOUTIAO || MP-BAIDU
+				{
 					name: 'DatetimePicker 日期时间选择',
 					url: 'datetime-picker'
-				}, {
+				},
+				// #endif
+				{
 					name: 'Easyinput 增强输入框',
 					url: 'easyinput'
 				}, {
@@ -209,10 +216,12 @@
 						name: 'LoadMore 加载更多',
 						url: 'load-more'
 					},
+					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK
 					{
 						name: 'SwipeAction 滑动操作',
 						url: 'swipe-action'
 					},
+					// #endif
 					{
 						name: 'SearchBar 搜索栏',
 						url: 'search-bar'
