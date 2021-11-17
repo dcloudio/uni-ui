@@ -15,13 +15,13 @@ const examplePath = path.join(root, 'temps')
 
 // 同步 readme.md
 // md 地址
-const readmePath = path.join(root, 'docs', 'components', comName + '.md')
+// const readmePath = path.join(root, 'docs', 'components', comName + '.md')
 
-const mdExists = fs.existsSync(readmePath)
-if (mdExists) {
-	const content = handleReadme(readmePath,comName)
-	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
-}
+// const mdExists = fs.existsSync(readmePath)
+// if (mdExists) {
+// 	const content = handleReadme(readmePath,comName)
+// 	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
+// }
 
 let relationComponents = []
 
