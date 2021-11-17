@@ -2,6 +2,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch');
+			uni.setLocale('zh-Hans')
 		},
 		onShow: function() {
 			console.log('App Show');
