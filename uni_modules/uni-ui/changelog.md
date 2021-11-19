@@ -1,3 +1,5 @@
+## 1.4.8（2021-11-19）
+- uni-fab 修复 阴影颜色不正确的bug
 ## 1.4.7（2021-11-19）
 - uni-ui 新增 支持国际化
 - uni-ui 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
