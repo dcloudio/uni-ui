@@ -1,7 +1,7 @@
 {
   "id": "uni-data-picker",
   "displayName": "uni-data-picker 数据驱动的picker选择器",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "单列、多列级联选择器，常用于省市区城市选择、公司部门选择、多级分类等场景",
   "keywords": [
     "uni-ui",
@@ -43,7 +43,8 @@
   },
   "uni_modules": {
     "dependencies": [
-      "uni-load-more"
+      "uni-load-more",
+			"uni-scss"
     ],
     "encrypt": [],
     "platforms": {
@@ -79,6 +80,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "y"
         }
       }
     }

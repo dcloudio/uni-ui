@@ -1,3 +1,6 @@
+## 1.2.0（2021-11-19）
+- 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+- 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-pagination](https://uniapp.dcloud.io/component/uniui/uni-pagination)
 ## 1.1.2（2021-10-08）
 - 修复 current 、value 属性未监听，导致高亮样式失效的 bug
 ## 1.1.1（2021-08-20）

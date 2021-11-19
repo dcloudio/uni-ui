@@ -1,4 +1,4 @@
-## 1.2.2
+## 1.3.0（2021-11-19）
 - 重构插槽的用法 ，header 替换为 title 
 - 新增 actions 插槽
 - 新增 cover 封面图属性和插槽
@@ -10,7 +10,6 @@
 - 取消 note 属性 ，使用actions插槽代替
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-card](https://uniapp.dcloud.io/component/uniui/uni-card)
-
 ## 1.2.1（2021-07-30）
 - 优化 vue3下事件警告的问题
 ## 1.2.0（2021-07-13）
