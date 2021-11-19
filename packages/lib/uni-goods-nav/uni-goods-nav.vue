@@ -18,7 +18,7 @@
 				</view>
 			</view>
 			<view :class="{'uni-tab__right':fill}" class="flex uni-tab__cart-sub-right ">
-				<view v-for="(item,index) in buttonGroup" :key="index" :style="{backgroundColor:item.backgroundColor,color:item.color}"
+				<view v-for="(item,index) in buttonGroup" :key="index" :style="{background:item.backgroundColor,color:item.color}"
 				 class="flex uni-tab__cart-button-right" @click="buttonClick(index,item)"><text :style="{color:item.color}" class="uni-tab__cart-button-right-text">{{ item.text }}</text></view>
 			</view>
 		</view>
@@ -26,6 +26,11 @@
 </template>
 
 <script>
+	import {
+	initVueI18n
+	} from '@dcloudio/uni-i18n'
+	import messages from './i18n/index.js'
+	const {	t	} = initVueI18n(messages)
 	/**
 	 * GoodsNav 商品导航
 	 * @description 商品加入购物车、立即购买等
@@ -46,10 +51,10 @@
 				default () {
 					return [{
 						icon: 'shop',
-						text: '店铺',
+						text: t("uni-goods-nav.options.shop"),
 					}, {
 						icon: 'cart',
-						text: '购物车'
+						text: t("uni-goods-nav.options.cart")
 					}]
 				}
 			},
@@ -57,13 +62,13 @@
 				type: Array,
 				default () {
 					return [{
-							text: '加入购物车',
-							backgroundColor: '#ffa200',
+							text: t("uni-goods-nav.buttonGroup.addToCart"),
+							backgroundColor: 'linear-gradient(90deg, #FFCD1E, #FF8A18)',
 							color: '#fff'
 						},
 						{
-							text: '立即购买',
-							backgroundColor: '#ff0000',
+							text: t("uni-goods-nav.buttonGroup.buyNow"),
+							backgroundColor: 'linear-gradient(90deg, #FE6035, #EF1224)',
 							color: '#fff'
 						}
 					]
@@ -159,7 +164,7 @@
 
 	.uni-tab__text {
 		margin-top: 3px;
-		font-size: $uni-font-size-sm;
+		font-size: 12px;
 		color: #646566;
 	}
 
@@ -177,7 +182,7 @@
 	}
 
 	.uni-tab__cart-button-right-text {
-		font-size: $uni-font-size-base;
+		font-size: 14px;
 		color: #fff;
 	}
 
@@ -215,13 +220,5 @@
 		padding: 0 4px;
 		// width: auto;
 		border-radius: 15px;
-	}
-
-	.uni-tab__color-y {
-		background-color: #ffa200;
-	}
-
-	.uni-tab__color-r {
-		background-color: #ff0000;
 	}
 </style>

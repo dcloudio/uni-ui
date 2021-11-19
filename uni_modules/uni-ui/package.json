@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.4.2",
+  "version": "1.4.7",
   "description": "uni-ui 是一个基于uni-app全端兼容的高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -12,7 +12,7 @@
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": ""
+    "HBuilderX": "^3.2.10"
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -120,7 +120,7 @@
         },
         "Vue": {
           "vue2": "y",
-          "vue3": "u"
+          "vue3": "y"
         }
       }
     }

@@ -4,9 +4,10 @@
 			<view class="uni-forms-item__inner" :class="['is-direction-' + labelPos]">
 				<view class="uni-forms-item__label" :style="{ width: labelWid , justifyContent: justifyContent }">
 					<slot name="left">
+						<text v-if="required" class="is-required">*</text>
 						<uni-icons v-if="leftIcon" class="label-icon" size="16" :type="leftIcon" :color="iconColor" />
 						<text class="label-text">{{ label }}</text>
-						<text v-if="required" class="is-required">*</text>
+
 						<view v-if="label" class="label-seat"></view>
 					</slot>
 				</view>
@@ -224,18 +225,16 @@ export default {
 				this.border = this.form.border;
 				this.showMsg = errShowType;
 				let name = this.isArray ? this.arrayField : this.name;
-				if (formRules) {
+				if(!name) return
+				if (formRules && this.rules.length > 0) {
 					if (!formRules[name]) {
 						formRules[name] = {
 							rules: this.rules
 						}
 					}
-					this.formRules = formRules[name];
-				}
-				if (this.rules.length > 0) {
 					validator.updateSchema(formRules);
 				}
-
+				this.formRules = formRules[name] || {};
 				this.validator = validator;
 			} else {
 				this.labelPos = this.labelPosition || 'left';
@@ -295,7 +294,8 @@ export default {
 		async triggerCheck(value,formTrigger) {
 			let promise = null;
 			this.errMsg = '';
-			if (!this.validator) return;
+			// fix by mehaotian 解决没有检验规则的情况下，抛出错误的问题
+			if (!this.validator || Object.keys(this.formRules).length === 0) return;
 			const isNoField = this.isRequired(this.formRules.rules || []);
 			let isTrigger = this.isTrigger(this.formRules.validateTrigger, this.validateTrigger, this.form.validateTrigger);
 			let result = null;
@@ -427,8 +427,8 @@ export default {
 	// margin-right: 5px;
 
 	.label-text {
-		font-size: 14px;
-		color: #333;
+		font-size: 13px;
+		color: #666666;
 	}
 	.label-seat {
 		margin-right: 5px;
@@ -451,7 +451,9 @@ export default {
 
 // 必填
 .is-required {
-	color: $uni-color-error;
+	// color: $uni-color-error;
+	color: #dd524d;
+	font-weight: bold;
 }
 
 .uni-error-message {
@@ -463,7 +465,7 @@ export default {
 
 .uni-error-message-text {
 	line-height: 22px;
-	color: $uni-color-error;
+	color: #dd524d;
 	font-size: 12px;
 }
 
@@ -474,7 +476,7 @@ export default {
 }
 
 .is-input-error-border {
-	border-color: $uni-color-error;
+	border-color: #dd524d;
 }
 
 .uni-forms-item--border {

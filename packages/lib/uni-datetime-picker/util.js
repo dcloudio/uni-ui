@@ -1,5 +1,3 @@
-import CALENDAR from './calendar.js'
-
 class Calendar {
 	constructor({
 		date,
@@ -112,7 +110,6 @@ class Calendar {
 			dateArr.push({
 				date: beforeDate,
 				month: full.month - 1,
-				lunar: this.getlunar(full.year, full.month - 1, beforeDate),
 				disable: true
 			})
 		}
@@ -170,12 +167,12 @@ class Calendar {
 				year: full.year,
 				date: i,
 				multiple: this.range ? checked : false,
-				beforeMultiple: this.dateEqual(this.multipleStatus.before, nowDate),
-				afterMultiple: this.dateEqual(this.multipleStatus.after, nowDate),
+				beforeMultiple: this.isLogicBefore(nowDate, this.multipleStatus.before, this.multipleStatus.after),
+				afterMultiple: this.isLogicAfter(nowDate, this.multipleStatus.before, this.multipleStatus.after),
 				month: full.month,
-				lunar: this.getlunar(full.year, full.month, i),
 				disable: !(disableBefore && disableAfter),
-				isDay
+				isDay,
+				userChecked: false
 			}
 			if (info) {
 				data.extraInfo = info
@@ -194,7 +191,6 @@ class Calendar {
 			dateArr.push({
 				date: i,
 				month: Number(full.month) + 1,
-				lunar: this.getlunar(full.year, Number(full.month) + 1, i),
 				disable: true
 			})
 		}
@@ -243,6 +239,25 @@ class Calendar {
 		}
 	}
 
+	/**
+	 *  比较真实起始日期
+	 */
+
+	isLogicBefore(currentDay, before, after) {
+		let logicBefore = before
+		if (before && after) {
+			logicBefore = this.dateCompare(before, after) ? before : after
+		}
+		return this.dateEqual(logicBefore, currentDay)
+	}
+
+	isLogicAfter(currentDay, before, after) {
+		let logicAfter = after
+		if (before && after) {
+			logicAfter = this.dateCompare(before, after) ? after : before
+		}
+		return this.dateEqual(logicAfter, currentDay)
+	}
 
 	/**
 	 * 获取日期范围内所有日期
@@ -265,19 +280,6 @@ class Calendar {
 		}
 		return arr
 	}
-	/**
-	 * 计算阴历日期显示
-	 */
-	getlunar(year, month, date) {
-		return CALENDAR.solar2lunar(year, month, date)
-	}
-	/**
-	 * 设置打点
-	 */
-	setSelectInfo(data, value) {
-		this.selected = value
-		this._getWeek(data)
-	}
 
 	/**
 	 *  获取多选状态
@@ -287,14 +289,13 @@ class Calendar {
 			before,
 			after
 		} = this.multipleStatus
-
 		if (!this.range) return
 		if (before && after) {
 			if (!this.lastHover) {
 				this.lastHover = true
 				return
 			}
-			this.multipleStatus.before = ''
+			this.multipleStatus.before = fullDate
 			this.multipleStatus.after = ''
 			this.multipleStatus.data = []
 			this.multipleStatus.fulldate = ''

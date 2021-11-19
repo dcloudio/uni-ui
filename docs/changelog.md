@@ -7,6 +7,564 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.3" date="2021-11-19">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-badge](https://uniapp.dcloud.io/component/uniui/uni-badge)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 升级ui
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 修改 size 属性默认值调整为 small
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 修改 type 属性，默认值调整为 error，info 替换 default
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在字节小程序上样式不生效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 弹出层被 tabbar 遮盖 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-card 组件更新">
+		<log-item-text tag-type="perf">
+			 重构插槽的用法 ，header 替换为 title 
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 actions 插槽
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 cover 封面图属性和插槽
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 padding 内容默认内边距离
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 margin 卡片默认外边距离
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 spacing 卡片默认内边距
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 shadow 卡片阴影属性
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 取消 mode 属性，可使用组合插槽代替
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 取消 note 属性 ，使用actions插槽代替
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-card](https://uniapp.dcloud.io/component/uniui/uni-card)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-collapse](https://uniapp.dcloud.io/component/uniui/uni-collapse)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 show-arrow 属性默认为true
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 show-arrow 属性，控制是否显示右侧箭头
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-combox](https://uniapp.dcloud.io/component/uniui/uni-combox)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-countdown](https://uniapp.dcloud.io/component/uniui/uni-countdown)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 重构
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 font-size 支持自定义字体大小
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-data-checkbox](https://uniapp.dcloud.io/component/uniui/uni-data-checkbox)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在uni-forms中 modelValue 中不存在当前字段，当前字段必填写也不参与校验的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 单选 list 模式下 ，icon 为 left 时，选中图标不显示的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-data-picker](https://uniapp.dcloud.io/component/uniui/uni-data-picker)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-dateformat 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-dateformat](https://uniapp.dcloud.io/component/uniui/uni-dateformat)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整 默认时间不再是当前时间，而是显示'-'字符
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-datetime-picker](https://uniapp.dcloud.io/component/uniui/uni-datetime-picker)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 hide-second 在移动端的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 单选赋默认值时，赋值日期未高亮的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 赋默认值时，移动端未正确显示时间的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 hide-second 属性，支持只使用时分，隐藏秒
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 取消选中时（范围选）直接开始下一次选择, 避免多点一次
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移动端支持清除按钮，同时支持通过 ref 调用组件的 clear 方法
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整字号大小，美化日历界面
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 因国际化导致的 placeholder 失效的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 范围选择器在 pc 端过宽的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 适配 vue3
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持作为 uni-forms 子组件相关功能
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中使用时，选择时间报 NAN 错误的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 type 属性动态赋值无效的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ‘确认’按钮被 tabbar 遮盖 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 组件未赋值时范围选左、右日历相同的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围选未正确显示当前值的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5 平台（移动端）报错 'cale' of undefined 的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-drawer 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-drawer](https://uniapp.dcloud.io/component/uniui/uni-drawer)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-easyinput](https://uniapp.dcloud.io/component/uniui/uni-easyinput)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 的动态表单中默认值校验不通过的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-fab](https://uniapp.dcloud.io/component/uniui/uni-fab)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fav 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-fav](https://uniapp.dcloud.io/component/uniui/uni-fav)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-file-picker](https://uniapp.dcloud.io/component/uniui/uni-file-picker)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 参数中返回 fileID 字段
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 腾讯云传入fileID 不能回显的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 选择图片后，不能放大的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 由于 0.2.11 版本引起的不能回显图片的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 clearFiles(index) 方法，可以手动删除指定文件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 v-model 值设为 null 报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 return-type="object" 时，无法删除文件的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 auto-upload 属性失效的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 label 插槽不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-forms](https://uniapp.dcloud.io/component/uniui/uni-forms)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 没有添加校验规则的字段依然报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 重置表单错误信息无法清除的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件文档
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 表单验证只生效一次的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-goods-nav 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-goods-nav](https://uniapp.dcloud.io/component/uniui/uni-goods-nav)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-grid 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-grid](https://uniapp.dcloud.io/component/uniui/uni-grid)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-group 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-group](https://uniapp.dcloud.io/component/uniui/uni-group)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="feat">
+			 更多图标
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 自定义图标使用方式
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-icons](https://uniapp.dcloud.io/component/uniui/uni-icons)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-indexed-list 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-indexed-list](https://uniapp.dcloud.io/component/uniui/uni-indexed-list)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-link](https://uniapp.dcloud.io/component/uniui/uni-link)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 nvue 下不显示的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-load-more](https://uniapp.dcloud.io/component/uniui/uni-load-more)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-nav-bar](https://uniapp.dcloud.io/component/uniui/uni-nav-bar)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-notice-bar](https://uniapp.dcloud.io/component/uniui/uni-notice-bar)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-number-box](https://uniapp.dcloud.io/component/uniui/uni-number-box)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-pagination](https://uniapp.dcloud.io/component/uniui/uni-pagination)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 current 、value 属性未监听，导致高亮样式失效的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-popup](https://uniapp.dcloud.io/component/uniui/uni-popup)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-rate](https://uniapp.dcloud.io/component/uniui/uni-rate)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 默认值修改为 0 颗星
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-row 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-row](https://uniapp.dcloud.io/component/uniui/uni-row)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-search-bar](https://uniapp.dcloud.io/component/uniui/uni-search-bar)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 value 属性与 modelValue 属性不兼容的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-segmented-control](https://uniapp.dcloud.io/component/uniui/uni-segmented-control)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-steps](https://uniapp.dcloud.io/component/uniui/uni-steps)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-swipe-action](https://uniapp.dcloud.io/component/uniui/uni-swipe-action)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 close-all 方法
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 close-all 方法，关闭所有已打开的组件
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 resize() 方法，在非微信小程序、h5、app-vue端出现不能滑动的问题的时候，重置组件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题 
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 微信小程序、h5、app-vue 滑动逻辑，避免出现动态新增组件后不能滑动的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swiper-dot 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-swiper-dot](https://uniapp.dcloud.io/component/uniui/uni-swiper-dot)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-table](https://uniapp.dcloud.io/component/uniui/uni-table)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-tag](https://uniapp.dcloud.io/component/uniui/uni-tag)
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供组件设计资源，组件样式调整
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移除 插槽
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移除 type 属性的 royal 选项
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 type 不是 default 时，size 为 small 字体大小显示不正确
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-title 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-title](https://uniapp.dcloud.io/component/uniui/uni-title)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-transition](https://uniapp.dcloud.io/component/uniui/uni-transition)
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.9" date="2021-08-02">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="feat">

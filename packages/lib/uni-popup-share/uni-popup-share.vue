@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-popup-share">
-		<view class="uni-share-title"><text class="uni-share-title-text">{{title}}</text></view>
+		<view class="uni-share-title"><text class="uni-share-title-text">{{shareTitleText}}</text></view>
 		<view class="uni-share-content">
 			<view class="uni-share-content-box">
 				<view class="uni-share-content-item" v-for="(item,index) in bottomData" :key="index" @click.stop="select(item,index)">
@@ -11,13 +11,18 @@
 			</view>
 		</view>
 		<view class="uni-share-button-box">
-			<button class="uni-share-button" @click="close">取消</button>
+			<button class="uni-share-button" @click="close">{{cancelText}}</button>
 		</view>
 	</view>
 </template>
 
 <script>
 	import popup from '../uni-popup/popup.js'
+	import {
+	initVueI18n
+	} from '@dcloudio/uni-i18n'
+	import messages from '../uni-popup/i18n/index.js'
+	const {	t	} = initVueI18n(messages)
 	export default {
 		name: 'UniPopupShare',
 		mixins:[popup],
@@ -25,7 +30,7 @@
 		props: {
 			title: {
 				type: String,
-				default: '分享到'
+				default: ''
 			},
 			beforeClose: {
 				type: Boolean,
@@ -54,20 +59,28 @@
 						icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/0dacdbe0-50bf-11eb-8ff1-d5dcf8779628.png',
 						name: 'sina'
 					},
-					{
-						text: '百度',
-						icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/1ec6e920-50bf-11eb-8a36-ebb87efcf8c0.png',
-						name: 'copy'
-					},
-					{
-						text: '其他',
-						icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/2e0fdfe0-50bf-11eb-b997-9918a5dda011.png',
-						name: 'more'
-					}
+					// {
+					// 	text: '百度',
+					// 	icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/1ec6e920-50bf-11eb-8a36-ebb87efcf8c0.png',
+					// 	name: 'copy'
+					// },
+					// {
+					// 	text: '其他',
+					// 	icon: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/2e0fdfe0-50bf-11eb-b997-9918a5dda011.png',
+					// 	name: 'more'
+					// }
 				]
 			}
 		},
 		created() {},
+		computed: {
+			cancelText() {
+				return t("uni-popup.cancel")
+			},
+		shareTitleText() {
+				return this.title || t("uni-popup.shareTitle")
+			}
+		},
 		methods: {
 			/**
 			 * 选择内容
@@ -78,7 +91,7 @@
 					index
 				})
 				this.close()
-				
+
 			},
 			/**
 			 * 关闭窗口
@@ -93,6 +106,8 @@
 <style lang="scss" scoped>
 	.uni-popup-share {
 		background-color: #fff;
+		border-top-left-radius: 11px;
+		border-top-right-radius: 11px;
 	}
 	.uni-share-title {
 		/* #ifndef APP-NVUE */
