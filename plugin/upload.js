@@ -5,8 +5,8 @@ const fs = require('fs')
 const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
-const modulesId = process.env.UNI_MODULES_ID
-// const modulesId = 'uni-forms'
+// const modulesId = process.env.UNI_MODULES_ID
+const modulesId = 'uni-test'
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
@@ -37,8 +37,8 @@ if (exampleExists) {
 util.copyDir(path.join(examplePath, 'example'), tempExamplePath)
 
 if (modulesId === 'uni-ui') {
-	buildReadme()
-	util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
+	// buildReadme()
+	// util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
 	// 同步 uni-ui 示例
 	util.copyDir(comPath, path.join(tempExamplePath, 'uni_modules'))
 } else {
@@ -164,7 +164,7 @@ function handlePageJson(comName, tempExamplePath) {
 	const outPath = path.join(tempExamplePath, 'pages')
 	const exists = fs.existsSync(outPath)
 	if (exists) {
-		util.deleteFolder(outPath)
+		// util.deleteFolder(outPath)
 	}
 	util.copyDir(path.join(root, 'pages', 'vue', comName), path.join(tempExamplePath, 'pages', comName))
 	util.copyDir(path.join(root, 'common'), path.join(tempExamplePath, 'common'))
