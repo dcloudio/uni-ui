@@ -214,4 +214,11 @@
 		color: #666;
 		margin-top: 5px;
 	}
+	.uni-px-5 {
+	    padding-left: 10px;
+	    padding-right: 10px;
+	}
+	.uni-pb-5 {
+	    padding-bottom: 10px;
+	}
 </style>
