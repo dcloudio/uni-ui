@@ -1,27 +1,21 @@
 {
-  "id": "uni-badge",
-  "displayName": "uni-badge 数字角标",
-  "version": "1.2.0",
-  "description": "数字角标（徽章）组件，在元素周围展示消息提醒，一般用于列表、九宫格、按钮等地方。",
+  "id": "uni-scss",
+  "displayName": "uni-scss 辅助样式",
+  "version": "1.0.0",
+  "description": "uni-sass是uni-ui提供的一套全局样式 ，通过一些简单的类名和sass变量，实现简单的页面布局操作，比如颜色、边距、圆角等。",
   "keywords": [
-    "",
-    "badge",
+    "uni-scss",
     "uni-ui",
-    "uniui",
-    "数字角标",
-    "徽章"
+    "辅助样式"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": ""
-  },
-  "directories": {
-    "example": "../../temps/example_temps"
+    "HBuilderX": "^3.1.0"
   },
   "dcloudext": {
     "category": [
-      "前端组件",
-      "通用组件"
+        "uni-app前端模板",
+        "前端页面模板"
     ],
     "sale": {
       "regular": {
@@ -42,7 +36,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": ["uni-scss"],
+    "dependencies": [],
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -52,7 +46,7 @@
       "client": {
         "App": {
           "app-vue": "y",
-          "app-nvue": "y"
+          "app-nvue": "u"
         },
         "H5-mobile": {
           "Safari": "y",
@@ -75,8 +69,8 @@
           "QQ": "y"
         },
         "快应用": {
-          "华为": "y",
-          "联盟": "y"
+          "华为": "n",
+          "联盟": "n"
         },
         "Vue": {
             "vue2": "y",

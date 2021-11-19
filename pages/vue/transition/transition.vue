@@ -132,7 +132,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/common/uni-nvue.scss';
 .example {
 	/* #ifndef APP-NVUE */
 	display: flex;

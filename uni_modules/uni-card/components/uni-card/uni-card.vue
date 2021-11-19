@@ -44,12 +44,14 @@
 	 * @property {String} subTitle 副标题
 	 * @property {Number} padding 内容内边距
 	 * @property {Number} margin 卡片外边距
+	 * @property {Number} spacing 卡片内边距
 	 * @property {String} extra 标题额外信息
 	 * @property {String} cover 封面图（本地路径需要引入）
 	 * @property {String} thumbnail 标题左侧缩略图
 	 * @property {Boolean} is-full = [true | false] 卡片内容是否通栏，为 true 时将去除padding值
 	 * @property {Boolean} is-shadow = [true | false] 卡片内容是否开启阴影
 	 * @property {String} shadow 卡片阴影
+	 * @property {Boolean} border 卡片边框
 	 * @event {Function} click 点击 Card 触发事件
 	 */
 	export default {

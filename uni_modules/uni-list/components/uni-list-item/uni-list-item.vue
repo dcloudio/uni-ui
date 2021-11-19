@@ -4,7 +4,7 @@
 		<!-- #endif -->
 	<view class="uni-list-item" :class="{'uni-list-item--dense': !border }">
 		<view v-if="!isFirstChild" class="uni-list-item__border" :class="{'uni-list--border': border ,'uni-border--full':borderFull}"></view>
-		<view class="uni-list-item-box" :class="{ 'uni-list-item--disabled': disabled }" :hover-class="!clickable || disabled || showSwitch ? '' : 'uni-list-item--hover'" @click="onClick">
+		<view class="uni-list-item-box" :class="{ 'uni-list-item--disabled': disabled }" :hover-class="!clickable || disabled  ? '' : 'uni-list-item--hover'" @click="onClick">
 			<slot name="icon">
 				<view v-if="thumb" class="uni-list-item__icon">
 					<image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--' + thumbSize]" />
@@ -37,43 +37,30 @@
 	 * ListItem 列表子组件
 	 * @description 列表子组件
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=24
-	 * @property {String} 	title 							标题
-	 * @property {String} 	note 							描述
-	 * @property {String} 	thumb 							左侧缩略图，若thumb有值，则不会显示扩展图标
-	 * @property {String}  	thumbSize = [lg|base|sm]		略缩图大小
+	 * @property {String} title 标题
+	 * @property {String} note 描述
+	 * @property {String} thumb 左侧缩略图，若thumb有值，则不会显示扩展图标
+	 * @property {String} thumbSize = [lg|base|sm]		略缩图大小
 	 * 	@value 	 lg			大图
 	 * 	@value 	 base		一般
 	 * 	@value 	 sm			小图
-	 * @property {String} 	badgeText						数字角标内容
-	 * @property {String} 	badgeType 						数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
-	 * @property {String} 	rightText 						右侧文字内容
-	 * @property {Boolean} 	disabled = [true|false]			是否禁用
-	 * @property {Boolean} 	clickable = [true|false] 		是否开启点击反馈
-	 * @property {String} 	link = [navigateTo|redirectTo|reLaunch|switchTab] 页面跳转方式
+	 * @property {String}  rightText 右侧文字内容
+	 * @property {Boolean} disabled = [true|false] 是否禁用
+	 * @property {Boolean} clickable = [true|false] 是否开启点击反馈
+	 * @property {String}  link = [navigateTo|redirectTo|reLaunch|switchTab] 页面跳转方式
 	 *  @value 	navigateTo 	同 uni.navigateTo()
 	 * 	@value redirectTo 	同 uni.redirectTo()
 	 * 	@value reLaunch   	同 uni.reLaunch()
 	 * 	@value switchTab  	同 uni.switchTab()
-	 * @property {String | PageURIString} 	to  			跳转目标页面
-	 * @property {Boolean} 	showBadge = [true|false] 		是否显示数字角标
-	 * @property {Boolean} 	showSwitch = [true|false] 		是否显示Switch
-	 * @property {Boolean} 	switchChecked = [true|false] 	Switch是否被选中
-	 * @property {Boolean} 	showExtraIcon = [true|false] 	左侧是否显示扩展图标
-	 * @property {Object} 	extraIcon 						扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
-	 * @property {String} 	direction = [row|column]		排版方向
-	 * @value row 			水平排列
-	 * @value column 		垂直排列
-	 * @event {Function} 	click 							点击 uniListItem 触发事件
-	 * @event {Function} 	switchChange 					点击切换 Switch 时触发
+	 * @property {String | PageURIString} to 跳转目标页面
+	 * @property {Boolean} showExtraIcon = [true|false] 	左侧是否显示扩展图标
+	 * @property {Object}  extraIcon 	扩展图标参数，格式为 {color: '#4cd964',size: '22',type: 'spinner'}
+	 * @event {Function} 	click 点击 uniListItem 触发事件
 	 */
 	export default {
 		name: 'UniListItem',
-		emits: ['click', 'switchChange'],
+		emits: ['onClick'],
 		props: {
-			direction: {
-				type: String,
-				default: 'row'
-			},
 			title: {
 				type: String,
 				default: ''
@@ -90,9 +77,17 @@
 				type: [Boolean, String],
 				default: false
 			},
-			clickable: {
-				type: Boolean,
-				default: false
+			thumb: {
+				type: String,
+				default: ''
+			},
+			thumbSize: {
+				type: String,
+				default: 'base'
+			},
+			rightText: {
+				type: String,
+				default: ''
 			},
 			showArrow: {
 				type: [Boolean, String],
@@ -106,37 +101,9 @@
 				type: String,
 				default: ''
 			},
-			showBadge: {
-				type: [Boolean, String],
+			clickable: {
+				type: Boolean,
 				default: false
-			},
-			showSwitch: {
-				type: [Boolean, String],
-				default: false
-			},
-			switchChecked: {
-				type: [Boolean, String],
-				default: false
-			},
-			badgeText: {
-				type: String,
-				default: ''
-			},
-			badgeType: {
-				type: String,
-				default: 'success'
-			},
-			rightText: {
-				type: String,
-				default: ''
-			},
-			thumb: {
-				type: String,
-				default: ''
-			},
-			thumbSize: {
-				type: String,
-				default: 'base'
 			},
 			showExtraIcon: {
 				type: [Boolean, String],
@@ -157,7 +124,6 @@
 				default: true
 			}
 		},
-		// inject: ['list'],
 		data() {
 			return {
 				isFirstChild: false,
@@ -195,13 +161,10 @@
 					return;
 				}
 				if (this.clickable) {
-					this.$emit('click', {
+					this.$emit('onClick', {
 						data: {}
 					});
 				}
-			},
-			onSwitchChange(e) {
-				this.$emit('switchChange', e.detail);
 			},
 			openPage() {
 				if (['navigateTo', 'redirectTo', 'reLaunch', 'switchTab'].indexOf(this.link) !== -1) {
@@ -214,12 +177,12 @@
 				let callback = {
 					url: this.to,
 					success: res => {
-						this.$emit('click', {
+						this.$emit('onClick', {
 							data: res
 						});
 					},
 					fail: err => {
-						this.$emit('click', {
+						this.$emit('onClick', {
 							data: err
 						});
 					}

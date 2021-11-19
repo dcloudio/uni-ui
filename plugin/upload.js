@@ -5,8 +5,8 @@ const fs = require('fs')
 const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
-// const modulesId = process.env.UNI_MODULES_ID
-const modulesId = 'uni-test'
+const modulesId = process.env.UNI_MODULES_ID
+// const modulesId = 'uni-test'
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
@@ -52,7 +52,16 @@ if (modulesId === 'uni-ui') {
 }
 
 function setPageComponents(modulesId, comName) {
-	const pagePath = path.join(root, 'pages', 'vue', comName, comName + '.vue')
+	let pagePath = path.join(root, 'pages', 'vue', comName)
+	let pageVue = path.join(pagePath,comName + '.vue')
+	let pageNvue = path.join(pagePath,comName + '.nvue')
+	if(fs.existsSync(pageVue)){
+		pagePath = pageVue
+	}else if(fs.existsSync(pageNvue)){
+		pagePath = pageNvue
+	}else{
+		return 
+	}
 	const pageContent = fs.readFileSync(pagePath).toString()
 	const pageContents = getComName(pageContent)
 	if (pageContents.length > 0) {
@@ -164,7 +173,7 @@ function handlePageJson(comName, tempExamplePath) {
 	const outPath = path.join(tempExamplePath, 'pages')
 	const exists = fs.existsSync(outPath)
 	if (exists) {
-		// util.deleteFolder(outPath)
+		util.deleteFolder(outPath)
 	}
 	util.copyDir(path.join(root, 'pages', 'vue', comName), path.join(tempExamplePath, 'pages', comName))
 	util.copyDir(path.join(root, 'common'), path.join(tempExamplePath, 'common'))

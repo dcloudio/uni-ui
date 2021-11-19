@@ -114,9 +114,6 @@ ___点击 picker 默认值规则：___
 	}
 </script>
 
-<style lang="scss">
-	@import '@/common/uni-nvue.scss';
-</style>
 ```
 
 ## API

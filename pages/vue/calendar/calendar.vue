@@ -109,7 +109,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 	.example-body {
 		/* #ifndef APP-NVUE */
 		display: flex;

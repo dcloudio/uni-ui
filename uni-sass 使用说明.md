@@ -12,7 +12,7 @@ uni-sass　插件包含了以下内容
 
 ```css
 // uni.sass
-@import '@/uni_modules/uni-ui-scss/variables.scss';
+@import '@/uni_modules/uni-scss/variables.scss';
 ```
 
 ### 可替换变量

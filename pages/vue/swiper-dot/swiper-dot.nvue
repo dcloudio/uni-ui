@@ -118,7 +118,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 	.swiper-box {
 		height: 200px;
 	}

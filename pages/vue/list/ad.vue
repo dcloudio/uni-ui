@@ -88,5 +88,4 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/common/uni-nvue.scss';
 </style>

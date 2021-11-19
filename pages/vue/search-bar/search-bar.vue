@@ -82,7 +82,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 
 	.search-result {
 		padding-top: 10px;

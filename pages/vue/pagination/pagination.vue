@@ -55,7 +55,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/common/uni-nvue.scss';
 
 	.example-body {
 		/* #ifndef APP-NVUE */

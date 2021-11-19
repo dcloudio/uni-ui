@@ -273,8 +273,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.content-box {
 		flex: 1;
 		/* #ifdef APP-NVUE */

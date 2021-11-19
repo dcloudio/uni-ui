@@ -13,7 +13,7 @@
 </script>
 
 <style lang="scss">
-	@import '@/uni_modules/uni-ui-scss';
+	@import '@/uni_modules/uni-scss';
 
 	/* #ifndef APP-NVUE */
 	@import '@/static/customicons.css';

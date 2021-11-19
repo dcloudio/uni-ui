@@ -63,8 +63,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.uni-wrap {
 		flex-direction: column;
 		/* #ifdef H5 */

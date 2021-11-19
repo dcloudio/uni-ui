@@ -59,8 +59,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.status-btn {
 		/* #ifndef APP-NVUE */
 		display: flex;

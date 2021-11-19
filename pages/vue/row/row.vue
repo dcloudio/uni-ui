@@ -183,7 +183,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/common/uni-nvue.scss';
 
 	.demo-uni-row {
 		margin-bottom: 10px;

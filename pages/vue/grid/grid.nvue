@@ -211,8 +211,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.image {
 		width: 50rpx;
 		height: 50rpx;

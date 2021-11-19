@@ -159,8 +159,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/common/uni-nvue.scss';
-
 	.chat-custom-right {
 		flex: 1;
 		/* #ifndef APP-NVUE */
