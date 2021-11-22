@@ -296,7 +296,7 @@
 				/* #endif */
 				&.is-disabled {
 					.uni-collapse-item__title-text {
-						color: $uni-text-color-disable;
+						color: #999;
 					}
 				}
 
@@ -311,14 +311,14 @@
 			}
 
 			&-img {
-				height: $uni-img-size-base;
-				width: $uni-img-size-base;
+				height: 22px;
+				width: 22px;
 				margin-right: 10px;
 			}
 
 			&-text {
 				flex: 1;
-				font-size: $uni-font-size-base;
+				font-size: 14px;
 				/* #ifndef APP-NVUE */
 				white-space: nowrap;
 				color: inherit;

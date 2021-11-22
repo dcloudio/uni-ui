@@ -19,7 +19,7 @@
 								if (this.matchLeftWindow) {
 									if (newRoute.path === '/') {
 										uni.redirectTo({
-											url: 'pages/vue/card/card'
+											url: 'pages/vue/color/color'
 										})
 									}
 									if (!newRoute.matched.length) {

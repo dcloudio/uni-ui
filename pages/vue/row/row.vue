@@ -206,7 +206,7 @@
 
 	.demo-uni-col {
 		height: 36px;
-		border-radius: $uni-border-radius-base;
+		border-radius: 5px;
 	}
 
 	.dark_deep {

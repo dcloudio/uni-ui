@@ -45,11 +45,11 @@
     },
     "h5" : {
         "router" : {
-            "mode" : "hash",
+            "mode" : "history",
             "base" : ""
         },
         "title" : "uni-ui",
         "template" : "template.h5.html"
     },
-    "vueVersion" : "2"
+    "vueVersion" : "3"
 }

@@ -51,7 +51,7 @@
 			<uni-card title="基础卡片" sub-title="副标题" extra="额外信息" padding="10px 0" :thumbnail="avatar" >
 				<template v-slot:title>
 					<uni-list>
-						<uni-list-item :show-switch="true" title="自定义标题" @switchChange="switchChange" />
+						<uni-list-item :show-switch="true" title="自定义标题"/>
 					</uni-list>
 				</template>
 				<image style="width: 100%;" :src="cover"></image>

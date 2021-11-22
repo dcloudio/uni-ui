@@ -14,7 +14,7 @@
 </script>
 
 <style lang="scss">
-	@import '@/uni_modules/uni-scss';
+	@import '@/uni_modules/uni-scss/index.scss';
 
 	/* #ifndef APP-NVUE */
 	@import '@/static/customicons.css';
