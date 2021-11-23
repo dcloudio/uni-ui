@@ -1,36 +1,47 @@
 <template>
 	<view>
-		<text class="example-info">此示例展示了聊天列表的使用场景</text>
-		<uni-section title="圆头像且不显示分割线" type="line"></uni-section>
-		<uni-list :border="false">
-			<uni-list-chat v-for="item in listData" :avatar-circle="true" :key="item.id" :title="item.author_name" :avatar="item.cover"
-			 :note="item.title" :time="item.published_at" :clickable="false"></uni-list-chat>
-		</uni-list>
-		<uni-section title="带圆点" type="line"></uni-section>
-		<uni-list>
-			<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
-			 :time="item.published_at" :badge-text="item.text" :clickable="false" badge-positon="left" badge-text="dot"></uni-list-chat>
-		</uni-list>
-		<uni-section title="自定义右侧内容" type="line"></uni-section>
-		<uni-list>
-			<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
-			 badge-positon="left" :badge-text="item.text">
-				<view class="chat-custom-right">
-					<text class="chat-custom-text">刚刚</text>
-					<uni-icons type="star-filled" color="#999" size="18"></uni-icons>
-				</view>
-			</uni-list-chat>
-		</uni-list>
-		<uni-section title="带通知角标的单头像聊天列表" type="line"></uni-section>
-		<uni-list>
-			<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
-			 :time="item.published_at" :clickable="true" :badge-text="item.text" @click="onClick"></uni-list-chat>
-		</uni-list>
-		<uni-section title="带通知角标的多头像聊天列表" type="line"></uni-section>
-		<uni-list>
-			<uni-list-chat v-for="(item,index) in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
-			 :time="item.published_at" :clickable="true" :avatarList="avatar(index+1)" :badge-text="item.text" @click="onClick"></uni-list-chat>
-		</uni-list>
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">此示例展示了聊天列表的使用场景。</text>
+		</uni-card>
+		<uni-section title="圆头像且不显示分割线" type="line">
+			<uni-list :border="false">
+				<uni-list-chat v-for="item in listData" :avatar-circle="true" :key="item.id" :title="item.author_name" :avatar="item.cover"
+				 :note="item.title" :time="item.published_at" :clickable="false"></uni-list-chat>
+			</uni-list>
+		</uni-section>
+
+		<uni-section title="带圆点" type="line">
+			<uni-list>
+				<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
+				 :time="item.published_at" :badge-text="item.text" :clickable="false" badge-positon="left" badge-text="dot"></uni-list-chat>
+			</uni-list>
+		</uni-section>
+
+		<uni-section title="自定义右侧内容" type="line">
+			<uni-list>
+				<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
+				 badge-positon="left" :badge-text="item.text">
+					<view class="chat-custom-right">
+						<text class="chat-custom-text">刚刚</text>
+						<uni-icons type="star-filled" color="#999" size="18"></uni-icons>
+					</view>
+				</uni-list-chat>
+			</uni-list>
+		</uni-section>
+
+		<uni-section title="带通知角标的单头像聊天列表" type="line">
+			<uni-list>
+				<uni-list-chat v-for="item in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
+				 :time="item.published_at" :clickable="true" :badge-text="item.text" @click="onClick"></uni-list-chat>
+			</uni-list>
+		</uni-section>
+
+		<uni-section title="带通知角标的多头像聊天列表" type="line">
+			<uni-list>
+				<uni-list-chat v-for="(item,index) in listData" :key="item.id" :title="item.author_name" :avatar="item.cover" :note="item.title"
+				 :time="item.published_at" :clickable="true" :avatarList="avatar(index+1)" :badge-text="item.text" @click="onClick"></uni-list-chat>
+			</uni-list>
+		</uni-section>
 	</view>
 </template>
 
@@ -148,8 +159,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '@/common/uni-nvue.scss';
-
 	.chat-custom-right {
 		flex: 1;
 		/* #ifndef APP-NVUE */

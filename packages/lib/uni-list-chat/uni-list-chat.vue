@@ -325,7 +325,7 @@
 		/* #endif */
 		flex-direction: row;
 		flex: 1;
-		padding: $uni-spacing-row-base $uni-spacing-row-lg;
+		padding:10px 15px;
 		position: relative;
 		overflow: hidden;
 	}

@@ -213,8 +213,8 @@ export default {
 |uni-popup|[弹出层](https://ext.dcloud.net.cn/plugin?name=uni-popup)|
 |uni-rate|[评分](https://ext.dcloud.net.cn/plugin?name=uni-rate)|
 |uni-row|[布局-行](https://ext.dcloud.net.cn/plugin?name=uni-row)|
+|uni-scss|[辅助样式](https://ext.dcloud.net.cn/plugin?name=uni-scss)|
 |uni-search-bar|[搜索栏](https://ext.dcloud.net.cn/plugin?name=uni-search-bar)|
-|Section|[标题栏](https://ext.dcloud.net.cn/plugin?name=uni-section)|
 |uni-segmented-control|[分段器](https://ext.dcloud.net.cn/plugin?name=uni-segmented-control)|
 |uni-steps|[步骤条](https://ext.dcloud.net.cn/plugin?name=uni-steps)|
 |uni-swipe-action|[滑动操作](https://ext.dcloud.net.cn/plugin?name=uni-swipe-action)|

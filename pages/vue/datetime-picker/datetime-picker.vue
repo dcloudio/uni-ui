@@ -1,17 +1,15 @@
 <template>
-	<view class="page">
-		<text class="example-info">可以同时选择日期和时间的选择器</text>
+	<view class="page container">
+		<uni-card is-full>
+			<text class="uni-h6">可以同时选择日期和时间的选择器</text>
+		</uni-card>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" v-model="single" @maskClick="maskClick" />
+			<uni-datetime-picker type="date" :clearIcon="false" v-model="single" @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="datetime" v-model="datetimesingle" :start="start" :end="end" @change="changeLog" />
-		</view>
-		<uni-section :title="'日期时间(隐藏秒)用法：' + datetimesingle" type="line"></uni-section>
-		<view class="example-body">
-			<uni-datetime-picker v-model="datetimesingle" :hide-second="true"></uni-datetime-picker>
+			<uni-datetime-picker type="datetime" v-model="datetimesingle" @change="changeLog" />
 		</view>
 		<uni-section :title="'日期范围用法：' + '[' + range + ']'" type="line"></uni-section>
 		<view class="example-body">
@@ -27,7 +25,7 @@
 		</view>
 		<uni-section :title="'时间戳用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker returnType="timestamp" v-model="single" @change="changeLog($event)" :start="start" :end="end" />
+			<uni-datetime-picker returnType="timestamp" v-model="single" @change="changeLog($event)" />
 		</view>
 		<uni-section :title="'date 对象用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
@@ -103,8 +101,8 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-	// ::v-deep .uni-calendar-item__weeks-box .uni-calendar-item--checked {
-	// 		background-color: green;
-	//}
+	.example-body {
+		background-color: #fff;
+		padding: 10px;
+	}
 </style>

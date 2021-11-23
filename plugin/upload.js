@@ -6,7 +6,7 @@ const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
 const modulesId = process.env.UNI_MODULES_ID
-// const modulesId = 'uni-forms'
+// const modulesId = 'uni-test'
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
@@ -15,13 +15,13 @@ const examplePath = path.join(root, 'temps')
 
 // 同步 readme.md
 // md 地址
-const readmePath = path.join(root, 'docs', 'components', comName + '.md')
+// const readmePath = path.join(root, 'docs', 'components', comName + '.md')
 
-const mdExists = fs.existsSync(readmePath)
-if (mdExists) {
-	const content = handleReadme(readmePath,comName)
-	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
-}
+// const mdExists = fs.existsSync(readmePath)
+// if (mdExists) {
+// 	const content = handleReadme(readmePath,comName)
+// 	util.write(path.join(root, 'uni_modules', modulesId, 'readme.md'), content)
+// }
 
 let relationComponents = []
 
@@ -37,8 +37,8 @@ if (exampleExists) {
 util.copyDir(path.join(examplePath, 'example'), tempExamplePath)
 
 if (modulesId === 'uni-ui') {
-	buildReadme()
-	util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
+	// buildReadme()
+	// util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
 	// 同步 uni-ui 示例
 	util.copyDir(comPath, path.join(tempExamplePath, 'uni_modules'))
 } else {
@@ -52,7 +52,16 @@ if (modulesId === 'uni-ui') {
 }
 
 function setPageComponents(modulesId, comName) {
-	const pagePath = path.join(root, 'pages', 'vue', comName, comName + '.vue')
+	let pagePath = path.join(root, 'pages', 'vue', comName)
+	let pageVue = path.join(pagePath,comName + '.vue')
+	let pageNvue = path.join(pagePath,comName + '.nvue')
+	if(fs.existsSync(pageVue)){
+		pagePath = pageVue
+	}else if(fs.existsSync(pageNvue)){
+		pagePath = pageNvue
+	}else{
+		return 
+	}
 	const pageContent = fs.readFileSync(pagePath).toString()
 	const pageContents = getComName(pageContent)
 	if (pageContents.length > 0) {

@@ -1,7 +1,7 @@
 {
   "id": "uni-test",
   "displayName": "Test 测试插件",
-  "version": "2.0.6",
+  "version": "2.0.13",
   "description": "测试插件 ",
   "keywords": [
     "test"
@@ -37,7 +37,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": [],
+    "dependencies": ["uni-scss"],
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -72,6 +72,10 @@
         "快应用": {
           "华为": "y",
           "联盟": "y"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "y"
         }
       }
     }
