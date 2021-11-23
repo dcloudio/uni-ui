@@ -8,7 +8,7 @@
 			:hover-class="currentIndex === 1 ? '' : 'uni-pagination--hover'" :hover-start-time="20"
 			:hover-stay-time="70" @click="clickLeft">
 			<template v-if="showIcon === true || showIcon === 'true'">
-				<uni-icons color="#666" size="16" type="arrowleft" />
+				<uni-icons color="#666" size="16" type="left" />
 			</template>
 			<template v-else>
 				<text class="uni-pagination__child-btn">{{ prevPageText }}</text>
@@ -33,7 +33,7 @@
 			:hover-class="currentIndex === maxPage ? '' : 'uni-pagination--hover'" :hover-start-time="20"
 			:hover-stay-time="70" @click="clickRight">
 			<template v-if="showIcon === true || showIcon === 'true'">
-				<uni-icons color="#666" size="16" type="arrowright" />
+				<uni-icons color="#666" size="16" type="right" />
 			</template>
 			<template v-else>
 				<text class="uni-pagination__child-btn">{{ nextPageText }}</text>
@@ -60,7 +60,9 @@
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
 	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	const {
+		t
+	} = initVueI18n(messages)
 	export default {
 		name: 'UniPagination',
 		emits: ['update:modelValue', 'input', 'change'],
@@ -177,26 +179,27 @@
 			}
 		},
 		watch: {
-			current(val) {
-				this.currentIndex = val
-			},
-			value(val) {
-				if (val < 1) {
-					this.currentIndex = 1
-				} else {
-					this.currentIndex = val
+			current: {
+				immediate: true,
+				handler(val, old) {
+					if (val < 1) {
+						this.currentIndex = 1
+					} else {
+						this.currentIndex = val
+					}
 				}
 			},
-			modelValue(val) {
-				if (val < 1) {
-					this.currentIndex = 1
-				} else {
-					this.currentIndex = val
+			value: {
+				immediate: true,
+				handler(val) {
+					if (Number(this.current) !== 1) return
+					if (val < 1) {
+						this.currentIndex = 1
+					} else {
+						this.currentIndex = val
+					}
 				}
 			}
-		},
-		created() {
-			this.currentIndex = +this.value
 		},
 		methods: {
 			// 选择标签
@@ -254,6 +257,7 @@
 </script>
 
 <style lang="scss" scoped>
+	$uni-primary: #2979ff;
 	.uni-pagination {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -278,13 +282,14 @@
 		/* #endif */
 		padding: 0 8px;
 		line-height: 30px;
-		font-size: $uni-font-size-base;
+		font-size: 12px;
 		position: relative;
-		background-color: #f4f4f5;
+		background-color: #F0F0F0;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		border-radius: 5px;
 		// border-width: 1px;
 		// border-style: solid;
 		// border-color: $uni-border-color;
@@ -294,12 +299,14 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		font-size: $uni-font-size-base;
+		font-size: 12px;
 		position: relative;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		color: #666;
+		font-size: 12px;
 	}
 
 	.uni-pagination__num {
@@ -312,8 +319,8 @@
 		align-items: center;
 		height: 30px;
 		line-height: 30px;
-		font-size: $uni-font-size-base;
-		color: $uni-text-color;
+		font-size: 12px;
+		color: #666;
 		margin: 0 5px;
 	}
 
@@ -327,7 +334,8 @@
 		text-align: center;
 		line-height: 30px;
 		// border: 1px red solid;
-		color: #666;
+		color: #999;
+		border-radius: 4px;
 		// border-width: 1px;
 		// border-style: solid;
 		// border-color: $uni-border-color;
@@ -358,16 +366,16 @@
 
 	.uni-pagination--hover {
 		color: rgba(0, 0, 0, 0.6);
-		background-color: $uni-bg-color-hover;
+		background-color: #eee;
 	}
 
 	.tag--active:hover {
-		color: $uni-color-primary;
+		color: $uni-primary;
 	}
 
 	.page--active {
 		color: #fff;
-		background-color: $uni-color-primary;
+		background-color: $uni-primary;
 	}
 
 	.page--active:hover {

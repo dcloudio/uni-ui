@@ -4,33 +4,44 @@
     "configurations": [{
      	"app-plus" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
      	},
      	"default" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
      	},
      	"h5" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
+     	},
+     	"mp-alipay" : 
+     	{
+     		"launchtype" : "local"
+     	},
+     	"mp-baidu" : 
+     	{
+     		"launchtype" : "local"
      	},
      	"mp-feishu" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
      	},
      	"mp-kuaishou" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
+     	},
+     	"mp-qq" : 
+     	{
+     		"launchtype" : "local"
      	},
      	"mp-toutiao" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
      	},
      	"mp-weixin" : 
      	{
-     		"launchtype" : "remote"
+     		"launchtype" : "local"
      	},
-     	"provider" : "aliyun",
      	"type" : "uniCloud"
      }
     ]

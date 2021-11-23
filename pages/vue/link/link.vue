@@ -1,18 +1,27 @@
 <template>
-	<view class="page">
-		<text class="example-info">超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打开新网页。</text>
-		<uni-section title="基本示例" type="line"></uni-section>
-		<view class="example-body">
+	<view class="container">
+		<uni-card is-full :is-shadow="false">
+			<text class="uni-h6">超链接组件，在小程序内复制url，在app内打开外部浏览器，在h5端打开新网页。</text>
+		</uni-card>
+		<uni-section title="基本示例" subTitle="打开外部连接" type="line" padding>
 			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/"></uni-link>
-		</view>
-		<uni-section title="自定义样式" type="line"></uni-section>
-		<view class="example-body">
-			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/" showUnderLine="false" color="#0000FF"></uni-link>
-		</view>
-		<uni-section title="支持插槽" type="line"></uni-section>
-		<view class="example-body">
-			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/" showUnderLine="false" color="#0000FF">插槽内容</uni-link>
-		</view>
+		</uni-section>
+		<uni-section title="自定义颜色" type="line" padding>
+			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/"
+				color="#007BFF"></uni-link>
+		</uni-section>
+		<uni-section title="自定义下划线" type="line" padding>
+			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/"
+				showUnderLine="false"></uni-link>
+		</uni-section>
+		<uni-section title="自定义字体大小" type="line" padding>
+			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/" showUnderLine="false"
+				font-size="20"></uni-link>
+		</uni-section>
+		<uni-section title="自定义插槽" type="line" padding>
+			<uni-link href="https://uniapp.dcloud.io/" text="https://uniapp.dcloud.io/" showUnderLine="false"
+				color="red">点击跳转</uni-link>
+		</uni-section>
 	</view>
 </template>
 
@@ -26,10 +35,4 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
-	.example-body {
-		flex-direction: row;
-		justify-content: flex-start;
-	}
 </style>

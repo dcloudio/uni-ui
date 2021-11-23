@@ -1,100 +1,110 @@
 <template>
-	<view>
-		<text class="example-info">uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
-		<uni-section title="基本用法" type="line"></uni-section>
-		<view class="example">
-			<!-- 基础用法，不包含校验规则 -->
-			<uni-forms ref="baseForm" :modelValue="baseFormData">
-				<uni-forms-item label="姓名" required>
-					<uni-easyinput v-model="baseFormData.name" placeholder="请输入姓名" />
-				</uni-forms-item>
-				<uni-forms-item label="年龄" required>
-					<uni-easyinput v-model="baseFormData.age" placeholder="请输入年龄" />
-				</uni-forms-item>
-				<uni-forms-item label="性别" required>
-					<uni-data-checkbox v-model="baseFormData.sex" :localdata="sexs" />
-				</uni-forms-item>
-				<uni-forms-item label="兴趣爱好" required>
-					<uni-data-checkbox v-model="baseFormData.hobby" multiple :localdata="hobbys" />
-				</uni-forms-item>
-				<uni-forms-item label="自我介绍">
-					<uni-easyinput type="textarea" v-model="baseFormData.introduction" placeholder="请输入自我介绍" />
-				</uni-forms-item>
-				<uni-forms-item label="日期时间">
-					<uni-datetime-picker type="datetime" return-type="timestamp" v-model="baseFormData.datetimesingle" />
-				</uni-forms-item>
-			</uni-forms>
-		</view>
-		<uni-section title="对齐方式" type="line"></uni-section>
-		<view class="example">
-			<view class="segmented-control">
-				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="button">
-				</uni-segmented-control>
+	<view class="container">
+		<uni-card :is-shadow="false" is-full>
+			<text class="uni-h6">uni-forms 组件一般由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。</text>
+		</uni-card>
+		<uni-section title="基本用法" type="line">
+			<view class="example">
+				<!-- 基础用法，不包含校验规则 -->
+				<uni-forms ref="baseForm" :modelValue="baseFormData">
+					<uni-forms-item label="姓名" required>
+						<uni-easyinput v-model="baseFormData.name" placeholder="请输入姓名" />
+					</uni-forms-item>
+					<uni-forms-item label="年龄" required>
+						<uni-easyinput v-model="baseFormData.age" placeholder="请输入年龄" />
+					</uni-forms-item>
+					<uni-forms-item label="性别" required>
+						<uni-data-checkbox v-model="baseFormData.sex" :localdata="sexs" />
+					</uni-forms-item>
+					<uni-forms-item label="兴趣爱好" required>
+						<uni-data-checkbox v-model="baseFormData.hobby" multiple :localdata="hobbys" />
+					</uni-forms-item>
+					<uni-forms-item label="自我介绍">
+						<uni-easyinput type="textarea" v-model="baseFormData.introduction" placeholder="请输入自我介绍" />
+					</uni-forms-item>
+					<uni-forms-item label="日期时间">
+						<uni-datetime-picker type="datetime" return-type="timestamp" v-model="baseFormData.datetimesingle"/>
+					</uni-forms-item>
+				</uni-forms>
 			</view>
-			<!-- 展示不同的排列方式 -->
-			<uni-forms ref="baseForm" :modelValue="alignmentFormData" :label-position="alignment">
-				<uni-forms-item label="姓名" required>
-					<uni-easyinput v-model="baseFormData.name" placeholder="请输入姓名" />
-				</uni-forms-item>
-				<uni-forms-item label="年龄" required>
-					<uni-easyinput v-model="baseFormData.age" placeholder="请输入年龄" />
-				</uni-forms-item>
-			</uni-forms>
-		</view>
-		<uni-section title="表单校验" type="line"></uni-section>
-		<view class="example">
-			<!-- 基础表单校验 -->
-			<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
-				<uni-forms-item label="姓名" required name="name">
-					<uni-easyinput v-model="valiFormData.name" placeholder="请输入姓名" />
-				</uni-forms-item>
-				<uni-forms-item label="年龄" required name="age">
-					<uni-easyinput v-model="valiFormData.age" placeholder="请输入年龄" />
-				</uni-forms-item>
-				<uni-forms-item label="自我介绍" name="introduction">
-					<uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
-				</uni-forms-item>
-			</uni-forms>
-			<button type="primary" @click="submit('valiForm')">提交</button>
-		</view>
-		<uni-section title="自定义校验规则" type="line"></uni-section>
-		<view class="example">
-			<!-- 自定义表单校验 -->
-			<uni-forms ref="customForm" :rules="customRules" :modelValue="customFormData">
-				<uni-forms-item label="姓名" required name="name">
-					<uni-easyinput v-model="customFormData.name" placeholder="请输入姓名" />
-				</uni-forms-item>
-				<uni-forms-item label="年龄" required name="age">
-					<uni-easyinput v-model="customFormData.age" placeholder="请输入年龄" />
-				</uni-forms-item>
-				<uni-forms-item label="兴趣爱好" required name="hobby">
-					<uni-data-checkbox v-model="customFormData.hobby" multiple :localdata="hobbys" />
-				</uni-forms-item>
-			</uni-forms>
-			<button type="primary" @click="submit('customForm')">提交</button>
-		</view>
+		</uni-section>
 
-		<uni-section title="动态表单" type="line"></uni-section>
-		<view class="example">
-			<!-- 动态表单校验 -->
-			<uni-forms ref="dynamicForm" :rules="dynamicRules" :modelValue="dynamicFormData">
-				<uni-forms-item label="邮箱" required name="email">
-					<uni-easyinput v-model="dynamicFormData.email" placeholder="请输入姓名" />
-				</uni-forms-item>
-				<uni-forms-item v-for="(item,index) in dynamicLists" :key="item.id" :label="item.label+' '+index"
-					required :rules="item.rules" :name="'domains[' + item.id + ']'">
-					<view class="form-item">
-						<uni-easyinput v-model="dynamicFormData.domains[item.id]" placeholder="请输入域名" />
-						<button class="button" size="mini" type="default" @click="del(item.id)">删除</button>
-					</view>
-				</uni-forms-item>
-			</uni-forms>
-			<view class="button-group">
-				<button type="primary" size="mini" @click="add">新增域名</button>
-				<button type="primary" size="mini" @click="submit('dynamicForm')">提交</button>
+		<uni-section title="对齐方式" type="line">
+			<view class="example">
+				<view class="segmented-control">
+					<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" styleType="button">
+					</uni-segmented-control>
+				</view>
+				<!-- 展示不同的排列方式 -->
+				<uni-forms ref="baseForm" :modelValue="alignmentFormData" :label-position="alignment">
+					<uni-forms-item label="姓名" required>
+						<uni-easyinput v-model="baseFormData.name" placeholder="请输入姓名" />
+					</uni-forms-item>
+					<uni-forms-item label="年龄" required>
+						<uni-easyinput v-model="baseFormData.age" placeholder="请输入年龄" />
+					</uni-forms-item>
+				</uni-forms>
 			</view>
-		</view>
+		</uni-section>
 
+		<uni-section title="表单校验" type="line">
+			<view class="example">
+				<!-- 基础表单校验 -->
+				<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
+					<uni-forms-item label="姓名" required name="name">
+						<uni-easyinput v-model="valiFormData.name" placeholder="请输入姓名" />
+					</uni-forms-item>
+					<uni-forms-item label="年龄" required name="age">
+						<uni-easyinput v-model="valiFormData.age" placeholder="请输入年龄" />
+					</uni-forms-item>
+					<uni-forms-item label="自我介绍" name="introduction">
+						<uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
+					</uni-forms-item>
+				</uni-forms>
+				<button type="primary" @click="submit('valiForm')">提交</button>
+			</view>
+		</uni-section>
+
+		<uni-section title="自定义校验规则" type="line">
+			<view class="example">
+				<!-- 自定义表单校验 -->
+				<uni-forms ref="customForm" :rules="customRules" :modelValue="customFormData">
+					<uni-forms-item label="姓名" required name="name">
+						<uni-easyinput v-model="customFormData.name" placeholder="请输入姓名" />
+					</uni-forms-item>
+					<uni-forms-item label="年龄" required name="age">
+						<uni-easyinput v-model="customFormData.age" placeholder="请输入年龄" />
+					</uni-forms-item>
+					<uni-forms-item label="兴趣爱好" required name="hobby">
+						<uni-data-checkbox v-model="customFormData.hobby" multiple :localdata="hobbys" />
+					</uni-forms-item>
+				</uni-forms>
+				<button type="primary" @click="submit('customForm')">提交</button>
+			</view>
+		</uni-section>
+
+
+		<uni-section title="动态表单" type="line">
+			<view class="example">
+				<!-- 动态表单校验 -->
+				<uni-forms ref="dynamicForm" :rules="dynamicRules" :modelValue="dynamicFormData">
+					<uni-forms-item label="邮箱" required name="email">
+						<uni-easyinput v-model="dynamicFormData.email" placeholder="请输入姓名" />
+					</uni-forms-item>
+					<uni-forms-item v-for="(item,index) in dynamicLists" :key="item.id" :label="item.label+' '+index"
+						required :rules="item.rules" :name="'domains[' + item.id + ']'">
+						<view class="form-item">
+							<uni-easyinput v-model="dynamicFormData.domains[item.id]" placeholder="请输入域名" />
+							<button class="button" size="mini" type="default" @click="del(item.id)">删除</button>
+						</view>
+					</uni-forms-item>
+				</uni-forms>
+				<view class="button-group">
+					<button type="primary" size="mini" @click="add">新增域名</button>
+					<button type="primary" size="mini" @click="submit('dynamicForm')">提交</button>
+				</view>
+			</view>
+		</uni-section>
 	</view>
 </template>
 
@@ -102,7 +112,7 @@
 	export default {
 		data() {
 			return {
-				// 基础表单数据 
+				// 基础表单数据
 				baseFormData: {
 					name: '',
 					age: '',
@@ -150,7 +160,7 @@
 				// 分段器数据
 				current: 0,
 				items: ['左对齐', '顶部对齐'],
-				// 校验表单数据 
+				// 校验表单数据
 				valiFormData: {
 					name: '',
 					age: '',
@@ -275,7 +285,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
 
 	.example {
 		padding: 15px;

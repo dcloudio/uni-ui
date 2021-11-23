@@ -1,35 +1,32 @@
 <script>
-export default {
-	onLaunch: function() {
-		console.log('App Launch');
-	},
-	onShow: function() {
-		console.log('App Show');
-	},
-	onHide: function() {
-		console.log('App Hide');
-	}
-};
+	export default {
+		onLaunch: function() {
+			console.log('App Launch');
+			uni.setLocale('zh-Hans')
+		},
+		onShow: function() {
+			console.log('App Show');
+		},
+		onHide: function() {
+			console.log('App Hide');
+		}
+	};
 </script>
 
 <style lang="scss">
-// uni-icons 扩展图标库
-@import '@/static/iconfont.css';
+	@import '@/uni_modules/uni-scss/index.scss';
 
-/* #ifndef APP-NVUE */
-page {
-	background-color: #efeff4;
-}
-/* #endif */
-
-/* #ifdef H5 */
-.uni-app--showleftwindow .hideOnPc {
-	display: none !important;
-}
-
-.uni-app--showleftwindow uni-page-body {
-		background-color: #F5F5F5 !important;
-		min-height: 100% !important;
+	/* #ifndef APP-NVUE */
+	@import '@/static/customicons.css';
+	// 设置整个项目的背景色
+	page {
+		background-color: #f5f5f5;
 	}
-/* #endif */
+
+	/* #endif */
+	.example-info {
+		font-size: 14px;
+		color: #333;
+		padding: 10px;
+	}
 </style>

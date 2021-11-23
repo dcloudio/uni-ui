@@ -119,9 +119,9 @@ export default {
 
 <style>
 /* #ifndef H5 */
-page {
+/* page {
 	padding-top: 85px;
-}
+} */
 /* #endif */
 .uni-group {
 	display: flex;
