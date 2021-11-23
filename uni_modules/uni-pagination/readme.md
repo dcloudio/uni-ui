@@ -30,7 +30,8 @@
 |:-:		|:-:	|:-:	|:-:						|
 |prevText	|String	|上一页	|左侧按钮文字				|
 |nextText	|String	|下一页	|右侧按钮文字				|
-|current	|Number	|1		|当前页						|
+|value/v-model	|Number	|1		|当前页						|
+|current	|Number	|1		|当前页, 优先级高于 value						|
 |total		|Number	|0		|数据总量					|
 |pageSize	|Number	|10		|每页数据量					|
 |showIcon	|Boolean|false	|是否以 icon 形式展示按钮	|

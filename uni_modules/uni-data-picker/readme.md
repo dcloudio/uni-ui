@@ -26,11 +26,6 @@
 > - `<uni-data-picker>` 内部包含了弹出层组件 `<uni-data-pickerview>` 外层的布局可能会影响弹出层，[详情](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Common_CSS_Questions)
 
 
-
-### 平台差异说明
-
-暂不支持在nvue页面中使用
-
 ### 安装方式
 
 本组件符合[easycom](https://uniapp.dcloud.io/collocation/pages?id=easycom)规范，`HBuilderX 2.5.5`起，只需将本组件导入项目，在页面`template`中即可直接使用，无需在页面中`import`和注册`componets`。
@@ -44,10 +39,11 @@
 |属性名								| 类型						|	可选值 		 | 		默认值			| 说明|
 |:-:									| :-:						|:-:				 | :-:					| :-:	|
 |v-model 							|String/ Number	| -				 	 |	-						|绑定数据|
+|spaceInfo            |Object         |            |              |服务空间配置，[详情](https://uniapp.dcloud.net.cn/uniCloud/init)|
 |localdata						|Array					| 					 |							|数据，[详情](https://gitee.com/dcloud/datacom)|
 |preload 							|Boolean				| true/false |	false				|预加载数据|
 |readonly 						|Boolean				| true/false |	false				|是否禁用|
-|clear-icon 						|Boolean				| true/false |	true				|是否显示清除按钮|
+|clear-icon 					|Boolean				| true/false |	true				|是否显示清除按钮|
 |ellipsis 						|Boolean				| true/false |	true				|是否隐藏 tab 标签过长的文本|
 |step-searh 					|Boolean				| true/false |	true				|分步查询时，点击节点请求数据|
 |step-search-url			|String					| 					 |							|分步查询时，动态加载云端数据url格式，`https://xxx.com/{parentValue}`(当前版本暂不支持，下版支持)|
