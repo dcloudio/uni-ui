@@ -159,11 +159,11 @@
 				if (this.isLocaldata) {
 					this.loadData()
 					this.inputSelected = this.selected.slice(0)
-				} else if (!this.parentField && !this.selfField && this.dataValue) {
+				} else if (!this.parentField && !this.selfField && this.hasValue) {
 					this.getNodeData(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
-				} else if (this.dataValue.length) {
+				} else if (this.hasValue) {
 					this.getTreePath(() => {
 						this.inputSelected = this.selected.slice(0)
 					})
@@ -229,6 +229,11 @@
 						inputValue = value
 					}
 					this.inputSelected = this._findNodePath(inputValue, this.localdata)
+					return
+				}
+
+				if (!this.hasValue) {
+					this.inputSelected = []
 					return
 				}
 

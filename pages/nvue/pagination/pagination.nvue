@@ -6,15 +6,15 @@
 		</view>
 		<uni-section title="修改按钮文字" type="line"></uni-section>
 		<view class="example-body">
-			<uni-pagination :total="50" title="标题文字" prev-text="前一页" next-text="后一页" />
+			<uni-pagination :total="50" :current="current" title="标题文字" prev-text="前一页" next-text="后一页" />
 		</view>
 		<uni-section title="图标样式" type="line"></uni-section>
 		<view class="example-body">
-			<uni-pagination :show-icon="true" :total="50" title="标题文字" />
+			<uni-pagination :show-icon="true" v-model="current" :current="2"   :total="50" title="标题文字" />
 		</view>
 		<uni-section title="修改数据长度" type="line"></uni-section>
 		<view class="example-body">
-			<uni-pagination :current="current" :total="total" title="标题文字" :show-icon="true" @change="change" />
+			<uni-pagination :total="total" title="标题文字" :show-icon="true" @change="change" />
 		</view>
 		<view class="btn-view">
 			<view>
@@ -32,10 +32,15 @@
 		components: {},
 		data() {
 			return {
-				current: 1,
-				total: 0,
+				current: 3,
+				total:10,
 				pageSize: 10
 			}
+		},
+		mounted() {
+			setTimeout(() => {
+				this.current = 5
+			},3000)
 		},
 		methods: {
 			add() {

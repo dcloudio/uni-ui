@@ -81,11 +81,9 @@
 		computed: {
 			labelStyle() {
 				if (this.labelWidth === 'auto') {
-					return {}
+					return ""
 				}
-				return {
-					width: this.labelWidth
-				}
+				return `width: ${this.labelWidth}`
 			},
 			filterCandidates() {
 				return this.candidates.filter((item) => {
