@@ -12,6 +12,7 @@
 > - 组件需要依赖 `sass` 插件 ，请自行手动安装
 > - 如不绑定服务空间，`autoUpload`默认为`false`且不可更改
 > - 选择文件目前只支持 `H5` 和 `微信小程序平台` ，且 `微信小程序平台` 使用 `wx.chooseMessageFile()`
+> - v-model 值需要自动上传成功后才会绑定值，一般只用来回显数据
 > - 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839
 
 
@@ -97,6 +98,8 @@
 
 #### Callback Params
 
+`**注意**：如果绑定的是腾讯云的服务空间 ，tempFilePaths 将返回 fileID`
+
 ```json
 {
 	"progress"			: Number, 		// 上传进度 ，仅 @progress 事件包含此字段
@@ -115,7 +118,8 @@
 
 | 方法称名						| 说明			|		参数 		|				
 | :-:								| :-:		  |		:-:		  |				
-| upload						| 手动上传 	，如`autoUpload`为`false`  ，必须调用此方法| - |
+| upload()						| 手动上传 	，如`autoUpload`为`false`  ，必须调用此方法| - |
+| clearFiles(index:Number)	| 清除选择结果| 传如 Number　为删除指定下标的文件 ，不传为删除所有|
 
 ### FilePicker Slots
 

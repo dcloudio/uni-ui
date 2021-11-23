@@ -3,12 +3,26 @@
 		<view class="example-info">
 			<text class="example-info-text">图标组件方便用户在设计页面的时候，减少小图片的使用。可方便自定义图标单色、尺寸</text>
 		</view>
+		<uni-section title="扩展图标" type="line">
+			<view class="uni-right" style="font-size: 12px;">
+				需要自行在项目 App.vue 中引入 css 图标扩展库
+			</view>
+		</uni-section>
+		<view class="example-body">
+			<uni-icons class="mr-30" type="icon-chart-pie-alt" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+			<uni-icons class="mr-30" type="icon-poweroff" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+			<uni-icons class="mr-30" type="icon-safety-certificate" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+			<uni-icons class="mr-30" type="icon-link" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+			<uni-icons class="mr-30" type="icon-kongxincai" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+		</view>
+
 		<uni-section title="基础图标" type="line">
 			<view class="uni-right">
 				<text class="uni-right-text">显示{{ checked?' unicode':'图标名' }}</text>
 				<switch :checked="checked" class="switch" @change="change" />
 			</view>
 		</uni-section>
+
 		<view class="example-body">
 			<view v-for="(item,index) in iconClassList" :key="index" class="icon-item" @click="switchActive(index)">
 				<uni-icons :type="item.name" :color="activeIndex === index?'#007aff':'#8f8f94'" size="25" />
@@ -432,7 +446,6 @@
 
 <style lang="scss">
 	@import '@/common/uni-nvue.scss';
-
 	.example-body {
 		padding: 0;
 		flex-direction: row;
@@ -471,5 +484,9 @@
 	.icon-item-text {
 		font-size: 24rpx;
 		text-align: center;
+	}
+	.mr-30 {
+		padding: 15px 0;
+		margin-right: 30px;
 	}
 </style>

@@ -12,6 +12,7 @@
 				</slot>
 			</view>
 			<view
+				v-if="showArrow"
 				:class="{ 'uni-collapse-item__title-arrow-active': isOpen, 'uni-collapse-item--animation': showAnimation === true }"
 				class="uni-collapse-item__title-arrow">
 				<uni-icons :color="disabled?'#ddd':'#bbb'" size="14" type="arrowdown" />
@@ -38,8 +39,12 @@
 	 * @property {String} title 标题文字
 	 * @property {String} thumb 标题左侧缩略图
 	 * @property {String} name 唯一标志符
+	 * @property {Boolean} open = [true|false] 是否展开组件
+	 * @property {Boolean} titleBorder = [true|false] 是否显示标题分隔线
+	 * @property {Boolean} border = [true|false] 是否显示分隔线
 	 * @property {Boolean} disabled = [true|false] 是否展开面板
 	 * @property {Boolean} showAnimation = [true|false] 开启动画
+	 * @property {Boolean} showArrow = [true|false] 是否显示右侧箭头
 	 */
 	export default {
 		name: 'uniCollapseItem',
@@ -87,8 +92,11 @@
 				type: String,
 				default: 'auto'
 			},
-			// 是否显示分隔线
 			border: {
+				type: Boolean,
+				default: true
+			},
+			showArrow:{
 				type: Boolean,
 				default: true
 			}
@@ -133,9 +141,7 @@
 			this.uninstall()
 		},
 		// #endif
-		
 		mounted() {
-			
 			if (!this.collapse) return
 			if (this.name !== '') {
 				this.nameSync = this.name
@@ -210,7 +216,7 @@
 						this.onClick(this.open,'init')
 					})
 					.exec()
-			}, 
+			},
 			getNvueHwight(type) {
 				const result = dom.getComponentRect(this.$refs['collapse--hook'], option => {
 					if (option && option.result && option.size) {
@@ -259,7 +265,7 @@
 			align-items: center;
 			transition: border-bottom-color .3s;
 
-			// transition-property: border-bottom-color; 
+			// transition-property: border-bottom-color;
 			// transition-duration: 5s;
 			&-wrap {
 				width: 100%;
@@ -355,7 +361,7 @@
 			height: 0;
 
 			&.is--transition {
-				// transition: all 0.3s; 
+				// transition: all 0.3s;
 				transition-property: height, border-bottom-width;
 				transition-duration: 0.3s;
 				/* #ifndef APP-NVUE */

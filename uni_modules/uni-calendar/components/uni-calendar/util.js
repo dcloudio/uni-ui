@@ -139,13 +139,15 @@ class Calendar {
 			let disableBefore = true
 			let disableAfter = true
 			if (this.startDate) {
-				let dateCompBefore = this.dateCompare(this.startDate, fullDate)
-				disableBefore = this.dateCompare(dateCompBefore ? this.startDate : fullDate, nowDate)
+				// let dateCompBefore = this.dateCompare(this.startDate, fullDate)
+				// disableBefore = this.dateCompare(dateCompBefore ? this.startDate : fullDate, nowDate)
+				disableBefore = this.dateCompare(this.startDate, nowDate)
 			}
 
 			if (this.endDate) {
-				let dateCompAfter = this.dateCompare(fullDate, this.endDate)
-				disableAfter = this.dateCompare(nowDate, dateCompAfter ? this.endDate : fullDate)
+				// let dateCompAfter = this.dateCompare(fullDate, this.endDate)
+				// disableAfter = this.dateCompare(nowDate, dateCompAfter ? this.endDate : fullDate)
+				disableAfter = this.dateCompare(nowDate, this.endDate)
 			}
 			let multiples = this.multipleStatus.data
 			let checked = false
@@ -169,7 +171,7 @@ class Calendar {
 				afterMultiple: this.dateEqual(this.multipleStatus.after, nowDate),
 				month: full.month,
 				lunar: this.getlunar(full.year, full.month, i),
-				disable: !disableBefore || !disableAfter,
+				disable: !(disableBefore && disableAfter),
 				isDay
 			}
 			if (info) {

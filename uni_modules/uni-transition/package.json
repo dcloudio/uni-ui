@@ -1,7 +1,7 @@
 {
   "id": "uni-transition",
   "displayName": "uni-transition 过渡动画",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "元素的简单过渡动画",
   "keywords": [
     "uni-ui",
@@ -76,6 +76,10 @@
         "快应用": {
           "华为": "u",
           "联盟": "u"
+        },
+        "Vue": {
+            "vue2": "y",
+            "vue3": "y"
         }
       }
     }

@@ -21,6 +21,23 @@
 <uni-icons type="contact" size="30"></uni-icons>
 ```
 
+### 扩展图标用法
+
+1. 需要自行在项目 App.vue 中引入 css 图标扩展库（注意: css 图标库引用的 .ttf 文件路径是否正确）
+	
+	```html
+	<style lang="scss">
+	/* 扩展图标库 */
+	@import '@/static/iconfont.css';
+	</style>
+	```
+2. 在 ``template`` 中使用组件
+
+	```html
+	<uni-icons class="mr-30" type="icon-kongxincai" font-family="iconfont" color="#007AFF" size="20"></uni-icons>
+	```
+
+
 
 
 ## API
@@ -32,6 +49,7 @@
 |size	|Number		|24		|图标大小			|
 |type	|String		|-		|图标图案，参考示例	|
 |color	|String		|-		|图标颜色			|
+|font-family(仅 vue 支持)	|String		|uniicons		|图标库字体家族			|
 
 
 ### Icons Events

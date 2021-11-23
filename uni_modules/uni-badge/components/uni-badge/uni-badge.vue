@@ -90,7 +90,7 @@
 					'uni-badge--' + type,
 					'uni-badge--' + size,
 					absolute ? 'uni-badge--absolute' : ''
-				]
+				].join(' ')
 			},
 			positionStyle() {
 				if (!this.absolute) return {}

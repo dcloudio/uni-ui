@@ -7,6 +7,300 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.6" date="2021-09-30">
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 清除已选项的功能（通过 clearIcon 属性配置是否显示按钮），同时提供 clear 方法以供调用，二者等效
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 readonly 为 true 时报错的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 上一版本造成的 map 属性失效的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 ellipsis 属性，支持配置 tab 选项长度过长时是否自动省略
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.5" date="2021-09-24">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="fix">
+			 在字节小程序上样式不生效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 startDate、 endDate 属性失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况下级联未触发的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 提供 show 和 hide 方法，开发者可以通过 ref 调用
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 选项内容过长自动添加省略号
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 map 属性 字段映射，将 text/value 映射到数据中的其他字段
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="feat">
+			 支持使用 css 图标库扩展组件（仅 vue 支持）
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.4" date="2021-09-10">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 hide-second 在移动端的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 单选赋默认值时，赋值日期未高亮的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 赋默认值时，移动端未正确显示时间的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 hide-second 属性，支持只使用时分，隐藏秒
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="perf">
+			 默认值修改为 0 颗星
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.3" date="2021-09-03">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 在uni-forms中 modelValue 中不存在当前字段，当前字段必填写也不参与校验的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 取消选中时（范围选）直接开始下一次选择, 避免多点一次
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移动端支持清除按钮，同时支持通过 ref 调用组件的 clear 方法
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整字号大小，美化日历界面
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 因国际化导致的 placeholder 失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 return-type="object" 时且存在v-model时，无法删除文件的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 参数中返回 fileID 字段
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 腾讯云传入fileID 不能回显的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 选择图片后，不能放大的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-link 组件更新">
+		<log-item-text tag-type="fix">
+			 在 nvue 下不显示的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue3中to属性在发行应用的时候报错的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 value 属性与 modelValue 属性不兼容的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="perf">
+			 close-all 方法
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.1" date="2021-08-20">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="perf">
+			 show-arrow 属性默认为true
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 show-arrow 属性，控制是否显示右侧箭头
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 单选 list 模式下 ，icon 为 left 时，选中图标不显示的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在 uni-forms 的动态表单中默认值校验不通过的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fav 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 由于 0.2.11 版本引起的不能回显图片的Bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 clearFiles(index) 方法，可以手动删除指定文件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 v-model 值设为 null 报错的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-goods-nav 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 支持国际化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="feat">
+			 close-all 方法，关闭所有已打开的组件
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 resize() 方法，在非微信小程序、h5、app-vue端出现不能滑动的问题的时候，重置组件
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题 
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 微信小程序、h5、app-vue 滑动逻辑，避免出现动态新增组件后不能滑动的问题
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.3.10" date="2021-08-13">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出层被 tabbar 遮盖 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-dateformat 组件更新">
+		<log-item-text tag-type="perf">
+			 调整 默认时间不再是当前时间，而是显示'-'字符
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 适配 vue3
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持作为 uni-forms 子组件相关功能
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中使用时，选择时间报 NAN 错误的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 type 属性动态赋值无效的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ‘确认’按钮被 tabbar 遮盖 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 组件未赋值时范围选左、右日历相同的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 范围选未正确显示当前值的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5 平台（移动端）报错 'cale' of undefined 的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在 uni-forms 中重置表单，错误信息无法清除的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 return-type="object" 时，无法删除文件的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 auto-upload 属性失效的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 没有添加校验规则的字段依然报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 重置表单错误信息无法清除的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件文档
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 表单验证只生效一次的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="perf">
+			 type 不是 default 时，size 为 small 字体大小显示不正确
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.3.9" date="2021-08-02">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="feat">

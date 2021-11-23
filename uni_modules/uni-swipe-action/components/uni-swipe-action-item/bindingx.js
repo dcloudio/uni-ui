@@ -1,8 +1,11 @@
+let bindIngXMixins = {}
+
+// #ifdef APP-NVUE
 const BindingX = uni.requireNativePlugin('bindingx');
 const dom = uni.requireNativePlugin('dom');
 const animation = uni.requireNativePlugin('animation');
 
-export default {
+bindIngXMixins = {
 	data() {
 		return {}
 	},
@@ -72,7 +75,7 @@ export default {
 			if (this.autoClose) {
 				this.swipeaction.closeOther(this)
 			}
-				
+
 			const leftWidth = this.button.left.width
 			const rightWidth = this.button.right.width
 			let expression = this.range(this.x, -rightWidth, leftWidth)
@@ -291,3 +294,7 @@ export default {
 		}
 	}
 }
+
+// #endif
+
+export default bindIngXMixins

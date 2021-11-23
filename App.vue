@@ -13,6 +13,9 @@ export default {
 </script>
 
 <style lang="scss">
+// uni-icons 扩展图标库
+@import '@/static/iconfont.css';
+
 /* #ifndef APP-NVUE */
 page {
 	background-color: #efeff4;
@@ -20,13 +23,6 @@ page {
 /* #endif */
 
 /* #ifdef H5 */
-
-// @media screen and (min-width: 768px) {
-// 	body{
-// 		overflow-y: scroll;
-// 	}
-// }
-
 .uni-app--showleftwindow .hideOnPc {
 	display: none !important;
 }
@@ -35,6 +31,5 @@ page {
 		background-color: #F5F5F5 !important;
 		min-height: 100% !important;
 	}
-
 /* #endif */
 </style>
