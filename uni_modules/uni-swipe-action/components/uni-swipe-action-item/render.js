@@ -46,6 +46,8 @@ export default {
 	 */
 	touchmove(e, ownerInstance, self) {
 		let instance = e.instance;
+		// 删除之后已经那不到实例了
+		if(!instance) return;
 		let disabled = instance.getDataset().disabled
 		let state = self.state
 		// fix by mehaotian, TODO 兼容 app-vue 获取dataset为字符串 , h5 获取 为 undefined 的问题,待框架修复
