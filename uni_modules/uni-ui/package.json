@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "uni-ui 是一个基于uni-app全端兼容的高性能UI框架",
   "keywords": [
     "uni-ui",

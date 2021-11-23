@@ -1,3 +1,12 @@
+## 1.4.9（2021-11-23）
+- uni-ui 修复 vue3中某些scss变量无法找到的问题
+- uni-combox 优化 label、label-width 属性
+- uni-data-picker 修复 由上个版本引发的map、v-model等属性不生效的bug
+- uni-file-picker 修复 参数为对象的情况下，url在某些情况显示错误的bug
+- uni-icons 优化 兼容旧组件 type 值
+- uni-list 修复 在vue3中to属性在发行应用的时候报错的bug
+- uni-scss 修复 vue3中scss语法兼容问题
+- uni-transition 修复 init 方法初始化问题
 ## 1.4.8（2021-11-19）
 - uni-fab 修复 阴影颜色不正确的bug
 ## 1.4.7（2021-11-19）

@@ -218,6 +218,10 @@
 </script>
 
 <style lang="scss" scoped>
+	$uni-font-size-lg:16px;
+	$uni-spacing-row-sm: 5px;
+	$uni-spacing-row-base: 10px;
+	$uni-spacing-row-lg: 15px;
 	$background-color: #fff;
 	$divide-line-color: #e5e5e5;
 	$avatar-width: 45px;
@@ -325,7 +329,7 @@
 		/* #endif */
 		flex-direction: row;
 		flex: 1;
-		padding:10px 15px;
+		padding: $uni-spacing-row-base $uni-spacing-row-lg;
 		position: relative;
 		overflow: hidden;
 	}

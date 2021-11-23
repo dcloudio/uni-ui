@@ -7,6 +7,88 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.9" date="2021-11-23">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中个别scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="perf">
+			 label、label-width 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 由上个版本引发的map、v-model等属性不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-drawer 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中个别scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 参数为对象的情况下，url在某些情况显示错误的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-group 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中某些scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="perf">
+			 兼容旧组件 type 值
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-indexed-list 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中某些scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="perf">
+			 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-list](https://uniapp.dcloud.io/component/uniui/uni-list)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在vue3中to属性在发行应用的时候报错的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中某些scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中某些scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-scss 组件更新">
+		<log-item-text tag-type="fix">
+			 / 符号在 vue 不同版本兼容问题引起的报错问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vue3中scss语法兼容问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3中某些scss变量无法找到的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 init 方法初始化问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.8" date="2021-11-19">
 	<log-item title="uni-fab 组件更新">
 		<log-item-text tag-type="fix">
