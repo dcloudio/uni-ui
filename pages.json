@@ -245,9 +245,6 @@
 			"navigationBarTitleText": "Combox 组合框"
 		}
 	}, {
-		"path": "pages/vue/list/ad",
-		"style": {}
-	}, {
 		"path": "pages/vue/list/chat",
 		"style": {}
 	}, {
