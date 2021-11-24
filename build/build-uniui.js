@@ -292,6 +292,9 @@ function buildDocsChangeLog(md, version) {
 }
 
 function compareVersion(a, b) {
+	console.log(a);
+	console.log(b);
+	if(!b) return false
 	a = a.split('.')
 	b = b.split('.')
 	if (a.length !== b.length) {

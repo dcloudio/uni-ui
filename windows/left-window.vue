@@ -4,7 +4,7 @@
 	</view>
 </template>
 <script>
-	import indexPage from '@/pages/vue/index/index.vue'
+	import indexPage from '@/pages/index/index'
 	export default {
 		components: { indexPage },
 		props: {
@@ -19,7 +19,7 @@
 								if (this.matchLeftWindow) {
 									if (newRoute.path === '/') {
 										uni.redirectTo({
-											url: 'pages/vue/card/card'
+											url: 'pages/vue/color/color'
 										})
 									}
 									if (!newRoute.matched.length) {
@@ -37,7 +37,8 @@
 	.left-window-style {
 		min-height: calc(100vh - var(--top-window-height));
 		overflow-y: hidden;
-		background-color: #f8f8f8;
-		padding: 0 15px;
+		background-color: #fff;
+		border-right: 1px solid #f5f5f5;
+		box-shadow: rgb(0 0 0 / 8%) 0px 0px 3px 1px;
 	}
 </style>

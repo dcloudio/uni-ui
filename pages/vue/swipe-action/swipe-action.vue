@@ -1,5 +1,8 @@
 <template>
-	<view>
+	<view class="container">
+		<uni-card is-full :is-shadow="false">
+			<text class="uni-h6">通过滑动触发选项的容器，容器内可放置列表等组件，通过左右滑动来触发一些操作。</text>
+		</uni-card>
 		<uni-section
 		    title="基本用法"
 		    type="line"
@@ -123,7 +126,7 @@
 					{
 						text: '确认',
 						style: {
-							backgroundColor: '#dd524d'
+							backgroundColor: '#F56C6C'
 						}
 					}
 				],
@@ -131,7 +134,7 @@
 						options: [{
 							text: '添加',
 							style: {
-								backgroundColor: 'rgb(255,58,49)'
+								backgroundColor: '#F56C6C'
 							}
 						}],
 						id: 0,
@@ -286,8 +289,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.content-box {
 		flex: 1;
 		/* #ifdef APP-NVUE */

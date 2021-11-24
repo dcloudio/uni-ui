@@ -1,15 +1,18 @@
 <template>
 	<view>
-		<uni-section title="基本用法" type="line"></uni-section>
-		<view class="example-body">
-			<uni-steps :options="list1" active-color="#007AFF" :active="active" />
-		</view>
-		<uni-section title="纵向排列" type="line"></uni-section>
-		<view class="example-body">
+		<uni-section title="基本用法" type="line" padding>
+			<uni-steps :options="list1" :active="active" />
+		</uni-section>
+		<uni-section title="自定义图标" type="line" padding>
+			<uni-steps :options="list1" active-icon="checkbox" :active="active" />
+		</uni-section>
+		<uni-section title="自定义图标" type="line" padding>
+			<uni-steps :options="list1" active-icon="medal" :active="active" />
+		</uni-section>
+		<uni-section title="纵向排列" type="line" padding>
 			<uni-steps :options="list2" active-color="#007AFF" :active="active" direction="column" />
-		</view>
-		<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="change"><text
-			 class="word-btn-white">改变状态</text></view>
+		</uni-section>
+		<button type="primary" size="mini" style="margin: 30px 10px; width: 100px;" @click="change">改变状态</button>
 	</view>
 </template>
 
@@ -20,7 +23,7 @@
 			return {
 				active: 1,
 				list1: [{
-					title: '事件一事件一事件一事件一事件一事件一'
+					title: '事件一'
 				}, {
 					title: '事件二'
 				}, {
@@ -56,8 +59,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.status-btn {
 		/* #ifndef APP-NVUE */
 		display: flex;

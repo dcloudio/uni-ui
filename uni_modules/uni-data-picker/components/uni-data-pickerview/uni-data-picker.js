@@ -6,6 +6,12 @@ export default {
         return []
       }
     },
+    spaceInfo: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
     collection: {
       type: String,
       default: ''
@@ -127,15 +133,14 @@ export default {
       return fields.join(',');
     },
     dataValue() {
-      let isarr = Array.isArray(this.value) && this.value.length === 0
-      let isstr = typeof this.value === 'string' && !this.value
-      let isnum = typeof this.value === 'number' && !this.value
-
-      if(isarr || isstr || isnum) {
-        return this.modelValue
+      let isModelValue = Array.isArray(this.modelValue) ? (this.modelValue.length > 0) : (this.modelValue !== null || this.modelValue !== undefined)
+      return isModelValue ? this.modelValue : this.value
+    },
+    hasValue() {
+      if (typeof this.dataValue === 'number') {
+        return true
       }
-
-      return this.value
+      return (this.dataValue != null) && (this.dataValue.length > 0)
     }
   },
   created() {
@@ -143,6 +148,7 @@ export default {
       var al = [];
       ['pageCurrent',
         'pageSize',
+        'spaceInfo',
         'value',
         'modelValue',
         'localdata',
@@ -181,7 +187,7 @@ export default {
     },
     getCommand(options = {}) {
       /* eslint-disable no-undef */
-      let db = uniCloud.database()
+      let db = uniCloud.database(this.spaceInfo)
 
       const action = options.action || this.action
       if (action) {
@@ -268,7 +274,7 @@ export default {
         return
       }
 
-      if (this.dataValue.length) {
+      if (this.dataValue != null) {
         this._loadNodeData((data) => {
           this._treeData = data
           this._updateBindData()
@@ -538,7 +544,7 @@ export default {
     _processLocalData() {
       this._treeData = []
       this._extractTree(this.localdata, this._treeData)
-	
+
       var inputValue = this.dataValue
       if (inputValue === undefined) {
         return

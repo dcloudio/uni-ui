@@ -1,17 +1,24 @@
 <template>
 	<view>
-		<view class="uni-padding-wrap uni-common-mt">
-			<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor"
-			 @clickItem="onClickItem" />
-		</view>
-		<view class="content">
-			<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>
-			<view v-if="current === 1"><text class="content-text">选项卡2的内容</text></view>
-			<view v-if="current === 2"><text class="content-text">选项卡3的内容</text></view>
-		</view>
+		<uni-card is-full>
+			<text class="uni-h6">标签组件多用于商品分类、重点内容显示等场景。</text>
+		</uni-card>
+
+		<uni-section title="实心标签" type="line">
+			<view class="uni-padding-wrap uni-common-mt">
+				<uni-segmented-control :current="current" :values="items" :style-type="styleType"
+					:active-color="activeColor" @clickItem="onClickItem" />
+			</view>
+			<view class="content">
+				<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>
+				<view v-if="current === 1"><text class="content-text">选项卡2的内容</text></view>
+				<view v-if="current === 2"><text class="content-text">选项卡3的内容</text></view>
+			</view>
+		</uni-section>
+
 		<uni-section title="Style" type="line"></uni-section>
 		<view class="example-body">
-			<radio-group class="uni-list " @change="styleChange">
+			<radio-group class="uni-list" @change="styleChange">
 				<view v-for="(item, index) in styles" :key="index" class="uni-list-item">
 					<view class="uni-list-item__container">
 						<view class="uni-list-item__content">
@@ -87,8 +94,6 @@
 </script>
 
 <style lang="scss">
-	@import '@/common/uni-nvue.scss';
-
 	.example-body {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -117,8 +122,8 @@
 	}
 
 	.content-text {
-		font-size: 18px;
-		color: $uni-text-color;
+		font-size: 14px;
+		color: #666;
 	}
 
 	.color-tag {
@@ -154,10 +159,10 @@
 		align-items: center;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-		border-bottom-color: $uni-border-color;
+		border-bottom-color: #eee;
 	}
 
 	.uni-list-item__content-title {
-		font-size: 16px;
+		font-size: 14px;
 	}
 </style>

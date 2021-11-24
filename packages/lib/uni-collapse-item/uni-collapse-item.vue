@@ -15,7 +15,7 @@
 				v-if="showArrow"
 				:class="{ 'uni-collapse-item__title-arrow-active': isOpen, 'uni-collapse-item--animation': showAnimation === true }"
 				class="uni-collapse-item__title-arrow">
-				<uni-icons :color="disabled?'#ddd':'#bbb'" size="14" type="arrowdown" />
+				<uni-icons :color="disabled?'#ddd':'#bbb'" size="14" type="bottom" />
 			</view>
 		</view>
 		<view class="uni-collapse-item__wrap" :class="{'is--transition':showAnimation}"
@@ -296,7 +296,7 @@
 				/* #endif */
 				&.is-disabled {
 					.uni-collapse-item__title-text {
-						color: $uni-text-color-disable;
+						color: #999;
 					}
 				}
 
@@ -311,14 +311,14 @@
 			}
 
 			&-img {
-				height: $uni-img-size-base;
-				width: $uni-img-size-base;
+				height: 22px;
+				width: 22px;
 				margin-right: 10px;
 			}
 
 			&-text {
 				flex: 1;
-				font-size: $uni-font-size-base;
+				font-size: 14px;
 				/* #ifndef APP-NVUE */
 				white-space: nowrap;
 				color: inherit;
@@ -343,7 +343,7 @@
 				transform: rotate(0deg);
 
 				&-active {
-					transform: rotate(180deg);
+					transform: rotate(-180deg);
 				}
 			}
 

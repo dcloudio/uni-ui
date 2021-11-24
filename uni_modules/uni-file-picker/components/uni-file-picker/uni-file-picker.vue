@@ -293,7 +293,7 @@
 						v.fileID = url
 						v.url = await this.getTempFileURL(url)
 					}
-					v.path = v.url
+					if(v.url) v.path = v.url
 					return v
 				}
 				if (this.returnType === 'object') {

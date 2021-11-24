@@ -1,22 +1,26 @@
 <template>
-	<view class="uni-combox">
+	<view class="uni-combox" :class="border ? '' : 'uni-combox__no-border'">
 		<view v-if="label" class="uni-combox__label" :style="labelStyle">
 			<text>{{label}}</text>
 		</view>
 		<view class="uni-combox__input-box">
-			<input class="uni-combox__input" type="text" :placeholder="placeholder" v-model="inputVal" @input="onInput"
-			 @focus="onFocus" @blur="onBlur" />
-			<uni-icons class="uni-combox__input-arrow" type="arrowdown" size="14" @click="toggleSelector"></uni-icons>
-			<view class="uni-combox__selector" v-if="showSelector">
-				<scroll-view scroll-y="true" class="uni-combox__selector-scroll">
-					<view class="uni-combox__selector-empty" v-if="filterCandidatesLength === 0">
-						<text>{{emptyTips}}</text>
-					</view>
-					<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" @click="onSelectorClick(index)">
-						<text>{{item}}</text>
-					</view>
-				</scroll-view>
-			</view>
+			<input class="uni-combox__input" type="text" :placeholder="placeholder" 
+			placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus" 
+@blur="onBlur" />
+			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
+			</uni-icons>
+		</view>
+		<view class="uni-combox__selector" v-if="showSelector">
+			<view class="uni-popper__arrow"></view>
+			<scroll-view scroll-y="true" class="uni-combox__selector-scroll">
+				<view class="uni-combox__selector-empty" v-if="filterCandidatesLength === 0">
+					<text>{{emptyTips}}</text>
+				</view>
+				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" 
+				@click="onSelectorClick(index)">
+					<text>{{item}}</text>
+				</view>
+			</scroll-view>
 		</view>
 	</view>
 </template>
@@ -35,8 +39,12 @@
 	 */
 	export default {
 		name: 'uniCombox',
-		emits:['input','update:modelValue'],
+		emits: ['input', 'update:modelValue'],
 		props: {
+			border: {
+				type: Boolean,
+				default: true
+			},
 			label: {
 				type: String,
 				default: ''
@@ -81,11 +89,9 @@
 		computed: {
 			labelStyle() {
 				if (this.labelWidth === 'auto') {
-					return {}
+					return ""
 				}
-				return {
-					width: this.labelWidth
-				}
+				return `width: ${this.labelWidth}`
 			},
 			filterCandidates() {
 				return this.candidates.filter((item) => {
@@ -144,10 +150,15 @@
 
 <style lang="scss" scoped>
 	.uni-combox {
+		font-size: 14px;
+		border: 1px solid #DCDFE6;
+		border-radius: 4px;
+		padding: 6px 10px;
+		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		height: 40px;
+		// height: 40px;
 		flex-direction: row;
 		align-items: center;
 		// border-bottom: solid 1px #DDDDDD;
@@ -172,13 +183,14 @@
 
 	.uni-combox__input {
 		flex: 1;
-		font-size: 16px;
+		font-size: 14px;
 		height: 22px;
 		line-height: 22px;
 	}
 
-	.uni-combox__input-arrow {
-		padding: 10px;
+	.uni-combox__input-plac {
+		font-size: 14px;
+		color: #999;
 	}
 
 	.uni-combox__selector {
@@ -186,13 +198,15 @@
 		box-sizing: border-box;
 		/* #endif */
 		position: absolute;
-		top: 42px;
+		top: calc(100% + 12px);
 		left: 0;
 		width: 100%;
 		background-color: #FFFFFF;
+		border: 1px solid #EBEEF5;
 		border-radius: 6px;
-		box-shadow: #DDDDDD 4px 4px 8px, #DDDDDD -4px -4px 8px;
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 		z-index: 2;
+		padding: 4px 0;
 	}
 
 	.uni-combox__selector-scroll {
@@ -200,21 +214,6 @@
 		max-height: 200px;
 		box-sizing: border-box;
 		/* #endif */
-	}
-
-	.uni-combox__selector::before {
-		/* #ifndef APP-NVUE */
-		content: '';
-		/* #endif */
-		position: absolute;
-		width: 0;
-		height: 0;
-		border-bottom: solid 6px #FFFFFF;
-		border-right: solid 6px transparent;
-		border-left: solid 6px transparent;
-		left: 50%;
-		top: -6px;
-		margin-left: -6px;
 	}
 
 	.uni-combox__selector-empty,
@@ -226,8 +225,12 @@
 		line-height: 36px;
 		font-size: 14px;
 		text-align: center;
-		border-bottom: solid 1px #DDDDDD;
-		margin: 0px 10px;
+		// border-bottom: solid 1px #DDDDDD;
+		padding: 0px 10px;
+	}
+
+	.uni-combox__selector-item:hover {
+		background-color: #f9f9f9;
 	}
 
 	.uni-combox__selector-empty:last-child,
@@ -235,5 +238,38 @@
 		/* #ifndef APP-NVUE */
 		border-bottom: none;
 		/* #endif */
+	}
+
+	// picker 弹出层通用的指示小三角
+	.uni-popper__arrow,
+	.uni-popper__arrow::after {
+		position: absolute;
+		display: block;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 6px;
+	}
+
+	.uni-popper__arrow {
+		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
+		top: -6px;
+		left: 10%;
+		margin-right: 3px;
+		border-top-width: 0;
+		border-bottom-color: #EBEEF5;
+	}
+
+	.uni-popper__arrow::after {
+		content: " ";
+		top: 1px;
+		margin-left: -6px;
+		border-top-width: 0;
+		border-bottom-color: #fff;
+	}
+
+	.uni-combox__no-border {
+		border: none;
 	}
 </style>
