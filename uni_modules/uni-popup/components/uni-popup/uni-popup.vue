@@ -30,7 +30,7 @@ import keypress from './keypress.js'
  * 	@value message 消息提示
  * 	@value dialog 对话框
  * 	@value share 底部分享示例
- * @property {Boolean} animation = [ture|false] 是否开启动画
+ * @property {Boolean} animation = [true|false] 是否开启动画
  * @property {Boolean} maskClick = [ture|false] 蒙版点击是否关闭弹窗
  * @property {String}  backgroundColor 					主窗口背景色
  * @property {Boolean} safeArea									是否适配底部安全区
