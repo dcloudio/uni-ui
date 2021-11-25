@@ -1,3 +1,11 @@
+> 当前插件不包含示例页面 ,如需示例请在 HBuiderX 中新建 `hello uni-app > 扩展组件` 中查看
+> 
+> 代码示例地址 ：[https://ext.dcloud.net.cn/plugin?id=4941](https://ext.dcloud.net.cn/plugin?id=4941)
+> 
+> 组件演示质地：[https://hellouniapp.dcloud.net.cn](https://hellouniapp.dcloud.net.cn/pages/extUI/badge/badge)
+> 
+> 组件文档地址：[https://uniapp.dcloud.io/component/uniui/uni-ui](https://uniapp.dcloud.io/component/uniui/uni-ui)
+
 # uni-ui 介绍
 
 ## uni-ui产品特点
