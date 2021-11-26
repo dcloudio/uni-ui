@@ -1,3 +1,7 @@
+## 1.7.2（2021-11-26）
+- 优化 组件示例
+## 1.7.1（2021-11-26）
+- 修复 vuedoc 文字错误
 ## 1.7.0（2021-11-19）
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-popup](https://uniapp.dcloud.io/component/uniui/uni-popup)
