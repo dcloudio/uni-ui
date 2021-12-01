@@ -150,7 +150,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-load-more {
 		/* #ifndef APP-NVUE */
 		display: flex;

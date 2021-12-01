@@ -256,7 +256,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-primary: #2979ff;
 	.uni-pagination {
 		/* #ifndef APP-NVUE */

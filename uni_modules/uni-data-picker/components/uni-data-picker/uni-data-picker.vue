@@ -292,7 +292,7 @@
 	}
 </script>
 
-<style scoped>
+<style >
 	.uni-data-tree {
 		position: relative;
 		font-size: 14px;

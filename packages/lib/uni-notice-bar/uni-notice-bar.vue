@@ -262,7 +262,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-noticebar {
 		/* #ifndef APP-NVUE */
 		display: flex;

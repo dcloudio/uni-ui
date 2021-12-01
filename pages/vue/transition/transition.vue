@@ -131,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .example {
 	/* #ifndef APP-NVUE */
 	display: flex;

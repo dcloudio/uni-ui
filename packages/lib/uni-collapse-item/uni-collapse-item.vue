@@ -249,7 +249,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-collapse-item {
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;

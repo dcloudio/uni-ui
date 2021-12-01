@@ -69,7 +69,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-primary: #2979ff !default;
 	
 	.uni-section {

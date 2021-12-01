@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 .log-box
 	position relative
 	width 100%

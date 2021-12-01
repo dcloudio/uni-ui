@@ -182,7 +182,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 
 	.demo-uni-row {
 		margin-bottom: 10px;

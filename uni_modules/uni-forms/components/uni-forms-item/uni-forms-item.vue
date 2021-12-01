@@ -379,7 +379,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .uni-forms-item {
 	position: relative;
 	padding: 0px;

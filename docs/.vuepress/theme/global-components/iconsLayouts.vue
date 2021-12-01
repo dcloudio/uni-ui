@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 @font-face
 	font-family uniicons
 	font-weight normal

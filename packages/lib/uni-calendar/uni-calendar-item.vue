@@ -95,7 +95,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-font-size-base:14px;
 	$uni-text-color:#333;
 	$uni-font-size-sm:12px;

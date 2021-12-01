@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 	.highlight
 		color #476582
 		background-color #1b1f230d

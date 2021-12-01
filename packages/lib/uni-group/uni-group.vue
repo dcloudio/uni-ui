@@ -77,7 +77,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-group {
 		background: #fff;
 		margin-top: 10px;

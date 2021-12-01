@@ -108,7 +108,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$fav-height: 25px;
 
 	.uni-fav {

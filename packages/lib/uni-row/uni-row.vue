@@ -180,7 +180,7 @@
 	}
 
 	// 字节、QQ配置后不生效
-	// 此处用法无法使用scoped
+	// 此处用法无法使用
 	/* #ifdef MP-WEIXIN || MP-TOUTIAO || MP-QQ */
 	:host {
 		display: block;

@@ -115,7 +115,7 @@
 	}
 </script>
 
-<style scoped>
+<style>
 	/* .uni-title {
 
 	} */

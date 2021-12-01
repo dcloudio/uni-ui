@@ -162,7 +162,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-popup-dialog {
 		width: 300px;
 		border-radius: 11px;

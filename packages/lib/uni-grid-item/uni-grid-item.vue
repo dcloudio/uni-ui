@@ -68,7 +68,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-grid-item {
 		/* #ifndef APP-NVUE */
 		height: 100%;

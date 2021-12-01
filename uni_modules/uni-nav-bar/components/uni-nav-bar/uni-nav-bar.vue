@@ -132,7 +132,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$nav-height: 44px;
 
 	.uni-nav-bar-text {

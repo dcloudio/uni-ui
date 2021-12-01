@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 .log-item
 	margin 10px 0
 	position relative
