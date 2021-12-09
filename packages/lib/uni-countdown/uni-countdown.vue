@@ -242,7 +242,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 	$font-size: 14px;
 
 	.uni-countdown {

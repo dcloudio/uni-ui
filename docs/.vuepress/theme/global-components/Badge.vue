@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 .badge
 	display inline-block
 	font-size 13px

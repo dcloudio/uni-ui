@@ -106,7 +106,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-grid-wrap {
 		/* #ifndef APP-NVUE */
 		display: flex;

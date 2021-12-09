@@ -131,7 +131,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-collapse {
 		/* #ifndef APP-NVUE */
 		width: 100%;

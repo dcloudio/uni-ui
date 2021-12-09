@@ -54,7 +54,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 .uni-list {
 	/* #ifndef APP-NVUE */
 	display: flex;

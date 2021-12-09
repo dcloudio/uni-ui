@@ -282,7 +282,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 	.uni-indexed-list {
 		position: absolute;
 		left: 0;

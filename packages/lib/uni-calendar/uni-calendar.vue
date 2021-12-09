@@ -356,7 +356,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-bg-color-mask: rgba($color: #000000, $alpha: 0.4);
 	$uni-border-color: #EDEDED;
 	$uni-text-color: #333;

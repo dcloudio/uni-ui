@@ -316,7 +316,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-error: #e43d33;
 	$uni-border-1: #DCDFE6 !default;
 	.uni-easyinput {

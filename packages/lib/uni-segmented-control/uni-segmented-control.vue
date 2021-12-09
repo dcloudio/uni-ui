@@ -87,7 +87,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	.segmented-control {
 		/* #ifndef APP-NVUE */
 		display: flex;

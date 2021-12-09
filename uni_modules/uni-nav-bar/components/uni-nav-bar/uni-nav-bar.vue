@@ -6,7 +6,7 @@
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
 				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
-						<uni-icons :color="color" :type="leftIcon" size="22" color="#333"/>
+						<uni-icons :color="color" :type="leftIcon" size="22"/>
 					</view>
 					<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length }" class="uni-navbar-btn-text uni-navbar__content_view"
 					 v-if="leftText.length">
@@ -132,7 +132,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$nav-height: 44px;
 
 	.uni-nav-bar-text {

@@ -21,9 +21,7 @@ uni-ui (根目录)
 如果需要修改组件需要到 `uni_modules` 下找到组件目录 ，修改对应文件即可
 
 ## 修改页面
-如果需要修改页面需要到 `pages > vue` 下找到组件页面目录 ，修改对应文件即可 ，nvue 下文件不需要修改，是根据`vue`下同名文件自动生成的
+如果需要修改页面需要到 `pages > vue` 下找到组件页面目录 ，修改对应文件即可 
 
 ## 修改文档
-如果需要修改组件文档需要到 `docs > components` 下找到组件文档，修改对应文件即可
-
-> 注意 ： 不要修改 `uni_modules` 下组件对应的文档 ，这个文档需要从 `docs` 目录下同步过来，如果修改的话，发布插件的时候会被老文档覆盖 
+文档已经迁移到 [https://github.com/dcloudio/unidocs-zh/tree/master/docs/component/uniui](https://github.com/dcloudio/unidocs-zh/tree/master/docs/component/uniui)

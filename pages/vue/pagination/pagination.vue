@@ -59,7 +59,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 
 	.example-body {
 		/* #ifndef APP-NVUE */

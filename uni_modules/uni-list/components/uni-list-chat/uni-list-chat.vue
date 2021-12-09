@@ -217,7 +217,7 @@
 	};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 	$uni-font-size-lg:16px;
 	$uni-spacing-row-sm: 5px;
 	$uni-spacing-row-base: 10px;

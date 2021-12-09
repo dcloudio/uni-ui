@@ -352,7 +352,7 @@ export default {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 .uni-popup {
 	position: fixed;
 	/* #ifndef APP-NVUE */

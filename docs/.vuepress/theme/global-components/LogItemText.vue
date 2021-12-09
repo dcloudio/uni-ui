@@ -68,7 +68,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
 .log-item-text
 	position relative
 	padding 10px 0

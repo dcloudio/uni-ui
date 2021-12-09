@@ -233,7 +233,7 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 	.uni-swipe {
 		position: relative;
 		/* #ifndef APP-NVUE */
