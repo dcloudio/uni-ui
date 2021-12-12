@@ -5,7 +5,7 @@
 		</uni-card>
 		<uni-section :title="'日期用法：' + single" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" :clearIcon="false" v-model="single" @maskClick="maskClick" />
+			<uni-datetime-picker type="date" :clear-icon="false" v-model="single" @maskClick="maskClick" />
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimesingle" type="line"></uni-section>
 		<view class="example-body">
