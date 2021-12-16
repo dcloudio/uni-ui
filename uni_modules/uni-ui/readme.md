@@ -2,7 +2,7 @@
 > 
 > 代码示例地址 ：[https://ext.dcloud.net.cn/plugin?id=4941](https://ext.dcloud.net.cn/plugin?id=4941)
 > 
-> 组件演示质地：[https://hellouniapp.dcloud.net.cn](https://hellouniapp.dcloud.net.cn/pages/extUI/badge/badge)
+> 组件演示地址：[https://hellouniapp.dcloud.net.cn](https://hellouniapp.dcloud.net.cn/pages/extUI/badge/badge)
 > 
 > 组件文档地址：[https://uniapp.dcloud.io/component/uniui/uni-ui](https://uniapp.dcloud.io/component/uniui/uni-ui)
 
