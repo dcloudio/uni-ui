@@ -84,7 +84,7 @@
 
 		<view>
 			<!-- 分享示例 -->
-			<uni-popup ref="share" type="share">
+			<uni-popup ref="share" type="share" safeArea backgroundColor="#fff">
 				<uni-popup-share></uni-popup-share>
 			</uni-popup>
 		</view>

@@ -151,12 +151,17 @@ export default {
 	},
 	mounted() {
 		const fixSize = () => {
-			const { windowWidth, windowHeight, windowTop, safeAreaInsets } = uni.getSystemInfoSync()
+			const { windowWidth, windowHeight, windowTop, safeArea,screenHeight ,safeAreaInsets } = uni.getSystemInfoSync()
 			this.popupWidth = windowWidth
 			this.popupHeight = windowHeight + windowTop
-			// 是否适配底部安全区
-			if(this.safeArea){
-				this.safeAreaInsets = safeAreaInsets
+			// TODO 是否适配底部安全区 ,目前微信ios 、和 app ios 计算有差异，需要框架修复
+			if(safeArea){
+				// #ifdef MP-WEIXIN
+				this.safeAreaInsets = screenHeight - safeArea.bottom
+				// #endif
+				// #ifndef MP-WEIXIN
+				this.safeAreaInsets = safeAreaInsets.bottom
+				// #endif
 			}else{
 				this.safeAreaInsets = 0
 			}
@@ -273,13 +278,12 @@ export default {
 		bottom(type) {
 			this.popupstyle = 'bottom'
 			this.ani = ['slide-bottom']
-
 			this.transClass = {
 				position: 'fixed',
 				left: 0,
 				right: 0,
 				bottom: 0,
-				paddingBottom: (this.safeAreaInsets && this.safeAreaInsets.bottom) || 0,
+				paddingBottom: this.safeAreaInsets+'px',
 				backgroundColor: this.bg
 			}
 			// TODO 兼容 type 属性 ，后续会废弃
