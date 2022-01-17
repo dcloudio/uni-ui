@@ -1,3 +1,15 @@
+## 1.4.10（2022-01-17）
+- uni-card 修复 在vue页面下略缩图显示不正常的bug
+- uni-datetime-picker 修复 clear-icon 属性在小程序平台不生效的 bug
+- uni-datetime-picker 修复 日期范围选在小程序平台，必须多点击一次才能取消选中状态的 bug
+- uni-fab 更新 组件依赖
+-
+- uni-icons 修复 nvue 有些图标不显示的bug，兼容老版本图标
+- uni-icons 优化 示例可复制图标名称
+- uni-nav-bar 修复 color 属性不生效的bug
+- uni-popup 修复 设置 safeArea 属性不生效的bug
+- uni-popup 优化 组件示例
+- uni-popup 修复 vuedoc 文字错误
 ## 1.4.9（2021-11-23）
 - uni-ui 修复 vue3中某些scss变量无法找到的问题
 - uni-combox 优化 label、label-width 属性

@@ -7,6 +7,51 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.10" date="2022-01-17">
+	<log-item title="uni-card 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue页面下略缩图显示不正常的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 clear-icon 属性在小程序平台不生效的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 日期范围选在小程序平台，必须多点击一次才能取消选中状态的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="perf">
+			 更新 组件依赖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 有些图标不显示的bug，兼容老版本图标
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 示例可复制图标名称
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 color 属性不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 设置 safeArea 属性不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件示例
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vuedoc 文字错误
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.9" date="2021-11-23">
 	<log-item title="uni-collapse 组件更新">
 		<log-item-text tag-type="fix">
