@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
-		<uni-nav-bar dark :fixed="true" shadow background-color="#007AFF" status-bar
-			left-icon="left" left-text="返回" title="自定义导航栏" @clickLeft="back" />
+		<uni-nav-bar dark :fixed="true" shadow background-color="#007AFF" status-bar left-icon="left" left-text="返回"
+			title="自定义导航栏" @clickLeft="back" />
 		<uni-card is-full :isShadow="false">
 			<text
 				class="uni-h6">本导航栏为自定义组件，并非原生导航栏。除非原生导航栏无法满足需求，否则不推荐使用自定义导航栏组件。具体参考https://ask.dcloud.net.cn/article/34921</text>
@@ -42,18 +42,17 @@
 				</view>
 			</view>
 		</uni-section>
-		<uni-section title="自定义高度" subTitle="使用 height 修改组件高度" type="line"
-			style="margin-bottom: 3px;">
+		<uni-section title="自定义高度" subTitle="使用 height 修改组件高度" type="line" style="margin-bottom: 3px;">
 			<view class="box-bg">
 				<view class="box-bg">
-					<uni-nav-bar height="65px" dark  shadow left-icon="left" leftText="返回"
-						rightText="设置" title="自定义高度" />
+					<uni-nav-bar height="65px" dark shadow left-icon="left" leftText="返回" rightText="设置"
+						title="自定义高度" />
 				</view>
 			</view>
 		</uni-section>
 		<uni-section title="自定义内容" subTitle="使用 left/right/default 插槽自定义内容" type="line" style="margin-bottom: 3px;">
 			<view class="box-bg">
-				<uni-nav-bar >
+				<uni-nav-bar>
 					<block slot="left">
 						<view class="city">
 							<view>
@@ -137,6 +136,7 @@
 
 <style lang="scss">
 	$nav-height: 30px;
+
 	.box-bg {
 		background-color: #F5F5F5;
 		padding: 5px 0;
