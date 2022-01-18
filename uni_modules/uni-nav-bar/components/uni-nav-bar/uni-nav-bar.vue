@@ -260,6 +260,9 @@
 	}
 
 	.uni-navbar__header-container {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		flex: 1;
 		overflow: hidden;
 	}
