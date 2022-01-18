@@ -219,6 +219,8 @@
 			startData() {
 				this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second)
 				if (this.seconds <= 0) {
+					this.seconds = this.toSeconds(0, 0, 0, 0, 0)
+					this.countDown()
 					return
 				}
 				clearInterval(this.timer)
@@ -232,6 +234,9 @@
 					this.countDown()
 				}, 1000)
 			},
+			update(){
+				this.startData();
+			},
 			changeFlag() {
 				if (!this.syncFlag) {
 					this.seconds = this.toSeconds(this.timestamp, this.day, this.hour, this.minute, this.second)
@@ -242,7 +247,7 @@
 		}
 	}
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 	$font-size: 14px;
 
 	.uni-countdown {
