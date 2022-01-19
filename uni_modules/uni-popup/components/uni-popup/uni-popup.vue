@@ -63,12 +63,12 @@ export default {
 		// maskClick
 		isMaskClick: {
 			type: Boolean,
-			default: true
+			default: null
 		},
 		// TODO 2 个版本后废弃属性 ，使用 isMaskClick
 		maskClick: {
 			type: Boolean,
-			default: true
+			default: null
 		},
 		backgroundColor: {
 			type: String,
@@ -199,7 +199,12 @@ export default {
 		// #endif
 	},
 	created() {
-		this.mkclick = this.maskClick || this.isMaskClick
+		// this.mkclick =  this.isMaskClick || this.maskClick
+		if(this.isMaskClick === null && this.maskClick === null){
+			this.mkclick  = true
+		}else{
+			this.mkclick = this.isMaskClick !== null ? this.isMaskClick : this.maskClick
+		}
 		if (this.animation) {
 			this.duration = 300
 		} else {

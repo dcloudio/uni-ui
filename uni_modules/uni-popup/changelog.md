@@ -1,3 +1,5 @@
+## 1.7.5（2022-01-19）
+- 修复 isMaskClick 失效的bug
 ## 1.7.4（2022-01-19）
 - 新增 cancelText \ confirmText 属性 ，可自定义文本
 - 新增 maskBackgroundColor 属性 ，可以修改蒙版颜色
