@@ -1,3 +1,5 @@
+## 1.3.1（2022-01-19）
+- 修复 微信小程序平台样式选择器报警告的问题
 ## 1.3.0（2021-11-19）
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-load-more](https://uniapp.dcloud.io/component/uniui/uni-load-more)
