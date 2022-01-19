@@ -1,3 +1,7 @@
+## 1.7.4（2022-01-19）
+- 新增 cancelText \ confirmText 属性 ，可自定义文本
+- 新增 maskBackgroundColor 属性 ，可以修改蒙版颜色
+- 优化 maskClick属性 更新为 isMaskClick ，解决微信小程序警告的问题
 ## 1.7.3（2022-01-13）
 - 修复 设置 safeArea 属性不生效的bug
 ## 1.7.2（2021-11-26）

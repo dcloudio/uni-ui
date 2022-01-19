@@ -165,7 +165,7 @@
 				type: Object,
 				default () {
 					return {
-						type: 'contact',
+						type: '',
 						color: '#000000',
 						size: 20
 					};
