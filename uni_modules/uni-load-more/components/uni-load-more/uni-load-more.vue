@@ -29,7 +29,7 @@
 			<image :src="imgBase64" mode="widthFix"></image>
 		</view>
 		<!-- #endif -->
-		<text class="uni-load-more__text"
+		<text v-if="showText" class="uni-load-more__text"
 			:style="{color: color}">{{ status === 'more' ? contentdownText : status === 'loading' ? contentrefreshText : contentnomoreText }}</text>
 	</view>
 </template>
@@ -100,6 +100,10 @@
 						contentnomore: ''
 					}
 				}
+			},
+			showText: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
@@ -161,12 +165,13 @@
 
 	.uni-load-more__text {
 		font-size: 14px;
+		margin-left: 8px;
 	}
 
 	.uni-load-more__img {
 		width: 24px;
 		height: 24px;
-		margin-right: 8px;
+		// margin-right: 8px;
 	}
 
 	.uni-load-more__img--nvue {
