@@ -213,7 +213,7 @@
 						// #endif
 						this.isheight = true
 						if (type) return
-						this.onClick(this.open,'init')
+						this.onClick(this.isOpen,'init')
 					})
 					.exec()
 			},

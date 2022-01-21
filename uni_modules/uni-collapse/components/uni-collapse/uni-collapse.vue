@@ -60,13 +60,14 @@
 			this.names = []
 		},
 		mounted() {
-			this.setOpen(this.dataValue)
+			this.$nextTick(()=>{
+				this.setOpen(this.dataValue)
+			})
 		},
 		methods: {
 			setOpen(val) {
 				let str = typeof val === 'string'
 				let arr = Array.isArray(val)
-
 				this.childrens.forEach((vm, index) => {
 					if (str) {
 						if (val === vm.nameSync) {
