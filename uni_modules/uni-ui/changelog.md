@@ -1,3 +1,21 @@
+## 1.4.11（2022-01-21）
+- uni-collapse 修复 微信小程序resize后组件收起的bug
+- uni-countdown 修复 在微信小程序中样式不生效的bug
+- uni-countdown 新增 update 方法 ，在动态更新时间后，刷新组件
+- uni-load-more 新增 showText属性 ，是否显示文本
+- uni-load-more 修复 nvue 平台下不显示文本的bug
+- uni-load-more 修复 微信小程序平台样式选择器报警告的问题
+- uni-nav-bar 修复 在vue下，标题不垂直居中的bug
+- uni-nav-bar 修复 height 属性类型错误
+- uni-nav-bar 新增 height 属性,可修改组件高度
+- uni-nav-bar 新增 dark 属性可可开启暗黑模式
+- uni-nav-bar 优化 标题字数过多显示省略号
+- uni-nav-bar 优化 插槽，插入内容可完全覆盖
+- uni-popup 修复 isMaskClick 失效的bug
+- uni-popup 新增 cancelText \ confirmText 属性 ，可自定义文本
+- uni-popup 新增 maskBackgroundColor 属性 ，可以修改蒙版颜色
+- uni-popup 优化 maskClick属性 更新为 isMaskClick ，解决微信小程序警告的问题
+
 ## 1.4.10（2022-01-17）
 - uni-card 修复 在vue页面下略缩图显示不正常的bug
 - uni-datetime-picker 修复 clear-icon 属性在小程序平台不生效的 bug

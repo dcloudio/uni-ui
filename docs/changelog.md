@@ -7,6 +7,72 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.11" date="2022-01-21">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序resize后组件收起的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="fix">
+			 在微信小程序中样式不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 update 方法 ，在动态更新时间后，刷新组件
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="feat">
+			 showText属性 ，是否显示文本
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue 平台下不显示文本的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 微信小程序平台样式选择器报警告的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue下，标题不垂直居中的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 height 属性类型错误
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 height 属性,可修改组件高度
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 dark 属性可可开启暗黑模式
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 标题字数过多显示省略号
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 插槽，插入内容可完全覆盖
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 isMaskClick 失效的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 cancelText \ confirmText 属性 ，可自定义文本
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 maskBackgroundColor 属性 ，可以修改蒙版颜色
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 maskClick属性 更新为 isMaskClick ，解决微信小程序警告的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-scss 组件更新">
+		<log-item-text tag-type="perf">
+			 组件示例
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.10" date="2022-01-17">
 	<log-item title="uni-card 组件更新">
 		<log-item-text tag-type="fix">
