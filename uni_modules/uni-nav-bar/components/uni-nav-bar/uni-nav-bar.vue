@@ -5,14 +5,14 @@
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
 				class="uni-navbar__header">
-				<view @tap="onClickLeft"
-					class="uni-navbar__header-btns uni-navbar__header-btns-left ">
-					<slot name="left" >
+				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left"
+					:style="{width:leftIconWidth}">
+					<slot name="left">
 						<view class="uni-navbar__content_view" v-if="leftIcon.length > 0">
-							<uni-icons :color="themeColor" :type="leftIcon" size="20"/>
+							<uni-icons :color="themeColor" :type="leftIcon" size="20" />
 						</view>
-						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }"
-							class="uni-navbar-btn-text" v-if="leftText.length">
+						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }" class="uni-navbar-btn-text"
+							v-if="leftText.length">
 							<text :style="{ color: themeColor, fontSize: '12px' }">{{ leftText }}</text>
 						</view>
 					</slot>
@@ -20,18 +20,18 @@
 				<view class="uni-navbar__header-container " @tap="onClickTitle">
 					<slot>
 						<view class="uni-navbar__header-container-inner" v-if="title.length>0">
-							<text class="uni-nav-bar-text uni-ellipsis-1" :style="{color: themeColor }">{{ title }}</text>
+							<text class="uni-nav-bar-text uni-ellipsis-1"
+								:style="{color: themeColor }">{{ title }}</text>
 						</view>
 					</slot>
 				</view>
-				<view @click="onClickRight"
-					class="uni-navbar__header-btns uni-navbar__header-btns-right">
-					<slot name="right" >
+				<view @click="onClickRight" class="uni-navbar__header-btns uni-navbar__header-btns-right"
+					:style="{width:rightIconWidth}">
+					<slot name="right">
 						<view v-if="rightIcon.length">
 							<uni-icons :color="themeColor" :type="rightIcon" size="22" />
 						</view>
-						<view class="uni-navbar-btn-text"
-							v-if="rightText.length && !rightIcon.length">
+						<view class="uni-navbar-btn-text" v-if="rightText.length && !rightIcon.length">
 							<text class="uni-nav-bar-right-text" :style="{ color: themeColor}">{{ rightText }}</text>
 						</view>
 					</slot>
@@ -40,13 +40,14 @@
 		</view>
 		<view class="uni-navbar__placeholder" v-if="fixed">
 			<status-bar v-if="statusBar" />
-			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}"/>
+			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}" />
 		</view>
 	</view>
 </template>
 
 <script>
 	import statusBar from "./uni-status-bar.vue";
+	const getVal = (val) => typeof val === 'number' ? val + 'px' : val;
 
 	/**
 	 * NavBar 自定义导航栏
@@ -125,36 +126,47 @@
 			height: {
 				type: [Number, String],
 				default: 44
-			}
+			},
+			leftWidth: {
+				type: [Number, String],
+				default: 60
+			},
+			rightWidth: {
+				type: [Number, String],
+				default: 60
+			},
 		},
-		computed:{
-			themeBgColor(){
-				if(this.dark){
+		computed: {
+			themeBgColor() {
+				if (this.dark) {
 					// 默认值
-					if(this.backgroundColor){
+					if (this.backgroundColor) {
 						return this.backgroundColor
-					}else{
-						return this.dark?'#333':'#FFF'
+					} else {
+						return this.dark ? '#333' : '#FFF'
 					}
 				}
-				return  this.backgroundColor || '#FFF'
+				return this.backgroundColor || '#FFF'
 			},
-			themeColor(){
-				if(this.dark){
+			themeColor() {
+				if (this.dark) {
 					// 默认值
-					if(this.color){
+					if (this.color) {
 						return this.color
-					}else{
-						return this.dark?'#fff':'#333'
+					} else {
+						return this.dark ? '#fff' : '#333'
 					}
 				}
 				return this.color || '#333'
 			},
-			navbarHeight(){
-				if(typeof this.height === 'number'){
-					return this.height + 'px'
-				}
-				return this.height
+			navbarHeight() {
+				return getVal(this.height)
+			},
+			leftIconWidth() {
+				return getVal(this.leftWidth)
+			},
+			rightIconWidth() {
+				return getVal(this.rightWidth)
 			}
 		},
 		mounted() {
@@ -178,9 +190,11 @@
 
 <style lang="scss" scoped>
 	$nav-height: 44px;
+
 	.uni-navbar {
 		// box-sizing: border-box;
 	}
+
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
 		font-size: 34rpx;
@@ -204,6 +218,7 @@
 	.uni-navbar__content_view {
 		// box-sizing: border-box;
 	}
+
 	.uni-navbar-btn-text {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -264,6 +279,7 @@
 		display: flex;
 		/* #endif */
 		flex: 1;
+		padding: 0 10px;
 		overflow: hidden;
 	}
 
@@ -320,9 +336,7 @@
 		text-overflow: ellipsis;
 		/* #endif */
 	}
+
 	// 暗主题配置
-	.uni-dark {
-
-	}
-
+	.uni-dark {}
 </style>
