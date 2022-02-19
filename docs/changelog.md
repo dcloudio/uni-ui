@@ -7,6 +7,40 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.12" date="2022-02-19">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 初始化的时候 ，open 属性失效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 multiple 为 true 时，v-model 的值为 null 报错的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="perf">
+			 size 属性可以传入不带单位的字符串数值
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 size 支持其他单位
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 更新 组件示例
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 left-width/right-width属性 ，可修改左右两侧的宽度
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 safeArea 属性不能设置为false的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.11" date="2022-01-21">
 	<log-item title="uni-collapse 组件更新">
 		<log-item-text tag-type="fix">

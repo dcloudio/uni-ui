@@ -1,3 +1,10 @@
+## 1.4.12（2022-02-19）
+- uni-collapse 修复 初始化的时候 ，open 属性失效的bug
+- uni-data-checkbox 修复 multiple 为 true 时，v-model 的值为 null 报错的 bug
+- uni-icons 优化 size 属性可以传入不带单位的字符串数值
+- uni-icons 优化 size 支持其他单位
+- uni-nav-bar 新增 left-width/right-width属性 ，可修改左右两侧的宽度
+- uni-popup 修复 safeArea 属性不能设置为false的bug
 ## 1.4.11（2022-01-21）
 - uni-collapse 修复 微信小程序resize后组件收起的bug
 - uni-countdown 修复 在微信小程序中样式不生效的bug
