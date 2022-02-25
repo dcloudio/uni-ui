@@ -7,7 +7,7 @@
 			<view class="uni-list-chat__container">
 				<view class="uni-list-chat__header-warp">
 					<view v-if="avatarCircle || avatarList.length === 0" class="uni-list-chat__header" :class="{ 'header--circle': avatarCircle }">
-						<image class="uni-list-chat__header-image" :src="avatar" mode="aspectFill"></image>
+						<image class="uni-list-chat__header-image" :class="{ 'header--circle': avatarCircle }" :src="avatar" mode="aspectFill"></image>
 					</view>
 					<!-- 头像组 -->
 					<view v-else class="uni-list-chat__header">
