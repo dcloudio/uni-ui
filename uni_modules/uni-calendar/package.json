@@ -1,7 +1,7 @@
 {
   "id": "uni-calendar",
   "displayName": "uni-calendar 日历",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "日历组件",
   "keywords": [
     "uni-ui",
@@ -42,7 +42,7 @@
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
   },
   "uni_modules": {
-    "dependencies": ["uni-scss"],
+    "dependencies": [],
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -80,7 +80,7 @@
         },
         "Vue": {
             "vue2": "y",
-            "vue3": "u"
+            "vue3": "y"
         }
       }
     }

@@ -185,9 +185,13 @@
 			},
 			startDate(val){
 				this.cale.resetSatrtDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			endDate(val){
 				this.cale.resetEndDate(val)
+				this.cale.setDate(this.nowDate.fullDate)
+				this.weeks = this.cale.weeks
 			},
 			selected(newVal) {
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
@@ -356,15 +360,7 @@
 	}
 </script>
 
-<style lang="scss" >
-	$uni-bg-color-mask: rgba($color: #000000, $alpha: 0.4);
-	$uni-border-color: #EDEDED;
-	$uni-text-color: #333;
-	$uni-bg-color-hover:#f1f1f1;
-	$uni-font-size-base:14px;
-	$uni-text-color-placeholder: #808080;
-	$uni-color-subtitle: #555555;
-	$uni-text-color-grey:#999;
+<style lang="scss" scoped>
 	.uni-calendar {
 		/* #ifndef APP-NVUE */
 		display: flex;
