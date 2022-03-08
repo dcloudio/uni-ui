@@ -1,3 +1,5 @@
+## 1.3.1（2022-03-07）
+- 修复 HBuilderX 1.4.X 版本中，h5和app端下报错的bug
 ## 1.3.0（2021-11-19）
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-swipe-action](https://uniapp.dcloud.io/component/uniui/uni-swipe-action)
