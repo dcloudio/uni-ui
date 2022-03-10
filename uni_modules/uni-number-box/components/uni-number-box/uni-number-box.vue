@@ -132,8 +132,8 @@
 			_onBlur(event) {
 				this.$emit('blur', event)
 				let value = event.detail.value;
-				if (!value) {
-					// this.inputValue = 0;
+				if (isNaN(value)) {
+					this.inputValue = this.min;
 					return;
 				}
 				value = +value;
