@@ -12,7 +12,7 @@
 				<slot name="right"></slot>
 			</view>
 		</view>
-		<view :style="{padding: padding ? '10px' : ''}">
+		<view :style="{padding: padding ? '10px' : ''}" style="overflow: hidden;" >
 			<slot/>
 		</view>
 	</view>
