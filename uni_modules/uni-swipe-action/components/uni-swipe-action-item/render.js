@@ -3,7 +3,7 @@ export default {
 	showWatch(newVal, oldVal, ownerInstance, instance,self) {
 		var state = self.state
 		var $el = ownerInstance.$el || ownerInstance.$vm && ownerInstance.$vm.$el
-		if(!el) return
+		if(!$el) return
 		this.getDom(instance, ownerInstance,self)
 		if (newVal && newVal !== 'none') {
 			this.openState(newVal, instance, ownerInstance,self)
