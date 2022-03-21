@@ -302,7 +302,6 @@
 		/* #ifndef APP-NVUE */
 		flex-shrink: 0;
 		/* #endif */
-		font-size: 14px;
 	}
 
 	.ani {
