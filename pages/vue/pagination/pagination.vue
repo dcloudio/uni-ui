@@ -34,14 +34,14 @@
 		data() {
 			return {
 				current: 3,
-				total:10,
+				total: 10,
 				pageSize: 10
 			}
 		},
 		mounted() {
 			setTimeout(() => {
 				this.current = 5
-			},3000)
+			}, 3000)
 		},
 		methods: {
 			add() {
@@ -59,8 +59,7 @@
 	}
 </script>
 
-<style lang="scss" >
-
+<style lang="scss">
 	.example-body {
 		/* #ifndef APP-NVUE */
 		display: block;

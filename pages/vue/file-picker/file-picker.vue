@@ -30,7 +30,7 @@
 					file-mediatype="image">选择</uni-file-picker>
 			</view>
 		</uni-section>
-		
+
 		<uni-section title="自定义图片大小" type="line">
 			<view class="example-body ">
 				<uni-file-picker readonly :value="fileLists" :imageStyles="imageStyles" file-mediatype="image">
@@ -90,9 +90,10 @@
 
 <style lang="scss">
 	.example-body {
-		padding:10px;
+		padding: 10px;
 		padding-top: 0;
 	}
+
 	.custom-image-box {
 		/* #ifndef APP-NVUE */
 		display: flex;

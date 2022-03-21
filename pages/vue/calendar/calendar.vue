@@ -4,14 +4,16 @@
 		<uni-section title="插入模式" type="line"></uni-section>
 		<view>
 			<!-- 插入模式 -->
-			<uni-calendar class="uni-calendar--hook" :selected="info.selected" :showMonth="false" @change="change" @monthSwitch="monthSwitch" />
+			<uni-calendar class="uni-calendar--hook" :selected="info.selected" :showMonth="false" @change="change"
+				@monthSwitch="monthSwitch" />
 		</view>
 		<uni-section class="hideOnPc" title="弹出模式" type="line"></uni-section>
 		<view class="example-body hideOnPc">
 			<button class="calendar-button" type="button" @click="open">打开日历</button>
 		</view>
-		<uni-calendar ref="calendar" class="uni-calendar--hook" :clear-date="true" :date="info.date" :insert="info.insert" :lunar="info.lunar" :startDate="info.startDate"
-		 :endDate="info.endDate" :range="info.range" @confirm="confirm" @close="close"/>
+		<uni-calendar ref="calendar" class="uni-calendar--hook" :clear-date="true" :date="info.date"
+			:insert="info.insert" :lunar="info.lunar" :startDate="info.startDate" :endDate="info.endDate"
+			:range="info.range" @confirm="confirm" @close="close" />
 	</view>
 </template>
 
@@ -60,15 +62,15 @@
 			})
 			// TODO 模拟请求异步同步数据
 			setTimeout(() => {
-				this.info.date = getDate(new Date(),-30).fullDate
-				this.info.startDate = getDate(new Date(),-60).fullDate
-				this.info.endDate =  getDate(new Date(),30).fullDate
+				this.info.date = getDate(new Date(), -30).fullDate
+				this.info.startDate = getDate(new Date(), -60).fullDate
+				this.info.endDate = getDate(new Date(), 30).fullDate
 				this.info.selected = [{
-						date: getDate(new Date(),-3).fullDate,
+						date: getDate(new Date(), -3).fullDate,
 						info: '打卡'
 					},
 					{
-						date: getDate(new Date(),-2).fullDate,
+						date: getDate(new Date(), -2).fullDate,
 						info: '签到',
 						data: {
 							custom: '自定义信息',
@@ -76,7 +78,7 @@
 						}
 					},
 					{
-						date: getDate(new Date(),-1).fullDate,
+						date: getDate(new Date(), -1).fullDate,
 						info: '已打卡'
 					}
 				]
@@ -86,7 +88,7 @@
 			open() {
 				this.$refs.calendar.open()
 			},
-			close(){
+			close() {
 				console.log('弹窗关闭');
 			},
 			change(e) {
@@ -115,6 +117,7 @@
 		/* #endif */
 		flex-direction: row;
 	}
+
 	.calendar-button {
 		flex: 1;
 		font-weight: bold;
