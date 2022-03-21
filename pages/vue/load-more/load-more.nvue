@@ -20,18 +20,18 @@
 		</uni-section>
 
 		<uni-section title="改变组件状态" type="line">
-		<radio-group class="uni-list" @change="onChange">
-			<view v-for="(item, index) in statusTypes" :key="index" class="uni-list-item">
-				<view class="uni-list-item__container">
-					<view class="uni-list-item__content">
-						<text class="uni-list-item__content-title">{{ item.text }}</text>
-					</view>
-					<view class="uni-list-item__extra">
-						<radio :value="item.value" :checked="item.checked" />
+			<radio-group class="uni-list" @change="onChange">
+				<view v-for="(item, index) in statusTypes" :key="index" class="uni-list-item">
+					<view class="uni-list-item__container">
+						<view class="uni-list-item__content">
+							<text class="uni-list-item__content-title">{{ item.text }}</text>
+						</view>
+						<view class="uni-list-item__extra">
+							<radio :value="item.value" :checked="item.checked" />
+						</view>
 					</view>
 				</view>
-			</view>
-		</radio-group>
+			</radio-group>
 		</uni-section>
 
 	</view>
@@ -77,7 +77,6 @@
 </script>
 
 <style lang="scss">
-
 	.uni-list-item {
 		border-bottom-style: solid;
 		border-bottom-width: 1px;

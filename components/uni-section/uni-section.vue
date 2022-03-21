@@ -12,7 +12,7 @@
 				<slot name="right"></slot>
 			</view>
 		</view>
-		<view :style="{padding: padding ? '10px' : ''}" style="overflow: hidden;" >
+		<view :class="{'is--hidden':overflow}" :style="{padding: padding ? '10px' : ''}">
 			<slot/>
 		</view>
 	</view>
@@ -51,6 +51,10 @@
 				default: ''
 			},
 			padding: {
+				type: Boolean,
+				default: false
+			},
+			overflow :{
 				type: Boolean,
 				default: false
 			}
@@ -139,5 +143,8 @@
 		color: #999;
 		line-height: 16px;
 		margin-top: 2px;
+	}
+	.is--hidden {
+		overflow: hidden;
 	}
 </style>

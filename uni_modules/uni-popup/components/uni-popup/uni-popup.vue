@@ -268,6 +268,11 @@
 			},
 
 			open(direction) {
+				// fix by mehaotian 处理快速打开关闭的情况
+				if(this.showPopup){
+					clearTimeout(this.timer)
+					this.showPopup = false
+				}
 				let innerType = ['top', 'center', 'bottom', 'left', 'right', 'message', 'dialog', 'share']
 				if (!(direction && innerType.indexOf(direction) !== -1)) {
 					direction = this.type

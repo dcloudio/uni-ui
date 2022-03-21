@@ -76,16 +76,16 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				this.datetimesingle = Date.now() - 2*24*3600*1000
+				this.datetimesingle = Date.now() - 2 * 24 * 3600 * 1000
 				this.single = '2021-2-12'
 				// this.range = ['2021-03-1', '2021-4-28']
 				this.datetimerange = ["2021-07-08 0:01:10", "2021-08-08 23:59:59"]
 				// this.start = '2021-07-10'
 				// this.end = '2021-07-20'
-			},3000)
+			}, 3000)
 		},
 
-		methods:{
+		methods: {
 			change(e) {
 				this.single = e
 				console.log('----change事件:', this.single = e);
@@ -93,7 +93,7 @@
 			changeLog(e) {
 				console.log('----change事件:', e);
 			},
-			maskClick(e){
+			maskClick(e) {
 				console.log('----maskClick事件:', e);
 			}
 		}
