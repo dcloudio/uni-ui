@@ -189,7 +189,7 @@
 					safeAreaInsets
 				} = uni.getSystemInfoSync()
 				this.popupWidth = windowWidth
-				this.popupHeight = windowHeight + windowTop
+				this.popupHeight = windowHeight + (windowTop || 0)
 				// TODO fix by mehaotian 是否适配底部安全区 ,目前微信ios 、和 app ios 计算有差异，需要框架修复
 				if (safeArea && this.safeArea) {
 					// #ifdef MP-WEIXIN
@@ -269,7 +269,7 @@
 
 			open(direction) {
 				// fix by mehaotian 处理快速打开关闭的情况
-				if(this.showPopup){
+				if (this.showPopup) {
 					clearTimeout(this.timer)
 					this.showPopup = false
 				}
