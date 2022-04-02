@@ -1,3 +1,5 @@
+## 1.0.1（2022-04-02）
+- 修复 value不能为0的bug
 ## 1.0.0（2021-11-19）
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-easyinput](https://uniapp.dcloud.io/component/uniui/uni-easyinput)
