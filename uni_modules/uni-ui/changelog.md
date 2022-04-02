@@ -1,3 +1,17 @@
+## 1.4.13（2022-04-02）
+- uni-calendar 修复 条件编译 nvue 不支持的 css 样式
+- uni-calendar 修复 startDate、 endDate 属性失效的 bug
+- uni-data-picker 修复 nvue 不支持的 v-show 的 bug
+- uni-data-picker 修复 条件编译 nvue 不支持的 css 样式
+- uni-datetime-picker 修复 Vue3 下动态赋值未响应的 bug
+- uni-easyinput 修复 value不能为0的bug
+- uni-popup 修复 弹出层内部无法滚动的bug
+- uni-popup 修复 小程序中高度错误的bug
+- uni-popup 修复 快速调用open出现问题的Bug
+- uni-rate 修复 条件判断 `NaN` 错误的 bug
+- uni-swipe-action 修复 按钮字体大小不能设置的bug
+- uni-swipe-action 修复 h5和app端下报el错误的bug
+- uni-swipe-action 修复 HBuilderX 1.4.X 版本中，h5和app端下报错的bug
 ## 1.4.12（2022-02-19）
 - uni-collapse 修复 初始化的时候 ，open 属性失效的bug
 - uni-data-checkbox 修复 multiple 为 true 时，v-model 的值为 null 报错的 bug

@@ -7,6 +7,70 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.13" date="2022-04-02">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 条件编译 nvue 不支持的 css 样式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 条件编译 nvue 不支持的 css 样式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 startDate、 endDate 属性失效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 不支持的 v-show 的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 条件编译 nvue 不支持的 css 样式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 Vue3 下动态赋值未响应的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 value不能为0的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="perf">
+			 删除无用文件
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出层内部无法滚动的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 小程序中高度错误的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 快速调用open出现问题的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="fix">
+			 条件判断 `NaN` 错误的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 按钮字体大小不能设置的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5和app端下报el错误的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 HBuilderX 1.4.X 版本中，h5和app端下报错的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.12" date="2022-02-19">
 	<log-item title="uni-collapse 组件更新">
 		<log-item-text tag-type="fix">
