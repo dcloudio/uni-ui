@@ -140,7 +140,7 @@
 			setList() {
 				let index = 0;
 				this.lists = []
-				this.options.forEach((value, index) => {
+				this.options.forEach((value) => {
 					if (value.data.length === 0) {
 						return
 					}
