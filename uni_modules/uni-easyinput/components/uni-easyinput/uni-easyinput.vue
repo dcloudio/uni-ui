@@ -206,7 +206,7 @@
 			if(!this.value && this.value !== 0){
 				this.val = this.modelValue
 			}
-			if(!this.modelValue === '' && this.modelValue !== 0){
+			if(!this.modelValue && this.modelValue !== 0){
 				this.val = this.value
 			}
 			this.form = this.getForm('uniForms')
