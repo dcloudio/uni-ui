@@ -1,3 +1,6 @@
+## 1.4.14（2022-04-18）
+- uni-datetime-picker 修复 Vue3 下动态赋值,单选类型未响应的 bug
+- uni-easyinput 修复 默认值不生效的bug
 ## 1.4.13（2022-04-02）
 - uni-calendar 修复 条件编译 nvue 不支持的 css 样式
 - uni-calendar 修复 startDate、 endDate 属性失效的 bug
