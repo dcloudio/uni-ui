@@ -37,6 +37,11 @@
 					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'" v-for="(view, index) in forms"
 						:key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
+				<uni-section title="DataCom组件" color="#007aff" type="line"></uni-section>
+				<uni-list>
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'" v-for="(view, index) in dataComs"
+						:key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
+				</uni-list>
 				<uni-section title="功能组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
 					<uni-list-item show-arrow :thumb="'/static/icons/'+func.url+'.png'"
@@ -127,6 +132,23 @@
 					}
 				],
 				forms: [{
+						name: 'Easyinput 增强输入框',
+						url: 'easyinput'
+					}, {
+						name: 'Form 表单',
+						url: 'forms'
+					}, {
+						name: 'Group 分组',
+						url: 'group'
+					}, {
+						name: 'FilePicker 文件选择上传',
+						url: 'file-picker'
+					}, {
+						name: 'NumberBox 数字输入框',
+						url: 'number-box'
+					}
+				],
+				dataComs: [{
 						name: 'DataCheckbox 单选复选框',
 						url: 'data-checkbox'
 					},
@@ -144,24 +166,8 @@
 					{
 						name: 'DatetimePicker 日期时间选择',
 						url: 'datetime-picker'
-					},
-					// #endif
-					{
-						name: 'Easyinput 增强输入框',
-						url: 'easyinput'
-					}, {
-						name: 'Form 表单',
-						url: 'forms'
-					}, {
-						name: 'Group 分组',
-						url: 'group'
-					}, {
-						name: 'FilePicker 文件选择上传',
-						url: 'file-picker'
-					}, {
-						name: 'NumberBox 数字输入框',
-						url: 'number-box'
 					}
+					// #endif
 				],
 				functionals: [
 					// {

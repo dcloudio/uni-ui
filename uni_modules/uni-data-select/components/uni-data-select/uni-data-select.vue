@@ -68,10 +68,10 @@
 				type: String,
 				default: ''
 			},
-			mode: {
-				type: String,
-				default: ''
-			},
+			// mode: {
+			// 	type: String,
+			// 	default: ''
+			// },
 			label: {
 				type: String,
 				default: ''
