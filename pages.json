@@ -38,6 +38,12 @@
 		}
 	},
 	{
+		"path": "pages/vue/breadcrumb/breadcrumb",
+		"style": {
+			"navigationBarTitleText": "Breadcrumb 面包屑"
+		}
+	},
+	{
 		"path": "pages/vue/countdown/countdown",
 		"style": {
 			"navigationBarTitleText": "Countdown 倒计时"
@@ -264,6 +270,13 @@
 		"path": "pages/vue/data-checkbox/data-checkbox",
 		"style": {
 			"navigationBarTitleText": "DataCheckbox 单选复选框",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/vue/data-select/data-select",
+		"style": {
+			"navigationBarTitleText": "DataSelect 下拉框选择器",
 			"enablePullDownRefresh": false
 		}
 
