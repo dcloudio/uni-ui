@@ -241,6 +241,10 @@
 					{
 						name: 'Dateformat 日期格式化',
 						url: 'dateformat'
+					},
+					{
+						name: 'Tooltip 文字提示',
+						url: 'tooltip'
 					}
 				],
 				navigations: [{
