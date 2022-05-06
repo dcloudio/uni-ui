@@ -5,7 +5,8 @@
 			<image class="home-header__logo" src="../../static/image/uniui-logo.png" mode="aspectFit"></image>
 			<view class="home-header__content">
 				<view class="home-header__content-title">全端兼容 高性能</view>
-				<view><text class="home-header__content-subtitle">uni-ui 是 DCloud 官方面向uni-app开发者提供的一套 ui 解决方案</text></view>
+				<view><text class="home-header__content-subtitle">uni-ui 是 DCloud 官方面向uni-app开发者提供的一套 ui 解决方案</text>
+				</view>
 			</view>
 		</view>
 
@@ -20,11 +21,11 @@
 				</uni-list>
 				<uni-section title="基础组件" sub-title="封装常用功能的组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'"
-						v-for="(view, index) in views" :key="index" :title="view.name" link
-						:to='`/pages/${platform}/${view.url}/${view.url}`' />
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'" v-for="(view, index) in views"
+						:key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
-				<uni-section title="布局组件" sub-title="使复杂的布局变得简单" color="#007aff" type="line" style="margin-top: 0;"></uni-section>
+				<uni-section title="布局组件" sub-title="使复杂的布局变得简单" color="#007aff" type="line" style="margin-top: 0;">
+				</uni-section>
 				<uni-list>
 					<uni-list-item show-arrow :thumb="'/static/icons/'+layout.url+'.png'"
 						v-for="(layout, index) in layouts" :key="index" :title="layout.name" link
@@ -33,9 +34,13 @@
 
 				<uni-section title="表单组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
-					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'"
-						v-for="(view, index) in forms" :key="index" :title="view.name" link
-						:to='`/pages/${platform}/${view.url}/${view.url}`' />
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'" v-for="(view, index) in forms"
+						:key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
+				</uni-list>
+				<uni-section title="DataCom组件" color="#007aff" type="line"></uni-section>
+				<uni-list>
+					<uni-list-item show-arrow :thumb="'/static/icons/'+view.url+'.png'" v-for="(view, index) in dataComs"
+						:key="index" :title="view.name" link :to='`/pages/${platform}/${view.url}/${view.url}`' />
 				</uni-list>
 				<uni-section title="功能组件" color="#007aff" type="line"></uni-section>
 				<uni-list>
@@ -99,64 +104,71 @@
 
 				],
 				views: [{
-					name: 'Badge 数字角标',
-					url: 'badge'
-				},
-				{
-					name: 'Fab 悬浮按钮',
-					url: 'fab'
-				},
-				{
-					name: 'Fav 收藏按钮',
-					url: 'fav'
-				},
-				{
-					name: 'Icons 图标',
-					url: 'icons'
-				},
-				{
-					name: 'NoticeBar 通告栏',
-					url: 'notice-bar'
-				},
-				{
-					name: 'Tag 标签',
-					url: 'tag'
-				}, {
-					name: 'Transition 过渡动画',
-					url: 'transition'
-				}],
+						name: 'Badge 数字角标',
+						url: 'badge'
+					},
+					{
+						name: 'Fab 悬浮按钮',
+						url: 'fab'
+					},
+					{
+						name: 'Fav 收藏按钮',
+						url: 'fav'
+					},
+					{
+						name: 'Icons 图标',
+						url: 'icons'
+					},
+					{
+						name: 'NoticeBar 通告栏',
+						url: 'notice-bar'
+					},
+					{
+						name: 'Tag 标签',
+						url: 'tag'
+					}, {
+						name: 'Transition 过渡动画',
+						url: 'transition'
+					}
+				],
 				forms: [{
-					name: 'DataCheckbox 单选复选框',
-					url: 'data-checkbox'
-				},
-				// #ifndef MP-KUAISHOU
-				{
-					name: 'DataPicker 级联选择',
-					url: 'data-picker'
-				},
-				// #endif
-				// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-TOUTIAO || MP-BAIDU
-				{
-					name: 'DatetimePicker 日期时间选择',
-					url: 'datetime-picker'
-				},
-				// #endif
-				{
-					name: 'Easyinput 增强输入框',
-					url: 'easyinput'
-				}, {
-					name: 'Form 表单',
-					url: 'forms'
-				}, {
-					name: 'Group 分组',
-					url: 'group'
-				}, {
-					name: 'FilePicker 文件选择上传',
-					url: 'file-picker'
-				}, {
-					name: 'NumberBox 数字输入框',
-					url: 'number-box'
-				}],
+						name: 'Easyinput 增强输入框',
+						url: 'easyinput'
+					}, {
+						name: 'Form 表单',
+						url: 'forms'
+					}, {
+						name: 'Group 分组',
+						url: 'group'
+					}, {
+						name: 'FilePicker 文件选择上传',
+						url: 'file-picker'
+					}, {
+						name: 'NumberBox 数字输入框',
+						url: 'number-box'
+					}
+				],
+				dataComs: [{
+						name: 'DataCheckbox 单选复选框',
+						url: 'data-checkbox'
+					},
+					{
+						name: 'DataSelect 下拉框选择器',
+						url: 'data-select'
+					},
+					// #ifndef MP-KUAISHOU
+					{
+						name: 'DataPicker 级联选择',
+						url: 'data-picker'
+					},
+					// #endif
+					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-TOUTIAO || MP-BAIDU
+					{
+						name: 'DatetimePicker 日期时间选择',
+						url: 'datetime-picker'
+					}
+					// #endif
+				],
 				functionals: [
 					// {
 					// 	name: 'Calendar 日历',
@@ -229,16 +241,24 @@
 					{
 						name: 'Dateformat 日期格式化',
 						url: 'dateformat'
+					},
+					{
+						name: 'Tooltip 文字提示',
+						url: 'tooltip'
 					}
 				],
 				navigations: [{
-					name: 'NavBar 导航栏',
-					url: 'nav-bar'
-				},
-				{
-					name: 'GoodsNav 商品导航',
-					url: 'goods-nav'
-				}],
+						name: 'Breadcrumb 面包屑',
+						url: 'breadcrumb'
+					}, {
+						name: 'NavBar 导航栏',
+						url: 'nav-bar'
+					},
+					{
+						name: 'GoodsNav 商品导航',
+						url: 'goods-nav'
+					}
+				],
 				platform: 'vue'
 			}
 		},
@@ -262,6 +282,7 @@
 		background-color: #fff;
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
+
 		/* #endif */
 		&__bg {
 			display: flex;
