@@ -1,4 +1,4 @@
-s<template>
+<template>
 	<view class="uni-searchbar">
 		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<view class="uni-searchbar__box-icon-search">
