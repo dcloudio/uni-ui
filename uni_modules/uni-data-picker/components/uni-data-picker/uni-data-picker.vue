@@ -212,7 +212,9 @@
 			},
 			onchange(e) {
 				this.hide()
-				this.inputSelected = e
+				this.$nextTick(() => {
+					this.inputSelected = e;
+				})
 				this._dispatchEvent(e)
 			},
 			_processReadonly(dataList, value) {
