@@ -6,9 +6,9 @@
 		<uni-section title="本地数据" type="line">
 			<uni-data-select v-model="value" :localdata="range" @change="change"></uni-data-select>
 		</uni-section>
-		<uni-section title="云端数据" subTitle="连接云服务空间, 且存在相关的数据表才能生效(此处演示, 未连接云服务空间, 故不生效, 且有报错)" type="line">
+<!-- 		<uni-section title="云端数据" subTitle="连接云服务空间, 且存在相关的数据表才能生效(此处演示, 未连接云服务空间, 故不生效, 且有报错)" type="line">
 			<uni-data-select collection="opendb-app-list" field="appid as value, name as text" v-mode="value" />
-		</uni-section>
+		</uni-section> -->
 		<uni-section title="是否可清除已选项" type="line">
 			<uni-data-select v-model="value" :localdata="range" @change="change" :clear="false"></uni-data-select>
 		</uni-section>

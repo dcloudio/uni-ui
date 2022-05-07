@@ -1,11 +1,14 @@
 {
   "id": "uni-data-select",
   "displayName": "uni-data-select 下拉框选择器",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "通过数据驱动的下拉框选择器",
   "keywords": [
     "uni-ui",
-    "select"
+    "select",
+		"uni-data-select",
+		"下拉框",
+		"下拉选"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
