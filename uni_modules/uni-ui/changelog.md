@@ -1,3 +1,11 @@
+## 1.4.15（2022-05-07）
+- uni-data-picker 修复 字节小程序 本地数据无法选择下一级的Bug
+- uni-data-select 新增 记住上次的选项（仅 collection 存在时有效）
+- uni-search-bar 修复  vue3 input 事件不生效的bug
+- uni-search-bar 修复 多余代码导致的bug
+- uni-tooltip 更新 text 属性变更为 content
+- uni-tooltip 更新 移除 width 属性
+- uni-tooltip 修复 组件根 text 嵌套组件 warning
 ## 1.4.14（2022-04-18）
 - uni-datetime-picker 修复 Vue3 下动态赋值,单选类型未响应的 bug
 - uni-easyinput 修复 默认值不生效的bug

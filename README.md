@@ -184,6 +184,7 @@ export default {
 |组件名|组件说明|
 |---|---|
 |uni-badge|[数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge)|
+|uni-breadcrumb|[undefined](https://ext.dcloud.net.cn/plugin?name=uni-breadcrumb)|
 |uni-calendar|[日历](https://ext.dcloud.net.cn/plugin?name=uni-calendar)|
 |uni-card|[卡片](https://ext.dcloud.net.cn/plugin?name=uni-card)|
 |uni-collapse|[折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse)|
@@ -191,6 +192,7 @@ export default {
 |uni-countdown|[倒计时](https://ext.dcloud.net.cn/plugin?name=uni-countdown)|
 |uni-data-checkbox|[数据选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-checkbox)|
 |uni-data-picker|[数据驱动的picker选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-picker)|
+|uni-data-select|[下拉框选择器](https://ext.dcloud.net.cn/plugin?name=uni-data-select)|
 |uni-dateformat|[日期格式化](https://ext.dcloud.net.cn/plugin?name=uni-dateformat)|
 |uni-datetime-picker|[日期选择器](https://ext.dcloud.net.cn/plugin?name=uni-datetime-picker)|
 |uni-drawer|[抽屉](https://ext.dcloud.net.cn/plugin?name=uni-drawer)|
@@ -223,6 +225,7 @@ export default {
 |uni-table|[表格](https://ext.dcloud.net.cn/plugin?name=uni-table)|
 |uni-tag|[标签](https://ext.dcloud.net.cn/plugin?name=uni-tag)|
 |uni-title|[章节标题](https://ext.dcloud.net.cn/plugin?name=uni-title)|
+|uni-tooltip|[undefined](https://ext.dcloud.net.cn/plugin?name=uni-tooltip)|
 |uni-transition|[过渡动画](https://ext.dcloud.net.cn/plugin?name=uni-transition)|
 
 

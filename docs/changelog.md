@@ -7,6 +7,49 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.15" date="2022-05-07">
+	<log-item title="uni-breadcrumb 组件更新">
+		<log-item-text tag-type="perf">
+			 初始化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 字节小程序 本地数据无法选择下一级的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="feat">
+			 记住上次的选项（仅 collection 存在时有效）
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 初始化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			  vue3 input 事件不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 多余代码导致的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="perf">
+			 更新 text 属性变更为 content
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更新 移除 width 属性
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 组件根 text 嵌套组件 warning
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 初始化
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.14" date="2022-04-18">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="fix">
