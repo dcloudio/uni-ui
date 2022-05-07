@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "description": "uni-breadcrumb",
   "keywords": [
-    "uni-breadcrumb"
+    "uni-breadcrumb",
+		"breadcrumb",
+		"uni-ui",
+		"面包屑导航",
+		"面包屑"
 ],
   "repository": "",
   "engines": {

@@ -1,10 +1,15 @@
 {
   "id": "uni-tooltip",
   "displayName": "uni-tooltip",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "uni-tooltip",
   "keywords": [
-    "uni-tooltip"
+    "uni-tooltip",
+		"uni-ui",
+		"tooltip",
+		"tip",
+		"文字提示",
+		"气泡框"
 ],
   "repository": "",
   "engines": {
@@ -27,9 +32,9 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "无",
-      "data": "无",
-      "permissions": "无"
+      "ads": "",
+      "data": "",
+      "permissions": ""
     },
     "npmurl": ""
   },
@@ -38,8 +43,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
-        "aliyun": "y"
+        "tcb": "u",
+        "aliyun": "u"
       },
       "client": {
         "Vue": {
