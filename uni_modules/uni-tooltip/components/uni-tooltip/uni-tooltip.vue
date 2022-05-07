@@ -9,7 +9,17 @@
 	</view>
 </template>
 
+
 <script>
+	/**
+	 * Breadcrumb 提示文字
+	 * @description 常用于展示鼠标 hover 时的提示信息。
+	 * @tutorial https://uniapp.dcloud.io/component/uniui/uni-tooltip
+	 * @property {String} content   弹出层显示的内容
+	 * @property {String}  placement出现位置, 目前只支持 left
+	 */
+
+
 	export default {
 		name: "uni-tooltip",
 		data() {
@@ -33,11 +43,6 @@
 
 <style>
 	.uni-tooltip {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		justify-content: center;
-		align-items: center;
 		position: relative;
 		cursor: pointer;
 	}

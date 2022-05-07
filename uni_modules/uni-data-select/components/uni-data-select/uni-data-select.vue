@@ -31,7 +31,7 @@
 	/**
 	 * DataChecklist 数据选择器
 	 * @description 通过数据渲染的下拉框组件
-	 * @tutorial https://ext.dcloud.net.cn/plugin?id=xxx
+	 * @tutorial https://uniapp.dcloud.io/component/uniui/uni-data-select
 	 * @property {String} value 默认值
 	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Boolean} clear 是否可以清空已选项
