@@ -6,9 +6,9 @@
   "keywords": [
     "uni-ui",
     "select",
-		"uni-data-select",
-		"下拉框",
-		"下拉选"
+    "uni-data-select",
+    "下拉框",
+    "下拉选"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
@@ -50,7 +50,7 @@
       },
       "client": {
         "App": {
-          "app-vue": "y",
+          "app-vue": "u",
           "app-nvue": "y"
         },
         "H5-mobile": {
@@ -74,12 +74,12 @@
           "QQ": "y"
         },
         "快应用": {
-          "华为": "u",
-          "联盟": "u"
+          "华为": "y",
+          "联盟": "y"
         },
         "Vue": {
             "vue2": "y",
-            "vue3": "u"
+            "vue3": "y"
         }
       }
     }
