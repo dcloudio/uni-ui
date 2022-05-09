@@ -1,7 +1,7 @@
 {
   "id": "uni-tooltip",
   "displayName": "uni-tooltip",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "uni-tooltip",
   "keywords": [
     "uni-tooltip",
@@ -11,8 +11,7 @@
     "文字提示"
 ],
   "repository": "",
-  "engines": {
-    "HBuilderX": "^3.1.0"
+"engines": {
   },
   "dcloudext": {
     "category": [
@@ -31,7 +30,7 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "无",
+      "ads": "无 ",
       "data": "无",
       "permissions": "无"
     },
