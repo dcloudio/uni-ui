@@ -175,7 +175,13 @@
 			init(formRules) {
 				// 判断是否有规则
 				if (Object.keys(formRules).length === 0) {
-					this.formData = this.dataValue
+					try{
+						// TODO 不影响原始数据
+						this.formData = JSON.parse(JSON.stringify(this.dataValue))
+					}catch(e){
+						//TODO handle the exception
+						this.formData = {}
+					}
 					return
 				};
 				this.formRules = formRules;
