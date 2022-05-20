@@ -18,7 +18,7 @@
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData"
 							:key="index" @click="change(item)">
-							<text>{{formatItemName(item)}}</text>
+							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
 					</scroll-view>
 				</view>
@@ -140,9 +140,9 @@
 		methods: {
 			initDefVal() {
 				let defValue = ''
-				if (this.value ||this.value === 0) {
-					defValue =  this.value
-				} else if(this.modelValue || this.modelValue === 0 ) {
+				if ((this.value || this.value === 0) && !this.isDisabled(this.value)) {
+					defValue = this.value
+				} else if ((this.modelValue || this.modelValue === 0) && !this.isDisabled(this.modelValue)) {
 					defValue = this.modelValue
 				} else {
 					let strogeValue
@@ -164,6 +164,22 @@
 				this.current = def ? this.formatItemName(def) : ''
 			},
 
+			/**
+			 * @param {[String, Number]} value
+			 * 判断用户给的 value 是否同时为禁用状态
+			 */
+			isDisabled(value) {
+				let isDisabled = false;
+
+				this.mixinDatacomResData.forEach(item => {
+					if (item.value === value) {
+						isDisabled = item.disable
+					}
+				})
+
+				return isDisabled;
+			},
+
 			clearVal() {
 				this.emit('')
 				if (this.collection) {
@@ -171,9 +187,11 @@
 				}
 			},
 			change(item) {
-				this.showSelector = false
-				this.current = this.formatItemName(item)
-				this.emit(item.value)
+				if (!item.disable) {
+					this.showSelector = false
+					this.current = this.formatItemName(item)
+					this.emit(item.value)
+				}
 			},
 			emit(val) {
 				this.$emit('change', val)
@@ -325,6 +343,11 @@
 		/* #ifndef APP-NVUE */
 		border-bottom: none;
 		/* #endif */
+	}
+
+	.uni-select__selector__disabled {
+		opacity: 0.4;
+		cursor: default;
 	}
 
 	/* picker 弹出层通用的指示小三角 */
