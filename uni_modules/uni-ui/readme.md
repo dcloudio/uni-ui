@@ -110,7 +110,6 @@ uni-ui支持 HBuilderX直接新建项目模板、npm安装和单独导入个别�
 |uni-rate|[评分](https://ext.dcloud.net.cn/plugin?name=uni-rate)|
 |uni-row|[布局-行](https://ext.dcloud.net.cn/plugin?name=uni-row)|
 |uni-search-bar|[搜索栏](https://ext.dcloud.net.cn/plugin?name=uni-search-bar)|
-|Section|[标题栏](https://ext.dcloud.net.cn/plugin?name=uni-section)|
 |uni-segmented-control|[分段器](https://ext.dcloud.net.cn/plugin?name=uni-segmented-control)|
 |uni-steps|[步骤条](https://ext.dcloud.net.cn/plugin?name=uni-steps)|
 |uni-swipe-action|[滑动操作](https://ext.dcloud.net.cn/plugin?name=uni-swipe-action)|
