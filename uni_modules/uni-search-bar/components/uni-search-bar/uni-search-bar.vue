@@ -7,11 +7,11 @@
 					<uni-icons color="#c0c4cc" size="18" type="search" />
 				</slot>
 			</view>
-			<input v-if="show || searchVal" :focus="showSync" :placeholder="placeholderText" :maxlength="maxlength"
+			<input v-if="show || searchVal" :focus="showSync" :disabled="readonly" :placeholder="placeholderText" :maxlength="maxlength"
 				class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal"
 				@confirm="confirm" @blur="blur" @focus="emitFocus" />
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
-			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='')"
+			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='') &&!readonly"
 				class="uni-searchbar__box-icon-clear" @click="clear">
 				<slot name="clearIcon">
 					<uni-icons color="#c0c4cc" size="20" type="clear" />
@@ -50,6 +50,7 @@
 	 * @property {String} cancelText 取消按钮的文字
 	 * @property {String} bgColor 输入框背景颜色
 	 * @property {Boolean} focus 是否自动聚焦
+	 * @property {Boolean} readonly 组件只读，不能有任何操作，只做展示
 	 * @event {Function} confirm uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value，e={value:Number}
 	 * @event {Function} input uniSearchBar 的 value 改变时触发事件，返回参数为uniSearchBar的value，e=value
 	 * @event {Function} cancel 点击取消按钮时触发事件，返回参数为uniSearchBar的value，e={value:Number}
@@ -100,6 +101,10 @@
 			focus: {
 				type: Boolean,
 				default: false
+			},
+			readonly: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -144,6 +149,7 @@
 				immediate: true,
 				handler(newVal) {
 					if (newVal) {
+						if(this.readonly) return
 						this.show = true;
 						this.$nextTick(() => {
 							this.showSync = true
@@ -160,6 +166,7 @@
 		},
 		methods: {
 			searchClick() {
+				if(this.readonly) return
 				if (this.show) {
 					return
 				}
@@ -175,6 +182,7 @@
 				this.searchVal = ""
 			},
 			cancel() {
+				if(this.readonly) return
 				this.$emit("cancel", {
 					value: this.searchVal
 				});
