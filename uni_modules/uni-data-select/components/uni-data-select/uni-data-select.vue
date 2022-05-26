@@ -102,7 +102,7 @@
 					'opendb-app-channels': '渠道',
 					'opendb-app-list': '应用'
 				}
-				const common = '请选择'
+				const common = this.placeholder
 				const placeholder = text[this.collection]
 				return placeholder ?
 					common + placeholder :
@@ -113,7 +113,7 @@
 			localdata: {
 				immediate: true,
 				handler(val, old) {
-					if (Array.isArray(val) && !old) {
+					if (Array.isArray(val) && old!==val) {
 						this.mixinDatacomResData = val
 					}
 				}
