@@ -26,12 +26,7 @@
 			to: {
 				type: [String, Object],
 				default: ''
-			},
-			replace: {
-				type: Boolean,
-				default: false
-			},
-
+			}
 		},
 		inject: ['uniBreadcrumb'],
 		computed: {
@@ -68,6 +63,9 @@
 	}
 </script>
 <style lang="scss">
+	$uni-primary: #2979ff !default;
+	$uni-base-color: #6a6a6a !default;
+	$uni-main-color: #3a3a3a !default;
 	.uni-breadcrumb-item {
 		display: flex;
 		align-items: center;
@@ -75,25 +73,25 @@
 		font-size: 14px;
 
 		&--slot {
-			color: #666;
+			color: $uni-base-color;
 			padding: 0 10px;
 
 			&-link {
-				color: #333;
+				color: $uni-main-color;
 				font-weight: bold;
 				/* #ifndef APP-NVUE */
 				cursor: pointer;
 				/* #endif */
 
 				&:hover {
-					color: #2979ff;
+					color: $uni-primary;
 				}
 			}
 		}
 
 		&--separator {
 			font-size: 12px;
-			color: #666;
+			color: $uni-base-color;
 		}
 
 		&:last-child &--separator {
