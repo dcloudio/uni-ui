@@ -1,8 +1,8 @@
 {
   "id": "uni-breadcrumb",
-  "displayName": "uni-breadcrumb",
+  "displayName": "uni-breadcrumb 面包屑",
   "version": "0.1.1",
-  "description": "uni-breadcrumb",
+  "description": "Breadcrumb  面包屑",
   "keywords": [
     "uni-breadcrumb",
     "breadcrumb",
@@ -72,7 +72,8 @@
           "阿里": "u",
           "百度": "u",
           "字节跳动": "u",
-          "QQ": "u"
+        "QQ": "u",
+        "京东": "u"
         },
         "快应用": {
           "华为": "u",
