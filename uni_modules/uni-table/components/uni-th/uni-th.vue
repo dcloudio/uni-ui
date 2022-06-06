@@ -19,7 +19,9 @@
 </template>
 
 <script>
+	// #ifdef H5
 	import dropdown from './filter-dropdown.vue'
+	// #endif
 /**
  * Th 表头
  * @description 表格内的表头单元格组件
@@ -42,7 +44,9 @@ export default {
 		virtualHost: true
 	},
 	components: {
+		// #ifdef H5
 		dropdown
+		// #endif
 	},
 	emits:['sort-change','filter-change'],
 	props: {
