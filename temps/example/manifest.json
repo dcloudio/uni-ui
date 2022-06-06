@@ -9,12 +9,6 @@
 		"usingComponents": true,
 		"nvueCompiler": "uni-app",
 		"nvueStyleCompiler":"uni-app",
-		"splashscreen": {
-			"alwaysShowBeforeRender": true,
-			"waiting": true,
-			"autoclose": true,
-			"delay": 0
-		},
 		"modules": { /* 模块配置 */
 
 		},

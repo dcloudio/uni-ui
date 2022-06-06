@@ -17,6 +17,9 @@
 		<uni-section title="自定义样式" subTitle="使用 bgColor 属性自定义背景色" type="line">
 			<uni-search-bar placeholder="自定义背景色" bgColor="#EEEEEE" @confirm="search" />
 		</uni-section>
+		<uni-section title="只读样式" subTitle="使用 readonly 使搜索框只读" type="line">
+			<uni-search-bar readonly placeholder="自定义背景色" @confirm="search" />
+		</uni-section>
 		<uni-section title="自定义icon" type="line">
 			<uni-search-bar placeholder="自定义searchIcon" @confirm="search" @cancel="cancel" cancel-text="cancel">
 				<uni-icons slot="searchIcon" color="#999999" size="18" type="home" />

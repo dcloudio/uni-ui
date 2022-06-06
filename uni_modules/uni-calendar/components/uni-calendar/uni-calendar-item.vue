@@ -96,6 +96,13 @@
 </script>
 
 <style lang="scss" scoped>
+	$uni-font-size-base:14px;
+	$uni-text-color:#333;
+	$uni-font-size-sm:12px;
+	$uni-color-error: #e43d33;
+	$uni-opacity-disabled: 0.3;
+	$uni-text-color-disable:#c0c0c0;
+	$uni-color-primary: #2979ff;
 	.uni-calendar-item__weeks-box {
 		flex: 1;
 		/* #ifndef APP-NVUE */
