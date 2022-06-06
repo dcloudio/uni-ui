@@ -7,6 +7,76 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.16" date="2022-06-06">
+	<log-item title="uni-breadcrumb 组件更新">
+		<log-item-text tag-type="feat">
+			 支持 uni.scss 修改颜色
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 localdata 赋值不生效的 bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持  uni.scss 修改颜色
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持选项禁用（数据选项设置 disabled: true 即禁用）
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 当 value 为 0 时选择不生效的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 关闭图标某些情况下无法取消的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fav 组件更新">
+		<log-item-text tag-type="feat">
+			 stat 属性 ，是否开启uni统计功能
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-goods-nav 组件更新">
+		<log-item-text tag-type="feat">
+			 stat属性，是否开启uni统计功能
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-group 组件更新">
+		<log-item-text tag-type="feat">
+			 stat属性，是否开启uni统计功能
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 stat 属性 ，可开启统计title 上报 ，仅使用了title 属性且项目开启了uni统计生效
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 readonly 属性，组件只读
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 isPC 找不到的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			  修复 在 nvue 下 disabled 失效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-title 组件更新">
+		<log-item-text tag-type="perf">
+			 修改组件描述
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="fix">
+			 content 为空时仍然弹出的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.15" date="2022-05-07">
 	<log-item title="uni-breadcrumb 组件更新">
 		<log-item-text tag-type="perf">

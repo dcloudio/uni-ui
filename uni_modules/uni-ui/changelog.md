@@ -1,3 +1,17 @@
+## 1.4.16（2022-06-06）
+- uni-breadcrumb 新增 支持 uni.scss 修改颜色
+- uni-data-select 修复 localdata 赋值不生效的 bug
+- uni-data-select 新增 支持选项禁用（数据选项设置 disabled: true 即禁用）
+- uni-data-select 修复 当 value 为 0 时选择不生效的 bug
+- uni-easyinput 修复 关闭图标某些情况下无法取消的bug
+- uni-fav 新增 stat 属性 ，是否开启uni统计功能
+- uni-goods-nav 新增 stat属性，是否开启uni统计功能
+- uni-group 新增 stat属性，是否开启uni统计功能
+- uni-nav-bar 新增 stat 属性 ，可开启统计 title 上报 ，仅使用了title 属性且项目开启了uni统计生效
+- uni-search-bar 新增 readonly 属性，组件只读
+- uni-swipe-action 修复 isPC 找不到的Bug
+- uni-swipe-action  修复 在 nvue 下 disabled 失效的bug
+- uni-tooltip 修复 content 为空时仍然弹出的bug
 ## 1.4.15（2022-05-07）
 - uni-data-picker 修复 字节小程序 本地数据无法选择下一级的Bug
 - uni-data-select 新增 记住上次的选项（仅 collection 存在时有效）
