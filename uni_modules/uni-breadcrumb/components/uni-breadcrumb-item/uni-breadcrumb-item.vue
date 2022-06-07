@@ -2,7 +2,7 @@
 	<view class="uni-breadcrumb-item">
 		<view :class="{
 			'uni-breadcrumb-item--slot': true,
-			'uni-breadcrumb-item--slot-link': to && currentPage !== to.path
+			'uni-breadcrumb-item--slot-link': to && currentPage !== to
 			}" @click="navTo">
 			<slot />
 		</view>
@@ -19,16 +19,36 @@
 	export default {
 		data() {
 			return {
-				currentPage: ''
+				currentPage: ""
 			}
+		},
+		options: {
+			virtualHost: true
 		},
 		props: {
 			to: {
-				type: [String, Object],
+				type: String,
 				default: ''
+			},
+			replace:{
+				type: Boolean,
+				default: false
 			}
 		},
-		inject: ['uniBreadcrumb'],
+		inject: {
+			uniBreadcrumb: {
+				from: "uniBreadcrumb",
+				default: null
+			}
+		},
+		created(){
+			const pages = getCurrentPages()
+			const page = pages[pages.length-1]
+
+			if(page){
+				this.currentPage = `/${page.route}`
+			}
+		},
 		computed: {
 			separator() {
 				return this.uniBreadcrumb.separator
@@ -37,26 +57,22 @@
 				return this.uniBreadcrumb.separatorClass
 			}
 		},
-		watch: {
-			$route: {
-				immediate: true,
-				handler(val) {
-					this.currentPage = val.path
-				}
-			}
-		},
 		methods: {
 			navTo() {
-				const {
-					to,
-					$router
-				} = this
-				if (this.currentPage === to.path) return
-				if (to && $router) {
-					this.replace ?
-						$router.replace(to) :
-						$router.push(to)
+				const { to } = this
 
+				if (!to || this.currentPage === to){
+					return
+				}
+
+				if(this.replace){
+					uni.redirectTo({
+						url:to
+					})
+				}else{
+					uni.navigateTo({
+						url:to
+					})
 				}
 			}
 		}
