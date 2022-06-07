@@ -1,29 +1,37 @@
 <template>
-	<view class="uni-easyinput" :class="{'uni-easyinput-error':msg}" :style="{color:inputBorder && msg?'#e43d33':styles.color}">
-		<view class="uni-easyinput__content" :class="{'is-input-border':inputBorder ,'is-input-error-border':inputBorder && msg,'is-textarea':type==='textarea','is-disabled':disabled}"
-		 :style="{'border-color':inputBorder && msg?'#dd524d':styles.borderColor,'background-color':disabled?styles.disableColor:''}">
-			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc" @click="onClickIcon('prefix')"></uni-icons>
-			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea" :class="{'input-padding':inputBorder}"
-			 :name="name" :value="val" :placeholder="placeholder" :placeholderStyle="placeholderStyle" :disabled="disabled" placeholder-class="uni-easyinput__placeholder-class"
-			 :maxlength="inputMaxlength" :focus="focused" :autoHeight="autoHeight" @input="onInput" @blur="onBlur"  @focus="onFocus"
-			 @confirm="onConfirm"></textarea>
+	<view class="uni-easyinput" :class="{'uni-easyinput-error':msg}"
+		:style="{color:inputBorder && msg?'#e43d33':styles.color}">
+		<view class="uni-easyinput__content"
+			:class="{'is-input-border':inputBorder ,'is-input-error-border':inputBorder && msg,'is-textarea':type==='textarea','is-disabled':disabled}"
+			:style="{'border-color':inputBorder && msg?'#dd524d':styles.borderColor,'background-color':disabled?styles.disableColor:''}">
+			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc"
+				@click="onClickIcon('prefix')"></uni-icons>
+			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea"
+				:class="{'input-padding':inputBorder}" :name="name" :value="val" :placeholder="placeholder"
+				:placeholderStyle="placeholderStyle" :disabled="disabled"
+				placeholder-class="uni-easyinput__placeholder-class" :maxlength="inputMaxlength" :focus="focused"
+				:autoHeight="autoHeight" @input="onInput" @blur="onBlur" @focus="onFocus"
+				@confirm="onConfirm"></textarea>
 			<input v-else :type="type === 'password'?'text':type" class="uni-easyinput__content-input" :style="{
 				 'padding-right':type === 'password' ||clearable || prefixIcon?'':'10px',
 				 'padding-left':prefixIcon?'':'10px'
-			 }"
-			 :name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
-			 :placeholderStyle="placeholderStyle" placeholder-class="uni-easyinput__placeholder-class" :disabled="disabled" :maxlength="inputMaxlength" :focus="focused" :confirmType="confirmType" @focus="onFocus"
-			 @blur="onBlur" @input="onInput" @confirm="onConfirm" />
-			<template v-if="type === 'password' && passwordIcon" >
-				<uni-icons v-if="val" class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" :type="showPassword?'eye-slash-filled':'eye-filled'"
-				 :size="18" color="#c0c4cc" @click="onEyes"></uni-icons>
+			 }" :name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
+				:placeholderStyle="placeholderStyle" placeholder-class="uni-easyinput__placeholder-class"
+				:disabled="disabled" :maxlength="inputMaxlength" :focus="focused" :confirmType="confirmType"
+				@focus="onFocus" @blur="onBlur" @input="onInput" @confirm="onConfirm" />
+			<template v-if="type === 'password' && passwordIcon">
+				<uni-icons v-if="val !== ''" class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}"
+					:type="showPassword?'eye-slash-filled':'eye-filled'" :size="18" color="#c0c4cc" @click="onEyes">
+				</uni-icons>
 			</template>
 			<template v-else-if="suffixIcon">
-				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" color="#c0c4cc" @click="onClickIcon('suffix')"></uni-icons>
+				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" color="#c0c4cc"
+					@click="onClickIcon('suffix')"></uni-icons>
 			</template>
 			<template v-else>
-				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear" :size="clearSize"
-				 v-if="clearable && val && !disabled" color="#c0c4cc" @click="onClear"></uni-icons>
+				<uni-icons class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}" type="clear"
+					:size="clearSize" v-if="clearable && val !=='' && !disabled" color="#c0c4cc" @click="onClear">
+				</uni-icons>
 			</template>
 			<slot name="right"></slot>
 		</view>
@@ -77,12 +85,12 @@
 	 * @example <uni-easyinput v-model="mobile"></uni-easyinput>
 	 */
 
-	 export default {
+	export default {
 		name: 'uni-easyinput',
-		emits:['click','iconClick','update:modelValue','input','focus','blur','confirm'],
-		model:{
-			prop:'modelValue',
-			event:'update:modelValue'
+		emits: ['click', 'iconClick', 'update:modelValue', 'input', 'focus', 'blur', 'confirm'],
+		model: {
+			prop: 'modelValue',
+			event: 'update:modelValue'
 		},
 		props: {
 			name: String,
@@ -138,7 +146,7 @@
 				type: [Boolean, String],
 				default: true
 			},
-			passwordIcon:{
+			passwordIcon: {
 				type: Boolean,
 				default: true
 			},
@@ -152,9 +160,9 @@
 					}
 				}
 			},
-			errorMessage:{
-				type:[String,Boolean],
-				default:''
+			errorMessage: {
+				type: [String, Boolean],
+				default: ''
 			}
 		},
 		data() {
@@ -183,7 +191,7 @@
 				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
 				// fix by mehaotian is_reset 在 uni-forms 中定义
-				if (this.form && this.formItem &&!this.is_reset) {
+				if (this.form && this.formItem && !this.is_reset) {
 					this.is_reset = false
 					this.formItem.setValue(newVal)
 				}
@@ -191,7 +199,7 @@
 			modelValue(newVal) {
 				if (this.errMsg) this.errMsg = ''
 				this.val = newVal
-				if (this.form && this.formItem &&!this.is_reset) {
+				if (this.form && this.formItem && !this.is_reset) {
 					this.is_reset = false
 					this.formItem.setValue(newVal)
 				}
@@ -203,17 +211,17 @@
 			}
 		},
 		created() {
-			if(!this.value && this.value !== 0){
+			if (!this.value && this.value !== 0) {
 				this.val = this.modelValue
 			}
-			if(!this.modelValue && this.modelValue !== 0){
+			if (!this.modelValue && this.modelValue !== 0) {
 				this.val = this.value
 			}
 			this.form = this.getForm('uniForms')
 			this.formItem = this.getForm('uniFormsItem')
 			if (this.form && this.formItem) {
 				if (this.formItem.name) {
-					if(!this.is_reset){
+					if (!this.is_reset) {
 						this.is_reset = false
 						this.formItem.setValue(this.val)
 					}
@@ -270,7 +278,7 @@
 				// TODO 兼容 vue2
 				this.$emit('input', value);
 				// TODO　兼容　vue3
-				this.$emit('update:modelValue',value)
+				this.$emit('update:modelValue', value)
 			},
 
 			onFocus(event) {
@@ -289,7 +297,7 @@
 				this.$emit('input', '');
 				// TODO 兼容 vue2
 				// TODO　兼容　vue3
-				this.$emit('update:modelValue','')
+				this.$emit('update:modelValue', '')
 			},
 			fieldClick() {
 				this.$emit('click');
@@ -316,9 +324,10 @@
 	};
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 	$uni-error: #e43d33;
 	$uni-border-1: #DCDFE6 !default;
+
 	.uni-easyinput {
 		/* #ifndef APP-NVUE */
 		width: 100%;
@@ -352,11 +361,13 @@
 		line-height: 1;
 		font-size: 14px;
 	}
+
 	.uni-easyinput__placeholder-class {
 		color: #999;
 		font-size: 12px;
 		font-weight: 200;
 	}
+
 	.is-textarea {
 		align-items: flex-start;
 	}
@@ -423,8 +434,10 @@
 
 	.is-input-error-border {
 		border-color: $uni-error;
+
 		.uni-easyinput__placeholder-class {
-			color: mix(#fff, $uni-error, 50%);;
+			color: mix(#fff, $uni-error, 50%);
+			;
 		}
 	}
 
@@ -453,6 +466,7 @@
 		border-color: red;
 		background-color: #F7F6F6;
 		color: #D5D5D5;
+
 		.uni-easyinput__placeholder-class {
 			color: #D5D5D5;
 			font-size: 12px;
