@@ -17,7 +17,7 @@
 
 ```html
 <uni-breadcrumb separator="/">
-	<uni-breadcrumb-item v-for="route in routes" :to="route.to">{{route.name}}</uni-breadcrumb-item>
+	<uni-breadcrumb-item v-for="(route,index) in routes" :key="index" :to="route.to">{{route.name}}</uni-breadcrumb-item>
 </uni-breadcrumb>
 ```
 
@@ -48,15 +48,15 @@ export default {
 
 |属性名			|类型	|默认值	|说明				|
 |:-:			|:-:	|:-:	|:-:				|
-|separator		|String	|斜杠'/'|分隔符				|
-|separatorClass	|String	|		|图标分隔符 class	|
+|separator		|String	|斜杠'/' |分隔符				|
+|separatorClass	|String	|		|图标分隔符 class	    |
 
 ### Breadcrumb Item Props
 
 |属性名	|类型			|默认值	|说明																			|
 |:-:	|:-:			|:-:	|:-:																			|
-|to		|String/Object	|		|路由跳转页面路径/对象															|
-|replace|Boolean		|		|在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录(仅 h5 支持）|
+|to		|String     	|		|路由跳转页面路径           														|
+|replace|Boolean		|		|在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录(仅 h5 支持）         |
 
 
 
