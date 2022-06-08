@@ -110,11 +110,12 @@
 			color: $uni-base-color;
 		}
 
-		&:last-child &--separator {
-			display: none;
-		}
 		&:first-child &--slot {
 			padding-left: 0;
+		}
+		
+		&:last-child &--separator {
+			display: none;
 		}
 	}
 </style>

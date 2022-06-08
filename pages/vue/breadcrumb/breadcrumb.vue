@@ -10,7 +10,7 @@
 		</uni-section>
 		<uni-section title="自定义分隔符" type="line" padding>
 				<uni-breadcrumb separator=">">
-					<uni-breadcrumb-item :replace="true" v-for="(route,index) in routes" :key="index" :to="route.to">{{route.name}}</uni-breadcrumb-item>
+					<uni-breadcrumb-item v-for="(route,index) in routes" :key="index" :to="route.to">{{route.name}}</uni-breadcrumb-item>
 				</uni-breadcrumb>
 		</uni-section>
 	</view>
@@ -28,7 +28,7 @@
 					to: '',
 					name: '菜单 A'
 				}, {
-					to: '/pages/vue/breadcrumb/breadcrumb',
+					to: '',
 					name: '菜单 B'
 				}]
 			};
