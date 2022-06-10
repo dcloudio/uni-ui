@@ -9,14 +9,18 @@
     "tooltip",
     "tip",
     "文字提示"
-],
-  "repository": "",
-"engines": {
+  ],
+  "repository": "https://github.com/dcloudio/uni-ui",
+  "engines": {
+    "HBuilderX": ""
+  },
+  "directories": {
+    "example": "../../temps/example_temps"
   },
   "dcloudext": {
     "category": [
-        "前端组件",
-        "通用组件"
+      "前端组件",
+      "通用组件"
     ],
     "sale": {
       "regular": {
@@ -71,8 +75,8 @@
           "阿里": "u",
           "百度": "u",
           "字节跳动": "u",
-        "QQ": "u",
-        "京东": "u"
+          "QQ": "u",
+          "京东": "u"
         },
         "快应用": {
           "华为": "u",
