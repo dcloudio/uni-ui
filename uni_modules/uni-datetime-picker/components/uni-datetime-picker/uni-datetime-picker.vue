@@ -799,15 +799,20 @@
 
 	.uni-date-editor--x {
 		position: relative;
+		display: flex;
+		flex-direction: row;
 	}
 
 	.uni-date-editor--x .uni-date__icon-clear {
-		position: absolute;
+		/* 		position: absolute;
 		top: 0;
 		right: 0;
 		display: inline-block;
-		box-sizing: border-box;
-		border: 9px solid transparent;
+		box-sizing: border-box; */
+		position: absolute;
+		right: 0;
+		z-index: 10;
+		border: 10px solid transparent;
 		/* #ifdef H5 */
 		cursor: pointer;
 		/* #endif */
