@@ -200,7 +200,10 @@
 					let watch = this.$watch(
 						'dataValue.' + key,
 						value => {
-							if (!value) return
+							if (!value){
+								this.formData[key] = this._getValue(key,value);
+								return
+							  }
 							// 如果是对象 ，则平铺内容
 							if (value.toString() === '[object Object]') {
 								for (let i in value) {
