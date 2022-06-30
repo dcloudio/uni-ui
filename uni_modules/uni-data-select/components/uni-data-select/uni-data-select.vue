@@ -238,6 +238,9 @@
 		align-items: center;
 		padding: 15px;
 		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
 	}
 
 	.uni-stat__actived {
@@ -326,6 +329,9 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
 		/* #endif */
 		line-height: 36px;
 		font-size: 14px;
