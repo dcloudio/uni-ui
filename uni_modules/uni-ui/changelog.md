@@ -1,3 +1,5 @@
+## 1.4.17（2022-06-30）
+- 支持 ios 安全区
 ## 1.4.16（2022-06-06）
 - uni-breadcrumb 新增 支持 uni.scss 修改颜色
 - uni-data-select 修复 localdata 赋值不生效的 bug
@@ -93,7 +95,7 @@
 - uni-badge 修改 type 属性，默认值调整为 error，info 替换 default
 - uni-badge 修复 在字节小程序上样式不生效的 bug
 - uni-calendar 修复 弹出层被 tabbar 遮盖 bug
-- uni-card 重构插槽的用法 ，header 替换为 title 
+- uni-card 重构插槽的用法 ，header 替换为 title
 - uni-card 新增 actions 插槽
 - uni-card 新增 cover 封面图属性和插槽
 - uni-card 新增 padding 内容默认内边距离
@@ -146,7 +148,7 @@
 - uni-search-bar 修复 value 属性与 modelValue 属性不兼容的Bug
 - uni-swipe-action 新增 close-all 方法，关闭所有已打开的组件
 - uni-swipe-action 新增 resize() 方法，在非微信小程序、h5、app-vue端出现不能滑动的问题的时候，重置组件
-- uni-swipe-action 修复 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题 
+- uni-swipe-action 修复 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题
 - uni-swipe-action 优化 微信小程序、h5、app-vue 滑动逻辑，避免出现动态新增组件后不能滑动的问题
 - uni-tag 新增 提供组件设计资源，组件样式调整
 - uni-tag 移除 插槽
@@ -163,7 +165,7 @@
 - uni-file-picker 修复 v-model 值设为 null 报错的Bug
 - uni-swipe-action 新增 close-all 方法，关闭所有已打开的组件
 - uni-swipe-action 新增 resize() 方法，在非微信小程序、h5、app-vue端出现不能滑动的问题的时候，重置组件
-- uni-swipe-action 修复 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题 
+- uni-swipe-action 修复 app 端偶尔出现类似 Page[x][-x,xx;-x,xx,x,x-x] 的问题
 - uni-swipe-action 优化 微信小程序、h5、app-vue 滑动逻辑，避免出现动态新增组件后不能滑动的问题
 ## 1.4.0（2021-08-13）
 - uni-calendar 修复 弹出层被 tabbar 遮盖 bug
@@ -364,8 +366,8 @@
 - uni-table 新增 sortable 属性，是否开启单列排序
 - uni-table 优化 表格多选逻辑
 ## 1.2.12（2021-03-23）
-- uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性; 
-- uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug， 
+- uni-ui 新增 uni-datetime-picker 的 hide-second 属性、border 属性;
+- uni-ui 修复 uni-datetime-picker 选择跟显示的日期不一样的 bug，
 - uni-ui 修复 uni-datetime-picker change事件触发2次的 bug
 - uni-ui 修复 uni-datetime-picker 分、秒 end 范围错误的 bug
 - uni-ui 新增 uni-tr selectable 属性，用于 type=selection 时，设置某行是否可由全选按钮控制
