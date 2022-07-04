@@ -1,3 +1,5 @@
+## 1.4.2（2022-07-04）
+- 修复 子组件找不到 setValue 报错的bug
 ## 1.4.1（2022-07-04）
 - 修复 uni-data-picker 在 uni-forms-item 中报错的bug
 - 修复 uni-data-picker 在 uni-forms-item 中宽度不正确的bug
