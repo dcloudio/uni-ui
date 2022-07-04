@@ -1,13 +1,13 @@
 <template>
 	<view class="uni-forms-item"
 		:class="['is-direction-' + localLabelPos ,border?'uni-forms-item--border':'' ,border && isFirstBorder?'is-first-border':'']">
-		<!-- <slot name="label"> -->
-		<view class="uni-forms-item__label" :class="{'no-label':!label && !isRequired}"
-			:style="{width:localLabelWidth,justifyContent: localLabelAlign}">
-			<text v-if="isRequired" class="is-required">*</text>
-			<text>{{label}}</text>
-		</view>
-		<!-- </slot> -->
+		<slot name="label">
+			<view class="uni-forms-item__label" :class="{'no-label':!label && !isRequired}"
+				:style="{width:localLabelWidth,justifyContent: localLabelAlign}">
+				<text v-if="isRequired" class="is-required">*</text>
+				<text>{{label}}</text>
+			</view>
+		</slot>
 		<!-- #ifndef APP-NVUE -->
 		<view class="uni-forms-item__content">
 			<slot></slot>
@@ -217,7 +217,7 @@
 				this.init(false)
 			},
 			// 兼容老版本表单组件
-			setValue(){
+			setValue() {
 				console.log('setValue 方法已经弃用，请使用最新版本的 uni-forms 表单组件以及其他关联组件。');
 			},
 			/**
@@ -506,7 +506,8 @@
 
 			/* #ifndef APP || H5 || MP-WEIXIN || APP-NVUE */
 			// TODO 因为小程序平台会多一层标签节点 ，所以需要在多余节点继承当前样式
-			&>uni-easyinput , &>uni-data-picker{
+			&>uni-easyinput,
+			&>uni-data-picker {
 				width: 100%;
 			}
 
