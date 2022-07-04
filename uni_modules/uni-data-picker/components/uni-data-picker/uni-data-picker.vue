@@ -296,6 +296,7 @@
 
 <style >
 	.uni-data-tree {
+		flex: 1;
 		position: relative;
 		font-size: 14px;
 	}

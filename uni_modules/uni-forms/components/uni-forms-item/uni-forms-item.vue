@@ -503,7 +503,7 @@
 
 			/* #ifndef APP || H5 || MP-WEIXIN || APP-NVUE */
 			// TODO 因为小程序平台会多一层标签节点 ，所以需要在多余节点继承当前样式
-			&>uni-easyinput {
+			&>uni-easyinput , &>uni-data-picker{
 				width: 100%;
 			}
 

@@ -1,3 +1,6 @@
+## 1.4.1（2022-07-04）
+- 修复 uni-data-picker 在 uni-forms-item 中报错的bug
+- 修复 uni-data-picker 在 uni-forms-item 中宽度不正确的bug
 ## 1.4.0（2022-06-30）
 - 【重要】组件逻辑重构，部分用法用旧版本不兼容，请注意兼容问题
 - 【重要】组件使用 Provide/Inject 方式注入依赖，提供了自定义表单组件调用 uni-forms 校验表单的能力
