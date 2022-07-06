@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
-		<view :class="{'uni-stat__actived': current}">
+		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select">
 				<view class="uni-select__input-box" @click="toggleSelector">
 					<view v-if="current" class="uni-select__input-text">{{current}}</view>
@@ -249,7 +249,12 @@
 		flex: 1;
 		box-sizing: border-box;
 	}
-
+	
+	.uni-stat-box {
+		width: 100%;
+		flex: 1;
+	}
+	
 	.uni-stat__actived {
 		width: 100%;
 		flex: 1;
