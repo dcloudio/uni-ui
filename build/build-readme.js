@@ -12,7 +12,7 @@ function buildReadme() {
 	const packagesLists = fs.readdirSync(uniui)
 	let  componentsLists = '### uni-ui 已支持的组件列表\n|组件名|组件说明|\n|---|---|\n'
 	packagesLists.forEach(item=>{
-		if(item==='uni-test' || item === 'uni-ui') return
+		if(item==='uni-test' || item === 'uni-ui' || item === '.DS_Store') return
 		let packageData = util.read(path.join(uniui,item,'package.json'))
 		packageData = JSON.parse(packageData)
 		let componentsName = packageData.displayName.split(' ')
