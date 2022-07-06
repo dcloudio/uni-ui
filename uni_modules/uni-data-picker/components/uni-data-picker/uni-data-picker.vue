@@ -515,7 +515,7 @@
 		}
 
 		.icon-clear {
-			margin-right: 5px;
+			/* margin-right: 5px; */
 		}
 	}
 

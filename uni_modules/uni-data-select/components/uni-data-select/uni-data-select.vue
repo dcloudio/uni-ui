@@ -251,7 +251,9 @@
 	}
 
 	.uni-stat__actived {
-		outline: 1px solid #2979ff;
+		width: 100%;
+		flex: 1;
+		// outline: 1px solid #2979ff;
 	}
 
 	.uni-label-text {
