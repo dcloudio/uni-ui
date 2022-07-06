@@ -39,7 +39,7 @@ function buildLib(callback) {
 	}
 	const packagesLists = fs.readdirSync(uniui)
 	packagesLists.reduce((promise, item) => {
-		if (item === 'uni-test' || item === 'uni-ui') return promise
+		if (item === 'uni-test' || item === 'uni-ui'|| item === '.DS_Store') return promise
 		if(item === 'uni-scss'){
 			let scsspath  = path.join(uniui, item)
 			util.copyDir(scsspath, path.join(lib, item))

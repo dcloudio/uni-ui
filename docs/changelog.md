@@ -7,6 +7,136 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.18" date="2022-07-06">
+	<log-item title="uni-breadcrumb 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序 separator 不显示问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="perf">
+			 在 uni-forms 中的依赖注入方式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 显示样式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-data-picker 在 uni-forms-item 中宽度不正确的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="perf">
+			 显示样式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 组件样式，调整了组件图标大小、高度、颜色等，与uni-ui风格保持一致
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 日历顶部年月及底部确认未国际化 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 在 uni-forms 1.4.0 中使用可以在 blur 时校验内容
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 clear 事件，点击右侧叉号图标触发
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 change 事件 ，仅在输入框失去焦点或用户按下回车时触发
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 组件样式，组件获取焦点时高亮显示，图标颜色调整等
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 clearable 显示策略
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 clearable 显示策略
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 在uni-forms下样式不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="feat">
+			 更多表单示例
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 子表单组件过期提示的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 子表单组件uni-datetime-picker、uni-data-select、uni-data-picker的显示样式
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更新 删除组件日志
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 由 1.4.0 引发的 label 插槽不生效的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 子组件找不到 setValue 报错的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-data-picker 在 uni-forms-item 中报错的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-data-picker 在 uni-forms-item 中宽度不正确的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 【重要】组件逻辑重构，部分用法用旧版本不兼容，请注意兼容问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 【重要】组件使用 Provide/Inject 方式注入依赖，提供了自定义表单组件调用 uni-forms 校验表单的能力
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 model 属性，等同于原 value/modelValue 属性，旧属性即将废弃
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 validateTrigger 属性的 blur 值，仅 uni-easyinput 生效
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 onFieldChange 方法，可以对子表单进行校验，可替代binddata方法
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 子表单的 setRules 方法，配合自定义校验函数使用
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-forms-item 的 setRules 方法，配置动态表单使用可动态更新校验规则
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 动态表单校验方式，废弃拼接name的方式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 表单校验顺序无序问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 组件示例中插槽用法无法显示内容的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3 下使用组件不能正常运行的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5端点击click触发两次的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序存在无使用组件的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.16" date="2022-06-06">
 	<log-item title="uni-breadcrumb 组件更新">
 		<log-item-text tag-type="feat">

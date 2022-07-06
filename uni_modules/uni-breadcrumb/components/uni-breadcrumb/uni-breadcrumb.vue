@@ -12,6 +12,9 @@
 	 * @property {String} separatorClass 图标分隔符 class
 	 */
 	export default {
+		options: {
+			virtualHost: true
+		},
 		props: {
 			separator: {
 				type: String,

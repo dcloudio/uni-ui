@@ -67,7 +67,7 @@ mpMixins = {
 			}
 		},
 		onClickForPC(index, item, position) {
-			if (is_pc) return
+			if (!is_pc) return
 			// #ifdef H5
 			this.$emit('click', {
 				content: item,
