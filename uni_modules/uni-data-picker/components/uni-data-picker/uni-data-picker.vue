@@ -10,7 +10,7 @@
 					<scroll-view v-else-if="inputSelected.length" class="selected-area" scroll-x="true">
 						<view class="selected-list">
 							<view class="selected-item" v-for="(item,index) in inputSelected" :key="index">
-								<text>{{item.text}}</text><text v-if="index<inputSelected.length-1"
+								<text class="text-color">{{item.text}}</text><text v-if="index<inputSelected.length-1"
 									class="input-split-line">{{split}}</text>
 							</view>
 						</view>
@@ -18,7 +18,7 @@
 					<text v-else class="selected-area placeholder">{{placeholder}}</text>
 					<view v-if="clearIcon && !readonly && inputSelected.length" class="icon-clear"
 						@click.stop="clear">
-						<uni-icons type="clear" color="#e1e1e1" size="14"></uni-icons>
+						<uni-icons type="clear" color="#c0c4cc" size="24"></uni-icons>
 					</view>
 					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly ">
 						<view class="input-arrow"></view>
@@ -296,6 +296,7 @@
 
 <style >
 	.uni-data-tree {
+		flex: 1;
 		position: relative;
 		font-size: 14px;
 	}
@@ -312,11 +313,13 @@
 		align-items: center;
 		flex-wrap: nowrap;
 		font-size: 14px;
-		line-height: 38px;
-		padding: 0 5px;
+		/* line-height: 35px; */
+		padding: 0 10px;
+		padding-right: 5px;
 		overflow: hidden;
-		/* #ifdef APP-NVUE */
-		height: 40px;
+		height: 35px;
+		/* #ifndef APP-NVUE */
+		box-sizing: border-box;
 		/* #endif */
 	}
 
@@ -349,19 +352,24 @@
 		/* #endif */
 		flex-direction: row;
 		flex-wrap: nowrap;
-		padding: 0 5px;
+		/* padding: 0 5px; */
 	}
 
 	.selected-item {
 		flex-direction: row;
-		padding: 0 1px;
+		/* padding: 0 1px; */
 		/* #ifndef APP-NVUE */
 		white-space: nowrap;
 		/* #endif */
 	}
+	
+	.text-color {
+		color: #333;
+	}
 
 	.placeholder {
 		color: grey;
+		font-size: 12px;
 	}
 
 	.input-split-line {
@@ -477,6 +485,11 @@
 		flex: 1;
 		overflow: hidden;
 	}
+	
+	.icon-clear {
+		display: flex;
+		align-items: center;
+	}
 
 	/* #ifdef H5 */
 	@media all and (min-width: 768px) {
@@ -502,7 +515,7 @@
 		}
 
 		.icon-clear {
-			margin-right: 5px;
+			/* margin-right: 5px; */
 		}
 	}
 

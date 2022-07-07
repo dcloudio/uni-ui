@@ -84,6 +84,9 @@
 			uploadImage,
 			uploadFile
 		},
+		options: {
+			virtualHost: true
+		},
 		emits: ['select', 'success', 'fail', 'progress', 'delete', 'update:modelValue', 'input'],
 		props: {
 			// #ifdef VUE3
@@ -607,7 +610,9 @@
 		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
 		overflow: hidden;
+		width: 100%;
 		/* #endif */
+		flex: 1;
 	}
 
 	.uni-file-picker__header {
