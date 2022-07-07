@@ -318,9 +318,9 @@
 		padding-right: 5px;
 		overflow: hidden;
 		height: 35px;
-		/* #ifdef APP-NVUE */
-		/* #endif */
+		/* #ifndef APP-NVUE */
 		box-sizing: border-box;
+		/* #endif */
 	}
 
 	.input-value-border {
@@ -515,7 +515,7 @@
 		}
 
 		.icon-clear {
-			margin-right: 5px;
+			/* margin-right: 5px; */
 		}
 	}
 
