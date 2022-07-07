@@ -1,3 +1,6 @@
+## 1.4.19（2022-07-07）
+- uni-data-picker 优化 pc端图标位置不正确的问题
+- uni-data-select 修复 pc端宽度异常的bug
 ## 1.4.18（2022-07-06）
 - uni-forms 【重要】组件逻辑重构，部分用法旧版本不兼容，请注意兼容问题
 - uni-forms 【重要】组件使用 Provide/Inject 方式注入依赖，提供了自定义表单组件调用 uni-forms 校验表单的能力
