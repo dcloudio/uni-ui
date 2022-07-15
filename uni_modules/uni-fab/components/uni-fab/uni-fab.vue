@@ -194,6 +194,9 @@
 			 * 按钮点击事件
 			 */
 			_onItemClick(index, item) {
+				if (this.popMenu) {
+					return
+				}
 				this.$emit('trigger', {
 					index,
 					item
