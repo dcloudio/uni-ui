@@ -1,6 +1,6 @@
 <template>
 	<!-- #ifdef H5 -->
-	<tr class="uni-table-tr">
+	<tr class="uni-table-tr" :style="trStyle">
 		<th v-if="selection === 'selection' && ishead" class="checkbox" :class="{ 'tr-table--border': border }">
 			<table-checkbox :checked="checked" :indeterminate="indeterminate" :disabled="disabled" @checkboxSelected="checkboxSelected"></table-checkbox>
 		</th>
@@ -9,7 +9,7 @@
 	</tr>
 	<!-- #endif -->
 	<!-- #ifndef H5 -->
-	<view class="uni-table-tr">
+	<view class="uni-table-tr" :style="trStyle">
 		<view v-if="selection === 'selection' " class="checkbox" :class="{ 'tr-table--border': border }">
 			<table-checkbox :checked="checked" :indeterminate="indeterminate" :disabled="disabled" @checkboxSelected="checkboxSelected"></table-checkbox>
 		</view>
@@ -36,6 +36,10 @@ export default {
 		keyValue: {
 			type: [String, Number],
 			default: ''
+		},
+		trStyle: {
+			type: Object,
+			default: {}
 		}
 	},
 	options: {
