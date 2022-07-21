@@ -100,8 +100,11 @@
 					{
 						name: 'Layout 布局',
 						url: 'row'
+					},
+          {
+						name: 'Section 标题栏',
+						url: 'section'
 					}
-
 				],
 				views: [{
 						name: 'Badge 数字角标',
