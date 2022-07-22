@@ -35,6 +35,8 @@
 </script>
 
 <style lang="scss">
+  $uni-success: #18bc37 !default;
+
 	.uni-wrap {
 		flex-direction: column;
 		/* #ifdef H5 */

@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-section">
-		<view class="uni-section-header">
+		<view class="uni-section-header" @click="onClick">
 				<view class="uni-section-header__decoration" v-if="type" :class="type" />
         <slot v-else name="decoration"></slot>
 
