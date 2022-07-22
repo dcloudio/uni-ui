@@ -1,6 +1,5 @@
 <template>
 	<view class="uni-wrap">
-		<scroll-view class="scroll" scroll-y>
 			<view class="example-info">
 				<text class="example-info-text"> uni-section 组件主要用于文章、列表详情等标题展示 </text>
 			</view>
@@ -17,7 +16,6 @@
 					right slot
 				</template>
 			</uni-section>
-		</scroll-view>
 	</view>
 </template>
 
@@ -37,7 +35,6 @@
 </script>
 
 <style lang="scss">
-
 	.uni-wrap {
 		flex-direction: column;
 		/* #ifdef H5 */

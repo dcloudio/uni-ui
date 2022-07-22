@@ -1,6 +1,5 @@
 <template>
 	<view class="uni-section">
-
 		<view class="uni-section-header">
 				<view class="uni-section-header__decoration" v-if="type" :class="type" />
         <slot v-else name="decoration"></slot>
@@ -105,7 +104,6 @@
 
 	.uni-section {
 		background-color: #fff;
-
     .uni-section-header {
       position: relative;
       /* #ifndef APP-NVUE */
