@@ -14,14 +14,8 @@
 			<uni-section class="mb-10" title="默认插槽" sub-title="副标题" padding="0 0 5px 10px">默认插槽内容</uni-section>
 			<uni-section class="mb-10" title="主标题">
 				<template v-slot:right>
-					right 插槽
+					right slot
 				</template>
-			</uni-section>
-      <uni-section class="mb-10" title="主标题">
-				默认插槽内容 padding=false
-			</uni-section>
-      <uni-section class="mb-10" title="主标题" padding>
-				默认插槽内容 padding=true
 			</uni-section>
 		</scroll-view>
 	</view>
@@ -65,12 +59,10 @@
 	}
 
   .decoration{
-    width: 0;
-    height: 0;
-    margin: -4px 4px 0 -3px;
-    border-top: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 8px solid $uni-primary;
-    border-left: 5px solid transparent;
+    width: 6px;
+    height: 6px;
+		margin-right: 4px;
+    border-radius: 50%;
+		background-color: $uni-success;
   }
 </style>
