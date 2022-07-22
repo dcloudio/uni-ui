@@ -7,7 +7,7 @@ url : pages/vue/section/section
 代码块： `uSection`
 :::
 
-标题栏，用于显示标题。
+标题栏组件，主要用于文章、列表详情等标题展示。
 
 ### 安装方式
 
@@ -20,17 +20,42 @@ url : pages/vue/section/section
 在 ``template`` 中使用组件
 
 ```html
-<uni-section title="只有主标题"></uni-section>
-<uni-section title="竖线装饰" sub-title="副标题" type="line"></uni-section>
-<uni-section title="圆形装饰" sub-title="副标题" type="circle"></uni-section>
+<uni-section class="mb-10" title="基础用法" sub-title="副标题"></uni-section>
+
+<uni-section class="mb-10" title="竖线装饰" sub-title="副标题" type="line"></uni-section>
+
+<uni-section class="mb-10" title="装饰器插槽" sub-title="副标题">
+  <template v-slot:decoration>
+    <view class="decoration"></view>
+  </template>
+</uni-section>
+
+<uni-section class="mb-10" title="默认插槽" sub-title="副标题">默认插槽内容</uni-section>
+
+<uni-section class="mb-10" title="主标题">
+  <template v-slot:right>
+    right slot
+  </template>
+</uni-section>
 ```
 
 ## API
 
 ### Section Props
 
-|属性名		|类型	|默认值	|说明												|
-|:-:		|:-:	|:-:	|:-:												|
-|type		|String	|-		|标题装饰类型 ，可选值：line（竖线）、circle（圆形）|
-|title		|String	|-		|主标题												|
-|sub-title	|String	|-		|副标题												|
+|属性名|类型|默认值|说明|
+|:-:|:-:|:-:|:-:|
+|type|String|-|装饰类型，可选值：line（竖线）、circle（圆形）、square（方形）|
+|title|String|-|主标题|
+|titleFontSize|String| 14px |主标题字体大小|
+|titleColor|String| #333 |主标题字体颜色|
+|subTitle|String|-|副标题|
+|subTitleFontSize|String| 12px |副标题字体大小|
+|subTitleColor|String| #999 |副标题字体颜色|
+|padding|Boolean/String| false |默认插槽容器的 padding 值，传入类型为 Boolean 时，设置为 10px 或 0|
+
+### Section Events
+
+|事件名|事件说明|返回参数|
+|:-:|:-:|:-:|
+|@click	|点击 Section 触发事件| -|
