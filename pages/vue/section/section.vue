@@ -48,11 +48,6 @@
 		flex: 1;
 	}
 
-	.scroll {
-		flex-direction: column;
-		flex: 1;
-	}
-
 	.mb-10 {
 		margin-bottom: 10px;
 	}
