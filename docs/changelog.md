@@ -7,6 +7,19 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.20" date="2022-07-25">
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 model 需要校验的值没有声明对应字段时，导致第一次不触发校验的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-section 组件更新">
+		<log-item-text tag-type="perf">
+			 初始化
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.19" date="2022-07-07">
 	<log-item title="uni-data-picker 组件更新">
 		<log-item-text tag-type="perf">

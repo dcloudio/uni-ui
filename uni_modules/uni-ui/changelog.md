@@ -1,3 +1,7 @@
+## 1.4.20（2022-07-25）
+- uni-section 新增组件
+- uni-forms 修复 model 需要校验的值没有声明对应字段时，导致第一次不触发校验的bug
+
 ## 1.4.19（2022-07-07）
 - uni-data-picker 优化 pc端图标位置不正确的问题
 - uni-data-select 修复 pc端宽度异常的bug
