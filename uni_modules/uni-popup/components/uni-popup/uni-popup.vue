@@ -4,7 +4,7 @@
 			<uni-transition key="1" v-if="maskShow" name="mask" mode-class="fade" :styles="maskClass"
 				:duration="duration" :show="showTrans" @click="onTap" />
 			<uni-transition key="2" :mode-class="ani" name="content" :styles="transClass" :duration="duration"
-				:show="showTrans" @click="onTap">
+				:show="showTrans" @click="onTap" :once-render="onceRender">
 				<view class="uni-popup__wrapper" :style="{ backgroundColor: bg }" :class="[popupstyle]" @click="clear">
 					<slot />
 				</view>
