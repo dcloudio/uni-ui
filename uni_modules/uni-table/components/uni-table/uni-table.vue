@@ -125,7 +125,7 @@ export default {
 			} else {
 				startIndex = theadChildren.rowspan - 1
 			}
-			let isHaveData = this.data && this.data.length.length > 0
+			let isHaveData = this.data && this.data.length > 0
 			theadChildren.checked = true
 			theadChildren.indeterminate = false
 			this.trChildren.forEach((item, index) => {
