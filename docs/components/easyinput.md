@@ -49,12 +49,26 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 
 绑定 `@iconClick` 事件可以触发图标的点击 ，返回 `prefix` 表示点击左侧图标，返回 `suffix` 表示点击右侧图标
 
+新增 `prefixIcon` 和 `suffixIcon` 插槽，用来显示输入框的头部和尾部内容 `1.4.21`起
+
 ```html
 
 <!-- 输入框头部图标 -->
 <uni-easyinput prefixIcon="search" v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
 <!-- 展示输入框尾部图标 -->
 <uni-easyinput suffixIcon="search"  v-model="value" placeholder="请输入内容" @iconClick="onClick"></uni-easyinput>
+<!-- 输入框头部插槽 -->
+<uni-easyinput v-model="value" placeholder="请输入网址">
+	<template #prefixIcon>
+		<view style="background-color: #f2f2f2;padding: 0 10rpx;height: 70rpx;line-height: 70rpx;margin-right: 10rpx;">https://</view>
+	</template>
+</uni-easyinput>
+<!-- 输入框尾部插槽 -->
+<uni-easyinput class="uni-mt-5" prefixIcon="search" v-model="value" placeholder="想看什么,搜索一下">
+	<template #suffixIcon>
+		<button class="uni-btn uni-btn-mini uni-btn-radius" type="primary" size="mini">搜索</button>
+	</template>
+</uni-easyinput>
 ```
 
 ### 输入框禁用

@@ -7,6 +7,14 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.21" date="2022-08-09">
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 `prefixIcon` 和 `suffixIcon` 插槽，用来显示输入框的头部和尾部内容
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.20" date="2022-07-25">
 	<log-item title="uni-forms 组件更新">
 		<log-item-text tag-type="fix">
