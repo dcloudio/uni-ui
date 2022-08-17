@@ -74,10 +74,10 @@
 					</view>
 				</view>
 				<view class="popup-x-body">
-					<calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
+					<calendar @close="$emit('maskClick')" ref="left" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
 						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding: 0 8px;" />
-					<calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
+					<calendar @close="$emit('maskClick')" ref="right" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="rightChange"
 						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
 						@monthSwitch="rightMonthSwitch" style="padding: 0 8px;border-left: 1px solid #F1F1F1;" />
@@ -88,7 +88,7 @@
 				</view>
 			</view>
 		</view>
-		<calendar v-show="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar @close="$emit('maskClick')" v-show="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			:hideSecond="hideSecond" @confirm="mobileChange" />
