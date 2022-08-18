@@ -1,3 +1,5 @@
+# 2.2.7（2022-08-18）
+- 修复 移动端 maskClick 无效的 bug，详见:[https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false](https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false)
 ## 2.2.6（2022-06-30）
 - 优化 组件样式，调整了组件图标大小、高度、颜色等，与uni-ui风格保持一致
 ## 2.2.5（2022-06-24）
