@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-calendar" @mouseleave="leaveCale">
 		<view v-if="!insert&&show" class="uni-calendar__mask" :class="{'uni-calendar--mask-show':aniMaskShow}"
-			@click="clean"></view>
+			@click="clean();maskClick()"></view>
 		<view v-if="insert || show" class="uni-calendar__content"
 			:class="{'uni-calendar--fixed':!insert,'uni-calendar--ani-show':aniMaskShow, 'uni-calendar__content-mobile': aniMaskShow}">
 			<view class="uni-calendar__header" :class="{'uni-calendar__header-mobile' :!insert}">
@@ -409,6 +409,11 @@
 			// 取消穿透
 			clean() {
 				this.close()
+			},
+
+			// 蒙版点击事件
+			maskClick() {
+				this.$emit('maskClose')
 			},
 
 			clearCalender() {
