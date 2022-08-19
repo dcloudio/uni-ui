@@ -197,6 +197,20 @@
 				},
 				immediate: true
 			},
+      		// #ifdef VUE3
+      		modelValue: {
+				handler(newVal, oldVal) {
+					if (newVal) {
+						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
+						this.initTime(false)
+					} else {
+						this.time = ''
+						this.parseValue(Date.now())
+					}
+				},
+				immediate: true
+			},
+      		// #endif
 			type: {
 				handler(newValue) {
 					if (newValue === 'date') {
@@ -736,7 +750,10 @@
 			 */
 			initTimePicker() {
 				if (this.disabled) return
-				const value = this.fixIosDateFormat(this.value)
+				let value = this.fixIosDateFormat(this.value)
+        		// #ifdef VUE3
+        		value = this.fixIosDateFormat(this.modelValue)
+        		// #endif
 				this.initPickerValue(value)
 				this.visible = !this.visible
 			},
