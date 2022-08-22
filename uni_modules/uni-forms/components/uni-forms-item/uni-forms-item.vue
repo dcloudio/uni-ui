@@ -388,7 +388,10 @@
 			// 是否显示星号
 			_isRequired() {
 				if (this.form) {
-					return this.required || this.form._isRequiredField(this.itemRules.rules || [])
+					if (this.form._isRequiredField(this.itemRules.rules || []) && this.required) {
+						return true
+					}
+					return false
 				}
 				return this.required
 			},
