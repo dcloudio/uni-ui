@@ -1,3 +1,5 @@
+## 1.4.8（2022-08-23）
+- 优化 根据 rules 自动添加 required 的问题
 ## 1.4.7（2022-08-22）
 - 修复 item 未设置 require 属性，rules 设置 require 后，星号也显示的 bug，详见：[https://ask.dcloud.net.cn/question/151540](https://ask.dcloud.net.cn/question/151540)
 ## 1.4.6（2022-07-13）
