@@ -346,7 +346,7 @@
 		border: 1px solid #EBEEF5;
 		border-radius: 6px;
 		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		z-index: 2;
+		z-index: 3;
 		padding: 4px 0;
 	}
 
