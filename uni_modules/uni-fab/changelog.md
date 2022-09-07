@@ -1,4 +1,4 @@
-## 1.2.3（2022-08-22）
+## 1.2.3（2022-09-05）
 - 修复 nvue 环境下，具有 tabBar 时，fab 组件下部位置无法正常获取 --window-bottom 的bug，详见：[https://ask.dcloud.net.cn/question/110638?notification_id=826310](https://ask.dcloud.net.cn/question/110638?notification_id=826310)
 ## 1.2.2（2021-12-29）
 - 更新 组件依赖
