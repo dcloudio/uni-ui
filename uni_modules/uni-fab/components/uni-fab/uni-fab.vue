@@ -34,7 +34,7 @@
 		  'uni-fab__circle--leftTop': leftTop,
 		  'uni-fab__circle--rightTop': rightTop,
 		  'uni-fab__content--other-platform': !isAndroidNvue
-		}" class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor, ...nvueBottom }" @click="_onClick">
+		}" class="uni-fab__circle uni-fab__plus" :style="{ 'background-color': styles.buttonColor, 'bottom': nvueBottom }" @click="_onClick">
 			<uni-icons class="fab-circle-icon" type="plusempty" :color="styles.iconColor" size="32"
 				:class="{'uni-fab__plus--active': isShow && content.length > 0}"></uni-icons>
 			<!-- <view class="fab-circle-v"  :class="{'uni-fab__plus--active': isShow && content.length > 0}"></view>
@@ -165,9 +165,10 @@
 			nvueBottom() {
 				const safeBottom = uni.getSystemInfoSync().windowBottom;
 				// #ifdef APP-NVUE
-				return {
-					bottom: 30 + safeBottom
-				}
+				return 30 + safeBottom
+				// #endif
+				// #ifndef APP-NVUE
+				return 30
 				// #endif
 			}
 		},
