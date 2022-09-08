@@ -516,6 +516,7 @@
 				setTimeout(() => {
 					this.popup = false
 					this.$emit('maskClick', this.value)
+					this.$refs.mobile.close()
 				}, 20)
 			},
 			setEmit(value) {

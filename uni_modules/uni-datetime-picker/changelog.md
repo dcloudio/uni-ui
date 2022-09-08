@@ -1,3 +1,5 @@
+## 2.2.8（2022-09-08）
+- 修复 close事件无效的 bug
 ## 2.2.7（2022-09-05）
 - 修复 移动端 maskClick 无效的 bug，详见:[https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false](https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false)
 ## 2.2.6（2022-06-30）
