@@ -182,6 +182,7 @@
 				default () {
 					return {
 						color: '#333',
+						backgroundColor: '#fff',
 						disableColor: '#F7F6F6',
 						borderColor: '#e5e5e5'
 					}
@@ -247,7 +248,7 @@
 				const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor
 				return obj2strStyle({
 					'border-color': borderColor || '#e5e5e5',
-					'background-color': this.disabled ? this.styles.disableColor : '#fff'
+					'background-color': this.disabled ? this.styles.disableColor : this.styles.backgroundColor
 				})
 			},
 			// input右侧样式
