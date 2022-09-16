@@ -609,6 +609,8 @@
 </script>
 
 <style lang="scss" >
+	$uni-primary: #007aff !default;
+
 	.uni-calendar {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -719,7 +721,7 @@
 		text-align: center;
 		width: 100px;
 		font-size: 14px;
-		color: #007aff;
+		color: $uni-primary;
 		/* #ifndef APP-NVUE */
 		letter-spacing: 3px;
 		/* #endif */
@@ -898,7 +900,7 @@
 		border-radius: 100px;
 		height: 40px;
 		line-height: 40px;
-		background-color: #007aff;
+		background-color: $uni-primary;
 		color: #fff;
 		font-size: 16px;
 		letter-spacing: 2px;

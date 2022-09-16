@@ -770,7 +770,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	$uni-primary: #007aff !default;
+
 	.uni-datetime-picker {
 		/* #ifndef APP-NVUE */
 		/* width: 100%; */
@@ -804,7 +806,7 @@
 
 	.uni-datetime-picker-btn-text {
 		font-size: 14px;
-		color: #007AFF;
+		color: $uni-primary;
 	}
 
 	.uni-datetime-picker-btn-group {
