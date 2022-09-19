@@ -202,7 +202,8 @@
 				showClearIcon: false,
 				showPassword: false,
 				focusShow: false,
-				localMsg: ''
+				localMsg: '',
+				isEnter: false // 用于判断当前是否是使用回车操作
 			};
 		},
 		computed: {
@@ -372,7 +373,9 @@
 				this.focusShow = false
 				this.$emit('blur', event);
 				// 根据类型返回值，在event中获取的值理论上讲都是string
-				this.$emit('change', this.val)
+				if (this.isEnter === false) {
+					this.$emit('change', this.val)
+				}
 				// 失去焦点时参与表单校验
 				if (this.form && this.formItem) {
 					const {
@@ -390,7 +393,11 @@
 			 */
 			onConfirm(e) {
 				this.$emit('confirm', this.val);
+				this.isEnter = true;
 				this.$emit('change', this.val)
+				this.$nextTick(() => {
+					this.isEnter = false
+				})
 			},
 
 			/**
