@@ -1,3 +1,5 @@
+## 1.4.21（2022-09-19）
+- 修复，安装时未导入 uni-data-select 和 uni-tooltip 的问题。
 ## 1.4.20（2022-07-25）
 - uni-section 新增组件
 - uni-forms 修复 model 需要校验的值没有声明对应字段时，导致第一次不触发校验的bug
