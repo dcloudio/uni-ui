@@ -891,6 +891,7 @@
 
 	.uni-datetime-picker-text {
 		font-size: 14px;
+		line-height: 50px
 	}
 
 	.uni-datetime-picker-sign {

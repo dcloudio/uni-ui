@@ -1,3 +1,5 @@
+## 2.2.11（2022-09-19）
+- 修复，支付宝小程序样式错乱，[详情](https://github.com/dcloudio/uni-app/issues/3861)
 ## 2.2.10（2022-09-19）
 - 修复，反向选择日期范围，日期显示异常，[详情](https://ask.dcloud.net.cn/question/153401?item_id=212892&rf=false)
 ## 2.2.9（2022-09-16）
