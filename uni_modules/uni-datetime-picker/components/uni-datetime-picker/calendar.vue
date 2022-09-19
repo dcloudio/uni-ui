@@ -551,8 +551,16 @@
 				this.cale.setMultiple(this.calendar.fullDate, true)
 				this.weeks = this.cale.weeks
 				this.tempSingleDate = this.calendar.fullDate
-				this.tempRange.before = this.cale.multipleStatus.before
-				this.tempRange.after = this.cale.multipleStatus.after
+				const beforeStatus = this.cale.multipleStatus.before
+				const beforeDate = new Date(this.cale.multipleStatus.before).getTime()
+				const afterDate = new Date(this.cale.multipleStatus.after).getTime()
+				if (beforeDate > afterDate && afterDate) {
+					this.tempRange.before = this.cale.multipleStatus.after
+					this.tempRange.after = this.cale.multipleStatus.before
+				} else {
+					this.tempRange.before = this.cale.multipleStatus.before
+					this.tempRange.after = this.cale.multipleStatus.after
+				}
 				this.change()
 			},
 			/**
