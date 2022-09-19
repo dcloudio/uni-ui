@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.4.21",
+  "version": "1.4.22",
   "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -17,7 +17,7 @@
   "directories": {
     "example": "../../temps/example_temps"
   },
-"dcloudext": {
+  "dcloudext": {
     "sale": {
       "regular": {
         "price": "0.00"
@@ -47,7 +47,7 @@
       "uni-countdown",
       "uni-data-checkbox",
       "uni-data-picker",
-			"uni-data-select",
+      "uni-data-select",
       "uni-dateformat",
       "uni-datetime-picker",
       "uni-drawer",
@@ -80,7 +80,7 @@
       "uni-table",
       "uni-tag",
       "uni-title",
-			"uni-tooltip",
+      "uni-tooltip",
       "uni-transition"
     ],
     "encrypt": [],
