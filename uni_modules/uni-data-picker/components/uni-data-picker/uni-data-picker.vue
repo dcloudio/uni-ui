@@ -49,6 +49,7 @@
 <script>
   import dataPicker from "../uni-data-pickerview/uni-data-picker.js"
   import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
+  import UniIcons from "../uni-icons/uni-icons.vue";
 
   /**
    * DataPicker 级联选择
@@ -78,7 +79,8 @@
     emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue'],
     mixins: [dataPicker],
     components: {
-      DataPickerView
+      DataPickerView,
+      UniIcons
     },
     props: {
       options: {
