@@ -126,7 +126,6 @@
 		data() {
 			return {
 				errMsg: '',
-				isRequired: false,
 				userRules: null,
 				localLabelAlign: 'left',
 				localLabelWidth: '65px',
@@ -139,6 +138,9 @@
 			// 处理错误信息
 			msg() {
 				return this.errorMessage || this.errMsg;
+			},
+			isRequired() {
+				return this.required
 			}
 		},
 		watch: {
@@ -315,7 +317,6 @@
 				this.localLabelWidth = this._labelWidthUnit(labelWidth)
 				// 标签位置
 				this.localLabelPos = this._labelPosition()
-				this.isRequired = this.required
 				// 将需要校验的子组件加入form 队列
 				this.form && type && childrens.push(this)
 
@@ -351,7 +352,6 @@
 				this.validator = validator
 				// 默认值赋予
 				this.itemSetValue(_getDataValue(this.name, localData))
-				this.isRequired = this._isRequired()
 
 			},
 			unInit() {
