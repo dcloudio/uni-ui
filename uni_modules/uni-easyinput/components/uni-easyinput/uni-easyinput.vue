@@ -36,7 +36,6 @@
 </template>
 
 <script>
-	import uniScss from '@/uni.scss'
 	/**
 	 * Easyinput 输入框
 	 * @description 此组件可以实现表单的输入与校验，包括 "text" 和 "textarea" 类型。
@@ -181,7 +180,7 @@
 			},
 			primaryColor: {
 				type: String,
-				default: uniScss.uniColorPrimary || '#2979ff'
+				default: '#2979ff'
 			},
 			styles: {
 				type: Object,
