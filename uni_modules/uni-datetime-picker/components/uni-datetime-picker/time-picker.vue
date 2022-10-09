@@ -185,6 +185,7 @@
 			}
 		},
 		watch: {
+			// #ifndef VUE3
 			value: {
 				handler(newVal, oldVal) {
 					if (newVal) {
@@ -197,8 +198,9 @@
 				},
 				immediate: true
 			},
-      		// #ifdef VUE3
-      		modelValue: {
+			// #endif
+			// #ifdef VUE3
+			modelValue: {
 				handler(newVal, oldVal) {
 					if (newVal) {
 						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
@@ -210,7 +212,7 @@
 				},
 				immediate: true
 			},
-      		// #endif
+			// #endif
 			type: {
 				handler(newValue) {
 					if (newValue === 'date') {
@@ -750,10 +752,7 @@
 			 */
 			initTimePicker() {
 				if (this.disabled) return
-				let value = this.fixIosDateFormat(this.value)
-        		// #ifdef VUE3
-        		value = this.fixIosDateFormat(this.modelValue)
-        		// #endif
+				const value = this.fixIosDateFormat(this.value)
 				this.initPickerValue(value)
 				this.visible = !this.visible
 			},
@@ -787,7 +786,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	$uni-primary: #007aff !default;
+
 	.uni-datetime-picker {
 		/* #ifndef APP-NVUE */
 		/* width: 100%; */
@@ -821,7 +822,7 @@
 
 	.uni-datetime-picker-btn-text {
 		font-size: 14px;
-		color: #007AFF;
+		color: $uni-primary;
 	}
 
 	.uni-datetime-picker-btn-group {
@@ -906,6 +907,7 @@
 
 	.uni-datetime-picker-text {
 		font-size: 14px;
+		line-height: 50px
 	}
 
 	.uni-datetime-picker-sign {

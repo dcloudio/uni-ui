@@ -1,3 +1,24 @@
+## 1.4.22（2022-09-19）
+- 优化 部分组件适配 uni-scss 主题色
+- uni-badge 修复 当 text 超过 max-num 时，badge 的宽度计算是根据 text 的长度计算，更改为 css 计算实际展示宽度，详见:[https://ask.dcloud.net.cn/question/150473](https://ask.dcloud.net.cn/question/150473)
+- uni-calendar 修复 表头年月切换，导致改变当前日期为选择月1号，且未触发change事件
+- uni-data-select 修复 微信小程序下拉框出现后选择会点击到蒙板后面的输入框
+- uni-data-select 修复 点击的位置不准确
+- uni-data-select 新增 支持 disabled 属性
+- uni-datetime-picker 修复，反向选择日期范围，日期显示异常，[详情](https://ask.dcloud.net.cn/question/153401?item_id=212892&rf=false)
+- uni-datetime-picker 修复 close事件无效的 bug
+- uni-datetime-picker 修复 移动端 maskClick 无效的 bug，详见:[https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false](https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false)
+- uni-fab 修复 小程序端由于 style 使用了对象导致报错，[详情](https://ask.dcloud.net.cn/question/152790?item_id=211778&rf=false)
+- uni-fab 修复 nvue 环境下，具有 tabBar 时，fab 组件下部位置无法正常获取 --window-bottom 的bug，详见：[https://ask.dcloud.net.cn/question/110638?notification_id=826310](https://ask.dcloud.net.cn/question/110638?notification_id=826310)
+- uni-forms 优化 根据 rules 自动添加 required 的问题
+- uni-forms 修复 item 未设置 require 属性，rules 设置 require 后，星号也显示的 bug，详见：[https://ask.dcloud.net.cn/question/151540](https://ask.dcloud.net.cn/question/151540)
+- uni-nav-bar 修复 nvue 环境下 fixed 为 true 的情况下，无法置顶的 bug
+- uni-notice-bar 新增 属性 fontSize，可修改文字大小。
+- uni-pagination 修复，未对主题色设置默认色，导致未引入 uni-scss 变量文件报错。
+- uni-pagination 修复，未对移动端当前页文字做主题色适配。
+- uni-pagination 修复 es 语言 i18n 错误
+## 1.4.21（2022-09-19）
+- 修复，安装时未导入 uni-data-select 和 uni-tooltip 的问题。
 ## 1.4.20（2022-07-25）
 - uni-section 新增组件
 - uni-forms 修复 model 需要校验的值没有声明对应字段时，导致第一次不触发校验的bug

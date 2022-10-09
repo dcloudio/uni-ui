@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.4.20",
+  "version": "1.4.22",
   "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -18,10 +18,6 @@
     "example": "../../temps/example_temps"
   },
   "dcloudext": {
-    "category": [
-      "前端组件",
-      "通用组件"
-    ],
     "sale": {
       "regular": {
         "price": "0.00"
@@ -38,7 +34,8 @@
       "data": "无",
       "permissions": "无"
     },
-    "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui"
+    "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui",
+    "type": "component-vue"
   },
   "uni_modules": {
     "dependencies": [
@@ -50,6 +47,7 @@
       "uni-countdown",
       "uni-data-checkbox",
       "uni-data-picker",
+      "uni-data-select",
       "uni-dateformat",
       "uni-datetime-picker",
       "uni-drawer",
@@ -74,6 +72,7 @@
       "uni-rate",
       "uni-row",
       "uni-search-bar",
+      "uni-section",
       "uni-segmented-control",
       "uni-steps",
       "uni-swipe-action",
@@ -81,6 +80,7 @@
       "uni-table",
       "uni-tag",
       "uni-title",
+      "uni-tooltip",
       "uni-transition"
     ],
     "encrypt": [],
