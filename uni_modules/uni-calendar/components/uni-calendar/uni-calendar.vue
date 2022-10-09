@@ -218,7 +218,7 @@
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
 				console.log(this.cale.getDate(value));
-				this.init(value)
+				this.setDate(value)
 			},
 			/**
 			 * 初始化日期显示

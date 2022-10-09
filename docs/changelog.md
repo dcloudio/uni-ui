@@ -1,16 +1,105 @@
-
-# 更新日志 
+# 更新日志
 
 ## 发布周期
+
 - 修订版本号：每周末会进行日常 bugfix 更新。**如果有紧急的 bugfix，则任何时候都可发布**
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
-<log title="1.4.21" date="2022-08-09">
+
+<log title="1.4.23" date="2022-10-09">
 	<log-item title="uni-easyinput 组件更新">
 		<log-item-text tag-type="feat">
 			 `prefixIcon` 和 `suffixIcon` 插槽，用来显示输入框的头部和尾部内容
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.22" date="2022-09-19">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="fix">
+			 当 text 超过 max-num 时，badge 的宽度计算是根据 text 的长度计算，更改为 css 计算实际展示宽度，详见:[https://ask.dcloud.net.cn/question/150473](https://ask.dcloud.net.cn/question/150473)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="perf">
+			 可以使用 uni-scss 控制主题色
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 fix: 表头年月切换，导致改变当前日期为选择月1号，且未触发change事件
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="perf">
+			 可以使用 uni-scss 控制主题色
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 可以使用 uni-scss 控制主题色
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序下拉框出现后选择会点击到蒙板后面的输入框
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 点击的位置不准确
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 支持 disabled 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			，反向选择日期范围，日期显示异常，[详情](https://ask.dcloud.net.cn/question/153401?item_id=212892&rf=false)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 可以使用 uni-scss 控制主题色
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 close事件无效的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 移动端 maskClick 无效的 bug，详见:[https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false](https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 环境下，具有 tabBar 时，fab 组件下部位置无法正常获取 --window-bottom 的bug，详见：[https://ask.dcloud.net.cn/question/110638?notification_id=826310](https://ask.dcloud.net.cn/question/110638?notification_id=826310)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="perf">
+			 根据 rules 自动添加 required 的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 item 未设置 require 属性，rules 设置 require 后，星号也显示的 bug，详见：[https://ask.dcloud.net.cn/question/151540](https://ask.dcloud.net.cn/question/151540)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 环境下 fixed 为 true 的情况下，无法置顶的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 属性 fontSize，可修改文字大小。
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-pagination 组件更新">
+		<log-item-text tag-type="fix">
+			，未对主题色设置默认色，导致未引入 uni-scss 变量文件报错。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			，未对移动端当前页文字做主题色适配。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			未使用 uni-scss 主题色的 bug。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 es 语言 i18n 错误
 		</log-item-text>
 	</log-item>
 </log>
@@ -1901,7 +1990,6 @@
 	</log-item>
 </log>
 
-
 <log title="1.2.13" date="2021-04-14">
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="fix">
@@ -2156,7 +2244,6 @@
 	</log-item>
 </log>
 
-
 <log title="1.2.4" date="2020-08-13">
 	<log-item-text tag-type="perf" only>
 		<highlight text="uni-ui" /> 项目结构优化
@@ -2230,4 +2317,3 @@
 		  uni-ui 文档初始化更新
 	</log-item-text>
 </log>
-

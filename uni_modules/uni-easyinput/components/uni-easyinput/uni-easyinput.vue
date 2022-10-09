@@ -65,7 +65,7 @@
 					:class="{ 'is-textarea-icon': type === 'textarea' }"
 					:type="showPassword ? 'eye-slash-filled' : 'eye-filled'"
 					:size="22"
-					:color="focusShow ? '#2979ff' : '#c0c4cc'"
+					:color="focusShow ? primaryColor : '#c0c4cc'"
 					@click="onEyes"
 				>
 				</uni-icons>
@@ -89,7 +89,7 @@
 					:class="{ 'is-textarea-icon': type === 'textarea' }"
 					type="clear"
 					:size="clearSize"
-					:color="msg ? '#dd524d' : focusShow ? '#2979ff' : '#c0c4cc'"
+					:color="msg ? '#dd524d' : focusShow ? primaryColor : '#c0c4cc'"
 					@click="onClear"
 				></uni-icons>
 			</template>
@@ -122,6 +122,7 @@
  * @property {Number }	clearSize	清除图标的大小，单位px（默认15）
  * @property {String}	prefixIcon	输入框头部图标
  * @property {String}	suffixIcon	输入框尾部图标
+ * @property {String}	primaryColor	设置主题色（默认#2979ff）
  * @property {Boolean}	trim	是否自动去除两端的空格
  * @value both	去除两端空格
  * @value left	去除左侧空格
@@ -253,6 +254,10 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		primaryColor: {
+			type: String,
+			default: "#2979ff",
+		},
 		styles: {
 			type: Object,
 			default() {
@@ -321,22 +326,26 @@ export default {
 			});
 		},
 		inputContentStyle() {
-			const focusColor = this.focusShow ? "#2979ff" : this.styles.borderColor;
+			const focusColor = this.focusShow
+				? this.primaryColor
+				: this.styles.borderColor;
 			const borderColor = this.inputBorder && this.msg ? "#dd524d" : focusColor;
 			return obj2strStyle({
 				"border-color": borderColor || "#e5e5e5",
-				"background-color": this.disabled ? this.styles.disableColor : "#fff",
+				"background-color": this.disabled
+					? this.styles.disableColor
+					: this.styles.backgroundColor,
 			});
 		},
 		// input右侧样式
 		inputStyle() {
 			const paddingRight =
-				this.type === "password" || this.clearable || this.prefixIcon || Boolean(this.$slots.prefixIcon)
+				this.type === "password" || this.clearable || this.prefixIcon
 					? ""
 					: "10px";
 			return obj2strStyle({
 				"padding-right": paddingRight,
-				"padding-left": this.prefixIcon || Boolean(this.$slots.prefixIcon) ? "" : "10px",
+				"padding-left": this.prefixIcon ? "" : "10px",
 			});
 		},
 	},
