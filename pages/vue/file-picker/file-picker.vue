@@ -5,12 +5,12 @@
 		</uni-card>
 		<uni-section title="只选择图片" type="line">
 			<view class="example-body">
-				<uni-file-picker limit="9" title="最多选择9张图片"></uni-file-picker>
+				<uni-file-picker limit="9" title="最多选择9张图片" :sourceType="sourceType"></uni-file-picker>
 			</view>
 		</uni-section>
 		<uni-section title="只选择视频" type="line">
 			<view class="example-body">
-				<uni-file-picker limit="9" file-mediatype="video" title="最多选择9个视频"></uni-file-picker>
+				<uni-file-picker limit="9" file-mediatype="video" title="最多选择9个视频" :sourceType="sourceType"></uni-file-picker>
 			</view>
 		</uni-section>
 
@@ -47,6 +47,8 @@
 	export default {
 		data() {
 			return {
+				sourceType:['camera','album'],
+
 				imageStyles: {
 					width: 64,
 					height: 64,
