@@ -205,6 +205,9 @@ export default {
       this._treeData = [];
       this._extractTree(this.localdata, this._treeData);
 
+      this._updateBindData();
+      this._updateSelected();
+
       let inputValue = this.dataValue;
       if (inputValue === undefined) {
         return;
