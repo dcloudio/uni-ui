@@ -1,12 +1,21 @@
-
-# 更新日志 
+# 更新日志
 
 ## 发布周期
+
 - 修订版本号：每周末会进行日常 bugfix 更新。**如果有紧急的 bugfix，则任何时候都可发布**
 - 次版本号：每月发布一个带有新特性的向下兼容的版本。
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+
+<log title="1.4.23" date="2022-10-09">
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 `prefixIcon` 和 `suffixIcon` 插槽，用来显示输入框的头部和尾部内容
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.22" date="2022-09-19">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="fix">
@@ -1981,7 +1990,6 @@
 	</log-item>
 </log>
 
-
 <log title="1.2.13" date="2021-04-14">
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="fix">
@@ -2236,7 +2244,6 @@
 	</log-item>
 </log>
 
-
 <log title="1.2.4" date="2020-08-13">
 	<log-item-text tag-type="perf" only>
 		<highlight text="uni-ui" /> 项目结构优化
@@ -2310,4 +2317,3 @@
 		  uni-ui 文档初始化更新
 	</log-item-text>
 </log>
-
