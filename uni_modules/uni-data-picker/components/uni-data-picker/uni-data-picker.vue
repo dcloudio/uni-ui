@@ -202,7 +202,7 @@
         this.$nextTick(() => {
           this.inputSelected = e;
         })
-        this._dispatchEvent(e)
+        this._dispatchEvent(e.concat())
       },
       _processReadonly(dataList, value) {
         var isTree = dataList.findIndex((item) => {
