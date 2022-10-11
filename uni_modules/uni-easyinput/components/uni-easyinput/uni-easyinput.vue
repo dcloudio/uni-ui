@@ -338,7 +338,7 @@ export default {
 		init() {
 			if (this.value || this.value === 0) {
 				this.val = this.value;
-			} else if (this.modelValue || this.modelValue === 0) {
+			} else if (this.modelValue || this.modelValue === 0 || this.modelValue === '') {
 				this.val = this.modelValue;
 			} else {
 				this.val = null;
