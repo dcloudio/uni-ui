@@ -230,6 +230,17 @@
 					}
 				}
 			},
+			modelValue: {
+				immediate: true,
+				handler(val) {
+					if (Number(this.current) !== 1) return
+					if (val < 1) {
+						this.currentIndex = 1
+					} else {
+						this.currentIndex = val
+					}
+				}
+			},
 			pageSizeIndex(val) {
 				this.$emit('pageSizeChange', this.pageSizeRange[val])
 			}
