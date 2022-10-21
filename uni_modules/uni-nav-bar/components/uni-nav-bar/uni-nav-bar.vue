@@ -38,12 +38,12 @@
 				</view>
 			</view>
 		</view>
-		/* #ifndef APP-NVUE */
+		<!-- #ifndef APP-NVUE -->
 		<view class="uni-navbar__placeholder" v-if="fixed">
 			<status-bar v-if="statusBar" />
 			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}" />
 		</view>
-		/* #endif */
+		<!-- #endif -->
 	</view>
 </template>
 
