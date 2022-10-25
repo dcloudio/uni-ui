@@ -1,3 +1,8 @@
+## 1.4.23（2022-10-25）
+- uni-datetime-picker 修复，支付宝小程序样式错乱，[详情](https://github.com/dcloudio/uni-app/issues/3861)
+
+- uni-nav-bar 修复 条件编译错误的bug
+- uni-nav-bar 修复 nvue 环境 fixed 为 true 的情况下，无法置顶的 bug
 ## 1.4.22（2022-09-19）
 - 优化 部分组件适配 uni-scss 主题色
 - uni-badge 修复 当 text 超过 max-num 时，badge 的宽度计算是根据 text 的长度计算，更改为 css 计算实际展示宽度，详见:[https://ask.dcloud.net.cn/question/150473](https://ask.dcloud.net.cn/question/150473)
