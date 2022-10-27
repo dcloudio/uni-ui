@@ -128,9 +128,9 @@ export default {
 	/* padding: 0 15px; */
 	/* #ifndef APP-NVUE */
 	display: flex;
+	max-width: 500px;
 	/* #endif */
 	flex-direction: column;
-	max-width: 500px;
 }
 
 .title {
