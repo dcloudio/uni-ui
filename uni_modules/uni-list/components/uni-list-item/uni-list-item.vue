@@ -179,7 +179,7 @@
 				type: Object,
 				default () {
 					return {
-						padding: 0,
+						padding: '',
 						backgroundColor: '#FFFFFF'
 					}
 				}
