@@ -1,14 +1,14 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
-	<cell>
+	<cell keep-scroll-position>
 		<!-- #endif -->
-
-		<view :class="{ 'uni-list-item--disabled': disabled }"
+		<view :class="{ 'uni-list-item--disabled': disabled }" :style="{'background-color':customStyle.backgroundColor}"
 			:hover-class="(!clickable && !link) || disabled || showSwitch ? '' : 'uni-list-item--hover'"
 			class="uni-list-item" @click="onClick">
 			<view v-if="!isFirstChild" class="border--left" :class="{ 'uni-list--border': border }"></view>
 			<view class="uni-list-item__container"
-				:class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column' }">
+				:class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column'}"
+				:style="{padding:customStyle.padding}">
 				<slot name="header">
 					<view class="uni-list-item__header">
 						<view v-if="thumb" class="uni-list-item__icon">
@@ -96,7 +96,7 @@
 				default: ''
 			},
 			ellipsis: {
-				type: [Number,String],
+				type: [Number, String],
 				default: 0
 			},
 			disabled: {
@@ -139,7 +139,7 @@
 				type: String,
 				default: 'success'
 			},
-			badgeStyle:{
+			badgeStyle: {
 				type: Object,
 				default () {
 					return {}
@@ -174,6 +174,15 @@
 			border: {
 				type: Boolean,
 				default: true
+			},
+			customStyle: {
+				type: Object,
+				default () {
+					return {
+						padding: 0,
+						backgroundColor: '#FFFFFF'
+					}
+				}
 			}
 		},
 		// inject: ['list'],
@@ -255,7 +264,7 @@
 						uni.switchTab(callback)
 						break
 					default:
-					uni.navigateTo(callback)
+						uni.navigateTo(callback)
 				}
 			}
 		}
@@ -275,6 +284,7 @@
 	$uni-bg-color-hover:#f1f1f1;
 	$uni-text-color-grey:#999;
 	$list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
+
 	.uni-list-item {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -289,12 +299,15 @@
 		cursor: pointer;
 		/* #endif */
 	}
+
 	.uni-list-item--disabled {
 		opacity: 0.3;
 	}
+
 	.uni-list-item--hover {
 		background-color: $uni-bg-color-hover;
 	}
+
 	.uni-list-item__container {
 		position: relative;
 		/* #ifndef APP-NVUE */
@@ -307,9 +320,11 @@
 		overflow: hidden;
 		// align-items: center;
 	}
+
 	.container--right {
 		padding-right: 0;
 	}
+
 	// .border--left {
 	// 	margin-left: $uni-spacing-row-lg;
 	// }
@@ -324,6 +339,7 @@
 		border-top-width: 0.5px;
 		/* #endif */
 	}
+
 	/* #ifndef APP-NVUE */
 	.uni-list--border:after {
 		position: absolute;
@@ -336,6 +352,7 @@
 		transform: scaleY(0.5);
 		background-color: $uni-border-color;
 	}
+
 	/* #endif */
 	.uni-list-item__content {
 		/* #ifndef APP-NVUE */
@@ -349,20 +366,24 @@
 		justify-content: space-between;
 		overflow: hidden;
 	}
+
 	.uni-list-item__content--center {
 		justify-content: center;
 	}
+
 	.uni-list-item__content-title {
 		font-size: $uni-font-size-base;
 		color: #3b4144;
 		overflow: hidden;
 	}
+
 	.uni-list-item__content-note {
 		margin-top: 6rpx;
 		color: $uni-text-color-grey;
 		font-size: $uni-font-size-sm;
 		overflow: hidden;
 	}
+
 	.uni-list-item__extra {
 		// width: 25%;
 		/* #ifndef APP-NVUE */
@@ -372,6 +393,7 @@
 		justify-content: flex-end;
 		align-items: center;
 	}
+
 	.uni-list-item__header {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -379,12 +401,14 @@
 		flex-direction: row;
 		align-items: center;
 	}
+
 	.uni-list-item__icon {
 		margin-right: 18rpx;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 	}
+
 	.uni-list-item__icon-img {
 		/* #ifndef APP-NVUE */
 		display: block;
@@ -393,6 +417,7 @@
 		width: $uni-img-size-base;
 		margin-right: 10px;
 	}
+
 	.uni-icon-wrapper {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -400,33 +425,40 @@
 		align-items: center;
 		padding: 0 10px;
 	}
+
 	.flex--direction {
 		flex-direction: column;
 		/* #ifndef APP-NVUE */
 		align-items: initial;
 		/* #endif */
 	}
+
 	.flex--justify {
 		/* #ifndef APP-NVUE */
 		justify-content: initial;
 		/* #endif */
 	}
+
 	.uni-list--lg {
 		height: $uni-img-size-lg;
 		width: $uni-img-size-lg;
 	}
+
 	.uni-list--base {
 		height: $uni-img-size-base;
 		width: $uni-img-size-base;
 	}
+
 	.uni-list--sm {
 		height: $uni-img-size-sm;
 		width: $uni-img-size-sm;
 	}
+
 	.uni-list-item__extra-text {
 		color: $uni-text-color-grey;
 		font-size: $uni-font-size-sm;
 	}
+
 	.uni-ellipsis-1 {
 		/* #ifndef APP-NVUE */
 		overflow: hidden;
@@ -435,9 +467,10 @@
 		/* #endif */
 		/* #ifdef APP-NVUE */
 		lines: 1;
-		text-overflow:ellipsis;
+		text-overflow: ellipsis;
 		/* #endif */
 	}
+
 	.uni-ellipsis-2 {
 		/* #ifndef APP-NVUE */
 		overflow: hidden;
@@ -448,7 +481,7 @@
 		/* #endif */
 		/* #ifdef APP-NVUE */
 		lines: 2;
-		text-overflow:ellipsis;
+		text-overflow: ellipsis;
 		/* #endif */
 	}
 </style>

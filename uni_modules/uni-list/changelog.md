@@ -1,3 +1,7 @@
+## 1.2.2（2022-11-11）
+- uni-list 新增 render-reverse 详情参考：[https://uniapp.dcloud.net.cn/component/list.html](https://uniapp.dcloud.net.cn/component/list.html)
+- uni-list-chat 支持字样：“草稿”加红显示
+- uni-list-item 新增 customStyle 支持设置padding、backgroundColor
 ## 1.2.1（2022-03-30）
 - 删除无用文件
 ## 1.2.0（2021-11-23）

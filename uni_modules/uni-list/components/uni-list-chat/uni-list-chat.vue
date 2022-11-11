@@ -24,7 +24,10 @@
 				<view class="uni-list-chat__content">
 					<view class="uni-list-chat__content-main">
 						<text class="uni-list-chat__content-title uni-ellipsis">{{ title }}</text>
-						<text class="uni-list-chat__content-note uni-ellipsis">{{ note }}</text>
+						<view style="flex-direction: row;">
+							<text class="draft" v-if="isDraft">[草稿]</text>
+							<text class="uni-list-chat__content-note uni-ellipsis">{{isDraft?note.slice(14,-1):note}}</text>
+						</view>
 					</view>
 					<view class="uni-list-chat__content-extra">
 						<slot>
@@ -121,6 +124,9 @@
 		},
 		// inject: ['list'],
 		computed: {
+			isDraft(){
+				return this.note.slice(0,14) == '[uni-im-draft]'
+			},
 			isSingle() {
 				if (this.badgeText === 'dot') {
 					return 'uni-badge--dot';
@@ -445,12 +451,19 @@
 		overflow: hidden;
 	}
 
-	.uni-list-chat__content-note {
+	.draft ,.uni-list-chat__content-note {
 		margin-top: 3px;
 		color: $note-color;
 		font-size: $note-size;
 		font-weight: $title-weight;
 		overflow: hidden;
+	}
+	.draft{
+		color: #eb3a41;
+		/* #ifndef APP-NVUE */
+		flex-shrink: 0;
+		/* #endif */
+		padding-right: 3px;
 	}
 
 	.uni-list-chat__content-extra {
