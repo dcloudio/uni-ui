@@ -202,6 +202,13 @@
 					// #ifndef MP-WEIXIN
 					this.safeAreaInsets = safeAreaInsets.bottom
 					// #endif
+					// TODO 支付宝小程序在开发者工具中safeArea和safeAreaInsets返回的坐标值相反，添加该判断便于调试，需要框架修复后删除
+					// #ifdef MP-ALIPAY
+					// 判断是否开发者工具
+					if (my.isIDE) {
+						this.safeAreaInsets = safeArea.bottom
+					}
+					// #endif
 				} else {
 					this.safeAreaInsets = 0
 				}
