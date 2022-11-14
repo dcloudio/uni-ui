@@ -1,3 +1,5 @@
+## 1.2.3（2022-11-14）
+- uni-list-chat 新增 avatar 支持 fileId
 ## 1.2.2（2022-11-11）
 - uni-list 新增属性 render-reverse 详情参考：[https://uniapp.dcloud.net.cn/component/list.html](https://uniapp.dcloud.net.cn/component/list.html)
 - uni-list-chat note属性 支持：“草稿”字样 加红显示 详情参考uni-im：[https://ext.dcloud.net.cn/plugin?name=uni-im](https://ext.dcloud.net.cn/plugin?name=uni-im)

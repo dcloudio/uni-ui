@@ -7,7 +7,7 @@
 			<view class="uni-list-chat__container">
 				<view class="uni-list-chat__header-warp">
 					<view v-if="avatarCircle || avatarList.length === 0" class="uni-list-chat__header" :class="{ 'header--circle': avatarCircle }">
-						<image class="uni-list-chat__header-image" :class="{ 'header--circle': avatarCircle }" :src="avatar" mode="aspectFill"></image>
+						<image class="uni-list-chat__header-image" :class="{ 'header--circle': avatarCircle }" :src="avatarUrl" mode="aspectFill"></image>
 					</view>
 					<!-- 头像组 -->
 					<view v-else class="uni-list-chat__header">
@@ -152,12 +152,32 @@
 				}
 			}
 		},
+		watch: {
+			avatar:{
+				handler(avatar) {
+					if(avatar.includes('://')){
+						uniCloud.getTempFileURL({
+							fileList: [avatar]
+						}).then(res=>{
+							// console.log(res);
+							// 兼容uniCloud私有化部署
+							let fileList = res.fileList || res.result.fileList
+							this.avatarUrl = fileList[0].tempFileURL
+						})
+					}else{
+						this.avatarUrl = avatar
+					}
+				},
+				immediate: true
+			}
+		},
 		data() {
 			return {
 				isFirstChild: false,
 				border: true,
 				// avatarList: 3,
-				imageWidth: 50
+				imageWidth: 50,
+				avatarUrl:''
 			};
 		},
 		mounted() {
