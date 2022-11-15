@@ -186,30 +186,36 @@
 			}
 		},
 		watch: {
-			'customStyle.padding'(padding) {
-				let paddingArr = padding.split(' ')
-				if (paddingArr.length === 1) {
-					this.padding = {
-						"top": padding,
-						"right": padding,
-						"bottom": padding,
-						"left": padding
+			'customStyle.padding': {
+				handler(padding) {
+					if(typeof padding == 'number'){
+						padding += ''
 					}
-				} else if (paddingArr.length === 2) {
-					this.padding = {
-						"top": padding[0],
-						"right": padding[1],
-						"bottom": padding[0],
-						"left": padding[1]
+					let paddingArr = padding.split(' ')
+					if (paddingArr.length === 1) {
+						this.padding = {
+							"top": padding,
+							"right": padding,
+							"bottom": padding,
+							"left": padding
+						}
+					} else if (paddingArr.length === 2) {
+						this.padding = {
+							"top": padding[0],
+							"right": padding[1],
+							"bottom": padding[0],
+							"left": padding[1]
+						}
+					} else if (paddingArr.length === 4) {
+						this.padding = {
+							"top": padding[0],
+							"right": padding[1],
+							"bottom": padding[2],
+							"left": padding[3]
+						}
 					}
-				} else if (paddingArr.length === 4) {
-					this.padding = {
-						"top": padding[0],
-						"right": padding[1],
-						"bottom": padding[2],
-						"left": padding[3]
-					}
-				}
+				},
+				immediate: true
 			}
 		},
 		// inject: ['list'],
