@@ -8,7 +8,7 @@
 			<view v-if="!isFirstChild" class="border--left" :class="{ 'uni-list--border': border }"></view>
 			<view class="uni-list-item__container"
 				:class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column'}"
-				:style="{padding:customStyle.padding}">
+				:style="{paddingTop:padding.top,paddingLeft:padding.left,paddingRight:padding.right,paddingBottom:padding.bottom}">
 				<slot name="header">
 					<view class="uni-list-item__header">
 						<view v-if="thumb" class="uni-list-item__icon">
@@ -185,10 +185,43 @@
 				}
 			}
 		},
+		watch: {
+			'customStyle.padding'(padding) {
+				let paddingArr = padding.split(' ')
+				if (paddingArr.length === 1) {
+					this.padding = {
+						"top": padding,
+						"right": padding,
+						"bottom": padding,
+						"left": padding
+					}
+				} else if (paddingArr.length === 2) {
+					this.padding = {
+						"top": padding[0],
+						"right": padding[1],
+						"bottom": padding[0],
+						"left": padding[1]
+					}
+				} else if (paddingArr.length === 4) {
+					this.padding = {
+						"top": padding[0],
+						"right": padding[1],
+						"bottom": padding[2],
+						"left": padding[3]
+					}
+				}
+			}
+		},
 		// inject: ['list'],
 		data() {
 			return {
-				isFirstChild: false
+				isFirstChild: false,
+				padding: {
+					top: "",
+					right: "",
+					bottom: "",
+					left: ""
+				}
 			};
 		},
 		mounted() {

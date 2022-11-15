@@ -1,3 +1,5 @@
+## 1.2.4（2022-11-14）
+- 修复 uni-list-item 的 customStyle 属性 padding值在nvue（vue2）下无效的bug
 ## 1.2.3（2022-11-14）
 - uni-list-chat 新增 avatar 支持 fileId
 ## 1.2.2（2022-11-11）
