@@ -159,7 +159,7 @@
 						defValue = strogeValue
 					} else {
 						let defItem = ''
-						if (this.defItem > 0 && this.defItem < this.mixinDatacomResData.length) {
+						if (this.defItem > 0 && this.defItem <= this.mixinDatacomResData.length) {
 							defItem = this.mixinDatacomResData[this.defItem - 1].value
 						}
 						defValue = defItem
