@@ -1,14 +1,16 @@
 <template>
-	<view class="uni-countdown">
-		<text v-if="showDay" :style="[timeStyle]" class="uni-countdown__number">{{ d }}</text>
-		<text v-if="showDay" :style="[splitorStyle]" class="uni-countdown__splitor">{{dayText}}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ h }}</text>
-		<text :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : hourText }}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ i }}</text>
-		<text :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : minuteText }}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ s }}</text>
-		<text v-if="!showColon" :style="[splitorStyle]" class="uni-countdown__splitor">{{secondText}}</text>
-	</view>
+    <view class="uni-countdown">
+        <text v-if="showDay" :style="[timeStyle]" class="uni-countdown__number">{{ d }}</text>
+        <text v-if="showDay" :style="[splitorStyle]" class="uni-countdown__splitor">{{dayText}}</text>
+        <text v-if="showHour" :style="[timeStyle]" class="uni-countdown__number">{{ h }}</text>
+        <text v-if="showHour" :style="[splitorStyle]"
+            class="uni-countdown__splitor">{{ showColon ? ':' : hourText }}</text>
+        <text v-if="showMinute" :style="[timeStyle]" class="uni-countdown__number">{{ i }}</text>
+        <text v-if="showMinute" :style="[splitorStyle]"
+            class="uni-countdown__splitor">{{ showColon ? ':' : minuteText }}</text>
+        <text :style="[timeStyle]" class="uni-countdown__number">{{ s }}</text>
+        <text v-if="!showColon" :style="[splitorStyle]" class="uni-countdown__splitor">{{secondText}}</text>
+    </view>
 </template>
 <script>
 	import {
@@ -30,6 +32,8 @@
 	 * @property {Number} second 秒
 	 * @property {Number} timestamp 时间戳
 	 * @property {Boolean} showDay = [true|false] 是否显示天数
+	 * @property {Boolean} showHour = [true|false] 是否显示小时
+   * @property {Boolean} showMinute = [true|false] 是否显示分钟
 	 * @property {Boolean} show-colon = [true|false] 是否以冒号为分隔符
 	 * @property {String} splitorColor 分割符号颜色
 	 * @event {Function} timeup 倒计时时间到触发事件
@@ -43,6 +47,14 @@
 				type: Boolean,
 				default: true
 			},
+			showHour: {
+        type: Boolean,
+        default: true
+      },
+      showMinute: {
+        type: Boolean,
+        default: true
+      },
 			showColon: {
 				type: Boolean,
 				default: true
