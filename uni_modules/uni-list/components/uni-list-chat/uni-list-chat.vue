@@ -26,7 +26,7 @@
 						<text class="uni-list-chat__content-title uni-ellipsis">{{ title }}</text>
 						<view style="flex-direction: row;">
 							<text class="draft" v-if="isDraft">[草稿]</text>
-							<text class="uni-list-chat__content-note uni-ellipsis">{{isDraft?note.slice(14,-1):note}}</text>
+							<text class="uni-list-chat__content-note uni-ellipsis">{{isDraft?note.slice(14):note}}</text>
 						</view>
 					</view>
 					<view class="uni-list-chat__content-extra">
