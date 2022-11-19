@@ -20,8 +20,8 @@
 				<view class="uni-navbar__header-container " @tap="onClickTitle">
 					<slot>
 						<view class="uni-navbar__header-container-inner" v-if="title.length>0">
-							<text class="uni-nav-bar-text uni-ellipsis-1"
-								:style="{color: themeColor }">{{ title }}</text>
+							<text class="uni-ellipsis-1"
+								:style="{color: themeColor, fontSize: titleSize }">{{ title }}</text>
 						</view>
 					</slot>
 				</view>
@@ -59,6 +59,7 @@
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=52
 	 * @property {Boolean} dark 开启黑暗模式
 	 * @property {String} title 标题文字
+	 * @property {String} titleSize 标题大小
 	 * @property {String} leftText 左侧按钮文本
 	 * @property {String} rightText 右侧按钮文本
 	 * @property {String} leftIcon 左侧按钮图标（图标类型参考 [Icon 图标](http://ext.dcloud.net.cn/plugin?id=28) type 属性）
@@ -68,6 +69,7 @@
 	 * @property {Boolean} fixed = [true|false] 是否固定顶部
 	 * @property {Boolean} statusBar = [true|false] 是否包含状态栏
 	 * @property {Boolean} shadow = [true|false] 导航栏下是否有阴影
+	 * @property {Boolean} border = [true|false] 导航栏下是否有边框
 	 * @property {Boolean} stat 是否开启统计标题上报
 	 * @event {Function} clickLeft 左侧按钮点击时触发
 	 * @event {Function} clickRight 右侧按钮点击时触发
@@ -87,6 +89,10 @@
 			title: {
 				type: String,
 				default: ""
+			},
+			titleSize: {
+				type: String,
+				default: "14rpx"
 			},
 			leftText: {
 				type: String,
@@ -207,15 +213,6 @@
 	}
 	.uni-navbar {
 		// box-sizing: border-box;
-	}
-
-	.uni-nav-bar-text {
-		/* #ifdef APP-PLUS */
-		font-size: 34rpx;
-		/* #endif */
-		/* #ifndef APP-PLUS */
-		font-size: 14px;
-		/* #endif */
 	}
 
 	.uni-nav-bar-right-text {
