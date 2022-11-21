@@ -155,9 +155,7 @@
 		watch: {
 			avatar:{
 				handler(avatar) {
-					if(avatar.includes('://')){
-						this.avatarUrl = avatar
-					}else{
+					if(avatar.substr(0,8) == 'cloud://'){
 						uniCloud.getTempFileURL({
 							fileList: [avatar]
 						}).then(res=>{
@@ -166,6 +164,8 @@
 							let fileList = res.fileList || res.result.fileList
 							this.avatarUrl = fileList[0].tempFileURL
 						})
+					}else{
+						this.avatarUrl = avatar
 					}
 				},
 				immediate: true
