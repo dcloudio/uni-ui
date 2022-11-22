@@ -112,6 +112,12 @@
 						value: 'value'
 					}
 				}
+			},
+			filterDefaultValue: {
+				type: [Array,String],
+				default () {
+					return ""
+				}
 			}
 		},
 		computed: {
@@ -157,7 +163,7 @@
 				enabled: true,
 				isOpened: false,
 				dataList: [],
-				filterValue: '',
+				filterValue: this.filterDefaultValue,
 				checkedValues: [],
 				gtValue: '',
 				ltValue: '',
