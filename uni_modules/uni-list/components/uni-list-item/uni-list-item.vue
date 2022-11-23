@@ -1,6 +1,6 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
-	<cell keep-scroll-position>
+	<cell :keep-scroll-position="keepScrollPosition">
 		<!-- #endif -->
 		<view :class="{ 'uni-list-item--disabled': disabled }" :style="{'background-color':customStyle.backgroundColor}"
 			:hover-class="(!clickable && !link) || disabled || showSwitch ? '' : 'uni-list-item--hover'"
@@ -183,6 +183,10 @@
 						backgroundColor: '#FFFFFF'
 					}
 				}
+			},
+			keepScrollPosition: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {
