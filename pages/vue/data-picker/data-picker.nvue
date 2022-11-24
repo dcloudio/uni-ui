@@ -13,6 +13,7 @@
 					@nodeclick="onnodeclick"
 					@popupopened="onpopupopened"
 					@popupclosed="onpopupclosed"
+					@inputclick="inputclick"
 				></uni-data-picker>
 			</view>
 		</uni-section>
@@ -118,6 +119,9 @@ export default {
 		},
 		onchange(e) {
 			console.log('onchange', e.detail.value);
+		},
+		inputclick(e){
+			console.log('inputclick');
 		}
 	}
 };
