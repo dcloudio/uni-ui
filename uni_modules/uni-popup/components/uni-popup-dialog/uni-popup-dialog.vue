@@ -171,6 +171,11 @@
 </script>
 
 <style lang="scss" >
+	$uni-primary: #007aff !default;
+	$uni-success: #4cd964 !default;
+	$uni-warning: #f0ad4e !default;
+	$uni-error: #dd524d !default;
+	
 	.uni-popup-dialog {
 		width: 300px;
 		border-radius: 11px;
@@ -240,7 +245,7 @@
 	}
 
 	.uni-button-color {
-		color: #007aff;
+		color: $uni-primary;
 	}
 
 	.uni-dialog-input {
@@ -254,15 +259,15 @@
 	}
 
 	.uni-popup__success {
-		color: #4cd964;
+		color: $uni-success;
 	}
 
 	.uni-popup__warn {
-		color: #f0ad4e;
+		color: $uni-warning;
 	}
 
 	.uni-popup__error {
-		color: #dd524d;
+		color: $uni-error;
 	}
 
 	.uni-popup__info {
