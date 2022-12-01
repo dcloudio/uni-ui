@@ -121,9 +121,7 @@
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
 	import messages from './i18n/index.js'
-	const {
-		t
-	} = initVueI18n(messages)
+	let t = null
 
 	export default {
 		name: 'UniDatetimePicker',
@@ -399,11 +397,10 @@
 			}
 		},
 		created() {
-			// if (this.form && this.formItem) {
-			// 	this.$watch('formItem.errMsg', (newVal) => {
-			// 		this.localMsg = newVal
-			// 	})
-			// }
+			if(!t) {
+				const  vueI18n = initVueI18n(messages)
+				t = vueI18n.t
+			}
 		},
 		mounted() {
 			this.platform()
@@ -542,8 +539,8 @@
 						}
 					}
 				}
-				
-				
+
+
 				this.$emit('change', value)
 				this.$emit('input', value)
 				this.$emit('update:modelValue', value)
@@ -785,7 +782,7 @@
 
 <style lang="scss">
 	$uni-primary: #007aff !default;
-	
+
 	.uni-date {
 		/* #ifndef APP-NVUE */
 		width: 100%;
