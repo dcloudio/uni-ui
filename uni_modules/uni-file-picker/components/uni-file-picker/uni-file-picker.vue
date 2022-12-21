@@ -189,7 +189,7 @@
 			sourceType: {
 				type: Array,
 				default () {
-					return ['album', 'camera']
+					return  ['album', 'camera']
 				}
 			}
 		},

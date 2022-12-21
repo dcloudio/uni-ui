@@ -9,7 +9,7 @@
 					<text class="arrow down" :class="{ active: descending }" @click.stop="descendingFn"></text>
 				</view>
 			</view>
-			<dropdown v-if="filterType || filterData.length" :filterData="filterData" :filterType="filterType" @change="ondropdown"></dropdown>
+			<dropdown v-if="filterType || filterData.length" :filterDefaultValue="filterDefaultValue" :filterData="filterData" :filterType="filterType" @change="ondropdown"></dropdown>
 		</view>
 	</th>
 	<!-- #endif -->
@@ -78,6 +78,12 @@ export default {
 			type: Array,
 			default () {
 				return []
+			}
+		},
+		filterDefaultValue: {
+			type: [Array,String],
+			default () {
+				return ""
 			}
 		}
 	},

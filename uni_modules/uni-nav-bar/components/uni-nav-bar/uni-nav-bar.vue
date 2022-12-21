@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
-		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
-			:style="{ 'background-color': themeBgColor }" class="uni-navbar__content">
+		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
+			:style="{ 'background-color': themeBgColor }" >
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
 				class="uni-navbar__header">
@@ -38,12 +38,12 @@
 				</view>
 			</view>
 		</view>
-		/* #ifndef APP-NVUE */
+		<!-- #ifndef APP-NVUE -->
 		<view class="uni-navbar__placeholder" v-if="fixed">
 			<status-bar v-if="statusBar" />
 			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}" />
 		</view>
-		/* #endif */
+		<!-- #endif -->
 	</view>
 </template>
 

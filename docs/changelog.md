@@ -7,6 +7,22 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.23" date="2022-10-25">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			，支付宝小程序样式错乱，[详情](https://github.com/dcloudio/uni-app/issues/3861)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 条件编译错误的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue 环境 fixed 为 true 的情况下，无法置顶的 bug
+		</log-item-text>
+	</log-item>
+</log>
+
 
 <log title="1.4.23" date="2022-10-09">
 	<log-item title="uni-easyinput 组件更新">
