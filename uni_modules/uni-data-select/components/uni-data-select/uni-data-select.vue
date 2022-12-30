@@ -171,7 +171,9 @@
 						}
 						defValue = defItem
 					}
-					this.emit(defValue)
+          if (defValue || defValue === 0) {
+					  this.emit(defValue)
+          }
 				}
 				const def = this.mixinDatacomResData.find(item => item.value === defValue)
 				this.current = def ? this.formatItemName(def) : ''
