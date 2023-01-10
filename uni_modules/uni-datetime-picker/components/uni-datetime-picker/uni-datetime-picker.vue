@@ -27,7 +27,7 @@
 		</view>
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
-		<view v-if="!isPhone" ref="datePicker" v-show="popup" class="uni-date-picker__container">
+		<view v-if="!isPhone && popup" ref="datePicker" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
 				<view class="uni-popper__arrow"></view>
 				<view v-if="hasTime" class="uni-date-changed popup-x-header">
@@ -88,7 +88,7 @@
 				</view>
 			</view>
 		</view>
-		<calendar v-show="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
+		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			:hideSecond="hideSecond" @confirm="mobileChange" @maskClose="close" />
@@ -401,9 +401,7 @@
 				const  vueI18n = initVueI18n(messages)
 				t = vueI18n.t
 			}
-		},
-		mounted() {
-			this.platform()
+      this.platform()
 		},
 		methods: {
 			initPicker(newVal) {
@@ -513,7 +511,7 @@
 				setTimeout(() => {
 					this.popup = false
 					this.$emit('maskClick', this.value)
-					this.$refs.mobile.close()
+					this.$refs.mobile && this.$refs.mobile.close()
 				}, 20)
 			},
 			setEmit(value) {
