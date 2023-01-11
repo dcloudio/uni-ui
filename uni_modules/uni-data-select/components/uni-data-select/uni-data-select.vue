@@ -16,9 +16,10 @@
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
-							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData"
+							:key="index" @click="change(item)">
+							<text
+								:class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
 					</scroll-view>
 				</view>
@@ -39,6 +40,7 @@
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
+	 * @property {Boolean} disabledSVShow 禁用后选中的默认值是否回显
 	 * @event {Function} change  选中发生变化触发
 	 */
 
@@ -90,6 +92,10 @@
 				default: 0
 			},
 			disabled: {
+				type: Boolean,
+				default: false
+			},
+			disabledSVShow: {
 				type: Boolean,
 				default: false
 			}
@@ -144,11 +150,11 @@
 		},
 		methods: {
 			// 执行数据库查询
-			query(){
+			query() {
 				this.mixinDatacomEasyGet();
 			},
 			// 监听查询条件变更事件
-			onMixinDatacomPropsChange(){
+			onMixinDatacomPropsChange() {
 				this.query();
 			},
 			initDefVal() {
@@ -184,15 +190,15 @@
 			 * 判断用户给的 value 是否同时为禁用状态
 			 */
 			isDisabled(value) {
-				let isDisabled = false;
+					let isDisabled = false;
 
-				this.mixinDatacomResData.forEach(item => {
-					if (item.value === value) {
-						isDisabled = item.disable
-					}
-				})
+					this.mixinDatacomResData.forEach(item => {
+						if (item.value === value && item.disabledSVShow) {
+							isDisabled = item.disable
+						}
+					})
 
-				return isDisabled;
+					return isDisabled;
 			},
 
 			clearVal() {
