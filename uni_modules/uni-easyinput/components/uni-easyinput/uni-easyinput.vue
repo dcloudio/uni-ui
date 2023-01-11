@@ -282,7 +282,8 @@ export default {
 				'is-input-border': this.inputBorder,
 				'is-input-error-border': this.inputBorder && this.msg,
 				'is-textarea': this.type === 'textarea',
-				'is-disabled': this.disabled
+				'is-disabled': this.disabled,
+				'is-focused': this.focusShow
 			});
 		},
 		inputContentStyle() {

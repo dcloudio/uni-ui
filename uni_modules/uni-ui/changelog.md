@@ -1,3 +1,19 @@
+## 1.4.24（2023-01-11）
+- uni-data-select 修复  当where变化时，数据不会自动更新的问题
+- uni-datetime-picker 修复 多次加载组件造成内存占用的 bug
+- uni-datetime-picker 修复 vue3 下 i18n 国际化初始值不正确的 bug
+- uni-easyinput 修复 props 中背景颜色无默认值的bug
+- uni-list 修复 uni-list-chat 在vue3下跳转报错的bug
+- uni-list 修复 uni-list-chat avatar属性 值为本地路径时错误的问题
+- uni-list 修复 uni-list-chat avatar属性 在腾讯云版uniCloud下错误的问题
+- uni-list 修复 uni-list-chat note属性 支持：“草稿”字样功能 文本少1位的问题
+- uni-list 修复 uni-list-item 的 customStyle 属性 padding值在 H5端 无效的bug
+- uni-list 修复 uni-list-item 的 customStyle 属性 padding值在nvue（vue2）下无效的bug
+- uni-list uni-list-chat 新增 avatar 支持 fileId
+- uni-list uni-list 新增属性 render-reverse 详情参考：[https://uniapp.dcloud.net.cn/component/list.html](https://uniapp.dcloud.net.cn/component/list.html)
+- uni-list uni-list-chat note属性 支持：“草稿”字样 加红显示 详情参考uni-im：[https://ext.dcloud.net.cn/plugin?name=uni-im](https://ext.dcloud.net.cn/plugin?name=uni-im)
+- uni-list uni-list-item 新增属性 customStyle 支持设置padding、backgroundColor
+- uni-popup 修复 nvue 下 v-show 报错
 ## 1.4.23（2022-10-25）
 - uni-datetime-picker 修复，支付宝小程序样式错乱，[详情](https://github.com/dcloudio/uni-app/issues/3861)
 
