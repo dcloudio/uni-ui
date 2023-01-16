@@ -154,7 +154,9 @@
 			},
 			// 监听查询条件变更事件
 			onMixinDatacomPropsChange(){
-				this.query();
+				if (this.collection) {
+					this.query()
+				}
 			},
 			initDefVal() {
 				let defValue = ''
