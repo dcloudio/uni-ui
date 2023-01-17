@@ -4,9 +4,9 @@
 			<text>{{label}}</text>
 		</view>
 		<view class="uni-combox__input-box">
-			<input class="uni-combox__input" type="text" :placeholder="placeholder" 
-			placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus" 
-@blur="onBlur" />
+			<input class="uni-combox__input" type="text" :placeholder="placeholder"
+				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus"
+				@blur="onBlur" />
 			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
 			</uni-icons>
 		</view>
@@ -16,8 +16,8 @@
 				<view class="uni-combox__selector-empty" v-if="filterCandidatesLength === 0">
 					<text>{{emptyTips}}</text>
 				</view>
-				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" 
-				@click="onSelectorClick(index)">
+				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index"
+					@click="onSelectorClick(index)">
 					<text>{{item}}</text>
 				</view>
 			</scroll-view>
@@ -94,6 +94,9 @@
 				return `width: ${this.labelWidth}`
 			},
 			filterCandidates() {
+				if (this.inputVal !== 0 && !this.inputVal) {
+					return this.candidates
+				}
 				return this.candidates.filter((item) => {
 					return item.toString().indexOf(this.inputVal) > -1
 				})
@@ -148,7 +151,7 @@
 	}
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 	.uni-combox {
 		font-size: 14px;
 		border: 1px solid #DCDFE6;
