@@ -5,23 +5,23 @@
 		</view>
 		<view class="uni-combox__input-box">
 			<input class="uni-combox__input" type="text" :placeholder="placeholder"
-				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus"
-				@blur="onBlur" />
+				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus" @blur="onBlur" />
 			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
 			</uni-icons>
 		</view>
 		<view class="uni-combox__selector" v-if="showSelector">
 			<view class="uni-popper__arrow"></view>
-			<scroll-view scroll-y="true" class="uni-combox__selector-scroll">
+			<scroll-view scroll-y="true" class="uni-combox__selector-scroll" @scroll="onScroll">
 				<view class="uni-combox__selector-empty" v-if="filterCandidatesLength === 0">
 					<text>{{emptyTips}}</text>
 				</view>
-				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index"
-					@click="onSelectorClick(index)">
+				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" @click="onSelectorClick(index)">
 					<text>{{item}}</text>
 				</view>
 			</scroll-view>
 		</view>
+		<!-- 新增蒙层，点击蒙层时关闭选项显示 -->
+		<view class="mask" v-show="showSelector" @click="showSelector = false"></view>
 	</view>
 </template>
 
@@ -83,7 +83,8 @@
 		data() {
 			return {
 				showSelector: false,
-				inputVal: ''
+				inputVal: '',
+				blurTimer:null,
 			}
 		},
 		computed: {
@@ -131,9 +132,15 @@
 				this.showSelector = true
 			},
 			onBlur() {
-				setTimeout(() => {
+				this.blurTimer = setTimeout(() => {
 					this.showSelector = false
 				}, 153)
+			},
+			onScroll(){ // 滚动时将blur的定时器关掉
+				if(this.blurTimer) {
+					clearTimeout(this.blurTimer)
+					this.blurTimer = null
+				}
 			},
 			onSelectorClick(index) {
 				this.inputVal = this.filterCandidates[index]
@@ -208,7 +215,7 @@
 		border: 1px solid #EBEEF5;
 		border-radius: 6px;
 		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		z-index: 2;
+		z-index: 3;
 		padding: 4px 0;
 	}
 
@@ -274,5 +281,13 @@
 
 	.uni-combox__no-border {
 		border: none;
+	}
+
+	.mask {
+		width:100%;
+		height:100%;
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 </style>
