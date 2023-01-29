@@ -21,7 +21,7 @@
 			</scroll-view>
 		</view>
 		<!-- 新增蒙层，点击蒙层时关闭选项显示 -->
-		<view class="mask" v-show="showSelector" @click="showSelector = false"></view>
+		<view class="uni-combox__mask" v-show="showSelector" @click="showSelector = false"></view>
 	</view>
 </template>
 
@@ -283,11 +283,12 @@
 		border: none;
 	}
 
-	.mask {
+	.uni-combox__mask {
 		width:100%;
 		height:100%;
 		position: fixed;
 		top: 0;
 		left: 0;
+    z-index: 1;
 	}
 </style>
