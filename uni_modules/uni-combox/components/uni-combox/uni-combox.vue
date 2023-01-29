@@ -1,12 +1,13 @@
 <template>
 	<view class="uni-combox" :class="border ? '' : 'uni-combox__no-border'">
+    <view class="uni-combox__mask" v-if="showSelector" @click="toggleSelector"></view>
 		<view v-if="label" class="uni-combox__label" :style="labelStyle">
 			<text>{{label}}</text>
 		</view>
 		<view class="uni-combox__input-box">
 			<input class="uni-combox__input" type="text" :placeholder="placeholder"
 				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus"
-				@blur="onBlur" />
+				 />
 			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
 			</uni-icons>
 		</view>
@@ -130,11 +131,6 @@
 			onFocus() {
 				this.showSelector = true
 			},
-			onBlur() {
-				setTimeout(() => {
-					this.showSelector = false
-				}, 153)
-			},
 			onSelectorClick(index) {
 				this.inputVal = this.filterCandidates[index]
 				this.showSelector = false
@@ -166,6 +162,15 @@
 		align-items: center;
 		// border-bottom: solid 1px #DDDDDD;
 	}
+
+  .uni-combox__mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+  }
 
 	.uni-combox__label {
 		font-size: 16px;
