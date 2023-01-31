@@ -75,7 +75,7 @@
    */
   export default {
     name: 'UniDataPicker',
-    emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue'],
+    emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue','inputclick'],
     mixins: [dataPicker],
     components: {
       DataPickerView
@@ -184,6 +184,7 @@
       },
       handleInput() {
         if (this.readonly) {
+					this.$emit('inputclick')
           return
         }
         this.show()

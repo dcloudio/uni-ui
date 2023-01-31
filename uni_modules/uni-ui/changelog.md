@@ -1,3 +1,5 @@
+## 1.4.25（2023-01-11）
+- uni-file-picker 新增 sourceType 属性, 可以自定义图片和视频选择的来源
 ## 1.4.24（2023-01-11）
 - uni-data-select 修复  当where变化时，数据不会自动更新的问题
 - uni-datetime-picker 修复 多次加载组件造成内存占用的 bug

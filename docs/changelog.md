@@ -7,6 +7,14 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.25" date="2023-01-11">
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 sourceType 属性, 可以自定义图片和视频选择的来源
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.24" date="2023-01-11">
 	<log-item title="uni-data-select 组件更新">
 		<log-item-text tag-type="fix">

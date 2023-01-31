@@ -19,6 +19,7 @@
 				@blur="_Blur"
 				@focus="_Focus"
 				@confirm="onConfirm"
+        @keyboardheightchange="onkeyboardheightchange"
 			></textarea>
 			<input
 				v-else
@@ -39,6 +40,7 @@
 				@blur="_Blur"
 				@input="onInput"
 				@confirm="onConfirm"
+        @keyboardheightchange="onkeyboardheightchange"
 			/>
 			<template v-if="type === 'password' && passwordIcon">
 				<!-- 开启密码时显示小眼睛 -->
@@ -339,7 +341,7 @@ export default {
 		init() {
 			if (this.value || this.value === 0) {
 				this.val = this.value;
-			} else if (this.modelValue || this.modelValue === 0) {
+			} else if (this.modelValue || this.modelValue === 0 || this.modelValue === '') {
 				this.val = this.modelValue;
 			} else {
 				this.val = null;
@@ -455,6 +457,15 @@ export default {
 			// 点击叉号触发
 			this.$emit('clear');
 		},
+
+    /**
+     * 键盘高度发生变化的时候触发此事件
+     * 兼容性：微信小程序2.7.0+、App 3.1.0+
+     * @param {Object} event
+     */
+    onkeyboardheightchange(event) {
+      this.$emit("keyboardheightchange",event);
+    },
 
 		/**
 		 * 去除空格
