@@ -7,6 +7,42 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.26" date="2023-01-31">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="fix">
+			 运行/打包 控制台警告问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 不关联服务空间报错的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			  属性 `format` 可用于格式化显示选项内容
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 keyboardheightchange 事件，可监听键盘高度变化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 无反馈效果呈现的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.25" date="2023-01-11">
 	<log-item title="uni-file-picker 组件更新">
 		<log-item-text tag-type="feat">

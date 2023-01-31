@@ -1,3 +1,11 @@
+## 1.4.26（2023-01-31）
+- uni-badge 修复 运行/打包 控制台警告问题
+- uni-calendar 修复 某些情况切换月份错误问题
+- uni-data-select 修复 不关联服务空间报错的问题
+- uni-data-select 新增  属性 `format` 可用于格式化显示选项内容
+- uni-datetime-picker 修复 某些情况切换月份错误问题
+- uni-easyinput 新增 keyboardheightchange 事件，可监听键盘高度变化
+- uni-list 修复 无反馈效果呈现的bug
 ## 1.4.25（2023-01-11）
 - uni-file-picker 新增 sourceType 属性, 可以自定义图片和视频选择的来源
 ## 1.4.24（2023-01-11）
