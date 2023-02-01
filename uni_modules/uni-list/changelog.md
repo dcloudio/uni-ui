@@ -1,3 +1,5 @@
+## 1.2.12（2023-02-01）
+- 新增 列表图标新增 customPrefix 属性 ，用法 [详见](https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html#icons-props)
 ## 1.2.11（2023-01-31）
 - 修复 无反馈效果呈现的bug
 ## 1.2.9（2022-11-22）
