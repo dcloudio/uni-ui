@@ -45,15 +45,6 @@
 	export default {
 		name: "uni-stat-select",
 		mixins: [uniCloud.mixinDatacom || {}],
-		data() {
-			return {
-				showSelector: false,
-				current: '',
-				mixinDatacomResData: [],
-				apps: [],
-				channels: []
-			};
-		},
 		props: {
 			localdata: {
 				type: Array,
@@ -99,10 +90,22 @@
 				default: ''
 			},
 		},
+		data() {
+			return {
+				showSelector: false,
+				current: '',
+				mixinDatacomResData: [],
+				apps: [],
+				channels: [],
+				cacheKey: "uni-data-select-lastSelectedValue",
+			};
+		},
 		created() {
-			this.last = `${this.collection}_last_selected_option_value`
-			if (this.collection && !this.localdata.length) {
+			this.debounceGet = this.debounce(() => {
 				this.query();
+			}, 300);
+			if (this.collection && !this.localdata.length) {
+				this.debounceGet();
 			}
 		},
 		computed: {
@@ -117,6 +120,14 @@
 				return placeholder ?
 					common + placeholder :
 					common
+			},
+			valueCom(){
+				// #ifdef VUE3
+				return this.modelValue;
+				// #endif
+				// #ifndef VUE3
+				return this.value;
+				// #endif
 			}
 		},
 		watch: {
@@ -128,16 +139,9 @@
 					}
 				}
 			},
-			// #ifndef VUE3
-			value() {
+			valueCom(val, old) {
 				this.initDefVal()
 			},
-			// #endif
-			// #ifdef VUE3
-			modelValue() {
-				this.initDefVal()
-			},
-			// #endif
 			mixinDatacomResData: {
 				immediate: true,
 				handler(val) {
@@ -148,26 +152,31 @@
 			}
 		},
 		methods: {
+			debounce(fn, time = 100){
+				let timer = null
+				return function(...args) {
+					if (timer) clearTimeout(timer)
+					timer = setTimeout(() => {
+						fn.apply(this, args)
+					}, time)
+				}
+			},
 			// 执行数据库查询
 			query(){
 				this.mixinDatacomEasyGet();
 			},
 			// 监听查询条件变更事件
 			onMixinDatacomPropsChange(){
-				if (this.collection) {
-					this.query()
-				}
+				this.debounceGet();
 			},
 			initDefVal() {
 				let defValue = ''
-				if ((this.value || this.value === 0) && !this.isDisabled(this.value)) {
-					defValue = this.value
-				} else if ((this.modelValue || this.modelValue === 0) && !this.isDisabled(this.modelValue)) {
-					defValue = this.modelValue
+				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
+					defValue = this.valueCom
 				} else {
 					let strogeValue
 					if (this.collection) {
-						strogeValue = uni.getStorageSync(this.last)
+						strogeValue = this.getCache()
 					}
 					if (strogeValue || strogeValue === 0) {
 						defValue = strogeValue
@@ -205,7 +214,7 @@
 			clearVal() {
 				this.emit('')
 				if (this.collection) {
-					uni.removeStorageSync(this.last)
+					this.removeCache()
 				}
 			},
 			change(item) {
@@ -220,10 +229,9 @@
 				this.$emit('input', val)
 				this.$emit('update:modelValue', val)
 				if (this.collection) {
-					uni.setStorageSync(this.last, val)
+					this.setCache(val);
 				}
 			},
-
 			toggleSelector() {
 				if (this.disabled) {
 					return
@@ -256,7 +264,32 @@
 							`未命名${channel_code}`
 						)
 				}
-			}
+			},
+			// 获取当前加载的数据
+			getLoadData(){
+				return this.mixinDatacomResData;
+			},
+			// 获取当前缓存key
+			getCurrentCacheKey(){
+				return this.collection;
+			},
+			// 获取缓存
+			getCache(name=this.getCurrentCacheKey()){
+				let cacheData = uni.getStorageSync(this.cacheKey) || {};
+				return cacheData[name];
+			},
+			// 设置缓存
+			setCache(value, name=this.getCurrentCacheKey()){
+				let cacheData = uni.getStorageSync(this.cacheKey) || {};
+				cacheData[name] = value;
+				uni.setStorageSync(this.cacheKey, cacheData);
+			},
+			// 删除缓存
+			removeCache(name=this.getCurrentCacheKey()){
+				let cacheData = uni.getStorageSync(this.cacheKey) || {};
+				delete cacheData[name];
+				uni.setStorageSync(this.cacheKey, cacheData);
+			},
 		}
 	}
 </script>
