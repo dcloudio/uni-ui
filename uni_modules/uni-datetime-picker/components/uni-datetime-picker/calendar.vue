@@ -271,7 +271,11 @@
 			},
 			pleStatus: {
 				immediate: true,
-				handler(newVal, oldVal) {
+				handler(newVal) {
+          // 字节小程序 watch 早于 created
+          if(!this.cale){
+            return
+          }
 					const {
 						before,
 						after,
