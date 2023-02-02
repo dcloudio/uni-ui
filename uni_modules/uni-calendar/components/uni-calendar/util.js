@@ -76,13 +76,18 @@ class Calendar {
 				dd.setDate(dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
 				break
 			case 'month':
-				if (dd.getDate() === 31) {
+				if (dd.getDate() === 31 && AddDayCount>0) {
 					dd.setDate(dd.getDate() + AddDayCount)
 				} else {
-          const preMonth = dd.getMonth()
+					const preMonth = dd.getMonth()
 					dd.setMonth(preMonth + AddDayCount) // 获取AddDayCount天后的日期
 					const nextMonth = dd.getMonth()
-					if(nextMonth-preMonth>AddDayCount){
+					// 处理 pre 切换月份目标月份为2月没有当前日(30 31) 切换错误问题
+					if(AddDayCount<0 && preMonth!==0 && nextMonth-preMonth>AddDayCount){
+						dd.setMonth(nextMonth+(nextMonth-preMonth+AddDayCount))
+					}
+					// 处理 next 切换月份目标月份为2月没有当前日(30 31) 切换错误问题
+					if(AddDayCount>0 && nextMonth-preMonth>AddDayCount){
 						dd.setMonth(nextMonth-(nextMonth-preMonth-AddDayCount))
 					}
 				}
