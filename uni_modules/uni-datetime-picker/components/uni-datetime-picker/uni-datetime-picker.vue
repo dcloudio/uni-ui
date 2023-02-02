@@ -7,18 +7,20 @@
 					<view v-if="!isRange" class="uni-date-x uni-date-single">
 						<uni-icons type="calendar" color="#c0c4cc" size="22"></uni-icons>
 						<input class="uni-date__x-input" type="text" v-model="singleVal"
-							:placeholder="singlePlaceholderText" :disabled="true" />
+              :placeholder="singlePlaceholderText" :disabled="true" />
 					</view>
+
 					<view v-else class="uni-date-x uni-date-range">
 						<uni-icons type="calendar" color="#c0c4cc" size="22"></uni-icons>
 						<input class="uni-date__x-input t-c" type="text" v-model="range.startDate"
 							:placeholder="startPlaceholderText" :disabled="true" />
-						<slot>
-							<view class="">{{rangeSeparator}}</view>
-						</slot>
+
+            <view class="">{{rangeSeparator}}</view>
+
 						<input class="uni-date__x-input t-c" type="text" v-model="range.endDate"
 							:placeholder="endPlaceholderText" :disabled="true" />
 					</view>
+
 					<view v-if="showClearIcon" class="uni-date__icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#c0c4cc" size="24"></uni-icons>
 					</view>
@@ -27,45 +29,57 @@
 		</view>
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
+
 		<view v-if="!isPhone && popup" ref="datePicker" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
+        <!-- TODO: optimize to :before -->
 				<view class="uni-popper__arrow"></view>
+
 				<view v-if="hasTime" class="uni-date-changed popup-x-header">
+          <!-- TODO: format check -->
 					<input class="uni-date__input t-c" type="text" v-model="tempSingleDate"
 						:placeholder="selectDateText" />
+
 					<time-picker type="time" v-model="time" :border="false" :disabled="!tempSingleDate"
 						:start="reactStartTime" :end="reactEndTime" :hideSecond="hideSecond" style="width: 100%;">
 						<input class="uni-date__input t-c" type="text" v-model="time" :placeholder="selectTimeText"
 							:disabled="!tempSingleDate" />
 					</time-picker>
 				</view>
+
 				<calendar ref="pcSingle" :showMonth="false" :start-date="caleRange.startDate"
 					:end-date="caleRange.endDate" :date="defSingleDate" @change="singleChange"
 					style="padding: 0 8px;" />
+
 				<view v-if="hasTime" class="popup-x-footer">
-					<!-- <text class="">此刻</text> -->
 					<text class="confirm" @click="confirmSingleChange">{{okText}}</text>
 				</view>
-				<view class="uni-date-popper__arrow"></view>
 			</view>
 
 			<view v-else class="uni-date-range--x" :style="popover">
+        <!-- TODO: optimize to :before -->
 				<view class="uni-popper__arrow"></view>
 				<view v-if="hasTime" class="popup-x-header uni-date-changed">
 					<view class="popup-x-header--datetime">
-						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
-							:placeholder="startDateText" />
+            <!-- TODO: format check -->
+            <input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.startDate"
+            :placeholder="startDateText" />
+
 						<time-picker type="time" v-model="tempRange.startTime" :start="reactStartTime" :border="false"
-							:disabled="!tempRange.startDate" :hideSecond="hideSecond">
-							<input class="uni-date__input uni-date-range__input" type="text"
-								v-model="tempRange.startTime" :placeholder="startTimeText"
-								:disabled="!tempRange.startDate" />
-						</time-picker>
-					</view>
-					<uni-icons type="arrowthinright" color="#999" style="line-height: 40px;"></uni-icons>
+            :disabled="!tempRange.startDate" :hideSecond="hideSecond">
+            <input class="uni-date__input uni-date-range__input" type="text"
+            v-model="tempRange.startTime" :placeholder="startTimeText"
+            :disabled="!tempRange.startDate" />
+          </time-picker>
+        </view>
+
+        <uni-icons type="arrowthinright" color="#999" style="line-height: 40px;"></uni-icons>
+
 					<view class="popup-x-header--datetime">
+            <!-- TODO: format check -->
 						<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endDate"
 							:placeholder="endDateText" />
+
 						<time-picker type="time" v-model="tempRange.endTime" :end="reactEndTime" :border="false"
 							:disabled="!tempRange.endDate" :hideSecond="hideSecond">
 							<input class="uni-date__input uni-date-range__input" type="text" v-model="tempRange.endTime"
@@ -73,6 +87,7 @@
 						</time-picker>
 					</view>
 				</view>
+
 				<view class="popup-x-body">
 					<calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
@@ -82,12 +97,14 @@
 						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
 						@monthSwitch="rightMonthSwitch" style="padding: 0 8px;border-left: 1px solid #F1F1F1;" />
 				</view>
+
 				<view v-if="hasTime" class="popup-x-footer">
 					<text class="" @click="clear">{{clearText}}</text>
 					<text class="confirm" @click="confirmRangeChange">{{okText}}</text>
 				</view>
 			</view>
 		</view>
+
 		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
@@ -111,6 +128,7 @@
 	 * @property {Boolean} disabled = [true|false] 是否禁用
 	 * @property {Boolean} clearIcon = [true|false] 是否显示清除按钮（仅PC端适用）
 	 * @event {Function} change 确定日期时触发的事件
+	 * @event {Function} maskClick 点击遮罩层触发的事件
 	 * @event {Function} show 打开弹出层
 	 * @event {Function} close 关闭弹出层
 	 * @event {Function} clear 清除上次选中的状态和值
@@ -120,9 +138,9 @@
 	import {
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
-	import messages from './i18n/index.js'
-	let t = null
+	import I18nMessages from './i18n/index.js'
 
+  uni.setLocale('en')
 	export default {
 		name: 'UniDatetimePicker',
 		options: {
@@ -132,22 +150,10 @@
 			calendar,
 			timePicker
 		},
-		inject: {
-			form: {
-				from: 'uniForm',
-				default: null
-			},
-			formItem: {
-				from: 'uniFormItem',
-				default: null
-			},
-		},
 		data() {
 			return {
 				isRange: false,
 				hasTime: false,
-				mobileRange: false,
-				// 单选
 				singleVal: '',
 				tempSingleDate: '',
 				defSingleDate: '',
@@ -161,9 +167,7 @@
 				},
 				range: {
 					startDate: '',
-					// startTime: '',
 					endDate: '',
-					// endTime: ''
 				},
 				tempRange: {
 					startDate: '',
@@ -184,12 +188,12 @@
 					data: [],
 					fulldate: ''
 				},
-				visible: false,
 				popup: false,
 				popover: null,
 				isEmitValue: false,
 				isPhone: false,
 				isFirstShow: true,
+        i18nT: () => {}
 			}
 		},
 		props: {
@@ -222,7 +226,7 @@
 				default: ''
 			},
 			startPlaceholder: {
-				type: String,
+        type: String,
 				default: ''
 			},
 			endPlaceholder: {
@@ -253,23 +257,15 @@
 		watch: {
 			type: {
 				immediate: true,
-				handler(newVal, oldVal) {
-					if (newVal.indexOf('time') !== -1) {
-						this.hasTime = true
-					} else {
-						this.hasTime = false
-					}
-					if (newVal.indexOf('range') !== -1) {
-						this.isRange = true
-					} else {
-						this.isRange = false
-					}
+				handler(newVal) {
+          this.hasTime = newVal.indexOf('time') !== -1
+					this.isRange = newVal.indexOf('range') !== -1
 				}
 			},
 			// #ifndef VUE3
 			value: {
 				immediate: true,
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (this.isEmitValue) {
 						this.isEmitValue = false
 						return
@@ -281,7 +277,7 @@
 			// #ifdef VUE3
 			modelValue: {
 				immediate: true,
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (this.isEmitValue) {
 						this.isEmitValue = false
 						return
@@ -292,7 +288,7 @@
 			// #endif
 			start: {
 				immediate: true,
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (!newVal) return
 					const {
 						defDate,
@@ -306,7 +302,7 @@
 			},
 			end: {
 				immediate: true,
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (!newVal) return
 					const {
 						defDate,
@@ -352,8 +348,7 @@
 			 * for i18n
 			 */
 			singlePlaceholderText() {
-				return this.placeholder || (this.type === 'date' ? this.selectDateText : t(
-					"uni-datetime-picker.selectDateTime"))
+				return this.placeholder || (this.type === 'date' ? this.selectDateText : this.selectDateTimeText)
 			},
 			startPlaceholderText() {
 				return this.startPlaceholder || this.startDateText
@@ -362,48 +357,45 @@
 				return this.endPlaceholder || this.endDateText
 			},
 			selectDateText() {
-				return t("uni-datetime-picker.selectDate")
+				return this.i18nT("uni-datetime-picker.selectDate")
 			},
+      selectDateTimeText() {
+        return this.i18nT("uni-datetime-picker.selectDateTime")
+      },
 			selectTimeText() {
-				return t("uni-datetime-picker.selectTime")
+				return this.i18nT("uni-datetime-picker.selectTime")
 			},
 			startDateText() {
-				return this.startPlaceholder || t("uni-datetime-picker.startDate")
+				return this.startPlaceholder || this.i18nT("uni-datetime-picker.startDate")
 			},
 			startTimeText() {
-				return t("uni-datetime-picker.startTime")
+				return this.i18nT("uni-datetime-picker.startTime")
 			},
 			endDateText() {
-				return this.endPlaceholder || t("uni-datetime-picker.endDate")
+				return this.endPlaceholder || this.i18nT("uni-datetime-picker.endDate")
 			},
 			endTimeText() {
-				return t("uni-datetime-picker.endTime")
+				return this.i18nT("uni-datetime-picker.endTime")
 			},
 			okText() {
-				return t("uni-datetime-picker.ok")
+				return this.i18nT("uni-datetime-picker.ok")
 			},
 			clearText() {
-				return t("uni-datetime-picker.clear")
+				return this.i18nT("uni-datetime-picker.clear")
 			},
 			showClearIcon() {
-				const {
-					clearIcon,
-					disabled,
-					singleVal,
-					range
-				} = this
-				const bool = clearIcon && !disabled && (singleVal || (range.startDate && range.endDate))
-				return bool
+				return this.clearIcon && !this.disabled && (this.singleVal || (this.range.startDate && this.range.endDate))
 			}
 		},
 		created() {
-			if(!t) {
-				const  vueI18n = initVueI18n(messages)
-				t = vueI18n.t
-			}
+			this.initI18nT()
       this.platform()
 		},
 		methods: {
+      initI18nT() {
+        const vueI18n = initVueI18n(I18nMessages)
+        this.i18nT = vueI18n.t
+      },
 			initPicker(newVal) {
 				if (!newVal || Array.isArray(newVal) && !newVal.length) {
 					this.$nextTick(() => {
@@ -703,15 +695,6 @@
 						this.$refs.pcSingle && this.$refs.pcSingle.clearCalender()
 					}
 					if (needEmit) {
-						// 校验规则
-						// if(this.form  && this.formItem){
-						// 	const {
-						// 		validateTrigger
-						// 	} = this.form
-						// 	if (validateTrigger === 'blur') {
-						// 		this.formItem.onFieldChange()
-						// 	}
-						// }
 						this.$emit('change', '')
 						this.$emit('input', '')
 						this.$emit('update:modelValue', '')
