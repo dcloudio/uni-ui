@@ -30,9 +30,8 @@
 
 		<view v-show="popup" class="uni-date-mask" @click="close"></view>
 
-		<view v-if="!isPhone && popup" ref="datePicker" class="uni-date-picker__container">
+		<view v-if="!isPhone" v-show="popup" ref="datePicker" class="uni-date-picker__container">
 			<view v-if="!isRange" class="uni-date-single--x" :style="popover">
-        <!-- TODO: optimize to :before -->
 				<view class="uni-popper__arrow"></view>
 
 				<view v-if="hasTime" class="uni-date-changed popup-x-header">
@@ -57,7 +56,6 @@
 			</view>
 
 			<view v-else class="uni-date-range--x" :style="popover">
-        <!-- TODO: optimize to :before -->
 				<view class="uni-popper__arrow"></view>
 				<view v-if="hasTime" class="popup-x-header uni-date-changed">
 					<view class="popup-x-header--datetime">
@@ -91,11 +89,11 @@
 				<view class="popup-x-body">
 					<calendar ref="left" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="leftChange" :pleStatus="endMultipleStatus"
-						@firstEnterCale="updateRightCale" @monthSwitch="leftMonthSwitch" style="padding: 0 8px;" />
+						@firstEnterCale="updateRightCale" style="padding: 0 8px;" />
 					<calendar ref="right" :showMonth="false" :start-date="caleRange.startDate"
 						:end-date="caleRange.endDate" :range="true" @change="rightChange"
 						:pleStatus="startMultipleStatus" @firstEnterCale="updateLeftCale"
-						@monthSwitch="rightMonthSwitch" style="padding: 0 8px;border-left: 1px solid #F1F1F1;" />
+						style="padding: 0 8px;border-left: 1px solid #F1F1F1;" />
 				</view>
 
 				<view v-if="hasTime" class="popup-x-footer">
@@ -107,6 +105,7 @@
 
 		<calendar v-if="isPhone" ref="mobile" :clearDate="false" :date="defSingleDate" :defTime="reactMobDefTime"
 			:start-date="caleRange.startDate" :end-date="caleRange.endDate" :selectableTimes="mobSelectableTime"
+      :startPlaceholder="startPlaceholder" :endPlaceholder="endPlaceholder"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :typeHasTime="hasTime" :insert="false"
 			:hideSecond="hideSecond" @confirm="mobileChange" @maskClose="close" />
 	</view>
@@ -135,12 +134,9 @@
 	 **/
 	import calendar from './calendar.vue'
 	import timePicker from './time-picker.vue'
-	import {
-		initVueI18n
-	} from '@dcloudio/uni-i18n'
-	import I18nMessages from './i18n/index.js'
+	import { initVueI18n } from '@dcloudio/uni-i18n'
+	import i18nMessages from './i18n/index.js'
 
-  uni.setLocale('en')
 	export default {
 		name: 'UniDatetimePicker',
 		options: {
@@ -393,7 +389,7 @@
 		},
 		methods: {
       initI18nT() {
-        const vueI18n = initVueI18n(I18nMessages)
+        const vueI18n = initVueI18n(i18nMessages)
         this.i18nT = vueI18n.t
       },
 			initPicker(newVal) {
@@ -403,6 +399,7 @@
 					})
 					return
 				}
+
 				if (!Array.isArray(newVal) && !this.isRange) {
 					const {
 						defDate,
@@ -460,7 +457,7 @@
 				this.isPhone = systemInfo.windowWidth <= 500
 				this.windowWidth = systemInfo.windowWidth
 			},
-			show(event) {
+			show() {
 				if (this.disabled) {
 					return
 				}
@@ -498,7 +495,6 @@
 
 				}, 50)
 			},
-
 			close() {
 				setTimeout(() => {
 					this.popup = false
@@ -530,7 +526,6 @@
 					}
 				}
 
-
 				this.$emit('change', value)
 				this.$emit('input', value)
 				this.$emit('update:modelValue', value)
@@ -541,11 +536,10 @@
 				return Date.parse(new Date(date))
 			},
 			singleChange(e) {
-				this.tempSingleDate = e.fulldate
+				this.defSingleDate = this.tempSingleDate = e.fulldate
 				if (this.hasTime) return
 				this.confirmSingleChange()
 			},
-
 			confirmSingleChange() {
 				if (!this.tempSingleDate) {
 					this.popup = false
@@ -559,7 +553,6 @@
 				this.setEmit(this.singleVal)
 				this.popup = false
 			},
-
 			leftChange(e) {
 				const {
 					before,
@@ -574,7 +567,6 @@
 				}
 				this.startMultipleStatus = Object.assign({}, this.startMultipleStatus, obj)
 			},
-
 			rightChange(e) {
 				const {
 					before,
@@ -589,7 +581,6 @@
 				}
 				this.endMultipleStatus = Object.assign({}, this.endMultipleStatus, obj)
 			},
-
 			mobileChange(e) {
 				if (this.isRange) {
 					const {
@@ -606,7 +597,6 @@
 						this.tempRange.endTime = endTime
 					}
 					this.confirmRangeChange()
-
 				} else {
 					if (this.hasTime) {
 						this.singleVal = e.fulldate + ' ' + e.time
@@ -617,14 +607,12 @@
 				}
 				this.$refs.mobile.close()
 			},
-
 			rangeChange(before, after) {
 				if (!(before && after)) return
 				this.handleStartAndEnd(before, after, true)
 				if (this.hasTime) return
 				this.confirmRangeChange()
 			},
-
 			confirmRangeChange() {
 				if (!this.tempRange.startDate && !this.tempRange.endDate) {
 					this.popup = false
@@ -644,19 +632,14 @@
 				this.setEmit(displayRange)
 				this.popup = false
 			},
-
 			handleStartAndEnd(before, after, temp = false) {
 				if (!(before && after)) return
-				const type = temp ? 'tempRange' : 'range'
-				if (this.dateCompare(before, after)) {
-					this[type].startDate = before
-					this[type].endDate = after
-				} else {
-					this[type].startDate = after
-					this[type].endDate = before
-				}
-			},
 
+				const type = temp ? 'tempRange' : 'range'
+        const isStartEarlierEnd = this.dateCompare(before, after)
+        this[type].startDate = isStartEarlierEnd ? before : after
+        this[type].endDate = isStartEarlierEnd ? after : before
+    },
 			/**
 			 * 比较时间大小
 			 */
@@ -665,11 +648,7 @@
 				startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
 				// 计算详细项的截止时间
 				endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
-				if (startDate <= endDate) {
-					return true
-				} else {
-					return false
-				}
+				return startDate <= endDate
 			},
 
 			/**
@@ -720,7 +699,6 @@
 					}
 				}
 			},
-
 			parseDate(date) {
 				date = this.fixIosDateFormat(date)
 				const defVal = new Date(date)
@@ -738,11 +716,9 @@
 					defTime
 				}
 			},
-
 			lessTen(item) {
 				return item < 10 ? '0' + item : item
 			},
-
 			//兼容 iOS、safari 日期格式
 			fixIosDateFormat(value) {
         // #ifndef MP
@@ -948,9 +924,8 @@
 		display: block;
 		width: 0;
 		height: 0;
-		border-color: transparent;
-		border-style: solid;
-		border-width: 6px;
+		border: 6px solid transparent;
+		border-top-width: 0;
 	}
 
 	.uni-popper__arrow {
@@ -958,7 +933,6 @@
 		top: -6px;
 		left: 10%;
 		margin-right: 3px;
-		border-top-width: 0;
 		border-bottom-color: #EBEEF5;
 	}
 
@@ -966,7 +940,6 @@
 		content: " ";
 		top: 1px;
 		margin-left: -6px;
-		border-top-width: 0;
 		border-bottom-color: #fff;
 	}
 </style>
