@@ -410,8 +410,6 @@
 					} = this.parseDate(newVal)
 					this.singleVal = defDate
 					this.tempSingleDate = defDate
-          console.warn('defDate',defDate)
-          console.warn('defTime',defTime)
 					this.defSingleDate = defDate
 					if (this.hasTime) {
 						this.singleVal = defDate + ' ' + defTime
@@ -732,11 +730,6 @@
 				const hour = defVal.getHours()
 				const minute = defVal.getMinutes()
 				const second = defVal.getSeconds()
-        console.warn('year',year)
-        console.warn('month',month)
-        console.warn('day',day)
-        console.warn('hour',hour)
-        console.warn('minute',minute)
 				const defDate = year + '-' + this.lessTen(month) + '-' + this.lessTen(day)
 				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + (this.hideSecond ? '' : (':' + this
 					.lessTen(second)))
@@ -758,13 +751,6 @@
 				}
         // #endif
 				return value
-			},
-
-			leftMonthSwitch(e) {
-				// console.log('leftMonthSwitch 返回:', e)
-			},
-			rightMonthSwitch(e) {
-				// console.log('rightMonthSwitch 返回:', e)
 			}
 		}
 	}
@@ -844,14 +830,6 @@
 
 	.uni-date-picker__container {
 		position: relative;
-		/* 		position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		box-sizing: border-box;
-		z-index: 996;
-		font-size: 14px; */
 	}
 
 	.uni-date-mask {
@@ -866,7 +844,6 @@
 	}
 
 	.uni-date-single--x {
-		/* padding: 0 8px; */
 		background-color: #fff;
 		position: absolute;
 		top: 0;
@@ -877,7 +854,6 @@
 	}
 
 	.uni-date-range--x {
-		/* padding: 0 8px; */
 		background-color: #fff;
 		position: absolute;
 		top: 0;
@@ -904,7 +880,6 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		/* justify-content: space-between; */
 	}
 
 	.popup-x-header--datetime {
@@ -924,7 +899,6 @@
 		border-top-color: #F1F1F1;
 		border-top-style: solid;
 		border-top-width: 1px;
-		/* background-color: #fff; */
 		line-height: 40px;
 		text-align: right;
 		color: #666;
@@ -942,23 +916,19 @@
 	}
 
 	.uni-date-changed {
-		/* background-color: #fff; */
 		text-align: center;
 		color: #333;
 		border-bottom-color: #F1F1F1;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
-		/* padding: 0 50px; */
 	}
 
 	.uni-date-changed--time text {
-		/* padding: 0 20px; */
 		height: 50px;
 		line-height: 50px;
 	}
 
 	.uni-date-changed .uni-date-changed--time {
-		/* display: flex; */
 		flex: 1;
 	}
 
