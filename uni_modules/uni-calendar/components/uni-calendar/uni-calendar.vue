@@ -63,11 +63,11 @@
 <script>
 	import Calendar from './util.js';
 	import calendarItem from './uni-calendar-item.vue'
-	import {
-	initVueI18n
-	} from '@dcloudio/uni-i18n'
-	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+
+	import { initVueI18n } from '@dcloudio/uni-i18n'
+	import i18nMessages from './i18n/index.js'
+	const {	t	} = initVueI18n(i18nMessages)
+
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
@@ -199,18 +199,13 @@
 			}
 		},
 		created() {
-			// 获取日历方法实例
 			this.cale = new Calendar({
-				// date: new Date(),
 				selected: this.selected,
 				startDate: this.startDate,
 				endDate: this.endDate,
 				range: this.range,
 			})
-			// 选中某一天
-			// this.cale.setDate(this.date)
 			this.init(this.date)
-			// this.setDay
 		},
 		methods: {
 			// 取消穿透
@@ -326,7 +321,6 @@
 			backtoday() {
 				console.log(this.cale.getDate(new Date()).fullDate);
 				let date = this.cale.getDate(new Date()).fullDate
-				// this.cale.setDate(date)
 				this.init(date)
 				this.change()
 			},
@@ -446,7 +440,6 @@
 
 	.uni-calendar--fixed-width {
 		width: 50px;
-		// padding: 0 15px;
 	}
 
 	.uni-calendar__backtoday {
