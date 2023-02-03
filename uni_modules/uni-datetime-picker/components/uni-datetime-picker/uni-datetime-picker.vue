@@ -410,6 +410,8 @@
 					} = this.parseDate(newVal)
 					this.singleVal = defDate
 					this.tempSingleDate = defDate
+          console.warn('defDate',defDate)
+          console.warn('defTime',defTime)
 					this.defSingleDate = defDate
 					if (this.hasTime) {
 						this.singleVal = defDate + ' ' + defTime
@@ -730,6 +732,11 @@
 				const hour = defVal.getHours()
 				const minute = defVal.getMinutes()
 				const second = defVal.getSeconds()
+        console.warn('year',year)
+        console.warn('month',month)
+        console.warn('day',day)
+        console.warn('hour',hour)
+        console.warn('minute',minute)
 				const defDate = year + '-' + this.lessTen(month) + '-' + this.lessTen(day)
 				const defTime = this.lessTen(hour) + ':' + this.lessTen(minute) + (this.hideSecond ? '' : (':' + this
 					.lessTen(second)))
@@ -745,9 +752,11 @@
 
 			//兼容 iOS、safari 日期格式
 			fixIosDateFormat(value) {
+        // #ifndef MP
 				if (typeof value === 'string') {
 					value = value.replace(/-/g, '/')
 				}
+        // #endif
 				return value
 			},
 
