@@ -187,12 +187,12 @@
 		watch: {
 			// #ifndef VUE3
 			value: {
-				handler(newVal, oldVal) {
-					if (newVal) {
-						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
+				handler(newVal) {
+          if (newVal) {
+            this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
 						this.initTime(false)
 					} else {
-						this.time = ''
+            this.time = ''
 						this.parseValue(Date.now())
 					}
 				},
@@ -201,8 +201,8 @@
 			// #endif
 			// #ifdef VUE3
 			modelValue: {
-				handler(newVal, oldVal) {
-					if (newVal) {
+        handler(newVal) {
+          if (newVal) {
 						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
 						this.initTime(false)
 					} else {
@@ -752,7 +752,7 @@
 			 */
 			initTimePicker() {
 				if (this.disabled) return
-				const value = this.fixIosDateFormat(this.value)
+				const value = this.fixIosDateFormat(this.time)
 				this.initPickerValue(value)
 				this.visible = !this.visible
 			},
