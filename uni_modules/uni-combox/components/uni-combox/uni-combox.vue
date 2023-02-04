@@ -16,7 +16,7 @@
 					<text>{{emptyTips}}</text>
 				</view>
 				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" @click="onSelectorClick(index)">
-					<text>{{item}}</text>
+					<text>{{item.text}}</text>
 				</view>
 			</scroll-view>
 		</view>
@@ -35,7 +35,7 @@
 	 * @property {String} placeholder 输入框占位符
 	 * @property {Array} candidates 候选项列表
 	 * @property {String} emptyTips 筛选结果为空时显示的文字
-	 * @property {String} value 组合框的值
+	 * @property {String} value 组合框输入的值
 	 */
 	export default {
 		name: 'uniCombox',
@@ -84,6 +84,7 @@
 			return {
 				showSelector: false,
 				inputVal: '',
+				inputData: null,
 				blurTimer:null,
 			}
 		},
@@ -98,9 +99,7 @@
 				if (this.inputVal !== 0 && !this.inputVal) {
 					return this.candidates
 				}
-				return this.candidates.filter((item) => {
-					return item.toString().indexOf(this.inputVal) > -1
-				})
+				return this.candidates.filter((item) => item.text.toString().indexOf(this.inputVal) > -1)
 			},
 			filterCandidatesLength() {
 				return this.filterCandidates.length
@@ -143,15 +142,18 @@
 				}
 			},
 			onSelectorClick(index) {
-				this.inputVal = this.filterCandidates[index]
+				this.inputVal = this.filterCandidates[index].text
+				this.inputData = this.filterCandidates[index].value
 				this.showSelector = false
 				this.$emit('input', this.inputVal)
 				this.$emit('update:modelValue', this.inputVal)
+				this.$emit("change", { text: this.inputVal, value: this.inputData })
 			},
 			onInput() {
 				setTimeout(() => {
 					this.$emit('input', this.inputVal)
 					this.$emit('update:modelValue', this.inputVal)
+					this.$emit("change", { text: this.inputVal, value: null })
 				})
 			}
 		}
