@@ -583,10 +583,12 @@
 			},
 			mobileChange(e) {
 				if (this.isRange) {
-					const {
-						before,
-						after
-					} = e.range
+					const {before, after} = e.range
+
+          if(!before || !after){
+            return
+          }
+
 					this.handleStartAndEnd(before, after, true)
 					if (this.hasTime) {
 						const {
