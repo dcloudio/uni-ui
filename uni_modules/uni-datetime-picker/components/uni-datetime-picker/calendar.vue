@@ -256,16 +256,28 @@
 				}
 			},
 			startDate(val) {
+				// 字节小程序 watch 早于 created
+				if(!this.cale){
+					return
+				}
 				this.cale.resetSatrtDate(val)
 				this.cale.setDate(this.nowDate.fullDate)
 				this.weeks = this.cale.weeks
 			},
 			endDate(val) {
+				// 字节小程序 watch 早于 created
+				if(!this.cale){
+					return
+				}
 				this.cale.resetEndDate(val)
 				this.cale.setDate(this.nowDate.fullDate)
 				this.weeks = this.cale.weeks
 			},
 			selected(newVal) {
+				// 字节小程序 watch 早于 created
+				if(!this.cale){
+					return
+				}
 				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
 				this.weeks = this.cale.weeks
 			},
