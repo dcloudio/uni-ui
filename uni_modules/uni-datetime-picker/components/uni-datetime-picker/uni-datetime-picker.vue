@@ -690,7 +690,7 @@
         let endDateEarlierRangeEndDate = false
         let endDate, endTime
         if(this.end) {
-          let endString
+          let endString = this.end
           if(typeof this.end === 'number'){
             endString = this.getDateTime(this.end)
           }
