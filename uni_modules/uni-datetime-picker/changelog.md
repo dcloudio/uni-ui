@@ -1,3 +1,5 @@
+## 2.2.19（2023-02-09）
+- 修复 2.2.18 引起范围选择配置 end 选择无效的Bug [详情](https://github.com/dcloudio/uni-ui/issues/686)
 ## 2.2.18（2023-02-08）
 - 修复 移动端范围选择change事件触发异常的Bug [详情](https://github.com/dcloudio/uni-ui/issues/684)
 - 优化 PC端输入日期格式错误时返回当前日期时间
@@ -5,7 +7,7 @@
 - 优化 移动端日期时间范围用法时间展示不完整问题
 ## 2.2.17（2023-02-04）
 - 修复 小程序端绑定 Date 类型报错的Bug [详情](https://github.com/dcloudio/uni-ui/issues/679)
-- 修复 vue3 time-picker 无法显示绑定时分秒问题
+- 修复 vue3 time-picker 无法显示绑定时分秒的Bug
 ## 2.2.16（2023-02-02）
 - 修复 字节小程序报错的Bug
 ## 2.2.15（2023-02-02）
