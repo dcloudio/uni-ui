@@ -20,7 +20,7 @@
 				<view class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
 				</view>
-				<text class="uni-calendar__backtoday" @click="backtoday">{{todayText}}</text>
+				<text class="uni-calendar__backtoday" @click="backToday">{{todayText}}</text>
 
 			</view>
 			<view class="uni-calendar__box">
@@ -62,7 +62,7 @@
 
 <script>
 	import Calendar from './util.js';
-	import calendarItem from './uni-calendar-item.vue'
+	import CalendarItem from './uni-calendar-item.vue'
 
 	import { initVueI18n } from '@dcloudio/uni-i18n'
 	import i18nMessages from './i18n/index.js'
@@ -90,7 +90,7 @@
 	 */
 	export default {
 		components: {
-			calendarItem
+			CalendarItem
 		},
 		emits:['close','confirm','change','monthSwitch'],
 		props: {
@@ -318,7 +318,7 @@
 			/**
 			 * 回到今天
 			 */
-			backtoday() {
+			backToday() {
 				console.log(this.cale.getDate(new Date()).fullDate);
 				let date = this.cale.getDate(new Date()).fullDate
 				this.init(date)
