@@ -11,6 +11,10 @@
 		<view class="example-body">
 			<uni-datetime-picker type="datetime" :start="start" :end="end" v-model="datetimeString" @change="change" />
 		</view>
+    <uni-section :title="'日期时间 default-value：' + datetimeDefaultValueString" type="line"></uni-section>
+		<view class="example-body">
+			<uni-datetime-picker type="datetime" :start="start" :end="end" :default-value="datetimeDefaultValue" v-model="datetimeDefaultValueString" @change="change" />
+		</view>
 		<uni-section :title="'日期范围用法：' + '[' + dateRange + ']'" type="line"></uni-section>
 		<view class="example-body">
 			<uni-datetime-picker v-model="dateRange" type="daterange" @maskClick="maskClick" />
@@ -52,6 +56,8 @@
 			return {
 				dateString: this.getDateTime(new Date()),
 				datetimeString: this.getDateTime(new Date()),
+        datetimeDefaultValueString: '',
+        datetimeDefaultValue: this.getDateTime(Date.now() + 1 * 24 * 3600000),
 				dateTimestamp: Date.now(),
 				dateInstance: new Date(),
 				dateRange: [this.getDate(Date.now() - 5 * 24 * 3600000), this.getDate(Date.now() + 5 * 24 * 3600000)],

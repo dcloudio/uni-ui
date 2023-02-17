@@ -56,19 +56,19 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="!insert && !range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top"
+			<view v-if="!insert && !range && hasTime" class="uni-date-changed uni-calendar--fixed-top"
 				style="padding: 0 80px;">
 				<view class="uni-date-changed--time-date">{{tempSingleDate ? tempSingleDate : selectDateText}}</view>
-				<time-picker type="time" :start="reactStartTime" :end="reactEndTime" v-model="time"
+				<time-picker type="time" :start="timepickerStartTime" :end="timepickerEndTime" v-model="time"
 					:disabled="!tempSingleDate" :border="false" :hide-second="hideSecond" class="time-picker-style">
 				</time-picker>
 			</view>
 
-			<view v-if="!insert && range && typeHasTime" class="uni-date-changed uni-calendar--fixed-top">
+			<view v-if="!insert && range && hasTime" class="uni-date-changed uni-calendar--fixed-top">
 				<view class="uni-date-changed--time-start">
 					<view class="uni-date-changed--time-date">{{tempRange.before ? tempRange.before : startDateText}}
 					</view>
-					<time-picker type="time" :start="reactStartTime" v-model="timeRange.startTime" :border="false"
+					<time-picker type="time" :start="timepickerStartTime" v-model="timeRange.startTime" :border="false"
 						:hide-second="hideSecond" :disabled="!tempRange.before" class="time-picker-style">
 					</time-picker>
 				</view>
@@ -77,7 +77,7 @@
 				</view>
 				<view class="uni-date-changed--time-end">
 					<view class="uni-date-changed--time-date">{{tempRange.after ? tempRange.after : endDateText}}</view>
-					<time-picker type="time" :end="reactEndTime" v-model="timeRange.endTime" :border="false"
+					<time-picker type="time" :end="timepickerEndTime" v-model="timeRange.endTime" :border="false"
 						:hide-second="hideSecond" :disabled="!tempRange.after" class="time-picker-style">
 					</time-picker>
 				</view>
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-	import Calendar from './util.js';
+	import { Calendar, getDate, getTime } from './util.js';
 	import calendarItem from './calendar-item.vue'
 	import timePicker from './time-picker.vue'
 
@@ -113,6 +113,7 @@
 	 * @property {Boolean} clearDate = [true|false] 弹窗模式是否清空上次选择内容
 	 * @property {Array} selected 打点，期待格式[{date: '2019-06-27', info: '签到', data: { custom: '自定义信息', name: '自定义消息头',xxx:xxx... }}]
 	 * @property {Boolean} showMonth 是否选择月份为背景
+	 * @property {[String} defaultValue 选择器打开时默认显示的时间
 	 * @event {Function} change 日期改变，`insert :ture` 时生效
 	 * @event {Function} confirm 确认选择`insert :false` 时生效
 	 * @event {Function} monthSwitch 切换月份时触发
@@ -168,7 +169,7 @@
 				type: Boolean,
 				default: false
 			},
-			typeHasTime: {
+			hasTime: {
 				type: Boolean,
 				default: false
 			},
@@ -210,7 +211,11 @@
 						fulldate: ''
 					}
 				}
-			}
+			},
+      defaultValue: {
+        type: String,
+        default: ''
+      }
 		},
 		data() {
 			return {
@@ -326,15 +331,13 @@
 			}
 		},
 		computed: {
-			reactStartTime() {
+			timepickerStartTime() {
 				const activeDate = this.range ? this.tempRange.before : this.calendar.fullDate
-				const res = activeDate === this.startDate ? this.selectableTimes.start : ''
-				return res
+				return activeDate === this.startDate ? this.selectableTimes.start : ''
 			},
-			reactEndTime() {
+			timepickerEndTime() {
 				const activeDate = this.range ? this.tempRange.after : this.calendar.fullDate
-				const res = activeDate === this.endDate ? this.selectableTimes.end : ''
-				return res
+				return activeDate === this.endDate ? this.selectableTimes.end : ''
 			},
 			/**
 			 * for i18n
@@ -458,9 +461,36 @@
 			 * @param {Object} date
 			 */
 			init(date) {
+        // 字节小程序 watch 早于 created
+				if(!this.cale){
+					return
+				}
 				this.cale.setDate(date)
 				this.weeks = this.cale.weeks
-				this.nowDate = this.calendar = this.cale.getInfo(date)
+				this.nowDate = this.cale.getInfo(date)
+        this.calendar = {...this.nowDate}
+        if(!date){
+          // 优化date为空默认不选中今天
+          this.calendar.fullDate = ''
+          if(this.defaultValue && !this.range){
+            // 暂时只支持移动端非范围选择
+            const defaultDate = new Date(this.defaultValue)
+            const fullDate = getDate(defaultDate)
+            const year = defaultDate.getFullYear()
+            const month = defaultDate.getMonth()+1
+            const date = defaultDate.getDate()
+            const day = defaultDate.getDay()
+            this.calendar = {
+              fullDate,
+              year,
+              month,
+              date,
+              day
+            },
+            this.tempSingleDate = fullDate
+            this.time = getTime(defaultDate, this.hideSecond)
+          }
+        }
 			},
 			/**
 			 * 打开日历弹窗
@@ -523,6 +553,15 @@
 			 * @param {Object} name
 			 */
 			setEmit(name) {
+        if(!this.range){
+					if(!this.calendar.fullDate){
+					  this.calendar = this.cale.getInfo(new Date())
+					  this.tempSingleDate = this.calendar.fullDate
+					}
+					if(this.hasTime && !this.time) {
+					  this.time = getTime(new Date(), this.hideSecond)
+					}
+				}
 				let {
 					year,
 					month,
@@ -565,29 +604,6 @@
 					this.tempRange.after = this.cale.multipleStatus.after
 				}
 				this.change()
-			},
-			/**
-			 * 回到今天
-			 */
-			backtoday() {
-				let date = this.cale.getDate(new Date()).fullDate
-				// this.cale.setDate(date)
-				this.init(date)
-				this.change()
-			},
-			/**
-			 * 比较时间大小
-			 */
-			dateCompare(startDate, endDate) {
-				// 计算截止时间
-				startDate = new Date(startDate.replace('-', '/').replace('-', '/'))
-				// 计算详细项的截止时间
-				endDate = new Date(endDate.replace('-', '/').replace('-', '/'))
-				if (startDate <= endDate) {
-					return true
-				} else {
-					return false
-				}
 			},
 			/**
 			 * 上个月
@@ -855,14 +871,17 @@
 
 	.uni-date-changed--time-end {
 		/* #ifndef APP-NVUE */
-		display: flex;
+    display: flex;
 		/* #endif */
 		align-items: center;
 	}
 
 	.uni-date-changed--time-date {
-		color: #999;
+    color: #999;
 		line-height: 50px;
+    /* #ifdef MP-TOUTIAO */
+    font-size: 16px;
+    /* #endif */
 		margin-right: 5px;
 		// opacity: 0.6;
 	}
