@@ -15,11 +15,12 @@
 				:maxlength="inputMaxlength"
 				:focus="focused"
 				:autoHeight="autoHeight"
+				:cursor-spacing="cursorSpacing"
 				@input="onInput"
 				@blur="_Blur"
 				@focus="_Focus"
 				@confirm="onConfirm"
-        @keyboardheightchange="onkeyboardheightchange"
+				@keyboardheightchange="onkeyboardheightchange"
 			></textarea>
 			<input
 				v-else
@@ -36,11 +37,12 @@
 				:maxlength="inputMaxlength"
 				:focus="focused"
 				:confirmType="confirmType"
+				:cursor-spacing="cursorSpacing"
 				@focus="_Focus"
 				@blur="_Blur"
 				@input="onInput"
 				@confirm="onConfirm"
-        @keyboardheightchange="onkeyboardheightchange"
+				@keyboardheightchange="onkeyboardheightchange"
 			/>
 			<template v-if="type === 'password' && passwordIcon">
 				<!-- 开启密码时显示小眼睛 -->
@@ -117,43 +119,43 @@
  * @example <uni-easyinput v-model="mobile"></uni-easyinput>
  */
 function obj2strClass(obj) {
-	let classess = '';
+	let classess = ''
 	for (let key in obj) {
-		const val = obj[key];
+		const val = obj[key]
 		if (val) {
-			classess += `${key} `;
+			classess += `${key} `
 		}
 	}
-	return classess;
+	return classess
 }
 
 function obj2strStyle(obj) {
-	let style = '';
+	let style = ''
 	for (let key in obj) {
-		const val = obj[key];
-		style += `${key}:${val};`;
+		const val = obj[key]
+		style += `${key}:${val};`
 	}
-	return style;
+	return style
 }
 export default {
 	name: 'uni-easyinput',
 	emits: ['click', 'iconClick', 'update:modelValue', 'input', 'focus', 'blur', 'confirm', 'clear', 'eyes', 'change'],
 	model: {
 		prop: 'modelValue',
-		event: 'update:modelValue'
+		event: 'update:modelValue',
 	},
 	options: {
-		virtualHost: true
+		virtualHost: true,
 	},
 	inject: {
 		form: {
 			from: 'uniForm',
-			default: null
+			default: null,
 		},
 		formItem: {
 			from: 'uniFormItem',
-			default: null
-		}
+			default: null,
+		},
 	},
 	props: {
 		name: String,
@@ -161,64 +163,64 @@ export default {
 		modelValue: [Number, String],
 		type: {
 			type: String,
-			default: 'text'
+			default: 'text',
 		},
 		clearable: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		autoHeight: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		placeholder: {
 			type: String,
-			default: ' '
+			default: ' ',
 		},
 		placeholderStyle: String,
 		focus: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		disabled: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		maxlength: {
 			type: [Number, String],
-			default: 140
+			default: 140,
 		},
 		confirmType: {
 			type: String,
-			default: 'done'
+			default: 'done',
 		},
 		clearSize: {
 			type: [Number, String],
-			default: 24
+			default: 24,
 		},
 		inputBorder: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		prefixIcon: {
 			type: String,
-			default: ''
+			default: '',
 		},
 		suffixIcon: {
 			type: String,
-			default: ''
+			default: '',
 		},
 		trim: {
 			type: [Boolean, String],
-			default: true
+			default: true,
 		},
 		passwordIcon: {
 			type: Boolean,
-			default: true
+			default: true,
 		},
 		primaryColor: {
 			type: String,
-			default: '#2979ff'
+			default: '#2979ff',
 		},
 		styles: {
 			type: Object,
@@ -227,14 +229,18 @@ export default {
 					color: '#333',
 					backgroundColor: '#fff',
 					disableColor: '#F7F6F6',
-					borderColor: '#e5e5e5'
-				};
-			}
+					borderColor: '#e5e5e5',
+				}
+			},
 		},
 		errorMessage: {
 			type: [String, Boolean],
-			default: ''
-		}
+			default: '',
+		},
+		cursorSpacing: {
+			type: Number,
+			default: 0,
+		},
 	},
 	data() {
 		return {
@@ -247,18 +253,18 @@ export default {
 			showPassword: false,
 			focusShow: false,
 			localMsg: '',
-			isEnter: false // 用于判断当前是否是使用回车操作
-		};
+			isEnter: false, // 用于判断当前是否是使用回车操作
+		}
 	},
 	computed: {
 		// 输入框内是否有值
 		isVal() {
-			const val = this.val;
+			const val = this.val
 			// fixed by mehaotian 处理值为0的情况，字符串0不在处理范围
 			if (val || val === 0) {
-				return true;
+				return true
 			}
-			return false;
+			return false
 		},
 
 		msg() {
@@ -267,16 +273,16 @@ export default {
 			// 	return this.errorMessage || this.formItem.errMsg;
 			// }
 			// TODO 处理头条 formItem 中 errMsg 不更新的问题
-			return this.localMsg || this.errorMessage;
+			return this.localMsg || this.errorMessage
 		},
 		// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，用户可以传入字符串数值
 		inputMaxlength() {
-			return Number(this.maxlength);
+			return Number(this.maxlength)
 		},
 
 		// 处理外层样式的style
 		boxStyle() {
-			return `color:${this.inputBorder && this.msg ? '#e43d33' : this.styles.color};`;
+			return `color:${this.inputBorder && this.msg ? '#e43d33' : this.styles.color};`
 		},
 		// input 内容的类和样式处理
 		inputContentClass() {
@@ -285,54 +291,54 @@ export default {
 				'is-input-error-border': this.inputBorder && this.msg,
 				'is-textarea': this.type === 'textarea',
 				'is-disabled': this.disabled,
-				'is-focused': this.focusShow
-			});
+				'is-focused': this.focusShow,
+			})
 		},
 		inputContentStyle() {
-			const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor;
-			const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor;
+			const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor
+			const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor
 			return obj2strStyle({
 				'border-color': borderColor || '#e5e5e5',
-				'background-color': this.disabled ? this.styles.disableColor : this.styles.backgroundColor
-			});
+				'background-color': this.disabled ? this.styles.disableColor : this.styles.backgroundColor,
+			})
 		},
 		// input右侧样式
 		inputStyle() {
-			const paddingRight = this.type === 'password' || this.clearable || this.prefixIcon ? '' : '10px';
+			const paddingRight = this.type === 'password' || this.clearable || this.prefixIcon ? '' : '10px'
 			return obj2strStyle({
 				'padding-right': paddingRight,
-				'padding-left': this.prefixIcon ? '' : '10px'
-			});
-		}
+				'padding-left': this.prefixIcon ? '' : '10px',
+			})
+		},
 	},
 	watch: {
 		value(newVal) {
-			this.val = newVal;
+			this.val = newVal
 		},
 		modelValue(newVal) {
-			this.val = newVal;
+			this.val = newVal
 		},
 		focus(newVal) {
 			this.$nextTick(() => {
-				this.focused = this.focus;
-				this.focusShow = this.focus;
-			});
-		}
+				this.focused = this.focus
+				this.focusShow = this.focus
+			})
+		},
 	},
 	created() {
-		this.init();
+		this.init()
 		// TODO 处理头条vue3 computed 不监听 inject 更改的问题（formItem.errMsg）
 		if (this.form && this.formItem) {
 			this.$watch('formItem.errMsg', newVal => {
-				this.localMsg = newVal;
-			});
+				this.localMsg = newVal
+			})
 		}
 	},
 	mounted() {
 		this.$nextTick(() => {
-			this.focused = this.focus;
-			this.focusShow = this.focus;
-		});
+			this.focused = this.focus
+			this.focusShow = this.focus
+		})
 	},
 	methods: {
 		/**
@@ -340,11 +346,11 @@ export default {
 		 */
 		init() {
 			if (this.value || this.value === 0) {
-				this.val = this.value;
+				this.val = this.value
 			} else if (this.modelValue || this.modelValue === 0 || this.modelValue === '') {
-				this.val = this.modelValue;
+				this.val = this.modelValue
 			} else {
-				this.val = null;
+				this.val = null
 			}
 		},
 
@@ -353,15 +359,15 @@ export default {
 		 * @param {Object} type
 		 */
 		onClickIcon(type) {
-			this.$emit('iconClick', type);
+			this.$emit('iconClick', type)
 		},
 
 		/**
 		 * 显示隐藏内容，密码框时生效
 		 */
 		onEyes() {
-			this.showPassword = !this.showPassword;
-			this.$emit('eyes', this.showPassword);
+			this.showPassword = !this.showPassword
+			this.$emit('eyes', this.showPassword)
 		},
 
 		/**
@@ -369,22 +375,22 @@ export default {
 		 * @param {Object} event
 		 */
 		onInput(event) {
-			let value = event.detail.value;
+			let value = event.detail.value
 			// 判断是否去除空格
 			if (this.trim) {
 				if (typeof this.trim === 'boolean' && this.trim) {
-					value = this.trimStr(value);
+					value = this.trimStr(value)
 				}
 				if (typeof this.trim === 'string') {
-					value = this.trimStr(value, this.trim);
+					value = this.trimStr(value, this.trim)
 				}
 			}
-			if (this.errMsg) this.errMsg = '';
-			this.val = value;
+			if (this.errMsg) this.errMsg = ''
+			this.val = value
 			// TODO 兼容 vue2
-			this.$emit('input', value);
+			this.$emit('input', value)
 			// TODO　兼容　vue3
-			this.$emit('update:modelValue', value);
+			this.$emit('update:modelValue', value)
 		},
 
 		/**
@@ -394,14 +400,14 @@ export default {
 		 */
 		onFocus() {
 			this.$nextTick(() => {
-				this.focused = true;
-			});
-			this.$emit('focus', null);
+				this.focused = true
+			})
+			this.$emit('focus', null)
 		},
 
 		_Focus(event) {
-			this.focusShow = true;
-			this.$emit('focus', event);
+			this.focusShow = true
+			this.$emit('focus', event)
 		},
 
 		/**
@@ -410,22 +416,22 @@ export default {
 		 * @param {Object} event
 		 */
 		onBlur() {
-			this.focused = false;
-			this.$emit('focus', null);
+			this.focused = false
+			this.$emit('focus', null)
 		},
 		_Blur(event) {
-			let value = event.detail.value;
-			this.focusShow = false;
-			this.$emit('blur', event);
+			let value = event.detail.value
+			this.focusShow = false
+			this.$emit('blur', event)
 			// 根据类型返回值，在event中获取的值理论上讲都是string
 			if (this.isEnter === false) {
-				this.$emit('change', this.val);
+				this.$emit('change', this.val)
 			}
 			// 失去焦点时参与表单校验
 			if (this.form && this.formItem) {
-				const { validateTrigger } = this.form;
+				const { validateTrigger } = this.form
 				if (validateTrigger === 'blur') {
-					this.formItem.onFieldChange();
+					this.formItem.onFieldChange()
 				}
 			}
 		},
@@ -435,12 +441,12 @@ export default {
 		 * @param {Object} e
 		 */
 		onConfirm(e) {
-			this.$emit('confirm', this.val);
-			this.isEnter = true;
-			this.$emit('change', this.val);
+			this.$emit('confirm', this.val)
+			this.isEnter = true
+			this.$emit('change', this.val)
 			this.$nextTick(() => {
-				this.isEnter = false;
-			});
+				this.isEnter = false
+			})
 		},
 
 		/**
@@ -448,48 +454,48 @@ export default {
 		 * @param {Object} event
 		 */
 		onClear(event) {
-			this.val = '';
+			this.val = ''
 			// TODO 兼容 vue2
-			this.$emit('input', '');
+			this.$emit('input', '')
 			// TODO 兼容 vue2
 			// TODO　兼容　vue3
-			this.$emit('update:modelValue', '');
+			this.$emit('update:modelValue', '')
 			// 点击叉号触发
-			this.$emit('clear');
+			this.$emit('clear')
 		},
 
-    /**
-     * 键盘高度发生变化的时候触发此事件
-     * 兼容性：微信小程序2.7.0+、App 3.1.0+
-     * @param {Object} event
-     */
-    onkeyboardheightchange(event) {
-      this.$emit("keyboardheightchange",event);
-    },
+		/**
+		 * 键盘高度发生变化的时候触发此事件
+		 * 兼容性：微信小程序2.7.0+、App 3.1.0+
+		 * @param {Object} event
+		 */
+		onkeyboardheightchange(event) {
+			this.$emit('keyboardheightchange', event)
+		},
 
 		/**
 		 * 去除空格
 		 */
 		trimStr(str, pos = 'both') {
 			if (pos === 'both') {
-				return str.trim();
+				return str.trim()
 			} else if (pos === 'left') {
-				return str.trimLeft();
+				return str.trimLeft()
 			} else if (pos === 'right') {
-				return str.trimRight();
+				return str.trimRight()
 			} else if (pos === 'start') {
-				return str.trimStart();
+				return str.trimStart()
 			} else if (pos === 'end') {
-				return str.trimEnd();
+				return str.trimEnd()
 			} else if (pos === 'all') {
-				return str.replace(/\s+/g, '');
+				return str.replace(/\s+/g, '')
 			} else if (pos === 'none') {
-				return str;
+				return str
 			}
-			return str;
-		}
-	}
-};
+			return str
+		},
+	},
+}
 </script>
 
 <style lang="scss">
