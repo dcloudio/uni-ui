@@ -8,19 +8,16 @@
         >
 					<view v-if="!isRange" class="uni-date-x uni-date-single">
 						<uni-icons class="icon-calendar" type="calendar" color="#c0c4cc" size="22"></uni-icons>
-						<input class="uni-date__x-input" type="text" v-model="displayValue"
-              :placeholder="singlePlaceholderText" :disabled="true" />
+						<view class="uni-date__x-input">{{ displayValue || singlePlaceholderText }}</view>
 					</view>
 
 					<view v-else class="uni-date-x uni-date-range">
-						<uni-icons class="icon-calendar" type="calendar" color="#c0c4cc" size="22"></uni-icons>
-						<input class="uni-date__x-input t-c" type="text" v-model="displayRangeValue.startDate"
-							:placeholder="startPlaceholderText" :disabled="true" />
+            <uni-icons class="icon-calendar" type="calendar" color="#c0c4cc" size="22"></uni-icons>
+            <view class="uni-date__x-input text-center">{{ displayRangeValue.startDate || startPlaceholderText }}</view>
 
             <view class="range-separator">{{rangeSeparator}}</view>
 
-						<input class="uni-date__x-input t-c" type="text" v-model="displayRangeValue.endDate"
-							:placeholder="endPlaceholderText" :disabled="true" />
+            <view class="uni-date__x-input text-center">{{ displayRangeValue.endDate || endPlaceholderText }}</view>
 					</view>
 
 					<view v-if="showClearIcon" class="uni-date__icon-clear" @click.stop="clear">
@@ -37,12 +34,12 @@
 				<view class="uni-popper__arrow"></view>
 
 				<view v-if="hasTime" class="uni-date-changed popup-x-header">
-					<input class="uni-date__input t-c" type="text" v-model="inputDate"
+					<input class="uni-date__input text-center" type="text" v-model="inputDate"
 						:placeholder="selectDateText" />
 
 					<time-picker type="time" v-model="pickerTime" :border="false" :disabled="!inputDate"
 						:start="timepickerStartTime" :end="timepickerEndTime" :hideSecond="hideSecond" style="width: 100%;">
-						<input class="uni-date__input t-c" type="text" v-model="pickerTime" :placeholder="selectTimeText"
+						<input class="uni-date__input text-center" type="text" v-model="pickerTime" :placeholder="selectTimeText"
 							:disabled="!inputDate" />
 					</time-picker>
 				</view>
@@ -830,7 +827,11 @@
       padding-left: 3px;
     }
     .range-separator{
+      height: 35px;
+      /* #ifndef MP */
       padding: 0 2px;
+      /* #endif */
+			line-height: 35px;
     }
 	}
 
@@ -857,15 +858,18 @@
 
 	.uni-date__x-input {
 		width: auto;
-		position: relative;
-		overflow: hidden;
-		flex: 1;
-		line-height: 1;
-		font-size: 14px;
 		height: 35px;
+    /* #ifndef MP */
+    padding-left: 5px;
+    /* #endif */
+		position: relative;
+		flex: 1;
+		line-height: 35px;
+		font-size: 14px;
+		overflow: hidden;
 	}
 
-	.t-c {
+	.text-center {
 		text-align: center;
 	}
 
