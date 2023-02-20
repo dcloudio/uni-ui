@@ -153,7 +153,7 @@ easyinput 组件是对原生input组件的增强 ，是专门为配合表单组�
 |inputBorder|Boolean|-|true|是否显示input输入框的边框|
 |styles|Object|-|-|	样式自定义|
 |passwordIcon|Boolean|-| true |	type=password 时，是否显示小眼睛图标|
-
+|cursorSpacing|Number|-| 0 |  指定光标与键盘的距离，单位 px 。取 textarea/input 距离底部的距离和 cursor-spacing 指定的距离的最小值作为光标与键盘的距离。详见[textarea](https://uniapp.dcloud.net.cn/component/textarea.html)/[input](https://uniapp.dcloud.net.cn/component/input.html)|
 
 #### Type Options
 
