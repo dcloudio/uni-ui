@@ -131,6 +131,14 @@
         this.load();
       })
     },
+    watch: {
+			localdata: {
+				handler() {
+					this.load()
+				},
+        deep: true
+			},
+    },
     methods: {
       clear() {
         this.modelValue = null;
