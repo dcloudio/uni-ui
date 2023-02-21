@@ -148,10 +148,6 @@
           return;
         }
 
-        if (!this.hasValue) {
-          return;
-        }
-
         // 回显本地数据
         if (this.isLocalData) {
           this.loadData();
