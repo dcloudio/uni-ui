@@ -80,7 +80,12 @@ class Calendar {
 				if (dd.getDate() === 31) {
 					dd.setDate(dd.getDate() + AddDayCount)
 				} else {
-					dd.setMonth(dd.getMonth() + AddDayCount) // 获取AddDayCount天后的日期
+					const preMonth = dd.getMonth()
+					dd.setMonth(preMonth + AddDayCount) // 获取AddDayCount天后的日期
+					const nextMonth = dd.getMonth()
+					if(nextMonth-preMonth>AddDayCount){
+						dd.setMonth(nextMonth-(nextMonth-preMonth-AddDayCount))
+					}
 				}
 				break
 			case 'year':

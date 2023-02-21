@@ -7,6 +7,119 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.26" date="2023-01-31">
+	<log-item title="uni-badge 组件更新">
+		<log-item-text tag-type="fix">
+			 运行/打包 控制台警告问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 不关联服务空间报错的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			  属性 `format` 可用于格式化显示选项内容
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 keyboardheightchange 事件，可监听键盘高度变化
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 无反馈效果呈现的bug
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.25" date="2023-01-11">
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 sourceType 属性, 可以自定义图片和视频选择的来源
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.24" date="2023-01-11">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			  当where变化时，数据不会自动更新的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 多次加载组件造成内存占用的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vue3 下 i18n 国际化初始值不正确的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="perf">
+			 主题样式
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 props 中背景颜色无默认值的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-list-chat 在vue3下跳转报错的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-list-chat avatar属性 值为本地路径时错误的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-list-chat avatar属性 在腾讯云版uniCloud下错误的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-list-chat note属性 支持：“草稿”字样功能 文本少1位的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-list-item 的 customStyle 属性 padding值在 H5端 无效的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-list-item 的 customStyle 属性 padding值在nvue（vue2）下无效的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list-chat 新增 avatar 支持 fileId
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list 新增属性 render-reverse 详情参考：[https://uniapp.dcloud.net.cn/component/list.html](https://uniapp.dcloud.net.cn/component/list.html)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list-chat note属性 支持：“草稿”字样 加红显示 详情参考uni-im：[https://ext.dcloud.net.cn/plugin?name=uni-im](https://ext.dcloud.net.cn/plugin?name=uni-im)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list-item 新增属性 customStyle 支持设置padding、backgroundColor
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 下 v-show 报错
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 主题样式
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="perf">
+			 主题样式
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.23" date="2022-10-25">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="fix">
