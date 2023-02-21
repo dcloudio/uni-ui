@@ -482,10 +482,10 @@
 						} = this.calendarRange
 						if (startDate && endDate) {
 							if (this.diffDate(startDate, endDate) < 30) {
-								this.$refs.right.next()
+								this.$refs.right.changeMonth('pre')
 							}
 						} else {
-							this.$refs.right.next()
+							this.$refs.right.changeMonth('next')
 							this.$refs.right.cale.lastHover = false
 						}
 					}
@@ -792,7 +792,7 @@
 					} else {
 						this.$refs.left && this.$refs.left.clearCalender()
 						this.$refs.right && this.$refs.right.clearCalender()
-						this.$refs.right && this.$refs.right.next()
+						this.$refs.right && this.$refs.right.changeMonth('next')
 					}
 					if (needEmit) {
 						this.$emit('change', [])

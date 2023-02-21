@@ -81,8 +81,8 @@
 			change(e) {
 				console.log('----change事件:', e);
 			},
-			maskClick(e) {
-				console.log('----maskClick事件:', e);
+			maskClick() {
+				console.log('----maskClick事件');
 			},
       getDateTime(date){
         return `${this.getDate(date)} ${this.getTime(date)}`
