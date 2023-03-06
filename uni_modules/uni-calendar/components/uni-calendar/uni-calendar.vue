@@ -217,8 +217,12 @@
 			clean() {},
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
-				console.log(this.cale.getDate(value));
 				this.setDate(value)
+				let detail = this.cale.getDate(value)
+				this.$emit('monthSwitch', {
+					year: detail.year,
+					month: detail.month
+				})
 			},
 			/**
 			 * 初始化日期显示
