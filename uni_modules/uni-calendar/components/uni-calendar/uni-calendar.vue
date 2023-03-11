@@ -217,7 +217,6 @@
 			clean() {},
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
-				console.log(this.cale.getDate(value));
 				this.setDate(value)
 			},
 			/**
@@ -324,11 +323,12 @@
 			 * 回到今天
 			 */
 			backtoday() {
-				console.log(this.cale.getDate(new Date()).fullDate);
-				let date = this.cale.getDate(new Date()).fullDate
-				// this.cale.setDate(date)
-				this.init(date)
+				let date = this.cale.getDate(new Date())
+				let nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
+				let toYearMonth = `${date.year}-${date.month}`
+				this.init(date.fullDate)
 				this.change()
+				nowYearMonth == toYearMonth || this.monthSwitch()
 			},
 			/**
 			 * 上个月
