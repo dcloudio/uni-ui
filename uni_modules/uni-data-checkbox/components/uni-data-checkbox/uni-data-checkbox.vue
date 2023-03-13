@@ -53,9 +53,12 @@
 						class="checklist-content"
 						:class="{ 'list-content': mode === 'list' && icon === 'left' }"
 					>
-						<text class="checklist-text" :style="item.styleIconText">{{
-							item[map.text]
-						}}</text>
+						<text
+							v-if="item[map.text]"
+							class="checklist-text"
+							:style="item.styleIconText"
+							>{{ item[map.text] }}</text
+						>
 						<view
 							v-if="mode === 'list' && icon === 'right'"
 							class="checkobx__list"
@@ -105,9 +108,12 @@
 						class="checklist-content"
 						:class="{ 'list-content': mode === 'list' && icon === 'left' }"
 					>
-						<text class="checklist-text" :style="item.styleIconText">{{
-							item[map.text]
-						}}</text>
+						<text
+							v-if="item[map.text]"
+							class="checklist-text"
+							:style="item.styleIconText"
+							>{{ item[map.text] }}</text
+						>
 						<view
 							v-if="mode === 'list' && icon === 'right'"
 							:style="item.styleRightIcon"
