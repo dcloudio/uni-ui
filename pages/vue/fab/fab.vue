@@ -13,6 +13,7 @@
 				<button class="button" type="primary" @click="switchBtn('left', 'top')">左上角显示</button>
 				<button class="button" type="primary" @click="switchBtn('right', 'top')">右上角显示</button>
 				<button class="button" type="primary" @click="switchColor">修改颜色</button>
+				<button class="button" type="primary" @click="switchIcon">修改图标</button>
 			</view>
 		</uni-section>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical"
@@ -106,6 +107,13 @@
 				} else {
 					this.pattern.iconColor = '#fff'
 					this.pattern.buttonColor = '#007AFF'
+				}
+			},
+			switchIcon(){
+				if(this.pattern.icon == 'plus'){
+					this.pattern.icon = 'plusempty'
+				} else {
+					this.pattern.icon = 'plus'
 				}
 			}
 		}
