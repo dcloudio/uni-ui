@@ -486,8 +486,8 @@
 						this.popover.right = 0
 					}
 				}).exec()
+				this.popup = !this.popup
 				setTimeout(() => {
-					this.popup = !this.popup
 					if (!this.isPhone && this.isRange && this.isFirstShow) {
 						this.isFirstShow = false
 						const {
