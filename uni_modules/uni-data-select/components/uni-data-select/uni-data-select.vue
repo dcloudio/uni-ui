@@ -16,7 +16,7 @@
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
+						<view v-else :class="['uni-select__selector-item', {'uni-select__selector-item_active': current === formatItemName(item)}]" v-for="(item,index) in mixinDatacomResData" :key="index"  
 							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
@@ -442,6 +442,13 @@
 		border-bottom: none;
 		/* #endif */
 	}
+
+  .uni-select__selector-item_active{
+    color: #409eff;
+    font-weight: bold;
+    background-color: #f5f7fa;
+    border-radius: 3px;
+  }
 
 	.uni-select__selector__disabled {
 		opacity: 0.4;
