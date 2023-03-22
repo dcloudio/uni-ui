@@ -43,7 +43,7 @@
 	 */
 
 	export default {
-		name: "uni-stat-select",
+		name: "uni-data-select",
 		mixins: [uniCloud.mixinDatacom || {}],
 		props: {
 			localdata: {
