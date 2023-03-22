@@ -12,13 +12,14 @@
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
 				<view class="uni-select__selector" v-if="showSelector">
 					<view class="uni-popper__arrow"></view>
-					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
+					<scroll-view scroll-y="true" class="uni-select__selector-scroll" :scroll-into-view="scrollToId">
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
 							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+              <view id="scrollToId" v-if="current === formatItemName(item)"></view>
 						</view>
 					</scroll-view>
 				</view>
@@ -98,6 +99,8 @@
 				apps: [],
 				channels: [],
 				cacheKey: "uni-data-select-lastSelectedValue",
+        /** 滚动至的id */
+        scrollToId: 'scrollToId',
 			};
 		},
 		created() {
