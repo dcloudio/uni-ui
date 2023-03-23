@@ -422,7 +422,7 @@
 		box-sizing: border-box;
 		/* #endif */
 	}
-	
+
 	/* #ifdef H5 */
 	@media (min-width: 768px) {
 		.uni-select__selector-scroll {
@@ -510,5 +510,6 @@
 		bottom: 0;
 		right: 0;
 		left: 0;
+		z-index: 2;
 	}
 </style>
