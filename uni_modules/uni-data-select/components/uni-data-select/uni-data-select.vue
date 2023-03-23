@@ -422,6 +422,14 @@
 		box-sizing: border-box;
 		/* #endif */
 	}
+	
+	/* #ifdef H5 */
+	@media (min-width: 768px) {
+		.uni-select__selector-scroll {
+			max-height: 600px;
+		}
+	}
+	/* #endif */
 
 	.uni-select__selector-empty,
 	.uni-select__selector-item {
