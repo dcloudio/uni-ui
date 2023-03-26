@@ -725,6 +725,10 @@
 		width: 100px;
 		font-size: 15px;
 		color: #666;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.uni-calendar__button-text {
