@@ -725,6 +725,7 @@
 		width: 100px;
 		font-size: 15px;
 		color: #666;
+		line-height: 30;
 	}
 
 	.uni-calendar__button-text {
