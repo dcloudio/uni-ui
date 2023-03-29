@@ -213,7 +213,7 @@ export default {
 		},
 		trim: {
 			type: [Boolean, String],
-			default: true
+			default: false
 		},
 		cursorSpacing: {
 			type: Number,
