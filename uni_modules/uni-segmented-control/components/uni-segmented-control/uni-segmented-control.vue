@@ -5,7 +5,7 @@
 		index === currentIndex&&styleType === 'button' ? 'segmented-control__item--button--active': '',
 		index === 0&&styleType === 'button' ? 'segmented-control__item--button--first': '',
 			index === values.length - 1&&styleType === 'button' ? 'segmented-control__item--button--last': '' ]" :key="index"
-			:style="{ backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : '',borderColor: index === currentIndex&&styleType === 'text'||styleType === 'button'?activeColor:'transparent' }"
+			:style="{ backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : '',borderColor: index === currentIndex&&(styleType === 'text'||styleType === 'button')?activeColor:'#d9d9d9' }"
 			class="segmented-control__item" @click="_onClick(index)">
 			<view>
 				<text :style="{color:
