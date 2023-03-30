@@ -249,7 +249,7 @@
 				default: false
 			},
       defaultValue: {
-        type: String,
+        type: [String, Object, Array],
         default: ''
       }
 		},

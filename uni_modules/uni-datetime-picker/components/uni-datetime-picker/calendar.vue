@@ -211,7 +211,7 @@
 				}
 			},
       defaultValue: {
-        type: String,
+        type: [String, Object, Array],
         default: ''
       }
 		},
@@ -447,7 +447,7 @@
 
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
-				this.init(value)
+				this.setDate(value)
 			},
 			/**
 			 * 初始化日期显示
