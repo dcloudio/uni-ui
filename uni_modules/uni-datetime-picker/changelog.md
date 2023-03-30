@@ -1,3 +1,6 @@
+## 2.2.22（2023-03-30）
+- 修复 日历 picker 修改年月后，自动选中当月1日 [详情](https://ask.dcloud.net.cn/question/165937)
+- 修复 小程序端 低版本 ios NaN [详情](https://ask.dcloud.net.cn/question/162979)
 ## 2.2.21（2023-02-20）
 - 修复 firefox 浏览器显示区域点击无法拉起日历弹框的Bug [详情](https://ask.dcloud.net.cn/question/163362)
 ## 2.2.20（2023-02-17）
