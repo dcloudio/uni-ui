@@ -221,7 +221,7 @@
 				let detail = this.cale.getDate(value)
 				this.$emit('monthSwitch', {
 					year: detail.year,
-					month: detail.month
+					month: Number(detail.month)
 				})
 			},
 			/**
