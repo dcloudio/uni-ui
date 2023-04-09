@@ -10,7 +10,7 @@
 		</view>
 		<view v-else class="uni-dialog-content">
 			<slot>
-				<input class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholderText" :focus="focus" >
+				<input class="uni-dialog-input" v-model="val" :type="inputType" :placeholder="placeholderText" :focus="focus" >
 			</slot>
 		</view>
 		<view class="uni-dialog-button-group">
@@ -57,6 +57,10 @@
 		mixins: [popup],
 		emits:['confirm','close'],
 		props: {
+			inputType:{
+				type: String,
+				default: 'text'
+			},
 			value: {
 				type: [String, Number],
 				default: ''
@@ -171,11 +175,6 @@
 </script>
 
 <style lang="scss" >
-	$uni-primary: #007aff !default;
-	$uni-success: #4cd964 !default;
-	$uni-warning: #f0ad4e !default;
-	$uni-error: #dd524d !default;
-	
 	.uni-popup-dialog {
 		width: 300px;
 		border-radius: 11px;
@@ -245,7 +244,7 @@
 	}
 
 	.uni-button-color {
-		color: $uni-primary;
+		color: #007aff;
 	}
 
 	.uni-dialog-input {
@@ -259,15 +258,15 @@
 	}
 
 	.uni-popup__success {
-		color: $uni-success;
+		color: #4cd964;
 	}
 
 	.uni-popup__warn {
-		color: $uni-warning;
+		color: #f0ad4e;
 	}
 
 	.uni-popup__error {
-		color: $uni-error;
+		color: #dd524d;
 	}
 
 	.uni-popup__info {

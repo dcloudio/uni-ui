@@ -1,3 +1,5 @@
+## 1.2.13（2023-03-03）
+- uni-list-chat 新增 支持具名插槽`header`
 ## 1.2.12（2023-02-01）
 - 新增 列表图标新增 customPrefix 属性 ，用法 [详见](https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html#icons-props)
 ## 1.2.11（2023-01-31）

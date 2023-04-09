@@ -583,7 +583,11 @@
 						path: v.path,
 						size: v.size,
 						fileID:v.fileID,
-						url: v.url
+						url: v.url,
+						// 修改删除一个文件后不能再上传的bug, #694
+            uuid: v.uuid,
+            status: v.status,
+            cloudPath: v.cloudPath
 					})
 				})
 				return newFilesData

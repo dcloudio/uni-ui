@@ -212,8 +212,13 @@
 			clean() {},
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
-				console.log(this.cale.getDate(value));
 				this.setDate(value)
+
+				const { year,month } = this.cale.getDate(value)
+        this.$emit('monthSwitch', {
+            year,
+            month
+        })
 			},
 			/**
 			 * 初始化日期显示
@@ -319,9 +324,15 @@
 			 * 回到今天
 			 */
 			backToday() {
-				console.log(this.cale.getDate(new Date()).fullDate);
-				let date = this.cale.getDate(new Date()).fullDate
-				this.init(date)
+				const nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
+				const date = this.cale.getDate(new Date())
+        const todayYearMonth = `${date.year}-${date.month}`
+
+        if(nowYearMonth !== todayYearMonth) {
+          this.monthSwitch()
+        }
+
+				this.init(date.fullDate)
 				this.change()
 			},
 			/**
