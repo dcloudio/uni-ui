@@ -20,7 +20,7 @@
 				<view class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
 				</view>
-				<text class="uni-calendar__backtoday" @click="backtoday">{{todayText}}</text>
+				<text class="uni-calendar__backtoday" @click="backToday">{{todayText}}</text>
 
 			</view>
 			<view class="uni-calendar__box">
@@ -218,11 +218,12 @@
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
 				this.setDate(value)
-				let detail = this.cale.getDate(value)
-				this.$emit('monthSwitch', {
-					year: detail.year,
-					month: detail.month
-				})
+
+				const { year,month } = this.cale.getDate(value)
+        this.$emit('monthSwitch', {
+            year,
+            month
+        })
 			},
 			/**
 			 * 初始化日期显示
@@ -327,13 +328,17 @@
 			/**
 			 * 回到今天
 			 */
-			backtoday() {
-				let date = this.cale.getDate(new Date())
-				let nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
-				let toYearMonth = `${date.year}-${date.month}`
+			backToday() {
+				const nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
+				const date = this.cale.getDate(new Date())
+        const todayYearMonth = `${date.year}-${date.month}`
+
+        if(nowYearMonth !== todayYearMonth) {
+          this.monthSwitch()
+        }
+
 				this.init(date.fullDate)
 				this.change()
-				nowYearMonth == toYearMonth || this.monthSwitch()
 			},
 			/**
 			 * 上个月
