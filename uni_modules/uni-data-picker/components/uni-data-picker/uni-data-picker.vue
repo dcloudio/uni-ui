@@ -141,7 +141,6 @@
     },
     methods: {
       clear() {
-        this.modelValue = null;
         this._dispatchEvent([]);
       },
       onPropsChange() {
