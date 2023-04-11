@@ -140,7 +140,7 @@ function obj2strStyle(obj) {
 }
 export default {
 	name: 'uni-easyinput',
-	emits: ['click', 'iconClick', 'update:modelValue', 'input', 'focus', 'blur', 'confirm', 'clear', 'eyes', 'change'],
+	emits: ['click', 'iconClick', 'update:modelValue', 'input', 'focus', 'blur', 'confirm', 'clear', 'eyes', 'change', 'keyboardheightchange'],
 	model: {
 		prop: 'modelValue',
 		event: 'update:modelValue'
