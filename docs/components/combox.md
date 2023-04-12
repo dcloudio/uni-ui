@@ -38,6 +38,7 @@ url : pages/vue/combox/combox
 |placeholder|String			|-			|输入框占位符						|
 |candidates	|Array/String	|[]			|候选字段							|
 |emptyTips	|String			|无匹配项	|无匹配项时的提示语					|
+|clearable	|Boolean			|false	|是否显示右侧清空内容的图标控件(输入框有内容时显示)，点击可清空输入框内容					|
 
 ### Combox Events
 

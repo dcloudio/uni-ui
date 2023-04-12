@@ -6,7 +6,9 @@
 		<view class="uni-combox__input-box">
 			<input class="uni-combox__input" type="text" :placeholder="placeholder"
 				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus" @blur="onBlur" />
-			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
+			<uni-icons v-if="!clearable" :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
+			</uni-icons>
+			<uni-icons v-show="clearable && inputVal" type="closeempty" size="14" color="#999" @click="clean" style="padding: 0.2rem;z-index: 10;">
 			</uni-icons>
 		</view>
 		<view class="uni-combox__selector" v-if="showSelector">
@@ -30,6 +32,7 @@
 	 * Combox 组合输入框
 	 * @description 组合输入框一般用于既可以输入也可以选择的场景
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=1261
+	 * @property {Boolean} clearable 是否显示右侧清空内容的图标控件(输入框有内容时显示)，点击可清空输入框内容
 	 * @property {String} label 左侧文字
 	 * @property {String} labelWidth 左侧内容宽度
 	 * @property {String} placeholder 输入框占位符
@@ -41,6 +44,10 @@
 		name: 'uniCombox',
 		emits: ['input', 'update:modelValue'],
 		props: {
+			clearable: {
+				type: Boolean,
+				default: false
+			},
 			border: {
 				type: Boolean,
 				default: true
@@ -153,6 +160,10 @@
 					this.$emit('input', this.inputVal)
 					this.$emit('update:modelValue', this.inputVal)
 				})
+			},
+			clean() {
+				this.inputVal = ''
+				this.onInput()
 			}
 		}
 	}
@@ -284,11 +295,11 @@
 	}
 
 	.uni-combox__mask {
-		width:100%;
-		height:100%;
+		width: 100%;
+		height: 100%;
 		position: fixed;
 		top: 0;
 		left: 0;
-    z-index: 1;
+		z-index: 1;
 	}
 </style>

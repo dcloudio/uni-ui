@@ -23,6 +23,12 @@
 				<uni-combox emptyTips="这里啥都没有" placeholder="请选择所在城市"></uni-combox>
 			</view>
 		</uni-section>
+
+		<uni-section title="使用清空按钮" subTitle="使用 clearable = true 当输入框有内容时显示清空按钮" type="line">
+			<view class="example-body">
+				<uni-combox :candidates="candidates" :clearable="true" placeholder="请选择所在城市" v-model="city"></uni-combox>
+			</view>
+		</uni-section>
 	</view>
 </template>
 

@@ -19,7 +19,7 @@
           <view v-if="clearIcon && !readonly && inputSelected.length" class="icon-clear" @click.stop="clear">
             <uni-icons type="clear" color="#c0c4cc" size="24"></uni-icons>
           </view>
-          <view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly ">
+          <view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly && !disabled ">
             <view class="input-arrow"></view>
           </view>
         </view>
@@ -58,6 +58,7 @@
    * @property {Array} localdata 本地数据，参考
    * @property {Boolean} border = [true|false] 是否有边框
    * @property {Boolean} readonly = [true|false] 是否仅读
+	 * @property {Boolean} disabled = [true|false] 是否不可用
    * @property {Boolean} preload = [true|false] 是否预加载数据
    * @value true 开启预加载数据，点击弹出窗口后显示已加载数据
    * @value false 关闭预加载数据，点击弹出窗口后开始加载数据
@@ -103,6 +104,10 @@
         type: Boolean,
         default: false
       },
+			disabled: {
+				type: Boolean,
+				default: false
+			},
       clearIcon: {
         type: Boolean,
         default: true
@@ -191,7 +196,7 @@
         this.$emit('popupclosed')
       },
       handleInput() {
-        if (this.readonly) {
+        if (this.readonly || this.disabled) {
 					this.$emit('inputclick')
           return
         }
