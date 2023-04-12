@@ -319,7 +319,9 @@
 		display: flex;
 		align-items: center;
 		// padding: 15px;
+		/* #ifdef H5 */
 		cursor: pointer;
+		/* #endif */
 		width: 100%;
 		flex: 1;
 		box-sizing: border-box;
