@@ -1,3 +1,5 @@
+## 1.3.8（2023-04-13）
+- 修复`uni-swipe-action`和`uni-swipe-action-item`不同时使用导致 closeOther 方法报错的 bug
 ## 1.3.7（2022-06-06）
 - 修复 vue3 下使用组件不能正常运行的Bug
 ## 1.3.6（2022-05-31）
