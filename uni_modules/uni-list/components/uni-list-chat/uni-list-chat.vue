@@ -18,7 +18,13 @@
 						</view>
 					</view>
 				</view>
-				<slot name="header"></slot>
+				<!-- #ifndef APP -->
+				<view class="slot-header">
+				<!-- #endif -->
+					<slot name="header"></slot>
+				<!-- #ifndef APP -->
+				</view>
+				<!-- #endif -->
 				<view v-if="badgeText && badgePositon === 'left'" class="uni-list-chat__badge uni-list-chat__badge-pos" :class="[isSingle]">
 					<text class="uni-list-chat__badge-text">{{ badgeText === 'dot' ? '' : badgeText }}</text>
 				</view>
