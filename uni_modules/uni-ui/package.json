@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.4.26",
+  "version": "1.4.27",
   "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -9,7 +9,7 @@
     "UI组件库",
     "ui框架",
     "ui库"
-],
+  ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "^3.2.10"

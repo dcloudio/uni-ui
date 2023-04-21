@@ -1,3 +1,45 @@
+## 1.4.27（2023-04-21）
+- uni-calendar 修复 某些情况 monthSwitch 未触发的Bug
+- uni-calendar 修复 某些情况切换月份错误的Bug
+- uni-data-picker 修复 更改 modelValue 报错的 bug
+- uni-data-picker 修复 v-for 未使用 key 值控制台 warning
+- uni-data-picker 修复代码合并时引发 value 属性为空时不渲染数据的问题
+- uni-data-picker 修复 localdata 不支持动态更新的bug
+- uni-data-select 修复 微信小程序点击时会改变背景颜色的 bug
+- uni-data-select 修复 禁用时会显示清空按钮
+- uni-data-select 优化 查询条件短期内多次变更只查询最后一次变更后的结果
+- uni-data-select 调整 内部缓存键名调整为 uni-data-select-lastSelectedValue
+- uni-datetime-picker 修复 日历 picker 修改年月后，自动选中当月1日 [详情](https://ask.dcloud.net.cn/question/165937)
+- uni-datetime-picker 修复 小程序端 低版本 ios NaN [详情](https://ask.dcloud.net.cn/question/162979)
+- uni-datetime-picker 修复 firefox 浏览器显示区域点击无法拉起日历弹框的Bug [详情](https://ask.dcloud.net.cn/question/163362)
+- uni-datetime-picker 优化 值为空依然选中当天问题
+- uni-datetime-picker 优化 提供 default-value 属性支持配置选择器打开时默认显示的时间
+- uni-datetime-picker 优化 非范围选择未选择日期时间，点击确认按钮选中当前日期时间
+- uni-datetime-picker 优化 字节小程序日期时间范围选择，底部日期换行问题
+- uni-datetime-picker 修复 2.2.18 引起范围选择配置 end 选择无效的Bug [详情](https://github.com/dcloudio/uni-ui/issues/686)
+- uni-datetime-picker 修复 移动端范围选择change事件触发异常的Bug [详情](https://github.com/dcloudio/uni-ui/issues/684)
+- uni-datetime-picker 优化 PC端输入日期格式错误时返回当前日期时间
+- uni-datetime-picker 优化 PC端输入日期时间超出 start、end 限制的Bug
+- uni-datetime-picker 优化 移动端日期时间范围用法时间展示不完整问题
+- uni-datetime-picker 修复 小程序端绑定 Date 类型报错的Bug [详情](https://github.com/dcloudio/uni-ui/issues/679)
+- uni-datetime-picker 修复 vue3 time-picker 无法显示绑定时分秒的Bug
+- uni-datetime-picker 修复 字节小程序报错的Bug
+- uni-datetime-picker 修复 某些情况切换月份错误的Bug
+- uni-easyinput 修复 vue3 下 keyboardheightchange 事件报错的bug
+- uni-easyinput 优化 trim 属性默认值
+- uni-easyinput 新增 cursor-spacing 属性
+- uni-fab 新增 pattern.icon 属性，可自定义图标
+- uni-file-picker 修复 手动上传删除一个文件后不能再上传的bug
+- uni-forms 修复 required 参数无法动态绑定
+- uni-list 优化 uni-list-chat 具名插槽`header` 非app端套一层元素，方便使用时通过外层元素定位实现样式修改
+- uni-list uni-list-chat 新增 支持具名插槽`header`
+- uni-list 新增 列表图标新增 customPrefix 属性 ，用法 [详见](https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html#icons-props)
+- uni-nav-bar 修复 自定义状态栏高度闪动BUG
+- uni-nav-bar 修复 暗黑模式下边线颜色错误的bug
+- uni-popup 修复 uni-popup 重复打开时的 bug
+- uni-popup uni-popup-dialog 组件新增 inputType 属性
+- uni-swipe-action 修复`uni-swipe-action`和`uni-swipe-action-item`不同时使用导致 closeOther 方法报错的 bug
+- uni-table 修复 在vue3模式下可能会出现错误的问题
 ## 1.4.26（2023-01-31）
 - uni-badge 修复 运行/打包 控制台警告问题
 - uni-calendar 修复 某些情况切换月份错误问题

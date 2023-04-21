@@ -7,6 +7,161 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.27" date="2023-04-21">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况 monthSwitch 未触发的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 更改 modelValue 报错的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 v-for 未使用 key 值控制台 warning
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			代码合并时引发 value 属性为空时不渲染数据的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 localdata 不支持动态更新的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 localdata 不支持动态更新的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序点击时会改变背景颜色的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 禁用时会显示清空按钮
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 查询条件短期内多次变更只查询最后一次变更后的结果
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整 内部缓存键名调整为 uni-data-select-lastSelectedValue
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 日历 picker 修改年月后，自动选中当月1日 [详情](https://ask.dcloud.net.cn/question/165937)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 小程序端 低版本 ios NaN [详情](https://ask.dcloud.net.cn/question/162979)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 firefox 浏览器显示区域点击无法拉起日历弹框的Bug [详情](https://ask.dcloud.net.cn/question/163362)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 值为空依然选中当天问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 提供 default-value 属性支持配置选择器打开时默认显示的时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 非范围选择未选择日期时间，点击确认按钮选中当前日期时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 字节小程序日期时间范围选择，底部日期换行问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 2.2.18 引起范围选择配置 end 选择无效的Bug [详情](https://github.com/dcloudio/uni-ui/issues/686)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 移动端范围选择change事件触发异常的Bug [详情](https://github.com/dcloudio/uni-ui/issues/684)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 PC端输入日期格式错误时返回当前日期时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 PC端输入日期时间超出 start、end 限制的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移动端日期时间范围用法时间展示不完整问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 小程序端绑定 Date 类型报错的Bug [详情](https://github.com/dcloudio/uni-ui/issues/679)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vue3 time-picker 无法显示绑定时分秒的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 字节小程序报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3 下 keyboardheightchange 事件报错的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 trim 属性默认值
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 cursor-spacing 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="feat">
+			 pattern.icon 属性，可自定义图标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 手动上传删除一个文件后不能再上传的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 required 参数无法动态绑定
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="perf">
+			 uni-list-chat 具名插槽`header` 非app端套一层元素，方便使用时通过外层元素定位实现样式修改
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list-chat 新增 支持具名插槽`header`
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 列表图标新增 customPrefix 属性 ，用法 [详见](https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html#icons-props)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 自定义状态栏高度闪动BUG
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 暗黑模式下边线颜色错误的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup 重复打开时的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-popup-dialog 组件新增 inputType 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			`uni-swipe-action`和`uni-swipe-action-item`不同时使用导致 closeOther 方法报错的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue3模式下可能会出现错误的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.26" date="2023-01-31">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="fix">
