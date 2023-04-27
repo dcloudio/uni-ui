@@ -4,23 +4,26 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
 				<view class="uni-select__input-box" @click="toggleSelector">
-					<view v-if="current" class="uni-select__input-text">{{current}}</view>
-					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view v-if="current && clear && !disabled" @click.stop="clearVal" >
-						<uni-icons type="clear" color="#c0c4cc" size="24"/>
-					</view>
-					<view v-else>
-						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
-					</view>
+					<uni-easyinput  v-model="current" v-if="filterable" :styles="inputStyles" @clear="clearVal" :placeholder="typePlaceholder" :inputBorder="false" @input="handleInput"></uni-easyinput>
+					<template v-else>
+						<view v-if="current" class="uni-select__input-text">{{current}}</view>
+						<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
+						<view v-if="current && clear && !disabled" @click.stop="clearVal" >
+							<uni-icons type="clear" color="#c0c4cc" size="24"/>
+						</view>
+						<view v-else>
+							<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
+						</view>
+					</template>
 				</view>
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
 				<view class="uni-select__selector" v-if="showSelector">
 					<view class="uni-popper__arrow"></view>
 					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
-						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
+						<view class="uni-select__selector-empty" v-if="mixinDatacomResDataFilter.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
+						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResDataFilter" :key="index"
 							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
@@ -39,6 +42,7 @@
 	 * @property {String} value 默认值
 	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Boolean} clear 是否可以清空已选项
+	 * @property {Boolean} filterable 是否可以检索
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
@@ -80,6 +84,10 @@
 				type: Boolean,
 				default: true
 			},
+			filterable:{
+				type:Boolean,
+				default:false
+			},
 			defItem: {
 				type: Number,
 				default: 0
@@ -99,9 +107,13 @@
 				showSelector: false,
 				current: '',
 				mixinDatacomResData: [],
+				mixinDatacomResDataFilter:[],
 				apps: [],
 				channels: [],
 				cacheKey: "uni-data-select-lastSelectedValue",
+				inputStyles:{
+					backgroundColor: 'transparent',
+				},
 			};
 		},
 		created() {
@@ -140,6 +152,7 @@
 				handler(val, old) {
 					if (Array.isArray(val) && old !== val) {
 						this.mixinDatacomResData = val
+						this.mixinDatacomResDataFilter = val
 					}
 				}
 			},
@@ -156,6 +169,16 @@
 			}
 		},
 		methods: {
+			// 筛选过滤
+			handleInput(e){
+				if(e){
+					this.mixinDatacomResDataFilter = this.mixinDatacomResData.filter(item=>{
+						return item.text.includes(e)
+					})
+				}else{
+					this.mixinDatacomResDataFilter = [...this.mixinDatacomResData]
+				}
+			},
 			debounce(fn, time = 100){
 				let timer = null
 				return function(...args) {
