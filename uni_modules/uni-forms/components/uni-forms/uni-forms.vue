@@ -179,7 +179,7 @@
 								break;
 							}
 						}
-						if (!formVm) return console.error('当前 uni-froms 组件缺少 ref 属性');
+						if (!formVm) return console.error('当前 uni-forms 组件缺少 ref 属性');
 						formVm.setValue(name, value);
 					}
 				}
