@@ -232,7 +232,8 @@
 				tempRange: {
 					before: '',
 					after: ''
-				}
+				},
+        isPhone: false
 			}
 		},
 		watch: {
@@ -394,6 +395,14 @@
 			// 选中某一天
 			this.init(this.date)
 		},
+    mounted(){
+      if(typeof navigator !== "undefined"){
+        this.isPhone = navigator.userAgent.toLowerCase().indexOf('mobile') !== -1
+        return
+      }
+      const { windowWidth } = uni.getSystemInfoSync()
+      this.isPhone = windowWidth <= 500
+    },
 		methods: {
 			leaveCale() {
 				this.firstEnter = true
@@ -586,7 +595,8 @@
 				this.tempSingleDate = this.calendar.fullDate
 				const beforeDate = new Date(this.cale.multipleStatus.before).getTime()
 				const afterDate = new Date(this.cale.multipleStatus.after).getTime()
-				if (beforeDate > afterDate && afterDate) {
+        // 这里返回的 before after 为什么要做替换？导致PC端如果开始结束日期都是今天，第一次选择开始日期早于今天，开始日期不更新
+				if (beforeDate > afterDate && afterDate && !this.isPhone) {
 					this.tempRange.before = this.cale.multipleStatus.after
 					this.tempRange.after = this.cale.multipleStatus.before
 				} else {
