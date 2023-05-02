@@ -450,6 +450,10 @@
 				right.setDate(this.$refs.right.nowDate.fullDate)
 			},
 			platform() {
+        if(typeof navigator !== "undefined"){
+          this.isPhone = navigator.userAgent.toLowerCase().indexOf('mobile') !== -1
+          return
+        }
 				const { windowWidth } = uni.getSystemInfoSync()
 				this.isPhone = windowWidth <= 500
 				this.windowWidth = windowWidth
@@ -460,7 +464,9 @@
 				}
 				this.platform()
 				if (this.isPhone) {
-					this.$refs.mobile.open()
+					setTimeout(() => {
+            this.$refs.mobile.open()
+          }, 0);
 					return
 				}
 				this.pickerPositionStyle = {
