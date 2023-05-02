@@ -1,3 +1,7 @@
+## 2.2.23（2023-05-02）
+- 修复 部分情况修改时间，开始时间未更新 [详情](https://github.com/dcloudio/uni-ui/issues/737)
+- 修复 部分平台及设备第一次点击无法显示弹框
+- 修复 ios 日期格式未补零显示及使用异常 [详情](https://ask.dcloud.net.cn/question/162979)
 ## 2.2.22（2023-03-30）
 - 修复 日历 picker 修改年月后，自动选中当月1日 [详情](https://ask.dcloud.net.cn/question/165937)
 - 修复 小程序端 低版本 ios NaN [详情](https://ask.dcloud.net.cn/question/162979)
