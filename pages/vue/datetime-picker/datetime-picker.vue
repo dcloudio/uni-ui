@@ -55,7 +55,7 @@
 		data() {
 			return {
 				dateString: this.getDateTime(new Date()),
-				datetimeString: this.getDateTime(new Date()),
+				datetimeString: this.getDateTime(new Date(), false),
         datetimeDefaultValueString: '',
         datetimeDefaultValue: this.getDateTime(Date.now() + 1 * 24 * 3600000),
 				dateTimestamp: Date.now(),
@@ -84,22 +84,24 @@
 			maskClick() {
 				console.log('----maskClick事件');
 			},
-      getDateTime(date){
-        return `${this.getDate(date)} ${this.getTime(date)}`
+      getDateTime(date, addZero = true){
+        return `${this.getDate(date, addZero)} ${this.getTime(date, addZero)}`
       },
-      getDate(date){
+      getDate(date, addZero = true){
         date = new Date(date)
         const year = date.getFullYear()
         const month = date.getMonth()+1
         const day = date.getDate()
-        return `${year}-${this.addZero(month)}-${this.addZero(day)}`
+        return `${year}-${addZero ? this.addZero(month) : month}-${addZero ? this.addZero(day) : day}`
       },
-      getTime(date){
+      getTime(date, addZero = true){
         date = new Date(date)
         const hour = date.getHours()
         const minute = date.getMinutes()
         const second = date.getSeconds()
-        return this.hideSecond ? `${this.addZero(hour)}:${this.addZero(minute)}` : `${this.addZero(hour)}:${this.addZero(minute)}:${this.addZero(second)}`
+        return this.hideSecond ?
+        `${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}` :
+        `${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}:${addZero ? this.addZero(second) : second}`
       },
 			addZero(num) {
 				if (num < 10) {
