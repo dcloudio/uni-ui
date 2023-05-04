@@ -1,5 +1,5 @@
 <template>
-	<view v-if="isShow||onceRender" v-show="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+	<view v-if="isShow||onceRender" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
 </template>
 
 <script>
@@ -86,6 +86,9 @@ export default {
 				...this.styles,
 				'transition-duration': this.duration / 1000 + 's'
 			}
+			if (!this.isShow) {
+        styles.display = 'none'
+      }
 			let transform = ''
 			for (let i in styles) {
 				let line = this.toLine(i)
