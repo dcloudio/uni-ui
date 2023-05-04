@@ -163,7 +163,7 @@
 				},
 				maskShow: true,
 				mkclick: true,
-				popupstyle: this.isDesktop ? 'fixforpc-top' : 'top'
+				popupstyle: 'top'
 			}
 		},
 		computed: {
