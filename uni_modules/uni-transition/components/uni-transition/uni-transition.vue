@@ -1,5 +1,10 @@
 <template>
-	<view v-if="isShow||onceRender" v-show="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #ifndef APP-NVUE -->
+  <view v-show="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #endif -->
+  <!-- #ifdef APP-NVUE -->
+  <view v-if="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #endif -->
 </template>
 
 <script>
