@@ -114,11 +114,11 @@
 				}
 
 				this.inputValue = (value / scale).toFixed(String(scale).length - 1);
-				this.$emit("change", +this.inputValue);
 				// TODO vue2 兼容
 				this.$emit("input", +this.inputValue);
 				// TODO vue3 兼容
 				this.$emit("update:modelValue", +this.inputValue);
+				this.$emit("change", +this.inputValue);
 			},
 			_getDecimalScale() {
 
@@ -144,9 +144,9 @@
 				}
 				const scale = this._getDecimalScale();
 				this.inputValue = value.toFixed(String(scale).length - 1);
-				this.$emit("change", +this.inputValue);
 				this.$emit("input", +this.inputValue);
 				this.$emit("update:modelValue", +this.inputValue);
+				this.$emit("change", +this.inputValue);
 			},
 			_onFocus(event) {
 				this.$emit('focus', event)
