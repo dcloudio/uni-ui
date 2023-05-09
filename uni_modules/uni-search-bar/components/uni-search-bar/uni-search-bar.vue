@@ -80,7 +80,7 @@
 			},
 			cancelText: {
 				type: String,
-				default: '取消'
+				default: ""
 			},
 			bgColor: {
 				type: String,
