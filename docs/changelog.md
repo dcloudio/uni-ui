@@ -7,6 +7,35 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.28" date="2023-06-14">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 部分情况修改时间，开始时间未更新 [详情](https://github.com/dcloudio/uni-ui/issues/737)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 部分平台及设备第一次点击无法显示弹框
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ios 日期格式未补零显示及使用异常 [详情](https://ask.dcloud.net.cn/question/162979)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 change 事件执行顺序错误的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 i18n 国际化不正确的 Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 NVUE 平台报错的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.27" date="2023-04-21">
 	<log-item title="uni-calendar 组件更新">
 		<log-item-text tag-type="fix">
