@@ -212,8 +212,11 @@ to				|String		|-			|	新页面跳转地址，如填写此属性，click 会返�
 clickable		|Boolean	|false		|	是否开启点击反馈
 showSwitch	    |Boolean	|false		|	是否显示Switch																			
 switchChecked	|Boolean	|false		|	Switch是否被选中																			
-showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标																		
+showExtraIcon   |Boolean	|false		|	左侧是否显示扩展图标
 extraIcon		|Object		|-			|	扩展图标参数，格式为 ``{color: '#4cd964',size: '22',type: 'spinner'}``，参考 [uni-icons](https://ext.dcloud.net.cn/plugin?id=28)	
+border | Boolean | true | 是否显示列表项边框
+customStyle | Object | ``{padding: '',backgroundColor: '#FFFFFF'}`` | 自定义列表项内边距和背景颜色
+keepScrollPosition | Boolean | false | 插入单元格后是否保持最后一个滑动位置
 direction		| String	|row		|	排版方向，可选值，row:水平排列;  column:垂直排列; 3个插槽是水平排还是垂直排，也受此属性控制
 
 
