@@ -6,7 +6,14 @@ function pad(str, length = 2) {
 	}
 	return str.slice(-length)
 }
-
+const locale = {
+	zh: {
+		weekday: ['日', '一', '二', '三', '四', '五', '六']
+	},
+	en: {
+		weekday: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	}
+}
 const parser = {
 	yyyy: (dateObj) => {
 		return pad(dateObj.year, 4)
@@ -25,6 +32,9 @@ const parser = {
 	},
 	d: (dateObj) => {
 		return dateObj.day
+	},
+	E: (dateObj) => {
+		return locale[dateObj.locale].weekday[dateObj.weekday]
 	},
 	hh: (dateObj) => {
 		return pad(dateObj.hour)
@@ -71,15 +81,17 @@ function getDate(time) {
 	}
 }
 
-export function formatDate(date, format = 'yyyy/MM/dd hh:mm:ss') {
+export function formatDate(date, format = 'yyyy/MM/dd hh:mm:ss', locale = 'zh') {
 	if (!date && date !== 0) {
 		return ''
 	}
 	date = getDate(date)
 	const dateObj = {
+		locale,
 		year: date.getFullYear(),
 		month: date.getMonth() + 1,
 		day: date.getDate(),
+		weekday: date.getDay(),
 		hour: date.getHours(),
 		minute: date.getMinutes(),
 		second: date.getSeconds(),
@@ -95,7 +107,8 @@ export function formatDate(date, format = 'yyyy/MM/dd hh:mm:ss') {
 			return parser[matched](dateObj)
 		})
 	}
-	return result
+	//warn: 最后处理星期以防英文星期被错误格式化
+	return result.replace(/E/, parser.E(dateObj))
 }
 
 export function friendlyDate(time, {
@@ -114,6 +127,7 @@ export function friendlyDate(time, {
 			year: '年',
 			month: '月',
 			day: '天',
+			week: '周',
 			hour: '小时',
 			minute: '分钟',
 			second: '秒',
@@ -128,6 +142,7 @@ export function friendlyDate(time, {
 			month: 'month',
 			day: 'day',
 			hour: 'hour',
+			week: 'week',
 			minute: 'minute',
 			second: 'second',
 			ago: 'ago',
@@ -145,7 +160,7 @@ export function friendlyDate(time, {
 		return ms < 0 ? text.justNow : text.soon
 	}
 	if (absMs >= threshold[1]) {
-		return formatDate(date, format)
+		return formatDate(date, format, locale)
 	}
 	let num
 	let unit
@@ -158,6 +173,7 @@ export function friendlyDate(time, {
 	const minutes = Math.floor(seconds / 60)
 	const hours = Math.floor(minutes / 60)
 	const days = Math.floor(hours / 24)
+	const weeks = Math.floor(days / 7)
 	const months = Math.floor(days / 30)
 	const years = Math.floor(months / 12)
 	switch (true) {
@@ -172,6 +188,10 @@ export function friendlyDate(time, {
 		case days > 0:
 			num = days
 			unit = text.day
+			break
+		case weeks > 0:
+			num = weeks
+			unit = text.week
 			break
 		case hours > 0:
 			num = hours
