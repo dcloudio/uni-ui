@@ -492,7 +492,9 @@
 							}
 						} else {
 							this.$refs.right.changeMonth('next')
-							this.$refs.right.cale.lastHover = false
+							if(this.isPhone){
+								this.$refs.right.cale.lastHover = false;
+							}
 						}
 					}
 
