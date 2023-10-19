@@ -6,6 +6,7 @@
 				v-if="type === 'textarea'"
 				class="uni-easyinput__content-textarea"
 				:class="{ 'input-padding': inputBorder }"
+				:style="{ minHeight: minHeight + 'px' }"
 				:name="name"
 				:value="val"
 				:placeholder="placeholder"
@@ -102,6 +103,7 @@
  * @property {String}	primaryColor	设置主题色（默认#2979ff）
  * @property {Boolean}	trim	是否自动去除两端的空格
  * @property {Boolean}	cursorSpacing	指定光标与键盘的距离，单位 px
+ * @property {Number}	minHeight	textarea默认最小高度，单位 px
  * @value both	去除两端空格
  * @value left	去除左侧空格
  * @value right	去除右侧空格
@@ -241,6 +243,10 @@ export default {
 		errorMessage: {
 			type: [String, Boolean],
 			default: ''
+		},
+		minHeight: {
+				type: [Number, String],
+				default: 80
 		}
 	},
 	data() {
@@ -565,10 +571,7 @@ $uni-border-1: #dcdfe6 !default;
 	font-size: 14px;
 	margin: 6px;
 	margin-left: 0;
-	height: 80px;
-	min-height: 80px;
 	/* #ifndef APP-NVUE */
-	min-height: 80px;
 	width: auto;
 	/* #endif */
 }
