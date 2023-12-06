@@ -29,8 +29,8 @@
 				default: '#333333'
 			},
 			size: {
-				type: Number,
-				default: 18
+				type: Object,
+				default: 24
 			},
 			fontFamily: {
 				type: String,
@@ -49,7 +49,11 @@
 				return ''
 			},
 			iconSize() : string {
-				return this.getFontSize(this.size)
+				if (typeof this.size == 'string') {
+					return '' + this.size
+				}
+				const size = this.size as number
+				return this.getFontSize(size)
 			},
 			styleObj() : UTSJSONObject {
 				if (this.fontFamily !== '') {

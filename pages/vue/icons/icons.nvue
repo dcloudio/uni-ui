@@ -11,7 +11,7 @@
 			</template>
 			<view class="icon-content">
 				<view v-for="(item,index) in iconClassList" :key="index" class="icon-item" @click="switchActive(index,item)">
-					<uni-icons :type="item.font_class" :color="activeIndex === index?'#007aff':'#5e6d82'" size="30" />
+					<uni-icons :type="item.font_class" :color="activeIndex === index?'#007aff':'#5e6d82'" :size="30" />
 					<text :style="{color:activeIndex === index?'#007aff':'#5e6d82'}"
 						class="uni-mt-5 uni-subtitle">{{ checked? item.unicode: item.font_class }}</text>
 				</view>
@@ -21,15 +21,15 @@
 		<uni-section title="自定义图标" subTitle="引入参考App.vue" type="line">
 			<view class="icon-content">
 				<view class="icon-item" >
-					<uni-icons customPrefix="customicons" type="youxi" color="#5e6d82" size="22" />
+					<uni-icons customPrefix="customicons" type="youxi" color="#5e6d82" :size="22" />
 					<text style="color:#5e6d82;">youxi</text>
 				</view>
 				<view class="icon-item" >
-					<uni-icons customPrefix="customicons" type="wenjian" color="#5e6d82" size="22" />
+					<uni-icons customPrefix="customicons" type="wenjian" color="#5e6d82" :size="22" />
 					<text style="color:#5e6d82;">wenjian</text>
 				</view>
 				<view class="icon-item" >
-					<uni-icons customPrefix="customicons" type="zhuanfa" color="#5e6d82" size="22" />
+					<uni-icons customPrefix="customicons" type="zhuanfa" color="#5e6d82" :size="22" />
 					<text style="color:#5e6d82;">zhuanfa</text>
 				</view>
 			</view>

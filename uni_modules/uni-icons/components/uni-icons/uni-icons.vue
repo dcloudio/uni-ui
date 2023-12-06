@@ -1,6 +1,6 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
-	<text :style="styleObj" class="uni-icons" @click="_onClick"></text>
+	<text :style="styleObj" class="uni-icons" @click="_onClick">{{unicode}}</text>
 	<!-- #endif -->
 	<!-- #ifndef APP-NVUE -->
 	<text :style="styleObj" class="uni-icons" :class="['uniui-'+type,customPrefix,customPrefix?type:'']" @click="_onClick">
@@ -10,11 +10,7 @@
 </template>
 
 <script>
-	import { fontData } from './uniicons';
-	const getVal = (val) => {
-		const reg = /^[0-9]*$/g
-		return (typeof val === 'number' || reg.test(val)) ? val + 'px' : val;
-	}
+	import { fontData } from './uniicons.js';
 	// #ifdef APP-NVUE
 	var domModule = weex.requireModule('dom');
 	import iconUrl from './uniicons.ttf'
@@ -48,7 +44,7 @@
 			},
 			size: {
 				type: [Number, String],
-				default: 16
+				default: 24
 			},
 			customPrefix: {
 				type: String,
@@ -68,12 +64,16 @@
 			unicode() {
 				let code = this.icons.find(v => v.font_class === this.type)
 				if (code) {
-					return unescape(`%u${code.unicode}`)
+					return code.unicode
 				}
 				return ''
 			},
 			iconSize() {
-				return getVal(this.size)
+				if (typeof this.size == 'string') {
+					return this.size
+				}
+				const size = this.size
+				return size + 'px'
 			},
 			styleObj() {
 				if (this.fontFamily !== '') {
@@ -96,7 +96,7 @@
 
 	@font-face {
 		font-family: uniicons;
-		src: url('./uniicons.ttf') format('truetype');
+		src: url('./uniicons.ttf');
 	}
 
 	/* #endif */
