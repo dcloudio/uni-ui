@@ -10,7 +10,7 @@
 </template>
 
 <script>
-	import { fontData } from './uniicons.js';
+	import { fontData } from './uniicons_file.ts';
 	// #ifdef APP-NVUE
 	var domModule = weex.requireModule('dom');
 	import iconUrl from './uniicons.ttf'
@@ -57,7 +57,7 @@
 		},
 		data() {
 			return {
-				icons: fontData
+				icons: fontData 
 			}
 		},
 		computed: {
@@ -68,7 +68,7 @@
 				}
 				return ''
 			},
-			iconSize() {
+			iconSize()  {
 				if (typeof this.size == 'string') {
 					return this.size
 				}

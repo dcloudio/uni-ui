@@ -167,6 +167,10 @@ export const fontData = [
     "font_class": "down",
     "unicode": "\ue6b8"
   },
+	{
+	  "font_class": "bottom",
+	  "unicode": "\ue6b8"
+	},
   {
     "font_class": "download",
     "unicode": "\ue68d"
@@ -611,6 +615,10 @@ export const fontData = [
     "font_class": "up",
     "unicode": "\ue6b6"
   },
+	{
+	  "font_class": "top",
+	  "unicode": "\ue6b6"
+	},
   {
     "font_class": "upload",
     "unicode": "\ue690"

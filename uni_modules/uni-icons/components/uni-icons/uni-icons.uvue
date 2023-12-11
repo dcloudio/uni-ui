@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import { fontData, IconsDataItem } from './uniicons-uvue'
+	import { fontData, IconsDataItem } from './uniicons_file'
 
 	/**
 	 * Icons 图标

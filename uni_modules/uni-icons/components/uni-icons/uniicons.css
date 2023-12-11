@@ -131,6 +131,10 @@
   content: "\e6b8";
 }
 
+.uniui-bottom:before {
+  content: "\e6b8";
+}
+
 .uniui-arrowright:before {
   content: "\e6d5";
 }
@@ -140,6 +144,10 @@
 }
 
 .uniui-up:before {
+  content: "\e6b6";
+}
+
+.uniui-top:before {
   content: "\e6b6";
 }
 
