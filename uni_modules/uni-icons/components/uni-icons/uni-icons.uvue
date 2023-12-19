@@ -49,11 +49,13 @@
 				return ''
 			},
 			iconSize() : string {
-				if (typeof this.size == 'string') {
-					return '' + this.size
+				const size = this.size
+				if (typeof size == 'string') {
+					const reg = /^[0-9]*$/g
+					return reg.test(size as string) ? '' + size + 'px' : '' + size;
+					// return '' + this.size
 				}
-				const size = this.size as number
-				return this.getFontSize(size)
+				return this.getFontSize(size as number)
 			},
 			styleObj() : UTSJSONObject {
 				if (this.fontFamily !== '') {

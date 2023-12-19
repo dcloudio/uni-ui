@@ -10,7 +10,13 @@
 </template>
 
 <script>
-	import { fontData } from './uniicons_file.ts';
+	import { fontData } from './uniicons_file_vue.js';
+
+	const getVal = (val) => {
+		const reg = /^[0-9]*$/g
+		return (typeof val === 'number' || reg.test(val)) ? val + 'px' : val;
+	}
+
 	// #ifdef APP-NVUE
 	var domModule = weex.requireModule('dom');
 	import iconUrl from './uniicons.ttf'
@@ -57,7 +63,7 @@
 		},
 		data() {
 			return {
-				icons: fontData 
+				icons: fontData
 			}
 		},
 		computed: {
@@ -68,12 +74,8 @@
 				}
 				return ''
 			},
-			iconSize()  {
-				if (typeof this.size == 'string') {
-					return this.size
-				}
-				const size = this.size
-				return size + 'px'
+			iconSize() {
+				return getVal(this.size)
 			},
 			styleObj() {
 				if (this.fontFamily !== '') {
