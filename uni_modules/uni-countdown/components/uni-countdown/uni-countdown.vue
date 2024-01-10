@@ -86,10 +86,6 @@
 			timestamp: {
 				type: Number,
 				default: 0
-			},
-      zeroPad: {
-				type: Boolean,
-				default: true
 			}
 		},
 		data() {
@@ -203,10 +199,18 @@
 				} else {
 					this.timeUp()
 				}
-        day = (day < 10 && this.zeroPad) ? `0${day}` : day
-				hour = (hour < 10 && this.zeroPad) ? `0${hour}` : hour
-				minute = (minute < 10 && this.zeroPad) ? `0${minute}` : minute
-				second = (second < 10 && this.zeroPad) ? `0${second}` : second
+				if (day < 10) {
+					day = '0' + day
+				}
+				if (hour < 10) {
+					hour = '0' + hour
+				}
+				if (minute < 10) {
+					minute = '0' + minute
+				}
+				if (second < 10) {
+					second = '0' + second
+				}
 				this.d = day
 				this.h = hour
 				this.i = minute

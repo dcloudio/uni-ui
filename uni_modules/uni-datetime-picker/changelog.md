@@ -1,3 +1,5 @@
+## 2.2.26（2024-01-08）
+- 修复 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
 ## 2.2.25（2023-10-18）
 - 修复 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
 ## 2.2.24（2023-06-02）

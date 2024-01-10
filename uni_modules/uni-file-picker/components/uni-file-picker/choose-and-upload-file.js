@@ -11,6 +11,27 @@ function chooseImage(opts) {
 		extension
 	} = opts
 	return new Promise((resolve, reject) => {
+		// #ifdef MP-WEIXIN
+		uni.chooseMedia({
+			count,
+			sizeType,
+			sourceType,
+			mediaType: ['image'],
+			extension,
+			success(res) {
+				res.tempFiles.forEach(item => {
+					item.path = item.tempFilePath;
+				})
+				resolve(normalizeChooseAndUploadFileRes(res, 'image'));
+			},
+			fail(res) {
+				reject({
+					errMsg: res.errMsg.replace('chooseImage:fail', ERR_MSG_FAIL),
+				});
+			},
+		})
+		// #endif
+		// #ifndef MP-WEIXIN
 		uni.chooseImage({
 			count,
 			sizeType,
@@ -25,6 +46,8 @@ function chooseImage(opts) {
 				});
 			},
 		});
+		// #endif
+
 	});
 }
 

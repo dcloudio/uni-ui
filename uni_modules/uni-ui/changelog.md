@@ -1,11 +1,4 @@
-## 1.4.28（2023-06-14）
-- uni-datetime-picker 修复 部分情况修改时间，开始时间未更新 [详情](https://github.com/dcloudio/uni-ui/issues/737)
-- uni-datetime-picker 修复 部分平台及设备第一次点击无法显示弹框
-- uni-datetime-picker 修复 ios 日期格式未补零显示及使用异常 [详情](https://ask.dcloud.net.cn/question/162979)
-- uni-number-box 修复 change 事件执行顺序错误的问题
-- uni-search-bar 修复 i18n 国际化不正确的 Bug
-- uni-transition 修复 NVUE 平台报错的问题
-## 1.4.27（2023-04-21）
+## 1.4.27（2023-04-23）
 - uni-calendar 修复 某些情况 monthSwitch 未触发的Bug
 - uni-calendar 修复 某些情况切换月份错误的Bug
 - uni-data-picker 修复 更改 modelValue 报错的 bug
