@@ -219,6 +219,7 @@
 
 			clearVal() {
 				this.emit('')
+				this.current = ''
 				if (this.collection) {
 					this.removeCache()
 				}
