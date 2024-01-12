@@ -47,8 +47,7 @@
         "appid" : "",
         "setting" : {
             "urlCheck" : true
-        },
-        "usingComponents" : true
+        }
     },
     "h5" : {
         "router" : {
