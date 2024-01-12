@@ -226,7 +226,7 @@ export default {
 |uni-table|[表格](https://ext.dcloud.net.cn/plugin?name=uni-table)|
 |uni-tag|[标签](https://ext.dcloud.net.cn/plugin?name=uni-tag)|
 |uni-title|[章节标题](https://ext.dcloud.net.cn/plugin?name=uni-title)|
-|uni-tooltip|[提示文字](https://ext.dcloud.net.cn/plugin?name=uni-tooltip)|
+|uni-tooltip|[undefined](https://ext.dcloud.net.cn/plugin?name=uni-tooltip)|
 |uni-transition|[过渡动画](https://ext.dcloud.net.cn/plugin?name=uni-transition)|
 
 

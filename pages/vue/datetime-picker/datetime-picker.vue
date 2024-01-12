@@ -17,7 +17,7 @@
 		</view>
 		<uni-section :title="'日期范围用法：' + '[' + dateRange + ']'" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="dateRange" type="daterange" @maskClick="maskClick" />
+			<uni-datetime-picker v-model="dateRange" type="daterange" @maskClick="maskClick" @noChange="noChange"/>
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimeRange + ']' " type="line"></uni-section>
 		<view class="example-body">
@@ -78,6 +78,10 @@
 			}
 		},
 		methods: {
+			noChange(e){
+				console.log('----noChange事件:', e);
+			},
+
 			change(e) {
 				console.log('----change事件:', e);
 			},

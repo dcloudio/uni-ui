@@ -1,3 +1,5 @@
+## 2.2.27（2024-01-10）
+- 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
 ## 2.2.26（2024-01-08）
 - 修复 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
 ## 2.2.25（2023-10-18）

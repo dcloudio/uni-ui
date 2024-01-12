@@ -7,6 +7,87 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.28" date="2024-01-12">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 回到今天时，月份显示不一致问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 支持 uni-app-x
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 部分情况修改时间，开始、结束时间显示异常的Bug [详情](https://ask.dcloud.net.cn/question/171146)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 当前月可以选择上月、下月的日期的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 微信小程序不再调用chooseImage,而是调用chooseMedia
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 上传文件至云存储携带本地文件名称
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="perf">
+			 labelWidth 描述错误
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="fix">
+			 项目未使用 ts 情况下，打包报错的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 size 属性为 string 时，不加单位导致尺寸异常的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 兼容老版本icon类型，如 top ，bottom 等
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 兼容老版本icon类型，如 top ，bottom 等
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-app x 下示例项目图标排序
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue下引入组件报错的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-app x 支持定义图标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="fix">
+			动态绑定title时，滚动速度不一致的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-tr只有一列时minWidth计算错误，列变化实时计算更新
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.28" date="2023-06-14">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="fix">
