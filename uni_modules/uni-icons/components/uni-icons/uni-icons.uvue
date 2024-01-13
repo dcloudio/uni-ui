@@ -30,7 +30,7 @@
 			},
 			size: {
 				type: Object,
-				default: 24
+				default: 16
 			},
 			fontFamily: {
 				type: String,
