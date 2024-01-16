@@ -26,6 +26,11 @@
 				<uni-data-select v-model="value" :localdata="range" @change="change" label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
+		<uni-section title="过滤筛选" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="value" filterable :localdata="range" @change="change" label="应用选择"></uni-data-select>
+			</view>
+		</uni-section>
 	</view>
 </template>
 
