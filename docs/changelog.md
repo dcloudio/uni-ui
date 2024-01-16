@@ -7,6 +7,9 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.4.33" date="2024-01-16">
+</log>
+
 <log title="1.4.28" date="2024-01-12">
 	<log-item title="uni-calendar 组件更新">
 		<log-item-text tag-type="fix">
