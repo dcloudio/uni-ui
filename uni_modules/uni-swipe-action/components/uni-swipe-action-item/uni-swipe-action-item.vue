@@ -81,8 +81,8 @@
 						<view v-for="(item,index) in leftOptions" :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
 					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
-					}" class="uni-swipe_button button-hock" @touchstart="appTouchStart"
-							@touchend="appTouchEnd($event,index,item,'left')"><text class="uni-swipe_button-text"
+					}" class="uni-swipe_button button-hock" @touchstart.stop="appTouchStart"
+							@touchend.stop="appTouchEnd($event,index,item,'left')"><text class="uni-swipe_button-text"
 								:style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text>
 						</view>
 					</slot>
@@ -93,7 +93,7 @@
 						<view v-for="(item,index) in rightOptions" :key="index" :style="{
 					  backgroundColor: item.style && item.style.backgroundColor ? item.style.backgroundColor : '#C7C6CD',
 					  fontSize: item.style && item.style.fontSize ? item.style.fontSize : '16px'
-					}" @touchstart="appTouchStart" @touchend="appTouchEnd($event,index,item,'right')"
+					}" @touchstart.stop="appTouchStart" @touchend.stop="appTouchEnd($event,index,item,'right')"
 							class="uni-swipe_button button-hock"><text class="uni-swipe_button-text"
 								:style="{color: item.style && item.style.color ? item.style.color : '#FFFFFF',}">{{ item.text }}</text>
 						</view>

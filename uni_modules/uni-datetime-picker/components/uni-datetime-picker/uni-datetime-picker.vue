@@ -636,9 +636,7 @@
 						before,
 						after
 					} = e.range
-
-					if (!before || !after) {
-						this.$emit("noChange",e);
+					if (!before) {
 						return;
 					}
 
@@ -753,8 +751,8 @@
 				this.pickerVisible = false
 			},
 			handleStartAndEnd(before, after, temp = false) {
-				if (!(before && after)) return
-
+				if (!before) return
+				if(!after)after = before;
 				const type = temp ? 'tempRange' : 'range'
 				const isStartEarlierEnd = dateCompare(before, after)
 				this[type].startDate = isStartEarlierEnd ? before : after
