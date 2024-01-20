@@ -4,7 +4,7 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
 				<view class="uni-select__input-box" @click="toggleSelector">
-					<view v-if="current" class="uni-select__input-text">{{current}}</view>
+					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
 					<view v-if="current && clear && !disabled" @click.stop="clearVal" >
 						<uni-icons type="clear" color="#c0c4cc" size="24"/>
@@ -132,8 +132,17 @@
 				// #ifndef VUE3
 				return this.value;
 				// #endif
+			},
+			textShow(){
+				// 长文本显示
+				let text = this.current;
+				if (text.length > 10) {
+					return text.slice(0, 25) + '...';
+				}
+				return text;
 			}
 		},
+
 		watch: {
 			localdata: {
 				immediate: true,
@@ -153,7 +162,8 @@
 						this.initDefVal()
 					}
 				}
-			}
+			},
+
 		},
 		methods: {
 			debounce(fn, time = 100){
