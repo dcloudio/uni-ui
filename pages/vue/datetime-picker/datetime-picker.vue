@@ -5,7 +5,7 @@
 		</uni-card>
 		<uni-section :title="'日期用法：' + dateString" type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker type="date" :clear-icon="false" v-model="dateString" @maskClick="maskClick" />
+			<uni-datetime-picker type="date" :clear-icon="false" v-model="dateString" @maskClick="maskClick" @show="show"/>
 		</view>
 		<uni-section :title="'日期时间用法：' + datetimeString" type="line"></uni-section>
 		<view class="example-body">
@@ -78,8 +78,8 @@
 			}
 		},
 		methods: {
-			noChange(e){
-				console.log('----noChange事件:', e);
+			show(){
+				console.log('----show事件:');
 			},
 
 			change(e) {

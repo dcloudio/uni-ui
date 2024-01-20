@@ -465,6 +465,7 @@
 				this.windowWidth = windowWidth
 			},
 			show() {
+				this.$emit("show")
 				if (this.disabled) {
 					return
 				}

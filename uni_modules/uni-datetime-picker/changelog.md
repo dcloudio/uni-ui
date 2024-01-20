@@ -1,3 +1,5 @@
+## 2.2.29（2024-01-20）
+- 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
 ## 2.2.28（2024-01-18）
 - 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
 ## 2.2.27（2024-01-10）
