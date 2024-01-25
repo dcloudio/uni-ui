@@ -7,6 +7,51 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.1" date="2024-01-25">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.34" date="2024-01-25">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 长文本回显超过容器的bug，超过容器部分显示省略号
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="perf">
+			 去除 移除无用的log输出
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 点击按钮时，按钮会被点击穿透导致自动收缩的 bug(兼容阿里/百度/抖音小程序)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 点击按钮时，按钮会被点击穿透导致自动收缩的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="feat">
+			 placement支持设置四个方向:top bottom left right
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.33" date="2024-01-16">
 </log>
 

@@ -1,6 +1,13 @@
-## 1.4.33（2024-01-16）
-fix: 修复图标大小默认值错误的问题
-## 1.4.28（2024-01-12）
+## 1.5.0（2024-01-13）
+- uni-data-select 修复 长文本回显超过容器的bug，超过容器部分显示省略号
+- uni-datetime-picker 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+- uni-datetime-picker 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+- uni-easyinput 去除 移除无用的log输出
+- uni-swipe-action 修复 点击按钮时，按钮会被点击穿透导致自动收缩的 bug(兼容阿里/百度/抖音小程序)
+- uni-swipe-action 修复 点击按钮时，按钮会被点击穿透导致自动收缩的 bug
+- uni-tooltip 新增 placement支持设置四个方向:top bottom left right
+- fix: 修复图标大小默认值错误的问题
+## 1.4.28（2023-04-23）
 - uni-calendar 修复 回到今天时，月份显示不一致问题
 - uni-data-picker 新增 支持 uni-app-x
 - uni-datetime-picker 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
