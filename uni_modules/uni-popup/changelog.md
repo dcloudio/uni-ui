@@ -1,3 +1,5 @@
+## 1.8.5（2024-01-26）
+- 新增 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
 ## 1.8.4（2023-11-15）
 - 新增 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
 ## 1.8.3（2023-04-17）
