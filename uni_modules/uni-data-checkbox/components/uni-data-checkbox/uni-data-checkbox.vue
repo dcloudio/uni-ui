@@ -385,7 +385,7 @@
 				let styles = {}
 				let selectedColor = this.selectedColor?this.selectedColor:'#2979ff'
 				if (this.selectedColor) {
-					if (this.mode !== 'list') {
+					if ((this.mode === 'list' && this.icon === 'left') || this.mode !== 'list') {
 						styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
 					}
 					if (this.mode === 'tag') {
@@ -405,7 +405,7 @@
 					let selectedColor = this.selectedColor?this.selectedColor:'#2979ff'
 					styles['background-color'] = item.selected?selectedColor:'#fff'
 					styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
-					
+
 					if(!item.selected && item.disabled){
 						styles['background-color'] = '#F2F6FC'
 						styles['border-color'] = item.selected?selectedColor:'#DCDFE6'
@@ -757,7 +757,7 @@
 					margin: 0;
 
 					&.is-list-border {
-						border-top: 1px #eee solid;
+						border-top: 1px #eee solid !important;
 					}
 
 					// 禁用
@@ -788,8 +788,10 @@
 							}
 						}
 						.radio__inner {
+							border-color: $uni-primary;
 							.radio__inner-icon {
 								opacity: 1;
+								border-color: $uni-primary;
 							}
 						}
 						.checklist-text {
