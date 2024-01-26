@@ -14,7 +14,7 @@
 			</slot>
 		</view>
 		<view class="uni-dialog-button-group">
-			<view class="uni-dialog-button" @click="closeDialog">
+			<view class="uni-dialog-button" v-if="showClose" @click="closeDialog">
 				<text class="uni-dialog-button-text">{{closeText}}</text>
 			</view>
 			<view class="uni-dialog-button uni-border-left" @click="onOk">
@@ -46,6 +46,7 @@
 	 * @property {String} mode = [base|input] 模式、
 	 * 	@value base 基础对话框
 	 * 	@value input 可输入对话框
+	 * @showClose {Boolean} 是否显示关闭按钮
 	 * @property {String} content 对话框内容
 	 * @property {Boolean} beforeClose 是否拦截取消事件
 	 * @event {Function} confirm 点击确认按钮触发
@@ -60,6 +61,10 @@
 			inputType:{
 				type: String,
 				default: 'text'
+			},
+			showClose:{
+				type: Boolean,
+				default: true
 			},
 			value: {
 				type: [String, Number],

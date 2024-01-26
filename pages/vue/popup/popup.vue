@@ -69,8 +69,7 @@
 		<view>
 			<!-- 提示窗示例 -->
 			<uni-popup ref="alertDialog" type="dialog">
-				<uni-popup-dialog :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="欢迎使用 uni-popup!" @confirm="dialogConfirm"
-					@close="dialogClose"></uni-popup-dialog>
+				<uni-popup-dialog :showClose="showClose" :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="欢迎使用 uni-popup!" @confirm="dialogConfirm" @close="dialogClose"></uni-popup-dialog>
 			</uni-popup>
 		</view>
 
@@ -98,7 +97,8 @@
 				type: 'center',
 				msgType: 'success',
 				messageText: '这是一条成功提示',
-				value: ''
+				value: '',
+				showClose: true,
 			}
 		},
 		onReady() {},

@@ -11,6 +11,7 @@ function chooseImage(opts) {
 		extension
 	} = opts
 	return new Promise((resolve, reject) => {
+		// 微信由于旧接口不再维护，针对微信小程序平台改用chooseMedia接口
 		// #ifdef MP-WEIXIN
 		uni.chooseMedia({
 			count,
