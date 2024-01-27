@@ -248,10 +248,6 @@
 				}
 				return parent;
 			},
-			/** 为了兼容原来的错别字 */
-			chagne(...rest){
-				this.change(...rest)
-			},
 			change(e) {
 				const values = e.detail.value
 
