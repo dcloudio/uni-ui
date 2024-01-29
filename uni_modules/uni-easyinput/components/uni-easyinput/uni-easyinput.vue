@@ -16,6 +16,7 @@
 				:focus="focused"
 				:autoHeight="autoHeight"
 				:cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition"
 				@input="onInput"
 				@blur="_Blur"
 				@focus="_Focus"
@@ -38,6 +39,7 @@
 				:focus="focused"
 				:confirmType="confirmType"
 				:cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition"
 				@focus="_Focus"
 				@blur="_Blur"
 				@input="onInput"
@@ -102,6 +104,7 @@
  * @property {String}	primaryColor	设置主题色（默认#2979ff）
  * @property {Boolean}	trim	是否自动去除两端的空格
  * @property {Boolean}	cursorSpacing	指定光标与键盘的距离，单位 px
+ * @property {Boolean}  ajust-position 当键盘弹起时，是否上推内容，默认值：true
  * @value both	去除两端空格
  * @value left	去除左侧空格
  * @value right	去除右侧空格
@@ -220,6 +223,10 @@ export default {
 			default: 0
 		},
 		passwordIcon: {
+			type: Boolean,
+			default: true
+		},
+		adjustPosition:{
 			type: Boolean,
 			default: true
 		},
