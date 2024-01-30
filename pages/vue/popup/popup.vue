@@ -76,8 +76,8 @@
 		<view>
 			<!-- 输入框示例 -->
 			<uni-popup ref="inputDialog" type="dialog">
-				<uni-popup-dialog ref="inputClose"  mode="input" title="输入内容" value="对话框预置提示内容!"
-					placeholder="请输入内容" @confirm="dialogInputConfirm"></uni-popup-dialog>
+				<uni-popup-dialog ref="inputClose" :maxlength="10" mode="input" title="输入内容" value="对话框预置提示内容!"
+					placeholder="请输入内容，限制10个字" @confirm="dialogInputConfirm"></uni-popup-dialog>
 			</uni-popup>
 		</view>
 
@@ -135,10 +135,9 @@
 				uni.showLoading({
 					title: '3秒后会关闭'
 				})
-
+				console.log(this.value);
 				setTimeout(() => {
 					uni.hideLoading()
-					console.log(val)
 					this.value = val
 					// 关闭窗口后，恢复默认内容
 					this.$refs.inputDialog.close()
