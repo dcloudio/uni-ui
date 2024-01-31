@@ -649,14 +649,6 @@
 				return new Date(year, month, 0).getDate();
 			},
 
-			//兼容 iOS、safari 日期格式
-			fixIosDateFormat(value) {
-				if (typeof value === 'string') {
-					value = value.replace(/-/g, '/')
-				}
-				return value
-			},
-
 			/**
 			 * 生成时间戳
 			 * @param {Object} time

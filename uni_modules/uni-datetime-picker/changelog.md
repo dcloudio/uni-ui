@@ -1,3 +1,5 @@
+## 2.2.30（2024-01-31）
+- 修复 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
 ## 2.2.29（2024-01-20）
 - 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
 ## 2.2.28（2024-01-18）

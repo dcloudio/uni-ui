@@ -38,7 +38,7 @@
 	export default {
 		data() {
 			return {
-				searchValue: '123123'
+				searchValue: '示例输入值，自动聚焦'
 			}
 		},
 		methods: {
@@ -93,7 +93,6 @@
 	}
 
 	.search-result-text {
-		text-align: center;
 		font-size: 14px;
 		color:#666;
 	}
