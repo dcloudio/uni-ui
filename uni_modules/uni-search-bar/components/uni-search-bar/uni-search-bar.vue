@@ -9,7 +9,7 @@
 			</view>
 			<input v-if="show || searchVal" :focus="showSync" :disabled="readonly" :placeholder="placeholderText" :maxlength="maxlength"
 				class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal"
-				@confirm="confirm" @blur="blur" @focus="emitFocus" />
+				@confirm="confirm" @blur="blur" @focus="emitFocus"/>
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='') &&!readonly"
 				class="uni-searchbar__box-icon-clear" @click="clear">
@@ -246,7 +246,7 @@
 		overflow: hidden;
 		position: relative;
 		flex: 1;
-		justify-content: center;
+		justify-content: left;
 		flex-direction: row;
 		align-items: center;
 		height: $uni-searchbar-height;
@@ -269,6 +269,8 @@
 		flex: 1;
 		font-size: 14px;
 		color: #333;
+		margin-left: 5px;
+		margin-top: 1px;
 	}
 
 	.uni-searchbar__box-icon-clear {
@@ -284,6 +286,7 @@
 		font-size: 14px;
 		color: #B3B3B3;
 		margin-left: 5px;
+		text-align: left;
 	}
 
 	.uni-searchbar__cancel {
