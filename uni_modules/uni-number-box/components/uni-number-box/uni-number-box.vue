@@ -206,7 +206,7 @@
 	.uni-numbox--text {
 		// fix nvue
 		line-height: 20px;
-
+		margin-bottom: 2px;
 		font-size: 20px;
 		font-weight: 300;
 		color: $color;
