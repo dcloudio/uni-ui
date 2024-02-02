@@ -41,6 +41,7 @@
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=329
 	 * @property {String} value input 模式下的默认值
 	 * @property {String} placeholder input 模式下输入提示
+	 * @property {Boolean} focus input模式下是否自动聚焦，默认为true
 	 * @property {String} type = [success|warning|info|error] 主题样式
 	 *  @value success 成功
 	 * 	@value warning 提示
@@ -109,12 +110,15 @@
 			maxlength: {
 				type: Number,
 				default: -1,
+			},
+			focus:{
+				type: Boolean,
+				default: true,
 			}
 		},
 		data() {
 			return {
 				dialogType: 'error',
-				focus: false,
 				val: ""
 			}
 		},
@@ -159,9 +163,6 @@
 			} else {
 				this.dialogType = this.type
 			}
-		},
-		mounted() {
-			this.focus = true
 		},
 		methods: {
 			/**
