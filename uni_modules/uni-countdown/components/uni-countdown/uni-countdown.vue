@@ -2,12 +2,12 @@
 	<view class="uni-countdown">
 		<text v-if="showDay" :style="[timeStyle]" class="uni-countdown__number">{{ d }}</text>
 		<text v-if="showDay" :style="[splitorStyle]" class="uni-countdown__splitor">{{dayText}}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ h }}</text>
-		<text :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : hourText }}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ i }}</text>
-		<text :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : minuteText }}</text>
-		<text :style="[timeStyle]" class="uni-countdown__number">{{ s }}</text>
-		<text v-if="!showColon" :style="[splitorStyle]" class="uni-countdown__splitor">{{secondText}}</text>
+		<text v-if="mergeShowTime.hour" :style="[timeStyle]" class="uni-countdown__number">{{ h }}</text>
+		<text v-if="mergeShowTime.hour" :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : hourText }}</text>
+		<text v-if="mergeShowTime.minute" :style="[timeStyle]" class="uni-countdown__number">{{ i }}</text>
+		<text v-if="mergeShowTime.minute" :style="[splitorStyle]" class="uni-countdown__splitor">{{ showColon ? ':' : minuteText }}</text>
+		<text v-if="mergeShowTime.second" :style="[timeStyle]" class="uni-countdown__number">{{ s }}</text>
+		<text v-if="!showColon&&mergeShowTime.second" :style="[splitorStyle]" class="uni-countdown__splitor">{{secondText}}</text>
 	</view>
 </template>
 <script>
@@ -43,6 +43,12 @@
 				type: Boolean,
 				default: true
 			},
+      showTime:{
+        type: Object,
+				default () {
+					return {}
+				}
+      },
 			showColon: {
 				type: Boolean,
 				default: true
@@ -101,6 +107,14 @@
 			}
 		},
 		computed: {
+      mergeShowTime() {
+				return {
+					hour: true,
+					minute: true,
+					second: true,
+					...this.showTime
+				}
+			},
 			dayText() {
 				return t("uni-countdown.day")
 			},
