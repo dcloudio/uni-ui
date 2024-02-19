@@ -425,7 +425,7 @@ export default {
 		 */
 		onBlur() {
 			this.focused = false;
-			this.$emit('focus', null);
+			this.$emit('blur', null);
 		},
 		_Blur(event) {
 			let value = event.detail.value;

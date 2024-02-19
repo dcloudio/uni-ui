@@ -1,13 +1,16 @@
+## 1.5.1（2024-02-19）
+- uni-data-checkbox 修复 修复错别字chagne为change
+- uni-datetime-picker 修复 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
+- uni-easyinput 修复 onBlur的emit传值错误
+- uni-easyinput 补充 adjust-position文档属性补充
+- uni-easyinput 补充 adjust-position属性传递值：（Boolean）当键盘弹起时，是否自动上推页面
+- uni-number-box 修复 加减号垂直位置偏移样式问题
+- uni-popup 新增 uni-popup-dialog 新增属性focus：input模式下，是否自动自动聚焦
+- uni-popup 新增 uni-popup-dialog 新增属性maxLength:限制输入框字数
+- uni-popup 新增 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
+- uni-search-bar 修复 uni-search-bar居中问题，现在默认居左，并修复样式偏移问题
 ## 1.5.0（2024-01-13）
-- uni-data-select 修复 长文本回显超过容器的bug，超过容器部分显示省略号
-- uni-datetime-picker 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
-- uni-datetime-picker 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
-- uni-easyinput 去除 移除无用的log输出
-- uni-swipe-action 修复 点击按钮时，按钮会被点击穿透导致自动收缩的 bug(兼容阿里/百度/抖音小程序)
-- uni-swipe-action 修复 点击按钮时，按钮会被点击穿透导致自动收缩的 bug
-- uni-tooltip 新增 placement支持设置四个方向:top bottom left right
-- fix: 修复图标大小默认值错误的问题
-## 1.4.28（2023-04-23）
+- 修复 npm包结构目录错误的问题
 - uni-calendar 修复 回到今天时，月份显示不一致问题
 - uni-data-picker 新增 支持 uni-app-x
 - uni-datetime-picker 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
@@ -18,6 +21,7 @@
 - uni-file-picker 新增 微信小程序不再调用chooseImage,而是调用chooseMedia
 - uni-file-picker 新增 上传文件至云存储携带本地文件名称
 - uni-forms 优化 labelWidth 描述错误
+fix: 修复图标大小默认值错误的问题
 - uni-icons 修复 项目未使用 ts 情况下，打包报错的bug
 - uni-icons 修复 size 属性为 string 时，不加单位导致尺寸异常的bug
 - uni-icons 优化 兼容老版本icon类型，如 top ，bottom 等
@@ -30,7 +34,7 @@
 更新示例工程
 - uni-popup 新增 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
 - uni-table 修复 uni-tr只有一列时minWidth计算错误，列变化实时计算更新
-## 1.4.27（2023-04-23）
+## 1.4.27（2023-04-21）
 - uni-calendar 修复 某些情况 monthSwitch 未触发的Bug
 - uni-calendar 修复 某些情况切换月份错误的Bug
 - uni-data-picker 修复 更改 modelValue 报错的 bug

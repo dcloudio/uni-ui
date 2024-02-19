@@ -7,6 +7,51 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.1" date="2024-02-19">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 修复错别字chagne为change
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 onBlur的emit传值错误
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 补充 adjust-position文档属性补充
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 补充 adjust-position属性传递值：（Boolean）当键盘弹起时，是否自动上推页面
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 加减号垂直位置偏移样式问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性focus：input模式下，是否自动自动聚焦
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性maxLength:限制输入框字数
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-search-bar居中问题，现在默认居左，并修复样式偏移问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.1" date="2024-01-25">
 	<log-item title="uni-datetime-picker 组件更新">
 		<log-item-text tag-type="feat">
