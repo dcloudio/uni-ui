@@ -271,6 +271,7 @@
 		color: #333;
 		margin-left: 5px;
 		margin-top: 1px;
+		background-color: inherit;
 	}
 
 	.uni-searchbar__box-icon-clear {
