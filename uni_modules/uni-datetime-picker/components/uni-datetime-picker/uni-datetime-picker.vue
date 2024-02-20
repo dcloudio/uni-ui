@@ -498,7 +498,7 @@
 								this.$refs.right.changeMonth('pre')
 							}
 						} else {
-							this.$refs.right.changeMonth('next')
+							// this.$refs.right.changeMonth('next')
 							if (this.isPhone) {
 								this.$refs.right.cale.lastHover = false;
 							}
