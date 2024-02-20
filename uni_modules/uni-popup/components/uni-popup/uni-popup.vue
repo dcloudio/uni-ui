@@ -359,7 +359,13 @@
 			 */
 			center(type) {
 				this.popupstyle = 'center'
-				this.ani = ['zoom-out', 'fade']
+				//微信小程序下，组合动画会出现文字向上闪动问题，再此做特殊处理
+				// #ifdef MP-WEIXIN
+					this.ani = ['fade']
+				// #endif
+				// #ifndef MP-WEIXIN
+					this.ani = ['zoom-out', 'fade']
+				// #endif
 				this.transClass = {
 					position: 'fixed',
 					/* #ifndef APP-NVUE */
