@@ -21,7 +21,7 @@
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
 				</view>
 
-				<view v-if="!insert" class="dialog-close" @click="close">
+				<view v-if="!insert" class="dialog-close" @click="maskClick">
 					<view class="dialog-close-plus" data-id="close"></view>
 					<view class="dialog-close-plus dialog-close-rotate" data-id="close"></view>
 				</view>

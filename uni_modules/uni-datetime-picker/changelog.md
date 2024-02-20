@@ -1,3 +1,5 @@
+## 2.2.32（2024-02-20）
+- 修复 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
 ## 2.2.31（2024-02-20）
 - 修复 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
 ## 2.2.30（2024-01-31）
