@@ -2,6 +2,8 @@
 	<view class="uni-easyinput" :class="{ 'uni-easyinput-error': msg }" :style="boxStyle">
 		<view class="uni-easyinput__content" :class="inputContentClass" :style="inputContentStyle">
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc" @click="onClickIcon('prefix')" size="22"></uni-icons>
+			<slot name="left">
+			</slot>
 			<textarea
 				v-if="type === 'textarea'"
 				class="uni-easyinput__content-textarea"
@@ -46,6 +48,7 @@
 				@confirm="onConfirm"
         @keyboardheightchange="onkeyboardheightchange"
 			/>
+
 			<template v-if="type === 'password' && passwordIcon">
 				<!-- 开启密码时显示小眼睛 -->
 				<uni-icons
