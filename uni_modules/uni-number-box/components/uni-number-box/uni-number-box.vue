@@ -1,12 +1,14 @@
 <template>
 	<view class="uni-numbox">
 		<view @click="_calcValue('minus')" class="uni-numbox__minus uni-numbox-btns" :style="{background}">
-			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }" :style="{color}">-</text>
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }"
+				:style="{color}">-</text>
 		</view>
-		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value" :type="step<1?'digit':'number'"
-			v-model="inputValue" :style="{background, color}" />
+		<input :disabled="disabled" @focus="_onFocus" @blur="_onBlur" class="uni-numbox__value"
+			:type="step<1?'digit':'number'" v-model="inputValue" :style="{background, color, width:widthWithPx}" />
 		<view @click="_calcValue('plus')" class="uni-numbox__plus uni-numbox-btns" :style="{background}">
-			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }" :style="{color}">+</text>
+			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue >= max || disabled }"
+				:style="{color}">+</text>
 		</view>
 	</view>
 </template>
@@ -21,6 +23,7 @@
 	 * @property {Number} step 每次点击改变的间隔大小
 	 * @property {String} background 背景色
 	 * @property {String} color 字体颜色（前景色）
+	 * @property {Number} width 输入框宽度(单位:px)
 	 * @property {Boolean} disabled = [true|false] 是否为禁用状态
 	 * @event {Function} change 输入框值改变时触发的事件，参数为输入框当前的 value
 	 * @event {Function} focus 输入框聚焦时触发的事件，参数为 event 对象
@@ -62,6 +65,10 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			width: {
+				type: Number,
+				default: 40,
 			}
 		},
 		data() {
@@ -75,6 +82,11 @@
 			},
 			modelValue(val) {
 				this.inputValue = +val;
+			}
+		},
+		computed: {
+			widthWithPx() {
+				return this.width + 'px';
 			}
 		},
 		created() {
@@ -154,7 +166,7 @@
 		}
 	};
 </script>
-<style lang="scss" >
+<style lang="scss">
 	$box-height: 26px;
 	$bg: #f5f5f5;
 	$br: 2px;

@@ -4,7 +4,7 @@
 			<text class="uni-h6">数字输入框组件多用于购物车加减商品等场景</text>
 		</uni-card>
 		<uni-section title="基本用法" type="line" padding>
-			<uni-number-box @change="changeValue" />
+			<uni-number-box :width="90" @change="changeValue" />
 		</uni-section>
 		<uni-section :title="'使用v-model : '+ vModelValue" subTitle="使用 v-model 显示默认值" type="line" padding>
 			<uni-number-box v-model="vModelValue" @blur="blur" @focus="focus" @change="changeValue" />
