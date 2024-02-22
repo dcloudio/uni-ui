@@ -1,15 +1,22 @@
 <template>
 	<view class="uni-searchbar">
-		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box"
-			@click="searchClick">
+		<view :style="{borderRadius:radius+'px',backgroundColor: bgColor}" class="uni-searchbar__box" @click="searchClick">
 			<view class="uni-searchbar__box-icon-search">
 				<slot name="searchIcon">
 					<uni-icons color="#c0c4cc" size="18" type="search" />
 				</slot>
 			</view>
-			<input v-if="show || searchVal" :focus="showSync" :disabled="readonly" :placeholder="placeholderText" :maxlength="maxlength"
-				class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal"
-				@confirm="confirm" @blur="blur" @focus="emitFocus"/>
+			<!-- #ifdef MP-ALIPAY -->
+			<input :enableNative="enableNative" v-if="show || searchVal" :focus="showSync" :disabled="readonly"
+				:placeholder="placeholderText" :maxlength="maxlength" class="uni-searchbar__box-search-input"
+				confirm-type="search" type="text" v-model="searchVal" @confirm="confirm" @blur="blur" @focus="emitFocus" />
+			<!-- #endif -->
+			<!-- #ifndef MP-ALIPAY -->
+			<input v-if="show || searchVal" :focus="showSync" :disabled="readonly" :placeholder="placeholderText"
+				:maxlength="maxlength" class="uni-searchbar__box-search-input" confirm-type="search" type="text"
+				v-model="searchVal" @confirm="confirm" @blur="blur" @focus="emitFocus" />
+			<!-- #endif -->
+
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='') &&!readonly"
 				class="uni-searchbar__box-icon-clear" @click="clear">
@@ -105,7 +112,13 @@
 			readonly: {
 				type: Boolean,
 				default: false
+			},
+			// #ifdef MP-ALIPAY
+			enableNative: {
+				tyep: Boolean,
+				default: false
 			}
+			// #endif
 		},
 		data() {
 			return {
@@ -149,7 +162,7 @@
 				immediate: true,
 				handler(newVal) {
 					if (newVal) {
-						if(this.readonly) return
+						if (this.readonly) return
 						this.show = true;
 						this.$nextTick(() => {
 							this.showSync = true
@@ -166,7 +179,7 @@
 		},
 		methods: {
 			searchClick() {
-				if(this.readonly) return
+				if (this.readonly) return
 				if (this.show) {
 					return
 				}
@@ -180,7 +193,7 @@
 				this.$emit("clear", '');
 			},
 			cancel() {
-				if(this.readonly) return
+				if (this.readonly) return
 				this.$emit("cancel", {
 					value: this.searchVal
 				});
