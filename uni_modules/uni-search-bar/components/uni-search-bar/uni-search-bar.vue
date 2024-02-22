@@ -176,10 +176,8 @@
 				})
 			},
 			clear() {
-				this.$emit("clear", {
-					value: this.searchVal
-				})
 				this.searchVal = ""
+				this.$emit("clear", '');
 			},
 			cancel() {
 				if(this.readonly) return
