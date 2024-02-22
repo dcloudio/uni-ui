@@ -1,3 +1,13 @@
+## 1.5.2（2024-02-22）
+- uni-countdown 新增 支持控制小时，分钟的显隐：showHour showMinute
+- uni-datetime-picker 修复 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
+- uni-datetime-picker 修复 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
+- uni-easyinput 新增 左侧插槽：left
+- uni-file-picker 新增 微信小程序选择视频时改用chooseMedia,并返回视频缩略图
+- uni-number-box 修复 step步长小于1时，键盘类型为number的bug
+- uni-popup 修复 uni-popup 在微信小程序下出现文字向上闪动的bug
+- uni-search-bar 新增 设置输入框字体颜色:textColor
+- uni-search-bar 修复 uni-search-bar在支付宝小程序下样式兼容问题
 ## 1.5.1（2024-02-19）
 - uni-data-checkbox 修复 修复错别字chagne为change
 - uni-datetime-picker 修复 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)

@@ -7,6 +7,50 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.2" date="2024-02-22">
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 支持控制小时，分钟的显隐：showHour showMinute
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 左侧插槽：left
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 微信小程序选择视频时改用chooseMedia,并返回视频缩略图
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 step步长小于1时，键盘类型为number的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup 在微信小程序下出现文字向上闪动的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 设置输入框字体颜色:textColor
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-search-bar在支付宝小程序下样式兼容问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.1" date="2024-02-19">
 	<log-item title="uni-data-checkbox 组件更新">
 		<log-item-text tag-type="fix">
