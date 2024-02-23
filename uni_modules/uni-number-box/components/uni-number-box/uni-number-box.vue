@@ -225,7 +225,7 @@
 	}
 
 	.uni-numbox .uni-numbox--disabled {
-		color: #c0c0c0 !important;
+		color: #c0c0c0;
 		/* #ifdef H5 */
 		cursor: not-allowed;
 		/* #endif */

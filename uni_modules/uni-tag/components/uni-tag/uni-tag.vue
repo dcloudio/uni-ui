@@ -206,14 +206,14 @@
 
 		// other attr
 		&--circle {
-			border-radius: 15px !important;
+			border-radius: 15px;
 		}
 
 		&--mark {
-			border-top-left-radius: 0 !important;
-			border-bottom-left-radius: 0 !important;
-			border-top-right-radius: 15px !important;
-			border-bottom-right-radius: 15px !important;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			border-top-right-radius: 15px;
+			border-bottom-right-radius: 15px;
 		}
 
 		&--disabled {
