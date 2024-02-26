@@ -94,6 +94,10 @@
 						url: 'list'
 					},
 					{
+						name: 'table 表格',
+						url: 'table'
+					},
+					{
 						name: 'Title 章节标题',
 						url: 'title'
 					},
