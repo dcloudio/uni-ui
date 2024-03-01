@@ -126,7 +126,7 @@
 		color: #fff;
 		border-radius: 3px;
 		background-color: $uni-info;
-		border-width: 1rpx;
+		border-width: 1px;
 		border-style: solid;
 		border-color: $uni-info;
 		/* #ifdef H5 */
