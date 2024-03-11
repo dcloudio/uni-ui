@@ -220,6 +220,12 @@
 		unmounted() {
 			this.setH5Visible()
 		},
+		activated() {
+   	  this.setH5Visible(!this.showPopup);
+    },
+    deactivated() {
+      this.setH5Visible(true);
+    },
 		// #endif
 		created() {
 			// this.mkclick =  this.isMaskClick || this.maskClick
@@ -240,10 +246,10 @@
 			this.maskClass.backgroundColor = this.maskBackgroundColor
 		},
 		methods: {
-			setH5Visible() {
+			setH5Visible(visible = true) {
 				// #ifdef H5
 				// fix by mehaotian 处理 h5 滚动穿透的问题
-				document.getElementsByTagName('body')[0].style.overflow = 'visible'
+				document.getElementsByTagName('body')[0].style.overflow =  visible ? "visible" : "hidden";
 				// #endif
 			},
 			/**
