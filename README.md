@@ -1,5 +1,5 @@
 ### [查看文档](https://uniapp.dcloud.io/component/uniui/uni-transition)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 [uni.im](https://im.dcloud.net.cn/#/?joinGroup=658160eb3e585b555acebfd7)
+#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 [uni.im](https://im.dcloud.net.cn/#/?joinGroup=65aa42e5465fe748c837da2b)
 
 ## uni-ui产品特点
 
@@ -242,4 +242,4 @@ export default {
 
 
 ### 贡献代码
-在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
+在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 或到[ask社区](https://ask.dcloud.net.cn/)反馈给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
