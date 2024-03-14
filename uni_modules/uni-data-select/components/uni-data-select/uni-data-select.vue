@@ -125,14 +125,6 @@
 					common + placeholder :
 					common
 			},
-			valueCom(){
-				// #ifdef VUE3
-				return this.modelValue;
-				// #endif
-				// #ifndef VUE3
-				return this.value;
-				// #endif
-			},
 			textShow(){
 				// 长文本显示
 				let text = this.current;
@@ -152,14 +144,22 @@
 					}
 				}
 			},
-			valueCom(val, old) {
-				this.initDefVal()
+			value (val) {
+				this.initDefVal(val)
+			},
+			modelValue (val) {
+				this.initDefVal(val)
 			},
 			mixinDatacomResData: {
 				immediate: true,
 				handler(val) {
 					if (val.length) {
-						this.initDefVal()
+						// #ifdef VUE3
+						this.initDefVal(this.modelValue !== undefined ? this.modelValue : this.value)
+						// #endif
+						// #ifndef VUE3
+						this.initDefVal(this.value)
+						// #endif
 					}
 				}
 			},
@@ -185,10 +185,10 @@
 					this.debounceGet();
 				}
 			},
-			initDefVal() {
+			initDefVal(val) {
 				let defValue = ''
-				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
-					defValue = this.valueCom
+				if ((val || val === 0) && !this.isDisabled(val)) {
+					defValue = val
 				} else {
 					let strogeValue
 					if (this.collection) {
@@ -203,9 +203,9 @@
 						}
 						defValue = defItem
 					}
-          if (defValue || defValue === 0) {
-					  this.emit(defValue)
-          }
+					if (defValue || defValue === 0) {
+						this.emit(defValue)
+					}
 				}
 				const def = this.mixinDatacomResData.find(item => item.value === defValue)
 				this.current = def ? this.formatItemName(def) : ''
