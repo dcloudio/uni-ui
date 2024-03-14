@@ -41,7 +41,7 @@
 					:type="showPassword ? 'eye-slash-filled' : 'eye-filled'" :size="22"
 					:color="focusShow ? primaryColor : '#c0c4cc'" @click="onEyes"></uni-icons>
 			</template>
-			<template v-else-if="suffixIcon">
+			<template v-if="suffixIcon">
 				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" color="#c0c4cc"
 					@click="onClickIcon('suffix')" size="22"></uni-icons>
 			</template>

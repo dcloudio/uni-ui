@@ -50,7 +50,7 @@
 		</uni-section>
 
 		<uni-section title="密码框" subTitle="指定属性 type=password 使用密码框,右侧会显示眼睛图标" type="line" padding>
-			<uni-easyinput type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput :clearable="false" type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
 		</uni-section>
 
 		<uni-section title="多行文本" subTitle="指定属性 type=textarea 使用多行文本框" type="line" padding>
