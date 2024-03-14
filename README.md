@@ -1,5 +1,5 @@
 ### [查看文档](https://uniapp.dcloud.io/component/uniui/uni-transition)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 [uni.im](https://im.dcloud.net.cn/#/?joinGroup=65aa42e5465fe748c837da2b)
+#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入uni-im官方交流群 [uni-im](https://im.dcloud.net.cn/#/?joinGroup=65aa42e5465fe748c837da2b)
 
 ## uni-ui产品特点
 
