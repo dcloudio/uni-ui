@@ -177,10 +177,10 @@
 					// #endif
 				],
 				functionals: [
-					// {
-					// 	name: 'Calendar 日历',
-					// 	url: 'calendar'
-					// },
+					{
+						name: 'Calendar 日历',
+						url: 'calendar'
+					},
 					{
 						name: 'Collapse 折叠面板',
 						url: 'collapse'
