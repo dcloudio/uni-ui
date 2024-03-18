@@ -6,3 +6,4 @@ dist/
 .hbuilderx/
 .project
 .DS_Store
+.vscode

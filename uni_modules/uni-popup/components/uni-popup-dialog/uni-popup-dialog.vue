@@ -61,7 +61,7 @@
 	export default {
 		name: "uniPopupDialog",
 		mixins: [popup],
-		emits: ['confirm', 'close'],
+		emits: ['confirm', 'close', 'update:modelValue', 'input'],
 		props: {
 			inputType: {
 				type: String,
@@ -71,10 +71,20 @@
 				type: Boolean,
 				default: true
 			},
+			// #ifdef VUE2
 			value: {
 				type: [String, Number],
 				default: ''
 			},
+			// #endif
+			// #ifdef VUE3
+			modelValue: {
+				type: [Number, String],
+				default: ''
+			},
+			// #endif
+
+
 			placeholder: {
 				type: [String, Number],
 				default: ''
@@ -111,7 +121,7 @@
 				type: Number,
 				default: -1,
 			},
-			focus:{
+			focus: {
 				type: Boolean,
 				default: true,
 			}
@@ -151,6 +161,16 @@
 				} else {
 					this.val = val
 				}
+			},
+			val(val) {
+				// #ifdef VUE2
+				// TODO 兼容 vue2
+				this.$emit('input', val);
+				// #endif
+				// #ifdef VUE3
+				// TODO　兼容　vue3
+				this.$emit('update:modelValue', val);
+				// #endif
 			}
 		},
 		created() {
@@ -174,7 +194,6 @@
 				} else {
 					this.$emit('confirm')
 				}
-				this.$emit("input",this.val);
 				if (this.beforeClose) return
 				this.popup.close()
 			},

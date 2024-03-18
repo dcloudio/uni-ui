@@ -6,16 +6,16 @@
 				<view class="uni-select__input-box" @click="toggleSelector">
 					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view v-if="current && clear && !disabled" @click.stop="clearVal" >
-						<uni-icons type="clear" color="#c0c4cc" size="24"/>
+					<view v-if="current && clear && !disabled" @click.stop="clearVal">
+						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
 					<view v-else>
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
 				</view>
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
-				<view class="uni-select__selector" v-if="showSelector">
-					<view class="uni-popper__arrow"></view>
+				<view class="uni-select__selector" :style="getOffsetByPlacement()" v-if="showSelector">
+					<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
 					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
@@ -43,6 +43,9 @@
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
+	 * @property {String} placement 弹出位置
+	 * 	@value top   		顶部弹出
+	 * 	@value bottom		底部弹出（default)
 	 * @event {Function} change  选中发生变化触发
 	 */
 
@@ -93,6 +96,10 @@
 				type: String,
 				default: ''
 			},
+			placement: {
+				type: String,
+				default: 'bottom'
+			}
 		},
 		data() {
 			return {
@@ -125,7 +132,7 @@
 					common + placeholder :
 					common
 			},
-			valueCom(){
+			valueCom() {
 				// #ifdef VUE3
 				return this.modelValue;
 				// #endif
@@ -133,7 +140,7 @@
 				return this.value;
 				// #endif
 			},
-			textShow(){
+			textShow() {
 				// 长文本显示
 				let text = this.current;
 				if (text.length > 10) {
@@ -166,7 +173,7 @@
 
 		},
 		methods: {
-			debounce(fn, time = 100){
+			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {
 					if (timer) clearTimeout(timer)
@@ -176,11 +183,11 @@
 				}
 			},
 			// 执行数据库查询
-			query(){
+			query() {
 				this.mixinDatacomEasyGet();
 			},
 			// 监听查询条件变更事件
-			onMixinDatacomPropsChange(){
+			onMixinDatacomPropsChange() {
 				if (this.collection) {
 					this.debounceGet();
 				}
@@ -203,9 +210,9 @@
 						}
 						defValue = defItem
 					}
-          if (defValue || defValue === 0) {
-					  this.emit(defValue)
-          }
+					if (defValue || defValue === 0) {
+						this.emit(defValue)
+					}
 				}
 				const def = this.mixinDatacomResData.find(item => item.value === defValue)
 				this.current = def ? this.formatItemName(def) : ''
@@ -268,7 +275,7 @@
 					let str = "";
 					str = this.format;
 					for (let key in item) {
-						str = str.replace(new RegExp(`{${key}}`,"g"),item[key]);
+						str = str.replace(new RegExp(`{${key}}`, "g"), item[key]);
 					}
 					return str;
 				} else {
@@ -282,30 +289,43 @@
 				}
 			},
 			// 获取当前加载的数据
-			getLoadData(){
+			getLoadData() {
 				return this.mixinDatacomResData;
 			},
 			// 获取当前缓存key
-			getCurrentCacheKey(){
+			getCurrentCacheKey() {
 				return this.collection;
 			},
 			// 获取缓存
-			getCache(name=this.getCurrentCacheKey()){
+			getCache(name = this.getCurrentCacheKey()) {
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				return cacheData[name];
 			},
 			// 设置缓存
-			setCache(value, name=this.getCurrentCacheKey()){
+			setCache(value, name = this.getCurrentCacheKey()) {
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				cacheData[name] = value;
 				uni.setStorageSync(this.cacheKey, cacheData);
 			},
 			// 删除缓存
-			removeCache(name=this.getCurrentCacheKey()){
+			removeCache(name = this.getCurrentCacheKey()) {
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				delete cacheData[name];
 				uni.setStorageSync(this.cacheKey, cacheData);
 			},
+			getOffsetByPlacement() {
+				let style = {};
+				let offset = 'calc(100% + 12px)';
+				switch (this.placement) {
+					case 'top':
+					style.bottom= offset;
+						break;
+					case 'bottom':
+					style.top= offset;
+						break;
+				}
+				return style;
+			}
 		}
 	}
 </script>
@@ -315,7 +335,6 @@
 	$uni-main-color: #333 !default;
 	$uni-secondary-color: #909399 !default;
 	$uni-border-3: #e5e5e5;
-
 
 	/* #ifndef APP-NVUE */
 	@media screen and (max-width: 500px) {
@@ -417,7 +436,6 @@
 		box-sizing: border-box;
 		/* #endif */
 		position: absolute;
-		top: calc(100% + 12px);
 		left: 0;
 		width: 100%;
 		background-color: #FFFFFF;
@@ -441,6 +459,7 @@
 			max-height: 600px;
 		}
 	}
+
 	/* #endif */
 
 	.uni-select__selector-empty,
@@ -473,8 +492,10 @@
 	}
 
 	/* picker 弹出层通用的指示小三角 */
-	.uni-popper__arrow,
-	.uni-popper__arrow::after {
+	.uni-popper__arrow_bottom,
+	.uni-popper__arrow_bottom::after,
+	.uni-popper__arrow_top,
+	.uni-popper__arrow_top::after, {
 		position: absolute;
 		display: block;
 		width: 0;
@@ -484,7 +505,7 @@
 		border-width: 6px;
 	}
 
-	.uni-popper__arrow {
+	.uni-popper__arrow_bottom {
 		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
 		top: -6px;
 		left: 10%;
@@ -493,13 +514,31 @@
 		border-bottom-color: #EBEEF5;
 	}
 
-	.uni-popper__arrow::after {
+	.uni-popper__arrow_bottom::after {
 		content: " ";
 		top: 1px;
 		margin-left: -6px;
 		border-top-width: 0;
 		border-bottom-color: #fff;
 	}
+
+	.uni-popper__arrow_top {
+		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
+		bottom: -6px;
+		left: 10%;
+		margin-right: 3px;
+		border-bottom-width: 0;
+		border-top-color: #EBEEF5;
+	}
+
+	.uni-popper__arrow_top::after {
+		content: " ";
+		bottom: 1px;
+		margin-left: -6px;
+		border-bottom-width: 0;
+		border-top-color: #fff;
+	}
+
 
 	.uni-select__input-text {
 		// width: 280px;

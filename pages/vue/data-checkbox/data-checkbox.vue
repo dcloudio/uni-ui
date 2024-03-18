@@ -156,4 +156,391 @@
 	.uni-pb-5 {
 		padding-bottom: 10px;
 	}
+
+	$uni-primary: #2979ff !default;
+	$border-color: #DCDFE6;
+	$disable: 0.4;
+
+	@mixin flex {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+	}
+
+	.uni-data-loading {
+		@include flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 36px;
+		padding-left: 10px;
+		color: #999;
+	}
+
+	.uni-data-checklist {
+		position: relative;
+		z-index: 0;
+		flex: 1;
+
+		// 多选样式
+		.checklist-group {
+			@include flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			&.is-list {
+				flex-direction: column;
+			}
+
+			.checklist-box {
+				@include flex;
+				flex-direction: row;
+				align-items: center;
+				position: relative;
+				margin: 5px 0;
+				margin-right: 25px;
+
+				.hidden {
+					position: absolute;
+					opacity: 0;
+				}
+
+				// 文字样式
+				.checklist-content {
+					@include flex;
+					flex: 1;
+					flex-direction: row;
+					align-items: center;
+					justify-content: space-between;
+
+					.checklist-text {
+						font-size: 14px;
+						color: #666;
+						margin-left: 5px;
+						line-height: 14px;
+					}
+
+					.checkobx__list {
+						border-right-width: 1px;
+						border-right-color: #007aff;
+						border-right-style: solid;
+						border-bottom-width: 1px;
+						border-bottom-color: #007aff;
+						border-bottom-style: solid;
+						height: 12px;
+						width: 6px;
+						left: -5px;
+						transform-origin: center;
+						transform: rotate(45deg);
+						opacity: 0;
+					}
+				}
+
+				// 多选样式
+				.checkbox__inner {
+					/* #ifndef APP-NVUE */
+					flex-shrink: 0;
+					box-sizing: border-box;
+					/* #endif */
+					position: relative;
+					width: 16px;
+					height: 16px;
+					border: 1px solid $border-color;
+					border-radius: 4px;
+					background-color: #fff;
+					z-index: 1;
+
+					.checkbox__inner-icon {
+						position: absolute;
+						/* #ifdef APP-NVUE */
+						top: 2px;
+						/* #endif */
+						/* #ifndef APP-NVUE */
+						top: 1px;
+						/* #endif */
+						left: 5px;
+						height: 8px;
+						width: 4px;
+						border-right-width: 1px;
+						border-right-color: #fff;
+						border-right-style: solid;
+						border-bottom-width: 1px;
+						border-bottom-color: #fff;
+						border-bottom-style: solid;
+						opacity: 0;
+						transform-origin: center;
+						transform: rotate(40deg);
+					}
+				}
+
+				// 单选样式
+				.radio__inner {
+					@include flex;
+					/* #ifndef APP-NVUE */
+					flex-shrink: 0;
+					box-sizing: border-box;
+					/* #endif */
+					justify-content: center;
+					align-items: center;
+					position: relative;
+					width: 16px;
+					height: 16px;
+					border: 1px solid $border-color;
+					border-radius: 16px;
+					background-color: #fff;
+					z-index: 1;
+
+					.radio__inner-icon {
+						width: 8px;
+						height: 8px;
+						border-radius: 10px;
+						opacity: 0;
+					}
+				}
+
+				// 默认样式
+				&.is--default {
+
+					// 禁用
+					&.is-disable {
+						/* #ifdef H5 */
+						cursor: not-allowed;
+
+						/* #endif */
+						.checkbox__inner {
+							background-color: #F2F6FC;
+							border-color: $border-color;
+							/* #ifdef H5 */
+							cursor: not-allowed;
+							/* #endif */
+						}
+
+						.radio__inner {
+							background-color: #F2F6FC;
+							border-color: $border-color;
+						}
+
+						.checklist-text {
+							color: #999;
+						}
+					}
+
+					// 选中
+					&.is-checked {
+						.checkbox__inner {
+							border-color: $uni-primary;
+							background-color: $uni-primary;
+
+							.checkbox__inner-icon {
+								opacity: 1;
+								transform: rotate(45deg);
+							}
+						}
+
+						.radio__inner {
+							border-color: $uni-primary;
+
+							.radio__inner-icon {
+								opacity: 1;
+								background-color: $uni-primary;
+							}
+						}
+
+						.checklist-text {
+							color: $uni-primary;
+						}
+
+						// 选中禁用
+						&.is-disable {
+							.checkbox__inner {
+								opacity: $disable;
+							}
+
+							.checklist-text {
+								opacity: $disable;
+							}
+
+							.radio__inner {
+								opacity: $disable;
+							}
+						}
+					}
+				}
+
+				// 按钮样式
+				&.is--button {
+					margin-right: 10px;
+					padding: 5px 10px;
+					border: 1px $border-color solid;
+					border-radius: 3px;
+					transition: border-color 0.2s;
+
+					// 禁用
+					&.is-disable {
+						/* #ifdef H5 */
+						cursor: not-allowed;
+						/* #endif */
+						border: 1px #eee solid;
+						opacity: $disable;
+
+						.checkbox__inner {
+							background-color: #F2F6FC;
+							border-color: $border-color;
+							/* #ifdef H5 */
+							cursor: not-allowed;
+							/* #endif */
+						}
+
+						.radio__inner {
+							background-color: #F2F6FC;
+							border-color: $border-color;
+							/* #ifdef H5 */
+							cursor: not-allowed;
+							/* #endif */
+						}
+
+						.checklist-text {
+							color: #999;
+						}
+					}
+
+					&.is-checked {
+						border-color: $uni-primary;
+
+						.checkbox__inner {
+							border-color: $uni-primary;
+							background-color: $uni-primary;
+
+							.checkbox__inner-icon {
+								opacity: 1;
+								transform: rotate(45deg);
+							}
+						}
+
+						.radio__inner {
+							border-color: $uni-primary;
+
+							.radio__inner-icon {
+								opacity: 1;
+								background-color: $uni-primary;
+							}
+						}
+
+						.checklist-text {
+							color: $uni-primary;
+						}
+
+						// 选中禁用
+						&.is-disable {
+							opacity: $disable;
+						}
+					}
+				}
+
+				// 标签样式
+				&.is--tag {
+					margin-right: 10px;
+					padding: 5px 10px;
+					border: 1px $border-color solid;
+					border-radius: 3px;
+					background-color: #f5f5f5;
+
+					.checklist-text {
+						margin: 0;
+						color: #666;
+					}
+
+					// 禁用
+					&.is-disable {
+						/* #ifdef H5 */
+						cursor: not-allowed;
+						/* #endif */
+						opacity: $disable;
+					}
+
+					&.is-checked {
+						background-color: $uni-primary;
+						border-color: $uni-primary;
+
+						.checklist-text {
+							color: #fff;
+						}
+					}
+				}
+
+				// 列表样式
+				&.is--list {
+					/* #ifndef APP-NVUE */
+					display: flex;
+					/* #endif */
+					padding: 10px 15px;
+					padding-left: 0;
+					margin: 0;
+
+					&.is-list-border {
+						border-top: 1px #eee solid;
+					}
+
+					// 禁用
+					&.is-disable {
+						/* #ifdef H5 */
+						cursor: not-allowed;
+
+						/* #endif */
+						.checkbox__inner {
+							background-color: #F2F6FC;
+							border-color: $border-color;
+							/* #ifdef H5 */
+							cursor: not-allowed;
+							/* #endif */
+						}
+
+						.checklist-text {
+							color: #999;
+						}
+					}
+
+					&.is-checked {
+						.checkbox__inner {
+							border-color: $uni-primary;
+							background-color: $uni-primary;
+
+							.checkbox__inner-icon {
+								opacity: 1;
+								transform: rotate(45deg);
+							}
+						}
+
+						.radio__inner {
+							.radio__inner-icon {
+								opacity: 1;
+							}
+						}
+
+						.checklist-text {
+							color: $uni-primary;
+						}
+
+						.checklist-content {
+							.checkobx__list {
+								opacity: 1;
+								border-color: $uni-primary;
+							}
+						}
+
+						// 选中禁用
+						&.is-disable {
+							.checkbox__inner {
+								opacity: $disable;
+							}
+
+							.checklist-text {
+								opacity: $disable;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 </style>

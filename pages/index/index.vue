@@ -94,6 +94,10 @@
 						url: 'list'
 					},
 					{
+						name: 'table 表格',
+						url: 'table'
+					},
+					{
 						name: 'Title 章节标题',
 						url: 'title'
 					},
@@ -173,10 +177,10 @@
 					// #endif
 				],
 				functionals: [
-					// {
-					// 	name: 'Calendar 日历',
-					// 	url: 'calendar'
-					// },
+					{
+						name: 'Calendar 日历',
+						url: 'calendar'
+					},
 					{
 						name: 'Collapse 折叠面板',
 						url: 'collapse'

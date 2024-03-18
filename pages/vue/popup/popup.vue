@@ -76,7 +76,7 @@
 		<view>
 			<!-- 输入框示例 -->
 			<uni-popup ref="inputDialog" type="dialog">
-				<uni-popup-dialog ref="inputClose" :maxlength="10" mode="input" title="输入内容" value="对话框预置提示内容!"
+				<uni-popup-dialog ref="inputClose" :maxlength="10" mode="input" title="输入内容" v-model="value"
 					placeholder="请输入内容，限制10个字" @confirm="dialogInputConfirm"></uni-popup-dialog>
 			</uni-popup>
 		</view>
