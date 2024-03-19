@@ -232,13 +232,13 @@
 		unmounted() {
 			this.setH5Visible()
 		},
+		// #endif
 		activated() {
    	  this.setH5Visible(!this.showPopup);
     },
     deactivated() {
       this.setH5Visible(true);
     },
-		// #endif
 		created() {
 			// this.mkclick =  this.isMaskClick || this.maskClick
 			if (this.isMaskClick === null && this.maskClick === null) {
