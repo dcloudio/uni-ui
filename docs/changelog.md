@@ -7,6 +7,59 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.3" date="2024-03-22">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 titleBorder类型修正
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 单选模式下选中样式不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在密码输入情况下 清除和小眼睛覆盖bug 在edge浏览器下显示双眼睛bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 补充 删除文件时返回文件下标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="feat">
+			 设置宽度属性width(单位：px)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 数据输入时修正为双向绑定
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 清空按钮emit值错误的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="feat">
+			 inActiveColor属性，可供配置未激活时的颜色
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="perf">
+			 app下边框过窄导致不显示的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出位置修正
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.2" date="2024-02-22">
 	<log-item title="uni-countdown 组件更新">
 		<log-item-text tag-type="feat">

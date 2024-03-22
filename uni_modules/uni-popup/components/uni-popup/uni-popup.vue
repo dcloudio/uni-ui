@@ -39,6 +39,7 @@
 	 * @property {Boolean} isMaskClick = [true|false] 蒙版点击是否关闭弹窗
 	 * @property {String}  backgroundColor 主窗口背景色
 	 * @property {String}  maskBackgroundColor 蒙版颜色
+	 * @property {String}  borderRadius 设置圆角(左上、右上、右下和左下) 示例:"10px 10px 10px 10px"
 	 * @property {Boolean} safeArea		   是否适配底部安全区
 	 * @event {Function} change 打开关闭弹窗触发，e={show: false}
 	 * @event {Function} maskClick 点击遮罩触发

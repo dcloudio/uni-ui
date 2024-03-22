@@ -1,3 +1,14 @@
+## 1.5.3（2024-03-22）
+- uni-collapse 修复 titleBorder类型修正
+- uni-data-checkbox 修复 单选模式下选中样式不生效的bug
+- uni-easyinput 修复 在密码输入情况下 清除和小眼睛覆盖bug 在edge浏览器下显示双眼睛bug
+- uni-file-picker 补充 删除文件时返回文件下标
+- uni-number-box 新增 设置宽度属性width(单位：px)
+- uni-popup 修复 uni-popup-dialog 数据输入时修正为双向绑定
+- uni-search-bar 修复 清空按钮emit值错误的bug
+- uni-segmented-control 新增 inActiveColor属性，可供配置未激活时的颜色
+- uni-tag 优化 app下边框过窄导致不显示的bug
+- uni-tooltip 修复 弹出位置修正
 ## 1.5.2（2024-02-22）
 - uni-countdown 新增 支持控制小时，分钟的显隐：showHour showMinute
 - uni-datetime-picker 修复 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
