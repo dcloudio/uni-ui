@@ -18,7 +18,7 @@
 			<view class="uni-dialog-button" v-if="showClose" @click="closeDialog">
 				<text class="uni-dialog-button-text">{{closeText}}</text>
 			</view>
-			<view class="uni-dialog-button uni-border-left" @click="onOk">
+			<view class="uni-dialog-button" :class="{ 'uni-border-left' : showClose }" @click="onOk">
 				<text class="uni-dialog-button-text uni-button-color">{{okText}}</text>
 			</view>
 		</view>
