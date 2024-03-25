@@ -1,3 +1,5 @@
+## 1.2.1（2024-03-20）
+- 新增 inActiveColor属性，可供配置未激活时的颜色
 ## 1.2.0（2021-11-19）
 - 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
 - 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-segmented-control](https://uniapp.dcloud.io/component/uniui/uni-segmented-control)
