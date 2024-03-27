@@ -121,7 +121,17 @@
 	}
 	export default {
 		name: 'uni-easyinput',
-		emits: ['click', 'iconClick', 'update:modelValue', 'input', 'focus', 'blur', 'confirm', 'clear', 'eyes', 'change',
+		emits: [
+			'click',
+			'iconClick',
+			'update:modelValue',
+			'input',
+			'focus',
+			'blur',
+			'confirm',
+			'clear',
+			'eyes',
+			'change',
 			'keyboardheightchange'
 		],
 		model: {
@@ -129,7 +139,12 @@
 			event: 'update:modelValue'
 		},
 		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifdef MP-TOUTIAO
 			virtualHost: true
+			// #endif
 		},
 		inject: {
 			form: {
@@ -216,7 +231,7 @@
 			},
 			styles: {
 				type: Object,
-				default () {
+				default() {
 					return {
 						color: '#333',
 						backgroundColor: '#fff',
@@ -232,10 +247,9 @@
 			// #ifdef MP-ALIPAY
 			enableNative: {
 				type: Boolean,
-				default: false,
+				default: false
 			}
 			// #endif
-
 		},
 		data() {
 			return {
@@ -277,7 +291,9 @@
 
 			// 处理外层样式的style
 			boxStyle() {
-				return `color:${this.inputBorder && this.msg ? '#e43d33' : this.styles.color};`;
+				return `color:${
+					this.inputBorder && this.msg ? '#e43d33' : this.styles.color
+				};`;
 			},
 			// input 内容的类和样式处理
 			inputContentClass() {
@@ -290,16 +306,24 @@
 				});
 			},
 			inputContentStyle() {
-				const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor;
-				const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor;
+				const focusColor = this.focusShow
+					? this.primaryColor
+					: this.styles.borderColor;
+				const borderColor =
+					this.inputBorder && this.msg ? '#dd524d' : focusColor;
 				return obj2strStyle({
 					'border-color': borderColor || '#e5e5e5',
-					'background-color': this.disabled ? this.styles.disableColor : this.styles.backgroundColor
+					'background-color': this.disabled
+						? this.styles.disableColor
+						: this.styles.backgroundColor
 				});
 			},
 			// input右侧样式
 			inputStyle() {
-				const paddingRight = this.type === 'password' || this.clearable || this.prefixIcon ? '' : '10px';
+				const paddingRight =
+					this.type === 'password' || this.clearable || this.prefixIcon
+						? ''
+						: '10px';
 				return obj2strStyle({
 					'padding-right': paddingRight,
 					'padding-left': this.prefixIcon ? '' : '10px'
@@ -342,7 +366,11 @@
 			init() {
 				if (this.value || this.value === 0) {
 					this.val = this.value;
-				} else if (this.modelValue || this.modelValue === 0 || this.modelValue === '') {
+				} else if (
+					this.modelValue ||
+					this.modelValue === 0 ||
+					this.modelValue === ''
+				) {
 					this.val = this.modelValue;
 				} else {
 					this.val = null;
@@ -424,9 +452,7 @@
 				}
 				// 失去焦点时参与表单校验
 				if (this.form && this.formItem) {
-					const {
-						validateTrigger
-					} = this.form;
+					const { validateTrigger } = this.form;
 					if (validateTrigger === 'blur') {
 						this.formItem.onFieldChange();
 					}
@@ -467,7 +493,7 @@
 			 * @param {Object} event
 			 */
 			onkeyboardheightchange(event) {
-				this.$emit("keyboardheightchange", event);
+				this.$emit('keyboardheightchange', event);
 			},
 
 			/**
@@ -552,8 +578,6 @@
 		}
 		/*endif*/
 	}
-
-
 
 	.uni-easyinput__placeholder-class {
 		color: #999;
