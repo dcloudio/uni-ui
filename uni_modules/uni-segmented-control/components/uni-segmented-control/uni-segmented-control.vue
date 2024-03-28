@@ -1,10 +1,14 @@
 <template>
 	<view :class="[styleType === 'text'?'segmented-control--text' : 'segmented-control--button' ]"
 		:style="{ borderColor: styleType === 'text' ? '' : activeColor }" class="segmented-control">
-		<view v-for="(item, index) in values" :class="computedBackgroundClass(index)" :key="index"
-			:style="computedBackgroundStyle(index)" class="segmented-control__item" @click="_onClick(index)">
+		<view v-for="(item, index) in values" :class="[styleType === 'text' ? '' : 'segmented-control__item--button',
+					index === currentIndex && styleType === 'button' ? 'segmented-control__item--button--active' : '',
+					index === 0 && styleType === 'button' ? 'segmented-control__item--button--first' : '',
+					index === values.length - 1 && styleType === 'button' ? 'segmented-control__item--button--last':'']" :key="index" :style="{backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : styleType === 'button' ?inActiveColor:'transparent', borderColor: index === currentIndex && styleType === 'text' || styleType === 'button' ? activeColor : inActiveColor}" class="segmented-control__item" @click="_onClick(index)">
 			<view>
-				<text :style="getTextStyle(index)" class="segmented-control__text"
+				<text
+					:style="index===currentIndex?{color : styleType === 'text' ? activeColor : '#fff'}:{color : styleType === 'text' ?'#000' : activeColor}"
+					class="segmented-control__text"
 					:class="styleType === 'text' && index === currentIndex ? 'segmented-control__item--text': ''">{{ item }}</text>
 			</view>
 
@@ -90,7 +94,8 @@
 			computedBackgroundStyle() {
 				return index => {
 					return {
-						backgroundColor: index === this.currentIndex && this.styleType === 'button' ? this.activeColor : this.styleType === 'button' ?this.inActiveColor:'transparent',
+						backgroundColor: index === this.currentIndex && this.styleType === 'button' ? this.activeColor : this
+							.styleType === 'button' ? this.inActiveColor : 'transparent',
 						borderColor: index === this.currentIndex && this.styleType === 'text' || this.styleType === 'button' ? this
 							.activeColor : this.inActiveColor
 					}

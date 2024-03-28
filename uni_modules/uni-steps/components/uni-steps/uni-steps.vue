@@ -12,7 +12,7 @@
 			</view>
 			<view :class="[direction==='column'?'uni-steps__column-container':'uni-steps__row-container']">
 				<view :class="[direction==='column'?'uni-steps__column-line-item':'uni-steps__row-line-item']"
-					v-for="(item,index) in options" :key="index" :style="computedStyle(index)">
+					v-for="(item,index) in options" :key="index" :style="{height: direction === 'column'?heightArr[index]+'px':'14px'}">
 					<view
 						:class="[direction==='column'?'uni-steps__column-line':'uni-steps__row-line',direction==='column'?'uni-steps__column-line--before':'uni-steps__row-line--before']"
 						:style="{backgroundColor:index<=active&&index!==0?activeColor:index===0?'transparent':deactiveColor}">
@@ -95,15 +95,6 @@
 				}).exec()
 			}
 		},
-		methods: {
-			computedStyle(index) {
-				if (this.direction === 'column') {
-					return {
-						height: this.heightArr[index] + 'px'
-					}
-				}
-			}
-		}
 	}
 </script>
 

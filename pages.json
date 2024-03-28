@@ -368,10 +368,6 @@
                 "navigationBarTitleText" : "",
                 "enablePullDownRefresh" : false
             }
-        },
-        {
-            "path" : "uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker",
-            "style" : {}
         }
     ],
     "globalStyle" : {
