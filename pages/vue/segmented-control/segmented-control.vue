@@ -7,7 +7,7 @@
 		<uni-section title="实心标签" type="line">
 			<view class="uni-padding-wrap uni-common-mt">
 				<uni-segmented-control :current="current" :values="items" :style-type="styleType"
-					:active-color="activeColor" @clickItem="onClickItem" :in-active-color="'#f7e2e9'"/>
+					:active-color="activeColor" @clickItem="onClickItem" :in-active-color="'#fff'"/>
 			</view>
 			<view class="content">
 				<view v-if="current === 0"><text class="content-text">选项卡1的内容</text></view>

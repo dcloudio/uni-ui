@@ -14,7 +14,7 @@
 					</view>
 				</view>
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
-				<view class="uni-select__selector" :style="getOffsetByPlacement()" v-if="showSelector">
+				<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
 					<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
 					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
@@ -147,6 +147,14 @@
 					return text.slice(0, 25) + '...';
 				}
 				return text;
+			},
+			getOffsetByPlacement() {
+				switch (this.placement) {
+					case 'top':
+						return "bottom:calc(100% + 12px);";
+					case 'bottom':
+						return "top:calc(100% + 12px);";
+				}
 			}
 		},
 
@@ -313,19 +321,6 @@
 				delete cacheData[name];
 				uni.setStorageSync(this.cacheKey, cacheData);
 			},
-			getOffsetByPlacement() {
-				let style = {};
-				let offset = 'calc(100% + 12px)';
-				switch (this.placement) {
-					case 'top':
-					style.bottom= offset;
-						break;
-					case 'bottom':
-					style.top= offset;
-						break;
-				}
-				return style;
-			}
 		}
 	}
 </script>
@@ -495,14 +490,15 @@
 	.uni-popper__arrow_bottom,
 	.uni-popper__arrow_bottom::after,
 	.uni-popper__arrow_top,
-	.uni-popper__arrow_top::after, {
-		position: absolute;
-		display: block;
-		width: 0;
-		height: 0;
-		border-color: transparent;
-		border-style: solid;
-		border-width: 6px;
+	.uni-popper__arrow_top::after,
+	{
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 6px;
 	}
 
 	.uni-popper__arrow_bottom {
