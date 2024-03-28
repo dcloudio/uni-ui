@@ -177,7 +177,9 @@
 			},
 			clear() {
 				this.searchVal = ""
-				this.$emit("clear", '');
+				this.$nextTick(() => {
+					this.$emit("clear", { value: "" })
+				})
 			},
 			cancel() {
 				if(this.readonly) return
