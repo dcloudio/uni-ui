@@ -179,7 +179,12 @@
 			// this.popup.closeMask()
 			if (this.mode === 'input') {
 				this.dialogType = 'info'
-				this.val = this.value
+				// #ifdef VUE2
+				this.val = this.value;
+				// #endif
+				// #ifdef VUE3
+				this.val = this.modelValue;
+				// #endif
 			} else {
 				this.dialogType = this.type
 			}
