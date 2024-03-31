@@ -7,6 +7,34 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.4" date="2024-03-31">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下:style动态绑定导致编译失败的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在头条小程序下丢失事件绑定的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 双向绑定时初始化逻辑修正
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下:style动态绑定导致编译失败的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-steps为竖排列时，文本长度过长引起点错乱的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.3" date="2024-03-22">
 	<log-item title="uni-collapse 组件更新">
 		<log-item-text tag-type="fix">

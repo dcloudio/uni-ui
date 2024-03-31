@@ -1,3 +1,9 @@
+## 1.5.5（2024-03-31）
+- uni-data-select 修复 在vue2下:style动态绑定导致编译失败的bug
+- uni-easyinput 修复 在头条小程序下丢失事件绑定的问题
+- uni-popup 修复 uni-popup-dialog 双向绑定时初始化逻辑修正
+- uni-segmented-control 修复 在vue2下:style动态绑定导致编译失败的bug
+- uni-steps 修复 uni-steps为竖排列时，文本长度过长引起点错乱的bug
 ## 1.5.3（2024-03-22）
 - uni-collapse 修复 titleBorder类型修正
 - uni-data-checkbox 修复 单选模式下选中样式不生效的bug

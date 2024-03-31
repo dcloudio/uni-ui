@@ -1,5 +1,5 @@
 ### [查看文档](https://uniapp.dcloud.io/component/uniui/uni-transition)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入uni-im官方交流群 [uni-im](https://im.dcloud.net.cn/#/?joinGroup=65aa42e5465fe748c837da2b)
+#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839 
 
 ## uni-ui产品特点
 
@@ -145,7 +145,6 @@ export default {
 ```
 > **注意**
 > - `CLI` 引用方式， `H5` 端不支持在 `main.js` 中全局注册组件，如有需求请使用（[easyCom](https://uniapp.dcloud.io/collocation/pages?id=easycom)） 的方式引用组件
-> - 若需要引入官方提供的scss变量文件可通过 `@ import '@dcloudio/uni-ui/lib/uni-scss/variables.scss'`,uni.scss无需引入即可使用
 > - 使用 npm 安装的组件，默认情况下 babel-loader 会忽略所有 node_modules 中的文件 ，导致条件编译失效，需要通过配置 `vue.config.js` 解决：
 > ```javascript
 > // 在根目录创建 vue.config.js 文件，并配置如下
@@ -243,4 +242,4 @@ export default {
 
 
 ### 贡献代码
-在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 或到[ask社区](https://ask.dcloud.net.cn/)反馈给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
+在使用 `uni-ui` 中，如遇到无法解决的问题，请提 [Issues](https://github.com/dcloudio/uni-ui/issues) 给我们，假如您有更好的点子或更好的实现方式，也欢迎给我们提交 [PR](https://github.com/dcloudio/uni-ui/pulls)
