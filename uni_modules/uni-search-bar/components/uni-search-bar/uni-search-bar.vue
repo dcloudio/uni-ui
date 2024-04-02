@@ -242,11 +242,11 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		box-sizing: border-box;
-		justify-content: left;
 		/* #endif */
 		overflow: hidden;
 		position: relative;
 		flex: 1;
+		justify-content: left;
 		flex-direction: row;
 		align-items: center;
 		height: $uni-searchbar-height;
