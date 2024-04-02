@@ -142,7 +142,7 @@
 	 * @property {Boolean} autoClose = [true|false] 	滑动打开当前组件，是否关闭其他组件
 	 * @property {Number}  threshold 					滑动缺省值
 	 * @property {Array} leftOptions 					左侧选项内容及样式
-	 * @property {Array} rgihtOptions 					右侧选项内容及样式
+	 * @property {Array} rightOptions 					右侧选项内容及样式
 	 * @event {Function} click 							点击选项按钮时触发事件，e = {content,index} ，content（点击内容）、index（下标)
 	 * @event {Function} change 						组件打开或关闭时触发，left\right\none
 	 */
