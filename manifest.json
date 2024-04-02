@@ -58,5 +58,5 @@
         "title" : "uni-ui",
         "template" : "template.h5.html"
     },
-    "vueVersion" : "3"
+    "vueVersion" : "2"
 }

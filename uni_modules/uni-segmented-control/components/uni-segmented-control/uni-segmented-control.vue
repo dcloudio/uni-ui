@@ -2,12 +2,13 @@
 	<view :class="[styleType === 'text'?'segmented-control--text' : 'segmented-control--button' ]"
 		:style="{ borderColor: styleType === 'text' ? '' : activeColor }" class="segmented-control">
 		<view v-for="(item, index) in values" :class="[styleType === 'text' ? '' : 'segmented-control__item--button',
-					index === currentIndex && styleType === 'button' ? 'segmented-control__item--button--active' : '',
 					index === 0 && styleType === 'button' ? 'segmented-control__item--button--first' : '',
-					index === values.length - 1 && styleType === 'button' ? 'segmented-control__item--button--last':'']" :key="index" :style="{backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : styleType === 'button' ?inActiveColor:'transparent', borderColor: index === currentIndex && styleType === 'text' || styleType === 'button' ? activeColor : inActiveColor}" class="segmented-control__item" @click="_onClick(index)">
+					index === values.length - 1 && styleType === 'button' ? 'segmented-control__item--button--last':'']" :key="index"
+			:style="{backgroundColor: index === currentIndex && styleType === 'button' ? activeColor : styleType === 'button' ?inActiveColor:'transparent', borderColor: index === currentIndex && styleType === 'text' || styleType === 'button' ? activeColor : inActiveColor}"
+			class="segmented-control__item" @click="_onClick(index)">
 			<view>
 				<text
-					:style="index===currentIndex?{color : styleType === 'text' ? activeColor : '#fff'}:{color : styleType === 'text' ?'#000' : activeColor}"
+					:style="{color:index === currentIndex? styleType === 'text'? activeColor: '#fff': styleType === 'text'? '#000': activeColor}"
 					class="segmented-control__text"
 					:class="styleType === 'text' && index === currentIndex ? 'segmented-control__item--text': ''">{{ item }}</text>
 			</view>
@@ -70,38 +71,7 @@
 				}
 			}
 		},
-		computed: {
-			getTextStyle() {
-				return (index) => {
-					let style = {};
-					if (index === this.currentIndex) {
-						style.color = this.styleType === 'text' ? this.activeColor : '#fff';
-					} else {
-						style.color = this.styleType === 'text' ?
-							'#000' : this.activeColor;
-					}
-					return style;
-				}
-			},
-			computedBackgroundClass() {
-				return index => [this.styleType === 'text' ? '' : 'segmented-control__item--button',
-					index === this.currentIndex && this.styleType === 'button' ? 'segmented-control__item--button--active' : '',
-					index === 0 && this.styleType === 'button' ? 'segmented-control__item--button--first' : '',
-					index === this.values.length - 1 && this.styleType === 'button' ? 'segmented-control__item--button--last' :
-					''
-				]
-			},
-			computedBackgroundStyle() {
-				return index => {
-					return {
-						backgroundColor: index === this.currentIndex && this.styleType === 'button' ? this.activeColor : this
-							.styleType === 'button' ? this.inActiveColor : 'transparent',
-						borderColor: index === this.currentIndex && this.styleType === 'text' || this.styleType === 'button' ? this
-							.activeColor : this.inActiveColor
-					}
-				}
-			}
-		},
+		computed: {},
 		created() {
 			this.currentIndex = this.current
 		},
