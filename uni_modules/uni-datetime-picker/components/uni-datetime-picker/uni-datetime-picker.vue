@@ -98,7 +98,7 @@
 			:start-date="calendarRange.startDate" :end-date="calendarRange.endDate" :selectableTimes="mobSelectableTime"
 			:startPlaceholder="startPlaceholder" :endPlaceholder="endPlaceholder" :default-value="defaultValue"
 			:pleStatus="endMultipleStatus" :showMonth="false" :range="isRange" :hasTime="hasTime" :insert="false"
-			:hideSecond="hideSecond" @confirm="mobileChange" @maskClose="close" />
+			:hideSecond="hideSecond" @confirm="mobileChange" @maskClose="close" @change="calendarChange"/>
 	</view>
 </template>
 <script>
@@ -817,6 +817,10 @@
 						this.$emit('update:modelValue', [])
 					}
 				}
+			},
+
+			calendarChange(e) {
+				this.$emit('calendarChange', e)
 			}
 		}
 	}
