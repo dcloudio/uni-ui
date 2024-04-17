@@ -23,7 +23,12 @@
 			}
 		},
 		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
 			virtualHost: true
+			// #endif
 		},
 		props: {
 			to: {
@@ -113,7 +118,7 @@
 		&:first-child &--slot {
 			padding-left: 0;
 		}
-		
+
 		&:last-child &--separator {
 			display: none;
 		}

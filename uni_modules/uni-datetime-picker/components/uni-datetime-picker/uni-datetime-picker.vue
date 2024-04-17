@@ -142,8 +142,14 @@
 
 	export default {
 		name: 'UniDatetimePicker',
+
 		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
 			virtualHost: true
+			// #endif
 		},
 		components: {
 			Calendar,
@@ -753,7 +759,7 @@
 			},
 			handleStartAndEnd(before, after, temp = false) {
 				if (!before) return
-				if(!after)after = before;
+				if (!after) after = before;
 				const type = temp ? 'tempRange' : 'range'
 				const isStartEarlierEnd = dateCompare(before, after)
 				this[type].startDate = isStartEarlierEnd ? before : after

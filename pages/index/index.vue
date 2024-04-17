@@ -169,7 +169,7 @@
 						url: 'data-picker'
 					},
 					// #endif
-					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-TOUTIAO || MP-BAIDU
+					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-BAIDU
 					{
 						name: 'DatetimePicker 日期时间选择',
 						url: 'datetime-picker'

@@ -87,7 +87,12 @@
 			checkBox
 		},
 		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
 			virtualHost: true
+			// #endif
 		},
 		props: {
 			filterType: {
@@ -293,7 +298,7 @@
 
 <style lang="scss">
 	$uni-primary: #1890ff !default;
-	
+
 	.flex-r {
 		display: flex;
 		flex-direction: row;
