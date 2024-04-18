@@ -52,7 +52,12 @@
 		name: 'uniCol',
 		// #ifdef MP-WEIXIN
 		options: {
-			virtualHost: true // 在微信小程序中将组件节点渲染为虚拟节点，更加接近Vue组件的表现
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
+			virtualHost: true
+			// #endif
 		},
 		// #endif
 		props: {

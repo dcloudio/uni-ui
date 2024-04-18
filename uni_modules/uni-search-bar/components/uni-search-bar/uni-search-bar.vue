@@ -8,7 +8,7 @@
 				</slot>
 			</view>
 			<input v-if="show || searchVal" :focus="showSync" :disabled="readonly" :placeholder="placeholderText" :maxlength="maxlength"
-				class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal"
+				class="uni-searchbar__box-search-input" confirm-type="search" type="text" v-model="searchVal" :style="{color:textColor}"
 				@confirm="confirm" @blur="blur" @focus="emitFocus"/>
 			<text v-else class="uni-searchbar__text-placeholder">{{ placeholder }}</text>
 			<view v-if="show && (clearButton==='always'||clearButton==='auto'&&searchVal!=='') &&!readonly"
@@ -49,6 +49,7 @@
 	 * 	@value none 一直不显示
 	 * @property {String} cancelText 取消按钮的文字
 	 * @property {String} bgColor 输入框背景颜色
+	 * @property {String} textColor 输入文字颜色
 	 * @property {Boolean} focus 是否自动聚焦
 	 * @property {Boolean} readonly 组件只读，不能有任何操作，只做展示
 	 * @event {Function} confirm uniSearchBar 的输入框 confirm 事件，返回参数为uniSearchBar的value，e={value:Number}
@@ -83,6 +84,10 @@
 				default: ""
 			},
 			bgColor: {
+				type: String,
+				default: "#F8F8F8"
+			},
+			textColor: {
 				type: String,
 				default: "#F8F8F8"
 			},

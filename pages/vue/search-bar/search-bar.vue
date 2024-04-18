@@ -5,7 +5,7 @@
 		</uni-card>
 
 		<uni-section title="基本用法" type="line">
-			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" class="search-result-text"	@cancel="cancel" @clear="clear" text-color="#ff261d">
+			<uni-search-bar textColor="#3c35f4" @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" class="search-result-text"	@cancel="cancel" @clear="clear" text-color="#ff261d">
 			</uni-search-bar>
 			<view class="search-result">
 				<text class="search-result-text">当前输入为：{{ searchValue }}</text>
