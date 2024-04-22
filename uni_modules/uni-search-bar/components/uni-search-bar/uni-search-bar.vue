@@ -89,7 +89,7 @@
 			},
 			textColor: {
 				type: String,
-				default: "#F8F8F8"
+				default: "#000000"
 			},
 			maxlength: {
 				type: [Number, String],
