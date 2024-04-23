@@ -30,14 +30,11 @@
 	export default {
 		name: 'uniRow',
 		componentName: 'uniRow',
+		// #ifdef MP-WEIXIN
 		options: {
-			// #ifdef MP-TOUTIAO
-			virtualHost: false,
-			// #endif
-			// #ifdef MP-WEIXIN
-			virtualHost: true
-			// #endif
+			virtualHost: true // 在微信小程序中将组件节点渲染为虚拟节点，更加接近Vue组件的表现，可使用flex布局
 		},
+		// #endif
 		props: {
 			type: String,
 			gutter: Number,

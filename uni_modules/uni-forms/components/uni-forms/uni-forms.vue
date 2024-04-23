@@ -68,12 +68,7 @@
 		name: 'uniForms',
 		emits: ['validate', 'submit'],
 		options: {
-			// #ifdef MP-TOUTIAO
-			virtualHost: false,
-			// #endif
-			// #ifndef MP-TOUTIAO
 			virtualHost: true
-			// #endif
 		},
 		props: {
 			// 即将弃用

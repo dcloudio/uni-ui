@@ -40,14 +40,9 @@
  */
 export default {
 	name: 'uniTh',
-		options: {
-			// #ifdef MP-TOUTIAO
-			virtualHost: false,
-			// #endif
-			// #ifndef MP-TOUTIAO
-			virtualHost: true
-			// #endif
-		},
+	options: {
+		virtualHost: true
+	},
 	components: {
 		// #ifdef H5
 		dropdown
