@@ -6,6 +6,7 @@
 				{{content}}
 			</slot>
 		</view>
+
 	</view>
 </template>
 
@@ -25,8 +26,7 @@
 
 			};
 		},
-		methods: {
-		},
+		methods: {},
 		computed: {
 			initPlacement() {
 				let style = {};
@@ -64,7 +64,7 @@
 						}
 						break;
 				}
-				return style;
+				return Object.entries(style).map(([key, value]) => `${key}: ${value}`).join('; ');
 			}
 		},
 		props: {
@@ -75,7 +75,7 @@
 
 			placement: {
 				type: String,
-				default: 'left'
+				default: 'bottom'
 			},
 		}
 	}
