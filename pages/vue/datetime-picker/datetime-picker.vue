@@ -21,7 +21,7 @@
 		</view>
 		<uni-section :title="'日期时间范围用法：' + '[' + datetimeRange + ']' " type="line"></uni-section>
 		<view class="example-body">
-			<uni-datetime-picker v-model="datetimeRange" type="datetimerange" rangeSeparator="至" />
+			<uni-datetime-picker v-model="datetimeRange" type="datetimerange" rangeSeparator="至" @calendarClick="calendarClick"/>
 		</view>
 		<uni-section :title="'时间戳用法：' + dateTimestamp" type="line"></uni-section>
 		<view class="example-body">
@@ -106,6 +106,9 @@
         `${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}` :
         `${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}:${addZero ? this.addZero(second) : second}`
       },
+			calendarClick(e){
+				console.log("点击的日期：",JSON.stringify(e))
+			},
 			addZero(num) {
 				if (num < 10) {
 					num = `0${num}`

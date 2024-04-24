@@ -541,8 +541,8 @@
 			/**
 			 * 变化触发
 			 */
-			change() {
-				if (!this.insert) return
+			change(isSingleChange) {
+				if (!this.insert && !isSingleChange) return
 				this.setEmit('change')
 			},
 			/**
@@ -611,7 +611,7 @@
 					this.tempRange.before = this.cale.multipleStatus.before
 					this.tempRange.after = this.cale.multipleStatus.after
 				}
-				this.change()
+				this.change(true)
 			},
 			changeMonth(type) {
 				let newDate
