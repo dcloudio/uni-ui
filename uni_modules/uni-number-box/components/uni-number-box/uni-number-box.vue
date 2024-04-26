@@ -200,8 +200,7 @@
 		height: $box-height;
 		text-align: center;
 		font-size: 14px;
-		border-left-width: 0;
-		border-right-width: 0;
+		border-width: 0;
 		color: $color;
 	}
 
