@@ -404,6 +404,7 @@
 	}
 
 	.uni-select__input-box {
+		width: 100%;
 		height: 35px;
 		position: relative;
 		/* #ifndef APP-NVUE */
