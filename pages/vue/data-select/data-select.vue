@@ -31,6 +31,11 @@
 				<uni-data-select placement="top" v-model="value" :localdata="range" @change="change" label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
+		<uni-section title="多选" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="defaultValue" mode="multiple" :localdata="options" @change="change"></uni-data-select>
+			</view>
+		</uni-section>
 	</view>
 </template>
 
@@ -52,12 +57,68 @@
 						"value": 2,
 						"text": "游泳"
 					}
-				]
+				],
+				defaultValue: [2, 3],
+				options: [{
+						"value": 0,
+						"text": "篮球",
+						"disable": true
+					},
+					{
+						"value": 1,
+						"text": "足球"
+					},
+					{
+						"value": 2,
+						"text": "游泳"
+					},
+					{
+						"value": 3,
+						"text": "网球"
+					},
+					{
+						"value": 4,
+						"text": "乒乓球"
+					},
+					{
+						"value": 5,
+						"text": "男子1000米跑步"
+					},
+					{
+						"value": 6,
+						"text": "女子1000米跑步"
+					},
+					{
+						"value": 7,
+						"text": "摔跤"
+					},
+					{
+						"value": 8,
+						"text": "拳击"
+					},
+					{
+						"value": 9,
+						"text": "健身"
+					},
+					{
+						"value": 10,
+						"text": "瑜伽"
+					},
+					{
+						"value": 11,
+						"text": "田径"
+					},
+					{
+						"value": 12,
+						"text": "高尔夫"
+					}
+				],
 			}
 		},
 		methods: {
 			change(e) {
 				console.log('e:', e);
+				console.log(this.defaultValue);
 			}
 		}
 	}
