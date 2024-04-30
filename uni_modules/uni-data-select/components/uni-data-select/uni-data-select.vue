@@ -2,11 +2,26 @@
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
-			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
-				<view class="uni-select__input-box" @click="toggleSelector">
+			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--multiple': mode === 'multiple' && checkedIds.length} ">
+				<view v-if="mode === 'single'" class="uni-select__input-box" @click="toggleSelector">
 					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
 					<view v-if="current && clear && !disabled" @click.stop="clearVal">
+						<uni-icons type="clear" color="#c0c4cc" size="24" />
+					</view>
+					<view v-else>
+						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
+					</view>
+				</view>
+				<view v-else class="uni-select__input-box uni-select__input-box--multiple" :class="{'uni-select__input-box--data': checkedIds.length}" @click="toggleSelector">
+					<view v-if="checkedIds.length" class="uni-select__input-checked" v-for="(item, index) in checkedVals" :key="index">
+						<text class="uni-select__input-checked-text">{{item}}</text>
+						<view @click.stop="remove(index)">
+							<uni-icons type="closeempty" color="#6a6969" size="14" />
+						</view>
+					</view>
+					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
+					<view v-if="checkedIds.length && clear && !disabled" class="uni-select__input-clear" @click.stop="clearValMultiple">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
 					<view v-else>
@@ -20,10 +35,16 @@
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
+						<view v-else-if="mode === 'single'" class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
 							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
+						<view v-else>
+							<view v-for="(item,index) in mixinDatacomResData" :key="index" class="uni-select__selector-item" :class="{'uni-select__selector-item--checked': checkedIds.indexOf(index) !== -1}" @click="changeMultiple(item, index)">
+								<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+								<uni-icons v-if="checkedIds.indexOf(index) !== -1" type="checkmarkempty" color="#6a6969" size="14" />
+							</view>
+						</view>	
 					</scroll-view>
 				</view>
 			</view>
@@ -46,6 +67,9 @@
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
+	 * @property {String} mode = [multiple|single] 设置select的模式类型 
+	 *  @value multiple 多选
+	 * 	@value single 单选
 	 * @event {Function} change  选中发生变化触发
 	 */
 
@@ -64,7 +88,7 @@
 				default: ''
 			},
 			modelValue: {
-				type: [String, Number],
+				type: [String, Number, Array],
 				default: ''
 			},
 			label: {
@@ -99,6 +123,10 @@
 			placement: {
 				type: String,
 				default: 'bottom'
+			},
+			mode: {
+				type: String,
+				default: 'single'
 			}
 		},
 		data() {
@@ -109,6 +137,9 @@
 				apps: [],
 				channels: [],
 				cacheKey: "uni-data-select-lastSelectedValue",
+				checkedIds: [],
+				checkedVals: [],
+				checkedKeys: [],
 			};
 		},
 		created() {
@@ -202,7 +233,7 @@
 			},
 			initDefVal() {
 				let defValue = ''
-				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
+				if ((this.valueCom || (this.valueCom === 0 && this.mode === 'single') || (Array.isArray(this.valueCom) && this.mode === 'multiple')) && !this.isDisabled(this.valueCom)) {
 					defValue = this.valueCom
 				} else {
 					let strogeValue
@@ -222,6 +253,24 @@
 						this.emit(defValue)
 					}
 				}
+
+				if (this.mode === 'multiple') {
+					let defaultIds = [], defaultVals = [], defaultKeys = []
+
+					this.mixinDatacomResData.forEach((item, index) => {
+						if (~defValue.indexOf(item.value)) {
+							defaultIds.push(index)
+							defaultVals.push(item.text)
+							defaultKeys.push(item.value)
+						}
+					})
+
+					this.checkedIds = defaultIds
+					this.checkedVals = defaultVals
+					this.checkedKeys = defaultKeys
+					return
+				}
+
 				const def = this.mixinDatacomResData.find(item => item.value === defValue)
 				this.current = def ? this.formatItemName(def) : ''
 			},
@@ -242,11 +291,42 @@
 				return isDisabled;
 			},
 
+			/**
+			 * 获取选中的选项
+			 * @param {Object | Number} value 选中内容 | 索引
+			 * @param {String} type 类型
+			 * 	- 'IDS' 选中的索引
+			 * 	- 'VALS' 选中的 text
+			 *  - 'KEYS' 选中的 value
+			 */
+			 getCheckedItem(value, type) {
+				let checkeds = {
+					'IDS': this.checkedIds,
+					'VALS': this.checkedVals,
+					'KEYS': this.checkedKeys
+				}[type] || []
+				const checkedsIds = checkeds.indexOf(value)
+
+				if (~checkedsIds) {
+					checkeds.splice(checkedsIds, 1)
+					return checkeds
+				}
+
+				checkeds.push(value);
+				return checkeds;
+			},
+
 			clearVal() {
 				this.emit('')
 				if (this.collection) {
 					this.removeCache()
 				}
+			},
+			clearValMultiple() {
+				this.emitMultiple([], [])
+				this.checkedIds = []
+				this.checkedVals = []
+				this.checkedKeys = []
 			},
 			change(item) {
 				if (!item.disable) {
@@ -255,6 +335,22 @@
 					this.emit(item.value)
 				}
 			},
+			changeMultiple(item, index) {
+				if (!item.disable) {
+					this.checkedIds = this.getCheckedItem(index, 'IDS')
+					this.checkedVals = this.getCheckedItem(this.formatItemName(item), 'VALS')
+					this.checkedKeys = this.getCheckedItem(this.formatItemKey(item), 'KEYS')
+
+					this.emitMultiple(this.checkedVals, this.checkedKeys)
+				}
+			},
+			remove(index) {
+				this.checkedIds.splice(index, 1)
+				this.checkedVals.splice(index, 1)
+				this.checkedKeys.splice(index, 1)
+
+				this.emitMultiple(this.checkedVals, this.checkedKeys)
+			},
 			emit(val) {
 				this.$emit('input', val)
 				this.$emit('update:modelValue', val)
@@ -262,6 +358,13 @@
 				if (this.collection) {
 					this.setCache(val);
 				}
+			},
+			emitMultiple(vals, keys) {
+				const valStr = vals.join(',')
+
+				this.$emit('update:modelValue', keys)
+				this.$emit('change', valStr)
+				this.$emit('input', valStr)
 			},
 			toggleSelector() {
 				if (this.disabled) {
@@ -295,6 +398,9 @@
 							`未命名${channel_code}`
 						)
 				}
+			},
+			formatItemKey(item) {
+				return item.value
 			},
 			// 获取当前加载的数据
 			getLoadData() {
@@ -387,11 +493,16 @@
 		border-bottom: solid 1px $uni-border-3;
 		width: 100%;
 		flex: 1;
-		height: 35px;
+		min-height: 35px;
 
 		&--disabled {
 			background-color: #f5f7fa;
 			cursor: not-allowed;
+		}
+
+		&--multiple {
+			height: auto;
+			padding-top: 4px;
 		}
 	}
 
@@ -404,7 +515,7 @@
 	}
 
 	.uni-select__input-box {
-		height: 35px;
+		min-height: 35px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -412,6 +523,16 @@
 		flex: 1;
 		flex-direction: row;
 		align-items: center;
+
+		&--multiple {
+			overflow: hidden;
+			height: auto;
+		}
+
+		&--data {
+			flex-wrap: wrap;
+			padding-right: 20px;
+		}
 	}
 
 	.uni-select__input {
@@ -468,10 +589,21 @@
 		text-align: center;
 		/* border-bottom: solid 1px $uni-border-3; */
 		padding: 0px 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		&--checked {
+			background-color: #e9f4fe;
+		}
 	}
 
 	.uni-select__selector-item:hover {
 		background-color: #f9f9f9;
+	}
+
+	.uni-select__selector-item--checked:hover {
+		background-color: #e9f4fe;
 	}
 
 	.uni-select__selector-empty:last-child,
@@ -535,7 +667,6 @@
 		border-top-color: #fff;
 	}
 
-
 	.uni-select__input-text {
 		// width: 280px;
 		width: 100%;
@@ -544,6 +675,27 @@
 		text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
+	}
+
+	.uni-select__input-clear {
+		position: absolute;
+		right: 0px;
+	}
+
+	.uni-select__input-checked {
+		padding: 4px 8px;
+		border-radius: 6px;
+		margin-right: 4px;
+		margin-bottom: 4px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		background-color: #e4e2e2;
+	}
+
+	.uni-select__input-checked-text {
+		color: #1d1d1d;
+		margin-right: 4px;
 	}
 
 	.uni-select__input-placeholder {
