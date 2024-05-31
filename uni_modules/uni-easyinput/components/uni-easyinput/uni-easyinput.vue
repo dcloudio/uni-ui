@@ -20,7 +20,21 @@
 				@focus="_Focus" @blur="_Blur" @input="onInput" @confirm="onConfirm"
 				@keyboardheightchange="onkeyboardheightchange" />
 			<!-- #endif -->
-			<!-- #ifndef MP-ALIPAY -->
+			<!-- #ifdef MP-WEIXIN -->
+			<textarea :disable-default-padding="disableDefaultPadding" v-if="type === 'textarea'" class="uni-easyinput__content-textarea"
+				:class="{ 'input-padding': inputBorder }" :name="name" :value="val" :placeholder="placeholder"
+				:placeholderStyle="placeholderStyle" :disabled="disabled" placeholder-class="uni-easyinput__placeholder-class"
+				:maxlength="inputMaxlength" :focus="focused" :autoHeight="autoHeight" :cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition" @input="onInput" @blur="_Blur" @focus="_Focus" @confirm="onConfirm"
+				@keyboardheightchange="onkeyboardheightchange"></textarea>
+			<input v-else :type="type === 'password' ? 'text' : type" class="uni-easyinput__content-input" :style="inputStyle"
+				:name="name" :value="val" :password="!showPassword && type === 'password'" :placeholder="placeholder"
+				:placeholderStyle="placeholderStyle" placeholder-class="uni-easyinput__placeholder-class" :disabled="disabled"
+				:maxlength="inputMaxlength" :focus="focused" :confirmType="confirmType" :cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition" @focus="_Focus" @blur="_Blur" @input="onInput" @confirm="onConfirm"
+				@keyboardheightchange="onkeyboardheightchange" />
+			<!-- #endif -->
+			<!-- #ifndef MP-ALIPAY || MP-WEIXIN -->
 			<textarea v-if="type === 'textarea'" class="uni-easyinput__content-textarea"
 				:class="{ 'input-padding': inputBorder }" :name="name" :value="val" :placeholder="placeholder"
 				:placeholderStyle="placeholderStyle" :disabled="disabled" placeholder-class="uni-easyinput__placeholder-class"
@@ -246,6 +260,12 @@
 			},
 			// #ifdef MP-ALIPAY
 			enableNative: {
+				type: Boolean,
+				default: false
+			},
+			// #endif
+			// #ifdef MP-WEIXIN
+			disableDefaultPadding: {
 				type: Boolean,
 				default: false
 			}
