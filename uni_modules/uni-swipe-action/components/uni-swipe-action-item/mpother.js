@@ -239,7 +239,7 @@ otherMixins = {
 			views
 				.selectAll('.' + this.elClass)
 				.boundingClientRect(data => {
-					if (data.length === 0) return
+					if (!data || data.length === 0) return
 					let show = 'none'
 					if (this.autoClose) {
 						show = 'none'
