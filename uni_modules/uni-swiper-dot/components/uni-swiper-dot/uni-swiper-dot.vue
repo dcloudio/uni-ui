@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-swiper__warp">
+	<view class="uni-swiper__wrap">
 		<slot />
 		<view v-if="mode === 'default'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box" key='default'>
 			<view v-for="(item,index) in info" @click="clickItem(index)" :style="{
@@ -121,7 +121,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.uni-swiper__warp {
+	.uni-swiper__wrap {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
