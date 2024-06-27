@@ -1,3 +1,17 @@
+## 1.9.1（2024-04-02）
+- 修复 uni-popup-dialog vue3下使用value无法进行绑定的bug(双向绑定兼容旧写法)
+## 1.9.0（2024-03-28）
+- 修复 uni-popup-dialog 双向绑定时初始化逻辑修正
+## 1.8.9（2024-03-20）
+- 修复 uni-popup-dialog 数据输入时修正为双向绑定
+## 1.8.8（2024-02-20）
+- 修复 uni-popup 在微信小程序下出现文字向上闪动的bug
+## 1.8.7（2024-02-02）
+- 新增 uni-popup-dialog 新增属性focus：input模式下，是否自动自动聚焦
+## 1.8.6（2024-01-30）
+- 新增 uni-popup-dialog 新增属性maxLength:限制输入框字数
+## 1.8.5（2024-01-26）
+- 新增 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
 ## 1.8.4（2023-11-15）
 - 新增 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
 ## 1.8.3（2023-04-17）

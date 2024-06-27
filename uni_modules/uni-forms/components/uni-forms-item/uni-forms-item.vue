@@ -36,7 +36,7 @@
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=2773
 	 * @property {Boolean} required 是否必填，左边显示红色"*"号
 	 * @property {String } 	label 				输入框左边的文字提示
-	 * @property {Number } 	labelWidth 			label的宽度，单位px（默认65）
+	 * @property {Number } 	labelWidth 			label的宽度，单位px（默认70）
 	 * @property {String } 	labelAlign = [left|center|right] label的文字对齐方式（默认left）
 	 * 	@value left		label 左侧显示
 	 * 	@value center	label 居中
@@ -91,7 +91,7 @@
 				type: String,
 				default: ''
 			},
-			// label的宽度 ，默认 80
+			// label的宽度
 			labelWidth: {
 				type: [String, Number],
 				default: ''
@@ -128,7 +128,7 @@
 				errMsg: '',
 				userRules: null,
 				localLabelAlign: 'left',
-				localLabelWidth: '65px',
+				localLabelWidth: '70px',
 				localLabelPos: 'left',
 				border: false,
 				isFirstBorder: false,
@@ -413,9 +413,9 @@
 				// 	const {
 				// 		labelWidth
 				// 	} = this.form
-				return this.num2px(this.labelWidth ? this.labelWidth : (labelWidth || (this.label ? 65 : 'auto')))
+				return this.num2px(this.labelWidth ? this.labelWidth : (labelWidth || (this.label ? 70 : 'auto')))
 				// }
-				// return '65px'
+				// return '70px'
 			},
 			// 处理 label 位置
 			_labelPosition() {

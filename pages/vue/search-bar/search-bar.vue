@@ -5,8 +5,7 @@
 		</uni-card>
 
 		<uni-section title="基本用法" type="line">
-			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input"
-				@cancel="cancel" @clear="clear">
+			<uni-search-bar textColor="#3c35f4" @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" class="search-result-text"	@cancel="cancel" @clear="clear" text-color="#ff261d">
 			</uni-search-bar>
 			<view class="search-result">
 				<text class="search-result-text">当前输入为：{{ searchValue }}</text>
@@ -38,7 +37,7 @@
 	export default {
 		data() {
 			return {
-				searchValue: '123123'
+				searchValue: '示例输入值，自动聚焦'
 			}
 		},
 		methods: {
@@ -93,9 +92,8 @@
 	}
 
 	.search-result-text {
-		text-align: center;
 		font-size: 14px;
-		color:#666;
+		color:#b62a4e !important;
 	}
 
 	.example-body {

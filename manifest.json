@@ -47,7 +47,8 @@
         "appid" : "",
         "setting" : {
             "urlCheck" : true
-        }
+        },
+        "usingComponents" : true
     },
     "h5" : {
         "router" : {
@@ -57,5 +58,5 @@
         "title" : "uni-ui",
         "template" : "template.h5.html"
     },
-    "vueVersion" : "3"
+    "vueVersion" : "2"
 }

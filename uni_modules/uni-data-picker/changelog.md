@@ -1,3 +1,5 @@
+## 2.0.0（2023-12-14）
+- 新增 支持 uni-app-x
 ## 1.1.2（2023-04-11）
 - 修复 更改 modelValue 报错的 bug
 - 修复 v-for 未使用 key 值控制台 warning

@@ -258,34 +258,32 @@
 			 * 获取星星个数
 			 */
 			_getRateCount(clientX) {
-				const _this = this;
-				this._getSize(function() {
-					const size = Number(_this.size)
-					if (isNaN(size)) {
-						return new Error('size 属性只能设置为数字')
-					}
-					const rateMoveRange = clientX - _this._rateBoxLeft
-					let index = parseInt(rateMoveRange / (size + _this.marginNumber))
-					index = index < 0 ? 0 : index;
-					index = index > _this.max ? _this.max : index;
-					const range = parseInt(rateMoveRange - (size + _this.marginNumber) * index);
-					let value = 0;
-					if (_this._oldValue === index && !_this.PC) return;
-					_this._oldValue = index;
-					if (_this.allowHalf) {
-						if (range > (size / 2)) {
-							value = index + 1
-						} else {
-							value = index + 0.5
-						}
-					} else {
+				this._getSize()
+				const size = Number(this.size)
+				if (isNaN(size)) {
+					return new Error('size 属性只能设置为数字')
+				}
+				const rateMoveRange = clientX - this._rateBoxLeft
+				let index = parseInt(rateMoveRange / (size + this.marginNumber))
+				index = index < 0 ? 0 : index;
+				index = index > this.max ? this.max : index;
+				const range = parseInt(rateMoveRange - (size + this.marginNumber) * index);
+				let value = 0;
+				if (this._oldValue === index && !this.PC) return;
+				this._oldValue = index;
+				if (this.allowHalf) {
+					if (range > (size / 2)) {
 						value = index + 1
+					} else {
+						value = index + 0.5
 					}
-					
-					value = Math.max(0.5, Math.min(value, _this.max))
-					_this.valueSync = value
-					_this._onChange()
-				})
+				} else {
+					value = index + 1
+				}
+
+				value = Math.max(0.5, Math.min(value, this.max))
+				this.valueSync = value
+				this._onChange()
 			},
 
 			/**
@@ -302,7 +300,7 @@
 			/**
 			 * 获取星星距离屏幕左侧距离
 			 */
-			_getSize(fn) {
+			_getSize() {
 				// #ifndef APP-NVUE
 				uni.createSelectorQuery()
 					.in(this)
@@ -311,7 +309,6 @@
 					.exec(ret => {
 						if (ret) {
 							this._rateBoxLeft = ret[0].left
-							fn && fn()
 						}
 					})
 				// #endif
@@ -320,7 +317,6 @@
 					const size = ret.size
 					if (size) {
 						this._rateBoxLeft = size.left
-						fn && fn()
 					}
 				})
 				// #endif

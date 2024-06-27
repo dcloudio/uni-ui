@@ -1,7 +1,7 @@
 {
 	"id": "55",
 	"name": "@dcloudio/uni-ui",
-	"version": "1.4.28",
+	"version": "1.5.5",
 	"description": "",
 	"author": "dcloud",
 	"license": "Apache-2.0",
@@ -31,6 +31,16 @@
 		"ios >= 8"
 	],
 	"uni-app": {
-		"scripts": {}
+		"scripts": {
+			"mp-dingtalk": {
+				"title": "钉钉小程序",
+				"env": {
+					"UNI_PLATFORM": "mp-alipay"
+				},
+				"define": {
+					"MP-DINGTALK": true
+				}
+			}
+		}
 	}
 }

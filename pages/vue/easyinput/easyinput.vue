@@ -22,9 +22,9 @@
 
 		<uni-section title="图标" subTitle="使用 prefixIcon / suffixIcon 属性 ,可以自定义输入框左右侧图标" type="line" padding>
 			<uni-easyinput prefixIcon="search" v-model="value" placeholder="左侧图标" @iconClick="iconClick">
+				<template #left></template>
 			</uni-easyinput>
-			<uni-easyinput class="uni-mt-5" suffixIcon="search" v-model="value" placeholder="右侧图标"
-				@iconClick="iconClick">
+			<uni-easyinput class="uni-mt-5" suffixIcon="search" v-model="value" placeholder="右侧图标" @iconClick="iconClick">
 			</uni-easyinput>
 		</uni-section>
 
@@ -32,7 +32,9 @@
 		<uni-section title="插槽" subTitle="使用 prefixIcon / suffixIcon 插槽 ,可以自定义输入框左右侧内容" type="line" padding>
 			<uni-easyinput v-model="value" placeholder="请输入网址">
 				<template #prefixIcon>
-					<view style="background-color: #f2f2f2;padding: 0 10rpx;height: 70rpx;line-height: 70rpx;margin-right: 10rpx;">https://</view>
+					<view
+						style="background-color: #f2f2f2;padding: 0 10rpx;height: 70rpx;line-height: 70rpx;margin-right: 10rpx;">
+						https://</view>
 				</template>
 			</uni-easyinput>
 			<uni-easyinput class="uni-mt-5" prefixIcon="search" v-model="value" placeholder="想看什么,搜索一下">
@@ -48,7 +50,7 @@
 		</uni-section>
 
 		<uni-section title="密码框" subTitle="指定属性 type=password 使用密码框,右侧会显示眼睛图标" type="line" padding>
-			<uni-easyinput type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput :clearable="false" type="password" v-model="password" placeholder="请输入密码"></uni-easyinput>
 		</uni-section>
 
 		<uni-section title="多行文本" subTitle="指定属性 type=textarea 使用多行文本框" type="line" padding>

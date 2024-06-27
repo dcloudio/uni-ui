@@ -191,6 +191,10 @@
 				default () {
 					return  ['album', 'camera']
 				}
+			},
+			provider: {
+				type: String,
+				default: '' // 默认上传到 unicloud 内置存储 extStorage 扩展存储
 			}
 		},
 		data() {
@@ -331,7 +335,6 @@
 			 * 选择文件
 			 */
 			choose() {
-
 				if (this.disabled) return
 				if (this.files.length >= Number(this.limitLength) && this.showType !== 'grid' && this.returnType ===
 					'array') {
@@ -418,6 +421,13 @@
 				if (!this.autoUpload || this.noSpace) {
 					res.tempFiles = []
 				}
+				res.tempFiles.forEach((fileItem, index) => {
+					this.provider && (fileItem.provider = this.provider);
+					const fileNameSplit = fileItem.name.split('.')
+					const ext = fileNameSplit.pop()
+					const fileName = fileNameSplit.join('.').replace(/[\s\/\?<>\\:\*\|":]/g, '_')
+					fileItem.cloudPath = fileName + '_' + Date.now() + '_' + index + '.' + ext
+				})
 			},
 
 			/**
@@ -523,6 +533,7 @@
 			 */
 			delFile(index) {
 				this.$emit('delete', {
+					index,
 					tempFile: this.files[index],
 					tempFilePath: this.files[index].url
 				})

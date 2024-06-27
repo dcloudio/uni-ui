@@ -3,7 +3,7 @@
 		<uni-card is-full :is-shadow="false">
 			<text class="uni-h6">弹出层组件用于弹出一个覆盖到页面上的内容，使用场景如：底部弹出分享弹窗、页面插屏广告等。</text>
 		</uni-card>
-		<uni-section title="基本示例" type="line">
+		<uni-section title="基本示例" type="line" sub-title="自定义顶部圆角">
 			<view class="example-body box">
 				<button class="button" type="primary" @click="toggle('top')"><text class="button-text">顶部</text></button>
 				<button class="button" type="primary" @click="toggle('bottom')"><text class="button-text">底部</text></button>
@@ -44,8 +44,7 @@
 			<view class="dialog-box">
 				<text class="dialog-text">输入内容：{{ value }}</text>
 			</view>
-			<button class="button" type="primary" @click="inputDialogToggle"><text
-					class="button-text">输入对话框</text></button>
+			<button class="button" type="primary" @click="inputDialogToggle"><text class="button-text">输入对话框</text></button>
 
 		</uni-section>
 		<uni-section title="底部分享示例" type="line" padding>
@@ -53,7 +52,7 @@
 		</uni-section>
 		<view>
 			<!-- 普通弹窗 -->
-			<uni-popup ref="popup" background-color="#fff" @change="change">
+			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">popup 内容</text></view>
 			</uni-popup>
@@ -69,16 +68,16 @@
 		<view>
 			<!-- 提示窗示例 -->
 			<uni-popup ref="alertDialog" type="dialog">
-				<uni-popup-dialog :type="msgType" cancelText="关闭" confirmText="同意" title="通知" content="欢迎使用 uni-popup!" @confirm="dialogConfirm"
-					@close="dialogClose"></uni-popup-dialog>
+				<uni-popup-dialog :showClose="showClose" :type="msgType" cancelText="关闭" confirmText="同意" title="通知"
+					content="欢迎使用 uni-popup!" @confirm="dialogConfirm" @close="dialogClose"></uni-popup-dialog>
 			</uni-popup>
 		</view>
 
 		<view>
 			<!-- 输入框示例 -->
 			<uni-popup ref="inputDialog" type="dialog">
-				<uni-popup-dialog ref="inputClose"  mode="input" title="输入内容" value="对话框预置提示内容!"
-					placeholder="请输入内容" @confirm="dialogInputConfirm"></uni-popup-dialog>
+				<uni-popup-dialog ref="inputClose" :maxlength="10" mode="input" title="输入内容" v-model="value"
+					placeholder="请输入内容，限制10个字" @confirm="dialogInputConfirm"></uni-popup-dialog>
 			</uni-popup>
 		</view>
 
@@ -98,7 +97,8 @@
 				type: 'center',
 				msgType: 'success',
 				messageText: '这是一条成功提示',
-				value: ''
+				value: '',
+				showClose: true,
 			}
 		},
 		onReady() {},
@@ -135,10 +135,9 @@
 				uni.showLoading({
 					title: '3秒后会关闭'
 				})
-
+				console.log(this.value);
 				setTimeout(() => {
 					uni.hideLoading()
-					console.log(val)
 					this.value = val
 					// 关闭窗口后，恢复默认内容
 					this.$refs.inputDialog.close()
@@ -197,7 +196,6 @@
 		justify-content: center;
 		padding: 15px;
 		height: 50px;
-		background-color: #fff;
 	}
 
 	.popup-height {

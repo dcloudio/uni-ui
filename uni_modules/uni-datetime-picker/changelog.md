@@ -1,3 +1,21 @@
+## 2.2.34（2024-04-24）
+- 新增 日期点击事件，在点击日期时会触发该事件。
+## 2.2.33（2024-04-15）
+- 修复 抖音小程序事件传递失效bug
+## 2.2.32（2024-02-20）
+- 修复 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
+## 2.2.31（2024-02-20）
+- 修复 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
+## 2.2.30（2024-01-31）
+- 修复 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
+## 2.2.29（2024-01-20）
+- 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+## 2.2.28（2024-01-18）
+- 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+## 2.2.27（2024-01-10）
+- 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+## 2.2.26（2024-01-08）
+- 修复 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
 ## 2.2.25（2023-10-18）
 - 修复 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
 ## 2.2.24（2023-06-02）
