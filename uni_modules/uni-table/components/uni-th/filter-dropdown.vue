@@ -203,7 +203,7 @@
 			},
 			resetDate() {
 				let date = new Date()
-				let dateText = date.toISOString().split('T')[0]
+				let dateText = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
 				this.dateRange = [dateText + ' 0:00:00', dateText + ' 23:59:59']
 			},
 			onDropdown(e) {
