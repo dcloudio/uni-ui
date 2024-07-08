@@ -1,3 +1,15 @@
+## 1.5.6（2024-07-08）
+- uni-datetime-picker 新增 日期点击事件，在点击日期时会触发该事件。
+- uni-datetime-picker 修复 抖音小程序事件传递失效bug
+- uni-easyinput 修复 easyinput组件双向绑定问题
+- uni-number-box 修复 在vue2下H5黑边的bug
+- uni-number-box 修复 在vue2手动输入后失焦导致清空数值的严重bug
+- uni-popup 修复 uni-popup-dialog vue3下使用value无法进行绑定的bug(双向绑定兼容旧写法)
+- uni-search-bar 修复 textColor默认值导致的文字不显示的bug
+- uni-search-bar 修复 textColor不生效的bug
+- uni-segmented-control 修复 修复在微信小程序下inactiveColor失效bug
+- uni-tooltip 修复 弹出位置默认值不一致导致的错位
+- uni-transition 修复 当元素会受变量影响自动隐藏的bug
 ## 1.5.0（2024-01-13）
 - 修复 npm包结构目录错误的问题
 - uni-calendar 修复 回到今天时，月份显示不一致问题
