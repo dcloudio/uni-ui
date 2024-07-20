@@ -155,13 +155,16 @@
 					this.dialogType = 'info'
 				}
 			},
+			// #ifdef VUE2
 			value(val) {
-				if (this.maxlength != -1 && this.mode === 'input') {
-					this.val = val.slice(0, this.maxlength);
-				} else {
-					this.val = val
-				}
+				this.setVal(val)
 			},
+			// #endif
+			// #ifdef VUE3
+			modelValue(val) {
+				this.setVal(val)
+			},
+			// #endif
 			val(val) {
 				// #ifdef VUE2
 				// TODO 兼容 vue2
@@ -207,6 +210,16 @@
 				this.$emit('close')
 				if (this.beforeClose) return
 				this.popup.close()
+			},
+			/**
+			 * 设置val的值
+			 */
+			setVal(val) {
+				if (this.maxlength != -1 && this.mode === 'input') {
+					this.val = val.slice(0, this.maxlength);
+				} else {
+					this.val = val
+				}
 			},
 			close() {
 				this.popup.close()
