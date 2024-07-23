@@ -143,9 +143,6 @@
 			textShow() {
 				// 长文本显示
 				let text = this.current;
-				if (text.length > 10) {
-					return text.slice(0, 25) + '...';
-				}
 				return text;
 			},
 			getOffsetByPlacement() {
@@ -405,6 +402,7 @@
 
 	.uni-select__input-box {
 		height: 35px;
+		width: 0px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
