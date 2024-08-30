@@ -31,7 +31,26 @@
 		components: {},
 		data() {
 			return {
-				candidates: ['北京', '南京', '东京', '武汉', '天津', '上海', '海口'],
+				//candidates: ['北京', '南京', '东京', '武汉', '天津', '上海', '海口'],
+				candidates: [{
+					key: 0,
+					value: '北京'
+				}, {
+					key: 1,
+					value: '南京'
+				}, , {
+					key: 2,
+					value: '武汉'
+				}, {
+					key: 3,
+					value: '天津'
+				}, {
+					key: 4,
+					value: '上海'
+				}, {
+					key: 5,
+					value: '海口'
+				}],
 				city: ''
 			}
 		},
