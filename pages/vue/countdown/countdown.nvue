@@ -31,6 +31,9 @@
 		<uni-section title="动态赋值" type="line" padding>
 			<uni-countdown :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond" />
 		</uni-section>
+		<uni-section title="filterShow自由控制显示位数"  sub-title="默认都是显示2位" type="line" padding>
+			<uni-countdown  :filterShow="{d:1,h:1,m:2,s:2}" :day="1" :hour="8" :minute="12" :second="40" />
+		</uni-section>
 	</view>
 </template>
 <script>
