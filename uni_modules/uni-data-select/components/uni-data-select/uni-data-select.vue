@@ -6,10 +6,10 @@
 				<view class="uni-select__input-box" @click="toggleSelector">
 					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view v-if="current && clear && !disabled" @click.stop="clearVal">
+					<view key="clear-button" v-if="current && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
-					<view v-else>
+					<view key="arrow-button" v-else>
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
 				</view>
@@ -244,6 +244,7 @@
 
 			clearVal() {
 				this.emit('')
+				this.current = ''
 				if (this.collection) {
 					this.removeCache()
 				}
