@@ -1,3 +1,40 @@
+## 1.5.6（2024-07-08）
+- uni-datetime-picker 新增 日期点击事件，在点击日期时会触发该事件。
+- uni-datetime-picker 修复 抖音小程序事件传递失效bug
+- uni-easyinput 修复 easyinput组件双向绑定问题
+- uni-number-box 修复 在vue2下H5黑边的bug
+- uni-number-box 修复 在vue2手动输入后失焦导致清空数值的严重bug
+- uni-popup 修复 uni-popup-dialog vue3下使用value无法进行绑定的bug(双向绑定兼容旧写法)
+- uni-search-bar 修复 textColor默认值导致的文字不显示的bug
+- uni-search-bar 修复 textColor不生效的bug
+- uni-segmented-control 修复 修复在微信小程序下inactiveColor失效bug
+- uni-tooltip 修复 弹出位置默认值不一致导致的错位
+- uni-transition 修复 当元素会受变量影响自动隐藏的bug
+## 1.5.0（2024-01-13）
+- 修复 npm包结构目录错误的问题
+- uni-calendar 修复 回到今天时，月份显示不一致问题
+- uni-data-picker 新增 支持 uni-app-x
+- uni-datetime-picker 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+- uni-datetime-picker 修复 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
+- uni-datetime-picker 修复 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
+- uni-datetime-picker 修复 部分情况修改时间，开始、结束时间显示异常的Bug [详情](https://ask.dcloud.net.cn/question/171146)
+- uni-datetime-picker 优化 当前月可以选择上月、下月的日期的Bug
+- uni-file-picker 新增 微信小程序不再调用chooseImage,而是调用chooseMedia
+- uni-file-picker 新增 上传文件至云存储携带本地文件名称
+- uni-forms 优化 labelWidth 描述错误
+fix: 修复图标大小默认值错误的问题
+- uni-icons 修复 项目未使用 ts 情况下，打包报错的bug
+- uni-icons 修复 size 属性为 string 时，不加单位导致尺寸异常的bug
+- uni-icons 优化 兼容老版本icon类型，如 top ，bottom 等
+- uni-icons 优化 兼容老版本icon类型，如 top ，bottom 等
+- uni-icons 优化 uni-app x 下示例项目图标排序
+- uni-icons 修复 nvue下引入组件报错的bug
+-优化 size 属性支持单位
+- uni-icons 新增 uni-app x 支持定义图标
+- uni-notice-bar 修复动态绑定title时，滚动速度不一致的问题
+更新示例工程
+- uni-popup 新增 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
+- uni-table 修复 uni-tr只有一列时minWidth计算错误，列变化实时计算更新
 ## 1.4.27（2023-04-21）
 - uni-calendar 修复 某些情况 monthSwitch 未触发的Bug
 - uni-calendar 修复 某些情况切换月份错误的Bug

@@ -13,7 +13,12 @@
 	 */
 	export default {
 		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
 			virtualHost: true
+			// #endif
 		},
 		props: {
 			separator: {

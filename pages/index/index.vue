@@ -94,6 +94,10 @@
 						url: 'list'
 					},
 					{
+						name: 'table 表格',
+						url: 'table'
+					},
+					{
 						name: 'Title 章节标题',
 						url: 'title'
 					},
@@ -165,7 +169,7 @@
 						url: 'data-picker'
 					},
 					// #endif
-					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-TOUTIAO || MP-BAIDU
+					// #ifndef APP-NVUE || MP-KUAISHOU || MP-LARK || MP-BAIDU
 					{
 						name: 'DatetimePicker 日期时间选择',
 						url: 'datetime-picker'
@@ -173,10 +177,10 @@
 					// #endif
 				],
 				functionals: [
-					// {
-					// 	name: 'Calendar 日历',
-					// 	url: 'calendar'
-					// },
+					{
+						name: 'Calendar 日历',
+						url: 'calendar'
+					},
 					{
 						name: 'Collapse 折叠面板',
 						url: 'collapse'
