@@ -464,9 +464,16 @@
 					this.isPhone = navigator.userAgent.toLowerCase().indexOf('mobile') !== -1
 					return
 				}
+				// #ifdef MP-WEIXIN
+				const {
+					windowWidth
+				} = uni.getWindowInfo()
+				// #endif
+				// #ifndef MP-WEIXIN
 				const {
 					windowWidth
 				} = uni.getSystemInfoSync()
+				// #endif
 				this.isPhone = windowWidth <= 500
 				this.windowWidth = windowWidth
 			},
