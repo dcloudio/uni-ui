@@ -192,6 +192,7 @@
 		},
 		mounted() {
 			const fixSize = () => {
+				// #ifdef MP-WEIXIN
 				const {
 					windowWidth,
 					windowHeight,
@@ -200,6 +201,17 @@
 					screenHeight,
 					safeAreaInsets
 				} = uni.getWindowInfo()
+				// #endif
+				// #ifndef MP-WEIXIN
+				const {
+					windowWidth,
+					windowHeight,
+					windowTop,
+					safeArea,
+					screenHeight,
+					safeAreaInsets
+				} = uni.getSystemInfo()
+				// #endif
 				this.popupWidth = windowWidth
 				this.popupHeight = windowHeight + (windowTop || 0)
 				// TODO fix by mehaotian 是否适配底部安全区 ,目前微信ios 、和 app ios 计算有差异，需要框架修复
