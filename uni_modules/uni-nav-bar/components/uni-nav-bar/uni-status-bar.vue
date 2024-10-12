@@ -9,12 +9,7 @@
 		name: 'UniStatusBar',
 		data() {
 			return {
-				 // #ifdef MP-WEIXIN
-				 statusBarHeight: uni.getWindowInfo().statusBarHeight + 'px',
-				 // #endif
-				 // #ifndef MP-WEIXIN
-				 statusBarHeight: uni.getSystemInfoSync().statusBarHeight + 'px'
-				 // #endif
+				statusBarHeight: uni.getWindowInfo().statusBarHeight + 'px',
 			}
 		}
 	}

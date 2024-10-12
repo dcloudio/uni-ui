@@ -37,7 +37,7 @@
 <script>
 	let platform
 	setTimeout(() => {
-		platform = uni.getSystemInfoSync().platform
+		platform = uni.getDeviceInfo().platform
 	}, 16)
 
 	import {
