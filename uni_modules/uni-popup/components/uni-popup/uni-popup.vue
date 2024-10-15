@@ -210,7 +210,7 @@
 					safeArea,
 					screenHeight,
 					safeAreaInsets
-				} = uni.getSystemInfo()
+				} = uni.getSystemInfoSync()
 				// #endif
 				this.popupWidth = windowWidth
 				this.popupHeight = windowHeight + (windowTop || 0)

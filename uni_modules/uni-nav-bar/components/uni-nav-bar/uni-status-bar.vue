@@ -13,7 +13,7 @@
 				statusBarHeight: uni.getWindowInfo().statusBarHeight + 'px',
 				// #endif
 				// #ifndef MP-WEIXIN
-				statusBarHeight: uni.getSystemInfo().statusBarHeight + 'px',
+				statusBarHeight: uni.getSystemInfoSync().statusBarHeight + 'px',
 				// #endif
 
 			}

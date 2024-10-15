@@ -111,7 +111,7 @@ export default {
 					let widthCoe = uni.getWindowInfo().screenWidth / 750
 					// #endif
 					// #ifndef MP-WEIXIN
-					let widthCoe = uni.getSystemInfo().screenWidth / 750
+					let widthCoe = uni.getSystemInfoSync().screenWidth / 750
 					// #endif
 					return Math.round(numberRpx * widthCoe)
 				} else if (this.width.match(regexHaveNotUnit) !== null) { // 未携带 rpx或px 的纯数字 String

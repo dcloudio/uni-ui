@@ -472,7 +472,7 @@
 				// #ifndef MP-WEIXIN
 				const {
 					windowWidth
-				} = uni.getSystemInfo()
+				} = uni.getSystemInfoSync()
 				// #endif
 				this.isPhone = windowWidth <= 500
 				this.windowWidth = windowWidth

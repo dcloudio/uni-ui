@@ -41,7 +41,7 @@
 		platform = uni.getDeviceInfo().platform
 		// #endif
 		// #ifndef MP-WEIXIN
-		platform = uni.getSystemInfo().platform
+		platform = uni.getSystemInfoSync().platform
 		// #endif
 	}, 16)
 
