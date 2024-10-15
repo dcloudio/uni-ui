@@ -41,7 +41,12 @@
 export default {
 	name: 'uniTh',
 	options: {
+		// #ifdef MP-TOUTIAO
+		virtualHost: false,
+		// #endif
+		// #ifndef MP-TOUTIAO
 		virtualHost: true
+		// #endif
 	},
 	components: {
 		// #ifdef H5
