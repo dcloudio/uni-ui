@@ -1,3 +1,19 @@
+## 1.5.7（2024-10-31）
+- uni-calendar 修复 calendar 在选择日期范围后重新选择日期需要点两次的 Bug
+- uni-combox 新增 clearAble 属性
+- uni-countdown 新增 支持控制显示位数 默认显示 2 位
+- uni-datetime-picker 修复 没有选中日期时点击确定直接报错的 Bug [详情](https://ask.dcloud.net.cn/question/198168)
+- uni-easyinput 修复 初始值传入 null 导致 input 报错的 Bug
+- uni-fab 修复 微信小程序中的 getSystemInfo 警告
+- uni-file-picker 优化 vue3 兼容性
+- uni-file-picker 修复 value 属性不兼容 vue3 的 Bug
+- uni-forms 修复 校验规则在抖音开发者工具上不生效的 Bug [详情](https://ask.dcloud.net.cn/question/191933)
+- uni-forms 修复 form 上次修改的问题
+- uni-forms 修复 binddata 的兼容性问题
+- uni-popup 修复 uni-popup 在 android 上的重复点击弹出位置不正确的 Bug
+- uni-table 修复 运行到抖音小程序上出现的问题
+- 修复 uni-load-more uni-nav-bar uni-popup uni-table uni-datetime-picker 在微信小程序中的 getSystemInfo 警告
+
 ## 1.5.6（2024-07-08）
 - uni-datetime-picker 新增 日期点击事件，在点击日期时会触发该事件。
 - uni-datetime-picker 修复 抖音小程序事件传递失效bug
