@@ -156,12 +156,13 @@
 				}
 			},
 			value(val) {
-				if (this.maxlength != -1 && this.mode === 'input') {
-					this.val = val.slice(0, this.maxlength);
-				} else {
-					this.val = val
-				}
+				setVal(val)
 			},
+			// #ifdef VUE3
+			modelValue(val) {
+				setVal(val)
+			},
+			// #endif
 			val(val) {
 				// #ifdef VUE2
 				// TODO 兼容 vue2
@@ -188,6 +189,16 @@
 			}
 		},
 		methods: {
+			/**
+			 * 给val属性赋值
+			 */
+			setVal(val) {
+				if (this.maxlength != -1 && this.mode === 'input') {
+					this.val = val.slice(0, this.maxlength);
+				} else {
+					this.val = val
+				}
+			},
 			/**
 			 * 点击确认按钮
 			 */
