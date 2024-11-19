@@ -17,7 +17,7 @@
 	 * 	@value h5 五级标题
 	 * @property {String} title 标题内容
 	 * @property {String} align = [left|center|right] 对齐方式
-	 * 	@value left 做对齐
+	 * 	@value left 左对齐
 	 * 	@value center 居中对齐
 	 * 	@value right 右对齐
 	 * @property {String} color 字体颜色
