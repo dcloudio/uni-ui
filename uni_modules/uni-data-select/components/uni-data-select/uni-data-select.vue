@@ -349,6 +349,7 @@
 	}
 
 	.uni-stat-box {
+		background-color: #fff;
 		width: 100%;
 		flex: 1;
 	}
