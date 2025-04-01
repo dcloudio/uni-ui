@@ -49,7 +49,7 @@
 |clear-icon 					|Boolean				| true/false |	true				|是否显示清除按钮|
 |ellipsis 						|Boolean				| true/false |	true				|是否隐藏 tab 标签过长的文本|
 |step-searh 					|Boolean				| true/false |	true				|分步查询时，点击节点请求数据|
-|step-search-url			|String					| 					 |							|分步查询时，动态加载云端数据url格式，`https://xxx.com/{parentValue}`(当前版本暂不支持，下版支持)|
+|step-search-url			|String					| 					 |							|分步查询时，动态加载云端数据url格式，`https://xxx.com/{parentValue}`(当前版本暂不支持，下版支持 1)|
 |self-field						|String					| 					 |							|分步查询时当前字段名称|
 |parent-field					|String					| 					 |							|分步查询时父字段名称|
 |collection						|String					| 					 |							|表名。支持输入多个表名，用 `,` 分割|
