@@ -1,7 +1,8 @@
 <template>
 	<view v-if="show" class="uni-noticebar" :style="{ backgroundColor }" @click="onClick">
-		<uni-icons v-if="showIcon === true || showIcon === 'true'" class="uni-noticebar-icon" type="sound"
-			:color="color" :size="fontSize * 1.5" />
+		<slot v-if="showIcon === true || showIcon === 'true'" name="noticebarIcon">
+			<uni-icons class="uni-noticebar-icon" type="sound" :color="color" :size="fontSize * 1.5" />
+		</slot>
 		<view ref="textBox" class="uni-noticebar__content-wrapper"
 			:class="{
 				'uni-noticebar__content-wrapper--scrollable': scrollable,
