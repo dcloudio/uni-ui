@@ -673,6 +673,7 @@
 						this.displayValue = e.fulldate
 					}
 					this.setEmit(this.displayValue)
+					this.calendarDate = this.displayValue;
 				}
 				this.$refs.mobile.close()
 			},
