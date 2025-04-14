@@ -673,6 +673,7 @@
 						this.displayValue = e.fulldate
 					}
 					this.setEmit(this.displayValue)
+					this.calendarDate = this.displayValue;
 				}
 				this.$refs.mobile.close()
 			},
@@ -699,17 +700,25 @@
 				let startDateLaterRangeStartDate = false
 				let startDateLaterRangeEndDate = false
 				let startDate, startTime
+
+				let compareStartDateString = this.tempRange.startDate
+				let compareEndDateString = this.tempRange.endDate
+				if (this.hasTime) {
+					compareStartDateString = `${this.tempRange.startDate} ${this.tempRange.startTime}`
+					compareEndDateString = `${this.tempRange.endDate} ${this.tempRange.endTime}`
+				}
+
 				if (this.start) {
 					let startString = this.start
 					if (typeof this.start === 'number') {
 						startString = getDateTime(this.start, this.hideSecond)
 					}
 					[startDate, startTime] = startString.split(' ')
-					if (this.start && !dateCompare(this.start, `${this.tempRange.startDate} ${this.tempRange.startTime}`)) {
+					if (this.start && !dateCompare(this.start, compareStartDateString)) {
 						startDateLaterRangeStartDate = true
 						this.tempRange.startDate = startDate
 					}
-					if (this.start && !dateCompare(this.start, `${this.tempRange.endDate} ${this.tempRange.endTime}`)) {
+					if (this.start && !dateCompare(this.start, compareEndDateString)) {
 						startDateLaterRangeEndDate = true
 						this.tempRange.endDate = startDate
 					}
@@ -724,11 +733,11 @@
 					}
 					[endDate, endTime] = endString.split(' ')
 
-					if (this.end && !dateCompare(`${this.tempRange.startDate} ${this.tempRange.startTime}`, this.end)) {
+					if (this.end && !dateCompare(compareStartDateString, this.end)) {
 						endDateEarlierRangeStartDate = true
 						this.tempRange.startDate = endDate
 					}
-					if (this.end && !dateCompare(`${this.tempRange.endDate} ${this.tempRange.endTime}`, this.end)) {
+					if (this.end && !dateCompare(compareEndDateString, this.end)) {
 						endDateEarlierRangeEndDate = true
 						this.tempRange.endDate = endDate
 					}

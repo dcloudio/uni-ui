@@ -66,3 +66,18 @@ url : pages/vue/notice-bar/notice-bar
 |@click		|点击 NoticeBar 触发事件	|-		|
 |@close		|关闭 NoticeBar 触发事件	|-		|
 |@getmore	|点击”查看更多“时触发事件	|-		|
+
+### 替换 icon 的 slot 插槽
+
+|插槽称名	|说明																|
+|:-:		|:-:																|
+|noticebarIcon	|替换组件的通知图标|
+
+```html
+<!-- 替换组件的通知图标 -->
+<uni-notice-bar show-icon single text="HBuilderX 1.0正式发布！uni-app实现里程碑突破实现里程碑突破！">
+	<template v-slot:noticebarIcon>
+		<uni-icons size="18" type="arrowright" />
+	</template>
+</uni-notice-bar>
+```

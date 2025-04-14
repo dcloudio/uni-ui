@@ -213,14 +213,22 @@
 							"bottom": verticalPadding,
 							"left": horizontalPadding
 						}
+					} else if(paddingArr.length === 3) {
+						const [topPadding, horizontalPadding, bottomPadding] = paddingArr;
+						this.padding = {
+							"top": topPadding,
+							"right": horizontalPadding,
+							"bottom": bottomPadding,
+							"left": horizontalPadding
+						}
 					} else if (paddingArr.length === 4) {
-							const [topPadding, rightPadding, bottomPadding, leftPadding] = paddingArr;
-							this.padding = {
-								"top": topPadding,
-								"right": rightPadding,
-								"bottom": bottomPadding,
-								"left": leftPadding
-							}
+						const [topPadding, rightPadding, bottomPadding, leftPadding] = paddingArr;
+						this.padding = {
+							"top": topPadding,
+							"right": rightPadding,
+							"bottom": bottomPadding,
+							"left": leftPadding
+						}
 					}
 				},
 				immediate: true
@@ -352,7 +360,7 @@
 	}
 
 	.uni-list-item--hover {
-		background-color: $uni-bg-color-hover;
+		background-color: $uni-bg-color-hover !important;
 	}
 
 	.uni-list-item__container {

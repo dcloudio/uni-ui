@@ -1,7 +1,7 @@
 {
   "id": "uni-table",
   "displayName": "uni-table 表格",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "表格组件，多用于展示多条结构类似的数据，如",
   "keywords": [
     "uni-ui",
@@ -47,8 +47,10 @@
       },
       "client": {
         "App": {
-          "app-vue": "y",
-          "app-nvue": "n"
+            "app-vue": "y",
+            "app-nvue": "n",
+            "app-harmony": "u",
+            "app-uvue": "u"
         },
         "H5-mobile": {
           "Safari": "y",

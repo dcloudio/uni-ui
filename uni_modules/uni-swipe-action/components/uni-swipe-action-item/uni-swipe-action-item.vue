@@ -1,6 +1,6 @@
 <template>
 	<!-- 在微信小程序 app vue端 h5 使用wxs 实现-->
-	<!-- #ifdef APP-HARMONY || MP-WEIXIN || H5 -->
+	<!-- #ifdef APP-VUE || APP-HARMONY || MP-WEIXIN || H5 -->
 	<view class="uni-swipe">
 		<!--  #ifdef MP-WEIXIN || H5 -->
 		<view class="uni-swipe_box" :change:prop="wxsswipe.showWatch" :prop="is_show" :data-threshold="threshold"
