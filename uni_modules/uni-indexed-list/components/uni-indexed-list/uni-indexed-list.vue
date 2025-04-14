@@ -140,7 +140,7 @@
 			setList() {
 				let index = 0;
 				this.lists = []
-				this.options.forEach((value) => {
+				this.options.forEach((value, index) => {
 					if (value.data.length === 0) {
 						return
 					}
@@ -282,7 +282,7 @@
 		}
 	}
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 	.uni-indexed-list {
 		position: absolute;
 		left: 0;

@@ -1,47 +1,107 @@
+## 2.2.40（2025-04-14）
+- 修复 绑定字符串值的时，日历面板选中状态未重置到默认值的问题
+## 2.2.39（2025-04-14）
+- 修复 在 iOS 微信小程序上type='daterange'时，传入'YYYY-MM-DD'格式不生效的问题
+
+## 2.2.38（2024-10-15）
+- 修复 微信小程序中的getSystemInfo警告
+## 2.2.35（2024-09-21）
+- 修复 没有选中日期时点击确定直接报错的Bug [详情](https://ask.dcloud.net.cn/question/198168)
+## 2.2.34（2024-04-24）
+- 新增 日期点击事件，在点击日期时会触发该事件。
+## 2.2.33（2024-04-15）
+- 修复 抖音小程序事件传递失效bug
+## 2.2.32（2024-02-20）
+- 修复 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
+## 2.2.31（2024-02-20）
+- 修复 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
+## 2.2.30（2024-01-31）
+- 修复 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
+## 2.2.29（2024-01-20）
+- 新增 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+## 2.2.28（2024-01-18）
+- 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+## 2.2.27（2024-01-10）
+- 优化 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+## 2.2.26（2024-01-08）
+- 修复 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
+## 2.2.25（2023-10-18）
+- 修复 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
+## 2.2.24（2023-06-02）
+- 修复 部分情况修改时间，开始、结束时间显示异常的Bug [详情](https://ask.dcloud.net.cn/question/171146)
+- 优化 当前月可以选择上月、下月的日期的Bug
+## 2.2.23（2023-05-02）
+- 修复 部分情况修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
+- 修复 部分平台及设备第一次点击无法显示弹框的Bug
+- 修复 ios 日期格式未补零显示及使用异常的Bug [详情](https://ask.dcloud.net.cn/question/162979)
+## 2.2.22（2023-03-30）
+- 修复 日历 picker 修改年月后，自动选中当月1日的Bug [详情](https://ask.dcloud.net.cn/question/165937)
+- 修复 小程序端 低版本 ios NaN的Bug [详情](https://ask.dcloud.net.cn/question/162979)
+## 2.2.21（2023-02-20）
+- 修复 firefox 浏览器显示区域点击无法拉起日历弹框的Bug [详情](https://ask.dcloud.net.cn/question/163362)
+## 2.2.20（2023-02-17）
+- 优化 值为空依然选中当天问题
+- 优化 提供 default-value 属性支持配置选择器打开时默认显示的时间
+- 优化 非范围选择未选择日期时间，点击确认按钮选中当前日期时间
+- 优化 字节小程序日期时间范围选择，底部日期换行的Bug
+## 2.2.19（2023-02-09）
+- 修复 2.2.18 引起范围选择配置 end 选择无效的Bug [详情](https://github.com/dcloudio/uni-ui/issues/686)
+## 2.2.18（2023-02-08）
+- 修复 移动端范围选择change事件触发异常的Bug [详情](https://github.com/dcloudio/uni-ui/issues/684)
+- 优化 PC端输入日期格式错误时返回当前日期时间
+- 优化 PC端输入日期时间超出 start、end 限制的Bug
+- 优化 移动端日期时间范围用法时间展示不完整问题
+## 2.2.17（2023-02-04）
+- 修复 小程序端绑定 Date 类型报错的Bug [详情](https://github.com/dcloudio/uni-ui/issues/679)
+- 修复 vue3 time-picker 无法显示绑定时分秒的Bug
+## 2.2.16（2023-02-02）
+- 修复 字节小程序报错的Bug
+## 2.2.15（2023-02-02）
+- 修复 某些情况切换月份错误的Bug
 ## 2.2.14（2023-01-30）
-- 修复 某些情况切换月份错误问题
+- 修复 某些情况切换月份错误的Bug [详情](https://ask.dcloud.net.cn/question/162033)
 ## 2.2.13（2023-01-10）
-- 修复 多次加载组件造成内存占用的 bug
+- 修复 多次加载组件造成内存占用的Bug
 ## 2.2.12（2022-12-01）
-- 修复 vue3 下 i18n 国际化初始值不正确的 bug
+- 修复 vue3 下 i18n 国际化初始值不正确的Bug
 ## 2.2.11（2022-09-19）
-- 修复，支付宝小程序样式错乱，[详情](https://github.com/dcloudio/uni-app/issues/3861)
+- 修复 支付宝小程序样式错乱的Bug [详情](https://github.com/dcloudio/uni-app/issues/3861)
 ## 2.2.10（2022-09-19）
-- 修复，反向选择日期范围，日期显示异常，[详情](https://ask.dcloud.net.cn/question/153401?item_id=212892&rf=false)
+- 修复 反向选择日期范围，日期显示异常的Bug [详情](https://ask.dcloud.net.cn/question/153401?item_id=212892&rf=false)
 ## 2.2.9（2022-09-16）
 - 可以使用 uni-scss 控制主题色
 ## 2.2.8（2022-09-08）
-- 修复 close事件无效的 bug
+- 修复 close事件无效的Bug
 ## 2.2.7（2022-09-05）
-- 修复 移动端 maskClick 无效的 bug，详见:[https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false](https://ask.dcloud.net.cn/question/140824?item_id=209458&rf=false)
+- 修复 移动端 maskClick 无效的Bug [详情](https://ask.dcloud.net.cn/question/140824)
 ## 2.2.6（2022-06-30）
 - 优化 组件样式，调整了组件图标大小、高度、颜色等，与uni-ui风格保持一致
 ## 2.2.5（2022-06-24）
-- 修复 日历顶部年月及底部确认未国际化 bug
+- 修复 日历顶部年月及底部确认未国际化的Bug
 ## 2.2.4（2022-03-31）
-- 修复 Vue3 下动态赋值,单选类型未响应的 bug
+- 修复 Vue3 下动态赋值,单选类型未响应的Bug
 ## 2.2.3（2022-03-28）
-- 修复 Vue3 下动态赋值未响应的 bug
+- 修复 Vue3 下动态赋值未响应的Bug
 ## 2.2.2（2021-12-10）
-- 修复 clear-icon 属性在小程序平台不生效的 bug
+- 修复 clear-icon 属性在小程序平台不生效的Bug
 ## 2.2.1（2021-12-10）
-- 修复 日期范围选在小程序平台，必须多点击一次才能取消选中状态的 bug
+- 修复 日期范围选在小程序平台，必须多点击一次才能取消选中状态的Bug
 ## 2.2.0（2021-11-19）
-- 优化 组件UI，并提供设计资源，详见:[https://uniapp.dcloud.io/component/uniui/resource](https://uniapp.dcloud.io/component/uniui/resource)
-- 文档迁移，详见:[https://uniapp.dcloud.io/component/uniui/uni-datetime-picker](https://uniapp.dcloud.io/component/uniui/uni-datetime-picker)
+- 优化 组件UI，并提供设计资源 [详情](https://uniapp.dcloud.io/component/uniui/resource)
+- 文档迁移 [https://uniapp.dcloud.io/component/uniui/uni-datetime-picker](https://uniapp.dcloud.io/component/uniui/uni-datetime-picker)
 ## 2.1.5（2021-11-09）
 - 新增 提供组件设计资源，组件样式调整
 ## 2.1.4（2021-09-10）
-- 修复 hide-second 在移动端的 bug
-- 修复 单选赋默认值时，赋值日期未高亮的 bug
-- 修复 赋默认值时，移动端未正确显示时间的 bug
+- 修复 hide-second 在移动端的Bug
+- 修复 单选赋默认值时，赋值日期未高亮的Bug
+- 修复 赋默认值时，移动端未正确显示时间的Bug
 ## 2.1.3（2021-09-09）
 - 新增 hide-second 属性，支持只使用时分，隐藏秒
 ## 2.1.2（2021-09-03）
 - 优化 取消选中时（范围选）直接开始下一次选择, 避免多点一次
 - 优化 移动端支持清除按钮，同时支持通过 ref 调用组件的 clear 方法
 - 优化 调整字号大小，美化日历界面
-- 修复 因国际化导致的 placeholder 失效的 bug
+- 修复 因国际化导致的 placeholder 失效的Bug
 ## 2.1.1（2021-08-24）
 - 新增 支持国际化
 - 优化 范围选择器在 pc 端过宽的问题
@@ -49,50 +109,50 @@
 - 新增 适配 vue3
 ## 2.0.19（2021-08-09）
 - 新增 支持作为 uni-forms 子组件相关功能
-- 修复 在 uni-forms 中使用时，选择时间报 NAN 错误的 bug
+- 修复 在 uni-forms 中使用时，选择时间报 NAN 错误的Bug
 ## 2.0.18（2021-08-05）
-- 修复 type 属性动态赋值无效的 bug
+- 修复 type 属性动态赋值无效的Bug
 - 修复 ‘确认’按钮被 tabbar 遮盖 bug
-- 修复 组件未赋值时范围选左、右日历相同的 bug
+- 修复 组件未赋值时范围选左、右日历相同的Bug
 ## 2.0.17（2021-08-04）
-- 修复 范围选未正确显示当前值的 bug
-- 修复 h5 平台（移动端）报错 'cale' of undefined 的 bug
+- 修复 范围选未正确显示当前值的Bug
+- 修复 h5 平台（移动端）报错 'cale' of undefined 的Bug
 ## 2.0.16（2021-07-21）
 - 新增 return-type 属性支持返回 date 日期对象
 ## 2.0.15（2021-07-14）
-- 修复 单选日期类型，初始赋值后不在当前日历的 bug
+- 修复 单选日期类型，初始赋值后不在当前日历的Bug
 - 新增 clearIcon 属性，显示框的清空按钮可配置显示隐藏（仅 pc 有效）
 - 优化 移动端移除显示框的清空按钮，无实际用途
 ## 2.0.14（2021-07-14）
-- 修复 组件赋值为空，界面未更新的 bug
-- 修复 start 和 end 不能动态赋值的 bug
-- 修复 范围选类型，用户选择后再次选择右侧日历（结束日期）显示不正确的 bug
+- 修复 组件赋值为空，界面未更新的Bug
+- 修复 start 和 end 不能动态赋值的Bug
+- 修复 范围选类型，用户选择后再次选择右侧日历（结束日期）显示不正确的Bug
 ## 2.0.13（2021-07-08）
-- 修复 范围选择不能动态赋值的 bug
+- 修复 范围选择不能动态赋值的Bug
 ## 2.0.12（2021-07-08）
 - 修复 范围选择的初始时间在一个月内时，造成无法选择的bug
 ## 2.0.11（2021-07-08）
 - 优化 弹出层在超出视窗边缘定位不准确的问题
 ## 2.0.10（2021-07-08）
-- 修复 范围起始点样式的背景色与今日样式的字体前景色融合，导致日期字体看不清的 bug
+- 修复 范围起始点样式的背景色与今日样式的字体前景色融合，导致日期字体看不清的Bug
 - 优化 弹出层在超出视窗边缘被遮盖的问题
 ## 2.0.9（2021-07-07）
 - 新增 maskClick 事件
-- 修复 特殊情况日历 rpx 布局错误的 bug，rpx -> px
+- 修复 特殊情况日历 rpx 布局错误的Bug，rpx -> px
 - 修复 范围选择时清空返回值不合理的bug，['', ''] -> []
 ## 2.0.8（2021-07-07）
 - 新增 日期时间显示框支持插槽
 ## 2.0.7（2021-07-01）
 - 优化 添加 uni-icons 依赖
 ## 2.0.6（2021-05-22）
-- 修复 图标在小程序上不显示的 bug
+- 修复 图标在小程序上不显示的Bug
 - 优化 重命名引用组件，避免潜在组件命名冲突
 ## 2.0.5（2021-05-20）
 - 优化 代码目录扁平化
 ## 2.0.4（2021-05-12）
 - 新增 组件示例地址
 ## 2.0.3（2021-05-10）
-- 修复 ios 下不识别 '-' 日期格式的 bug
+- 修复 ios 下不识别 '-' 日期格式的Bug
 - 优化 pc 下弹出层添加边框和阴影
 ## 2.0.2（2021-05-08）
 - 修复 在 admin 中获取弹出层定位错误的bug
@@ -103,7 +163,7 @@
  > 注意：此版本不向后兼容，不再支持单独时间选择（type=time）及相关的 hide-second 属性（时间选可使用内置组件 picker）
 ## 1.0.6（2021-03-18）
 - 新增 hide-second 属性，时间支持仅选择时、分
-- 修复 选择跟显示的日期不一样的 bug
-- 修复 chang事件触发2次的 bug
-- 修复 分、秒 end 范围错误的 bug
+- 修复 选择跟显示的日期不一样的Bug
+- 修复 chang事件触发2次的Bug
+- 修复 分、秒 end 范围错误的Bug
 - 优化 更好的 nvue 适配

@@ -7,6 +7,622 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.7" date="2024-10-31">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 calendar在选择日期范围后重新选择日期需要点两次的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="feat">
+			 clearAble属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 支持控制显示位数 默认显示2位
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 没有选中日期时点击确定直接报错的Bug [详情](https://ask.dcloud.net.cn/question/198168)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 初始值传入 null 导致input报错的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 vue3兼容性
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 value 属性不兼容vue3的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 校验规则在抖音开发者工具上不生效的bug，详见：[https://ask.dcloud.net.cn/question/191933](https://ask.dcloud.net.cn/question/191933)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 form上次修改的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 binddata的兼容性问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-popup在android上的重复点击弹出位置不正确的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 运行到抖音小程序上出现的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.1" date="2024-07-08">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 日期点击事件，在点击日期时会触发该事件。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 抖音小程序事件传递失效bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 easyinput组件双向绑定问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下H5黑边的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在vue2手动输入后失焦导致清空数值的严重bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog vue3下使用value无法进行绑定的bug(双向绑定兼容旧写法)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 textColor默认值导致的文字不显示的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 textColor不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="fix">
+			 修复在微信小程序下inactiveColor失效bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出位置默认值不一致导致的错位
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 当元素会受变量影响自动隐藏的bug
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.4" date="2024-03-31">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下:style动态绑定导致编译失败的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在头条小程序下丢失事件绑定的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 双向绑定时初始化逻辑修正
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下:style动态绑定导致编译失败的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-steps 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-steps为竖排列时，文本长度过长引起点错乱的bug
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.3" date="2024-03-22">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 titleBorder类型修正
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 单选模式下选中样式不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 在密码输入情况下 清除和小眼睛覆盖bug 在edge浏览器下显示双眼睛bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 补充 删除文件时返回文件下标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="feat">
+			 设置宽度属性width(单位：px)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 数据输入时修正为双向绑定
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 清空按钮emit值错误的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="feat">
+			 inActiveColor属性，可供配置未激活时的颜色
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="perf">
+			 app下边框过窄导致不显示的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出位置修正
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.2" date="2024-02-22">
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 支持控制小时，分钟的显隐：showHour showMinute
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 日历的close事件触发异常的bug [详情](https://github.com/dcloudio/uni-ui/issues/844)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 h5平台 右边日历的月份默认+1的bug [详情](https://github.com/dcloudio/uni-ui/issues/841)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="feat">
+			 左侧插槽：left
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 微信小程序选择视频时改用chooseMedia,并返回视频缩略图
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 step步长小于1时，键盘类型为number的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup 在微信小程序下出现文字向上闪动的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 设置输入框字体颜色:textColor
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-search-bar在支付宝小程序下样式兼容问题
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.1" date="2024-02-19">
+	<log-item title="uni-data-checkbox 组件更新">
+		<log-item-text tag-type="fix">
+			 修复错别字chagne为change
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 隐藏“秒”时，在IOS15及以下版本时出现 结束时间在开始时间之前 的bug [详情](https://github.com/dcloudio/uni-ui/issues/788)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 onBlur的emit传值错误
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 补充 adjust-position文档属性补充
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 补充 adjust-position属性传递值：（Boolean）当键盘弹起时，是否自动上推页面
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 加减号垂直位置偏移样式问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性focus：input模式下，是否自动自动聚焦
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性maxLength:限制输入框字数
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-popup-dialog 新增属性showClose:控制关闭按钮的显示
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-search-bar居中问题，现在默认居左，并修复样式偏移问题
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.1" date="2024-01-25">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.34" date="2024-01-25">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 长文本回显超过容器的bug，超过容器部分显示省略号
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 show事件，弹窗弹出时触发该事件 [详情](https://github.com/dcloudio/uni-app/issues/4694)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 去除 noChange事件，当进行日期范围选择时，若只选了一天，则开始结束日期都为同一天 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="perf">
+			 去除 移除无用的log输出
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 点击按钮时，按钮会被点击穿透导致自动收缩的 bug(兼容阿里/百度/抖音小程序)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 点击按钮时，按钮会被点击穿透导致自动收缩的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="feat">
+			 placement支持设置四个方向:top bottom left right
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.33" date="2024-01-16">
+</log>
+
+<log title="1.4.28" date="2024-01-12">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 回到今天时，月份显示不一致问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 支持 uni-app-x
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 增加noChange事件，当进行日期范围选择时，若有空值，则触发该事件 [详情](https://github.com/dcloudio/uni-ui/issues/815)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 字节小程序时间选择范围器失效问题 [详情](https://github.com/dcloudio/uni-ui/issues/834)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 PC端初次修改时间，开始时间未更新的Bug [详情](https://github.com/dcloudio/uni-ui/issues/737)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 部分情况修改时间，开始、结束时间显示异常的Bug [详情](https://ask.dcloud.net.cn/question/171146)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 当前月可以选择上月、下月的日期的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 微信小程序不再调用chooseImage,而是调用chooseMedia
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 上传文件至云存储携带本地文件名称
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="perf">
+			 labelWidth 描述错误
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="fix">
+			 项目未使用 ts 情况下，打包报错的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 size 属性为 string 时，不加单位导致尺寸异常的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 兼容老版本icon类型，如 top ，bottom 等
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 兼容老版本icon类型，如 top ，bottom 等
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-app x 下示例项目图标排序
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 nvue下引入组件报错的bug
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 uni-app x 支持定义图标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="fix">
+			动态绑定title时，滚动速度不一致的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="feat">
+			 uni-popup 支持uni-app-x 注意暂时仅支持 `maskClick` `@open` `@close`
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-tr只有一列时minWidth计算错误，列变化实时计算更新
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.28" date="2023-06-14">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 部分情况修改时间，开始时间未更新 [详情](https://github.com/dcloudio/uni-ui/issues/737)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 部分平台及设备第一次点击无法显示弹框
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 ios 日期格式未补零显示及使用异常 [详情](https://ask.dcloud.net.cn/question/162979)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 change 事件执行顺序错误的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 i18n 国际化不正确的 Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 NVUE 平台报错的问题
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.4.27" date="2023-04-21">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 某些情况 monthSwitch 未触发的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 更改 modelValue 报错的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 v-for 未使用 key 值控制台 warning
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			代码合并时引发 value 属性为空时不渲染数据的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 localdata 不支持动态更新的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 localdata 不支持动态更新的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序点击时会改变背景颜色的 bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 禁用时会显示清空按钮
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 查询条件短期内多次变更只查询最后一次变更后的结果
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 调整 内部缓存键名调整为 uni-data-select-lastSelectedValue
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 日历 picker 修改年月后，自动选中当月1日 [详情](https://ask.dcloud.net.cn/question/165937)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 小程序端 低版本 ios NaN [详情](https://ask.dcloud.net.cn/question/162979)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 firefox 浏览器显示区域点击无法拉起日历弹框的Bug [详情](https://ask.dcloud.net.cn/question/163362)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 值为空依然选中当天问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 提供 default-value 属性支持配置选择器打开时默认显示的时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 非范围选择未选择日期时间，点击确认按钮选中当前日期时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 字节小程序日期时间范围选择，底部日期换行问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 2.2.18 引起范围选择配置 end 选择无效的Bug [详情](https://github.com/dcloudio/uni-ui/issues/686)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 移动端范围选择change事件触发异常的Bug [详情](https://github.com/dcloudio/uni-ui/issues/684)
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 PC端输入日期格式错误时返回当前日期时间
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 PC端输入日期时间超出 start、end 限制的Bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 移动端日期时间范围用法时间展示不完整问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 小程序端绑定 Date 类型报错的Bug [详情](https://github.com/dcloudio/uni-ui/issues/679)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 vue3 time-picker 无法显示绑定时分秒的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 字节小程序报错的Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 某些情况切换月份错误的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 vue3 下 keyboardheightchange 事件报错的bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 trim 属性默认值
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 cursor-spacing 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="feat">
+			 pattern.icon 属性，可自定义图标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 手动上传删除一个文件后不能再上传的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 required 参数无法动态绑定
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="perf">
+			 uni-list-chat 具名插槽`header` 非app端套一层元素，方便使用时通过外层元素定位实现样式修改
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-list-chat 新增 支持具名插槽`header`
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 列表图标新增 customPrefix 属性 ，用法 [详见](https://uniapp.dcloud.net.cn/component/uniui/uni-icons.html#icons-props)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 自定义状态栏高度闪动BUG
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 暗黑模式下边线颜色错误的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup 重复打开时的 bug
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 uni-popup-dialog 组件新增 inputType 属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			`uni-swipe-action`和`uni-swipe-action-item`不同时使用导致 closeOther 方法报错的 bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue3模式下可能会出现错误的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.4.26" date="2023-01-31">
 	<log-item title="uni-badge 组件更新">
 		<log-item-text tag-type="fix">

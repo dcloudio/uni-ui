@@ -1,5 +1,10 @@
 <template>
-	<view v-if="isShow||onceRender" v-show="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #ifndef APP-NVUE -->
+  <view v-show="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #endif -->
+  <!-- #ifdef APP-NVUE -->
+  <view v-if="isShow" ref="ani" :animation="animationData" :class="customClass" :style="transformStyles" @click="onClick"><slot></slot></view>
+  <!-- #endif -->
 </template>
 
 <script>
@@ -249,7 +254,7 @@ export default {
 		},
 		animationType(type) {
 			return {
-				fade: type ? 1 : 0,
+				fade: type ? 0 : 1,
 				'slide-top': `translateY(${type ? '0' : '-100%'})`,
 				'slide-right': `translateX(${type ? '0' : '100%'})`,
 				'slide-bottom': `translateY(${type ? '0' : '100%'})`,

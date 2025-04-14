@@ -77,21 +77,20 @@
 				</view>
 			</view>
 		</view>
-		<!-- #ifdef H5 -->
-		<!-- <keypress v-if="visible" @esc="tiggerTimePicker" @enter="setTime" /> -->
-		<!-- #endif -->
 	</view>
 </template>
 
 <script>
-	// #ifdef H5
-	import keypress from './keypress'
-	// #endif
 	import {
 		initVueI18n
 	} from '@dcloudio/uni-i18n'
-	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	import i18nMessages from './i18n/index.js'
+	const {
+		t
+	} = initVueI18n(i18nMessages)
+	import {
+		fixIosDateFormat
+	} from './util'
 
 	/**
 	 * DatetimePicker 时间选择器
@@ -108,11 +107,6 @@
 
 	export default {
 		name: 'UniDatetimePicker',
-		components: {
-			// #ifdef H5
-			keypress
-			// #endif
-		},
 		data() {
 			return {
 				indicatorStyle: `height: 50px;`,
@@ -145,6 +139,14 @@
 				endMinute: 59,
 				endSecond: 59,
 			}
+		},
+		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
+			virtualHost: true
+			// #endif
 		},
 		props: {
 			type: {
@@ -187,9 +189,9 @@
 		watch: {
 			// #ifndef VUE3
 			value: {
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (newVal) {
-						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
+						this.parseValue(fixIosDateFormat(newVal))
 						this.initTime(false)
 					} else {
 						this.time = ''
@@ -201,9 +203,9 @@
 			// #endif
 			// #ifdef VUE3
 			modelValue: {
-				handler(newVal, oldVal) {
+				handler(newVal) {
 					if (newVal) {
-						this.parseValue(this.fixIosDateFormat(newVal)) //兼容 iOS、safari 日期格式
+						this.parseValue(fixIosDateFormat(newVal))
 						this.initTime(false)
 					} else {
 						this.time = ''
@@ -233,13 +235,13 @@
 			},
 			start: {
 				handler(newVal) {
-					this.parseDatetimeRange(this.fixIosDateFormat(newVal), 'start') //兼容 iOS、safari 日期格式
+					this.parseDatetimeRange(fixIosDateFormat(newVal), 'start')
 				},
 				immediate: true
 			},
 			end: {
 				handler(newVal) {
-					this.parseDatetimeRange(this.fixIosDateFormat(newVal), 'end') //兼容 iOS、safari 日期格式
+					this.parseDatetimeRange(fixIosDateFormat(newVal), 'end')
 				},
 				immediate: true
 			},
@@ -543,7 +545,7 @@
 					const day = now.getDate()
 					dateBase = year + '/' + month + '/' + day + ' '
 				}
-				if (Number(value) && typeof value !== NaN) {
+				if (Number(value)) {
 					value = parseInt(value)
 					dateBase = 0
 				}
@@ -614,7 +616,7 @@
 						pointType === 'start' ? this.startYear = this.year - 60 : this.endYear = this.year + 60
 						return
 					}
-					if (Number(point) && Number(point) !== NaN) {
+					if (Number(point)) {
 						point = parseInt(point)
 					}
 					// datetime 的 end 没有时分秒, 则不限制
@@ -659,14 +661,6 @@
 			// 每个月的实际天数
 			daysInMonth(year, month) { // Use 1 for January, 2 for February, etc.
 				return new Date(year, month, 0).getDate();
-			},
-
-			//兼容 iOS、safari 日期格式
-			fixIosDateFormat(value) {
-				if (typeof value === 'string') {
-					value = value.replace(/-/g, '/')
-				}
-				return value
 			},
 
 			/**
@@ -752,7 +746,7 @@
 			 */
 			initTimePicker() {
 				if (this.disabled) return
-				const value = this.fixIosDateFormat(this.value)
+				const value = fixIosDateFormat(this.time)
 				this.initPickerValue(value)
 				this.visible = !this.visible
 			},

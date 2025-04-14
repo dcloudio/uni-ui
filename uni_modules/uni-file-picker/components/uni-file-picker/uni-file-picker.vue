@@ -8,10 +8,8 @@
 			:image-styles="imageStyles" :files-list="filesList" :limit="limitLength" :disablePreview="disablePreview"
 			:delIcon="delIcon" @uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
 			<slot>
-				<view class="is-add">
-					<view class="icon-add"></view>
-					<view class="icon-add rotate"></view>
-				</view>
+				<view class="icon-add"></view>
+				<view class="icon-add rotate"></view>
 			</slot>
 		</upload-image>
 		<upload-file v-if="fileMediatype !== 'image' || showType !== 'grid'" :readonly="readonly"
@@ -89,24 +87,18 @@
 		},
 		emits: ['select', 'success', 'fail', 'progress', 'delete', 'update:modelValue', 'input'],
 		props: {
-			// #ifdef VUE3
 			modelValue: {
 				type: [Array, Object],
 				default () {
 					return []
 				}
 			},
-			// #endif
-
-			// #ifndef VUE3
 			value: {
 				type: [Array, Object],
 				default () {
 					return []
 				}
 			},
-			// #endif
-
 			disabled: {
 				type: Boolean,
 				default: false
@@ -191,6 +183,10 @@
 				default () {
 					return  ['album', 'camera']
 				}
+			},
+			provider: {
+				type: String,
+				default: '' // 默认上传到 unicloud 内置存储 extStorage 扩展存储
 			}
 		},
 		data() {
@@ -200,22 +196,18 @@
 			}
 		},
 		watch: {
-			// #ifndef VUE3
 			value: {
 				handler(newVal, oldVal) {
 					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
-			// #endif
-			// #ifdef VUE3
 			modelValue: {
 				handler(newVal, oldVal) {
 					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
-			// #endif
 		},
 		computed: {
 			filesList() {
@@ -331,7 +323,6 @@
 			 * 选择文件
 			 */
 			choose() {
-
 				if (this.disabled) return
 				if (this.files.length >= Number(this.limitLength) && this.showType !== 'grid' && this.returnType ===
 					'array') {
@@ -418,6 +409,13 @@
 				if (!this.autoUpload || this.noSpace) {
 					res.tempFiles = []
 				}
+				res.tempFiles.forEach((fileItem, index) => {
+					this.provider && (fileItem.provider = this.provider);
+					const fileNameSplit = fileItem.name.split('.')
+					const ext = fileNameSplit.pop()
+					const fileName = fileNameSplit.join('.').replace(/[\s\/\?<>\\:\*\|":]/g, '_')
+					fileItem.cloudPath = fileName + '_' + Date.now() + '_' + index + '.' + ext
+				})
 			},
 
 			/**
@@ -523,6 +521,7 @@
 			 */
 			delFile(index) {
 				this.$emit('delete', {
+					index,
 					tempFile: this.files[index],
 					tempFilePath: this.files[index].url
 				})
@@ -643,14 +642,6 @@
 	.file-count {
 		font-size: 14px;
 		color: #999;
-	}
-
-	.is-add {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		align-items: center;
-		justify-content: center;
 	}
 
 	.icon-add {

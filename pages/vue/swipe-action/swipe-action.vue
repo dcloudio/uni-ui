@@ -182,7 +182,7 @@
 			setTimeout(() => {
 				this.isOpened = 'right';
 			}, 1000);
-			
+
 			uni.$on('update',res=>{
 				console.log(111);
 				this.swipeClick({

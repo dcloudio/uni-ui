@@ -20,7 +20,7 @@
 				<view class="uni-calendar__header-btn-box" @click.stop="next">
 					<view class="uni-calendar__header-btn uni-calendar--right"></view>
 				</view>
-				<text class="uni-calendar__backtoday" @click="backtoday">{{todayText}}</text>
+				<text class="uni-calendar__backtoday" @click="backToday">{{todayText}}</text>
 
 			</view>
 			<view class="uni-calendar__box">
@@ -62,12 +62,12 @@
 
 <script>
 	import Calendar from './util.js';
-	import calendarItem from './uni-calendar-item.vue'
-	import {
-	initVueI18n
-	} from '@dcloudio/uni-i18n'
-	import messages from './i18n/index.js'
-	const {	t	} = initVueI18n(messages)
+	import CalendarItem from './uni-calendar-item.vue'
+
+	import { initVueI18n } from '@dcloudio/uni-i18n'
+	import i18nMessages from './i18n/index.js'
+	const {	t	} = initVueI18n(i18nMessages)
+
 	/**
 	 * Calendar 日历
 	 * @description 日历组件可以查看日期，选择任意范围内的日期，打点操作。常用场景如：酒店日期预订、火车机票选择购买日期、上下班打卡等
@@ -90,7 +90,7 @@
 	 */
 	export default {
 		components: {
-			calendarItem
+			CalendarItem
 		},
 		emits:['close','confirm','change','monthSwitch'],
 		props: {
@@ -199,18 +199,13 @@
 			}
 		},
 		created() {
-			// 获取日历方法实例
 			this.cale = new Calendar({
-				// date: new Date(),
 				selected: this.selected,
 				startDate: this.startDate,
 				endDate: this.endDate,
 				range: this.range,
 			})
-			// 选中某一天
-			// this.cale.setDate(this.date)
 			this.init(this.date)
-			// this.setDay
 		},
 		methods: {
 			// 取消穿透
@@ -218,6 +213,7 @@
 			bindDateChange(e) {
 				const value = e.detail.value + '-1'
 				this.setDate(value)
+
 				let detail = this.cale.getDate(value)
 				this.$emit('monthSwitch', {
 					year: detail.year,
@@ -327,13 +323,18 @@
 			/**
 			 * 回到今天
 			 */
-			backtoday() {
-				let date = this.cale.getDate(new Date())
-				let nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
-				let toYearMonth = `${date.year}-${date.month}`
+			backToday() {
+				const nowYearMonth = `${this.nowDate.year}-${this.nowDate.month}`
+				const date = this.cale.getDate(new Date())
+        const todayYearMonth = `${date.year}-${date.month}`
+
 				this.init(date.fullDate)
+
+        if(nowYearMonth !== todayYearMonth) {
+          this.monthSwitch()
+        }
+
 				this.change()
-				nowYearMonth == toYearMonth || this.monthSwitch()
 			},
 			/**
 			 * 上个月
@@ -451,7 +452,6 @@
 
 	.uni-calendar--fixed-width {
 		width: 50px;
-		// padding: 0 15px;
 	}
 
 	.uni-calendar__backtoday {

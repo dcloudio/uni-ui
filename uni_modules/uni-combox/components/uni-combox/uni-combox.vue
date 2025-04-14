@@ -4,24 +4,25 @@
 			<text>{{label}}</text>
 		</view>
 		<view class="uni-combox__input-box">
-			<input class="uni-combox__input" type="text" :placeholder="placeholder"
-				placeholder-class="uni-combox__input-plac" v-model="inputVal" @input="onInput" @focus="onFocus" @blur="onBlur" />
-			<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
+			<input class="uni-combox__input" type="text" :placeholder="placeholder" placeholder-class="uni-combox__input-plac"
+				v-model="inputVal" @input="onInput" @focus="onFocus" @blur="onBlur" />
+			<uni-icons v-if="!inputVal || !clearAble" :type="showSelector? 'top' : 'bottom'" size="14" color="#999" @click="toggleSelector">
+			</uni-icons>
+			<uni-icons v-if="inputVal && clearAble" type="clear" size="24" color="#999" @click="clean">
 			</uni-icons>
 		</view>
 		<view class="uni-combox__selector" v-if="showSelector">
 			<view class="uni-popper__arrow"></view>
-			<scroll-view scroll-y="true" class="uni-combox__selector-scroll" @scroll="onScroll">
+			<scroll-view scroll-y="true" class="uni-combox__selector-scroll">
 				<view class="uni-combox__selector-empty" v-if="filterCandidatesLength === 0">
 					<text>{{emptyTips}}</text>
 				</view>
-				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index" @click="onSelectorClick(index)">
+				<view class="uni-combox__selector-item" v-for="(item,index) in filterCandidates" :key="index"
+					@click="onSelectorClick(index)">
 					<text>{{item}}</text>
 				</view>
 			</scroll-view>
 		</view>
-		<!-- 新增蒙层，点击蒙层时关闭选项显示 -->
-		<view class="uni-combox__mask" v-show="showSelector" @click="showSelector = false"></view>
 	</view>
 </template>
 
@@ -41,6 +42,10 @@
 		name: 'uniCombox',
 		emits: ['input', 'update:modelValue'],
 		props: {
+			clearAble: {
+				type: Boolean,
+				default: false
+			},
 			border: {
 				type: Boolean,
 				default: true
@@ -83,8 +88,7 @@
 		data() {
 			return {
 				showSelector: false,
-				inputVal: '',
-				blurTimer:null,
+				inputVal: ''
 			}
 		},
 		computed: {
@@ -95,9 +99,6 @@
 				return `width: ${this.labelWidth}`
 			},
 			filterCandidates() {
-				if (this.inputVal !== 0 && !this.inputVal) {
-					return this.candidates
-				}
 				return this.candidates.filter((item) => {
 					return item.toString().indexOf(this.inputVal) > -1
 				})
@@ -132,15 +133,9 @@
 				this.showSelector = true
 			},
 			onBlur() {
-				this.blurTimer = setTimeout(() => {
+				setTimeout(() => {
 					this.showSelector = false
 				}, 153)
-			},
-			onScroll(){ // 滚动时将blur的定时器关掉
-				if(this.blurTimer) {
-					clearTimeout(this.blurTimer)
-					this.blurTimer = null
-				}
 			},
 			onSelectorClick(index) {
 				this.inputVal = this.filterCandidates[index]
@@ -153,12 +148,16 @@
 					this.$emit('input', this.inputVal)
 					this.$emit('update:modelValue', this.inputVal)
 				})
+			},
+			clean() {
+				this.inputVal = ''
+				this.onInput()
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.uni-combox {
 		font-size: 14px;
 		border: 1px solid #DCDFE6;
@@ -215,7 +214,7 @@
 		border: 1px solid #EBEEF5;
 		border-radius: 6px;
 		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		z-index: 3;
+		z-index: 2;
 		padding: 4px 0;
 	}
 
@@ -281,14 +280,5 @@
 
 	.uni-combox__no-border {
 		border: none;
-	}
-
-	.uni-combox__mask {
-		width:100%;
-		height:100%;
-		position: fixed;
-		top: 0;
-		left: 0;
-    z-index: 1;
 	}
 </style>

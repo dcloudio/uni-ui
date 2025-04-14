@@ -141,7 +141,6 @@
     },
     methods: {
       clear() {
-        this.modelValue = null;
         this._dispatchEvent([]);
       },
       onPropsChange() {
@@ -153,10 +152,6 @@
       load() {
         if (this.readonly) {
           this._processReadonly(this.localdata, this.dataValue);
-          return;
-        }
-
-        if (!this.hasValue) {
           return;
         }
 
@@ -237,15 +232,24 @@
         }
 
         let result = []
-        for (let i = 0; i < value.length; i++) {
-          var val = value[i]
-          var item = dataList.find((v) => {
-            return v.value == val
-          })
-          if (item) {
-            result.push(item)
-          }
-        }
+				if (Array.isArray(value)) {
+					for (let i = 0; i < value.length; i++) {
+						var val = value[i]
+						var item = dataList.find((v) => {
+							return v.value == val
+						})
+						if (item) {
+							result.push(item)
+						}
+					}
+				} else {
+					let item = dataList.find((v) => {
+						return v.value == value;
+					});
+					if (item) {
+						result.push(item);
+					}
+				}
         if (result.length) {
           this.inputSelected = result
         }
