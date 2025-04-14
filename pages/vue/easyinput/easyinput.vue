@@ -16,8 +16,7 @@
 
 
 		<uni-section title="自定义样式" subTitle="使用 styles 属性 ,可以自定义输入框样式" type="line" padding>
-			<uni-easyinput v-model="value" :styles="styles" :placeholderStyle="placeholderStyle" placeholder="请输入内容"
-				@input="input"></uni-easyinput>
+			<uni-easyinput v-model="value" :styles="styles" :placeholderStyle="placeholderStyle" placeholder="请输入内容" @input="input"></uni-easyinput>
 		</uni-section>
 
 		<uni-section title="图标" subTitle="使用 prefixIcon / suffixIcon 属性 ,可以自定义输入框左右侧图标" type="line" padding>
@@ -32,8 +31,7 @@
 		<uni-section title="插槽" subTitle="使用 left / right 插槽 ,可以自定义输入框左右侧内容" type="line" padding>
 			<uni-easyinput v-model="value" placeholder="请输入网址">
 				<template #left>
-					<view
-						style="background-color: #f2f2f2;padding: 0 10rpx;height: 70rpx;line-height: 70rpx;margin-right: 10rpx;">
+					<view style="background-color: #f2f2f2;padding: 0 10rpx;height: 70rpx;line-height: 70rpx;margin-right: 10rpx;">
 						https://</view>
 				</template>
 			</uni-easyinput>
