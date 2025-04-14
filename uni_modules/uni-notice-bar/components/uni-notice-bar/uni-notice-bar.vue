@@ -3,25 +3,18 @@
 		<slot v-if="showIcon === true || showIcon === 'true'" name="noticebarIcon">
 			<uni-icons class="uni-noticebar-icon" type="sound" :color="color" :size="fontSize * 1.5" />
 		</slot>
-		<view ref="textBox" class="uni-noticebar__content-wrapper"
-			:class="{
+		<view ref="textBox" class="uni-noticebar__content-wrapper" :class="{
 				'uni-noticebar__content-wrapper--scrollable': scrollable,
 				'uni-noticebar__content-wrapper--single': !scrollable && (single || moreText)
-			}"
-			:style="{ height: scrollable ? fontSize * 1.5 + 'px' : 'auto' }"
-		>
-			<view :id="elIdBox" class="uni-noticebar__content"
-				:class="{
+			}" :style="{ height: scrollable ? fontSize * 1.5 + 'px' : 'auto' }">
+			<view :id="elIdBox" class="uni-noticebar__content" :class="{
 					'uni-noticebar__content--scrollable': scrollable,
 					'uni-noticebar__content--single': !scrollable && (single || moreText)
-				}"
-			>
-				<text :id="elId" ref="animationEle" class="uni-noticebar__content-text" 
-					:class="{
+				}">
+				<text :id="elId" ref="animationEle" class="uni-noticebar__content-text" :class="{
 						'uni-noticebar__content-text--scrollable': scrollable,
 						'uni-noticebar__content-text--single': !scrollable && (single || showGetMore)
-					}" 
-					:style="{
+					}" :style="{
 						color: color,
 						fontSize: fontSize + 'px',
 						lineHeight: fontSize * 1.5 + 'px',
@@ -32,12 +25,10 @@
 						'-webkit-animationPlayState': webviewHide ? 'paused' : animationPlayState,
 						animationDelay: animationDelay,
 						'-webkit-animationDelay': animationDelay
-					}"
-				>{{text}}</text>
+					}">{{text}}</text>
 			</view>
 		</view>
-		<view v-if="isShowGetMore" class="uni-noticebar__more uni-cursor-point"
-			@click="clickMore">
+		<view v-if="isShowGetMore" class="uni-noticebar__more uni-cursor-point" @click="clickMore">
 			<text v-if="moreText.length > 0" :style="{ color: moreColor, fontSize: fontSize + 'px' }">{{ moreText }}</text>
 			<uni-icons v-else type="right" :color="moreColor" :size="fontSize * 1.1" />
 		</view>
@@ -151,8 +142,8 @@
 				animationDelay: '0s'
 			}
 		},
-		watch:{
-			text:function(newValue,oldValue){
+		watch: {
+			text(newValue, oldValue) {
 				this.initSize();
 			}
 		},
@@ -161,8 +152,8 @@
 				return this.showGetMore === true || this.showGetMore === 'true'
 			},
 			isShowClose() {
-				return (this.showClose === true || this.showClose === 'true') 
-					&& (this.showGetMore === false || this.showGetMore === 'false')
+				return (this.showClose === true || this.showClose === 'true') &&
+					(this.showGetMore === false || this.showGetMore === 'false')
 			}
 		},
 		mounted() {
