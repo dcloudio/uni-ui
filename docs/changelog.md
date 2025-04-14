@@ -7,6 +7,139 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.7" date="2024-10-31">
+	<log-item title="uni-calendar 组件更新">
+		<log-item-text tag-type="fix">
+			 calendar在选择日期范围后重新选择日期需要点两次的Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-combox 组件更新">
+		<log-item-text tag-type="feat">
+			 clearAble属性
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="feat">
+			 支持控制显示位数 默认显示2位
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 没有选中日期时点击确定直接报错的Bug [详情](https://ask.dcloud.net.cn/question/198168)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 初始值传入 null 导致input报错的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-fab 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="perf">
+			 vue3兼容性
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 value 属性不兼容vue3的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-forms 组件更新">
+		<log-item-text tag-type="fix">
+			 校验规则在抖音开发者工具上不生效的bug，详见：[https://ask.dcloud.net.cn/question/191933](https://ask.dcloud.net.cn/question/191933)
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 form上次修改的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 binddata的兼容性问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-popup在android上的重复点击弹出位置不正确的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			 运行到抖音小程序上出现的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 微信小程序中的getSystemInfo警告
+		</log-item-text>
+	</log-item>
+</log>
+
+<log title="1.5.1" date="2024-07-08">
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="feat">
+			 日期点击事件，在点击日期时会触发该事件。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 抖音小程序事件传递失效bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 easyinput组件双向绑定问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-number-box 组件更新">
+		<log-item-text tag-type="fix">
+			 在vue2下H5黑边的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在vue2手动输入后失焦导致清空数值的严重bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog vue3下使用value无法进行绑定的bug(双向绑定兼容旧写法)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-search-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 textColor默认值导致的文字不显示的bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 textColor不生效的bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-segmented-control 组件更新">
+		<log-item-text tag-type="fix">
+			 修复在微信小程序下inactiveColor失效bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tooltip 组件更新">
+		<log-item-text tag-type="fix">
+			 弹出位置默认值不一致导致的错位
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 当元素会受变量影响自动隐藏的bug
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.4" date="2024-03-31">
 	<log-item title="uni-data-select 组件更新">
 		<log-item-text tag-type="fix">

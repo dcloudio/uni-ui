@@ -1,7 +1,7 @@
 {
   "id": "uni-data-select",
   "displayName": "uni-data-select 下拉框选择器",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "通过数据驱动的下拉框选择器",
   "keywords": [
     "uni-ui",
@@ -48,8 +48,10 @@
       },
       "client": {
         "App": {
-          "app-vue": "u",
-          "app-nvue": "n"
+            "app-vue": "y",
+            "app-nvue": "n",
+            "app-harmony": "u",
+            "app-uvue": "u"
         },
         "H5-mobile": {
           "Safari": "y",

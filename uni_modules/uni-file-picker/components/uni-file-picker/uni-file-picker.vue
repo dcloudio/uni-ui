@@ -8,10 +8,8 @@
 			:image-styles="imageStyles" :files-list="filesList" :limit="limitLength" :disablePreview="disablePreview"
 			:delIcon="delIcon" @uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
 			<slot>
-				<view class="is-add">
-					<view class="icon-add"></view>
-					<view class="icon-add rotate"></view>
-				</view>
+				<view class="icon-add"></view>
+				<view class="icon-add rotate"></view>
 			</slot>
 		</upload-image>
 		<upload-file v-if="fileMediatype !== 'image' || showType !== 'grid'" :readonly="readonly"
@@ -89,24 +87,18 @@
 		},
 		emits: ['select', 'success', 'fail', 'progress', 'delete', 'update:modelValue', 'input'],
 		props: {
-			// #ifdef VUE3
 			modelValue: {
 				type: [Array, Object],
 				default () {
 					return []
 				}
 			},
-			// #endif
-
-			// #ifndef VUE3
 			value: {
 				type: [Array, Object],
 				default () {
 					return []
 				}
 			},
-			// #endif
-
 			disabled: {
 				type: Boolean,
 				default: false
@@ -204,22 +196,18 @@
 			}
 		},
 		watch: {
-			// #ifndef VUE3
 			value: {
 				handler(newVal, oldVal) {
 					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
-			// #endif
-			// #ifdef VUE3
 			modelValue: {
 				handler(newVal, oldVal) {
 					this.setValue(newVal, oldVal)
 				},
 				immediate: true
 			},
-			// #endif
 		},
 		computed: {
 			filesList() {
@@ -654,14 +642,6 @@
 	.file-count {
 		font-size: 14px;
 		color: #999;
-	}
-
-	.is-add {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		align-items: center;
-		justify-content: center;
 	}
 
 	.icon-add {

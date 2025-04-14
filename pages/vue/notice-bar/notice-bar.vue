@@ -30,6 +30,13 @@
 		<uni-section title="关闭按钮" subTitle="使用 show-close 属性,可关闭通知" type="line">
 			<uni-notice-bar show-close single text="HBuilderX 1.0正式发布！uni-app实现里程碑突破实现里程碑突破！" />
 		</uni-section>
+		<uni-section title="自定义icon" subTitle="使用 noticebarIcon 插槽可自定义左侧图标" type="line">
+			<uni-notice-bar show-icon single text="HBuilderX 1.0正式发布！uni-app实现里程碑突破实现里程碑突破！">
+				<template v-slot:noticebarIcon>
+		            <uni-icons size="18" type="arrowright" />
+	            </template>
+			</uni-notice-bar>
+		</uni-section>
 	</view>
 </template>
 

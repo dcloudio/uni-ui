@@ -6,10 +6,10 @@
 				<view class="uni-select__input-box" @click="toggleSelector">
 					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view v-if="current && clear && !disabled" @click.stop="clearVal">
+					<view key="clear-button" v-if="current && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
-					<view v-else>
+					<view key="arrow-button" v-else>
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
 				</view>
@@ -143,9 +143,6 @@
 			textShow() {
 				// 长文本显示
 				let text = this.current;
-				if (text.length > 10) {
-					return text.slice(0, 25) + '...';
-				}
 				return text;
 			},
 			getOffsetByPlacement() {
@@ -244,6 +241,7 @@
 
 			clearVal() {
 				this.emit('')
+				this.current = ''
 				if (this.collection) {
 					this.removeCache()
 				}
@@ -352,6 +350,7 @@
 	}
 
 	.uni-stat-box {
+		background-color: #fff;
 		width: 100%;
 		flex: 1;
 	}
@@ -405,6 +404,7 @@
 
 	.uni-select__input-box {
 		height: 35px;
+		width: 0px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
