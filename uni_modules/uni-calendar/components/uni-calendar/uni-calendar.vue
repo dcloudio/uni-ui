@@ -214,11 +214,11 @@
 				const value = e.detail.value + '-1'
 				this.setDate(value)
 
-				const { year,month } = this.cale.getDate(value)
-        this.$emit('monthSwitch', {
-            year,
-            month
-        })
+				let detail = this.cale.getDate(value)
+				this.$emit('monthSwitch', {
+					year: detail.year,
+					month: Number(detail.month)
+				})
 			},
 			/**
 			 * 初始化日期显示
