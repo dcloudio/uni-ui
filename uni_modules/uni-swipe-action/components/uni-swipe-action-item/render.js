@@ -121,9 +121,13 @@ export default {
 		var rightDom = $el.querySelector('.button-group--right')
 		if (leftDom && leftDom.offsetWidth) {
 			state.leftWidth = leftDom.offsetWidth || 0
+		} else {
+			state.leftWidth = 0
 		}
 		if (rightDom && rightDom.offsetWidth) {
 			state.rightWidth = rightDom.offsetWidth || 0
+		} else {
+			state.rightWidth = 0
 		}
 		state.threshold = instance.getDataset().threshold
 	},
