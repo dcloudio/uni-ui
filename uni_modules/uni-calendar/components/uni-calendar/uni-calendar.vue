@@ -193,10 +193,13 @@
 				this.cale.setDate(this.nowDate.fullDate)
 				this.weeks = this.cale.weeks
 			},
-			selected(newVal) {
-				this.cale.setSelectInfo(this.nowDate.fullDate, newVal)
-				this.weeks = this.cale.weeks
-			}
+			selected: {
+			    handler(newVal) {
+				   this.cale.setSelectInfo(this.nowDate.fullDate, newVal);
+				   this.weeks = this.cale.weeks;
+			    },
+			    deep: true,
+		    },
 		},
 		created() {
 			this.cale = new Calendar({
