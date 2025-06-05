@@ -20,9 +20,18 @@
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
-							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+						<view
+								v-else
+								class="uni-select__selector-item"
+								:class="{ 'uni-select_selector-item_active': item[dataKey] == current }"
+								style="display: flex; justify-content: space-between; align-items: center"
+								v-for="(item, index) in mixinDatacomResData"
+								:key="index"
+								@click="change(item)">
+								<text :class="{ 'uni-select__selector__disabled': item.disable }">{{
+										formatItemName(item)
+								}}</text>
+								<uni-icons v-if="item[dataKey] == current" type="checkmarkempty" color="#007aff" />
 						</view>
 					</scroll-view>
 				</view>
@@ -569,5 +578,11 @@
 		right: 0;
 		left: 0;
 		z-index: 2;
+	}
+
+	.uni-select_selector-item_active {
+	    color: #409eff;
+	    font-weight: bold;
+	    background-color: #f5f7fa;
 	}
 </style>
