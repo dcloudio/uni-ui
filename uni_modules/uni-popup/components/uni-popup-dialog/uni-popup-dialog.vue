@@ -156,11 +156,11 @@
 				}
 			},
 			value(val) {
-				setVal(val)
+				this.setVal(val)
 			},
 			// #ifdef VUE3
 			modelValue(val) {
-				setVal(val)
+				this.setVal(val)
 			},
 			// #endif
 			val(val) {
