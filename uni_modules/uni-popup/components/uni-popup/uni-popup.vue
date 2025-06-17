@@ -130,12 +130,16 @@
 			showPopup(show) {
 				// #ifdef H5
 				// fix by mehaotian 处理 h5 滚动穿透的问题
+				if (!this.isActive) {
+					return
+				}
 				document.getElementsByTagName('body')[0].style.overflow = show ? 'hidden' : 'visible'
 				// #endif
 			}
 		},
 		data() {
 			return {
+				isActive: true,
 				duration: 300,
 				ani: [],
 				showPopup: false,
@@ -237,21 +241,25 @@
 		// #ifndef VUE3
 		// TODO vue2
 		destroyed() {
+			this.isActive = false;
 			this.setH5Visible()
 		},
 		// #endif
 		// #ifdef VUE3
 		// TODO vue3
 		unmounted() {
+			this.isActive = false;
 			this.setH5Visible()
 		},
 		// #endif
 		activated() {
-   	  this.setH5Visible(!this.showPopup);
-    },
-    deactivated() {
-      this.setH5Visible(true);
-    },
+			this.isActive = true;
+   	  		this.setH5Visible(!this.showPopup);
+		},
+		deactivated() {
+			this.isActive = false;
+			this.setH5Visible(true);
+		},
 		created() {
 			// this.mkclick =  this.isMaskClick || this.maskClick
 			if (this.isMaskClick === null && this.maskClick === null) {
