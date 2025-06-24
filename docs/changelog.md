@@ -7,6 +7,111 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.8" date="2025-06-24">
+	<log-item title="uni-countdown 组件更新">
+		<log-item-text tag-type="fix">
+			 filterShow 导致的运行报错
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 在readonly属性为true时选项匹配错误的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="fix">
+			 清除按钮不展示问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 默认背景为白色与整体组件保持风格统一
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 绑定字符串值的时，日历面板选中状态未重置到默认值的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 iOS 微信小程序上type='daterange'时，传入'YYYY-MM-DD'格式不生效的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 支付宝小程序 上传样式问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 可触发点击反馈的 uni-list-item 没有hover效果的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例中过期图片地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="perf">
+			 适配微信小程序固定导航栏时，右侧插槽避让胶囊按钮
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-notice-bar 组件更新">
+		<log-item-text tag-type="feat">
+			 左侧自定义插槽，可自定义文字或图标
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 中 setVal 方法报错的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 数据双向绑定问题。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 更新组件示例 ，解决更新数据或保存项目导致弹窗消失的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog 弹出框在vue3中双向绑定问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例中过期图片地址
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 鸿蒙 next 浏览器上无法滑动的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更新示例项目
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 app 端 缺少leftOptions 或 rightOptions 时无法滑动的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 由上一个兼容版本引发的 安卓运行报错且无法回弹的问题
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 兼容鸿蒙平台
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 WEB 平台控制台报错
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-table 组件更新">
+		<log-item-text tag-type="fix">
+			： 下拉筛选中 toISOString() 引发的时区问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 第一次执行不显示动画的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 页面数据更新到底动画复原的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 示例页面打开报错的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.7" date="2024-10-31">
 	<log-item title="uni-calendar 组件更新">
 		<log-item-text tag-type="fix">
