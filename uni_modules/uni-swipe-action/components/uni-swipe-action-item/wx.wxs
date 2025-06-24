@@ -302,6 +302,9 @@ function isPC() {
 			break;
 		}
 	}
+  if(userAgentInfo.indexOf('Phone') > 0 && userAgentInfo.indexOf('Harmony') > 0){
+    flag = false;
+  }
 	return flag;
 }
 
