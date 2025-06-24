@@ -1,18 +1,14 @@
 <template>
 	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
-		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
-			:style="{ 'background-color': themeBgColor, 'border-bottom-color':themeColor }" >
+		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': themeBgColor }">
 			<status-bar v-if="statusBar" />
-			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
-				class="uni-navbar__header">
-				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left"
-					:style="{width:leftIconWidth}">
+			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight,width:navWidth+'px'}" class="uni-navbar__header">
+				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left" :style="{width:leftIconWidth}">
 					<slot name="left">
 						<view class="uni-navbar__content_view" v-if="leftIcon.length > 0">
 							<uni-icons :color="themeColor" :type="leftIcon" size="20" />
 						</view>
-						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }" class="uni-navbar-btn-text"
-							v-if="leftText.length">
+						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }" class="uni-navbar-btn-text" v-if="leftText.length">
 							<text :style="{ color: themeColor, fontSize: '12px' }">{{ leftText }}</text>
 						</view>
 					</slot>
@@ -20,13 +16,11 @@
 				<view class="uni-navbar__header-container " @tap="onClickTitle">
 					<slot>
 						<view class="uni-navbar__header-container-inner" v-if="title.length>0">
-							<text class="uni-nav-bar-text uni-ellipsis-1"
-								:style="{color: themeColor }">{{ title }}</text>
+							<text class="uni-nav-bar-text uni-ellipsis-1" :style="{color: themeColor }">{{ title }}</text>
 						</view>
 					</slot>
 				</view>
-				<view @click="onClickRight" class="uni-navbar__header-btns uni-navbar__header-btns-right"
-					:style="{width:rightIconWidth}">
+				<view @click="onClickRight" class="uni-navbar__header-btns uni-navbar__header-btns-right" :style="{width:rightIconWidth}">
 					<slot name="right">
 						<view v-if="rightIcon.length">
 							<uni-icons :color="themeColor" :type="rightIcon" size="22" />
@@ -38,12 +32,10 @@
 				</view>
 			</view>
 		</view>
-		<!-- #ifndef APP-NVUE -->
 		<view class="uni-navbar__placeholder" v-if="fixed">
 			<status-bar v-if="statusBar" />
 			<view class="uni-navbar__placeholder-view" :style="{ height:navbarHeight}" />
 		</view>
-		<!-- #endif -->
 	</view>
 </template>
 
@@ -52,8 +44,8 @@
 	const getVal = (val) => typeof val === 'number' ? val + 'px' : val;
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * NavBar 自定义导航栏
 	 * @description 导航栏组件，主要用于头部导航
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=52
@@ -145,6 +137,11 @@
 				default: ''
 			}
 		},
+		data() {
+			return {
+				navWidth: 'auto'
+			}
+		},
 		computed: {
 			themeBgColor() {
 				if (this.dark) {
@@ -169,6 +166,21 @@
 				return this.color || '#333'
 			},
 			navbarHeight() {
+				// #ifdef MP-WEIXIN
+				if (this.fixed && this.height === 0) {
+					const menuBtnInfo = uni.getMenuButtonBoundingClientRect()
+					const winInfo = uni.getWindowInfo()
+					const statusHeight = winInfo.statusBarHeight
+					const spaceHeight = menuBtnInfo.top - statusHeight
+					return getVal(menuBtnInfo.height + spaceHeight * 2)
+				}
+				// #endif
+				// #ifndef MP-WEIXIN
+				if (this.fixed && this.height === 0) {
+					return getVal(44)
+				}
+				// #endif
+
 				return getVal(this.height)
 			},
 			leftIconWidth() {
@@ -177,6 +189,15 @@
 			rightIconWidth() {
 				return getVal(this.rightWidth)
 			}
+		},
+		created() {
+			// #ifdef MP-WEIXIN
+			if (this.fixed) {
+				const menuBtnInfo = uni.getMenuButtonBoundingClientRect()
+				this.navWidth = menuBtnInfo.left
+			}
+			// #endif
+
 		},
 		mounted() {
 			if (uni.report && this.stat && this.title !== '') {
@@ -205,6 +226,7 @@
 		position: sticky;
 		/* #endif */
 	}
+
 	.uni-navbar {
 		// box-sizing: border-box;
 	}
@@ -311,14 +333,13 @@
 		// box-sizing: border-box;
 	}
 
-
 	.uni-navbar__placeholder-view {
 		height: $nav-height;
 	}
 
 	.uni-navbar--fixed {
 		position: fixed;
-		z-index: 99;
+		z-index: 998;
 		/* #ifdef H5 */
 		left: var(--window-left);
 		right: var(--window-right);
