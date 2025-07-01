@@ -4,9 +4,9 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
 				<view class="uni-select__input-box" @click="toggleSelector">
-					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
+					<view v-if="multiple || current" class="uni-select__input-text">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view key="clear-button" v-if="current && clear && !disabled" @click.stop="clearVal">
+					<view key="clear-button" v-if="shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
 					<view key="arrow-button" v-else>
@@ -21,8 +21,11 @@
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
+							@click="change(item)" :class="{'uni-select__selector-item--selected': isSelected(item)}">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+							<view v-if="multiple && isSelected(item)" class="uni-select__selector-item-check">
+								<uni-icons type="checkmarkempty" color="#007aff" size="16"/>
+							</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -36,13 +39,14 @@
 	 * DataChecklist 数据选择器
 	 * @description 通过数据渲染的下拉框组件
 	 * @tutorial https://uniapp.dcloud.io/component/uniui/uni-data-select
-	 * @property {String} value 默认值
+	 * @property {String|Array} value 默认值，多选时为数组
 	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Boolean} clear 是否可以清空已选项
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
+	 * @property {Boolean} multiple 是否多选模式
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
@@ -60,11 +64,11 @@
 				}
 			},
 			value: {
-				type: [String, Number],
+				type: [String, Number, Array],
 				default: ''
 			},
 			modelValue: {
-				type: [String, Number],
+				type: [String, Number, Array],
 				default: ''
 			},
 			label: {
@@ -88,6 +92,10 @@
 				default: 0
 			},
 			disabled: {
+				type: Boolean,
+				default: false
+			},
+			multiple: {
 				type: Boolean,
 				default: false
 			},
@@ -142,8 +150,21 @@
 			},
 			textShow() {
 				// 长文本显示
-				let text = this.current;
-				return text;
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					const count = Array.isArray(currentValues) ? currentValues.length : 0;
+					return `已选择${count}项`;
+				} else {
+					return this.current;
+				}
+			},
+			shouldShowClear() {
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					return Array.isArray(currentValues) && currentValues.length > 0;
+				} else {
+					return !!this.current;
+				}
 			},
 			getOffsetByPlacement() {
 				switch (this.placement) {
@@ -187,6 +208,23 @@
 					}, time)
 				}
 			},
+			// 检查项目是否已选中
+			isSelected(item) {
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					return Array.isArray(currentValues) && currentValues.includes(item.value);
+				} else {
+					return this.getCurrentValues() === item.value;
+				}
+			},
+			// 获取当前选中的值
+			getCurrentValues() {
+				if (this.multiple) {
+					return Array.isArray(this.valueCom) ? this.valueCom : (this.valueCom ? [this.valueCom] : []);
+				} else {
+					return this.valueCom;
+				}
+			},
 			// 执行数据库查询
 			query() {
 				this.mixinDatacomEasyGet();
@@ -198,7 +236,7 @@
 				}
 			},
 			initDefVal() {
-				let defValue = ''
+				let defValue = this.multiple ? [] : ''
 				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
 					defValue = this.valueCom
 				} else {
@@ -209,48 +247,88 @@
 					if (strogeValue || strogeValue === 0) {
 						defValue = strogeValue
 					} else {
-						let defItem = ''
+						let defItem = this.multiple ? [] : ''
 						if (this.defItem > 0 && this.defItem <= this.mixinDatacomResData.length) {
-							defItem = this.mixinDatacomResData[this.defItem - 1].value
+							defItem = this.multiple ? [this.mixinDatacomResData[this.defItem - 1].value] : this.mixinDatacomResData[this.defItem - 1].value
 						}
 						defValue = defItem
 					}
-					if (defValue || defValue === 0) {
+					if (defValue || defValue === 0 || (this.multiple && Array.isArray(defValue) && defValue.length > 0)) {
 						this.emit(defValue)
 					}
 				}
-				const def = this.mixinDatacomResData.find(item => item.value === defValue)
-				this.current = def ? this.formatItemName(def) : ''
+				
+				if (this.multiple) {
+					const selectedValues = Array.isArray(defValue) ? defValue : (defValue ? [defValue] : []);
+					const selectedItems = this.mixinDatacomResData.filter(item => selectedValues.includes(item.value));
+					this.current = selectedItems.map(item => this.formatItemName(item));
+				} else {
+					const def = this.mixinDatacomResData.find(item => item.value === defValue)
+					this.current = def ? this.formatItemName(def) : ''
+				}
 			},
 
 			/**
-			 * @param {[String, Number]} value
+			 * @param {[String, Number, Array]} value
 			 * 判断用户给的 value 是否同时为禁用状态
 			 */
 			isDisabled(value) {
-				let isDisabled = false;
-
-				this.mixinDatacomResData.forEach(item => {
-					if (item.value === value) {
-						isDisabled = item.disable
-					}
-				})
-
-				return isDisabled;
+				if (Array.isArray(value)) {
+					// 对于数组，如果任意一个值被禁用，则认为整体被禁用
+					return value.some(val => {
+						return this.mixinDatacomResData.some(item => item.value === val && item.disable);
+					});
+				} else {
+					let isDisabled = false;
+					this.mixinDatacomResData.forEach(item => {
+						if (item.value === value) {
+							isDisabled = item.disable
+						}
+					})
+					return isDisabled;
+				}
 			},
 
 			clearVal() {
-				this.emit('')
-				this.current = ''
+				const emptyValue = this.multiple ? [] : '';
+				this.emit(emptyValue)
+				this.current = this.multiple ? [] : ''
 				if (this.collection) {
 					this.removeCache()
 				}
 			},
 			change(item) {
 				if (!item.disable) {
-					this.showSelector = false
-					this.current = this.formatItemName(item)
-					this.emit(item.value)
+					if (this.multiple) {
+						// 多选模式
+						let currentValues = this.getCurrentValues();
+						if (!Array.isArray(currentValues)) {
+							currentValues = currentValues ? [currentValues] : [];
+						}
+						
+						const itemValue = item.value;
+						const index = currentValues.indexOf(itemValue);
+						
+						if (index > -1) {
+							// 如果已选中，则取消选择
+							currentValues.splice(index, 1);
+						} else {
+							// 如果未选中，则添加选择
+							currentValues.push(itemValue);
+						}
+						
+						// 更新显示文本
+						const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
+						this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
+						
+						this.emit(currentValues);
+						// 多选模式下不关闭选择器
+					} else {
+						// 单选模式
+						this.showSelector = false
+						this.current = this.formatItemName(item)
+						this.emit(item.value)
+					}
 				}
 			},
 			emit(val) {
@@ -463,15 +541,24 @@
 		display: flex;
 		cursor: pointer;
 		/* #endif */
+		flex-direction: row;
+		align-items: center;
 		line-height: 35px;
 		font-size: 14px;
-		text-align: center;
-		/* border-bottom: solid 1px $uni-border-3; */
+		/* border-bottom: solid 1px $uni-border-3; */  
 		padding: 0px 10px;
 	}
 
 	.uni-select__selector-item:hover {
 		background-color: #f9f9f9;
+	}
+
+	.uni-select__selector-item--selected {
+		background-color: #ecf5ff;
+	}
+
+	.uni-select__selector-item-check {
+		margin-left: auto;
 	}
 
 	.uni-select__selector-empty:last-child,
