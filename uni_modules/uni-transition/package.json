@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.01",
+    "uni-app": "^4.05",
     "uni-app-x": ""
   },
   "directories": {
@@ -68,7 +68,7 @@
             "nvue": "√",
             "android": "√",
             "ios": "√",
-            "harmony": "-"
+            "harmony": "√"
           },
           "mp": {
             "weixin": {
@@ -80,18 +80,16 @@
             "baidu": {
             },
             "kuaishou": {
-                "extVersion": "1.1.0",
-                "minVersion": ""
             },
             "jd": {
             },
-            "harmony": "x",
-            "qq": "-",
+            "harmony": "-",
+            "qq": "√",
             "lark": "-"
           },
           "quickapp": {
-            "huawei": "-",
-            "union": "-"
+            "huawei": "√",
+            "union": "√"
           }
         },
         "uni-app-x": {

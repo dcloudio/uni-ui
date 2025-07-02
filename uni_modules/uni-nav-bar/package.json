@@ -12,7 +12,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.22",
+    "uni-app": "^4.05",
     "uni-app-x": ""
   },
   "directories": {
@@ -49,8 +49,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "√",
-        "aliyun": "√",
+        "tcb": "x",
+        "aliyun": "x",
         "alipay": "x"
       },
       "client": {
@@ -75,11 +75,11 @@
             "alipay": "√",
             "toutiao": "√",
             "baidu": "√",
-            "kuaishou": "√",
-            "jd": "√",
-            "harmony": "√",
+            "kuaishou": "-",
+            "jd": "-",
+            "harmony": "-",
             "qq": "√",
-            "lark": "√"
+            "lark": "-"
           },
           "quickapp": {
             "huawei": "√",

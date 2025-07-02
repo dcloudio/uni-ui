@@ -13,8 +13,8 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.01",
-    "uni-app-x": ""
+    "uni-app": "^4.05",
+    "uni-app-x": "^4.05"
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -69,7 +69,7 @@
             "nvue": "√",
             "android": "√",
             "ios": "√",
-            "harmony": "x"
+            "harmony": "√"
           },
           "mp": {
             "weixin": "√",
@@ -89,16 +89,16 @@
         },
         "uni-app-x": {
           "web": {
-            "safari": "-",
-            "chrome": "-"
+            "safari": "√",
+            "chrome": "√"
           },
           "app": {
-            "android": "-",
-            "ios": "-",
-            "harmony": "-"
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
           },
           "mp": {
-            "weixin": "-"
+            "weixin": "√"
           }
         }
       }

@@ -49,9 +49,9 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "√",
-        "aliyun": "√",
-        "alipay": "√"
+        "tcb": "x",
+        "aliyun": "x",
+        "alipay": "x"
       },
       "client": {
         "uni-app": {
@@ -81,11 +81,11 @@
             "alipay": "√",
             "toutiao": "√",
             "baidu": "√",
-            "kuaishou": "√",
-            "jd": "√",
-            "harmony": "√",
+            "kuaishou": "-",
+            "jd": "-",
+            "harmony": "-",
             "qq": "√",
-            "lark": "√"
+            "lark": "-"
           },
           "quickapp": {
             "huawei": "√",
