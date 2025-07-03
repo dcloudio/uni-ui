@@ -5,7 +5,14 @@
 			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
 					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
-					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">{{textShow}}</view>
+					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">
+            <view v-if="chips" class="uni-select__chips-container">
+              <view v-for="item in textShow.split(',')" :key="item" class="uni-select__chip">
+                <text class="uni-select__chip-text">{{item}}</text>
+              </view>
+            </view>
+            <view v-else class="padding-top-bottom">{{textShow}}</view>
+          </view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
 					<!-- 清除按钮 -->
 					<view key="clear-button" v-if="shouldShowClear && clear && !disabled" @click.stop="clearVal">
@@ -115,7 +122,11 @@
 			allowWrap: {
 				type: Boolean,
 				default: false
-			}
+			},
+      chips: {
+        type: Boolean,
+        default: false
+      }
 		},
 		data() {
 			return {
@@ -422,6 +433,11 @@
 	$uni-main-color: #333 !default;
 	$uni-secondary-color: #909399 !default;
 	$uni-border-3: #e5e5e5;
+  $uni-primary: #2979ff !default;
+	$uni-success: #4cd964 !default;
+	$uni-warning: #f0ad4e !default;
+	$uni-error: #dd524d !default;
+	$uni-info: #909399 !default;
 
 	/* #ifndef APP-NVUE */
 	@media screen and (max-width: 500px) {
@@ -480,7 +496,7 @@
 		border-bottom: solid 1px $uni-border-3;
 		width: 100%;
 		flex: 1;
-		height: 35px;
+		min-height: 35px;
 
 		&--disabled {
 			background-color: #f5f7fa;
@@ -492,6 +508,27 @@
 			min-height: 35px;
 			align-items: flex-start;
 		}
+
+    &__chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 5px 0;
+      margin-right: -6px; 
+      margin-bottom: -6px;
+    }
+
+    &__chip {
+      display: flex;
+      align-items: center;
+      background-color: $uni-primary;
+      color: #fff;
+      border-radius: 20px;
+      padding: 0 10px;
+      margin-right: 6px; 
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
 	}
 
 	.uni-select__label {
@@ -505,8 +542,6 @@
 	.uni-select__input-box {
 		// height: 35px;
 		width: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -516,14 +551,15 @@
 		align-items: center;
 		
 		&--wrap {
-      padding-top: 5px;
-      padding-bottom: 5px;
-
 			.uni-select__input-text {
 				margin-right: 8px;
 			}
-			
 		}
+
+    .padding-top-bottom {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
 	}
 
 	.uni-select__input {
@@ -611,15 +647,14 @@
 	.uni-popper__arrow_bottom,
 	.uni-popper__arrow_bottom::after,
 	.uni-popper__arrow_top,
-	.uni-popper__arrow_top::after,
-	{
-	position: absolute;
-	display: block;
-	width: 0;
-	height: 0;
-	border-color: transparent;
-	border-style: solid;
-	border-width: 6px;
+	.uni-popper__arrow_top::after {
+		position: absolute;
+		display: block;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 6px;
 	}
 
 	.uni-popper__arrow_bottom {

@@ -37,9 +37,26 @@
 					label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
-		<uni-section title="多选换行显示" type="line">
+    <uni-section title="单选换行显示(allow-wrap)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="lineValue" allow-wrap :localdata="range" @change="change"
+					label="换行显示"></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="多选换行显示(allow-wrap)" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="multipleValue" multiple allow-wrap :localdata="range" @change="changeMultiple"
+					label="换行显示"></uni-data-select>
+			</view>
+		</uni-section>
+    <uni-section title="单行显示(chips方式)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="lineValue" allow-wrap :localdata="range" @change="change" chips></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="多选换行显示(chips方式)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" multiple allow-wrap chips :localdata="range" @change="changeMultiple"
 					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
@@ -50,23 +67,24 @@
 		data() {
 			return {
 				value: 0,
-				multipleValue: [1, 2, 3, 4, 5],
+        lineValue: 3,
+				multipleValue: [1, 3, 4, 5],
 				range: [{
 					"value": 0,
 					"text": "篮球运动锻炼",
 					"disable": true
 				}, {
 					"value": 1,
-					"text": "足球运动健身"
+					"text": "足球"
 				}, {
 					"value": 2,
-					"text": "游泳健身锻炼"
+					"text": "游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼"
 				}, {
 					"value": 3,
 					"text": "跑步有氧运动"
 				}, {
 					"value": 4,
-					"text": "网球运动竞技"
+					"text": "网球"
 				}, {
 					"value": 5,
 					"text": "羽毛球运动"
