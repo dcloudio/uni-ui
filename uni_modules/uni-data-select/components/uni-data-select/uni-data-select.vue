@@ -2,13 +2,16 @@
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
-			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
-				<view class="uni-select__input-box" @click="toggleSelector">
-					<view v-if="multiple || current" class="uni-select__input-text">{{textShow}}</view>
+			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap}">
+				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
+					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
+					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">{{textShow}}</view>
 					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
+					<!-- 清除按钮 -->
 					<view key="clear-button" v-if="shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
+					<!-- 下拉箭头 -->
 					<view key="arrow-button" v-else>
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
@@ -21,9 +24,9 @@
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)" :class="{'uni-select__selector-item--selected': isSelected(item)}">
+							@click="change(item)" :class="{'uni-select__selector-item--selected': !item.disable && isSelected(item)}">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
-							<view v-if="multiple && isSelected(item)" class="uni-select__selector-item-check">
+							<view v-if="!item.disable && isSelected(item)" class="uni-select__selector-item-check">
 								<uni-icons type="checkmarkempty" color="#007aff" size="16"/>
 							</view>
 						</view>
@@ -47,6 +50,7 @@
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
 	 * @property {Boolean} multiple 是否多选模式
+	 * @property {Boolean} allowWrap 是否允许选中文本换行显示
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
@@ -95,10 +99,6 @@
 				type: Boolean,
 				default: false
 			},
-			multiple: {
-				type: Boolean,
-				default: false
-			},
 			// 格式化输出 用法 field="_id as value, version as text, uni_platform as label" format="{label} - {text}"
 			format: {
 				type: String,
@@ -107,6 +107,14 @@
 			placement: {
 				type: String,
 				default: 'bottom'
+			},
+      multiple: {
+				type: Boolean,
+				default: false
+			},
+			allowWrap: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -152,8 +160,12 @@
 				// 长文本显示
 				if (this.multiple) {
 					const currentValues = this.getCurrentValues();
-					const count = Array.isArray(currentValues) ? currentValues.length : 0;
-					return `已选择${count}项`;
+					if (Array.isArray(currentValues) && currentValues.length > 0) {
+						const selectedItems = this.mixinDatacomResData.filter(item => currentValues.includes(item.value));
+						return selectedItems.map(item => this.formatItemName(item)).join(', ');
+					} else {
+						return ''; // 空数组时返回空字符串，显示占位符
+					}
 				} else {
 					return this.current;
 				}
@@ -165,6 +177,10 @@
 				} else {
 					return !!this.current;
 				}
+			},
+			shouldWrap() {
+				// 只有在多选模式、开启换行、且有内容时才应用换行样式
+				return this.multiple && this.allowWrap && !!this.textShow;
 			},
 			getOffsetByPlacement() {
 				switch (this.placement) {
@@ -470,6 +486,12 @@
 			background-color: #f5f7fa;
 			cursor: not-allowed;
 		}
+		
+		&--wrap {
+			height: auto;
+			min-height: 35px;
+			align-items: flex-start;
+		}
 	}
 
 	.uni-select__label {
@@ -481,8 +503,10 @@
 	}
 
 	.uni-select__input-box {
-		height: 35px;
+		// height: 35px;
 		width: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -490,6 +514,16 @@
 		flex: 1;
 		flex-direction: row;
 		align-items: center;
+		
+		&--wrap {
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+			.uni-select__input-text {
+				margin-right: 8px;
+			}
+			
+		}
 	}
 
 	.uni-select__input {
@@ -631,11 +665,22 @@
 		text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
+		
+		&--wrap {
+			white-space: normal;
+			text-overflow: initial;
+			-o-text-overflow: initial;
+			overflow: visible;
+			word-wrap: break-word;
+			word-break: break-all;
+			// line-height: 1.5;
+		}
 	}
 
 	.uni-select__input-placeholder {
 		color: $uni-base-color;
 		font-size: 12px;
+    margin: 1px 0;
 	}
 
 	.uni-select--mask {

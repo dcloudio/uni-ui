@@ -37,6 +37,12 @@
 					label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
+		<uni-section title="多选换行显示" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" multiple allow-wrap :localdata="range" @change="changeMultiple"
+					label="换行显示"></uni-data-select>
+			</view>
+		</uni-section>
 	</view>
 </template>
 <script>
@@ -44,29 +50,29 @@
 		data() {
 			return {
 				value: 0,
-				multipleValue: [],
+				multipleValue: [1, 2, 3, 4, 5],
 				range: [{
 					"value": 0,
-					"text": "篮球",
+					"text": "篮球运动锻炼",
 					"disable": true
 				}, {
 					"value": 1,
-					"text": "足球"
+					"text": "足球运动健身"
 				}, {
 					"value": 2,
-					"text": "游泳"
+					"text": "游泳健身锻炼"
 				}, {
 					"value": 3,
-					"text": "11"
+					"text": "跑步有氧运动"
 				}, {
 					"value": 4,
-					"text": "21"
+					"text": "网球运动竞技"
 				}, {
 					"value": 5,
-					"text": "31"
+					"text": "羽毛球运动"
 				}, {
 					"value": 6,
-					"text": "41"
+					"text": "乒乓球运动"
 				}]
 			}
 		},
