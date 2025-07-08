@@ -75,13 +75,21 @@
 					"disable": true
 				}, {
 					"value": 1,
-					"text": "足球"
+					"text": "足球",
+					"chipsCustomStyle":{
+						"background-color": "red",
+						"border-radius": '5px'
+					}
 				}, {
 					"value": 2,
 					"text": "游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼"
 				}, {
 					"value": 3,
-					"text": "跑步有氧运动"
+					"text": "跑步有氧运动",
+					"chipsCustomStyle":{
+						"background-color": "green",
+						"border-radius": '5px'
+					}
 				}, {
 					"value": 4,
 					"text": "网球"

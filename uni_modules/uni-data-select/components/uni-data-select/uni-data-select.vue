@@ -7,8 +7,8 @@
 					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
 					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">
             <view v-if="chips" class="uni-select__chips-container">
-              <view v-for="item in textShow.split(',')" :key="item" class="uni-select__chip">
-                <text class="uni-select__chip-text">{{item}}</text>
+              <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
+                <text>{{item}}</text>
               </view>
             </view>
             <view v-else class="padding-top-bottom">{{textShow}}</view>
@@ -223,9 +223,23 @@
 					}
 				}
 			},
-
 		},
 		methods: {
+			getChipsItemStyle(index){
+				let currentValues = this.getCurrentValues()
+				if(Array.isArray(currentValues)){
+					const currentValuesIndex = currentValues[index];
+					if(currentValuesIndex > -1){
+						const item = this.mixinDatacomResData[currentValuesIndex]
+						return item.chipsCustomStyle ? item.chipsCustomStyle : ''
+					}else{
+						return ""
+					}
+				}else if(currentValues>-1){
+					const item = this.mixinDatacomResData[currentValues]
+					return item.chipsCustomStyle ? item.chipsCustomStyle : ''
+				}
+			},
 			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {
@@ -284,7 +298,7 @@
 						this.emit(defValue)
 					}
 				}
-				
+
 				if (this.multiple) {
 					const selectedValues = Array.isArray(defValue) ? defValue : (defValue ? [defValue] : []);
 					const selectedItems = this.mixinDatacomResData.filter(item => selectedValues.includes(item.value));
@@ -332,10 +346,10 @@
 						if (!Array.isArray(currentValues)) {
 							currentValues = currentValues ? [currentValues] : [];
 						}
-						
+
 						const itemValue = item.value;
 						const index = currentValues.indexOf(itemValue);
-						
+
 						if (index > -1) {
 							// 如果已选中，则取消选择
 							currentValues.splice(index, 1);
@@ -343,11 +357,11 @@
 							// 如果未选中，则添加选择
 							currentValues.push(itemValue);
 						}
-						
+
 						// 更新显示文本
 						const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
 						this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
-						
+
 						this.emit(currentValues);
 						// 多选模式下不关闭选择器
 					} else {
@@ -502,7 +516,7 @@
 			background-color: #f5f7fa;
 			cursor: not-allowed;
 		}
-		
+
 		&--wrap {
 			height: auto;
 			min-height: 35px;
@@ -514,7 +528,7 @@
       flex-wrap: wrap;
       width: 100%;
       padding: 5px 0;
-      margin-right: -6px; 
+      margin-right: -6px;
       margin-bottom: -6px;
     }
 
@@ -525,7 +539,7 @@
       color: #fff;
       border-radius: 20px;
       padding: 0 10px;
-      margin-right: 6px; 
+      margin-right: 6px;
       margin-bottom: 6px;
       font-size: 12px;
     }
@@ -549,7 +563,7 @@
 		flex: 1;
 		flex-direction: row;
 		align-items: center;
-		
+
 		&--wrap {
 			.uni-select__input-text {
 				margin-right: 8px;
@@ -615,7 +629,7 @@
 		align-items: center;
 		line-height: 35px;
 		font-size: 14px;
-		/* border-bottom: solid 1px $uni-border-3; */  
+		/* border-bottom: solid 1px $uni-border-3; */
 		padding: 0px 10px;
 	}
 
@@ -700,7 +714,7 @@
 		text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
-		
+
 		&--wrap {
 			white-space: normal;
 			text-overflow: initial;
