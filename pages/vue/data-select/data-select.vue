@@ -37,6 +37,12 @@
 					label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
+		<uni-section title="设置文字出现位置(center)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select  align="center" v-model="value" :localdata="range" @change="change"
+					label="应用选择"></uni-data-select>
+			</view>
+		</uni-section>
     <uni-section title="单选换行显示(allow-wrap)" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="lineValue" allow-wrap :localdata="range" @change="change"
@@ -51,7 +57,7 @@
 		</uni-section>
     <uni-section title="单行显示(chips方式)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="lineValue" allow-wrap :localdata="range" @change="change" chips></uni-data-select>
+				<uni-data-select v-model="lineValue" align="center"  allow-wrap :localdata="range" @change="change" chips></uni-data-select>
 			</view>
 		</uni-section>
 		<uni-section title="多选换行显示(chips方式)" type="line">

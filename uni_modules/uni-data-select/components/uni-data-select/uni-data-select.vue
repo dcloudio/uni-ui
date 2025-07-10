@@ -6,20 +6,20 @@
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
 					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
 					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">
-            <view v-if="chips" class="uni-select__chips-container">
+            <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
               <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
                 <text>{{item}}</text>
               </view>
             </view>
-            <view v-else class="padding-top-bottom">{{textShow}}</view>
+            <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
           </view>
-					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
+					<view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
 					<!-- 清除按钮 -->
-					<view key="clear-button" v-if="shouldShowClear && clear && !disabled" @click.stop="clearVal">
+					<view key="clear-button" v-if="!hideRight && shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
 					<!-- 下拉箭头 -->
-					<view key="arrow-button" v-else>
+					<view key="arrow-button" v-else-if="!hideRight">
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
 				</view>
@@ -126,7 +126,15 @@
       chips: {
         type: Boolean,
         default: false
-      }
+      },
+			align:{
+				type: String,
+				default: "left"
+			},
+			hideRight: {
+				type: Boolean,
+				default: false
+			},
 		},
 		data() {
 			return {
@@ -227,18 +235,19 @@
 		methods: {
 			getChipsItemStyle(index){
 				let currentValues = this.getCurrentValues()
+				let style = {}
 				if(Array.isArray(currentValues)){
 					const currentValuesIndex = currentValues[index];
 					if(currentValuesIndex > -1){
 						const item = this.mixinDatacomResData[currentValuesIndex]
-						return item.chipsCustomStyle ? item.chipsCustomStyle : ''
-					}else{
-						return ""
+						style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
 					}
 				}else if(currentValues>-1){
 					const item = this.mixinDatacomResData[currentValues]
-					return item.chipsCustomStyle ? item.chipsCustomStyle : ''
+					style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
 				}
+				style.textAlign = this.textAlign
+				return style
 			},
 			debounce(fn, time = 100) {
 				let timer = null
