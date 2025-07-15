@@ -13,8 +13,8 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.05",
-    "uni-app-x": "^4.05"
+    "uni-app": "^4.06",
+    "uni-app-x": ""
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -76,11 +76,11 @@
             "alipay": "√",
             "toutiao": "√",
             "baidu": "√",
-            "kuaishou": "√",
-            "jd": "√",
-            "harmony": "√",
+            "kuaishou": "-",
+            "jd": "-",
+            "harmony": "-",
             "qq": "√",
-            "lark": "√"
+            "lark": "-"
           },
           "quickapp": {
             "huawei": "-",
