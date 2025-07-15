@@ -2,10 +2,10 @@
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
-			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap}">
+			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
 					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
-					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': allowWrap}">
+					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
             <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
               <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
                 <text>{{item}}</text>
@@ -57,7 +57,7 @@
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
 	 * @property {Boolean} multiple 是否多选模式
-	 * @property {Boolean} allowWrap 是否允许选中文本换行显示
+	 * @property {Boolean} wrap 是否允许选中文本换行显示
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
@@ -119,7 +119,7 @@
 				type: Boolean,
 				default: false
 			},
-			allowWrap: {
+			wrap: {
 				type: Boolean,
 				default: false
 			},
@@ -135,6 +135,10 @@
 				type: Boolean,
 				default: false
 			},
+      mode:{
+        type: String,
+        default: 'default'
+      }
 		},
 		data() {
 			return {
@@ -199,7 +203,7 @@
 			},
 			shouldWrap() {
 				// 只有在多选模式、开启换行、且有内容时才应用换行样式
-				return this.multiple && this.allowWrap && !!this.textShow;
+				return this.multiple && this.wrap && !!this.textShow;
 			},
 			getOffsetByPlacement() {
 				switch (this.placement) {
@@ -502,9 +506,16 @@
 		margin-right: 5px;
 	}
 
+  .border-bottom {
+    border-bottom: solid 1px $uni-border-3;
+  }
+
+  .border-default {
+    border: 1px solid $uni-border-3;
+  }
+
 	.uni-select {
 		font-size: 14px;
-		border: 1px solid $uni-border-3;
 		box-sizing: border-box;
 		border-radius: 4px;
 		padding: 0 5px;
@@ -516,7 +527,6 @@
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
-		border-bottom: solid 1px $uni-border-3;
 		width: 100%;
 		flex: 1;
 		min-height: 35px;

@@ -5,7 +5,7 @@
 		</uni-card>
 		<uni-section title="本地数据 (多选)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="multipleValue" multiple :localdata="range" @change="changeMultiple"></uni-data-select>
+				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range" @change="changeMultiple"></uni-data-select>
 			</view>
 		</uni-section>
 		<uni-section title="本地数据 (单选)" type="line">
@@ -43,26 +43,26 @@
 					label="应用选择"></uni-data-select>
 			</view>
 		</uni-section>
-    <uni-section title="单选换行显示(allow-wrap)" type="line">
+    <uni-section title="单选换行显示(wrap)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="lineValue" allow-wrap :localdata="range" @change="change"
+				<uni-data-select v-model="lineValue"  wrap :localdata="range" @change="change"
 					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
-		<uni-section title="多选换行显示(allow-wrap)" type="line">
+		<uni-section title="多选换行显示(wrap)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="multipleValue" multiple allow-wrap :localdata="range" @change="changeMultiple"
+				<uni-data-select v-model="multipleValue" mode="underline" multiple wrap :localdata="range" @change="changeMultiple"
 					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
     <uni-section title="单行显示(chips方式)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="lineValue" align="center"  allow-wrap :localdata="range" @change="change" chips></uni-data-select>
+				<uni-data-select v-model="lineValue" mode="underline" hideRight align="center"  wrap :localdata="range" @change="change" chips></uni-data-select>
 			</view>
 		</uni-section>
 		<uni-section title="多选换行显示(chips方式)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="multipleValue" multiple allow-wrap chips :localdata="range" @change="changeMultiple"
+				<uni-data-select v-model="multipleValue" mode="underline" multiple wrap chips :localdata="range" @change="changeMultiple"
 					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
