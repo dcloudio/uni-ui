@@ -5,7 +5,7 @@
 		</uni-card>
 		<uni-section title="本地数据 (多选)" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range" @change="changeMultiple"></uni-data-select>
+				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range" @change="changeMultiple" @open="open" @close="close" @clear="clear"></uni-data-select>
 			</view>
 		</uni-section>
 		<uni-section title="本地数据 (单选)" type="line">
@@ -88,7 +88,7 @@
 					}
 				}, {
 					"value": 2,
-					"text": "游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼游泳健身锻炼"
+					"text": "游泳健身"
 				}, {
 					"value": 3,
 					"text": "跑步有氧运动",
@@ -114,7 +114,16 @@
 			},
 			changeMultiple(e) {
 				console.log('多选值:', e);
-			}
+			},
+			open(){
+				console.log("打开选择框")
+			},
+			close(){
+				console.log("关闭选择框")
+			},
+			clear(){
+				console.log("清除选择框")
+			},
 		}
 	}
 </script>

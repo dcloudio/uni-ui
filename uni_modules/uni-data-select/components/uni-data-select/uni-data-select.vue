@@ -31,11 +31,8 @@
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)" :class="{'uni-select__selector-item--selected': !item.disable && isSelected(item)}">
+							@click="change(item)" :style="!item.disable && isSelected(item) ? {backgroundColor: selectedBackGroundColor, color: selectedTextColor} : {}">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
-							<view v-if="!item.disable && isSelected(item)" class="uni-select__selector-item-check">
-								<uni-icons type="checkmarkempty" color="#007aff" size="16"/>
-							</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -138,6 +135,14 @@
       mode:{
         type: String,
         default: 'default'
+      },
+      selectedBackGroundColor:{
+        type: String,
+        default: '#f5f5f5'
+      },
+      selectedTextColor:{
+        type: String,
+        default: ''
       }
 		},
 		data() {
@@ -214,8 +219,12 @@
 				}
 			}
 		},
-
 		watch: {
+			showSelector:{
+				handler(val,old){
+					val ? this.$emit('open') : this.$emit('close')
+				}
+			},
 			localdata: {
 				immediate: true,
 				handler(val, old) {
@@ -350,6 +359,7 @@
 				if (this.collection) {
 					this.removeCache()
 				}
+				this.$emit('clear')
 			},
 			change(item) {
 				if (!item.disable) {
@@ -652,13 +662,7 @@
 		padding: 0px 10px;
 	}
 
-	.uni-select__selector-item:hover {
-		background-color: #f9f9f9;
-	}
 
-	.uni-select__selector-item--selected {
-		background-color: #ecf5ff;
-	}
 
 	.uni-select__selector-item-check {
 		margin-left: auto;
