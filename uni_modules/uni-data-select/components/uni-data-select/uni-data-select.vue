@@ -20,9 +20,18 @@
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
-							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+						<view
+								v-else
+								class="uni-select__selector-item"
+								:class="{ 'uni-select_selector-item_active': item[dataKey] == current }"
+								style="display: flex; justify-content: space-between; align-items: center"
+								v-for="(item, index) in mixinDatacomResData"
+								:key="index"
+								@click="change(item)">
+								<text :class="{ 'uni-select__selector__disabled': item.disable }">{{
+										formatItemName(item)
+								}}</text>
+								<uni-icons v-if="item[dataKey] == current" type="checkmarkempty" color="#007aff" />
 						</view>
 					</scroll-view>
 				</view>
@@ -44,6 +53,8 @@
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
 	 * @property {String} placement 弹出位置
+	 * @property {String} dataKey 作为 key 唯一标识的键名
+   * @property {String} dataValue 作为 value 唯一标识的键名
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
 	 * @event {Function} change  选中发生变化触发
@@ -99,6 +110,14 @@
 			placement: {
 				type: String,
 				default: 'bottom'
+			},
+			dataKey: {
+					type: [String],
+					default: "text"
+			},
+			dataValue: {
+					type: [String],
+					default: "value"
 			}
 		},
 		data() {
@@ -211,7 +230,7 @@
 					} else {
 						let defItem = ''
 						if (this.defItem > 0 && this.defItem <= this.mixinDatacomResData.length) {
-							defItem = this.mixinDatacomResData[this.defItem - 1].value
+							defItem = this.mixinDatacomResData[this.defItem - 1][this.dataValue]
 						}
 						defValue = defItem
 					}
@@ -219,7 +238,7 @@
 						this.emit(defValue)
 					}
 				}
-				const def = this.mixinDatacomResData.find(item => item.value === defValue)
+				const def = this.mixinDatacomResData.find(item => item[this.dataValue] === defValue)
 				this.current = def ? this.formatItemName(def) : ''
 			},
 
@@ -231,7 +250,7 @@
 				let isDisabled = false;
 
 				this.mixinDatacomResData.forEach(item => {
-					if (item.value === value) {
+					if (item[this.dataValue] === value) {
 						isDisabled = item.disable
 					}
 				})
@@ -269,11 +288,12 @@
 				this.showSelector = !this.showSelector
 			},
 			formatItemName(item) {
-				let {
-					text,
-					value,
-					channel_code
-				} = item
+				if (!item) {
+						return ""
+				}
+				let text = item[this.dataKey]
+				let value = item[this.dataValue]
+				let { channel_code } = item
 				channel_code = channel_code ? `(${channel_code})` : ''
 
 				if (this.format) {
@@ -558,5 +578,11 @@
 		right: 0;
 		left: 0;
 		z-index: 2;
+	}
+
+	.uni-select_selector-item_active {
+	    color: #409eff;
+	    font-weight: bold;
+	    background-color: #f5f7fa;
 	}
 </style>
