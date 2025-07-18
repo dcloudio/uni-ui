@@ -52,7 +52,7 @@
 		</uni-section>
 		<view>
 			<!-- 普通弹窗 -->
-			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
+			<uni-popup ref="popup" background-color="#fff" @change="change">
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">popup 内容</text></view>
 			</uni-popup>
