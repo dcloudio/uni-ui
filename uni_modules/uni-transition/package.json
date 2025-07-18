@@ -1,7 +1,7 @@
 {
   "id": "uni-transition",
   "displayName": "uni-transition 过渡动画",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "元素的简单过渡动画",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.01",
+    "uni-app": "^4.12",
     "uni-app-x": ""
   },
   "directories": {
@@ -68,7 +68,7 @@
             "nvue": "√",
             "android": "√",
             "ios": "√",
-            "harmony": "-"
+            "harmony": "√"
           },
           "mp": {
             "weixin": {
@@ -80,18 +80,16 @@
             "baidu": {
             },
             "kuaishou": {
-                "extVersion": "1.1.0",
-                "minVersion": ""
             },
             "jd": {
             },
-            "harmony": "x",
-            "qq": "-",
+            "harmony": "-",
+            "qq": "√",
             "lark": "-"
           },
           "quickapp": {
-            "huawei": "-",
-            "union": "-"
+            "huawei": "√",
+            "union": "√"
           }
         },
         "uni-app-x": {

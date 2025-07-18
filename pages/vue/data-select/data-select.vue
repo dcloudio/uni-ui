@@ -3,7 +3,12 @@
 		<uni-card :is-shadow="false" is-full>
 			<text class="uni-h6">通过数据驱动的单选框和复选框，可直接通过连接 uniCloud 获取数据，同时可以配合表单组件 uni-forms 使用</text>
 		</uni-card>
-		<uni-section title="本地数据" type="line">
+		<uni-section title="本地数据 (多选)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range" @change="changeMultiple" @open="open" @close="close" @clear="clear"></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="本地数据 (单选)" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="value" :localdata="range" @change="change"></uni-data-select>
 			</view>
@@ -28,41 +33,100 @@
 		</uni-section>
 		<uni-section title="设置弹出位置" type="line">
 			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select placement="top" v-model="value" :localdata="range" @change="change" label="应用选择"></uni-data-select>
+				<uni-data-select placement="top" v-model="value" :localdata="range" @change="change"
+					label="应用选择"></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="设置文字出现位置(center)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select  align="center" v-model="value" :localdata="range" @change="change"
+					label="应用选择"></uni-data-select>
+			</view>
+		</uni-section>
+    <uni-section title="单选换行显示(wrap)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="lineValue"  wrap :localdata="range" @change="change"
+					label="换行显示"></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="多选换行显示(wrap)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" mode="underline" multiple wrap :localdata="range" @change="changeMultiple"
+					label="换行显示"></uni-data-select>
+			</view>
+		</uni-section>
+    <uni-section title="单行显示(chips方式)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="lineValue" mode="underline" hideRight align="center"  wrap :localdata="range" @change="change" chips></uni-data-select>
+			</view>
+		</uni-section>
+		<uni-section title="多选换行显示(chips方式)" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" mode="underline" multiple wrap chips :localdata="range" @change="changeMultiple"
+					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
 	</view>
 </template>
-
 <script>
 	export default {
 		data() {
 			return {
 				value: 0,
+        lineValue: 3,
+				multipleValue: [1, 3, 4, 5],
 				range: [{
-						"value": 0,
-						"text": "篮球",
-						"disable": true
-					},
-					{
-						"value": 1,
-						"text": "足球"
-					},
-					{
-						"value": 2,
-						"text": "游泳"
+					"value": 0,
+					"text": "篮球运动锻炼",
+					"disable": true
+				}, {
+					"value": 1,
+					"text": "足球",
+					"chipsCustomStyle":{
+						"background-color": "red",
+						"border-radius": '5px'
 					}
-				]
+				}, {
+					"value": 2,
+					"text": "游泳健身"
+				}, {
+					"value": 3,
+					"text": "跑步有氧运动",
+					"chipsCustomStyle":{
+						"background-color": "green",
+						"border-radius": '5px'
+					}
+				}, {
+					"value": 4,
+					"text": "网球"
+				}, {
+					"value": 5,
+					"text": "羽毛球运动"
+				}, {
+					"value": 6,
+					"text": "乒乓球运动"
+				}]
 			}
 		},
 		methods: {
 			change(e) {
-				console.log('e:', e);
-			}
+				console.log('单选值:', e);
+			},
+			changeMultiple(e) {
+				console.log('多选值:', e);
+			},
+			open(){
+				console.log("打开选择框")
+			},
+			close(){
+				console.log("关闭选择框")
+			},
+			clear(){
+				console.log("清除选择框")
+			},
 		}
 	}
 </script>
-
 <style lang="scss">
 	.text {
 		font-size: 12px;
