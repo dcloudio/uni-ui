@@ -1,3 +1,7 @@
+## 1.5.9（2025-07-18）
+- uni-popup 修复 nvue 下弹窗样式错乱的问题 ，更新依赖 uni-transition 组件
+- uni-popup 更新 示例取消 borderRadius 属性 ，如需内容圆角，用户应该直接在内容插槽中实现
+- uni-transition 修复 nvue 页面，样式错误问题
 ## 1.5.8（2025-06-24）
 - uni-countdown 修复 filterShow 导致的运行报错
 - uni-data-picker 修复 在readonly属性为true时选项匹配错误的问题

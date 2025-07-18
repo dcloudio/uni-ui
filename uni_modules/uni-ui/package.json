@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "^3.2.10",
-    "uni-app": "^4.03",
+    "uni-app": "^4.06",
     "uni-app-x": ""
   },
   "directories": {
@@ -91,8 +91,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "√",
-        "aliyun": "√",
+        "tcb": "x",
+        "aliyun": "x",
         "alipay": "x"
       },
       "client": {
