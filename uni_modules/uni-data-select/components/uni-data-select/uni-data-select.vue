@@ -2,36 +2,22 @@
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
-			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
-				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
-					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
-					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
-            <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
-              <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
-                <text>{{item}}</text>
-              </view>
-            </view>
-            <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
-          </view>
-					<view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
-					<!-- 清除按钮 -->
-					<view key="clear-button" v-if="!hideRight && shouldShowClear && clear && !disabled" @click.stop="clearVal">
-						<uni-icons type="clear" color="#c0c4cc" size="24" />
-					</view>
-					<!-- 下拉箭头 -->
-					<view key="arrow-button" v-else-if="!hideRight">
-						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
-					</view>
+			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
+				<view class="uni-select__input-box" @click="toggleSelector">
+					<view v-if="current" class="uni-select__input-text">{{current}}</view>
+					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
+					<uni-icons v-if="current && clear" type="clear" color="#c0c4cc" size="24" @click="clearVal" />
+					<uni-icons v-else :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 				</view>
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
-				<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
-					<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
+				<view class="uni-select__selector" v-if="showSelector">
+					<view class="uni-popper__arrow"></view>
 					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
 						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)" :style="!item.disable && isSelected(item) ? {backgroundColor: selectedBackGroundColor, color: selectedTextColor} : {}">
+							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
 					</scroll-view>
@@ -46,23 +32,18 @@
 	 * DataChecklist 数据选择器
 	 * @description 通过数据渲染的下拉框组件
 	 * @tutorial https://uniapp.dcloud.io/component/uniui/uni-data-select
-	 * @property {String|Array} value 默认值，多选时为数组
+	 * @property {String} value 默认值
 	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Boolean} clear 是否可以清空已选项
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
-	 * @property {Boolean} multiple 是否多选模式
-	 * @property {Boolean} wrap 是否允许选中文本换行显示
-	 * @property {String} placement 弹出位置
-	 * 	@value top   		顶部弹出
-	 * 	@value bottom		底部弹出（default)
 	 * @event {Function} change  选中发生变化触发
 	 */
 
 	export default {
-		name: "uni-data-select",
+		name: "uni-stat-select",
 		mixins: [uniCloud.mixinDatacom || {}],
 		props: {
 			localdata: {
@@ -72,11 +53,11 @@
 				}
 			},
 			value: {
-				type: [String, Number, Array],
+				type: [String, Number],
 				default: ''
 			},
 			modelValue: {
-				type: [String, Number, Array],
+				type: [String, Number],
 				default: ''
 			},
 			label: {
@@ -108,42 +89,6 @@
 				type: String,
 				default: ''
 			},
-			placement: {
-				type: String,
-				default: 'bottom'
-			},
-      multiple: {
-				type: Boolean,
-				default: false
-			},
-			wrap: {
-				type: Boolean,
-				default: false
-			},
-      chips: {
-        type: Boolean,
-        default: false
-      },
-			align:{
-				type: String,
-				default: "left"
-			},
-			hideRight: {
-				type: Boolean,
-				default: false
-			},
-      mode:{
-        type: String,
-        default: 'default'
-      },
-      selectedBackGroundColor:{
-        type: String,
-        default: '#f5f5f5'
-      },
-      selectedTextColor:{
-        type: String,
-        default: ''
-      }
 		},
 		data() {
 			return {
@@ -176,55 +121,16 @@
 					common + placeholder :
 					common
 			},
-			valueCom() {
+			valueCom(){
 				// #ifdef VUE3
 				return this.modelValue;
 				// #endif
 				// #ifndef VUE3
 				return this.value;
 				// #endif
-			},
-			textShow() {
-				// 长文本显示
-				if (this.multiple) {
-					const currentValues = this.getCurrentValues();
-					if (Array.isArray(currentValues) && currentValues.length > 0) {
-						const selectedItems = this.mixinDatacomResData.filter(item => currentValues.includes(item.value));
-						return selectedItems.map(item => this.formatItemName(item)).join(', ');
-					} else {
-						return ''; // 空数组时返回空字符串，显示占位符
-					}
-				} else {
-					return this.current;
-				}
-			},
-			shouldShowClear() {
-				if (this.multiple) {
-					const currentValues = this.getCurrentValues();
-					return Array.isArray(currentValues) && currentValues.length > 0;
-				} else {
-					return !!this.current;
-				}
-			},
-			shouldWrap() {
-				// 只有在多选模式、开启换行、且有内容时才应用换行样式
-				return this.multiple && this.wrap && !!this.textShow;
-			},
-			getOffsetByPlacement() {
-				switch (this.placement) {
-					case 'top':
-						return "bottom:calc(100% + 12px);";
-					case 'bottom':
-						return "top:calc(100% + 12px);";
-				}
 			}
 		},
 		watch: {
-			showSelector:{
-				handler(val,old){
-					val ? this.$emit('open') : this.$emit('close')
-				}
-			},
 			localdata: {
 				immediate: true,
 				handler(val, old) {
@@ -243,26 +149,10 @@
 						this.initDefVal()
 					}
 				}
-			},
+			}
 		},
 		methods: {
-			getChipsItemStyle(index){
-				let currentValues = this.getCurrentValues()
-				let style = {}
-				if(Array.isArray(currentValues)){
-					const currentValuesIndex = currentValues[index];
-					if(currentValuesIndex > -1){
-						const item = this.mixinDatacomResData[currentValuesIndex]
-						style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
-					}
-				}else if(currentValues>-1){
-					const item = this.mixinDatacomResData[currentValues]
-					style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
-				}
-				style.textAlign = this.textAlign
-				return style
-			},
-			debounce(fn, time = 100) {
+			debounce(fn, time = 100){
 				let timer = null
 				return function(...args) {
 					if (timer) clearTimeout(timer)
@@ -271,35 +161,18 @@
 					}, time)
 				}
 			},
-			// 检查项目是否已选中
-			isSelected(item) {
-				if (this.multiple) {
-					const currentValues = this.getCurrentValues();
-					return Array.isArray(currentValues) && currentValues.includes(item.value);
-				} else {
-					return this.getCurrentValues() === item.value;
-				}
-			},
-			// 获取当前选中的值
-			getCurrentValues() {
-				if (this.multiple) {
-					return Array.isArray(this.valueCom) ? this.valueCom : (this.valueCom ? [this.valueCom] : []);
-				} else {
-					return this.valueCom;
-				}
-			},
 			// 执行数据库查询
-			query() {
+			query(){
 				this.mixinDatacomEasyGet();
 			},
 			// 监听查询条件变更事件
-			onMixinDatacomPropsChange() {
+			onMixinDatacomPropsChange(){
 				if (this.collection) {
 					this.debounceGet();
 				}
 			},
 			initDefVal() {
-				let defValue = this.multiple ? [] : ''
+				let defValue = ''
 				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
 					defValue = this.valueCom
 				} else {
@@ -310,95 +183,53 @@
 					if (strogeValue || strogeValue === 0) {
 						defValue = strogeValue
 					} else {
-						let defItem = this.multiple ? [] : ''
+						let defItem = ''
 						if (this.defItem > 0 && this.defItem <= this.mixinDatacomResData.length) {
-							defItem = this.multiple ? [this.mixinDatacomResData[this.defItem - 1].value] : this.mixinDatacomResData[this.defItem - 1].value
+							defItem = this.mixinDatacomResData[this.defItem - 1].value
 						}
 						defValue = defItem
 					}
-					if (defValue || defValue === 0 || (this.multiple && Array.isArray(defValue) && defValue.length > 0)) {
-						this.emit(defValue)
-					}
+          if (defValue || defValue === 0) {
+					  this.emit(defValue)
+          }
 				}
-
-				if (this.multiple) {
-					const selectedValues = Array.isArray(defValue) ? defValue : (defValue ? [defValue] : []);
-					const selectedItems = this.mixinDatacomResData.filter(item => selectedValues.includes(item.value));
-					this.current = selectedItems.map(item => this.formatItemName(item));
-				} else {
-					const def = this.mixinDatacomResData.find(item => item.value === defValue)
-					this.current = def ? this.formatItemName(def) : ''
-				}
+				const def = this.mixinDatacomResData.find(item => item.value === defValue)
+				this.current = def ? this.formatItemName(def) : ''
 			},
 
 			/**
-			 * @param {[String, Number, Array]} value
+			 * @param {[String, Number]} value
 			 * 判断用户给的 value 是否同时为禁用状态
 			 */
 			isDisabled(value) {
-				if (Array.isArray(value)) {
-					// 对于数组，如果任意一个值被禁用，则认为整体被禁用
-					return value.some(val => {
-						return this.mixinDatacomResData.some(item => item.value === val && item.disable);
-					});
-				} else {
-					let isDisabled = false;
-					this.mixinDatacomResData.forEach(item => {
-						if (item.value === value) {
-							isDisabled = item.disable
-						}
-					})
-					return isDisabled;
-				}
+				let isDisabled = false;
+
+				this.mixinDatacomResData.forEach(item => {
+					if (item.value === value) {
+						isDisabled = item.disable
+					}
+				})
+
+				return isDisabled;
 			},
 
 			clearVal() {
-				const emptyValue = this.multiple ? [] : '';
-				this.emit(emptyValue)
-				this.current = this.multiple ? [] : ''
+				this.emit('')
 				if (this.collection) {
 					this.removeCache()
 				}
-				this.$emit('clear')
 			},
 			change(item) {
 				if (!item.disable) {
-					if (this.multiple) {
-						// 多选模式
-						let currentValues = this.getCurrentValues();
-						if (!Array.isArray(currentValues)) {
-							currentValues = currentValues ? [currentValues] : [];
-						}
-
-						const itemValue = item.value;
-						const index = currentValues.indexOf(itemValue);
-
-						if (index > -1) {
-							// 如果已选中，则取消选择
-							currentValues.splice(index, 1);
-						} else {
-							// 如果未选中，则添加选择
-							currentValues.push(itemValue);
-						}
-
-						// 更新显示文本
-						const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
-						this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
-
-						this.emit(currentValues);
-						// 多选模式下不关闭选择器
-					} else {
-						// 单选模式
-						this.showSelector = false
-						this.current = this.formatItemName(item)
-						this.emit(item.value)
-					}
+					this.showSelector = false
+					this.current = this.formatItemName(item)
+					this.emit(item.value)
 				}
 			},
 			emit(val) {
+				this.$emit('change', val)
 				this.$emit('input', val)
 				this.$emit('update:modelValue', val)
-				this.$emit('change', val)
 				if (this.collection) {
 					this.setCache(val);
 				}
@@ -423,7 +254,7 @@
 					let str = "";
 					str = this.format;
 					for (let key in item) {
-						str = str.replace(new RegExp(`{${key}}`, "g"), item[key]);
+						str = str.replace(new RegExp(`{${key}}`,"g"),item[key]);
 					}
 					return str;
 				} else {
@@ -437,26 +268,26 @@
 				}
 			},
 			// 获取当前加载的数据
-			getLoadData() {
+			getLoadData(){
 				return this.mixinDatacomResData;
 			},
 			// 获取当前缓存key
-			getCurrentCacheKey() {
+			getCurrentCacheKey(){
 				return this.collection;
 			},
 			// 获取缓存
-			getCache(name = this.getCurrentCacheKey()) {
+			getCache(name=this.getCurrentCacheKey()){
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				return cacheData[name];
 			},
 			// 设置缓存
-			setCache(value, name = this.getCurrentCacheKey()) {
+			setCache(value, name=this.getCurrentCacheKey()){
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				cacheData[name] = value;
 				uni.setStorageSync(this.cacheKey, cacheData);
 			},
 			// 删除缓存
-			removeCache(name = this.getCurrentCacheKey()) {
+			removeCache(name=this.getCurrentCacheKey()){
 				let cacheData = uni.getStorageSync(this.cacheKey) || {};
 				delete cacheData[name];
 				uni.setStorageSync(this.cacheKey, cacheData);
@@ -470,11 +301,7 @@
 	$uni-main-color: #333 !default;
 	$uni-secondary-color: #909399 !default;
 	$uni-border-3: #e5e5e5;
-  $uni-primary: #2979ff !default;
-	$uni-success: #4cd964 !default;
-	$uni-warning: #f0ad4e !default;
-	$uni-error: #dd524d !default;
-	$uni-info: #909399 !default;
+
 
 	/* #ifndef APP-NVUE */
 	@media screen and (max-width: 500px) {
@@ -488,16 +315,13 @@
 		display: flex;
 		align-items: center;
 		// padding: 15px;
-		/* #ifdef H5 */
 		cursor: pointer;
-		/* #endif */
 		width: 100%;
 		flex: 1;
 		box-sizing: border-box;
 	}
 
 	.uni-stat-box {
-		background-color: #fff;
 		width: 100%;
 		flex: 1;
 	}
@@ -516,16 +340,9 @@
 		margin-right: 5px;
 	}
 
-  .border-bottom {
-    border-bottom: solid 1px $uni-border-3;
-  }
-
-  .border-default {
-    border: 1px solid $uni-border-3;
-  }
-
 	.uni-select {
 		font-size: 14px;
+		border: 1px solid $uni-border-3;
 		box-sizing: border-box;
 		border-radius: 4px;
 		padding: 0 5px;
@@ -537,41 +354,15 @@
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
+		border-bottom: solid 1px $uni-border-3;
 		width: 100%;
 		flex: 1;
-		min-height: 35px;
+		height: 35px;
 
 		&--disabled {
 			background-color: #f5f7fa;
 			cursor: not-allowed;
 		}
-
-		&--wrap {
-			height: auto;
-			min-height: 35px;
-			align-items: flex-start;
-		}
-
-    &__chips-container {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      padding: 5px 0;
-      margin-right: -6px;
-      margin-bottom: -6px;
-    }
-
-    &__chip {
-      display: flex;
-      align-items: center;
-      background-color: $uni-primary;
-      color: #fff;
-      border-radius: 20px;
-      padding: 0 10px;
-      margin-right: 6px;
-      margin-bottom: 6px;
-      font-size: 12px;
-    }
 	}
 
 	.uni-select__label {
@@ -583,8 +374,7 @@
 	}
 
 	.uni-select__input-box {
-		// height: 35px;
-		width: 0px;
+		height: 35px;
 		position: relative;
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -592,17 +382,6 @@
 		flex: 1;
 		flex-direction: row;
 		align-items: center;
-
-		&--wrap {
-			.uni-select__input-text {
-				margin-right: 8px;
-			}
-		}
-
-    .padding-top-bottom {
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
 	}
 
 	.uni-select__input {
@@ -622,6 +401,7 @@
 		box-sizing: border-box;
 		/* #endif */
 		position: absolute;
+		top: calc(100% + 12px);
 		left: 0;
 		width: 100%;
 		background-color: #FFFFFF;
@@ -639,33 +419,21 @@
 		/* #endif */
 	}
 
-	/* #ifdef H5 */
-	@media (min-width: 768px) {
-		.uni-select__selector-scroll {
-			max-height: 600px;
-		}
-	}
-
-	/* #endif */
-
 	.uni-select__selector-empty,
 	.uni-select__selector-item {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		cursor: pointer;
 		/* #endif */
-		flex-direction: row;
-		align-items: center;
 		line-height: 35px;
 		font-size: 14px;
+		text-align: center;
 		/* border-bottom: solid 1px $uni-border-3; */
 		padding: 0px 10px;
 	}
 
-
-
-	.uni-select__selector-item-check {
-		margin-left: auto;
+	.uni-select__selector-item:hover {
+		background-color: #f9f9f9;
 	}
 
 	.uni-select__selector-empty:last-child,
@@ -681,10 +449,8 @@
 	}
 
 	/* picker 弹出层通用的指示小三角 */
-	.uni-popper__arrow_bottom,
-	.uni-popper__arrow_bottom::after,
-	.uni-popper__arrow_top,
-	.uni-popper__arrow_top::after {
+	.uni-popper__arrow,
+	.uni-popper__arrow::after {
 		position: absolute;
 		display: block;
 		width: 0;
@@ -694,7 +460,7 @@
 		border-width: 6px;
 	}
 
-	.uni-popper__arrow_bottom {
+	.uni-popper__arrow {
 		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
 		top: -6px;
 		left: 10%;
@@ -703,31 +469,13 @@
 		border-bottom-color: #EBEEF5;
 	}
 
-	.uni-popper__arrow_bottom::after {
+	.uni-popper__arrow::after {
 		content: " ";
 		top: 1px;
 		margin-left: -6px;
 		border-top-width: 0;
 		border-bottom-color: #fff;
 	}
-
-	.uni-popper__arrow_top {
-		filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
-		bottom: -6px;
-		left: 10%;
-		margin-right: 3px;
-		border-bottom-width: 0;
-		border-top-color: #EBEEF5;
-	}
-
-	.uni-popper__arrow_top::after {
-		content: " ";
-		bottom: 1px;
-		margin-left: -6px;
-		border-bottom-width: 0;
-		border-top-color: #fff;
-	}
-
 
 	.uni-select__input-text {
 		// width: 280px;
@@ -737,22 +485,11 @@
 		text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
-
-		&--wrap {
-			white-space: normal;
-			text-overflow: initial;
-			-o-text-overflow: initial;
-			overflow: visible;
-			word-wrap: break-word;
-			word-break: break-all;
-			// line-height: 1.5;
-		}
 	}
 
 	.uni-select__input-placeholder {
 		color: $uni-base-color;
 		font-size: 12px;
-    margin: 1px 0;
 	}
 
 	.uni-select--mask {
@@ -761,6 +498,5 @@
 		bottom: 0;
 		right: 0;
 		left: 0;
-		z-index: 2;
 	}
 </style>
