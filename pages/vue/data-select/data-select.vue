@@ -3,6 +3,21 @@
 		<uni-card :is-shadow="false" is-full>
 			<text class="uni-h6">通过数据驱动的单选框和复选框，可直接通过连接 uniCloud 获取数据，同时可以配合表单组件 uni-forms 使用</text>
 		</uni-card>
+    <uni-section title="自定义 slot:content" subTitle="多选的时候,超过 2 个显示省略" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range">
+          <template v-slot:content="{selected}">
+            <view v-for="item in selected.slice(0, 2)" :key="item.value" class="slot-content-item">
+              {{item.text}}
+            </view>
+            <view v-if="selected.length > 2" class="slot-content-item">
+              +{{selected.length - 2}} more
+            </view>
+          </template>
+        </uni-data-select>
+			</view>
+		</uni-section>
+
 		<uni-section title="本地数据 (多选)" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range" @change="changeMultiple" @open="open" @close="close" @clear="clear"></uni-data-select>
@@ -142,4 +157,13 @@
 	.uni-pb-5 {
 		padding-bottom: 10px;
 	}
+
+  .slot-content-item {
+    display: inline-block;
+    margin-right: 5px;
+    background-color: $uni-secondary-color;
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: #fff;
+  }
 </style>

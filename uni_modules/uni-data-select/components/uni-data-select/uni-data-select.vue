@@ -4,16 +4,20 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
-					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
-					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
-            <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
-              <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
-                <text>{{item}}</text>
-              </view>
-            </view>
-            <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
+          <view v-if="slotContent" class="slot-content">
+            <slot name="content" :selected="getSelectedItems()"></slot>
           </view>
-					<view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
+          <template v-else>
+            <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
+                <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
+                    <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="{...getChipsItemStyle(index)}">
+                      <text>{{item}}</text>
+                    </view>
+                </view>
+              <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
+            </view>
+            <view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
+          </template>
 					<!-- 清除按钮 -->
 					<view key="clear-button" v-if="!hideRight && shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
@@ -217,7 +221,15 @@
 					case 'bottom':
 						return "top:calc(100% + 12px);";
 				}
-			}
+			},
+      slotContent(){
+        // #ifdef VUE2
+        return this.$scopedSlots ? this.$scopedSlots.content : false
+        // #endif
+        // #ifdef VUE3
+        return this.$slots ? this.$slots.content : false
+        // #endif
+      }
 		},
 		watch: {
 			showSelector:{
@@ -246,6 +258,14 @@
 			},
 		},
 		methods: {
+      getSelectedItems() {
+        const currentValues = this.getCurrentValues();
+        if (this.multiple) {
+          return this.mixinDatacomResData.filter(item => currentValues.includes(item.value));
+        } else {
+          return this.mixinDatacomResData.find(item => item.value === currentValues);
+        }
+      },
 			getChipsItemStyle(index){
 				let currentValues = this.getCurrentValues()
 				let style = {}
@@ -259,8 +279,7 @@
 					const item = this.mixinDatacomResData[currentValues]
 					style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
 				}
-				style.textAlign = this.textAlign
-				return style
+        return { ...style, textAlign: this.align };
 			},
 			debounce(fn, time = 100) {
 				let timer = null
@@ -602,6 +621,12 @@
     .padding-top-bottom {
       padding-top: 5px;
       padding-bottom: 5px;
+    }
+
+    .slot-content {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
     }
 	}
 
