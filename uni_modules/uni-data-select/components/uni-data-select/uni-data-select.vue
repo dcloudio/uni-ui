@@ -9,20 +9,13 @@
           </view>
           <template v-else>
             <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
-                <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
-                    <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="{...getChipsItemStyle(index)}">
-                      <text>{{item}}</text>
-                    </view>
-                </view>
-              <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
+              <view class="padding-top-bottom" :class="'align-'+align">{{textShow}}</view>
             </view>
-            <view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
+            <view v-else class="uni-select__input-text uni-select__input-placeholder" :class="'align-'+align">{{typePlaceholder}}</view>
           </template>
-					<!-- 清除按钮 -->
 					<view key="clear-button" v-if="!hideRight && shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
-					<!-- 下拉箭头 -->
 					<view key="arrow-button" v-else-if="!hideRight">
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
@@ -35,7 +28,7 @@
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)" :style="!item.disable && isSelected(item) ? {backgroundColor: selectedBackGroundColor, color: selectedTextColor} : {}">
+							@click="change(item)">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
 					</scroll-view>
@@ -124,10 +117,6 @@
 				type: Boolean,
 				default: false
 			},
-      chips: {
-        type: Boolean,
-        default: false
-      },
 			align:{
 				type: String,
 				default: "left"
@@ -139,14 +128,6 @@
       mode:{
         type: String,
         default: 'default'
-      },
-      selectedBackGroundColor:{
-        type: String,
-        default: '#f5f5f5'
-      },
-      selectedTextColor:{
-        type: String,
-        default: ''
       }
 		},
 		data() {
@@ -266,21 +247,6 @@
           return this.mixinDatacomResData.find(item => item.value === currentValues);
         }
       },
-			getChipsItemStyle(index){
-				let currentValues = this.getCurrentValues()
-				let style = {}
-				if(Array.isArray(currentValues)){
-					const currentValuesIndex = currentValues[index];
-					if(currentValuesIndex > -1){
-						const item = this.mixinDatacomResData[currentValuesIndex]
-						style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
-					}
-				}else if(currentValues>-1){
-					const item = this.mixinDatacomResData[currentValues]
-					style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
-				}
-        return { ...style, textAlign: this.align };
-			},
 			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {
@@ -570,27 +536,6 @@
 			min-height: 35px;
 			align-items: flex-start;
 		}
-
-    &__chips-container {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      padding: 5px 0;
-      margin-right: -6px;
-      margin-bottom: -6px;
-    }
-
-    &__chip {
-      display: flex;
-      align-items: center;
-      background-color: $uni-primary;
-      color: #fff;
-      border-radius: 20px;
-      padding: 0 10px;
-      margin-right: 6px;
-      margin-bottom: 6px;
-      font-size: 12px;
-    }
 	}
 
 	.uni-select__label {
@@ -788,4 +733,17 @@
 		left: 0;
 		z-index: 2;
 	}
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+  
 </style>

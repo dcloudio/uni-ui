@@ -70,17 +70,6 @@
 					label="换行显示"></uni-data-select>
 			</view>
 		</uni-section>
-    <uni-section title="单行显示(chips方式)" type="line">
-			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="lineValue" mode="underline" hideRight align="center"  wrap :localdata="range" @change="change" chips></uni-data-select>
-			</view>
-		</uni-section>
-		<uni-section title="多选换行显示(chips方式)" type="line">
-			<view class="uni-px-5 uni-pb-5">
-				<uni-data-select v-model="multipleValue" mode="underline" multiple wrap chips :localdata="range" @change="changeMultiple"
-					label="换行显示"></uni-data-select>
-			</view>
-		</uni-section>
 	</view>
 </template>
 <script>
@@ -97,20 +86,12 @@
 				}, {
 					"value": 1,
 					"text": "足球",
-					"chipsCustomStyle":{
-						"background-color": "red",
-						"border-radius": '5px'
-					}
 				}, {
 					"value": 2,
 					"text": "游泳健身"
 				}, {
 					"value": 3,
 					"text": "跑步有氧运动",
-					"chipsCustomStyle":{
-						"background-color": "green",
-						"border-radius": '5px'
-					}
 				}, {
 					"value": 4,
 					"text": "网球"
