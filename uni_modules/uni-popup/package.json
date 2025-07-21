@@ -1,7 +1,7 @@
 {
   "id": "uni-popup",
   "displayName": "uni-popup 弹出层",
-  "version": "1.9.9",
+  "version": "1.9.10",
   "description": " Popup 组件，提供常用的弹层",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.01",
+    "uni-app": "^4.06",
     "uni-app-x": ""
   },
   "directories": {
@@ -69,18 +69,18 @@
             "nvue": "√",
             "android": "√",
             "ios": "√",
-            "harmony": "x"
+            "harmony": "√"
           },
           "mp": {
             "weixin": "√",
             "alipay": "√",
             "toutiao": "√",
             "baidu": "√",
-            "kuaishou": "√",
-            "jd": "√",
-            "harmony": "√",
+            "kuaishou": "-",
+            "jd": "-",
+            "harmony": "-",
             "qq": "√",
-            "lark": "√"
+            "lark": "-"
           },
           "quickapp": {
             "huawei": "-",
@@ -89,16 +89,16 @@
         },
         "uni-app-x": {
           "web": {
-            "safari": "-",
-            "chrome": "-"
+            "safari": "√",
+            "chrome": "√"
           },
           "app": {
-            "android": "-",
-            "ios": "-",
-            "harmony": "-"
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
           },
           "mp": {
-            "weixin": "-"
+            "weixin": "√"
           }
         }
       }

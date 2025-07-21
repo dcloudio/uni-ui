@@ -174,8 +174,14 @@
 						this.animation = createAnimation(this.config, this)
 						this.tranfromInit(false).step()
 						this.animation.run(() => {
+							// #ifdef APP-NVUE
+							this.transform = this.styleInit(false).transform || ''
+							this.opacity = this.styleInit(false).opacity || 1
+							// #endif
+							// #ifndef APP-NVUE
 							this.transform = ''
 							this.opacity = this.styleInit(false).opacity || 1
+							// #endif
 							this.$emit('change', {
 								detail: this.isShow
 							})

@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-popup-dialog">
+	<view class="uni-popup-dialog" :style="{ borderRadius }">
 		<view class="uni-dialog-title">
 			<text class="uni-dialog-title-text" :class="['uni-popup__'+dialogType]">{{titleText}}</text>
 		</view>
@@ -124,6 +124,10 @@
 			focus: {
 				type: Boolean,
 				default: true,
+			},
+		    borderRadius: {
+				type: String,
+				default: '11px',
 			}
 		},
 		data() {
@@ -229,7 +233,6 @@
 <style lang="scss">
 	.uni-popup-dialog {
 		width: 300px;
-		border-radius: 11px;
 		background-color: #fff;
 	}
 

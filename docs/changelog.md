@@ -7,6 +7,22 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.9" date="2025-07-18">
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 下弹窗样式错乱的问题 ，更新依赖 uni-transition 组件
+		</log-item-text>
+		<log-item-text tag-type="perf">
+			 更新 示例取消 borderRadius 属性 ，如需内容圆角，用户应该直接在内容插槽中实现
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-transition 组件更新">
+		<log-item-text tag-type="fix">
+			 nvue 页面，样式错误问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.8" date="2025-06-24">
 	<log-item title="uni-countdown 组件更新">
 		<log-item-text tag-type="fix">

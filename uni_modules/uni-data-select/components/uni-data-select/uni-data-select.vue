@@ -2,14 +2,24 @@
 	<view class="uni-stat__select">
 		<span v-if="label" class="uni-label-text hide-on-phone">{{label + '：'}}</span>
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
-			<view class="uni-select" :class="{'uni-select--disabled':disabled}">
-				<view class="uni-select__input-box" @click="toggleSelector">
-					<view v-if="current" class="uni-select__input-text">{{textShow}}</view>
-					<view v-else class="uni-select__input-text uni-select__input-placeholder">{{typePlaceholder}}</view>
-					<view key="clear-button" v-if="current && clear && !disabled" @click.stop="clearVal">
+			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
+				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
+					<!-- 选中文本显示区域，支持换行和省略号两种模式 -->
+					<view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
+            <view v-if="chips" class="uni-select__chips-container" :style="{'justify-content':align}">
+              <view v-for="item,index in textShow.split(',')" :key="item" class="uni-select__chip" :style="getChipsItemStyle(index)">
+                <text>{{item}}</text>
+              </view>
+            </view>
+            <view v-else class="padding-top-bottom" :style="{'text-align':align}">{{textShow}}</view>
+          </view>
+					<view v-else class="uni-select__input-text uni-select__input-placeholder" :style="{'text-align':align}">{{typePlaceholder}}</view>
+					<!-- 清除按钮 -->
+					<view key="clear-button" v-if="!hideRight && shouldShowClear && clear && !disabled" @click.stop="clearVal">
 						<uni-icons type="clear" color="#c0c4cc" size="24" />
 					</view>
-					<view key="arrow-button" v-else>
+					<!-- 下拉箭头 -->
+					<view key="arrow-button" v-else-if="!hideRight">
 						<uni-icons :type="showSelector? 'top' : 'bottom'" size="14" color="#999" />
 					</view>
 				</view>
@@ -21,7 +31,7 @@
 							<text>{{emptyTips}}</text>
 						</view>
 						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
+							@click="change(item)" :style="!item.disable && isSelected(item) ? {backgroundColor: selectedBackGroundColor, color: selectedTextColor} : {}">
 							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
 						</view>
 					</scroll-view>
@@ -36,13 +46,15 @@
 	 * DataChecklist 数据选择器
 	 * @description 通过数据渲染的下拉框组件
 	 * @tutorial https://uniapp.dcloud.io/component/uniui/uni-data-select
-	 * @property {String} value 默认值
+	 * @property {String|Array} value 默认值，多选时为数组
 	 * @property {Array} localdata 本地数据 ，格式 [{text:'',value:''}]
 	 * @property {Boolean} clear 是否可以清空已选项
 	 * @property {Boolean} emptyText 没有数据时显示的文字 ，本地数据无效
 	 * @property {String} label 左侧标题
 	 * @property {String} placeholder 输入框的提示文字
 	 * @property {Boolean} disabled 是否禁用
+	 * @property {Boolean} multiple 是否多选模式
+	 * @property {Boolean} wrap 是否允许选中文本换行显示
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
@@ -60,11 +72,11 @@
 				}
 			},
 			value: {
-				type: [String, Number],
+				type: [String, Number, Array],
 				default: ''
 			},
 			modelValue: {
-				type: [String, Number],
+				type: [String, Number, Array],
 				default: ''
 			},
 			label: {
@@ -99,7 +111,39 @@
 			placement: {
 				type: String,
 				default: 'bottom'
-			}
+			},
+      multiple: {
+				type: Boolean,
+				default: false
+			},
+			wrap: {
+				type: Boolean,
+				default: false
+			},
+      chips: {
+        type: Boolean,
+        default: false
+      },
+			align:{
+				type: String,
+				default: "left"
+			},
+			hideRight: {
+				type: Boolean,
+				default: false
+			},
+      mode:{
+        type: String,
+        default: 'default'
+      },
+      selectedBackGroundColor:{
+        type: String,
+        default: '#f5f5f5'
+      },
+      selectedTextColor:{
+        type: String,
+        default: ''
+      }
 		},
 		data() {
 			return {
@@ -142,8 +186,29 @@
 			},
 			textShow() {
 				// 长文本显示
-				let text = this.current;
-				return text;
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					if (Array.isArray(currentValues) && currentValues.length > 0) {
+						const selectedItems = this.mixinDatacomResData.filter(item => currentValues.includes(item.value));
+						return selectedItems.map(item => this.formatItemName(item)).join(', ');
+					} else {
+						return ''; // 空数组时返回空字符串，显示占位符
+					}
+				} else {
+					return this.current;
+				}
+			},
+			shouldShowClear() {
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					return Array.isArray(currentValues) && currentValues.length > 0;
+				} else {
+					return !!this.current;
+				}
+			},
+			shouldWrap() {
+				// 只有在多选模式、开启换行、且有内容时才应用换行样式
+				return this.multiple && this.wrap && !!this.textShow;
 			},
 			getOffsetByPlacement() {
 				switch (this.placement) {
@@ -154,8 +219,12 @@
 				}
 			}
 		},
-
 		watch: {
+			showSelector:{
+				handler(val,old){
+					val ? this.$emit('open') : this.$emit('close')
+				}
+			},
 			localdata: {
 				immediate: true,
 				handler(val, old) {
@@ -175,9 +244,24 @@
 					}
 				}
 			},
-
 		},
 		methods: {
+			getChipsItemStyle(index){
+				let currentValues = this.getCurrentValues()
+				let style = {}
+				if(Array.isArray(currentValues)){
+					const currentValuesIndex = currentValues[index];
+					if(currentValuesIndex > -1){
+						const item = this.mixinDatacomResData[currentValuesIndex]
+						style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
+					}
+				}else if(currentValues>-1){
+					const item = this.mixinDatacomResData[currentValues]
+					style =  item.chipsCustomStyle ? item.chipsCustomStyle : {}
+				}
+				style.textAlign = this.textAlign
+				return style
+			},
 			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {
@@ -185,6 +269,23 @@
 					timer = setTimeout(() => {
 						fn.apply(this, args)
 					}, time)
+				}
+			},
+			// 检查项目是否已选中
+			isSelected(item) {
+				if (this.multiple) {
+					const currentValues = this.getCurrentValues();
+					return Array.isArray(currentValues) && currentValues.includes(item.value);
+				} else {
+					return this.getCurrentValues() === item.value;
+				}
+			},
+			// 获取当前选中的值
+			getCurrentValues() {
+				if (this.multiple) {
+					return Array.isArray(this.valueCom) ? this.valueCom : (this.valueCom ? [this.valueCom] : []);
+				} else {
+					return this.valueCom;
 				}
 			},
 			// 执行数据库查询
@@ -198,7 +299,7 @@
 				}
 			},
 			initDefVal() {
-				let defValue = ''
+				let defValue = this.multiple ? [] : ''
 				if ((this.valueCom || this.valueCom === 0) && !this.isDisabled(this.valueCom)) {
 					defValue = this.valueCom
 				} else {
@@ -209,48 +310,89 @@
 					if (strogeValue || strogeValue === 0) {
 						defValue = strogeValue
 					} else {
-						let defItem = ''
+						let defItem = this.multiple ? [] : ''
 						if (this.defItem > 0 && this.defItem <= this.mixinDatacomResData.length) {
-							defItem = this.mixinDatacomResData[this.defItem - 1].value
+							defItem = this.multiple ? [this.mixinDatacomResData[this.defItem - 1].value] : this.mixinDatacomResData[this.defItem - 1].value
 						}
 						defValue = defItem
 					}
-					if (defValue || defValue === 0) {
+					if (defValue || defValue === 0 || (this.multiple && Array.isArray(defValue) && defValue.length > 0)) {
 						this.emit(defValue)
 					}
 				}
-				const def = this.mixinDatacomResData.find(item => item.value === defValue)
-				this.current = def ? this.formatItemName(def) : ''
+
+				if (this.multiple) {
+					const selectedValues = Array.isArray(defValue) ? defValue : (defValue ? [defValue] : []);
+					const selectedItems = this.mixinDatacomResData.filter(item => selectedValues.includes(item.value));
+					this.current = selectedItems.map(item => this.formatItemName(item));
+				} else {
+					const def = this.mixinDatacomResData.find(item => item.value === defValue)
+					this.current = def ? this.formatItemName(def) : ''
+				}
 			},
 
 			/**
-			 * @param {[String, Number]} value
+			 * @param {[String, Number, Array]} value
 			 * 判断用户给的 value 是否同时为禁用状态
 			 */
 			isDisabled(value) {
-				let isDisabled = false;
-
-				this.mixinDatacomResData.forEach(item => {
-					if (item.value === value) {
-						isDisabled = item.disable
-					}
-				})
-
-				return isDisabled;
+				if (Array.isArray(value)) {
+					// 对于数组，如果任意一个值被禁用，则认为整体被禁用
+					return value.some(val => {
+						return this.mixinDatacomResData.some(item => item.value === val && item.disable);
+					});
+				} else {
+					let isDisabled = false;
+					this.mixinDatacomResData.forEach(item => {
+						if (item.value === value) {
+							isDisabled = item.disable
+						}
+					})
+					return isDisabled;
+				}
 			},
 
 			clearVal() {
-				this.emit('')
-				this.current = ''
+				const emptyValue = this.multiple ? [] : '';
+				this.emit(emptyValue)
+				this.current = this.multiple ? [] : ''
 				if (this.collection) {
 					this.removeCache()
 				}
+				this.$emit('clear')
 			},
 			change(item) {
 				if (!item.disable) {
-					this.showSelector = false
-					this.current = this.formatItemName(item)
-					this.emit(item.value)
+					if (this.multiple) {
+						// 多选模式
+						let currentValues = this.getCurrentValues();
+						if (!Array.isArray(currentValues)) {
+							currentValues = currentValues ? [currentValues] : [];
+						}
+
+						const itemValue = item.value;
+						const index = currentValues.indexOf(itemValue);
+
+						if (index > -1) {
+							// 如果已选中，则取消选择
+							currentValues.splice(index, 1);
+						} else {
+							// 如果未选中，则添加选择
+							currentValues.push(itemValue);
+						}
+
+						// 更新显示文本
+						const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
+						this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
+
+						this.emit(currentValues);
+						// 多选模式下不关闭选择器
+					} else {
+						// 单选模式
+						this.showSelector = false
+						this.current = this.formatItemName(item)
+						this.emit(item.value)
+					}
 				}
 			},
 			emit(val) {
@@ -328,6 +470,11 @@
 	$uni-main-color: #333 !default;
 	$uni-secondary-color: #909399 !default;
 	$uni-border-3: #e5e5e5;
+  $uni-primary: #2979ff !default;
+	$uni-success: #4cd964 !default;
+	$uni-warning: #f0ad4e !default;
+	$uni-error: #dd524d !default;
+	$uni-info: #909399 !default;
 
 	/* #ifndef APP-NVUE */
 	@media screen and (max-width: 500px) {
@@ -369,9 +516,16 @@
 		margin-right: 5px;
 	}
 
+  .border-bottom {
+    border-bottom: solid 1px $uni-border-3;
+  }
+
+  .border-default {
+    border: 1px solid $uni-border-3;
+  }
+
 	.uni-select {
 		font-size: 14px;
-		border: 1px solid $uni-border-3;
 		box-sizing: border-box;
 		border-radius: 4px;
 		padding: 0 5px;
@@ -383,15 +537,41 @@
 		/* #endif */
 		flex-direction: row;
 		align-items: center;
-		border-bottom: solid 1px $uni-border-3;
 		width: 100%;
 		flex: 1;
-		height: 35px;
+		min-height: 35px;
 
 		&--disabled {
 			background-color: #f5f7fa;
 			cursor: not-allowed;
 		}
+
+		&--wrap {
+			height: auto;
+			min-height: 35px;
+			align-items: flex-start;
+		}
+
+    &__chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 5px 0;
+      margin-right: -6px;
+      margin-bottom: -6px;
+    }
+
+    &__chip {
+      display: flex;
+      align-items: center;
+      background-color: $uni-primary;
+      color: #fff;
+      border-radius: 20px;
+      padding: 0 10px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
 	}
 
 	.uni-select__label {
@@ -403,7 +583,7 @@
 	}
 
 	.uni-select__input-box {
-		height: 35px;
+		// height: 35px;
 		width: 0px;
 		position: relative;
 		/* #ifndef APP-NVUE */
@@ -412,6 +592,17 @@
 		flex: 1;
 		flex-direction: row;
 		align-items: center;
+
+		&--wrap {
+			.uni-select__input-text {
+				margin-right: 8px;
+			}
+		}
+
+    .padding-top-bottom {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
 	}
 
 	.uni-select__input {
@@ -463,15 +654,18 @@
 		display: flex;
 		cursor: pointer;
 		/* #endif */
+		flex-direction: row;
+		align-items: center;
 		line-height: 35px;
 		font-size: 14px;
-		text-align: center;
 		/* border-bottom: solid 1px $uni-border-3; */
 		padding: 0px 10px;
 	}
 
-	.uni-select__selector-item:hover {
-		background-color: #f9f9f9;
+
+
+	.uni-select__selector-item-check {
+		margin-left: auto;
 	}
 
 	.uni-select__selector-empty:last-child,
@@ -490,15 +684,14 @@
 	.uni-popper__arrow_bottom,
 	.uni-popper__arrow_bottom::after,
 	.uni-popper__arrow_top,
-	.uni-popper__arrow_top::after,
-	{
-	position: absolute;
-	display: block;
-	width: 0;
-	height: 0;
-	border-color: transparent;
-	border-style: solid;
-	border-width: 6px;
+	.uni-popper__arrow_top::after {
+		position: absolute;
+		display: block;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 6px;
 	}
 
 	.uni-popper__arrow_bottom {
@@ -544,11 +737,22 @@
 		text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
+
+		&--wrap {
+			white-space: normal;
+			text-overflow: initial;
+			-o-text-overflow: initial;
+			overflow: visible;
+			word-wrap: break-word;
+			word-break: break-all;
+			// line-height: 1.5;
+		}
 	}
 
 	.uni-select__input-placeholder {
 		color: $uni-base-color;
 		font-size: 12px;
+    margin: 1px 0;
 	}
 
 	.uni-select--mask {
