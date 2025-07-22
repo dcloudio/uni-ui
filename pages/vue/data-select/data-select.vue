@@ -3,6 +3,40 @@
 		<uni-card :is-shadow="false" is-full>
 			<text class="uni-h6">通过数据驱动的单选框和复选框，可直接通过连接 uniCloud 获取数据，同时可以配合表单组件 uni-forms 使用</text>
 		</uni-card>
+
+		<uni-section title="自定义 slot:item" subTitle="修改选择项uni-list-item" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select ref="uniDataSelect" v-model="multipleValue" mode="underline" multiple :localdata="range" wrap>
+					<template v-slot:content="{selected}">
+						<view v-for="item in selected" :key="item.value" class="slot-content-item">
+						  {{item.text}}
+						</view>
+						<view v-if="selected.length == 0" class="slot-content-item">
+						  没有选择项
+						</view>
+					</template>
+		      <template v-slot:item="{item,itemSelected}">
+						<view @click.stop>
+							<uni-list-item showSwitch :switchChecked="itemSelected" :title="item.text" :note="item.value+''" :disabled="item.disable" @switchChange="switchChange($event,item)"></uni-list-item>
+						</view>
+		      </template>
+		    </uni-data-select>
+			</view>
+		</uni-section>
+
+		<uni-section title="自定义 slot:empty" subTitle="" type="line">
+			<view class="uni-px-5 uni-pb-5">
+				<uni-data-select multiple :localdata="[]">
+		      <template v-slot:empty>
+		        <view class="empty-box">
+		        	<uni-icons type="spinner-cycle" size="30"></uni-icons>
+							<view>slot(empty)</view>
+		        </view>
+		      </template>
+		    </uni-data-select>
+			</view>
+		</uni-section>
+
     <uni-section title="自定义 slot:content" subTitle="多选的时候,超过 2 个显示省略" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="multipleValue" mode="underline" multiple :localdata="range">
@@ -13,6 +47,9 @@
             <view v-if="selected.length > 2" class="slot-content-item">
               +{{selected.length - 2}} more
             </view>
+						<view v-if="selected.length == 0" class="slot-content-item">
+						  没有选择项
+						</view>
           </template>
         </uni-data-select>
 			</view>
@@ -78,7 +115,7 @@
 			return {
 				value: 0,
         lineValue: 3,
-				multipleValue: [1, 3, 4, 5],
+				multipleValue: [1,2,3],
 				range: [{
 					"value": 0,
 					"text": "篮球运动锻炼",
@@ -120,6 +157,10 @@
 			clear(){
 				console.log("清除选择框")
 			},
+			switchChange(e,item){
+				console.log("switch change",e,item)
+				this.$refs.uniDataSelect.change(item)
+			}
 		}
 	}
 </script>
@@ -146,5 +187,23 @@
     padding: 2px 5px;
     border-radius: 5px;
     color: #fff;
+		margin-bottom: 5px;
   }
+
+  .empty-box{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+	.select-box{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 </style>

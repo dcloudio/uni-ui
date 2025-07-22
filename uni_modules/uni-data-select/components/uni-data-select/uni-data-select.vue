@@ -24,13 +24,36 @@
 				<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
 					<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
 					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
-						<view class="uni-select__selector-empty" v-if="mixinDatacomResData.length === 0">
-							<text>{{emptyTips}}</text>
-						</view>
-						<view v-else class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-							@click="change(item)">
-							<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
-						</view>
+            <template v-if="slotEmpty">
+							<view class="uni-select__selector-empty">
+								<slot name="empty" :empty="emptyTips"></slot>
+							</view>
+            </template>
+            <template v-else>
+              <view v-if="mixinDatacomResData.length === 0" class="uni-select__selector-empty">
+                <text>{{emptyTips}}</text>
+              </view>
+            </template>
+						<template v-if="slotItem">
+							<view v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
+								<slot name="item" :item="item" :itemSelected="multiple? getCurrentValues().includes(item.value):getCurrentValues() == item.value"></slot>
+							</view>
+						</template>
+						<template v-else>
+							<view v-if="!multiple && mixinDatacomResData.length > 0" class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
+								@click="change(item)">
+								<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+							</view>
+							<view v-if="multiple && mixinDatacomResData.length > 0" >
+								<checkbox-group>
+									<label class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
+										<checkbox :checked="getCurrentValues().includes(item.value)" :disabled="item.disable">
+											<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+										</checkbox>
+									</label>
+								</checkbox-group>
+							</view>
+						</template>
 					</scroll-view>
 				</view>
 			</view>
@@ -210,7 +233,23 @@
         // #ifdef VUE3
         return this.$slots ? this.$slots.content : false
         // #endif
-      }
+      },
+      slotEmpty(){
+        // #ifdef VUE2
+        return this.$scopedSlots ? this.$scopedSlots.empty : false
+        // #endif
+        // #ifdef VUE3
+        return this.$slots ? this.$slots.empty : false
+        // #endif
+      },
+			slotItem(){
+				// #ifdef VUE2
+				return this.$scopedSlots ? this.$scopedSlots.item : false
+				// #endif
+				// #ifdef VUE3
+				return this.$slots ? this.$slots.item : false
+				// #endif
+			}
 		},
 		watch: {
 			showSelector:{
@@ -572,6 +611,8 @@
       width: 100%;
       display: flex;
       flex-direction: row;
+			flex-wrap: wrap;
+			gap: 0 0 5px 0;
     }
 	}
 
@@ -745,5 +786,5 @@
   .align-right {
     text-align: right;
   }
-  
+
 </style>
