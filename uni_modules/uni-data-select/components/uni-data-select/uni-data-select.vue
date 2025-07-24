@@ -4,11 +4,11 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
-          <view v-if="slotContent" class="slot-content">
+          <view v-if="slotContent" class="slot-content padding-top-bottom" :class="{'uni-select__input-text--wrap': shouldWrap}">
             <slot name="content" :selected="getSelectedItems()"></slot>
           </view>
           <template v-else>
-            <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': wrap}">
+            <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': shouldWrap}">
               <view class="padding-top-bottom" :class="'align-'+align">{{textShow}}</view>
             </view>
             <view v-else class="uni-select__input-text uni-select__input-placeholder" :class="'align-'+align">{{typePlaceholder}}</view>
@@ -21,41 +21,40 @@
 					</view>
 				</view>
 				<view class="uni-select--mask" v-if="showSelector" @click="toggleSelector" />
-				<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
-					<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
-					<scroll-view scroll-y="true" class="uni-select__selector-scroll">
-            <template v-if="slotEmpty">
-							<view class="uni-select__selector-empty">
-								<slot name="empty" :empty="emptyTips"></slot>
-							</view>
-            </template>
-            <template v-else>
-              <view v-if="mixinDatacomResData.length === 0" class="uni-select__selector-empty">
-                <text>{{emptyTips}}</text>
-              </view>
-            </template>
-						<template v-if="slotItem">
-							<view v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
-								<slot name="item" :item="item" :itemSelected="multiple? getCurrentValues().includes(item.value):getCurrentValues() == item.value"></slot>
-							</view>
-						</template>
-						<template v-else>
-							<view v-if="!multiple && mixinDatacomResData.length > 0" class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
-								@click="change(item)">
-								<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
-							</view>
-							<view v-if="multiple && mixinDatacomResData.length > 0" >
-								<checkbox-group>
-									<label class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
-										<checkbox :checked="getCurrentValues().includes(item.value)" :disabled="item.disable">
+					<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
+						<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
+						<scroll-view scroll-y="true" class="uni-select__selector-scroll">
+							<template v-if="slotEmpty">
+								<view class="uni-select__selector-empty">
+									<slot name="empty" :empty="emptyTips"></slot>
+								</view>
+							</template>
+							<template v-else>
+								<view v-if="mixinDatacomResData.length === 0" class="uni-select__selector-empty">
+									<text>{{emptyTips}}</text>
+								</view>
+							</template>
+							<template v-if="slotItem">
+								<view v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
+									<slot name="item" :item="item" :itemSelected="multiple? getCurrentValues().includes(item.value):getCurrentValues() == item.value"></slot>
+								</view>
+							</template>
+							<template v-else>
+								<view v-if="!multiple && mixinDatacomResData.length > 0" class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
+									@click="change(item)">
+									<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+								</view>
+								<view v-if="multiple && mixinDatacomResData.length > 0" >
+									<checkbox-group @change="checkBoxChange">
+										<label class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index" >
+											<checkbox :value="index+''" :checked="getCurrentValues().includes(item.value)" :disabled="item.disable"></checkbox>
 											<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
-										</checkbox>
-									</label>
-								</checkbox-group>
-							</view>
-						</template>
-					</scroll-view>
-				</view>
+										</label>
+									</checkbox-group>
+								</view>
+							</template>
+						</scroll-view>
+					</view>
 			</view>
 		</view>
 	</view>
@@ -84,6 +83,26 @@
 	export default {
 		name: "uni-data-select",
 		mixins: [uniCloud.mixinDatacom || {}],
+		emits: [
+			'open',
+			'close',
+			'update:modelValue',
+			'input',
+			'clear',
+			'change'
+		],
+		model: {
+			prop: 'modelValue',
+			event: 'update:modelValue'
+		},
+		options: {
+			// #ifdef MP-TOUTIAO
+			virtualHost: false,
+			// #endif
+			// #ifndef MP-TOUTIAO
+			virtualHost: true
+			// #endif
+		},
 		props: {
 			localdata: {
 				type: Array,
@@ -185,12 +204,9 @@
 					common
 			},
 			valueCom() {
-				// #ifdef VUE3
-				return this.modelValue;
-				// #endif
-				// #ifndef VUE3
-				return this.value;
-				// #endif
+        if (this.value === '') return this.modelValue
+				if (this.modelValue === '') return this.value
+				return this.value
 			},
 			textShow() {
 				// 长文本显示
@@ -375,7 +391,6 @@
 					return isDisabled;
 				}
 			},
-
 			clearVal() {
 				const emptyValue = this.multiple ? [] : '';
 				this.emit(emptyValue)
@@ -384,6 +399,29 @@
 					this.removeCache()
 				}
 				this.$emit('clear')
+			},
+			checkBoxChange(res){
+				let range = res.detail.value
+
+				let currentValues = range && range.length > 0? range.map((item)=>{
+					const index = parseInt(item, 10);
+
+					// 检查是否为有效数字
+					if (isNaN(index)) {
+						throw new Error(`无效索引: ${item}`);
+					}
+
+					// 检查索引范围
+					if (index < 0 || index >= this.mixinDatacomResData.length) {
+						throw new Error(`索引越界: ${index}`);
+					}
+
+					return this.mixinDatacomResData[index].value;
+				}) : []
+				const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
+				this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
+
+				this.emit(currentValues);
 			},
 			change(item) {
 				if (!item.disable) {
@@ -573,7 +611,7 @@
 		&--wrap {
 			height: auto;
 			min-height: 35px;
-			align-items: flex-start;
+			// align-items: flex-start;
 		}
 	}
 
@@ -612,7 +650,6 @@
       display: flex;
       flex-direction: row;
 			flex-wrap: wrap;
-			gap: 0 0 5px 0;
     }
 	}
 
