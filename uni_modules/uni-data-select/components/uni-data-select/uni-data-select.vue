@@ -5,7 +5,7 @@
 			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
           <view v-if="slotContent" class="slot-content padding-top-bottom" :class="{'uni-select__input-text--wrap': shouldWrap}">
-            <slot name="content" :selected="getSelectedItems()"></slot>
+            <slot name="content" :selected="selectedItems"></slot>
           </view>
           <template v-else>
             <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': shouldWrap}">
@@ -24,7 +24,7 @@
 					<view class="uni-select__selector" :style="getOffsetByPlacement" v-if="showSelector">
 						<view :class="placement=='bottom'?'uni-popper__arrow_bottom':'uni-popper__arrow_top'"></view>
 						<scroll-view scroll-y="true" class="uni-select__selector-scroll">
-							<template v-if="slotEmpty">
+							<template v-if="slotEmpty && mixinDatacomResData.length === 0">
 								<view class="uni-select__selector-empty">
 									<slot name="empty" :empty="emptyTips"></slot>
 								</view>
@@ -35,8 +35,8 @@
 								</view>
 							</template>
 							<template v-if="slotItem">
-								<view v-for="(item,index) in mixinDatacomResData" :key="index" @click="change(item)">
-									<slot name="item" :item="item" :itemSelected="multiple? getCurrentValues().includes(item.value):getCurrentValues() == item.value"></slot>
+								<view v-for="(itemData,index) in mixinDatacomResData" :key="index" @click="change(itemData)">
+									<slot name="item" :item="itemData" :itemSelected="isSelected(itemData)"></slot>
 								</view>
 							</template>
 							<template v-else>
@@ -48,7 +48,7 @@
 									<checkbox-group @change="checkBoxChange">
 										<label class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index" >
 											<checkbox :value="index+''" :checked="getCurrentValues().includes(item.value)" :disabled="item.disable"></checkbox>
-											<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+											<view :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</view>
 										</label>
 									</checkbox-group>
 								</view>
@@ -265,7 +265,16 @@
 				// #ifdef VUE3
 				return this.$slots ? this.$slots.item : false
 				// #endif
-			}
+			},
+      selectedItems() {
+        const currentValues = this.getCurrentValues();
+        let _mixindata = JSON.parse(JSON.stringify(this.mixinDatacomResData))
+        if (this.multiple) {
+          return _mixindata.filter(item => currentValues.includes(item.value));
+        } else {
+          return _mixindata.find(item => item.value === currentValues);
+        }
+      }
 		},
 		watch: {
 			showSelector:{
@@ -294,14 +303,6 @@
 			},
 		},
 		methods: {
-      getSelectedItems() {
-        const currentValues = this.getCurrentValues();
-        if (this.multiple) {
-          return this.mixinDatacomResData.filter(item => currentValues.includes(item.value));
-        } else {
-          return this.mixinDatacomResData.find(item => item.value === currentValues);
-        }
-      },
 			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {
@@ -408,12 +409,12 @@
 
 					// 检查是否为有效数字
 					if (isNaN(index)) {
-						throw new Error(`无效索引: ${item}`);
+						console.error(`无效索引: ${item}`);
 					}
 
 					// 检查索引范围
 					if (index < 0 || index >= this.mixinDatacomResData.length) {
-						throw new Error(`索引越界: ${index}`);
+						console.error(`索引越界: ${index}`);
 					}
 
 					return this.mixinDatacomResData[index].value;
