@@ -4,8 +4,8 @@
 		<view class="uni-stat-box" :class="{'uni-stat__actived': current}">
 			<view class="uni-select" :class="{'uni-select--disabled':disabled, 'uni-select--wrap': shouldWrap , 'border-default': mode == 'default','border-bottom': mode == 'underline'}">
 				<view class="uni-select__input-box" @click="toggleSelector" :class="{'uni-select__input-box--wrap': shouldWrap}">
-          <view v-if="slotContent" class="slot-content padding-top-bottom" :class="{'uni-select__input-text--wrap': shouldWrap}">
-            <slot name="content" :selected="selectedItems"></slot>
+          <view v-if="slotSelected" class="slot-content padding-top-bottom" :class="{'uni-select__input-text--wrap': shouldWrap}">
+            <slot name="selected" :selectedItems="getSelectedItems()"></slot>
           </view>
           <template v-else>
             <view v-if="textShow" class="uni-select__input-text" :class="{'uni-select__input-text--wrap': shouldWrap}">
@@ -34,9 +34,9 @@
 									<text>{{emptyTips}}</text>
 								</view>
 							</template>
-							<template v-if="slotItem">
+							<template v-if="slotOption">
 								<view v-for="(itemData,index) in mixinDatacomResData" :key="index" @click="change(itemData)">
-									<slot name="item" :item="itemData" :itemSelected="isSelected(itemData)"></slot>
+									<slot name="option" :item="itemData" :itemSelected="multiple? getCurrentValues().includes(itemData.value):getCurrentValues() == itemData.value"></slot>
 								</view>
 							</template>
 							<template v-else>
@@ -242,12 +242,12 @@
 						return "top:calc(100% + 12px);";
 				}
 			},
-      slotContent(){
+      slotSelected(){
         // #ifdef VUE2
-        return this.$scopedSlots ? this.$scopedSlots.content : false
+        return this.$scopedSlots ? this.$scopedSlots.selected : false
         // #endif
         // #ifdef VUE3
-        return this.$slots ? this.$slots.content : false
+        return this.$slots ? this.$slots.selected : false
         // #endif
       },
       slotEmpty(){
@@ -258,23 +258,14 @@
         return this.$slots ? this.$slots.empty : false
         // #endif
       },
-			slotItem(){
+			slotOption(){
 				// #ifdef VUE2
-				return this.$scopedSlots ? this.$scopedSlots.item : false
+				return this.$scopedSlots ? this.$scopedSlots.option : false
 				// #endif
 				// #ifdef VUE3
-				return this.$slots ? this.$slots.item : false
+				return this.$slots ? this.$slots.option : false
 				// #endif
-			},
-      selectedItems() {
-        const currentValues = this.getCurrentValues();
-        let _mixindata = JSON.parse(JSON.stringify(this.mixinDatacomResData))
-        if (this.multiple) {
-          return _mixindata.filter(item => currentValues.includes(item.value));
-        } else {
-          return _mixindata.find(item => item.value === currentValues);
-        }
-      }
+			}
 		},
 		watch: {
 			showSelector:{
@@ -303,6 +294,18 @@
 			},
 		},
 		methods: {
+			getSelectedItems() {
+				const currentValues = this.getCurrentValues();
+				let _minxData = this.mixinDatacomResData
+				// #ifdef MP-WEIXIN || MP-TOUTIAO
+				_minxData = JSON.parse(JSON.stringify(this.mixinDatacomResData))
+				// #endif
+				if (this.multiple) {
+					return _minxData.filter(item => currentValues.includes(item.value)) || [];
+				} else {
+					return _minxData.filter(item => item.value === currentValues) || [];
+				}
+			},
 			debounce(fn, time = 100) {
 				let timer = null
 				return function(...args) {

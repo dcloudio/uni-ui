@@ -28,18 +28,20 @@
 					@change="change"></uni-data-select>
 			</view>
 		</uni-section>
+		<!-- #ifndef MP-TOUTIAO && VUE2 -->
+		<!-- 头条中存在 2 个插槽存在问题 -->
 		<uni-section title="单选使用插槽" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="value" mode="underline" :localdata="range">
-					<template v-slot:content="{selected}">
+					<template v-slot:selected="{selectedItems}">
 						<view class="slot-box">
-							<view v-if="selected" class="slot-content-item">
-								{{selected.text}}
+							<view v-for="item in sliceArray(selectedItems)" :key="item.value" class="slot-content-item">
+								{{item.text}}
 							</view>
-							<view v-else class="slot-content-item"> 没有选择项 </view>
+							<view v-if="selectedItems.length == 0" class="slot-content-item"> 没有选择项 </view>
 						</view>
 					</template>
-					<template v-slot:item="{item,itemSelected}">
+					<template v-slot:option="{item,itemSelected}">
 						<view class="item-view" :class="{
 							'item-selected': itemSelected,
 							'item-disabled': item.disable
@@ -50,28 +52,24 @@
 				</uni-data-select>
 			</view>
 		</uni-section>
+		<!-- #endif -->
+
 		<uni-section title="多选使用插槽" subTitle="多选的时候,超过2个显示省略;" type="line">
 			<view class="uni-px-5 uni-pb-5">
 				<uni-data-select v-model="multipleValue" multiple mode="underline" placement="top" :localdata="range">
-					<template v-slot:content="{selected}">
+					<template v-slot:selected="{selectedItems}">
 						<view class="slot-box">
-							<view v-for="item in sliceArray(selected)" :key="item.value" class="slot-content-item">
+							<view v-for="item in sliceArray(selectedItems)" :key="item.value" class="slot-content-item">
 								{{item.text}}
 							</view>
-							<view v-if="selected.length > 2" class="slot-content-item"> +{{selected.length - 2}} more </view>
-							<view v-if="selected.length == 0" class="slot-content-item"> 没有选择项 </view>
+							<view v-if="selectedItems.length > 2" class="slot-content-item"> +{{selectedItems.length - 2}} more </view>
+							<view v-if="selectedItems.length == 0" class="slot-content-item"> 没有选择项 </view>
 						</view>
 					</template>
-					<template v-slot:item="{item,itemSelected}">
+					<template v-slot:option="{item,itemSelected}">
 						<view>
 							<uni-list-item showSwitch :switchChecked="itemSelected" :title="item.text" :note="item.value+''"
 								:disabled="item.disable"></uni-list-item>
-						</view>
-					</template>
-					<template v-slot:empty>
-						<view class="empty-box">
-							<uni-icons type="spinner-cycle" size="30"></uni-icons>
-							<view>empty</view>
 						</view>
 					</template>
 				</uni-data-select>
