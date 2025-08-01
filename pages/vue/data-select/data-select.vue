@@ -114,8 +114,6 @@
 		methods: {
 			change(e) {
 				console.log('单选值:', e);
-				console.log("range", this.range)
-				console.log("value", this.value)
 			},
 			changeMultiple(e) {
 				console.log('多选值:', e);

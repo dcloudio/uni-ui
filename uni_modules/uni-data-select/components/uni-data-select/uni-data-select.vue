@@ -77,7 +77,19 @@
 	 * @property {String} placement 弹出位置
 	 * 	@value top   		顶部弹出
 	 * 	@value bottom		底部弹出（default)
+	 * @property {String} align 选择文字的位置
+	 *  @value left 显示左侧
+	 *  @value center 显示中间
+	 *  @value right 显示 右侧
+	 * @property {Boolean} hideRight 是否隐藏右侧按钮
+	 * @property {String} mode 边框样式
+	 *  @value default 四周边框
+	 *  @value underline 下边框
+	 *  @value none 无边框
 	 * @event {Function} change  选中发生变化触发
+	 * @event {Function} open  选择框开启时触发
+	 * @event {Function} close  选择框关闭时触发
+	 * @event {Function} clear  点击清除按钮之后触发
 	 */
 
 	export default {
@@ -410,12 +422,10 @@
 				let currentValues = range && range.length > 0? range.map((item)=>{
 					const index = parseInt(item, 10);
 
-					// 检查是否为有效数字
 					if (isNaN(index)) {
 						console.error(`无效索引: ${item}`);
 					}
 
-					// 检查索引范围
 					if (index < 0 || index >= this.mixinDatacomResData.length) {
 						console.error(`索引越界: ${index}`);
 					}
@@ -440,19 +450,15 @@
 						const index = currentValues.indexOf(itemValue);
 
 						if (index > -1) {
-							// 如果已选中，则取消选择
 							currentValues.splice(index, 1);
 						} else {
-							// 如果未选中，则添加选择
 							currentValues.push(itemValue);
 						}
 
-						// 更新显示文本
 						const selectedItems = this.mixinDatacomResData.filter(dataItem => currentValues.includes(dataItem.value));
 						this.current = selectedItems.map(dataItem => this.formatItemName(dataItem));
 
 						this.emit(currentValues);
-						// 多选模式下不关闭选择器
 					} else {
 						// 单选模式
 						this.showSelector = false
