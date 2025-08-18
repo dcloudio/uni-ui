@@ -1,12 +1,6 @@
 <template>
 	<view class="container">
-		<uni-nav-bar dark :fixed="true" :height="0" shadow background-color="#007AFF" status-bar left-icon="left" left-text="返回" title="自定义导航栏" @clickLeft="back">
-			<template v-slot:right>
-				<text class="city">
-					搜索
-				</text>
-			</template>
-		</uni-nav-bar>
+		<uni-nav-bar dark :fixed="true" :height="0" shadow background-color="#007AFF" status-bar left-icon="left" left-text="返回" title="自定义导航栏" @clickLeft="back"></uni-nav-bar>
 		<uni-card is-full :isShadow="false">
 			<text class="uni-h6">本导航栏为自定义组件，并非原生导航栏。除非原生导航栏无法满足需求，否则不推荐使用自定义导航栏组件。具体参考https://ask.dcloud.net.cn/article/34921</text>
 		</uni-card>
