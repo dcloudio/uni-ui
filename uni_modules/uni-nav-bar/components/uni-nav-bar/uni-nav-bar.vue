@@ -2,7 +2,7 @@
 	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
 		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': themeBgColor }">
 			<status-bar v-if="statusBar" />
-			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight,width:navWidth+'px'}" class="uni-navbar__header">
+			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight,width:showMenuButtonWidth?navWidth+'px':'100%'}" class="uni-navbar__header">
 				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left" :style="{width:leftIconWidth}">
 					<slot name="left">
 						<view class="uni-navbar__content_view" v-if="leftIcon.length > 0">
@@ -131,6 +131,10 @@
 			rightWidth: {
 				type: [Number, String],
 				default: 60
+			},
+			showMenuButtonWidth: {
+				type: Boolean,
+				default: false
 			},
 			stat: {
 				type: [Boolean, String],
