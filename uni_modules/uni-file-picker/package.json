@@ -1,7 +1,7 @@
 {
   "id": "uni-file-picker",
   "displayName": "uni-file-picker 文件选择上传",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "文件选择上传组件，可以选择图片、视频等任意文件并上传到当前绑定的服务空间",
   "keywords": [
     "uni-ui",
@@ -12,7 +12,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.05",
+    "uni-app": "^4.33",
     "uni-app-x": ""
   },
   "directories": {
@@ -48,9 +48,9 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "x",
-        "aliyun": "x",
-        "alipay": "x"
+        "tcb": "√",
+        "aliyun": "√",
+        "alipay": "√"
       },
       "client": {
         "uni-app": {
