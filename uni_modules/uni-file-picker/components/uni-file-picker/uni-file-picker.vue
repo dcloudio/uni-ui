@@ -394,11 +394,13 @@
 					let filedata = await get_file_data(files[i], this.fileMediatype)
 					filedata.progress = 0
 					filedata.status = 'ready'
-					this.files.push(filedata)
-					currentData.push({
+					// fix by mehaotian ,统一返回，删除也包含file对象
+					let fileTempData = {
 						...filedata,
 						file: files[i]
-					})
+					}
+					this.files.push(fileTempData)
+					currentData.push(fileTempData)
 				}
 				this.$emit('select', {
 					tempFiles: currentData,
