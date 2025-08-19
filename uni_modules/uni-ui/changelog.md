@@ -1,3 +1,17 @@
+## 1.5.11（2025-08-19）
+- uni-data-select 新增 插槽 selected empty option
+- uni-data-select 新增 mutiple 属性,支持多选功能
+- uni-data-select 新增 wrap 属性,支持选中的文字超过一行显示
+- uni-data-select 新增 align 属性,支持修改选中的文字显示的位置
+- uni-data-select 新增 hideRight 属性,支持隐藏右侧所有按钮
+- uni-data-select 新增 mode 属性,支持修改边框样式
+- uni-data-select 新增 事件 open close clear
+- uni-easyinput 修复 微信小程序平台样式警告问题
+- uni-file-picker 修复 删除文件后，返回信息不包含file对象的问题
+- uni-icons 修复 图标点击事件返回
+- uni-nav-bar 修复 微信小程序 fixed 下避让胶囊，优化标题居中，默认showMenuButtonWidth 不开启下，右侧插槽会被 胶囊覆盖
+- uni-nav-bar 新增 showMenuButtonWidth 右侧是否避让胶囊，即 显示区域为胶囊左侧，默认不开启，开启后会导致标题不在页面水平居中
+- uni-tag 修复 传入数字 0 不显示的问题
 ## 1.5.9（2025-07-18）
 - uni-popup 修复 nvue 下弹窗样式错乱的问题 ，更新依赖 uni-transition 组件
 - uni-popup 更新 示例取消 borderRadius 属性 ，如需内容圆角，用户应该直接在内容插槽中实现

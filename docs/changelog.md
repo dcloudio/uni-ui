@@ -7,6 +7,60 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.11" date="2025-08-19">
+	<log-item title="uni-data-select 组件更新">
+		<log-item-text tag-type="feat">
+			 插槽 selected empty option
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 mutiple 属性,支持多选功能
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 wrap 属性,支持选中的文字超过一行显示
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 align 属性,支持修改选中的文字显示的位置
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 hideRight 属性,支持隐藏右侧所有按钮
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 mode 属性,支持修改边框样式
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 事件 open close clear
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序平台样式警告问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 删除文件后，返回信息不包含file对象的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="fix">
+			 图标点击事件返回
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序 fixed 下避让胶囊，优化标题居中，默认showMenuButtonWidth 不开启下，右侧插槽会被 胶囊覆盖
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 showMenuButtonWidth 右侧是否避让胶囊，即 显示区域为胶囊左侧，默认不开启，开启后会导致标题不在页面水平居中
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-tag 组件更新">
+		<log-item-text tag-type="fix">
+			 传入数字 0 不显示的问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.9" date="2025-07-18">
 	<log-item title="uni-popup 组件更新">
 		<log-item-text tag-type="fix">
