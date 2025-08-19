@@ -1,7 +1,7 @@
 {
   "id": "uni-tag",
   "displayName": "uni-tag 标签",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Tag 组件，用于展示1个或多个文字标签，可点击切换选中、不选中的状态。",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.05",
+    "uni-app": "^4.07",
     "uni-app-x": ""
   },
   "directories": {
