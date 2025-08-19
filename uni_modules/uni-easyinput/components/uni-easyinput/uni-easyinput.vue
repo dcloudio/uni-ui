@@ -545,22 +545,6 @@
 		line-height: 1;
 		font-size: 14px;
 		height: 35px;
-		// min-height: 36px;
-
-		/*ifdef H5*/
-		& ::-ms-reveal {
-			display: none;
-		}
-
-		& ::-ms-clear {
-			display: none;
-		}
-
-		& ::-o-clear {
-			display: none;
-		}
-
-		/*endif*/
 	}
 
 	.uni-easyinput__placeholder-class {
