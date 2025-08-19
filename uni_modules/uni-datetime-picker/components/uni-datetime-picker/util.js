@@ -389,8 +389,8 @@ function getDefaultSecond(hideSecond) {
 }
 
 function dateCompare(startDate, endDate) {
-	startDate = new Date(fixIosDateFormat(startDate.trim()))
-	endDate = new Date(fixIosDateFormat(endDate.trim()))
+	startDate = new Date(fixIosDateFormat(typeof startDate === 'string' ? startDate.trim() : startDate))
+	endDate = new Date(fixIosDateFormat(typeof endDate === 'string' ? endDate.trim() : endDate))
 	return startDate <= endDate
 }
 
