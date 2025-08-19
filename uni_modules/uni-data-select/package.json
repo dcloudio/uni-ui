@@ -9,12 +9,12 @@
     "uni-data-select",
     "下拉框",
     "下拉选"
-  ],
+],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "^3.1.1",
-    "uni-app": "^3.1.0",
-    "uni-app-x": "^3.1.0"
+    "uni-app": "^4.45",
+    "uni-app-x": ""
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -38,9 +38,9 @@
     },
     "npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui",
     "type": "component-vue",
-    "darkmode": "-",
-    "i18n": "-",
-    "widescreen": "-"
+    "darkmode": "x",
+    "i18n": "x",
+    "widescreen": "x"
   },
   "uni_modules": {
     "dependencies": [
@@ -51,29 +51,29 @@
       "cloud": {
         "tcb": "√",
         "aliyun": "√",
-        "alipay": "x"
+        "alipay": "√"
       },
       "client": {
         "uni-app": {
           "vue": {
-            "vue2": "-",
-            "vue3": "-"
+            "vue2": "√",
+            "vue3": "√"
           },
           "web": {
-            "safari": "-",
-            "chrome": "-"
+            "safari": "√",
+            "chrome": "√"
           },
           "app": {
-            "vue": "-",
+            "vue": "√",
             "nvue": "-",
-            "android": "-",
-            "ios": "-",
-            "harmony": "-"
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
           },
           "mp": {
-            "weixin": "-",
-            "alipay": "-",
-            "toutiao": "-",
+            "weixin": "√",
+            "alipay": "√",
+            "toutiao": "√",
             "baidu": "-",
             "kuaishou": "-",
             "jd": "-",
