@@ -1,7 +1,7 @@
 {
   "id": "uni-easyinput",
   "displayName": "uni-easyinput 增强输入框",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "Easyinput 组件是对原生input组件的增强",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.05",
+    "uni-app": "^4.07",
     "uni-app-x": ""
   },
   "directories": {
@@ -66,7 +66,7 @@
           },
           "app": {
             "vue": "√",
-            "nvue": "√",
+            "nvue": "-",
             "android": "√",
             "ios": "√",
             "harmony": "√"
@@ -76,15 +76,15 @@
             "alipay": "√",
             "toutiao": "√",
             "baidu": "√",
-            "kuaishou": "-",
-            "jd": "-",
-            "harmony": "-",
+            "kuaishou": "√",
+            "jd": "√",
+            "harmony": "√",
             "qq": "√",
             "lark": "-"
           },
           "quickapp": {
-            "huawei": "√",
-            "union": "√"
+            "huawei": "-",
+            "union": "-"
           }
         },
         "uni-app-x": {
