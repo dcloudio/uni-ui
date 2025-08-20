@@ -26,7 +26,7 @@
 		<!-- #ifndef APP-NVUE -->
 		<view v-else-if="!webviewHide && status === 'loading' && showIcon"
 			:style="{width:iconSize+'px',height:iconSize+'px'}" class="uni-load-more__img uni-load-more__img--ios-H5">
-			<image :src="imgBase64" mode="widthFix"></image>
+			<image class="image" :src="imgBase64" mode="widthFix"></image>
 		</view>
 		<!-- #endif -->
 		<text v-if="showText" class="uni-load-more__text"
@@ -210,7 +210,7 @@
 		animation: loading-ios-H5 1s 0s step-end infinite;
 	}
 
-	.uni-load-more__img--ios-H5 image {
+	.uni-load-more__img--ios-H5 .image {
 		position: absolute;
 		width: 100%;
 		height: 100%;
