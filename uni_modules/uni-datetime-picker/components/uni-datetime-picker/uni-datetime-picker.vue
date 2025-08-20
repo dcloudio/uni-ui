@@ -1027,11 +1027,6 @@
 		border-bottom-width: 1px;
 	}
 
-	.uni-date-changed--time text {
-		height: 50px;
-		line-height: 50px;
-	}
-
 	.uni-date-changed .uni-date-changed--time {
 		flex: 1;
 	}
