@@ -1,7 +1,7 @@
 {
   "id": "uni-popup",
   "displayName": "uni-popup 弹出层",
-  "version": "1.9.10",
+  "version": "1.9.11",
   "description": " Popup 组件，提供常用的弹层",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.06",
+    "uni-app": "^4.07",
     "uni-app-x": ""
   },
   "directories": {
