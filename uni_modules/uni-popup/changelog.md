@@ -1,3 +1,5 @@
+## 1.9.11（2025-08-20）
+- 修复 uni-popup-dialog组件设置 borderRadius 不生效的 Bug
 ## 1.9.10（2025-07-18）
 - 修复 nvue 下弹窗样式错乱的问题 ，更新依赖 uni-transition 组件
 - 更新 示例取消 borderRadius 属性 ，如需内容圆角，用户应该直接在内容插槽中实现
