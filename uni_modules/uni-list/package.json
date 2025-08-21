@@ -1,7 +1,7 @@
 {
   "id": "uni-list",
   "displayName": "uni-list 列表",
-  "version": "1.2.16",
+  "version": "1.2.17",
   "description": "List 组件 ，帮助使用者快速构建列表。",
   "keywords": [
     "",
@@ -14,7 +14,7 @@
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^4.05",
+    "uni-app": "^4.08",
     "uni-app-x": ""
   },
   "directories": {
@@ -67,7 +67,7 @@
           },
           "app": {
             "vue": "√",
-            "nvue": "√",
+            "nvue": "-",
             "android": "√",
             "ios": "√",
             "harmony": "√"
