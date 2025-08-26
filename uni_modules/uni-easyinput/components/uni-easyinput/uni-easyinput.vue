@@ -353,7 +353,7 @@
 					this.modelValue === 0 ||
 					this.modelValue === ''
 				) {
-					this.val = this.modelValue; 
+					this.val = this.modelValue;
 				} else {
 					// fix by ht 如果初始值为null，则input报错，待框架修复
 					this.val = '';
@@ -393,10 +393,12 @@
 				}
 				if (this.errMsg) this.errMsg = '';
 				this.val = value;
-				// TODO 兼容 vue2
-				this.$emit('input', value);
 				// TODO　兼容　vue3
 				this.$emit('update:modelValue', value);
+
+				// fix by ht input 修改一定要放在 update:modelvalue 后面，避免在input中修改值，导致 v-model 不生效
+				// TODO 兼容 vue2
+				this.$emit('input', value);
 			},
 
 			/**
