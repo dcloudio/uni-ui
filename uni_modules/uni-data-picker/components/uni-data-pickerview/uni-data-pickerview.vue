@@ -137,10 +137,23 @@
           }
         }
       },
-      updateData(data) {
+      async updateData(data) {
         this._treeData = data.treeData
         this.selected = data.selected
-        if (!this._treeData.length) {
+        if (this.lazy) {
+          try {
+            const result = await this.loadLazyData(2);
+            console.log("lazy", result);
+            // 处理懒加载数据的结果
+            if (result && Array.isArray(result)) {
+              this._treeData.push(...result);
+              this._updateBindData();
+            }
+          } catch (error) {
+            console.error("Lazy data loading failed:", error);
+          }
+        }
+        else if (!this._treeData.length) {
           this.loadData()
         } else {
           //this.selected = data.selected
@@ -149,6 +162,23 @@
       },
       onDataChange() {
         this.$emit('datachange');
+      },
+      // 将 lazydata 回调模式转换为 Promise 模式
+      loadLazyData(level) {
+        return new Promise((resolve, reject) => {
+          if (!this.lazydata || typeof this.lazydata !== 'function') {
+            reject(new Error('lazydata function is not defined'));
+            return;
+          }
+          
+          try {
+            this.lazydata(level, (data) => {
+              resolve(data);
+            });
+          } catch (error) {
+            reject(error);
+          }
+        });
       },
       onSelectedChange(node, isleaf) {
         if (isleaf) {

@@ -2,13 +2,21 @@ export default {
   props: {
     localdata: {
       type: [Array, Object],
-      default () {
+      default() {
         return []
       }
     },
+    lazy: {
+      type: Boolean,
+      default: false
+    },
+    lazydata: {
+      type: Function,
+      default: () => { }
+    },
     spaceInfo: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     },
@@ -62,13 +70,13 @@ export default {
     },
     value: {
       type: [Array, String, Number],
-      default () {
+      default() {
         return []
       }
     },
     modelValue: {
       type: [Array, String, Number],
-      default () {
+      default() {
         return []
       }
     },
@@ -94,7 +102,7 @@ export default {
     },
     map: {
       type: Object,
-      default () {
+      default() {
         return {
           text: "text",
           value: "value"

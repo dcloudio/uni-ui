@@ -40,15 +40,15 @@
       <data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata"
         :preload="preload" :collection="collection" :field="field" :orderby="orderby" :where="where"
         :step-searh="stepSearh" :self-field="selfField" :parent-field="parentField" :managed-mode="true" :map="map"
-        :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick">
+        :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick" :lazy="lazy" :lazydata="lazydata">
       </data-picker-view>
     </view>
   </view>
 </template>
 
 <script>
-  import dataPicker from "../uni-data-pickerview/uni-data-picker.js"
-  import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
+import dataPicker from "../uni-data-pickerview/uni-data-picker.js"
+import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
 
   /**
    * DataPicker 级联选择
