@@ -4,17 +4,13 @@
 			<text class="file-title">{{ title }}</text>
 			<text class="file-count">{{ filesList.length }}/{{ limitLength }}</text>
 		</view>
-		<upload-image v-if="fileMediatype === 'image' && showType === 'grid'" :readonly="readonly"
-			:image-styles="imageStyles" :files-list="filesList" :limit="limitLength" :disablePreview="disablePreview"
-			:delIcon="delIcon" @uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
+		<upload-image v-if="fileMediatype === 'image' && showType === 'grid'" :readonly="readonly" :image-styles="imageStyles" :files-list="filesList" :limit="limitLength" :disablePreview="disablePreview" :delIcon="delIcon" @uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
 			<slot>
 				<view class="icon-add"></view>
 				<view class="icon-add rotate"></view>
 			</slot>
 		</upload-image>
-		<upload-file v-if="fileMediatype !== 'image' || showType !== 'grid'" :readonly="readonly"
-			:list-styles="listStyles" :files-list="filesList" :showType="showType" :delIcon="delIcon"
-			@uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
+		<upload-file v-if="fileMediatype !== 'image' || showType !== 'grid'" :readonly="readonly" :list-styles="listStyles" :files-list="filesList" :showType="showType" :delIcon="delIcon" @uploadFiles="uploadFiles" @choose="choose" @delFile="delFile">
 			<slot><button type="primary" size="mini">选择文件</button></slot>
 		</upload-file>
 	</view>
@@ -181,12 +177,16 @@
 			sourceType: {
 				type: Array,
 				default () {
-					return  ['album', 'camera']
+					return ['album', 'camera']
 				}
 			},
 			provider: {
 				type: String,
 				default: '' // 默认上传到 unicloud 内置存储 extStorage 扩展存储
+			},
+			dir: {
+				type: String,
+				default: '/'
 			}
 		},
 		data() {
@@ -282,19 +282,19 @@
 				return this.uploadFiles(files)
 			},
 			async setValue(newVal, oldVal) {
-				const newData =  async (v) => {
+				const newData = async (v) => {
 					const reg = /cloud:\/\/([\w.]+\/?)\S*/
 					let url = ''
-					if(v.fileID){
+					if (v.fileID) {
 						url = v.fileID
-					}else{
+					} else {
 						url = v.url
 					}
 					if (reg.test(url)) {
 						v.fileID = url
 						v.url = await this.getTempFileURL(url)
 					}
-					if(v.url) v.path = v.url
+					if (v.url) v.path = v.url
 					return v
 				}
 				if (this.returnType === 'object') {
@@ -305,13 +305,13 @@
 					}
 				} else {
 					if (!newVal) newVal = []
-					for(let i =0 ;i < newVal.length ;i++){
+					for (let i = 0; i < newVal.length; i++) {
 						let v = newVal[i]
 						await newData(v)
 					}
 				}
 				this.localValue = newVal
-				if (this.form && this.formItem &&!this.is_reset) {
+				if (this.form && this.formItem && !this.is_reset) {
 					this.is_reset = false
 					this.formItem.setValue(this.localValue)
 				}
@@ -368,7 +368,9 @@
 			 * @param {Object} res
 			 */
 			async chooseFileCallback(res) {
+
 				const _extname = get_extname(this.fileExtname)
+
 				const is_one = (Number(this.limitLength) === 1 &&
 						this.disablePreview &&
 						!this.disabled) ||
@@ -411,13 +413,24 @@
 				if (!this.autoUpload || this.noSpace) {
 					res.tempFiles = []
 				}
-				res.tempFiles.forEach((fileItem, index) => {
+				res.tempFiles.map((fileItem, index) => {
 					this.provider && (fileItem.provider = this.provider);
 					const fileNameSplit = fileItem.name.split('.')
 					const ext = fileNameSplit.pop()
 					const fileName = fileNameSplit.join('.').replace(/[\s\/\?<>\\:\*\|":]/g, '_')
-					fileItem.cloudPath = fileName + '_' + Date.now() + '_' + index + '.' + ext
+					// 选择文件目录上传
+					let dir = this.dir || ''; // 防止用户传入的 dir 不正常
+					// 检查最后一个字符是否为 '/'（同时处理空字符串情况）
+					if (dir && dir[dir.length - 1] !== '/') {
+						dir += '/';
+					}
+
+					fileItem.cloudPath = dir + fileName + '_' + Date.now() + '_' + index + '.' + ext
+					fileItem.cloudPathAsRealPath = true
+
+					return fileItem
 				})
+				return res
 			},
 
 			/**
@@ -464,7 +477,7 @@
 						const reg = /cloud:\/\/([\w.]+\/?)\S*/
 						if (reg.test(item.url)) {
 							this.files[index].url = await this.getTempFileURL(item.url)
-						}else{
+						} else {
 							this.files[index].url = item.url
 						}
 
@@ -553,7 +566,7 @@
 				let data = []
 				if (this.returnType === 'object') {
 					data = this.backObject(this.files)[0]
-					this.localValue = data?data:null
+					this.localValue = data ? data : null
 				} else {
 					data = this.backObject(this.files)
 					if (!this.localValue) {
@@ -583,12 +596,12 @@
 						name: v.name,
 						path: v.path,
 						size: v.size,
-						fileID:v.fileID,
+						fileID: v.fileID,
 						url: v.url,
 						// 修改删除一个文件后不能再上传的bug, #694
-            uuid: v.uuid,
-            status: v.status,
-            cloudPath: v.cloudPath
+						uuid: v.uuid,
+						status: v.status,
+						cloudPath: v.cloudPath
 					})
 				})
 				return newFilesData
