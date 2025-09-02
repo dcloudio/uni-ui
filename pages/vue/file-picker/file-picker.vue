@@ -5,7 +5,7 @@
 		</uni-card>
 		<uni-section title="只选择图片" type="line">
 			<view class="example-body">
-				<uni-file-picker limit="9" title="最多选择9张图片" :source-type="sourceType"></uni-file-picker>
+				<uni-file-picker limit="9" title="最多选择9张图片" dir="上传测试目录" :source-type="sourceType"></uni-file-picker>
 			</view>
 		</uni-section>
 		<uni-section title="只选择视频" type="line">
@@ -32,8 +32,7 @@
 		<uni-section title="自定义图片大小" type="line">
 			<view class="example-body custom-image-box">
 				<text class="text">选择头像</text>
-				<uni-file-picker limit="1" :del-icon="false" disable-preview :imageStyles="imageStyles"
-					file-mediatype="image">选择</uni-file-picker>
+				<uni-file-picker limit="1" :del-icon="false" disable-preview :imageStyles="imageStyles" file-mediatype="image">选择</uni-file-picker>
 			</view>
 		</uni-section>
 
