@@ -88,6 +88,7 @@
 					}
 				})
 				this.emit(val)
+				this.$emit('change', val)
 			},
 			setAccordion(self) {
 				if (!this.accordion) return
