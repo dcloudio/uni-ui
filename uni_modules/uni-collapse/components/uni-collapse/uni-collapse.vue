@@ -66,9 +66,9 @@
 		},
 		methods: {
 			setOpen(val) {
-				let str = typeof val === 'string'
-				let arr = Array.isArray(val)
-				this.childrens.forEach((vm, index) => {
+				const str = typeof val === 'string'
+				const arr = Array.isArray(val)
+				this.childrens.forEach((vm) => {
 					if (str) {
 						if (val === vm.nameSync) {
 							if (!this.accordion) {
@@ -79,15 +79,12 @@
 						}
 					}
 					if (arr) {
-						val.forEach(v => {
-							if (v === vm.nameSync) {
-								if (this.accordion) {
-									console.warn('accordion 属性为 true ,v-model 类型应该为 string')
-									return
-								}
-								vm.isOpen = true
-							}
-						})
+						const isOpen = val.findIndex(v => v === vm.nameSync) !== -1
+						if (this.accordion && isOpen) {
+							console.warn('accordion 属性为 true ,v-model 类型应该为 string')
+							return
+						}
+						vm.isOpen = isOpen
 					}
 				})
 				this.emit(val)
