@@ -192,7 +192,8 @@
 		data() {
 			return {
 				files: [],
-				localValue: []
+				localValue: [],
+				dirPath: '/'
 			}
 		},
 		watch: {
@@ -205,6 +206,12 @@
 			modelValue: {
 				handler(newVal, oldVal) {
 					this.setValue(newVal, oldVal)
+				},
+				immediate: true
+			},
+			dir: {
+				handler(newVal) {
+					this.dirPath = newVal
 				},
 				immediate: true
 			},
@@ -419,7 +426,7 @@
 					const ext = fileNameSplit.pop()
 					const fileName = fileNameSplit.join('.').replace(/[\s\/\?<>\\:\*\|":]/g, '_')
 					// 选择文件目录上传
-					let dir = this.dir || ''; // 防止用户传入的 dir 不正常
+					let dir = this.dirPath || ''; // 防止用户传入的 dir 不正常
 					// 检查最后一个字符是否为 '/'（同时处理空字符串情况）
 					if (dir && dir[dir.length - 1] !== '/') {
 						dir += '/';
