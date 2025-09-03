@@ -270,13 +270,14 @@
 	}
 
 	.uni-navbar__header {
+		padding: 0 10px;
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		padding: 0 10px;
 		flex-direction: row;
 		height: $nav-height;
 		font-size: 12px;
+		box-sizing: border-box;
 	}
 
 	.uni-navbar__header-btns {
