@@ -27,7 +27,7 @@
 				<uni-data-picker
 					placeholder="请选择班级"
 					popup-title="请选择"
-          lazy
+					lazy
 					:lazydata="lazyData"
 					v-model="classValue"
 					@change="onchange"
@@ -91,6 +91,7 @@ export default {
 			//   value: "value"
 			// },
 			classValue: "",
+      idCache:0,
 			classDataTree: [
 				{
 					text: "一年级",
@@ -129,16 +130,40 @@ export default {
 		};
 	},
 	methods: {
-		lazyData(level, resolve) {
-      let id = 0;
-			setTimeout(() => {
-				const nodes = Array.from({ length: level + 1 }).map((item) => ({
-					value: ++id,
-					text: `选项${id}`,
-				}));
-				// 通过调用resolve将子节点数据返回，通知组件数据加载完成
-				resolve(nodes);
-			}, 1000);
+		lazyData(node, resolve) {
+      const { selectedLevel } = node
+      console.log("收到 node", node)
+			if (selectedLevel == 0) {
+				setTimeout(() => {
+					const nodes = Array.from({ length: 2 }).map((item) => ({
+						value: ++this.idCache,
+						text: `选项${this.idCache}`,
+            hasChildren: true
+					}));
+					// 通过调用resolve将子节点数据返回，通知组件数据加载完成
+					resolve(nodes);
+				}, 1000);
+			}else if(selectedLevel == 1){
+        setTimeout(() => {
+					const nodes = Array.from({ length: 2 }).map((item) => ({
+						value: ++this.idCache,
+						text: `第二层${this.idCache} - 父value:${node.value}`,
+            hasChildren: true
+					}));
+					// 通过调用resolve将子节点数据返回，通知组件数据加载完成
+					resolve(nodes);
+				}, 1000);
+      }else if(selectedLevel == 2){
+        setTimeout(() => {
+					const nodes = Array.from({ length: 3 }).map((item) => ({
+						value: ++this.idCache,
+						text: `第三层${this.idCache} - 父value:${node.value}`,
+            hasChildren: false
+					}));
+					// 通过调用resolve将子节点数据返回，通知组件数据加载完成
+					resolve(nodes);
+				}, 1000);
+      }
 		},
 		onnodeclick(e) {
 			console.log("nodeclick", e);

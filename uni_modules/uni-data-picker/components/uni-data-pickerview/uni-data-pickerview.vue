@@ -12,11 +12,15 @@
             @click="handleSelect(index)"
           >
             <text>{{item.text || ''}}</text>
+            {{ selectedIndex }}
           </view>
       </view>
     </scroll-view>
     <view class="tab-c">
       <scroll-view class="list" :scroll-y="true">
+        {{ dataList }}
+        <br></br>
+        {{ _treeData }}
         <view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in dataList[selectedIndex]" :key="j"
           @click="handleNodeClick(item, selectedIndex, j)">
           <text class="item-text">{{item[map.text]}}</text>
@@ -114,10 +118,14 @@
         const {
           isleaf,
           hasNodes
-        } = this._updateBindData()
+        } = this.lazy ? {} : this._updateBindData()
 
-        // 本地数据
-        if (this.isLocalData) {
+        if(this.lazy) {
+          this.lazyLoad(this.selectedIndex+1,node)
+          this.onSelectedChange(node, !node.hasChildren)
+          // this._updateBindData(node)
+        }
+        else if (this.isLocalData) {
           this.onSelectedChange(node, (!hasNodes || isleaf))
         } else if (this.isCloudDataList) { // Cloud 数据 (单列)
           this.onSelectedChange(node, true)
@@ -141,17 +149,7 @@
         this._treeData = data.treeData
         this.selected = data.selected
         if (this.lazy) {
-          try {
-            const result = await this.loadLazyData(2);
-            console.log("lazy", result);
-            // 处理懒加载数据的结果
-            if (result && Array.isArray(result)) {
-              this._treeData.push(...result);
-              this._updateBindData();
-            }
-          } catch (error) {
-            console.error("Lazy data loading failed:", error);
-          }
+          this.lazyLoad(this.selectedIndex)
         }
         else if (!this._treeData.length) {
           this.loadData()
@@ -163,8 +161,25 @@
       onDataChange() {
         this.$emit('datachange');
       },
+      async lazyLoad(selectedLevel,node={}){
+        let _node = {
+          selectedLevel,
+          ...node
+        }
+        const result = await this.loadLazyData(_node);
+        // 处理懒加载数据的结果
+        if (result && Array.isArray(result)) {
+          result.forEach((result_item)=>{
+            if(node) result_item.parent_value = node.value
+            result_item.level = selectedLevel
+          })
+          this._treeData = this._treeData.filter(item => item.level != selectedLevel)
+          this._treeData.push(...result)
+          this._updateBindData(node);
+        }
+      },
       // 将 lazydata 回调模式转换为 Promise 模式
-      loadLazyData(level) {
+      loadLazyData(node) {
         return new Promise((resolve, reject) => {
           if (!this.lazydata || typeof this.lazydata !== 'function') {
             reject(new Error('lazydata function is not defined'));
@@ -172,7 +187,7 @@
           }
           
           try {
-            this.lazydata(level, (data) => {
+            this.lazydata(node, (data) => {
               resolve(data);
             });
           } catch (error) {
