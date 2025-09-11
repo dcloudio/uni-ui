@@ -26,7 +26,7 @@
       </slot>
     </view>
     <view class="uni-data-tree-cover" v-if="isOpened" @click="handleClose"></view>
-    <view class="uni-data-tree-dialog" v-if="isOpened">
+    <view class="uni-data-tree-dialog" v-show="isOpened">
       <view class="uni-popper__arrow"></view>
       <view class="dialog-caption">
         <view class="title-area">
@@ -129,6 +129,15 @@ import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
     created() {
       this.$nextTick(() => {
         this.load();
+        if(this.preload && this.lazy){
+          setTimeout(() => {
+            this.$refs.pickerView.updateData({
+              treeData: this._treeData,
+              selected: this.selected,
+              selectedIndex: this.selectedIndex
+            })
+          }, 200)
+        }
       })
     },
     watch: {
@@ -177,7 +186,7 @@ import DataPickerView from "../uni-data-pickerview/uni-data-pickerview.vue"
             treeData: this._treeData,
             selected: this.selected,
             selectedIndex: this.selectedIndex
-          })
+          }, this.preload)
         }, 200)
         this.$emit('popupopened')
       },

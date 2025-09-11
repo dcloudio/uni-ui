@@ -12,15 +12,15 @@
             @click="handleSelect(index)"
           >
             <text>{{item.text || ''}}</text>
-            {{ selectedIndex }}
+            <!-- {{ selectedIndex }} -->
           </view>
       </view>
     </scroll-view>
     <view class="tab-c">
       <scroll-view class="list" :scroll-y="true">
-        {{ dataList }}
+        <!-- {{ dataList }}
         <br></br>
-        {{ _treeData }}
+        {{ _treeData }} -->
         <view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in dataList[selectedIndex]" :key="j"
           @click="handleNodeClick(item, selectedIndex, j)">
           <text class="item-text">{{item[map.text]}}</text>
@@ -118,12 +118,14 @@
         const {
           isleaf,
           hasNodes
-        } = this.lazy ? {} : this._updateBindData()
+        } = this._updateBindData()
 
-        if(this.lazy) {
-          this.lazyLoad(this.selectedIndex+1,node)
-          this.onSelectedChange(node, !node.hasChildren)
-          // this._updateBindData(node)
+        if (this.lazy) {
+          if(isleaf){
+            this.onSelectedChange(node, node.isleaf)
+          }else if(!hasNodes){
+            this.lazyLoad(this.selectedIndex+1,node)
+          }
         }
         else if (this.isLocalData) {
           this.onSelectedChange(node, (!hasNodes || isleaf))
@@ -145,11 +147,14 @@
           }
         }
       },
-      async updateData(data) {
-        this._treeData = data.treeData
-        this.selected = data.selected
-        if (this.lazy) {
-          this.lazyLoad(this.selectedIndex)
+      async updateData(data,preload) {
+        console.log("updateData")
+        if (!this.lazy) {
+          this._treeData = data.treeData
+          this.selected = data.selected
+        }
+        if (this.lazy && this._treeData.length == 0 && !preload) {
+          this.lazyLoad(0)
         }
         else if (!this._treeData.length) {
           this.loadData()
@@ -173,7 +178,7 @@
             if(node) result_item.parent_value = node.value
             result_item.level = selectedLevel
           })
-          this._treeData = this._treeData.filter(item => item.level != selectedLevel)
+          // this._treeData = this._treeData.filter(item => item.level != selectedLevel)
           this._treeData.push(...result)
           this._updateBindData(node);
         }
