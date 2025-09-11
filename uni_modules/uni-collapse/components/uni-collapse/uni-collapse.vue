@@ -51,8 +51,11 @@
 			}
 		},
 		watch: {
-			dataValue(val) {
-				this.setOpen(val)
+			dataValue: {
+				handler(newVal) {
+					this.setOpen(newVal)
+				},
+				deep: true
 			}
 		},
 		created() {
