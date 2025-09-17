@@ -16,7 +16,7 @@
 				</view>
 			</view>
 		</view>
-		<view v-if="filesList.length < limit && !readonly" class="file-picker__box" :style="boxStyle">
+		<view v-if="filesList.length < limit" class="file-picker__box" :style="boxStyle">
 			<view class="file-picker__box-content is-add" :style="borderStyle" @click="choose">
 				<slot></slot>
 			</view>
@@ -142,12 +142,15 @@
 				this.$emit("uploadFiles", item)
 			},
 			choose() {
+				if(this.readonly) return
 				this.$emit("choose")
 			},
 			delFile(index) {
+				if(this.readonly) return
 				this.$emit('delFile', index)
 			},
 			prviewImage(img, index) {
+				if(this.readonly) return
 				let urls = []
 				if(Number(this.limit) === 1&&this.disablePreview&&!this.disabled){
 					this.$emit("choose")
