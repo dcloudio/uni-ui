@@ -18,4 +18,3 @@
 - 若无初始值 value，则初始值 value 为当前本地时间 Date.now()， 但不会显示在 picker 显示框中
 
 ### [查看文档](https://uniapp.dcloud.io/component/uniui/uni-datetime-picker)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839 
