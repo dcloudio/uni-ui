@@ -298,8 +298,7 @@
 					'10px';
 				return obj2strStyle({
 					'padding-right': paddingRight,
-					'padding-left': this.prefixIcon ? '' : '10px',
-					...this.styles
+					'padding-left': this.prefixIcon ? '' : '10px'
 				});
 			}
 		},
