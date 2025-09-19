@@ -20,4 +20,3 @@ uni-app的内置组件已经有了 `<form>`组件，用于提交表单内容。
 另外，`<uni-forms>`组件下面的各个表单项，可以通过`<uni-group>`包裹为不同的分组。同一`<uni-group>`下的不同表单项目将聚拢在一起，同其他group保持垂直间距。`<uni-group>`仅影响视觉效果。
 
 ### [查看文档](https://uniapp.dcloud.io/component/uniui/uni-forms)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839 

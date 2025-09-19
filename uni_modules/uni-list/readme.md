@@ -21,8 +21,6 @@ uni-list-item有很多风格，uni-list-item组件通过内置的属性，满足
 uni-list不包含下拉刷新和上拉翻页。上拉翻页另见组件：[uni-load-more](https://ext.dcloud.net.cn/plugin?id=29)
 
 ### [点击查看详细文档](https://uniapp.dcloud.io/component/uniui/uni-indexed-list)
-#### 如使用过程中有任何问题，或者您对uni-ui有一些好的建议，欢迎加入 uni-ui 交流群：871950839 
-
 
 
 ## 基于uni-list扩展的页面模板
