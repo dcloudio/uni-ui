@@ -1,0 +1,113 @@
+<!-- 
+badge组件是一个容器组件，包含一个slot，和一个角标view。
+badge组件包裹一个目标view时，badge组件内部的角标view的中心点位于目标view的右上角顶点。
+	如果没有slot内容，视为要显示独立的红点和数字，此时不是角标，就是普通的红点和圆背景数字。
+badge组件的badge-class和badge-style属性，直接作用在角标view上，可以修改角标view的样式。
+badge组件有如下属性：
+- text
+	类型为 string|null
+	值为0时，不显示角标；所以永远不会显示一个为0的角标。此时直接显示slot子内容，不包裹；
+	值为null或""时，代表一个长宽为8px的红色圆点；
+	否则显示text文字
+- badge-class
+	直接作用于角标view的class
+- badge-style
+	直接作用于角标view的style
+-->
+<template>
+	<slot v-if="props.text == '0'"></slot> <!-- 如果不显示badge，则不包裹，直接显示子内容。保证常态下的高性能-->
+	<template v-else>
+		<view style="position: relative; overflow: visible;align-self: flex-start" v-if="hasDefaultSlot">
+			<!-- 目标内容插槽 -->
+			<slot></slot>
+
+			<!-- badge 文字模式 -->
+			<text v-if="props.text != ''" :class="['text', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle">
+				{{ props.text }}
+			</text>
+
+			<!-- badge 红点模式 -->
+			<view v-else :class="['dot', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle"></view>
+		</view>
+		
+		<!-- 不包裹，直接显示badge 文字模式 -->
+		<text v-else-if="props.text != ''" :class="['text', {'postion': hasDefaultSlot}, props.badgeClass]" :style="'align-self: flex-start;'+props.badgeStyle">
+			{{ props.text }}
+		</text>
+		
+		<!-- 不包裹，直接显示badge 红点模式 -->
+		<view v-else :class="['dot', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle"></view>
+	</template>
+</template>
+
+<script setup lang="uts">
+	// 定义组件属性接口
+	type Props = {
+		/**
+		 * @description badge的内容，为0表示不显示badge；为空表示圆点；有文字则显示文字
+		 */
+		text? : string,
+		/**
+		 * @description 暴露给外部用于覆盖样式
+		 */
+		badgeStyle? : string,
+		/**
+		 * @description 暴露给外部用于覆盖样式
+		 */
+		badgeClass? : string
+	}
+
+	// 使用 withDefaults 设置默认值
+	const props = withDefaults(defineProps<Props>(), {
+		text: '',
+		badgeStyle: '',
+		badgeClass: ''
+	})
+	
+	// 1. 获取插槽对象
+	const slots = useSlots();
+	// 2. 定义计算属性来判断默认插槽是否有内容
+	const hasDefaultSlot = computed(() => {
+	  return slots['default'] != null;
+	  // 优化：排除空文本节点和注释节点
+	  // 确保内容不是只有空格或换行符的文本节点
+	  // const meaningfulContent = content.filter(vnode => {
+	    // 忽略注释节点 (vnode.type === Comment)
+	    // 忽略只有空白的文本节点 (vnode.type === Text && vnode.children.trim() === '')
+	    // 简单判断 VNode 数组长度通常足够，但要更严谨可以这样做：
+	    // return vnode.type !== Comment && !(typeof vnode.children === 'string' && vnode.children.trim() === '');
+	  // });
+	  // return meaningfulContent.length > 0;
+	});
+</script>
+
+<style>
+	.text {
+		/* background-color: rgba(225, 80, 80, 0.9); */ /* 有透明度*/
+		background-color: rgb(225, 80, 80); /* 无透明度*/
+		min-width: 16px;
+		height: 16px;
+		line-height: 16px;
+		border-radius: 8px;
+		padding-left: 4px;/* 保证圆角不裁剪文字 */
+		padding-right: 4px;/* 保证圆角不裁剪文字 */
+		font-size: 10px;
+		color: white;
+		text-align: center;
+	}
+
+	.dot {
+		background-color: rgb(225, 80, 80);
+		width: 8px;
+		height: 8px;
+		border-radius: 4px;
+	}
+	
+	/* 有包裹内容，才定位在右上角。所以这个样式是一个单独的class，在slot有内容时才生效 */
+	.postion {
+		position: absolute;
+		top: 0px; /* 定位在顶部*/
+		right: 0px; /* 定位在右边*/
+		transform: translate(50%, -50%); /* 中心向右上角偏移，保证中心在元素右上角顶点*/
+	}
+</style>

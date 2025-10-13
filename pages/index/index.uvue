@@ -1,0 +1,12 @@
+<template>
+	<navigator url="/pages/badge/badge">badge</navigator>
+	<navigator url="/pages/rate/rate">rate</navigator>
+	<navigator url="/pages/swiper-view/swiper-view">swiper-view</navigator>
+</template>
+
+<script>
+	
+</script>
+
+<style>
+</style>

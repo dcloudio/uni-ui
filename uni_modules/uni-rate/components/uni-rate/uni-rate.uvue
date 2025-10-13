@@ -1,0 +1,151 @@
+<template>
+	<text v-if="props.full != true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
+  <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
+    <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
+    <!-- <text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass" :style="{ width: calculatedWidth, ...(props.starActiveStyle ? parseStyle(props.starActiveStyle) : {}) }"> -->
+		<text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass ?? ''" 
+		:style=" starStyle + ';' + starActiveStyle + ';width:' + calculatedWidth">
+      {{ fullActiveStars }}
+    </text>
+  </view>
+</template>
+
+<script setup lang="uts">
+const props = defineProps<{
+  value?: number, // 当前评分，如 3.5
+  modelValue?: number, // v-model绑定值
+	full?: boolean, // 是否显示全部，包括灰色
+	readonly?: boolean, // 只读，不可点击修改
+	plain?: boolean, // 灰星是否镂空
+	starClass?: string, // 灰星星的样式类
+	starStyle?: string // 灰星星的内联样式
+	starActiveClass?: string, // 选中星星的样式类
+	starActiveStyle?: string // 选中星星的内联样式
+}>()
+
+const emit = defineEmits<{
+  change: [value: number]
+  'update:modelValue': [value: number]
+}>()
+
+// 响应式数据 - 优先使用modelValue，其次使用value
+const currentValue = ref<number>(0)
+
+// 安全初始化函数
+function safeInitValue() {
+  const initialValue = props.modelValue ?? props.value ?? 0
+  if (typeof initialValue === 'number' && !isNaN(initialValue)) {
+    currentValue.value = initialValue
+  } else {
+    currentValue.value = 0
+  }
+}
+
+// 监听props变化
+watch(() : number | null => {
+  return props.modelValue ?? props.value ?? null
+}, (newValue : number | null) => {
+  if (newValue != null && typeof newValue === 'number' && !isNaN(newValue as number)) {
+    currentValue.value = newValue as number
+  }
+}, { immediate: true })
+
+// 初始化
+safeInitValue()
+
+// 计算星星显示
+const stars = computed(() => {
+  if (props.full != true) {
+    const value = Math.max(0, Math.min(5, currentValue.value))
+    return '★'.repeat(Math.round(value))
+  } else {
+    return props.plain == true ? '☆'.repeat(5) : '★'.repeat(5)
+  }
+})
+
+const fullActiveStars = '★'.repeat(5) // 显示灰星时才有意义
+
+// 计算点亮层的宽度
+const calculatedWidth = computed(() => {
+  // 确保在 0 到 5 之间
+  const value = currentValue.value
+  const rate = Math.max(0, Math.min(5, value))
+	console.log('rate: ',rate);
+	// TODO 这里逻辑可能有问题，Android端小数无法显示
+  return `${(rate / 5) * 100}%`
+})
+
+// 处理点击事件
+function onTap(event: UniPointerEvent) : void {
+  // 如果是只读模式，不处理点击
+  if (props.readonly == true) {
+    return
+  }
+  
+  // 获取点击位置 - 优化的事件处理
+  let clickX = event.x
+  // console.log("clickX:" + clickX);
+  
+  // 获取容器宽度 - 使用 currentTarget 获取绑定事件的 view 容器，而不是被点击的 text 元素
+  let containerWidth = 0
+  try {
+    if (event.currentTarget?.offsetWidth != null && event.currentTarget.offsetWidth > 0) {
+      containerWidth = event.currentTarget.offsetWidth
+    }
+  } catch (e) {
+    // 忽略错误，使用默认值
+		console.log('e: ',e);
+  }
+	// console.log("containerWidth:" + 	containerWidth);
+  
+  // 计算点击的是第几颗星（从0开始）
+  const finalValue = Math.round(clickX / containerWidth * 5)
+	// console.log('finalValue: ',finalValue);
+  
+	// 计算每颗星的宽度
+	// const starWidth = containerWidth / 5
+  // 计算点击位置在星内的偏移量
+  // const offsetInStar = (clickX % starWidth) / starWidth
+  /* // 根据偏移量决定是整星还是半星
+  let newValue: number
+  if (offsetInStar <= 0.5) {
+    newValue = starIndex + 0.5 // 半星
+  } else {
+    newValue = starIndex + 1 // 整星
+  }
+  // 确保值在有效范围内 */
+  // const finalValue = Math.max(0.5, Math.min(5, starIndex + 1))
+  
+  // 更新值
+  currentValue.value = finalValue
+  
+  // 触发change事件
+  emit('change', finalValue)
+  
+  // 触发v-model更新
+  emit('update:modelValue', finalValue)
+}
+
+</script>
+
+<style>
+
+.stars-pos {
+  /* 确保两个 star 的位置重叠 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap; /* 确保星不会换行 */
+  overflow: hidden; /* 关键：裁剪点亮层 */
+}
+.gray-stars {
+  color: #ccc; /* 未点亮颜色 */
+  position: relative; /* 确保底层可见 */
+}
+.active-init-width {
+  width: 0%; /* full时高亮星的初始宽度 */
+}
+.active-color{
+ color: #ffca3e; /* 点亮颜色 */
+}
+</style>

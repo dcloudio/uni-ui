@@ -1,0 +1,190 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view style="flex: 1;padding: 5px;">
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	<view style="padding: 5px;">
+	<!-- #endif -->
+		<text style="font-size: 18px; font-weight: bold; color: #333;margin-bottom: 20px;">Badge 组件演示</text>
+
+		<!-- 动态badge -->
+		<view style="margin-bottom: 20px;">
+			<text style=" color: #666;">badge动态设置text属性：</text>
+			<text style=" color: #666; margin-bottom: 10px;">输入0不显示badge，空字符串显示红点，输入其他显示文字</text>
+			<view style="margin-bottom: 10px;">
+				<input 
+					v-model="dynamicBadgeText"
+					placeholder="输入badge text属性"
+					style="border: 1px solid #ddd; border-radius: 4px; padding: 8px; width: 200px;"
+				/>
+			</view>
+			<uni-badge-view :text="dynamicBadgeText">
+				<view style="width: 20px;height: 16px;background-color: green;"></view>
+			</uni-badge-view>
+		</view>
+
+		<!-- 不显示badge -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">不显示badge：</text>
+			<uni-badge-view text="0">
+				<view style="width: 20px;height: 16px;background-color: green;"></view>
+			</uni-badge-view>
+		</view>
+		
+		<!-- 不包裹内容 -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的圆点：</text>
+			<uni-badge-view text=""> <!-- 123-->
+			</uni-badge-view>
+		</view>
+		
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的文字：</text>
+			<uni-badge-view text="1"/>
+		</view>
+
+		<!-- 文字样式 -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">文字样式：</text>
+			<uni-badge-view text="3">
+				<view style=" width: 40px; height: 20px;">
+					<text>20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+		<!-- text为99+ -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
+			<uni-badge-view text="99+">
+				<view style=" width: 50px; height: 20px; background-color: #6c757d; ">
+					<text style="color: white;">20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+		<!-- 文字样式自定义badge-class -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">自定义badge-class（绿色badge）：</text>
+			<uni-badge-view text="NEW" badge-class="custom-badge-text">
+				<!-- TODO Web因为css强制全部scope导致样式无法自定义 -->
+				<view style="height: 20px; background-color: #ffc107; ">
+					<text>20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+		<!-- 文字样式自定义badge-style -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">自定义样式badge-style（紫色badge）：</text>
+			<uni-badge-view text="HOT" badge-style="background-color: #6f42c1; color: yellow;">
+				<view style="height: 20px; background-color: #dc3545; ">
+					<text style="color: white;">20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+		<!-- 红点样式 -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">红点默认样式：</text>
+			<uni-badge-view>
+				<button size="mini">按钮</button>
+			</uni-badge-view>
+		</view>
+
+		<!-- 空文字测试 -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">空文字（红点模式）：</text>
+			<uni-badge-view text="">
+				<view style="height: 20px; background-color: #17a2b8; border-radius: 4px; ">
+					<text style="color: white;">20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+
+		<!-- 红点自定义badge-class -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">dot自定义badge-class（绿色badge）：</text>
+			<uni-badge-view badge-class="custom-badge-dot">
+				<view style="height: 20px; background-color: #ffc107; ">
+					<text>20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+
+		<!-- 红点自定义badge-style -->
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">dot自定义badge-style（紫色badge）：</text>
+			<uni-badge-view badge-style="background-color: #6f42c1;">
+				<view style="height: 20px; background-color: #dc3545; ">
+					<text style="color: white;">20px区域</text>
+				</view>
+			</uni-badge-view>
+		</view>
+		
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">按钮中badge文字：</text>
+			<button size="mini">按钮<uni-badge-view text="9"/></button>
+			<!-- TODO Android上上述badge样式错乱-->
+			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
+				<text>按钮&nbsp;</text>
+				<uni-badge-view text="9" style="padding-top: 5px;"/>
+				<!-- TODO
+				 上面的style会导致web vue报错：
+				 [Vue warn]: Extraneous non-props attributes (style) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. \n at <UniBadgeView>\nat <View>\nat <View>\nat <View>\nat <Badge>\nat <AsyncComponentWrapper>\nat <PageBody>\nat <Page>\nat <Anonymous>\nat <Layout>\nat <App>
+				 app不报错。
+				 但web和app，这个style都没有生效。
+				 但，直接在浏览器控制台设置样式是生效的。
+				 另外，这个问题的起源是badge-view在单独text的时候设置了align-self: flex-start;。导致不垂直居中。但如果去掉align-self: flex-start，在无包裹情况下宽度又会成为100%
+				 -->
+			</view>
+		</view>
+		
+		<view style="margin-bottom: 10px;">
+			<text style=" color: #666; margin-bottom: 10px;">按钮中badge红点：</text>
+			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
+				<text>按钮&nbsp;</text>
+				<uni-badge-view/>
+			</view>
+		</view>
+
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	</view>
+	<!-- #endif -->
+</template>
+
+<script setup lang="uts">
+// 动态badge的text值
+const dynamicBadgeText = ref<string>("0")
+
+// 处理输入框输入事件
+// const onBadgeTextInput = (event: InputEvent) => {
+// 	const target = event.target as any
+// 	if (target != null) {
+// 		dynamicBadgeText.value = target.value as string
+// 	}
+// }
+</script>
+
+<style>
+	.demo-badge {
+		margin-bottom: 10px;
+	}
+
+	/* 提高自定义 badge 样式的权重 */
+	.custom-badge-text {
+		background-color: #28a745 !important;
+		color: black !important;
+	}
+	
+	.custom-badge-dot {
+		background-color: #28a745 !important;
+		width: 16px !important;
+		height: 16px !important;
+		border-radius: 16px !important;
+	}
+</style>
