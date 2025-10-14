@@ -22,21 +22,21 @@ badge组件有如下属性：
 			<slot></slot>
 
 			<!-- badge 文字模式 -->
-			<text v-if="props.text != ''" :class="['text', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle">
+			<text v-if="props.text != ''" :class="['text', 'postion', props.badgeClass]" :style="props.badgeStyle">
 				{{ props.text }}
 			</text>
 
 			<!-- badge 红点模式 -->
-			<view v-else :class="['dot', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle"></view>
+			<view v-else :class="['dot', 'postion', props.badgeClass]" :style="props.badgeStyle"></view>
 		</view>
 		
 		<!-- 不包裹，直接显示badge 文字模式 -->
-		<text v-else-if="props.text != ''" :class="['text', {'postion': hasDefaultSlot}, props.badgeClass]" :style="'align-self: flex-start;'+props.badgeStyle">
+		<text v-else-if="props.text != ''" :class="['text', props.badgeClass]" :style="props.badgeStyle">
 			{{ props.text }}
 		</text>
 		
 		<!-- 不包裹，直接显示badge 红点模式 -->
-		<view v-else :class="['dot', {'postion': hasDefaultSlot}, props.badgeClass]" :style="props.badgeStyle"></view>
+		<view v-else :class="['dot', props.badgeClass]" :style="props.badgeStyle"></view>
 	</template>
 </template>
 
