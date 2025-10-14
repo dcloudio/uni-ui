@@ -1,26 +1,63 @@
 <template>
-	<text v-if="props.full != true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
+	<text v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
     <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
 		<text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass ?? ''" 
-		:style=" starStyle + ';' + starActiveStyle + ';width:' + calculatedWidth">
-      {{ fullActiveStars }}
-    </text>
+		:style=" starStyle + ';' + starActiveStyle + ';width:' + calculatedWidth">★★★★★</text> <!-- 前景亮星，宽度根据value变化-->
   </view>
 </template>
 
 <script setup lang="uts">
 const props = defineProps<{
-  value?: number, // 当前评分，如 3.5
-  modelValue?: number, // v-model绑定值
-	full?: boolean, // 是否显示全部，包括灰色
-	readonly?: boolean, // 只读，不可点击修改
-	plain?: boolean, // 灰星是否镂空
-	starClass?: string, // 灰星星的样式类
-	starStyle?: string // 灰星星的内联样式
-	starActiveClass?: string, // 选中星星的样式类
-	starActiveStyle?: string // 选中星星的内联样式
+  /**
+	 * @description 当前评分
+	 */
+	value?: number,
+  /**
+   * @description v-model绑定值
+   */
+	modelValue?: number, 
+	/**
+	 * @description 是否显示全部5颗星，包括灰星
+	 */
+	full?: boolean, 
+	/**
+	 * @description 只读，不可点击修改
+	 */
+	readonly?: boolean, 
+	/**
+	 * @description 灰星是否镂空
+	 */
+	plain?: boolean, 
+	/**
+	 * @description 灰星的样式类
+	 */
+	starClass?: string.ClassString, 
+	/**
+	 * @description 灰星的内联样式
+	 */
+	starStyle?: string 
+	/**
+	 * @description 选中星星的样式类
+	 */
+	starActiveClass?: string.ClassString, 
+	/**
+	 * @description 选中星星的内联样式
+	 */
+	starActiveStyle?: string 
 }>()
+
+// 计算星星显示
+const stars = computed(() => {
+  if (props.full!=true) {
+    const value = Math.max(0, Math.min(5, props.value ?? 0))
+    return '★'.repeat(Math.round(value)) //返回亮星数量
+  } else {
+    return props.plain == true ? '☆'.repeat(5) : '★'.repeat(5) //返回灰星数量
+  }
+})
+
+// 问题：props.full != true 时，下面的Script其实都没有意义，但却需要执行。但vue里又无法用if包裹下面的代码，不灵活
 
 const emit = defineEmits<{
   change: [value: number]
@@ -29,9 +66,9 @@ const emit = defineEmits<{
 
 // 响应式数据 - 优先使用modelValue，其次使用value
 const currentValue = ref<number>(0)
-
+currentValue.value = props.modelValue ?? props.value ?? 0
 // 安全初始化函数
-function safeInitValue() {
+/* function safeInitValue() {
   const initialValue = props.modelValue ?? props.value ?? 0
   if (typeof initialValue === 'number' && !isNaN(initialValue)) {
     currentValue.value = initialValue
@@ -40,8 +77,7 @@ function safeInitValue() {
   }
 }
 // 初始化
-safeInitValue()
-
+safeInitValue() */
 // 监听props变化
 watch(() : number | null => {
   return props.modelValue ?? props.value ?? null
@@ -51,25 +87,13 @@ watch(() : number | null => {
   }
 }, { immediate: true })
 
-// 计算星星显示
-const stars = computed(() => {
-  if (props.full != true) {
-    const value = Math.max(0, Math.min(5, currentValue.value))
-    return '★'.repeat(Math.round(value))
-  } else {
-    return props.plain == true ? '☆'.repeat(5) : '★'.repeat(5)
-  }
-})
-
-const fullActiveStars = '★'.repeat(5) // 显示灰星时才有意义
-
 // 计算点亮层的宽度
 const calculatedWidth = computed(() => {
   // 确保在 0 到 5 之间
   const value = currentValue.value
   const rate = Math.max(0, Math.min(5, value))
-	console.log('rate: ',rate);
-	// TODO 这里逻辑可能有问题，Android端小数无法显示
+	// console.log('rate: ',rate);
+	// TODO Android端小数无法正常渲染，不是宽度计算的问题
   return `${(rate / 5) * 100}%`
 })
 
@@ -82,7 +106,6 @@ function onTap(event: UniPointerEvent) : void {
   
   // 获取点击位置 - 优化的事件处理
   let clickX = event.x
-  // console.log("clickX:" + clickX);
   
   // 获取容器宽度 - 使用 currentTarget 获取绑定事件的 view 容器，而不是被点击的 text 元素
   let containerWidth = 0

@@ -17,7 +17,7 @@ badge组件有如下属性：
 <template>
 	<slot v-if="props.text == '0'"></slot> <!-- 如果不显示badge，则不包裹，直接显示子内容。保证常态下的高性能-->
 	<template v-else>
-		<view style="position: relative; overflow: visible;align-self: flex-start" v-if="hasDefaultSlot">
+		<view v-if="hasDefaultSlot" style="position: relative; overflow: visible;align-self: flex-start">
 			<!-- 目标内容插槽 -->
 			<slot></slot>
 
@@ -48,15 +48,15 @@ badge组件有如下属性：
 		 */
 		text? : string,
 		/**
-		 * @description 暴露给外部用于覆盖样式
+		 * @description 暴露给外部用于覆盖style
 		 */
 		badgeStyle? : string,
 		/**
-		 * @description 暴露给外部用于覆盖样式
+		 * @description 暴露给外部用于覆盖class
 		 */
-		badgeClass? : string
+		badgeClass? : string.ClassString
 	}
-
+	
 	// 使用 withDefaults 设置默认值
 	const props = withDefaults(defineProps<Props>(), {
 		text: '',
@@ -69,15 +69,6 @@ badge组件有如下属性：
 	// 2. 定义计算属性来判断默认插槽是否有内容
 	const hasDefaultSlot = computed(() => {
 	  return slots['default'] != null;
-	  // 优化：排除空文本节点和注释节点
-	  // 确保内容不是只有空格或换行符的文本节点
-	  // const meaningfulContent = content.filter(vnode => {
-	    // 忽略注释节点 (vnode.type === Comment)
-	    // 忽略只有空白的文本节点 (vnode.type === Text && vnode.children.trim() === '')
-	    // 简单判断 VNode 数组长度通常足够，但要更严谨可以这样做：
-	    // return vnode.type !== Comment && !(typeof vnode.children === 'string' && vnode.children.trim() === '');
-	  // });
-	  // return meaningfulContent.length > 0;
 	});
 </script>
 

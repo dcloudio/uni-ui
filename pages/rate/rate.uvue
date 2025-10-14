@@ -31,8 +31,7 @@
 		<text class="title">只读，程序动态赋值，不触发change</text>
 			<uni-rate :value="rateValue" @change="onRateChange"/>
 		<text class="title">只读，不触发change" </text>
-			<uni-rate readonly="readonly" :value="5" @change="onRateChange" />
-		
+			<uni-rate :readonly="true" :value="5" @change="onRateChange" />
 		<text class="title">高性能版，自定义大小和颜色（style方式）</text>
 			<uni-rate style="font-size: 32px" star-active-style="color:red" :value="4.6" />
 			<!-- 仅高性能版，因为单层，可以在组件的style属性上写作用于text的样式。但规范的写法是使用star-active-style -->
@@ -50,12 +49,34 @@
 	</view>
 	<!-- #endif -->
 </template>
-
+<!--
+<script>
+	export default {
+		data() {
+			return {
+				vModelRateValue: 0,
+				rateValue :0
+			}
+		},
+		onReady() {
+			console.log(this.$nativePage?.getDomJson())
+		},
+		methods: {
+			onRateChange(value: number) {
+			}
+		},
+	}
+</script>
+-->
 <script setup lang="uts">
 
 	const vModelRateValue = ref<number>(0)
 	const rateValue = ref<number>(0)
 	let interval = 0
+	
+	/* onReady(() => {
+		console.log(getCurrentInstance()!.proxy!.$page.$nativePage);
+	}) */
 
 	function onRateChange(value: number) {
 		console.log('onRateChange received value:', value, 'type:', typeof value)
@@ -90,7 +111,6 @@
 		}
 	})
 </script>
-
 <style>
 .custom-default{
 	color:black

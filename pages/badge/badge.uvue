@@ -10,7 +10,6 @@
 	</uni-badge-view>
 	<!-- TODO 上面被注掉的代码，在Android上顶部被裁剪，但web上角标上部可以露出来不少，没有拉齐表现 -->
 		<text style="font-size: 18px; font-weight: bold; color: #333;margin-bottom: 20px;">Badge 组件演示</text>
-
 		<!-- 动态badge -->
 		<view style="margin-bottom: 20px;">
 			<text style=" color: #666;">badge动态设置text属性：</text>
@@ -36,13 +35,13 @@
 		<!-- 不包裹内容 -->
 		<view style="margin-bottom: 10px;">
 			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的圆点：</text>
-			<uni-badge-view text=""> <!-- 123-->
+			<uni-badge-view text="">
 			</uni-badge-view>
 		</view>
 		
 		<view style="margin-bottom: 10px;">
 			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的文字：</text>
-			<uni-badge-view text="1" badgeStyle="align-self:flex-start;"/>
+			<uni-badge-view text="1" badge-style="align-self:flex-start;"/> <!-- 在flex方向为竖时，默认横向拉伸，需要设flex-start避免 -->
 		</view>
 
 		<!-- 文字样式 -->
@@ -59,15 +58,15 @@
 		<view style="margin-bottom: 10px;">
 			<text style=" color: #666; margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
 			<uni-badge-view text="99+">
-				<view style=" width: 10px; height: 20px; background-color: #6c757d; ">
-					<text style="color: white;">20px区域</text>
+				<view style=" width: 50px; height: 20px; background-color: #6c757d; ">
+					<text style="color: white;">50px区域</text>
 				</view>
 			</uni-badge-view>
 		</view>
 		
-		<!-- TODO 下面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄 -->
+		<!-- TODO 上面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄 -->
 		<uni-badge-view text="99+">
-			<view style="width: 24px; height: 20px; background-color: green;"></view>
+			<view style="width: 10px; height: 20px; background-color: green;"></view>
 		</uni-badge-view>
 
 		<!-- 文字样式自定义badge-class -->
@@ -137,13 +136,13 @@
 			<!-- TODO Android的button不支持子组件，上述badge样式错乱。先遗留，等button用前端重构-->
 			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
 				<text>按钮&nbsp;</text>
-				<uni-badge-view text="9" style="padding-top: 5px;"/>
+				<uni-badge-view text="9"/>
 				<!-- TODO
-				 上面的style会导致web vue报错：
+				 上面加style="padding-top: 5px;" 会导致vue报错：
 				 [Vue warn]: Extraneous non-props attributes (style) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. \n at <UniBadgeView>\nat <View>\nat <View>\nat <View>\nat <Badge>\nat <AsyncComponentWrapper>\nat <PageBody>\nat <Page>\nat <Anonymous>\nat <Layout>\nat <App>
-				 app不报错。
-				 但web和app，这个style都没有生效。
-				 但，直接在浏览器控制台设置样式是生效的。
+				 app不报错。app也应该报错。
+				 本质是因为多根节点，不知道把style属性绑定到哪个根节点，需要指定，在组件的每个根节点上使用v-bind="$attrs"绑定所有属性过去
+				 
 				 另外，这个问题的起源是badge-view在单独text的时候设置了align-self: flex-start;。导致不垂直居中。但如果去掉align-self: flex-start，在无包裹情况下宽度又会成为100%
 				 -->
 			</view>
