@@ -2,7 +2,6 @@
 	<text v-if="props.full != true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
     <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
-    <!-- <text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass" :style="{ width: calculatedWidth, ...(props.starActiveStyle ? parseStyle(props.starActiveStyle) : {}) }"> -->
 		<text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass ?? ''" 
 		:style=" starStyle + ';' + starActiveStyle + ';width:' + calculatedWidth">
       {{ fullActiveStars }}
@@ -40,6 +39,8 @@ function safeInitValue() {
     currentValue.value = 0
   }
 }
+// 初始化
+safeInitValue()
 
 // 监听props变化
 watch(() : number | null => {
@@ -49,9 +50,6 @@ watch(() : number | null => {
     currentValue.value = newValue as number
   }
 }, { immediate: true })
-
-// 初始化
-safeInitValue()
 
 // 计算星星显示
 const stars = computed(() => {

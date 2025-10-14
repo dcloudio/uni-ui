@@ -3,23 +3,25 @@
 	<scroll-view style="flex: 1;padding: 5px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view style="padding: 5px;">
+	<view style="flex: 1;padding: 5px;">
 	<!-- #endif -->
+	<!-- <uni-badge-view text="99+" >
+		<view style="width: 50px; height: 20px; background-color: green;"></view>
+	</uni-badge-view> -->
+	<!-- TODO 上面被注掉的代码，在Android上顶部被裁剪，但web上角标上部可以露出来不少，没有拉齐表现 -->
 		<text style="font-size: 18px; font-weight: bold; color: #333;margin-bottom: 20px;">Badge 组件演示</text>
 
 		<!-- 动态badge -->
 		<view style="margin-bottom: 20px;">
 			<text style=" color: #666;">badge动态设置text属性：</text>
 			<text style=" color: #666; margin-bottom: 10px;">输入0不显示badge，空字符串显示红点，输入其他显示文字</text>
-			<view style="margin-bottom: 10px;">
-				<input 
-					v-model="dynamicBadgeText"
-					placeholder="输入badge text属性"
-					style="border: 1px solid #ddd; border-radius: 4px; padding: 8px; width: 200px;"
-				/>
-			</view>
+			<input
+				v-model="dynamicBadgeText"
+				placeholder="输入badge text属性"
+				style="border: 1px solid #ddd; border-radius: 4px; width: 200px;height: 24px;padding-left: 2px;"
+			/>
 			<uni-badge-view :text="dynamicBadgeText">
-				<view style="width: 20px;height: 16px;background-color: green;"></view>
+				<view style="width: 20px;height: 20px;background-color: green;"></view>
 			</uni-badge-view>
 		</view>
 
@@ -62,6 +64,11 @@
 				</view>
 			</uni-badge-view>
 		</view>
+		
+		<!-- TODO 上面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄 -->
+		<uni-badge-view text="99+">
+			<view style="width: 10px; height: 20px; background-color: green;"></view>
+		</uni-badge-view>
 
 		<!-- 文字样式自定义badge-class -->
 		<view style="margin-bottom: 10px;">
@@ -112,6 +119,7 @@
 				</view>
 			</uni-badge-view>
 		</view>
+		<!-- TODO 以上web不生效，需解决样式的强制scope问题 @王亚琪 -->
 
 		<!-- 红点自定义badge-style -->
 		<view style="margin-bottom: 10px;">
@@ -125,8 +133,8 @@
 		
 		<view style="margin-bottom: 10px;">
 			<text style=" color: #666; margin-bottom: 10px;">按钮中badge文字：</text>
-			<button size="mini">按钮<uni-badge-view text="9"/></button>
-			<!-- TODO Android上上述badge样式错乱-->
+			<!-- <button size="mini">按钮<uni-badge-view text="9"/></button> -->
+			<!-- TODO Android的button不支持子组件，上述badge样式错乱。先遗留，等button用前端重构-->
 			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
 				<text>按钮&nbsp;</text>
 				<uni-badge-view text="9" style="padding-top: 5px;"/>
@@ -161,13 +169,9 @@
 // 动态badge的text值
 const dynamicBadgeText = ref<string>("0")
 
-// 处理输入框输入事件
-// const onBadgeTextInput = (event: InputEvent) => {
-// 	const target = event.target as any
-// 	if (target != null) {
-// 		dynamicBadgeText.value = target.value as string
-// 	}
-// }
+/* onReady(() => {
+	console.log((getCurrentInstance()!.proxy!.$page as BasePage).$nativePage!.getDomJson());
+}) */
 </script>
 
 <style>
