@@ -85,6 +85,7 @@ badge组件有如下属性：
 		font-size: 10px;
 		color: white;
 		text-align: center;
+		white-space: nowrap;
 	}
 
 	.dot {

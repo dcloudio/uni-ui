@@ -55,8 +55,8 @@
 		</view>
 
 		<!-- text为99+ -->
-		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
+		<view style="margin-bottom: 10px;overflow: visible;"> <!--  添加 overflow: visible 兼容内部宽度不够使角标被裁剪 -->
+			<text style="color: #666; margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
 			<uni-badge-view text="99+">
 				<view style=" width: 50px; height: 20px; background-color: #6c757d; ">
 					<text style="color: white;">50px区域</text>
@@ -64,7 +64,7 @@
 			</uni-badge-view>
 		</view>
 		
-		<!-- TODO 上面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄 -->
+		<!-- 上面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄。uni-badge-view组件中角标文本样式加 white-space: nowrap 解决 -->
 		<uni-badge-view text="99+">
 			<view style="width: 10px; height: 20px; background-color: green;"></view>
 		</uni-badge-view>
