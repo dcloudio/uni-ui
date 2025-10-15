@@ -1,0 +1,80 @@
+<!--
+swiper-slider是swiper-view的唯一子组件。
+每个swiper-slider就是一个滑动视图，相当于view容器。
+-->
+<template>
+	<view :class="rootClass">
+		<view :class="contentClass">
+			<slot></slot>
+		</view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { computed } from 'vue'
+
+	type Props = {
+		autoHeight ?: boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		autoHeight: false
+	})
+
+	const rootClass = computed(() => {
+		const classes : string[] = ['swiper-slider']
+		if (props.autoHeight) {
+			classes.push('auto-height')
+		} else {
+			classes.push('fill-parent')
+		}
+		return classes
+	})
+
+	const contentClass = computed(() => {
+		const classes : string[] = ['swiper-slider-content']
+		if (props.autoHeight) {
+			classes.push('content-auto-height')
+		} else {
+			classes.push('content-fill-parent')
+		}
+		return classes
+	})
+</script>
+
+<style>
+
+	.swiper-slider {
+		flex: 0 0 auto;
+		flex-shrink: 0;
+		overflow: hidden;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.auto-height {
+		height: auto;
+	}
+
+	.fill-parent {
+		height: 100%;
+	}
+
+	.swiper-slider-content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.content-auto-height {
+		flex: 0 0 auto;
+		height: auto;
+	}
+
+	.content-fill-parent {
+		flex: 1;
+		height: 100%;
+	}
+</style>

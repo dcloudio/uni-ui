@@ -1,0 +1,889 @@
+<!--
+swiper-view组件：滑块视图容器，提供滑动轮播显示能力
+支持子组件：swiper-slider、swiper-indicator
+-->
+<template>
+	<view ref="container" :class="['swiper-container', vertical ? 'vertical' : 'horizontal']" @touchstart="onTouchStart"
+		@touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchEnd">
+		<view :class="['swiper-wrapper']" :style="wrapperStyle">
+			<slot></slot>
+		</view>
+		<!-- 默认指示器：当没有swiper-indicator组件时显示 -->
+		<view v-if="showDefaultIndicator"
+			:class="['swiper-indicator', 'swiper-indicator-default', vertical ? 'vertical' : 'horizontal']">
+			<view v-for="i in defaultIndicatorArray" :key="i" :class="['item', currentIndex === i ? 'active' : '']"
+				@click="handleDefaultIndicatorClick(i)"></view>
+		</view>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { ref, computed, watch, onMounted, onUnmounted, provide } from 'vue'
+
+	type EventDetail = { current : number; source : string }
+	type ChangeEvent = { detail : EventDetail }
+	type TransitionEventDetail = { dx : number; dy : number }
+	type TransitionEvent = { detail : TransitionEventDetail }
+	type AnimationFinishEvent = { detail : EventDetail }
+	type ElementRect = { width : number; height : number }
+
+	type Props = {
+		vertical ?: boolean
+		current ?: number
+		circular ?: boolean
+		autoplay ?: boolean
+		interval ?: number
+		duration ?: number
+		easingFunction ?: string
+		previousMargin ?: string
+		nextMargin ?: string
+		rebound ?: boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		vertical: false,
+		current: 0,
+		circular: false,
+		autoplay: false,
+		interval: 3000,
+		duration: 500,
+		easingFunction: 'default',
+		previousMargin: '0px',
+		nextMargin: '0px',
+		rebound: true
+	})
+
+	const emit = defineEmits<{
+		change : [event: ChangeEvent]
+		transition : [event: TransitionEvent]
+		animationfinish : [event: AnimationFinishEvent]
+	}>()
+
+
+	const container = ref<UniElement | null>(null)
+	const currentIndex = ref(props.current)
+	const count = ref(0)
+	const realCountRef = ref(0) // 用于provide给indicator的真实数量
+	const translate = ref(0)
+	const animating = ref(false)
+	const timer = ref(0)
+	const showDefaultIndicator = ref(true) // 是否显示默认指示器，默认为true
+	let animationTimer = 0 // 用于取消动画的setTimeout
+
+	let startX = 0, startY = 0, startTime = 0, dragging = false, startTranslate = 0, preventDef = false
+	let prevMargin = 0, nextMargin = 0, itemSize = 0
+	let realCount = 0 // 真实的slide数量
+	let autoHeightEnabled = true
+
+	const { vertical, circular, autoplay, interval, duration, rebound } = props
+
+	// 解析margin值
+	const parseMargin = (margin : string) : number => {
+		if (margin.length === 0) {
+			return 0
+		}
+		if (margin.endsWith('px')) {
+			return parseFloat(margin)
+		} else if (margin.endsWith('rpx')) {
+			return parseFloat(margin) * (750 / uni.getWindowInfo().windowWidth)
+		}
+		const numeric = parseFloat(margin)
+		if (!isNaN(numeric)) {
+			return numeric
+		}
+		return 0
+	}
+
+	const wrapperStyle = computed(() => {
+		const prop = vertical ? 'Y' : 'X'
+		const transitionDuration = animating.value ? 500:0;
+		// 添加will-change和transform-style以优化渲染性能,防止内容闪烁
+		// 加上margin偏移,让wrapper向右/下移动,从而在左/上侧留出空间显示前一个slider
+		const marginOffset = vertical ? prevMargin : prevMargin
+		const offset = translate.value + marginOffset
+		
+		const finalCSS = `transform: translate${prop}(${offset}px); transition: transform; transition-duration:${transitionDuration}ms; overflow: visible;`
+		
+		console.log("offset:"+finalCSS)
+			// console.log("finalCSS",finalCSS)
+		return finalCSS
+			
+	})
+
+	// 创建数组用于默认指示器的v-for迭代
+	const defaultIndicatorArray = computed(() => {
+		const arr : number[] = []
+		for (let i = 0; i < realCountRef.value; i++) {
+			arr.push(i)
+		}
+		return arr
+	})
+
+	// circular模式：动态调整DOM顺序，确保当前显示项前后都有元素
+	function adjustCircularOrder(targetIndex : number) {
+		if (!circular || realCount < 3) return // 少于3个元素时不支持margin，无需调整
+
+		const el = container.value
+		if (el == null) return
+
+		const wrapper = el.querySelector('.swiper-wrapper')
+		if (wrapper == null) return
+
+		const sliders = wrapper.querySelectorAll('.swiper-slider')
+		if (sliders == null || sliders.length !== realCount) return
+
+		// 目标：确保 targetIndex 前后都有元素
+		// 期望的顺序：[(targetIndex-1) % realCount, targetIndex, (targetIndex+1) % realCount, ...]
+		const prevIndex = (targetIndex - 1 + realCount) % realCount
+
+		// 检查当前第一个元素是否是 prevIndex
+		const firstSlider = sliders[0] as UniElement
+		const dataIndexStr = firstSlider.getAttribute('data-index')
+		const firstIndex = parseInt(dataIndexStr != null ? dataIndexStr : '0')
+
+		if (firstIndex !== prevIndex) {
+			// 需要调整顺序
+			// 将元素按期望顺序重新排列
+			const orderedIndices : number[] = []
+			for (let i = 0; i < realCount; i++) {
+				orderedIndices.push((prevIndex + i) % realCount)
+			}
+
+			// 创建一个映射：index -> slider element
+			const sliderMap = new Map<number, UniElement>()
+			for (let i = 0; i < sliders.length; i++) {
+				const slider = sliders[i] as UniElement
+				const attrValue = slider.getAttribute('data-index')
+				const index = parseInt(attrValue != null ? attrValue : '0')
+				sliderMap.set(index, slider)
+			}
+
+			// 按新顺序重新添加到wrapper
+			for (const index of orderedIndices) {
+				const slider = sliderMap.get(index)
+				if (slider != null) {
+					wrapper.appendChild(slider)
+				}
+			}
+		}
+	}
+
+	function slideTo(idx : number, src : string) {
+		
+		console.log("idx",idx,"src",src)
+		if (!circular && (idx < 0 || idx >= count.value)) return
+
+		const old = currentIndex.value
+		let targetIndex = idx
+		
+
+		// circular模式下处理边界
+		if (circular && realCount > 1) {
+			// 循环索引
+			if (idx < 0) {
+				targetIndex = realCount - 1
+			} else if (idx >= realCount) {
+				targetIndex = 0
+			} else {
+				targetIndex = idx
+			}
+		}
+
+		currentIndex.value = targetIndex
+		animating.value = true
+
+		// circular模式下：先动画到目标位置（位置0或位置2），动画结束后再重排DOM
+		if (circular && realCount >= 3) {
+			// 判断滑动方向
+			const isForward = (old === 0 && targetIndex === realCount - 1) ||
+				(targetIndex < old && !(old === realCount - 1 && targetIndex === 0))
+
+			// 向前滑动到位置0，向后滑动到位置2
+			const targetDomPosition = isForward ? 0 : 2
+			translate.value = -(targetDomPosition * itemSize)
+			console.log("222")
+		} else {
+			translate.value = -(targetIndex * itemSize)
+			console.log("111")
+		}
+		
+		console.log(translate.value)
+
+		if (old != targetIndex) {
+			emit('change', { detail: { current: targetIndex, source: src } })
+		}
+
+		// 清除之前的动画timer
+		if (animationTimer > 0) {
+			clearTimeout(animationTimer)
+			animationTimer = 0
+		}
+
+		animationTimer = setTimeout(() => {
+			animating.value = false
+			animationTimer = 0
+
+			// circular模式：动画结束后重排DOM，使targetIndex回到位置1
+			if (circular && realCount >= 3) {
+				adjustCircularOrder(targetIndex)
+				translate.value = -(1 * itemSize)
+			}
+			emit('animationfinish', { detail: { current: targetIndex, source: src } })
+		}, duration)
+	}
+
+	function stopTimer() {
+		if (timer.value > 0) {
+			clearInterval(timer.value)
+			timer.value = 0
+		}
+	}
+
+	function startTimer() {
+		const total = circular && realCount > 1 ? realCount : count.value
+		if (!autoplay || total <= 1) return
+		stopTimer()
+		timer.value = setInterval(() => {
+			let next = currentIndex.value + 1
+			if (circular && realCount > 1) {
+				if (next >= realCount) next = 0
+			} else {
+				if (next >= count.value) {
+					stopTimer()
+					return
+				}
+			}
+			console.log("startTimer 123")
+			slideTo(next, 'autoplay')
+		}, interval)
+	}
+
+	// 为swiper-indicator提供数据（provide ref对象以保持响应性）
+	provide('swiper-vertical', props.vertical)
+	provide('swiper-current', currentIndex)
+	provide('swiper-total', realCountRef) // 总是provide真实数量，不包括克隆的
+	provide('swiper-change', (idx : number) => {
+		slideTo(idx, 'click')
+	})
+
+	watch(() : number => props.current, (v : number) => {
+		if (v != currentIndex.value && v >= 0 && v < count.value) {
+			slideTo(v, 'prop')
+		}
+	})
+
+	// 默认指示器点击处理
+	const handleDefaultIndicatorClick = (index : number) => {
+		slideTo(index, 'click')
+	}
+
+	// 更新container高度以适配当前slider的高度（auto-height功能）
+	const updateContainerHeight = () : void => {
+		if (!autoHeightEnabled) {
+			return
+		}
+		const el = container.value
+		if (el == null) return
+
+		const wrapper = el.querySelector('.swiper-wrapper')
+		if (wrapper == null) return
+
+		const sliders = wrapper.querySelectorAll('.swiper-slider')
+		if (sliders == null || sliders.length === 0) return
+
+		let currentSlider : UniElement | null = null
+		for (let i = 0; i < sliders.length; i++) {
+			const slider = sliders[i] as UniElement
+			const dataIndexStr = slider.getAttribute('data-index')
+			const index = parseInt(dataIndexStr != null ? dataIndexStr : '0')
+			if (index === currentIndex.value) {
+				currentSlider = slider
+				break
+			}
+		}
+
+		if (currentSlider != null) {
+			const sliderContent = currentSlider.querySelector('.swiper-slider-content') as UniElement | null
+			let measuredHeight = 0
+			if (sliderContent != null) {
+				measuredHeight = sliderContent.scrollHeight
+				if (measuredHeight <= 0) {
+					measuredHeight = sliderContent.offsetHeight
+				}
+			}
+			if (measuredHeight <= 0) {
+				measuredHeight = currentSlider.scrollHeight
+			}
+			if (measuredHeight <= 0) {
+				measuredHeight = currentSlider.offsetHeight
+			}
+			if (measuredHeight <= 0) {
+				try {
+					const rect = currentSlider.getBoundingClientRect() as ElementRect
+					if (rect != null && rect.height > 0) {
+						measuredHeight = rect.height
+					}
+				} catch (err) {
+					// ignore: fall back to previous height
+				}
+			}
+			if (measuredHeight > 0) {
+				el.style.setProperty('height', measuredHeight + 'px')
+			} else {
+				el.style.removeProperty('height')
+			}
+		}
+	}
+
+	// 监听currentIndex变化，延迟更新container高度（auto-height）
+	watch(currentIndex, () => {
+		if (!autoHeightEnabled) {
+			return
+		}
+		setTimeout(() => {
+			updateContainerHeight()
+		}, duration + 50)
+	})
+
+	onMounted(() => {
+		const init = () : void => {
+			const el = container.value
+			if (el == null) return
+
+			const wrapper = el.querySelector('.swiper-wrapper')
+			if (wrapper == null) return
+
+			const sliders = wrapper.querySelectorAll('.swiper-slider')
+			if (sliders == null) return
+
+			let containerWidth = el.offsetWidth
+			let containerHeight = el.offsetHeight
+			
+			if (containerWidth <= 0 || containerHeight <= 0) {
+				try {
+					const rect = el.getBoundingClientRect() as ElementRect
+					if (rect != null) {
+						if (containerWidth <= 0 && rect.width > 0) {
+							containerWidth = rect.width
+						}
+						if (containerHeight <= 0 && rect.height > 0) {
+							containerHeight = rect.height
+						}
+					}
+				} catch (err) {
+					// ignore
+				}
+			}
+
+			if (containerWidth <= 0) {
+				const widthStyle = el.style.getPropertyValue('width')
+				if (widthStyle != null && widthStyle.length > 0 && widthStyle !== 'auto') {
+					const parsedWidth = parseMargin(widthStyle)
+					if (parsedWidth > 0) {
+						containerWidth = parsedWidth
+					}
+				}
+			}
+			if (containerHeight <= 0) {
+				const heightStyle = el.style.getPropertyValue('height')
+				if (heightStyle != null && heightStyle.length > 0 && heightStyle !== 'auto') {
+					const parsedHeight = parseMargin(heightStyle)
+					if (parsedHeight > 0) {
+						containerHeight = parsedHeight
+					}
+				}
+			}
+
+			if (containerWidth <= 0) {
+				const windowInfo = uni.getWindowInfo()
+				containerWidth = windowInfo.windowWidth
+			}
+
+			// 先设置slider数量，这样默认指示器才能正确渲染
+			realCount = sliders.length
+			realCountRef.value = realCount // 更新ref供indicator使用
+			count.value = realCount
+
+			// 查找indicator并移动到container层级（使其不受wrapper transform影响）
+			// 注意：排除默认指示器（它在container内，不在wrapper内，所以不会被查到）
+			const indicators = wrapper.querySelectorAll('.swiper-indicator:not(.swiper-indicator-default)')
+
+			if (indicators != null && indicators.length > 0) {
+				// 如果有indicator组件,将其移到container
+				for (let i = 0; i < indicators.length; i++) {
+					const indicator = indicators[i] as UniElement
+					// 将indicator从wrapper移到container
+					el.appendChild(indicator)
+				}
+
+				// 延迟检测自定义内容，确保slot已渲染
+				setTimeout(() => {
+					for (let i = 0; i < indicators.length; i++) {
+						const indicator = indicators[i] as UniElement
+						// 检查indicator的所有子元素
+						const allChildren = indicator.children
+						let hasCustom = false
+						if (allChildren != null && allChildren.length > 0) {
+							for (let j = 0; j < allChildren.length; j++) {
+								const child = allChildren[j] as UniElement
+								// 如果有非.item的子元素，说明有自定义内容
+								const className = child.getAttribute('class')
+								if (className == null || className.indexOf('item') < 0) {
+									hasCustom = true
+									break
+								}
+							}
+						}
+						if (hasCustom) {
+							indicator.classList.add('has-custom-content')
+						}
+					}
+				}, 50)
+
+				// 有自定义indicator组件,不显示默认指示器
+				showDefaultIndicator.value = false
+			} else {
+				// 没有indicator组件,显示默认指示器
+				showDefaultIndicator.value = true
+			}
+			prevMargin = parseMargin(props.previousMargin)
+			nextMargin = parseMargin(props.nextMargin)
+			console.log(prevMargin+":::"+nextMargin+":::")
+
+			// 为每个slider添加data-index属性，用于circular模式的DOM重排
+			for (let i = 0; i < sliders.length; i++) {
+				const slider = sliders[i] as UniElement
+				slider.setAttribute('data-index', i.toString())
+			}
+
+			const computedStyle = el.style.getPropertyValue('height')
+			let hasFixedHeight = false
+			if (computedStyle != null && computedStyle.length > 0 && computedStyle !== 'auto') {
+				hasFixedHeight = true
+				if (containerHeight <= 0) {
+					const heightFromStyle = parseMargin(computedStyle)
+					if (heightFromStyle > 0) {
+						containerHeight = heightFromStyle
+					}
+				}
+			}
+			if (!hasFixedHeight && containerHeight <= 0) {
+				containerHeight = 0
+			}
+			autoHeightEnabled = !hasFixedHeight
+
+			// 设置wrapper和slider尺寸
+			const allSliders = sliders
+			// itemSize是每个slider的尺寸,需要减去margin,这样slider+margin才等于container宽度
+			// 对于水平方向,使用container宽度; 垂直方向,如果container有高度则使用,否则让内容撑开
+			if (vertical) {
+				if (hasFixedHeight && containerHeight > 0) {
+					itemSize = containerHeight - prevMargin - nextMargin
+				} else {
+					// 垂直方向且container没有固定高度,让每个slider自己决定高度
+					itemSize = 0
+				}
+			} else {
+				itemSize = containerWidth - prevMargin - nextMargin
+				if (itemSize <= 0) {
+					itemSize = containerWidth
+				}
+			}
+			if (itemSize < 0) {
+				itemSize = 0
+			}
+
+			// 设置wrapper尺寸
+			if (vertical) {
+				if (containerWidth > 0) {
+					wrapper.style.setProperty('width', containerWidth + 'px')
+				}
+				if (itemSize > 0) {
+					const totalSize = itemSize * allSliders.length
+					wrapper.style.setProperty('height', totalSize + 'px')
+				}
+			} else {
+				const totalSize = itemSize * allSliders.length
+				wrapper.style.setProperty('width', totalSize + 'px')
+				// 水平方向,如果container有固定高度则设为100%,否则不设置让内容撑开
+				if (hasFixedHeight) {
+					wrapper.style.setProperty('height', '100%')
+				}
+			}
+
+			// 设置每个slider的尺寸
+			for (let i = 0; i < allSliders.length; i++) {
+				const s = allSliders[i] as UniElement
+				if (vertical) {
+					if (containerWidth > 0) {
+						s.style.setProperty('width', containerWidth + 'px')
+					}
+					if (itemSize > 0) {
+						s.style.setProperty('height', itemSize + 'px')
+					}
+					// 如果itemSize为0,不设置高度,让内容自己撑开
+				} else {
+					if (itemSize > 0) {
+						s.style.setProperty('width', itemSize + 'px')
+					} else if (containerWidth > 0) {
+						s.style.setProperty('width', containerWidth + 'px')
+					}
+					// 水平方向,如果container有固定高度则设为100%,否则让内容自己撑开
+					if (hasFixedHeight) {
+						s.style.setProperty('height', '100%')
+					}
+					// 否则不设置高度,让内容自己撑开
+				}
+			}
+
+			// 设置container的overflow:水平方向visible显示前后,垂直方向hidden裁剪
+			if (prevMargin > 0 || nextMargin > 0) {
+				if (vertical) {
+					// 垂直方向:上下需要显示margin区域,左右裁剪
+					el.style.setProperty('overflow-x', 'hidden')
+					el.style.setProperty('overflow-y', 'visible')
+				} else {
+					// 水平方向:左右需要显示margin区域,上下裁剪
+					el.style.setProperty('overflow-x', 'visible')
+					el.style.setProperty('overflow-y', 'hidden')
+				}
+			}
+
+			// 初始位置
+			const initialIndex = props.current > 0 ? props.current : 0
+			currentIndex.value = initialIndex
+
+			if (circular && realCount >= 3) {
+				// circular模式：调整DOM顺序，使初始索引在位置1
+				adjustCircularOrder(initialIndex)
+				translate.value = -(1 * itemSize)
+			} else {
+				translate.value = -(initialIndex * itemSize)
+			}
+
+			if (autoplay) startTimer()
+
+			// 初始化完成后，更新container高度（auto-height）
+			if (autoHeightEnabled) {
+				setTimeout(() => {
+					updateContainerHeight()
+				}, 50)
+			}
+		}
+
+		setTimeout(function(){
+			Promise.resolve().then(init)
+		},100)
+		
+	})
+
+	onUnmounted(() => stopTimer())
+
+	const onTouchStart = (e : TouchEvent) => {
+		stopTimer()
+
+		// 如果正在动画中,立即停止动画并完成DOM重排
+		if (animating.value) {
+			if (animationTimer > 0) {
+				clearTimeout(animationTimer)
+				animationTimer = 0
+			}
+			animating.value = false
+
+			// circular模式:如果动画被中断,需要立即完成DOM重排
+			if (circular && realCount >= 3) {
+				adjustCircularOrder(currentIndex.value)
+				translate.value = -(1 * itemSize)
+			}
+		}
+		
+		console.log(translate.value)
+
+		const t = e.touches[0]
+		startX = t.pageX
+		startY = t.pageY
+		startTime = Date.now()
+		dragging = true
+		startTranslate = translate.value
+		preventDef = false
+		
+		console.log("startTranslate",startTranslate)
+	}
+
+	const onTouchMove = (e : TouchEvent) => {
+		if (!dragging) return
+
+		const t = e.touches[0]
+		const dx = t.pageX - startX
+		const dy = t.pageY - startY
+		let delta = vertical ? dy : dx
+
+		// 先计算是否在边界
+		let atBoundary = false
+		let shouldPreventDefault = true
+
+		if (!circular && !rebound && realCount > 0) {
+			// rebound=false时，检查是否到达边界
+			const minTranslate = -(count.value - 1) * itemSize
+			const maxTranslate = 0
+			const newTranslate = startTranslate + delta
+			
+			
+
+			if ((newTranslate > maxTranslate && delta > 0) || (newTranslate < minTranslate && delta < 0)) {
+				// 到达边界且继续往边界外拉，不阻止默认事件
+				atBoundary = true
+				shouldPreventDefault = false
+			}
+		}
+
+		if (!preventDef) {
+			const adx = Math.abs(dx), ady = Math.abs(dy)
+			if ((vertical && ady > adx) || (!vertical && adx > ady)) {
+				preventDef = true
+				// 只在确定滑动方向后才开始emit transition事件
+				emit('transition', { detail: { dx, dy } })
+			}
+			// 根据边界情况决定是否阻止默认事件
+			if (preventDef && !atBoundary && (adx > 5 || ady > 5)) {
+				e.preventDefault()
+			}
+		} else {
+			// 如果不在边界，阻止默认事件；在边界则允许冒泡
+			if (!atBoundary) {
+				e.preventDefault()
+			}
+			emit('transition', { detail: { dx, dy } })
+		}
+
+		if (circular && realCount >= 3) {
+			// circular模式：限制拖动范围在0到2之间（因为DOM是[prev, current, next]）
+			const minTranslate = -(2 * itemSize)
+			const maxTranslate = 0
+			const newTranslate = startTranslate + delta
+
+			if (newTranslate > maxTranslate) {
+				translate.value = maxTranslate
+			} else if (newTranslate < minTranslate) {
+				translate.value = minTranslate
+			} else {
+				translate.value = newTranslate
+			}
+		} else if (circular && realCount === 2) {
+			// 2个元素的circular：不支持margin，允许自由拖动
+			translate.value = startTranslate + delta
+		} else {
+			// 非circular模式
+			const minTranslate = -(count.value - 1) * itemSize
+			const maxTranslate = 0
+			const newTranslate = startTranslate + delta
+
+			if (rebound) {
+				// rebound=true: 允许超出边界，但有阻尼效果
+				if (newTranslate > maxTranslate) {
+					// 超出上边界，应用阻尼（减速到30%）
+					const overScroll = newTranslate - maxTranslate
+					translate.value = maxTranslate + overScroll * 0.3
+				} else if (newTranslate < minTranslate) {
+					// 超出下边界，应用阻尼
+					const overScroll = newTranslate - minTranslate
+					translate.value = minTranslate + overScroll * 0.3
+				} else {
+					translate.value = newTranslate
+				}
+			} else {
+				// rebound=false: 不允许超出边界
+				if (newTranslate > maxTranslate) {
+					translate.value = maxTranslate
+				} else if (newTranslate < minTranslate) {
+					translate.value = minTranslate
+				} else {
+					translate.value = newTranslate
+				}
+			}
+			
+			
+		}
+	}
+
+	const onTouchEnd = (e : TouchEvent) => {
+		if (!dragging) return
+		dragging = false
+
+		const t = e.changedTouches[0]
+		const dx = t.pageX - startX
+		const dy = t.pageY - startY
+		const dt = Date.now() - startTime
+		const delta = vertical ? dy : dx
+		const abs = Math.abs(delta)
+
+		const shouldChange = (dt < 300 && abs > 30) || abs > 100
+
+		if (circular && realCount >= 3) {
+			// circular模式（>=3个元素）：基于translate位置判断
+			const currentTranslate = translate.value
+			const centerTranslate = -(1 * itemSize)
+
+			if (shouldChange) {
+				// 判断拖动到哪个位置
+				// 当前元素在位置1（translate = -itemSize）
+				// 拖到位置0表示向前切换
+				// 拖到位置2表示向后切换
+				if (currentTranslate > centerTranslate) {
+					// 向前切换
+					const nextIndex = (currentIndex.value - 1 + realCount) % realCount
+					slideTo(nextIndex, 'touch')
+				} else if (currentTranslate < centerTranslate) {
+					// 向后切换
+					const nextIndex = (currentIndex.value + 1) % realCount
+					slideTo(nextIndex, 'touch')
+				} else {
+					// 回到当前
+					slideTo(currentIndex.value, 'touch')
+				}
+			} else {
+				// 回到当前
+				slideTo(currentIndex.value, 'touch')
+			}
+		} else if (circular && realCount === 2) {
+			// circular模式（2个元素）：简单切换
+			if (shouldChange) {
+				let nextIndex = currentIndex.value
+				if (delta > 0) {
+					nextIndex = currentIndex.value - 1
+				} else if (delta < 0) {
+					nextIndex = currentIndex.value + 1
+				}
+
+				// 循环索引
+				if (nextIndex < 0) {
+					nextIndex = realCount - 1
+				} else if (nextIndex >= realCount) {
+					nextIndex = 0
+				}
+
+				slideTo(nextIndex, 'touch')
+			} else {
+				slideTo(currentIndex.value, 'touch')
+			}
+		} else {
+			// 非circular模式
+			const minTranslate = -(count.value - 1) * itemSize
+			const maxTranslate = 0
+			const currentTranslate = translate.value
+
+			// 检查是否超出边界（rebound效果）
+			if (rebound && (currentTranslate > maxTranslate || currentTranslate < minTranslate)) {
+				// 有回弹效果：回弹到边界
+				if (currentTranslate > maxTranslate) {
+					slideTo(0, 'touch')
+				} else {
+					slideTo(count.value - 1, 'touch')
+				}
+			} else if (shouldChange) {
+				if (delta > 0 && currentIndex.value > 0) {
+					slideTo(currentIndex.value - 1, 'touch')
+				} else if (delta < 0 && currentIndex.value < count.value - 1) {
+					slideTo(currentIndex.value + 1, 'touch')
+				} else {
+					slideTo(currentIndex.value, 'touch')
+				}
+			} else {
+				slideTo(currentIndex.value, 'touch')
+			}
+			
+			console.log("currentIndex.value",currentIndex.value)
+		}
+		
+
+		if (autoplay) startTimer()
+	}
+</script>
+
+<style>
+	.swiper-container {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		transition: height 500ms;
+	}
+
+	/* #ifdef WEB */
+	/* 隐藏滚动条但保持overflow功能 */
+	.swiper-container::-webkit-scrollbar {
+		display: none;
+	}
+
+	.swiper-container {
+		/* IE and Edge */
+		-ms-overflow-style: none;
+		/* Firefox */
+		scrollbar-width: none;
+	}
+
+	/* #endif */
+	.swiper-wrapper {
+		position: relative;
+		display: flex;
+		/* 优化Web平台渲染性能,防止拖动时内容闪烁 */
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		width: 100%;
+		flex: 1;
+		flex-direction: row;
+	}
+
+	.horizontal .swiper-wrapper {
+		flex-direction: row;
+	}
+
+	.vertical .swiper-wrapper {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	/* 默认指示器样式 */
+	.swiper-indicator {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+		pointer-events: none;
+		background-color: transparent;
+	}
+
+	.swiper-indicator .item {
+		pointer-events: auto;
+	}
+
+	.swiper-indicator.horizontal {
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		height: 40px;
+		flex-direction: row;
+	}
+
+	.swiper-indicator.vertical {
+		top: 0px;
+		bottom: 0px;
+		right: 0px;
+		width: 40px;
+		flex-direction: column;
+	}
+
+	.swiper-indicator .item {
+		width: 8px;
+		height: 8px;
+		border-radius: 4px;
+		border: 0.1px solid rgba(230, 230, 230, 0.3);
+		background-color: rgba(0, 0, 0, 0.3);
+		margin: 2px 4px;
+	}
+
+	.swiper-indicator .item.active {
+		border: 0.1px solid rgba(225, 225, 225, 0.9);
+		background-color: rgba(255, 255, 255, 0.9);
+	}
+</style>
