@@ -2,8 +2,9 @@
 	<text v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
     <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
-		<text v-if="props.full" class="stars-pos active-color active-init-width" :class="props.starActiveClass ?? ''" 
-		:style=" starStyle + ';' + starActiveStyle + ';width:' + calculatedWidth">★★★★★</text> <!-- 前景亮星，宽度根据value变化-->
+    <!-- Android/iOS平台不支持裁剪显示半个文字，需通过嵌套view裁剪实现 -->
+		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth"><text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap;align-self: flex-start;" 
+		:style=" starStyle + ';' + starActiveStyle + ';'">★★★★★</text></view> <!-- 前景亮星，宽度根据value变化-->
   </view>
 </template>
 
