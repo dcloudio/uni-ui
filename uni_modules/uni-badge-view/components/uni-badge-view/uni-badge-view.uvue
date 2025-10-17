@@ -1,19 +1,3 @@
-<!-- 
-badge组件是一个容器组件，包含一个slot，和一个角标view。
-badge组件包裹一个目标view时，badge组件内部的角标view的中心点位于目标view的右上角顶点。
-	如果没有slot内容，视为要显示独立的红点和数字，此时不是角标，就是普通的红点和圆背景数字。
-badge组件的badge-class和badge-style属性，直接作用在角标view上，可以修改角标view的样式。
-badge组件有如下属性：
-- text
-	类型为 string|null
-	值为0时，不显示角标；所以永远不会显示一个为0的角标。此时直接显示slot子内容，不包裹；
-	值为null或""时，代表一个长宽为8px的红色圆点；
-	否则显示text文字
-- badge-class
-	直接作用于角标view的class
-- badge-style
-	直接作用于角标view的style
--->
 <template>
 	<slot v-if="props.text == '0'"></slot> <!-- 如果不显示badge，则不包裹，直接显示子内容。保证常态下的高性能-->
 	<template v-else>

@@ -201,10 +201,10 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 			// 向前滑动到位置0，向后滑动到位置2
 			const targetDomPosition = isForward ? 0 : 2
 			translate.value = -(targetDomPosition * itemSize)
-			console.log("222")
+			// console.log("222")
 		} else {
 			translate.value = -(targetIndex * itemSize)
-			console.log("111")
+			// console.log("111")
 		}
 		
 		console.log(translate.value)

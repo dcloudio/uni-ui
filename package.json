@@ -1,0 +1,10 @@
+{
+  "name": "uniapp-test",
+  "version": "1.0.0",
+  "scripts": {
+  	"dev": "set HBUILDERX_HOME=C:\\hbuilderx\\hx dev\\cli.exe&& .\\scripts\\dev.bat h5",
+		"dev:app-android": "set HBUILDERX_HOME=C:\\hbuilderx\\hx dev\\cli.exe&& .\\scripts\\dev.bat app-android",
+  	"dev:mac": "HBUILDERX_HOME=/Applications/HBuilderX-Dev.app/Contents/MacOS/cli ./scripts/dev.sh app-android"
+  },
+  "license": "MIT"
+}

@@ -1,17 +1,21 @@
 <template>
+	<!-- TODO  Android/iOS平台不支持裁剪显示半个文字，高性能场景包裹一层view不合适，需要等App平台解决-->
 	<text v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
     <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
-    <!-- Android/iOS平台不支持裁剪显示半个文字，需通过嵌套view裁剪实现 -->
-		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth"><text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap;align-self: flex-start;" 
-		:style=" starStyle + ';' + starActiveStyle + ';'">★★★★★</text></view> <!-- 前景亮星，宽度根据value变化-->
+    <!-- Android/iOS平台不支持裁剪显示半个文字，需通过包裹一层view裁剪实现 -->
+		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth">
+			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap;align-self: flex-start;" 
+		:style=" starStyle + ';' + starActiveStyle + ';'">★★★★★</text>
+		</view>
+		<!-- 前景亮星，宽度根据value变化-->
   </view>
 </template>
 
 <script setup lang="uts">
 const props = defineProps<{
   /**
-	 * @description 当前评分
+	 * @description 当前评分。值域为大于等于0、小于等于5的数字
 	 */
 	value?: number,
   /**
@@ -19,11 +23,11 @@ const props = defineProps<{
    */
 	modelValue?: number, 
 	/**
-	 * @description 是否显示全部5颗星，包括灰星
+	 * @description 是否显示全部5颗星。当黄色不够5星时，是否填充灰星以达到5星的固定长度。不填充灰星性能更高
 	 */
 	full?: boolean, 
 	/**
-	 * @description 只读，不可点击修改
+	 * @description 是否响应点击变化。full属性为false时不生效，即无灰星时一定只读
 	 */
 	readonly?: boolean, 
 	/**
@@ -100,7 +104,7 @@ const calculatedWidth = computed(() => {
 
 // 处理点击事件
 function onTap(event: UniPointerEvent) : void {
-  // 如果是只读模式，不处理点击
+  // 如果是禁用模式，不处理点击
   if (props.readonly == true) {
     return
   }
@@ -148,6 +152,7 @@ function onTap(event: UniPointerEvent) : void {
   emit('update:modelValue', finalValue)
 }
 
+// TODO 接入form表单规范，可以submit
 </script>
 
 <style>
