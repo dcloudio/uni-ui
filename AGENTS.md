@@ -1,40 +1,14 @@
-# 项目背景
-项目下有一个 /pages/rate/rate.uvue 页面，里面演示了rate组件的各种用法。
+# 需求
 
-# 开发目标
+除以上文件外，不需要扫描其他文件，也不需要改动其他文件。
 
-rate组件是投票评分使用的组件。它使用字符实现，通过修改字体的样式，实现各种效果。
-
-它分2个版本，一个版本是高性能版本，只有一层，不显示灰星，仅显示亮星，亮星不支持小数点，不能点击。适于长列表中显示。
-另一个版本是普通版本，由背景灰星和前景亮星叠加而成，支持小程序点，支持点击。
-
-本组件支持v-model绑定响应式数据。
-
-rate组件有如下属性：
-- value
-	值域为大于等于0、小于等于5的数字
-- full
-	是否显示背景灰星
-- readonly
-	是否响应点击变化
-- plain
-	在设置plain属性时，会对未选中的星星呈现镂空效果
-- star-class
-	星星的样式
-- star-style
-	星星的样式
-- star-active-class
-	选中的星星的样式
-- star-active-style
-	选中的星星的样式
-
-rate组件有onChange事件，事件回调中会给出点击触发的新评分值。
-
-# 改造注意事项
+# 注意事项
 
 使用uni-app x框架开发。
 
 不引入任何三方依赖。
+
+回答问题使用中文。
 
 ## 前端框架
 uni-app x必须使用vue框架，在本项目中必须使用组合式API，不能使用选项式API。
@@ -84,7 +58,7 @@ uni-app x使用的css是标准浏览器css的子集，区别见下：
 - 不能使用媒体查询
 
 ### 长度单位
-- 仅支持px
+- 优先使用支持px，次之是rpx，最后是百分比。不使用其他单位。
 
 ### at-rules
 - 仅支持`@font-face`、`@import`，不使用其他at-rules
@@ -96,10 +70,8 @@ uni-app x使用的css是标准浏览器css的子集，区别见下：
 ### 样式作用范围规则
 - 不使用css scoped
 
+## vue注意事项
+uvue组件的 onMounted 可以获取 UniElement，但不能立即获取元素的宽高等排版信息，此时获取排版信息需要 uni.createSelectorQuery 异步获取。
+
 ## uni-app x项目的自动化测试
 本项目使用uni-app的自动化测试框架，是基于jest的改造版本。
-本项目下有一个自动化测试的示例：
-这个js文件`/pages/badge/badge.test.js`，就是页面`pages/badge/badge.uvue`的自动化测试脚本。
-
-需要为rate.uvue也生成一个`rate.test.js`，进行自动化测试。
-

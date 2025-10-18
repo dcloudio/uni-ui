@@ -1,0 +1,476 @@
+<template>
+	<!-- 蒙层 -->
+	<view v-if="showMask" :class="['mask', props.maskClass]" :style="['position: fixed; top: 0; left: 0; right: 0; bottom: 0;', props.maskStyle]" @click="handleMaskClick"></view>
+
+	<!-- 弹出层 -->
+	<view :class="['pop', popPositionClass, props.popClass]" :style="[popComputedStyle, props.popStyle]">
+		<!-- 菜单箭头 -->
+		<view v-if="showMenuArrow" :class="['menu-arrow', menuArrowPositionClass, props.menuArrowClass]" :style="[menuArrowComputedStyle, props.menuArrowStyle]"></view>
+
+		<!-- 内容插槽 -->
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+	import { ComponentPublicInstance } from 'vue'
+
+	// 定义组件属性接口
+	type Props = {
+		/**
+		 * @description 弹出位置
+		 */
+		pos? : "center" | "left" | "right" | "top" | "bottom" | "custom",
+		/**
+		 * @description 是否显示蒙层
+		 */
+		showMask? : boolean,
+		/**
+		 * @description 点击蒙层是否关闭
+		 */
+		maskClickClose? : boolean,
+		/**
+		 * @description 自动隐藏时间(毫秒)，0表示不自动隐藏
+		 */
+		autoHideDuration? : number,
+		/**
+		 * @description 通过class自定义pop的样式
+		 */
+		popClass? : string.ClassString,
+		/**
+		 * @description 通过style自定义pop的样式
+		 */
+		popStyle? : string,
+		/**
+		 * @description 通过class自定义蒙层的样式
+		 */
+		maskClass? : string.ClassString,
+		/**
+		 * @description 通过style自定义蒙层的样式
+		 */
+		maskStyle? : string,
+		/**
+		 * @description 通过class自定义菜单箭头的样式
+		 */
+		menuArrowClass? : string.ClassString,
+		/**
+		 * @description 通过style自定义菜单箭头的样式
+		 */
+		menuArrowStyle? : string
+	}
+
+	// 使用 withDefaults 设置默认值
+	const props = withDefaults(defineProps<Props>(), {
+		pos: "center",
+		showMask: false,
+		maskClickClose: false,
+		autoHideDuration: 0,
+		popClass: '',
+		popStyle: '',
+		maskClass: '',
+		maskStyle: '',
+		menuArrowClass: '',
+		menuArrowStyle: ''
+	})
+
+	// 定义发射事件
+	const emit = defineEmits<{
+		(e: 'close'): void
+	}>()
+
+	// 定义跟随元素数据类型
+	type FollowElementData = {
+		element: Element | null,
+		side: "up" | "down" | "left" | "right",
+		offsetX: number,
+		offsetY: number,
+		align: "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical"
+	}
+
+	// 响应式状态
+	const showMenuArrow = ref<boolean>(false)
+	const followElementData = ref<FollowElementData | null>(null)
+	const isClosing = ref<boolean>(false)
+
+	let autoHideTimer : number = 0
+
+	// 计算弹出层位置class
+	const popPositionClass = computed(() : string.ClassString => {
+		let classes = ''
+		if (followElementData.value != null) {
+			classes = 'pop-follow'
+		} else {
+			classes = `pop-${props.pos}`
+		}
+		if (isClosing.value) {
+			classes += ` ${classes}-closing`
+		}
+		return classes as string.ClassString
+	})
+
+	// 计算弹出层样式
+	const popComputedStyle = computed(() : string => {
+		let style = 'position: fixed;'
+
+		// 如果有跟随元素，计算位置
+		if (followElementData.value != null && followElementData.value.element != null) {
+			const windowInfo = uni.getWindowInfo()
+			const rect = followElementData.value.element.getBoundingClientRect()
+			const side = followElementData.value.side
+			const offsetX = followElementData.value.offsetX
+			const offsetY = followElementData.value.offsetY
+			const align = followElementData.value.align
+
+			if (side == 'up') {
+				// 在元素上方
+				style += `bottom: ${windowInfo.windowHeight + windowInfo.windowTop - rect.top + offsetY}px;`
+				if (align == 'left') {
+					style += `left: ${rect.left + offsetX}px;`
+				} else if (align == 'right') {
+					style += `right: ${windowInfo.windowWidth - rect.right + offsetX}px;`
+				} else {
+					// center-horizontal 或默认
+					style += `left: ${rect.left + rect.width / 2 + offsetX}px; transform: translateX(-50%);`
+				}
+			} else if (side == 'down') {
+				// 在元素下方
+				style += `top: ${rect.bottom + offsetY}px;`
+				if (align == 'left') {
+					style += `left: ${rect.left + offsetX}px;`
+				} else if (align == 'right') {
+					style += `right: ${windowInfo.windowWidth - rect.right + offsetX}px;`
+				} else {
+					// center-horizontal 或默认
+					style += `left: ${rect.left + rect.width / 2 + offsetX}px; transform: translateX(-50%);`
+				}
+			} else if (side == 'left') {
+				// 在元素左侧
+				style += `right: ${windowInfo.windowWidth - rect.left + offsetX}px;`
+				if (align == 'top') {
+					style += `top: ${rect.top + offsetY}px;`
+				} else if (align == 'bottom') {
+					style += `bottom: ${windowInfo.windowHeight + windowInfo.windowTop - rect.bottom + offsetY}px;`
+				} else {
+					// center-vertical 或默认
+					style += `top: ${rect.top + rect.height / 2 + offsetY}px; transform: translateY(-50%);`
+				}
+			} else if (side == 'right') {
+				// 在元素右侧
+				style += `left: ${rect.right + offsetX}px;`
+				if (align == 'top') {
+					style += `top: ${rect.top + offsetY}px;`
+				} else if (align == 'bottom') {
+					style += `bottom: ${windowInfo.windowHeight + windowInfo.windowTop - rect.bottom + offsetY}px;`
+				} else {
+					// center-vertical 或默认
+					style += `top: ${rect.top + rect.height / 2 + offsetY}px; transform: translateY(-50%);`
+				}
+			}
+		}
+
+		return style
+	})
+
+	// 计算箭头位置class
+	const menuArrowPositionClass = computed(() : string.ClassString => {
+		if (followElementData.value != null) {
+			return `arrow-${followElementData.value.side}` as string.ClassString
+		}
+		return ''
+	})
+
+	// 计算箭头样式
+	const menuArrowComputedStyle = computed(() : string => {
+		if (followElementData.value == null || followElementData.value.element == null) {
+			return ''
+		}
+
+		const windowInfo = uni.getWindowInfo()
+		const rect = followElementData.value.element.getBoundingClientRect()
+		const side = followElementData.value.side
+		const align = followElementData.value.align
+		let style = ''
+
+		// 计算箭头位置,使其指向触发元素的中心
+		if (side == 'up' || side == 'down') {
+			// 上下方向,箭头需要左右移动对准触发元素中心
+			if (align == 'left') {
+				// 弹层左对齐,箭头位置 = 触发元素中心 - 弹层左边缘
+				const arrowLeft = rect.width / 2
+				style += `left: ${arrowLeft}px; transform: translateX(0);`
+			} else if (align == 'right') {
+				// 弹层右对齐,箭头位置 = 触发元素中心
+				const arrowRight = rect.width / 2
+				style += `right: ${arrowRight}px; transform: translateX(0);`
+			} else {
+				// 居中对齐,箭头在中间
+				style += `left: 50%; transform: translateX(-50%);`
+			}
+		} else if (side == 'left' || side == 'right') {
+			// 左右方向,箭头需要上下移动对准触发元素中心
+			if (align == 'top') {
+				// 弹层顶部对齐,箭头位置 = 触发元素中心 - 弹层顶边缘
+				const arrowTop = rect.height / 2
+				style += `top: ${arrowTop}px; transform: translateY(0);`
+			} else if (align == 'bottom') {
+				// 弹层底部对齐,箭头位置 = 触发元素中心
+				const arrowBottom = rect.height / 2
+				style += `bottom: ${arrowBottom}px; transform: translateY(0);`
+			} else {
+				// 居中对齐,箭头在中间
+				style += `top: 50%; transform: translateY(-50%);`
+			}
+		}
+
+		return style
+	})
+
+	// 清除自动隐藏定时器
+	const clearAutoHideTimer = () => {
+		if (autoHideTimer != 0) {
+			clearTimeout(autoHideTimer)
+			autoHideTimer = 0
+		}
+	}
+
+	// 关闭弹层
+	const close = () => {
+		isClosing.value = true
+		clearAutoHideTimer()
+		// 等待动画完成后再触发close事件
+		setTimeout(() => {
+			emit('close')
+			isClosing.value = false
+		}, 300)
+	}
+
+	// 设置自动隐藏
+	const startAutoHide = () => {
+		clearAutoHideTimer()
+		if (props.autoHideDuration > 0) {
+			autoHideTimer = setTimeout(() => {
+				close()
+			}, props.autoHideDuration)
+		}
+	}
+
+	// 处理蒙层点击
+	const handleMaskClick = () => {
+		if (props.maskClickClose) {
+			close()
+		}
+	}
+
+	/**
+	 * @description 跟随元素显示
+	 * @param element 目标元素
+	 * @param side 显示在目标元素的哪一侧
+	 * @param offsetX X轴偏移
+	 * @param offsetY Y轴偏移
+	 * @param showArrow 是否显示箭头
+	 * @param align 对齐方式：left-左对齐, right-右对齐, top-上对齐, bottom-下对齐, center-horizontal-水平居中, center-vertical-垂直居中
+	 */
+	function followElement(element : Element, side : "up" | "down" | "left" | "right", offsetX : number, offsetY : number, showArrow : boolean, align : "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical") : void {
+		followElementData.value = {
+			element: element,
+			side: side,
+			offsetX: offsetX,
+			offsetY: offsetY,
+			align: align
+		} as FollowElementData
+		showMenuArrow.value = showArrow
+	}
+
+	// 暴露方法给外部调用
+	defineExpose({
+		followElement,
+		close
+	})
+
+	// 组件挂载时
+	onMounted(() => {
+		startAutoHide()
+	})
+
+	// 监听自动隐藏时间变化
+	watch(() : number => {
+		return props.autoHideDuration
+	}, () => {
+		startAutoHide()
+	})
+</script>
+
+<style>
+	.mask {
+		z-index: 999;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.pop {
+		z-index: 1000;
+		background-color: white;
+		border-radius: 8px;
+		padding: 16px;
+		overflow: visible;
+	}
+
+	.pop-center {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.pop-top {
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		animation: slideInFromTop 0.3s ease-out;
+	}
+
+	.pop-top.pop-top-closing {
+		animation: slideOutToTop 0.3s ease-in;
+	}
+
+	.pop-bottom {
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		animation: slideInFromBottom 0.3s ease-out;
+	}
+
+	.pop-bottom.pop-bottom-closing {
+		animation: slideOutToBottom 0.3s ease-in;
+	}
+
+	.pop-left {
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		animation: slideInFromLeft 0.3s ease-out;
+	}
+
+	.pop-left.pop-left-closing {
+		animation: slideOutToLeft 0.3s ease-in;
+	}
+
+	.pop-right {
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+		animation: slideInFromRight 0.3s ease-out;
+	}
+
+	.pop-right.pop-right-closing {
+		animation: slideOutToRight 0.3s ease-in;
+	}
+
+	@keyframes slideInFromTop {
+		from {
+			transform: translateX(-50%) translateY(-100%);
+		}
+		to {
+			transform: translateX(-50%) translateY(0);
+		}
+	}
+
+	@keyframes slideInFromBottom {
+		from {
+			transform: translateX(-50%) translateY(100%);
+		}
+		to {
+			transform: translateX(-50%) translateY(0);
+		}
+	}
+
+	@keyframes slideInFromLeft {
+		from {
+			transform: translateY(-50%) translateX(-100%);
+		}
+		to {
+			transform: translateY(-50%) translateX(0);
+		}
+	}
+
+	@keyframes slideInFromRight {
+		from {
+			transform: translateY(-50%) translateX(100%);
+		}
+		to {
+			transform: translateY(-50%) translateX(0);
+		}
+	}
+
+	@keyframes slideOutToTop {
+		from {
+			transform: translateX(-50%) translateY(0);
+		}
+		to {
+			transform: translateX(-50%) translateY(-100%);
+		}
+	}
+
+	@keyframes slideOutToBottom {
+		from {
+			transform: translateX(-50%) translateY(0);
+		}
+		to {
+			transform: translateX(-50%) translateY(100%);
+		}
+	}
+
+	@keyframes slideOutToLeft {
+		from {
+			transform: translateY(-50%) translateX(0);
+		}
+		to {
+			transform: translateY(-50%) translateX(-100%);
+		}
+	}
+
+	@keyframes slideOutToRight {
+		from {
+			transform: translateY(-50%) translateX(0);
+		}
+		to {
+			transform: translateY(-50%) translateX(100%);
+		}
+	}
+
+	.pop-custom {
+		/* 自定义位置由外部样式控制 */
+	}
+
+	.pop-follow {
+		/* 跟随元素位置由计算样式控制 */
+	}
+
+	.menu-arrow {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-width: 8px;
+		border-style: solid;
+		border-color: transparent;
+		z-index: 1;
+	}
+
+	.arrow-up {
+		bottom: -16px;
+		border-top-color: #ccc;
+	}
+
+	.arrow-down {
+		top: -16px;
+		border-bottom-color: #ccc;
+	}
+
+	.arrow-left {
+		right: -16px;
+		border-left-color: #ccc;
+	}
+
+	.arrow-right {
+		left: -16px;
+		border-right-color: #ccc;
+	}
+</style>
