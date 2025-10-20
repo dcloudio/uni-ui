@@ -72,7 +72,7 @@ if 设置circular后
 	disable-bounce属性无效。优先执行首尾衔接逻辑
 else circular不为ture时，即没有首尾衔接，此时
 	if disable-bounce不为true时，即不禁用bounce，拉到首尾边缘继续拉，要显示回弹效果
-	else disable-bounce为true时，即禁用bounce，拉到首尾边缘继续拉，不再有但回弹效果。要把事件向上冒泡，让父容器可以吃到事件，比如父容器可以同向滚动，那么拉到swiper首尾边缘继续拉，父容器就会续接滚动
+	else disable-bounce为true时，即禁用bounce，拉到首尾边缘继续拉，不再有回弹效果。要把事件向上冒泡，让父容器可以吃到事件，比如父容器可以同向滚动，那么拉到swiper首尾边缘继续拉，父容器就会续接滚动
 
 当组件使用者设置了circular，为了正确、顺滑的显示首尾衔接效果，需要对vue数据在组件内部进行加工，实现数据复用。具体分如下情况：
 1. 组件外部传入了2个swiper-slider，A和B。此时前后Margin（previous-margin和next-margin）无效，即前后Margin要求swiper-slider数量大于等于3。
