@@ -320,7 +320,7 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 			if (measuredHeight <= 0) {
 				try {
 					const rect = currentSlider.getBoundingClientRect() as ElementRect
-					if (rect != null && rect.height > 0) {
+					if (rect.height > 0) {
 						measuredHeight = rect.height
 					}
 				} catch (err) {
@@ -825,9 +825,11 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 	.swiper-wrapper {
 		position: relative;
 		display: flex;
+		/* #ifdef WEB */
 		/* 优化Web平台渲染性能,防止拖动时内容闪烁 */
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
+	/* #endif */
 		width: 100%;
 		flex: 1;
 		flex-direction: row;
