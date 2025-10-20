@@ -2,11 +2,13 @@
 	<navigator url="/pages/badge/badge">badge</navigator>
 	<navigator url="/pages/rate/rate">rate</navigator>
 	<navigator url="/pages/swiper-view/swiper-view">swiper-view</navigator>
+	<navigator url="/pages/tab-bar/tab-bar">tab-bar</navigator>
+	<navigator url="/pages/pop-view/pop-view">pop-view</navigator>
 </template>
 
-<script>
-	
-</script>
+<script setup>
 
+</script>
 <style>
+
 </style>

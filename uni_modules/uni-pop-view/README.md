@@ -7,8 +7,6 @@ pop-view，即弹出视图容器。提供弹层能力，通过子组件展示弹
 - 通过part-class来自定义子组件样式
 - 极高的性能
 
-参考[headlessui](https://headlessui.com/v1/vue/popover)
-
 # 文件位置
 组件演示页面源码位置在 /pages/pop-view/pop-view.uvue
 示例页面要求包括组件的所有属性和事件的演示。
@@ -22,7 +20,7 @@ pop-view组件的源码位置在：/uni_modules/uni-pop-view/components/uni-pop-
 
 pop-view内部有pop和mask2个view。
 (其实不考虑menu模式或边框的话，一个view就搞定了，用padding来显示pop，背景色是mask颜色)
-没有蒙层，即show-mask为false时，且没有api调用showArrow时，组件内部只有一个pop节点，组件样式都绑定在pop上。
+没有蒙层，即non-mask为true时，且没有api调用showArrow时，组件内部只有一个pop节点，组件样式都绑定在pop上。
 
 uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组件。其实就是把showModal的代码开源封装一下，并且showModal自身也应该是这么实现
 
@@ -31,8 +29,8 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 |属性名							|属性类型	|默认值	|描述																																						|
 |:-:								|:-:			|:-:		|:-:																																						|
 |pos								|`"center"|"left"	|"right"|"top"|"bottom"	|"custom"`	|"center"|弹出位置	|
-|show-mask					|boolean	|false	|是否显示蒙层。蒙层代表模态，无法透点。蒙层有默认灰色，也可以配置透明。但透明也是模态	|
-|mask-click-close		|boolean	|false	|点击蒙层是否关闭pop-view																													|
+|non-mask						|boolean	|false	|是否关闭蒙层。蒙层代表模态，无法透点，不会滚动穿透。蒙层有默认灰色，也可以配置透明。但透明也是模态	|
+|mask-click-close		|boolean	|false	|点击或滑动蒙层是否关闭pop-view																													|
 |auto-hide-duration	|number		|3000		|默认pop不会自动关闭，但设置本属性的时间后会在指定时间后自动关闭。可用于顶部通知				|
 |pop-class					|string		|				|通过class自定义pop的样式，直接作用于pop的class上												|
 |pop-style					|string		|				|通过style自定义pop的样式，直接作用于pop的style上												|
@@ -41,6 +39,20 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 |menu-arrow-class		|string		|				|通过class自定义菜单箭头的样式，直接作用于菜单箭头的class上							|
 |menu-arrow-style		|string		|				|通过style自定义菜单箭头的样式，直接作用于菜单箭头的style上							|
 
+如果不设蒙层，会有滚动穿透问题。如果要避免滚动穿透，需要配置蒙层，哪怕配置蒙层透明。
+只有在顶部弹出悬浮通知栏时，才没有必要设蒙层，其他大多数场景都应该有蒙层。
+
 ## pop-view组件的API
 .followElement(ELement,side="up|down|left|right",offset-x,offset-y,showArrow)
 通过本方法，设置要把弹出pop绑定在哪个目标元素上，出现在目标元素的那一侧，偏移x、y坐标，是否显示箭头指向目标元素。
+
+## TODO
+参考[Floating UI](https://github.com/floating-ui/)，比目前的uni-pop-view更好的地方，应该参考补充:
+1. 支持点一下四周出一圈按钮的效果，比菜单酷。
+2. 自动翻转：如果浮动元素在其首选位置被视口或滚动容器剪裁，Floating UI会尝试将其翻转到另一个更合适的侧面。如果翻转后仍然无法完全可见，它会沿着轴线微调位置，使其完全可见。
+3. 滚动跟随：滚动时弹出菜单始终锚定目标元素一起滚。
+
+对于滚动跟随，Floating UI是用js算的，性能还是不行。
+浏览器出了新规范，CSS Anchor Positioning API，https://developer.mozilla.org/en-US/docs/Web/CSS/anchor。
+css里配置好后，浏览器的排版引擎会自动处理，保障滚动跟随。
+目前Chrome125 和 safari26已经支持。我们的App平台也应该支持。

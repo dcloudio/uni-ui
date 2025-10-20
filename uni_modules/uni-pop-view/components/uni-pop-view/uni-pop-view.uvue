@@ -1,6 +1,6 @@
 <template>
 	<!-- 蒙层 -->
-	<view v-if="showMask" :class="['mask', props.maskClass]" :style="['position: fixed; top: 0; left: 0; right: 0; bottom: 0;', props.maskStyle]" @click="handleMaskClick"></view>
+	<view v-if="!nonMask" :class="['mask', props.maskClass]" :style="['position: fixed; top: 0; left: 0; right: 0; bottom: 0;', props.maskStyle]" @click="handleMaskClick" @touchstart="handleMaskTouchStart" @touchmove="handleMaskTouchMove" @touchend="handleMaskTouchEnd"></view>
 
 	<!-- 弹出层 -->
 	<view :class="['pop', popPositionClass, props.popClass]" :style="[popComputedStyle, props.popStyle]">
@@ -24,7 +24,7 @@
 		/**
 		 * @description 是否显示蒙层
 		 */
-		showMask? : boolean,
+		nonMask? : boolean,
 		/**
 		 * @description 点击蒙层是否关闭
 		 */
@@ -62,7 +62,7 @@
 	// 使用 withDefaults 设置默认值
 	const props = withDefaults(defineProps<Props>(), {
 		pos: "center",
-		showMask: false,
+		nonMask: false,
 		maskClickClose: false,
 		autoHideDuration: 0,
 		popClass: '',
@@ -91,8 +91,16 @@
 	const showMenuArrow = ref<boolean>(false)
 	const followElementData = ref<FollowElementData | null>(null)
 	const isClosing = ref<boolean>(false)
+	// 动画状态：'hidden' - 隐藏状态, 'showing' - 显示动画, 'shown' - 显示完成, 'hiding' - 隐藏动画
+	const animationState = ref<string>('hidden')
 
 	let autoHideTimer : number = 0
+
+	// 触摸开始位置
+	let touchStartX : number = 0
+	let touchStartY : number = 0
+	// 是否发生了滑动
+	let hasMoved : boolean = false
 
 	// 计算弹出层位置class
 	const popPositionClass = computed(() : string.ClassString => {
@@ -101,9 +109,18 @@
 			classes = 'pop-follow'
 		} else {
 			classes = `pop-${props.pos}`
-		}
-		if (isClosing.value) {
-			classes += ` ${classes}-closing`
+			// 只有在四边弹出时才添加动画状态的 class
+			if (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right') {
+				if (animationState.value == 'showing') {
+					classes += ' animate-showing'
+				} else if (animationState.value == 'shown') {
+					classes += ' animate-shown'
+				} else if (animationState.value == 'hiding') {
+					classes += ' animate-hiding'
+				} else if (animationState.value == 'hidden') {
+					classes += ' animate-hidden'
+				}
+			}
 		}
 		return classes as string.ClassString
 	})
@@ -237,11 +254,24 @@
 	const close = () => {
 		isClosing.value = true
 		clearAutoHideTimer()
-		// 等待动画完成后再触发close事件
-		setTimeout(() => {
+
+		// 只有在从四边弹出时才需要动画
+		const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
+
+		if (needAnimation) {
+			// 触发隐藏动画
+			animationState.value = 'hiding'
+			// 等待动画完成后再触发close事件
+			setTimeout(() => {
+				animationState.value = 'hidden'
+				emit('close')
+				isClosing.value = false
+			}, 300)
+		} else {
+			// 不需要动画，直接关闭
 			emit('close')
 			isClosing.value = false
-		}, 300)
+		}
 	}
 
 	// 设置自动隐藏
@@ -259,6 +289,53 @@
 		if (props.maskClickClose) {
 			close()
 		}
+	}
+
+	// 处理蒙层触摸开始
+	const handleMaskTouchStart = (e : TouchEvent) => {
+		// 阻止事件冒泡和默认行为
+		e.stopPropagation()
+		e.preventDefault()
+
+		if (e.touches.length > 0) {
+			touchStartX = e.touches[0].clientX
+			touchStartY = e.touches[0].clientY
+			hasMoved = false
+		}
+	}
+
+	// 处理蒙层触摸移动
+	const handleMaskTouchMove = (e : TouchEvent) => {
+		// 阻止事件冒泡和默认行为
+		e.stopPropagation()
+		e.preventDefault()
+
+		if (e.touches.length > 0) {
+			const moveX = Math.abs(e.touches[0].clientX - touchStartX)
+			const moveY = Math.abs(e.touches[0].clientY - touchStartY)
+
+			// 如果移动距离超过5px，认为发生了滑动
+			if (moveX > 5 || moveY > 5) {
+				hasMoved = true
+			}
+		}
+	}
+
+	// 处理蒙层触摸结束
+	const handleMaskTouchEnd = (e : TouchEvent) => {
+		// 阻止事件冒泡和默认行为
+		e.stopPropagation()
+		e.preventDefault()
+
+		// 如果设置了maskClickClose，无论是点击还是滑动都关闭弹层
+		if (props.maskClickClose) {
+			close()
+		}
+
+		// 重置状态
+		hasMoved = false
+		touchStartX = 0
+		touchStartY = 0
 	}
 
 	/**
@@ -289,6 +366,19 @@
 
 	// 组件挂载时
 	onMounted(() => {
+		// 只有在从四边弹出时才需要动画
+		const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
+
+		if (needAnimation) {
+			// 启动显示动画
+			// 先设置为 showing 状态（初始隐藏位置）
+			animationState.value = 'showing'
+			// 在下一帧切换到 shown 状态（触发动画）
+			setTimeout(() => {
+				animationState.value = 'shown'
+			}, 50)
+		}
+
 		startAutoHide()
 	})
 
@@ -314,126 +404,109 @@
 		overflow: visible;
 	}
 
+	/* 只有在四边弹出时才添加 transition */
+	.pop-top, .pop-bottom, .pop-left, .pop-right {
+		transition-duration: 300ms;
+		transition-property: transform;
+		transition-timing-function: ease-out;
+	}
+
 	.pop-center {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
 
+	/* top 位置的动画 */
 	.pop-top {
 		top: 0;
 		left: 50%;
-		transform: translateX(-50%);
-		animation: slideInFromTop 0.3s ease-out;
 	}
 
-	.pop-top.pop-top-closing {
-		animation: slideOutToTop 0.3s ease-in;
+	.pop-top.animate-hidden {
+		transform: translateX(-50%) translateY(-100%);
 	}
 
+	.pop-top.animate-showing {
+		transform: translateX(-50%) translateY(-100%);
+	}
+
+	.pop-top.animate-shown {
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.pop-top.animate-hiding {
+		transform: translateX(-50%) translateY(-100%);
+		transition-timing-function: ease-in;
+	}
+
+	/* bottom 位置的动画 */
 	.pop-bottom {
 		bottom: 0;
 		left: 50%;
-		transform: translateX(-50%);
-		animation: slideInFromBottom 0.3s ease-out;
 	}
 
-	.pop-bottom.pop-bottom-closing {
-		animation: slideOutToBottom 0.3s ease-in;
+	.pop-bottom.animate-hidden {
+		transform: translateX(-50%) translateY(100%);
 	}
 
+	.pop-bottom.animate-showing {
+		transform: translateX(-50%) translateY(100%);
+	}
+
+	.pop-bottom.animate-shown {
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.pop-bottom.animate-hiding {
+		transform: translateX(-50%) translateY(100%);
+		transition-timing-function: ease-in;
+	}
+
+	/* left 位置的动画 */
 	.pop-left {
 		top: 50%;
 		left: 0;
-		transform: translateY(-50%);
-		animation: slideInFromLeft 0.3s ease-out;
 	}
 
-	.pop-left.pop-left-closing {
-		animation: slideOutToLeft 0.3s ease-in;
+	.pop-left.animate-hidden {
+		transform: translateY(-50%) translateX(-100%);
 	}
 
+	.pop-left.animate-showing {
+		transform: translateY(-50%) translateX(-100%);
+	}
+
+	.pop-left.animate-shown {
+		transform: translateY(-50%) translateX(0);
+	}
+
+	.pop-left.animate-hiding {
+		transform: translateY(-50%) translateX(-100%);
+		transition-timing-function: ease-in;
+	}
+
+	/* right 位置的动画 */
 	.pop-right {
 		top: 50%;
 		right: 0;
-		transform: translateY(-50%);
-		animation: slideInFromRight 0.3s ease-out;
 	}
 
-	.pop-right.pop-right-closing {
-		animation: slideOutToRight 0.3s ease-in;
+	.pop-right.animate-hidden {
+		transform: translateY(-50%) translateX(100%);
 	}
 
-	@keyframes slideInFromTop {
-		from {
-			transform: translateX(-50%) translateY(-100%);
-		}
-		to {
-			transform: translateX(-50%) translateY(0);
-		}
+	.pop-right.animate-showing {
+		transform: translateY(-50%) translateX(100%);
 	}
 
-	@keyframes slideInFromBottom {
-		from {
-			transform: translateX(-50%) translateY(100%);
-		}
-		to {
-			transform: translateX(-50%) translateY(0);
-		}
+	.pop-right.animate-shown {
+		transform: translateY(-50%) translateX(0);
 	}
 
-	@keyframes slideInFromLeft {
-		from {
-			transform: translateY(-50%) translateX(-100%);
-		}
-		to {
-			transform: translateY(-50%) translateX(0);
-		}
-	}
-
-	@keyframes slideInFromRight {
-		from {
-			transform: translateY(-50%) translateX(100%);
-		}
-		to {
-			transform: translateY(-50%) translateX(0);
-		}
-	}
-
-	@keyframes slideOutToTop {
-		from {
-			transform: translateX(-50%) translateY(0);
-		}
-		to {
-			transform: translateX(-50%) translateY(-100%);
-		}
-	}
-
-	@keyframes slideOutToBottom {
-		from {
-			transform: translateX(-50%) translateY(0);
-		}
-		to {
-			transform: translateX(-50%) translateY(100%);
-		}
-	}
-
-	@keyframes slideOutToLeft {
-		from {
-			transform: translateY(-50%) translateX(0);
-		}
-		to {
-			transform: translateY(-50%) translateX(-100%);
-		}
-	}
-
-	@keyframes slideOutToRight {
-		from {
-			transform: translateY(-50%) translateX(0);
-		}
-		to {
-			transform: translateY(-50%) translateX(100%);
-		}
+	.pop-right.animate-hiding {
+		transform: translateY(-50%) translateX(100%);
+		transition-timing-function: ease-in;
 	}
 
 	.pop-custom {

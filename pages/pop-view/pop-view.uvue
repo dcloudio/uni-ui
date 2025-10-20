@@ -11,8 +11,7 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">基础弹出位置</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
-				<!-- TODO App没有帧动画，弹层没动画 @颜伊林-->
+			<view class="button-wrap">
 				<button @click="showCenterPop" size="mini">居中弹出</button>
 				<button @click="showTopPop" size="mini">顶部弹出</button>
 				<button @click="showBottomPop" size="mini">底部弹出</button>
@@ -26,10 +25,11 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">蒙层演示</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button @click="showMaskPop" size="mini">显示蒙层</button>
 				<button @click="showMaskClickClosePop" size="mini">点击蒙层关闭</button>
 				<button @click="showTransparentMaskPop" size="mini">透明蒙层</button>
+				<button @click="nonMaskPop" size="mini">不要蒙层</button>
 			</view>
 		</view>
 
@@ -37,16 +37,16 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">跟随元素演示</text>
 
-			<view style="flex-direction: column; align-items: center;">
+			<view style="align-items: center;">
 				<button ref="followBtnUp" @click="showFollowPopUp" size="mini">向上弹出</button>
-				<button ref="followBtnDown" @click="showFollowPopDown" size="mini">向下弹出</button>
-				<button ref="followBtnLeft" @click="showFollowPopLeft" size="mini">向左弹出</button>
-				<button ref="followBtnRight" @click="showFollowPopRight" size="mini">向右弹出</button>
+				<button ref="followBtnDown" @click="showFollowPopDown" size="mini" style="margin-top: 5px;">向下弹出</button>
+				<button ref="followBtnLeft" @click="showFollowPopLeft" size="mini" style="margin-top: 5px;">向左弹出</button>
+				<button ref="followBtnRight" @click="showFollowPopRight" size="mini" style="margin-top: 5px;">向右弹出</button>
 			</view>
 
-			<view style="margin-top: 10px; flex-direction: column; align-items: center;">
+			<view style="margin-top: 10px; align-items: center;">
 				<button ref="followBtnArrow" @click="showFollowPopWithArrow" size="mini">带箭头</button>
-				<button ref="followBtnOffset" @click="showFollowPopWithOffset" size="mini">带偏移</button>
+				<button ref="followBtnOffset" @click="showFollowPopWithOffset" size="mini" style="margin-top: 5px;">带偏移</button>
 			</view>
 		</view>
 
@@ -54,13 +54,13 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">跟随元素对齐方式演示</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button ref="alignBtnDownLeft" @click="showAlignDownLeft" size="mini">下方左对齐</button>
 				<button ref="alignBtnDownCenter" @click="showAlignDownCenter" size="mini">下方水平居中</button>
 				<button ref="alignBtnDownRight" @click="showAlignDownRight" size="mini">下方右对齐</button>
 			</view>
 
-			<view style="margin-top: 10px; flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button ref="alignBtnRightTop" @click="showAlignRightTop" size="mini">右侧上对齐</button>
 				<button ref="alignBtnRightCenter" @click="showAlignRightCenter" size="mini">右侧垂直居中</button>
 				<button ref="alignBtnLeftBottom" @click="showAlignLeftBottom" size="mini">左侧下对齐</button>
@@ -71,7 +71,7 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">自动隐藏演示</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button @click="showAutoHidePop" size="mini">2秒后自动关闭</button>
 			</view>
 		</view>
@@ -80,17 +80,41 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">自定义样式</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button @click="showCustomStylePop" size="mini">自定义弹层样式</button>
 				<button @click="showCustomMaskPop" size="mini">自定义蒙层样式</button>
 			</view>
 		</view>
+		
+		<!-- 自定义动画演示 -->
+		<view style="margin-bottom: 30px;">
+			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">自定义动画</text>
+
+			<view class="button-wrap">
+				<button @click="showCustomAnimationPop" size="mini">自定义弹层动画</button>
+			</view>
+		</view>
+
+		<!-- 自定义动画弹层 -->
+		<uni-pop-view
+			v-if="showCustomAnimPop"
+			pos="center"
+			:mask-click-close="true"
+			:pop-class="customAnimClass"
+			@close="closeCustomAnimationPop"
+		>
+			<view style="min-width: 200px;">
+				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">自定义动画弹层</text>
+				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这个弹层使用了自定义的缩放+透明度动画</text>
+				<button @click="closeCustomAnimationPop" size="mini">关闭</button>
+			</view>
+		</uni-pop-view>
 
 		<!-- 多层堆叠测试 -->
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">多层堆叠测试</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button @click="showStackedLayer1" size="mini">打开第1层弹层</button>
 			</view>
 		</view>
@@ -99,7 +123,7 @@
 		<view style="margin-bottom: 30px;">
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">滚动穿透测试</text>
 
-			<view style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
+			<view class="button-wrap">
 				<button @click="showScrollPenetrationPop" size="mini">打开滚动穿透测试弹层</button>
 			</view>
 			<text style="font-size: 12px; color: #999; margin-top: 5px;">测试弹层内scroll-view滚动到顶部或底部时是否会影响主页面滚动</text>
@@ -110,7 +134,7 @@
 			v-if="showPop"
 			ref="popViewRef"
 			:pos="popPos"
-			:show-mask="popShowMask"
+			:non-mask="popNonMask"
 			:mask-click-close="popMaskClickClose"
 			:auto-hide-duration="popAutoHideDuration"
 			:pop-class="popClass"
@@ -131,17 +155,14 @@
 		<!-- 多层堆叠弹层 - 第1层 -->
 		<uni-pop-view
 			v-if="showStackedPop1"
-			:pos="'center'"
-			:show-mask="true"
 			:mask-click-close="true"
 			@close="closeStackedLayer1"
 		>
-			<!-- TODO 下面的弹层在Android上border-radius没了 @颜伊林 -->
-			<!-- TODO 下面的弹层在Web上，手机模式下width不是100% @王亚琪 -->
-			<view style="min-width: 300px; padding: 20px; background-color: #fff; border-radius: 8px;">
+			<!-- TODO 下面的3个弹层在Web上，手机模式下width是50%，挤在一起。Android相对正常。3层都有差异，都要拉齐 @王亚琪 -->
+			<view style="padding: 10px; background-color: #fff; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">第1层弹层</text>
 				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这是第1层弹层,点击下方按钮可以打开第2层</text>
-				<view style="flex-direction: row; gap: 10px;">
+				<view style="flex-direction: row;justify-content: space-around;">
 					<button @click="showStackedLayer2" size="mini" type="primary">打开第2层</button>
 					<button @click="closeStackedLayer1" size="mini">关闭本层</button>
 				</view>
@@ -151,15 +172,13 @@
 		<!-- 多层堆叠弹层 - 第2层 -->
 		<uni-pop-view
 			v-if="showStackedPop2"
-			:pos="'center'"
-			:show-mask="true"
 			:mask-click-close="true"
 			@close="closeStackedLayer2"
 		>
-			<view style="min-width: 300px; padding: 20px; background-color: #f0f0f0; border-radius: 8px;">
+			<view style="padding: 10px; background-color: #f0f0f0; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">第2层弹层</text>
 				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这是第2层弹层,点击下方按钮可以打开第3层</text>
-				<view style="flex-direction: row; gap: 10px;">
+				<view style="flex-direction: row; justify-content: space-around;">
 					<button @click="showStackedLayer3" size="mini" type="primary">打开第3层</button>
 					<button @click="closeStackedLayer2" size="mini">关闭本层</button>
 				</view>
@@ -169,12 +188,10 @@
 		<!-- 多层堆叠弹层 - 第3层 -->
 		<uni-pop-view
 			v-if="showStackedPop3"
-			:pos="'center'"
-			:show-mask="true"
 			:mask-click-close="true"
 			@close="closeStackedLayer3"
 		>
-			<view style="min-width: 300px; padding: 20px; background-color: #e0e0e0; border-radius: 8px;">
+			<view style="padding: 10px; background-color: #e0e0e0; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">第3层弹层</text>
 				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这是第3层弹层,最顶层的弹层</text>
 				<button @click="closeStackedLayer3" size="mini">关闭本层</button>
@@ -184,13 +201,11 @@
 		<!-- 滚动穿透测试弹层 -->
 		<uni-pop-view
 			v-if="showScrollPop"
-			:pos="'center'"
-			:show-mask="true"
 			:mask-click-close="true"
 			@close="closeScrollPenetrationPop"
 		>
 			<view
-				style="width: 600rpx; height: 800rpx; padding: 20px; background-color: #fff; border-radius: 8px; display: flex; flex-direction: column;"
+				style="width: 600rpx; height: 300px; padding: 20px; background-color: #fff; border-radius: 8px;"
 				@touchmove.stop.prevent
 			>
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">滚动穿透测试</text>
@@ -244,7 +259,7 @@
 	// 弹层状态
 	const showPop = ref<boolean>(false)
 	const popPos = ref<"center" | "left" | "right" | "top" | "bottom" | "custom">("center")
-	const popShowMask = ref<boolean>(false)
+	const popNonMask = ref<boolean>(false)
 	const popMaskClickClose = ref<boolean>(false)
 	const popAutoHideDuration = ref<number>(0)
 	const popClass = ref<string>('')
@@ -264,6 +279,10 @@
 	// 滚动穿透测试弹层状态
 	const showScrollPop = ref<boolean>(false)
 
+	// 自定义动画弹层状态
+	const showCustomAnimPop = ref<boolean>(false)
+	const customAnimClass = ref<string>('custom-anim-start')
+
 	// 引用
 	const popViewRef = ref<ComponentPublicInstance | null>(null)
 	const followBtnUp = ref<Element | null>(null)
@@ -282,7 +301,7 @@
 	// 定义配置类型
 	type PopViewConfig = {
 		pos?: "center" | "left" | "right" | "top" | "bottom" | "custom",
-		showMask?: boolean,
+		nonMask?: boolean,
 		maskClickClose?: boolean,
 		autoHideDuration?: number,
 		popClass?: string,
@@ -298,7 +317,7 @@
 	// 显示弹层的通用方法
 	const showPopView = (config: PopViewConfig) => {
 		popPos.value = config.pos ?? "center"
-		popShowMask.value = config.showMask ?? false
+		popNonMask.value = config.nonMask ?? false
 		popMaskClickClose.value = config.maskClickClose ?? false
 		popAutoHideDuration.value = config.autoHideDuration ?? 0
 		popClass.value = config.popClass ?? ''
@@ -316,7 +335,6 @@
 	const showCenterPop = () => {
 		showPopView({
 			pos: "center",
-			showMask: true,
 			maskClickClose: true,
 			title: '居中弹出',
 			content: '这是一个居中显示的弹层'
@@ -326,6 +344,7 @@
 	const showTopPop = () => {
 		showPopView({
 			pos: "top",
+			nonMask: true,
 			popStyle: "width:720rpx;border:1px solid #ccc;border-radius:0px 0px 6px 6px", // TODO 四边弹出时，有些样式应预置
 			title: '顶部弹出',
 			content: '这是一个顶部显示的弹层'
@@ -336,7 +355,6 @@
 		showPopView({
 			pos: "bottom",
 			popStyle: "width:750rpx;border-radius:6px 6px 0px 0px", // TODO 四边弹出时，有些样式应预置
-			showMask: true,
 			maskClickClose:true,
 			title: '底部弹出',
 			content: '这是一个底部显示的弹层'
@@ -346,8 +364,7 @@
 	const showLeftPop = () => {
 		showPopView({
 			pos: "left",
-			popStyle: "width:220px;height:100%;border-radius:0px 0px 0px 0px", // TODO 四边弹出时，有些样式应预置
-			showMask: true,
+			popStyle: "width:220px;height:100%;border-radius:0px 0px 0px 0px",
 			maskClickClose:true,
 			title: '左侧弹出',
 			content: '这是一个左侧显示的弹层'
@@ -357,8 +374,7 @@
 	const showRightPop = () => {
 		showPopView({
 			pos: "right",
-			popStyle: "width:220px;height:100%;border-radius:0px 0px 0px 0px", // TODO 四边弹出时，有些样式应预置
-			showMask: true,
+			popStyle: "width:220px;height:100%;border-radius:0px 0px 0px 0px",
 			maskClickClose:true,
 			title: '右侧弹出',
 			content: '这是一个右侧显示的弹层'
@@ -368,6 +384,7 @@
 	const showCustomPop = () => {
 		showPopView({
 			pos: "custom",
+			maskClickClose:true,
 			popStyle: "bottom:20%;background-color:#ccc;align-self: center;",
 			title: '弹层'
 		})
@@ -377,7 +394,6 @@
 	const showMaskPop = () => {
 		showPopView({
 			pos: "center",
-			showMask: true,
 			title: '显示蒙层',
 			content: '这个弹层有蒙层，但点击蒙层不会关闭'
 		})
@@ -386,21 +402,28 @@
 	const showMaskClickClosePop = () => {
 		showPopView({
 			pos: "center",
-			showMask: true,
 			maskClickClose: true,
 			title: '点击蒙层关闭',
-			content: '点击蒙层可以关闭这个弹层'
+			content: '点击或滑动蒙层可以关闭这个弹层'
 		})
 	}
 
 	const showTransparentMaskPop = () => {
 		showPopView({
 			pos: "center",
-			showMask: true,
 			maskStyle: 'background-color: transparent;',
 			popStyle: 'background-color: #ccc;',
 			title: '透明蒙层',
 			content: '这个弹层的蒙层是透明的，并且点击蒙层不会关闭'
+		})
+	}
+	
+	const nonMaskPop = () => {
+		showPopView({
+			pos: "center",
+			nonMask: true,
+			title: '不要蒙层',
+			content: '这个弹层没有蒙层。会有滚动穿透问题'
 		})
 	}
 
@@ -408,6 +431,7 @@
 	const showAutoHidePop = () => {
 		showPopView({
 			autoHideDuration: 2000,
+			nonMask: true,
 			popStyle: 'background-color:#eee',
 			title: '自动隐藏',
 			content: '弹层将在2秒后自动关闭'
@@ -418,10 +442,10 @@
 	const showCustomStylePop = () => {
 		showPopView({
 			pos: "center",
-			showMask: false,
+			nonMask: false,
 			maskClickClose: true,
 			popClass: 'custom-pop',
-			popStyle: 'background-color: #4CAF50; border-radius: 40px; padding: 24px; height: 240px; transition: opacity 0.3s ease-out, transform 0.3s ease-out;',
+			popStyle: 'background-color: #4CAF50; border-radius: 40px; padding: 24px; height: 240px;',  /* TODO App的border-radius很小 @颜伊林*/
 			title: '自定义样式',
 			content: '这是一个使用自定义样式的弹层'
 		})
@@ -430,7 +454,6 @@
 	const showCustomMaskPop = () => {
 		showPopView({
 			pos: "center",
-			showMask: true,
 			maskClickClose: true,
 			maskStyle: 'background-color: rgba(76, 175, 80, 0.3);',
 			title: '自定义蒙层',
@@ -442,7 +465,7 @@
 	const showFollowPopUp = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			title: '向上弹出',
 			content: '跟随按钮向上显示'
@@ -457,7 +480,6 @@
 	const showFollowPopDown = () => {
 		showPopView({
 			pos: "custom",
-			showMask: true,
 			maskStyle: "background-color: transparent",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
@@ -474,7 +496,7 @@
 	const showFollowPopLeft = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			title: '向左弹出',
 			content: '跟随按钮向左显示'
@@ -489,7 +511,7 @@
 	const showFollowPopRight = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			title: '右侧弹出',
 			content: '跟随按钮向右显示'
@@ -504,7 +526,7 @@
 	const showFollowPopWithArrow = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-bottom-color: #ccc;',
 			title: '带箭头',
@@ -520,7 +542,7 @@
 	const showFollowPopWithOffset = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-bottom-color: #ccc;',
 			title: '带偏移',
@@ -537,7 +559,7 @@
 	const showAlignDownLeft = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方左对齐',
@@ -553,7 +575,7 @@
 	const showAlignDownRight = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方右对齐',
@@ -569,7 +591,7 @@
 	const showAlignDownCenter = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方水平居中',
@@ -585,7 +607,7 @@
 	const showAlignRightTop = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-right-color: #ccc;',
 			title: '右侧上对齐',
@@ -601,7 +623,7 @@
 	const showAlignLeftBottom = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-left-color: #ccc;',
 			title: '左侧下对齐',
@@ -617,7 +639,7 @@
 	const showAlignRightCenter = () => {
 		showPopView({
 			pos: "custom",
-			showMask: false,
+			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
 			menuArrowStyle: 'border-right-color: #ccc;',
 			title: '右侧垂直居中',
@@ -668,10 +690,58 @@
 	const closeScrollPenetrationPop = () => {
 		showScrollPop.value = false
 	}
+
+	// 自定义动画弹层方法
+	const showCustomAnimationPop = () => {
+		showCustomAnimPop.value = true
+		// 初始状态：缩小+透明
+		customAnimClass.value = 'custom-anim-start'
+		// 延迟一帧后触发动画：正常大小+不透明
+		setTimeout(() => {
+			customAnimClass.value = 'custom-anim-end'
+		}, 50)
+	}
+
+	const closeCustomAnimationPop = () => {
+		// 先触发关闭动画：缩小+透明
+		customAnimClass.value = 'custom-anim-start'
+		// 等待动画完成后关闭弹层
+		setTimeout(() => {
+			showCustomAnimPop.value = false
+		}, 300)
+	}
 </script>
 
 <style>
 	.custom-pop {
 		box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	/* 自定义动画样式 */
+	.custom-anim-start {
+		transition-duration: 300ms;
+		transition-property: transform, opacity;
+		transition-timing-function: ease-out;
+		transform: translate(-50%, -50%) scale(0.8);
+		opacity: 0.3;
+	}
+
+	.custom-anim-end {
+		transition-duration: 300ms;
+		transition-property: transform, opacity;
+		transition-timing-function: ease-out;
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+	}
+
+	.button-wrap{
+		flex-direction: row;
+		flex-wrap: wrap;
+		/* #ifndef APP */
+		gap: 10px;
+		/* #endif */
+		/* #ifdef APP */
+		justify-content: space-around;
+		/* #endif */
 	}
 </style>

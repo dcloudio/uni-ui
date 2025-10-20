@@ -54,7 +54,7 @@
 	// 2. 定义计算属性来判断默认插槽是否有内容
 	// TODO 这种判断方式的性能有待商榷，这利用了模板的隐式转换
 	const hasDefaultSlot = computed(() => {
-		console.log('slot: ',slots['default']);
+		// console.log('slot: ',slots['default']);
 	  return slots['default'] != null;
 	});
 </script>
@@ -91,6 +91,6 @@
 	}
 	
 	.badge-wrap{
-		align-self: flex-start; /* 默认这样，不然width会变100%。但需要居中时得覆盖重设*/
+		/* align-self: flex-start; */ /* 默认这样，不然width会变100%。但需要居中时得覆盖重设*/
 	}
 </style>
