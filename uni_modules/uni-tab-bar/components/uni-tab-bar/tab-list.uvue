@@ -1,0 +1,37 @@
+<template>
+	<view class="tab-list">
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+import { provide, ref, onMounted } from 'vue'
+
+// 存储子项数量
+const itemCount = ref<number>(0)
+
+// 注册子项
+function registerItem(): number {
+	const index = itemCount.value
+	itemCount.value++
+	return index
+}
+
+// 向子组件提供注册方法
+provide('tabListRegisterItem', registerItem)
+</script>
+
+<style>
+.tab-list {
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 50px; /* 默认50px高*/
+	bottom: var(--uni-safe-area-inset-bottom); /* 默认避让底部安全区*/
+	overflow: visible; /* 避免裁剪badge*/
+	background-color: #ffffff;
+	border-top-width: 1px;
+	border-top-color: #e5e5e5;
+}
+</style>

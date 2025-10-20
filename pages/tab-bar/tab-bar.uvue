@@ -1,0 +1,91 @@
+<template>
+	<uni-tab-bar class="full-screen-tab-bar" :active-index="activeIndex" @change="handleChange">
+		<!-- 内容区域 -->
+		<tab-content>
+			<tab-content1 />
+		</tab-content>
+
+		<tab-content>
+			<tab-content2 />
+		</tab-content>
+
+		<tab-content>
+			<tab-content3 />
+		</tab-content>
+
+		<tab-content>
+			<tab-content4 />
+		</tab-content>
+
+		<!-- 底部选项卡 -->
+		<tab-list>
+			<!-- 图标高度20，文字字号10px，文字高度是14px(也就是行高大于1.4的底部会被裁剪），角标不能在图标的正右上角，需要向下偏移2px，避免角标画出tab-list之外) -->
+			<tab-list-item  badge-text="5" badge-style="top:2px">
+				<text class="tab-icon">🏠</text>
+				<text class="tab-label" :class="activeIndex == 0 ? 'tab-label-active' : ''">首页</text>
+			</tab-list-item>
+
+			<tab-list-item  badge-text="" badge-style="top:2px">
+				<text class="tab-icon">💬</text>
+				<text class="tab-label" :class="activeIndex == 1 ? 'tab-label-active' : ''">消息</text>
+			</tab-list-item>
+
+			<tab-list-item  badge-text="99+" badge-style="top:2px">
+				<text class="tab-icon">🔔</text>
+				<text class="tab-label" :class="activeIndex == 2 ? 'tab-label-active' : ''">通知</text>
+			</tab-list-item>
+
+			<tab-list-item  badge-style="top:2px">
+				<text class="tab-icon">👤</text>
+				<text class="tab-label" :class="activeIndex == 3 ? 'tab-label-active' : ''">我的</text>
+			</tab-list-item>
+		</tab-list>
+	</uni-tab-bar>
+</template>
+
+<script setup lang="uts">
+	import { ref } from 'vue'
+	import tabList from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-list.uvue'
+	import tabListItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-list-item.uvue'
+	import tabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-content.uvue'
+	import tabContent1 from './tab-content1.uvue'
+	import tabContent2 from './tab-content2.uvue'
+	import tabContent3 from './tab-content3.uvue'
+	import tabContent4 from './tab-content4.uvue'
+
+	// 当前激活的索引
+	const activeIndex = ref<number>(0)
+
+	// 处理 tab-bar 的切换
+	function handleChange(index : number) : void {
+		activeIndex.value = index
+		console.log('切换到索引：', index)
+	}
+</script>
+
+<style>
+	.full-screen-tab-bar {
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+	}
+
+	.tab-item { 
+		align-self: center !important /* TODO 这里覆盖不了badge组件内部的同名class*/
+	}
+
+	.tab-icon {
+		height: 24px;
+		font-size: 16px;
+	}
+
+	.tab-label {
+		font-size: 10px;
+		color: #666;
+	}
+
+	.tab-label-active {
+		color: #007aff;
+		font-weight: bold;
+	}
+</style>

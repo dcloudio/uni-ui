@@ -1,0 +1,76 @@
+<template>
+	<!-- <view > -->
+		<uni-badge-view class="tab-list-item" :class="isActive ? 'tab-list-item-active' : ''" @click="handleClick" :text="badgeText" :badge-class="badgeClass" :badge-style="badgeStyle">
+			<slot></slot>
+		</uni-badge-view>
+	<!-- </view> -->
+</template>
+
+<script setup lang="uts">
+import { inject, ref, computed, onMounted } from 'vue'
+import { Ref } from 'vue'
+
+// 定义组件属性
+type Props = {
+	/**
+	 * @description badge 的内容
+	 */
+	badgeText?: string,
+	/**
+	 * @description badge 的样式类
+	 */
+	badgeClass?: string.ClassString,
+	/**
+	 * @description badge 的内联样式
+	 */
+	badgeStyle?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	badgeText: '0',
+	badgeClass: '',
+	badgeStyle: ''
+})
+
+// 从父组件注入数据和方法
+const currentIndex = inject<Ref<number>>('tabBarCurrentIndex', ref(0))
+const changeTab = inject<(index: number) => void>('tabBarChangeTab', (index: number) => {})
+const registerItem = inject<() => number>('tabListRegisterItem', () => 0)
+
+// 当前项的索引
+const itemIndex = ref<number>(-1)
+
+// 组件挂载时注册
+onMounted(() => {
+	itemIndex.value = registerItem()
+})
+
+// 计算是否激活
+const isActive = computed((): boolean => {
+	return currentIndex.value == itemIndex.value
+})
+
+// 处理点击事件
+function handleClick(): void {
+	if (itemIndex.value >= 0) {
+		changeTab(itemIndex.value)
+	}
+}
+</script>
+
+<style>
+.tab-list-item {
+	/* align-self: center; */
+	/* flex: 1; */
+	/* flex-direction: column;
+	justify-content: center;
+	align-items: center; */
+	/* height: 100%; */
+	/* padding-top: 10px;
+	padding-bottom: 10px; */
+}
+
+.tab-list-item-active {
+	/* 激活状态样式，可根据需要自定义 */
+}
+</style>
