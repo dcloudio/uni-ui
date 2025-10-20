@@ -278,7 +278,7 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 	}
 
 	// 更新container高度以适配当前slider的高度（auto-height功能）
-	const updateContainerHeight = () : void => {
+	const updateContainerHeight = (index: number) : void => {
 		if (!autoHeightEnabled) {
 			return
 		}
@@ -291,16 +291,7 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 		const sliders = wrapper.querySelectorAll('.swiper-slider')
 		if (sliders == null || sliders.length === 0) return
 
-		let currentSlider : UniElement | null = null
-		for (let i = 0; i < sliders.length; i++) {
-			const slider = sliders[i] as UniElement
-			const dataIndexStr = slider.getAttribute('data-index')
-			const index = parseInt(dataIndexStr != null ? dataIndexStr : '0')
-			if (index === currentIndex.value) {
-				currentSlider = slider
-				break
-			}
-		}
+		let currentSlider : UniElement | null = sliders[index]
 
 		if (currentSlider != null) {
 			const sliderContent = currentSlider.querySelector('.swiper-slider-content') as UniElement | null
@@ -336,13 +327,11 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 	}
 
 	// 监听currentIndex变化，延迟更新container高度（auto-height）
-	watch(currentIndex, () => {
+	watch(currentIndex, (newVal: number) => {
 		if (!autoHeightEnabled) {
 			return
 		}
-		setTimeout(() => {
-			updateContainerHeight()
-		}, duration + 50)
+		updateContainerHeight(newVal)
 	})
 
 	onMounted(() => {
@@ -565,9 +554,7 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 
 			// 初始化完成后，更新container高度（auto-height）
 			if (autoHeightEnabled) {
-				setTimeout(() => {
-					updateContainerHeight()
-				}, 50)
+				updateContainerHeight(initialIndex)
 			}
 		}
 
@@ -805,7 +792,7 @@ swiper-view组件：滑块视图容器，提供滑动轮播显示能力
 		position: relative;
 		width: 100%;
 		overflow: hidden;
-		transition: height 500ms;
+		/* transition: height 500ms; */
 	}
 
 	/* #ifdef WEB */

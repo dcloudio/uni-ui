@@ -12,14 +12,14 @@
 			<text style="color: #666; margin-bottom: 10px;">不等高slider测试（Auto Height）app和web都不正常：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">容器高度随当前slider内容自动调整</text>
 			<swiper-view style="background-color: #f5f5f5;">
-				<swiper-slider>
+				<swiper-slider :auto-height="true">
 					<view style="background-color: #ff6b6b; padding: 20px;">
 						<view style="background-color: white; padding: 15px; border-radius: 8px;">
 							<text style="color: #333; font-size: 16px; line-height: 24px;">短内容 - 高度约100px</text>
 						</view>
 					</view>
 				</swiper-slider>
-				<swiper-slider>
+				<swiper-slider :auto-height="true">
 					<view style="background-color: #4ecdc4; padding: 20px;">
 						<view style="background-color: white; padding: 15px; border-radius: 8px;">
 							<text style="color: #333; font-size: 16px; line-height: 24px;">中等内容 - 高度约150px
@@ -27,7 +27,7 @@
 						</view>
 					</view>
 				</swiper-slider>
-				<swiper-slider>
+				<swiper-slider :auto-height="true">
 					<view style="background-color: #95e1d3; padding: 20px;">
 						<view style="background-color: white; padding: 15px; border-radius: 8px;">
 							<text style="color: #333; font-size: 16px; line-height: 24px;">长内容 - 高度约200px
