@@ -7,7 +7,9 @@
 </template>
 
 <script setup>
-
+	onReady(() => {
+    // console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson())
+  })
 </script>
 <style>
 
