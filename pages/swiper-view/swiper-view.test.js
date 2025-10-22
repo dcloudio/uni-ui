@@ -83,7 +83,7 @@ describe('SwiperView.uvue', () => {
 
   it('indicator dots exist', async () => {
     // 测试指示器是否存在
-    const indicators = await page.$$('.swiper-indicator')
+    const indicators = await page.$$('.uni-swiper-indicator')
     expect(indicators.length).toBeGreaterThan(0)
 
     // 检查指示器内是否有dot
@@ -121,12 +121,12 @@ describe('SwiperView.uvue', () => {
 
   it('swiper container structure', async () => {
     // 测试swiper容器结构
-    const containers = await page.$$('.swiper-container')
-    expect(containers.length).toBeGreaterThan(0)
-
-    // 检查wrapper是否存在
-    const wrappers = await page.$$('.swiper-wrapper')
+    const wrappers = await page.$$('.uni-swiper-wrapper')
     expect(wrappers.length).toBeGreaterThan(0)
+
+    // 检查containers是否存在
+    const containers = await page.$$('.uni-swiper-container')
+    expect(containers.length).toBeGreaterThan(0)
   })
 
   it('button click to change current', async () => {
@@ -165,9 +165,9 @@ describe('SwiperView.uvue', () => {
     // 测试swiper包含多个slide
     const firstSwiper = await page.$('swiper-view')
     if (firstSwiper != null) {
-      const wrapper = await firstSwiper.$('.swiper-wrapper')
-      if (wrapper != null) {
-        const slides = await wrapper.$$('view')
+      const container = await firstSwiper.$('.uni-swiper-container')
+      if (container != null) {
+        const slides = await container.$$('view')
         expect(slides.length).toBeGreaterThanOrEqual(2)
       }
     }

@@ -1,0 +1,6 @@
+export type UniSwiperIndicatorProps = {
+	itemClass ?: string
+	itemStyle ?: string
+	itemActiveClass ?: string
+	itemActiveStyle ?: string
+}

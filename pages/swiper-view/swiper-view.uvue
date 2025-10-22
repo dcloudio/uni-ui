@@ -360,6 +360,7 @@
 
 <script setup lang="uts">
 	import { ref, onMounted } from 'vue'
+	import { UniSwiperViewChangeEvent, UniSwiperViewTransitionEvent, UniSwiperViewAnimationFinishEvent } from '../../uni_modules/swiper-view/components/swiper-view/types.uts'
 
 	// 3D卡片缩放演示
 	const scaleCurrentIndex = ref<number>(0)
@@ -374,53 +375,25 @@
 	const customIndicatorIndex = ref<number>(0)
 	const customIndicatorTotal = ref<number>(3)
 
-
-	type ChangeEventDetail = {
-		current: number
-		source: string
-	}
-
-	type ChangeEvent = {
-		detail: ChangeEventDetail
-	}
-
-	type TransitionEventDetail = {
-		dx: number
-		dy: number
-	}
-
-	type TransitionEvent = {
-		detail: TransitionEventDetail
-	}
-
-	type AnimationFinishEventDetail = {
-		current: number
-		source: string
-	}
-
-	type AnimationFinishEvent = {
-		detail: AnimationFinishEventDetail
-	}
-
-	const handleScaleChange = (e: ChangeEvent) => {
+	const handleScaleChange = (e: UniSwiperViewChangeEvent) => {
 		scaleCurrentIndex.value = e.detail.current
 	}
 
-	const handleChange = (e: ChangeEvent) => {
+	const handleChange = (e: UniSwiperViewChangeEvent) => {
 		eventCurrentIndex.value = e.detail.current
 		eventSource.value = 'change-' + e.detail.source
 	}
 
-	const handleTransition = (e: TransitionEvent) => {
+	const handleTransition = (e: UniSwiperViewTransitionEvent) => {
 		transitionDx.value = Math.round(e.detail.dx)
 		transitionDy.value = Math.round(e.detail.dy)
 	}
 
-	const handleAnimationFinish = (e: AnimationFinishEvent) => {
+	const handleAnimationFinish = (e: UniSwiperViewAnimationFinishEvent) => {
 		eventSource.value = 'animationfinish-' + e.detail.source
 	}
 
-	const handleCustomIndicatorChange = (e: ChangeEvent) => {
+	const handleCustomIndicatorChange = (e: UniSwiperViewChangeEvent) => {
 		customIndicatorIndex.value = e.detail.current
 	}
 </script>
@@ -444,14 +417,14 @@
 	}
 
 	/* 自定义指示器class样式 - 使用 :deep() 穿透组件作用域 */
-	:deep(.swiper-indicator .item.custom-item) {
+	:deep(.uni-swiper-indicator .uni-swiper-indicator-item.custom-item) {
 		width: 16px;
 		height: 4px;
 		border-radius: 2px;
 		background-color: rgba(255, 165, 0, 0.5);
 	}
 
-	:deep(.swiper-indicator .item.custom-item.custom-item-active) {
+	:deep(.uni-swiper-indicator .uni-swiper-indicator-item.custom-item.custom-item-active) {
 		width: 24px;
 		background-color: rgba(255, 165, 0, 1);
 	}

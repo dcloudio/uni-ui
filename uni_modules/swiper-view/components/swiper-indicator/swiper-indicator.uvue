@@ -1,121 +1,119 @@
-<!--
-swiper-indicator：swiper指示器组件
--->
 <template>
-	<view :class="['swiper-indicator', vertical ? 'vertical' : 'horizontal']" :style="containerStyle">
-		<!-- 自定义内容slot -->
+	<view
+		class="uni-swiper-indicator"
+		:class="vertical ? 'uni-swiper-indicator_vertical' : 'uni-swiper-indicator_horizontal'"
+		:style="containerStyle">
 		<slot></slot>
 
 		<!-- 默认圆点指示器 -->
 		<view
 			v-for="i in totalArray"
 			:key="i"
-			:class="['item', current == i ? 'active' : '', itemClass, current == i ? itemActiveClass : '']"
+			class="uni-swiper-indicator-item"
+			:class="[
+				itemClass,
+				{ 'active': current == i },
+				{ itemActiveClass: current == i },
+			]"
 			:style="mergeStyle(current == i)"
-			@click="handleClick(i)"
-		></view>
+			@click="handleClick(i)">
+		</view>
 	</view>
 </template>
 
 <script setup lang="uts">
-	import { computed, inject, ref, Ref } from 'vue'
+import { computed, inject, ref, Ref } from 'vue'
+import { UniSwiperIndicatorProps } from './types.uts'
 
-	type Props = {
-		itemClass?: string
-		itemStyle?: string
-		itemActiveClass?: string
-		itemActiveStyle?: string
+const props = withDefaults(defineProps<UniSwiperIndicatorProps>(), {
+	itemClass: '',
+	itemStyle: '',
+	itemActiveClass: '',
+	itemActiveStyle: ''
+})
+
+// 从父组件注入（inject的是ref对象）
+const vertical = inject<boolean>('swiper-vertical', false)
+const currentRef = inject<Ref<number>>('swiper-current', ref(0))
+const totalRef = inject<Ref<number>>('swiper-total', ref(0))
+const onChange = inject<(index : number) => void>('swiper-change', (index : number) => { })
+
+// 通过computed解包ref以确保响应性
+const current = computed(() => currentRef.value)
+const total = computed(() => totalRef.value)
+
+// 创建数组用于v-for迭代
+const totalArray = computed(() => {
+	const arr : number[] = []
+	for (let i = 0; i < totalRef.value; i++) {
+		arr.push(i)
 	}
+	return arr
+})
 
-	const props = withDefaults(defineProps<Props>(), {
-		itemClass: '',
-		itemStyle: '',
-		itemActiveClass: '',
-		itemActiveStyle: ''
-	})
+// 容器样式（外部传入的class和style）
+const containerStyle = computed(() => {
+	// 这里可以接收外部传入的style
+	return ''
+})
 
-	// 从父组件注入（inject的是ref对象）
-	const vertical = inject<boolean>('swiper-vertical', false)
-	const currentRef = inject<Ref<number>>('swiper-current', ref(0))
-	const totalRef = inject<Ref<number>>('swiper-total', ref(0))
-	const onChange = inject<(index: number) => void>('swiper-change', (index: number) => {})
-
-	// 通过computed解包ref以确保响应性
-	const current = computed(() => currentRef.value)
-	const total = computed(() => totalRef.value)
-
-	// 创建数组用于v-for迭代
-	const totalArray = computed(() => {
-		const arr: number[] = []
-		for (let i = 0; i < totalRef.value; i++) {
-			arr.push(i)
-		}
-		return arr
-	})
-
-	// 容器样式（外部传入的class和style）
-	const containerStyle = computed(() => {
-		// 这里可以接收外部传入的style
-		return ''
-	})
-
-	// 合并item样式
-	const mergeStyle = (isActive: boolean): string => {
-		let style = props.itemStyle
-		if (isActive && props.itemActiveStyle.length > 0) {
-			style = style.length > 0 ? style + '; ' + props.itemActiveStyle : props.itemActiveStyle
-		}
-		return style
+// 合并item样式
+const mergeStyle = (isActive : boolean) : string => {
+	let style = props.itemStyle
+	if (isActive && props.itemActiveStyle.length > 0) {
+		style = style.length > 0 ? style + '; ' + props.itemActiveStyle : props.itemActiveStyle
 	}
+	return style
+}
 
-	const handleClick = (index: number) => {
-		onChange(index)
-	}
+const handleClick = (index : number) => {
+	onChange(index)
+}
 </script>
 
 <style>
-	.swiper-indicator {
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 10;
-		pointer-events: auto;
-	}
+.uni-swiper-indicator {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	pointer-events: auto;
+}
 
-	.swiper-indicator.horizontal {
-		bottom: 0px;
-		left: 0px;
-		right: 0px;
-		height: 40px;
-		flex-direction: row;
-	}
+.uni-swiper-indicator.uni-swiper-indicator_horizontal {
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 40px;
+	flex-direction: row;
+}
 
-	.swiper-indicator.vertical {
-		top: 0px;
-		bottom: 0px;
-		right: 0px;
-		width: 40px;
-		flex-direction: column;
-	}
+.uni-swiper-indicator.uni-swiper-indicator_vertical {
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	width: 40px;
+	flex-direction: column;
+}
 
-	.swiper-indicator .item {
-		width: 8px;
-		height: 8px;
-		border-radius: 4px;
-		border: 0.1px solid rgba(230, 230, 230, 0.3);
-		background-color: rgba(0, 0, 0, 0.3);
-		margin: 2px 4px;
-	}
+.uni-swiper-indicator .uni-swiper-indicator-item {
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	border: 0.1px solid rgba(230, 230, 230, 0.3);
+	background-color: rgba(0, 0, 0, 0.3);
+	margin: 2px 4px;
+}
 
-	.swiper-indicator .item.active {
-		border: 0.1px solid rgba(225, 225, 225, 0.9);
-		background-color: rgba(255, 255, 255, 0.9);
-	}
-
-	/* TODO 当slot有内容时，应该用v-if彻底不创建dom，而不是创建但隐藏 */
-	/* 当有slot内容时，隐藏默认圆点 */
-	.swiper-indicator.has-custom-content .item {
-		display: none !important;
-	}
+.uni-swiper-indicator .uni-swiper-indicator-item.active {
+	border: 0.1px solid rgba(225, 225, 225, 0.9);
+	background-color: rgba(255, 255, 255, 0.9);
+}
+`
+/* TODO 当slot有内容时，应该用v-if彻底不创建dom，而不是创建但隐藏 */
+/* 当有slot内容时，隐藏默认圆点 */
+.uni-swiper-indicator.uni-swiper-indicator_has-custom-content .uni-swiper-indicator-item {
+	display: none !important;
+}
 </style>

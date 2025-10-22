@@ -1,7 +1,3 @@
-<!--
-swiper-slider是swiper-view的唯一子组件。
-每个swiper-slider就是一个滑动视图，相当于view容器。
--->
 <template>
 	<view :class="rootClass">
 		<view :class="contentClass">
@@ -12,39 +8,35 @@ swiper-slider是swiper-view的唯一子组件。
 
 <script setup lang="uts">
 	import { computed } from 'vue'
+	import { UniSwiperSliderProps } from './types.uts'
 
-	type Props = {
-		autoHeight ?: boolean
-	}
-
-	const props = withDefaults(defineProps<Props>(), {
+	const props = withDefaults(defineProps<UniSwiperSliderProps>(), {
 		autoHeight: false
 	})
 
 	const rootClass = computed(() => {
-		const classes : string[] = ['swiper-slider']
+		const classes : string[] = ['uni-swiper-slider']
 		if (props.autoHeight) {
-			classes.push('auto-height')
+			classes.push('h-auto')
 		} else {
-			classes.push('fill-parent')
+			classes.push('h-100')
 		}
 		return classes
 	})
 
 	const contentClass = computed(() => {
-		const classes : string[] = ['swiper-slider-content']
+		const classes : string[] = ['uni-swiper-slider-content']
 		if (props.autoHeight) {
-			classes.push('content-auto-height')
+			classes.push('uni-swiper-slider-content_auto-height')
 		} else {
-			classes.push('content-fill-parent')
+			classes.push('uni-swiper-slider-content_fill-parent')
 		}
 		return classes
 	})
 </script>
 
 <style>
-
-	.swiper-slider {
+	.uni-swiper-slider {
 		flex: 0 0 auto;
 		flex-shrink: 0;
 		overflow: hidden;
@@ -54,26 +46,26 @@ swiper-slider是swiper-view的唯一子组件。
 		width: 100%;
 	}
 
-	.auto-height {
+	.h-auto {
 		height: auto;
 	}
 
-	.fill-parent {
+	.h-100 {
 		height: 100%;
 	}
 
-	.swiper-slider-content {
+	.uni-swiper-slider-content {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 	}
 
-	.content-auto-height {
+	.uni-swiper-slider-content_auto-height {
 		flex: 0 0 auto;
 		height: auto;
 	}
 
-	.content-fill-parent {
+	.uni-swiper-slider-content_fill-parent {
 		flex: 1;
 		height: 100%;
 	}

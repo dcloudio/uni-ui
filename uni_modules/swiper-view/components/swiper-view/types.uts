@@ -1,0 +1,20 @@
+type UniSwiperViewChangeEventDetail = { current : number; source : string }
+export type UniSwiperViewChangeEvent = { detail : UniSwiperViewChangeEventDetail }
+
+type UniSwiperViewTransitionEventDetail = { dx : number; dy : number }
+export type UniSwiperViewTransitionEvent = { detail : UniSwiperViewTransitionEventDetail }
+
+export type UniSwiperViewAnimationFinishEvent = { detail : UniSwiperViewChangeEventDetail }
+
+export type UniSwiperViewProps = {
+	vertical ?: boolean
+	current ?: number
+	circular ?: boolean
+	autoplay ?: boolean
+	interval ?: number
+	duration ?: number
+	easingFunction ?: string
+	previousMargin ?: string
+	nextMargin ?: string
+	rebound ?: boolean
+}
