@@ -1,28 +1,34 @@
 <template>
 	<view
 		class="uni-swiper-indicator"
-		:class="vertical ? 'uni-swiper-indicator_vertical' : 'uni-swiper-indicator_horizontal'"
+		:class="
+			vertical
+				? 'uni-swiper-indicator_vertical'
+				: 'uni-swiper-indicator_horizontal'
+		"
 		:style="containerStyle">
 		<slot></slot>
 
 		<!-- 默认圆点指示器 -->
-		<view
-			v-for="i in totalArray"
-			:key="i"
-			class="uni-swiper-indicator-item"
-			:class="[
-				itemClass,
-				{ 'active': current == i },
-				{ itemActiveClass: current == i },
-			]"
-			:style="mergeStyle(current == i)"
-			@click="handleClick(i)">
-		</view>
+		<template v-if="!hasSlotContent">
+			<view
+				v-for="i in totalArray"
+				:key="i"
+				class="uni-swiper-indicator-item"
+				:class="[
+					itemClass,
+					{ active: current == i },
+					{ itemActiveClass: current == i },
+				]"
+				:style="mergeStyle(current == i)"
+				@click="handleClick(i)">
+			</view>
+		</template>
 	</view>
 </template>
 
 <script setup lang="uts">
-import { computed, inject, ref, Ref } from 'vue'
+import { computed, inject, ref, Ref, useSlots } from 'vue'
 import { UniSwiperIndicatorProps } from './types.uts'
 
 const props = withDefaults(defineProps<UniSwiperIndicatorProps>(), {
@@ -30,6 +36,12 @@ const props = withDefaults(defineProps<UniSwiperIndicatorProps>(), {
 	itemStyle: '',
 	itemActiveClass: '',
 	itemActiveStyle: ''
+})
+
+const slots = useSlots()
+const hasSlotContent = computed(() : boolean => {
+	const defaultSlot = slots['default']
+	return defaultSlot != null
 })
 
 // 从父组件注入（inject的是ref对象）
@@ -109,11 +121,5 @@ const handleClick = (index : number) => {
 .uni-swiper-indicator .uni-swiper-indicator-item.active {
 	border: 0.1px solid rgba(225, 225, 225, 0.9);
 	background-color: rgba(255, 255, 255, 0.9);
-}
-`
-/* TODO 当slot有内容时，应该用v-if彻底不创建dom，而不是创建但隐藏 */
-/* 当有slot内容时，隐藏默认圆点 */
-.uni-swiper-indicator.uni-swiper-indicator_has-custom-content .uni-swiper-indicator-item {
-	display: none !important;
 }
 </style>

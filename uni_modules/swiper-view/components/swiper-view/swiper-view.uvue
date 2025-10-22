@@ -400,7 +400,7 @@ onMounted(() => {
 
 		// 查找indicator并移动到container层级（使其不受wrapper transform影响）
 		// 注意：排除默认指示器（它在container内，不在wrapper内，所以不会被查到）
-		const indicators = container.querySelectorAll('.uni-swiper-indicator:not(.uni-swiper-indicator_default)')
+		const indicators = container.querySelectorAll('.uni-swiper-indicator')
 
 		if (indicators != null && indicators.length > 0) {
 			// 如果有indicator组件,将其移到container
@@ -409,31 +409,6 @@ onMounted(() => {
 				// 将indicator从wrapper移到container
 				el.appendChild(indicator)
 			}
-
-			// 延迟检测自定义内容，确保slot已渲染
-			setTimeout(() => {
-				for (let i = 0; i < indicators.length; i++) {
-					const indicator = indicators[i] as UniElement
-					// 检查indicator的所有子元素
-					const allChildren = indicator.children
-					let hasCustom = false
-					if (allChildren != null && allChildren.length > 0) {
-						for (let j = 0; j < allChildren.length; j++) {
-							const child = allChildren[j] as UniElement
-							// 如果有非.item的子元素，说明有自定义内容
-							const className = child.getAttribute('class')
-							if (className == null || className.indexOf('item') < 0) {
-								hasCustom = true
-								break
-							}
-						}
-					}
-					if (hasCustom) {
-						indicator.classList.add('uni-swiper-indicator_has-custom-content')
-					}
-				}
-			}, 50)
-
 			// 有自定义indicator组件,不显示默认指示器
 			showDefaultIndicator.value = false
 		} else {
