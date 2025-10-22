@@ -111,10 +111,9 @@ const wrapperStyle = computed(() => {
 	const marginOffset = vertical ? prevMargin : prevMargin
 	const offset = translate.value + marginOffset
 
-	const finalCSS = `transform: translate${direction}(${offset}px); transition: transform; transition-duration:${transitionDuration}ms; overflow: visible;`
+	const finalCSS = `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms;`
 
 	console.log("offset:" + finalCSS)
-	// console.log("finalCSS",finalCSS)
 	return finalCSS
 
 })
@@ -801,15 +800,14 @@ const onTouchEnd = (e : TouchEvent) => {
 .uni-swiper-wrapper::-webkit-scrollbar {
 	display: none;
 }
-
 .uni-swiper-wrapper {
 	/* IE and Edge */
 	-ms-overflow-style: none;
 	/* Firefox */
 	scrollbar-width: none;
 }
-
 /* #endif */
+
 .uni-swiper-container {
 	position: relative;
 	display: flex;
@@ -821,6 +819,8 @@ const onTouchEnd = (e : TouchEvent) => {
 	width: 100%;
 	flex: 1;
 	flex-direction: row;
+	transition: transform; 
+	overflow: visible;
 }
 
 .uni-swiper-wrapper_horizontal .uni-swiper-container {
