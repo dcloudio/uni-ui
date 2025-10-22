@@ -31,7 +31,7 @@
 
 <script setup lang="uts">
 import { ref, computed, watch, onMounted, onUnmounted, provide } from 'vue'
-import { UniSwiperViewProps, UniSwiperViewChangeEvent, UniSwiperViewTransitionEvent, UniSwiperViewAnimationFinishEvent } from './types.uts'
+import { UniSwiperViewProps, UniSwiperViewChangeEventDetail, UniSwiperViewChangeEvent, UniSwiperViewTransitionEventDetail, UniSwiperViewTransitionEvent,  UniSwiperViewAnimationFinishEvent } from './types.uts'
 
 const props = withDefaults(defineProps<UniSwiperViewProps>(), {
 	// 是否纵向滑动
@@ -216,7 +216,7 @@ function slideTo(idx : number, src : string) {
 	console.log(translate.value)
 
 	if (old != targetIndex) {
-		emit('change', { detail: { current: targetIndex, source: src } })
+		emit('change', { detail: { current: targetIndex, source: src } as UniSwiperViewChangeEventDetail } as UniSwiperViewChangeEvent)
 	}
 
 	// 清除之前的动画timer
@@ -234,7 +234,7 @@ function slideTo(idx : number, src : string) {
 			adjustCircularOrder(targetIndex)
 			translate.value = -(1 * itemSize)
 		}
-		emit('animationfinish', { detail: { current: targetIndex, source: src } })
+		emit('animationfinish', { detail: { current: targetIndex, source: src } as UniSwiperViewChangeEventDetail } as UniSwiperViewAnimationFinishEvent)
 	}, duration)
 }
 
@@ -631,7 +631,7 @@ const onTouchMove = (e : TouchEvent) => {
 		if ((vertical && ady > adx) || (!vertical && adx > ady)) {
 			preventDef = true
 			// 只在确定滑动方向后才开始emit transition事件
-			emit('transition', { detail: { dx, dy } })
+			emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
 		}
 		// 根据边界情况决定是否阻止默认事件
 		if (preventDef && !atBoundary && (adx > 5 || ady > 5)) {
@@ -642,7 +642,7 @@ const onTouchMove = (e : TouchEvent) => {
 		if (!atBoundary) {
 			e.preventDefault()
 		}
-		emit('transition', { detail: { dx, dy } })
+		emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
 	}
 
 	if (circular && realCount >= 3) {

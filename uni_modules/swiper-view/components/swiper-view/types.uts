@@ -1,7 +1,7 @@
-type UniSwiperViewChangeEventDetail = { current : number; source : string }
+export type UniSwiperViewChangeEventDetail = { current: number; source: string }
 export type UniSwiperViewChangeEvent = { detail : UniSwiperViewChangeEventDetail }
 
-type UniSwiperViewTransitionEventDetail = { dx : number; dy : number }
+export type UniSwiperViewTransitionEventDetail = { dx: number; dy: number }
 export type UniSwiperViewTransitionEvent = { detail : UniSwiperViewTransitionEventDetail }
 
 export type UniSwiperViewAnimationFinishEvent = { detail : UniSwiperViewChangeEventDetail }
