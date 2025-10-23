@@ -42,6 +42,13 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 如果不设蒙层，会有滚动穿透问题。如果要避免滚动穿透，需要配置蒙层，哪怕配置蒙层透明。
 只有在顶部弹出悬浮通知栏时，才没有必要设蒙层，其他大多数场景都应该有蒙层。
 
+支持滚动跟随：
+如果弹层没有设置mask，且设置了滚动跟随，那么滚动时弹层始终锚定目标元素一起滚。
+在高版本浏览器(Chrome125+ 和 safari26+)使用新规范，CSS Anchor Positioning API，https://developer.mozilla.org/en-US/docs/Web/CSS/anchor。
+该css里配置好后，浏览器的排版引擎会自动处理，保障滚动跟随。
+TOOD 我们的App平台也应该支持这个css。
+在不支持CSS Anchor Positioning API的低版本浏览器和App平台，使用手动计算位置来实现跟随。
+
 ## pop-view组件的API
 .followElement(ELement,side="up|down|left|right",offset-x,offset-y,showArrow)
 通过本方法，设置要把弹出pop绑定在哪个目标元素上，出现在目标元素的那一侧，偏移x、y坐标，是否显示箭头指向目标元素。
@@ -50,9 +57,4 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 参考[Floating UI](https://github.com/floating-ui/)，比目前的uni-pop-view更好的地方，应该参考补充:
 1. 支持点一下四周出一圈按钮的效果，比菜单酷。
 2. 自动翻转：如果浮动元素在其首选位置被视口或滚动容器剪裁，Floating UI会尝试将其翻转到另一个更合适的侧面。如果翻转后仍然无法完全可见，它会沿着轴线微调位置，使其完全可见。
-3. 滚动跟随：滚动时弹出菜单始终锚定目标元素一起滚。
-
 对于滚动跟随，Floating UI是用js算的，性能还是不行。
-浏览器出了新规范，CSS Anchor Positioning API，https://developer.mozilla.org/en-US/docs/Web/CSS/anchor。
-css里配置好后，浏览器的排版引擎会自动处理，保障滚动跟随。
-目前Chrome125 和 safari26已经支持。我们的App平台也应该支持。

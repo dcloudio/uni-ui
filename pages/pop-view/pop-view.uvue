@@ -45,7 +45,7 @@
 			</view>
 
 			<view style="margin-top: 10px; align-items: center;">
-				<button ref="followBtnArrow" @click="showFollowPopWithArrow" size="mini">带箭头</button>
+				<button ref="followBtnArrow" @click="showFollowPopWithArrow" size="mini">带箭头且无蒙层</button>
 				<button ref="followBtnOffset" @click="showFollowPopWithOffset" size="mini" style="margin-top: 5px;">带偏移</button>
 			</view>
 		</view>
@@ -204,10 +204,7 @@
 			:mask-click-close="true"
 			@close="closeScrollPenetrationPop"
 		>
-			<view
-				style="width: 600rpx; height: 300px; padding: 20px; background-color: #fff; border-radius: 8px;"
-				@touchmove.stop.prevent
-			>
+			<view style="width: 600rpx; height: 300px; padding: 20px; background-color: #fff; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">滚动穿透测试</text>
 				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">滑动下方内容到顶部或底部,观察主页面是否跟随滚动</text>
 
@@ -432,7 +429,7 @@
 		showPopView({
 			autoHideDuration: 2000,
 			nonMask: true,
-			popStyle: 'background-color:#eee',
+			popStyle: 'background-color:#eee;bottom:60px;height:120px', // TODO 应该固定在底部，且弹层上不应该有关闭按钮
 			title: '自动隐藏',
 			content: '弹层将在2秒后自动关闭'
 		})
@@ -526,11 +523,11 @@
 	const showFollowPopWithArrow = () => {
 		showPopView({
 			pos: "custom",
-			maskClickClose: true,
-			popStyle: 'background-color: #ccc;',
+			nonMask:true,
+			popStyle: 'background-color: #ccc;z-index:997', //降低z-index，不覆盖导航栏和tabbar
 			menuArrowStyle: 'border-bottom-color: #ccc;',
-			title: '带箭头',
-			content: '这个弹层带有指向按钮的箭头'
+			title: '带箭头且无蒙层',
+			content: '这个弹层带有指向按钮的箭头。无蒙层可以和跟随元素一起滚动'
 		})
 		nextTick(() => {
 			if (popViewRef.value != null && followBtnArrow.value != null) {

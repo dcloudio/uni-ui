@@ -1,6 +1,7 @@
 node_modules/
 .project
 unpackage/
+harmony-configs
 .DS_Store
 .hbuilderx/
 __image_snapshots__/

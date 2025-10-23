@@ -73,5 +73,19 @@ uni-app x使用的css是标准浏览器css的子集，区别见下：
 ## vue注意事项
 uvue组件的 onMounted 可以获取 UniElement，但不能立即获取元素的宽高等排版信息，此时获取排版信息需要 uni.createSelectorQuery 异步获取。
 
+# 调试
+- 打印日志
+可以通过console.log输出日志，并且要求手动粘贴日志到agent。
+在浏览器平台，可以要求粘贴DOM。
+在app平台，可以要求通过如下方式打印app的页面整体DOM结构，
+```uts
+console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson())
+```
+
+- 获取日志
+可以通过如下cli命令获取HBuilderX的控制台日志，包括编译错误和运行时log：
+* app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x`
+* web平台：`C:\hbuilderx\hx_dev\cli.exe logcat web --browser Chrome --project uni-ui-x`
+
 ## uni-app x项目的自动化测试
 本项目使用uni-app的自动化测试框架，是基于jest的改造版本。

@@ -1,9 +1,13 @@
 <template>
 	<!-- 蒙层 -->
-	<view v-if="!nonMask" :class="['mask', props.maskClass]" :style="['position: fixed; top: 0; left: 0; right: 0; bottom: 0;', props.maskStyle]" @click="handleMaskClick" @touchstart="handleMaskTouchStart" @touchmove="handleMaskTouchMove" @touchend="handleMaskTouchEnd"></view>
+	<view v-if="!nonMask" :class="['mask', props.maskClass]" :style="['position: fixed; top: 0; left: 0; right: 0; bottom: 0;', props.maskStyle]" @click="handleMaskClick" @touchstart="handleMaskTouchStart" @touchmove="handleMaskTouchMove" @touchend="handleMaskTouchEnd" @wheel.prevent.stop></view>
 
 	<!-- 弹出层 -->
-	<view :class="['pop', popPositionClass, props.popClass]" :style="[popComputedStyle, props.popStyle]">
+	<view :class="['pop', popPositionClass, props.popClass]" :style="[popComputedStyle, props.popStyle]"
+	 <!-- #ifdef WEB -->
+	 @touchstart="handlePopTouchStart" @touchmove="handlePopTouchMove" @wheel="handlePopWheel"
+	 <!-- #endif -->
+	 >
 		<!-- 菜单箭头 -->
 		<view v-if="showMenuArrow" :class="['menu-arrow', menuArrowPositionClass, props.menuArrowClass]" :style="[menuArrowComputedStyle, props.menuArrowStyle]"></view>
 
@@ -80,11 +84,14 @@
 
 	// 定义跟随元素数据类型
 	type FollowElementData = {
-		element: Element | null,
+		element: UniElement | null,
 		side: "up" | "down" | "left" | "right",
 		offsetX: number,
 		offsetY: number,
-		align: "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical"
+		align: "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical",
+		// #ifdef WEB
+		anchorName?: string  // CSS Anchor Positioning 的锚点名称
+		// #endif
 	}
 
 	// 响应式状态
@@ -101,6 +108,27 @@
 	let touchStartY : number = 0
 	// 是否发生了滑动
 	let hasMoved : boolean = false
+
+	// #ifdef WEB
+	// 弹层内容触摸开始位置 Web有穿透问题，需要这么处理
+	let popTouchStartY : number = 0
+	// CSS Anchor Positioning API 支持检测（仅 Web 平台）
+	let supportsAnchorPositioning : boolean = false
+	// #endif
+
+	// 位置跟踪相关变量（Web 和 APP 平台都需要）
+	let positionTrackerActive : boolean = false
+	// RAF 节流标记
+	let rafId : number = 0
+	// 强制更新计数器
+	const forceUpdateCounter = ref<number>(0)
+	// #ifndef WEB
+	// APP 平台：定时器 ID
+	let positionCheckTimer : number = 0
+	// APP 平台：上次记录的位置
+	let lastElementTop : number = 0
+	let lastElementLeft : number = 0
+	// #endif
 
 	// 计算弹出层位置class
 	const popPositionClass = computed(() : string.ClassString => {
@@ -129,8 +157,102 @@
 	const popComputedStyle = computed(() : string => {
 		let style = 'position: fixed;'
 
+		// 响应强制更新计数器的变化（用于触发重新计算）
+		// 这里只是读取值以建立响应式依赖，不使用该值
+		if (forceUpdateCounter.value >= 0) {
+			// 计数器变化会触发此 computed 重新计算
+		}
+
 		// 如果有跟随元素，计算位置
 		if (followElementData.value != null && followElementData.value.element != null) {
+			// #ifdef WEB
+			// 如果支持 CSS Anchor Positioning，使用原生 CSS 锚点定位
+			if (supportsAnchorPositioning && followElementData.value.anchorName != null) {
+				const anchorName = followElementData.value.anchorName
+				const side = followElementData.value.side
+				const offsetX = followElementData.value.offsetX
+				const offsetY = followElementData.value.offsetY
+				const align = followElementData.value.align
+
+				// 设置 position-anchor
+				style += `position-anchor: ${anchorName};`
+
+				// 根据不同方向设置锚点位置
+				if (side == 'up') {
+					style += `bottom: anchor(top);`
+					if (offsetY != 0) {
+						style += `margin-bottom: ${offsetY}px;`
+					}
+					if (align == 'left') {
+						style += `left: anchor(left);`
+						if (offsetX != 0) style += `margin-left: ${offsetX}px;`
+					} else if (align == 'right') {
+						style += `right: anchor(right);`
+						if (offsetX != 0) style += `margin-right: ${offsetX}px;`
+					} else {
+						// center-horizontal
+						style += `left: anchor(center);`
+						style += `transform: translateX(-50%);`
+						if (offsetX != 0) style += `margin-left: ${offsetX}px;`
+					}
+				} else if (side == 'down') {
+					style += `top: anchor(bottom);`
+					if (offsetY != 0) {
+						style += `margin-top: ${offsetY}px;`
+					}
+					if (align == 'left') {
+						style += `left: anchor(left);`
+						if (offsetX != 0) style += `margin-left: ${offsetX}px;`
+					} else if (align == 'right') {
+						style += `right: anchor(right);`
+						if (offsetX != 0) style += `margin-right: ${offsetX}px;`
+					} else {
+						// center-horizontal
+						style += `left: anchor(center);`
+						style += `transform: translateX(-50%);`
+						if (offsetX != 0) style += `margin-left: ${offsetX}px;`
+					}
+				} else if (side == 'left') {
+					style += `right: anchor(left);`
+					if (offsetX != 0) {
+						style += `margin-right: ${offsetX}px;`
+					}
+					if (align == 'top') {
+						style += `top: anchor(top);`
+						if (offsetY != 0) style += `margin-top: ${offsetY}px;`
+					} else if (align == 'bottom') {
+						style += `bottom: anchor(bottom);`
+						if (offsetY != 0) style += `margin-bottom: ${offsetY}px;`
+					} else {
+						// center-vertical
+						style += `top: anchor(center);`
+						style += `transform: translateY(-50%);`
+						if (offsetY != 0) style += `margin-top: ${offsetY}px;`
+					}
+				} else if (side == 'right') {
+					style += `left: anchor(right);`
+					if (offsetX != 0) {
+						style += `margin-left: ${offsetX}px;`
+					}
+					if (align == 'top') {
+						style += `top: anchor(top);`
+						if (offsetY != 0) style += `margin-top: ${offsetY}px;`
+					} else if (align == 'bottom') {
+						style += `bottom: anchor(bottom);`
+						if (offsetY != 0) style += `margin-bottom: ${offsetY}px;`
+					} else {
+						// center-vertical
+						style += `top: anchor(center);`
+						style += `transform: translateY(-50%);`
+						if (offsetY != 0) style += `margin-top: ${offsetY}px;`
+					}
+				}
+
+				return style
+			}
+			// #endif
+
+			// 降级方案：使用 JavaScript 计算位置
 			const windowInfo = uni.getWindowInfo()
 			const rect = followElementData.value.element.getBoundingClientRect()
 			const side = followElementData.value.side
@@ -293,9 +415,13 @@
 
 	// 处理蒙层触摸开始
 	const handleMaskTouchStart = (e : TouchEvent) => {
-		// 阻止事件冒泡和默认行为
-		e.stopPropagation()
+		// #ifdef WEB
+		// Web 平台：阻止默认行为以防止滚动穿透
 		e.preventDefault()
+		// #endif
+
+		// 所有平台：阻止事件冒泡
+		e.stopPropagation()
 
 		if (e.touches.length > 0) {
 			touchStartX = e.touches[0].clientX
@@ -306,9 +432,13 @@
 
 	// 处理蒙层触摸移动
 	const handleMaskTouchMove = (e : TouchEvent) => {
-		// 阻止事件冒泡和默认行为
-		e.stopPropagation()
+		// #ifdef WEB
+		// Web 平台：阻止默认行为以防止滚动穿透
 		e.preventDefault()
+		// #endif
+
+		// 所有平台：阻止事件冒泡
+		e.stopPropagation()
 
 		if (e.touches.length > 0) {
 			const moveX = Math.abs(e.touches[0].clientX - touchStartX)
@@ -323,9 +453,13 @@
 
 	// 处理蒙层触摸结束
 	const handleMaskTouchEnd = (e : TouchEvent) => {
-		// 阻止事件冒泡和默认行为
-		e.stopPropagation()
+		// #ifdef WEB
+		// Web 平台：阻止默认行为以防止滚动穿透
 		e.preventDefault()
+		// #endif
+
+		// 所有平台：阻止事件冒泡
+		e.stopPropagation()
 
 		// 如果设置了maskClickClose，无论是点击还是滑动都关闭弹层
 		if (props.maskClickClose) {
@@ -338,6 +472,238 @@
 		touchStartY = 0
 	}
 
+	// 更新跟随元素位置（APP 平台和不支持 CSS Anchor Positioning 的浏览器使用）
+	const updateFollowElementPosition = () => {
+		// #ifdef WEB
+		// Web 平台：只有在不支持 CSS Anchor Positioning 时才需要手动更新
+		const needUpdate = followElementData.value != null && !supportsAnchorPositioning
+		// #endif
+
+		// #ifndef WEB
+		// APP 平台：始终需要手动更新
+		const needUpdate = followElementData.value != null
+		// #endif
+
+		if (needUpdate) {
+			// 取消之前的 RAF
+			if (rafId != 0) {
+				cancelAnimationFrame(rafId)
+			}
+
+			// 使用 RAF 节流，避免频繁更新
+			rafId = requestAnimationFrame(() => {
+				// 通过修改计数器触发 computed 重新计算
+				forceUpdateCounter.value++
+				rafId = 0
+			})
+		}
+	}
+
+	// 页面滚动处理函数
+	const handlePageScroll = () => {
+		updateFollowElementPosition()
+	}
+
+	// 启动位置跟踪（用于跟随元素模式）
+	const startPositionTracker = () => {
+		// #ifdef WEB
+		// Web 平台：只有在不支持 CSS Anchor Positioning 时才启动监听
+		const needTracker = !positionTrackerActive && followElementData.value != null && !supportsAnchorPositioning
+		// #endif
+
+		// #ifndef WEB
+		// APP 平台：始终需要跟踪
+		const needTracker = !positionTrackerActive && followElementData.value != null
+		// #endif
+
+		if (needTracker) {
+			positionTrackerActive = true
+
+			// #ifdef WEB
+			// Web 平台：使用滚动事件监听
+			window.addEventListener('scroll', handlePageScroll, { passive: true, capture: true })
+			window.addEventListener('resize', handlePageScroll, { passive: true })
+			console.log('Web: Scroll listener started for follow element')
+			// #endif
+
+			// #ifndef WEB
+			// APP 平台：使用定时器轮询检测位置变化
+			if (followElementData.value != null && followElementData.value.element != null) {
+				const rect = followElementData.value.element.getBoundingClientRect()
+				lastElementTop = rect.top
+				lastElementLeft = rect.left
+			}
+
+			positionCheckTimer = setInterval(() => {
+				if (followElementData.value != null && followElementData.value.element != null) {
+					const rect = followElementData.value.element.getBoundingClientRect()
+					// 检测位置是否变化（超过 1px）
+					if (Math.abs(rect.top - lastElementTop) > 1 || Math.abs(rect.left - lastElementLeft) > 1) {
+						lastElementTop = rect.top
+						lastElementLeft = rect.left
+						updateFollowElementPosition()
+					}
+				}
+			}, 16) as number  // 约 60fps
+
+			console.log('APP: Position tracker started for follow element')
+			// #endif
+		}
+	}
+
+	// 停止位置跟踪
+	const stopPositionTracker = () => {
+		if (positionTrackerActive) {
+			positionTrackerActive = false
+
+			// #ifdef WEB
+			// Web 平台：移除事件监听器
+			window.removeEventListener('scroll', handlePageScroll, true)
+			window.removeEventListener('resize', handlePageScroll)
+			// #endif
+
+			// #ifndef WEB
+			// APP 平台：清除定时器
+			if (positionCheckTimer != 0) {
+				clearInterval(positionCheckTimer)
+				positionCheckTimer = 0
+			}
+			// #endif
+
+			// 取消待处理的 RAF
+			if (rafId != 0) {
+				cancelAnimationFrame(rafId)
+				rafId = 0
+			}
+		}
+	}
+
+	// #ifdef WEB
+	// Web 专用函数：处理滚动穿透
+
+	// 检测浏览器是否支持 CSS Anchor Positioning API
+	const checkAnchorPositioningSupport = () : boolean => {
+		try {
+			// 检测 CSS.supports API 是否可用
+			if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function') {
+				return CSS.supports('anchor-name', '--test')
+			}
+		} catch (e) {
+			console.log('CSS Anchor Positioning check failed:', e)
+		}
+		return false
+	}
+
+	// 处理弹层内容触摸开始
+	const handlePopTouchStart = (e : TouchEvent) => {
+		if (e.touches.length > 0) {
+			popTouchStartY = e.touches[0].clientY
+		}
+	}
+
+	// 处理弹层内鼠标滚轮事件 - 智能处理滚动穿透
+	const handlePopWheel = (e : WheelEvent) => {
+		// 获取滚动目标元素
+		const target = e.target as UniElement
+
+		// 检查是否是可滚动元素或其子元素
+		let element : UniElement | null = target
+		let isScrollable = false
+
+		// 向上遍历 DOM 树,查找可滚动容器
+		while (element != null) {
+			const tagName = element.tagName.toLowerCase()
+
+			// 检查是否是可滚动组件
+			if (tagName == 'scroll-view' || tagName == 'list-view' || tagName == 'swiper' || tagName == 'moveable-view' || tagName == 'waterflow' ) {
+				isScrollable = true
+
+				// 获取滚动信息
+				const scrollTop = element.scrollTop
+				const scrollHeight = element.scrollHeight
+				const rect = element.getBoundingClientRect()
+				const clientHeight = rect.height
+
+				// 判断滚动方向
+				const deltaY = e.deltaY
+				const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1
+				const isAtTop = scrollTop <= 1
+
+				// 如果向下滚动且已到底部，或向上滚动且已到顶部，阻止穿透
+				if ((deltaY > 0 && isAtBottom) || (deltaY < 0 && isAtTop)) {
+					e.preventDefault()
+					e.stopPropagation()
+				}
+
+				break
+			}
+
+			element = element.parentElement
+		}
+
+		// 如果不是可滚动元素内部,阻止滚动穿透
+		if (!isScrollable) {
+			e.preventDefault()
+			e.stopPropagation()
+		}
+	}
+
+	// 处理弹层内容触摸移动 - 防止滚动穿透
+	const handlePopTouchMove = (e : TouchEvent) => {
+		// 获取触摸目标元素
+		const target = e.target as UniElement
+
+		// 检查是否是可滚动元素或其子元素
+		let element : UniElement | null = target
+		let isScrollable = false
+
+		// 向上遍历 DOM 树,查找可滚动容器
+		while (element != null) {
+			const tagName = element.tagName.toLowerCase()
+
+			// 检查是否是 scroll-view 或其他可滚动组件
+			// TODO 如果未来扩展内置滚动容器，得增加这个名单。如果有三方插件作者做了原生滚动组件，这种机制无法处理
+			if (tagName == 'scroll-view' || tagName == 'list-view' || tagName == 'swiper' || tagName == 'moveable-view' || tagName == 'waterflow' ) {
+				isScrollable = true
+
+				// 获取滚动容器的滚动信息
+				const scrollTop = element.scrollTop
+				const scrollHeight = element.scrollHeight
+				const rect = element.getBoundingClientRect()
+				const clientHeight = rect.height
+
+				// 计算触摸移动方向
+				if (e.touches.length > 0) {
+					const currentY = e.touches[0].clientY
+					const deltaY = currentY - popTouchStartY
+
+					// 向上滑动(deltaY < 0)且已滚动到底部,或向下滑动(deltaY > 0)且已滚动到顶部
+					const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1
+					const isAtTop = scrollTop <= 1
+
+					if ((deltaY < 0 && isAtBottom) || (deltaY > 0 && isAtTop)) {
+						// 到达边界,阻止滚动穿透
+						e.preventDefault()
+						e.stopPropagation()
+					}
+
+					popTouchStartY = currentY
+				}
+
+				break
+			}
+
+			element = element.parentElement
+		}
+
+		// 如果不是可滚动元素内部,阻止滚动穿透
+		if (!isScrollable) {
+			e.preventDefault()
+			e.stopPropagation()
+		}
+	}
+	// #endif
+
 	/**
 	 * @description 跟随元素显示
 	 * @param element 目标元素
@@ -347,7 +713,37 @@
 	 * @param showArrow 是否显示箭头
 	 * @param align 对齐方式：left-左对齐, right-右对齐, top-上对齐, bottom-下对齐, center-horizontal-水平居中, center-vertical-垂直居中
 	 */
-	function followElement(element : Element, side : "up" | "down" | "left" | "right", offsetX : number, offsetY : number, showArrow : boolean, align : "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical") : void {
+	function followElement(element : UniElement, side : "up" | "down" | "left" | "right", offsetX : number, offsetY : number, showArrow : boolean, align : "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical") : void {
+		// #ifdef WEB
+		let anchorName : string | null = null
+
+		// 如果支持 CSS Anchor Positioning，为目标元素添加 anchor-name
+		if (supportsAnchorPositioning) {
+			try {
+				anchorName = '--uni-pop-anchor-' + Date.now()
+				element.style.setProperty('anchor-name', anchorName)
+				console.log('CSS Anchor Positioning enabled with anchor name:', anchorName)
+			} catch (e) {
+				console.log('Failed to set anchor-name:', e)
+				anchorName = null
+			}
+		} else {
+			// 不支持则启动滚动监听
+			console.log('CSS Anchor Positioning not supported, using scroll listener fallback')
+		}
+
+		followElementData.value = {
+			element: element,
+			side: side,
+			offsetX: offsetX,
+			offsetY: offsetY,
+			align: align,
+			anchorName: anchorName
+		} as FollowElementData
+		// #endif
+
+		// #ifndef WEB
+		// APP 平台始终使用 JavaScript 计算位置
 		followElementData.value = {
 			element: element,
 			side: side,
@@ -355,7 +751,26 @@
 			offsetY: offsetY,
 			align: align
 		} as FollowElementData
+		console.log('APP platform: using scroll listener for follow element')
+		// #endif
+
 		showMenuArrow.value = showArrow
+
+		// #ifdef WEB
+		// Web 平台：如果不支持 CSS Anchor Positioning，延迟启动位置跟踪
+		if (!supportsAnchorPositioning) {
+			nextTick(() => {
+				startPositionTracker()
+			})
+		}
+		// #endif
+
+		// #ifndef WEB
+		// APP 平台：始终启动位置跟踪
+		nextTick(() => {
+			startPositionTracker()
+		})
+		// #endif
 	}
 
 	// 暴露方法给外部调用
@@ -366,6 +781,17 @@
 
 	// 组件挂载时
 	onMounted(() => {
+		// #ifdef WEB
+		// Web 平台：检测 CSS Anchor Positioning 支持
+		supportsAnchorPositioning = checkAnchorPositioningSupport()
+		console.log('Web platform - Component mounted, CSS Anchor Positioning support:', supportsAnchorPositioning)
+		// #endif
+
+		// #ifndef WEB
+		// APP 平台：输出日志
+		console.log('APP platform - Component mounted, using scroll listener for follow element')
+		// #endif
+
 		// 只有在从四边弹出时才需要动画
 		const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
 
@@ -382,6 +808,12 @@
 		startAutoHide()
 	})
 
+	// 组件卸载时清理
+	onUnmounted(() => {
+		// Web 和 APP 平台都需要清理位置跟踪器
+		stopPositionTracker()
+	})
+
 	// 监听自动隐藏时间变化
 	watch(() : number => {
 		return props.autoHideDuration
@@ -392,12 +824,12 @@
 
 <style>
 	.mask {
-		z-index: 999;
+		z-index: 999; /* Web平台导航栏和tabbar的z-index都是998。弹层mask设999将覆盖到导航栏和tabbar上*/
 		background-color: rgba(0, 0, 0, 0.5);
 	}
 
 	.pop {
-		z-index: 1000;
+		z-index: 1000; /* 比mask的z-index高1*/
 		background-color: white;
 		border-radius: 8px;
 		padding: 16px;
