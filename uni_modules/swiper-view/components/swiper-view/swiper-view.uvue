@@ -22,7 +22,7 @@
 				v-for="i in defaultIndicatorArray"
 				:key="i"
 				class="uni-swiper-indicator-item"
-				:class="{ 'active': currentIndex === i }"
+				:class="{ 'active': currentIndex == i }"
 				@click="handleDefaultIndicatorClick(i)">
 			</view>
 		</view>
@@ -86,7 +86,7 @@ const { vertical, circular, autoplay, interval, duration, rebound } = props
 
 // 解析margin值
 const parseMargin = (margin : string) : number => {
-	if (margin.length === 0) {
+	if (margin.length == 0) {
 		return 0
 	}
 	if (margin.endsWith('px')) {
@@ -120,12 +120,12 @@ const defaultIndicatorArray = computed(() => {
 
 // circular模式：动态调整DOM顺序，确保当前显示项前后都有元素
 function adjustCircularOrder(targetIndex : number) {
-	if (!circular || sliderCount.value < 2 || (sliderCount.value === 2 && nextMargin > 0)) return // 少于2个元素时不支持margin，无需调整
+	if (!circular || sliderCount.value < 2 || (sliderCount.value == 2 && nextMargin > 0)) return // 少于2个元素时不支持margin，无需调整
 
-	const el = wrapper.value
-	if (el == null) return
+	const wrapperEl = wrapper.value
+	if (wrapperEl == null) return
 
-	const container = el.querySelector('.uni-swiper-container')
+	const container = wrapperEl.querySelector('.uni-swiper-container')
 	if (container == null) return
 
 	const sliders = container.querySelectorAll('.uni-swiper-slider')
@@ -193,8 +193,8 @@ function slideTo(targetIndex : number, source : string) {
 	// circular模式下：先动画到目标位置（位置0或位置2），动画结束后再重排DOM
 	if (circular && sliderCount.value > 1) {
 		// 判断滑动方向
-		const isForward = (old === 0 && calculatedTargetIndex === sliderCount.value - 1) ||
-			(calculatedTargetIndex < old && !(old === sliderCount.value - 1 && calculatedTargetIndex === 0))
+		const isForward = (old == 0 && calculatedTargetIndex == sliderCount.value - 1) ||
+			(calculatedTargetIndex < old && !(old == sliderCount.value - 1 && calculatedTargetIndex == 0))
 
 		// 向前滑动到位置0，向后滑动到位置2
 		const targetDomPosition = isForward ? 0 : 2
@@ -277,14 +277,14 @@ const updateContainerHeight = (index : number) : void => {
 	if (!autoHeightEnabled) {
 		return
 	}
-	const el = wrapper.value
-	if (el == null) return
+	const wrapperEl = wrapper.value
+	if (wrapperEl == null) return
 
-	const container = el.querySelector('.uni-swiper-container')
+	const container = wrapperEl.querySelector('.uni-swiper-container')
 	if (container == null) return
 
 	const sliders = container.querySelectorAll('.uni-swiper-slider')
-	if (sliders == null || sliders.length === 0) return
+	if (sliders == null || sliders.length == 0) return
 	let currentSlider : UniElement | null = sliders[index]
 
 	if (currentSlider != null) {
@@ -305,26 +305,22 @@ const updateContainerHeight = (index : number) : void => {
 		if (measuredHeight <= 0) {
 			try {
 				const rect = currentSlider.getBoundingClientRect()
-				if (rect.height > 0) {
-					measuredHeight = rect.height
-				}
+				measuredHeight = rect.height
 			} catch (err) {
 				// ignore: fall back to previous height
+				console.error('updateContainerHeight fail', err)
 			}
 		}
 		if (measuredHeight > 0) {
-			el.style.setProperty('height', measuredHeight + 'px')
+			wrapperEl.style.setProperty('height', measuredHeight + 'px')
 		} else {
-			el.style.removeProperty('height')
+			wrapperEl.style.removeProperty('height')
 		}
 	}
 }
 
 // 监听currentIndex变化，延迟更新container高度（auto-height）
 watch(currentIndex, (newVal : number) => {
-	if (!autoHeightEnabled) {
-		return
-	}
 	updateContainerHeight(newVal)
 })
 
@@ -332,35 +328,29 @@ onMounted(() => {
 	const init = () : void => {
 		if (wrapper.value == null) return
 
-		const el = wrapper.value
-		const container = el.querySelector('.uni-swiper-container')
+		const wrapperEl = wrapper.value
+		const container = wrapperEl.querySelector('.uni-swiper-container')
 		if (container == null) return
 
 		const sliders = container.querySelectorAll('.uni-swiper-slider')
 		if (sliders == null) return
 
-		let containerWidth = el.offsetWidth
-		let containerHeight = el.offsetHeight
+		let containerWidth = wrapperEl.offsetWidth
+		let containerHeight = wrapperEl.offsetHeight
 
 		if (containerWidth <= 0 || containerHeight <= 0) {
-			try {
-				const rect = el.getBoundingClientRect()
-				if (rect != null) {
-					if (containerWidth <= 0 && rect.width > 0) {
-						containerWidth = rect.width
-					}
-					if (containerHeight <= 0 && rect.height > 0) {
-						containerHeight = rect.height
-					}
-				}
-			} catch (err) {
-				// ignore
+			const rect = wrapperEl.getBoundingClientRect()
+			if (containerWidth <= 0 && rect.width > 0) {
+				containerWidth = rect.width
+			}
+			if (containerHeight <= 0 && rect.height > 0) {
+				containerHeight = rect.height
 			}
 		}
 
 		if (containerWidth <= 0) {
-			const widthStyle = el.style.getPropertyValue('width')
-			if (widthStyle != null && widthStyle.length > 0 && widthStyle !== 'auto') {
+			const widthStyle = wrapperEl.style.getPropertyValue('width')
+			if (widthStyle.length > 0 && widthStyle !== 'auto') {
 				const parsedWidth = parseMargin(widthStyle)
 				if (parsedWidth > 0) {
 					containerWidth = parsedWidth
@@ -368,8 +358,8 @@ onMounted(() => {
 			}
 		}
 		if (containerHeight <= 0) {
-			const heightStyle = el.style.getPropertyValue('height')
-			if (heightStyle != null && heightStyle.length > 0 && heightStyle !== 'auto') {
+			const heightStyle = wrapperEl.style.getPropertyValue('height')
+			if (heightStyle.length > 0 && heightStyle !== 'auto') {
 				const parsedHeight = parseMargin(heightStyle)
 				if (parsedHeight > 0) {
 					containerHeight = parsedHeight
@@ -382,29 +372,21 @@ onMounted(() => {
 			containerWidth = windowInfo.windowWidth
 		}
 
-		// 先设置slider数量，这样默认指示器才能正确渲染
 		sliderCount.value = sliders.length
 
-		// 查找indicator并移动到container层级（使其不受wrapper transform影响）
-		// 注意：排除默认指示器（它在container内，不在wrapper内，所以不会被查到）
 		const indicators = container.querySelectorAll('.uni-swiper-indicator')
-
+		// 开发者自定义了指示器组件，将其移动到 wrapper 下，并移除默认指示器
 		if (indicators != null && indicators.length > 0) {
-			// 如果有indicator组件,将其移到container
 			for (let i = 0; i < indicators.length; i++) {
 				const indicator = indicators[i] as UniElement
-				// 将indicator从wrapper移到container
-				el.appendChild(indicator)
+				wrapperEl.appendChild(indicator)
 			}
-			// 有自定义indicator组件,不显示默认指示器
 			showDefaultIndicator.value = false
 		} else {
-			// 没有indicator组件,显示默认指示器
 			showDefaultIndicator.value = true
 		}
 		prevMargin = parseMargin(props.previousMargin)
 		nextMargin = parseMargin(props.nextMargin)
-		console.log(prevMargin + ":::" + nextMargin + ":::")
 
 		// 为每个slider添加data-index属性，用于circular模式的DOM重排
 		for (let i = 0; i < sliders.length; i++) {
@@ -412,9 +394,9 @@ onMounted(() => {
 			slider.setAttribute('data-index', i.toString())
 		}
 
-		const computedStyle = el.style.getPropertyValue('height')
+		const computedStyle = wrapperEl.style.getPropertyValue('height')
 		let hasFixedHeight = false
-		if (computedStyle != null && computedStyle.length > 0 && computedStyle !== 'auto') {
+		if (computedStyle.length > 0 && computedStyle !== 'auto') {
 			hasFixedHeight = true
 			if (containerHeight <= 0) {
 				const heightFromStyle = parseMargin(computedStyle)
@@ -496,12 +478,12 @@ onMounted(() => {
 		if (prevMargin > 0 || nextMargin > 0) {
 			if (vertical) {
 				// 垂直方向:上下需要显示margin区域,左右裁剪
-				el.style.setProperty('overflow-x', 'hidden')
-				el.style.setProperty('overflow-y', 'visible')
+				wrapperEl.style.setProperty('overflow-x', 'hidden')
+				wrapperEl.style.setProperty('overflow-y', 'visible')
 			} else {
 				// 水平方向:左右需要显示margin区域,上下裁剪
-				el.style.setProperty('overflow-x', 'visible')
-				el.style.setProperty('overflow-y', 'hidden')
+				wrapperEl.style.setProperty('overflow-x', 'visible')
+				wrapperEl.style.setProperty('overflow-y', 'hidden')
 			}
 		}
 
@@ -520,9 +502,7 @@ onMounted(() => {
 		if (autoplay) startAutoPlay()
 
 		// 初始化完成后，更新container高度（auto-height）
-		if (autoHeightEnabled) {
-			updateContainerHeight(initialIndex)
-		}
+		updateContainerHeight(initialIndex)
 	}
 
 	setTimeout(function () {
@@ -620,7 +600,7 @@ const onTouchMove = (e : TouchEvent) => {
 		} else {
 			translate.value = newTranslate
 		}
-	} else if (circular && sliderCount.value === 2) {
+	} else if (circular && sliderCount.value == 2) {
 		// 2个元素的circular：不支持margin，允许自由拖动
 		translate.value = startTranslate + delta
 	} else {
@@ -694,7 +674,7 @@ const onTouchEnd = (e : TouchEvent) => {
 			// 回到当前
 			slideTo(currentIndex.value, 'touch')
 		}
-	} else if (circular && sliderCount.value === 2) {
+	} else if (circular && sliderCount.value == 2) {
 		// circular模式（2个元素）：简单切换
 		if (shouldChange) {
 			let nextIndex = currentIndex.value

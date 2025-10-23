@@ -342,7 +342,6 @@
 				</swiper-slider>
 			</swiper-view>
 		</view>
-
 	<!-- #ifdef APP -->
 	</scroll-view>
 	<!-- #endif -->
