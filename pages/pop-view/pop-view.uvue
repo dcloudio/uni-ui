@@ -38,15 +38,15 @@
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">跟随元素演示</text>
 
 			<view style="align-items: center;">
-				<button ref="followBtnUp" @click="showFollowPopUp" size="mini">向上弹出</button>
-				<button ref="followBtnDown" @click="showFollowPopDown" size="mini" style="margin-top: 5px;">向下弹出</button>
-				<button ref="followBtnLeft" @click="showFollowPopLeft" size="mini" style="margin-top: 5px;">向左弹出</button>
-				<button ref="followBtnRight" @click="showFollowPopRight" size="mini" style="margin-top: 5px;">向右弹出</button>
+				<button id="followBtnUp" @click="showFollowPopUp" size="mini">向上弹出</button>
+				<button id="followBtnDown" @click="showFollowPopDown" size="mini" style="margin-top: 5px;">向下弹出</button>
+				<button id="followBtnLeft" @click="showFollowPopLeft" size="mini" style="margin-top: 5px;">向左弹出</button>
+				<button id="followBtnRight" @click="showFollowPopRight" size="mini" style="margin-top: 5px;">向右弹出</button>
 			</view>
 
 			<view style="margin-top: 10px; align-items: center;">
-				<button ref="followBtnArrow" @click="showFollowPopWithArrow" size="mini">带箭头且无蒙层</button>
-				<button ref="followBtnOffset" @click="showFollowPopWithOffset" size="mini" style="margin-top: 5px;">带偏移</button>
+				<button id="followBtnArrow" @click="showFollowPopWithArrow" size="mini">带箭头且无蒙层</button>
+				<button id="followBtnOffset" @click="showFollowPopWithOffset" size="mini" style="margin-top: 5px;">带偏移</button>
 			</view>
 		</view>
 
@@ -55,15 +55,15 @@
 			<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">跟随元素对齐方式演示</text>
 
 			<view class="button-wrap">
-				<button ref="alignBtnDownLeft" @click="showAlignDownLeft" size="mini">下方左对齐</button>
-				<button ref="alignBtnDownCenter" @click="showAlignDownCenter" size="mini">下方水平居中</button>
-				<button ref="alignBtnDownRight" @click="showAlignDownRight" size="mini">下方右对齐</button>
+				<button id="alignBtnDownLeft" @click="showAlignDownLeft" size="mini">下方左对齐</button>
+				<button id="alignBtnDownCenter" @click="showAlignDownCenter" size="mini">下方水平居中</button>
+				<button id="alignBtnDownRight" @click="showAlignDownRight" size="mini">下方右对齐</button>
 			</view>
 
 			<view class="button-wrap">
-				<button ref="alignBtnRightTop" @click="showAlignRightTop" size="mini">右侧上对齐</button>
-				<button ref="alignBtnRightCenter" @click="showAlignRightCenter" size="mini">右侧垂直居中</button>
-				<button ref="alignBtnLeftBottom" @click="showAlignLeftBottom" size="mini">左侧下对齐</button>
+				<button id="alignBtnRightTop" @click="showAlignRightTop" size="mini">右侧上对齐</button>
+				<button id="alignBtnRightCenter" @click="showAlignRightCenter" size="mini">右侧垂直居中</button>
+				<button id="alignBtnLeftBottom" @click="showAlignLeftBottom" size="mini">左侧下对齐</button>
 			</view>
 		</view>
 
@@ -141,8 +141,14 @@
 			:pop-style="popStyle"
 			:mask-class="popMaskClass"
 			:mask-style="popMaskStyle"
-			:menu-arrow-class="popMenuArrowClass"
-			:menu-arrow-style="popMenuArrowStyle"
+			:follow-id="popFollowId"
+			:follow-side="popFollowSide"
+			:follow-offset-x="popFollowOffsetX"
+			:follow-offset-y="popFollowOffsetY"
+			:non-follow-arrow="popNonFollowArrow"
+			:follow-align="popFollowAlign"
+			:follow-arrow-class="popFollowArrowClass"
+			:follow-arrow-style="popFollowArrowStyle"
 			@close="handleClose"
 		>
 			<view style="min-width: 200px;">
@@ -157,6 +163,7 @@
 			v-if="showStackedPop1"
 			:mask-click-close="true"
 			@close="closeStackedLayer1"
+			pop-style="width: 720rpx;"
 		>
 			<!-- TODO 下面的3个弹层在Web上，手机模式下width是50%，挤在一起。Android相对正常。3层都有差异，都要拉齐 @王亚琪 -->
 			<view style="padding: 10px; background-color: #fff; border-radius: 8px;">
@@ -174,6 +181,7 @@
 			v-if="showStackedPop2"
 			:mask-click-close="true"
 			@close="closeStackedLayer2"
+			pop-style="width: 680rpx;"
 		>
 			<view style="padding: 10px; background-color: #f0f0f0; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">第2层弹层</text>
@@ -190,6 +198,7 @@
 			v-if="showStackedPop3"
 			:mask-click-close="true"
 			@close="closeStackedLayer3"
+			pop-style="width: 600rpx;"
 		>
 			<view style="padding: 10px; background-color: #e0e0e0; border-radius: 8px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #333;">第3层弹层</text>
@@ -236,6 +245,37 @@
 			</view>
 		</uni-pop-view>
 
+		<!-- 自动隐藏弹层（Toast效果） -->
+		<uni-pop-view
+			v-if="showAutoHideToast"
+			pos="custom"
+			:non-mask="true"
+			:auto-hide-duration="2000"
+			pop-style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.7); padding: 12px 24px; border-radius: 8px; min-width: 200px;"
+			@close="closeAutoHideToast"
+		>
+			<text style="font-size: 14px; color: #fff;text-align: center;">{{ toastMessage }}</text>
+		</uni-pop-view>
+
+		<!-- 带箭头且无蒙层弹层 -->
+		<uni-pop-view
+			v-if="showArrowNoMaskPop"
+			:non-mask="true"
+			pop-style="background-color: #ccc; z-index: 997;"
+			follow-id="followBtnArrow"
+			follow-side="down"
+			:follow-offset-y="10"
+			:non-follow-arrow="false"
+			follow-arrow-style="border-bottom-color: #ccc;"
+			@close="closeArrowNoMaskPop"
+		>
+			<view style="min-width: 200px;">
+				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">带箭头且无蒙层</text>
+				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这个弹层带有指向按钮的箭头。无蒙层可以和跟随元素一起滚动</text>
+				<button @click="closeArrowNoMaskPop" size="mini">关闭</button>
+			</view>
+		</uni-pop-view>
+
 	<!-- #ifdef APP -->
 	</scroll-view>
 	<!-- #endif -->
@@ -247,12 +287,6 @@
 <script setup lang="uts">
 	import { ComponentPublicInstance } from 'vue'
 
-	// 定义 uni-pop-view 组件暴露的方法接口
-	type PopViewExpose = {
-		followElement: (element: Element, side: "up" | "down" | "left" | "right", offsetX: number, offsetY: number, showArrow: boolean, align: "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical") => void
-		close: () => void
-	}
-
 	// 弹层状态
 	const showPop = ref<boolean>(false)
 	const popPos = ref<"center" | "left" | "right" | "top" | "bottom" | "custom">("center")
@@ -263,8 +297,14 @@
 	const popStyle = ref<string>('')
 	const popMaskClass = ref<string>('')
 	const popMaskStyle = ref<string>('')
-	const popMenuArrowClass = ref<string>('')
-	const popMenuArrowStyle = ref<string>('')
+	const popFollowId = ref<string>('')
+	const popFollowSide = ref<"up" | "down" | "left" | "right">('down')
+	const popFollowOffsetX = ref<number>(0)
+	const popFollowOffsetY = ref<number>(0)
+	const popNonFollowArrow = ref<boolean>(true)
+	const popFollowAlign = ref<"left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical">('center-horizontal')
+	const popFollowArrowClass = ref<string>('')
+	const popFollowArrowStyle = ref<string>('')
 	const popTitle = ref<string>('弹层标题')
 	const popContent = ref<string>('这是弹层内容')
 
@@ -280,20 +320,15 @@
 	const showCustomAnimPop = ref<boolean>(false)
 	const customAnimClass = ref<string>('custom-anim-start')
 
+	// 自动隐藏弹层状态（Toast效果）
+	const showAutoHideToast = ref<boolean>(false)
+	const toastMessage = ref<string>('')
+
+	// 带箭头无蒙层弹层状态
+	const showArrowNoMaskPop = ref<boolean>(false)
+
 	// 引用
 	const popViewRef = ref<ComponentPublicInstance | null>(null)
-	const followBtnUp = ref<Element | null>(null)
-	const followBtnDown = ref<Element | null>(null)
-	const followBtnLeft = ref<Element | null>(null)
-	const followBtnRight = ref<Element | null>(null)
-	const followBtnArrow = ref<Element | null>(null)
-	const followBtnOffset = ref<Element | null>(null)
-	const alignBtnDownLeft = ref<Element | null>(null)
-	const alignBtnDownRight = ref<Element | null>(null)
-	const alignBtnDownCenter = ref<Element | null>(null)
-	const alignBtnRightTop = ref<Element | null>(null)
-	const alignBtnLeftBottom = ref<Element | null>(null)
-	const alignBtnRightCenter = ref<Element | null>(null)
 
 	// 定义配置类型
 	type PopViewConfig = {
@@ -305,8 +340,14 @@
 		popStyle?: string,
 		maskClass?: string,
 		maskStyle?: string,
-		menuArrowClass?: string,
-		menuArrowStyle?: string,
+		followId?: string,
+		followSide?: "up" | "down" | "left" | "right",
+		followOffsetX?: number,
+		followOffsetY?: number,
+		nonFollowArrow?: boolean,
+		followAlign?: "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical",
+		followArrowClass?: string,
+		followArrowStyle?: string,
 		title?: string,
 		content?: string
 	}
@@ -321,8 +362,14 @@
 		popStyle.value = config.popStyle ?? ''
 		popMaskClass.value = config.maskClass ?? ''
 		popMaskStyle.value = config.maskStyle ?? ''
-		popMenuArrowClass.value = config.menuArrowClass ?? ''
-		popMenuArrowStyle.value = config.menuArrowStyle ?? ''
+		popFollowId.value = config.followId ?? ''
+		popFollowSide.value = config.followSide ?? 'down'
+		popFollowOffsetX.value = config.followOffsetX ?? 0
+		popFollowOffsetY.value = config.followOffsetY ?? 0
+		popNonFollowArrow.value = config.nonFollowArrow ?? true
+		popFollowAlign.value = config.followAlign ?? 'center-horizontal'
+		popFollowArrowClass.value = config.followArrowClass ?? ''
+		popFollowArrowStyle.value = config.followArrowStyle ?? ''
 		popTitle.value = config.title ?? '弹层标题'
 		popContent.value = config.content ?? '这是弹层内容'
 		showPop.value = true
@@ -424,15 +471,14 @@
 		})
 	}
 
-	// 自动隐藏
+	// 自动隐藏（Toast效果）
 	const showAutoHidePop = () => {
-		showPopView({
-			autoHideDuration: 2000,
-			nonMask: true,
-			popStyle: 'background-color:#eee;bottom:60px;height:120px', // TODO 应该固定在底部，且弹层上不应该有关闭按钮
-			title: '自动隐藏',
-			content: '弹层将在2秒后自动关闭'
-		})
+		toastMessage.value = '弹层将在2秒后自动关闭'
+		showAutoHideToast.value = true
+	}
+
+	const closeAutoHideToast = () => {
+		showAutoHideToast.value = false
 	}
 
 	// 自定义样式
@@ -461,191 +507,168 @@
 	// 跟随元素
 	const showFollowPopUp = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
+			followId: 'followBtnUp',
+			followSide: 'up',
+			followOffsetY: 10,
+			nonFollowArrow: true,
 			title: '向上弹出',
 			content: '跟随按钮向上显示'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnUp.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnUp.value, 'up', 0, 10, false, 'center-horizontal')
-			}
 		})
 	}
 
 	const showFollowPopDown = () => {
 		showPopView({
-			pos: "custom",
 			maskStyle: "background-color: transparent",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
+			followId: 'followBtnDown',
+			followSide: 'down',
+			followOffsetY: 10,
+			nonFollowArrow: true,
 			title: '向下弹出',
 			content: '跟随按钮向下显示'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnDown.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnDown.value, 'down', 0, 10, false, 'center-horizontal')
-			}
 		})
 	}
 
 	const showFollowPopLeft = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
+			followId: 'followBtnLeft',
+			followSide: 'left',
+			followOffsetX: 10,
+			nonFollowArrow: true,
 			title: '向左弹出',
 			content: '跟随按钮向左显示'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnLeft.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnLeft.value, 'left', 10, 0, false, 'center-vertical')
-			}
 		})
 	}
 
 	const showFollowPopRight = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
+			followId: 'followBtnRight',
+			followSide: 'right',
+			followOffsetX: 10,
+			nonFollowArrow: true,
 			title: '右侧弹出',
 			content: '跟随按钮向右显示'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnRight.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnRight.value, 'right', 10, 0, false, 'center-vertical')
-			}
 		})
 	}
 
 	const showFollowPopWithArrow = () => {
-		showPopView({
-			pos: "custom",
-			nonMask:true,
-			popStyle: 'background-color: #ccc;z-index:997', //降低z-index，不覆盖导航栏和tabbar
-			menuArrowStyle: 'border-bottom-color: #ccc;',
-			title: '带箭头且无蒙层',
-			content: '这个弹层带有指向按钮的箭头。无蒙层可以和跟随元素一起滚动'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnArrow.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnArrow.value, 'down', 0, 10, true, 'center-horizontal')
-			}
-		})
+		showArrowNoMaskPop.value = true
+	}
+
+	const closeArrowNoMaskPop = () => {
+		showArrowNoMaskPop.value = false
 	}
 
 	const showFollowPopWithOffset = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-bottom-color: #ccc;',
+			followId: 'followBtnOffset',
+			followSide: 'down',
+			followOffsetX: 50,
+			followOffsetY: 20,
+			nonFollowArrow: false,
+			followArrowStyle: 'border-bottom-color: #ccc;',
 			title: '带偏移',
 			content: '这个弹层使用了偏移量'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && followBtnOffset.value != null) {
-				popViewRef.value.$callMethod('followElement', followBtnOffset.value, 'down', 50, 20, true, 'center-horizontal')
-			}
 		})
 	}
 
 	// 对齐方式演示
 	const showAlignDownLeft = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-bottom-color: #ccc;',
+			followId: 'alignBtnDownLeft',
+			followSide: 'down',
+			followOffsetY: 10,
+			nonFollowArrow: false,
+			followAlign: 'left',
+			followArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方左对齐',
 			content: '弹层与按钮左侧对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnDownLeft.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnDownLeft.value, 'down', 0, 10, true, 'left')
-			}
 		})
 	}
 
 	const showAlignDownRight = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-bottom-color: #ccc;',
+			followId: 'alignBtnDownRight',
+			followSide: 'down',
+			followOffsetY: 10,
+			nonFollowArrow: false,
+			followAlign: 'right',
+			followArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方右对齐',
 			content: '弹层与按钮右侧对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnDownRight.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnDownRight.value, 'down', 0, 10, true, 'right')
-			}
 		})
 	}
 
 	const showAlignDownCenter = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-bottom-color: #ccc;',
+			followId: 'alignBtnDownCenter',
+			followSide: 'down',
+			followOffsetY: 10,
+			nonFollowArrow: false,
+			followAlign: 'center-horizontal',
+			followArrowStyle: 'border-bottom-color: #ccc;',
 			title: '下方水平居中',
 			content: '弹层与按钮水平居中对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnDownCenter.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnDownCenter.value, 'down', 0, 10, true, 'center-horizontal')
-			}
 		})
 	}
 
 	const showAlignRightTop = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-right-color: #ccc;',
+			followId: 'alignBtnRightTop',
+			followSide: 'right',
+			followOffsetX: 10,
+			nonFollowArrow: false,
+			followAlign: 'top',
+			followArrowStyle: 'border-right-color: #ccc;',
 			title: '右侧上对齐',
 			content: '弹层与按钮顶部对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnRightTop.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnRightTop.value, 'right', 10, 0, true, 'top')
-			}
 		})
 	}
 
 	const showAlignLeftBottom = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-left-color: #ccc;',
+			followId: 'alignBtnLeftBottom',
+			followSide: 'left',
+			followOffsetX: 10,
+			nonFollowArrow: false,
+			followAlign: 'bottom',
+			followArrowStyle: 'border-left-color: #ccc;',
 			title: '左侧下对齐',
 			content: '弹层与按钮底部对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnLeftBottom.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnLeftBottom.value, 'left', 10, 0, true, 'bottom')
-			}
 		})
 	}
 
 	const showAlignRightCenter = () => {
 		showPopView({
-			pos: "custom",
 			maskClickClose: true,
 			popStyle: 'background-color: #ccc;',
-			menuArrowStyle: 'border-right-color: #ccc;',
+			followId: 'alignBtnRightCenter',
+			followSide: 'right',
+			followOffsetX: 10,
+			nonFollowArrow: false,
+			followAlign: 'center-vertical',
+			followArrowStyle: 'border-right-color: #ccc;',
 			title: '右侧垂直居中',
 			content: '弹层与按钮垂直居中对齐'
-		})
-		nextTick(() => {
-			if (popViewRef.value != null && alignBtnRightCenter.value != null) {
-				popViewRef.value.$callMethod('followElement', alignBtnRightCenter.value, 'right', 10, 0, true, 'center-vertical')
-			}
 		})
 	}
 

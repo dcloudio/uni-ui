@@ -8,8 +8,8 @@
 	 @touchstart="handlePopTouchStart" @touchmove="handlePopTouchMove" @wheel="handlePopWheel"
 	 <!-- #endif -->
 	 >
-		<!-- 菜单箭头 -->
-		<view v-if="showMenuArrow" :class="['menu-arrow', menuArrowPositionClass, props.menuArrowClass]" :style="[menuArrowComputedStyle, props.menuArrowStyle]"></view>
+		<!-- 跟随箭头 -->
+		<view v-if="showFollowArrow" :class="['follow-arrow', followArrowPositionClass, props.followArrowClass]" :style="[followArrowComputedStyle, props.followArrowStyle]"></view>
 
 		<!-- 内容插槽 -->
 		<slot></slot>
@@ -54,13 +54,37 @@
 		 */
 		maskStyle? : string,
 		/**
-		 * @description 通过class自定义菜单箭头的样式
+		 * @description 通过class自定义跟随箭头的样式
 		 */
-		menuArrowClass? : string.ClassString,
+		followArrowClass? : string.ClassString,
 		/**
-		 * @description 通过style自定义菜单箭头的样式
+		 * @description 通过style自定义跟随箭头的样式
 		 */
-		menuArrowStyle? : string
+		followArrowStyle? : string,
+		/**
+		 * @description 要跟随的元素id
+		 */
+		followId? : string,
+		/**
+		 * @description 出现在跟随的元素的那一边
+		 */
+		followSide? : "up" | "down" | "left" | "right",
+		/**
+		 * @description 出现在跟随元素的位置后再偏移多少的x坐标值
+		 */
+		followOffsetX? : number,
+		/**
+		 * @description 出现在跟随元素的位置后再偏移多少的y坐标值
+		 */
+		followOffsetY? : number,
+		/**
+		 * @description 是否关闭显示跟随箭头
+		 */
+		nonFollowArrow? : boolean,
+		/**
+		 * @description 跟随元素的对齐方式
+		 */
+		followAlign? : "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical"
 	}
 
 	// 使用 withDefaults 设置默认值
@@ -73,8 +97,14 @@
 		popStyle: '',
 		maskClass: '',
 		maskStyle: '',
-		menuArrowClass: '',
-		menuArrowStyle: ''
+		followArrowClass: '',
+		followArrowStyle: '',
+		followId: '',
+		followSide: 'down',
+		followOffsetX: 0,
+		followOffsetY: 0,
+		nonFollowArrow: false,
+		followAlign: 'center-horizontal'
 	})
 
 	// 定义发射事件
@@ -95,7 +125,7 @@
 	}
 
 	// 响应式状态
-	const showMenuArrow = ref<boolean>(false)
+	const showFollowArrow = ref<boolean>(false)
 	const followElementData = ref<FollowElementData | null>(null)
 	const isClosing = ref<boolean>(false)
 	// 动画状态：'hidden' - 隐藏状态, 'showing' - 显示动画, 'shown' - 显示完成, 'hiding' - 隐藏动画
@@ -311,7 +341,7 @@
 	})
 
 	// 计算箭头位置class
-	const menuArrowPositionClass = computed(() : string.ClassString => {
+	const followArrowPositionClass = computed(() : string.ClassString => {
 		if (followElementData.value != null) {
 			return `arrow-${followElementData.value.side}` as string.ClassString
 		}
@@ -319,7 +349,7 @@
 	})
 
 	// 计算箭头样式
-	const menuArrowComputedStyle = computed(() : string => {
+	const followArrowComputedStyle = computed(() : string => {
 		if (followElementData.value == null || followElementData.value.element == null) {
 			return ''
 		}
@@ -507,7 +537,7 @@
 	// 启动位置跟踪（用于跟随元素模式）
 	const startPositionTracker = () => {
 		// #ifdef WEB
-		// Web 平台：只有在不支持 CSS Anchor Positioning 时才启动监听
+		// Web和小程序 平台：只有在不支持 CSS Anchor Positioning 时才启动监听
 		const needTracker = !positionTrackerActive && followElementData.value != null && !supportsAnchorPositioning
 		// #endif
 
@@ -523,11 +553,11 @@
 			// Web 平台：使用滚动事件监听
 			window.addEventListener('scroll', handlePageScroll, { passive: true, capture: true })
 			window.addEventListener('resize', handlePageScroll, { passive: true })
-			console.log('Web: Scroll listener started for follow element')
+			// console.log('Web: Scroll listener started for follow element')
 			// #endif
 
 			// #ifndef WEB
-			// APP 平台：使用定时器轮询检测位置变化
+			// APP和MP 平台：使用定时器轮询检测位置变化
 			if (followElementData.value != null && followElementData.value.element != null) {
 				const rect = followElementData.value.element.getBoundingClientRect()
 				lastElementTop = rect.top
@@ -546,7 +576,7 @@
 				}
 			}, 16) as number  // 约 60fps
 
-			console.log('APP: Position tracker started for follow element')
+			// console.log('APP: Position tracker started for follow element')
 			// #endif
 		}
 	}
@@ -589,7 +619,7 @@
 				return CSS.supports('anchor-name', '--test')
 			}
 		} catch (e) {
-			console.log('CSS Anchor Positioning check failed:', e)
+			// console.log('CSS Anchor Positioning check failed:', e)
 		}
 		return false
 	}
@@ -704,78 +734,8 @@
 	}
 	// #endif
 
-	/**
-	 * @description 跟随元素显示
-	 * @param element 目标元素
-	 * @param side 显示在目标元素的哪一侧
-	 * @param offsetX X轴偏移
-	 * @param offsetY Y轴偏移
-	 * @param showArrow 是否显示箭头
-	 * @param align 对齐方式：left-左对齐, right-右对齐, top-上对齐, bottom-下对齐, center-horizontal-水平居中, center-vertical-垂直居中
-	 */
-	function followElement(element : UniElement, side : "up" | "down" | "left" | "right", offsetX : number, offsetY : number, showArrow : boolean, align : "left" | "right" | "top" | "bottom" | "center-horizontal" | "center-vertical") : void {
-		// #ifdef WEB
-		let anchorName : string | null = null
-
-		// 如果支持 CSS Anchor Positioning，为目标元素添加 anchor-name
-		if (supportsAnchorPositioning) {
-			try {
-				anchorName = '--uni-pop-anchor-' + Date.now()
-				element.style.setProperty('anchor-name', anchorName)
-				console.log('CSS Anchor Positioning enabled with anchor name:', anchorName)
-			} catch (e) {
-				console.log('Failed to set anchor-name:', e)
-				anchorName = null
-			}
-		} else {
-			// 不支持则启动滚动监听
-			console.log('CSS Anchor Positioning not supported, using scroll listener fallback')
-		}
-
-		followElementData.value = {
-			element: element,
-			side: side,
-			offsetX: offsetX,
-			offsetY: offsetY,
-			align: align,
-			anchorName: anchorName
-		} as FollowElementData
-		// #endif
-
-		// #ifndef WEB
-		// APP 平台始终使用 JavaScript 计算位置
-		followElementData.value = {
-			element: element,
-			side: side,
-			offsetX: offsetX,
-			offsetY: offsetY,
-			align: align
-		} as FollowElementData
-		console.log('APP platform: using scroll listener for follow element')
-		// #endif
-
-		showMenuArrow.value = showArrow
-
-		// #ifdef WEB
-		// Web 平台：如果不支持 CSS Anchor Positioning，延迟启动位置跟踪
-		if (!supportsAnchorPositioning) {
-			nextTick(() => {
-				startPositionTracker()
-			})
-		}
-		// #endif
-
-		// #ifndef WEB
-		// APP 平台：始终启动位置跟踪
-		nextTick(() => {
-			startPositionTracker()
-		})
-		// #endif
-	}
-
 	// 暴露方法给外部调用
 	defineExpose({
-		followElement,
 		close
 	})
 
@@ -784,25 +744,88 @@
 		// #ifdef WEB
 		// Web 平台：检测 CSS Anchor Positioning 支持
 		supportsAnchorPositioning = checkAnchorPositioningSupport()
-		console.log('Web platform - Component mounted, CSS Anchor Positioning support:', supportsAnchorPositioning)
+		// console.log('Web platform - Component mounted, CSS Anchor Positioning support:', supportsAnchorPositioning)
 		// #endif
 
 		// #ifndef WEB
 		// APP 平台：输出日志
-		console.log('APP platform - Component mounted, using scroll listener for follow element')
+		// console.log('APP platform - Component mounted, using scroll listener for follow element')
 		// #endif
 
-		// 只有在从四边弹出时才需要动画
-		const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
+		// 如果设置了 followId，自动跟随元素
+		if (props.followId != '') {
+			// 延迟执行，确保目标元素已经渲染
+			nextTick(() => {
+				const targetElement = uni.getElementById(props.followId)
+				if (targetElement != null) {
+					// 设置跟随元素数据
+					// #ifdef WEB
+					let anchorName : string | null = null
 
-		if (needAnimation) {
-			// 启动显示动画
-			// 先设置为 showing 状态（初始隐藏位置）
-			animationState.value = 'showing'
-			// 在下一帧切换到 shown 状态（触发动画）
-			setTimeout(() => {
-				animationState.value = 'shown'
-			}, 50)
+					// 如果支持 CSS Anchor Positioning，为目标元素添加 anchor-name
+					if (supportsAnchorPositioning) {
+						try {
+							anchorName = '--uni-pop-anchor-' + Date.now()
+							targetElement.style.setProperty('anchor-name', anchorName)
+							// console.log('CSS Anchor Positioning enabled with anchor name:', anchorName)
+						} catch (e) {
+							console.log('Failed to set anchor-name:', e)
+							anchorName = null
+						}
+					} else {
+						// 不支持则启动滚动监听
+						// console.log('CSS Anchor Positioning not supported, using scroll listener fallback')
+					}
+
+					followElementData.value = {
+						element: targetElement,
+						side: props.followSide,
+						offsetX: props.followOffsetX,
+						offsetY: props.followOffsetY,
+						align: props.followAlign,
+						anchorName: anchorName
+					} as FollowElementData
+
+					// Web 平台：如果不支持 CSS Anchor Positioning，启动位置跟踪
+					if (!supportsAnchorPositioning) {
+						startPositionTracker()
+					}
+					// #endif
+
+					// #ifndef WEB
+					// APP 平台始终使用 JavaScript 计算位置
+					// 但这里会导致小程序也走了手动计算位置，性能会很差
+					followElementData.value = {
+						element: targetElement,
+						side: props.followSide,
+						offsetX: props.followOffsetX,
+						offsetY: props.followOffsetY,
+						align: props.followAlign
+					} as FollowElementData
+					// console.log('APP platform: using scroll listener for follow element')
+
+					// APP 平台：始终启动位置跟踪
+					startPositionTracker()
+					// #endif
+
+					showFollowArrow.value = !props.nonFollowArrow
+				} else {
+					console.warn(`followId "${props.followId}" not found`)
+				}
+			})
+		} else {
+			// 只有在从四边弹出时才需要动画
+			const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
+
+			if (needAnimation) {
+				// 启动显示动画
+				// 先设置为 showing 状态（初始隐藏位置）
+				animationState.value = 'showing'
+				// 在下一帧切换到 shown 状态（触发动画）
+				setTimeout(() => {
+					animationState.value = 'shown'
+				}, 50)
+			}
 		}
 
 		startAutoHide()
@@ -949,7 +972,7 @@
 		/* 跟随元素位置由计算样式控制 */
 	}
 
-	.menu-arrow {
+	.follow-arrow {
 		position: absolute;
 		width: 0;
 		height: 0;
