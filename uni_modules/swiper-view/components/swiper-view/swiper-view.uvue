@@ -73,13 +73,14 @@ const realCountRef = ref(0)
 const translate = ref(0)
 // 是否正在动画
 const animating = ref(false)
-const timer = ref(0)
+// auto play setInterval timer
+const autoPlayTimer = ref(0)
 // 是否显示默认指示器，默认为true
 const showDefaultIndicator = ref(true)
 // 用于取消动画的setTimeout
 let animationTimer = 0
 
-let startX = 0, startY = 0, startTime = 0, dragging = false, startTranslate = 0, preventDef = false
+let startX = 0, startY = 0, startTime = 0, dragging = false, startTranslate = 0, isPreventDefault = false
 let prevMargin = 0, nextMargin = 0, itemSize = 0
 let realCount = 0 // 真实的slide数量
 let autoHeightEnabled = true
@@ -106,16 +107,9 @@ const parseMargin = (margin : string) : number => {
 const wrapperStyle = computed(() => {
 	const direction = vertical ? 'Y' : 'X'
 	const transitionDuration = animating.value ? 500 : 0;
-	// 添加will-change和transform-style以优化渲染性能,防止内容闪烁
-	// 加上margin偏移,让wrapper向右/下移动,从而在左/上侧留出空间显示前一个slider
-	const marginOffset = vertical ? prevMargin : prevMargin
-	const offset = translate.value + marginOffset
+	const offset = translate.value + prevMargin
 
-	const finalCSS = `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms;`
-
-	console.log("offset:" + finalCSS)
-	return finalCSS
-
+	return `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms;`
 })
 
 // 创建数组用于默认指示器的v-for迭代
@@ -176,47 +170,46 @@ function adjustCircularOrder(targetIndex : number) {
 	}
 }
 
-function slideTo(idx : number, src : string) {
-	console.log("idx", idx, "src", src)
-	if (!circular && (idx < 0 || idx >= count.value)) return
+function slideTo(targetIndex : number, source : string) {
+	console.log('slideTo targetIndex', targetIndex);
+	console.log('slideTo source', source);
+	if (!circular && (targetIndex < 0 || targetIndex >= count.value)) return
 
 	const old = currentIndex.value
-	let targetIndex = idx
+	let calculatedTargetIndex = targetIndex
 
 	// circular模式下处理边界
 	if (circular && realCount > 1) {
 		// 循环索引
-		if (idx < 0) {
-			targetIndex = realCount - 1
-		} else if (idx >= realCount) {
-			targetIndex = 0
+		if (targetIndex < 0) {
+			calculatedTargetIndex = realCount - 1
+		} else if (targetIndex >= realCount) {
+			calculatedTargetIndex = 0
 		} else {
-			targetIndex = idx
+			calculatedTargetIndex = targetIndex
 		}
 	}
 
-	currentIndex.value = targetIndex
+	currentIndex.value = calculatedTargetIndex
 	animating.value = true
 
 	// circular模式下：先动画到目标位置（位置0或位置2），动画结束后再重排DOM
 	if (circular && realCount >= 3) {
 		// 判断滑动方向
-		const isForward = (old === 0 && targetIndex === realCount - 1) ||
-			(targetIndex < old && !(old === realCount - 1 && targetIndex === 0))
+		const isForward = (old === 0 && calculatedTargetIndex === realCount - 1) ||
+			(calculatedTargetIndex < old && !(old === realCount - 1 && calculatedTargetIndex === 0))
 
 		// 向前滑动到位置0，向后滑动到位置2
 		const targetDomPosition = isForward ? 0 : 2
 		translate.value = -(targetDomPosition * itemSize)
-		// console.log("222")
 	} else {
-		translate.value = -(targetIndex * itemSize)
-		// console.log("111")
+		translate.value = -(calculatedTargetIndex * itemSize)
 	}
 
 	console.log(translate.value)
 
-	if (old != targetIndex) {
-		emit('change', { detail: { current: targetIndex, source: src } as UniSwiperViewChangeEventDetail } as UniSwiperViewChangeEvent)
+	if (old != calculatedTargetIndex) {
+		emit('change', { detail: { current: calculatedTargetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewChangeEvent)
 	}
 
 	// 清除之前的动画timer
@@ -231,35 +224,34 @@ function slideTo(idx : number, src : string) {
 
 		// circular模式：动画结束后重排DOM，使targetIndex回到位置1
 		if (circular && realCount >= 3) {
-			adjustCircularOrder(targetIndex)
+			adjustCircularOrder(calculatedTargetIndex)
 			translate.value = -(1 * itemSize)
 		}
-		emit('animationfinish', { detail: { current: targetIndex, source: src } as UniSwiperViewChangeEventDetail } as UniSwiperViewAnimationFinishEvent)
+		emit('animationfinish', { detail: { current: calculatedTargetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewAnimationFinishEvent)
 	}, duration)
 }
 
-function stopTimer() {
-	if (timer.value > 0) {
-		clearInterval(timer.value)
-		timer.value = 0
+function stopAutoPlay() {
+	if (autoPlayTimer.value > 0) {
+		clearInterval(autoPlayTimer.value)
+		autoPlayTimer.value = 0
 	}
 }
 
-function startTimer() {
+function startAutoPlay() {
 	const total = circular && realCount > 1 ? realCount : count.value
 	if (!autoplay || total <= 1) return
-	stopTimer()
-	timer.value = setInterval(() => {
+	stopAutoPlay()
+	autoPlayTimer.value = setInterval(() => {
 		let next = currentIndex.value + 1
 		if (circular && realCount > 1) {
 			if (next >= realCount) next = 0
 		} else {
 			if (next >= count.value) {
-				stopTimer()
+				stopAutoPlay()
 				return
 			}
 		}
-		console.log("startTimer 123")
 		slideTo(next, 'autoplay')
 	}, interval)
 }
@@ -268,8 +260,8 @@ function startTimer() {
 provide('swiper-vertical', props.vertical)
 provide('swiper-current', currentIndex)
 provide('swiper-total', realCountRef) // 总是provide真实数量，不包括克隆的
-provide('swiper-change', (idx : number) => {
-	slideTo(idx, 'click')
+provide('swiper-change', (targetIndex : number) => {
+	slideTo(targetIndex, 'click')
 })
 
 watch(() : number => props.current, (v : number) => {
@@ -530,7 +522,7 @@ onMounted(() => {
 			translate.value = -(initialIndex * itemSize)
 		}
 
-		if (autoplay) startTimer()
+		if (autoplay) startAutoPlay()
 
 		// 初始化完成后，更新container高度（auto-height）
 		if (autoHeightEnabled) {
@@ -543,10 +535,10 @@ onMounted(() => {
 	}, 100)
 })
 
-onUnmounted(() => stopTimer())
+onUnmounted(() => stopAutoPlay())
 
 const onTouchStart = (e : TouchEvent) => {
-	stopTimer()
+	stopAutoPlay()
 
 	// 如果正在动画中,立即停止动画并完成DOM重排
 	if (animating.value) {
@@ -571,7 +563,7 @@ const onTouchStart = (e : TouchEvent) => {
 	startTime = Date.now()
 	dragging = true
 	startTranslate = translate.value
-	preventDef = false
+	isPreventDefault = false
 
 	console.log("startTranslate", startTranslate)
 }
@@ -601,15 +593,15 @@ const onTouchMove = (e : TouchEvent) => {
 		}
 	}
 
-	if (!preventDef) {
+	if (!isPreventDefault) {
 		const adx = Math.abs(dx), ady = Math.abs(dy)
 		if ((vertical && ady > adx) || (!vertical && adx > ady)) {
-			preventDef = true
+			isPreventDefault = true
 			// 只在确定滑动方向后才开始emit transition事件
 			emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
 		}
 		// 根据边界情况决定是否阻止默认事件
-		if (preventDef && !atBoundary && (adx > 5 || ady > 5)) {
+		if (isPreventDefault && !atBoundary && (adx > 5 || ady > 5)) {
 			e.preventDefault()
 		}
 	} else {
@@ -758,7 +750,7 @@ const onTouchEnd = (e : TouchEvent) => {
 	}
 
 
-	if (autoplay) startTimer()
+	if (autoplay) startAutoPlay()
 }
 </script>
 

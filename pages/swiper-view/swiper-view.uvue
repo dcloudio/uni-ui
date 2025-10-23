@@ -37,7 +37,6 @@
 						</view>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -60,7 +59,6 @@
 						<text style="color: white; font-size: 24px;">Slide 3 黑</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -95,7 +93,6 @@
 						</view>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -118,7 +115,6 @@
 						<text style="color: white; font-size: 24px;">Vertical 3</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -141,7 +137,6 @@
 						<text style="color: white; font-size: 24px;">Vertical 3</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -295,7 +290,6 @@
 						<text style="color: white; font-size: 24px;">Event 3</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -346,7 +340,6 @@
 						<text style="color: white; font-size: 24px;">Rebound 3</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
