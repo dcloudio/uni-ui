@@ -9,7 +9,7 @@
 
 		<!-- 不等高slider测试(Auto Height) -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">不等高slider测试（Auto Height）app和web都不正常：</text>
+			<text style="color: #666; margin-bottom: 10px;">不等高slider测试（Auto Height）harmony 无效：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">容器高度随当前slider内容自动调整</text>
 			<swiper-view style="background-color: #f5f5f5;">
 				<swiper-slider :auto-height="true">
