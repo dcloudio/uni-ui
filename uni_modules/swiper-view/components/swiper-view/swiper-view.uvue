@@ -66,10 +66,8 @@ const emit = defineEmits<{
 const wrapper = ref<UniElement | null>(null)
 // 当前索引
 const currentIndex = ref(props.current)
-// slide数量
-const count = ref(0)
-// 用于provide给indicator的真实数量
-const realCountRef = ref(0)
+// swiper-slider 数量
+const sliderCount = ref(0)
 const translate = ref(0)
 // 是否正在动画
 const animating = ref(false)
@@ -82,7 +80,6 @@ let animationTimer = 0
 
 let startX = 0, startY = 0, startTime = 0, dragging = false, startTranslate = 0, isPreventDefault = false
 let prevMargin = 0, nextMargin = 0, itemSize = 0
-let realCount = 0 // 真实的slide数量
 let autoHeightEnabled = true
 
 const { vertical, circular, autoplay, interval, duration, rebound } = props
@@ -115,7 +112,7 @@ const wrapperStyle = computed(() => {
 // 创建数组用于默认指示器的v-for迭代
 const defaultIndicatorArray = computed(() => {
 	const arr : number[] = []
-	for (let i = 0; i < realCountRef.value; i++) {
+	for (let i = 0; i < sliderCount.value; i++) {
 		arr.push(i)
 	}
 	return arr
@@ -123,7 +120,7 @@ const defaultIndicatorArray = computed(() => {
 
 // circular模式：动态调整DOM顺序，确保当前显示项前后都有元素
 function adjustCircularOrder(targetIndex : number) {
-	if (!circular || realCount < 3) return // 少于3个元素时不支持margin，无需调整
+	if (!circular || sliderCount.value < 2 || (sliderCount.value === 2 && nextMargin > 0)) return // 少于2个元素时不支持margin，无需调整
 
 	const el = wrapper.value
 	if (el == null) return
@@ -132,11 +129,11 @@ function adjustCircularOrder(targetIndex : number) {
 	if (container == null) return
 
 	const sliders = container.querySelectorAll('.uni-swiper-slider')
-	if (sliders == null || sliders.length !== realCount) return
+	if (sliders == null || sliders.length !== sliderCount.value) return
 
 	// 目标：确保 targetIndex 前后都有元素
-	// 期望的顺序：[(targetIndex-1) % realCount, targetIndex, (targetIndex+1) % realCount, ...]
-	const prevIndex = (targetIndex - 1 + realCount) % realCount
+	// 期望的顺序：[(targetIndex-1) % sliderCount.value, targetIndex, (targetIndex+1) % sliderCount.value, ...]
+	const prevIndex = (targetIndex - 1 + sliderCount.value) % sliderCount.value
 
 	// 检查当前第一个元素是否是 prevIndex
 	const firstSlider = sliders[0]
@@ -147,8 +144,8 @@ function adjustCircularOrder(targetIndex : number) {
 		// 需要调整顺序
 		// 将元素按期望顺序重新排列
 		const orderedIndices : number[] = []
-		for (let i = 0; i < realCount; i++) {
-			orderedIndices.push((prevIndex + i) % realCount)
+		for (let i = 0; i < sliderCount.value; i++) {
+			orderedIndices.push((prevIndex + i) % sliderCount.value)
 		}
 
 		// 创建一个映射：index -> slider element
@@ -173,17 +170,17 @@ function adjustCircularOrder(targetIndex : number) {
 function slideTo(targetIndex : number, source : string) {
 	console.log('slideTo targetIndex', targetIndex);
 	console.log('slideTo source', source);
-	if (!circular && (targetIndex < 0 || targetIndex >= count.value)) return
+	if (!circular && (targetIndex < 0 || targetIndex >= sliderCount.value)) return
 
 	const old = currentIndex.value
 	let calculatedTargetIndex = targetIndex
 
 	// circular模式下处理边界
-	if (circular && realCount > 1) {
+	if (circular && sliderCount.value > 1) {
 		// 循环索引
 		if (targetIndex < 0) {
-			calculatedTargetIndex = realCount - 1
-		} else if (targetIndex >= realCount) {
+			calculatedTargetIndex = sliderCount.value - 1
+		} else if (targetIndex >= sliderCount.value) {
 			calculatedTargetIndex = 0
 		} else {
 			calculatedTargetIndex = targetIndex
@@ -194,10 +191,10 @@ function slideTo(targetIndex : number, source : string) {
 	animating.value = true
 
 	// circular模式下：先动画到目标位置（位置0或位置2），动画结束后再重排DOM
-	if (circular && realCount >= 3) {
+	if (circular && sliderCount.value > 1) {
 		// 判断滑动方向
-		const isForward = (old === 0 && calculatedTargetIndex === realCount - 1) ||
-			(calculatedTargetIndex < old && !(old === realCount - 1 && calculatedTargetIndex === 0))
+		const isForward = (old === 0 && calculatedTargetIndex === sliderCount.value - 1) ||
+			(calculatedTargetIndex < old && !(old === sliderCount.value - 1 && calculatedTargetIndex === 0))
 
 		// 向前滑动到位置0，向后滑动到位置2
 		const targetDomPosition = isForward ? 0 : 2
@@ -223,7 +220,7 @@ function slideTo(targetIndex : number, source : string) {
 		animationTimer = 0
 
 		// circular模式：动画结束后重排DOM，使targetIndex回到位置1
-		if (circular && realCount >= 3) {
+		if (circular && sliderCount.value > 1) {
 			adjustCircularOrder(calculatedTargetIndex)
 			translate.value = -(1 * itemSize)
 		}
@@ -239,15 +236,15 @@ function stopAutoPlay() {
 }
 
 function startAutoPlay() {
-	const total = circular && realCount > 1 ? realCount : count.value
+	const total = circular && sliderCount.value > 1 ? sliderCount.value : sliderCount.value
 	if (!autoplay || total <= 1) return
 	stopAutoPlay()
 	autoPlayTimer.value = setInterval(() => {
 		let next = currentIndex.value + 1
-		if (circular && realCount > 1) {
-			if (next >= realCount) next = 0
+		if (circular && sliderCount.value > 1) {
+			if (next >= sliderCount.value) next = 0
 		} else {
-			if (next >= count.value) {
+			if (next >= sliderCount.value) {
 				stopAutoPlay()
 				return
 			}
@@ -259,13 +256,13 @@ function startAutoPlay() {
 // 为swiper-indicator提供数据（provide ref对象以保持响应性）
 provide('swiper-vertical', props.vertical)
 provide('swiper-current', currentIndex)
-provide('swiper-total', realCountRef) // 总是provide真实数量，不包括克隆的
+provide('swiper-total', sliderCount) // 总是provide真实数量，不包括克隆的
 provide('swiper-change', (targetIndex : number) => {
 	slideTo(targetIndex, 'click')
 })
 
 watch(() : number => props.current, (v : number) => {
-	if (v != currentIndex.value && v >= 0 && v < count.value) {
+	if (v != currentIndex.value && v >= 0 && v < sliderCount.value) {
 		slideTo(v, 'prop')
 	}
 })
@@ -386,9 +383,7 @@ onMounted(() => {
 		}
 
 		// 先设置slider数量，这样默认指示器才能正确渲染
-		realCount = sliders.length
-		realCountRef.value = realCount // 更新ref供indicator使用
-		count.value = realCount
+		sliderCount.value = sliders.length
 
 		// 查找indicator并移动到container层级（使其不受wrapper transform影响）
 		// 注意：排除默认指示器（它在container内，不在wrapper内，所以不会被查到）
@@ -514,7 +509,7 @@ onMounted(() => {
 		const initialIndex = props.current > 0 ? props.current : 0
 		currentIndex.value = initialIndex
 
-		if (circular && realCount >= 3) {
+		if (circular && sliderCount.value > 1) {
 			// circular模式：调整DOM顺序，使初始索引在位置1
 			adjustCircularOrder(initialIndex)
 			translate.value = -(1 * itemSize)
@@ -549,7 +544,7 @@ const onTouchStart = (e : TouchEvent) => {
 		animating.value = false
 
 		// circular模式:如果动画被中断,需要立即完成DOM重排
-		if (circular && realCount >= 3) {
+		if (circular && sliderCount.value > 1) {
 			adjustCircularOrder(currentIndex.value)
 			translate.value = -(1 * itemSize)
 		}
@@ -580,9 +575,9 @@ const onTouchMove = (e : TouchEvent) => {
 	let atBoundary = false
 	let shouldPreventDefault = true
 
-	if (!circular && !rebound && realCount > 0) {
+	if (!circular && !rebound && sliderCount.value > 0) {
 		// rebound=false时，检查是否到达边界
-		const minTranslate = -(count.value - 1) * itemSize
+		const minTranslate = -(sliderCount.value - 1) * itemSize
 		const maxTranslate = 0
 		const newTranslate = startTranslate + delta
 
@@ -612,7 +607,7 @@ const onTouchMove = (e : TouchEvent) => {
 		emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
 	}
 
-	if (circular && realCount >= 3) {
+	if (circular && sliderCount.value > 1) {
 		// circular模式：限制拖动范围在0到2之间（因为DOM是[prev, current, next]）
 		const minTranslate = -(2 * itemSize)
 		const maxTranslate = 0
@@ -625,12 +620,12 @@ const onTouchMove = (e : TouchEvent) => {
 		} else {
 			translate.value = newTranslate
 		}
-	} else if (circular && realCount === 2) {
+	} else if (circular && sliderCount.value === 2) {
 		// 2个元素的circular：不支持margin，允许自由拖动
 		translate.value = startTranslate + delta
 	} else {
 		// 非circular模式
-		const minTranslate = -(count.value - 1) * itemSize
+		const minTranslate = -(sliderCount.value - 1) * itemSize
 		const maxTranslate = 0
 		const newTranslate = startTranslate + delta
 
@@ -673,7 +668,7 @@ const onTouchEnd = (e : TouchEvent) => {
 
 	const shouldChange = (dt < 300 && abs > 30) || abs > 100
 
-	if (circular && realCount >= 3) {
+	if (circular && sliderCount.value > 1) {
 		// circular模式（>=3个元素）：基于translate位置判断
 		const currentTranslate = translate.value
 		const centerTranslate = -(1 * itemSize)
@@ -685,11 +680,11 @@ const onTouchEnd = (e : TouchEvent) => {
 			// 拖到位置2表示向后切换
 			if (currentTranslate > centerTranslate) {
 				// 向前切换
-				const nextIndex = (currentIndex.value - 1 + realCount) % realCount
+				const nextIndex = (currentIndex.value - 1 + sliderCount.value) % sliderCount.value
 				slideTo(nextIndex, 'touch')
 			} else if (currentTranslate < centerTranslate) {
 				// 向后切换
-				const nextIndex = (currentIndex.value + 1) % realCount
+				const nextIndex = (currentIndex.value + 1) % sliderCount.value
 				slideTo(nextIndex, 'touch')
 			} else {
 				// 回到当前
@@ -699,7 +694,7 @@ const onTouchEnd = (e : TouchEvent) => {
 			// 回到当前
 			slideTo(currentIndex.value, 'touch')
 		}
-	} else if (circular && realCount === 2) {
+	} else if (circular && sliderCount.value === 2) {
 		// circular模式（2个元素）：简单切换
 		if (shouldChange) {
 			let nextIndex = currentIndex.value
@@ -711,8 +706,8 @@ const onTouchEnd = (e : TouchEvent) => {
 
 			// 循环索引
 			if (nextIndex < 0) {
-				nextIndex = realCount - 1
-			} else if (nextIndex >= realCount) {
+				nextIndex = sliderCount.value - 1
+			} else if (nextIndex >= sliderCount.value) {
 				nextIndex = 0
 			}
 
@@ -722,7 +717,7 @@ const onTouchEnd = (e : TouchEvent) => {
 		}
 	} else {
 		// 非circular模式
-		const minTranslate = -(count.value - 1) * itemSize
+		const minTranslate = -(sliderCount.value - 1) * itemSize
 		const maxTranslate = 0
 		const currentTranslate = translate.value
 
@@ -732,12 +727,12 @@ const onTouchEnd = (e : TouchEvent) => {
 			if (currentTranslate > maxTranslate) {
 				slideTo(0, 'touch')
 			} else {
-				slideTo(count.value - 1, 'touch')
+				slideTo(sliderCount.value - 1, 'touch')
 			}
 		} else if (shouldChange) {
 			if (delta > 0 && currentIndex.value > 0) {
 				slideTo(currentIndex.value - 1, 'touch')
-			} else if (delta < 0 && currentIndex.value < count.value - 1) {
+			} else if (delta < 0 && currentIndex.value < sliderCount.value - 1) {
 				slideTo(currentIndex.value + 1, 'touch')
 			} else {
 				slideTo(currentIndex.value, 'touch')
