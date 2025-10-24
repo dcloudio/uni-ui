@@ -153,8 +153,8 @@
 	// 强制更新计数器
 	const forceUpdateCounter = ref<number>(0)
 	// #ifndef WEB
-	// APP 平台：定时器 ID
-	let positionCheckTimer : number = 0
+	// APP 平台：requestAnimationFrame ID
+	let positionCheckRafId : number = 0
 	// APP 平台：上次记录的位置
 	let lastElementTop : number = 0
 	let lastElementLeft : number = 0
@@ -534,6 +534,39 @@
 		updateFollowElementPosition()
 	}
 
+	// #ifndef WEB
+	// APP平台：位置检查实现函数
+	const doPositionCheck = () : void => {
+		if (followElementData.value != null && followElementData.value.element != null) {
+			const rect = followElementData.value.element.getBoundingClientRect()
+			// 检测位置是否变化（超过 1px）
+			if (Math.abs(rect.top - lastElementTop) > 1 || Math.abs(rect.left - lastElementLeft) > 1) {
+				lastElementTop = rect.top
+				lastElementLeft = rect.left
+				updateFollowElementPosition()
+			}
+		}
+	}
+	// #endif
+
+	// 位置检查循环函数（先声明变量，再赋值，支持递归调用）
+	let checkPosition : (() => void) | null = null
+	checkPosition = () : void => {
+		if (!positionTrackerActive) {
+			// 如果跟踪已停止，不再继续循环
+			return
+		}
+
+		// #ifndef WEB
+		doPositionCheck()
+
+		// 继续下一帧检查（使用非空断言调用自身）
+		positionCheckRafId = requestAnimationFrame(() : void => {
+			checkPosition!()
+		})
+		// #endif
+	}
+
 	// 启动位置跟踪（用于跟随元素模式）
 	const startPositionTracker = () => {
 		// #ifdef WEB
@@ -557,26 +590,17 @@
 			// #endif
 
 			// #ifndef WEB
-			// APP和MP 平台：使用定时器轮询检测位置变化
+			// APP和MP 平台：使用 requestAnimationFrame 轮询检测位置变化
 			if (followElementData.value != null && followElementData.value.element != null) {
 				const rect = followElementData.value.element.getBoundingClientRect()
 				lastElementTop = rect.top
 				lastElementLeft = rect.left
 			}
 
-			positionCheckTimer = setInterval(() => {
-				if (followElementData.value != null && followElementData.value.element != null) {
-					const rect = followElementData.value.element.getBoundingClientRect()
-					// 检测位置是否变化（超过 1px）
-					if (Math.abs(rect.top - lastElementTop) > 1 || Math.abs(rect.left - lastElementLeft) > 1) {
-						lastElementTop = rect.top
-						lastElementLeft = rect.left
-						updateFollowElementPosition()
-					}
-				}
-			}, 16) as number  // 约 60fps
+			// 启动循环
+			checkPosition!()
 
-			// console.log('APP: Position tracker started for follow element')
+			// console.log('APP: Position tracker started for follow element with requestAnimationFrame')
 			// #endif
 		}
 	}
@@ -593,10 +617,10 @@
 			// #endif
 
 			// #ifndef WEB
-			// APP 平台：清除定时器
-			if (positionCheckTimer != 0) {
-				clearInterval(positionCheckTimer)
-				positionCheckTimer = 0
+			// APP 平台：取消 requestAnimationFrame
+			if (positionCheckRafId != 0) {
+				cancelAnimationFrame(positionCheckRafId)
+				positionCheckRafId = 0
 			}
 			// #endif
 

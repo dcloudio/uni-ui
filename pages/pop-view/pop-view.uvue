@@ -276,6 +276,21 @@
 			</view>
 		</uni-pop-view>
 
+		<!-- 顶部弹出独立弹层（无蒙层，独立实例避免与其他弹层冲突） -->
+		<uni-pop-view
+			v-if="showTopPopLayer"
+			pos="top"
+			:non-mask="true"
+			pop-style="width:720rpx;border:1px solid #ccc;border-radius:0px 0px 6px 6px;z-index:1111"
+			@close="closeTopPop"
+		> <!-- TODO 不设zindex时，弹层在web上高于所有。但Android上会被左右弹层覆盖 -->
+			<view style="min-width: 200px;">
+				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">顶部弹出</text>
+				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这是一个顶部显示的弹层，层级更高</text>
+				<button @click="closeTopPop" size="mini">关闭</button>
+			</view>
+		</uni-pop-view>
+
 	<!-- #ifdef APP -->
 	</scroll-view>
 	<!-- #endif -->
@@ -326,6 +341,9 @@
 
 	// 带箭头无蒙层弹层状态
 	const showArrowNoMaskPop = ref<boolean>(false)
+
+	// 顶部弹出独立弹层状态（因为无蒙层，避免与其他弹层冲突）
+	const showTopPopLayer = ref<boolean>(false)
 
 	// 引用
 	const popViewRef = ref<ComponentPublicInstance | null>(null)
@@ -386,13 +404,11 @@
 	}
 
 	const showTopPop = () => {
-		showPopView({
-			pos: "top",
-			nonMask: true,
-			popStyle: "width:720rpx;border:1px solid #ccc;border-radius:0px 0px 6px 6px", // TODO 四边弹出时，有些样式应预置
-			title: '顶部弹出',
-			content: '这是一个顶部显示的弹层'
-		})
+		showTopPopLayer.value = true
+	}
+
+	const closeTopPop = () => {
+		showTopPopLayer.value = false
 	}
 
 	const showBottomPop = () => {
