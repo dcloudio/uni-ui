@@ -73,21 +73,21 @@
 				@change="handleScaleChange"
 			>
 				<swiper-slider>
-					<view :class="['scale-card', scaleCurrentIndex === 0 ? 'scale-card-active' : '']">
+					<view class="scale-card" :class="{'scale-card-active': scaleCurrentIndex == 0}">
 						<view style="width: 100%; height: 100%; background-color: #e74c3c; align-items: center; justify-content: center; border-radius: 8px;">
 							<text style="color: white; font-size: 20px;">A</text>
 						</view>
 					</view>
 				</swiper-slider>
 				<swiper-slider>
-					<view :class="['scale-card', scaleCurrentIndex === 1 ? 'scale-card-active' : '']">
+					<view class="scale-card" :class="{'scale-card-active': scaleCurrentIndex == 1}">
 						<view style="width: 100%; height: 100%; background-color: #3498db; align-items: center; justify-content: center; border-radius: 8px;">
 							<text style="color: white; font-size: 20px;">B</text>
 						</view>
 					</view>
 				</swiper-slider>
 				<swiper-slider>
-					<view :class="['scale-card', scaleCurrentIndex === 2 ? 'scale-card-active' : '']">
+					<view class="scale-card" :class="{'scale-card-active': scaleCurrentIndex == 2}">
 						<view style="width: 100%; height: 100%; background-color: #2ecc71; align-items: center; justify-content: center; border-radius: 8px;">
 							<text style="color: white; font-size: 20px;">C</text>
 						</view>
