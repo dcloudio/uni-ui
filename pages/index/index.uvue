@@ -4,6 +4,7 @@
 	<navigator url="/pages/swiper-view/swiper-view">swiper-view</navigator>
 	<navigator url="/pages/tab-bar/tab-bar">tab-bar</navigator>
 	<navigator url="/pages/pop-view/pop-view">pop-view</navigator>
+	<navigator url="/pages/page-container/page-container">page-container</navigator>
 </template>
 
 <script setup>

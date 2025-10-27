@@ -1,0 +1,414 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view style="flex: 1; padding: 15px;">
+	<!-- #endif -->
+		<!-- #ifndef APP -->
+		<view style="padding: 15px;">
+		<!-- #endif -->
+			<text style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 20px;">Page-Container 组件演示</text>
+
+			<!-- 基础 position 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Position 属性演示</text>
+				<view class="button-wrap">
+					<button @click="showContainer('bottom')" size="mini">底部弹出 (bottom)</button>
+					<button @click="showContainer('top')" size="mini">顶部弹出 (top)</button>
+					<button @click="showContainer('right')" size="mini">右侧弹出 (right)</button>
+					<button @click="showContainer('center')" size="mini">居中弹出 (center)</button>
+				</view>
+			</view>
+
+			<!-- overlay 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Overlay 属性演示</text>
+				<view class="button-wrap">
+					<button @click="showOverlayDemo(true)" size="mini">显示蒙层 (overlay=true)</button>
+					<button @click="showOverlayDemo(false)" size="mini">不显示蒙层 (overlay=false)</button>
+					<button @click="showTransparentOverlay" size="mini">透明蒙层</button>
+				</view>
+			</view>
+
+			<!-- round 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Round 属性演示</text>
+				<view class="button-wrap">
+					<button @click="showRoundDemo(false)" size="mini">无圆角 (round=false)</button>
+					<button @click="showRoundDemo(true)" size="mini">圆角 (round=true)</button>
+				</view>
+			</view>
+
+			<!-- duration 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Duration 属性演示</text>
+				<view class="button-wrap">
+					<button @click="showDurationDemo(0)" size="mini"> 无动画(0ms)</button>
+					<button @click="showDurationDemo(100)" size="mini">快速 (100ms)</button>
+					<button @click="showDurationDemo(300)" size="mini">中速 (300ms)</button>
+					<button @click="showDurationDemo(2000)" size="mini">超慢 (2000ms)</button>
+				</view>
+			</view>
+
+			<!-- z-index 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Z-index 属性演示</text>
+				<view class="button-wrap">
+					<button @click="showZIndexDemo(100)" size="mini">默认层级 (100)</button>
+					<button @click="showZIndexDemo(500)" size="mini">中等层级 (500)</button>
+					<button @click="showZIndexDemo(1000)" size="mini">高层级 (1000)</button>
+				</view>
+			</view>
+
+			<!-- close-on-slide-down 属性演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">Close-on-slide-down
+					属性演示</text>
+				<view class="button-wrap">
+					<button @click="showSlideDownDemo(false)" size="mini">不支持下滑关闭 (false)</button>
+					<button @click="showSlideDownDemo(true)" size="mini">支持下滑关闭 (true)</button>
+				</view>
+				<text style="font-size: 12px; color: #999; margin-top: 5px;">提示: 当 close-on-slide-down=true 时，可下滑关闭容器</text>
+			</view>
+
+			<!-- 自定义样式演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">自定义样式演示</text>
+				<view class="button-wrap">
+					<button @click="showCustomOverlayStyle" size="mini">自定义 overlay-style</button>
+					<button @click="showCustomContainerStyle" size="mini">自定义 custom-style</button>
+				</view>
+			</view>
+
+			<!-- 事件演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">事件演示</text>
+				<view class="button-wrap">
+					<button @click="showEventDemo" size="mini">打开容器(查看所有事件)</button>
+				</view>
+				<view style="margin-top: 10px; padding: 10px; background-color: #f5f5f5; border-radius: 4px;">
+					<text style="font-size: 12px; color: #666; font-weight: bold;">事件日志:</text>
+					<view v-for="(log, index) in eventLogs" :key="index" style="margin-top: 5px;">
+						<text style="font-size: 11px; color: #333;">{{ log }}</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 对话框模式演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">对话框模式演示</text>
+				<view class="button-wrap">
+					<button @click="showDialogDemo" size="mini" type="primary">打开对话框</button>
+				</view>
+				<text style="font-size: 12px; color: #999; margin-top: 5px;">模拟对话框效果，居中显示，非全屏</text>
+			</view>
+
+			<!-- 综合演示 -->
+			<view style="margin-bottom: 30px;">
+				<text style="font-size: 16px; font-weight: bold; color: #333; margin-bottom: 10px;">综合演示</text>
+				<view class="button-wrap">
+					<button @click="showComprehensiveDemo" size="mini">打开综合演示</button>
+				</view>
+				<text style="font-size: 12px; color: #999; margin-top: 5px;">包含多个属性组合的演示</text>
+			</view>
+
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	</view>
+	<!-- #endif -->
+	<!-- Page-Container 组件 -->
+	<page-container :show="containerShow" :duration="containerDuration" :zIndex="containerZIndex"
+		:overlay="containerOverlay" :position="containerPosition" :round="containerRound"
+		:closeOnSlideDown="containerCloseOnSlideDown" :overlayStyle="containerOverlayStyle"
+		:customStyle="containerCustomStyle" @beforeenter="onBeforeEnter" @enter="onEnter" @afterenter="onAfterEnter"
+		@beforeleave="onBeforeLeave" @leave="onLeave" @afterleave="onAfterLeave" @clickoverlay="onClickOverlay">
+		<view :style="contentStyle">
+			<text style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">{{ containerTitle }}</text>
+			<text style="font-size: 14px; color: #666; margin-bottom: 15px;">{{ containerContent }}</text>
+
+			<!-- 当前配置信息 -->
+			<scroll-view
+				style="height: 200px; margin-bottom: 15px; padding: 10px; background-color: #f9f9f9; border-radius: 4px;">
+				<text style="font-size: 12px; color: #333; font-weight: bold;">当前配置:</text>
+				<text style="font-size: 11px; color: #666; margin-top: 5px;">position: {{ containerPosition }}</text>
+				<text style="font-size: 11px; color: #666;">duration: {{ containerDuration }}ms</text>
+				<text style="font-size: 11px; color: #666;">z-index: {{ containerZIndex }}</text>
+				<text style="font-size: 11px; color: #666;">overlay: {{ containerOverlay }}</text>
+				<text style="font-size: 11px; color: #666;">round: {{ containerRound }}</text>
+				<text style="font-size: 11px; color: #666;">close-on-slide-down: {{ containerCloseOnSlideDown }}</text>
+				<text style="font-size: 11px; color: #666;">overlay-style: {{ containerOverlayStyle }}</text>
+				<text style="font-size: 11px; color: #666;">custom-style: {{ containerCustomStyle }}</text>
+				<text style="font-size: 11px; color: #666;">content-style: {{ contentStyle }}</text>
+			</scroll-view>
+
+			<button @click="closeContainer" size="mini" type="primary">关闭容器</button>
+			<button @click="navigateBack" size="mini" type="default">后退页面</button>
+		</view>
+	</page-container>
+</template>
+
+<script setup lang="uts">
+	// Page-Container 属性
+	const containerShow = ref<boolean>(false)
+	const containerDuration = ref<number>(300)
+	const containerZIndex = ref<number>(100)
+	const containerOverlay = ref<boolean>(true)
+	const containerPosition = ref<string>("bottom")
+	const containerRound = ref<boolean>(false)
+	const containerCloseOnSlideDown = ref<boolean>(false)
+	const containerOverlayStyle = ref<string>("")
+	const containerCustomStyle = ref<string>("")
+
+	// 内容
+	const containerTitle = ref<string>("Page-Container")
+	const containerContent = ref<string>("这是一个 page-container 容器")
+	const contentStyle = ref<string>("padding: 20px; background-color: #ffffff;")
+
+	// 事件日志
+	const eventLogs = ref<string[]>([])
+
+	// 添加事件日志
+	const addEventLog = (eventName : string) => {
+		const timestamp = new Date().toLocaleTimeString()
+		eventLogs.value.unshift(`[${timestamp}] ${eventName}`)
+		// 只保留最近10条日志
+		if (eventLogs.value.length > 10) {
+			eventLogs.value = eventLogs.value.slice(0, 10)
+		}
+	}
+
+	// 重置配置为默认值
+	const resetConfig = () => {
+		containerDuration.value = 300
+		containerZIndex.value = 100
+		containerOverlay.value = true
+		containerPosition.value = "bottom"
+		containerRound.value = false
+		containerCloseOnSlideDown.value = false
+		containerOverlayStyle.value = ""
+		containerCustomStyle.value = ""
+		contentStyle.value = "padding: 20px; background-color: #ffffff;"
+	}
+
+	// Position 演示
+	const showContainer = (position : string) => {
+		resetConfig()
+		containerPosition.value = position
+		containerTitle.value = `Position: ${position}`
+		containerContent.value = `容器从${position == 'top' ? '顶部' : position == 'bottom' ? '底部' : position == 'right' ? '右侧' : '居中'}弹出`
+		containerShow.value = true
+	}
+
+	// Overlay 演示
+	const showOverlayDemo = (hasOverlay : boolean) => {
+		resetConfig()
+		containerOverlay.value = hasOverlay
+		containerTitle.value = `Overlay: ${hasOverlay}`
+		containerContent.value = hasOverlay ? "显示蒙层，点击蒙层可关闭" : "不显示蒙层"
+		containerShow.value = true
+	}
+
+	// 透明蒙层演示
+	const showTransparentOverlay = () => {
+		resetConfig()
+		containerOverlay.value = true
+		containerOverlayStyle.value = "background-color: rgba(0, 0, 0, 0);"
+		containerTitle.value = "透明蒙层"
+		containerContent.value = "蒙层开启但完全透明，可以点击蒙层区域关闭"
+		containerShow.value = true
+	}
+
+	// Round 演示
+	const showRoundDemo = (isRound : boolean) => {
+		resetConfig()
+		containerRound.value = isRound
+		containerPosition.value = "bottom"
+		containerTitle.value = `Round: ${isRound}`
+		containerContent.value = isRound ? "显示圆角" : "不显示圆角"
+		containerShow.value = true
+	}
+
+	// Duration 演示
+	const showDurationDemo = (duration : number) => {
+		resetConfig()
+		containerDuration.value = duration
+		containerTitle.value = `Duration: ${duration}ms`
+		containerContent.value = `动画时长为 ${duration} 毫秒，请注意打开和关闭的动画速度`
+		containerShow.value = true
+	}
+
+	// Z-index 演示
+	const showZIndexDemo = (zIndex : number) => {
+		resetConfig()
+		containerZIndex.value = zIndex
+		containerTitle.value = `Z-index: ${zIndex}`
+		containerContent.value = `容器的层级为 ${zIndex}`
+		containerShow.value = true
+	}
+
+	// Close-on-slide-down 演示
+	const showSlideDownDemo = (canSlideDown : boolean) => {
+		resetConfig()
+		containerCloseOnSlideDown.value = canSlideDown
+		containerPosition.value = "bottom"
+		containerTitle.value = `Close-on-slide-down: ${canSlideDown}`
+		containerContent.value = canSlideDown ? "可以通过下滑关闭容器，试试看！" : "不支持下滑关闭"
+		containerShow.value = true
+	}
+
+	// 自定义 overlay-style 演示
+	const showCustomOverlayStyle = () => {
+		resetConfig()
+		containerOverlayStyle.value = "background-color: rgba(255, 0, 0, 0.3);"
+		containerTitle.value = "自定义 Overlay-style"
+		containerContent.value = "蒙层使用红色半透明背景"
+		containerShow.value = true
+	}
+
+	// 自定义 custom-style 演示
+	const showCustomContainerStyle = () => {
+		resetConfig()
+		containerCustomStyle.value = "background-color: #f0f0f0; border-radius: 20px;"
+		contentStyle.value = "padding: 30px; background-color: transparent;"
+		containerTitle.value = "自定义 Custom-style"
+		containerContent.value = "容器使用自定义样式，带圆角和灰色背景"
+		containerShow.value = true
+	}
+
+	// 事件演示
+	const showEventDemo = () => {
+		resetConfig()
+		eventLogs.value = [] // 清空日志
+		containerTitle.value = "事件演示"
+		containerContent.value = "打开和关闭容器时，会触发各种事件，请查看下方的事件日志"
+		containerShow.value = true
+	}
+
+	// 对话框模式演示
+	const showDialogDemo = () => {
+		resetConfig()
+		containerPosition.value = "center"
+		containerDuration.value = 300
+		containerZIndex.value = 1000
+		containerOverlay.value = true
+		containerRound.value = true
+		containerOverlayStyle.value = "background-color: rgba(0, 0, 0, 0.6);"
+		// 设置对话框样式：使用flex布局居中对齐
+		containerCustomStyle.value = "display: flex; align-items: center; justify-content: center; background-color: transparent;"
+		contentStyle.value = "width: 600rpx; padding: 24px; background-color: #ffffff; border-radius: 16px; animation: dialogScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);"
+		containerTitle.value = "对话框示例"
+		containerContent.value = "这是一个模拟对话框的page-container示例"
+		containerShow.value = true
+	}
+
+	// 综合演示
+	const showComprehensiveDemo = () => {
+		resetConfig()
+		containerPosition.value = "bottom"
+		containerDuration.value = 500
+		containerZIndex.value = 500
+		containerOverlay.value = true
+		containerRound.value = true
+		containerCloseOnSlideDown.value = true
+		containerOverlayStyle.value = "background-color: rgba(0, 0, 0, 0.5);"
+		containerCustomStyle.value = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+		contentStyle.value = "padding: 30px; background-color: transparent;"
+		containerTitle.value = "综合演示"
+		containerContent.value = "这是一个综合演示，包含:\n- position: bottom\n- duration: 500ms\n- z-index: 500\n- overlay: true\n- round: true\n- close-on-slide-down: true\n- 自定义蒙层样式\n- 自定义容器样式(渐变背景)"
+		containerShow.value = true
+	}
+
+	// 关闭容器
+	const closeContainer = () => {
+		containerShow.value = false
+	}
+
+	// ========== 事件处理 ==========
+
+	// beforeenter 事件
+	const onBeforeEnter = () => {
+		console.log("beforeenter: 进入前触发")
+		addEventLog("beforeenter - 进入前触发")
+	}
+
+	// enter 事件
+	const onEnter = () => {
+		console.log("enter: 进入中触发")
+		addEventLog("enter - 进入中触发")
+	}
+
+	// afterenter 事件
+	const onAfterEnter = () => {
+		console.log("afterenter: 进入后触发")
+		addEventLog("afterenter - 进入后触发")
+	}
+
+	// beforeleave 事件
+	const onBeforeLeave = () => {
+		console.log("beforeleave: 离开前触发")
+		addEventLog("beforeleave - 离开前触发")
+	}
+
+	// leave 事件
+	const onLeave = () => {
+		console.log("leave: 离开中触发")
+		addEventLog("leave - 离开中触发")
+	}
+
+	// afterleave 事件
+	const onAfterLeave = () => {
+		console.log("afterleave: 离开后触发")
+		addEventLog("afterleave - 离开后触发")
+		// 重置 show 状态，确保可以再次打开
+		containerShow.value = false
+	}
+
+	// clickoverlay 事件
+	const onClickOverlay = () => {
+		console.log("clickoverlay: 点击蒙层触发")
+		addEventLog("clickoverlay - 点击蒙层触发")
+		// 点击蒙层关闭容器
+		containerShow.value = false
+	}
+
+	// 后退页面
+	const navigateBack = () => {
+		uni.navigateBack({
+			success(result) {
+				console.log('navigateBack success', result.errMsg)
+			},
+			fail(error) {
+				console.log('navigateBack fail', error.errMsg)
+			},
+			complete(result) {
+				console.log('navigateBack complete', result.errMsg)
+			},
+		})
+	}
+</script>
+
+<style>
+	.button-wrap {
+		flex-direction: row;
+		flex-wrap: wrap;
+		/* #ifndef APP */
+		gap: 10px;
+		/* #endif */
+		/* #ifdef APP */
+		justify-content: space-around;
+		/* #endif */
+	}
+
+	/* 对话框缩放动画 */
+	@keyframes dialogScale {
+		0% {
+			transform: scale(0.9);
+			opacity: 0.8;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+</style>

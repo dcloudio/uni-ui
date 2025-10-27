@@ -1,0 +1,480 @@
+<template>
+	<!-- 蒙层 -->
+	<view v-if="innerShow && overlay"
+		class="page-container-overlay"
+		:style="[overlayComputedStyle, overlayStyle]"
+		@click="handleOverlayClick"
+		@touchmove.prevent.stop
+	></view>
+
+	<!-- 容器 -->
+	<view v-if="innerShow"
+		:class="['page-container', positionClass, animationClass]"
+		:style="[containerComputedStyle, customStyle]"
+		@touchstart="handleTouchStart"
+		@touchmove="handleTouchMove"
+		@touchend="handleTouchEnd"
+	>
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+	// ========== 全局实例管理 ==========
+
+	// 实例类型定义
+	type PageContainerInstance = {
+		id: number,
+		close: () => void,
+		overlay: boolean  // 是否显示蒙层
+	}
+
+	// 全局实例列表（按打开顺序）
+	const globalInstances: PageContainerInstance[] = []
+
+	// 获取下一个实例 ID
+	let nextInstanceId = 0
+
+	/**
+	 * 注册 page-container 实例
+	 */
+	function registerInstance(close: () => void, overlay: boolean): number {
+		const id = nextInstanceId++
+		const instance: PageContainerInstance = {
+			id: id,
+			close: close,
+			overlay: overlay
+		}
+		globalInstances.push(instance)
+		return id
+	}
+
+	/**
+	 * 注销 page-container 实例
+	 */
+	function unregisterInstance(id: number): void {
+		const index = globalInstances.findIndex(item => item.id === id)
+		if (index > -1) {
+			globalInstances.splice(index, 1)
+		}
+	}
+
+	/**
+	 * 检查是否有显示蒙层的实例
+	 */
+	function hasOverlayInstance(): boolean {
+		return globalInstances.some(item => item.overlay)
+	}
+
+	/**
+	 * 处理返回操作
+	 * @returns true 表示已处理返回操作（阻止默认行为），false 表示没有处理（允许默认返回）
+	 */
+	function handleBackPress(): boolean {
+		if (globalInstances.length > 0) {
+			// 关闭最后一个（最上层的）容器
+			const lastInstance = globalInstances[globalInstances.length - 1]
+			lastInstance.close()
+			return true  // 阻止默认返回行为
+		}
+		return false  // 没有容器显示，允许默认返回
+	}
+
+	// ========== 组件属性类型定义 ==========
+	type Props = {
+		/**
+		 * @description 是否显示容器
+		 */
+		show?: boolean,
+		/**
+		 * @description 弹出位置
+		 */
+		position?: "top" | "bottom" | "right" | "center",
+		/**
+		 * @description 是否显示蒙层
+		 */
+		overlay?: boolean,
+		/**
+		 * @description 动画时长（毫秒）
+		 */
+		duration?: number,
+		/**
+		 * @description 是否显示圆角
+		 */
+		round?: boolean,
+		/**
+		 * @description 是否支持下滑关闭（仅在 position="bottom" 时有效）
+		 */
+		closeOnSlideDown?: boolean,
+		/**
+		 * @description 层级
+		 */
+		zIndex?: number,
+		/**
+		 * @description 自定义蒙层样式
+		 */
+		overlayStyle?: string,
+		/**
+		 * @description 自定义容器样式
+		 */
+		customStyle?: string
+	}
+
+	// 设置默认值
+	const props = withDefaults(defineProps<Props>(), {
+		show: false,
+		position: "bottom",
+		overlay: true,
+		duration: 300,
+		round: false,
+		closeOnSlideDown: false,
+		zIndex: 100,
+		overlayStyle: "",
+		customStyle: ""
+	})
+
+	// 定义事件
+	const emit = defineEmits<{
+		(e: 'beforeenter'): void,
+		(e: 'enter'): void,
+		(e: 'afterenter'): void,
+		(e: 'beforeleave'): void,
+		(e: 'leave'): void,
+		(e: 'afterleave'): void,
+		(e: 'clickoverlay'): void
+	}>()
+
+	// 内部状态
+	const innerShow = ref<boolean>(false)
+	const animationState = ref<string>('hidden')  // hidden, entering, entered, leaving
+	const instanceId = ref<number>(0)
+
+	// 触摸相关状态（用于下滑关闭）
+	let touchStartY = 0
+	let touchStartTime = 0
+	let isDragging = false
+	const translateY = ref<number>(0)
+
+	// 计算位置 class
+	const positionClass = computed((): string => {
+		return `page-container-${props.position}`
+	})
+
+	// 计算动画 class
+	const animationClass = computed((): string => {
+		if (animationState.value === 'entering') {
+			return 'page-container-enter-active'
+		} else if (animationState.value === 'entered') {
+			return 'page-container-enter-to'
+		} else if (animationState.value === 'leaving') {
+			return 'page-container-leave-active'
+		}
+		return ''
+	})
+
+	// 计算蒙层样式
+	const overlayComputedStyle = computed((): string => {
+		let style = `z-index: ${props.zIndex};`
+
+		// 动画时长
+		style += `transition-duration: ${props.duration}ms;`
+
+		// 根据动画状态设置透明度
+		if (animationState.value === 'entering' || animationState.value === 'entered') {
+			style += 'opacity: 1;'
+		} else if (animationState.value === 'leaving' || animationState.value === 'hidden') {
+			style += 'opacity: 0;'
+		}
+
+		return style
+	})
+
+	// 计算容器样式
+	const containerComputedStyle = computed((): string => {
+		let style = `z-index: ${props.zIndex + 1};`
+
+		// 动画时长
+		style += `transition-duration: ${props.duration}ms;`
+
+		// 圆角
+		if (props.round) {
+			if (props.position === 'bottom') {
+				style += 'border-radius: 16px 16px 0 0;'
+			} else if (props.position === 'top') {
+				style += 'border-radius: 0 0 16px 16px;'
+			} else if (props.position === 'right') {
+				style += 'border-radius: 16px 0 0 16px;'
+			} else if (props.position === 'center') {
+				style += 'border-radius: 16px;'
+			}
+		}
+
+		// 下滑拖动时的 transform
+		if (isDragging && props.position === 'bottom' && translateY.value > 0) {
+			style += `transform: translateY(${translateY.value}px);`
+			style += 'transition: none;'  // 拖动时禁用过渡
+		}
+
+		return style
+	})
+
+	// 注册和注销函数会在打开和关闭时调用
+
+	// 关闭容器（定义在前面，因为 openContainer 会引用它）
+	const closeContainer = () => {
+		// 触发 beforeleave 事件
+		emit('beforeleave')
+
+		animationState.value = 'leaving'
+		emit('leave')
+
+		// 动画结束后
+		setTimeout(() => {
+			animationState.value = 'hidden'
+			innerShow.value = false
+			translateY.value = 0
+
+			// 从全局列表注销
+			unregisterInstance(instanceId.value)
+
+			// #ifdef WEB
+			// Web 平台：如果没有其他显示蒙层的 page-container，恢复页面滚动
+			if (!hasOverlayInstance()) {
+				document.body.style.overflow = ''
+			}
+			// #endif
+
+			emit('afterleave')
+		}, props.duration)
+	}
+
+	// 打开容器
+	const openContainer = () => {
+		// 触发 beforeenter 事件
+		emit('beforeenter')
+
+		// 第一步：显示元素在初始位置
+		innerShow.value = true
+		animationState.value = 'entering'
+
+		// 注册到全局列表
+		instanceId.value = registerInstance(closeContainer, props.overlay)
+
+		// #ifdef WEB
+		// Web 平台：如果有蒙层，禁止页面滚动，防止滚动穿透
+		if (props.overlay) {
+			document.body.style.overflow = 'hidden'
+		}
+		// #endif
+
+		emit('enter')
+
+		// 第二步：使用帧回调立即开始动画（进入最终位置）
+		requestAnimationFrame(() => {
+			// console.log("弹出动画开始了");
+			animationState.value = 'entered'
+			// 第三步：动画结束后触发 afterenter
+			setTimeout(() => {
+				emit('afterenter')
+			}, props.duration)
+		})
+	}
+
+	// 处理蒙层点击
+	const handleOverlayClick = () => {
+		emit('clickoverlay')
+		// 默认行为：点击蒙层关闭容器
+		closeContainer()
+	}
+
+	// 处理触摸开始（用于下滑关闭）
+	const handleTouchStart = (e: TouchEvent) => {
+		if (!props.closeOnSlideDown || props.position !== 'bottom') {
+			return
+		}
+
+		if (e.touches.length > 0) {
+			touchStartY = e.touches[0].clientY
+			touchStartTime = Date.now()
+			isDragging = false
+		}
+	}
+
+	// 处理触摸移动
+	const handleTouchMove = (e: TouchEvent) => {
+		// 如果不是下滑关闭模式，阻止事件冒泡（防止滚动穿透），但允许容器内部滚动
+		if (!props.closeOnSlideDown || props.position !== 'bottom') {
+			e.stopPropagation()
+			return
+		}
+
+		if (e.touches.length > 0) {
+			const deltaY = e.touches[0].clientY - touchStartY
+
+			// 只允许向下拖动
+			if (deltaY > 0) {
+				isDragging = true
+				translateY.value = deltaY
+
+				// 阻止默认滚动行为
+				e.preventDefault()
+				e.stopPropagation()
+			}
+		}
+	}
+
+	// 处理触摸结束
+	const handleTouchEnd = (e: TouchEvent) => {
+		if (!props.closeOnSlideDown || props.position !== 'bottom') {
+			return
+		}
+
+		if (isDragging) {
+			const deltaTime = Date.now() - touchStartTime
+			const velocity = translateY.value / deltaTime  // px/ms
+
+			// 判断是否应该关闭：拖动距离超过 100px 或拖动速度较快
+			if (translateY.value > 100 || velocity > 0.3) {
+				closeContainer()
+			} else {
+				// 回弹
+				translateY.value = 0
+			}
+
+			isDragging = false
+		}
+	}
+
+	// 监听 show 属性变化
+	watch((): boolean => {
+		return props.show
+	}, (newVal: boolean) => {
+		if (newVal && !innerShow.value) {
+			openContainer()
+		} else if (!newVal && innerShow.value) {
+			closeContainer()
+		}
+	})
+
+	// 组件挂载时
+	onMounted(() => {
+		// 如果初始状态为显示，则打开
+		if (props.show) {
+			openContainer()
+		}
+	})
+
+	// 组件卸载时
+	onUnmounted(() => {
+		// 确保从全局列表中移除
+		if (instanceId.value > 0) {
+			unregisterInstance(instanceId.value)
+		}
+	})
+
+	// 监听页面返回操作（组件内部直接监听）
+	onBackPress(() => {
+		return handleBackPress()
+	})
+
+	// 暴露方法
+	defineExpose({
+		close: closeContainer
+	})
+</script>
+
+<style>
+	/* 蒙层 */
+	.page-container-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		transition-property: opacity;
+		transition-timing-function: ease;
+	}
+
+	/* 容器基础样式 */
+	.page-container {
+		position: fixed;
+		background-color: #ffffff;
+		transition-property: transform, opacity;
+		transition-timing-function: ease;
+		/* #ifdef WEB */
+		/* 防止滚动穿透（Web 平台） */
+		overscroll-behavior: contain;
+		/* #endif */
+	}
+
+	/* 底部弹出 */
+	.page-container-bottom {
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transform: translateY(100%);
+	}
+
+	.page-container-bottom.page-container-enter-to {
+		transform: translateY(0);
+	}
+
+	.page-container-bottom.page-container-leave-active {
+		transform: translateY(100%);
+	}
+
+	/* 顶部弹出 */
+	.page-container-top {
+		left: 0;
+		right: 0;
+		top: 0;
+		transform: translateY(-100%);
+	}
+
+	.page-container-top.page-container-enter-to {
+		transform: translateY(0);
+	}
+
+	.page-container-top.page-container-leave-active {
+		transform: translateY(-100%);
+	}
+
+	/* 右侧弹出 */
+	.page-container-right {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 80%;
+		max-width: 600rpx;
+		transform: translateX(100%);
+	}
+
+	.page-container-right.page-container-enter-to {
+		transform: translateX(0);
+	}
+
+	.page-container-right.page-container-leave-active {
+		transform: translateX(100%);
+	}
+
+	/* 居中弹出 */
+	.page-container-center {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.9);
+		opacity: 0;
+		max-width: 700rpx;
+		/* max-height: 80%; */
+	}
+
+	.page-container-center.page-container-enter-to {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+	}
+
+	.page-container-center.page-container-leave-active {
+		transform: translate(-50%, -50%) scale(0.9);
+		opacity: 0;
+	}
+</style>

@@ -49,25 +49,6 @@
 	</view>
 	<!-- #endif -->
 </template>
-<!--
-<script>
-	export default {
-		data() {
-			return {
-				vModelRateValue: 0,
-				rateValue :0
-			}
-		},
-		onReady() {
-			console.log(this.$nativePage?.getDomJson())
-		},
-		methods: {
-			onRateChange(value: number) {
-			}
-		},
-	}
-</script>
--->
 <script setup lang="uts">
 
 	const vModelRateValue = ref<number>(0)

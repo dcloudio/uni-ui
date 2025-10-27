@@ -33,7 +33,7 @@ uni-app x必须使用uts编程语言，这是一种类似TS的语言，但又有
 - 不使用any。
 - 尽量不使用 === 和!==，使用 == 和!= 替代。
 - 不使用js的原型链特性。
-- 更多参考: [uts与ts的差异](https://doc。dcloud。net。cn/uni-app-x/uts/uts_diff_ts。html)
+- 更多参考: [uts与ts的差异](https://doc.dcloud.net.cn/uni-app-x/uts/uts_diff_ts.html)
 
 ## css注意事项
 uni-app x使用的css是标准浏览器css的子集，区别见下：
@@ -84,7 +84,7 @@ console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson()
 
 - 获取日志
 可以通过如下cli命令获取HBuilderX的控制台日志，包括编译错误和运行时log：
-* app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x`
+* app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x` （日志乱码，暂时不可用）
 * web平台：`C:\hbuilderx\hx_dev\cli.exe logcat web --browser Chrome --project uni-ui-x`
 
 ## uni-app x项目的自动化测试
