@@ -143,7 +143,7 @@
 			},
 			_onBlur(event) {
 				this.$emit('blur', event)
-				let value = event.detail.value;
+				let value = event.target.value;
 				if (isNaN(value)) {
 					this.inputValue = this.value;
 					return;
@@ -230,3 +230,4 @@
 		/* #endif */
 	}
 </style>
+
