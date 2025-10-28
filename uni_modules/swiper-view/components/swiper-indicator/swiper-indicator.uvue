@@ -5,20 +5,19 @@
 			vertical
 				? 'uni-swiper-indicator_vertical'
 				: 'uni-swiper-indicator_horizontal'
-		"
-		:style="containerStyle">
+		">
 		<slot></slot>
 
 		<!-- 默认圆点指示器 -->
 		<template v-if="!hasSlotContent">
 			<view
-				v-for="i in totalArray"
+				v-for="i in total"
 				:key="i"
 				class="uni-swiper-indicator-item"
 				:class="[
 					itemClass,
-					{ active: current == i },
-					{ itemActiveClass: current == i },
+					{ active: current == i - 1 },
+					{ itemActiveClass: current == i - 1 },
 				]"
 				:style="mergeStyle(current == i)"
 				@click="handleClick(i)">
@@ -40,34 +39,14 @@ const props = withDefaults(defineProps<UniSwiperIndicatorProps>(), {
 
 const slots = useSlots()
 const hasSlotContent = computed(() : boolean => {
-	const defaultSlot = slots['default']
-	return defaultSlot != null
+	return slots['default'] != null
 })
 
 // 从父组件注入（inject的是ref对象）
 const vertical = inject<boolean>('swiper-vertical', false)
-const currentRef = inject<Ref<number>>('swiper-current', ref(0))
-const totalRef = inject<Ref<number>>('swiper-total', ref(0))
+const current = inject<Ref<number>>('swiper-current', ref(0))
+const total = inject<Ref<number>>('swiper-total', ref(0))
 const onChange = inject<(index : number) => void>('swiper-change', (index : number) => { })
-
-// 通过computed解包ref以确保响应性
-const current = computed(() => currentRef.value)
-const total = computed(() => totalRef.value)
-
-// 创建数组用于v-for迭代
-const totalArray = computed(() => {
-	const arr : number[] = []
-	for (let i = 0; i < totalRef.value; i++) {
-		arr.push(i)
-	}
-	return arr
-})
-
-// 容器样式（外部传入的class和style）
-const containerStyle = computed(() => {
-	// 这里可以接收外部传入的style
-	return ''
-})
 
 // 合并item样式
 const mergeStyle = (isActive : boolean) : string => {

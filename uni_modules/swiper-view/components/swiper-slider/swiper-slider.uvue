@@ -1,49 +1,26 @@
 <template>
-	<view :class="rootClass">
-		<view :class="contentClass">
+	<view class="uni-swiper-slider" :class="props.autoHeight ? 'h-auto' : 'h-100'">
+		<view class="uni-swiper-slider-content" :class="props.autoHeight ? 'uni-swiper-slider-content_auto-height' : 'uni-swiper-slider-content_fill-parent'">
 			<slot></slot>
 		</view>
 	</view>
 </template>
 
 <script setup lang="uts">
-	import { computed } from 'vue'
 	import { UniSwiperSliderProps } from './types.uts'
 
 	const props = withDefaults(defineProps<UniSwiperSliderProps>(), {
 		autoHeight: false
 	})
-
-	const rootClass = computed(() => {
-		const classes : string[] = ['uni-swiper-slider']
-		if (props.autoHeight) {
-			classes.push('h-auto')
-		} else {
-			classes.push('h-100')
-		}
-		return classes
-	})
-
-	const contentClass = computed(() => {
-		const classes : string[] = ['uni-swiper-slider-content']
-		if (props.autoHeight) {
-			classes.push('uni-swiper-slider-content_auto-height')
-		} else {
-			classes.push('uni-swiper-slider-content_fill-parent')
-		}
-		return classes
-	})
 </script>
 
 <style>
 	.uni-swiper-slider {
+		display: flex;
 		flex: 0 0 auto;
 		flex-shrink: 0;
 		overflow: hidden;
-		position: relative;
-		display: flex;
 		flex-direction: column;
-		width: 100%;
 	}
 
 	.h-auto {
