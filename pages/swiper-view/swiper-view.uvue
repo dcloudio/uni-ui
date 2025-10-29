@@ -167,6 +167,28 @@
 			</swiper-view>
 		</view>
 
+		<!-- 垂直滑动且 circular -->
+		<view style="margin-bottom: 20px;">
+			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）且开启 circular：</text>
+			<swiper-view vertical circular style="height: 200px;">
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #8e44ad; align-items: center; justify-content: center;">
+						<text style="color: white; font-size: 24px;">Vertical 1</text>
+					</view>
+				</swiper-slider>
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #2c3e50; align-items: center; justify-content: center;">
+						<text style="color: white; font-size: 24px;">Vertical 2</text>
+					</view>
+				</swiper-slider>
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #e67e22; align-items: center; justify-content: center;">
+						<text style="color: white; font-size: 24px;">Vertical 3</text>
+					</view>
+				</swiper-slider>
+			</swiper-view>
+		</view>
+
 		<!-- 自动播放 + circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自动播放 + 循环（autoplay + circular）：</text>
