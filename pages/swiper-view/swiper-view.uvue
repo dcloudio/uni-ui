@@ -11,7 +11,7 @@
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">不等高slider测试（Auto Height）harmony 无效：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">容器高度随当前slider内容自动调整</text>
-			<swiper-view style="background-color: #f5f5f5;">
+			<swiper-view>
 				<swiper-slider :auto-height="true">
 					<view style="background-color: #ff6b6b; padding: 20px;">
 						<view style="background-color: white; padding: 15px; border-radius: 8px;">
@@ -43,7 +43,7 @@
 		<!-- 基础用法（测试指示器在黑白背景下的可见性） -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">基础用法（横向滑动，测试指示器可见性）：</text>
-			<swiper-view style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #ff6b6b; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Slide 1</text>
@@ -69,7 +69,7 @@
 				circular
 				previous-margin="40px"
 				next-margin="40px"
-				style="height: 120px; background-color: #f5f5f5;"
+				style="height: 120px;"
 				@change="handleScaleChange1"
 			>
 				<swiper-slider>
@@ -103,7 +103,7 @@
 				circular
 				previous-margin="40px"
 				next-margin="40px"
-				style="height: 120px; background-color: #f5f5f5;"
+				style="height: 120px;"
 				@change="handleScaleChange2"
 			>
 				<swiper-slider>
@@ -126,7 +126,7 @@
 		<!-- 垂直滑动 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）：</text>
-			<swiper-view vertical style="height: 200px; background-color: #f5f5f5;">
+			<swiper-view vertical style="height: 200px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #8e44ad; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Vertical 1</text>
@@ -148,7 +148,7 @@
 		<!-- 垂直滑动且关闭rebound -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）且关闭rebound：</text>
-			<swiper-view vertical :rebound="false" style="height: 200px; background-color: #f5f5f5;">
+			<swiper-view vertical :rebound="false" style="height: 200px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #8e44ad; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Vertical 1</text>
@@ -170,7 +170,7 @@
 		<!-- 自动播放 + circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自动播放 + 循环（autoplay + circular）：</text>
-			<swiper-view autoplay circular :interval="2000" style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view autoplay circular :interval="2000" style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #ee5a6f; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Auto 1</text>
@@ -193,7 +193,7 @@
 		<!-- 2卡片 + circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">2卡片 + 循环circular：</text>
-			<swiper-view circular :interval="2000" style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view circular :interval="2000" style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #ee5a6f; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">A</text>
@@ -210,7 +210,7 @@
 		<!-- 指示器短横线样式 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器短横线样式（item-style）：</text>
-			<swiper-view style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #9b59b6; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Line 1</text>
@@ -233,7 +233,7 @@
 		<!-- 高亮指示器加长 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">高亮指示器加长（item-active-style）：</text>
-			<swiper-view style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #e84118; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Scale 1</text>
@@ -254,7 +254,7 @@
 		<!-- item-class和item-active-class示例 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器class定制（item-class + item-active-class）：</text>
-			<swiper-view style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #f39c12; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Class 1</text>
@@ -272,7 +272,7 @@
 		<!-- item-style和item-active-style示例 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器样式定制（item-style + item-active-style）：</text>
-			<swiper-view style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #8e44ad; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Style 1</text>
@@ -300,7 +300,7 @@
 				@change="handleChange"
 				@transition="handleTransition"
 				@animationfinish="handleAnimationFinish"
-				style="height: 150px; background-color: #f5f5f5;"
+				style="height: 150px;"
 			>
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #2d3436; align-items: center; justify-content: center;">
@@ -323,7 +323,7 @@
 		<!-- 自定义数字指示器 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自定义数字指示器（slot）：</text>
-			<swiper-view @change="handleCustomIndicatorChange" style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view @change="handleCustomIndicatorChange" style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #16a085; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Custom 1</text>
@@ -351,7 +351,7 @@
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">circular和rebound同时设置：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">以circular为优先</text>
-			<swiper-view :rebound="true" :circular="true" style="height: 150px; background-color: #f5f5f5;">
+			<swiper-view :rebound="true" :circular="true" style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #3742fa; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Rebound 1</text>
