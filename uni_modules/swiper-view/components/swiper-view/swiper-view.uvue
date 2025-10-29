@@ -546,14 +546,6 @@ const onTouchMove = (e : TouchEvent) => {
 	}
 
 	if (circular && sliderCount.value > 1) {
-		// circular模式：限制拖动范围在0到2之间（因为DOM是[prev, current, next]）
-		const minTranslate = -(2 * itemSize)
-		const maxTranslate = 0
-		const newTranslate = startTranslate + delta
-
-		translate.value = newTranslate
-	} else if (circular && sliderCount.value == 2) {
-		// 2个元素的circular：不支持margin，允许自由拖动
 		translate.value = startTranslate + delta
 	} else {
 		// 非circular模式
@@ -606,7 +598,8 @@ const onTouchEnd = (e : TouchEvent) => {
 		return
 	}
 
-	if (circular) {
+	// 两个 slider 且没有前后边距 或者 多于两个 slider 时，才支持循环切换
+	if (circular && (sliderCount.value > 2 || (sliderCount.value ==2 && prevMargin == 0 && nextMargin == 0))) {
 		// 判断拖动到哪个位置
 		if (delta > 0) {
 			// 向前切换
