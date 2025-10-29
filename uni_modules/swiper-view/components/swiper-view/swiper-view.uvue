@@ -328,7 +328,7 @@ onMounted(() => {
 
 		if (containerWidth <= 0) {
 			const wrapperWidth = wrapperEl.style.getPropertyValue('width')
-			if (wrapperWidth.length > 0 && wrapperWidth != 'auto') {
+			if (wrapperWidth.endsWith("px") || wrapperWidth.endsWith("rpx")) {
 				const parsedWidth = parsePxRpx(wrapperWidth)
 				if (parsedWidth > 0) {
 					containerWidth = parsedWidth
@@ -337,7 +337,7 @@ onMounted(() => {
 		}
 		if (containerHeight <= 0) {
 			const wrapperHeight = wrapperEl.style.getPropertyValue('height')
-			if (wrapperHeight.length > 0 && wrapperHeight != 'auto') {
+			if (wrapperHeight.endsWith("px") || wrapperHeight.endsWith("rpx")) {
 				const parsedHeight = parsePxRpx(wrapperHeight)
 				if (parsedHeight > 0) {
 					containerHeight = parsedHeight
@@ -644,7 +644,6 @@ const onTouchEnd = (e : TouchEvent) => {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	/* transition: height 500ms; */
 }
 
 /* #ifdef WEB */
