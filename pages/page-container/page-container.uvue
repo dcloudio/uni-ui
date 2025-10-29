@@ -311,7 +311,7 @@
 		containerRound.value = true
 		containerCloseOnSlideDown.value = true
 		containerOverlayStyle.value = "background-color: rgba(0, 0, 0, 0.5);"
-		containerCustomStyle.value = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+		containerCustomStyle.value = "background-image: linear-gradient(to top, red , yellow);"
 		contentStyle.value = "padding: 30px; background-color: transparent;"
 		containerTitle.value = "综合演示"
 		containerContent.value = "这是一个综合演示，包含:\n- position: bottom\n- duration: 500ms\n- z-index: 500\n- overlay: true\n- round: true\n- close-on-slide-down: true\n- 自定义蒙层样式\n- 自定义容器样式(渐变背景)"
