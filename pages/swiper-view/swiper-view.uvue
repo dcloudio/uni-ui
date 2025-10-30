@@ -400,7 +400,7 @@
 </template>
 
 <script setup lang="uts">
-	import { ref, onMounted } from 'vue'
+	import { ref } from 'vue'
 	import { UniSwiperViewChangeEvent, UniSwiperViewTransitionEvent, UniSwiperViewAnimationFinishEvent } from '../../uni_modules/swiper-view/components/swiper-view/types.uts'
 
 	// 3D卡片缩放演示
