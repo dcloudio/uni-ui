@@ -295,7 +295,7 @@
 		containerOverlayStyle.value = "background-color: rgba(0, 0, 0, 0.6);"
 		// 设置对话框样式：使用flex布局居中对齐
 		containerCustomStyle.value = "display: flex; align-items: center; justify-content: center; background-color: transparent;"
-		contentStyle.value = "width: 600rpx; padding: 24px; background-color: #ffffff; border-radius: 16px; animation: dialogScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);"
+		contentStyle.value = "width: 600rpx; padding: 24px; background-color: #ffffff; border-radius: 16px;"
 		containerTitle.value = "对话框示例"
 		containerContent.value = "这是一个模拟对话框的page-container示例"
 		containerShow.value = true
@@ -399,16 +399,4 @@
 		/* #endif */
 	}
 
-	/* 对话框缩放动画 */
-	@keyframes dialogScale {
-		0% {
-			transform: scale(0.9);
-			opacity: 0.8;
-		}
-
-		100% {
-			transform: scale(1);
-			opacity: 1;
-		}
-	}
 </style>

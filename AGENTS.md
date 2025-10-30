@@ -82,7 +82,7 @@ console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson()
 
 - 获取日志
 可以通过如下cli命令获取HBuilderX的控制台日志，包括编译错误和运行时log：
-* app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x` （日志乱码，暂时不可用）
+* app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x`
 * web平台：`C:\hbuilderx\hx_dev\cli.exe logcat web --browser Chrome --project uni-ui-x`
 
 ## uni-app x项目的自动化测试

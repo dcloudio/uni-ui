@@ -1,0 +1,484 @@
+<template>
+	<view 
+		class="movable-view"
+		:style="viewStyle"
+		ref="viewRef"
+		@touchstart="handleTouchStart"
+		@touchmove="handleTouchMove"
+		@touchend="handleTouchEnd"
+		@touchcancel="handleTouchCancel"
+	>
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+	type Props = {
+		x?: number
+		y?: number
+		direction?: "all" | "vertical" | "horizontal" | "none"
+		inertia?: boolean
+		outOfBounds?: boolean
+		damping?: number
+		friction?: number
+		scale?: boolean
+		scaleMin?: number
+		scaleMax?: number
+		scaleValue?: number
+	}
+	
+	const props = withDefaults(defineProps<Props>(), {
+		x: 0,
+		y: 0,
+		direction: "none",
+		inertia: false,
+		outOfBounds: false,
+		damping: 20,
+		friction: 2,
+		scale: false,
+		scaleMin: 0.5,
+		scaleMax: 2,
+		scaleValue: 1
+	})
+	
+	type ChangeEventDetail = {
+		x: number
+		y: number
+		source: string
+	}
+	
+	type ScaleEventDetail = {
+		scale: number
+		x: number
+		y: number
+	}
+	
+	const emit = defineEmits<{
+		(e: 'change', event: { detail: ChangeEventDetail }): void
+		(e: 'scale', event: { detail: ScaleEventDetail }): void
+	}>()
+	
+	const viewRef = ref<UniElement | null>(null)
+	
+	// 内部状态
+	const innerX = ref<number>(props.x)
+	const innerY = ref<number>(props.y)
+	const innerScale = ref<number>(props.scaleValue)
+	
+	// 触摸相关状态
+	let touchStartX = 0
+	let touchStartY = 0
+	let touchStartTime = 0
+	let viewStartX = 0
+	let viewStartY = 0
+	let isDragging = false
+	let isScaling = false
+	let initialDistance = 0
+	let initialScale = 1
+	
+	// 区域和视图尺寸
+	let areaWidth = 0
+	let areaHeight = 0
+	let viewWidth = 0
+	let viewHeight = 0
+	
+	type Rect = {
+		width: number
+		height: number
+		left: number
+		top: number
+		right: number
+		bottom: number
+	}
+	
+	// 惯性相关
+	let velocityX = 0
+	let velocityY = 0
+	let lastMoveTime = 0
+	let lastMoveX = 0
+	let lastMoveY = 0
+	let animFrameId: number | null = null
+	
+	// 计算视图样式
+	const viewStyle = computed((): string => {
+		let style = `position: absolute; left: ${innerX.value}px; top: ${innerY.value}px;`
+		if (props.scale) {
+			style += `transform: scale(${innerScale.value});`
+		}
+		return style
+	})
+	
+	// 获取区域尺寸（从父组件）
+	const getAreaRect = (): Promise<Rect | null> => {
+		return new Promise<Rect | null>((resolve) => {
+			// #ifdef APP
+			if (viewRef.value != null) {
+				// 尝试获取父元素
+				const parentElement = viewRef.value.parentElement
+				if (parentElement != null) {
+					const rect = parentElement.getBoundingClientRect()
+					resolve({
+						width: rect.width,
+						height: rect.height,
+						left: rect.left,
+						top: rect.top,
+						right: rect.right,
+						bottom: rect.bottom
+					} as Rect)
+					return
+				}
+			}
+			// #endif
+			
+			// 使用createSelectorQuery查询
+			const query = uni.createSelectorQuery()
+			query.select('.movable-area').boundingClientRect((rect: any) => {
+				if (rect != null) {
+					resolve({
+						width: rect.width as number,
+						height: rect.height as number,
+						left: rect.left as number,
+						top: rect.top as number,
+						right: rect.right as number,
+						bottom: rect.bottom as number
+					} as Rect)
+				} else {
+					resolve(null)
+				}
+			}).exec()
+		})
+	}
+	
+	// 获取视图尺寸
+	const getViewRect = (): Promise<Rect | null> => {
+		return new Promise<Rect | null>((resolve) => {
+			if (viewRef.value == null) {
+				resolve(null)
+				return
+			}
+			
+			// #ifdef APP
+			const rect = viewRef.value.getBoundingClientRect()
+			resolve({
+				width: rect.width,
+				height: rect.height,
+				left: rect.left,
+				top: rect.top,
+				right: rect.right,
+				bottom: rect.bottom
+			} as Rect)
+			return
+			// #endif
+			
+			// #ifndef APP
+			const query = uni.createSelectorQuery()
+			query.select('.movable-view').boundingClientRect((rect: any) => {
+				if (rect != null) {
+					resolve({
+						width: rect.width as number,
+						height: rect.height as number,
+						left: rect.left as number,
+						top: rect.top as number,
+						right: rect.right as number,
+						bottom: rect.bottom as number
+					} as Rect)
+				} else {
+					resolve(null)
+				}
+			}).exec()
+			// #endif
+		})
+	}
+	
+	// 初始化尺寸
+	const initSizes = async (): Promise<void> => {
+		const areaRect = await getAreaRect()
+		const viewRect = await getViewRect()
+		
+		if (areaRect != null) {
+			areaWidth = areaRect.width
+			areaHeight = areaRect.height
+		}
+		
+		if (viewRect != null) {
+			viewWidth = viewRect.width
+			viewHeight = viewRect.height
+		}
+	}
+	
+	// 限制坐标在边界内
+	const clampPosition = (x: number, y: number): { x: number, y: number } => {
+		if (props.outOfBounds) {
+			return { x, y }
+		}
+		
+		let clampedX = x
+		let clampedY = y
+		
+		// 计算缩放后的实际尺寸
+		const scaledWidth = viewWidth * innerScale.value
+		const scaledHeight = viewHeight * innerScale.value
+		
+		// X轴限制
+		if (scaledWidth <= areaWidth) {
+			clampedX = Math.max(0, Math.min(x, areaWidth - scaledWidth))
+		} else {
+			// 视图大于区域时，确保区域在视图内
+			clampedX = Math.max(areaWidth - scaledWidth, Math.min(x, 0))
+		}
+		
+		// Y轴限制
+		if (scaledHeight <= areaHeight) {
+			clampedY = Math.max(0, Math.min(y, areaHeight - scaledHeight))
+		} else {
+			clampedY = Math.max(areaHeight - scaledHeight, Math.min(y, 0))
+		}
+		
+		return { x: clampedX, y: clampedY }
+	}
+	
+	// 根据方向限制移动
+	const applyDirection = (deltaX: number, deltaY: number): { deltaX: number, deltaY: number } => {
+		if (props.direction == "all") {
+			return { deltaX, deltaY }
+		} else if (props.direction == "horizontal") {
+			return { deltaX, deltaY: 0 }
+		} else if (props.direction == "vertical") {
+			return { deltaX: 0, deltaY }
+		} else {
+			return { deltaX: 0, deltaY: 0 }
+		}
+	}
+	
+	// 更新位置并触发事件
+	const updatePosition = (x: number, y: number, source: string = "touch"): void => {
+		const clamped = clampPosition(x, y)
+		innerX.value = clamped.x
+		innerY.value = clamped.y
+		
+		emit('change', {
+			detail: {
+				x: innerX.value,
+				y: innerY.value,
+				source: source
+			} as ChangeEventDetail
+		})
+	}
+	
+	// 计算两点间距离
+	const getDistance = (touches: Touch[]): number => {
+		if (touches.length < 2) {
+			return 0
+		}
+		const touch1 = touches[0]
+		const touch2 = touches[1]
+		const dx = touch1.clientX - touch2.clientX
+		const dy = touch1.clientY - touch2.clientY
+		return Math.sqrt(dx * dx + dy * dy)
+	}
+	
+	// 触摸开始
+	const handleTouchStart = (e: TouchEvent): void => {
+		if (animFrameId != null) {
+			// 取消惯性动画
+			if (typeof requestAnimationFrame !== 'undefined') {
+				// #ifdef WEB
+				cancelAnimationFrame(animFrameId)
+				// #endif
+			}
+			animFrameId = null
+		}
+		
+		isDragging = false
+		isScaling = false
+		
+		if (e.touches.length == 1) {
+			// 单指拖动
+			touchStartX = e.touches[0].clientX
+			touchStartY = e.touches[0].clientY
+			touchStartTime = Date.now()
+			viewStartX = innerX.value
+			viewStartY = innerY.value
+			lastMoveX = innerX.value
+			lastMoveY = innerY.value
+			lastMoveTime = touchStartTime
+			velocityX = 0
+			velocityY = 0
+		} else if (e.touches.length == 2 && props.scale) {
+			// 双指缩放
+			isScaling = true
+			initialDistance = getDistance(e.touches)
+			initialScale = innerScale.value
+		}
+	}
+	
+	// 触摸移动
+	const handleTouchMove = (e: TouchEvent): void => {
+		const now = Date.now()
+		
+		// #ifdef WEB
+		e.preventDefault()
+		// #endif
+		
+		if (isScaling && e.touches.length == 2 && props.scale) {
+			// 双指缩放
+			const currentDistance = getDistance(e.touches)
+			if (initialDistance > 0) {
+				const scaleDelta = currentDistance / initialDistance
+				let newScale = initialScale * scaleDelta
+				newScale = Math.max(props.scaleMin, Math.min(newScale, props.scaleMax))
+				innerScale.value = newScale
+				
+				emit('scale', {
+					detail: {
+						scale: innerScale.value,
+						x: innerX.value,
+						y: innerY.value
+					} as ScaleEventDetail
+				})
+			}
+		} else if (e.touches.length == 1 && !isScaling) {
+			// 单指拖动
+			isDragging = true
+			const deltaX = e.touches[0].clientX - touchStartX
+			const deltaY = e.touches[0].clientY - touchStartY
+			
+			const directionLimited = applyDirection(deltaX, deltaY)
+			const newX = viewStartX + directionLimited.deltaX
+			const newY = viewStartY + directionLimited.deltaY
+			
+			updatePosition(newX, newY, "touch")
+			
+			// 计算速度（用于惯性）
+			if (props.inertia) {
+				const timeDelta = now - lastMoveTime
+				if (timeDelta > 0) {
+					velocityX = (innerX.value - lastMoveX) / timeDelta
+					velocityY = (innerY.value - lastMoveY) / timeDelta
+				}
+				lastMoveX = innerX.value
+				lastMoveY = innerY.value
+				lastMoveTime = now
+			}
+		}
+	}
+	
+	// 触摸结束
+	const handleTouchEnd = (e: TouchEvent): void => {
+		isScaling = false
+		
+		if (isDragging && props.inertia) {
+			// 启动惯性动画
+			startInertiaAnimation()
+		}
+		
+		isDragging = false
+	}
+	
+	// 触摸取消
+	const handleTouchCancel = (e: TouchEvent): void => {
+		isScaling = false
+		isDragging = false
+	}
+	
+	// 惯性动画
+	const startInertiaAnimation = (): void => {
+		if (!props.inertia) {
+			return
+		}
+		
+		const animate = (): void => {
+			if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
+				// 速度太小，停止动画
+				animFrameId = null
+				return
+			}
+			
+			// 应用摩擦
+			velocityX *= (1 - props.friction / 100)
+			velocityY *= (1 - props.friction / 100)
+			
+			// 更新位置
+			const newX = innerX.value + velocityX * 16 // 假设60fps，16ms一帧
+			const newY = innerY.value + velocityY * 16
+			const directionLimited = applyDirection(velocityX * 16, velocityY * 16)
+			
+			const finalX = innerX.value + directionLimited.deltaX
+			const finalY = innerY.value + directionLimited.deltaY
+			
+			updatePosition(finalX, finalY, "friction")
+			
+			// #ifdef WEB
+			animFrameId = requestAnimationFrame(animate)
+			// #endif
+			
+			// #ifndef WEB
+			// APP平台使用setTimeout模拟
+			setTimeout(() => {
+				animate()
+			}, 16)
+			// #endif
+		}
+		
+		// #ifdef WEB
+		animFrameId = requestAnimationFrame(animate)
+		// #endif
+		
+		// #ifndef WEB
+		animate()
+		// #endif
+	}
+	
+	// 监听props变化
+	watch(() => props.x, (newVal: number) => {
+		if (!isDragging) {
+			innerX.value = newVal
+			updatePosition(innerX.value, innerY.value, "touch")
+		}
+	})
+	
+	watch(() => props.y, (newVal: number) => {
+		if (!isDragging) {
+			innerY.value = newVal
+			updatePosition(innerX.value, innerY.value, "touch")
+		}
+	})
+	
+	watch(() => props.scaleValue, (newVal: number) => {
+		if (!isScaling) {
+			innerScale.value = Math.max(props.scaleMin, Math.min(newVal, props.scaleMax))
+			emit('scale', {
+				detail: {
+					scale: innerScale.value,
+					x: innerX.value,
+					y: innerY.value
+				} as ScaleEventDetail
+			})
+		}
+	})
+	
+	// 初始化
+	onMounted(() => {
+		innerX.value = props.x
+		innerY.value = props.y
+		innerScale.value = props.scaleValue
+		setTimeout(() => {
+			initSizes()
+		}, 100)
+	})
+	
+	onUnmounted(() => {
+		if (animFrameId != null) {
+			// #ifdef WEB
+			cancelAnimationFrame(animFrameId)
+			// #endif
+			animFrameId = null
+		}
+	})
+</script>
+
+<style>
+.movable-view {
+	position: absolute;
+}
+</style>

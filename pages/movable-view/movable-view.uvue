@@ -1,0 +1,162 @@
+<template>
+  <view class="page-body">
+    <!-- <page-head title="movable-view,可拖动视图"></page-head> -->
+    <view class="uni-padding-wrap uni-common-mt">
+      <view class="uni-title uni-common-mt">
+        示例 1
+        <text>\nmovable-view 区域小于 movable-area</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default" :x="x" :y="y" direction="all" @change="onChange">text</movable-view>
+      </movable-area>
+      <view @tap="tap" class="uni-link uni-center uni-common-mt">
+        点击这里移动至 (30px, 30px)
+      </view>
+      <view class="uni-title uni-common-mt">
+        示例 2
+        <text>\nmovable-view区域大于movable-area</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default max" direction="all">text</movable-view>
+      </movable-area>
+      <view class="uni-title uni-common-mt">
+        示例 3
+        <text>\n只可以横向移动</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default" direction="horizontal">text</movable-view>
+      </movable-area>
+      <view class="uni-title uni-common-mt">
+        示例 4
+        <text>\n只可以纵向移动</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default" direction="vertical">text</movable-view>
+      </movable-area>
+      <view class="uni-title uni-common-mt">
+        示例 5
+        <text>\n可超出边界</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default" direction="all" out-of-bounds>text</movable-view>
+      </movable-area>
+      <view class="uni-title uni-common-mt">
+        示例 6
+        <text>\n带有惯性</text>
+      </view>
+      <movable-area class="movable-area-default">
+        <movable-view class="movable-view-default" direction="all" inertia>text</movable-view>
+      </movable-area>
+      <view class="uni-title uni-common-mt">
+        示例 7
+        <text>\n可放缩</text>
+      </view>
+      <movable-area class="movable-area-default" scale-area>
+        <movable-view class="movable-view-default" direction="all" @scale="onScale" scale scale-min="0.5" scale-max="4"
+          :scale-value="scale">text</movable-view>
+      </movable-area>
+      <view @tap="tap2" class="uni-link uni-center uni-common-mt" style="padding-bottom:40px;">
+        点击这里放大3倍
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="uts">
+	import movableArea from "@/uni_modules/movable-view/components/movable-area.uvue"
+  const x = ref<number>(0)
+  const y = ref<number>(0)
+  const scale = ref<number>(2)
+
+  type OldState = {
+    x: number
+    y: number
+    scale: number
+  }
+
+  const old = reactive<OldState>({
+    x: 0,
+    y: 0,
+    scale: 2
+  })
+
+  const tap = () => {
+    // 解决view层不同步的问题
+    x.value = old.x
+    y.value = old.y
+    nextTick(() => {
+      x.value = 30
+      y.value = 30
+    })
+  }
+
+  const tap2 = () => {
+    // 解决view层不同步的问题
+    scale.value = old.scale
+    nextTick(() => {
+      scale.value = 3
+    })
+  }
+
+  type MovableChangeDetail = {
+    x: number
+    y: number
+    source: string
+  }
+
+  type MovableScaleDetail = {
+    x: number
+    y: number
+    scale: number
+  }
+
+  type MovableChangeEvent = {
+    detail: MovableChangeDetail
+  }
+
+  type MovableScaleEvent = {
+    detail: MovableScaleDetail
+  }
+
+  const onChange = (e: MovableChangeEvent) => {
+    old.x = e.detail.x
+    old.y = e.detail.y
+  }
+
+  const onScale = (e: MovableScaleEvent) => {
+    old.scale = e.detail.scale
+  }
+
+  defineExpose({
+  	x,
+  	y,
+  	scale,
+  	tap,
+  	tap2 // 仅供自动化测试用例调用
+  })
+
+</script>
+
+<style>
+  .movable-view-default {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    width: 75px;
+    background-color: #007AFF;
+    color: #fff;
+  }
+
+  .movable-area-default {
+    height: 150px;
+    width: 100%;
+    background-color: #D8D8D8;
+    overflow: hidden;
+  }
+
+  .max {
+    width: 250px;
+    height: 250px;
+  }
+</style>

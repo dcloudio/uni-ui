@@ -30,17 +30,23 @@
 				"navigationBarTitleText": "tab-bar"
 			}
 		},
-		{
+		/* {
 			"path": "pages/pop-view/pop-view",
 			"style": {
 				"navigationBarTitleText": "pop-view"
 			}
-		},
+		}, */
 		{
 			"path": "pages/page-container/page-container",
 			"style": {
 				"navigationBarTitleText": "page-container",
 				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/movable-view/movable-view",
+			"style": {
+				"navigationBarTitleText": "movable-view"
 			}
 		}
 	],
