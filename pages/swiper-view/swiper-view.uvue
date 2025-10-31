@@ -369,6 +369,32 @@
 			</swiper-view>
 		</view>
 
+		<view style="margin-bottom: 20px;">
+			<text style="color: #666; margin-bottom: 10px;">自定义数字指示器（slot）handle click：</text>
+			<swiper-view :current='testCurrent' style="height: 150px;">
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #16a085; align-items: center; justify-content: center;">
+						<text style="color: white; font-size: 24px;">Custom 1</text>
+					</view>
+				</swiper-slider>
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #ffffff; align-items: center; justify-content: center;">
+						<text style="color: black; font-size: 24px;">Custom 2</text>
+					</view>
+				</swiper-slider>
+				<swiper-slider>
+					<view style="width: 100%; height: 100%; background-color: #000000; align-items: center; justify-content: center;">
+						<text style="color: white; font-size: 24px;">Custom 3</text>
+					</view>
+				</swiper-slider>
+				<swiper-indicator>
+					<view v-for="item in 3" style="margin: 0 10px;">
+						<text class="custom-indicator-text" :class="{ 'active': testCurrent == item - 1 }" @click="handleCustomIndicatorClick(item - 1)">{{item - 1}}</text>
+					</view>
+				</swiper-indicator>
+			</swiper-view>
+		</view>
+
 		<!-- circular和rebound同时设置 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">circular和rebound同时设置：</text>
@@ -407,6 +433,8 @@
 	const scaleCurrentIndex1 = ref<number>(0)
 	const scaleCurrentIndex2 = ref<number>(0)
 
+	const testCurrent = ref<number>(0)
+
 	// 事件演示
 	const eventCurrentIndex = ref<number>(0)
 	const eventSource = ref<string>('none')
@@ -441,6 +469,9 @@
 	const handleCustomIndicatorChange = (e: UniSwiperViewChangeEvent) => {
 		customIndicatorIndex.value = e.detail.current
 	}
+	const handleCustomIndicatorClick = (index: number) => {
+		testCurrent.value = index
+	}
 </script>
 
 <style lang="scss">
@@ -472,5 +503,15 @@
 	:deep(.uni-swiper-indicator .uni-swiper-indicator-item.custom-item.custom-item-active) {
 		width: 24px;
 		background-color: rgba(255, 165, 0, 1);
+	}
+	.custom-indicator-text {
+		padding: 10px;
+		font-size: 14px;
+		color: #ccc;
+	}
+	.custom-indicator-text.active {
+		font-size: 18px;
+		color: yellow;
+		font-weight: bold;
 	}
 </style>
