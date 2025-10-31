@@ -90,6 +90,16 @@
 		right: number
 		bottom: number
 	}
+
+	type Position = {
+		x: number
+		y: number
+	}
+
+	type Delta = {
+		deltaX: number
+		deltaY: number
+	}
 	
 	// 惯性相关
 	let velocityX = 0
@@ -133,18 +143,15 @@
 			// 使用createSelectorQuery查询
 			const query = uni.createSelectorQuery()
 			query.select('.movable-area').boundingClientRect((rect: any) => {
-				if (rect != null) {
 					resolve({
-						width: rect.width as number,
-						height: rect.height as number,
-						left: rect.left as number,
-						top: rect.top as number,
-						right: rect.right as number,
-						bottom: rect.bottom as number
+						width: (rect as DOMRect).width,
+						height: (rect as DOMRect).height,
+						left: (rect as DOMRect).left,
+						top: (rect as DOMRect).top,
+						right: (rect as DOMRect).right,
+						bottom: (rect as DOMRect).bottom
 					} as Rect)
-				} else {
-					resolve(null)
-				}
+			
 			}).exec()
 		})
 	}
@@ -207,7 +214,7 @@
 	}
 	
 	// 限制坐标在边界内
-	const clampPosition = (x: number, y: number): { x: number, y: number } => {
+	const clampPosition = (x: number, y: number): Position => {
 		if (props.outOfBounds) {
 			return { x, y }
 		}
@@ -238,7 +245,7 @@
 	}
 	
 	// 根据方向限制移动
-	const applyDirection = (deltaX: number, deltaY: number): { deltaX: number, deltaY: number } => {
+	const applyDirection = (deltaX: number, deltaY: number): Delta => {
 		if (props.direction == "all") {
 			return { deltaX, deltaY }
 		} else if (props.direction == "horizontal") {
@@ -251,7 +258,7 @@
 	}
 	
 	// 更新位置并触发事件
-	const updatePosition = (x: number, y: number, source: string = "touch"): void => {
+	const updatePosition = (x: number, y: number, source: string): void => {
 		const clamped = clampPosition(x, y)
 		innerX.value = clamped.x
 		innerY.value = clamped.y
@@ -281,11 +288,11 @@
 	const handleTouchStart = (e: TouchEvent): void => {
 		if (animFrameId != null) {
 			// 取消惯性动画
+			// #ifdef WEB
 			if (typeof requestAnimationFrame !== 'undefined') {
-				// #ifdef WEB
 				cancelAnimationFrame(animFrameId)
-				// #endif
 			}
+			// #endif
 			animFrameId = null
 		}
 		
@@ -362,25 +369,7 @@
 			}
 		}
 	}
-	
-	// 触摸结束
-	const handleTouchEnd = (e: TouchEvent): void => {
-		isScaling = false
-		
-		if (isDragging && props.inertia) {
-			// 启动惯性动画
-			startInertiaAnimation()
-		}
-		
-		isDragging = false
-	}
-	
-	// 触摸取消
-	const handleTouchCancel = (e: TouchEvent): void => {
-		isScaling = false
-		isDragging = false
-	}
-	
+
 	// 惯性动画
 	const startInertiaAnimation = (): void => {
 		if (!props.inertia) {
@@ -415,7 +404,8 @@
 			// #ifndef WEB
 			// APP平台使用setTimeout模拟
 			setTimeout(() => {
-				animate()
+			// Recursive calls on function expressions are not supported. Define the function separately before invoking it.
+				// animate()
 			}, 16)
 			// #endif
 		}
@@ -429,22 +419,40 @@
 		// #endif
 	}
 	
+	// 触摸结束
+	const handleTouchEnd = (e: TouchEvent): void => {
+		isScaling = false
+		
+		if (isDragging && props.inertia) {
+			// 启动惯性动画
+			startInertiaAnimation()
+		}
+		
+		isDragging = false
+	}
+	
+	// 触摸取消
+	const handleTouchCancel = (e: TouchEvent): void => {
+		isScaling = false
+		isDragging = false
+	}
+	
 	// 监听props变化
-	watch(() => props.x, (newVal: number) => {
+	watch((): number => props.x, (newVal: number) => {
 		if (!isDragging) {
 			innerX.value = newVal
 			updatePosition(innerX.value, innerY.value, "touch")
 		}
 	})
 	
-	watch(() => props.y, (newVal: number) => {
+	watch((): number => props.y, (newVal: number) => {
 		if (!isDragging) {
 			innerY.value = newVal
 			updatePosition(innerX.value, innerY.value, "touch")
 		}
 	})
 	
-	watch(() => props.scaleValue, (newVal: number) => {
+	watch((): number => props.scaleValue, (newVal: number) => {
 		if (!isScaling) {
 			innerScale.value = Math.max(props.scaleMin, Math.min(newVal, props.scaleMax))
 			emit('scale', {

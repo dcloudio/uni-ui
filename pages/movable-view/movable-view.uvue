@@ -52,7 +52,7 @@
         <text>\n可放缩</text>
       </view>
       <movable-area class="movable-area-default" scale-area>
-        <movable-view class="movable-view-default" direction="all" @scale="onScale" scale scale-min="0.5" scale-max="4"
+        <movable-view class="movable-view-default" direction="all" @scale="onScale" scale :scale-min="0.5" :scale-max="4"
           :scale-value="scale">text</movable-view>
       </movable-area>
       <view @tap="tap2" class="uni-link uni-center uni-common-mt" style="padding-bottom:40px;">
@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="uts">
-	import movableArea from "@/uni_modules/movable-view/components/movable-area.uvue"
   const x = ref<number>(0)
   const y = ref<number>(0)
   const scale = ref<number>(2)
