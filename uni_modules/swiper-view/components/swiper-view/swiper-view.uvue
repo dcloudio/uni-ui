@@ -679,12 +679,7 @@ const onTouchEnd = (e : TouchEvent) => {
 	align-items: center;
 	justify-content: center;
 	z-index: 10;
-	pointer-events: none;
 	background-color: transparent;
-}
-
-.uni-swiper-indicator .uni-swiper-indicator-item {
-	pointer-events: auto;
 }
 
 .uni-swiper-indicator.uni-swiper-indicator_horizontal {
