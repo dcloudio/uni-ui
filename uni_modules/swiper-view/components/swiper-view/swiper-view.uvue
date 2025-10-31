@@ -210,7 +210,6 @@ function stopAutoPlay() {
 
 // 默认指示器点击处理
 const handleIndicatorClick = (index : number) => {
-	console.log('handle indicator click:', index)
 	slideTo(index, 'click', 1)
 }
 
@@ -456,7 +455,6 @@ onMounted(() => {
 onUnmounted(() => stopAutoPlay())
 
 const onTouchStart = (e : TouchEvent) => {
-	console.log('onTouchStart ------------------------');
 	stopAutoPlay()
 
 	// 如果正在动画中,停止动画
@@ -479,7 +477,6 @@ const onTouchStart = (e : TouchEvent) => {
 }
 
 const onTouchMove = (e : TouchEvent) => {
-	console.log('onTouchMove ------------------------');
 	if (!dragging) return
 
 	const t = e.touches[0]
@@ -573,7 +570,6 @@ const onTouchMove = (e : TouchEvent) => {
 }
 
 const onTouchEnd = (e : TouchEvent) => {
-	console.log('onTouchEnd ------------------------');
 	if (!dragging) return
 	dragging = false
 
