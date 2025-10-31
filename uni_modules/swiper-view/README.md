@@ -42,6 +42,16 @@ swiper-indicator是指示器子组件，用于指示当前处于哪个swiper-sli
 
 swiper-indicator组件默认自带一个圆点指示器。可通过其属性item-class、item-style、item-active-class、item-active-style，来修改默认指示器的样式。同时，swiper-indicator组件支持slot来更换为自定义的指示器。
 
+以下没有列出的是不要了吗？
+indicator-dots 	        boolean	                    false	                  是否显示面板指示点
+indicator-color	        string(string.ColorString)	"rgba(0, 0, 0, .3)"	 指示点颜色
+indicator-active-color	string(string.ColorString)	"#000000"	           当前选中的指示点颜色
+disable-touch	          boolean	                    false	                  是否禁止用户 touch 操作
+easing-function	        string	                    default                 指定 swiper 切换缓动动画类型，有效值：default、linear、easeInCubic、easeOutCubic、easeInOutCubic
+current-item-id	        string	                    -                     	当前所在滑块的 item-id ，不能与 current 被同时指定
+
+rebound 要改成 disable-bounce 吗？
+
 swiper-view组件支持的属性如下：
 |属性名						|属性类型																				|默认值	|描述																																											|
 |:-:							|:-:																						|:-:		|:-:																																											|
