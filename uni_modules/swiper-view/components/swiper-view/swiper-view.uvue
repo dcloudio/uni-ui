@@ -159,8 +159,6 @@ function adjustSliderPosition(targetIndex : number, direction? : number | null) 
 function slideTo(targetIndex : number, source : string, direction? : number | null) {
 	if (targetIndex < 0 || targetIndex >= sliderCount.value) return
 
-	adjustSliderPosition(targetIndex, direction)
-
 	animating.value = true
 	if(circular){
 		// 第一个 向前继续滑动到 最后一个时
@@ -225,54 +223,11 @@ function updateContainerHeight(index : number) {
 	let currentSlider : UniElement | null = sliders[index]
 
 	if (currentSlider != null) {
-		const sliderContent = currentSlider.querySelector('.uni-swiper-slider-content') as UniElement | null
-		let measuredHeight = 0
-		if (sliderContent != null) {
-			// harmony 上 scrollHeight 未实现，需要确认这里的逻辑是否合理，如果合理，实现 harmony UniElement.scrollHeight
-			measuredHeight = sliderContent.scrollHeight
-			if (measuredHeight <= 0) {
-				measuredHeight = sliderContent.offsetHeight
-			}
-		}
-		if (measuredHeight <= 0) {
-			measuredHeight = currentSlider.scrollHeight
-		}
-		if (measuredHeight <= 0) {
-			measuredHeight = currentSlider.offsetHeight
-		}
-		if (measuredHeight <= 0) {
-			try {
-				const rect = currentSlider.getBoundingClientRect()
-				measuredHeight = rect.height
-			} catch (err) {
-				// ignore: fall back to previous height
-				console.error('updateContainerHeight fail', err)
-			}
-		}
-		if (measuredHeight > 0) {
-			wrapper.value!.style.setProperty('height', measuredHeight + 'px')
-		} else {
-			wrapper.value!.style.removeProperty('height')
-		}
+		const sliderContent = currentSlider.querySelector('.uni-swiper-slider-content') as UniElement
+		// harmony 上 scrollHeight 未实现，需要确认这里的逻辑是否合理，如果合理，实现 harmony UniElement.scrollHeight
+		wrapper.value!.style.setProperty('height', `${sliderContent.scrollHeight}px`)
 	}
 }
-
-// 为swiper-indicator提供数据（provide ref对象以保持响应性）
-provide('swiper-vertical', props.vertical)
-provide('swiper-current', currentIndex)
-provide('swiper-total', sliderCount) // 总是provide真实数量，不包括克隆的
-provide('swiper-change', (targetIndex : number) => {
-	slideTo(targetIndex, 'click', 1)
-})
-
-watch(() : number => props.current, (newVal : number) => {
-	if (newVal == currentIndex.value || newVal < 0 || newVal >= sliderCount.value) return
-	slideTo(newVal, 'prop', 1)
-})
-
-watch(currentIndex, (newVal : number) => {
-	updateContainerHeight(newVal)
-})
 
 function initIndicators(){
 	const wrapperEl = wrapper.value!
@@ -328,132 +283,11 @@ function calculateSliderContainerSize() : ContainerSize {
 		}
 	}
 
-	if (containerWidth <= 0) {
-		containerWidth = uni.getWindowInfo().windowWidth
-	}
 	return {
 		containerWidth,
 		containerHeight
 	}
 }
-
-onMounted(() => {
-	const init = () : void => {
-		const sliders = getSliders()
-		if (sliders == null) return
-		initSliderCount()
-		initIndicators()
-		let { containerWidth, containerHeight } = calculateSliderContainerSize()
-
-		const wrapperEl = wrapper.value!
-		const wrapperHeight = wrapperEl.style.getPropertyValue('height')
-		let hasFixedHeight = false
-		if (wrapperHeight.length > 0 && wrapperHeight !== 'auto') {
-			hasFixedHeight = true
-			if (containerHeight <= 0) {
-				containerHeight = parsePxRpx(wrapperHeight)
-			}
-		}
-		if (!hasFixedHeight && containerHeight <= 0) {
-			containerHeight = 0
-		}
-		autoHeightEnabled = !hasFixedHeight
-
-		// 设置wrapper和slider尺寸
-		// itemSize是每个slider的尺寸,需要减去margin,这样slider+margin才等于container宽度
-		// 对于水平方向,使用container宽度; 垂直方向,如果container有高度则使用,否则让内容撑开
-		if (vertical) {
-			if (hasFixedHeight && containerHeight > 0) {
-				sliderItemSize = containerHeight - prevMargin - nextMargin
-			} else {
-				// 垂直方向且container没有固定高度,让每个slider自己决定高度
-				sliderItemSize = 0
-			}
-		} else {
-			sliderItemSize = containerWidth - prevMargin - nextMargin
-			if (sliderItemSize <= 0) {
-				sliderItemSize = containerWidth
-			}
-		}
-		if (sliderItemSize < 0) {
-			sliderItemSize = 0
-		}
-
-		// 设置container尺寸
-		const container = wrapperEl.querySelector('.new-uni-swiper-container')!
-		if (vertical) {
-			if (containerWidth > 0) {
-				container.style.setProperty('width', containerWidth + 'px')
-			}
-			if (sliderItemSize > 0) {
-				const totalSize = sliderItemSize * sliders.length
-				container.style.setProperty('height', totalSize + 'px')
-			}
-		} else {
-			const totalSize = sliderItemSize * sliders.length
-			container.style.setProperty('width', totalSize + 'px')
-			// 水平方向,如果container有固定高度则设为100%,否则不设置让内容撑开
-			if (hasFixedHeight) {
-				container.style.setProperty('height', '100%')
-			}
-		}
-
-		// 设置每个slider的尺寸
-		for (let i = 0; i < sliders.length; i++) {
-			const s = sliders[i] as UniElement
-			if (vertical) {
-				if (containerWidth > 0) {
-					s.style.setProperty('width', containerWidth + 'px')
-				}
-				if (sliderItemSize > 0) {
-					s.style.setProperty('height', sliderItemSize + 'px')
-				}
-				// 如果itemSize为0,不设置高度,让内容自己撑开
-			} else {
-				if (sliderItemSize > 0) {
-					s.style.setProperty('width', sliderItemSize + 'px')
-				} else if (containerWidth > 0) {
-					s.style.setProperty('width', containerWidth + 'px')
-				}
-				// 水平方向,如果container有固定高度则设为100%,否则让内容自己撑开
-				if (hasFixedHeight) {
-					s.style.setProperty('height', '100%')
-				}
-				// 否则不设置高度,让内容自己撑开
-			}
-		}
-
-		// 设置container的overflow:水平方向visible显示前后,垂直方向hidden裁剪
-		if (prevMargin > 0 || nextMargin > 0) {
-			if (vertical) {
-				// 垂直方向:上下需要显示margin区域,左右裁剪
-				wrapperEl.style.setProperty('overflow-x', 'hidden')
-				wrapperEl.style.setProperty('overflow-y', 'visible')
-			} else {
-				// 水平方向:左右需要显示margin区域,上下裁剪
-				wrapperEl.style.setProperty('overflow-x', 'visible')
-				wrapperEl.style.setProperty('overflow-y', 'hidden')
-			}
-		}
-
-		// 初始位置
-		const initialIndex = props.current > 0 && props.current < sliderCount.value ? props.current : 0
-		currentIndex.value = initialIndex
-
-		if(initialIndex != 0) {
-			translate.value = -(initialIndex * sliderItemSize)
-		}
-
-		startAutoPlay()
-		updateContainerHeight(initialIndex)
-	}
-
-	setTimeout(function () {
-		Promise.resolve().then(init)
-	}, 100)
-})
-
-onUnmounted(() => stopAutoPlay())
 
 const onTouchStart = (e : TouchEvent) => {
 	stopAutoPlay()
@@ -628,6 +462,145 @@ const onTouchEnd = (e : TouchEvent) => {
 
 	startAutoPlay()
 }
+
+// 为swiper-indicator提供数据（provide ref对象以保持响应性）
+provide('swiper-vertical', props.vertical)
+provide('swiper-current', currentIndex)
+provide('swiper-total', sliderCount) // 总是provide真实数量，不包括克隆的
+provide('swiper-change', (targetIndex : number) => {
+	slideTo(targetIndex, 'click', 1)
+})
+
+watch(() : number => props.current, (newVal : number) => {
+	if (newVal == currentIndex.value || newVal < 0 || newVal >= sliderCount.value) return
+	slideTo(newVal, 'prop', 1)
+})
+
+watch(currentIndex, (newVal : number) => {
+	updateContainerHeight(newVal)
+})
+
+onMounted(() => {
+	function init(){
+		const sliders = getSliders()
+		if (sliders == null) return
+		let { containerWidth, containerHeight } = calculateSliderContainerSize()
+		if(containerWidth <= 0 || containerHeight <= 0){
+			setTimeout(() => {
+				init()
+			}, 0);
+			return
+		}
+
+		initSliderCount()
+		initIndicators()
+		const wrapperEl = wrapper.value!
+		const wrapperHeight = wrapperEl.style.getPropertyValue('height')
+		let hasFixedHeight = false
+		if (wrapperHeight.length > 0 && wrapperHeight !== 'auto') {
+			hasFixedHeight = true
+			if (containerHeight <= 0) {
+				containerHeight = parsePxRpx(wrapperHeight)
+			}
+		}
+		if (!hasFixedHeight && containerHeight <= 0) {
+			containerHeight = 0
+		}
+		autoHeightEnabled = !hasFixedHeight
+
+		// 设置wrapper和slider尺寸
+		// itemSize是每个slider的尺寸,需要减去margin,这样slider+margin才等于container宽度
+		// 对于水平方向,使用container宽度; 垂直方向,如果container有高度则使用,否则让内容撑开
+		if (vertical) {
+			if (hasFixedHeight && containerHeight > 0) {
+				sliderItemSize = containerHeight - prevMargin - nextMargin
+			} else {
+				// 垂直方向且container没有固定高度,让每个slider自己决定高度
+				sliderItemSize = 0
+			}
+		} else {
+			sliderItemSize = containerWidth - prevMargin - nextMargin
+			if (sliderItemSize <= 0) {
+				sliderItemSize = containerWidth
+			}
+		}
+		if (sliderItemSize < 0) {
+			sliderItemSize = 0
+		}
+
+		// 设置container尺寸
+		const container = wrapperEl.querySelector('.new-uni-swiper-container')!
+		if (vertical) {
+			if (containerWidth > 0) {
+				container.style.setProperty('width', containerWidth + 'px')
+			}
+			if (sliderItemSize > 0) {
+				const totalSize = sliderItemSize * sliders.length
+				container.style.setProperty('height', totalSize + 'px')
+			}
+		} else {
+			const totalSize = sliderItemSize * sliders.length
+			container.style.setProperty('width', totalSize + 'px')
+			// 水平方向,如果container有固定高度则设为100%,否则不设置让内容撑开
+			if (hasFixedHeight) {
+				container.style.setProperty('height', '100%')
+			}
+		}
+
+		// 设置每个slider的尺寸
+		for (let i = 0; i < sliders.length; i++) {
+			const s = sliders[i] as UniElement
+			if (vertical) {
+				if (containerWidth > 0) {
+					s.style.setProperty('width', containerWidth + 'px')
+				}
+				if (sliderItemSize > 0) {
+					s.style.setProperty('height', sliderItemSize + 'px')
+				}
+				// 如果itemSize为0,不设置高度,让内容自己撑开
+			} else {
+				if (sliderItemSize > 0) {
+					s.style.setProperty('width', sliderItemSize + 'px')
+				} else if (containerWidth > 0) {
+					s.style.setProperty('width', containerWidth + 'px')
+				}
+				// 水平方向,如果container有固定高度则设为100%,否则让内容自己撑开
+				if (hasFixedHeight) {
+					s.style.setProperty('height', '100%')
+				}
+				// 否则不设置高度,让内容自己撑开
+			}
+		}
+
+		// 设置container的overflow:水平方向visible显示前后,垂直方向hidden裁剪
+		if (prevMargin > 0 || nextMargin > 0) {
+			if (vertical) {
+				// 垂直方向:上下需要显示margin区域,左右裁剪
+				wrapperEl.style.setProperty('overflow-x', 'hidden')
+				wrapperEl.style.setProperty('overflow-y', 'visible')
+			} else {
+				// 水平方向:左右需要显示margin区域,上下裁剪
+				wrapperEl.style.setProperty('overflow-x', 'visible')
+				wrapperEl.style.setProperty('overflow-y', 'hidden')
+			}
+		}
+
+		// 初始位置
+		const initialIndex = props.current > 0 && props.current < sliderCount.value ? props.current : 0
+		currentIndex.value = initialIndex
+
+		if(initialIndex != 0) {
+			translate.value = -(initialIndex * sliderItemSize)
+		}
+
+		startAutoPlay()
+		updateContainerHeight(initialIndex)
+	}
+
+	init()
+})
+
+onUnmounted(() => stopAutoPlay())
 </script>
 
 <style>
