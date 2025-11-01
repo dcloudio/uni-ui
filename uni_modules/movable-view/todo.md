@@ -1,0 +1,4 @@
+- 微信的x和y属性，是联合类型number|string，支持rpx字符串
+- 微信的animation属性默认值是true，不符合布尔属性规范。新增的non-animation还没实现
+- 微信的惯性、可超出的边界、超出后回弹阻尼，这些细节表现拉不齐。需要看微信怎么实现的
+- 事件的返回参数缺少 touch-out-of-bounds 和 out-of-bounds

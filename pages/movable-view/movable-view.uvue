@@ -1,161 +1,502 @@
 <template>
-  <view class="page-body">
-    <!-- <page-head title="movable-view,可拖动视图"></page-head> -->
-    <view class="uni-padding-wrap uni-common-mt">
-      <view class="uni-title uni-common-mt">
-        示例 1
-        <text>\nmovable-view 区域小于 movable-area</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default" :x="x" :y="y" direction="all" @change="onChange">text</movable-view>
-      </movable-area>
-      <view @tap="tap" class="uni-link uni-center uni-common-mt">
-        点击这里移动至 (30px, 30px)
-      </view>
-      <view class="uni-title uni-common-mt">
-        示例 2
-        <text>\nmovable-view区域大于movable-area</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default max" direction="all">text</movable-view>
-      </movable-area>
-      <view class="uni-title uni-common-mt">
-        示例 3
-        <text>\n只可以横向移动</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default" direction="horizontal">text</movable-view>
-      </movable-area>
-      <view class="uni-title uni-common-mt">
-        示例 4
-        <text>\n只可以纵向移动</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default" direction="vertical">text</movable-view>
-      </movable-area>
-      <view class="uni-title uni-common-mt">
-        示例 5
-        <text>\n可超出边界</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default" direction="all" out-of-bounds>text</movable-view>
-      </movable-area>
-      <view class="uni-title uni-common-mt">
-        示例 6
-        <text>\n带有惯性</text>
-      </view>
-      <movable-area class="movable-area-default">
-        <movable-view class="movable-view-default" direction="all" inertia>text</movable-view>
-      </movable-area>
-      <view class="uni-title uni-common-mt">
-        示例 7
-        <text>\n可放缩</text>
-      </view>
-      <movable-area class="movable-area-default" scale-area>
-        <movable-view class="movable-view-default" direction="all" @scale="onScale" scale :scale-min="0.5" :scale-max="4"
-          :scale-value="scale">text</movable-view>
-      </movable-area>
-      <view @tap="tap2" class="uni-link uni-center uni-common-mt" style="padding-bottom:40px;">
-        点击这里放大3倍
-      </view>
-    </view>
-  </view>
+	<!-- #ifdef APP -->
+	<scroll-view class="page" style="flex: 1;">
+	<!-- #endif -->
+		<!-- #ifndef APP -->
+		<view class="page">
+		<!-- #endif -->
+			<text class="page-title">movable-view 可拖动视图</text>
+
+			<!-- 事件监听演示 -->
+			<!-- <view class="section event-section">
+				<text class="section-title">事件监听实时演示</text>
+				<view class="event-info-box">
+					<view class="event-row">
+						<text class="event-label">@change 事件：</text>
+						<text class="event-value">x: {{Math.round(eventInfo.x)}}, y: {{Math.round(eventInfo.y)}}</text>
+					</view>
+					<view class="event-row">
+						<text class="event-label">source：</text>
+						<text class="event-value">{{eventInfo.source.length > 0 ? eventInfo.source : '未触发'}}</text>
+					</view>
+					<view class="event-row">
+						<text class="event-label">@scale 事件：</text>
+						<text class="event-value">scale: {{eventInfo.scale.toFixed(2)}}x</text>
+					</view>
+					
+				</view>
+				<text class="event-tip">拖动下方 movable-view 即可看到实时事件信息</text>
+			</view> -->
+
+			<!-- 基础属性 -->
+			<view class="section">
+				<text class="section-title">基础属性</text>
+
+				<view class="example">
+					<text class="example-title">示例 1：x / y 属性 - 设置初始位置</text>
+					<text class="example-desc">初始位置 (30px, 30px)</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" :x="x" :y="y" direction="all" @change="onChange">
+							<text style="color: white;">{{Math.round(old.x)}}, {{Math.round(old.y)}}</text>
+						</movable-view>
+					</movable-area>
+					<text class="link" @click="tapMove">点击移动至 (30px, 30px)</text>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 2：视图大于区域</text>
+					<text class="example-desc">movable-view 区域大于 movable-area</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view max" direction="all">
+							<text style="color: white;">大视图</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<!-- direction 属性 -->
+			<view class="section">
+				<text class="section-title">direction - 移动方向</text>
+
+				<view class="example">
+					<text class="example-title">示例 3：direction="all"</text>
+					<text class="example-desc">可全方向移动</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all">
+							<text style="color: white;">全方向</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 4：direction="horizontal"</text>
+					<text class="example-desc">仅可横向移动</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="horizontal">
+							<text style="color: white;">横向</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 5：direction="vertical"</text>
+					<text class="example-desc">仅可纵向移动</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="vertical">
+							<text style="color: white;">纵向</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 6：direction="none"</text>
+					<text class="example-desc">不可移动（默认值）</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="none">
+							<text style="color: white;">不可拖动</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<!-- 边界属性 -->
+			<view class="section">
+				<text class="section-title">边界控制</text>
+
+				<view class="example">
+					<text class="example-title">示例 7：out-of-bounds="false"</text>
+					<text class="example-desc">不可超出边界（默认）</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :out-of-bounds="false">
+							<text style="color: white;">严格边界</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 8：out-of-bounds="true"</text>
+					<text class="example-desc">可超出边界（最多5px）</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :out-of-bounds="true">
+							<text style="color: white;">可超出</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<!-- 惯性属性 -->
+			<view class="section">
+				<text class="section-title">惯性滑动</text>
+
+				<view class="example">
+					<text class="example-title">示例 9：inertia="true"</text>
+					<text class="example-desc">带有惯性效果</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :inertia="true">
+							<text style="color: white;">有惯性</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 10：friction - 摩擦系数</text>
+					<text class="example-desc">friction="10" (摩擦力大，滑动短)</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :inertia="true" :friction="10">
+							<text style="color: white;">高摩擦</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 11：friction - 摩擦系数</text>
+					<text class="example-desc">friction="2" (摩擦力小，滑动远)</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :inertia="true" :friction="2">
+							<text style="color: white;">低摩擦</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 12：damping - 阻尼系数</text>
+					<text class="example-desc">damping="10" (回弹慢)</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :out-of-bounds="true" :damping="10">
+							<text style="color: white;">低阻尼</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 13：damping - 阻尼系数</text>
+					<text class="example-desc">damping="50" (回弹快)</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :out-of-bounds="true" :damping="50">
+							<text style="color: white;">高阻尼</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<!-- 缩放属性 -->
+			<view class="section">
+				<text class="section-title">缩放功能</text>
+
+				<view class="example">
+					<text class="example-title">示例 14：scale - 双指缩放 + 事件监听</text>
+					<text class="example-desc">scale-min="0.5" scale-max="4" scale-value="{{scale}}"</text>
+					<movable-area class="movable-area" scale-area>
+						<movable-view class="movable-view" direction="all" :scale="true" :scale-min="0.5" :scale-max="4"
+							:scale-value="scale" @scale="onScale">
+							<text style="color: white;">{{old.scale.toFixed(2)}}</text>
+						</movable-view>
+					</movable-area>
+					<view class="info-row">
+						<text class="info-text">当前缩放: {{scale.toFixed(2)}}x</text>
+						<text class="link" @click="tapScale3">放大3倍</text>
+					</view>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 15：限制缩放范围</text>
+					<text class="example-desc">scale-min="1" scale-max="2"</text>
+					<movable-area class="movable-area" scale-area>
+						<movable-view class="movable-view" direction="all" :scale="true" :scale-min="1" :scale-max="2"
+							:scale-value="1">
+							<text style="color: white;">限制缩放</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<!-- 事件详解 -->
+			<view class="section">
+				<text class="section-title">事件详解 - source 参数</text>
+
+				<view class="example">
+					<text class="example-title">示例 16：观察 source 参数变化</text>
+					<text class="example-desc">source 可能值：touch（拖动）、friction（惯性）、out-of-bounds（超出边界回弹）、''（程序设置）</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :inertia="true" :out-of-bounds="true" :friction="2" @change="onChange">
+							<text style="color: white;">拖动观察</text>
+						</movable-view>
+					</movable-area>
+					<view class="event-detail">
+						<text class="event-detail-text">当前 source: "{{old.source}}"</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 组合属性 -->
+			<view class="section">
+				<text class="section-title">组合效果</text>
+
+				<view class="example">
+					<text class="example-title">示例 17：惯性 + 超出边界</text>
+					<text class="example-desc">inertia + out-of-bounds</text>
+					<movable-area class="movable-area">
+						<movable-view class="movable-view" direction="all" :inertia="true" :out-of-bounds="true" :friction="2" @change="onChange">
+							<text style="color: white;">惯性+边界</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 18：缩放 + 惯性</text>
+					<text class="example-desc">scale + inertia</text>
+					<movable-area class="movable-area" scale-area>
+						<movable-view class="movable-view" direction="all" :scale="true" :scale-min="0.5" :scale-max="3"
+							:inertia="true" :friction="2" @change="onChange" @scale="onScale">
+							<text style="color: white;">缩放+惯性</text>
+						</movable-view>
+					</movable-area>
+				</view>
+
+				<view class="example">
+					<text class="example-title">示例 19：全功能演示 + 完整事件</text>
+					<text class="example-desc">所有属性组合 + @change + @scale</text>
+					<movable-area class="movable-area" scale-area>
+						<movable-view class="movable-view" direction="all" :inertia="true" :out-of-bounds="true" :scale="true"
+							:scale-min="0.5" :scale-max="4" :friction="3" :damping="20" @change="onChange" @scale="onScale">
+							<text style="color: white;">全功能</text>
+						</movable-view>
+					</movable-area>
+				</view>
+			</view>
+
+			<view style="height: 50px;"></view>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	</view>
+	<!-- #endif -->
 </template>
 
 <script setup lang="uts">
-  const x = ref<number>(0)
-  const y = ref<number>(0)
-  const scale = ref<number>(2)
+	import { MovableViewChangeEvent, MovableViewScaleEvent } from '../../uni_modules/movable-view/components/movable-view/types.uts'
 
-  type OldState = {
-    x: number
-    y: number
-    scale: number
-  }
+	const x = ref<number>(0)
+	const y = ref<number>(0)
+	const scale = ref<number>(2)
 
-  const old = reactive<OldState>({
-    x: 0,
-    y: 0,
-    scale: 2
-  })
+	type OldState = {
+		x : number
+		y : number
+		scale : number
+		source : string
+	}
 
-  const tap = () => {
-    // 解决view层不同步的问题
-    x.value = old.x
-    y.value = old.y
-    nextTick(() => {
-      x.value = 30
-      y.value = 30
-    })
-  }
+	const old = reactive<OldState>({
+		x: 0,
+		y: 0,
+		scale: 2,
+		source:""
+	})
 
-  const tap2 = () => {
-    // 解决view层不同步的问题
-    scale.value = old.scale
-    nextTick(() => {
-      scale.value = 3
-    })
-  }
+	// 事件信息状态
+	/* type EventInfo = {
+		x: number
+		y: number
+		source: string
+		scale: number
+	}
 
-  type MovableChangeDetail = {
-    x: number
-    y: number
-    source: string
-  }
+	const eventInfo = reactive<EventInfo>({
+		x: 0,
+		y: 0,
+		source: '',
+		scale: 2
+	}) */
 
-  type MovableScaleDetail = {
-    x: number
-    y: number
-    scale: number
-  }
+	const tapMove = () => {
+		// 解决view层不同步的问题
+		x.value = old.x
+		y.value = old.y
+		nextTick(() => {
+			x.value = 30
+			y.value = 30
+		})
+	}
 
-  type MovableChangeEvent = {
-    detail: MovableChangeDetail
-  }
+	const tapScale3 = () => {
+		// 解决view层不同步的问题
+		scale.value = old.scale
+		nextTick(() => {
+			scale.value = 3
+		})
+	}
 
-  type MovableScaleEvent = {
-    detail: MovableScaleDetail
-  }
+	const onChange = (e : MovableViewChangeEvent) => {
+		old.x = e.detail.x
+		old.y = e.detail.y
+		old.source =  e.detail.source
+		// console.log('e.detail.source: ',e.detail.source);
+		// TODO 以下赋值特别卡，Android掉帧，需要排查原因
+		// eventInfo.x = e.detail.x
+		// eventInfo.y = e.detail.y
+		// eventInfo.source = e.detail.source
+	}
 
-  const onChange = (e: MovableChangeEvent) => {
-    old.x = e.detail.x
-    old.y = e.detail.y
-  }
+	const onScale = (e : MovableViewScaleEvent) => {
+		old.scale = e.detail.scale
+		// eventInfo.scale = e.detail.scale
+		// eventInfo.x = e.detail.x
+		// eventInfo.y = e.detail.y
+	}
 
-  const onScale = (e: MovableScaleEvent) => {
-    old.scale = e.detail.scale
-  }
-
-  defineExpose({
-  	x,
-  	y,
-  	scale,
-  	tap,
-  	tap2 // 仅供自动化测试用例调用
-  })
-
+	defineExpose({
+		x,
+		y,
+		scale,
+		tapMove,
+		tapScale3 // 仅供自动化测试用例调用
+	})
 </script>
 
 <style>
-  .movable-view-default {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 75px;
-    width: 75px;
-    background-color: #007AFF;
-    color: #fff;
-  }
+	.page {
+		padding: 15px;
+	}
 
-  .movable-area-default {
-    height: 150px;
-    width: 100%;
-    background-color: #D8D8D8;
-    overflow: hidden;
-  }
+	.page-title {
+		font-size: 24px;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 20px;
+		text-align: center;
+	}
 
-  .max {
-    width: 250px;
-    height: 250px;
-  }
+	.section {
+		margin-bottom: 30px;
+		background-color: #ffffff;
+		border-radius: 8px;
+		padding: 15px;
+	}
+
+	.section-title {
+		font-size: 18px;
+		font-weight: bold;
+		color: #007AFF;
+		margin-bottom: 15px;
+		border-left-width: 4px;
+		border-left-color: #007AFF;
+		padding-left: 10px;
+	}
+
+	.example {
+		margin-bottom: 20px;
+	}
+
+	.example-title {
+		font-size: 14px;
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 5px;
+	}
+
+	.example-desc {
+		font-size: 12px;
+		color: #666;
+		margin-bottom: 10px;
+	}
+
+	.movable-area {
+		height: 150px;
+		width: 100%;
+		background-color: #E8E8E8;
+		border-radius: 4px;
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+
+	.movable-view {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 75px;
+		width: 75px;
+		background-color: #007AFF;
+		border-radius: 4px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+
+	.max {
+		width: 250px;
+		height: 250px;
+	}
+
+	.link {
+		color: #007AFF;
+		font-size: 14px;
+		text-decoration-line: underline;
+		/* #ifdef WEB */
+		cursor: pointer;
+		/* #endif */
+	}
+
+	.info-row {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 5px;
+	}
+
+	.info-text {
+		font-size: 12px;
+		color: #666;
+	}
+
+	.event-section {
+		background-color: #FFF9E6;
+		border-width: 2px;
+		border-color: #FFD700;
+	}
+
+	.event-info-box {
+		background-color: #ffffff;
+		border-radius: 4px;
+		padding: 10px;
+		margin-bottom: 10px;
+	}
+
+	.event-row {
+		flex-direction: row;
+		margin-bottom: 8px;
+	}
+
+	.event-label {
+		font-size: 13px;
+		font-weight: bold;
+		color: #666;
+		width: 120px;
+	}
+
+	.event-value {
+		font-size: 13px;
+		color: #007AFF;
+		font-weight: bold;
+		flex: 1;
+	}
+
+	.event-tip {
+		font-size: 12px;
+		color: #999;
+		font-style: italic;
+		text-align: center;
+	}
+
+	.event-detail {
+		background-color: #F0F8FF;
+		border-radius: 4px;
+		padding: 8px;
+		margin-top: 8px;
+	}
+
+	.event-detail-text {
+		font-size: 12px;
+		color: #007AFF;
+		font-family: monospace;
+	}
 </style>

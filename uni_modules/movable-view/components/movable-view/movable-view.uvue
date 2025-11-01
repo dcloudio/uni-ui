@@ -13,6 +13,8 @@
 </template>
 
 <script setup lang="uts">
+	import { MovableViewChangeEvent, MovableViewScaleEvent, MovableViewChangeEventDetail, MovableViewScaleEventDetail } from './types.uts'
+
 	type Props = {
 		x?: number
 		y?: number
@@ -41,21 +43,9 @@
 		scaleValue: 1
 	})
 	
-	type ChangeEventDetail = {
-		x: number
-		y: number
-		source: string
-	}
-	
-	type ScaleEventDetail = {
-		scale: number
-		x: number
-		y: number
-	}
-	
 	const emit = defineEmits<{
-		(e: 'change', event: { detail: ChangeEventDetail }): void
-		(e: 'scale', event: { detail: ScaleEventDetail }): void
+		change: [event: MovableViewChangeEvent]
+		scale: [event: MovableViewScaleEvent]
 	}>()
 	
 	const viewRef = ref<UniElement | null>(null)
@@ -107,23 +97,32 @@
 	let lastMoveTime = 0
 	let lastMoveX = 0
 	let lastMoveY = 0
-	let animFrameId: number | null = null
+	const isAnimating = ref<boolean>(false)
 	
 	// 计算视图样式
 	const viewStyle = computed((): string => {
-		let style = `position: absolute; left: ${innerX.value}px; top: ${innerY.value}px;`
+		let transforms : string[] = []
+		transforms.push(`translate(${innerX.value}px, ${innerY.value}px)`)
 		if (props.scale) {
-			style += `transform: scale(${innerScale.value});`
+			transforms.push(`scale(${innerScale.value})`)
 		}
+		let style = `transform: ${transforms.join(' ')};`
+
+		// 惯性动画时添加 transition
+		if (isAnimating.value && props.inertia) {
+			// 根据速度计算持续时间，速度越大持续时间越长
+			const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY)
+			const duration = Math.min(Math.max(speed * 100, 300), 1000) // 300ms - 1000ms
+			style += ` transition: transform ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94);`
+		}
+
 		return style
 	})
 	
 	// 获取区域尺寸（从父组件）
 	const getAreaRect = (): Promise<Rect | null> => {
 		return new Promise<Rect | null>((resolve) => {
-			// #ifdef APP
 			if (viewRef.value != null) {
-				// 尝试获取父元素
 				const parentElement = viewRef.value.parentElement
 				if (parentElement != null) {
 					const rect = parentElement.getBoundingClientRect()
@@ -138,21 +137,7 @@
 					return
 				}
 			}
-			// #endif
-			
-			// 使用createSelectorQuery查询
-			const query = uni.createSelectorQuery()
-			query.select('.movable-area').boundingClientRect((rect: any) => {
-					resolve({
-						width: (rect as DOMRect).width,
-						height: (rect as DOMRect).height,
-						left: (rect as DOMRect).left,
-						top: (rect as DOMRect).top,
-						right: (rect as DOMRect).right,
-						bottom: (rect as DOMRect).bottom
-					} as Rect)
-			
-			}).exec()
+			resolve(null)
 		})
 	}
 	
@@ -163,8 +148,7 @@
 				resolve(null)
 				return
 			}
-			
-			// #ifdef APP
+
 			const rect = viewRef.value.getBoundingClientRect()
 			resolve({
 				width: rect.width,
@@ -174,26 +158,6 @@
 				right: rect.right,
 				bottom: rect.bottom
 			} as Rect)
-			return
-			// #endif
-			
-			// #ifndef APP
-			const query = uni.createSelectorQuery()
-			query.select('.movable-view').boundingClientRect((rect: any) => {
-				if (rect != null) {
-					resolve({
-						width: rect.width as number,
-						height: rect.height as number,
-						left: rect.left as number,
-						top: rect.top as number,
-						right: rect.right as number,
-						bottom: rect.bottom as number
-					} as Rect)
-				} else {
-					resolve(null)
-				}
-			}).exec()
-			// #endif
 		})
 	}
 	
@@ -215,32 +179,39 @@
 	
 	// 限制坐标在边界内
 	const clampPosition = (x: number, y: number): Position => {
-		if (props.outOfBounds) {
-			return { x, y }
-		}
-		
 		let clampedX = x
 		let clampedY = y
-		
+
 		// 计算缩放后的实际尺寸
 		const scaledWidth = viewWidth * innerScale.value
 		const scaledHeight = viewHeight * innerScale.value
-		
+
+		// 超出边界的最大距离（仅当 outOfBounds 为 true 时生效）
+		const maxOutOfBounds = 5
+
 		// X轴限制
 		if (scaledWidth <= areaWidth) {
-			clampedX = Math.max(0, Math.min(x, areaWidth - scaledWidth))
+			const minX = props.outOfBounds ? -maxOutOfBounds : 0
+			const maxX = props.outOfBounds ? areaWidth - scaledWidth + maxOutOfBounds : areaWidth - scaledWidth
+			clampedX = Math.max(minX, Math.min(x, maxX))
 		} else {
 			// 视图大于区域时，确保区域在视图内
-			clampedX = Math.max(areaWidth - scaledWidth, Math.min(x, 0))
+			const minX = props.outOfBounds ? areaWidth - scaledWidth - maxOutOfBounds : areaWidth - scaledWidth
+			const maxX = props.outOfBounds ? maxOutOfBounds : 0
+			clampedX = Math.max(minX, Math.min(x, maxX))
 		}
-		
+
 		// Y轴限制
 		if (scaledHeight <= areaHeight) {
-			clampedY = Math.max(0, Math.min(y, areaHeight - scaledHeight))
+			const minY = props.outOfBounds ? -maxOutOfBounds : 0
+			const maxY = props.outOfBounds ? areaHeight - scaledHeight + maxOutOfBounds : areaHeight - scaledHeight
+			clampedY = Math.max(minY, Math.min(y, maxY))
 		} else {
-			clampedY = Math.max(areaHeight - scaledHeight, Math.min(y, 0))
+			const minY = props.outOfBounds ? areaHeight - scaledHeight - maxOutOfBounds : areaHeight - scaledHeight
+			const maxY = props.outOfBounds ? maxOutOfBounds : 0
+			clampedY = Math.max(minY, Math.min(y, maxY))
 		}
-		
+
 		return { x: clampedX, y: clampedY }
 	}
 	
@@ -262,14 +233,16 @@
 		const clamped = clampPosition(x, y)
 		innerX.value = clamped.x
 		innerY.value = clamped.y
-		
-		emit('change', {
-			detail: {
-				x: innerX.value,
-				y: innerY.value,
-				source: source
-			} as ChangeEventDetail
-		})
+
+		const eventDetail : MovableViewChangeEventDetail = {
+			x: innerX.value,
+			y: innerY.value,
+			source: source
+		}
+		const event : MovableViewChangeEvent = {
+			detail: eventDetail
+		}
+		emit('change', event)
 	}
 	
 	// 计算两点间距离
@@ -286,16 +259,9 @@
 	
 	// 触摸开始
 	const handleTouchStart = (e: TouchEvent): void => {
-		if (animFrameId != null) {
-			// 取消惯性动画
-			// #ifdef WEB
-			if (typeof requestAnimationFrame !== 'undefined') {
-				cancelAnimationFrame(animFrameId)
-			}
-			// #endif
-			animFrameId = null
-		}
-		
+		// 取消惯性动画
+		isAnimating.value = false
+
 		isDragging = false
 		isScaling = false
 		
@@ -322,12 +288,10 @@
 	// 触摸移动
 	const handleTouchMove = (e: TouchEvent): void => {
 		const now = Date.now()
-		
-		// #ifdef WEB
-		e.preventDefault()
-		// #endif
-		
+
 		if (isScaling && e.touches.length == 2 && props.scale) {
+			// 缩放时阻止默认事件
+			e.preventDefault()
 			// 双指缩放
 			const currentDistance = getDistance(e.touches)
 			if (initialDistance > 0) {
@@ -335,37 +299,69 @@
 				let newScale = initialScale * scaleDelta
 				newScale = Math.max(props.scaleMin, Math.min(newScale, props.scaleMax))
 				innerScale.value = newScale
-				
-				emit('scale', {
-					detail: {
-						scale: innerScale.value,
-						x: innerX.value,
-						y: innerY.value
-					} as ScaleEventDetail
-				})
+
+				const scaleEventDetail : MovableViewScaleEventDetail = {
+					scale: innerScale.value,
+					x: innerX.value,
+					y: innerY.value
+				}
+				const scaleEvent : MovableViewScaleEvent = {
+					detail: scaleEventDetail
+				}
+				emit('scale', scaleEvent)
 			}
 		} else if (e.touches.length == 1 && !isScaling) {
 			// 单指拖动
-			isDragging = true
 			const deltaX = e.touches[0].clientX - touchStartX
 			const deltaY = e.touches[0].clientY - touchStartY
-			
-			const directionLimited = applyDirection(deltaX, deltaY)
-			const newX = viewStartX + directionLimited.deltaX
-			const newY = viewStartY + directionLimited.deltaY
-			
-			updatePosition(newX, newY, "touch")
-			
-			// 计算速度（用于惯性）
-			if (props.inertia) {
-				const timeDelta = now - lastMoveTime
-				if (timeDelta > 0) {
-					velocityX = (innerX.value - lastMoveX) / timeDelta
-					velocityY = (innerY.value - lastMoveY) / timeDelta
+
+			// 判断是否应该阻止默认事件（防止与外层滚动冲突）
+			const absDeltaX = Math.abs(deltaX)
+			const absDeltaY = Math.abs(deltaY)
+
+			// 根据移动方向和组件的 direction 属性决定是否阻止默认事件
+			let shouldPreventDefault = false
+
+			if (props.direction == "all") {
+				// 全方向移动：只要有移动就阻止默认事件
+				if (absDeltaX > 5 || absDeltaY > 5) {
+					shouldPreventDefault = true
 				}
-				lastMoveX = innerX.value
-				lastMoveY = innerY.value
-				lastMoveTime = now
+			} else if (props.direction == "horizontal") {
+				// 水平移动：当水平移动大于垂直移动时阻止默认事件
+				if (absDeltaX > absDeltaY && absDeltaX > 5) {
+					shouldPreventDefault = true
+				}
+			} else if (props.direction == "vertical") {
+				// 垂直移动：当垂直移动大于水平移动时阻止默认事件
+				if (absDeltaY > absDeltaX && absDeltaY > 5) {
+					shouldPreventDefault = true
+				}
+			}
+
+			if (shouldPreventDefault) {
+				e.preventDefault()
+				isDragging = true
+			}
+
+			if (isDragging) {
+				const directionLimited = applyDirection(deltaX, deltaY)
+				const newX = viewStartX + directionLimited.deltaX
+				const newY = viewStartY + directionLimited.deltaY
+
+				updatePosition(newX, newY, "touch")
+
+				// 计算速度（用于惯性）
+				if (props.inertia) {
+					const timeDelta = now - lastMoveTime
+					if (timeDelta > 0) {
+						velocityX = (innerX.value - lastMoveX) / timeDelta
+						velocityY = (innerY.value - lastMoveY) / timeDelta
+					}
+					lastMoveX = innerX.value
+					lastMoveY = innerY.value
+					lastMoveTime = now
+				}
 			}
 		}
 	}
@@ -375,48 +371,38 @@
 		if (!props.inertia) {
 			return
 		}
-		
-		const animate = (): void => {
-			if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
-				// 速度太小，停止动画
-				animFrameId = null
-				return
-			}
-			
-			// 应用摩擦
-			velocityX *= (1 - props.friction / 100)
-			velocityY *= (1 - props.friction / 100)
-			
-			// 更新位置
-			const newX = innerX.value + velocityX * 16 // 假设60fps，16ms一帧
-			const newY = innerY.value + velocityY * 16
-			const directionLimited = applyDirection(velocityX * 16, velocityY * 16)
-			
-			const finalX = innerX.value + directionLimited.deltaX
-			const finalY = innerY.value + directionLimited.deltaY
-			
-			updatePosition(finalX, finalY, "friction")
-			
-			// #ifdef WEB
-			animFrameId = requestAnimationFrame(animate)
-			// #endif
-			
-			// #ifndef WEB
-			// APP平台使用setTimeout模拟
-			setTimeout(() => {
-			// Recursive calls on function expressions are not supported. Define the function separately before invoking it.
-				// animate()
-			}, 16)
-			// #endif
+
+		// 速度太小，不启动动画
+		if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
+			return
 		}
-		
-		// #ifdef WEB
-		animFrameId = requestAnimationFrame(animate)
-		// #endif
-		
-		// #ifndef WEB
-		animate()
-		// #endif
+
+		// 计算惯性滑动的目标位置
+		// 根据速度和摩擦力计算最终位置
+		const friction = props.friction / 100
+		const timeToStop = Math.log(0.01) / Math.log(1 - friction) // 速度衰减到1%所需的帧数
+		const framesPerMs = 60 / 1000 // 假设60fps
+
+		// 计算总位移（等比数列求和）
+		const totalDeltaX = velocityX * 16 * (1 - Math.pow(1 - friction, timeToStop)) / friction
+		const totalDeltaY = velocityY * 16 * (1 - Math.pow(1 - friction, timeToStop)) / friction
+
+		const directionLimited = applyDirection(totalDeltaX, totalDeltaY)
+		const targetX = innerX.value + directionLimited.deltaX
+		const targetY = innerY.value + directionLimited.deltaY
+
+		// 启动动画标记
+		isAnimating.value = true
+
+		// 更新到目标位置（CSS transition 会自动处理动画）
+		updatePosition(targetX, targetY, "friction")
+
+		// 动画结束后重置标记
+		const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY)
+		const duration = Math.min(Math.max(speed * 100, 300), 1000)
+		setTimeout(() => {
+			isAnimating.value = false
+		}, duration)
 	}
 	
 	// 触摸结束
@@ -455,13 +441,15 @@
 	watch((): number => props.scaleValue, (newVal: number) => {
 		if (!isScaling) {
 			innerScale.value = Math.max(props.scaleMin, Math.min(newVal, props.scaleMax))
-			emit('scale', {
-				detail: {
-					scale: innerScale.value,
-					x: innerX.value,
-					y: innerY.value
-				} as ScaleEventDetail
-			})
+			const scaleEventDetail : MovableViewScaleEventDetail = {
+				scale: innerScale.value,
+				x: innerX.value,
+				y: innerY.value
+			}
+			const scaleEvent : MovableViewScaleEvent = {
+				detail: scaleEventDetail
+			}
+			emit('scale', scaleEvent)
 		}
 	})
 	
@@ -476,12 +464,8 @@
 	})
 	
 	onUnmounted(() => {
-		if (animFrameId != null) {
-			// #ifdef WEB
-			cancelAnimationFrame(animFrameId)
-			// #endif
-			animFrameId = null
-		}
+		// 清理动画状态
+		isAnimating.value = false
 	})
 </script>
 
