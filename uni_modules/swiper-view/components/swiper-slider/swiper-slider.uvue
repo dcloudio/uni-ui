@@ -1,49 +1,34 @@
 <template>
-	<view class="uni-swiper-slider" :class="props.autoHeight ? 'h-auto' : 'h-100'">
-		<view class="uni-swiper-slider-content" :class="props.autoHeight ? 'uni-swiper-slider-content_auto-height' : 'uni-swiper-slider-content_fill-parent'">
+	<view
+		class="uni-swiper-slider flex flex-column overflow-hidden flex-grow-0 flex-shrink-0"
+		:class="props.autoHeight ? 'h-auto' : 'h-100'">
+		<view
+			class="uni-swiper-slider-content w-100 flex flex-column"
+			:class="
+				props.autoHeight
+					? 'h-auto flex-grow-0 flex-shrink-0'
+					: 'flex-1 h-100'
+			">
 			<slot></slot>
 		</view>
 	</view>
 </template>
 
 <script setup lang="uts">
-	import { UniSwiperSliderProps } from './types.uts'
+import { UniSwiperSliderProps } from './types.uts'
 
-	const props = withDefaults(defineProps<UniSwiperSliderProps>(), {
-		autoHeight: false
-	})
+const props = withDefaults(defineProps<UniSwiperSliderProps>(), {
+	autoHeight: false
+})
 </script>
 
 <style>
-	.uni-swiper-slider {
-		display: flex;
-		flex: 0 0 auto;
-		flex-shrink: 0;
-		overflow: hidden;
-		flex-direction: column;
-	}
+@import url('../styles/common.css');
 
-	.h-auto {
-		height: auto;
-	}
-
-	.h-100 {
-		height: 100%;
-	}
-
-	.uni-swiper-slider-content {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.uni-swiper-slider-content_auto-height {
-		flex: 0 0 auto;
-		height: auto;
-	}
-
-	.uni-swiper-slider-content_fill-parent {
-		flex: 1;
-		height: 100%;
-	}
+.flex-grow-0 {
+	flex-grow: 0;
+}
+.flex-shrink-0 {
+	flex-shrink: 0;
+}
 </style>

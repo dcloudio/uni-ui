@@ -1,10 +1,10 @@
 <template>
 	<view
-		class="uni-swiper-indicator"
+		class="new-uni-swiper-indicator absolute flex justify-center align-center"
 		:class="
 			vertical
-				? 'uni-swiper-indicator_vertical'
-				: 'uni-swiper-indicator_horizontal'
+				? 'new-uni-swiper-indicator_vertical flex-column'
+				: 'new-uni-swiper-indicator_horizontal flex-row'
 		">
 		<slot></slot>
 
@@ -13,10 +13,10 @@
 			<view
 				v-for="i in total"
 				:key="i"
-				class="uni-swiper-indicator-item"
+				class="new-uni-swiper-indicator-item"
 				:class="[props.itemClass, { 'active' : current == i - 1 }, { [props.itemActiveClass] : current == i - 1 }]"
 				:style="mergeStyle(current == i - 1)"
-				@click="handleClick(i - 1)">
+				@click="onChange(i - 1)">
 			</view>
 		</template>
 	</view>
@@ -38,13 +38,11 @@ const hasSlotContent = computed(() : boolean => {
 	return slots['default'] != null
 })
 
-// 从父组件注入（inject的是ref对象）
 const vertical = inject<boolean>('swiper-vertical', false)
 const current = inject<Ref<number>>('swiper-current', ref(0))
 const total = inject<Ref<number>>('swiper-total', ref(0))
 const onChange = inject<(index : number) => void>('swiper-change', (index : number) => { })
 
-// 合并item样式
 const mergeStyle = (isActive : boolean) : string => {
 	let style = props.itemStyle
 	if (isActive && props.itemActiveStyle.length > 0) {
@@ -52,49 +50,28 @@ const mergeStyle = (isActive : boolean) : string => {
 	}
 	return style
 }
-
-const handleClick = (index : number) => {
-	onChange(index)
-}
 </script>
 
 <style>
-.uni-swiper-indicator {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+@import url('../styles/common.css');
+@import url('../styles/indicator.css');
+
+.new-uni-swiper-indicator {
 	z-index: 10;
-	pointer-events: auto;
+	bottom: 0px;
+	right: 0px;
+	/* #ifdef APP */
+	pointer-events: none;
+	/* #endif */
 }
 
-.uni-swiper-indicator.uni-swiper-indicator_horizontal {
-	bottom: 0px;
+.new-uni-swiper-indicator.new-uni-swiper-indicator_horizontal {
 	left: 0px;
-	right: 0px;
 	height: 40px;
-	flex-direction: row;
 }
 
-.uni-swiper-indicator.uni-swiper-indicator_vertical {
+.new-uni-swiper-indicator.new-uni-swiper-indicator_vertical {
 	top: 0px;
-	bottom: 0px;
-	right: 0px;
 	width: 40px;
-	flex-direction: column;
-}
-
-.uni-swiper-indicator .uni-swiper-indicator-item {
-	width: 8px;
-	height: 8px;
-	border-radius: 4px;
-	border: 0.1px solid rgba(230, 230, 230, 0.3);
-	background-color: rgba(0, 0, 0, 0.3);
-	margin: 2px 4px;
-}
-
-.uni-swiper-indicator .uni-swiper-indicator-item.active {
-	border: 0.1px solid rgba(225, 225, 225, 0.9);
-	background-color: rgba(255, 255, 255, 0.9);
 }
 </style>

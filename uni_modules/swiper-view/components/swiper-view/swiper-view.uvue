@@ -1,29 +1,30 @@
 <template>
 	<view
 		ref="wrapper"
-		class="uni-swiper-wrapper"
-		:class="
-			vertical ? 'uni-swiper-wrapper_vertical' : 'uni-swiper-wrapper_horizontal'
-		"
+		class="new-uni-swiper-wrapper relative w-100 overflow-hidden"
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
 		@touchcancel="onTouchEnd">
-		<view class="uni-swiper-container" :style="containerStyle">
+		<view class="new-uni-swiper-container w-100 relative flex flex-1 overflow-visible"
+		:class="
+			vertical ? 'w-100 flex-column' : 'flex-row'
+		"
+		:style="containerStyle">
 			<slot></slot>
 		</view>
 		<view
 			v-if="showDefaultIndicator"
-			class="uni-swiper-indicator uni-swiper-indicator_default"
+			class="new-uni-swiper-indicator absolute flex justify-center align-center"
 			:class="
 				vertical
-					? 'uni-swiper-indicator_vertical'
-					: 'uni-swiper-indicator_horizontal'
+					? 'new-uni-swiper-indicator_vertical flex-column'
+					: 'new-uni-swiper-indicator_horizontal flex-row'
 			">
 			<view
 				v-for="i in sliderCount"
 				:key="i"
-				class="uni-swiper-indicator-item"
+				class="new-uni-swiper-indicator-item"
 				:class="{ active: currentIndex == i - 1 }"
 				@touchstart="(e: TouchEvent) => {e.stopPropagation();}"
 				@touchmove="(e: TouchEvent) => {e.stopPropagation();}"
@@ -111,7 +112,7 @@ function getSliders() : UniElement[] | null {
 	const wrapperEl = wrapper.value
 	if (wrapperEl == null) return null
 
-	const container = wrapperEl.querySelector('.uni-swiper-container')
+	const container = wrapperEl.querySelector('.new-uni-swiper-container')
 	if (container == null) return null
 
 	const sliders = container.querySelectorAll('.uni-swiper-slider')
@@ -275,8 +276,8 @@ watch(currentIndex, (newVal : number) => {
 
 function initIndicators(){
 	const wrapperEl = wrapper.value!
-	const container = wrapperEl.querySelector('.uni-swiper-container')!
-	const indicators = container.querySelectorAll('.uni-swiper-indicator')
+	const container = wrapperEl.querySelector('.new-uni-swiper-container')!
+	const indicators = container.querySelectorAll('.new-uni-swiper-indicator')
 	if (indicators == null || indicators.length == 0) return
 
 	// 开发者自定义了指示器组件，将其移动到 wrapper 下，并移除默认指示器
@@ -379,7 +380,7 @@ onMounted(() => {
 		}
 
 		// 设置container尺寸
-		const container = wrapperEl.querySelector('.uni-swiper-container')!
+		const container = wrapperEl.querySelector('.new-uni-swiper-container')!
 		if (vertical) {
 			if (containerWidth > 0) {
 				container.style.setProperty('width', containerWidth + 'px')
@@ -630,18 +631,17 @@ const onTouchEnd = (e : TouchEvent) => {
 </script>
 
 <style>
-.uni-swiper-wrapper {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-}
+@import url('../styles/common.css');
+@import url('../styles/indicator.css');
 
 /* #ifdef WEB */
-/* 隐藏滚动条但保持overflow功能 */
-.uni-swiper-wrapper::-webkit-scrollbar {
+.new-uni-swiper-wrapper{
+	display: block;
+}
+.new-uni-swiper-wrapper::-webkit-scrollbar {
 	display: none;
 }
-.uni-swiper-wrapper {
+.new-uni-swiper-wrapper {
 	/* IE and Edge */
 	-ms-overflow-style: none;
 	/* Firefox */
@@ -649,62 +649,27 @@ const onTouchEnd = (e : TouchEvent) => {
 }
 /* #endif */
 
-.uni-swiper-container {
-	position: relative;
-	display: flex;
-	width: 100%;
-	flex: 1;
-	flex-direction: row;
+.new-uni-swiper-container {
 	transition: transform;
-	overflow: visible;
 }
 
-.uni-swiper-wrapper_horizontal .uni-swiper-container {
-	flex-direction: row;
-}
-
-.uni-swiper-wrapper_vertical .uni-swiper-container {
-	flex-direction: column;
-	width: 100%;
-}
-
-/* 默认指示器样式 */
-.uni-swiper-indicator {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.new-uni-swiper-indicator {
 	z-index: 10;
 	background-color: transparent;
+	bottom: 0px;
+	right: 0px;
+	/* #ifdef APP */
+	pointer-events: none;
+	/* #endif */
 }
 
-.uni-swiper-indicator.uni-swiper-indicator_horizontal {
-	bottom: 0px;
+.new-uni-swiper-indicator.new-uni-swiper-indicator_horizontal {
 	left: 0px;
-	right: 0px;
 	height: 40px;
-	flex-direction: row;
 }
 
-.uni-swiper-indicator.uni-swiper-indicator_vertical {
+.new-uni-swiper-indicator.new-uni-swiper-indicator_vertical {
 	top: 0px;
-	bottom: 0px;
-	right: 0px;
 	width: 40px;
-	flex-direction: column;
-}
-
-.uni-swiper-indicator .uni-swiper-indicator-item {
-	width: 8px;
-	height: 8px;
-	border-radius: 4px;
-	border: 0.1px solid rgba(230, 230, 230, 0.3);
-	background-color: rgba(0, 0, 0, 0.3);
-	margin: 2px 4px;
-}
-
-.uni-swiper-indicator .uni-swiper-indicator-item.active {
-	border: 0.1px solid rgba(225, 225, 225, 0.9);
-	background-color: rgba(255, 255, 255, 0.9);
 }
 </style>
