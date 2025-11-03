@@ -290,6 +290,9 @@ function calculateSliderContainerSize() : ContainerSize {
 }
 
 const onTouchStart = (e : TouchEvent) => {
+	// #ifdef APP-ANDROID
+	e.preventDefault()
+	// #endif
 	stopAutoPlay()
 
 	// 如果正在动画中,停止动画
