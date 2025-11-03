@@ -6,7 +6,7 @@
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
 		@touchcancel="onTouchEnd">
-		<view class="new-uni-swiper-container w-100 relative flex flex-1 overflow-visible"
+		<view v-show="isDomReady" class="new-uni-swiper-container w-100 relative flex flex-1 overflow-visible"
 		:class="
 			vertical ? 'w-100 flex-column' : 'flex-row'
 		"
@@ -40,6 +40,8 @@
 import { ref, computed, watch, onMounted, onUnmounted, provide } from 'vue'
 import { UniSwiperViewProps, UniSwiperViewChangeEventDetail, UniSwiperViewChangeEvent, UniSwiperViewTransitionEventDetail, UniSwiperViewTransitionEvent,  UniSwiperViewAnimationFinishEvent, ContainerSize } from './types.uts'
 import { parsePxRpx, getDirection } from './utils.uts'
+
+const isDomReady = ref(false)
 
 const props = withDefaults(defineProps<UniSwiperViewProps>(), {
 	// 是否纵向滑动
@@ -485,12 +487,6 @@ onMounted(() => {
 		const sliders = getSliders()
 		if (sliders == null) return
 		let { containerWidth, containerHeight } = calculateSliderContainerSize()
-		if(containerWidth <= 0 || containerHeight <= 0){
-			setTimeout(() => {
-				init()
-			}, 0);
-			return
-		}
 
 		initSliderCount()
 		initIndicators()
@@ -595,9 +591,17 @@ onMounted(() => {
 
 		startAutoPlay()
 		updateContainerHeight(initialIndex)
+		isDomReady.value = true
 	}
-
+	
+	// #ifdef APP
+	setTimeout(() => {
+		init()
+	}, 80);
+	// #endif
+	// #ifndef APP
 	init()
+	// #endif
 })
 
 onUnmounted(() => stopAutoPlay())
