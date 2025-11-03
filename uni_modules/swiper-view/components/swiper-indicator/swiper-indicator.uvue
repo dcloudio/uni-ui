@@ -1,6 +1,6 @@
 <template>
 	<view
-		class="new-uni-swiper-indicator absolute flex justify-center align-center"
+		class="new-uni-swiper-indicator absolute justify-center align-center"
 		:class="
 			vertical
 				? 'new-uni-swiper-indicator_vertical flex-column'

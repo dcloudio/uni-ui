@@ -1,12 +1,12 @@
 <template>
 	<view
 		ref="wrapper"
-		class="new-uni-swiper-wrapper relative w-100 overflow-hidden"
+		class="new-uni-swiper-wrapper relative w-100"
 		@touchstart="onTouchStart"
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
 		@touchcancel="onTouchEnd">
-		<view v-show="isDomReady" class="new-uni-swiper-container w-100 relative flex flex-1 overflow-visible"
+		<view class="new-uni-swiper-container w-100 overflow-visible"
 		:class="
 			vertical ? 'w-100 flex-column' : 'flex-row'
 		"
@@ -15,7 +15,7 @@
 		</view>
 		<view
 			v-if="showDefaultIndicator"
-			class="new-uni-swiper-indicator absolute flex justify-center align-center"
+			class="new-uni-swiper-indicator absolute justify-center align-center"
 			:class="
 				vertical
 					? 'new-uni-swiper-indicator_vertical flex-column'
@@ -40,8 +40,6 @@
 import { ref, computed, watch, onMounted, onUnmounted, provide } from 'vue'
 import { UniSwiperViewProps, UniSwiperViewChangeEventDetail, UniSwiperViewChangeEvent, UniSwiperViewTransitionEventDetail, UniSwiperViewTransitionEvent,  UniSwiperViewAnimationFinishEvent, ContainerSize } from './types.uts'
 import { parsePxRpx, getDirection } from './utils.uts'
-
-const isDomReady = ref(false)
 
 const props = withDefaults(defineProps<UniSwiperViewProps>(), {
 	// 是否纵向滑动
@@ -591,7 +589,6 @@ onMounted(() => {
 
 		startAutoPlay()
 		updateContainerHeight(initialIndex)
-		isDomReady.value = true
 	}
 	
 	// #ifdef APP
