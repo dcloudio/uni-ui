@@ -224,8 +224,7 @@ function updateContainerHeight(index : number) {
 
 	if (currentSlider != null) {
 		const sliderContent = currentSlider.querySelector('.uni-swiper-slider-content') as UniElement
-		// harmony 上 scrollHeight 未实现，需要确认这里的逻辑是否合理，如果合理，实现 harmony UniElement.scrollHeight
-		wrapper.value!.style.setProperty('height', `${sliderContent.scrollHeight}px`)
+		wrapper.value!.style.setProperty('height', `${sliderContent.offsetHeight}px`)
 	}
 }
 
