@@ -6,11 +6,10 @@
 		@touchmove="onTouchMove"
 		@touchend="onTouchEnd"
 		@touchcancel="onTouchEnd">
-		<view class="new-uni-swiper-container w-100 overflow-visible"
-		:class="
-			vertical ? 'w-100 flex-column' : 'flex-row'
-		"
-		:style="containerStyle">
+		<view
+			class="new-uni-swiper-container w-100 overflow-visible"
+			:class="vertical ? 'w-100 flex-column' : 'flex-row'"
+			:style="containerStyle">
 			<slot></slot>
 		</view>
 		<view
@@ -74,11 +73,15 @@ touchStartY = 0,
 touchStartTime = 0,
 dragging = false,
 touchStartTranslate = 0,
-isPreventDefault = false,
 prevMargin = parsePxRpx(props.previousMargin),
 nextMargin = parsePxRpx(props.nextMargin),
 sliderItemSize = 0,
-autoHeightEnabled = true
+autoHeightEnabled = true,
+firstSliderPosition = 'start',
+lastSliderPosition = 'end',
+maxTranslate = 0,
+minTranslate = 0
+
 
 const { vertical, circular, autoplay, interval, duration, disableBounce } = props
 
@@ -89,6 +92,13 @@ const containerStyle = computed(() => {
 
 	return `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms; transition-timing-function: ${props.easingFunction};`
 })
+
+function clearWaitAnimationFinishTimer() {
+	if (waitAnimationFinishTimer > 0) {
+		clearTimeout(waitAnimationFinishTimer)
+		waitAnimationFinishTimer = 0
+	}
+}
 
 function getSliders() : UniElement[] | null {
 	const wrapperEl = wrapper.value
@@ -106,69 +116,78 @@ function resetSlidersPosition() {
 	const sliders = getSliders()
 	if (sliders == null) return
 
-	// 循环滑动到第0个的时候，重置第0个和 container 的位置
+	// 循环滑动到第 0 个的时候，重置第 0 个 slider 和 container 的位置
 	if(translate.value <= -1 * sliderCount.value * sliderItemSize){
 		translate.value = 0
 		sliders[0].style.setProperty('transform', `translate${getDirection(vertical)}(0px)`)
-	// 循环滑动到最后一个的时候，将最后一个和 container 的位置调整到正向滑动到最后一个的位置
+		firstSliderPosition = 'start'
+	// 循环滑动到最后一个的时候，将最后一个 slider 和 container 的位置调整到正向滑动到最后一个的位置
 	} else if(translate.value > 0){
 		translate.value = -(sliderCount.value -1) * sliderItemSize
 		sliders[sliders.length - 1].style.setProperty('transform', `translate${getDirection(vertical)}(0px)`)
+		lastSliderPosition = 'end'
 	}
+}
+
+function isStartToEndSlide(targetIndex: number, direction? : number | null) : boolean {
+	return currentIndex.value == 0 && targetIndex == sliderCount.value - 1 && direction == -1
+}
+
+function isEndToStartSlide(targetIndex: number, direction? : number | null) : boolean {
+	return currentIndex.value == sliderCount.value - 1 && targetIndex == 0 && direction == 1
+}
+
+function isSupportCircular() : boolean {
+	return circular && (sliderCount.value > 2 || (sliderCount.value == 2 && prevMargin == 0 && nextMargin == 0))
 }
 
 // 开启衔接滑动时，滑动到边界，如果继续滑动，需要调整前后元素位置以实现无缝衔接
 // TODO: 需要考虑要移动的元素不在可视区域时再移动，比如三个 slider & circular & prevMargin/nextMargin > 0 时
 function adjustSliderPosition(targetIndex : number, direction? : number | null) {
-	// 非衔接滑动 | 少于两个 slider | 两个 slider 且 prevMargin > 0 || nextMargin > 0 时 不支持衔接滑动，不需要调整位置
-	if (!circular || sliderCount.value < 2 || (sliderCount.value == 2 && (prevMargin > 0 || nextMargin > 0))) return
+	if (!isSupportCircular()) return
 
-	const sliders = getSliders()
-	if (sliders == null) return
+	const isEndToStartNeedAdjustPosition = isEndToStartSlide(targetIndex, direction) && firstSliderPosition == 'start'
+	const isStartToEndNeedAdjustPosition = isStartToEndSlide(targetIndex, direction) && lastSliderPosition == 'end'
 
-	resetSlidersPosition()
-	// 最后一个 向后继续滑动到 第一个时，将第一个移动到最后一个的后面
-	if(targetIndex == 0 && currentIndex.value == sliderCount.value -1 && direction == 1){
-		const firstSlider = sliders[0] as UniElement
-		firstSlider.style.setProperty('transform', `translate${getDirection(vertical)}(${(sliderCount.value) * sliderItemSize}px)`)
-	// 第一个 向前继续滑动到 最后一个时，将最后一个移动到第一个的前面
-	} else if (targetIndex == sliderCount.value - 1 && currentIndex.value == 0 && direction == -1){
+	if(isStartToEndNeedAdjustPosition || isEndToStartNeedAdjustPosition){
+		resetSlidersPosition()
+		const sliders = getSliders()!
+
+		if(isEndToStartNeedAdjustPosition){
+			const firstSlider = sliders[0] as UniElement
+			firstSlider.style.setProperty('transform', `translate${getDirection(vertical)}(${(sliderCount.value) * sliderItemSize}px)`)
+			firstSliderPosition = 'end'
+			return
+		}
 		const lastSlider = sliders[sliders.length - 1] as UniElement
-		lastSlider.style.setProperty('transform', `translate${getDirection(vertical)}(-${sliderCount.value * sliderItemSize}px)`)
+		lastSlider.style.setProperty('transform', `translate${getDirection(vertical)}(${-(sliderCount.value) * sliderItemSize}px)`)
+		lastSliderPosition = 'start'
 	}
 }
 
 function slideTo(targetIndex : number, source : string, direction? : number | null) {
 	if (targetIndex < 0 || targetIndex >= sliderCount.value) return
 
+	adjustSliderPosition(targetIndex, direction)
+
 	animating.value = true
-	if(circular){
-		// 第一个 向前继续滑动到 最后一个时
-		if(currentIndex.value == 0 && targetIndex == sliderCount.value -1 && direction == -1){
-			translate.value = (1 * sliderItemSize)
-		// 最后一个 向后继续滑动到 第一个时
-		} else if(currentIndex.value == sliderCount.value -1 && targetIndex == 0 && direction == 1){
-			translate.value = (sliderCount.value * sliderItemSize * -1)
-		} else {
-			translate.value = targetIndex * sliderItemSize * -1
-		}
+	if(circular && isStartToEndSlide(targetIndex, direction)){
+		translate.value = (1 * sliderItemSize)
+	} else if(circular && isEndToStartSlide(targetIndex, direction)){
+		translate.value = (sliderCount.value * sliderItemSize * -1)
 	} else {
 		translate.value = targetIndex * sliderItemSize * -1
 	}
 
-	emit('change', { detail: { current: targetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewChangeEvent)
 	currentIndex.value = targetIndex
+	emit('change', { detail: { current: targetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewChangeEvent)
 
-	// 清除之前的动画timer
-	if (waitAnimationFinishTimer > 0) {
-		clearTimeout(waitAnimationFinishTimer)
-		waitAnimationFinishTimer = 0
-	}
+	clearWaitAnimationFinishTimer()
 
 	waitAnimationFinishTimer = setTimeout(() => {
+		emit('animationfinish', { detail: { current: targetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewAnimationFinishEvent)
 		animating.value = false
 		waitAnimationFinishTimer = 0
-		emit('animationfinish', { detail: { current: targetIndex, source } as UniSwiperViewChangeEventDetail } as UniSwiperViewAnimationFinishEvent)
 		resetSlidersPosition()
 	}, duration)
 }
@@ -193,16 +212,13 @@ const handleIndicatorClick = (index : number) => {
 	slideTo(index, 'click', 1)
 }
 
-// 更新container高度以适配当前slider的高度（for auto-height）
-function updateContainerHeight(index : number) {
-	if (!autoHeightEnabled) {
-		return
-	}
+function updateWrapperHeight(index : number) {
+	if (!autoHeightEnabled) return
 
 	const sliders = getSliders()
 	if (sliders == null) return
-	let currentSlider : UniElement | null = sliders[index]
 
+	let currentSlider : UniElement | null = sliders[index]
 	if (currentSlider != null) {
 		const sliderContent = currentSlider.querySelector('.uni-swiper-slider-content') as UniElement
 		wrapper.value!.style.setProperty('height', `${sliderContent.offsetHeight}px`)
@@ -226,6 +242,19 @@ function initSliderCount(){
 	const sliders = getSliders()
 	if (sliders == null) return
 	sliderCount.value = sliders.length
+}
+
+function updateMinTranslate() {
+	minTranslate = -(sliderCount.value - 1) * sliderItemSize
+}
+
+function fixIndex(index: number): number {
+	if(index < 0){
+		return circular ? sliderCount.value - 1 : 0
+	} else if(index >= sliderCount.value){
+		return circular ? 0 : sliderCount.value - 1
+	}
+	return index
 }
 
 function calculateSliderContainerSize() : ContainerSize {
@@ -268,6 +297,127 @@ function calculateSliderContainerSize() : ContainerSize {
 	}
 }
 
+function calculateSliderItemSize(hasFixedHeight: boolean, containerWidth: number, containerHeight: number) {
+	if (vertical) {
+		if (hasFixedHeight && containerHeight > 0) {
+			sliderItemSize = containerHeight - prevMargin - nextMargin
+		} else {
+			sliderItemSize = 0
+		}
+	} else {
+		sliderItemSize = containerWidth - prevMargin - nextMargin
+		if (sliderItemSize <= 0) {
+			sliderItemSize = containerWidth
+		}
+	}
+	if (sliderItemSize < 0) {
+		sliderItemSize = 0
+	}
+}
+
+function updateContainerSize(containerWidth: number, containerHeight: number, sliders: UniElement[], hasFixedHeight: boolean) {
+	const container = wrapper.value!.querySelector('.new-uni-swiper-container')!
+	if (vertical) {
+		if (containerWidth > 0) {
+			container.style.setProperty('width', containerWidth + 'px')
+		}
+		if (sliderItemSize > 0) {
+			const totalSize = sliderItemSize * sliders.length
+			container.style.setProperty('height', totalSize + 'px')
+		}
+	} else {
+		const totalSize = sliderItemSize * sliders.length
+		container.style.setProperty('width', totalSize + 'px')
+		// 水平方向,如果container有固定高度则设为100%,否则不设置让内容撑开
+		if (hasFixedHeight) {
+			container.style.setProperty('height', '100%')
+		}
+	}
+}
+
+function updateSlidersSize(sliders: UniElement[], containerWidth: number, sliderItemSize: number, hasFixedHeight: boolean){
+	let sliderWidth = '', sliderHeight = ''
+	if (vertical) {
+		if (containerWidth > 0) {
+			sliderWidth = containerWidth + 'px'
+		}
+		if (sliderItemSize > 0) {
+			sliderHeight = sliderItemSize + 'px'
+		}
+	} else {
+		if (sliderItemSize > 0) {
+			sliderWidth = sliderItemSize + 'px'
+		} else if (containerWidth > 0) {
+			sliderWidth = containerWidth + 'px'
+		}
+		if (hasFixedHeight) {
+			sliderHeight = '100%'
+		}
+	}
+	for (let i = 0; i < sliders.length; i++) {
+		const item = sliders[i]
+		if (sliderWidth.length > 0) {
+			item.style.setProperty('width', sliderWidth)
+		}
+		if (sliderHeight.length > 0) {
+			item.style.setProperty('height', sliderHeight)
+		}
+	}
+}
+
+function updateWrapperOverflow() {
+	if (prevMargin > 0 || nextMargin > 0) {
+		if (vertical) {
+			wrapper.value!.style.setProperty('overflow-x', 'hidden')
+			wrapper.value!.style.setProperty('overflow-y', 'visible')
+		} else {
+			wrapper.value!.style.setProperty('overflow-x', 'visible')
+			wrapper.value!.style.setProperty('overflow-y', 'hidden')
+		}
+	}
+}
+
+function init(){
+		const sliders = getSliders()
+		if (sliders == null) return
+
+		initSliderCount()
+		initIndicators()
+
+		let { containerWidth, containerHeight } = calculateSliderContainerSize()
+		const wrapperHeight = wrapper.value!.style.getPropertyValue('height')
+		let hasFixedHeight = false
+		if (wrapperHeight.length > 0 && wrapperHeight !== 'auto') {
+			hasFixedHeight = true
+			if (containerHeight <= 0) {
+				containerHeight = parsePxRpx(wrapperHeight)
+			}
+		}
+		if (!hasFixedHeight && containerHeight <= 0) {
+			containerHeight = 0
+		}
+		autoHeightEnabled = !hasFixedHeight
+
+		calculateSliderItemSize(hasFixedHeight, containerWidth, containerHeight)
+
+		updateContainerSize(containerWidth, containerHeight, sliders, hasFixedHeight)
+
+		updateSlidersSize(sliders, containerWidth, sliderItemSize, hasFixedHeight)
+
+		updateWrapperOverflow()
+
+		const initialIndex = props.current > 0 && props.current < sliderCount.value ? props.current : 0
+		currentIndex.value = initialIndex
+
+		if(initialIndex != 0) {
+			translate.value = -(initialIndex * sliderItemSize)
+		}
+
+		updateMinTranslate()
+		updateWrapperHeight(initialIndex)
+		startAutoPlay()
+	}
+
 const onTouchStart = (e : TouchEvent) => {
 	// #ifdef APP-ANDROID
 	e.preventDefault()
@@ -276,10 +426,7 @@ const onTouchStart = (e : TouchEvent) => {
 
 	if (animating.value) {
 		animating.value = false
-		if (waitAnimationFinishTimer > 0) {
-			clearTimeout(waitAnimationFinishTimer)
-			waitAnimationFinishTimer = 0
-		}
+		clearWaitAnimationFinishTimer()
 	}
 	resetSlidersPosition()
 
@@ -289,7 +436,6 @@ const onTouchStart = (e : TouchEvent) => {
 	touchStartTime = Date.now()
 	dragging = true
 	touchStartTranslate = translate.value
-	isPreventDefault = false
 }
 
 const onTouchMove = (e : TouchEvent) => {
@@ -298,91 +444,45 @@ const onTouchMove = (e : TouchEvent) => {
 	const t = e.touches[0]
 	const dx = t.pageX - touchStartX
 	const dy = t.pageY - touchStartY
-	let delta = vertical ? dy : dx
-	let targetIndex = currentIndex.value
+	const delta = vertical ? dy : dx
 	const direction = delta > 0 ? -1 : 1
-	// 向前拖动
-	if(delta > 0){
-		targetIndex = currentIndex.value -1
-	// 向后拖动
-	} else if(delta < 0){
-		targetIndex = currentIndex.value +1
-	}
-	if(targetIndex < 0){
-		targetIndex = circular ? sliderCount.value -1 : 0
-	} else if(targetIndex >= sliderCount.value){
-		targetIndex = circular ? 0 : sliderCount.value -1
-	}
+	const currentTranslate = touchStartTranslate + delta
+
+	const targetIndex = fixIndex(currentIndex.value + direction)
 	adjustSliderPosition(targetIndex, direction)
 
-	// 先计算是否在边界
-	let atBoundary = false
-	let shouldPreventDefault = true
-
-	if (!circular && disableBounce && sliderCount.value > 0) {
-		// disableBounce=true时，检查是否到达边界
-		const minTranslate = -(sliderCount.value - 1) * sliderItemSize
-		const maxTranslate = 0
-		const newTranslate = touchStartTranslate + delta
-
-		if ((newTranslate > maxTranslate && delta > 0) || (newTranslate < minTranslate && delta < 0)) {
-			// 到达边界且继续往边界外拉，不阻止默认事件
-			atBoundary = true
-			shouldPreventDefault = false
-		}
+	const atBoundary = !circular && disableBounce && sliderCount.value > 0 && ((currentTranslate > maxTranslate && delta > 0) || (currentTranslate < minTranslate && delta < 0))
+	if (!atBoundary) {
+		e.preventDefault()
 	}
 
-	if (!isPreventDefault) {
-		const adx = Math.abs(dx), ady = Math.abs(dy)
-		if ((vertical && ady > adx) || (!vertical && adx > ady)) {
-			isPreventDefault = true
-			// 只在确定滑动方向后才开始emit transition事件
-			emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
-		}
-		// 根据边界情况决定是否阻止默认事件
-		if (isPreventDefault && !atBoundary && (adx > 5 || ady > 5)) {
-			e.preventDefault()
-		}
-	} else {
-		// 如果不在边界，阻止默认事件；在边界则允许冒泡
-		if (!atBoundary) {
-			e.preventDefault()
-		}
+	if (delta != 0) {
 		emit('transition', { detail: { dx, dy } as UniSwiperViewTransitionEventDetail } as UniSwiperViewTransitionEvent)
 	}
 
-	if (circular && sliderCount.value > 1) {
-		translate.value = touchStartTranslate + delta
-	} else {
-		// 非circular模式
-		const minTranslate = -(sliderCount.value - 1) * sliderItemSize
-		const maxTranslate = 0
-		const newTranslate = touchStartTranslate + delta
-
-		if (!disableBounce) {
-			// disableBounce=false: 允许超出边界，但有阻尼效果
-			if (newTranslate > maxTranslate) {
-				// 超出上边界，应用阻尼（减速到30%）
-				const overScroll = newTranslate - maxTranslate
-				translate.value = maxTranslate + overScroll * 0.3
-			} else if (newTranslate < minTranslate) {
-				// 超出下边界，应用阻尼
-				const overScroll = newTranslate - minTranslate
-				translate.value = minTranslate + overScroll * 0.3
-			} else {
-				translate.value = newTranslate
-			}
-		} else {
-			// disableBounce=true: 不允许超出边界
-			if (newTranslate > maxTranslate) {
-				translate.value = maxTranslate
-			} else if (newTranslate < minTranslate) {
-				translate.value = minTranslate
-			} else {
-				translate.value = newTranslate
-			}
+	if (disableBounce) {
+		if(currentTranslate > maxTranslate){
+			translate.value = maxTranslate
+			return
+		}
+		if (currentTranslate < minTranslate) {
+			translate.value = minTranslate
+			return
 		}
 	}
+	if (!disableBounce) {
+		if(currentTranslate > maxTranslate){
+			const overScroll = currentTranslate - maxTranslate
+			translate.value = maxTranslate + overScroll * 0.3
+			return
+		}
+		if (currentTranslate < minTranslate) {
+			const overScroll = currentTranslate - minTranslate
+			translate.value = minTranslate + overScroll * 0.3
+			return
+		}
+	}
+	translate.value = currentTranslate
 }
 
 const onTouchEnd = (e : TouchEvent) => {
@@ -393,53 +493,40 @@ const onTouchEnd = (e : TouchEvent) => {
 	const dx = t.pageX - touchStartX
 	const dy = t.pageY - touchStartY
 	const dt = Date.now() - touchStartTime
-	// < 0, 表示向前滑动，要向后切换
 	const delta = vertical ? dy : dx
-	const direction = delta < 0 ? 1 : -1
 	const abs = Math.abs(delta)
+	const source = 'touch'
+	let direction = delta < 0 ? 1 : -1
 
 	const shouldChange = (dt < 300 && abs > 30) || abs > 100
 	if (!shouldChange){
-		slideTo(currentIndex.value, 'touch', direction)
+		slideTo(currentIndex.value, source, direction)
 		return
 	}
 
-	// 两个 slider 且没有前后边距 或者 多于两个 slider 时，才支持循环切换
-	if (circular && (sliderCount.value > 2 || (sliderCount.value ==2 && prevMargin == 0 && nextMargin == 0))) {
-		// 判断拖动到哪个位置
+	let nextIndex = currentIndex.value
+	if (isSupportCircular()) {
 		if (delta > 0) {
-			// 向前切换
-			const nextIndex = (currentIndex.value - 1 + sliderCount.value) % sliderCount.value
-			slideTo(nextIndex, 'touch', -1)
+			nextIndex = (currentIndex.value - 1 + sliderCount.value) % sliderCount.value
 		} else if (delta < 0) {
-			// 向后切换
-			const nextIndex = (currentIndex.value + 1) % sliderCount.value
-			slideTo(nextIndex, 'touch', 1)
+			nextIndex = (currentIndex.value + 1) % sliderCount.value
 		}
 	} else {
-		// 非circular模式
-		const minTranslate = -(sliderCount.value - 1) * sliderItemSize
-		const maxTranslate = 0
-		const currentTranslate = translate.value
-
-		// 检查是否超出边界（rebound效果）
-		if (!disableBounce && (currentTranslate > maxTranslate || currentTranslate < minTranslate)) {
-			// 有回弹效果：回弹到边界
-			if (currentTranslate > maxTranslate) {
-				slideTo(0, 'touch', direction)
+		if (!disableBounce && (translate.value > maxTranslate || translate.value < minTranslate)) {
+			if (translate.value > maxTranslate) {
+				nextIndex = 0
 			} else {
-				slideTo(sliderCount.value - 1, 'touch', direction)
+				nextIndex = sliderCount.value - 1
 			}
 		} else {
 			if (delta > 0 && currentIndex.value > 0) {
-				slideTo(currentIndex.value - 1, 'touch', direction)
+				nextIndex = currentIndex.value - 1
 			} else if (delta < 0 && currentIndex.value < sliderCount.value - 1) {
-				slideTo(currentIndex.value + 1, 'touch', direction)
-			} else {
-				slideTo(currentIndex.value, 'touch', direction)
+				nextIndex = currentIndex.value + 1
 			}
 		}
 	}
+	slideTo(nextIndex, source, direction)
 
 	startAutoPlay()
 }
@@ -457,123 +544,14 @@ watch(() : number => props.current, (newVal : number) => {
 })
 
 watch(currentIndex, (newVal : number) => {
-	updateContainerHeight(newVal)
+	updateWrapperHeight(newVal)
 })
 
 onMounted(() => {
-	function init(){
-		const sliders = getSliders()
-		if (sliders == null) return
-		let { containerWidth, containerHeight } = calculateSliderContainerSize()
-
-		initSliderCount()
-		initIndicators()
-		const wrapperEl = wrapper.value!
-		const wrapperHeight = wrapperEl.style.getPropertyValue('height')
-		let hasFixedHeight = false
-		if (wrapperHeight.length > 0 && wrapperHeight !== 'auto') {
-			hasFixedHeight = true
-			if (containerHeight <= 0) {
-				containerHeight = parsePxRpx(wrapperHeight)
-			}
-		}
-		if (!hasFixedHeight && containerHeight <= 0) {
-			containerHeight = 0
-		}
-		autoHeightEnabled = !hasFixedHeight
-
-		// 设置wrapper和slider尺寸
-		// itemSize是每个slider的尺寸,需要减去margin,这样slider+margin才等于container宽度
-		// 对于水平方向,使用container宽度; 垂直方向,如果container有高度则使用,否则让内容撑开
-		if (vertical) {
-			if (hasFixedHeight && containerHeight > 0) {
-				sliderItemSize = containerHeight - prevMargin - nextMargin
-			} else {
-				// 垂直方向且container没有固定高度,让每个slider自己决定高度
-				sliderItemSize = 0
-			}
-		} else {
-			sliderItemSize = containerWidth - prevMargin - nextMargin
-			if (sliderItemSize <= 0) {
-				sliderItemSize = containerWidth
-			}
-		}
-		if (sliderItemSize < 0) {
-			sliderItemSize = 0
-		}
-
-		// 设置container尺寸
-		const container = wrapperEl.querySelector('.new-uni-swiper-container')!
-		if (vertical) {
-			if (containerWidth > 0) {
-				container.style.setProperty('width', containerWidth + 'px')
-			}
-			if (sliderItemSize > 0) {
-				const totalSize = sliderItemSize * sliders.length
-				container.style.setProperty('height', totalSize + 'px')
-			}
-		} else {
-			const totalSize = sliderItemSize * sliders.length
-			container.style.setProperty('width', totalSize + 'px')
-			// 水平方向,如果container有固定高度则设为100%,否则不设置让内容撑开
-			if (hasFixedHeight) {
-				container.style.setProperty('height', '100%')
-			}
-		}
-
-		// 设置每个slider的尺寸
-		for (let i = 0; i < sliders.length; i++) {
-			const s = sliders[i] as UniElement
-			if (vertical) {
-				if (containerWidth > 0) {
-					s.style.setProperty('width', containerWidth + 'px')
-				}
-				if (sliderItemSize > 0) {
-					s.style.setProperty('height', sliderItemSize + 'px')
-				}
-				// 如果itemSize为0,不设置高度,让内容自己撑开
-			} else {
-				if (sliderItemSize > 0) {
-					s.style.setProperty('width', sliderItemSize + 'px')
-				} else if (containerWidth > 0) {
-					s.style.setProperty('width', containerWidth + 'px')
-				}
-				// 水平方向,如果container有固定高度则设为100%,否则让内容自己撑开
-				if (hasFixedHeight) {
-					s.style.setProperty('height', '100%')
-				}
-				// 否则不设置高度,让内容自己撑开
-			}
-		}
-
-		// 设置container的overflow:水平方向visible显示前后,垂直方向hidden裁剪
-		if (prevMargin > 0 || nextMargin > 0) {
-			if (vertical) {
-				// 垂直方向:上下需要显示margin区域,左右裁剪
-				wrapperEl.style.setProperty('overflow-x', 'hidden')
-				wrapperEl.style.setProperty('overflow-y', 'visible')
-			} else {
-				// 水平方向:左右需要显示margin区域,上下裁剪
-				wrapperEl.style.setProperty('overflow-x', 'visible')
-				wrapperEl.style.setProperty('overflow-y', 'hidden')
-			}
-		}
-
-		const initialIndex = props.current > 0 && props.current < sliderCount.value ? props.current : 0
-		currentIndex.value = initialIndex
-
-		if(initialIndex != 0) {
-			translate.value = -(initialIndex * sliderItemSize)
-		}
-
-		startAutoPlay()
-		updateContainerHeight(initialIndex)
-	}
-	
 	// #ifdef APP
 	setTimeout(() => {
 		init()
-	}, 80);
+	}, 100);
 	// #endif
 	// #ifndef APP
 	init()
@@ -588,7 +566,7 @@ onUnmounted(() => stopAutoPlay())
 @import url('../styles/indicator.css');
 
 /* #ifdef WEB */
-.new-uni-swiper-wrapper{
+.new-uni-swiper-wrapper {
 	display: block;
 }
 .new-uni-swiper-wrapper::-webkit-scrollbar {
