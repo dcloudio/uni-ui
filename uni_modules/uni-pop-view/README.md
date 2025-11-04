@@ -54,6 +54,7 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 > TOOD uni-app x的App平台也应该支持这个css。
 在不支持CSS Anchor Positioning API的低版本浏览器和App平台，使用手动计算位置来实现跟随。
 还需要处理wheel滚轮事件，否则会造成不touch蒙层，直接滚动页面时，Follow偏移。
+小程序平台不支持滚动跟随。
 
 实践中，推荐组件使用者的使用方式是：
 设置follow的同时，弹出蒙层，哪怕蒙层透明。
@@ -62,11 +63,11 @@ uni-MessageBox可以再出一个组件，做对话框，内部集成pop-view组�
 
 在支持CSS Anchor Positioning API的高版本浏览器上，尤其是PC大屏上，会有弹层不消失，滚轮让背景容器滚动的需求，此时配置不要蒙层也可以。
 
-需要异常测试，Follow一个不存在的id，要在控制台报错，打console.error
-
 ## TODO
 参考[Floating UI](https://github.com/floating-ui/)，比目前的uni-pop-view更好的地方，应该参考补充:
 1. 支持点一下四周出一圈按钮的效果，比菜单酷。
 2. 自动翻转：如果浮动元素在其首选位置被视口或滚动容器剪裁，Floating UI会尝试将其翻转到另一个更合适的侧面。如果翻转后仍然无法完全可见，它会沿着轴线微调位置，使其完全可见。
 
 小程序未测试，尤其是滚动跟随。
+
+小程序上应该使用portal组件，模态下拦截back。

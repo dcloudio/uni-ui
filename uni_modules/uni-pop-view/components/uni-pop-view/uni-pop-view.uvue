@@ -115,6 +115,7 @@
 	// 定义跟随元素数据类型
 	type FollowElementData = {
 		element: UniElement | null,
+		elementId: string,  // 元素 ID，用于小程序平台查询
 		side: "up" | "down" | "left" | "right",
 		offsetX: number,
 		offsetY: number,
@@ -128,8 +129,40 @@
 	const showFollowArrow = ref<boolean>(false)
 	const followElementData = ref<FollowElementData | null>(null)
 	const isClosing = ref<boolean>(false)
+
+	// #ifdef APP
+	// APP 平台：Follow 元素位置是否就绪（用于防止初始位置跳动）
+	const followPositionReady = ref<boolean>(false)
+	// #endif
+
+	// #ifdef MP-WEIXIN
+	// 微信小程序：缓存跟随元素的位置信息（因为查询是异步的）
+	const followElementRect = ref<any>(null)
+	// #endif
+
+	// 更新跟随元素位置信息的辅助函数
+	const updateFollowElementRect = () => {
+		if (followElementData.value == null) {
+			return
+		}
+
+		// #ifdef MP-WEIXIN
+		// 微信小程序：使用 uni.createSelectorQuery 异步查询
+		uni.createSelectorQuery().select('#' + followElementData.value.elementId).boundingClientRect((rect : any) => {
+			if (rect != null) {
+				followElementRect.value = rect
+			}
+		}).exec()
+		// #endif
+
+		// #ifndef MP-WEIXIN
+		// Web 和 APP：不需要做任何事，popComputedStyle 会直接调用 getBoundingClientRect
+		// #endif
+	}
 	// 动画状态：'hidden' - 隐藏状态, 'showing' - 显示动画, 'shown' - 显示完成, 'hiding' - 隐藏动画
 	const animationState = ref<string>('hidden')
+	// 是否启用 transition（用于 Web/小程序的三步时序控制）
+	const transitionEnabled = ref<boolean>(false)
 
 	let autoHideTimer : number = 0
 
@@ -152,12 +185,17 @@
 	let rafId : number = 0
 	// 强制更新计数器
 	const forceUpdateCounter = ref<number>(0)
-	// #ifndef WEB
+	// #ifdef APP
 	// APP 平台：requestAnimationFrame ID
 	let positionCheckRafId : number = 0
 	// APP 平台：上次记录的位置
 	let lastElementTop : number = 0
 	let lastElementLeft : number = 0
+	// #endif
+
+	// #ifdef MP-WEIXIN
+	// 微信小程序：setTimeout ID（用于位置跟踪）
+	let positionCheckTimerId : number = 0
 	// #endif
 
 	// 计算弹出层位置class
@@ -193,8 +231,17 @@
 			// 计数器变化会触发此 computed 重新计算
 		}
 
+		// #ifdef APP
+		// APP 平台：如果是 Follow 模式但位置还未就绪，隐藏弹层避免跳动
+		if (props.followId != '' && !followPositionReady.value) {
+			style += 'opacity: 0; pointer-events: none;'
+			return style
+		}
+		// #endif
+
 		// 如果有跟随元素，计算位置
 		if (followElementData.value != null && followElementData.value.element != null) {
+
 			// #ifdef WEB
 			// 如果支持 CSS Anchor Positioning，使用原生 CSS 锚点定位
 			if (supportsAnchorPositioning && followElementData.value.anchorName != null) {
@@ -284,7 +331,20 @@
 
 			// 降级方案：使用 JavaScript 计算位置
 			const windowInfo = uni.getWindowInfo()
-			const rect = followElementData.value.element.getBoundingClientRect()
+
+			// #ifdef MP-WEIXIN
+			// 微信小程序：使用缓存的位置信息
+			const rect = followElementRect.value
+			if (rect == null) {
+				return style  // 位置信息未准备好，返回基本样式
+			}
+			// #endif
+
+			// #ifndef MP-WEIXIN
+			// Web 和 APP：直接调用 getBoundingClientRect
+			const rect = followElementData.value.element!.getBoundingClientRect()
+			// #endif
+
 			const side = followElementData.value.side
 			const offsetX = followElementData.value.offsetX
 			const offsetY = followElementData.value.offsetY
@@ -337,6 +397,105 @@
 			}
 		}
 
+		// 非跟随元素的四边弹出：根据动画状态设置 transform 和 transition
+		// Web/小程序：inline style 包含 transition（完整控制）
+		// APP：inline style 只包含 transform，transition 由 CSS class 提供
+		if (followElementData.value == null) {
+			const pos = props.pos
+			const state = animationState.value
+			const hasTransition = transitionEnabled.value
+
+			// #ifndef APP
+			// Web 和 微信小程序：inline style 完整控制（包括 transition）
+			if (pos == 'top') {
+				if (state == 'showing' || state == 'hidden') {
+					if (hasTransition) {
+						style += 'transform: translateX(-50%) translateY(-100%); transition: transform 300ms ease-out;'
+					} else {
+						style += 'transform: translateX(-50%) translateY(-100%); transition: none;'
+					}
+				} else if (state == 'shown') {
+					style += 'transform: translateX(-50%) translateY(0); transition: transform 300ms ease-out;'
+				} else if (state == 'hiding') {
+					style += 'transform: translateX(-50%) translateY(-100%); transition: transform 300ms ease-in;'
+				}
+			} else if (pos == 'bottom') {
+				if (state == 'showing' || state == 'hidden') {
+					if (hasTransition) {
+						style += 'transform: translateX(-50%) translateY(100%); transition: transform 300ms ease-out;'
+					} else {
+						style += 'transform: translateX(-50%) translateY(100%); transition: none;'
+					}
+				} else if (state == 'shown') {
+					style += 'transform: translateX(-50%) translateY(0); transition: transform 300ms ease-out;'
+				} else if (state == 'hiding') {
+					style += 'transform: translateX(-50%) translateY(100%); transition: transform 300ms ease-in;'
+				}
+			} else if (pos == 'left') {
+				if (state == 'showing' || state == 'hidden') {
+					if (hasTransition) {
+						style += 'transform: translateY(-50%) translateX(-100%); transition: transform 300ms ease-out;'
+					} else {
+						style += 'transform: translateY(-50%) translateX(-100%); transition: none;'
+					}
+				} else if (state == 'shown') {
+					style += 'transform: translateY(-50%) translateX(0); transition: transform 300ms ease-out;'
+				} else if (state == 'hiding') {
+					style += 'transform: translateY(-50%) translateX(-100%); transition: transform 300ms ease-in;'
+				}
+			} else if (pos == 'right') {
+				if (state == 'showing' || state == 'hidden') {
+					if (hasTransition) {
+						style += 'transform: translateY(-50%) translateX(100%); transition: transform 300ms ease-out;'
+					} else {
+						style += 'transform: translateY(-50%) translateX(100%); transition: none;'
+					}
+				} else if (state == 'shown') {
+					style += 'transform: translateY(-50%) translateX(0); transition: transform 300ms ease-out;'
+				} else if (state == 'hiding') {
+					style += 'transform: translateY(-50%) translateX(100%); transition: transform 300ms ease-in;'
+				}
+			}
+			// #endif
+
+			// #ifdef APP
+			// APP 平台：inline style 只包含 transform（不含 transition，由 CSS class 提供）
+			if (pos == 'top') {
+				if (state == 'showing' || state == 'hidden') {
+					style += 'transform: translateX(-50%) translateY(-100%);'
+				} else if (state == 'shown') {
+					style += 'transform: translateX(-50%) translateY(0);'
+				} else if (state == 'hiding') {
+					style += 'transform: translateX(-50%) translateY(-100%);'
+				}
+			} else if (pos == 'bottom') {
+				if (state == 'showing' || state == 'hidden') {
+					style += 'transform: translateX(-50%) translateY(100%);'
+				} else if (state == 'shown') {
+					style += 'transform: translateX(-50%) translateY(0);'
+				} else if (state == 'hiding') {
+					style += 'transform: translateX(-50%) translateY(100%);'
+				}
+			} else if (pos == 'left') {
+				if (state == 'showing' || state == 'hidden') {
+					style += 'transform: translateY(-50%) translateX(-100%);'
+				} else if (state == 'shown') {
+					style += 'transform: translateY(-50%) translateX(0);'
+				} else if (state == 'hiding') {
+					style += 'transform: translateY(-50%) translateX(-100%);'
+				}
+			} else if (pos == 'right') {
+				if (state == 'showing' || state == 'hidden') {
+					style += 'transform: translateY(-50%) translateX(100%);'
+				} else if (state == 'shown') {
+					style += 'transform: translateY(-50%) translateX(0);'
+				} else if (state == 'hiding') {
+					style += 'transform: translateY(-50%) translateX(100%);'
+				}
+			}
+			// #endif
+		}
+
 		return style
 	})
 
@@ -354,8 +513,28 @@
 			return ''
 		}
 
+		// #ifdef APP
+		// APP 平台：如果位置还未就绪，返回空样式
+		if (!followPositionReady.value) {
+			return ''
+		}
+		// #endif
+
 		const windowInfo = uni.getWindowInfo()
-		const rect = followElementData.value.element.getBoundingClientRect()
+
+		// #ifdef MP-WEIXIN
+		// 微信小程序：使用缓存的位置信息
+		const rect = followElementRect.value
+		if (rect == null) {
+			return ''  // 位置信息未准备好，返回空样式
+		}
+		// #endif
+
+		// #ifndef MP-WEIXIN
+		// Web 和 APP：直接调用 getBoundingClientRect
+		const rect = followElementData.value.element!.getBoundingClientRect()
+		// #endif
+
 		const side = followElementData.value.side
 		const align = followElementData.value.align
 		let style = ''
@@ -406,6 +585,11 @@
 	const close = () => {
 		isClosing.value = true
 		clearAutoHideTimer()
+
+		// #ifdef APP
+		// APP 平台：重置位置就绪标志，下次打开时重新延迟
+		followPositionReady.value = false
+		// #endif
 
 		// 只有在从四边弹出时才需要动画
 		const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
@@ -515,6 +699,11 @@
 		// #endif
 
 		if (needUpdate) {
+			// #ifdef MP-WEIXIN
+			// 微信小程序：更新跟随元素位置缓存
+			updateFollowElementRect()
+			// #endif
+
 			// 取消之前的 RAF
 			if (rafId != 0) {
 				cancelAnimationFrame(rafId)
@@ -534,7 +723,7 @@
 		updateFollowElementPosition()
 	}
 
-	// #ifndef WEB
+	// #ifdef APP
 	// APP平台：位置检查实现函数
 	const doPositionCheck = () : void => {
 		if (followElementData.value != null && followElementData.value.element != null) {
@@ -589,8 +778,9 @@
 			// console.log('Web: Scroll listener started for follow element')
 			// #endif
 
-			// #ifndef WEB
-			// APP和MP 平台：使用 requestAnimationFrame 轮询检测位置变化
+			// #ifdef APP
+			// APP平台：使用 requestAnimationFrame 轮询检测位置变化
+			// TODO 小程序平台没处理，小程序没有 requestAnimationFrame，用 setTimeout 模拟性能过低。未来可以研究css锚点定位，目前暂不支持了
 			if (followElementData.value != null && followElementData.value.element != null) {
 				const rect = followElementData.value.element.getBoundingClientRect()
 				lastElementTop = rect.top
@@ -601,6 +791,26 @@
 			checkPosition!()
 
 			// console.log('APP: Position tracker started for follow element with requestAnimationFrame')
+			// #endif
+
+			// #ifdef MP-WEIXIN
+			// 微信小程序：使用 setTimeout 定期更新位置
+			// 由于微信小程序没有 requestAnimationFrame，使用定时器轮询
+			const checkPositionMP = () => {
+				if (!positionTrackerActive) {
+					return
+				}
+
+				// 更新位置缓存
+				updateFollowElementRect()
+
+				// 继续下一次检查（每 100ms 检查一次）
+				positionCheckTimerId = setTimeout(checkPositionMP, 100)
+			}
+
+			// 启动定时器
+			checkPositionMP()
+			// console.log('MP-WEIXIN: Position tracker started with setTimeout')
 			// #endif
 		}
 	}
@@ -616,11 +826,19 @@
 			window.removeEventListener('resize', handlePageScroll)
 			// #endif
 
-			// #ifndef WEB
+			// #ifdef APP
 			// APP 平台：取消 requestAnimationFrame
 			if (positionCheckRafId != 0) {
 				cancelAnimationFrame(positionCheckRafId)
 				positionCheckRafId = 0
+			}
+			// #endif
+
+			// #ifdef MP-WEIXIN
+			// 微信小程序：清除定时器
+			if (positionCheckTimerId != 0) {
+				clearTimeout(positionCheckTimerId)
+				positionCheckTimerId = 0
 			}
 			// #endif
 
@@ -803,6 +1021,7 @@
 
 					followElementData.value = {
 						element: targetElement,
+						elementId: props.followId,
 						side: props.followSide,
 						offsetX: props.followOffsetX,
 						offsetY: props.followOffsetY,
@@ -821,12 +1040,25 @@
 					// 但这里会导致小程序也走了手动计算位置，性能会很差
 					followElementData.value = {
 						element: targetElement,
+						elementId: props.followId,
 						side: props.followSide,
 						offsetX: props.followOffsetX,
 						offsetY: props.followOffsetY,
 						align: props.followAlign
 					} as FollowElementData
 					// console.log('APP platform: using scroll listener for follow element')
+
+					// #ifdef APP
+					// APP 平台：延迟一下确保位置计算准确，避免初始跳动
+					setTimeout(() => {
+						followPositionReady.value = true
+					}, 50)
+					// #endif
+
+					// #ifdef MP-WEIXIN
+					// 微信小程序：初始化查询跟随元素位置
+					updateFollowElementRect()
+					// #endif
 
 					// APP 平台：始终启动位置跟踪
 					startPositionTracker()
@@ -842,12 +1074,21 @@
 			const needAnimation = followElementData.value == null && (props.pos == 'top' || props.pos == 'bottom' || props.pos == 'left' || props.pos == 'right')
 
 			if (needAnimation) {
-				// 启动显示动画
-				// 先设置为 showing 状态（初始隐藏位置）
+				// 启动显示动画 - 使用三步时序控制
+				// 步骤1：设置为 showing 状态（初始隐藏位置，无 transition）
 				animationState.value = 'showing'
-				// 在下一帧切换到 shown 状态（触发动画）
+				transitionEnabled.value = false
+
+				// 步骤2：延迟 50ms 后，启用 transition（但 transform 值不变）
 				setTimeout(() => {
-					animationState.value = 'shown'
+					// Web/小程序：启用 transition，popComputedStyle 会添加 transition 到 inline style
+					// APP：transitionEnabled 不影响，transition 由 CSS class 提供
+					transitionEnabled.value = true
+
+					// 步骤3：再延迟 50ms，切换到 shown 状态（改变 transform，触发动画）
+					setTimeout(() => {
+						animationState.value = 'shown'
+					}, 50)
 				}, 50)
 			}
 		}
@@ -883,12 +1124,8 @@
 		overflow: visible;
 	}
 
-	/* 只有在四边弹出时才添加 transition */
-	.pop-top, .pop-bottom, .pop-left, .pop-right {
-		transition-duration: 300ms;
-		transition-property: transform;
-		transition-timing-function: ease-out;
-	}
+	/* transition 只在动画状态类中添加，不在基础类中 */
+	/* 这样可以避免首次渲染时的意外动画 */
 
 	.pop-center {
 		top: 50%;
@@ -908,15 +1145,17 @@
 
 	.pop-top.animate-showing {
 		transform: translateX(-50%) translateY(-100%);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-top.animate-shown {
 		transform: translateX(-50%) translateY(0);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-top.animate-hiding {
 		transform: translateX(-50%) translateY(-100%);
-		transition-timing-function: ease-in;
+		transition: transform 300ms ease-in;
 	}
 
 	/* bottom 位置的动画 */
@@ -931,15 +1170,17 @@
 
 	.pop-bottom.animate-showing {
 		transform: translateX(-50%) translateY(100%);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-bottom.animate-shown {
 		transform: translateX(-50%) translateY(0);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-bottom.animate-hiding {
 		transform: translateX(-50%) translateY(100%);
-		transition-timing-function: ease-in;
+		transition: transform 300ms ease-in;
 	}
 
 	/* left 位置的动画 */
@@ -954,15 +1195,17 @@
 
 	.pop-left.animate-showing {
 		transform: translateY(-50%) translateX(-100%);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-left.animate-shown {
 		transform: translateY(-50%) translateX(0);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-left.animate-hiding {
 		transform: translateY(-50%) translateX(-100%);
-		transition-timing-function: ease-in;
+		transition: transform 300ms ease-in;
 	}
 
 	/* right 位置的动画 */
@@ -977,15 +1220,17 @@
 
 	.pop-right.animate-showing {
 		transform: translateY(-50%) translateX(100%);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-right.animate-shown {
 		transform: translateY(-50%) translateX(0);
+		transition: transform 300ms ease-out;
 	}
 
 	.pop-right.animate-hiding {
 		transform: translateY(-50%) translateX(100%);
-		transition-timing-function: ease-in;
+		transition: transform 300ms ease-in;
 	}
 
 	.pop-custom {

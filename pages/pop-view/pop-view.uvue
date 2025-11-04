@@ -98,9 +98,10 @@
 		<!-- 自定义动画弹层 -->
 		<uni-pop-view
 			v-if="showCustomAnimPop"
-			pos="center"
+			pos="custom"
 			:mask-click-close="true"
 			:pop-class="customAnimClass"
+			:pop-style="customAnimStyle"
 			@close="closeCustomAnimationPop"
 		>
 			<view style="min-width: 200px;">
@@ -283,7 +284,7 @@
 			:non-mask="true"
 			pop-style="width:720rpx;border:1px solid #ccc;border-radius:0px 0px 6px 6px;z-index:1111"
 			@close="closeTopPop"
-		> <!-- TODO 不设zindex时，弹层在web上高于所有。但Android上会被左右弹层覆盖 -->
+		> <!-- TODO 不设zindex时，弹层在web上高于所有。但Android上会被左右弹层覆盖。这块有平台差异 -->
 			<view style="min-width: 200px;">
 				<text style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">顶部弹出</text>
 				<text style="font-size: 14px; color: #666; margin-bottom: 15px;">这是一个顶部显示的弹层，层级更高</text>
@@ -333,7 +334,8 @@
 
 	// 自定义动画弹层状态
 	const showCustomAnimPop = ref<boolean>(false)
-	const customAnimClass = ref<string>('custom-anim-start')
+	const customAnimClass = ref<string>('') // 控制是否有 transition
+	const customAnimStyle = ref<string>('top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0;')
 
 	// 自动隐藏弹层状态（Toast效果）
 	const showAutoHideToast = ref<boolean>(false)
@@ -729,22 +731,66 @@
 
 	// 自定义动画弹层方法
 	const showCustomAnimationPop = () => {
+		// #ifdef APP
+		// APP 平台：使用 CSS class 控制 transition
+		// 步骤1：先设置初始状态（缩小+完全透明），无 transition class
+		customAnimClass.value = '' // 无 transition，避免首次渲染时的意外动画
+		customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0;'
 		showCustomAnimPop.value = true
-		// 初始状态：缩小+透明
-		customAnimClass.value = 'custom-anim-start'
-		// 延迟一帧后触发动画：正常大小+不透明
+
+		// 步骤2：延迟 50ms 后添加 transition class（但值保持在初始状态）
 		setTimeout(() => {
-			customAnimClass.value = 'custom-anim-end'
+			customAnimClass.value = 'custom-anim-transition' // 添加 CSS class 的 transition
+
+			// 步骤3：再延迟 50ms 改变值，触发动画
+			setTimeout(() => {
+				customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); opacity: 1;'
+			}, 50)
 		}, 50)
+		// #endif
+
+		// #ifndef APP
+		// Web 和 微信小程序：使用 inline style 控制 transition
+		// 步骤1：先设置初始状态（缩小+完全透明，无 transition）
+		customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0; transition: none;'
+		showCustomAnimPop.value = true
+
+		// 步骤2：延迟 50ms 后添加 transition（但值保持在初始状态）
+		setTimeout(() => {
+			customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0; transition: transform 300ms ease-out, opacity 300ms ease-out;'
+
+			// 步骤3：再延迟 50ms 改变值，触发动画
+			setTimeout(() => {
+				customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); opacity: 1; transition: transform 300ms ease-out, opacity 300ms ease-out;'
+			}, 50)
+		}, 50)
+		// #endif
 	}
 
 	const closeCustomAnimationPop = () => {
-		// 先触发关闭动画：缩小+透明
-		customAnimClass.value = 'custom-anim-start'
-		// 等待动画完成后关闭弹层
+		// #ifdef APP
+		// APP 平台：使用 CSS class 控制 transition
+		customAnimClass.value = 'custom-anim-transition-close'
+		customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0;'
+
 		setTimeout(() => {
 			showCustomAnimPop.value = false
-		}, 300)
+			// 重置状态，为下次打开做准备
+			customAnimClass.value = ''
+			customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0;'
+		}, 350)
+		// #endif
+
+		// #ifndef APP
+		// Web 和 微信小程序：使用 inline style 控制 transition
+		customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0; transition: transform 300ms ease-in, opacity 300ms ease-in;'
+
+		setTimeout(() => {
+			showCustomAnimPop.value = false
+			// 重置状态，为下次打开做准备
+			customAnimStyle.value = 'top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0; transition: none;'
+		}, 350)
+		// #endif
 	}
 </script>
 
@@ -753,22 +799,20 @@
 		box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
 	}
 
-	/* 自定义动画样式 */
-	.custom-anim-start {
+	/* #ifdef APP */
+	/* 自定义动画的 transition class（APP 平台通过 CSS class 控制 transition） */
+	.custom-anim-transition {
 		transition-duration: 300ms;
 		transition-property: transform, opacity;
 		transition-timing-function: ease-out;
-		transform: translate(-50%, -50%) scale(0.8);
-		opacity: 0.3;
 	}
 
-	.custom-anim-end {
+	.custom-anim-transition-close {
 		transition-duration: 300ms;
 		transition-property: transform, opacity;
-		transition-timing-function: ease-out;
-		transform: translate(-50%, -50%) scale(1);
-		opacity: 1;
+		transition-timing-function: ease-in;
 	}
+	/* #endif */
 
 	.button-wrap{
 		flex-direction: row;

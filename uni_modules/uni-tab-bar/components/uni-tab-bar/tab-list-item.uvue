@@ -1,15 +1,12 @@
 <template>
 	<!-- <view > -->
-		<uni-badge-view class="tab-list-item" :class="isActive ? 'tab-list-item-active' : ''" @click="handleClick" :text="badgeText" :badge-class="badgeClass" :badge-style="badgeStyle">
+		<uni-badge-view :always-wrap-with-content="true" style="align-self: center;" class="tab-list-item" :class="isActive ? 'tab-list-item-active' : ''" @click="handleClick" :text="badgeText" :badge-class="badgeClass" :badge-style="badgeStyle">
 			<slot></slot>
 		</uni-badge-view>
 	<!-- </view> -->
 </template>
 
 <script setup lang="uts">
-import { inject, ref, computed, onMounted } from 'vue'
-import { Ref } from 'vue'
-
 // 定义组件属性
 type Props = {
 	/**
@@ -52,6 +49,7 @@ const isActive = computed((): boolean => {
 
 // 处理点击事件
 function handleClick(): void {
+	// 需要注意，这个事件触发的前提是badge-view组件里的点击事情透传过去了，需要用$attr传递
 	if (itemIndex.value >= 0) {
 		changeTab(itemIndex.value)
 	}
