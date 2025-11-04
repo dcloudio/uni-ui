@@ -1,13 +1,10 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex: 1; padding: 10px;">
+	<scroll-view style="flex: 1;">
 	<!-- #endif -->
-	<!-- #ifndef APP -->
 	<view style="padding: 10px;">
-	<!-- #endif -->
 		<text style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">Swiper View 组件演示</text>
 
-		<!-- 不等高slider测试(Auto Height) -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">不等高slider测试（Auto Height）harmony 无效：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">容器高度随当前slider内容自动调整</text>
@@ -40,7 +37,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 基础用法（测试指示器在黑白背景下的可见性） -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">基础用法（横向滑动，测试指示器可见性）：</text>
 			<swiper-view style="height: 150px;">
@@ -62,7 +58,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- previousMargin和nextMargin -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">3D卡片（previousMargin + nextMargin + circular），应用层实现缩放：</text>
 			<swiper-view
@@ -96,7 +91,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- previousMargin和nextMargin -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">3D卡片（previousMargin + nextMargin + circular），应用层实现缩放：</text>
 			<swiper-view
@@ -123,7 +117,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 垂直滑动 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）：</text>
 			<swiper-view vertical style="height: 200px;">
@@ -145,10 +138,9 @@
 			</swiper-view>
 		</view>
 
-		<!-- 垂直滑动且关闭rebound -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）且关闭rebound：</text>
-			<swiper-view vertical :rebound="false" style="height: 200px;">
+			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）且开启 disable-rebound：</text>
+			<swiper-view vertical :disable-bounce="true" style="height: 200px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #8e44ad; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Vertical 1</text>
@@ -167,7 +159,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 垂直滑动且 circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">垂直滑动（vertical）且开启 circular：</text>
 			<swiper-view vertical circular style="height: 200px;">
@@ -189,7 +180,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 自动播放 + circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自动播放 + 循环（autoplay + circular）：</text>
 			<swiper-view autoplay circular :interval="2000" style="height: 150px;">
@@ -212,7 +202,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 2卡片 + circular -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">2卡片 + 循环circular：</text>
 			<swiper-view circular :interval="2000" style="height: 150px;">
@@ -229,7 +218,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 指示器短横线样式 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器短横线样式（item-style）：</text>
 			<swiper-view style="height: 150px;">
@@ -252,7 +240,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 高亮指示器加长 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">高亮指示器加长（item-active-style）：</text>
 			<swiper-view style="height: 150px;">
@@ -273,7 +260,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- item-class和item-active-class示例 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器class定制（item-class + item-active-class）：</text>
 			<swiper-view style="height: 150px;">
@@ -291,7 +277,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- item-style和item-active-style示例 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">指示器样式定制（item-style + item-active-style）：</text>
 			<swiper-view style="height: 150px;">
@@ -312,7 +297,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 事件监听示例 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">事件监听（@change、@transition、@animationfinish）：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">当前索引: {{eventCurrentIndex}}</text>
@@ -342,7 +326,6 @@
 			</swiper-view>
 		</view>
 
-		<!-- 自定义数字指示器 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自定义数字指示器（slot）：</text>
 			<swiper-view @change="handleCustomIndicatorChange" style="height: 150px;">
@@ -395,11 +378,10 @@
 			</swiper-view>
 		</view>
 
-		<!-- circular和rebound同时设置 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">circular和rebound同时设置：</text>
+			<text style="color: #666; margin-bottom: 10px;">circular 和 disabled-bounce 同时设置：</text>
 			<text style="color: #999; font-size: 12px; margin-bottom: 5px;">以circular为优先</text>
-			<swiper-view :rebound="true" :circular="true" style="height: 150px;">
+			<swiper-view :disable-bounce="false" :circular="true" style="height: 150px;">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #3742fa; align-items: center; justify-content: center;">
 						<text style="color: white; font-size: 24px;">Rebound 1</text>
@@ -417,11 +399,9 @@
 				</swiper-slider>
 			</swiper-view>
 		</view>
+	</view>
 	<!-- #ifdef APP -->
 	</scroll-view>
-	<!-- #endif -->
-	<!-- #ifndef APP -->
-	</view>
 	<!-- #endif -->
 </template>
 
@@ -429,18 +409,15 @@
 	import { ref } from 'vue'
 	import { UniSwiperViewChangeEvent, UniSwiperViewTransitionEvent, UniSwiperViewAnimationFinishEvent } from '../../uni_modules/swiper-view/components/swiper-view/types.uts'
 
-	// 3D卡片缩放演示
 	const scaleCurrentIndex1 = ref<number>(0)
 	const scaleCurrentIndex2 = ref<number>(0)
 
 
-	// 事件演示
 	const eventCurrentIndex = ref<number>(0)
 	const eventSource = ref<string>('none')
 	const transitionDx = ref<number>(0)
 	const transitionDy = ref<number>(0)
 
-	// 自定义数字指示器
 	const customIndicatorIndex = ref<number>(0)
 	const customIndicatorTotal = ref<number>(3)
 	const customIndicatorCurrent = ref<number>(0)
@@ -478,7 +455,6 @@
 </script>
 
 <style lang="scss">
-	/* 3D卡片缩放效果 */
 	.scale-card {
 		width: 100%;
 		height: 100%;
@@ -495,7 +471,6 @@
 		opacity: 1;
 	}
 
-	/* 自定义指示器class样式 - 使用 :deep() 穿透组件作用域 */
 	:deep(.uni-swiper-indicator .uni-swiper-indicator-item.custom-item) {
 		width: 16px;
 		height: 4px;

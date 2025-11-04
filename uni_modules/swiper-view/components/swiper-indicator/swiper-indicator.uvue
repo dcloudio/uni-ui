@@ -8,7 +8,6 @@
 		">
 		<slot></slot>
 
-		<!-- 默认圆点指示器 -->
 		<template v-if="!hasSlotContent">
 			<view
 				v-for="i in total"

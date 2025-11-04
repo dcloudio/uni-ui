@@ -42,50 +42,32 @@ import { UniSwiperViewProps, UniSwiperViewChangeEventDetail, UniSwiperViewChange
 import { parsePxRpx, getDirection } from './utils.uts'
 
 const props = withDefaults(defineProps<UniSwiperViewProps>(), {
-	// 是否纵向滑动
 	vertical: false,
-	// 当前显示的slide索引
 	current: 0,
-	// 是否启用循环切换
 	circular: false,
-	// 是否自动切换
 	autoplay: false,
-	// 自动切换时间间隔，单位ms
 	interval: 3000,
-	// 切换动画时长，单位ms
 	duration: 500,
-	// 动画缓动函数
 	easingFunction: 'default',
-	// 前后预留边距，支持px和rpx单位
 	previousMargin: '0px',
 	nextMargin: '0px',
-	// 是否启用边界回弹效果
-	rebound: true
+	disableBounce: false
 })
 
-// 要向开发者 emit 的事件
 const emit = defineEmits<{
 	change : [event: UniSwiperViewChangeEvent]
 	transition : [event: UniSwiperViewTransitionEvent]
 	animationfinish : [event: UniSwiperViewAnimationFinishEvent]
 }>()
 
-// swiper wrapper,最外层容器
 const wrapper = ref<UniElement | null>(null)
-// 当前索引
 const currentIndex = ref(props.current)
-// swiper-slider 数量
 const sliderCount = ref(0)
-// container translate 位置
 const translate = ref(0)
-// 是否正在动画
 const animating = ref(false)
-// auto play setInterval timer
 const autoPlayTimer = ref(0)
-// 是否显示默认指示器，默认为true
 const showDefaultIndicator = ref(true)
 
-// setTimeout 等待动画结束后通知 transition finish 及重置 animating 状态的 timer
 let waitAnimationFinishTimer = 0,
 touchStartX = 0,
 touchStartY = 0,
@@ -98,14 +80,14 @@ nextMargin = parsePxRpx(props.nextMargin),
 sliderItemSize = 0,
 autoHeightEnabled = true
 
-const { vertical, circular, autoplay, interval, duration, rebound } = props
+const { vertical, circular, autoplay, interval, duration, disableBounce } = props
 
 const containerStyle = computed(() => {
 	const direction = getDirection(vertical)
 	const transitionDuration = animating.value ? duration : 0;
 	const offset = translate.value + prevMargin
 
-	return `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms;`
+	return `transform: translate${direction}(${offset}px); transition-duration:${transitionDuration}ms; transition-timing-function: ${props.easingFunction};`
 })
 
 function getSliders() : UniElement[] | null {
@@ -207,7 +189,6 @@ function stopAutoPlay() {
 	}
 }
 
-// 默认指示器点击处理
 const handleIndicatorClick = (index : number) => {
 	slideTo(index, 'click', 1)
 }
@@ -234,7 +215,6 @@ function initIndicators(){
 	const indicators = container.querySelectorAll('.new-uni-swiper-indicator')
 	if (indicators == null || indicators.length == 0) return
 
-	// 开发者自定义了指示器组件，将其移动到 wrapper 下，并移除默认指示器
 	for (let i = 0; i < indicators.length; i++) {
 		const indicator = indicators[i] as UniElement
 		wrapperEl.appendChild(indicator)
@@ -294,7 +274,6 @@ const onTouchStart = (e : TouchEvent) => {
 	// #endif
 	stopAutoPlay()
 
-	// 如果正在动画中,停止动画
 	if (animating.value) {
 		animating.value = false
 		if (waitAnimationFinishTimer > 0) {
@@ -322,11 +301,11 @@ const onTouchMove = (e : TouchEvent) => {
 	let delta = vertical ? dy : dx
 	let targetIndex = currentIndex.value
 	const direction = delta > 0 ? -1 : 1
+	// 向前拖动
 	if(delta > 0){
-		// 向前拖动
 		targetIndex = currentIndex.value -1
+	// 向后拖动
 	} else if(delta < 0){
-		// 向后拖动
 		targetIndex = currentIndex.value +1
 	}
 	if(targetIndex < 0){
@@ -340,8 +319,8 @@ const onTouchMove = (e : TouchEvent) => {
 	let atBoundary = false
 	let shouldPreventDefault = true
 
-	if (!circular && !rebound && sliderCount.value > 0) {
-		// rebound=false时，检查是否到达边界
+	if (!circular && disableBounce && sliderCount.value > 0) {
+		// disableBounce=true时，检查是否到达边界
 		const minTranslate = -(sliderCount.value - 1) * sliderItemSize
 		const maxTranslate = 0
 		const newTranslate = touchStartTranslate + delta
@@ -380,8 +359,8 @@ const onTouchMove = (e : TouchEvent) => {
 		const maxTranslate = 0
 		const newTranslate = touchStartTranslate + delta
 
-		if (rebound) {
-			// rebound=true: 允许超出边界，但有阻尼效果
+		if (!disableBounce) {
+			// disableBounce=false: 允许超出边界，但有阻尼效果
 			if (newTranslate > maxTranslate) {
 				// 超出上边界，应用阻尼（减速到30%）
 				const overScroll = newTranslate - maxTranslate
@@ -394,7 +373,7 @@ const onTouchMove = (e : TouchEvent) => {
 				translate.value = newTranslate
 			}
 		} else {
-			// rebound=false: 不允许超出边界
+			// disableBounce=true: 不允许超出边界
 			if (newTranslate > maxTranslate) {
 				translate.value = maxTranslate
 			} else if (newTranslate < minTranslate) {
@@ -444,7 +423,7 @@ const onTouchEnd = (e : TouchEvent) => {
 		const currentTranslate = translate.value
 
 		// 检查是否超出边界（rebound效果）
-		if (rebound && (currentTranslate > maxTranslate || currentTranslate < minTranslate)) {
+		if (!disableBounce && (currentTranslate > maxTranslate || currentTranslate < minTranslate)) {
 			// 有回弹效果：回弹到边界
 			if (currentTranslate > maxTranslate) {
 				slideTo(0, 'touch', direction)
@@ -465,10 +444,9 @@ const onTouchEnd = (e : TouchEvent) => {
 	startAutoPlay()
 }
 
-// 为swiper-indicator提供数据（provide ref对象以保持响应性）
 provide('swiper-vertical', props.vertical)
 provide('swiper-current', currentIndex)
-provide('swiper-total', sliderCount) // 总是provide真实数量，不包括克隆的
+provide('swiper-total', sliderCount)
 provide('swiper-change', (targetIndex : number) => {
 	slideTo(targetIndex, 'click', 1)
 })
@@ -581,7 +559,6 @@ onMounted(() => {
 			}
 		}
 
-		// 初始位置
 		const initialIndex = props.current > 0 && props.current < sliderCount.value ? props.current : 0
 		currentIndex.value = initialIndex
 

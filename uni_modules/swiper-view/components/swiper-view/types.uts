@@ -16,7 +16,7 @@ export type UniSwiperViewProps = {
 	easingFunction?: string
 	previousMargin?: string
 	nextMargin?: string
-	rebound?: boolean
+	disableBounce?: boolean
 }
 
 export type ContainerSize = {
