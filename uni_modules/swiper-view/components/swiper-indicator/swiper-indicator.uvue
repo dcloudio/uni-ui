@@ -13,7 +13,11 @@
 				v-for="i in total"
 				:key="i"
 				class="new-uni-swiper-indicator-item"
-				:class="[props.itemClass, { 'active' : current == i - 1 }, { [props.itemActiveClass] : current == i - 1 }]"
+				:class="[
+					props.itemClass,
+					{ active: current == i - 1 },
+					{ [props.itemActiveClass]: current == i - 1 },
+				]"
 				:style="mergeStyle(current == i - 1)"
 				@click="onChange(i - 1)">
 			</view>

@@ -198,7 +198,6 @@
 						<text style="color: white; font-size: 24px;">Auto 3</text>
 					</view>
 				</swiper-slider>
-				
 			</swiper-view>
 		</view>
 
@@ -353,7 +352,7 @@
 		</view>
 
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">自定义指示器并绑定点击事件：</text>
+			<text style="color: #666; margin-bottom: 10px;">自定义指示器并绑定点击事件(仅web支持点击)：</text>
 			<swiper-view :current='customIndicatorCurrent' style="height: 150px;" @change="handleCustomIndicatorHandleClickChange">
 				<swiper-slider>
 					<view style="width: 100%; height: 100%; background-color: #16a085; align-items: center; justify-content: center;">
