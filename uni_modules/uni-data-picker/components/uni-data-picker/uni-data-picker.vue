@@ -209,6 +209,8 @@
         this._dispatchEvent(e)
       },
       _processReadonly(dataList, value) {
+				let textField = this.map.text
+				let valueField = this.map.value
         var isTree = dataList.findIndex((item) => {
           return item.children
         })
@@ -216,8 +218,8 @@
           let inputValue
           if (Array.isArray(value)) {
             inputValue = value[value.length - 1]
-            if (typeof inputValue === 'object' && inputValue.value) {
-              inputValue = inputValue.value
+            if (typeof inputValue === 'object' && inputValue[valueField]) {
+              inputValue = inputValue[valueField]
             }
           } else {
             inputValue = value
@@ -236,18 +238,24 @@
 					for (let i = 0; i < value.length; i++) {
 						var val = value[i]
 						var item = dataList.find((v) => {
-							return v.value == val
+							return v[valueField] == val
 						})
 						if (item) {
-							result.push(item)
+							result.push({
+								value: item[valueField],
+								text: item[textField]
+							})
 						}
 					}
 				} else {
 					let item = dataList.find((v) => {
-						return v.value == value;
-					});
+						return v[valueField] == value
+					})
 					if (item) {
-						result.push(item);
+						result.push({
+							value: item[valueField],
+							text: item[textField]
+						})
 					}
 				}
         if (result.length) {
