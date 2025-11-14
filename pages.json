@@ -48,6 +48,12 @@
 			"style": {
 				"navigationBarTitleText": "movable-view"
 			}
+		},
+		{
+			"path": "pages/button/button",
+			"style": {
+				"navigationBarTitleText": "button"
+			}
 		}
 	],
 	"globalStyle": {

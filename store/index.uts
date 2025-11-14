@@ -1,0 +1,147 @@
+export type SafeArea = {
+  top : number,
+  right : number,
+  bottom : number,
+  left : number,
+  width : number,
+  height : number,
+}
+
+export const AGREE_PRIVACY = 'UNI-PRIVACY-AGREE'
+
+export type UserInfo = {
+  nickName: string,
+  avatarUrl?: string
+}
+
+type State = {
+  lifeCycleNum : number,
+  // 状态栏高度
+  statusBarHeight : number,
+  safeArea : SafeArea
+  // 设备像素比
+  devicePixelRatio : number
+  // 事件判断回调
+  eventCallbackNum: number
+  // 是否匹配左侧窗口
+  noMatchLeftWindow:boolean
+  // 当前激活的tab页
+  active: string
+  leftWinActive:string
+  // 是否同意隐私政策
+  agreeToPrivacy: boolean | null
+  // 是否同意截屏
+  allowCapture: boolean,
+  // 是否暗黑主题（适配web端）
+  isDarkMode: boolean
+  // 是否无网环境
+  netless: boolean,
+  // 登录用户信息
+  userInfo: UserInfo | null
+}
+
+const getAgreePrivacy = () => {
+  const data = uni.getStorageSync(AGREE_PRIVACY)
+  if (typeof data === 'boolean') {
+    return data
+  }
+  if (data == null) {
+    return null
+  }
+    return null
+}
+
+export const state = reactive({
+  lifeCycleNum: 0,
+  statusBarHeight: 0,
+  devicePixelRatio: 1,
+  eventCallbackNum: 0,
+  noMatchLeftWindow: true,
+  active: 'componentPage',
+  leftWinActive: '/pages/component/view/view',
+  safeArea: {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  },
+  agreeToPrivacy: getAgreePrivacy(),
+  allowCapture: true,
+  isDarkMode:false,
+  netless: false,
+  userInfo: null
+} as State)
+
+export const setUserInfo = (userInfo : UserInfo | null) => {
+  state.userInfo = userInfo
+}
+
+export const setLifeCycleNum = (num : number) => {
+  state.lifeCycleNum = num
+}
+
+export const setEventCallbackNum = (num : number) => {
+  state.eventCallbackNum = num
+}
+
+export const setStatusBarHeight = (height : number) => {
+  state.statusBarHeight = height
+}
+
+export const setSafeArea = (value : SafeArea) => {
+  state.safeArea = value
+}
+
+export const setDevicePixelRatio = (devicePixelRatio : number) => {
+  state.devicePixelRatio = devicePixelRatio
+}
+
+export const setMatchLeftWindow = (matchLeftWindow:boolean) => {
+  state.noMatchLeftWindow = !matchLeftWindow
+}
+
+export const setActive = (tabPage:string) => {
+  state.active = tabPage
+}
+
+export const setLeftWinActive = (leftWinActive:string) => {
+  state.leftWinActive = leftWinActive
+}
+
+export const setAgreeToPrivacy = (agree: boolean) => {
+  state.agreeToPrivacy = agree
+  uni.setStorageSync(AGREE_PRIVACY, agree);
+}
+
+export const setAllowCapture = (allow: boolean) => {
+  state.allowCapture = allow
+}
+
+// 检查系统主题
+export const checkSystemTheme = () => {
+  // #ifdef WEB || MP
+  const info = uni.getAppBaseInfo();
+  state.isDarkMode = info.hostTheme === 'dark';
+  uni.onHostThemeChange((result) => {
+    state.isDarkMode = result.hostTheme === 'dark';
+  });
+  // #endif
+  // #ifdef APP
+  uni.getSystemInfo({
+    success: (res : GetSystemInfoResult) => {
+      const appTheme = res.appTheme == "auto" ? res.osTheme! : res.appTheme!
+      state.isDarkMode = appTheme.trim() == 'dark';
+    }
+  })
+  uni.onAppThemeChange((res : AppThemeChangeResult) => {
+    state.isDarkMode = res.appTheme.trim() == 'dark';
+  })
+  // #endif
+}
+
+export const setNetless = (netless: boolean) => {
+  state.netless = netless
+}
+

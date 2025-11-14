@@ -111,14 +111,14 @@
 
 <template>
   <view class="main">
-    <button id="testButton" :disabled="data.disabled_boolean" :size="data.size_enum[data.size_enum_current].name"
+    <uni-button id="testButton" :disabled="data.disabled_boolean" :size="data.size_enum[data.size_enum_current].name"
       :type="data.type_enum[data.type_enum_current].name" :plain="data.plain_boolean" @click="button_click"
       @touchstart="button_touchstart" @touchmove="button_touchmove" @touchcancel="button_touchcancel"
       @touchend="button_touchend" @tap="button_tap" @longpress="button_longpress" class="btn"
       :class="data.default_style ? (data.disabled_boolean ? 'custom-btn-disable' : 'custom-btn') : ''"
       :hover-class="data.default_style ? 'is-hover' : 'button-hover'">
       {{ data.text }}
-    </button>
+    </uni-button>
   </view>
   <scroll-view style="flex: 1">
     <view class="content">
@@ -138,7 +138,11 @@
     </view>
   </scroll-view>
 </template>
-
+<!-- 
+<script setup>
+	// import Button from "@/uni_modules/uni-button/components/uni-button/uni-button.uvue"
+</script>
+-->
 <style>
   .main {
     padding: 5px 0;
