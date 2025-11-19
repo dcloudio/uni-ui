@@ -22,6 +22,7 @@ uni-app x必须使用uts编程语言，这是一种类似TS的语言，但又有
 - any类型的变量在使用其属性或方法时，需要as为正确的相容类型。
 - 不支持object类型，使用UTSJSONObject类型替代。
 - 不支持undefined，变量使用前必须赋值。
+- 所有变量、方法，都需要先定义后使用，严格注意顺序。
 - 对象类型定义使用type而不是interface。 interface是接口，不用于对象类型定义。
 - 变量和常量定义使用let和const，不使用var。
 - 不使用 JSX 表达式。
