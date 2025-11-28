@@ -1,0 +1,126 @@
+<template>
+  <view class="page">
+    <view class="header">
+      <text class="title">Slider 性能测试</text>
+      <text class="subtitle">100个slider共享同一个值</text>
+    </view>
+
+    <view class="content">
+      <view class="control-section">
+        <view style="flex:1;">
+          <slider2 :value="sharedValue" @input="onSharedInput" @change="onSharedChange" show-value />
+        </view>
+      </view>
+
+      <scroll-view class="sliders-scroll" scroll-y>
+        <view class="sliders-section">
+          <view v-for="index in 100" :key="index" class="slider-item">
+            <text class="slider-label">{{ displayIndex(index) }}</text>
+                <view style="flex:1;">
+                  <slider2 :value="sharedValue" @input="onSharedInput" />
+                </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</template>
+
+<script setup lang="uts">
+  import slider2 from '@/uni_modules/slider/components/slider/slider.uvue'
+
+  const sharedValue = ref(50)
+  
+  function displayIndex(index: number): string {
+    index = index - 1
+    return index < 10 ? `0${index}` : index + ''
+  }
+
+  function onSharedInput(val: number) {
+    sharedValue.value = val
+  }
+
+  function onSharedChange(val: number) {
+    console.log('change:', val)
+  }
+</script>
+
+<style>
+  .page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+  }
+
+  .header {
+    padding: 0 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 5px;
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .control-section {
+    padding: 10px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .value-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007aff;
+    margin-bottom: 15px;
+  }
+
+  .sliders-scroll {
+    flex: 1;
+    overflow-y: scroll;
+  }
+
+  .sliders-section {
+    padding: 10px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .slider-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    width: 19%;
+  }
+
+  .slider-label {
+    font-size: 9px;
+    color: #666666;
+    margin-right: 3px;
+    text-align: right;
+  }
+</style>

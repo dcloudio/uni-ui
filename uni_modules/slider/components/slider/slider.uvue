@@ -1,0 +1,549 @@
+<template>
+	<view class="slider-wrapper">
+		<view ref="containerRef" class="slider-container" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+			@touchend="handleTouchEnd">
+			<!-- 背景轨道 -->
+			<view class="slider-track-bg"></view>
+
+			<!-- 填充条(左边线) -->
+			<view ref="fillRef" class="slider-track-fill" :style="{ 'transform': `scaleX(${fillPercentage})` }"
+				android-layer-type="hardware"></view>
+
+			<!-- 滑块 -->
+			<view ref="handleRef" class="slider-handle" tabIndex="0" role="slider" android-layer-type="hardware"
+				:aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"
+				:style="{ 'transform': `translateX(${pxOffset}px)` }"></view>
+		</view>
+
+		<!-- 显示当前值 -->
+		<text v-if="showValue" class="slider-value">{{ currentValue }}</text>
+	</view>
+</template>
+
+<script setup lang="uts">
+	// Emits 定义
+	const emit = defineEmits < {
+		change: [value: number],
+		input: [value: number]
+	} > ()
+
+	// Props 类型定义
+	type SliderProps = {
+		min: number
+		max: number
+		step: number
+		value: number
+		disabled: boolean
+		showValue: boolean
+	}
+
+	// Props 定义
+	const props = withDefaults(defineProps < SliderProps > (), {
+		min: 0,
+		max: 100,
+		step: 1,
+		value: 0,
+		disabled: false,
+		showValue: false
+	})
+
+	// Refs
+	const containerRef = ref < UniElement | null > (null)
+	const fillRef = ref < UniElement | null > (null)
+	const handleRef = ref < UniElement | null > (null)
+
+	// 状态
+	const currentValue = ref(props.value)
+	const isDragging = ref(false)
+	const trackDimensions = ref < UTSJSONObject | null > (null) // 轨道尺寸
+	const handleDimensions = ref < UTSJSONObject | null > (null) // 滑块尺寸
+	const pxOffset = ref(0)
+	const fillPercentage = ref(0)
+	let rafId = 0
+	let ticking = false
+	let isTouchDevice = false
+	let cachedDecimalPlaces = -1 // 缓存 step 小数位数，-1表示未缓存
+	let cachedStep = props.step // 缓存 step 值，便于检测变化
+	const snapValues = ref < number[] > ([]) // 预计算的吸附值表
+
+	// 双向线性插值函数
+	function lerp(start: number, end: number, t: number): number {
+		// 限制 t 的值在 [0, 1] 范围内
+		const clampedT = Math.max(0, Math.min(1, t))
+		return start * (1 - clampedT) + end * clampedT
+	}
+
+	// 获取数字的小数位数
+	function getDecimalPlaces(num: number): number {
+		if (num == 0) return 0
+		if (cachedStep !== num || cachedDecimalPlaces == -1) {
+			const str = num.toString()
+			const decimalIndex = str.indexOf('.')
+			if (decimalIndex == -1) cachedDecimalPlaces = 0
+			cachedDecimalPlaces = str.length - decimalIndex - 1
+		}
+		return cachedDecimalPlaces
+	}
+
+	// 应用步进精度处理
+	function applyStepPrecision(value: number): number {
+		let result = value
+
+		if (props.step > 0) {
+			result = Math.round(result / props.step) * props.step
+
+			// 根据step的小数位数来toFixed结果
+			const decimalPlaces = getDecimalPlaces(props.step)
+			if (decimalPlaces > 0) {
+				result = parseFloat(result.toFixed(decimalPlaces))
+			}
+		}
+
+		return result
+	}
+
+	// TODO 计算吸附值会大大增加 slider-100 页面进入时间 (1144ms -> 3422ms)，而且吸附值对性能影响不大 !!!
+	// 更新吸附值查找表
+	function updateSnapValues() {
+		if (props.step <= 0) {
+			snapValues.value = []
+			return
+		}
+
+		const range = props.max - props.min
+		const stepCount = ((range / props.step) | 0)
+
+		// 如果步数太多（>1000），回退到实时计算模式，避免内存占用过大
+		if (stepCount > 1000) {
+			snapValues.value = []
+			return
+		}
+
+		const values : number[] = []
+		const decimalPlaces = getDecimalPlaces(props.step)
+
+		for (let i = 0; i <= stepCount; i++) {
+			let val = props.min + i * props.step
+			// 处理浮点数精度问题
+			if (decimalPlaces > 0) {
+				val = parseFloat(val.toFixed(decimalPlaces))
+			}
+			values.push(val)
+		}
+
+		// 确保包含最大值
+		if (values.length > 0 && values[values.length - 1] < props.max) {
+			values.push(props.max)
+		}
+
+		snapValues.value = values
+	}
+
+	// 核心渲染函数：更新视觉效果
+	function renderVisuals(newValue: number) {
+		// 1. 边界限制
+		const clampedValue = Math.max(props.min, Math.min(newValue, props.max))
+		currentValue.value = clampedValue
+
+		// 2. 计算比例
+		const percentage = (clampedValue - props.min) / (props.max - props.min)
+
+		// 3. 计算位置和缩放
+		const containerEl = containerRef.value
+		if (containerEl != null) {
+			const dims = trackDimensions.value
+			const handleDims = handleDimensions.value
+			const containerWidth = (dims != null ? dims['width'] : containerEl.offsetWidth) as number
+      const handleWidth = (handleDims != null ? handleDims['width'] : handleRef.value!.offsetWidth) as number
+
+			// 减去滑块的宽度
+			const trackWidth = containerWidth - handleWidth
+
+			// 滑块位置：从0到trackWidth，滑块中心点对齐该位置
+			pxOffset.value = trackWidth * percentage
+
+			// 填充条缩放比例
+			fillPercentage.value = percentage - 0.001 // 减去一个微小值，避免出现1时的边界问题
+		}
+
+		// 4. 触发回调
+		emit('input', clampedValue)
+	}
+
+	// 计算新值
+	function calculateValue(clientX: number): number {
+		if (trackDimensions.value == null) {
+			return currentValue.value
+		}
+
+		const dims = trackDimensions.value
+		const containerWidth = dims['width']! as number
+		const containerLeft = dims['left']! as number
+
+		// 轨道起始位置
+		const trackLeft = containerLeft
+		// 实际轨道宽度
+		const trackWidth = containerWidth
+
+		let currentX = clientX - trackLeft
+
+		// 边界检查
+		currentX = Math.max(0, Math.min(currentX, trackWidth))
+
+		// 计算比例
+		const ratio = currentX / trackWidth
+
+		// 使用线性插值计算实际值
+		let newValue = lerp(props.min, props.max, ratio)
+
+		// 如果有预计算的吸附值表，直接查表
+		if (snapValues.value.length > 0) {
+			const index = Math.round((newValue - props.min) / props.step)
+			const clampedIndex = Math.max(0, Math.min(snapValues.value.length - 1, index))
+			newValue = snapValues.value[clampedIndex]
+		} else {
+			// 否则使用实时计算
+			newValue = applyStepPrecision(newValue)
+		}
+
+		return newValue
+	}
+
+	// 触摸开始
+	function handleTouchStart(e: TouchEvent) {
+		if (props.disabled == true) {
+			return
+		}
+
+		// 标记为触摸设备
+		isTouchDevice = true
+		isDragging.value = true
+
+		// 缓存轨道尺寸
+		const containerEl = containerRef.value
+		if (containerEl != null) {
+			const rect = containerEl.getBoundingClientRect()
+			trackDimensions.value = {
+				width: rect.width,
+				left: rect.left
+			}
+		}
+		const handleEl = handleRef.value
+		if (handleEl != null) {
+			const rect = handleEl.getBoundingClientRect()
+			handleDimensions.value = {
+				width: rect.width,
+				height: rect.height
+			}
+		}
+
+		// 立即更新到触摸位置
+		if (e.touches.length > 0) {
+			const newValue = calculateValue(e.touches[0].clientX)
+			renderVisuals(newValue)
+		}
+	}
+
+	// 触摸结束
+	function handleTouchEnd() {
+		if (isDragging.value == false) {
+			return
+		}
+
+		isDragging.value = false
+
+		// 取消 rAF
+		if (rafId != 0) {
+			cancelAnimationFrame(rafId)
+			rafId = 0
+		}
+		ticking = false
+
+		// 触发 change 事件
+		emit('change', currentValue.value)
+	}
+
+	// 触摸移动处理
+	function handleTouchMove(e: TouchEvent) {
+		if (isDragging.value == false || props.disabled == true) {
+			return
+		}
+
+		// 只在可取消时才调用preventDefault
+		if (e.cancelable) {
+			e.preventDefault()
+		}
+
+		if (ticking == false) {
+			rafId = requestAnimationFrame(() => {
+				if (e.touches.length > 0) {
+					const newValue = calculateValue(e.touches[0].clientX)
+					renderVisuals(newValue)
+				}
+				ticking = false
+			})
+			ticking = true
+		}
+	}
+
+	// #region Mouse End Resize	// 鼠标移动处理 (使用 rAF 优化)
+	function handleMouseMove(e: MouseEvent) {
+		if (isDragging.value == false || props.disabled == true) {
+			return
+		}
+
+		if (ticking == false) {
+			rafId = requestAnimationFrame(() => {
+				const newValue = calculateValue(e.clientX)
+				renderVisuals(newValue)
+				ticking = false
+			})
+			ticking = true
+		}
+	}
+
+	// 鼠标按下
+	function handleMouseDown(e: MouseEvent) {
+		if (props.disabled == true) {
+			return
+		}
+
+		// 如果是触摸设备，忽略鼠标事件
+		if (isTouchDevice == true) {
+			return
+		}
+
+		e.preventDefault()
+		isDragging.value = true
+
+		// 缓存轨道尺寸
+		const containerEl = containerRef.value
+		if (containerEl != null) {
+			const rect = containerEl.getBoundingClientRect()
+			trackDimensions.value = {
+				width: rect.width,
+				left: rect.left
+			}
+		}
+
+		// 立即更新到点击位置
+		const newValue = calculateValue(e.clientX)
+		renderVisuals(newValue)
+
+		// #ifdef WEB
+		// 绑定全局鼠标事件
+		window.addEventListener('mousemove', handleMouseMove)
+		window.addEventListener('mouseup', handleMouseUp)
+		// #endif
+	}
+
+	// 鼠标释放
+	function handleMouseUp() {
+		if (isDragging.value == false) {
+			return
+		}
+
+		isDragging.value = false
+
+		// 取消 rAF
+		if (rafId != 0) {
+			cancelAnimationFrame(rafId)
+			rafId = 0
+		}
+		ticking = false
+
+		// 触发 change 事件
+		emit('change', currentValue.value)
+
+		// #ifdef WEB
+		// 移除全局鼠标事件
+		window.removeEventListener('mousemove', handleMouseMove)
+		window.removeEventListener('mouseup', handleMouseUp)
+		// #endif
+	}
+
+	// #ifdef WEB
+	// 键盘事件处理
+	function handleKeyDown(e: KeyboardEvent) {
+		if (props.disabled == true) {
+			return
+		}
+
+		let newValue = currentValue.value
+
+		if (e.key == 'ArrowLeft' || e.key == 'ArrowDown') {
+			newValue -= props.step
+			e.preventDefault()
+		} else if (e.key == 'ArrowRight' || e.key == 'ArrowUp') {
+			newValue += props.step
+			e.preventDefault()
+		} else if (e.key == 'Home') {
+			newValue = props.min
+			e.preventDefault()
+		} else if (e.key == 'End') {
+			newValue = props.max
+			e.preventDefault()
+		} else {
+			return
+		}
+
+		// 应用步进精度处理
+		newValue = applyStepPrecision(newValue)
+
+		// 键盘操作频率低，直接调用
+		requestAnimationFrame(() => {
+			renderVisuals(newValue)
+			emit('change', currentValue.value)
+		})
+	}
+	// #endif
+
+	// 窗口resize处理
+	function handleResize() {
+		// 清除缓存的尺寸，强制重新计算
+		trackDimensions.value = null
+		// 重新渲染当前值
+		renderVisuals(currentValue.value)
+	}
+	// #endregion
+
+	// 监听 props 变化
+	watch((): number => { return props.value }, (newValue: number) => {
+		if (isDragging.value == false) {
+			renderVisuals(newValue)
+		}
+	})
+
+	watch((): number => { return props.min }, () => {
+		// updateSnapValues()
+		renderVisuals(currentValue.value)
+	})
+
+	watch((): number => { return props.max }, () => {
+		// updateSnapValues()
+		renderVisuals(currentValue.value)
+	})
+
+	watch((): number => { return props.step }, () => {
+		// updateSnapValues()
+		renderVisuals(currentValue.value)
+	})
+
+	// 初始化
+	onMounted(() => {
+		// updateSnapValues()
+		// TODO APP 上需要使用 nextTick 才能正确获取尺寸
+		// #ifdef APP
+		nextTick(() => {
+		// #endif
+			// 初始化视觉效果
+			renderVisuals(props.value)
+		// #ifdef APP
+		})
+		// #endif
+		// #ifdef WEB
+		// 监听窗口resize
+		window.addEventListener('resize', handleResize)
+		// 监听鼠标按下事件
+		const containerEl = containerRef.value
+		if (containerEl != null) {
+			containerEl.addEventListener('mousedown', handleMouseDown)
+		}
+		const handleEl = handleRef.value
+		if (handleEl != null) {
+			handleEl.addEventListener('keydown', handleKeyDown)
+		}
+		// #endif
+	})
+
+	// 清理
+	onUnmounted(() => {
+		if (rafId != 0) {
+			cancelAnimationFrame(rafId)
+		}
+	})
+	onBeforeUnmount(() => {
+		// #ifdef WEB
+		window.removeEventListener('mousemove', handleMouseMove)
+		window.removeEventListener('mouseup', handleMouseUp)
+		window.removeEventListener('resize', handleResize)
+		const containerEl = containerRef.value
+		if (containerEl != null) {
+			containerEl.removeEventListener('mousedown', handleMouseDown)
+		}
+		// #endif
+	})
+</script>
+
+<style>
+	.slider-wrapper {
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-direction: row;
+		box-sizing: border-box;
+		overflow: visible;
+	}
+
+	.slider-container {
+		position: relative;
+		flex: 1;
+		height: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		box-sizing: border-box;
+		border-radius: 2px;
+		overflow: visible;
+	}
+
+	.slider-track-bg {
+		width: 100%;
+		height: 2px;
+		background-color: #e5e5e5;
+		position: absolute;
+		z-index: 0;
+	}
+
+	.slider-track-fill {
+		width: 100%;
+		height: 2px;
+		background-color: #007aff;
+		border-radius: 2px;
+		transform-origin: left center;
+		will-change: transform;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.slider-handle {
+		width: 28px;
+		height: 28px;
+		align-self: flex-start;
+		background-color: #ffffff;
+		border-radius: 14px;
+		will-change: transform;
+		cursor: grab;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+		z-index: 2;
+	}
+
+	.slider-handle:active {
+		cursor: grabbing;
+	}
+
+	.slider-handle:focus-visible {
+		outline: 2px solid #007bff;
+		outline-offset: 2px;
+	}
+
+	.slider-value {
+		width: 35px;
+		color: #888;
+		margin-left: 3px;
+		font-size: 14px;
+		align-self: center;
+		white-space: nowrap;
+	}
+</style>

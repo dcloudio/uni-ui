@@ -1,0 +1,118 @@
+<template>
+  <!-- #ifdef APP -->
+  <scroll-view scroll-x style="flex:1;">
+    <!-- #endif -->
+    <view class="page">
+      <view class="header">
+        <text class="title">Slider 滑块</text>
+      </view>
+
+      <view class="content">
+        <view class="section">
+          <text class="section-title">基础用法</text>
+          <slider2 :value="value1" @input="onInput1" @change="onChange1" show-value/>
+          <text class="value-text">当前值: {{ value1 }}</text>
+        </view>
+
+        <view class="section">
+          <text class="section-title">step 0.1</text>
+          <slider2 :value="value4" :min="0.1" :max="1" :step="0.1" @input="onInput1" @change="onChange1" show-value />
+          <text class="value-text">当前值: {{ value1 }}</text>
+        </view>
+
+        <view class="section">
+          <text class="section-title">设置步长（step=10）</text>
+          <slider2 :value="value2" :step="10" @input="onInput2" @change="onChange2" />
+          <text class="value-text">当前值: {{ value2 }}</text>
+        </view>
+
+        <view class="section">
+          <text class="section-title">自定义范围（min=20, max=80）</text>
+          <slider2 :value="value3" :min="20" :max="80" @input="onInput3" @change="onChange3" />
+          <text class="value-text">当前值: {{ value3 }}</text>
+        </view>
+
+        <view class="section">
+          <text class="section-title">禁用状态</text>
+          <slider2 :value="50" :disabled="true" />
+        </view>
+      </view>
+    </view>
+    <!-- #ifdef APP -->
+  </scroll-view>
+  <!-- #endif -->
+</template>
+
+<script setup lang="uts">
+  import slider2 from '@/uni_modules/slider/components/slider/slider.uvue'
+
+  const value1 = ref(30)
+  const value2 = ref(50)
+  const value3 = ref(50)
+  const value4 = ref(0)
+
+  function onInput1(val: number) {
+    value1.value = val
+  }
+
+  function onChange1(val: number) {
+    console.log('change1:', val)
+  }
+
+  function onInput2(val: number) {
+    value2.value = val
+  }
+
+  function onChange2(val: number) {
+    console.log('change2:', val)
+  }
+
+  function onInput3(val: number) {
+    value3.value = val
+  }
+
+  function onChange3(val: number) {
+    console.log('change3:', val)
+  }
+</script>
+
+<style>
+  .page {
+    background-color: #f5f5f5;
+  }
+
+  .header {
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 15px;
+  }
+
+  .value-text {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 10px;
+  }
+</style>

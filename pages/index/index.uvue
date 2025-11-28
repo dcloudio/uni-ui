@@ -7,6 +7,8 @@
 	<navigator url="/pages/page-container/page-container">page-container</navigator>
 	<navigator url="/pages/movable-view/movable-view">movable-view</navigator>
 	<navigator url="/pages/button/button">button</navigator>
+	<navigator url="/pages/slider/slider">slider</navigator>
+	<navigator url="/pages/slider-performance/slider-performance">slider性能测试</navigator>
 </template>
 
 <script setup>

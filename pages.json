@@ -54,6 +54,18 @@
 			"style": {
 				"navigationBarTitleText": "button"
 			}
+		},
+    {
+			"path": "pages/slider/slider",
+			"style": {
+				"navigationBarTitleText": "slider"
+			}
+		},
+		{
+			"path": "pages/slider-performance/slider-performance",
+			"style": {
+				"navigationBarTitleText": "slider性能测试"
+			}
 		}
 	],
 	"globalStyle": {
