@@ -230,10 +230,9 @@
 		}
 		const handleEl = handleRef.value
 		if (handleEl != null) {
-			const rect = handleEl.getBoundingClientRect()
 			handleDimensions.value = {
-				width: rect.width,
-				height: rect.height
+				width: handleEl.offsetWidth,
+				height: handleEl.offsetHeight
 			}
 		}
 
@@ -494,7 +493,6 @@
 		justify-content: center;
 		cursor: pointer;
 		box-sizing: border-box;
-		border-radius: 2px;
 		overflow: visible;
 	}
 
@@ -503,6 +501,7 @@
 		height: 2px;
 		background-color: #e5e5e5;
 		position: absolute;
+		border-radius: 2px;
 		z-index: 0;
 	}
 
