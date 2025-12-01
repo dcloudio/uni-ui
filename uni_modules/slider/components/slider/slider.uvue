@@ -491,9 +491,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		cursor: pointer;
 		box-sizing: border-box;
 		overflow: visible;
+    /* #ifdef WEB */
+		cursor: pointer;
+    /* #endif */
 	}
 
 	.slider-track-bg {
@@ -511,9 +513,11 @@
 		background-color: #007aff;
 		border-radius: 2px;
 		transform-origin: left center;
-		will-change: transform;
 		position: absolute;
 		z-index: 1;
+    /* #ifdef WEB */
+    will-change: transform;
+    /* #endif */
 	}
 
 	.slider-handle {
@@ -522,19 +526,12 @@
 		align-self: flex-start;
 		background-color: #ffffff;
 		border-radius: 14px;
-		will-change: transform;
-		cursor: grab;
 		box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 		z-index: 2;
-	}
-
-	.slider-handle:active {
-		cursor: grabbing;
-	}
-
-	.slider-handle:focus-visible {
-		outline: 2px solid #007bff;
-		outline-offset: 2px;
+    /* #ifdef WEB */
+		will-change: transform;
+		cursor: grab;
+    /* #endif */
 	}
 
 	.slider-value {
