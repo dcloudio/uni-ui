@@ -66,6 +66,12 @@
 			"style": {
 				"navigationBarTitleText": "slider性能测试"
 			}
+		},
+		{
+			"path": "pages/transform-test/transform-test",
+			"style": {
+				"navigationBarTitleText": "Transform性能测试"
+			}
 		}
 	],
 	"globalStyle": {

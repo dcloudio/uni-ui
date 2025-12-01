@@ -9,6 +9,7 @@
 	<navigator url="/pages/button/button">button</navigator>
 	<navigator url="/pages/slider/slider">slider</navigator>
 	<navigator url="/pages/slider-performance/slider-performance">slider性能测试</navigator>
+	<navigator url="/pages/transform-test/transform-test">Transform性能测试</navigator>
 </template>
 
 <script setup>
