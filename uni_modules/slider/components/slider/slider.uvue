@@ -6,13 +6,11 @@
 			<view class="slider-track-bg"></view>
 
 			<!-- 填充条(左边线) -->
-			<view ref="fillRef" class="slider-track-fill" :style="{ 'transform': `scaleX(${fillPercentage})` }"
-				android-layer-type="hardware"></view>
+			<view ref="fillRef" class="slider-track-fill" android-layer-type="hardware"></view>
 
 			<!-- 滑块 -->
 			<view ref="handleRef" class="slider-handle" tabIndex="0" role="slider" android-layer-type="hardware"
-				:aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"
-				:style="{ 'transform': `translateX(${pxOffset}px)` }"></view>
+				:aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"></view>
 		</view>
 
 		<!-- 显示当前值 -->
@@ -57,8 +55,6 @@
 	const isDragging = ref(false)
 	const trackDimensions = ref < UTSJSONObject | null > (null) // 轨道尺寸
 	const handleDimensions = ref < UTSJSONObject | null > (null) // 滑块尺寸
-	const pxOffset = ref(0)
-	const fillPercentage = ref(0)
 	let rafId = 0
 	let ticking = false
 	let isTouchDevice = false
@@ -159,11 +155,21 @@
 			// 减去滑块的宽度
 			const trackWidth = containerWidth - handleWidth
 
-			// 滑块位置：从0到trackWidth，滑块中心点对齐该位置
-			pxOffset.value = trackWidth * percentage
+			// 滑块位置：从0到trackWidth
+			const pxOffset = trackWidth * percentage
 
-			// 填充条缩放比例
-			fillPercentage.value = percentage - 0.001 // 减去一个微小值，避免出现1时的边界问题
+			// 填充条缩放比例（减去微小值避免边界问题）
+			const fillScale = percentage - 0.001
+
+			// 直接修改元素的 transform 属性
+			const handleEl = handleRef.value
+			if (handleEl != null) {
+				handleEl.style.setProperty('transform', `translateX(${pxOffset}px)`)
+			}
+			const fillEl = fillRef.value
+			if (fillEl != null) {
+				fillEl.style.setProperty('transform', `scaleX(${fillScale})`)
+			}
 		}
 
 		// 4. 触发回调
