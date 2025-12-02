@@ -11,7 +11,7 @@
       <!-- 滑块 -->
       <view ref="handleRef" class="slider-handle" tabIndex="0" role="slider" android-layer-type="hardware"
         :aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"
-        :style="{ 'width': `${clampedBlockSize}px`, 'height': `${clampedBlockSize}px`, 'border-radius': `${clampedBlockSize / 2}px`, 'background-color': foreColor || '#ffffff' }"></view>
+        :style="{ 'width': `${clampedBlockSize}px`, 'height': `${clampedBlockSize}px`, 'background-color': foreColor }"></view>
     </view>
 
     <!-- 显示当前值 -->
@@ -78,7 +78,7 @@
     activeBackgroundColor: '#007aff',
     backgroundColor: '#e9e9e9',
     blockSize: 28,
-    foreColor: ''
+    foreColor: '#ffffff'
   })
 
   // Refs
@@ -602,6 +602,7 @@
 
   .slider-handle {
     align-self: flex-start;
+		border-radius: 14px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     z-index: 2;
     /* #ifdef WEB */
