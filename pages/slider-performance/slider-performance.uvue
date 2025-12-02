@@ -1,13 +1,14 @@
 <template>
   <view class="page">
     <template v-for="index in 100" :key="index">
-      <slider2 class="slider-item" :value="sharedValue" @input="onSharedInput" />
+      <slider2 class="slider-item" :value="sharedValue" @changing="onSharedInput" />
     </template>
   </view>
 </template>
 
 <script setup lang="uts">
   import slider2 from '@/uni_modules/slider/components/slider/slider.uvue'
+  import { _UniSliderChangeEvent } from '@/uni_modules/slider/components/slider/global.uts'
 
   const sharedValue = ref(50)
 
@@ -16,12 +17,12 @@
     return index < 10 ? `0${index}` : index + ''
   }
 
-  function onSharedInput(val : number) {
-    sharedValue.value = val
+  function onSharedInput(val : _UniSliderChangeEvent) {
+    sharedValue.value = val.detail.value
   }
 
-  function onSharedChange(val : number) {
-    console.log('change:', val)
+  function onSharedChange(val : _UniSliderChangeEvent) {
+    console.log('change:', val.detail.value)
   }
 </script>
 
