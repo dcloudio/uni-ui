@@ -3,14 +3,15 @@
     <view ref="containerRef" class="slider-container" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
       @touchend="handleTouchEnd">
       <!-- 背景轨道 -->
-      <view class="slider-track-bg"></view>
+      <view class="slider-track-bg" :style="{ 'background-color': backgroundColor }"></view>
 
       <!-- 填充条(左边线) -->
-      <view ref="fillRef" class="slider-track-fill" android-layer-type="hardware"></view>
+      <view ref="fillRef" class="slider-track-fill" android-layer-type="hardware" :style="{ 'background-color': activeBackgroundColor }"></view>
 
       <!-- 滑块 -->
       <view ref="handleRef" class="slider-handle" tabIndex="0" role="slider" android-layer-type="hardware"
-        :aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"></view>
+        :aria-valuenow="currentValue" :aria-valuemin="min" :aria-valuemax="max"
+        :style="{ 'width': `${clampedBlockSize}px`, 'height': `${clampedBlockSize}px`, 'border-radius': `${clampedBlockSize / 2}px`, 'background-color': foreColor || '#ffffff' }"></view>
     </view>
 
     <!-- 显示当前值 -->
@@ -50,26 +51,34 @@
 
   // Props 类型定义
   type SliderProps = {
+    id : string
+    name : string
     min : number
     max : number
     step : number
     value : number
     disabled : boolean
     showValue : boolean
-    name : string
-    id : string
+    activeBackgroundColor : string
+    backgroundColor : string
+    blockSize : number
+    foreColor : string
   }
 
   // Props 定义
   const props = withDefaults(defineProps<SliderProps>(), {
+    id: '',
+    name: '',
     min: 0,
     max: 100,
     step: 1,
     value: 0,
     disabled: false,
     showValue: false,
-    name: '',
-    id: ''
+    activeBackgroundColor: '#007aff',
+    backgroundColor: '#e9e9e9',
+    blockSize: 28,
+    foreColor: ''
   })
 
   // Refs
@@ -89,6 +98,11 @@
   let cachedDecimalPlaces = -1 // 缓存 step 小数位数，-1表示未缓存
   let cachedStep = props.step // 缓存 step 值，便于检测变化
   const snapValues = ref<number[]>([]) // 预计算的吸附值表
+
+  // 计算限制后的滑块大小（12-28）
+  const clampedBlockSize = computed(() : number => {
+    return Math.max(12, Math.min(28, props.blockSize))
+  })
 
   function preventDefaultEvent(e : UniTouchEvent) {
     if (e.cancelable) {
@@ -184,7 +198,7 @@
       const dims = trackDimensions.value
       const handleDims = handleDimensions.value
       const containerWidth = (dims != null ? dims['width'] : containerEl.offsetWidth) as number
-      const handleWidth = (handleDims != null ? handleDims['width'] : handleRef.value!.offsetWidth) as number
+      const handleWidth = (handleDims != null ? handleDims['width'] : clampedBlockSize.value) as number
 
       // 减去滑块的宽度
       const trackWidth = containerWidth - handleWidth
@@ -569,7 +583,6 @@
   .slider-track-bg {
     width: 100%;
     height: 2px;
-    background-color: #e5e5e5;
     position: absolute;
     border-radius: 2px;
     z-index: 0;
@@ -578,7 +591,6 @@
   .slider-track-fill {
     width: 100%;
     height: 2px;
-    background-color: #007aff;
     border-radius: 2px;
     transform-origin: left center;
     position: absolute;
@@ -589,11 +601,7 @@
   }
 
   .slider-handle {
-    width: 28px;
-    height: 28px;
     align-self: flex-start;
-    background-color: #ffffff;
-    border-radius: 14px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     z-index: 2;
     /* #ifdef WEB */
