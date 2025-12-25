@@ -186,14 +186,14 @@
 			},
 			dir: {
 				type: String,
-				default: '/'
+				default: ''
 			}
 		},
 		data() {
 			return {
 				files: [],
 				localValue: [],
-				dirPath: '/'
+				dirPath: ''
 			}
 		},
 		watch: {
