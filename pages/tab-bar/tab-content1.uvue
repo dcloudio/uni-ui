@@ -1,14 +1,23 @@
 <template>
+	<!-- #ifdef APP -->
+	<scroll-view class="content-page">
+	<!-- #endif -->
+	<!-- #ifdef WEB -->
 	<view class="content-page">
+	<!-- #endif -->
 		<text class="page-title">首页</text>
 		<text class="page-text">这是首页的内容</text>
 		<text class="page-text">当前索引: {{ activeIndex }}</text>
+		<text>1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2</text>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifdef WEB -->
 	</view>
+	<!-- #endif -->
 </template>
 
 <script setup lang="uts">
-import { inject, ref } from 'vue'
-import { Ref } from 'vue'
 
 // 从父组件注入当前激活的索引
 const activeIndex = inject<Ref<number>>('tabBarCurrentIndex', ref(0))

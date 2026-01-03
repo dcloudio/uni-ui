@@ -2,10 +2,20 @@
 	"pages": [
 		{
 			"path": "pages/index/index",
+			"style": {"navigationBarTitleText": "uni-ui x"}
+		},
+		{
+			"path": "pages/nav-bar/nav-bar",
+			"style": {"navigationStyle": "custom"}
+		}
+		/*
+		{
+			"path": "pages/calendar/calendar",
 			"style": {
-				"navigationBarTitleText": "uni-ui x"
+				"navigationBarTitleText": ""
 			}
 		},
+		
 		{
 			"path": "pages/swiper-view/swiper-view",
 			"style": {
@@ -29,14 +39,14 @@
 			"style": {
 				"navigationBarTitleText": "tab-bar"
 			}
-		},
+		}, */
 		/* {
 			"path": "pages/pop-view/pop-view",
 			"style": {
 				"navigationBarTitleText": "pop-view"
 			}
 		}, */
-		{
+		/* {
 			"path": "pages/page-container/page-container",
 			"style": {
 				"navigationBarTitleText": "page-container",
@@ -62,17 +72,11 @@
 			}
 		},
 		{
-			"path": "pages/slider-performance/slider-performance",
-			"style": {
-				"navigationBarTitleText": "slider性能测试"
-			}
-		},
-		{
 			"path": "pages/transform-test/transform-test",
 			"style": {
 				"navigationBarTitleText": "Transform性能测试"
 			}
-		}
+		} */
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
