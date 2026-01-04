@@ -11,6 +11,7 @@
 	<navigator url="/pages/slider-performance/slider-performance">slider性能测试</navigator>
 	<navigator url="/pages/transform-test/transform-test">Transform性能测试</navigator>
 	<navigator url="/pages/nav-bar/nav-bar">nav-bar</navigator>
+	<navigator url="/pages/refresh-box/refresh-box">refresh-box</navigator>
 </template>
 
 <script setup>

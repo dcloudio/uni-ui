@@ -1,14 +1,18 @@
 {
 	"pages": [
-		{
+		/* {
 			"path": "pages/index/index",
 			"style": {"navigationBarTitleText": "uni-ui x"}
-		},
+		}, */
+		{
+			"path": "pages/refresh-box/refresh-box",
+			"style": {"navigationStyle": "下拉刷新组件"}
+		}
+		/*
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		}
-		/*
+		},
 		{
 			"path": "pages/calendar/calendar",
 			"style": {
@@ -81,7 +85,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-ui x",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#00aaff",
 		"backgroundColor": "#F8F8F8"
 	}
 }

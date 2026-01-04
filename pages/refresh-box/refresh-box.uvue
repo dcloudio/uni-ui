@@ -1,0 +1,158 @@
+<template>
+  <view style="flex: 1;">
+    <scroll-view
+      style="flex: 1;"
+      :refresher-enabled="true"
+      :refresher-triggered="refreshing"
+      refresher-default-style="none"
+      :refresher-threshold="45"
+      refresher-max-drag-distance="200px"
+      @refresherpulling="onRefresherpulling"
+      @refresherrefresh="onRefresherrefresh"
+      @refresherrestore="onRefresherrestore"
+      @refresherabort="onRefresherabort"
+    > <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+      <!-- 列表内容 -->
+      <view v-for="i in listCount" :key="i" class="content-item">
+        <text class="text">item-{{ i }}</text>
+      </view>
+
+      <!-- refresher 插槽使用 uni-refresh-box 组件 -->
+      <uni-refresh-box
+        slot="refresher"
+        :pulling-distance="pullingDistance"
+        :refreshing="refreshing"
+      ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+    </scroll-view>
+		<text style="margin: 5px;">竖排暗黑自定义文字的下拉设置</text>
+		<scroll-view
+		  style="flex: 1;background-color: black;"
+		  :refresher-enabled="true"
+		  :refresher-triggered="refreshing"
+		  refresher-default-style="none"
+		  :refresher-threshold="45"
+		  refresher-max-drag-distance="200px"
+		  @refresherpulling="onRefresherpulling"
+		  @refresherrefresh="onRefresherrefresh"
+		  @refresherrestore="onRefresherrestore"
+		  @refresherabort="onRefresherabort"
+		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		  <!-- 列表内容 -->
+		  <view v-for="i in listCount" :key="i" class="content-item">
+		    <text class="text">item-{{ i }}</text>
+		  </view>
+		
+		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
+		  <uni-refresh-box
+		    slot="refresher"
+		    :pulling-distance="pullingDistance"
+		    :refreshing="refreshing"
+				loading-class="loading-class"
+				text-class="text-class"
+				style="flex-direction: column;height: 40px;"
+				pulling-text="继续下拉可刷新"
+				loosing-text="释放后会刷新"
+				loading-text="奋力加载中..."
+			></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+		</scroll-view>
+		<text style="margin: 5px;">slot自定义下拉图标</text>
+		<scroll-view
+		  style="flex: 1;"
+		  :refresher-enabled="true"
+		  :refresher-triggered="refreshing"
+		  refresher-default-style="none"
+		  :refresher-threshold="45"
+		  refresher-max-drag-distance="200px"
+		  @refresherpulling="onRefresherpulling"
+		  @refresherrefresh="onRefresherrefresh"
+		  @refresherrestore="onRefresherrestore"
+		  @refresherabort="onRefresherabort"
+		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		  <!-- 列表内容 -->
+		  <view v-for="i in listCount" :key="i" class="content-item">
+		    <text class="text">item-{{ i }}</text>
+		  </view>
+		
+		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
+		  <uni-refresh-box
+		    slot="refresher"
+		    :pulling-distance="pullingDistance"
+		    :refreshing="refreshing"
+		  >
+				<template #loading="{ state }">
+				  <image
+				    v-if="state === 2"
+				    src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif"
+				    style="width: 20px; height: 20px;"
+				  /> <!-- 刷新中的动图-->
+				  <image
+				    v-else
+				    src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif"
+				    style="width: 20px; height: 20px;"
+				  /> <!-- 非刷新中的图，可以和刷新中的图是一张，也可以分开-->
+				</template>
+				<!-- <image src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif" style="width:20px;height:20px;"></image> -->
+			</uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+		</scroll-view>
+  </view>
+</template>
+
+<script setup lang="uts">
+// 列表数据
+const listCount = ref(3)
+
+// 刷新状态
+const refreshing = ref(false)
+
+// 下拉距离
+const pullingDistance = ref(0)
+
+// 下拉过程
+function onRefresherpulling(e: RefresherEvent) {
+  pullingDistance.value = e.detail.dy
+}
+
+// 触发刷新
+function onRefresherrefresh() {
+  refreshing.value = true
+  console.log('触发刷新')
+
+  // 模拟异步请求
+  setTimeout(() => {
+    listCount.value += 5
+    refreshing.value = false
+    console.log('刷新完成')
+  }, 1500)
+}
+
+// 刷新复位
+function onRefresherrestore() {
+  pullingDistance.value = 0
+}
+
+// 刷新中止
+function onRefresherabort() {
+  pullingDistance.value = 0
+}
+</script>
+
+<style>
+.content-item {
+  margin: 5px 10px;
+}
+.text {
+  color: #666;
+  font-size: 14px;
+}
+
+.loading-class{
+	/* TODO 全平台都不生效，无法覆盖子组件内部样式。是不是因为loading组件使用了useComputeStyle？*/
+	border-color:white; 
+	width: 20px;
+	height: 20px;
+}
+.text-class{
+	color: white;
+	margin-top: 5px;
+}
+</style>
