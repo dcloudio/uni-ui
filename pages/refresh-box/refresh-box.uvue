@@ -49,7 +49,7 @@
 		    :refreshing="refreshing"
 				loading-class="loading-class"
 				text-class="text-class"
-				style="flex-direction: column;height: 40px;"
+				style="flex-direction: column;height: 42px;"
 				pulling-text="继续下拉可刷新"
 				loosing-text="释放后会刷新"
 				loading-text="奋力加载中..."
@@ -81,7 +81,7 @@
 		  >
 				<template #loading="{ state }">
 				  <image
-				    v-if="state === 2"
+				    v-if="state == 2"
 				    src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif"
 				    style="width: 20px; height: 20px;"
 				  /> <!-- 刷新中的动图-->
@@ -146,7 +146,7 @@ function onRefresherabort() {
 }
 
 .loading-class{
-	/* TODO 全平台都不生效，无法覆盖子组件内部样式。是不是因为loading组件使用了useComputeStyle？*/
+	/* TODO 除鸿蒙，其他平台都不生效，无法覆盖子组件内部样式*/
 	border-color:white; 
 	width: 20px;
 	height: 20px;

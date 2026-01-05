@@ -7,12 +7,12 @@
 		{
 			"path": "pages/refresh-box/refresh-box",
 			"style": {"navigationBarTitleText": "下拉刷新组件"}
-		}
-		/*
+		},
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		},
+		}
+		/*,
 		{
 			"path": "pages/calendar/calendar",
 			"style": {

@@ -52,7 +52,7 @@
 				<text class="txt-button" @click="clickButton">+</text>
 			</template>
 			<template #mid>
-				<text @click="clickButton">左中右都是插槽，都能点</text>
+				<input placeholder="左中右都是插槽，中间是input" style="border: #ccc 0.5px solid;"/>
 			</template>
 			<template #right>
 				<text class="txt-button" @click="clickButton">⋯</text>
