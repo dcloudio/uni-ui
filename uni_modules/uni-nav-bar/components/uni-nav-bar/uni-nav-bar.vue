@@ -1,10 +1,10 @@
 <template>
-  <view style="flex-direction: row;padding-top: var(--status-bar-height);box-sizing: content-box;align-items: center;position: relative;" flatten>
+  <view style="flex-direction: row;padding-top: var(--status-bar-height);box-sizing: content-box;align-items: center;position: relative;">
     <view style="height: 44px;align-items: center;justify-content: center;
     <!-- #ifdef WEB -->
     cursor: pointer
     <!-- #endif -->
-    " class="left-class" :class="leftClass" flatten>
+    " class="uni-left-class-buildin" :class="leftClass">
 			<!-- 旋转边框的view实现返回箭头。因需要扩大点击区域，外面多套了一层 -->
 			<view v-if="!hideDefaultBack && slots['left']==null" style="width: 44px;height: 44px;justify-content: center;align-items: center;" @click="back">
 				<view style="width: 12px;height: 12px;transform: rotate(45deg);
@@ -13,11 +13,11 @@
       <slot name="left" v-else></slot>
     </view>
 
-    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;" class="mid-class" :class="midClass" flatten>
+    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;" class="uni-mid-class-buildin" :class="midClass" flatten>
       <text v-if="slots['mid']==null" :style="{ color: foreColor }" flatten> {{ title }} </text>
 			<slot name="mid" v-else></slot>
     </view>
-    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;right: 0;" class="right-class" :class="rightClass" flatten>
+    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;right: 0;" class="uni-right-class-buildin" :class="rightClass" flatten>
       <slot name="right"></slot>
     </view>
 
@@ -69,16 +69,16 @@
 </script>
 
 <style>
-	.left-class {
+	.uni-left-class-buildin {
     width: 44px;
 		margin-left: 6px;
 	}
-  .mid-class {
+  .uni-mid-class-buildin {
     justify-content: center;
 		left: 52px; /* padding 6 + 44 = 52*/
     right: 52px;
   }
-  .right-class {
+  .uni-right-class-buildin {
     width: 44px;
     margin-right: 6px;
   }

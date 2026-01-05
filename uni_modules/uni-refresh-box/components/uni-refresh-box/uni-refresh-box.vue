@@ -1,10 +1,10 @@
 <template>
-  <view slot="refresher" class="refresh-box"> <!-- TODO 鸿蒙需要在这个view上补属性slot="refresher"，不认外层传入-->
+  <view slot="refresher" class="uni-refresh-box-buildin"> <!-- TODO 鸿蒙需要在这个view上补属性slot="refresher"，不认外层传入-->
     <slot name="loading" :state="currentState">
-      <loading ref="loadingRef" :paused="currentState != 2" class="loading-class-buildin" :class="loadingClass"></loading>
+      <loading ref="loadingRef" :paused="currentState != 2" class="uni-loading-class-buildin" :class="loadingClass"></loading>
 			<!-- TODO Android的loading第1次设置paused为false不生效，第2次才有用 -->
     </slot>
-    <text class="text-class-buildin" :class="textClass">{{ tipText }}</text>
+    <text class="uni-text-class-buildin" :class="textClass">{{ tipText }}</text>
   </view>
 </template>
 
@@ -127,7 +127,7 @@ defineExpose({
 </script>
 
 <style>
-.refresh-box {
+.uni-refresh-box-buildin {
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -135,13 +135,13 @@ defineExpose({
   height: 30px;
 }
 
-.loading-class-buildin {
+.uni-loading-class-buildin {
   width: 14px;
   height: 14px;
   border-color: #888;
 }
 
-.text-class-buildin {
+.uni-text-class-buildin {
   color: #888;
   font-size: 14px;
   margin-left: 4px;
