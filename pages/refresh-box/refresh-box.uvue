@@ -3,53 +3,53 @@
     <scroll-view
       style="flex: 1;"
       :refresher-enabled="true"
-      :refresher-triggered="refreshing"
+      :refresher-triggered="refreshing1"
       refresher-default-style="none"
       :refresher-threshold="45"
       refresher-max-drag-distance="200px"
-      @refresherpulling="onRefresherpulling"
-      @refresherrefresh="onRefresherrefresh"
-      @refresherrestore="onRefresherrestore"
-      @refresherabort="onRefresherabort"
+      @refresherpulling="onRefresherpulling1"
+      @refresherrefresh="onRefresherrefresh1"
+      @refresherrestore="onRefresherrestore1"
+      @refresherabort="onRefresherabort1"
     > <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
       <!-- 列表内容 -->
-      <view v-for="i in listCount" :key="i" class="content-item">
+      <view v-for="i in listCount1" :key="i" class="content-item">
         <text class="text">item-{{ i }}</text>
       </view>
 
       <!-- refresher 插槽使用 uni-refresh-box 组件 -->
       <uni-refresh-box
         slot="refresher"
-        :pulling-distance="pullingDistance"
-        :refreshing="refreshing"
+        :pulling-distance="pullingDistance1"
+        :refreshing="refreshing1"
       ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
     </scroll-view>
 		<text style="margin: 5px;">竖排暗黑自定义文字的下拉设置</text>
 		<scroll-view
 		  style="flex: 1;background-color: black;"
 		  :refresher-enabled="true"
-		  :refresher-triggered="refreshing"
+		  :refresher-triggered="refreshing2"
 		  refresher-default-style="none"
 		  :refresher-threshold="45"
 		  refresher-max-drag-distance="200px"
-		  @refresherpulling="onRefresherpulling"
-		  @refresherrefresh="onRefresherrefresh"
-		  @refresherrestore="onRefresherrestore"
-		  @refresherabort="onRefresherabort"
+		  @refresherpulling="onRefresherpulling2"
+		  @refresherrefresh="onRefresherrefresh2"
+		  @refresherrestore="onRefresherrestore2"
+		  @refresherabort="onRefresherabort2"
 		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
 		  <!-- 列表内容 -->
-		  <view v-for="i in listCount" :key="i" class="content-item">
+		  <view v-for="i in listCount2" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
 		  </view>
-		
+
 		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
 		  <uni-refresh-box
 		    slot="refresher"
-		    :pulling-distance="pullingDistance"
-		    :refreshing="refreshing"
+		    :pulling-distance="pullingDistance2"
+		    :refreshing="refreshing2"
 				loading-class="loading-class"
 				text-class="text-class"
-				style="flex-direction: column;height: 42px;"
+				style="flex-direction: column;height: 46px;padding-top: 6px;"
 				pulling-text="继续下拉可刷新"
 				loosing-text="释放后会刷新"
 				loading-text="奋力加载中..."
@@ -59,25 +59,25 @@
 		<scroll-view
 		  style="flex: 1;"
 		  :refresher-enabled="true"
-		  :refresher-triggered="refreshing"
+		  :refresher-triggered="refreshing3"
 		  refresher-default-style="none"
 		  :refresher-threshold="45"
 		  refresher-max-drag-distance="200px"
-		  @refresherpulling="onRefresherpulling"
-		  @refresherrefresh="onRefresherrefresh"
-		  @refresherrestore="onRefresherrestore"
-		  @refresherabort="onRefresherabort"
+		  @refresherpulling="onRefresherpulling3"
+		  @refresherrefresh="onRefresherrefresh3"
+		  @refresherrestore="onRefresherrestore3"
+		  @refresherabort="onRefresherabort3"
 		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
 		  <!-- 列表内容 -->
-		  <view v-for="i in listCount" :key="i" class="content-item">
+		  <view v-for="i in listCount3" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
 		  </view>
-		
+
 		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
 		  <uni-refresh-box
 		    slot="refresher"
-		    :pulling-distance="pullingDistance"
-		    :refreshing="refreshing"
+		    :pulling-distance="pullingDistance3"
+		    :refreshing="refreshing3"
 		  >
 				<template #loading="{ state }">
 				  <image
@@ -94,45 +94,144 @@
 				<!-- <image src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif" style="width:20px;height:20px;"></image> -->
 			</uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
 		</scroll-view>
+		<text style="margin: 5px;">无文字，纯loading</text>
+		<scroll-view
+		  style="flex: 1;"
+		  :refresher-enabled="true"
+		  :refresher-triggered="refreshing4"
+		  refresher-default-style="none"
+		  :refresher-threshold="45"
+		  refresher-max-drag-distance="200px"
+		  @refresherpulling="onRefresherpulling4"
+		  @refresherrefresh="onRefresherrefresh4"
+		  @refresherrestore="onRefresherrestore4"
+		  @refresherabort="onRefresherabort4"
+		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		  <!-- 列表内容 -->
+		  <view v-for="i in listCount4" :key="i" class="content-item">
+		    <text class="text">item-{{ i }}</text>
+		  </view>
+
+		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
+		  <uni-refresh-box
+		    slot="refresher"
+		    :pulling-distance="pullingDistance4"
+		    :refreshing="refreshing4"
+				pulling-text=""
+				loosing-text=""
+				loading-text=""
+		  ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+		</scroll-view>
   </view>
 </template>
 
 <script setup lang="uts">
-// 列表数据
-const listCount = ref(3)
+// 第1个 scroll-view 的状态
+const listCount1 = ref(3)
+const refreshing1 = ref(false)
+const pullingDistance1 = ref(0)
 
-// 刷新状态
-const refreshing = ref(false)
-
-// 下拉距离
-const pullingDistance = ref(0)
-
-// 下拉过程
-function onRefresherpulling(e: RefresherEvent) {
-  pullingDistance.value = e.detail.dy
+function onRefresherpulling1(e: RefresherEvent) {
+  pullingDistance1.value = e.detail.dy
 }
 
-// 触发刷新
-function onRefresherrefresh() {
-  refreshing.value = true
-  console.log('触发刷新')
-
-  // 模拟异步请求
+function onRefresherrefresh1() {
+  refreshing1.value = true
+  console.log('列表1 触发刷新')
   setTimeout(() => {
-    listCount.value += 5
-    refreshing.value = false
-    console.log('刷新完成')
+    listCount1.value += 5
+    refreshing1.value = false
+    console.log('列表1 刷新完成')
   }, 1500)
 }
 
-// 刷新复位
-function onRefresherrestore() {
-  pullingDistance.value = 0
+function onRefresherrestore1() {
+  pullingDistance1.value = 0
 }
 
-// 刷新中止
-function onRefresherabort() {
-  pullingDistance.value = 0
+function onRefresherabort1() {
+  pullingDistance1.value = 0
+}
+
+// 第2个 scroll-view 的状态
+const listCount2 = ref(3)
+const refreshing2 = ref(false)
+const pullingDistance2 = ref(0)
+
+function onRefresherpulling2(e: RefresherEvent) {
+  pullingDistance2.value = e.detail.dy
+}
+
+function onRefresherrefresh2() {
+  refreshing2.value = true
+  console.log('列表2 触发刷新')
+  setTimeout(() => {
+    listCount2.value += 5
+    refreshing2.value = false
+    console.log('列表2 刷新完成')
+  }, 1500)
+}
+
+function onRefresherrestore2() {
+  pullingDistance2.value = 0
+}
+
+function onRefresherabort2() {
+  pullingDistance2.value = 0
+}
+
+// 第3个 scroll-view 的状态
+const listCount3 = ref(3)
+const refreshing3 = ref(false)
+const pullingDistance3 = ref(0)
+
+function onRefresherpulling3(e: RefresherEvent) {
+  pullingDistance3.value = e.detail.dy
+}
+
+function onRefresherrefresh3() {
+  refreshing3.value = true
+  console.log('列表3 触发刷新')
+  setTimeout(() => {
+    listCount3.value += 5
+    refreshing3.value = false
+    console.log('列表3 刷新完成')
+  }, 1500)
+}
+
+function onRefresherrestore3() {
+  pullingDistance3.value = 0
+}
+
+function onRefresherabort3() {
+  pullingDistance3.value = 0
+}
+
+// 第4个 scroll-view 的状态
+const listCount4 = ref(3)
+const refreshing4 = ref(false)
+const pullingDistance4 = ref(0)
+
+function onRefresherpulling4(e: RefresherEvent) {
+  pullingDistance4.value = e.detail.dy
+}
+
+function onRefresherrefresh4() {
+  refreshing4.value = true
+  console.log('列表4 触发刷新')
+  setTimeout(() => {
+    listCount4.value += 5
+    refreshing4.value = false
+    console.log('列表4 刷新完成')
+  }, 1500)
+}
+
+function onRefresherrestore4() {
+  pullingDistance4.value = 0
+}
+
+function onRefresherabort4() {
+  pullingDistance4.value = 0
 }
 </script>
 
@@ -146,8 +245,7 @@ function onRefresherabort() {
 }
 
 .loading-class{
-	/* TODO 除鸿蒙，其他平台都不生效，无法覆盖子组件内部样式*/
-	border-color:white; 
+	border-color:white;
 	width: 20px;
 	height: 20px;
 }

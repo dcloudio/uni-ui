@@ -1,8 +1,7 @@
 <template>
   <view slot="refresher" class="uni-refresh-box-buildin"> <!-- TODO 鸿蒙需要在这个view上补属性slot="refresher"，不认外层传入-->
     <slot name="loading" :state="currentState">
-      <loading ref="loadingRef" :paused="currentState != 2" class="uni-loading-class-buildin" :class="loadingClass"></loading>
-			<!-- TODO Android的loading第1次设置paused为false不生效，第2次才有用 -->
+      <loading ref="loadingRef" :paused="currentState != 2" class="uni-loading-class-buildin" :class="loadingClass" bold></loading>
     </slot>
     <text class="uni-text-class-buildin" :class="textClass">{{ tipText }}</text>
   </view>
@@ -65,8 +64,10 @@ const props = defineProps({
 // Data
 const loadingRef = ref<UniElement | null>(null)
 const resetting = ref(false)
+// 标记是否正在归位中（从刷新结束到完全收起）
+const restoring = ref(false)
 
-// 状态：0-下拉中 1-松手可刷新 2-刷新中 3-刷新完成
+// 状态：0-下拉中 1-松手可刷新 2-刷新中 3-刷新完成 4-归位中（不显示文字）
 const currentState = computed((): number => {
   if (resetting.value) {
     return 3
@@ -74,10 +75,13 @@ const currentState = computed((): number => {
   if (props.refreshing) {
     return 2
   }
+  // 归位中不显示文字
+  if (restoring.value) {
+    return 4
+  }
   if (props.pullingDistance > props.threshold) {
     return 1
   }
-	// console.log(0)
   return 0
 })
 
@@ -92,6 +96,8 @@ const tipText = computed((): string => {
       return props.loadingText
     case 3:
       return props.completeText
+    case 4:
+      return '' // 归位中不显示文字
     default:
       return props.pullingText
   }
@@ -102,16 +108,27 @@ watch((): boolean => props.refreshing, (newVal: boolean, oldVal: boolean) => {
   if (!newVal && oldVal) {
     // 外部结束刷新，显示完成状态
     resetting.value = true
+    restoring.value = true
     setTimeout(() => {
       resetting.value = false
     }, 300)
   }
 })
 
-// 更新 loading 旋转角度
-watch((): number => props.pullingDistance, (distance: number) => {
+// 监听 pullingDistance 变化
+watch((): number => props.pullingDistance, (distance: number, oldDistance: number) => {
+  // 归零时结束归位状态
+  if (distance == 0 && restoring.value) {
+    restoring.value = false
+  }
+
+  // 开始新的下拉时（从0变为大于0），重置归位状态
+  if (distance > 0 && oldDistance == 0 && !props.refreshing) {
+    restoring.value = false
+  }
+
+  // 更新 loading 旋转角度
   const el = loadingRef.value
-	// console.log(el?.style);
   if (el != null && !props.refreshing) {
     const maxDistance = 200
     const maxRotation = 540

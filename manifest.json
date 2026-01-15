@@ -1,11 +1,12 @@
 {
-	"name": "aicomponent",
+	"name": "uni-ui-x",
 	"appid": "__UNI__CF77140",
 	"description": "",
 	"versionName": "1.0.0",
 	"versionCode": "100",
 	"uni-app-x": {
-		"vapor": true
+		"vapor": true,
+		"styleIsolationVersion": "2"
 	},
 	/* 快应用特有相关 */
 	"quickapp": {},
