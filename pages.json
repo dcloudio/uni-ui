@@ -11,6 +11,12 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
+		},
+		{
+			"path": "pages/list-perf-test/list-perf-test",
+			"style": {
+				"navigationBarTitleText": ""
+			}
 		}
 		/*,
 		{

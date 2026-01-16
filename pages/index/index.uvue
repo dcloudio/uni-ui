@@ -7,6 +7,7 @@
 	<navigator class="padding-bottom" url="/pages/movable-view/movable-view">movable-view</navigator>
 	<navigator class="padding-bottom" url="/pages/nav-bar/nav-bar">nav-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box">refresh-box</navigator>
+	<navigator class="padding-bottom" url="/pages/list-perf-test/list-perf-test">死亡长列表</navigator>
 </template>
 
 <script setup>

@@ -1,0 +1,656 @@
+<template>
+	<view class="page">
+		<fps />
+		<view class="header">
+			<text class="header-title">死亡列表性能测试</text>
+			<text class="header-info">{{ listData.length }}条 | 40+元素 | 10+层嵌套 | 圆角阴影 | 无拍平</text>
+		</view>
+		<list-view class="list-wrap" :show-scrollbar="true">
+			<list-item v-for="(item, index) in listData" :key="item.id" :type="item.type">
+
+				<!-- ========== Type 1: 单图配文 ========== -->
+				<view v-if="item.type == 1" class="item item-type1">
+					<view class="item-header b1">
+						<text class="item-title" @click.stop="onTitleClick(item.id + 1)">#{{ item.id + 1 }} Type1 单图配文</text>
+						<view class="tag-row">
+							<text class="tag-sm">置顶</text>
+							<text class="tag-sm hot">热搜</text>
+						</view>
+					</view>
+					<view class="type1-body b2">
+						<view class="type1-left b3">
+							<view class="img-wrap b4">
+								<image class="type1-img" :src="item.image" mode="aspectFill" @click.stop="onImageClick([item.image], 0)"></image>
+							</view>
+							<view class="img-tag b5">
+								<text class="tag-text">图{{ item.id + 1 }}</text>
+							</view>
+						</view>
+						<view class="type1-right b3">
+							<view class="title-area b4">
+								<text class="content-title">{{ item.title }}</text>
+							</view>
+							<view class="desc-area b4">
+								<text class="content-desc">{{ item.desc }}</text>
+							</view>
+							<view class="meta-row b4">
+								<uni-rate :value="item.rating"></uni-rate>
+								<text class="rate-text">{{ item.rating }}分</text>
+								<text class="split-line">|</text>
+								<text class="author-text">{{ item.author }}</text>
+							</view>
+							<!-- 利用嵌套层做横排Tags，压缩高度 -->
+							<view class="filler-area b4">
+								<view class="nest-row b5">
+									<text class="tag-pill">标签A</text>
+									<view class="nest-row b6">
+										<text class="tag-pill">标签B</text>
+										<view class="nest-row b7">
+											<text class="tag-pill">标签C</text>
+											<view class="nest-row b8">
+												<text class="tag-pill">L8</text>
+												<view class="nest-row b9">
+													<text class="tag-pill">L9</text>
+													<view class="nest-row b10">
+														<time-format :timestamp="item.timestamp" format="relative"></time-format>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<!-- ========== Type 2: 三图配文 ========== -->
+				<view v-else-if="item.type == 2" class="item item-type2">
+					<view class="item-header b1">
+						<text class="item-title" @click.stop="onTitleClick(item.id + 1)">#{{ item.id + 1 }} Type2 三图配文</text>
+						<view class="tag-row">
+							<text class="header-tag">多图</text>
+							<text class="tag-sm">推荐</text>
+						</view>
+					</view>
+					<view class="type2-body b2">
+						<view class="type2-text b3">
+							<text class="content-title">{{ item.title }}</text>
+						</view>
+						<view class="type2-images b3">
+							<view class="type2-img-box b4" @click.stop="onImageClick(item.images, 0)">
+								<image class="type2-img" :src="item.images[0]" mode="aspectFill"></image>
+								<text class="img-label">1/3</text>
+							</view>
+							<view class="type2-img-box b4" @click.stop="onImageClick(item.images, 1)">
+								<image class="type2-img" :src="item.images[1]" mode="aspectFill"></image>
+								<text class="img-label">2/3</text>
+							</view>
+							<view class="type2-img-box b4" @click.stop="onImageClick(item.images, 2)">
+								<image class="type2-img" :src="item.images[2]" mode="aspectFill"></image>
+								<text class="img-label">3/3</text>
+							</view>
+						</view>
+						<view class="meta-row b3">
+							<text class="author-text">{{ item.author }}</text>
+							<text class="view-count">1024阅读</text>
+							<!-- 嵌套开始 -->
+							<view class="nest-row b4">
+								<text class="tag-pill">摄影</text>
+								<view class="nest-row b5">
+									<text class="tag-pill">生活</text>
+									<view class="nest-row b6">
+										<text class="tag-pill">L6</text>
+										<view class="nest-row b7">
+											<text class="tag-pill">L7</text>
+											<view class="nest-row b8">
+												<text class="tag-pill">L8</text>
+												<view class="nest-row b9">
+													<view class="nest-row b10">
+														<time-format :timestamp="item.timestamp" format="relative"></time-format>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<!-- ========== Type 3: 九宫格 ========== -->
+				<view v-else-if="item.type == 3" class="item item-type3">
+					<view class="item-header b1">
+						<text class="item-title" @click.stop="onTitleClick(item.id + 1)">#{{ item.id + 1 }} Type3 九宫格</text>
+						<text class="header-tag">相册</text>
+					</view>
+					<view class="type3-body b2">
+						<view class="type3-desc b3">
+							<text class="content-desc">{{ item.desc }}</text>
+						</view>
+						<view class="type3-grid b3">
+							<view class="grid-row b4">
+								<image class="grid-img" :src="item.gridImages[0]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 0)"></image>
+								<image class="grid-img" :src="item.gridImages[1]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 1)"></image>
+								<image class="grid-img" :src="item.gridImages[2]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 2)"></image>
+							</view>
+							<view class="grid-row b4">
+								<image class="grid-img" :src="item.gridImages[3]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 3)"></image>
+								<image class="grid-img" :src="item.gridImages[4]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 4)"></image>
+								<image class="grid-img" :src="item.gridImages[5]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 5)"></image>
+							</view>
+							<view class="grid-row b4">
+								<image class="grid-img" :src="item.gridImages[6]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 6)"></image>
+								<image class="grid-img" :src="item.gridImages[7]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 7)"></image>
+								<image class="grid-img" :src="item.gridImages[8]" mode="aspectFill" @click.stop="onImageClick(item.gridImages, 8)"></image>
+							</view>
+						</view>
+						<!-- 利用嵌套层做底部工具栏，横排 -->
+						<view class="nest-row b3">
+							<text class="tag-pill">分享</text>
+							<view class="nest-row b4">
+								<text class="tag-pill">收藏</text>
+								<view class="nest-row b5">
+									<text class="tag-pill">点赞</text>
+									<view class="nest-row b6">
+										<text class="tag-pill">L6</text>
+										<view class="nest-row b7">
+											<text class="tag-pill">L7</text>
+											<view class="nest-row b8">
+												<text class="author-text">{{ item.author }}</text>
+												<view class="nest-row b9">
+													<view class="nest-row b10">
+														<time-format :timestamp="item.timestamp" format="date"></time-format>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<!-- ========== Type 4: 卡片条 ========== -->
+				<view v-else-if="item.type == 4" class="item item-type4">
+					<view class="type4-card">
+						<view class="card-body b1">
+							<!-- 深层嵌套改为横向Flex，不再是单纯的包裹 -->
+							<view class="card-row b2">
+								<view class="card-icon-box">
+									<text class="card-icon">{{ item.type }}</text>
+								</view>
+								<view class="card-row b3">
+									<view class="card-text-box">
+										<text class="card-title" @click.stop="onTitleClick(item.id + 1)">#{{ item.id + 1 }} Type4</text>
+										<text class="card-sub">点击查看详情</text>
+									</view>
+									<view class="card-row b4">
+										<text class="tag-sm">活动</text>
+										<view class="card-row b5">
+											<text class="tag-sm">优惠</text>
+											<view class="card-row b6">
+												<text class="tag-sm">L6</text>
+												<view class="card-row b7">
+													<text class="tag-sm">L7</text>
+													<view class="card-row b8">
+														<text class="card-info-text">进行中</text>
+														<view class="card-row b9">
+															<view class="card-row b10">
+																<time-format :timestamp="item.timestamp" format="time"></time-format>
+															</view>
+														</view>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<!-- ========== Type 5: 视频 ========== -->
+				<view v-else-if="item.type == 5" class="item item-type5">
+					<view class="item-header b1">
+						<text class="item-title" @click.stop="onTitleClick(item.id + 1)">#{{ item.id + 1 }} Type5 视频</text>
+						<view class="tag-row">
+							<text class="header-tag">HD</text>
+							<text class="tag-sm">1080P</text>
+						</view>
+					</view>
+					<view class="type5-body b2">
+						<view class="type5-video-area b3">
+							<video
+								class="type5-video"
+								:src="item.videoUrl"
+								<!--
+								:poster="item.videoPoster"
+								:show-center-play-btn="true"
+								-->
+								:controls="true"
+								object-fit="cover"
+							></video>
+						</view>
+						<view class="info-row b3">
+							<text class="info-text">播放:{{ item.playCount }}</text>
+							<text class="split-line">|</text>
+							<text class="info-text">弹幕:99+</text>
+							<view class="nest-row b4">
+								<text class="tag-pill">娱乐</text>
+								<view class="nest-row b5">
+									<text class="tag-pill">搞笑</text>
+									<view class="nest-row b6">
+										<text class="tag-pill">L6</text>
+										<view class="nest-row b7">
+											<text class="tag-pill">L7</text>
+											<view class="nest-row b8">
+												<text class="tag-pill">L8</text>
+												<view class="nest-row b9">
+													<view class="nest-row b10">
+														<time-format :timestamp="item.timestamp" format="datetime"></time-format>
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</list-item>
+		</list-view>
+	</view>
+</template>
+
+<script setup lang="uts">
+import timeFormat from '@/components/time-format/time-format.uvue'
+import { mockListData, type ListItemData } from './mock-data.uts'
+
+// 使用预生成的数据
+const listData = ref<ListItemData[]>([])
+
+onMounted(() => {
+	// console.log('加载预生成的4000条数据')
+	listData.value = mockListData
+	// console.log('数据加载完成')
+})
+
+function onTitleClick(index: number) {
+	uni.showToast({
+		title: `序号: ${index}`,
+		icon: 'none'
+	})
+}
+
+function onImageClick(urls: string[], current: number) {
+	uni.previewImage({
+		urls: urls,
+		current: current
+	})
+}
+</script>
+
+<style>
+.page {
+	flex: 1;
+	background-color: #e0e0e0;
+}
+
+.header {
+	padding: 10px 15px;
+	background-color: #333;
+}
+
+.header-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.header-info {
+	font-size: 10px;
+	color: #aaa;
+	margin-top: 2px;
+}
+
+.list-wrap {
+	flex: 1;
+}
+
+/* ===== 基础颜色边框 - 可视化嵌套 ===== */
+.b1 { border-width: 1px; border-color: #e74c3c; border-style: solid; padding: 2px; }
+.b2 { border-width: 1px; border-color: #e67e22; border-style: solid; padding: 2px; }
+.b3 { border-width: 1px; border-color: #f1c40f; border-style: solid; padding: 2px; }
+.b4 { border-width: 1px; border-color: #2ecc71; border-style: solid; padding: 2px; }
+.b5 { border-width: 1px; border-color: #1abc9c; border-style: solid; padding: 2px; }
+.b6 { border-width: 1px; border-color: #3498db; border-style: solid; padding: 2px; }
+.b7 { border-width: 1px; border-color: #9b59b6; border-style: solid; padding: 2px; }
+.b8 { border-width: 1px; border-color: #34495e; border-style: solid; padding: 2px; }
+.b9 { border-width: 1px; border-color: #e91e63; border-style: solid; padding: 2px; }
+.b10 { border-width: 1px; border-color: #00bcd4; border-style: solid; padding: 2px; }
+
+/* ===== 核心嵌套容器 - 横排压缩高度 ===== */
+.nest-row {
+	flex-direction: row;
+	align-items: center;
+	flex: 1;
+	margin-left: 2px;
+}
+
+/* ===== 列表项 ===== */
+.item {
+	margin: 4px 6px;
+	padding: 6px;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item-header {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 4px;
+	background-color: #f9f9f9;
+}
+
+.item-title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+}
+
+.tag-row {
+	flex-direction: row;
+	align-items: center;
+}
+
+.header-tag {
+	font-size: 9px;
+	color: #fff;
+	background-color: #333;
+	padding: 1px 3px;
+	border-radius: 2px;
+	margin-right: 4px;
+}
+
+.tag-sm {
+	font-size: 9px;
+	color: #666;
+	background-color: #eee;
+	padding: 1px 3px;
+	border-radius: 2px;
+	margin-right: 4px;
+}
+
+.tag-sm.hot {
+	color: #e74c3c;
+	background-color: #fadbd8;
+}
+
+.tag-pill {
+	font-size: 9px;
+	color: #555;
+	background-color: #f0f0f0;
+	padding: 1px 4px;
+	border-radius: 8px;
+	margin-right: 4px;
+}
+
+/* ===== Type 1 ===== */
+.item-type1 {
+	border-left-width: 3px;
+	border-left-color: #e74c3c;
+	border-left-style: solid;
+}
+
+.type1-body {
+	flex-direction: row;
+}
+
+.type1-left {
+	width: 90px;
+	margin-right: 6px;
+}
+
+.img-wrap {
+	width: 90px;
+	height: 60px;
+}
+
+.type1-img {
+	width: 90px;
+	height: 60px;
+	border-radius: 4px;
+}
+
+.img-tag {
+	margin-top: 2px;
+	align-items: flex-start;
+}
+
+.tag-text {
+	font-size: 9px;
+	color: #fff;
+	background-color: #e74c3c;
+	padding: 0 3px;
+	border-radius: 2px;
+}
+
+.type1-right {
+	flex: 1;
+}
+
+.title-area, .desc-area {
+	margin-bottom: 2px;
+}
+
+.content-title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+	lines: 1;
+	text-overflow: ellipsis;
+}
+
+.content-desc {
+	font-size: 11px;
+	color: #666;
+	lines: 1;
+	text-overflow: ellipsis;
+}
+
+.meta-row {
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 2px;
+}
+
+.rate-text {
+	font-size: 9px;
+	color: #e67e22;
+	margin-left: 2px;
+}
+
+.split-line {
+	font-size: 9px;
+	color: #ddd;
+	margin: 0 4px;
+}
+
+.author-text {
+	font-size: 9px;
+	color: #999;
+}
+
+.filler-area {
+	flex-direction: row;
+}
+
+/* ===== Type 2 ===== */
+.item-type2 {
+	border-left-width: 3px;
+	border-left-color: #3498db;
+	border-left-style: solid;
+}
+
+.type2-text {
+	margin-bottom: 4px;
+}
+
+.type2-images {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+
+.type2-img-box {
+	flex: 1;
+	margin-right: 4px;
+	height: 50px;
+	position: relative;
+}
+
+.type2-img {
+	width: 100%;
+	height: 50px;
+	border-radius: 4px;
+}
+
+.img-label {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	font-size: 8px;
+	color: #fff;
+	background-color: rgba(0,0,0,0.5);
+	padding: 0 2px;
+	border-radius: 2px 0 2px 0;
+}
+
+.view-count {
+	font-size: 9px;
+	color: #aaa;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+/* ===== Type 3 ===== */
+.item-type3 {
+	border-left-width: 3px;
+	border-left-color: #2ecc71;
+	border-left-style: solid;
+}
+
+.type3-desc {
+	margin-bottom: 4px;
+}
+
+.type3-grid {
+	margin-bottom: 4px;
+}
+
+.grid-row {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 2px;
+}
+
+.grid-img {
+	width: 32%;
+	height: 50px;
+	border-radius: 3px;
+}
+
+/* ===== Type 4 ===== */
+.item-type4 {
+	margin: 2px 6px;
+	padding: 0;
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.type4-card {
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 4px 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-row {
+	flex-direction: row;
+	align-items: center;
+	flex: 1;
+}
+
+.card-icon-box {
+	width: 26px;
+	height: 26px;
+	background-color: #9b59b6;
+	border-radius: 13px;
+	justify-content: center;
+	align-items: center;
+	margin-right: 6px;
+}
+
+.card-icon {
+	font-size: 12px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.card-text-box {
+	width: 100px;
+	margin-right: 4px;
+}
+
+.card-title {
+	font-size: 12px;
+	color: #333;
+	font-weight: bold;
+	lines: 1;
+}
+
+.card-sub {
+	font-size: 9px;
+	color: #999;
+}
+
+.card-info-text {
+	font-size: 9px;
+	color: #2ecc71;
+	margin-right: 4px;
+}
+
+/* ===== Type 5 ===== */
+.item-type5 {
+	border-left-width: 3px;
+	border-left-color: #9b59b6;
+	border-left-style: solid;
+}
+
+.type5-video-area {
+	margin-bottom: 4px;
+}
+
+.type5-video {
+	width: 100%;
+	height: 120px;
+	border-radius: 4px;
+}
+
+.info-row {
+	flex-direction: row;
+	align-items: center;
+}
+
+.info-text {
+	font-size: 9px;
+	color: #666;
+}
+</style>
