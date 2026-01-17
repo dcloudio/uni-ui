@@ -227,10 +227,8 @@
 							<video
 								class="type5-video"
 								:src="item.videoUrl"
-								<!--
 								:poster="item.videoPoster"
 								:show-center-play-btn="true"
-								-->
 								:controls="true"
 								object-fit="cover"
 							></video>
