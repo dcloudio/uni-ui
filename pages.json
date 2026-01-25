@@ -11,12 +11,6 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		},
-		{
-			"path": "pages/list-perf-test/list-perf-test",
-			"style": {
-				"navigationBarTitleText": ""
-			}
 		}
 		/*,
 		{
@@ -51,12 +45,6 @@
 			}
 		}, */
 		/* {
-			"path": "pages/pop-view/pop-view",
-			"style": {
-				"navigationBarTitleText": "pop-view"
-			}
-		}, */
-		/* {
 			"path": "pages/page-container/page-container",
 			"style": {
 				"navigationBarTitleText": "page-container",
@@ -67,18 +55,6 @@
 			"path": "pages/movable-view/movable-view",
 			"style": {
 				"navigationBarTitleText": "movable-view"
-			}
-		},
-		{
-			"path": "pages/button/button",
-			"style": {
-				"navigationBarTitleText": "button"
-			}
-		},
-    {
-			"path": "pages/slider/slider",
-			"style": {
-				"navigationBarTitleText": "slider"
 			}
 		},
 		{

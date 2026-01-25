@@ -47,8 +47,8 @@
 		    slot="refresher"
 		    :pulling-distance="pullingDistance2"
 		    :refreshing="refreshing2"
-				loading-class="loading-class"
-				text-class="text-class"
+				loading-class="loading-dark"
+				text-class="text-dark"
 				style="flex-direction: column;height: 46px;padding-top: 6px;"
 				pulling-text="继续下拉可刷新"
 				loosing-text="释放后会刷新"
@@ -120,6 +120,7 @@
 				pulling-text=""
 				loosing-text=""
 				loading-text=""
+				loading-class="loading-big-font"
 		  ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
 		</scroll-view>
   </view>
@@ -244,13 +245,18 @@ function onRefresherabort4() {
   font-size: 14px;
 }
 
-.loading-class{
+.loading-dark{
 	border-color:white;
 	width: 20px;
 	height: 20px;
 }
-.text-class{
+.text-dark{
 	color: white;
 	margin-top: 5px;
+}
+
+.loading-big-font{
+	width: 24px;
+	height: 24px;
 }
 </style>

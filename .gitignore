@@ -1,5 +1,6 @@
 node_modules/
 .project
+.claude
 unpackage/
 harmony-configs
 .DS_Store
@@ -8,3 +9,5 @@ __image_snapshots__/
 __snapshot__
 /code-review/node_modules
 harmony-configs
+/uni_modules/uni-pop-view/
+/pages/pop-view/
