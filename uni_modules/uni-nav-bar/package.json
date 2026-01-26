@@ -8,9 +8,8 @@
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.1.0",
-		"uni-app": "^3.1.0",
-		"uni-app-x": "^3.1.0"
+		"HBuilderX": "^5.0",
+		"uni-app-x": "^5.0"
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -23,7 +22,6 @@
 			}
 		},
 		"contact": {
-			"qq": ""
 		},
 		"declaration": {
 			"ads": "",
@@ -47,16 +45,16 @@
 			"client": {
 				"uni-app": {
 					"vue": {
-						"vue2": "-",
-						"vue3": "-"
+						"vue2": "x",
+						"vue3": "x"
 					},
 					"web": {
 						"safari": "-",
 						"chrome": "-"
 					},
 					"app": {
-						"vue": "-",
-						"nvue": "-",
+						"vue": "x",
+						"nvue": "x",
 						"android": "-",
 						"ios": "-",
 						"harmony": "-"
@@ -79,16 +77,16 @@
 				},
 				"uni-app-x": {
 					"web": {
-						"safari": "-",
-						"chrome": "-"
+						"safari": "√",
+						"chrome": "√"
 					},
 					"app": {
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
+						"android": "√",
+						"ios": "√",
+						"harmony": "√"
 					},
 					"mp": {
-						"weixin": "-"
+						"weixin": "√"
 					}
 				}
 			}

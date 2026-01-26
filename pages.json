@@ -11,20 +11,6 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		}
-		/*,
-		{
-			"path": "pages/calendar/calendar",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
-		
-		{
-			"path": "pages/swiper-view/swiper-view",
-			"style": {
-				"navigationBarTitleText": "swiper"
-			}
 		},
 		{
 			"path": "pages/badge/badge",
@@ -43,7 +29,15 @@
 			"style": {
 				"navigationBarTitleText": "tab-bar"
 			}
-		}, */
+		},
+		/*,
+		{
+			"path": "pages/swiper-view/swiper-view",
+			"style": {
+				"navigationBarTitleText": "swiper"
+			}
+		},
+		 */
 		/* {
 			"path": "pages/page-container/page-container",
 			"style": {

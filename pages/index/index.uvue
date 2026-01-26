@@ -1,13 +1,11 @@
 <template>
 	<navigator class="padding-bottom" url="/pages/badge/badge">badge</navigator>
 	<navigator class="padding-bottom" url="/pages/rate/rate">rate</navigator>
-	<navigator class="padding-bottom" url="/pages/swiper-view/swiper-view">swiper-view</navigator>
 	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar">tab-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/page-container/page-container">page-container</navigator>
 	<navigator class="padding-bottom" url="/pages/movable-view/movable-view">movable-view</navigator>
 	<navigator class="padding-bottom" url="/pages/nav-bar/nav-bar">nav-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box">refresh-box</navigator>
-	<navigator class="padding-bottom" url="/pages/list-perf-test/list-perf-test">死亡长列表</navigator>
 </template>
 
 <script setup>

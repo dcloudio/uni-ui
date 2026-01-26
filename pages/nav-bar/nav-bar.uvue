@@ -1,36 +1,28 @@
 <template>
-	<scroll-view style="flex: 1;">
+	<!-- 正常使用场景应把uni-nav-bar放在template的根节点，下方并列方式scroll-view滚动容器。本示例为了演示多种导航栏效果把导航栏组件放到了scroll-view里了 -->
+	<scroll-view style="flex: 1;padding-bottom: var(--uni-safe-area-inset-bottom);">
 		<uni-nav-bar></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar navigationBarTextStyle="black" title="黑色标题"></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar navigationBarTextStyle="white" title="青色背景白色标题" style="background-color: cyan;"></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar title="下边带灰线" style="border-bottom: 0.5px #ccc solid;"></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar hideDefaultBack title="隐藏左侧返回箭头"></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar navigationBarTextStyle="black" title="标题居左" mid-class="left-title"></uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar title="右边有按钮">
 			<template #right>
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar title="右边有2个按钮" right-class="two-buttons">
 			<template #right>
 				<text class="txt-button" @click="clickButton">+</text>
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar title="左边有按钮">
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
 			</template>
 		</uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar title="左右各1个按钮">
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
@@ -39,14 +31,12 @@
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar>
 			<template #mid>
-				<text>右边的箭头可以点</text>
+				<text>插槽右箭头可以点</text>
 				<text style="padding: 3px;font-size: 10px;" @click="clickButton">▼</text>
 			</template>
 		</uni-nav-bar>
-		<view style="height: 2px;" flatten></view>
 		<uni-nav-bar>
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
