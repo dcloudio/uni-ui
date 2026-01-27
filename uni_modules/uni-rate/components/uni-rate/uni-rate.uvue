@@ -1,11 +1,11 @@
 <template>
 	<!-- TODO  Android/iOS平台不支持裁剪显示半个文字，高性能场景包裹一层view不合适，需要等App平台解决-->
-	<text v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
-  <view v-else style="position: relative;align-self: flex-start;" @click="onTap">
-    <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
+	<text v-if="props.full!=true" style="white-space: nowrap;" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
+  <view v-else id="rate-parent" style="position: relative;align-self: flex-start;" @click="onTap">
+    <text class="stars-pos gray-stars easy-touch" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
     <!-- Android/iOS平台不支持裁剪显示半个文字，需通过包裹一层view裁剪实现 -->
 		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth">
-			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap;align-self: flex-start;" 
+			<text v-if="props.full" class="active-color easy-touch" :class="props.starActiveClass ?? ''" style="white-space: nowrap;align-self: flex-start;" 
 		:style=" starStyle + ';' + starActiveStyle + ';'">★★★★★</text>
 		</view>
 		<!-- 前景亮星，宽度根据value变化-->
@@ -13,6 +13,9 @@
 </template>
 
 <script setup lang="uts">
+defineOptions({
+	externalClasses: ['star-class','star-active-class']
+})
 const props = defineProps<{
   /**
 	 * @description 当前评分。值域为大于等于0、小于等于5的数字
@@ -72,17 +75,7 @@ const emit = defineEmits<{
 // 响应式数据 - 优先使用modelValue，其次使用value
 const currentValue = ref<number>(0)
 currentValue.value = props.modelValue ?? props.value ?? 0
-// 安全初始化函数
-/* function safeInitValue() {
-  const initialValue = props.modelValue ?? props.value ?? 0
-  if (typeof initialValue === 'number' && !isNaN(initialValue)) {
-    currentValue.value = initialValue
-  } else {
-    currentValue.value = 0
-  }
-}
-// 初始化
-safeInitValue() */
+
 // 监听props变化
 watch(() : number | null => {
   return props.modelValue ?? props.value ?? null
@@ -101,55 +94,60 @@ const calculatedWidth = computed(() => {
 	// TODO Android端小数无法正常渲染，不是宽度计算的问题
   return `${(rate / 5) * 100}%`
 })
-
+// #ifdef MP
+const instance = getCurrentInstance()!.proxy!
+// #endif
 // 处理点击事件
 function onTap(event: UniPointerEvent) : void {
   // 如果是禁用模式，不处理点击
   if (props.readonly == true) {
     return
   }
-  
-  // 获取点击位置 - 优化的事件处理
+
   let clickX = event.x
-  
-  // 获取容器宽度 - 使用 currentTarget 获取绑定事件的 view 容器，而不是被点击的 text 元素
-  let containerWidth = 0
+  let containerWidth = 0.0
+  // #ifndef MP
   try {
-    if (event.currentTarget?.offsetWidth != null && event.currentTarget.offsetWidth > 0) {
-      containerWidth = event.currentTarget.offsetWidth
+    const target = event.currentTarget as UniElement
+    if (target != null) {
+      containerWidth = target.offsetWidth
     }
   } catch (e) {
-    // 忽略错误，使用默认值
-		console.log('e: ',e);
+    // 忽略错误
   }
-	// console.log("containerWidth:" + 	containerWidth);
+	if (containerWidth > 0) {
+	  const finalValue = Math.round(clickX / containerWidth * 5)
+	  currentValue.value = finalValue
+	  emit('change', finalValue)
+	  emit('update:modelValue', finalValue)
+	  return
+	}
+	// #endif
+	// #ifdef MP
+	// 小程序必须通过createSelectorQuery异步获取容器宽度且在组件中需要用 .in(instance) 指定组件作用域
+	// const instance = getCurrentInstance()!.proxy! //写在这里会报错，必须写在外面
+	// console.log('instance: ', instance)
+	if (instance != null) {
+		uni.createSelectorQuery().in(instance).select('#rate-parent').boundingClientRect((rect) => {
+			// console.log('rect: ', rect)
+			if (rect != null) {
+				const width = rect.width
+				const left = rect.left
+				// 小程序的 event.x 是 clientX，需要减去 left 得到相对坐标
+				let relativeX = clickX - left
+				if (relativeX < 0) relativeX = 0
+				if (relativeX > width) relativeX = width
+
+				const finalValue = Math.round(relativeX / width * 5)
+				currentValue.value = finalValue
+				emit('change', finalValue)
+				emit('update:modelValue', finalValue)
+			}
+		}).exec()
+	}
+	// #endif
+
   
-  // 计算点击的是第几颗星（从0开始）
-  const finalValue = Math.round(clickX / containerWidth * 5)
-	// console.log('finalValue: ',finalValue);
-  
-	// 计算每颗星的宽度
-	// const starWidth = containerWidth / 5
-  // 计算点击位置在星内的偏移量
-  // const offsetInStar = (clickX % starWidth) / starWidth
-  /* // 根据偏移量决定是整星还是半星
-  let newValue: number
-  if (offsetInStar <= 0.5) {
-    newValue = starIndex + 0.5 // 半星
-  } else {
-    newValue = starIndex + 1 // 整星
-  }
-  // 确保值在有效范围内 */
-  // const finalValue = Math.max(0.5, Math.min(5, starIndex + 1))
-  
-  // 更新值
-  currentValue.value = finalValue
-  
-  // 触发change事件
-  emit('change', finalValue)
-  
-  // 触发v-model更新
-  emit('update:modelValue', finalValue)
 }
 
 // TODO 接入form表单规范，可以submit
@@ -174,5 +172,9 @@ function onTap(event: UniPointerEvent) : void {
 }
 .active-color{
  color: #ffca3e; /* 点亮颜色 */
+}
+.easy-touch {
+	letter-spacing: 3px;
+	font-size: 20px;
 }
 </style>
