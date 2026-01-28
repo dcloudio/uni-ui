@@ -6,6 +6,13 @@
 	<navigator class="padding-bottom" url="/pages/movable-view/movable-view">movable-view</navigator>
 	<navigator class="padding-bottom" url="/pages/nav-bar/nav-bar">nav-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box">refresh-box</navigator>
+	<text>--测试navigator和button嵌套text组件的表现--</text>
+	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
+	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>
+	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></navigator>
+	<button class="padding-bottom"><text style="color: green;">子text绿色</text></button>
+	<button class="padding-bottom" style="color: aqua;">button青色</button>
+	<button class="padding-bottom" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></button> <!-- TODO hover-class="navigator-hover" 会引发鸿蒙崩溃！-->
 </template>
 
 <script setup>
@@ -16,5 +23,8 @@
 <style>
 .padding-bottom {
   padding-bottom: 10px;
+}
+.navigator-hover {
+	background-color: yellow;
 }
 </style>

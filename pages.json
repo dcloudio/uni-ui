@@ -3,6 +3,11 @@
 		{
 			"path": "pages/index/index",
 			"style": {"navigationBarTitleText": "uni-ui x"}
+		},{
+			"path": "pages/rate/rate",
+			"style": {
+				"navigationBarTitleText": "rate"
+			}
 		},
 		{
 			"path": "pages/refresh-box/refresh-box",
@@ -11,25 +16,23 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		},
+		}
+		// #ifndef MP
+		,
 		{
 			"path": "pages/badge/badge",
 			"style": {
-				"navigationBarTitleText": "badge"
+				"navigationBarTitleText": "badge"  //微信小程序编译不过！@fxy
 			}
-		},
-		{
-			"path": "pages/rate/rate",
-			"style": {
-				"navigationBarTitleText": "rate"
-			}
-		},
-		{
+		}
+		// #endif
+		
+		/* {
 			"path": "pages/tab-bar/tab-bar",
 			"style": {
 				"navigationBarTitleText": "tab-bar"
 			}
-		},
+		} */
 		/*,
 		{
 			"path": "pages/swiper-view/swiper-view",

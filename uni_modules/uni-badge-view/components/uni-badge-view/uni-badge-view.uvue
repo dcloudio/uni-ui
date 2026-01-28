@@ -29,7 +29,8 @@
 <script setup lang="uts">
 	// 禁用自动属性继承，手动控制属性绑定位置
 	defineOptions({
-		inheritAttrs: false
+		inheritAttrs: false,
+		externalClasses: ['badge-class']
 	})
 
 	// 定义组件属性接口
