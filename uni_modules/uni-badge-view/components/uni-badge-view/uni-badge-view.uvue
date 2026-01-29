@@ -2,6 +2,9 @@
 	<!-- 如果不显示badge，则不包裹，直接显示子内容。保证常态下的高性能。但如果设置了alwaysWrapWithContent且有slot内容，则仍然保持包裹层 -->
 	<slot v-if="text == '0' && alwaysWrapWithContent== false"></slot>
 	<!-- 如果有多个子slot，且不设badge，去掉包裹层直接露出slot，会导致flex方向错乱。此时应设置alwaysWrapWithContent为true，总是保留包裹层 -->
+	
+	<!-- 微信小程序不支持外部绑定事件 -->
+	
 	<template v-else>
 		<view v-if="hasDefaultSlot" style="overflow: visible;" class="badge-wrap">
 			<!-- 目标内容插槽 -->
