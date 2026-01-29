@@ -17,7 +17,6 @@
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
 		}
-		// #ifndef MP
 		,
 		{
 			"path": "pages/badge/badge",
@@ -25,7 +24,6 @@
 				"navigationBarTitleText": "badge"  //微信小程序编译不过！@fxy
 			}
 		}
-		// #endif
 		
 		/* {
 			"path": "pages/tab-bar/tab-bar",

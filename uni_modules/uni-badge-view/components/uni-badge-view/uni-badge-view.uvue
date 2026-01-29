@@ -1,28 +1,28 @@
 <template>
 	<!-- 如果不显示badge，则不包裹，直接显示子内容。保证常态下的高性能。但如果设置了alwaysWrapWithContent且有slot内容，则仍然保持包裹层 -->
-	<slot v-if="props.text == '0' && props.alwaysWrapWithContent== false"></slot>
+	<slot v-if="text == '0' && alwaysWrapWithContent== false"></slot>
 	<!-- 如果有多个子slot，且不设badge，去掉包裹层直接露出slot，会导致flex方向错乱。此时应设置alwaysWrapWithContent为true，总是保留包裹层 -->
 	<template v-else>
-		<view v-if="hasDefaultSlot" style="overflow: visible;" class="badge-wrap" v-bind="$attrs">
+		<view v-if="hasDefaultSlot" style="overflow: visible;" class="badge-wrap">
 			<!-- 目标内容插槽 -->
 			<slot></slot>
 
 			<!-- badge 文字模式 -->
-			<text v-if="props.text != '' && props.text != '0' " :class="['text', 'postion', props.badgeClass]" :style="props.badgeStyle">
-				{{ props.text }}
+			<text v-if="text != '' && text != '0' " :class="['text', 'postion', badgeClass]" :style="badgeStyle" @click="c1">
+				{{ text }}
 			</text>
 
 			<!-- badge 红点模式 -->
-			<view v-else-if="props.text != '0'" :class="['dot', 'postion', props.badgeClass]" :style="props.badgeStyle"></view>
+			<view v-else-if="text != '0'" :class="['dot', 'postion', badgeClass]" :style="badgeStyle"></view>
 		</view>
 
 		<!-- 不包裹，直接显示badge 文字模式 -->
-		<text v-else-if="props.text != ''" :class="['text', props.badgeClass]" :style="props.badgeStyle">
-			{{ props.text }}
+		<text v-else-if="text != ''" :class="['text', badgeClass]" :style="badgeStyle">
+			{{ text }}
 		</text>
 
 		<!-- 不包裹，直接显示badge 红点模式 -->
-		<view v-else :class="['dot', props.badgeClass]" :style="props.badgeStyle"></view>
+		<view v-else :class="['dot', badgeClass]" :style="badgeStyle"></view>
 	</template>
 </template>
 
