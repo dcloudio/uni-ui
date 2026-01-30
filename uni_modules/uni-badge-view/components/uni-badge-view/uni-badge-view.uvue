@@ -11,7 +11,7 @@
 			<slot></slot>
 
 			<!-- badge 文字模式 -->
-			<text v-if="text != '' && text != '0' " :class="['text', 'postion', badgeClass]" :style="badgeStyle" @click="c1">
+			<text v-if="text != '' && text != '0' " :class="['text', 'postion', badgeClass]" :style="badgeStyle">
 				{{ text }}
 			</text>
 
