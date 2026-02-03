@@ -268,7 +268,7 @@
 	// 自定义 custom-style 演示
 	const showCustomContainerStyle = () => {
 		resetConfig()
-		containerCustomStyle.value = "background-color: #f0f0f0; border-radius: 20px;"
+		containerCustomStyle.value = "background-color: #f0f0f0; border-radius: 25px;"
 		contentStyle.value = "padding: 30px; background-color: transparent;"
 		containerTitle.value = "自定义 Custom-style"
 		containerContent.value = "容器使用自定义样式，带圆角和灰色背景"
