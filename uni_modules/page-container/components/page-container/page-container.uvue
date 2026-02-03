@@ -39,12 +39,12 @@
     })
 
     const emits = defineEmits<{
-        beforeenter : [event: UniPointerEvent]
-        enter : [event: UniPointerEvent]
-        afterenter : [event: UniPointerEvent]
-        beforeleave : [event: UniPointerEvent]
-        leave : [event: UniPointerEvent]
-        afterleave : [event: UniPointerEvent]
+        beforeenter : []
+        enter : []
+        afterenter : []
+        beforeleave : []
+        leave : []
+        afterleave : []
         clickoverlay : [event: UniPointerEvent]
     }>()
 
