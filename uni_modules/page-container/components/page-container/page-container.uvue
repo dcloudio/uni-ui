@@ -1,7 +1,7 @@
 <template>
     <view v-show="showPageContainer">
-        <view v-if="overlay" class="uni-page-container-overlay" :style="overlayStyleMap" @click="onClickOverlay" @touchmove.prevent.stop></view>
-        <view class="uni-page-container-popup" :class="popupClasses" :style="innerStyleMap" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+        <view v-if="overlay" class="uni-page-container-overlay" :style="[overlayStyleMap, overlayStyle]" @click="onClickOverlay" @touchmove.prevent.stop></view>
+        <view class="uni-page-container-popup" :class="popupClasses" :style="[innerStyleMap, customStyle]" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
             <slot />
         </view>
     </view>
@@ -66,19 +66,6 @@
             ['z-index', props.zIndex],
             ['transition-duration', props.duration + 'ms'],
         ])
-
-        const overlayStyle = props.overlayStyle.trim()
-        if (overlayStyle) {
-            overlayStyle.split(';').forEach(style => {
-                const trimmedStyle = style.trim()
-                if (trimmedStyle) {
-                    const [key, value] = trimmedStyle.split(':')
-                    if (key != null && value != null) {
-                        styleMap.set(key.trim(), value.trim())
-                    }
-                }
-            })
-        }
         if (isEntered.value) {
             styleMap.set('opacity', '1').set('pointer-events', 'auto')
         }
@@ -90,19 +77,6 @@
             ['z-index', props.zIndex + 1],
             ['transition-duration', props.duration + 'ms'],
         ])
-
-        const customStyle = props.customStyle.trim()
-        if (customStyle) {
-            customStyle.split(';').forEach(style => {
-                const trimmedStyle = style.trim()
-                if (trimmedStyle) {
-                    const [key, value] = trimmedStyle.split(':')
-                    if (key != null && value != null) {
-                        styleMap.set(key.trim(), value.trim())
-                    }
-                }
-            })
-        }
         // 下滑拖动时的 transform
 		if (isDragging && translateY.value > 0) {
 			styleMap.set('transform', `translateY(${translateY.value}px)`)
@@ -125,7 +99,7 @@
         return classes
     })
 
-    watch(() => props.show, (newVal : boolean, oldVal : boolean) => {
+    watch(() => props.show, (newVal : boolean) => {
         if (newVal && !showPageContainer.value) {
 			openContainer()
 		} else if (!newVal && showPageContainer.value) {
