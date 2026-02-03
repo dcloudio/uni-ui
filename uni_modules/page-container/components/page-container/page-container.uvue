@@ -1,7 +1,9 @@
 <template>
     <view v-show="showPageContainer">
-        <view v-if="overlay" class="uni-page-container-overlay" :style="[overlayStyleMap, overlayStyle]" @click="onClickOverlay" @touchmove.prevent.stop></view>
-        <view class="uni-page-container-popup" :class="popupClasses" :style="[innerStyleMap, customStyle]" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+        <view v-if="overlay" class="uni-page-container-overlay" :style="[overlayStyleMap, overlayStyle]"
+            @click="onClickOverlay" @touchmove.prevent.stop></view>
+        <view class="uni-page-container-popup" :class="popupClasses" :style="[innerStyleMap, customStyle]"
+            @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
             <slot />
         </view>
     </view>
@@ -54,12 +56,12 @@
     const isEntered = ref(false)
 
     // 触摸相关状态（用于下滑关闭）
-	let touchStartY = 0
-	let touchStartTime = 0
-	let isDragging = false
+    let touchStartY = 0
+    let touchStartTime = 0
+    let isDragging = false
     const MAX_SLIDER_DISTANCE = 100
     const MIN_SLIDER_VELOCITY = 0.3
-	const translateY = ref<number>(0)
+    const translateY = ref<number>(0)
 
     const overlayStyleMap = computed(() => {
         const styleMap = new Map<string, string>([
@@ -78,10 +80,10 @@
             ['transition-duration', props.duration + 'ms'],
         ])
         // 下滑拖动时的 transform
-		if (isDragging && translateY.value > 0) {
-			styleMap.set('transform', `translateY(${translateY.value}px)`)
-			styleMap.set('transition', 'none')
-		}
+        if (isDragging && translateY.value > 0) {
+            styleMap.set('transform', `translateY(${translateY.value}px)`)
+            styleMap.set('transition', 'none')
+        }
         return styleMap
     })
 
@@ -101,10 +103,10 @@
 
     watch(() => props.show, (newVal : boolean) => {
         if (newVal && !showPageContainer.value) {
-			openContainer()
-		} else if (!newVal && showPageContainer.value) {
-			closeContainer()
-		}
+            openContainer()
+        } else if (!newVal && showPageContainer.value) {
+            closeContainer()
+        }
     })
 
     function openContainer() {
@@ -182,57 +184,57 @@
 
     function onTouchStart(e : UniTouchEvent) {
         if (!props.closeOnSlideDown) {
-			return
-		}
+            return
+        }
 
-		if (e.touches.length > 0) {
-			touchStartY = e.touches[0].clientY
-			touchStartTime = Date.now()
-			isDragging = false
-		}
+        if (e.touches.length > 0) {
+            touchStartY = e.touches[0].clientY
+            touchStartTime = Date.now()
+            isDragging = false
+        }
     }
 
     function onTouchMove(e : UniTouchEvent) {
         // 如果不是下滑关闭模式，阻止事件冒泡（防止滚动穿透），但允许容器内部滚动
-		if (!props.closeOnSlideDown) {
-			e.stopPropagation()
-			return
-		}
+        if (!props.closeOnSlideDown) {
+            e.stopPropagation()
+            return
+        }
 
-		if (e.touches.length > 0) {
-			const deltaY = e.touches[0].clientY - touchStartY
+        if (e.touches.length > 0) {
+            const deltaY = e.touches[0].clientY - touchStartY
 
-			// 只允许向下拖动
-			if (deltaY > 0) {
-				isDragging = true
-				translateY.value = deltaY
+            // 只允许向下拖动
+            if (deltaY > 0) {
+                isDragging = true
+                translateY.value = deltaY
 
-				// 阻止默认滚动行为
-				e.preventDefault()
-				e.stopPropagation()
-			}
-		}
+                // 阻止默认滚动行为
+                e.preventDefault()
+                e.stopPropagation()
+            }
+        }
     }
 
     function onTouchEnd(event : UniTouchEvent) {
         if (!props.closeOnSlideDown) {
-			return
-		}
+            return
+        }
 
-		if (isDragging) {
-			const deltaTime = Date.now() - touchStartTime
-			const velocity = translateY.value / deltaTime
+        if (isDragging) {
+            const deltaTime = Date.now() - touchStartTime
+            const velocity = translateY.value / deltaTime
 
-			// 判断是否应该关闭：拖动距离超过 100px 或拖动速度较快
-			if (translateY.value > MAX_SLIDER_DISTANCE || velocity > MIN_SLIDER_VELOCITY) {
-				closeContainer()
-			} else {
-				// 回弹
-				translateY.value = 0
-			}
+            // 判断是否应该关闭：拖动距离超过 100px 或拖动速度较快
+            if (translateY.value > MAX_SLIDER_DISTANCE || velocity > MIN_SLIDER_VELOCITY) {
+                closeContainer()
+            } else {
+                // 回弹
+                translateY.value = 0
+            }
 
-			isDragging = false
-		}
+            isDragging = false
+        }
     }
 
     onBackPress(() => {
