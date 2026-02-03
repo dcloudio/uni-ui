@@ -50,7 +50,7 @@
 
     const showPageContainer = ref(false)
     const isAnimating = ref(false)
-    const transitionTimer = ref(null)
+    const transitionTimer = ref<number | null>(null)
     const isEntered = ref(false)
 
     // 触摸相关状态（用于下滑关闭）
@@ -139,7 +139,7 @@
     }
 
     function clearTransitionTimer() {
-        if (transitionTimer.value) {
+        if (transitionTimer.value != null) {
             clearTimeout(transitionTimer.value)
             transitionTimer.value = null
         }
