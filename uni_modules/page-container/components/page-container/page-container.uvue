@@ -1,13 +1,26 @@
 <template>
     <view v-show="showPageContainer">
-        <view v-if="overlay" class="uni-page-container-overlay" :style="[overlayStyleMap, overlayStyle]"
-            @click="onClickOverlay" @touchmove.prevent.stop></view>
-        <view class="uni-page-container-popup" :class="popupClasses" :style="[innerStyleMap, customStyle]"
-            @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
-            <slot />
-        </view>
+      <view
+        v-if="overlay"
+        class="uni-page-container-overlay"
+        :style="[overlayStyleMap, overlayStyle]"
+        @click="onClickOverlay"
+        <!-- #ifndef APP-ANDROID -->
+        @touchmove.prevent.stop
+        <!-- #endif -->
+      ></view>
+      <view
+        class="uni-page-container-popup"
+        :class="popupClasses"
+        :style="[innerStyleMap, customStyle]"
+        @touchstart="onTouchStart"
+        @touchmove="onTouchMove"
+        @touchend="onTouchEnd"
+      >
+        <slot />
+      </view>
     </view>
-</template>
+  </template>
 
 <script setup lang="uts">
     defineOptions({
