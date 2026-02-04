@@ -14,7 +14,7 @@
         name: 'page-container'
     })
 
-    type PageContainerPosition = 'top' | 'bottom' | 'right' | 'center';
+    type PageContainerPosition = 'top' | 'bottom' | 'left' | 'right' | 'center';
 
     interface PageContainerProps {
         show : boolean;
@@ -289,6 +289,18 @@
     }
 
     .uni-page-container-popup-right.uni-page-container-popup-enter {
+        transform: translateX(0);
+    }
+
+    .uni-page-container-popup-left {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 80%;
+        transform: translateX(-100%);
+    }
+
+    .uni-page-container-popup-left.uni-page-container-popup-enter {
         transform: translateX(0);
     }
 

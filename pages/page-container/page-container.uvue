@@ -14,6 +14,7 @@
 					<button @click="showContainer('bottom')" size="mini">底部弹出 (bottom)</button>
 					<button @click="showContainer('top')" size="mini">顶部弹出 (top)</button>
 					<button @click="showContainer('right')" size="mini">右侧弹出 (right)</button>
+					<button @click="showContainer('left')" size="mini">左侧弹出 (left)</button>
 					<button @click="showContainer('center')" size="mini">居中弹出 (center)</button>
 				</view>
 			</view>
@@ -141,8 +142,8 @@
 				<text style="font-size: 11px; color: #666;">content-style: {{ contentStyle }}</text>
 			</scroll-view>
 
-			<button @click="closeContainer" size="mini" type="primary" style="text-align: center">关闭容器</button>
-			<button @click="navigateBack" size="mini" type="default" style="text-align: center">后退页面</button>
+			<button @click="closeContainer" size="mini" type="primary">关闭容器</button>
+			<button @click="navigateBack" size="mini" type="default">后退页面</button>
 		</view>
 	</page-container>
 </template>
