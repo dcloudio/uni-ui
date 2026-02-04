@@ -65,7 +65,7 @@
     type Fields = 'year' | 'month' | 'day'
 
 	defineOptions({
-		name: 'picker',
+		name: 'picker'
 	})
 
     interface PickerProps {

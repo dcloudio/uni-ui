@@ -16,7 +16,7 @@
     import { PickerViewContext, PickerViewColumnApi } from '../types.uts'
   
     defineOptions({
-      name: 'picker-view-column',
+      name: 'picker-view-column'
     })
   
     const ctx = inject<PickerViewContext>(PICKER_VIEW_KEY)
