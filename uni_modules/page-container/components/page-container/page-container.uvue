@@ -168,6 +168,9 @@
         emits('beforeenter')
         showPageContainer.value = true
         isEntered.value = false
+        // 重置拖动状态
+        translateValue.value = 0
+        isDragging = false
         nextTick(() => {
             emits('enter')
             isAnimating.value = true
