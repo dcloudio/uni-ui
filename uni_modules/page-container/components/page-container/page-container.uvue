@@ -82,7 +82,6 @@
         ])
         // 滑动拖动时的 transform
         if (translateValue.value != 0 && isDragging) {
-            // 根据不同的 position 设置不同的 transform
             let transformValue = ''
             switch (props.position) {
                 case 'bottom':
@@ -207,8 +206,9 @@
         }
 
         if (e.touches.length > 0) {
-            touchStartX = e.touches[0].clientX
-            touchStartY = e.touches[0].clientY
+            const { clientX, clientY } = e.touches[0]
+            touchStartX = clientX
+            touchStartY = clientY
             touchStartTime = Date.now()
             isDragging = false
         }
@@ -222,36 +222,42 @@
         }
 
         if (e.touches.length > 0) {
-            const deltaX = e.touches[0].clientX - touchStartX
-            const deltaY = e.touches[0].clientY - touchStartY
+            const { clientX, clientY } = e.touches[0]
+            const deltaX = clientX - touchStartX
+            const deltaY = clientY - touchStartY
             let shouldDrag = false
             let dragValue = 0
 
             // 根据不同的 position 判断滑动方向
-            if (props.position == 'bottom') {
-                // 底部弹出：向下滑动关闭
-                if (deltaY > 0) {
-                    shouldDrag = true
-                    dragValue = deltaY
-                }
-            } else if (props.position == 'top') {
-                // 顶部弹出：向上滑动关闭
-                if (deltaY < 0) {
-                    shouldDrag = true
-                    dragValue = deltaY
-                }
-            } else if (props.position == 'left') {
-                // 左侧弹出：向左滑动关闭
-                if (deltaX < 0) {
-                    shouldDrag = true
-                    dragValue = deltaX
-                }
-            } else if (props.position == 'right') {
-                // 右侧弹出：向右滑动关闭
-                if (deltaX > 0) {
-                    shouldDrag = true
-                    dragValue = deltaX
-                }
+            switch (props.position) {
+                case 'bottom':
+                    // 底部弹出：向下滑动关闭
+                    if (deltaY > 0) {
+                        shouldDrag = true
+                        dragValue = deltaY
+                    }
+                    break
+                case 'top':
+                    // 顶部弹出：向上滑动关闭
+                    if (deltaY < 0) {
+                        shouldDrag = true
+                        dragValue = deltaY
+                    }
+                    break
+                case 'left':
+                    // 左侧弹出：向左滑动关闭
+                    if (deltaX < 0) {
+                        shouldDrag = true
+                        dragValue = deltaX
+                    }
+                    break
+                case 'right':
+                    // 右侧弹出：向右滑动关闭
+                    if (deltaX > 0) {
+                        shouldDrag = true
+                        dragValue = deltaX
+                    }
+                    break
             }
 
             if (shouldDrag) {

@@ -86,12 +86,12 @@ const show = ref(false)
 | close-on-slide-down |   boolean   | false  |  否  |             是否在下滑一段距离后关闭             |
 |    overlay-style    |   string    |        |  否  |                 自定义遮罩层样式                 |
 |    custom-style     |   string    |        |  否  |                 自定义弹出层样式                 |
-|    @beforeenter     | eventhandle |        |  否  |                    进入前触发                    |
-|       @enter        | eventhandle |        |  否  |                    进入中触发                    |
-|     @afterenter     | eventhandle |        |  否  |                    进入后触发                    |
-|    @beforeleave     | eventhandle |        |  否  |                    离开前触发                    |
-|       @leave        | eventhandle |        |  否  |                    离开中触发                    |
-|     @afterleave     | eventhandle |        |  否  |                    离开后触发                    |
+|    @beforeenter     |             |        |  否  |                    进入前触发                    |
+|       @enter        |             |        |  否  |                    进入中触发                    |
+|     @afterenter     |             |        |  否  |                    进入后触发                    |
+|    @beforeleave     |             |        |  否  |                    离开前触发                    |
+|       @leave        |             |        |  否  |                    离开中触发                    |
+|     @afterleave     |             |        |  否  |                    离开后触发                    |
 |    @clickoverlay    | eventhandle |        |  否  |                 点击遮罩层时触发                 |
 
 ## 使用示例
