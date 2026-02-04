@@ -16,8 +16,16 @@
 		{
 			"path": "pages/nav-bar/nav-bar",
 			"style": {"navigationStyle": "custom"}
-		}
-		,
+		},
+		{
+            "path": "pages/picker/picker",
+            "style": {
+                "navigationBarTitleText": "picker"
+            }
+        },
+        {
+            "path": "uni_modules/picker/pages/picker/picker"
+        },
 		{
 			"path": "pages/badge/badge",
 			"style": {
