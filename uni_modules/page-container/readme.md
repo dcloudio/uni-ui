@@ -8,7 +8,7 @@
 
 ## 功能特性
 
-- ✅ 支持四种弹出位置：top、bottom、right、center
+- ✅ 支持五种弹出位置：top、bottom、left、right、center
 - ✅ 支持自定义动画时长
 - ✅ 支持显示/隐藏蒙层
 - ✅ 支持圆角显示
@@ -30,6 +30,7 @@
 在 Web 平台，当打开**带蒙层**（`overlay: true`）的 page-container 时，组件会自动设置 `document.body.style.overflow = 'hidden'` 禁止背景页面滚动，避免滚动穿透问题。
 
 当 page-container 关闭时，会检查是否还有其他带蒙层的实例显示：
+
 - 如果还有其他带蒙层的实例，保持背景禁止滚动
 - 如果没有带蒙层的实例了，自动恢复页面滚动
 
@@ -54,7 +55,7 @@
 </template>
 
 <script setup lang="uts">
-  const show = ref(false)
+const show = ref(false)
 </script>
 ```
 
@@ -74,24 +75,24 @@
 
 # 组件规范
 
-|属性								|类型				|默认值	|必填	|说明																					|
-|:-:								|:-:				|:-:		|:-:	|:-:																					|
-|show								|boolean		|false	|否		|是否显示容器组件															|
-|duration						|number			|300		|否		|动画时长，单位毫秒														|
-|z-index						|number			|100		|否		|z-index 层级																	|
-|overlay						|boolean		|true		|否		|是否显示遮罩层																|
-|position						|string			|bottom	|否		|弹出位置，可选值为 top bottom right center	|
-|round							|boolean		|false	|否		|是否显示圆角																	|
-|close-on-slide-down|boolean		|false	|否		|是否在下滑一段距离后关闭											|
-|overlay-style			|string			|				|否		|自定义遮罩层样式															|
-|custom-style				|string			|				|否		|自定义弹出层样式															|
-|@beforeenter				|eventhandle|				|否		|进入前触发																		|
-|@enter							|eventhandle|				|否		|进入中触发																		|
-|@afterenter				|eventhandle|				|否		|进入后触发																		|
-|@beforeleave				|eventhandle|				|否		|离开前触发																		|
-|@leave							|eventhandle|				|否		|离开中触发																		|
-|@afterleave				|eventhandle|				|否		|离开后触发																		|
-|@clickoverlay			|eventhandle|				|否		|点击遮罩层时触发															|
+|        属性         |    类型     | 默认值 | 必填 |                       说明                       |
+| :-----------------: | :---------: | :----: | :--: | :----------------------------------------------: |
+|        show         |   boolean   | false  |  否  |                 是否显示容器组件                 |
+|      duration       |   number    |  300   |  否  |                动画时长，单位毫秒                |
+|       z-index       |   number    |  100   |  否  |                   z-index 层级                   |
+|       overlay       |   boolean   |  true  |  否  |                  是否显示遮罩层                  |
+|      position       |   string    | bottom |  否  | 弹出位置，可选值为  top bottom left right center |
+|        round        |   boolean   | false  |  否  |                   是否显示圆角                   |
+| close-on-slide-down |   boolean   | false  |  否  |             是否在下滑一段距离后关闭             |
+|    overlay-style    |   string    |        |  否  |                 自定义遮罩层样式                 |
+|    custom-style     |   string    |        |  否  |                 自定义弹出层样式                 |
+|    @beforeenter     | eventhandle |        |  否  |                    进入前触发                    |
+|       @enter        | eventhandle |        |  否  |                    进入中触发                    |
+|     @afterenter     | eventhandle |        |  否  |                    进入后触发                    |
+|    @beforeleave     | eventhandle |        |  否  |                    离开前触发                    |
+|       @leave        | eventhandle |        |  否  |                    离开中触发                    |
+|     @afterleave     | eventhandle |        |  否  |                    离开后触发                    |
+|    @clickoverlay    | eventhandle |        |  否  |                 点击遮罩层时触发                 |
 
 ## 使用示例
 
@@ -106,6 +107,11 @@
 <!-- 顶部弹出 -->
 <page-container :show="show" position="top">
   <view style="padding: 20px;">顶部弹出的内容</view>
+</page-container>
+
+<!-- 左侧弹出 -->
+<page-container :show="show" position="left">
+  <view style="padding: 20px;">左侧弹出的内容</view>
 </page-container>
 
 <!-- 右侧弹出 -->
@@ -166,34 +172,34 @@
 </template>
 
 <script setup lang="uts">
-  const onBeforeEnter = () => {
-    console.log('进入前')
-  }
+const onBeforeEnter = () => {
+  console.log('进入前')
+}
 
-  const onEnter = () => {
-    console.log('进入中')
-  }
+const onEnter = () => {
+  console.log('进入中')
+}
 
-  const onAfterEnter = () => {
-    console.log('进入后')
-  }
+const onAfterEnter = () => {
+  console.log('进入后')
+}
 
-  const onBeforeLeave = () => {
-    console.log('离开前')
-  }
+const onBeforeLeave = () => {
+  console.log('离开前')
+}
 
-  const onLeave = () => {
-    console.log('离开中')
-  }
+const onLeave = () => {
+  console.log('离开中')
+}
 
-  const onAfterLeave = () => {
-    console.log('离开后')
-  }
+const onAfterLeave = () => {
+  console.log('离开后')
+}
 
-  const onClickOverlay = () => {
-    console.log('点击蒙层')
-    // 默认会关闭容器，如需阻止可在这里处理
-  }
+const onClickOverlay = () => {
+  console.log('点击蒙层')
+  // 默认会关闭容器，如需阻止可在这里处理
+}
 </script>
 ```
 
