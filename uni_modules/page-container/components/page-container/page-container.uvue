@@ -384,16 +384,16 @@
     }
 
     .uni-page-container-popup-center {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        transition-property: opacity;
+        top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.9);
+        transition-property: opacity, transform;
         transition-timing-function: ease;
         opacity: 0;
     }
 
     .uni-page-container-popup-center.uni-page-container-popup-enter {
+        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
 </style>
