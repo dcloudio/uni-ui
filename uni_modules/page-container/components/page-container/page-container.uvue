@@ -1,5 +1,5 @@
 <template>
-    <view v-show="showPageContainer">
+    <view v-if="showPageContainer">
       <view
         v-if="overlay"
         class="uni-page-container-overlay"
@@ -20,7 +20,7 @@
         <slot />
       </view>
     </view>
-  </template>
+</template>
 
 <script setup lang="uts">
     defineOptions({
