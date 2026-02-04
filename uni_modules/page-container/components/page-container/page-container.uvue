@@ -17,15 +17,15 @@
     type PageContainerPosition = 'top' | 'bottom' | 'right' | 'center';
 
     interface PageContainerProps {
-        show ?: boolean;
-        duration ?: number;
-        zIndex ?: number
-        overlay ?: boolean;
-        round ?: boolean;
-        position ?: PageContainerPosition;
-        customStyle ?: string;
-        overlayStyle ?: string;
-        closeOnSlideDown ?: boolean;
+        show : boolean;
+        duration : number;
+        zIndex : number
+        overlay : boolean;
+        round : boolean;
+        position : PageContainerPosition;
+        customStyle : string;
+        overlayStyle : string;
+        closeOnSlideDown : boolean;
     }
 
     const props = withDefaults(defineProps<PageContainerProps>(), {
@@ -89,7 +89,7 @@
 
     const popupClasses = computed(() => {
         const classes : string[] = []
-        if (props.position) {
+        if (props.position != null) {
             classes.push(`uni-page-container-popup-${props.position}`)
         }
         if (props.round) {
@@ -101,13 +101,37 @@
         return classes
     })
 
-    watch(() => props.show, (newVal : boolean) => {
-        if (newVal && !showPageContainer.value) {
-            openContainer()
-        } else if (!newVal && showPageContainer.value) {
-            closeContainer()
+    function clearTransitionTimer() {
+        if (transitionTimer.value != null) {
+            clearTimeout(transitionTimer.value as number)
+            transitionTimer.value = null
         }
-    })
+    }
+
+    // 动画结束处理
+    function onAnimationEnd(type : 'enter' | 'leave') {
+        isAnimating.value = false
+
+        clearTransitionTimer()
+
+        if (type == 'enter') {
+            emits('afterenter')
+        } else if (type == 'leave') {
+            showPageContainer.value = false
+            emits('afterleave')
+        }
+    }
+
+    // 监听动画结束
+    function listenTransitionEnd(type : 'enter' | 'leave') {
+        // 清除之前的定时器
+        clearTransitionTimer()
+
+        // 使用 setTimeout 作为兜底方案
+        transitionTimer.value = setTimeout(() => {
+            onAnimationEnd(type)
+        }, props.duration)
+    }
 
     function openContainer() {
         emits('beforeenter')
@@ -140,37 +164,13 @@
         })
     }
 
-    function clearTransitionTimer() {
-        if (transitionTimer.value != null) {
-            clearTimeout(transitionTimer.value)
-            transitionTimer.value = null
+    watch((): boolean => props.show, (newVal : boolean) => {
+        if (newVal && !showPageContainer.value) {
+            openContainer()
+        } else if (!newVal && showPageContainer.value) {
+            closeContainer()
         }
-    }
-
-    // 监听动画结束
-    function listenTransitionEnd(type : 'enter' | 'leave') {
-        // 清除之前的定时器
-        clearTransitionTimer()
-
-        // 使用 setTimeout 作为兜底方案
-        transitionTimer.value = setTimeout(() => {
-            onAnimationEnd(type)
-        }, props.duration)
-    }
-
-    // 动画结束处理
-    function onAnimationEnd(type : 'enter' | 'leave') {
-        isAnimating.value = false
-
-        clearTransitionTimer()
-
-        if (type == 'enter') {
-            emits('afterenter')
-        } else if (type == 'leave') {
-            showPageContainer.value = false
-            emits('afterleave')
-        }
-    }
+    })
 
     function onClickOverlay(event : UniPointerEvent) {
         if (isAnimating.value) {
