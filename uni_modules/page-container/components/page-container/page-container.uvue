@@ -16,6 +16,7 @@
         @touchstart="onTouchStart"
         @touchmove="onTouchMove"
         @touchend="onTouchEnd"
+        @touchcancel="onTouchCancel"
       >
         <slot />
       </view>
@@ -304,6 +305,18 @@
                 translateValue.value = 0
             }
 
+            isDragging = false
+        }
+    }
+
+    function onTouchCancel(event : UniTouchEvent) {
+        if (!props.closeOnSlideDown) {
+            return
+        }
+
+        // touchcancel 时重置拖动状态并回弹
+        if (isDragging) {
+            translateValue.value = 0
             isDragging = false
         }
     }
