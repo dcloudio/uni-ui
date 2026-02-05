@@ -1,25 +1,15 @@
 <template>
-    <view v-if="showPageContainer">
-      <view
-        v-if="overlay"
-        class="uni-page-container-overlay"
-        :style="[overlayStyleMap, overlayStyle]"
-        @click="onClickOverlay"
+    <view v-if="overlay && showPageContainer" class="uni-page-container-overlay"
+        :style="[overlayStyleMap, overlayStyle]" @click="onClickOverlay" 
         <!-- #ifndef APP-ANDROID -->
         @touchmove.prevent.stop
         <!-- #endif -->
-      ></view>
-      <view
-        class="uni-page-container-popup"
-        :class="popupClasses"
-        :style="[innerStyleMap, customStyle]"
-        @touchstart="onTouchStart"
-        @touchmove="onTouchMove"
-        @touchend="onTouchEnd"
-        @touchcancel="onTouchCancel"
-      >
+        >
+    </view>
+    <view v-if="showPageContainer" class="uni-page-container-popup" :class="popupClasses"
+        :style="[innerStyleMap, customStyle]" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd"
+        @touchcancel="onTouchCancel">
         <slot />
-      </view>
     </view>
 </template>
 
@@ -199,7 +189,7 @@
         })
     }
 
-    watch((): boolean => props.show, (newVal : boolean) => {
+    watch(() : boolean => props.show, (newVal : boolean) => {
         if (newVal && !showPageContainer.value) {
             openContainer()
         } else if (!newVal && showPageContainer.value) {
@@ -422,8 +412,8 @@
 
     .uni-page-container-popup-center {
         top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) scale(0.9);
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
         transition-property: opacity, transform;
         transition-timing-function: ease;
         opacity: 0;
