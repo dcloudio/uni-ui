@@ -155,13 +155,17 @@
         }, props.duration)
     }
 
+    function resetDragState() {
+        isDragging = false
+        translateValue.value = 0
+    }
+
     function openContainer() {
         emits('beforeenter')
         showPageContainer.value = true
         isEntered.value = false
         // 重置拖动状态
-        translateValue.value = 0
-        isDragging = false
+        resetDragState()
         nextTick(() => {
             emits('enter')
             isAnimating.value = true
@@ -293,13 +297,11 @@
             // 判断是否应该关闭：拖动距离超过 100px 或拖动速度较快
             if (Math.abs(translateValue.value) > MAX_SLIDER_DISTANCE || velocity > MIN_SLIDER_VELOCITY) {
                 // 先重置拖动状态，避免触发回弹逻辑
-                isDragging = false
-                translateValue.value = 0
+                resetDragState()
                 closeContainer()
             } else {
                 // 回弹
-                isDragging = false
-                translateValue.value = 0
+                resetDragState()
             }
         }
     }
@@ -311,8 +313,7 @@
 
         // touchcancel 时重置拖动状态并回弹
         if (isDragging) {
-            isDragging = false
-            translateValue.value = 0
+            resetDragState()
         }
     }
 
