@@ -224,6 +224,9 @@
     function onTouchMove(e : UniTouchEvent) {
         // 如果不是滑动关闭模式，阻止事件冒泡（防止滚动穿透），但允许容器内部滚动
         if (!props.closeOnSlideDown) {
+            // #ifdef WEB
+            e.preventDefault()
+            // #endif
             e.stopPropagation()
             return
         }
