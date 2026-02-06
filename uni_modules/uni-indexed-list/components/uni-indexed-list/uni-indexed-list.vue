@@ -236,16 +236,7 @@
 
 			// #ifdef H5
 			IsPC() {
-				var userAgentInfo = navigator.userAgent;
-				var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
-				var flag = true;
-				for (let v = 0; v < Agents.length - 1; v++) {
-					if (userAgentInfo.indexOf(Agents[v]) > 0) {
-						flag = false;
-						break;
-					}
-				}
-				return flag;
+				return uni.getSystemInfoSync().deviceType === "pc"
 			},
 			// #endif
 
@@ -364,4 +355,5 @@
 		color: #fff;
 		background-color: rgba(0, 0, 0, 0.5);
 	}
+
 </style>
