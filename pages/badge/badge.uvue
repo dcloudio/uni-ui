@@ -64,7 +64,6 @@
 			</uni-badge-view>
 		</view>
 		
-		<!-- 上面的view 50px宽，可以正常显示99+。但下面的view10px宽，Android上就只能显示9。包裹的内容越窄，badge就越窄。uni-badge-view组件中角标文本样式加 white-space: nowrap 解决 -->
 		<uni-badge-view text="99+" >
 			<view style="width: 10px; height: 20px; background-color: green;"></view>
 		</uni-badge-view>
@@ -174,23 +173,15 @@ const dynamicBadgeText = ref<string>("0")
 </script>
 
 <style>
-	.badge-wrap{
-		align-self: flex-start; /* 默认这样，不然width会变100%。但需要居中时得覆盖重设*/
-	}
-	.demo-badge {
-		margin-bottom: 10px;
-	}
-
-	/* 提高自定义 badge 样式的权重 */
 	.custom-badge-text {
-		background-color: #28a745 !important;
-		color: black !important;
+		background-color: #28a745;
+		color: black;
 	}
 	
 	.custom-badge-dot {
-		background-color: #28a745 !important;
-		width: 16px !important;
-		height: 16px !important;
-		border-radius: 16px !important;
+		background-color: #28a745;
+		width: 16px;
+		height: 16px;
+		border-radius: 16px;
 	}
 </style>
