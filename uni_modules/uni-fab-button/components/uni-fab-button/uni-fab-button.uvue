@@ -1,7 +1,7 @@
 <template>
 	<view style="align-items: center; justify-content: center;" class="fab">
-		<view class="plus" :class="plusClass" style="position: absolute;"></view>
-		<view class="plus" :class="plusClass" style="position: absolute;transform: rotate(90deg);"></view>
+		<view flatten class="plus" :class="plusClass" style="position: absolute;"></view>
+		<view flatten class="plus" :class="plusClass" style="position: absolute;transform: rotate(90deg);"></view>
 	</view>
 </template>
 <script lang="uts" setup>
