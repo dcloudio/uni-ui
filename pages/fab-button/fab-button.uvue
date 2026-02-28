@@ -1,0 +1,57 @@
+<template>
+	<view style="flex: 1;position: relative;">
+		<text>标准uni-fab-button</text>
+		<uni-fab-button></uni-fab-button>
+		<text>自定义fab样式</text>
+		<uni-fab-button class="custom-class"></uni-fab-button>
+		<text>自定义plus样式</text>
+		<uni-fab-button plus-class="custom-plus-class"></uni-fab-button>
+		<text>自定义fab和plus样式，变成一个16px的纯+</text>
+		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
+		<uni-fab-button class="right-bottom" hover-class="fab-hover" hover-stay-time="100" @click="clickme"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
+	</view>
+</template>
+
+<script setup>
+	const clickme = () => {
+		uni.showToast({
+			title: '点击了右下角的fab',
+			icon: 'none'
+		})
+	}
+</script>
+
+<style>
+	.custom-class{
+		background-color: green;
+		width: 20px;
+		height: 20px;
+	}
+	.custom-plus-class {
+		background-color: brown;
+		width: 80%;
+		height: 5px;
+		border-radius: 0px;
+	}
+	.transparent {
+		width: 16px;
+		height: 16px;
+		background-color: transparent;
+		box-shadow: none;
+	}
+	.black-plus {
+		background-color: black;
+		width: 100%;
+		height: 2px;
+		border-radius: 0px;
+	}
+	.right-bottom {
+		position: absolute;
+		right: 44px;
+		bottom: 44px;
+		transition: transform 0.1s ease;
+	}
+	.fab-hover{
+		transform: scale(0.8);
+	}
+</style>

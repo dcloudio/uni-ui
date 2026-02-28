@@ -5,9 +5,7 @@
 			"style": {"navigationBarTitleText": "uni-ui x"}
 		},{
 			"path": "pages/rate/rate",
-			"style": {
-				"navigationBarTitleText": "rate"
-			}
+			"style": {"navigationBarTitleText": "rate"}
 		},
 		{
 			"path": "pages/refresh-box/refresh-box",
@@ -18,18 +16,21 @@
 			"style": {"navigationStyle": "custom"}
 		},
 		{
-            "path": "pages/picker/picker",
-            "style": {
-                "navigationBarTitleText": "picker"
-            }
-        },
-        {
-            "path": "uni_modules/picker/pages/picker/picker"
-        },
-		{
 			"path": "pages/badge/badge",
+			"style": {"navigationBarTitleText": "badge"}
+		},
+		{
+			"path": "pages/page-container/page-container",
+			"style": {"navigationBarTitleText": "page-container"}
+		},
+		{
+			"path": "pages/pop-view/pop-view",
+			"style": {"navigationBarTitleText": "pop-view"}
+		},
+		{
+			"path": "pages/fab-button/fab-button",
 			"style": {
-				"navigationBarTitleText": "badge"  //微信小程序编译不过！@fxy
+				"navigationBarTitleText": "fab-button"
 			}
 		}
 		
@@ -39,21 +40,7 @@
 				"navigationBarTitleText": "tab-bar"
 			}
 		} */
-		/*,
-		{
-			"path": "pages/swiper-view/swiper-view",
-			"style": {
-				"navigationBarTitleText": "swiper"
-			}
-		},
-		 */
-		/* {
-			"path": "pages/page-container/page-container",
-			"style": {
-				"navigationBarTitleText": "page-container",
-				"enablePullDownRefresh": false
-			}
-		},
+		/* 
 		{
 			"path": "pages/movable-view/movable-view",
 			"style": {
