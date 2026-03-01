@@ -36,7 +36,7 @@
 		  @refresherrefresh="onRefresherrefresh2"
 		  @refresherrestore="onRefresherrestore2"
 		  @refresherabort="onRefresherabort2"
-		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		> 
 		  <!-- 列表内容 -->
 		  <view v-for="i in listCount2" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
@@ -53,7 +53,7 @@
 				pulling-text="继续下拉可刷新"
 				loosing-text="释放后会刷新"
 				loading-text="奋力加载中..."
-			></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+			></uni-refresh-box> 
 		</scroll-view>
 		<text style="margin: 5px;">slot自定义下拉图标</text>
 		<scroll-view
@@ -67,7 +67,7 @@
 		  @refresherrefresh="onRefresherrefresh3"
 		  @refresherrestore="onRefresherrestore3"
 		  @refresherabort="onRefresherabort3"
-		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		> 
 		  <!-- 列表内容 -->
 		  <view v-for="i in listCount3" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
@@ -92,7 +92,7 @@
 				  /> <!-- 非刷新中的图，可以和刷新中的图是一张，也可以分开-->
 				</template>
 				<!-- <image src="https://web-ext-storage.dcloud.net.cn/hello-uni-app-x/refresh-box-run.gif" style="width:20px;height:20px;"></image> -->
-			</uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+			</uni-refresh-box> 
 		</scroll-view>
 		<text style="margin: 5px;">无文字，纯loading</text>
 		<scroll-view
@@ -106,7 +106,7 @@
 		  @refresherrefresh="onRefresherrefresh4"
 		  @refresherrestore="onRefresherrestore4"
 		  @refresherabort="onRefresherabort4"
-		> <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
+		> 
 		  <!-- 列表内容 -->
 		  <view v-for="i in listCount4" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
@@ -121,7 +121,7 @@
 				loosing-text=""
 				loading-text=""
 				loading-class="loading-big-font"
-		  ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
+		  ></uni-refresh-box> 
 		</scroll-view>
   </view>
 </template>

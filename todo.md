@@ -13,5 +13,8 @@ dateformat
 超链接uni-link
 fab-button
 numberbox form
-indexList
+index-bar
+
 searchinput
+combox
+缺一个列表拖动排序

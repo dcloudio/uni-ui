@@ -1,0 +1,132 @@
+<template>
+	<view style="flex: 1; flex-direction: column; position: relative;">
+		<!-- 控制条 -->
+		<view class="control-bar">
+			<button class="control-btn" @click="toggleStyle">{{ useCustomStyle ? '默认样式' : '自定义样式' }}</button>
+			<button class="control-btn" @click="toggleIndexs">{{ useCustomIndexs ? '根据数据设索引' : '自定义索引' }}</button>
+		</view>
+		<list-view ref="listRef" style="flex: 1;" :scroll-into-view="indexViewID">
+			<!-- TODO 2个v-for导致蒸汽模式下乱了 -->
+			<template v-for="group in cityGroups" :key="group.index">
+				<!-- 索引头作为独立的 list-item -->
+				<list-item :id="'idx-' + group.index" type="header">
+					<view class="group-header">
+						<text class="group-header-text">{{ group.index }}</text>
+					</view>
+				</list-item>
+				<!-- 每个城市作为独立的 list-item -->
+				<list-item v-for="city in group.cities" :key="city.pinyin" type="city">
+					<view class="city-item">
+						<text class="city-name">{{ city.name }}</text>
+					</view>
+				</list-item>
+			</template>
+		</list-view>
+		<uni-index-bar
+			:indexs="currentIndexs"
+			:indicator-view-class="useCustomStyle ? 'custom-indicator' : ''"
+			:indicator-text-class="useCustomStyle ? 'custom-indicator-text' : ''"
+			:style="useCustomStyle ? 'color: aqua;' : ''"
+			@select="onSelect">
+		</uni-index-bar>
+	</view>
+</template>
+
+<script lang="uts" setup>
+	import { cityGroups } from './cities.uts'
+
+	// 默认索引列表
+	const defaultIndexs = cityGroups.map((g) : string => g.index).join('\n')
+	// 自定义索引列表
+	const customIndexs = '☆\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n#'
+
+	// 控制状态
+	const useCustomStyle = ref(false)
+	const useCustomIndexs = ref(false)
+
+	// 当前使用的索引
+	const currentIndexs = computed(() : string => useCustomIndexs.value ? customIndexs : defaultIndexs)
+
+	const listRef = ref<UniListViewElement | null>(null)
+	const indexViewID = ref("")
+
+	const toggleStyle = () => {
+		useCustomStyle.value = !useCustomStyle.value
+	}
+
+	const toggleIndexs = () => {
+		useCustomIndexs.value = !useCustomIndexs.value
+	}
+
+	const onSelect = (index : string) => {
+		const list = listRef.value
+		if (list == null) {
+			return
+		}
+		// console.log('选择了索引：', index)
+		const childId = 'idx-' + index
+		// #ifndef WEB
+		indexViewID.value = childId
+		// #endif
+		// TODO Web端 list的scroll-into-view 属性不生效，暂时使用 getElementById 获取元素位置并滚动到对应位置；后续如果 scroll-into-view 在 H5 端得到支持，可以去掉下面的代码
+		// #ifdef WEB
+		const element = uni.getElementById(childId)
+		if (element != null) {
+			// 使用 scrollTop 属性滚动
+			const rect = element.getBoundingClientRect()
+			const listRect = list.getBoundingClientRect()
+			const scrollTop = list.scrollTop + (rect.top - listRect.top)
+			list.scrollTop = scrollTop
+		}
+		// #endif
+	}
+</script>
+
+<style>
+	.control-bar {
+		flex-direction: row;
+		padding: 10px;
+		background-color: #f5f5f5;
+	}
+
+	.control-btn {
+		flex: 1;
+		margin: 0 5px;
+		font-size: 14px;
+	}
+
+	.group-header {
+		background-color: #f5f5f5;
+		padding-left: 16px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+
+	.group-header-text {
+		font-size: 14px;
+		color: #999999;
+		font-weight: bold;
+	}
+
+	.city-item {
+		padding-left: 16px;
+		padding-top: 14px;
+		padding-bottom: 14px;
+		border-bottom-width: 1px;
+		border-bottom-color: #eeeeee;
+		border-bottom-style: solid;
+	}
+
+	.city-name {
+		font-size: 16px;
+		color: #333333;
+	}
+
+	.custom-indicator {
+		background-color: #007aff;
+	}
+
+	.custom-indicator-text {
+		color: #ffff00;
+	}
+</style>

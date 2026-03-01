@@ -72,7 +72,6 @@
 		<view style="margin-bottom: 10px;">
 			<text style=" color: #666; margin-bottom: 10px;">自定义badge-class（绿色badge）：</text>
 			<uni-badge-view text="NEW" badge-class="custom-badge-text">
-				<!-- TODO Web因为css强制全部scope导致样式无法自定义 -->
 				<view style="height: 20px; background-color: #ffc107; ">
 					<text>20px区域</text>
 				</view>
@@ -117,7 +116,6 @@
 				</view>
 			</uni-badge-view>
 		</view>
-		<!-- TODO 以上web不生效，需解决样式的强制scope问题 @王亚琪 -->
 
 		<!-- 红点自定义badge-style -->
 		<view style="margin-bottom: 10px;">
@@ -136,13 +134,11 @@
 			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
 				<text>按钮&nbsp;</text>
 				<uni-badge-view text="9"/>
-				<!-- TODO
+				<!-- 
 				 上面加style="padding-top: 5px;" 会导致vue报错：
 				 [Vue warn]: Extraneous non-props attributes (style) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. \n at <UniBadgeView>\nat <View>\nat <View>\nat <View>\nat <Badge>\nat <AsyncComponentWrapper>\nat <PageBody>\nat <Page>\nat <Anonymous>\nat <Layout>\nat <App>
 				 app不报错。app也应该报错。
 				 本质是因为多根节点，不知道把style属性绑定到哪个根节点，需要指定，在组件的每个根节点上使用v-bind="$attrs"绑定所有属性过去
-				 
-				 另外，这个问题的起源是badge-view在单独text的时候设置了align-self: flex-start;。导致不垂直居中。但如果去掉align-self: flex-start，在无包裹情况下宽度又会成为100%
 				 -->
 			</view>
 		</view>
