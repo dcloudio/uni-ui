@@ -1,0 +1,2 @@
+export const UNI_COLLAPSE_REGISTER_CHILD = 'uni-collapse-register-child'
+export const UNI_COLLAPSE_CHILD_TOGGLE = 'uni-collapse-child-toggle'
