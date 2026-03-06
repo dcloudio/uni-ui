@@ -1,0 +1,723 @@
+<template>
+	<!-- #ifdef APP-ANDROID -->
+	<view class="drag-cell" :class="containerClass" :style="containerStyle">
+		<view
+			v-for="(_item, _index) in innerList"
+			class="drag-cell-item"
+			:style="getAppendStyle()">
+		</view>
+	</view>
+	<!-- #endif -->
+
+	<!-- #ifndef APP-ANDROID -->
+	<view class="drag-cell" :class="containerClass" :style="containerStyle">
+		<view
+			v-for="(item, index) in innerList"
+			:key="itemIds[index]"
+			class="drag-cell-item"
+			:class="getItemClass(index)"
+			:style="getItemStyle(index)"
+			<!-- #ifdef WEB -->
+			@pointerdown.stop="onPointerDown($event, index)"
+			@pointermove="onPointerMove"
+			@pointerup="onPointerEnd"
+			@pointercancel="onPointerEnd"
+			<!-- #endif -->
+			@touchstart.stop="onItemTouchStart($event, index)"
+			@touchmove="onItemTouchMove"
+			@touchend="onItemTouchEnd"
+			@touchcancel="onItemTouchEnd">
+			<view class="drag-cell-item-inner">
+				<slot :item="item" :index="index"></slot>
+			</view>
+		</view>
+		<view v-if="showAppendSlot" class="drag-cell-append" :style="getAppendStyle()">
+			<slot name="append"></slot>
+		</view>
+		<view v-if="dragging && activeIndex >= 0" class="drag-cell-drag-proxy" :style="getDragProxyStyle()">
+			<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
+		</view>
+		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
+			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
+		</view>
+		<view
+			v-if="dragging"
+			class="drag-cell-drag-layer"
+			<!-- #ifdef WEB -->
+			@pointermove.stop.prevent="onPointerMove"
+			@pointerup="onPointerEnd"
+			@pointercancel="onPointerEnd"
+			<!-- #endif -->
+			@touchmove.stop.prevent="onItemTouchMove"
+			@touchend="onItemTouchEnd"
+			@touchcancel="onItemTouchEnd">
+		</view>
+	</view>
+	<!-- #endif -->
+</template>
+
+<script setup lang="uts">
+
+	type ItemLayout = {
+		left: number,
+		pageTop: number,
+		width: number,
+		height: number,
+		centerX: number,
+		centerY: number
+	}
+
+	type QueryRect = {
+		left: number,
+		top: number,
+		width: number,
+		height: number,
+		right?: number,
+		bottom?: number,
+		x?: number,
+		y?: number
+	}
+
+	type DeleteBarLayout = {
+		left: number,
+		pageTop: number,
+		right: number,
+		bottom: number
+	}
+
+	const props = defineProps({
+		modelValue: {
+			type: Array,
+			required: false
+		},
+		column: {
+			type: Number,
+			default: 0
+		},
+		showClose: {
+			type: Boolean,
+			default: false
+		},
+		showAppend: {
+			type: Boolean,
+			default: true
+		}
+	})
+
+	const emit = defineEmits(['update:modelValue', 'change'])
+	const instance = getCurrentInstance()
+	const slots = useSlots()
+
+	const innerList = ref(props.modelValue != null ? props.modelValue.slice() : [])
+	const itemIds = ref<number[]>([])
+	const layouts = ref<ItemLayout[]>([])
+	const previewOrder = ref<number[]>([])
+	const previewPositionMap = ref<number[]>([])
+	const dragging = ref(false)
+	const activeIndex = ref(-1)
+	const hoverIndex = ref(-1)
+	const dragOffsetX = ref(0)
+	const dragOffsetY = ref(0)
+	const startTouchX = ref(0)
+	const startTouchY = ref(0)
+	const pendingIndex = ref(-1)
+	const overDeleteBar = ref(false)
+	const deleteBarLayout = ref<DeleteBarLayout | null>(null)
+	const activeViewLeft = ref(0)
+	const activeViewTop = ref(0)
+	const nextItemId = ref(0)
+	let longPressTimer = 0
+	const longPressDuration = 350
+	const pressCancelDistance = 10
+
+	const columnCount = computed(() : number => {
+		const currentColumn = props.column as number
+		if (currentColumn <= 0) {
+			return 0
+		}
+		return Math.floor(currentColumn)
+	})
+
+	const containerClass = computed(() : string => {
+		return columnCount.value > 0 ? 'drag-cell-grid' : 'drag-cell-row'
+	})
+
+	const showClose = computed(() : boolean => props.showClose == true)
+	const showAppendSlot = computed(() : boolean => props.showAppend == true && slots['append'] != null)
+	const showDeleteBar = computed(() : boolean => showClose.value && dragging.value)
+	const containerStyle = computed(() : string => '')
+	const appLanguage = uni.getAppBaseInfo().appLanguage ?? 'en'
+
+	type DeleteBarLocale = {
+		idle: string,
+		active: string
+	}
+
+	const getDeleteBarLocale = () : DeleteBarLocale => {
+		const language = appLanguage.toLowerCase()
+		if (language.indexOf('zh-hant') == 0 || language.indexOf('zh-tw') == 0 || language.indexOf('zh-hk') == 0 || language.indexOf('zh-mo') == 0) {
+			return {
+				idle: '\u62d6\u5230\u6b64\u8655\u522a\u9664',
+				active: '\u9b06\u624b\u522a\u9664'
+			}
+		}
+		if (language.indexOf('zh') == 0) {
+			return {
+				idle: '\u62d6\u5230\u6b64\u5904\u5220\u9664',
+				active: '\u677e\u624b\u5220\u9664'
+			}
+		}
+		if (language.indexOf('fr') == 0) {
+			return {
+				idle: 'Faites glisser ici pour supprimer',
+				active: 'Rel\u00e2chez pour supprimer'
+			}
+		}
+		if (language.indexOf('la') == 0) {
+			return {
+				idle: 'Huc trahe ut deleas',
+				active: 'Dimitte ut deleas'
+			}
+		}
+		return {
+			idle: 'Drag here to delete',
+			active: 'Release to delete'
+		}
+	}
+
+	const deleteBarLocale = getDeleteBarLocale()
+	const deleteBarText = computed(() : string => {
+		return overDeleteBar.value ? deleteBarLocale.active : deleteBarLocale.idle
+	})
+
+	const createIdentityOrder = (length : number) : number[] => {
+		const order : number[] = []
+		for (let i = 0; i < length; i++) {
+			order.push(i)
+		}
+		return order
+	}
+
+	const applyPreviewOrder = (order : number[]) => {
+		previewOrder.value = order
+		const positionMap : number[] = []
+		for (let i = 0; i < order.length; i++) {
+			positionMap[order[i]] = i
+		}
+		previewPositionMap.value = positionMap
+	}
+
+	const buildIdList = (length : number) : number[] => {
+		const ids : number[] = []
+		for (let i = 0; i < length; i++) {
+			ids.push(nextItemId.value)
+			nextItemId.value = nextItemId.value + 1
+		}
+		return ids
+	}
+
+	function clearLongPressTimer() : void {
+		if (longPressTimer != 0) {
+			clearTimeout(longPressTimer)
+			longPressTimer = 0
+		}
+	}
+
+	const resetDragState = () => {
+		clearLongPressTimer()
+		dragging.value = false
+		activeIndex.value = -1
+		hoverIndex.value = -1
+		pendingIndex.value = -1
+		overDeleteBar.value = false
+		deleteBarLayout.value = null
+		activeViewLeft.value = 0
+		activeViewTop.value = 0
+		dragOffsetX.value = 0
+		dragOffsetY.value = 0
+		applyPreviewOrder(createIdentityOrder(innerList.value.length))
+	}
+
+	const getCurrentTargetRect = (target : UniElement | null) : QueryRect | null => {
+		if (target == null) {
+			return null
+		}
+		const rect = target.getBoundingClientRect()
+		return {
+			left: rect.left,
+			top: rect.top,
+			width: rect.width,
+			height: rect.height,
+			right: rect.right,
+			bottom: rect.bottom
+		}
+	}
+
+
+
+	function measureLayouts() : void {
+		if (instance == null || instance.proxy == null) {
+			return
+		}
+		uni.createSelectorQuery()
+			.in(instance.proxy)
+			.selectAll('.drag-cell-item')
+			.boundingClientRect((rects) => {
+				const nextLayouts : ItemLayout[] = []
+				if (rects != null) {
+					const rectList = rects as QueryRect[]
+					for (let i = 0; i < rectList.length; i++) {
+						const rect = rectList[i]
+						const left = rect.left
+						let top = rect.y ?? 0
+						if (top == 0 && rect.bottom != null) {
+							top = rect.bottom - rect.height
+						}
+						const width = rect.width
+						const height = rect.height
+						nextLayouts.push({
+							left,
+							pageTop: top,
+							width,
+							height,
+							centerX: left + width / 2,
+							centerY: top + height / 2
+						})
+					}
+				}
+				layouts.value = nextLayouts
+			})
+			.exec()
+	}
+
+	const syncFromModel = () => {
+		if (dragging.value) {
+			return
+		}
+		innerList.value = props.modelValue != null ? props.modelValue.slice() : []
+		itemIds.value = buildIdList(innerList.value.length)
+		resetDragState()
+		nextTick(() => {
+			measureLayouts()
+		})
+	}
+
+	const emitChange = () => {
+		emit('update:modelValue', innerList.value)
+		emit('change', innerList.value)
+	}
+
+
+
+	const getWebWindowTopOffset = () : number => {
+		// #ifdef WEB
+		return uni.getWindowInfo().windowTop
+		// #endif
+		// #ifndef WEB
+		return 0
+		// #endif
+	}
+
+	const measureDeleteBar = () => {
+		if (instance == null || instance.proxy == null || showDeleteBar.value != true) {
+			deleteBarLayout.value = null
+			return
+		}
+		uni.createSelectorQuery()
+			.in(instance.proxy)
+			.select('.drag-cell-delete-bar')
+			.boundingClientRect((rect) => {
+				if (rect != null) {
+					const barRect = rect as QueryRect
+					const windowTopOffset = getWebWindowTopOffset()
+					const right = barRect.right ?? (barRect.left + barRect.width)
+					const bottom = barRect.bottom ?? (barRect.top + barRect.height)
+					deleteBarLayout.value = {
+						left: barRect.left,
+						pageTop: barRect.top + windowTopOffset,
+						right,
+						bottom: bottom + windowTopOffset
+					}
+				} else {
+					deleteBarLayout.value = null
+				}
+			})
+			.exec()
+	}
+
+
+
+	const buildPreviewOrder = (length : number, from : number, to : number) : number[] => {
+		const order = createIdentityOrder(length)
+		if (from == to) {
+			return order
+		}
+		order.splice(from, 1)
+		order.splice(to, 0, from)
+		return order
+	}
+
+	const updateHoverIndex = () => {
+		const currentActiveIndex = activeIndex.value
+		if (currentActiveIndex < 0 || currentActiveIndex >= layouts.value.length) {
+			return
+		}
+		const sourceLayout = layouts.value[currentActiveIndex]
+		const centerX = sourceLayout.centerX + dragOffsetX.value
+		const centerY = sourceLayout.centerY + dragOffsetY.value
+		let nearestIndex = currentActiveIndex
+		let nearestDistance = -1.0
+		for (let i = 0; i < layouts.value.length; i++) {
+			const layout = layouts.value[i]
+			const deltaX = layout.centerX - centerX
+			const deltaY = layout.centerY - centerY
+			const distance = deltaX * deltaX + deltaY * deltaY
+			if (nearestDistance < 0 || distance < nearestDistance) {
+				nearestDistance = distance
+				nearestIndex = i
+			}
+		}
+		if (nearestIndex != hoverIndex.value) {
+			hoverIndex.value = nearestIndex
+			applyPreviewOrder(buildPreviewOrder(innerList.value.length, currentActiveIndex, nearestIndex))
+		}
+	}
+
+	const cancelPendingPress = () => {
+		clearLongPressTimer()
+		pendingIndex.value = -1
+	}
+
+	function beginDrag(index : number, clientX : number, clientY : number) : void {
+		if (layouts.value.length != innerList.value.length || index >= layouts.value.length) {
+			measureLayouts()
+			cancelPendingPress()
+			return
+		}
+		clearLongPressTimer()
+		pendingIndex.value = -1
+		startTouchX.value = clientX
+		startTouchY.value = clientY
+		dragOffsetX.value = 0
+		dragOffsetY.value = 0
+		dragging.value = true
+		activeIndex.value = index
+		hoverIndex.value = index
+		overDeleteBar.value = false
+		applyPreviewOrder(createIdentityOrder(innerList.value.length))
+		nextTick(() => {
+			measureDeleteBar()
+		})
+	}
+
+	const updateDeleteBarState = () => {
+		if (showClose.value != true || dragging.value != true || activeIndex.value < 0 || activeIndex.value >= layouts.value.length) {
+			overDeleteBar.value = false
+			return
+		}
+		const barLayout = deleteBarLayout.value
+		if (barLayout == null) {
+			overDeleteBar.value = false
+			return
+		}
+		const sourceLayout = layouts.value[activeIndex.value]
+		const centerX = activeViewLeft.value + sourceLayout.width / 2 + dragOffsetX.value
+		const centerY = activeViewTop.value + sourceLayout.height / 2 + dragOffsetY.value
+		const isInside = centerX >= barLayout.left && centerX <= barLayout.right && centerY >= barLayout.pageTop && centerY <= barLayout.bottom
+		if (isInside != overDeleteBar.value) {
+			overDeleteBar.value = isInside
+			if (isInside) {
+				hoverIndex.value = activeIndex.value
+				applyPreviewOrder(createIdentityOrder(innerList.value.length))
+			}
+		}
+	}
+
+	const scheduleLongPress = (index : number, clientX : number, clientY : number, viewLeft : number, viewTop : number) => {
+		clearLongPressTimer()
+		pendingIndex.value = index
+		startTouchX.value = clientX
+		startTouchY.value = clientY
+		activeViewLeft.value = viewLeft
+		activeViewTop.value = viewTop
+		longPressTimer = setTimeout(() => {
+			longPressTimer = 0
+			beginDrag(index, clientX, clientY)
+		}, longPressDuration)
+	}
+
+
+
+
+
+	const moveDrag = (clientX : number, clientY : number) => {
+		if (dragging.value == true && activeIndex.value >= 0) {
+			dragOffsetX.value = clientX - startTouchX.value
+			dragOffsetY.value = clientY - startTouchY.value
+			updateDeleteBarState()
+			if (overDeleteBar.value != true) {
+				updateHoverIndex()
+			}
+			return
+		}
+		if (pendingIndex.value >= 0) {
+			const deltaX = clientX - startTouchX.value
+			const deltaY = clientY - startTouchY.value
+			const distanceSquare = deltaX * deltaX + deltaY * deltaY
+			if (distanceSquare > pressCancelDistance * pressCancelDistance) {
+				cancelPendingPress()
+			}
+		}
+	}
+
+	const finishDrag = () => {
+		if (pendingIndex.value >= 0) {
+			cancelPendingPress()
+			return
+		}
+		if (dragging.value != true || activeIndex.value < 0) {
+			return
+		}
+		const currentActiveIndex = activeIndex.value
+		if (showClose.value == true && overDeleteBar.value == true) {
+			const nextList = innerList.value.slice()
+			const nextIds = itemIds.value.slice()
+			nextList.splice(currentActiveIndex, 1)
+			nextIds.splice(currentActiveIndex, 1)
+			innerList.value = nextList
+			itemIds.value = nextIds
+			resetDragState()
+			emitChange()
+			nextTick(() => {
+				measureLayouts()
+			})
+			return
+		}
+		const targetIndex = hoverIndex.value
+		if (targetIndex < 0 || targetIndex == currentActiveIndex) {
+			resetDragState()
+			return
+		}
+
+		const nextList = innerList.value.slice()
+		const nextIds = itemIds.value.slice()
+		const movedItem = nextList.splice(currentActiveIndex, 1)[0]
+		const movedId = nextIds.splice(currentActiveIndex, 1)[0]
+		nextList.splice(targetIndex, 0, movedItem)
+		nextIds.splice(targetIndex, 0, movedId)
+
+		innerList.value = nextList
+		itemIds.value = nextIds
+		resetDragState()
+		emitChange()
+		nextTick(() => {
+			measureLayouts()
+		})
+	}
+
+	const onItemTouchStart = (event : Any, index : number) => {
+		const touchEvent = event as UniTouchEvent
+		const touch = touchEvent.touches[0]
+		const target = touchEvent.currentTarget as UniElement
+		const rect = getCurrentTargetRect(target)
+		const viewLeft = rect != null ? rect.left : 0
+		const viewTop = rect != null ? rect.top : 0
+		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop)
+	}
+
+	const onItemTouchMove = (event : Any) => {
+		const touchEvent = event as UniTouchEvent
+		const touch = touchEvent.touches[0]
+		if (dragging.value == true) {
+			touchEvent.preventDefault()
+		}
+		moveDrag(touch.clientX, touch.clientY)
+	}
+
+	const onItemTouchEnd = (_event : Any) => {
+		finishDrag()
+	}
+
+
+	// #ifdef WEB
+	const onPointerDown = (event : UniPointerEvent, index : number) => {
+		const target = event.currentTarget as UniElement
+		const rect = getCurrentTargetRect(target)
+		const viewLeft = rect != null ? rect.left : 0
+		const viewTop = rect != null ? rect.top : 0
+		scheduleLongPress(index, event.x, event.y, viewLeft, viewTop)
+	}
+
+	const onPointerMove = (event : UniPointerEvent) => {
+		if (dragging.value == true) {
+			event.preventDefault()
+		}
+		moveDrag(event.x, event.y)
+	}
+
+	const onPointerEnd = (_event : UniPointerEvent) => {
+		finishDrag()
+	}
+	// #endif
+
+	const getItemClass = (index : number) : string => {
+		if (dragging.value == true && activeIndex.value == index) {
+			return 'drag-cell-item-placeholder'
+		}
+		return ''
+	}
+
+	const getItemStyle = (index : number) : string => {
+		let widthStyle = 'width: auto;'
+		if (columnCount.value > 0) {
+			widthStyle = `width: ${100 / columnCount.value}%;`
+		}
+
+		let zIndexStyle = 'z-index: 1;'
+		let transformStyle = 'translateX(0px) translateY(0px)'
+
+		if (dragging.value == true) {
+			if (activeIndex.value != index && index < layouts.value.length) {
+				const targetPosition = previewPositionMap.value[index]
+				if (targetPosition != null && targetPosition < layouts.value.length) {
+					const sourceLayout = layouts.value[index]
+					const targetLayout = layouts.value[targetPosition]
+					const deltaX = targetLayout.left - sourceLayout.left
+					const deltaY = targetLayout.pageTop - sourceLayout.pageTop
+					transformStyle = `translateX(${deltaX}px) translateY(${deltaY}px)`
+				}
+			}
+		}
+
+		return `${widthStyle}${zIndexStyle}transform: ${transformStyle};`
+	}
+
+	const getDragProxyStyle = () : string => {
+		const index = activeIndex.value
+		if (dragging.value == true && index >= 0 && index < layouts.value.length) {
+			const layout = layouts.value[index]
+			return `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${layout.width}px; height: ${layout.height}px; z-index: 30; transform: translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(1.12);`
+		}
+		return 'display: none;'
+	}
+
+	const getAppendStyle = () : string => {
+		if (columnCount.value > 0) {
+			return `width: ${100 / columnCount.value}%;`
+		}
+		return 'width: auto;'
+	}
+
+
+	onMounted(() => {
+		itemIds.value = buildIdList(innerList.value.length)
+		applyPreviewOrder(createIdentityOrder(innerList.value.length))
+		nextTick(() => {
+			measureLayouts()
+		})
+	})
+</script>
+
+<style>
+	.drag-cell {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		width: 100%;
+		position: relative;
+		overflow: visible;
+	}
+
+	.drag-cell-row {
+		justify-content: flex-start;
+	}
+
+	.drag-cell-grid {
+		justify-content: flex-start;
+	}
+
+	.drag-cell-item {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		transition-property: transform;
+		transition-duration: 200ms;
+		transition-timing-function: ease;
+		transform-origin: center center;
+		overflow: visible;
+		/* #ifdef WEB */
+		cursor: grab;
+		/* #endif */
+	}
+
+	.drag-cell-append {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		overflow: visible;
+	}
+
+	.drag-cell-item-placeholder {
+		transition-duration: 0ms;
+		opacity: 0;
+	}
+
+	.drag-cell-item-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		transition-property: transform;
+		transition-duration: 200ms;
+		transition-timing-function: ease;
+		transform-origin: center center;
+	}
+
+	.drag-cell-drag-proxy {
+		transition-duration: 0ms;
+		opacity: 0.94;
+		pointer-events: none;
+		/* #ifdef WEB */
+		cursor: grabbing;
+		/* #endif */
+	}
+
+	.drag-cell-delete-bar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 56px;
+		border-radius: 0px;
+		background-color: rgba(255, 59, 48, 0.92);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		transform: translateY(0px);
+		z-index: 20;
+	}
+
+	.drag-cell-delete-bar-active {
+		background-color: rgba(209, 33, 23, 0.96);
+		transform: scale(1.02);
+	}
+
+	.drag-cell-delete-text {
+		font-size: 16px;
+		font-weight: bold;
+		color: #ffffff;
+		text-align: center;
+	}
+
+	.drag-cell-drag-layer {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0);
+		z-index: 25;
+	}
+</style>

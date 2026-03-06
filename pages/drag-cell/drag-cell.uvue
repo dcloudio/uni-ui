@@ -1,0 +1,525 @@
+﻿<template>
+	<!-- #ifdef APP -->
+	<scroll-view style="flex: 1; padding: 15px;">
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	<view style="padding: 15px;">
+	<!-- #endif -->
+		<text class="page-title">{{ pageTitle }}</text>
+
+		<view class="section">
+			<text class="section-title">{{ example1Title }}</text>
+			<text class="section-desc">{{ example1Desc }}</text>
+			<uni-drag-cell v-model="tagList" @change="onTagChange">
+				<template #default="{ item, index }">
+					<view class="tag-slot">
+						<view class="tag-item" @click="clickItem(item as string, index as number)">
+							<text class="tag-text">{{ item as string }}</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ currentOrderLabel + tagList.join(', ') }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">{{ example2Title }}</text>
+			<text class="section-desc">{{ example2Desc }}</text>
+			<uni-drag-cell v-model="gridList3" :column="3" @change="onGridChange">
+				<template #default="{ item }">
+					<view class="grid-slot">
+						<view class="grid-item">
+							<text class="grid-text">{{ (item as UTSJSONObject)['name'] }}</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ currentOrderLabel + getGridNames(gridList3) }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">{{ example3Title }}</text>
+			<text class="section-desc">{{ example3Desc }}</text>
+			<uni-drag-cell v-model="gridList4" :column="1" @change="onGridChange">
+				<template #default="{ item }">
+					<view class="grid-slot-small">
+						<view class="grid-item-small">
+							<text class="grid-text-small">{{ (item as UTSJSONObject)['name'] }}</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ currentOrderLabel + getGridNames(gridList4) }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">{{ example4Title }}</text>
+			<text class="section-desc">{{ example4Desc }}</text>
+			<uni-drag-cell v-model="deleteList" :show-close="true" :show-append="true" @change="onDeleteChange">
+				<template #default="{ item }">
+					<view class="tag-slot">
+						<view class="tag-item-delete">
+							<text class="tag-text">{{ item as string }}</text>
+						</view>
+					</view>
+				</template>
+				<template #append>
+					<view class="tag-slot">
+						<view class="tag-item-add" @click="promptAddDeleteTag">
+							<text class="tag-plus-text">+</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ currentOrderLabel + deleteList.join(', ') }}</text>
+			<text class="result-text">{{ remainLabel + deleteList.length + itemUnit }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">{{ example5Title }}</text>
+			<text class="section-desc">{{ example5Desc }}</text>
+			<uni-drag-cell v-model="iconGridList" :column="3" :show-close="true" @change="onIconGridChange">
+				<template #default="{ item }">
+					<view class="icon-grid-slot">
+						<view class="icon-grid-item">
+							<view class="icon-box">
+								<text class="icon-emoji">{{ (item as UTSJSONObject)['icon'] }}</text>
+							</view>
+							<text class="icon-label">{{ (item as UTSJSONObject)['label'] }}</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ currentOrderLabel + getIconNames(iconGridList) }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">{{ example6Title }}</text>
+			<text class="section-desc">{{ example6Desc }}</text>
+			<uni-drag-cell v-model="imageList" :column="3" :show-close="true" :show-append="imageList.length < maxImageCount" @change="onImageChange">
+				<template #default="{ item }">
+					<view class="image-grid-slot">
+						<view class="image-grid-item">
+							<image class="image-grid-img" :src="item as string" mode="aspectFill"></image>
+						</view>
+					</view>
+				</template>
+				<template #append>
+					<view class="image-grid-slot">
+						<view class="image-grid-plus" @click="chooseImages">
+							<text class="image-grid-plus-icon">+</text>
+						</view>
+					</view>
+				</template>
+			</uni-drag-cell>
+			<text class="result-text">{{ selectedLabel + imageList.length + '/' + maxImageCount }}</text>
+		</view>
+
+		<view style="height: 50px;"></view>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+	<!-- #ifndef APP -->
+	</view>
+	<!-- #endif -->
+</template>
+
+<script setup lang="uts">
+	const pageTitle = 'drag-cell \u62d6\u62fd\u6392\u5e8f\u7ec4\u4ef6'
+	const example1Title = '\u793a\u4f8b 1\uff1a\u6807\u7b7e\u62d6\u62fd\u6392\u5e8f'
+	const example1Desc = '\u957f\u6309\u6807\u7b7e\u540e\u53ef\u62d6\u62fd\u6392\u5e8f\uff0c\u70b9\u51fb\u6807\u7b7e\u53ef\u62ff\u5230 item \u548c index'
+	const example2Title = '\u793a\u4f8b 2\uff1a\u5bab\u683c\u62d6\u62fd\u6392\u5e8f\uff083 \u5217\uff09'
+	const example2Desc = '\u957f\u6309\u5bab\u683c\u9879\u540e\u53ef\u62d6\u62fd\u6392\u5e8f'
+	const example3Title = '\u793a\u4f8b 3\uff1a\u5217\u8868\u62d6\u62fd\u6392\u5e8f\uff081 \u5217\uff09'
+	const example3Desc = '\u957f\u6309\u5217\u8868\u9879\u540e\u53ef\u62d6\u62fd\u6392\u5e8f'
+	const example4Title = '\u793a\u4f8b 4\uff1a\u53ef\u65b0\u589e\u5e76\u5220\u9664\u7684\u6807\u7b7e'
+	const example4Desc = '\u957f\u6309\u6807\u7b7e\u53ef\u6392\u5e8f\uff0c\u62d6\u5230\u5e95\u90e8\u53ef\u5220\u9664\uff0c\u70b9\u51fb + \u53ef\u8f93\u5165\u5e76\u65b0\u589e\u6807\u7b7e'
+	const example5Title = '\u793a\u4f8b 5\uff1a\u5e26\u5220\u9664\u529f\u80fd\u7684\u56fe\u6807\u5bab\u683c'
+	const example5Desc = '\u957f\u6309\u540e\u53ef\u62d6\u52a8\u56fe\u6807\u5bab\u683c\u9879\uff0c\u5e76\u652f\u6301\u62d6\u5230\u5e95\u90e8\u5220\u9664'
+	const example6Title = '\u793a\u4f8b 6\uff1a\u4e5d\u5bab\u683c\u56fe\u7247\u9009\u62e9'
+	const example6Desc = '\u70b9\u51fb + \u9009\u62e9\u56fe\u7247\uff0c\u652f\u6301\u62d6\u62fd\u6392\u5e8f\uff0c\u4e5f\u652f\u6301\u62d6\u5230\u5e95\u90e8\u5220\u9664'
+	const currentOrderLabel = '\u5f53\u524d\u987a\u5e8f\uff1a'
+	const remainLabel = '\u5269\u4f59\uff1a'
+	const selectedLabel = '\u5df2\u9009\u62e9\uff1a'
+	const itemUnit = ' \u9879'
+	const addTagTitle = '\u65b0\u589e\u6807\u7b7e'
+	const addTagPlaceholder = '\u8bf7\u8f93\u5165\u6807\u7b7e\u5185\u5bb9'
+	const addTagConfirm = '\u786e\u5b9a'
+	const addTagCancel = '\u53d6\u6d88'
+	const emptyTagText = '\u6807\u7b7e\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a'
+	const clickItemPrefix = '\u70b9\u51fb\u4e86\u7b2c '
+	const clickItemMiddle = ' \u9879\uff1a'
+	const maxImageCount = 9
+
+	const tagList = ref<string[]>(['\u6807\u7b7e1', '\u6807\u7b7e2', '\u6807\u7b7e3', '\u6807\u7b7e4'])
+
+	const gridList3 = ref<UTSJSONObject[]>([
+		{ name: '\u5bab\u683c1' },
+		{ name: '\u5bab\u683c2' },
+		{ name: '\u5bab\u683c3' },
+		{ name: '\u5bab\u683c4' },
+		{ name: '\u5bab\u683c5' },
+		{ name: '\u5bab\u683c6' },
+		{ name: '\u5bab\u683c7' },
+		{ name: '\u5bab\u683c8' },
+		{ name: '\u5bab\u683c9' }
+	])
+
+	const gridList4 = ref<UTSJSONObject[]>([
+		{ name: '1' },
+		{ name: '2' },
+		{ name: '3' },
+		{ name: '4' },
+		{ name: '5' }
+	])
+
+	const deleteList = ref<string[]>(['\u6807\u7b7eA', '\u6807\u7b7eB', '\u6807\u7b7eC', '\u6807\u7b7eD', '\u6807\u7b7eE'])
+
+	const iconGridList = ref<UTSJSONObject[]>([
+		{ icon: 'H', label: '\u9996\u9875' },
+		{ icon: 'M', label: '\u6d88\u606f' },
+		{ icon: 'P', label: '\u6211\u7684' },
+		{ icon: 'S', label: '\u8bbe\u7f6e' },
+		{ icon: 'A', label: '\u76f8\u518c' },
+		{ icon: 'Y', label: '\u97f3\u4e50' }
+	])
+
+	const imageList = ref<string[]>([])
+
+	const getObjectString = (item : UTSJSONObject, key : string) : string => {
+		const value = item[key]
+		if (value == null) {
+			return ''
+		}
+		return value as string
+	}
+
+	const clickItem = (item : string, index : number) => {
+		uni.showToast({
+			title: clickItemPrefix + (index + 1) + clickItemMiddle + item,
+			icon: 'none'
+		})
+	}
+
+	const onTagChange = (list : string[]) => {
+		console.log('tag list changed:', list)
+	}
+
+	const onGridChange = (list : UTSJSONObject[]) => {
+		console.log('grid list changed:', list)
+	}
+
+	const onDeleteChange = (list : string[]) => {
+		console.log('delete list changed:', list)
+	}
+
+	const onIconGridChange = (list : UTSJSONObject[]) => {
+		console.log('icon grid list changed:', list)
+	}
+
+	const onImageChange = (list : string[]) => {
+		console.log('image list changed:', list)
+	}
+
+	const promptAddDeleteTag = () => {
+		uni.showModal({
+			title: addTagTitle,
+			editable: true,
+			placeholderText: addTagPlaceholder,
+			confirmText: addTagConfirm,
+			cancelText: addTagCancel,
+			success: (res : UniShowModalResult) => {
+				if (res.confirm != true) {
+					return
+				}
+				const value = res.content != null ? res.content.trim() : ''
+				if (value.length == 0) {
+					uni.showToast({
+						title: emptyTagText,
+						icon: 'none'
+					})
+					return
+				}
+				const nextList = deleteList.value.slice()
+				nextList.push(value)
+				deleteList.value = nextList
+				onDeleteChange(deleteList.value)
+			}
+		})
+	}
+
+	const extractChooseImagePaths = (res : ChooseImageSuccess) : string[] => {
+		const paths : string[] = []
+		for (let i = 0; i < res.tempFilePaths.length; i++) {
+			const path = res.tempFilePaths[i]
+			if (path.length > 0) {
+				paths.push(path)
+			}
+		}
+		if (paths.length > 0) {
+			return paths
+		}
+		for (let i = 0; i < res.tempFiles.length; i++) {
+			const path = res.tempFiles[i].path
+			if (path.length > 0) {
+				paths.push(path)
+			}
+		}
+		return paths
+	}
+
+	const chooseImages = () => {
+		const remainCount = maxImageCount - imageList.value.length
+		if (remainCount <= 0) {
+			return
+		}
+		uni.chooseImage({
+			count: remainCount,
+			success: (res : ChooseImageSuccess) => {
+				const selectedPaths = extractChooseImagePaths(res)
+				if (selectedPaths.length == 0) {
+					return
+				}
+				const nextList = imageList.value.slice()
+				for (let i = 0; i < selectedPaths.length; i++) {
+					if (nextList.length >= maxImageCount) {
+						break
+					}
+					nextList.push(selectedPaths[i])
+				}
+				imageList.value = nextList
+				onImageChange(imageList.value)
+			}
+		})
+	}
+
+	const getGridNames = (list : UTSJSONObject[]) : string => {
+		const names : string[] = []
+		for (let i = 0; i < list.length; i++) {
+			const value = list[i]['name']
+			if (value != null) {
+				names.push(value as string)
+			}
+		}
+		return names.join(', ')
+	}
+
+	const getIconNames = (list : UTSJSONObject[]) : string => {
+		const names : string[] = []
+		for (let i = 0; i < list.length; i++) {
+			const value = list[i]['label']
+			if (value != null) {
+				names.push(value as string)
+			}
+		}
+		return names.join(', ')
+	}
+</script>
+
+<style>
+	.page-title {
+		font-size: 24px;
+		font-weight: bold;
+		color: #333333;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	.section {
+		margin-bottom: 30px;
+		background-color: #ffffff;
+		border-radius: 8px;
+		padding: 15px;
+	}
+
+	.section-title {
+		font-size: 16px;
+		font-weight: bold;
+		color: #007aff;
+		margin-bottom: 5px;
+	}
+
+	.section-desc {
+		font-size: 12px;
+		color: #666666;
+		margin-bottom: 15px;
+	}
+
+	.tag-slot {
+		padding-right: 10px;
+		padding-bottom: 10px;
+	}
+
+	.tag-item {
+		display: flex;
+		flex-direction: column;
+		background-color: #007aff;
+		border-radius: 4px;
+		padding: 8px 16px;
+	}
+
+	.tag-text {
+		color: #ffffff;
+		font-size: 14px;
+	}
+
+	.tag-item-delete {
+		display: flex;
+		flex-direction: column;
+		background-color: #ff6b6b;
+		border-radius: 4px;
+		padding: 8px 16px;
+	}
+
+	.tag-item-add {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #fff5f5;
+		border-width: 1px;
+		border-style: dashed;
+		border-color: #ff6b6b;
+		border-radius: 4px;
+		padding: 8px 16px;
+	}
+
+	.tag-plus-text {
+		color: #ff6b6b;
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	.grid-slot {
+		width: 100%;
+		padding: 5px;
+	}
+
+	.grid-item {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #28a745;
+		border-radius: 8px;
+		height: 80px;
+	}
+
+	.grid-text {
+		color: #ffffff;
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	.grid-slot-small {
+		width: 100%;
+		padding: 3px;
+	}
+
+	.grid-item-small {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #ffc107;
+		border-radius: 8px;
+		height: 60px;
+	}
+
+	.grid-text-small {
+		color: #333333;
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	.icon-grid-slot {
+		width: 100%;
+		padding: 5px;
+	}
+
+	.icon-grid-item {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: #f8f9fa;
+		border-radius: 8px;
+		padding: 10px;
+	}
+
+	.icon-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		background-color: #e9ecef;
+		border-radius: 25px;
+		margin-bottom: 5px;
+	}
+
+	.icon-emoji {
+		font-size: 24px;
+		font-weight: bold;
+		color: #333333;
+	}
+
+	.icon-label {
+		font-size: 12px;
+		color: #333333;
+	}
+
+	.image-grid-slot {
+		width: 100%;
+		padding: 5px;
+	}
+
+	.image-grid-item {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 104px;
+		background-color: #f5f5f5;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.image-grid-img {
+		width: 100%;
+		height: 100%;
+		border-radius: 12px;
+	}
+
+	.image-grid-plus {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 104px;
+		background-color: #fafafa;
+		border-width: 1px;
+		border-style: dashed;
+		border-color: #d9d9d9;
+		border-radius: 12px;
+	}
+
+	.image-grid-plus-icon {
+		font-size: 36px;
+		font-weight: bold;
+		color: #999999;
+	}
+
+	.result-text {
+		font-size: 12px;
+		color: #666666;
+		margin-top: 10px;
+	}
+</style>
+

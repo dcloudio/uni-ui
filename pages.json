@@ -9,7 +9,7 @@
 		{
 			"path": "pages/index-bar/index-bar",
 			"style": {
-				"navigationBarTitleText": "城市索引"
+				"navigationBarTitleText": "index-bar"
 			}
 		}, {
 			"path": "pages/rate/rate",
@@ -36,12 +36,6 @@
 			}
 		},
 		{
-			"path": "pages/page-container/page-container",
-			"style": {
-				"navigationBarTitleText": "page-container"
-			}
-		},
-		{
 			"path": "pages/pop-view/pop-view",
 			"style": {
 				"navigationBarTitleText": "pop-view"
@@ -57,6 +51,12 @@
 			"path": "pages/number-box/number-box",
 			"style": {
 				"navigationBarTitleText": "number-box"
+			}
+		},
+		{
+			"path": "pages/drag-cell/drag-cell",
+			"style": {
+				"navigationBarTitleText": "drag-cell"
 			}
 		}
 		/* {

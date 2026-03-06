@@ -8,7 +8,7 @@
 		<uni-fab-button plus-class="custom-plus-class"></uni-fab-button>
 		<text>自定义fab和plus样式，变成一个16px的纯+</text>
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
-		<uni-fab-button class="right-bottom" hover-class="fab-hover" hover-stay-time="100" @click="clickme"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
+		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="clickme"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
 	</view>
 </template>
 
@@ -52,6 +52,7 @@
 		transition: transform 0.1s ease;
 	}
 	.fab-hover{
-		transform: scale(0.8);
+		opacity: 0.8;
+		transform: scale(0.8); /* TOOD hover-class里使用transform和transition，取消hover后无法复位*/
 	}
 </style>
