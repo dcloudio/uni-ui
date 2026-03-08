@@ -1,44 +1,63 @@
-﻿<template>
+<template>
 	<!-- #ifdef APP-ANDROID -->
+	<view class="drag-cell-host" :style="hostStyle">
 	<view class="drag-cell" :class="containerClass" :style="containerStyle">
 		<view
-			v-for="index in innerList.length"
-			:key="index"
+			v-for="(item, index) in innerList"
+			:key="itemIds.length > index ? itemIds[index] : index"
 			class="drag-cell-item"
-			:class="getItemClass(index - 1)"
-			:style="getItemStyle(index - 1)"
-			@touchstart.stop="onItemTouchStart($event, index - 1)"
+			:class="getItemClass(index)"
+			:style="getItemStyle(index)"
+			@touchstart.stop="onItemTouchStart($event, index)"
 			@touchmove="onItemTouchMove"
 			@touchend="onItemTouchEnd"
 			@touchcancel="onItemTouchEnd">
 			<view class="drag-cell-item-inner">
-				<slot :item="innerList[index - 1]" :index="index - 1"></slot>
+				<view class="drag-cell-slot-content">
+					<slot :item="item" :index="index"></slot>
+				</view>
+				<view
+					v-if="handleModeEnabled"
+					class="drag-cell-handle"
+					:class="getHandleClass(index)"
+					@touchstart.stop="onHandleTouchStart($event, index)"
+					@touchend.stop="onHandleTouchEnd"
+					@touchcancel.stop="onHandleTouchEnd">
+					<slot name="handle" :item="item" :index="index"></slot>
+				</view>
 			</view>
 		</view>
-		<view v-if="showAppendSlot" class="drag-cell-append" :style="getAppendStyle()">
+		<view v-if="showAppendSlot && dragging != true" class="drag-cell-append" :style="getAppendStyle()">
 			<slot name="append"></slot>
-		</view>
-		<view v-if="dragging && activeIndex >= 0" class="drag-cell-drag-proxy" :style="getDragProxyStyle()">
-			<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
 		</view>
 		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
 			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
 		</view>
 		<view
-			v-if="dragging"
+			v-if="showAndroidDeleteProxy"
+			class="drag-cell-delete-proxy"
+			:style="getAndroidDeleteProxyStyle()">
+			<view class="drag-cell-delete-proxy-inner">
+				<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
+			</view>
+		</view>
+		<view
+			v-if="dragging && showClose != true"
 			class="drag-cell-drag-layer"
 			@touchmove.stop.prevent="onItemTouchMove"
 			@touchend="onItemTouchEnd"
 			@touchcancel="onItemTouchEnd">
 		</view>
 	</view>
+	</view>
 	<!-- #endif -->
 
 	<!-- #ifndef APP-ANDROID -->
+	<view class="drag-cell-host" :style="hostStyle">
 	<view class="drag-cell" :class="containerClass" :style="containerStyle">
 		<view
 			v-for="(item, index) in innerList"
-			:key="itemIds[index]"
+			:key="itemIds.length > index ? itemIds[index] : index"
 			class="drag-cell-item"
 			:class="getItemClass(index)"
 			:style="getItemStyle(index)"
@@ -53,14 +72,27 @@
 			@touchend="onItemTouchEnd"
 			@touchcancel="onItemTouchEnd">
 			<view class="drag-cell-item-inner">
-				<slot :item="item" :index="index"></slot>
+				<view class="drag-cell-slot-content">
+					<slot :item="item" :index="index"></slot>
+				</view>
+				<view
+					v-if="handleModeEnabled"
+					class="drag-cell-handle"
+					:class="getHandleClass(index)"
+					<!-- #ifdef WEB -->
+					@pointerdown.stop.prevent="onHandlePointerDown($event, index)"
+					@pointerup.stop="onHandlePointerEnd"
+					@pointercancel.stop="onHandlePointerEnd"
+					<!-- #endif -->
+					@touchstart.stop="onHandleTouchStart($event, index)"
+					@touchend.stop="onHandleTouchEnd"
+					@touchcancel.stop="onHandleTouchEnd">
+					<slot name="handle" :item="item" :index="index"></slot>
+				</view>
 			</view>
 		</view>
-		<view v-if="showAppendSlot" class="drag-cell-append" :style="getAppendStyle()">
+		<view v-if="showAppendSlot && dragging != true" class="drag-cell-append" :style="getAppendStyle()">
 			<slot name="append"></slot>
-		</view>
-		<view v-if="dragging && activeIndex >= 0" class="drag-cell-drag-proxy" :style="getDragProxyStyle()">
-			<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
 		</view>
 		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
 			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
@@ -77,6 +109,7 @@
 			@touchend="onItemTouchEnd"
 			@touchcancel="onItemTouchEnd">
 		</view>
+	</view>
 	</view>
 	<!-- #endif -->
 </template>
@@ -110,6 +143,18 @@
 		bottom: number
 	}
 
+	type ContentInset = {
+		top: number,
+		bottom: number
+	}
+
+	type ContainerLayout = {
+		left: number,
+		pageTop: number,
+		width: number,
+		height: number
+	}
+
 	const props = defineProps({
 		modelValue: {
 			type: Array,
@@ -126,6 +171,10 @@
 		showAppend: {
 			type: Boolean,
 			default: true
+		},
+		handleMode: {
+			type: Boolean,
+			default: false
 		}
 	})
 
@@ -136,8 +185,10 @@
 	const innerList = ref(props.modelValue != null ? props.modelValue.slice() : [])
 	const itemIds = ref<number[]>([])
 	const layouts = ref<ItemLayout[]>([])
-	const previewOrder = ref<number[]>([])
-	const previewPositionMap = ref<number[]>([])
+	const gridColumnCenters = ref<number[]>([])
+	const gridRowCenters = ref<number[]>([])
+	const previewItemIds = ref<number[]>([])
+	const settling = ref(false)
 	const dragging = ref(false)
 	const activeIndex = ref(-1)
 	const hoverIndex = ref(-1)
@@ -148,12 +199,21 @@
 	const pendingIndex = ref(-1)
 	const overDeleteBar = ref(false)
 	const deleteBarLayout = ref<DeleteBarLayout | null>(null)
+	const containerLayout = ref<ContainerLayout | null>(null)
 	const activeViewLeft = ref(0)
 	const activeViewTop = ref(0)
+	const activeContentInsetTop = ref(0)
+	const activeContentInsetBottom = ref(0)
+	let activeContentElement : UniElement | null = null
+	let activeItemElement : UniElement | null = null
+	const dragCoordOffsetX = ref(0)
+	const dragCoordOffsetY = ref(0)
 	const nextItemId = ref(0)
 	let longPressTimer = 0
 	const longPressDuration = 350
 	const pressCancelDistance = 10
+	const dragActiveScale = 1.12
+	const deleteBarHeight = 56
 
 	const columnCount = computed(() : number => {
 		const currentColumn = props.column as number
@@ -169,8 +229,40 @@
 
 	const showClose = computed(() : boolean => props.showClose == true)
 	const showAppendSlot = computed(() : boolean => props.showAppend == true && slots['append'] != null)
+	const handleModeEnabled = computed(() : boolean => props.handleMode == true && slots['handle'] != null)
 	const showDeleteBar = computed(() : boolean => showClose.value && dragging.value)
-	const containerStyle = computed(() : string => '')
+	const activeDragScale = computed(() : number => {
+		return handleModeEnabled.value ? 1 : dragActiveScale
+	})
+	const showAndroidDeleteProxy = computed(() : boolean => {
+		// #ifdef APP-ANDROID
+		return showClose.value == true && dragging.value == true && activeIndex.value >= 0 && activeIndex.value < innerList.value.length
+		// #endif
+		// #ifndef APP-ANDROID
+		return false
+		// #endif
+	})
+	const hostStyle = computed(() : string => {
+		const currentContainerLayout = containerLayout.value
+		if (dragging.value == true && currentContainerLayout != null) {
+			return `height: ${currentContainerLayout.height}px;`
+		}
+		return ''
+	})
+	const containerStyle = computed(() : string => {
+		const currentContainerLayout = containerLayout.value
+		if (dragging.value == true && currentContainerLayout != null) {
+			return `height: ${currentContainerLayout.height}px;`
+		}
+		return ''
+	})
+	const getAndroidDeleteProxyStyle = () : string => {
+		if (showAndroidDeleteProxy.value != true || activeIndex.value < 0 || activeIndex.value >= layouts.value.length) {
+			return 'display: none;'
+		}
+		const sourceLayout = layouts.value[activeIndex.value]
+		return `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px; z-index: 30; transform: translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value});`
+	}
 	const appLanguage = uni.getAppBaseInfo().appLanguage ?? 'en'
 
 	type DeleteBarLocale = {
@@ -224,15 +316,23 @@
 	}
 
 	const applyPreviewOrder = (order : number[]) => {
-		previewOrder.value = order
-		const positionMap : number[] = []
+		const nextPreviewItemIds : number[] = []
 		for (let i = 0; i < order.length; i++) {
-			positionMap.push(0)
+			const sourceIndex = order[i]
+			if (sourceIndex >= 0 && sourceIndex < itemIds.value.length) {
+				nextPreviewItemIds.push(itemIds.value[sourceIndex])
+			}
 		}
-		for (let i = 0; i < order.length; i++) {
-			positionMap[order[i]] = i
+		previewItemIds.value = nextPreviewItemIds
+	}
+
+	const findPreviewPosition = (itemId : number) : number => {
+		for (let i = 0; i < previewItemIds.value.length; i++) {
+			if (previewItemIds.value[i] == itemId) {
+				return i
+			}
 		}
-		previewPositionMap.value = positionMap
+		return -1
 	}
 
 	const buildIdList = (length : number) : number[] => {
@@ -261,6 +361,12 @@
 		deleteBarLayout.value = null
 		activeViewLeft.value = 0
 		activeViewTop.value = 0
+		activeContentInsetTop.value = 0
+		activeContentInsetBottom.value = 0
+		activeContentElement = null
+		activeItemElement = null
+		dragCoordOffsetX.value = 0
+		dragCoordOffsetY.value = 0
 		dragOffsetX.value = 0
 		dragOffsetY.value = 0
 		applyPreviewOrder(createIdentityOrder(innerList.value.length))
@@ -281,41 +387,150 @@
 		}
 	}
 
+	const getSlotContentElement = (itemElement : UniElement | null) : UniElement | null => {
+		if (itemElement == null) {
+			return null
+		}
+		const slotWrapper = itemElement.querySelector('.drag-cell-slot-content') as UniElement | null
+		if (slotWrapper == null) {
+			return null
+		}
+		const firstChild = slotWrapper.firstChild
+		if (firstChild != null && firstChild instanceof UniElement) {
+			return firstChild as UniElement
+		}
+		return slotWrapper
+	}
+
+	const getContentElement = (currentTarget : UniElement | null, eventTarget : UniElement | null) : UniElement | null => {
+		const slotContentElement = getSlotContentElement(currentTarget)
+		if (slotContentElement != null) {
+			return slotContentElement
+		}
+		const currentRect = getCurrentTargetRect(currentTarget)
+		if (currentRect == null || eventTarget == null) {
+			return null
+		}
+		let directContentElement : UniElement | null = null
+		let candidateElement : UniElement | null = null
+		let candidateArea = -1.0
+		const currentArea = currentRect.width * currentRect.height
+		let node : UniElement | null = eventTarget
+		let guard = 0
+		while (node != null && node != currentTarget && guard < 12) {
+			const parent = node.parentElement
+			if (parent != null && parent.parentElement == currentTarget) {
+				directContentElement = node
+			}
+			const rect = node.getBoundingClientRect()
+			const width = rect.width
+			const height = rect.height
+			const area = width * height
+			if (width > 0 && height > 0 && area < currentArea - 0.5 && area > candidateArea) {
+				candidateArea = area
+				candidateElement = node
+			}
+			node = parent
+			guard++
+		}
+		if (directContentElement != null) {
+			return directContentElement
+		}
+		return candidateElement
+	}
+
+	const getContentInset = (currentTarget : UniElement | null, contentElement : UniElement | null) : ContentInset => {
+		const currentRect = getCurrentTargetRect(currentTarget)
+		if (currentRect == null || contentElement == null) {
+			return {
+				top: 0,
+				bottom: 0
+			}
+		}
+		const currentBottom = currentRect.bottom != null ? currentRect.bottom : (currentRect.top + currentRect.height)
+		const contentRect = contentElement.getBoundingClientRect()
+		let topInset = contentRect.top - currentRect.top
+		let bottomInset = currentBottom - contentRect.bottom
+		if (topInset < 0) {
+			topInset = 0
+		}
+		if (bottomInset < 0) {
+			bottomInset = 0
+		}
+		return {
+			top: topInset,
+			bottom: bottomInset
+		}
+	}
+
+	const rebuildGridAxisCache = (nextLayouts : ItemLayout[]) => {
+		const nextColumnCenters : number[] = []
+		const nextRowCenters : number[] = []
+		const length = nextLayouts.length
+		const columns = columnCount.value
+		if (columns > 0 && length > 0) {
+			const actualColumns = Math.min(columns, length)
+			for (let i = 0; i < actualColumns; i++) {
+				nextColumnCenters.push(nextLayouts[i].centerX)
+			}
+			for (let i = 0; i < length; i += actualColumns) {
+				nextRowCenters.push(nextLayouts[i].centerY)
+			}
+		}
+		gridColumnCenters.value = nextColumnCenters
+		gridRowCenters.value = nextRowCenters
+	}
+
 
 
 	function measureLayouts() : void {
 		if (instance == null || instance.proxy == null) {
 			return
 		}
-		uni.createSelectorQuery()
-			.in(instance.proxy)
-			.selectAll('.drag-cell-item')
-			.boundingClientRect((rects) => {
-				const nextLayouts : ItemLayout[] = []
-				if (rects != null) {
-					const rectList = rects as NodeInfo[]
-					for (let i = 0; i < rectList.length; i++) {
-						const rect = rectList[i]
-						const left = rect.left != null ? rect.left : 0
-						let top = rect.top != null ? rect.top : 0
-						const width = rect.width != null ? rect.width : 0
-						const height = rect.height != null ? rect.height : 0
-						if (top == 0 && rect.bottom != null) {
-							top = rect.bottom - height
-						}
-						nextLayouts.push({
-							left,
-							pageTop: top,
-							width,
-							height,
-							centerX: left + width / 2,
-							centerY: top + height / 2
-						})
-					}
+		const query = uni.createSelectorQuery().in(instance.proxy)
+		query.select('.drag-cell').boundingClientRect((rect) => {
+			if (rect != null) {
+				const containerRect = rect as NodeInfo
+				let top = containerRect.top != null ? containerRect.top : 0
+				const height = containerRect.height != null ? containerRect.height : 0
+				if (top == 0 && containerRect.bottom != null) {
+					top = containerRect.bottom - height
 				}
-				layouts.value = nextLayouts
-			})
-			.exec()
+				containerLayout.value = {
+					left: containerRect.left != null ? containerRect.left : 0,
+					pageTop: top,
+					width: containerRect.width != null ? containerRect.width : 0,
+					height
+				}
+			}
+		})
+		query.selectAll('.drag-cell-item').boundingClientRect((rects) => {
+			const nextLayouts : ItemLayout[] = []
+			if (rects != null) {
+				const rectList = rects as NodeInfo[]
+				for (let i = 0; i < rectList.length; i++) {
+					const rect = rectList[i]
+					const left = rect.left != null ? rect.left : 0
+					let top = rect.top != null ? rect.top : 0
+					const width = rect.width != null ? rect.width : 0
+					const height = rect.height != null ? rect.height : 0
+					if (top == 0 && rect.bottom != null) {
+						top = rect.bottom - height
+					}
+					nextLayouts.push({
+						left,
+						pageTop: top,
+						width,
+						height,
+						centerX: left + width / 2,
+						centerY: top + height / 2
+					})
+				}
+			}
+			layouts.value = nextLayouts
+			rebuildGridAxisCache(nextLayouts)
+		})
+		query.exec()
 	}
 
 	const syncFromModel = () => {
@@ -370,7 +585,6 @@
 			.boundingClientRect((rect) => {
 				if (rect != null) {
 					const barRect = rect as NodeInfo
-					const windowTopOffset = getWebWindowTopOffset()
 					const left = barRect.left != null ? barRect.left : 0
 					const top = barRect.top != null ? barRect.top : 0
 					const width = barRect.width != null ? barRect.width : 0
@@ -379,9 +593,9 @@
 					const bottom = barRect.bottom != null ? barRect.bottom : (top + height)
 					deleteBarLayout.value = {
 						left,
-						pageTop: top + windowTopOffset,
+						pageTop: top,
 						right,
-						bottom: bottom + windowTopOffset
+						bottom: bottom
 					}
 				} else {
 					deleteBarLayout.value = null
@@ -402,14 +616,56 @@
 		return order
 	}
 
+	const findNearestAxisIndex = (centers : number[], value : number) : number => {
+		let nearestIndex = 0
+		let nearestDistance = -1.0
+		for (let i = 0; i < centers.length; i++) {
+			const distance = Math.abs(centers[i] - value)
+			if (nearestDistance < 0 || distance < nearestDistance) {
+				nearestDistance = distance
+				nearestIndex = i
+			}
+		}
+		return nearestIndex
+	}
+
+	const getGridHoverIndex = (centerX : number, centerY : number) : number => {
+		const length = layouts.value.length
+		const columns = columnCount.value
+		if (columns <= 0 || length == 0) {
+			return activeIndex.value
+		}
+
+		const actualColumns = Math.min(columns, length)
+		const columnIndex = findNearestAxisIndex(gridColumnCenters.value, centerX)
+		const rowIndex = findNearestAxisIndex(gridRowCenters.value, centerY)
+		const rowStart = rowIndex * actualColumns
+		const rowEnd = Math.min(rowStart + actualColumns, length)
+		let targetIndex = rowStart + columnIndex
+		if (targetIndex >= rowEnd) {
+			targetIndex = rowEnd - 1
+		}
+		return targetIndex
+	}
+
 	const updateHoverIndex = () => {
 		const currentActiveIndex = activeIndex.value
 		if (currentActiveIndex < 0 || currentActiveIndex >= layouts.value.length) {
 			return
 		}
 		const sourceLayout = layouts.value[currentActiveIndex]
-		const centerX = sourceLayout.centerX + dragOffsetX.value
-		const centerY = sourceLayout.centerY + dragOffsetY.value
+		const centerX = sourceLayout.left + sourceLayout.width / 2 + dragOffsetX.value
+		const centerY = sourceLayout.pageTop + sourceLayout.height / 2 + dragOffsetY.value
+		if (columnCount.value > 0) {
+			const touchX = startTouchX.value + dragOffsetX.value + dragCoordOffsetX.value
+			const touchY = startTouchY.value + dragOffsetY.value + dragCoordOffsetY.value
+			const targetIndex = getGridHoverIndex(touchX, touchY)
+			if (targetIndex != hoverIndex.value) {
+				hoverIndex.value = targetIndex
+				applyPreviewOrder(buildPreviewOrder(innerList.value.length, currentActiveIndex, targetIndex))
+			}
+			return
+		}
 		let nearestIndex = currentActiveIndex
 		let nearestDistance = -1.0
 		for (let i = 0; i < layouts.value.length; i++) {
@@ -433,6 +689,37 @@
 		pendingIndex.value = -1
 	}
 
+	const setDragContext = (clientX : number, clientY : number, viewLeft : number, viewTop : number, contentInset : ContentInset, contentElement : UniElement | null, itemElement : UniElement | null) => {
+		startTouchX.value = clientX
+		startTouchY.value = clientY
+		activeViewLeft.value = viewLeft
+		activeViewTop.value = viewTop
+		activeContentInsetTop.value = contentInset.top
+		activeContentInsetBottom.value = contentInset.bottom
+		activeContentElement = contentElement
+		activeItemElement = itemElement
+	}
+
+	const prepareDragContext = (clientX : number, clientY : number, itemElement : UniElement | null, eventTarget : UniElement | null) => {
+		const rect = getCurrentTargetRect(itemElement)
+		const contentElement = getContentElement(itemElement, eventTarget)
+		const contentInset = getContentInset(itemElement, contentElement)
+		const viewLeft = rect != null ? rect.left : 0
+		const viewTop = rect != null ? rect.top : 0
+		setDragContext(clientX, clientY, viewLeft, viewTop, contentInset, contentElement, itemElement)
+	}
+
+	const getItemElementFromHandle = (handleElement : UniElement | null) : UniElement | null => {
+		if (handleElement == null) {
+			return null
+		}
+		const innerElement = handleElement.parentElement
+		if (innerElement == null) {
+			return null
+		}
+		return innerElement.parentElement
+	}
+
 	function beginDrag(index : number, clientX : number, clientY : number) : void {
 		if (layouts.value.length != innerList.value.length || index >= layouts.value.length) {
 			measureLayouts()
@@ -445,6 +732,9 @@
 		startTouchY.value = clientY
 		dragOffsetX.value = 0
 		dragOffsetY.value = 0
+		dragCoordOffsetX.value = layouts.value[index].left - activeViewLeft.value
+		dragCoordOffsetY.value = layouts.value[index].pageTop - activeViewTop.value
+		settling.value = false
 		dragging.value = true
 		activeIndex.value = index
 		hoverIndex.value = index
@@ -453,6 +743,12 @@
 		nextTick(() => {
 			measureDeleteBar()
 		})
+	}
+
+	const beginHandleDrag = (index : number, clientX : number, clientY : number, handleElement : UniElement | null, eventTarget : UniElement | null) => {
+		const itemElement = getItemElementFromHandle(handleElement)
+		prepareDragContext(clientX, clientY, itemElement, eventTarget)
+		beginDrag(index, clientX, clientY)
 	}
 
 	const updateDeleteBarState = () => {
@@ -466,9 +762,86 @@
 			return
 		}
 		const sourceLayout = layouts.value[activeIndex.value]
-		const centerX = activeViewLeft.value + sourceLayout.width / 2 + dragOffsetX.value
-		const centerY = activeViewTop.value + sourceLayout.height / 2 + dragOffsetY.value
-		const isInside = centerX >= barLayout.left && centerX <= barLayout.right && centerY >= barLayout.pageTop && centerY <= barLayout.bottom
+		let contentLeft = sourceLayout.left + dragOffsetX.value
+		let contentRight = sourceLayout.left + sourceLayout.width + dragOffsetX.value
+		let contentTop = sourceLayout.pageTop + activeContentInsetTop.value + dragOffsetY.value
+		let contentBottom = sourceLayout.pageTop + sourceLayout.height - activeContentInsetBottom.value + dragOffsetY.value
+		// #ifdef APP-ANDROID
+		if (showAndroidDeleteProxy.value == true) {
+			const windowInfo = uni.getWindowInfo()
+			const barLeftAndroid = 0
+			const barRightAndroid = windowInfo.windowWidth
+			const barTopAndroid = windowInfo.windowHeight - deleteBarHeight
+			const scaledWidth = sourceLayout.width * activeDragScale.value
+			const scaledHeight = sourceLayout.height * activeDragScale.value
+			const deltaX = (scaledWidth - sourceLayout.width) / 2
+			const deltaY = (scaledHeight - sourceLayout.height) / 2
+			const scaledTop = activeViewTop.value + dragOffsetY.value - deltaY
+			let insetTopAndroid = activeContentInsetTop.value
+			let insetBottomAndroid = activeContentInsetBottom.value
+			const maxInsetAndroid = Math.max(0, sourceLayout.height / 2 - 1)
+			const invalidInsetAndroid = insetTopAndroid < 0 || insetBottomAndroid < 0 || insetTopAndroid > maxInsetAndroid || insetBottomAndroid > maxInsetAndroid || insetTopAndroid + insetBottomAndroid >= sourceLayout.height - 1
+			if (invalidInsetAndroid) {
+				insetTopAndroid = 0
+				insetBottomAndroid = 0
+			}
+			contentLeft = activeViewLeft.value + dragOffsetX.value - deltaX
+			contentRight = contentLeft + scaledWidth
+			contentTop = scaledTop + insetTopAndroid * activeDragScale.value
+			contentBottom = scaledTop + scaledHeight - insetBottomAndroid * activeDragScale.value
+			const horizontalOverlapAndroid = contentRight >= barLeftAndroid && contentLeft <= barRightAndroid
+			const bottomReachedDeleteBarAndroid = contentBottom >= barTopAndroid
+			const isInsideAndroid = horizontalOverlapAndroid && bottomReachedDeleteBarAndroid
+			if (isInsideAndroid != overDeleteBar.value) {
+				overDeleteBar.value = isInsideAndroid
+				if (isInsideAndroid) {
+					hoverIndex.value = activeIndex.value
+					applyPreviewOrder(createIdentityOrder(innerList.value.length))
+				}
+			}
+			return
+		}
+		// #endif
+		const windowTopOffset = getWebWindowTopOffset()
+		const liveContentRect = getCurrentTargetRect(activeContentElement)
+		if (liveContentRect != null) {
+			contentLeft = liveContentRect.left
+			contentRight = liveContentRect.right != null ? liveContentRect.right : (liveContentRect.left + liveContentRect.width)
+			contentTop = liveContentRect.top
+			contentBottom = liveContentRect.bottom != null ? liveContentRect.bottom : (liveContentRect.top + liveContentRect.height)
+			// #ifdef WEB
+			contentTop = contentTop - windowTopOffset
+			contentBottom = contentBottom - windowTopOffset
+			// #endif
+		} else {
+			const liveItemRect = getCurrentTargetRect(activeItemElement)
+			if (liveItemRect != null && sourceLayout.height > 0) {
+				const liveRight = liveItemRect.right != null ? liveItemRect.right : (liveItemRect.left + liveItemRect.width)
+				const liveBottom = liveItemRect.bottom != null ? liveItemRect.bottom : (liveItemRect.top + liveItemRect.height)
+				const scaleY = liveItemRect.height / sourceLayout.height
+				contentLeft = liveItemRect.left
+				contentRight = liveRight
+				contentTop = liveItemRect.top + activeContentInsetTop.value * scaleY
+				contentBottom = liveBottom - activeContentInsetBottom.value * scaleY
+				// #ifdef WEB
+				contentTop = contentTop - windowTopOffset
+				contentBottom = contentBottom - windowTopOffset
+				// #endif
+			} else if (showClose.value == true) {
+				const scaledCenterX = sourceLayout.width / 2
+				const scaledCenterY = sourceLayout.height / 2
+				const contentTopLocal = activeContentInsetTop.value
+				const contentBottomLocal = sourceLayout.height - activeContentInsetBottom.value
+				contentLeft = activeViewLeft.value + dragOffsetX.value + scaledCenterX + (0 - scaledCenterX) * activeDragScale.value
+				contentRight = activeViewLeft.value + dragOffsetX.value + scaledCenterX + (sourceLayout.width - scaledCenterX) * activeDragScale.value
+				contentTop = activeViewTop.value + dragOffsetY.value + scaledCenterY + (contentTopLocal - scaledCenterY) * activeDragScale.value
+				contentBottom = activeViewTop.value + dragOffsetY.value + scaledCenterY + (contentBottomLocal - scaledCenterY) * activeDragScale.value
+			}
+		}
+		const measuredTop = barLayout.pageTop
+		const horizontalOverlap = contentRight >= barLayout.left && contentLeft <= barLayout.right
+		const bottomReachedDeleteBar = contentBottom >= measuredTop
+		const isInside = horizontalOverlap && bottomReachedDeleteBar
 		if (isInside != overDeleteBar.value) {
 			overDeleteBar.value = isInside
 			if (isInside) {
@@ -478,13 +851,10 @@
 		}
 	}
 
-	const scheduleLongPress = (index : number, clientX : number, clientY : number, viewLeft : number, viewTop : number) => {
+	const scheduleLongPress = (index : number, clientX : number, clientY : number, viewLeft : number, viewTop : number, contentInset : ContentInset, contentElement : UniElement | null, itemElement : UniElement | null) => {
 		clearLongPressTimer()
 		pendingIndex.value = index
-		startTouchX.value = clientX
-		startTouchY.value = clientY
-		activeViewLeft.value = viewLeft
-		activeViewTop.value = viewTop
+		setDragContext(clientX, clientY, viewLeft, viewTop, contentInset, contentElement, itemElement)
 		longPressTimer = setTimeout(() => {
 			longPressTimer = 0
 			beginDrag(index, clientX, clientY)
@@ -524,17 +894,22 @@
 			return
 		}
 		const currentActiveIndex = activeIndex.value
+		if (showClose.value == true) {
+			updateDeleteBarState()
+		}
 		if (showClose.value == true && overDeleteBar.value == true) {
 			const nextList = innerList.value.slice()
 			const nextIds = itemIds.value.slice()
 			nextList.splice(currentActiveIndex, 1)
 			nextIds.splice(currentActiveIndex, 1)
+			settling.value = true
+			resetDragState()
 			innerList.value = nextList
 			itemIds.value = nextIds
-			resetDragState()
 			emitChange()
 			nextTick(() => {
 				measureLayouts()
+				settling.value = false
 			})
 			return
 		}
@@ -551,23 +926,32 @@
 		nextList.splice(targetIndex, 0, movedItem)
 		nextIds.splice(targetIndex, 0, movedId)
 
+		settling.value = true
+		resetDragState()
 		innerList.value = nextList
 		itemIds.value = nextIds
-		resetDragState()
 		emitChange()
 		nextTick(() => {
 			measureLayouts()
+			settling.value = false
 		})
 	}
 
+	// #ifdef APP-ANDROID
 	const onItemTouchStart = (event : Any, index : number) => {
+		if (handleModeEnabled.value == true) {
+			return
+		}
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
 		const target = touchEvent.currentTarget as UniElement
+		const eventTarget = touchEvent.target as UniElement
 		const rect = getCurrentTargetRect(target)
+		const contentElement = getContentElement(target, eventTarget)
+		const contentInset = getContentInset(target, contentElement)
 		const viewLeft = rect != null ? rect.left : 0
 		const viewTop = rect != null ? rect.top : 0
-		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop)
+		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop, contentInset, contentElement, target)
 	}
 
 	const onItemTouchMove = (event : Any) => {
@@ -583,14 +967,88 @@
 		finishDrag()
 	}
 
+	const onHandleTouchStart = (event : Any, index : number) => {
+		if (handleModeEnabled.value != true) {
+			return
+		}
+		const touchEvent = event as UniTouchEvent
+		const touch = touchEvent.touches[0]
+		const handleTarget = touchEvent.currentTarget as UniElement
+		const eventTarget = touchEvent.target as UniElement
+		beginHandleDrag(index, touch.clientX, touch.clientY, handleTarget, eventTarget)
+	}
+
+	const onHandleTouchEnd = (_event : Any) => {
+		if (dragging.value == true) {
+			finishDrag()
+			return
+		}
+		cancelPendingPress()
+	}
+	// #endif
+
+	// #ifndef APP-ANDROID
+	const onItemTouchStart = (event : UniTouchEvent, index : number) => {
+		if (handleModeEnabled.value == true) {
+			return
+		}
+		const touch = event.touches[0]
+		const target = event.currentTarget as UniElement
+		const eventTarget = event.target as UniElement
+		const rect = getCurrentTargetRect(target)
+		const contentElement = getContentElement(target, eventTarget)
+		const contentInset = getContentInset(target, contentElement)
+		const viewLeft = rect != null ? rect.left : 0
+		const viewTop = rect != null ? rect.top : 0
+		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop, contentInset, contentElement, target)
+	}
+
+	const onItemTouchMove = (event : UniTouchEvent) => {
+		const touch = event.touches[0]
+		if (dragging.value == true) {
+			// console.log('harmony 应该阻止默认滚动')
+			event.preventDefault()  //TODO 鸿蒙上这里无法阻止滚动，导致拖动时页面也跟着滚动 @wangzhitong
+		}
+		moveDrag(touch.clientX, touch.clientY)
+	}
+
+	const onItemTouchEnd = (_event : UniTouchEvent) => {
+		finishDrag()
+	}
+
+	const onHandleTouchStart = (event : UniTouchEvent, index : number) => {
+		if (handleModeEnabled.value != true) {
+			return
+		}
+		const touch = event.touches[0]
+		const handleTarget = event.currentTarget as UniElement
+		const eventTarget = event.target as UniElement
+		beginHandleDrag(index, touch.clientX, touch.clientY, handleTarget, eventTarget)
+	}
+
+	const onHandleTouchEnd = (_event : UniTouchEvent) => {
+		if (dragging.value == true) {
+			finishDrag()
+			return
+		}
+		cancelPendingPress()
+	}
+	// #endif
+
 
 	// #ifdef WEB
 	const onPointerDown = (event : UniPointerEvent, index : number) => {
+		if (handleModeEnabled.value == true) {
+			return
+		}
 		const target = event.currentTarget as UniElement
+		const eventTarget = event.target as UniElement
 		const rect = getCurrentTargetRect(target)
+		const contentElement = getContentElement(target, eventTarget)
+		const contentInset = getContentInset(target, contentElement)
 		const viewLeft = rect != null ? rect.left : 0
 		const viewTop = rect != null ? rect.top : 0
-		scheduleLongPress(index, event.x, event.y, viewLeft, viewTop)
+		scheduleLongPress(index, event.x, event.y, viewLeft, viewTop, contentInset, contentElement, target)
 	}
 
 	const onPointerMove = (event : UniPointerEvent) => {
@@ -603,49 +1061,103 @@
 	const onPointerEnd = (_event : UniPointerEvent) => {
 		finishDrag()
 	}
+
+	const onHandlePointerDown = (event : UniPointerEvent, index : number) => {
+		if (handleModeEnabled.value != true) {
+			return
+		}
+		const handleTarget = event.currentTarget as UniElement
+		const eventTarget = event.target as UniElement
+		beginHandleDrag(index, event.x, event.y, handleTarget, eventTarget)
+	}
+
+	const onHandlePointerEnd = (_event : UniPointerEvent) => {
+		if (dragging.value == true) {
+			finishDrag()
+			return
+		}
+		cancelPendingPress()
+	}
 	// #endif
 
 	const getItemClass = (index : number) : string => {
 		if (dragging.value == true && activeIndex.value == index) {
-			return 'drag-cell-item-placeholder'
+			return 'drag-cell-item-active'
+		}
+		return ''
+	}
+
+	const getHandleClass = (index : number) : string => {
+		if (handleModeEnabled.value == true && dragging.value == true && activeIndex.value == index) {
+			return 'drag-cell-handle-active'
 		}
 		return ''
 	}
 
 	const getItemStyle = (index : number) : string => {
 		let widthStyle = 'width: auto;'
+		let positionStyle = ''
 		if (columnCount.value > 0) {
 			widthStyle = `width: ${100 / columnCount.value}%;`
 		}
 
 		let zIndexStyle = 'z-index: 1;'
+		let transitionStyle = 'transition-duration: 200ms;'
 		let transformStyle = 'translateX(0px) translateY(0px)'
 
-		if (dragging.value == true) {
-			if (activeIndex.value != index && index < layouts.value.length) {
-				const targetPosition = previewPositionMap.value[index]
-				if (targetPosition != null && targetPosition < layouts.value.length) {
-					const sourceLayout = layouts.value[index]
-					const targetLayout = layouts.value[targetPosition]
-					const deltaX = targetLayout.left - sourceLayout.left
-					const deltaY = targetLayout.pageTop - sourceLayout.pageTop
-					transformStyle = `translateX(${deltaX}px) translateY(${deltaY}px)`
+		// #ifdef APP-ANDROID
+		if (dragging.value == true && columnCount.value > 0) {
+			transitionStyle = 'transition-duration: 0ms;'
+		}
+		// #endif
+
+		if (settling.value == true) {
+			transitionStyle = 'transition-duration: 0ms;'
+		}
+
+		const currentContainerLayout = containerLayout.value
+		if (dragging.value == true && index < layouts.value.length && currentContainerLayout != null) {
+			const sourceLayout = layouts.value[index]
+			const baseLeft = sourceLayout.left - currentContainerLayout.left
+			const baseTop = sourceLayout.pageTop - currentContainerLayout.pageTop
+			widthStyle = ''
+			if (activeIndex.value == index) {
+				// #ifdef APP-ANDROID
+				positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
+				if (showClose.value == true) {
+					zIndexStyle = 'z-index: 0;'
+					transitionStyle = 'transition-duration: 0ms;'
+					transformStyle = 'translateX(0px) translateY(0px)'
+					return `${widthStyle}${positionStyle}${zIndexStyle}${transitionStyle}opacity: 0; transform: ${transformStyle};`
+				}
+				// #endif
+				// #ifndef APP-ANDROID
+				if (showClose.value == true) {
+					positionStyle = `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
+				} else {
+					positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
+				}
+				// #endif
+				zIndexStyle = 'z-index: 30;'
+				transitionStyle = 'transition-duration: 0ms;'
+				transformStyle = `translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value})`
+			} else {
+				positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
+				if (index < itemIds.value.length) {
+					const currentItemId = itemIds.value[index]
+					const targetPosition = findPreviewPosition(currentItemId)
+					if (targetPosition >= 0 && targetPosition < layouts.value.length) {
+						const targetLayout = layouts.value[targetPosition]
+						const deltaX = targetLayout.left - sourceLayout.left
+						const deltaY = targetLayout.pageTop - sourceLayout.pageTop
+						transformStyle = `translateX(${deltaX}px) translateY(${deltaY}px)`
+					}
 				}
 			}
 		}
 
-		return `${widthStyle}${zIndexStyle}transform: ${transformStyle};`
+		return `${widthStyle}${positionStyle}${zIndexStyle}${transitionStyle}transform: ${transformStyle};`
 	}
-
-	const getDragProxyStyle = () : string => {
-		const index = activeIndex.value
-		if (dragging.value == true && index >= 0 && index < layouts.value.length) {
-			const layout = layouts.value[index]
-			return `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${layout.width}px; height: ${layout.height}px; z-index: 30; transform: translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(1.12);`
-		}
-		return 'display: none;'
-	}
-
 	const getAppendStyle = () : string => {
 		if (columnCount.value > 0) {
 			return `width: ${100 / columnCount.value}%;`
@@ -664,6 +1176,12 @@
 </script>
 
 <style>
+	.drag-cell-host {
+		position: relative;
+		width: 100%;
+		overflow: visible;
+	}
+
 	.drag-cell {
 		display: flex;
 		flex-direction: row;
@@ -703,12 +1221,12 @@
 		overflow: visible;
 	}
 
-	.drag-cell-item-placeholder {
+	.drag-cell-item-active {
 		transition-duration: 0ms;
-		opacity: 0;
 	}
 
 	.drag-cell-item-inner {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -719,14 +1237,35 @@
 		transform-origin: center center;
 	}
 
-	.drag-cell-drag-proxy {
-		transition-duration: 0ms;
-		opacity: 0.94;
-		pointer-events: none;
+	.drag-cell-slot-content {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+	}
+
+	.drag-cell-handle {
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: flex-start;
+		opacity: 0.82;
+		transition-property: transform, opacity;
+		transition-duration: 160ms;
 		/* #ifdef WEB */
-		cursor: grabbing;
+		cursor: grab;
 		/* #endif */
 	}
+
+	.drag-cell-handle-active {
+		opacity: 1;
+		transform: scale(1.08);
+	}
+
 
 	.drag-cell-delete-bar {
 		position: fixed;
@@ -756,6 +1295,19 @@
 		text-align: center;
 	}
 
+	.drag-cell-delete-proxy {
+		position: fixed;
+		z-index: 30;
+		overflow: visible;
+	}
+
+	.drag-cell-delete-proxy-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+	}
+
 	.drag-cell-drag-layer {
 		position: fixed;
 		left: 0;
@@ -766,6 +1318,15 @@
 		z-index: 25;
 	}
 </style>
+
+
+
+
+
+
+
+
+
 
 
 
