@@ -27,7 +27,7 @@
       currentUrl.value = defaultUrl
       return
     }
-    currentUrl.value = decodeURIComponent(nextUrl)
+    currentUrl.value = decodeURIComponent(nextUrl) ?? nextUrl
   })
 
   function onWebViewError(event : UniWebViewErrorEvent) {
