@@ -1,84 +1,173 @@
 <template>
-  <text class="time-text">{{ formattedTime }}</text>
+  <text>{{ formattedTime }}</text>
 </template>
 
 <script setup lang="uts">
-  const props = defineProps({
-    /**
-     * @description 时间戳（毫秒）
-     */
-    timestamp: {
-      type: Number,
-      required: true
-    },
-    /**
-     * @description 格式化模式: 'date' | 'time' | 'datetime' | 'relative'
-     */
-    format: {
-      type: String,
-      default: 'datetime'
-    }
+  type Props = {
+    timestamp: number
+    format?: string
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    format: 'datetime'
   })
+
+  const appLanguage = (uni.getAppBaseInfo().appLanguage ?? 'en').toLowerCase()
+  const formattedTime = ref<string>('')
 
   function padZero(num : number) : string {
     return num < 10 ? '0' + num.toString() : num.toString()
   }
 
-  // 时间差分解函数
-  function decomposeDiff(absDiff : number) : { days : number; hours : number; minutes : number } {
-    const seconds = Math.floor(absDiff / 1000)
-    const minutes = Math.floor(seconds / 60)
-    const hours = Math.floor(minutes / 60)
-    const days = Math.floor(hours / 24)
-    return { days, hours, minutes }
-  }
-
-  function getRelativeTime(timestamp : number) : string {
-    const now = Date.now()
-    const diff = now - timestamp
-
-    if (diff < 0) {
-      const { days, hours, minutes } = decomposeDiff(-diff)
-      if (days > 0) return `${days}天后`
-      if (hours > 0) return `${hours}小时后`
-      if (minutes > 0) return `${minutes}分钟后`
-      return '即将'
+  function normalizeTimestamp(timestamp : number) : number {
+    const absTimestamp = Math.abs(timestamp)
+    if (absTimestamp > 0 && absTimestamp < 100000000000) {
+      return timestamp * 1000
     }
-
-    const { days, hours, minutes } = decomposeDiff(diff)
-    if (days > 0) return `${days}天前`
-    if (hours > 0) return `${hours}小时前`
-    if (minutes > 0) return `${minutes}分钟前`
-    return '刚刚'
+    return timestamp
   }
 
-  // 格式化时间
-  const formattedTime = computed(() : string => {
-    const date = new Date(props.timestamp)
-    const formatType = props.format ?? 'datetime'
+  function isValidDate(date : Date) : boolean {
+    return !isNaN(date.getTime())
+  }
 
+  function getLocaleKey(language : string) : string {
+    if (language.indexOf('zh-hant') == 0 || language.indexOf('zh-tw') == 0 || language.indexOf('zh-hk') == 0 || language.indexOf('zh-mo') == 0) {
+      return 'zh-hant'
+    }
+    if (language.indexOf('zh') == 0) {
+      return 'zh-hans'
+    }
+    if (language.indexOf('fr') == 0) {
+      return 'fr'
+    }
+    if (language.indexOf('la') == 0) {
+      return 'la'
+    }
+    return 'en'
+  }
+
+  const localeKey = getLocaleKey(appLanguage)
+
+  function formatDateTime(date : Date) : string {
     const year = date.getFullYear()
     const month = padZero(date.getMonth() + 1)
     const day = padZero(date.getDate())
     const hours = padZero(date.getHours())
     const minutes = padZero(date.getMinutes())
-    const seconds = padZero(date.getSeconds())
+    return `${year}-${month}-${day} ${hours}:${minutes}`
+  }
 
-    if (formatType == 'date') {
-      return `${year}-${month}-${day}`
-    } else if (formatType == 'time') {
-      return `${hours}:${minutes}:${seconds}`
-    } else if (formatType == 'relative') {
-      return getRelativeTime(props.timestamp)
-    } else {
-      return `${year}-${month}-${day} ${hours}:${minutes}`
+  function formatTime(date : Date) : string {
+    return `${padZero(date.getHours())}:${padZero(date.getMinutes())}`
+  }
+
+  function getNowText(localeKey : string) : string {
+    if (localeKey == 'zh-hans') return '刚刚'
+    if (localeKey == 'zh-hant') return '刚刚'
+    if (localeKey == 'fr') return 'mnt.'
+    if (localeKey == 'la') return 'nunc'
+    return 'now'
+  }
+
+  function formatMinuteAgo(localeKey : string, minutes : number) : string {
+    if (localeKey == 'zh-hans') return `${minutes}分钟前`
+    if (localeKey == 'zh-hant') return `${minutes}分鐘前`
+    if (localeKey == 'fr') return `-${minutes}min`
+    if (localeKey == 'la') return `-${minutes}m`
+    return `${minutes}m ago`
+  }
+
+  function formatHourAgo(localeKey : string, hours : number) : string {
+    if (localeKey == 'zh-hans') return `${hours}小时前`
+    if (localeKey == 'zh-hant') return `${hours}小時前`
+    if (localeKey == 'fr') return `-${hours}h`
+    if (localeKey == 'la') return `-${hours}h`
+    return `${hours}h ago`
+  }
+
+  function formatYesterday(localeKey : string, timeText : string) : string {
+    if (localeKey == 'zh-hant' || localeKey == 'zh-hans') return `昨天 ${timeText}`
+    if (localeKey == 'fr') return `hier ${timeText}`
+    if (localeKey == 'la') return `heri ${timeText}`
+    return `yest ${timeText}`
+  }
+
+  function getDayStartTimestamp(date : Date) : number {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+  }
+
+  function getRelativeTime(targetDate : Date, currentTimestamp : number) : string {
+    const targetTimestamp = targetDate.getTime()
+    if (targetTimestamp > currentTimestamp) {
+      return formatDateTime(targetDate)
     }
+
+    const nowDate = new Date(currentTimestamp)
+    const todayStart = getDayStartTimestamp(nowDate)
+    const yesterdayStart = todayStart - 24 * 60 * 60 * 1000
+
+    if (targetTimestamp >= todayStart) {
+      const diffMs = currentTimestamp - targetTimestamp
+      if (diffMs < 60 * 1000) {
+        return getNowText(localeKey)
+      }
+      const diffMinutes = Math.floor(diffMs / (60 * 1000))
+      if (diffMinutes < 60) {
+        return formatMinuteAgo(localeKey, diffMinutes)
+      }
+      const diffHours = Math.floor(diffMs / (60 * 60 * 1000))
+      return formatHourAgo(localeKey, diffHours)
+    }
+
+    if (targetTimestamp >= yesterdayStart) {
+      return formatYesterday(localeKey, formatTime(targetDate))
+    }
+
+    return formatDateTime(targetDate)
+  }
+
+  function refreshFormattedTime() {
+    const normalizedTimestamp = normalizeTimestamp(props.timestamp)
+    const targetDate = new Date(normalizedTimestamp)
+    if (!isValidDate(targetDate)) {
+      formattedTime.value = ''
+      return
+    }
+
+    const formatType = props.format
+    if (formatType == 'relative') {
+      formattedTime.value = getRelativeTime(targetDate, Date.now())
+      return
+    }
+
+    const hours = padZero(targetDate.getHours())
+    const minutes = padZero(targetDate.getMinutes())
+    if (formatType == 'time') {
+      const seconds = padZero(targetDate.getSeconds())
+      formattedTime.value = `${hours}:${minutes}:${seconds}`
+      return
+    }
+
+    const year = targetDate.getFullYear()
+    const month = padZero(targetDate.getMonth() + 1)
+    const day = padZero(targetDate.getDate())
+    if (formatType == 'date') {
+      formattedTime.value = `${year}-${month}-${day}`
+      return
+    }
+    formattedTime.value = `${year}-${month}-${day} ${hours}:${minutes}`
+  }
+
+  watch(() : string => props.format, () => {
+    refreshFormattedTime()
+  })
+
+  watch(() : number => props.timestamp, () => {
+    refreshFormattedTime()
+  })
+
+  onMounted(() => {
+    refreshFormattedTime()
   })
 </script>
-
-<style>
-  .time-text {
-    font-size: 12px;
-    color: #999999;
-  }
-</style>

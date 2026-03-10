@@ -9,6 +9,9 @@
 	<navigator class="padding-bottom" url="/pages/pop-view/pop-view">pop-view</navigator>
 	<navigator class="padding-bottom" url="/pages/fab-button/fab-button">fab-button</navigator>
 	<navigator class="padding-bottom" url="/pages/number-box/number-box">number-box</navigator>
+	<navigator class="padding-bottom" url="/pages/collapse/collapse">collapse</navigator>
+	<navigator class="padding-bottom" url="/pages/link/link">link</navigator>
+	<navigator class="padding-bottom" url="/pages/time-format/time-format">time-format</navigator>
 	<navigator class="padding-bottom" url="/pages/index-bar/index-bar">index-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/drag-cell/drag-cell">drag-cell</navigator>
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>

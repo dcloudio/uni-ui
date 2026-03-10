@@ -1,0 +1,75 @@
+<template>
+  <view class="page">
+    <view class="header">
+      <text class="header-title">link web-view</text>
+      <text class="header-url">{{ currentUrl }}</text>
+    </view>
+    <web-view class="webview" :src="currentUrl" @error="onWebViewError"></web-view>
+  </view>
+</template>
+
+<script setup lang="uts">
+  const defaultUrl = 'https://uniapp.dcloud.net.cn'
+  const currentUrl = ref<string>(defaultUrl)
+
+  onLoad((options : UTSJSONObject | null) => {
+    if (options == null) {
+      currentUrl.value = defaultUrl
+      return
+    }
+    const rawUrl = options['url']
+    if (rawUrl == null) {
+      currentUrl.value = defaultUrl
+      return
+    }
+    const nextUrl = rawUrl as string
+    if (nextUrl.length == 0) {
+      currentUrl.value = defaultUrl
+      return
+    }
+    currentUrl.value = decodeURIComponent(nextUrl)
+  })
+
+  function onWebViewError(event : UniWebViewErrorEvent) {
+    const detail = event.detail
+    const errMsg = detail.errMsg ?? ''
+    uni.showModal({
+      content: `web-view 加载失败：${errMsg}`,
+      showCancel: false
+    })
+  }
+</script>
+
+<style>
+  .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #eeeeee;
+  }
+
+  .header-title {
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .header-url {
+    font-size: 12px;
+    color: #666666;
+  }
+
+  .webview {
+    flex: 1;
+  }
+</style>

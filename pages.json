@@ -35,12 +35,12 @@
 				"navigationBarTitleText": "badge"
 			}
 		},
-		{
+		/* {
 			"path": "pages/pop-view/pop-view",
 			"style": {
 				"navigationBarTitleText": "pop-view"
 			}
-		},
+		}, */
 		{
 			"path": "pages/fab-button/fab-button",
 			"style": {
@@ -51,6 +51,32 @@
 			"path": "pages/number-box/number-box",
 			"style": {
 				"navigationBarTitleText": "number-box"
+			}
+		},
+		{
+			"path": "pages/collapse/collapse",
+			"style": {
+				"navigationBarTitleText": "collapse"
+			}
+		},
+		{
+			"path": "pages/link/link",
+			"style": {
+				"navigationBarTitleText": "link"
+			}
+		},
+		// #ifdef MP
+		{
+			"path": "pages/link-webview/link-webview",
+			"style": {
+				"navigationBarTitleText": "link-webview"
+			}
+		},
+		// #endif
+		{
+			"path": "pages/time-format/time-format",
+			"style": {
+				"navigationBarTitleText": "time-format"
 			}
 		},
 		{

@@ -35,6 +35,9 @@
     }
   },
   "uni_modules": {
+    "dependencies": [
+      "uts-openSchema"
+    ],
     "encrypt": [],
     "platforms": {
       "cloud": {

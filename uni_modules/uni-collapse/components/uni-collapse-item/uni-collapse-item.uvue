@@ -2,11 +2,11 @@
   <view class="uni-collapse-item" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
     <view class="uni-collapse-item__title" @click="openCollapse(!is_open)">
       <text class="uni-collapse-item__title-text"
-        :class="{'is-disabled':disabled,'open--active':is_open}">{{title}}</text>
+        :class="{'is-disabled': disabled, 'open--active': is_open}">{{ title }}</text>
       <view class="down_arrow" :class="{'down_arrow--active': is_open}"></view>
     </view>
-    <view ref="boxRef" class="uni-collapse-item__content" :class="{'box-open--active':is_open}">
-      <view ref="contentRef" class="uni-collapse-item__content-box" :class="{'content-open--active':box_is_open}">
+    <view ref="boxRef" class="uni-collapse-item__content" :class="{'box-open--active': is_open}">
+      <view ref="contentRef" class="uni-collapse-item__content-box" :class="{'content-open--active': box_is_open}">
         <slot></slot>
       </view>
     </view>
@@ -16,7 +16,11 @@
 <script lang="uts" setup>
   import type { ItemChildType } from '../type.uts'
   import { state } from '@/store/index.uts'
-  import { UNI_COLLAPSE_REGISTER_CHILD, UNI_COLLAPSE_CHILD_TOGGLE } from '../common.uts'
+  import {
+    UNI_COLLAPSE_REGISTER_CHILD,
+    UNI_COLLAPSE_UNREGISTER_CHILD,
+    UNI_COLLAPSE_CHILD_TOGGLE
+  } from '../common.uts'
 
   const isDarkMode = computed(() : boolean => {
     return state.isDarkMode
@@ -32,52 +36,66 @@
     open: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }
   })
-  let height = 0
+
+  const emit = defineEmits<{
+    change: [open: boolean]
+  }>()
+
   let is_open = ref<boolean>(props.open)
   let box_is_open = ref<boolean>(props.open)
 
   let boxRef = ref<UniViewElement | null>(null)
   let contentRef = ref<UniViewElement | null>(null)
 
-  let openType = computed(() => props.open)
-
-  // 组件唯一ID
   const elId = ref(`uni_collapse_item_${Math.ceil(Math.random() * 10e5).toString(36)}`)
 
-  const registerChild = inject<((child : ItemChildType) => string) | null>(UNI_COLLAPSE_REGISTER_CHILD, null)
-  const collapseToggle = inject<((elId : string) => string) | null>(UNI_COLLAPSE_CHILD_TOGGLE, null)
+  const registerChild = inject<((child : ItemChildType) => void) | null>(UNI_COLLAPSE_REGISTER_CHILD, null)
+  const unregisterChild = inject<((elId : string) => void) | null>(UNI_COLLAPSE_UNREGISTER_CHILD, null)
+  const collapseToggle = inject<((elId : string) => void) | null>(UNI_COLLAPSE_CHILD_TOGGLE, null)
 
   function openOrClose(open : boolean) {
-    setTimeout(() => {
-      box_is_open.value = !box_is_open.value
-    }, 10)
+    box_is_open.value = open
+
     // #ifndef MP-WEIXIN
-    const bNode = boxRef.value?.style!;
-    const cNode = contentRef.value?.style!;
-    let hide = open ? 'flex' : 'none';
-    const opacity = open ? "1" : "0"
-    let ani_transform = open ? 'translateY(0)' : 'translateY(-100%)';
-    bNode.setProperty('display', hide);
+    const boxStyle = boxRef.value?.style
+    const contentStyle = contentRef.value?.style
+    if (boxStyle == null || contentStyle == null) {
+      return
+    }
+
+    boxStyle.setProperty('display', open ? 'flex' : 'none')
     nextTick(() => {
       setTimeout(() => {
-        cNode.setProperty('transform', ani_transform);
-        cNode.setProperty('opacity', opacity);
+        contentStyle.setProperty('transform', open ? 'translateY(0)' : 'translateY(-100%)')
+        contentStyle.setProperty('opacity', open ? '1' : '0')
       }, 10)
     })
     // #endif
   }
 
-  // 开启或关闭折叠面板
-  function openCollapse(open : boolean) {
-    if (props.disabled) return
-    // 关闭其他已打开
-    if (collapseToggle != null) {
+  function applyOpenState(open : boolean, syncSiblings : boolean, triggerEmit : boolean) {
+    if (is_open.value == open && box_is_open.value == open) {
+      return
+    }
+
+    if (open && syncSiblings && collapseToggle != null) {
       collapseToggle(elId.value)
     }
+
     is_open.value = open
     openOrClose(open)
+
+    if (triggerEmit) {
+      emit('change', open)
+    }
   }
 
+  function openCollapse(open : boolean) {
+    if (props.disabled) {
+      return
+    }
+    applyOpenState(open, true, true)
+  }
 
   onMounted(() => {
     if (registerChild != null) {
@@ -88,12 +106,20 @@
       }
       registerChild(child)
     }
+
+    if (is_open.value && collapseToggle != null) {
+      collapseToggle(elId.value)
+    }
   })
 
-  watch(openType, (value : boolean) => {
-    if (boxRef.value != null) {
-      openCollapse(value)
+  onUnmounted(() => {
+    if (unregisterChild != null) {
+      unregisterChild(elId.value)
     }
+  })
+
+  watch(() : boolean => props.open, (value : boolean) => {
+    applyOpenState(value, false, false)
   })
 
   defineExpose({
@@ -104,10 +130,6 @@
 </script>
 
 <style>
-  /* .uni-collapse-item {
-    background-color: #fff;
-  } */
-
   .uni-collapse-item__title {
     flex-direction: row;
     align-items: center;
@@ -139,7 +161,6 @@
   }
 
   .open--active {
-    /* background-color: #f0f0f0; */
     color: var(--active-color, #bbb);
   }
 

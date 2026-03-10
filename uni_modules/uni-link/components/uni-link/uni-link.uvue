@@ -1,63 +1,197 @@
 <template>
-  <text class="text" @click="openURL">{{text}}</text>
+  <text class="uni-link" @click="openURL">
+    <slot>
+      <text>{{ href }}</text>
+    </slot>
+  </text>
 </template>
-
 <script lang="uts" setup>
   // #ifdef APP
-  import { openSchema } from '@/uni_modules/uts-openSchema'
+  import { openSchema, canOpenURL } from '@/uni_modules/uts-openSchema'
   // #endif
 
-  /**
-   * @description uni-link是一个外部网页超链接组件，在小程序内打开内部web-view组件或复制url，在app内打开外部浏览器，在h5端打开新网页
-   * @property {String} href 点击后打开的外部网页url，小程序中必须以https://开头
-   * @property {String} text 显示的文字
-   * @property {Boolean} inWhiteList 是否在小程序白名单中，如果在的话，在小程序端会直接打开内置web-view，否则会只会复制url，提示在外部打开
-   * @example * <uni-link href="https://ext.dcloud.net.cn" text="https://ext.dcloud.net.cn" :inWhiteList="true"></uni-link>
-   */
-  const props = defineProps({
-    href: {
-      type: String,
-      default: ''
-    },
-    text: {
-      type: String,
-      default: ''
-    },
-    inWhiteList: {
-      type: Boolean,
-      default: false
-    }
+  defineOptions({
+    name: 'UniLink'
   })
 
-  function openURL () {
+  type Props = {
+    href?: string
+    mpWebviewPageUrl?: string
+  }
+
+  type LocaleType = 'zh-Hans' | 'zh-Hant' | 'en' | 'fr' | 'la'
+
+  type LocaleMessages = {
+    emptyHref: string
+    popupBlocked: string
+    mpWebviewPageMissing: string
+    mpOpenFailed: string
+    appOpenFailed: string
+    copiedOpenInBrowserPrefix: string
+    copyFailedOpenInBrowser: string
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    href: '',
+    mpWebviewPageUrl: ''
+  })
+
+  const emit = defineEmits<{
+    error: [message: string]
+  }>()
+
+  const appLanguage = (uni.getAppBaseInfo().appLanguage ?? 'en').toLowerCase()
+
+  function resolveLocaleType() : LocaleType {
+    if (
+      appLanguage.indexOf('zh-hant') == 0 ||
+      appLanguage.indexOf('zh-tw') == 0 ||
+      appLanguage.indexOf('zh-hk') == 0 ||
+      appLanguage.indexOf('zh-mo') == 0
+    ) {
+      return 'zh-Hant'
+    }
+    if (appLanguage.indexOf('zh') == 0) {
+      return 'zh-Hans'
+    }
+    if (appLanguage.indexOf('fr') == 0) {
+      return 'fr'
+    }
+    if (appLanguage.indexOf('la') == 0 || appLanguage.indexOf('lat') == 0) {
+      return 'la'
+    }
+    return 'en'
+  }
+
+  function getLocaleMessages() : LocaleMessages {
+    const localeType = resolveLocaleType()
+
+    if (localeType == 'zh-Hans') {
+      return {
+        emptyHref: '链接地址不能为空',
+        popupBlocked: '浏览器拦截了新窗口',
+        mpWebviewPageMissing: '小程序未配置 web-view 页面',
+        mpOpenFailed: '小程序内打开失败',
+        appOpenFailed: '当前设备无法打开该链接',
+        copiedOpenInBrowserPrefix: '已复制链接，请使用外部浏览器打开：',
+        copyFailedOpenInBrowser: '复制链接失败，请手动复制链接并使用外部浏览器打开'
+      }
+    }
+
+    if (localeType == 'zh-Hant') {
+      return {
+        emptyHref: '連結地址不能為空',
+        popupBlocked: '瀏覽器封鎖了新視窗',
+        mpWebviewPageMissing: '小程式未設定 web-view 頁面',
+        mpOpenFailed: '小程式內開啟失敗',
+        appOpenFailed: '目前裝置無法開啟此連結',
+        copiedOpenInBrowserPrefix: '已複製連結，請使用外部瀏覽器開啟：',
+        copyFailedOpenInBrowser: '複製連結失敗，請手動複製連結並使用外部瀏覽器開啟'
+      }
+    }
+
+    if (localeType == 'fr') {
+      return {
+        emptyHref: 'L’URL ne peut pas être vide',
+        popupBlocked: 'Le navigateur a bloqué la nouvelle fenêtre',
+        mpWebviewPageMissing: 'La page web-view du mini programme n’est pas configurée',
+        mpOpenFailed: 'Échec de l’ouverture dans le mini programme',
+        appOpenFailed: 'Cet appareil ne peut pas ouvrir ce lien',
+        copiedOpenInBrowserPrefix: 'Le lien a été copié. Veuillez l’ouvrir dans un navigateur externe :',
+        copyFailedOpenInBrowser: 'Échec de la copie du lien. Veuillez le copier manuellement et l’ouvrir dans un navigateur externe.'
+      }
+    }
+
+    if (localeType == 'la') {
+      return {
+        emptyHref: 'Inscriptio nexus vacua esse non potest',
+        popupBlocked: 'Navigator fenestram novam prohibuit',
+        mpWebviewPageMissing: 'Pagina web-view mini programmatis configurata non est',
+        mpOpenFailed: 'Apertio intra mini programma defecit',
+        appOpenFailed: 'Hoc instrumentum hunc nexum aperire non potest',
+        copiedOpenInBrowserPrefix: 'Nexus descriptus est. Quaeso eum in navigatro externo aperi:',
+        copyFailedOpenInBrowser: 'Descriptio nexus defecit. Quaeso nexum manu describe et in navigatro externo aperi.'
+      }
+    }
+
+    return {
+      emptyHref: 'The link URL cannot be empty',
+      popupBlocked: 'The browser blocked the new window',
+      mpWebviewPageMissing: 'The mini program web-view page is not configured',
+      mpOpenFailed: 'Failed to open the link inside the mini program',
+      appOpenFailed: 'This device cannot open the link',
+      copiedOpenInBrowserPrefix: 'The link has been copied. Please open it in an external browser:',
+      copyFailedOpenInBrowser: 'Failed to copy the link. Please copy it manually and open it in an external browser.'
+    }
+  }
+
+  function showPrompt(content : string) {
+    uni.showModal({
+      content,
+      showCancel: false
+    })
+  }
+
+  function copyLinkAndPrompt(url : string) {
+    const messages = getLocaleMessages()
+    uni.setClipboardData({
+      data: url,
+      showToast: false,
+      success: () => {
+        showPrompt(messages.copiedOpenInBrowserPrefix + '\n' + url)
+      },
+      fail: () => {
+        showPrompt(messages.copyFailedOpenInBrowser)
+      }
+    })
+  }
+
+  function reportOpenError(message : string) {
+    emit('error', message)
+  }
+
+  function openURL() {
+    const url = props.href.trim()
+    const messages = getLocaleMessages()
+
+    if (url.length == 0) {
+      reportOpenError(messages.emptyHref)
+      return
+    }
+
     // #ifdef WEB
-    window.open(props.href)
+    const targetWindow = window.open(url, '_blank')
+    if (targetWindow == null) {
+      reportOpenError(messages.popupBlocked)
+    }
     // #endif
 
     // #ifdef MP
-    if (props.inWhiteList) { //如果在小程序的网址白名单中，会走内置webview打开，否则会复制网址提示在外部浏览器打开
-      uni.navigateTo({
-        url: '/pages/component/web-view/web-view?url=' + props.href
-      });
-    } else {
-      uni.setClipboardData({
-        data: props.href
-      });
-      uni.showModal({
-        content: '本网址无法直接在小程序内打开。已自动复制网址，请在手机浏览器里粘贴该网址',
-        showCancel: false
-      });
+    const webviewPageUrl = props.mpWebviewPageUrl.trim()
+    if (webviewPageUrl.length == 0) {
+      reportOpenError(messages.mpWebviewPageMissing)
+      copyLinkAndPrompt(url)
+      return
     }
+    const connector = webviewPageUrl.indexOf('?') == -1 ? '?' : '&'
+    uni.navigateTo({
+      url: `${webviewPageUrl}${connector}url=${encodeURIComponent(url)}`,
+      success: () => {},
+      fail: () => {
+        reportOpenError(messages.mpOpenFailed)
+        copyLinkAndPrompt(url)
+      }
+    })
     // #endif
 
     // #ifdef APP
-    openSchema(props.href)
+    openSchema(url)
     // #endif
   }
 </script>
 
 <style>
-  .text {
-    text-decoration-line: underline
+  .uni-link {
+    text-decoration-line: underline;
   }
 </style>

@@ -1,0 +1,105 @@
+<template>
+  <scroll-view class="page">
+    <view class="section">
+      <text class="section-title">基础用法</text>
+      <uni-link href="https://uniapp.dcloud.net.cn" @error="onError"></uni-link> <!-- TODO Android点不了 @liuxiaohang-->
+    </view>
+
+    <view class="section">
+      <text class="section-title">自定义样式</text>
+      <uni-link
+        href="https://doc.dcloud.net.cn/uni-app-x/"
+        class="custom-link"
+        @error="onError"
+      > <!-- TODO App上自定义class无效 @fengxiaoyun-->
+        <text>查看 uni-app x 文档</text>
+      </uni-link>
+    </view>
+
+    <view class="section">
+      <text class="section-title">小程序 web-view 示例</text>
+      <uni-link
+        href="https://uniapp.dcloud.net.cn"
+        mpWebviewPageUrl="/pages/link-webview/link-webview"
+        @error="onError"
+      >
+        <text>MP web-view 跳转示例</text>
+      </uni-link>
+      <text class="tip-text">仅小程序平台生效，跳转到 pages/link-webview/link-webview 页面承载 web-view；未配置 mpWebviewPageUrl 或打开失败时会自动复制链接并提示使用外部浏览器打开。</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">失败示例</text>
+      <uni-link
+        href=""
+        @error="onError"
+      >
+        <text>空链接（触发 error）</text>
+      </uni-link>
+    </view>
+
+    <view class="log-section">
+      <text class="log-title">最近事件</text>
+      <text class="log-text">{{ lastEvent }}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="uts">
+  const lastEvent = ref<string>('暂无事件')
+
+  function onError(message : string) {
+    lastEvent.value = `error: ${message}`
+    console.log(`[link] error: ${message}`)
+  }
+</script>
+
+<style>
+  .page {
+    flex: 1;
+    padding: 12px;
+  }
+
+  .section {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .tip-text {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #999999;
+  }
+
+  .custom-link {
+    color: #007aff;
+    font-size: 15px;
+  }
+
+  .log-section {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
+
+  .log-title {
+    font-size: 13px;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .log-text {
+    font-size: 13px;
+    color: #007aff;
+  }
+</style>
