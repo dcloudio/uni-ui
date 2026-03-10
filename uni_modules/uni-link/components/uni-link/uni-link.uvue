@@ -1,7 +1,7 @@
 <template>
-  <text class="uni-link" @click="openURL">
+  <text class="uni-link">
     <slot>
-      <text>{{ href }}</text>
+      <text @click="openURL">{{ href }}</text>
     </slot>
   </text>
 </template>
