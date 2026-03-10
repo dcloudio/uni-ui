@@ -163,6 +163,7 @@
 		color: #757575;
 		text-align: center;
 		line-height: 1.4;
+		z-index: 1000;
 	}
 
 	.indicator {

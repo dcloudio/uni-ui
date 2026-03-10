@@ -6,21 +6,19 @@
 			<button class="control-btn" @click="toggleIndexs">{{ useCustomIndexs ? '根据数据设索引' : '自定义索引' }}</button>
 		</view>
 		<list-view ref="listRef" style="flex: 1;" :scroll-into-view="indexViewID">
-			<!-- TODO 2个v-for导致蒸汽模式下乱了 -->
-			<template v-for="group in cityGroups" :key="group.index">
-				<!-- 索引头作为独立的 list-item -->
-				<list-item :id="'idx-' + group.index" type="header">
-					<view class="group-header">
+			<sticky-section v-for="group in cityGroups" :key="group.index">
+				<sticky-header :id="'idx-' + group.index">
+					<view class="group-header" style="background-color: aqua;">
 						<text class="group-header-text">{{ group.index }}</text>
 					</view>
-				</list-item>
+				</sticky-header>
 				<!-- 每个城市作为独立的 list-item -->
 				<list-item v-for="city in group.cities" :key="city.pinyin" type="city">
 					<view class="city-item">
 						<text class="city-name">{{ city.name }}</text>
 					</view>
 				</list-item>
-			</template>
+			</sticky-section>
 		</list-view>
 		<uni-index-bar
 			:indexs="currentIndexs"
@@ -65,11 +63,11 @@
 		}
 		// console.log('选择了索引：', index)
 		const childId = 'idx-' + index
-		// #ifndef WEB
+		// #ifndef VUE3-VAPOR && APP-HARMONY
+		// TODO 鸿蒙蒸汽模式修复scrollIntoView不能准确滚动到孙子节点的问题后也使用 scrollIntoView
 		indexViewID.value = childId
 		// #endif
-		// TODO Web端 list的scroll-into-view 属性不生效，暂时使用 getElementById 获取元素位置并滚动到对应位置；后续如果 scroll-into-view 在 H5 端得到支持，可以去掉下面的代码
-		// #ifdef WEB
+		// #ifdef VUE3-VAPOR && APP-HARMONY
 		const element = uni.getElementById(childId)
 		if (element != null) {
 			// 使用 scrollTop 属性滚动
