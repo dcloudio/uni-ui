@@ -65,14 +65,11 @@
 				"navigationBarTitleText": "link"
 			}
 		},
-		// #ifdef MP
 		{
-			"path": "pages/link-webview/link-webview",
+			"path": "uni_modules/uni-link/pages/link-webview",
 			"style": {
-				"navigationBarTitleText": "link-webview"
 			}
 		},
-		// #endif
 		{
 			"path": "pages/time-format/time-format",
 			"style": {

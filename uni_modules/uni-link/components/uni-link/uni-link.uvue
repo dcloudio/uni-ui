@@ -1,13 +1,11 @@
 <template>
-  <text class="uni-link">
-    <slot>
-      <text @click="openURL">{{ href }}</text>
-    </slot>
+  <text style="text-decoration-line: underline" @click="openURL">
+    <slot></slot>
   </text>
 </template>
 <script lang="uts" setup>
   // #ifdef APP
-  import { openSchema, canOpenURL } from '@/uni_modules/uts-openSchema'
+  import { openSchema } from '@/uni_modules/uts-openSchema'
   // #endif
 
   defineOptions({
@@ -16,7 +14,7 @@
 
   type Props = {
     href?: string
-    mpWebviewPageUrl?: string
+    target?: '_blank' | '_self'
   }
 
   type LocaleType = 'zh-Hans' | 'zh-Hant' | 'en' | 'fr' | 'la'
@@ -24,16 +22,16 @@
   type LocaleMessages = {
     emptyHref: string
     popupBlocked: string
-    mpWebviewPageMissing: string
-    mpOpenFailed: string
-    appOpenFailed: string
+    internalOpenFailed: string
     copiedOpenInBrowserPrefix: string
     copyFailedOpenInBrowser: string
   }
 
+  const LINK_WEBVIEW_PAGE_PATH = '/uni_modules/uni-link/pages/link-webview'
+
   const props = withDefaults(defineProps<Props>(), {
     href: '',
-    mpWebviewPageUrl: ''
+    target: '_self'
   })
 
   const emit = defineEmits<{
@@ -70,9 +68,7 @@
       return {
         emptyHref: '链接地址不能为空',
         popupBlocked: '浏览器拦截了新窗口',
-        mpWebviewPageMissing: '小程序未配置 web-view 页面',
-        mpOpenFailed: '小程序内打开失败',
-        appOpenFailed: '当前设备无法打开该链接',
+        internalOpenFailed: '页面内打开失败',
         copiedOpenInBrowserPrefix: '已复制链接，请使用外部浏览器打开：',
         copyFailedOpenInBrowser: '复制链接失败，请手动复制链接并使用外部浏览器打开'
       }
@@ -82,9 +78,7 @@
       return {
         emptyHref: '連結地址不能為空',
         popupBlocked: '瀏覽器封鎖了新視窗',
-        mpWebviewPageMissing: '小程式未設定 web-view 頁面',
-        mpOpenFailed: '小程式內開啟失敗',
-        appOpenFailed: '目前裝置無法開啟此連結',
+        internalOpenFailed: '頁面內開啟失敗',
         copiedOpenInBrowserPrefix: '已複製連結，請使用外部瀏覽器開啟：',
         copyFailedOpenInBrowser: '複製連結失敗，請手動複製連結並使用外部瀏覽器開啟'
       }
@@ -94,9 +88,7 @@
       return {
         emptyHref: 'L’URL ne peut pas être vide',
         popupBlocked: 'Le navigateur a bloqué la nouvelle fenêtre',
-        mpWebviewPageMissing: 'La page web-view du mini programme n’est pas configurée',
-        mpOpenFailed: 'Échec de l’ouverture dans le mini programme',
-        appOpenFailed: 'Cet appareil ne peut pas ouvrir ce lien',
+        internalOpenFailed: 'Échec de l’ouverture dans la page intégrée',
         copiedOpenInBrowserPrefix: 'Le lien a été copié. Veuillez l’ouvrir dans un navigateur externe :',
         copyFailedOpenInBrowser: 'Échec de la copie du lien. Veuillez le copier manuellement et l’ouvrir dans un navigateur externe.'
       }
@@ -106,9 +98,7 @@
       return {
         emptyHref: 'Inscriptio nexus vacua esse non potest',
         popupBlocked: 'Navigator fenestram novam prohibuit',
-        mpWebviewPageMissing: 'Pagina web-view mini programmatis configurata non est',
-        mpOpenFailed: 'Apertio intra mini programma defecit',
-        appOpenFailed: 'Hoc instrumentum hunc nexum aperire non potest',
+        internalOpenFailed: 'Apertio intra paginam defecit',
         copiedOpenInBrowserPrefix: 'Nexus descriptus est. Quaeso eum in navigatro externo aperi:',
         copyFailedOpenInBrowser: 'Descriptio nexus defecit. Quaeso nexum manu describe et in navigatro externo aperi.'
       }
@@ -117,9 +107,7 @@
     return {
       emptyHref: 'The link URL cannot be empty',
       popupBlocked: 'The browser blocked the new window',
-      mpWebviewPageMissing: 'The mini program web-view page is not configured',
-      mpOpenFailed: 'Failed to open the link inside the mini program',
-      appOpenFailed: 'This device cannot open the link',
+      internalOpenFailed: 'Failed to open the link in the built-in page',
       copiedOpenInBrowserPrefix: 'The link has been copied. Please open it in an external browser:',
       copyFailedOpenInBrowser: 'Failed to copy the link. Please copy it manually and open it in an external browser.'
     }
@@ -150,6 +138,19 @@
     emit('error', message)
   }
 
+  function openInBuiltInWebview(url : string, copyOnFail : boolean, messages : LocaleMessages) {
+    uni.navigateTo({
+      url: `${LINK_WEBVIEW_PAGE_PATH}?url=${encodeURIComponent(url)}`,
+      success: () => {},
+      fail: () => {
+        reportOpenError(messages.internalOpenFailed)
+        if (copyOnFail) {
+          copyLinkAndPrompt(url)
+        }
+      }
+    })
+  }
+
   function openURL() {
     const url = props.href.trim()
     const messages = getLocaleMessages()
@@ -167,31 +168,22 @@
     // #endif
 
     // #ifdef MP
-    const webviewPageUrl = props.mpWebviewPageUrl.trim()
-    if (webviewPageUrl.length == 0) {
-      reportOpenError(messages.mpWebviewPageMissing)
+    if (props.target == '_blank') {
       copyLinkAndPrompt(url)
       return
     }
-    const connector = webviewPageUrl.indexOf('?') == -1 ? '?' : '&'
-    uni.navigateTo({
-      url: `${webviewPageUrl}${connector}url=${encodeURIComponent(url)}`,
-      success: () => {},
-      fail: () => {
-        reportOpenError(messages.mpOpenFailed)
-        copyLinkAndPrompt(url)
-      }
-    })
+    openInBuiltInWebview(url, true, messages)
     // #endif
 
     // #ifdef APP
-    openSchema(url)
+    if (props.target == '_blank') {
+      openSchema(url)
+      return
+    }
+    openInBuiltInWebview(url, false, messages)
     // #endif
   }
 </script>
 
 <style>
-  .uni-link {
-    text-decoration-line: underline;
-  }
 </style>

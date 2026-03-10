@@ -2,39 +2,36 @@
   <scroll-view class="page">
     <view class="section">
       <text class="section-title">基础用法</text>
-      <uni-link href="https://uniapp.dcloud.net.cn" @error="onError"></uni-link> <!-- TODO Android点不了 @liuxiaohang-->
+      <uni-link href="https://uniapp.dcloud.net.cn" @error="onError">https://uniapp.dcloud.net.cn</uni-link>
     </view>
 
     <view class="section">
       <text class="section-title">自定义样式</text>
-      <uni-link
-        href="https://doc.dcloud.net.cn/uni-app-x/"
-        class="custom-link"
-        @error="onError"
-      > <!-- TODO App上自定义class无效 @fengxiaoyun-->
-        <text>查看 uni-app x 文档</text>
+      <uni-link href="https://doc.dcloud.net.cn/uni-app-x/" class="custom-link" @error="onError" >
+        查看 uni-app x 文档
       </uni-link>
     </view>
 
     <view class="section">
-      <text class="section-title">小程序 web-view 示例</text>
-      <uni-link
-        href="https://uniapp.dcloud.net.cn"
-        mpWebviewPageUrl="/pages/link-webview/link-webview"
-        @error="onError"
-      >
-        <text>MP web-view 跳转示例</text>
+      <text class="section-title">target="_self" (默认)</text>
+      <uni-link href="https://uniapp.dcloud.net.cn" target="_self" @error="onError" >
+        在 webview 中打开
       </uni-link>
-      <text class="tip-text">仅小程序平台生效，跳转到 pages/link-webview/link-webview 页面承载 web-view；未配置 mpWebviewPageUrl 或打开失败时会自动复制链接并提示使用外部浏览器打开。</text>
+      <text class="tip-text">小程序和 APP 使用 webview 页面打开链接</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">target="_blank"</text>
+      <uni-link href="https://uniapp.dcloud.net.cn" target="_blank" @error="onError" >
+        使用外部浏览器打开
+      </uni-link>
+      <text class="tip-text">APP 使用 openSchema 插件，小程序复制链接提示，Web 新窗口打开</text>
     </view>
 
     <view class="section">
       <text class="section-title">失败示例</text>
-      <uni-link
-        href=""
-        @error="onError"
-      >
-        <text>空链接（触发 error）</text>
+      <uni-link href="" @error="onError" >
+        空链接（触发 error）
       </uni-link>
     </view>
 
@@ -82,7 +79,7 @@
 
   .custom-link {
     color: #007aff;
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .log-section {
