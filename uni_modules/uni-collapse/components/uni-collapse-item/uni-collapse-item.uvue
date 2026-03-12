@@ -1,12 +1,19 @@
 <template>
-  <view class="uni-collapse-item" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <view>
     <view class="uni-collapse-item__title" @click="openCollapse(!is_open)">
-      <text class="uni-collapse-item__title-text"
-        :class="{'is-disabled': disabled, 'open--active': is_open}">{{ title }}</text>
-      <view class="down_arrow" :class="{'down_arrow--active': is_open}"></view>
+      <view class="uni-collapse-item__title-main">
+        <slot name="title" :open="is_open" :disabled="props.disabled">
+          <text class="uni-collapse-item__title-text"
+            :class="[props.titleClass, {'is-disabled': props.disabled, 'open--active': is_open}]">{{ props.title }}</text>
+        </slot>
+      </view>
+      <view class="down_arrow"
+        :class="[props.arrowClass, {'down_arrow--active': is_open, 'down_arrow--disabled': props.disabled}]"></view>
     </view>
-    <view ref="boxRef" class="uni-collapse-item__content" :class="{'box-open--active': is_open}">
-      <view ref="contentRef" class="uni-collapse-item__content-box" :class="{'content-open--active': box_is_open}">
+    <view ref="contentWrapRef" class="uni-collapse-item__content"
+      :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-state-open' : 'content-state-close']">
+      <view ref="contentRef" class="uni-collapse-item__content-box"
+        :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-box-open' : 'content-box-close']">
         <slot></slot>
       </view>
     </view>
@@ -15,62 +22,67 @@
 
 <script lang="uts" setup>
   import type { ItemChildType } from '../type.uts'
-  import { state } from '@/store/index.uts'
   import {
     UNI_COLLAPSE_REGISTER_CHILD,
     UNI_COLLAPSE_UNREGISTER_CHILD,
     UNI_COLLAPSE_CHILD_TOGGLE
   } from '../common.uts'
 
-  const isDarkMode = computed(() : boolean => {
-    return state.isDarkMode
-  })
-
   defineOptions({
     name: 'UniCollapseItem',
-    styleIsolation: 'app'
+    styleIsolation: 'app',
+    externalClasses: ['title-class', 'arrow-class']
   })
 
-  const props = defineProps({
-    title: { type: String, default: '' },
-    open: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false }
+  type Props = {
+    title? : string,
+    open? : boolean,
+    disabled? : boolean,
+    titleClass? : string.ClassString,
+    arrowClass? : string.ClassString
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    title: '',
+    open: false,
+    disabled: false,
+    titleClass: '',
+    arrowClass: ''
   })
 
   const emit = defineEmits<{
     change: [open: boolean]
   }>()
 
+  defineSlots<{
+    default(props : {}) : any,
+    title(props : { open : boolean, disabled : boolean }) : any
+  }>()
+
   let is_open = ref<boolean>(props.open)
   let box_is_open = ref<boolean>(props.open)
-
-  let boxRef = ref<UniViewElement | null>(null)
+  let transition_enabled = ref<boolean>(false)
+  let contentWrapRef = ref<UniViewElement | null>(null)
   let contentRef = ref<UniViewElement | null>(null)
 
   const elId = ref(`uni_collapse_item_${Math.ceil(Math.random() * 10e5).toString(36)}`)
+  const contentTransitionDelay = 16
+
+  let enableTransitionTimer = 0
 
   const registerChild = inject<((child : ItemChildType) => void) | null>(UNI_COLLAPSE_REGISTER_CHILD, null)
   const unregisterChild = inject<((elId : string) => void) | null>(UNI_COLLAPSE_UNREGISTER_CHILD, null)
   const collapseToggle = inject<((elId : string) => void) | null>(UNI_COLLAPSE_CHILD_TOGGLE, null)
 
+  function clearEnableTransitionTimer() {
+    if (enableTransitionTimer != 0) {
+      clearTimeout(enableTransitionTimer)
+      enableTransitionTimer = 0
+    }
+  }
+
   function openOrClose(open : boolean) {
     box_is_open.value = open
-
-    // #ifndef MP-WEIXIN
-    const boxStyle = boxRef.value?.style
-    const contentStyle = contentRef.value?.style
-    if (boxStyle == null || contentStyle == null) {
-      return
-    }
-
-    boxStyle.setProperty('display', open ? 'flex' : 'none')
-    nextTick(() => {
-      setTimeout(() => {
-        contentStyle.setProperty('transform', open ? 'translateY(0)' : 'translateY(-100%)')
-        contentStyle.setProperty('opacity', open ? '1' : '0')
-      }, 10)
-    })
-    // #endif
   }
 
   function applyOpenState(open : boolean, syncSiblings : boolean, triggerEmit : boolean) {
@@ -110,9 +122,17 @@
     if (is_open.value && collapseToggle != null) {
       collapseToggle(elId.value)
     }
+
+    nextTick(() => {
+      enableTransitionTimer = setTimeout(() => {
+        enableTransitionTimer = 0
+        transition_enabled.value = true
+      }, contentTransitionDelay)
+    })
   })
 
   onUnmounted(() => {
+    clearEnableTransitionTimer()
     if (unregisterChild != null) {
       unregisterChild(elId.value)
     }
@@ -134,23 +154,13 @@
     flex-direction: row;
     align-items: center;
     padding: 12px 18px;
-    background-color: var(--list-background-color, #ffffff);
+    background-color: var(--collapse-title-background, #ffffff);
   }
 
-  .down_arrow {
-    width: 8px;
-    height: 8px;
-    transform: rotate(45deg);
-    border-right: 1px #999 solid;
-    border-bottom: 1px #999 solid;
-    margin-top: -3px;
-    transition-property: transform;
-    transition-duration: 150ms;
-  }
-
-  .down_arrow--active {
-    transform: rotate(-135deg);
-    margin-top: 0px;
+  .uni-collapse-item__title-main {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
   }
 
   .uni-collapse-item__title-text {
@@ -161,33 +171,83 @@
   }
 
   .open--active {
-    color: var(--active-color, #bbb);
+    color: var(--active-color, #555555);
   }
 
   .is-disabled {
-    color: #999;
+    color: var(--disabled-color, #999999);
+  }
+
+  .down_arrow {
+    width: 8px;
+    height: 8px;
+    margin-left: 12px;
+    margin-top: -3px;
+    transform: rotate(45deg);
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: var(--arrow-color, #999999);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--arrow-color, #999999);
+    transition-property: transform, border-right-color, border-bottom-color;
+    transition-duration: 150ms;
+  }
+
+  .down_arrow--active {
+    margin-top: 0px;
+    transform: rotate(-135deg);
+    border-right-color: var(--arrow-active-color, #999999);
+    border-bottom-color: var(--arrow-active-color, #999999);
+  }
+
+  .down_arrow--disabled {
+    border-right-color: var(--arrow-disabled-color, #999999);
+    border-bottom-color: var(--arrow-disabled-color, #999999);
   }
 
   .uni-collapse-item__content {
-    display: none;
-    position: relative;
     overflow: hidden;
-  }
-
-  .box-open--active {
-    display: flex;
+    width: 100%;
+    max-height: 0px;
   }
 
   .uni-collapse-item__content-box {
     width: 100%;
-    transition-property: transform, opacity;
-    transition-duration: 150ms;
-    transform: translateY(-100%);
     opacity: 0;
+    transform: translateY(-8px);
   }
 
-  .content-open--active {
-    transform: translateY(0%);
+  .content-state-open {
+    max-height: 2000px;
+  }
+
+  .content-state-close {
+    max-height: 0px;
+  }
+
+  .content-box-open {
     opacity: 1;
+    transform: translateY(0px);
+  }
+
+  .content-box-close {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .content-transition--active {
+    transition-duration: 180ms;
+    transition-timing-function: ease;
+  }
+
+  /* 不要恢复旧的“运行时测量高度 + 内联 style.height”方案。
+     该方案在 HarmonyOS 上会出现默认展开时外层容器仍为 0 高度，导致内容不显示。 */
+  .uni-collapse-item__content {
+    transition-property: max-height;
+  }
+
+  .uni-collapse-item__content-box {
+    transition-property: opacity, transform;
   }
 </style>

@@ -16,8 +16,12 @@
     name: 'UniCollapse'
   })
 
-  const props = defineProps({
-    accordion: { type: Boolean, default: true }
+  type Props = {
+    accordion? : boolean
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    accordion: true
   })
 
   let childNodes = [] as ItemChildType[]

@@ -8,7 +8,7 @@
 		<list-view ref="listRef" style="flex: 1;" :scroll-into-view="indexViewID">
 			<sticky-section v-for="group in cityGroups" :key="group.index">
 				<sticky-header :id="'idx-' + group.index">
-					<view class="group-header" style="background-color: aqua;">
+					<view class="group-header" style="background-color: lightgray;">
 						<text class="group-header-text">{{ group.index }}</text>
 					</view>
 				</sticky-header>
