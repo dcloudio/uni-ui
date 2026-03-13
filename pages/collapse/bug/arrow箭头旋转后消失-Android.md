@@ -1,108 +1,170 @@
-# uni-collapse-item Android 展开后箭头消失问题
+# uni-collapse-item Android 箭头点击后消失问题
 
 ## 结论
 
-这是 Android 渲染层问题，不是 `uni-collapse-item` 的展开状态、布局计算或内容高度逻辑错误。
+这是 Android 渲染层问题，不是 `uni-collapse-item` 的展开状态、事件流或内容布局逻辑错误。
 
-真正原因是：箭头节点本身一直存在，尺寸和位置也都正常，但它是一个“空 `view` + `border-right`/`border-bottom` + `transform: rotate(...)`”画出来的箭头。在 Android 上，这种节点在交互后切换 `transform` / 边框颜色并参与过渡时，会出现边框不再被绘制的情况，所以视觉上像“箭头消失了”。
+更准确地说，问题不是单纯的“旋转箭头”会出错，而是 Android 对下面这种写法存在绘制异常：
+
+- 空 `view`
+- 通过 `border-right` + `border-bottom` 画箭头
+- 运行时切换 `transform: rotate(...)`
+- 同时切换 `border-right-color` / `border-bottom-color`
+- 并让这些属性参与 `transition`
+
+在这种情况下，Android 上箭头节点仍然存在，bounds 也正常，但边框会丢失绘制，视觉上表现为“箭头消失”。
 
 ## 涉及代码
 
-- 箭头节点定义：[uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue](/C:/Users/wa/Documents/HBuilderProjects/uni-ui-x/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue#L10)
-- 展开收起状态切换：[uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue](/C:/Users/wa/Documents/HBuilderProjects/uni-ui-x/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue#L140)
-- 箭头样式定义：[uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue](/C:/Users/wa/Documents/HBuilderProjects/uni-ui-x/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue#L287)
+- 组件文件：`uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.uvue`
+- 示例页：`pages/collapse/collapse.uvue`
 
-关键样式：
+原始问题样式的关键点是：
 
 ```css
 .down_arrow {
-  width: 8px;
-  height: 8px;
-  transform: rotate(45deg);
-  border-right-width: 1px;
-  border-bottom-width: 1px;
+  border-right-color: var(--arrow-color, #999999);
+  border-bottom-color: var(--arrow-color, #999999);
   transition-property: transform, border-right-color, border-bottom-color;
-  transition-duration: 150ms;
 }
 
 .down_arrow--active {
   transform: rotate(-135deg);
+  border-right-color: var(--arrow-active-color, #999999);
+  border-bottom-color: var(--arrow-active-color, #999999);
 }
 ```
 
-## 复现方式
+## 原始复现方式
 
-1. 启动示例页 `/pages/collapse/collapse`。
-2. 进入“手风琴模式”区域。
-3. 初始状态下箭头正常显示。
-4. 点击“面板 B”展开。
-5. Android 上可见“面板 B”的右侧箭头消失，同时原本“面板 A”的箭头也可能一起消失。
-6. 同页未参与状态切换的箭头，例如“禁用项”，仍然正常显示。
+1. 启动示例页 `/pages/collapse/collapse`
+2. 进入“手风琴模式”
+3. 初始状态下箭头正常显示
+4. 点击“面板 B”展开
+5. Android 上“面板 B”右侧箭头消失，同时“面板 A”收起后的箭头也可能一起消失
+6. 未参与切换的箭头，例如禁用项，通常仍可见
 
-## 实测证据
+## 原始问题证据
 
-### 1. 组件状态和高度计算正常
+### 1. 状态流转正常
 
-Android `adb logcat` 中，点击“面板 B”后有以下日志：
+点击“面板 B”后的日志能看到：
 
 ```text
-[uni-collapse-item] applyOpenState start, elId=uni_collapse_item_g0hl, open=true
-[uni-collapse-item] set content height, elId=uni_collapse_item_g0hl, height=64
-[uni-collapse-item] set box_is_open true, elId=uni_collapse_item_g0hl, content_height=64
-[uni-collapse-item] final layout tag=after-open-timer, elId=uni_collapse_item_g0hl, is_open=true, box_is_open=true, content_height=64
+[collapse] 面板 B 展开
 ```
 
-这说明：
+并且之前的调试日志已验证：
 
-- 点击事件正常触发。
-- `is_open` 状态正常切换。
-- 展开内容高度测量正常。
-- 展开后的最终布局状态正常。
+- `is_open` 正常切换
+- 展开内容高度正常
+- 节点没有被销毁
 
-也就是说，组件逻辑没有出错。
+说明组件逻辑本身没有异常。
 
-### 2. 箭头节点没有丢，只是没画出来
+### 2. 节点仍在，只有绘制丢失
 
-通过 `uiautomator dump` 对比点击前后页面层级：
+通过 `uiautomator dump` 对比点击前后层级：
 
 - 点击前，“面板 B”箭头节点 bounds 为 `[961,733][995,767]`
 - 点击后，“面板 B”箭头节点 bounds 为 `[961,546][995,580]`
 - 点击后，“面板 A”箭头节点 bounds 为 `[961,412][995,446]`
 
-说明箭头节点在 Android 原生视图树里一直存在，而且宽高位置都正常，不是节点被删掉，也不是宽高变成了 0。
+说明箭头节点在 Android 原生视图树里一直存在，不是节点被删除，也不是尺寸变成 0，而是边框没有被正确绘制出来。
 
-### 3. 截图对比能直接看到“节点在，但箭头没画出来”
+### 3. 截图对比
 
-- 点击前截图：`collapse_before.png`
-- 点击“面板 B”后截图：`collapse_after.png`
-- 点击“自定义箭头样式”后截图：`collapse_custom_after.png`
+原始问题截图：
 
-截图表现：
+- `arrow-collapse_before.png`
+- `arrow-collapse_after.png`
+- `arrow-collapse_custom_after.png`
 
-- 点击前，箭头正常显示。
-- 点击后，参与状态切换的箭头消失。
-- 未参与切换的禁用箭头仍然可见。
+现象：
 
-这和“Android 对动态 `transform` 的 border 箭头重绘异常”一致。
+- 点击前箭头正常
+- 点击后参与切换的箭头消失
+- 未参与切换的箭头通常仍可见
 
-## 为什么可以判定为 Android bug
+## 对照实验
 
-满足下面三个条件：
+为了缩小原因范围，做了两个实验。
 
-1. 组件状态日志完整且正确，说明业务逻辑没问题。
-2. Android 原生层级里箭头节点还在，bounds 正常，说明不是节点被移除或布局塌陷。
-3. 最终只有视觉绘制丢失，且只发生在 Android，其他平台正常。
+### 实验 1：仅保留旋转，不再切换边框颜色
 
-因此问题不在 `uni-collapse-item` 的展开逻辑，而在 Android 对“边框画箭头 + transform 旋转 + 状态切换/过渡”的绘制实现。
+把箭头样式改为：
 
-## 建议提交给 Android / 渲染层的描述
+- 仍然使用拆分的 `border-right-*` / `border-bottom-*`
+- 仍然保留 `transform: rotate(...)`
+- 仅把 `transition-property` 改成 `transform`
+- 删除激活态里的 `border-right-color` / `border-bottom-color` 切换
 
-在 uni-app x Android 渲染环境中，一个没有内容、仅依赖 `border-right` 和 `border-bottom` 绘制的 `view`，在运行时切换 `transform: rotate(...)` 并伴随边框颜色/过渡更新后，节点仍在视图树中，但边框不再被绘制，导致箭头消失。
+实验结果：
 
-## 临时规避方向
+- Android 初始截图：`arrow-collapse-android-fix-before.png`
+- 点击“面板 B”后截图：`arrow-collapse-android-fix-after.png`
 
-如果需要先绕过问题，可以考虑：
+结果是：箭头不再消失。
 
-- 不用 border 画箭头，改成图片或字体图标。
-- 避免在空 `view` 的 border 箭头上做旋转动画。
-- 改成两个普通 `view` 组合画箭头，而不是依赖 border + rotate。
+这说明真正触发问题的高概率因素是：
+
+- `border` 画箭头
+- `transform` 旋转
+- `border-color` 状态切换和过渡
+
+这三者叠加后，Android 出现丢绘制。
+
+### 实验 2：把边框写成 `border-right: 1px var(...) solid`
+
+还做过一次更激进的实验，把拆分的边框属性改成简写形式，例如：
+
+```css
+border-right: 1px var(--arrow-color, #999999) solid;
+border-bottom: 1px var(--arrow-color, #999999) solid;
+```
+
+实验结果：
+
+- Android 初始状态下箭头就已经不显示
+
+这说明在 uni-app x Android 渲染环境里，`border` 简写和 `var()` 的组合本身也不稳定，不适合作为这个组件的规避方案。
+
+## 最终规避方案
+
+当前组件已采用平台区隔方案：
+
+- 非 Android 平台：保持原设计
+  - 旋转箭头
+  - 切换边框颜色
+  - 颜色参与过渡
+- Android 平台：条件编译降级
+  - 只旋转箭头
+  - 不切换激活态边框颜色
+  - 不让边框颜色参与过渡
+  - 继续使用拆分的 `border-*` 写法，不使用 `border` 简写 + `var()`
+
+这样可以：
+
+- 保持非 Android 的原视觉表现
+- 避开 Android 的边框丢绘制问题
+
+## 建议提交 issue 时的描述
+
+在 uni-app x Android 渲染环境中，一个没有内容、仅依赖 `border-right` 和 `border-bottom` 绘制的 `view`，在运行时切换 `transform: rotate(...)` 并同时切换 `border-right-color` / `border-bottom-color`、且这些属性参与 `transition` 时，节点仍保留在视图树中，但边框会丢失绘制，导致箭头消失。
+
+另外，`border-right: 1px var(...) solid` / `border-bottom: 1px var(...) solid` 这种“`border` 简写 + `var()`”写法，在 Android 上还可能导致初始状态下箭头直接不显示。
+
+## 建议平台侧排查方向
+
+- `border` 参与绘制的空节点在 `transform` 更新时的重绘逻辑
+- `border-color` 与 `transform` 同时参与过渡时的渲染合成
+- `border` 简写配合 `var()` 时的样式解析和首帧绘制
+
+## 当前代码规范说明
+
+Android 平台这里的规范方式是：
+
+1. 用条件编译隔离平台差异
+2. Android 上只保留旋转动画，不让边框颜色参与状态切换
+3. 继续使用拆分的 `border-right-width/style/color`、`border-bottom-width/style/color`
+4. 不使用 `border` 简写 + `var()` 作为箭头实现

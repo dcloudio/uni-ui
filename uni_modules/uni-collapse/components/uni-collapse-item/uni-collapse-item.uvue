@@ -8,7 +8,7 @@
         </slot>
       </view>
       <view class="down_arrow"
-        :class="[props.arrowClass, {'down_arrow--active': is_open, 'down_arrow--disabled': props.disabled}]"></view>
+        :class="[props.arrowClass, arrowPlatformClass, arrowStateClass, arrowDisabledClass]"></view>
     </view>
     <view ref="contentWrapRef" class="uni-collapse-item__content"
       :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-state-open' : 'content-state-close']">
@@ -69,10 +69,33 @@
   const contentTransitionDelay = 16
 
   let enableTransitionTimer = 0
+  let isAndroidArrowRenderFix = false
+
+  // #ifdef APP-ANDROID
+  // Android arrow fix:
+  // keep transform rotation, but avoid animating border colors for border-drawn arrows.
+  // Keep split border-* properties here. Do not use border shorthand with var().
+  isAndroidArrowRenderFix = true
+  // #endif
 
   const registerChild = inject<((child : ItemChildType) => void) | null>(UNI_COLLAPSE_REGISTER_CHILD, null)
   const unregisterChild = inject<((elId : string) => void) | null>(UNI_COLLAPSE_UNREGISTER_CHILD, null)
   const collapseToggle = inject<((elId : string) => void) | null>(UNI_COLLAPSE_CHILD_TOGGLE, null)
+
+  const arrowPlatformClass = computed(() : string => {
+    return isAndroidArrowRenderFix ? 'down_arrow--android-fix' : ''
+  })
+
+  const arrowStateClass = computed(() : string => {
+    if (!is_open.value) {
+      return ''
+    }
+    return isAndroidArrowRenderFix ? 'down_arrow--android-active' : 'down_arrow--active'
+  })
+
+  const arrowDisabledClass = computed(() : string => {
+    return props.disabled ? 'down_arrow--disabled' : ''
+  })
 
   function clearEnableTransitionTimer() {
     if (enableTransitionTimer != 0) {
@@ -199,6 +222,15 @@
     transform: rotate(-135deg);
     border-right-color: var(--arrow-active-color, #999999);
     border-bottom-color: var(--arrow-active-color, #999999);
+  }
+
+  .down_arrow--android-fix {
+    transition-property: transform;
+  }
+
+  .down_arrow--android-active {
+    margin-top: 0px;
+    transform: rotate(-135deg);
   }
 
   .down_arrow--disabled {
