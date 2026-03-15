@@ -1,14 +1,14 @@
 <template>
   <view>
-    <view class="uni-collapse-item__title" @click="openCollapse(!is_open)">
+    <view class="uni-collapse-item__title" :class="props.titleWrapClass" @click="openCollapse(!is_open)">
       <view class="uni-collapse-item__title-main">
         <slot name="title" :open="is_open" :disabled="props.disabled">
           <text class="uni-collapse-item__title-text"
-            :class="[props.titleClass, {'is-disabled': props.disabled, 'open--active': is_open}]">{{ props.title }}</text>
+            :class="[{'open--active': is_open, 'is-disabled': props.disabled}, props.titleClass, is_open ? props.titleOpenClass : '', props.disabled ? props.titleDisabledClass : '']">{{ props.title }}</text>
         </slot>
       </view>
       <view class="down_arrow"
-        :class="[props.arrowClass, arrowPlatformClass, arrowStateClass, arrowDisabledClass]"></view>
+        :class="[arrowPlatformClass, arrowStateClass, arrowDisabledClass, props.arrowClass, is_open ? props.arrowOpenClass : '', props.disabled ? props.arrowDisabledClass : '']"></view>
     </view>
     <view ref="contentWrapRef" class="uni-collapse-item__content"
       :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-state-open' : 'content-state-close']">
@@ -31,23 +31,33 @@
   defineOptions({
     name: 'UniCollapseItem',
     styleIsolation: 'app',
-    externalClasses: ['title-class', 'arrow-class']
+    externalClasses: ['title-wrap-class', 'title-class', 'title-open-class', 'title-disabled-class', 'arrow-class', 'arrow-open-class', 'arrow-disabled-class']
   })
 
   type Props = {
     title? : string,
     open? : boolean,
     disabled? : boolean,
+    titleWrapClass? : string.ClassString,
     titleClass? : string.ClassString,
-    arrowClass? : string.ClassString
+    titleOpenClass? : string.ClassString,
+    titleDisabledClass? : string.ClassString,
+    arrowClass? : string.ClassString,
+    arrowOpenClass? : string.ClassString,
+    arrowDisabledClass? : string.ClassString
   }
 
   const props = withDefaults(defineProps<Props>(), {
     title: '',
     open: false,
     disabled: false,
+    titleWrapClass: '',
     titleClass: '',
-    arrowClass: ''
+    titleOpenClass: '',
+    titleDisabledClass: '',
+    arrowClass: '',
+    arrowOpenClass: '',
+    arrowDisabledClass: ''
   })
 
   const emit = defineEmits<{
@@ -177,7 +187,7 @@
     flex-direction: row;
     align-items: center;
     padding: 12px 18px;
-    background-color: var(--collapse-title-background, #ffffff);
+    background-color: #ffffff;
   }
 
   .uni-collapse-item__title-main {
@@ -190,15 +200,15 @@
     flex: 1;
     font-size: 14px;
     font-weight: 400;
-    color: var(--text-color, #333333);
+    color: #333333;
   }
 
   .open--active {
-    color: var(--active-color, #555555);
+    opacity: 0.78;
   }
 
   .is-disabled {
-    color: var(--disabled-color, #999999);
+    opacity: 0.45;
   }
 
   .down_arrow {
@@ -209,10 +219,10 @@
     transform: rotate(45deg);
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: var(--arrow-color, #999999);
+    border-right-color: #999999;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: var(--arrow-color, #999999);
+    border-bottom-color: #999999;
     transition-property: transform, border-right-color, border-bottom-color;
     transition-duration: 150ms;
   }
@@ -220,8 +230,7 @@
   .down_arrow--active {
     margin-top: 0px;
     transform: rotate(-135deg);
-    border-right-color: var(--arrow-active-color, #999999);
-    border-bottom-color: var(--arrow-active-color, #999999);
+    opacity: 0.78;
   }
 
   .down_arrow--android-fix {
@@ -234,8 +243,7 @@
   }
 
   .down_arrow--disabled {
-    border-right-color: var(--arrow-disabled-color, #999999);
-    border-bottom-color: var(--arrow-disabled-color, #999999);
+    opacity: 0.45;
   }
 
   .uni-collapse-item__content {

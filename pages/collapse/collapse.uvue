@@ -22,16 +22,15 @@
     </view>
 
     <view class="section">
-      <text class="section-title">普通模式</text>
+      <text class="section-title">普通模式-可同时展开的分组折叠列表</text>
       <uni-collapse :accordion="false">
-        <uni-collapse-item title="可同时展开 1" @change="onMulti1Change">
-          <view class="content-box">
-            <text class="content-text">普通模式下，多个面板可以同时展开，适合信息分组展示场景。\n换行\n换行\n换行\n换行</text>
-          </view>
-        </uni-collapse-item>
-        <uni-collapse-item title="可同时展开 2" @change="onMulti2Change">
-          <view class="content-box">
-            <text class="content-text">你可以自由组合面板的展开状态，互不影响。\n换行\n换行\n换行\n换行</text>
+        <uni-collapse-item v-for="(group, index) in categoryGroups" :key="group.title" :title="group.title" @change="onCategoryChange(group.title, $event as boolean)">
+          <view class="category-list">
+            <view v-for="(item, itemIndex) in group.items" :key="item.title" class="category-list-item"
+              :class="{'category-list-item--last': itemIndex == group.items.length - 1}">
+              <text class="category-list-text">{{ item.title }}</text>
+              <view class="category-list-arrow"></view>
+            </view>
           </view>
         </uni-collapse-item>
       </uni-collapse>
@@ -89,19 +88,24 @@
     </view>
 
     <view class="section section-dark">
-      <text class="section-title section-title-dark">暗黑模式变量示例</text>
+      <text class="section-title section-title-dark">暗黑模式 externalClass 示例</text>
       <view class="dark-tip">
-        <text class="dark-tip-text">这个示例通过 CSS 变量覆盖组件颜色，不依赖额外 props。</text>
+        <text class="dark-tip-text">这个示例通过给 uni-collapse-item 传入 class 和 externalClass，分别定制内容区和标题区样式。</text>
       </view>
       <uni-collapse :accordion="false">
-        <uni-collapse-item title="暗色标题 A" :open="true">
+        <uni-collapse-item class="dark-collapse-item" title="暗色标题 A" :open="true" title-wrap-class="dark-title-wrap" title-class="dark-title-text" title-open-class="dark-title-text-open" arrow-class="dark-arrow" arrow-open-class="dark-arrow-open">
           <view class="content-box dark-content-box">
-            <text class="content-text dark-content-text">标题文字、激活态文字和箭头颜色都来自外层容器的 CSS 变量。</text>
+            <text class="content-text dark-content-text">组件根节点通过 class 统一接入暗色卡片样式，标题背景、默认文字、展开态文字和箭头颜色通过 externalClass 传入。</text>
           </view>
         </uni-collapse-item>
-        <uni-collapse-item title="暗色标题 B" title-class="dark-title-strong" arrow-class="dark-arrow-strong">
+        <uni-collapse-item class="dark-collapse-item dark-collapse-item-strong" title="暗色标题 B" title-wrap-class="dark-title-wrap-strong" title-class="dark-title-text-strong" title-open-class="dark-title-text-open" arrow-class="dark-arrow-strong" arrow-open-class="dark-arrow-open">
           <view class="content-box dark-content-box">
-            <text class="content-text dark-content-text">externalClass 也可以继续叠加在暗色主题之上。</text>
+            <text class="content-text dark-content-text">你也可以继续组合不同的根容器 class、标题字重、箭头粗细和激活色样式。</text>
+          </view>
+        </uni-collapse-item>
+        <uni-collapse-item class="dark-collapse-item dark-collapse-item-muted" title="暗色禁用项" :disabled="true" title-wrap-class="dark-title-wrap-muted" title-class="dark-title-text" title-disabled-class="dark-title-text-disabled" arrow-class="dark-arrow" arrow-disabled-class="dark-arrow-disabled">
+          <view class="content-box dark-content-box dark-content-box-muted">
+            <text class="content-text dark-content-text">禁用态默认通过透明度表达状态，外部依然可以继续指定禁用态文字和箭头颜色。</text>
           </view>
         </uni-collapse-item>
       </uni-collapse>
@@ -115,6 +119,42 @@
 </template>
 
 <script setup lang="uts">
+  type CategoryItem = {
+    title : string
+  }
+
+  type CategoryGroup = {
+    title : string,
+    items : CategoryItem[]
+  }
+
+  const categoryGroups : CategoryGroup[] = [
+    {
+      title: '分类1',
+      items: [
+        { title: '分类1-item1' },
+        { title: '分类1-item2' },
+        { title: '分类1-item3' }
+      ]
+    },
+    {
+      title: '分类2',
+      items: [
+        { title: '分类2-item1' },
+        { title: '分类2-item2' },
+        { title: '分类2-item3' }
+      ]
+    },
+    {
+      title: '分类3',
+      items: [
+        { title: '分类3-item1' },
+        { title: '分类3-item2' },
+        { title: '分类3-item3' }
+      ]
+    }
+  ]
+
   const lastEvent = ref<string>('暂无交互')
 
   function updateEvent(panel : string, open : boolean) {
@@ -132,12 +172,8 @@
     updateEvent('面板 B ', open)
   }
 
-  function onMulti1Change(open : boolean) {
-    updateEvent('可同时展开 1 ', open)
-  }
-
-  function onMulti2Change(open : boolean) {
-    updateEvent('可同时展开 2 ', open)
+  function onCategoryChange(title : string, open : boolean) {
+    updateEvent(`${title} `, open)
   }
 </script>
 
@@ -171,6 +207,44 @@
     font-size: 13px;
     color: #475569;
     line-height: 20px;
+  }
+
+  .category-list {
+    background-color: #f8fafc;
+  }
+
+  .category-list-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e2e8f0;
+  }
+
+  .category-list-item--last {
+    border-bottom-width: 0px;
+  }
+
+  .category-list-text {
+    flex: 1;
+    font-size: 13px;
+    color: #334155;
+    line-height: 20px;
+  }
+
+  .category-list-arrow {
+    width: 8px;
+    height: 8px;
+    margin-left: 12px;
+    transform: rotate(-45deg);
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #94a3b8;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #94a3b8;
   }
 
   .demo-title-emphasis {
@@ -259,17 +333,22 @@
 
   .section-dark {
     background-color: #111827;
-    --collapse-title-background: #111827;
-    --text-color: #f8fafc;
-    --active-color: #60a5fa;
-    --disabled-color: #6b7280;
-    --arrow-color: #cbd5e1;
-    --arrow-active-color: #60a5fa;
-    --arrow-disabled-color: #6b7280;
   }
 
   .section-title-dark {
     color: #e5e7eb;
+  }
+
+  .dark-collapse-item {
+    background-color: #111827;
+  }
+
+  .dark-collapse-item-strong {
+    background-color: #0f172a;
+  }
+
+  .dark-collapse-item-muted {
+    background-color: #101826;
   }
 
   .dark-tip {
@@ -290,14 +369,60 @@
     color: #cbd5e1;
   }
 
-  .dark-title-strong {
+  .dark-content-box-muted {
+    background-color: #182333;
+  }
+
+  .dark-title-wrap {
+    background-color: #111827;
+  }
+
+  .dark-title-wrap-strong {
+    background-color: #0f172a;
+  }
+
+  .dark-title-wrap-muted {
+    background-color: #101826;
+  }
+
+  .dark-title-text {
+    color: #f8fafc;
+  }
+
+  .dark-title-text-strong {
     font-size: 15px;
     font-weight: 700;
+    color: #e2e8f0;
+  }
+
+  .dark-title-text-open {
+    color: #60a5fa;
+  }
+
+  .dark-title-text-disabled {
+    color: #94a3b8;
+  }
+
+  .dark-arrow {
+    border-right-color: #cbd5e1;
+    border-bottom-color: #cbd5e1;
   }
 
   .dark-arrow-strong {
+    border-right-color: #cbd5e1;
+    border-bottom-color: #cbd5e1;
     border-right-width: 2px;
     border-bottom-width: 2px;
+  }
+
+  .dark-arrow-open {
+    border-right-color: #60a5fa;
+    border-bottom-color: #60a5fa;
+  }
+
+  .dark-arrow-disabled {
+    border-right-color: #94a3b8;
+    border-bottom-color: #94a3b8;
   }
 
   .log-section {

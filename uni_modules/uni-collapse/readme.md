@@ -21,8 +21,12 @@
 ```
 
 uni-collapse-item的标题栏的自定义：
+- 标题栏容器可通过 `title-wrap-class` 自定义背景等容器样式。
 - 标题栏支持title属性，可通过title-class自定义文字样式。
+- 标题展开态可通过 `title-open-class` 自定义激活文字样式。组件默认使用透明度区分状态，便于外部继续覆盖文字颜色。
+- 标题禁用态可通过 `title-disabled-class` 自定义禁用文字样式。若同时存在展开态和禁用态，以禁用态为最终状态。
 - 标题栏右边默认带有箭头，可通过arrow-class自定义箭头样式。该箭头为一个view包括2个直角边的边框，然后旋转而成。
+- 箭头展开态和禁用态可分别通过 `arrow-open-class`、`arrow-disabled-class` 覆盖。组件默认也使用透明度区分状态，便于外部继续覆盖箭头颜色。
 - 如果完全不想要默认包含的title和arrow，也可以传入一个名为title的具名插槽来替换。
 
 ## 具名插槽标题
@@ -44,8 +48,11 @@ uni-collapse-item的标题栏的自定义：
 ```html
 <uni-collapse-item
   title="自定义样式"
+  title-wrap-class="my-title-wrap-class"
   title-class="my-title-class"
+  title-open-class="my-title-open-class"
   arrow-class="my-arrow-class"
+  arrow-open-class="my-arrow-open-class"
 >
   <view><text>内容区域</text></view>
 </uni-collapse-item>
@@ -66,8 +73,13 @@ uni-collapse-item的标题栏的自定义：
 | title | String | `''` | 默认标题文本。在未使用 `#title` 插槽时生效 |
 | open | Boolean | `false` | 是否展开，支持外部监听后更新 |
 | disabled | Boolean | `false` | 是否禁用点击展开/收起 |
+| titleWrapClass | string.ClassString | `''` | 对应 externalClass `title-wrap-class`，作用于标题栏容器 `view` |
 | titleClass | string.ClassString | `''` | 对应 externalClass `title-class`，作用于默认标题 `text` |
+| titleOpenClass | string.ClassString | `''` | 对应 externalClass `title-open-class`，作用于默认标题展开态 `text` |
+| titleDisabledClass | string.ClassString | `''` | 对应 externalClass `title-disabled-class`，作用于默认标题禁用态 `text` |
 | arrowClass | string.ClassString | `''` | 对应 externalClass `arrow-class`，作用于默认箭头 `view` |
+| arrowOpenClass | string.ClassString | `''` | 对应 externalClass `arrow-open-class`，作用于默认箭头展开态 `view` |
+| arrowDisabledClass | string.ClassString | `''` | 对应 externalClass `arrow-disabled-class`，作用于默认箭头禁用态 `view` |
 
 ## Slots
 
@@ -95,17 +107,13 @@ uni-collapse-item的标题栏的自定义：
 | openCollapse(open: boolean) | 执行展开/收起，会遵循 `disabled` 和手风琴逻辑 |
 | openOrClose(open: boolean) | 直接切换内容显示状态 |
 
-## 主题变量
+## 暗黑模式适配
 
-组件支持通过 CSS 变量覆盖默认颜色：
+建议通过组件 `class` 和 externalClass 组合传入暗色样式：
 
-- `--collapse-title-background`
-- `--text-color`
-- `--active-color`
-- `--disabled-color`
-- `--arrow-color`
-- `--arrow-active-color`
-- `--arrow-disabled-color`
+- 用组件 `class` 统一控制根节点和内容区等外层视觉。
+- 用 `title-wrap-class`、`title-class`、`title-open-class`、`arrow-class`、`arrow-open-class` 等 externalClass 覆盖标题区和箭头样式。
+- 默认展开态和禁用态主要通过透明度表达，减少颜色覆盖时的交叉冲突。
 
 ## 示例页面
 

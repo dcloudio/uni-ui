@@ -3,19 +3,25 @@ tabbar，需要控制激活样式
 
 movable-view
 
-nav-bar
 tab-bar
-badge-view
-rate form
-下拉刷新
-折叠面板
-dateformat
-超链接uni-link
-fab-button
-numberbox form
-index-bar
+menu
 
-drag-cell
+[x] nav-bar
+[x] badge-view
+[x] rate form
+[x] 下拉刷新
+[x] 折叠面板
+	箭头变颜色+旋转Android会消失
+[x] dateformat
+[x] 超链接uni-link
+[x] fab-button
+	鸿蒙按下有时不缩小
+[x] numberbox form
+[x] index-bar
+[ ] drag-cell
+	鸿蒙拖动后视图和数据的顺序对不上。拖动时乱跑
+
+[ ] 日历选择
 
 drag-list
 	sort-type 哪个list-item的type要排序。不写就是所有item都参与排序
