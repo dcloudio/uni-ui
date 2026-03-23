@@ -1,11 +1,11 @@
 <template>
-	<view class="uni-tab-bar"> <!-- 如果tabbar是一个非全屏的组件，需要套一层。如果是全屏的，比如pages.json中的tabbar，其实不需要这一层-->
+	<view class="uni-tab-bar-root"> <!-- 如果tabbar是一个非全屏的组件，需要套一层。如果是全屏的，比如pages.json中的tabbar，其实不需要这一层-->
 		<slot></slot>
 	</view>
 </template>
 
 <script setup lang="uts">
-import { provide, ref, watch } from 'vue'
+import { UniTabBarLayout } from './types.uts'
 
 // 定义组件属性
 const props = defineProps<{
@@ -22,6 +22,17 @@ const emit = defineEmits<{
 
 // 当前激活的索引
 const currentIndex = ref<number>(props.activeIndex)
+
+const TAB_LIST_BASE_HEIGHT = 50 //tab-list 高度，单位是px，如果修改了tab-list高度，此处需要同步修改
+const windowInfo = uni.getWindowInfo()
+const safeAreaInsetBottom = windowInfo.safeAreaInsets.bottom
+const tabBarLayout: UniTabBarLayout = {
+	tabListBaseHeight: TAB_LIST_BASE_HEIGHT,
+	windowWidth: windowInfo.windowWidth,
+	safeAreaInsetBottom: safeAreaInsetBottom
+}
+const tabContentBottom = ref<number>(TAB_LIST_BASE_HEIGHT + safeAreaInsetBottom)
+const tabContentHeight = ref<number>(windowInfo.windowHeight - tabContentBottom.value)
 
 // tab-content 的数量计数器
 const contentCount = ref<number>(0)
@@ -49,16 +60,19 @@ function registerContent(): number {
 }
 
 // 通过 provide 向子组件提供数据和方法
-provide('tabBarCurrentIndex', currentIndex)
-provide('tabBarChangeTab', changeTab)
-provide('tabBarRegisterContent', registerContent)
+provide('uniTabBarCurrentIndex', currentIndex)
+provide('uniTabBarChangeTab', changeTab)
+provide('uniTabBarRegisterContent', registerContent)
+provide('uniTabBarContentHeight', tabContentHeight)
+provide('uniTabBarContentBottom', tabContentBottom)
+provide('uniTabBarLayout', tabBarLayout)
 </script>
 
 <style>
-.uni-tab-bar {
-	flex-direction: column;
+.uni-tab-bar-root {
 	width: 100%;
 	height: 100%;
 	position: relative;
+	flex-direction: column;
 }
 </style>

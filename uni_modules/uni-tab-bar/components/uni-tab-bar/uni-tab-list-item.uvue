@@ -1,0 +1,74 @@
+<template>
+	<view class="uni-tab-list-item-root">
+		<slot></slot>
+		<text v-if="props.badgeText != null && props.badgeText != '0' && props.badgeText != ''" class="uni-tab-list-item-badge-position uni-tab-list-item-badge-text" :class="props.badgeClass" :style="props.badgeStyle">{{ props.badgeText }}</text>
+		<view v-else-if="props.badgeText != null && props.badgeText != '0'" class="uni-tab-list-item-badge-position uni-tab-list-item-badge-dot" :class="props.badgeClass" :style="props.badgeStyle"></view>
+	</view>
+</template>
+
+<script setup lang="uts">
+// 定义组件属性
+type Props = {
+	/**
+	 * @description badge 的内容
+	 */
+	badgeText?: string,
+	/**
+	 * @description badge 的样式类
+	 */
+	badgeClass?: string.ClassString,
+	/**
+	 * @description badge 的内联样式
+	 */
+	badgeStyle?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	badgeClass: '',
+	badgeStyle: ''
+})
+
+const registerItem = inject<() => number>('uniTabListRegisterItem', () => 0)
+
+onMounted(() => {
+	registerItem()
+})
+</script>
+
+<style>
+.uni-tab-list-item-root {
+	flex: 1;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: visible;
+}
+
+.uni-tab-list-item-badge-position {
+	position: absolute;
+	top: 6px;
+	left: 50%;
+	transform: translate(25%, -50%);
+}
+
+.uni-tab-list-item-badge-text {
+	background-color: rgb(225, 80, 80);
+	min-width: 14px;
+	height: 14px;
+	line-height: 14px;
+	border-radius: 7px;
+	font-size: 10px;
+	color: white;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.uni-tab-list-item-badge-dot {
+	background-color: rgb(225, 80, 80);
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+}
+</style>

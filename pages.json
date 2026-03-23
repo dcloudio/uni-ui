@@ -81,24 +81,18 @@
 			"style": {
 				"navigationBarTitleText": "drag-cell"
 			}
-		}
-		/* {
+		},
+		{
 			"path": "pages/tab-bar/tab-bar",
 			"style": {
-				"navigationBarTitleText": "tab-bar"
+				"navigationBarTitleText": "首页"
 			}
-		} */
+		}
 		/* 
 		{
 			"path": "pages/movable-view/movable-view",
 			"style": {
 				"navigationBarTitleText": "movable-view"
-			}
-		},
-		{
-			"path": "pages/transform-test/transform-test",
-			"style": {
-				"navigationBarTitleText": "Transform性能测试"
 			}
 		} */
 	],

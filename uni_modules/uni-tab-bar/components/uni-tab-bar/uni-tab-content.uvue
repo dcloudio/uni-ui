@@ -1,16 +1,17 @@
 <template>
-	<view v-if="shouldRender" v-show="isActive" class="tab-content">
+	<view v-if="hasRendered" class="uni-tab-content-root"
+		:style="{ visibility: (isActive ? 'visible' : 'hidden'), height: (contentHeight + 'px'), bottom: (contentBottom + 'px') }">
 		<slot></slot>
 	</view>
 </template>
 
 <script setup lang="uts">
-import { inject, ref, computed, watch, onMounted } from 'vue'
-import { Ref } from 'vue'
 
 // 从父组件注入数据和方法
-const currentIndex = inject<Ref<number>>('tabBarCurrentIndex', ref(0))
-const registerContent = inject<() => number>('tabBarRegisterContent', () => 0)
+const currentIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
+const registerContent = inject<() => number>('uniTabBarRegisterContent', () => 0)
+const contentHeight = inject<Ref<number>>('uniTabBarContentHeight', ref(0))
+const contentBottom = inject<Ref<number>>('uniTabBarContentBottom', ref(0))
 
 // 当前 content 的索引
 const contentIndex = ref<number>(-1)
@@ -21,7 +22,7 @@ const hasRendered = ref<boolean>(false)
 // 组件挂载时分配索引
 onMounted(() => {
 	contentIndex.value = registerContent()
-	
+
 	// 如果是第一个激活的 tab-content，立即渲染
 	if (contentIndex.value == currentIndex.value) {
 		hasRendered.value = true
@@ -31,15 +32,6 @@ onMounted(() => {
 // 计算是否激活
 const isActive = computed((): boolean => {
 	return currentIndex.value == contentIndex.value
-})
-
-// 计算是否应该渲染
-const shouldRender = computed((): boolean => {
-	// 一旦激活过，就始终保持渲染状态
-	if (isActive.value && hasRendered.value == false) {
-		hasRendered.value = true
-	}
-	return hasRendered.value
 })
 
 // 监听激活状态，首次激活时渲染
@@ -53,9 +45,11 @@ watch((): boolean => {
 </script>
 
 <style>
-.tab-content {
-	flex: 1;
+.uni-tab-content-root {
 	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
 	flex-direction: column;
 }
 </style>

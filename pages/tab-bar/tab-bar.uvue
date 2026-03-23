@@ -1,100 +1,194 @@
 <template>
-	<uni-tab-bar class="full-screen-tab-bar" :active-index="activeIndex" @change="handleChange">
+	<uni-tab-bar style="flex: 1" :active-index="activeIndex" @change="handleChange">
 		<!-- 内容区域 -->
-		<tab-content>
-			<tab-content1 />
-		</tab-content>
-
-		<tab-content>
-			<tab-content2 />
-		</tab-content>
-
-		<tab-content>
-			<tab-content3 />
-		</tab-content>
-
-		<tab-content>
-			<tab-content4 />
-		</tab-content>
-		
-		<tab-content>
-			<tab-content5 />
-		</tab-content>
+		<uni-tab-content>
+			<tabContent1 ref="tabContent1Ref" />
+		</uni-tab-content>
+		<uni-tab-content>
+			<tabContent2 />
+		</uni-tab-content>
+		<uni-tab-content>
+			<tabContent3 />
+		</uni-tab-content>
+		<uni-tab-content>
+			<tabContent4 />
+		</uni-tab-content>
 
 		<!-- 底部选项卡 -->
-		<tab-list>
+		<uni-tab-list>
 			<!-- 图标高度24，文字字号10px，文字高度是12~14px，角标不能在图标的正右上角，需要向下偏移1px，避免角标画出tab-list之外) -->
-			<tab-list-item>
-				<text class="tab-icon-text">🏠</text>
-				<text class="tab-label" :class="activeIndex == 0 ? 'tab-label-active' : ''">首页</text>
-			</tab-list-item>
+			<uni-tab-list-item>
+				<view class="first-tab-button" @click="handleFirstTabClick">
+					<view class="first-tab-animator">
+						<view class="first-tab-face"
+							:class="showBackToTop ? 'first-tab-default-hidden' : 'first-tab-default-visible'">
+							<image :src="activeIndex == 0 ? '/static/componentHL.png' : '/static/component.png'" class="tab-icon-image"></image>
+							<text class="tab-label" :class="activeIndex == 0 ? 'tab-label-active' : ''">首页</text>
+						</view>
+						<view class="first-tab-face"
+							:class="showBackToTop ? 'first-tab-backtop-visible' : 'first-tab-backtop-hidden'">
+							<text class="tab-arrow-icon" :class="activeIndex == 0 ? 'tab-arrow-icon-active' : ''">↑</text>
+							<text class="tab-label" :class="activeIndex == 0 ? 'tab-label-active' : ''">回到顶部</text>
+						</view>
+					</view>
+				</view>
+			</uni-tab-list-item>
+			<uni-tab-list-item badge-text="99+">  <!-- 需要角标时使用 badge-text="99+" 详见uni-badge组件 -->
+				<image :src="activeIndex == 1 ? '/static/apiHL.png' : '/static/api.png'" class="tab-icon-image"></image>
+				<text class="tab-label" :class="activeIndex == 1 ? 'tab-label-active' : ''">API</text>
+			</uni-tab-list-item>
+			<uni-tab-list-item>
+				<image :src="activeIndex == 2 ? '/static/cssHL.png' : '/static/css.png'" class="tab-icon-image"></image>
+				<text class="tab-label" :class="activeIndex == 2 ? 'tab-label-active' : ''">CSS</text>
+			</uni-tab-list-item>
+			<uni-tab-list-item badge-text="">
+				<image :src="activeIndex == 3 ? '/static/templateHL.png' : '/static/template.png'" class="tab-icon-image"></image>
+				<text class="tab-label" :class="activeIndex == 3 ? 'tab-label-active' : ''">模板</text>
+			</uni-tab-list-item>
 
-			<tab-list-item  badge-text="">
-				<text class="tab-icon-text" :class="activeIndex == 1 ? 'tab-label-active' : ''">√</text>
-				<text class="tab-label" :class="activeIndex == 1 ? 'tab-label-active' : ''">字体</text>
-			</tab-list-item>
-
-			<tab-list-item  badge-text="99+" badge-style="top:1px">
-				<text class="tab-icon-text">🔔</text>
-				<text class="tab-label" :class="activeIndex == 2 ? 'tab-label-active' : ''">通知</text>
-			</tab-list-item>
-
-			<tab-list-item badge-text="1" badge-style="top:1px">
-				<text class="tab-icon-text">👤</text>
-				<text class="tab-label" :class="activeIndex == 3 ? 'tab-label-active' : ''">我的</text>
-			</tab-list-item>
-			
-			<tab-list-item badge-text="1" badge-style="top:1px">
-				<image :src="activeIndex == 4 ? '/static/templateHL.png' : '/static/template.png'" class="tab-icon-image"></image>
-				<text class="tab-label" :class="activeIndex == 4 ? 'tab-label-active' : ''">图片</text>
-			</tab-list-item>
-		</tab-list>
+		</uni-tab-list>
 	</uni-tab-bar>
 </template>
 
 <script setup lang="uts">
-	import tabList from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-list.uvue'
-	import tabListItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-list-item.uvue'
-	import tabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/tab-content.uvue'
+	import uniTabList from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list.uvue'
+	import uniTabListItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list-item.uvue'
+	import uniTabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-content.uvue'
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'
 	import tabContent4 from './tab-content4.uvue'
-	import tabContent5 from './tab-content5.uvue'
 
-	// 当前激活的索引
+	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
+	const TAB_CONTENT1_SWITCH_OFFSET = 100 // 当 tab-content1 滚动超过这个距离（单位px）时显示回到顶部按钮，如需调节请自行定义
+	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
+
+	  // 当前激活的索引
 	const activeIndex = ref<number>(0)
+	const showBackToTop = ref<boolean>(false)
+	let lastTabContent1ScrollTop = 0
+
+	function handleTabContent1Scroll(scrollTop : number) : void {
+		lastTabContent1ScrollTop = scrollTop
+		if (activeIndex.value == 0) {
+			showBackToTop.value = scrollTop > TAB_CONTENT1_SWITCH_OFFSET
+		}
+	}
+
+	function handleFirstTabClick() : void {
+		if (activeIndex.value == 0 && showBackToTop.value) {
+			const tabContent1Instance = tabContent1Ref.value
+			if (tabContent1Instance != null) {
+				tabContent1Instance.$callMethod('scrollToTop')
+			}
+		}
+	}
 
 	// 处理 tab-bar 的切换
 	function handleChange(index : number) : void {
 		activeIndex.value = index
-		console.log('切换到索引：', index)
+		if (index == 0) {
+			showBackToTop.value = lastTabContent1ScrollTop > TAB_CONTENT1_SWITCH_OFFSET
+		} else {
+			showBackToTop.value = false
+		}
+		switch (index) {
+			case 0:
+				uni.setNavigationBarTitle({ title: '组件' })
+				break
+			case 1:
+				uni.setNavigationBarTitle({ title: 'API' })
+				break
+			case 2:
+				uni.setNavigationBarTitle({ title: 'CSS' })
+				break
+			case 3:
+				uni.setNavigationBarTitle({ title: '模板' })
+				break
+		}
 	}
+
+	onLoad(() => {
+		uni.$on(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
+	})
+
+	onUnload(() => {
+		uni.$off(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
+	})
 </script>
 
 <style>
-	.full-screen-tab-bar {
+	.first-tab-button {
 		width: 100%;
 		height: 100%;
 		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.tab-icon-text {
-		height: 24px;
-		font-size: 16px;
+	.first-tab-animator {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
-	
+
+	.first-tab-face {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		transition-property: opacity, transform;
+		transition-duration: 220ms;
+		transition-timing-function: ease;
+	}
+
+	.first-tab-default-visible {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+	.first-tab-default-hidden {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+
+	.first-tab-backtop-visible {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+	.first-tab-backtop-hidden {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+
 	.tab-icon-image {
 		height: 24px;
 		width: 24px;
 	}
 
+	.tab-arrow-icon {
+		line-height: 20px;
+		margin-bottom: 2px;
+	}
+
+	.tab-arrow-icon-active {
+		color: #007aff;
+	}
+
 	.tab-label {
 		font-size: 10px;
+		color: rgb(122, 126, 131);
 	}
 
 	.tab-label-active {
 		color: #007aff;
-		/* font-weight: bold; */
 	}
 </style>

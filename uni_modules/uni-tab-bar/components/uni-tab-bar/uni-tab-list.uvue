@@ -1,0 +1,65 @@
+<template>
+	<view :style="listStyle" class="uni-tab-list-root" @click="handleClick">
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+import { UniTabBarLayout } from './types.uts'
+
+const tabBarLayout = inject<UniTabBarLayout>('uniTabBarLayout', {
+	tabListBaseHeight: 50,
+	windowWidth: 0,
+	safeAreaInsetBottom: 0
+} as UniTabBarLayout)
+const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: number) => {})
+
+// 存储子项数量
+const itemCount = ref<number>(0)
+
+// 注册子项
+function registerItem(): number {
+	const index = itemCount.value
+	itemCount.value++
+	return index
+}
+
+const listStyle = {
+	height: tabBarLayout.tabListBaseHeight + 'px',
+	paddingBottom: tabBarLayout.safeAreaInsetBottom + 'px'
+}
+
+function handleClick(e: UniPointerEvent): void {
+	if (itemCount.value <= 0 || tabBarLayout.windowWidth <= 0) {
+		return
+	}
+	let index = Math.floor(e.clientX / tabBarLayout.windowWidth * itemCount.value)
+	if (index < 0) {
+		index = 0
+	}
+	if (index >= itemCount.value) {
+		index = itemCount.value - 1
+	}
+	changeTab(index)
+}
+
+// 向子组件提供注册方法
+provide('uniTabListRegisterItem', registerItem)
+</script>
+
+<style>
+.uni-tab-list-root {
+	width: 100%;
+	height: 50px; /* 这里的默认高度是为了更快的渲染界面而不塌陷。如果在uni-tab-bar组件里调整了tab-list的高度，本组件有一个响应式style，仍有会根据新高度来调整。但如果同步调整这里，界面会减少抖动 */
+	position: absolute;
+	bottom: 0;
+	box-sizing: content-box;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	overflow: visible;
+	border-top-width: 0.5px;
+	border-top-color: #000000;
+	border-top-style: solid;
+}
+</style>
