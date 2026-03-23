@@ -1,12 +1,10 @@
 <template>
-	<!-- #ifdef APP-ANDROID -->
-	<view class="drag-cell-host" :style="hostStyle">
+	<view class="drag-cell-host">
 	<view class="drag-cell" :class="containerClass" :style="containerStyle">
 		<view
 			v-for="(item, index) in innerList"
 			:key="itemIds.length > index ? itemIds[index] : index"
 			class="drag-cell-item"
-			:class="getItemClass(index)"
 			:style="getItemStyle(index)"
 			@touchstart.stop="onItemTouchStart($event, index)"
 			@touchmove="onItemTouchMove"
@@ -41,77 +39,15 @@
 				<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
 			</view>
 		</view>
-		<view
+		<!-- <view
 			v-if="dragging && showClose != true"
 			class="drag-cell-drag-layer"
 			@touchmove.stop.prevent="onItemTouchMove"
 			@touchend="onItemTouchEnd"
 			@touchcancel="onItemTouchEnd">
-		</view>
+		</view> -->
 	</view>
 	</view>
-	<!-- #endif -->
-
-	<!-- #ifndef APP-ANDROID -->
-	<view class="drag-cell-host" :style="hostStyle">
-	<view class="drag-cell" :class="containerClass" :style="containerStyle">
-		<view
-			v-for="(item, index) in innerList"
-			:key="itemIds.length > index ? itemIds[index] : index"
-			class="drag-cell-item"
-			:class="getItemClass(index)"
-			:style="getItemStyle(index)"
-			<!-- #ifdef WEB -->
-			@pointerdown.stop="onPointerDown($event, index)"
-			@pointermove="onPointerMove"
-			@pointerup="onPointerEnd"
-			@pointercancel="onPointerEnd"
-			<!-- #endif -->
-			@touchstart.stop="onItemTouchStart($event, index)"
-			@touchmove="onItemTouchMove"
-			@touchend="onItemTouchEnd"
-			@touchcancel="onItemTouchEnd">
-			<view class="drag-cell-item-inner">
-				<view class="drag-cell-slot-content">
-					<slot :item="item" :index="index"></slot>
-				</view>
-				<view
-					v-if="handleModeEnabled"
-					class="drag-cell-handle"
-					:class="getHandleClass(index)"
-					<!-- #ifdef WEB -->
-					@pointerdown.stop.prevent="onHandlePointerDown($event, index)"
-					@pointerup.stop="onHandlePointerEnd"
-					@pointercancel.stop="onHandlePointerEnd"
-					<!-- #endif -->
-					@touchstart.stop="onHandleTouchStart($event, index)"
-					@touchend.stop="onHandleTouchEnd"
-					@touchcancel.stop="onHandleTouchEnd">
-					<slot name="handle" :item="item" :index="index"></slot>
-				</view>
-			</view>
-		</view>
-		<view v-if="showAppendSlot && dragging != true" class="drag-cell-append" :style="getAppendStyle()">
-			<slot name="append"></slot>
-		</view>
-		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
-			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
-		</view>
-		<view
-			v-if="dragging"
-			class="drag-cell-drag-layer"
-			<!-- #ifdef WEB -->
-			@pointermove.stop.prevent="onPointerMove"
-			@pointerup="onPointerEnd"
-			@pointercancel="onPointerEnd"
-			<!-- #endif -->
-			@touchmove.stop.prevent="onItemTouchMove"
-			@touchend="onItemTouchEnd"
-			@touchcancel="onItemTouchEnd">
-		</view>
-	</view>
-	</view>
-	<!-- #endif -->
 </template>
 
 <script setup lang="uts">
@@ -235,19 +171,7 @@
 		return handleModeEnabled.value ? 1 : dragActiveScale
 	})
 	const showAndroidDeleteProxy = computed(() : boolean => {
-		// #ifdef APP-ANDROID
 		return showClose.value == true && dragging.value == true && activeIndex.value >= 0 && activeIndex.value < innerList.value.length
-		// #endif
-		// #ifndef APP-ANDROID
-		return false
-		// #endif
-	})
-	const hostStyle = computed(() : string => {
-		const currentContainerLayout = containerLayout.value
-		if (dragging.value == true && currentContainerLayout != null) {
-			return `height: ${currentContainerLayout.height}px;`
-		}
-		return ''
 	})
 	const containerStyle = computed(() : string => {
 		const currentContainerLayout = containerLayout.value
@@ -483,9 +407,9 @@
 
 
 
-	function measureLayouts() : void {
+	function measureLayouts() : Promise<void> {
 		if (instance == null || instance.proxy == null) {
-			return
+			return Promise.resolve()
 		}
 		const query = uni.createSelectorQuery().in(instance.proxy)
 		query.select('.drag-cell').boundingClientRect((rect) => {
@@ -530,7 +454,11 @@
 			layouts.value = nextLayouts
 			rebuildGridAxisCache(nextLayouts)
 		})
-		query.exec()
+		return new Promise(resolve => {
+			query.exec(() => {
+				resolve()
+			})
+		})
 	}
 
 	const syncFromModel = () => {
@@ -540,9 +468,6 @@
 		innerList.value = props.modelValue != null ? props.modelValue.slice() : []
 		itemIds.value = buildIdList(innerList.value.length)
 		resetDragState()
-		nextTick(() => {
-			measureLayouts()
-		})
 	}
 
 	const emitChange = () => {
@@ -555,14 +480,6 @@
 		return list != null ? list.length : -1
 	}, (_newLength : number) => {
 		syncFromModel()
-	})
-
-	watch(() : number => {
-		return columnCount.value
-	}, (_newColumn : number) => {
-		nextTick(() => {
-			measureLayouts()
-		})
 	})
 
 	const getWebWindowTopOffset = () : number => {
@@ -722,7 +639,6 @@
 
 	function beginDrag(index : number, clientX : number, clientY : number) : void {
 		if (layouts.value.length != innerList.value.length || index >= layouts.value.length) {
-			measureLayouts()
 			cancelPendingPress()
 			return
 		}
@@ -748,7 +664,9 @@
 	const beginHandleDrag = (index : number, clientX : number, clientY : number, handleElement : UniElement | null, eventTarget : UniElement | null) => {
 		const itemElement = getItemElementFromHandle(handleElement)
 		prepareDragContext(clientX, clientY, itemElement, eventTarget)
-		beginDrag(index, clientX, clientY)
+		measureLayouts().then(() => {
+			beginDrag(index, clientX, clientY)
+		})
 	}
 
 	const updateDeleteBarState = () => {
@@ -766,7 +684,6 @@
 		let contentRight = sourceLayout.left + sourceLayout.width + dragOffsetX.value
 		let contentTop = sourceLayout.pageTop + activeContentInsetTop.value + dragOffsetY.value
 		let contentBottom = sourceLayout.pageTop + sourceLayout.height - activeContentInsetBottom.value + dragOffsetY.value
-		// #ifdef APP-ANDROID
 		if (showAndroidDeleteProxy.value == true) {
 			const windowInfo = uni.getWindowInfo()
 			const barLeftAndroid = 0
@@ -801,7 +718,6 @@
 			}
 			return
 		}
-		// #endif
 		const windowTopOffset = getWebWindowTopOffset()
 		const liveContentRect = getCurrentTargetRect(activeContentElement)
 		if (liveContentRect != null) {
@@ -857,7 +773,9 @@
 		setDragContext(clientX, clientY, viewLeft, viewTop, contentInset, contentElement, itemElement)
 		longPressTimer = setTimeout(() => {
 			longPressTimer = 0
-			beginDrag(index, clientX, clientY)
+			measureLayouts().then(() => {
+				beginDrag(index, clientX, clientY)
+			})
 		}, longPressDuration)
 	}
 
@@ -908,7 +826,6 @@
 			itemIds.value = nextIds
 			emitChange()
 			nextTick(() => {
-				measureLayouts()
 				settling.value = false
 			})
 			return
@@ -932,13 +849,11 @@
 		itemIds.value = nextIds
 		emitChange()
 		nextTick(() => {
-			measureLayouts()
 			settling.value = false
 		})
 	}
 
-	// #ifdef APP-ANDROID
-	const onItemTouchStart = (event : Any, index : number) => {
+	const onItemTouchStart = (event : any, index : number) => {
 		if (handleModeEnabled.value == true) {
 			return
 		}
@@ -954,7 +869,7 @@
 		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop, contentInset, contentElement, target)
 	}
 
-	const onItemTouchMove = (event : Any) => {
+	const onItemTouchMove = (event : any) => {
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
 		if (dragging.value == true) {
@@ -963,11 +878,11 @@
 		moveDrag(touch.clientX, touch.clientY)
 	}
 
-	const onItemTouchEnd = (_event : Any) => {
+	const onItemTouchEnd = (_event : any) => {
 		finishDrag()
 	}
 
-	const onHandleTouchStart = (event : Any, index : number) => {
+	const onHandleTouchStart = (event : any, index : number) => {
 		if (handleModeEnabled.value != true) {
 			return
 		}
@@ -978,113 +893,12 @@
 		beginHandleDrag(index, touch.clientX, touch.clientY, handleTarget, eventTarget)
 	}
 
-	const onHandleTouchEnd = (_event : Any) => {
+	const onHandleTouchEnd = (_event : any) => {
 		if (dragging.value == true) {
 			finishDrag()
 			return
 		}
 		cancelPendingPress()
-	}
-	// #endif
-
-	// #ifndef APP-ANDROID
-	const onItemTouchStart = (event : UniTouchEvent, index : number) => {
-		if (handleModeEnabled.value == true) {
-			return
-		}
-		const touch = event.touches[0]
-		const target = event.currentTarget as UniElement
-		const eventTarget = event.target as UniElement
-		const rect = getCurrentTargetRect(target)
-		const contentElement = getContentElement(target, eventTarget)
-		const contentInset = getContentInset(target, contentElement)
-		const viewLeft = rect != null ? rect.left : 0
-		const viewTop = rect != null ? rect.top : 0
-		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop, contentInset, contentElement, target)
-	}
-
-	const onItemTouchMove = (event : UniTouchEvent) => {
-		const touch = event.touches[0]
-		if (dragging.value == true) {
-			// console.log('harmony 应该阻止默认滚动')
-			event.preventDefault()  //TODO 鸿蒙上这里无法阻止滚动，导致拖动时页面也跟着滚动 @wangzhitong
-		}
-		moveDrag(touch.clientX, touch.clientY)
-	}
-
-	const onItemTouchEnd = (_event : UniTouchEvent) => {
-		finishDrag()
-	}
-
-	const onHandleTouchStart = (event : UniTouchEvent, index : number) => {
-		if (handleModeEnabled.value != true) {
-			return
-		}
-		const touch = event.touches[0]
-		const handleTarget = event.currentTarget as UniElement
-		const eventTarget = event.target as UniElement
-		beginHandleDrag(index, touch.clientX, touch.clientY, handleTarget, eventTarget)
-	}
-
-	const onHandleTouchEnd = (_event : UniTouchEvent) => {
-		if (dragging.value == true) {
-			finishDrag()
-			return
-		}
-		cancelPendingPress()
-	}
-	// #endif
-
-
-	// #ifdef WEB
-	const onPointerDown = (event : UniPointerEvent, index : number) => {
-		if (handleModeEnabled.value == true) {
-			return
-		}
-		const target = event.currentTarget as UniElement
-		const eventTarget = event.target as UniElement
-		const rect = getCurrentTargetRect(target)
-		const contentElement = getContentElement(target, eventTarget)
-		const contentInset = getContentInset(target, contentElement)
-		const viewLeft = rect != null ? rect.left : 0
-		const viewTop = rect != null ? rect.top : 0
-		scheduleLongPress(index, event.x, event.y, viewLeft, viewTop, contentInset, contentElement, target)
-	}
-
-	const onPointerMove = (event : UniPointerEvent) => {
-		if (dragging.value == true) {
-			event.preventDefault()
-		}
-		moveDrag(event.x, event.y)
-	}
-
-	const onPointerEnd = (_event : UniPointerEvent) => {
-		finishDrag()
-	}
-
-	const onHandlePointerDown = (event : UniPointerEvent, index : number) => {
-		if (handleModeEnabled.value != true) {
-			return
-		}
-		const handleTarget = event.currentTarget as UniElement
-		const eventTarget = event.target as UniElement
-		beginHandleDrag(index, event.x, event.y, handleTarget, eventTarget)
-	}
-
-	const onHandlePointerEnd = (_event : UniPointerEvent) => {
-		if (dragging.value == true) {
-			finishDrag()
-			return
-		}
-		cancelPendingPress()
-	}
-	// #endif
-
-	const getItemClass = (index : number) : string => {
-		if (dragging.value == true && activeIndex.value == index) {
-			return 'drag-cell-item-active'
-		}
-		return ''
 	}
 
 	const getHandleClass = (index : number) : string => {
@@ -1106,9 +920,8 @@
 		let transformStyle = 'translateX(0px) translateY(0px)'
 
 		// #ifdef APP-ANDROID
-		if (dragging.value == true && columnCount.value > 0) {
-			transitionStyle = 'transition-duration: 0ms;'
-		}
+		// TODO 安卓平台transition动画过程中新设置的属性不生效，暂时在安卓平台屏蔽transition动画，待安卓平台修复后移除此条件编译
+		transitionStyle = 'transition-duration: 0ms;'
 		// #endif
 
 		if (settling.value == true) {
@@ -1122,24 +935,14 @@
 			const baseTop = sourceLayout.pageTop - currentContainerLayout.pageTop
 			widthStyle = ''
 			if (activeIndex.value == index) {
-				// #ifdef APP-ANDROID
 				positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
+				transitionStyle = 'transition-duration: 0ms;'
 				if (showClose.value == true) {
 					zIndexStyle = 'z-index: 0;'
-					transitionStyle = 'transition-duration: 0ms;'
 					transformStyle = 'translateX(0px) translateY(0px)'
 					return `${widthStyle}${positionStyle}${zIndexStyle}${transitionStyle}opacity: 0; transform: ${transformStyle};`
 				}
-				// #endif
-				// #ifndef APP-ANDROID
-				if (showClose.value == true) {
-					positionStyle = `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
-				} else {
-					positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
-				}
-				// #endif
 				zIndexStyle = 'z-index: 30;'
-				transitionStyle = 'transition-duration: 0ms;'
 				transformStyle = `translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value})`
 			} else {
 				positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
@@ -1154,6 +957,8 @@
 					}
 				}
 			}
+		} else if (index !== activeIndex.value) {
+			transitionStyle = 'transition-duration: 0ms;'
 		}
 
 		return `${widthStyle}${positionStyle}${zIndexStyle}${transitionStyle}transform: ${transformStyle};`
@@ -1169,9 +974,6 @@
 	onMounted(() => {
 		itemIds.value = buildIdList(innerList.value.length)
 		applyPreviewOrder(createIdentityOrder(innerList.value.length))
-		nextTick(() => {
-			measureLayouts()
-		})
 	})
 </script>
 
@@ -1205,7 +1007,6 @@
 		display: flex;
 		flex-direction: column;
 		transition-property: transform;
-		transition-duration: 200ms;
 		transition-timing-function: ease;
 		transform-origin: center center;
 		overflow: visible;
@@ -1221,10 +1022,6 @@
 		overflow: visible;
 	}
 
-	.drag-cell-item-active {
-		transition-duration: 0ms;
-	}
-
 	.drag-cell-item-inner {
 		position: relative;
 		display: flex;
@@ -1232,7 +1029,6 @@
 		width: 100%;
 		height: 100%;
 		transition-property: transform;
-		transition-duration: 200ms;
 		transition-timing-function: ease;
 		transform-origin: center center;
 	}
