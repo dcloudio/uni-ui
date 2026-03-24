@@ -79,11 +79,6 @@
 		bottom: number
 	}
 
-	type ContentInset = {
-		top: number,
-		bottom: number
-	}
-
 	type ContainerLayout = {
 		left: number,
 		pageTop: number,
@@ -138,10 +133,6 @@
 	const containerLayout = ref<ContainerLayout | null>(null)
 	const activeViewLeft = ref(0)
 	const activeViewTop = ref(0)
-	const activeContentInsetTop = ref(0)
-	const activeContentInsetBottom = ref(0)
-	let activeContentElement : UniElement | null = null
-	let activeItemElement : UniElement | null = null
 	const dragCoordOffsetX = ref(0)
 	const dragCoordOffsetY = ref(0)
 	const nextItemId = ref(0)
@@ -285,10 +276,6 @@
 		deleteBarLayout.value = null
 		activeViewLeft.value = 0
 		activeViewTop.value = 0
-		activeContentInsetTop.value = 0
-		activeContentInsetBottom.value = 0
-		activeContentElement = null
-		activeItemElement = null
 		dragCoordOffsetX.value = 0
 		dragCoordOffsetY.value = 0
 		dragOffsetX.value = 0
@@ -296,94 +283,25 @@
 		applyPreviewOrder(createIdentityOrder(innerList.value.length))
 	}
 
-	const getCurrentTargetRect = (target : UniElement | null) : QueryRect | null => {
-		if (target == null) {
+	const getItemLayout = (index : number) : ItemLayout | null => {
+		if (index < 0 || index >= layouts.value.length) {
 			return null
 		}
-		const rect = target.getBoundingClientRect()
-		return {
-			left: rect.left,
-			top: rect.top,
-			width: rect.width,
-			height: rect.height,
-			right: rect.right,
-			bottom: rect.bottom
-		}
+		return layouts.value[index]
 	}
 
-	const getSlotContentElement = (itemElement : UniElement | null) : UniElement | null => {
-		if (itemElement == null) {
+	const getCurrentTargetRect = (index : number) : QueryRect | null => {
+		const itemLayout = getItemLayout(index)
+		if (itemLayout == null) {
 			return null
-		}
-		const slotWrapper = itemElement.querySelector('.drag-cell-slot-content') as UniElement | null
-		if (slotWrapper == null) {
-			return null
-		}
-		const firstChild = slotWrapper.firstChild
-		if (firstChild != null && firstChild instanceof UniElement) {
-			return firstChild as UniElement
-		}
-		return slotWrapper
-	}
-
-	const getContentElement = (currentTarget : UniElement | null, eventTarget : UniElement | null) : UniElement | null => {
-		const slotContentElement = getSlotContentElement(currentTarget)
-		if (slotContentElement != null) {
-			return slotContentElement
-		}
-		const currentRect = getCurrentTargetRect(currentTarget)
-		if (currentRect == null || eventTarget == null) {
-			return null
-		}
-		let directContentElement : UniElement | null = null
-		let candidateElement : UniElement | null = null
-		let candidateArea = -1.0
-		const currentArea = currentRect.width * currentRect.height
-		let node : UniElement | null = eventTarget
-		let guard = 0
-		while (node != null && node != currentTarget && guard < 12) {
-			const parent = node.parentElement
-			if (parent != null && parent.parentElement == currentTarget) {
-				directContentElement = node
-			}
-			const rect = node.getBoundingClientRect()
-			const width = rect.width
-			const height = rect.height
-			const area = width * height
-			if (width > 0 && height > 0 && area < currentArea - 0.5 && area > candidateArea) {
-				candidateArea = area
-				candidateElement = node
-			}
-			node = parent
-			guard++
-		}
-		if (directContentElement != null) {
-			return directContentElement
-		}
-		return candidateElement
-	}
-
-	const getContentInset = (currentTarget : UniElement | null, contentElement : UniElement | null) : ContentInset => {
-		const currentRect = getCurrentTargetRect(currentTarget)
-		if (currentRect == null || contentElement == null) {
-			return {
-				top: 0,
-				bottom: 0
-			}
-		}
-		const currentBottom = currentRect.bottom != null ? currentRect.bottom : (currentRect.top + currentRect.height)
-		const contentRect = contentElement.getBoundingClientRect()
-		let topInset = contentRect.top - currentRect.top
-		let bottomInset = currentBottom - contentRect.bottom
-		if (topInset < 0) {
-			topInset = 0
-		}
-		if (bottomInset < 0) {
-			bottomInset = 0
 		}
 		return {
-			top: topInset,
-			bottom: bottomInset
+			left: itemLayout.left,
+			top: itemLayout.pageTop,
+			width: itemLayout.width,
+			height: itemLayout.height,
+			right: itemLayout.left + itemLayout.width,
+			bottom: itemLayout.pageTop + itemLayout.height
 		}
 	}
 
@@ -606,35 +524,37 @@
 		pendingIndex.value = -1
 	}
 
-	const setDragContext = (clientX : number, clientY : number, viewLeft : number, viewTop : number, contentInset : ContentInset, contentElement : UniElement | null, itemElement : UniElement | null) => {
+	const setDragContext = (index : number, clientX : number, clientY : number) => {
 		startTouchX.value = clientX
 		startTouchY.value = clientY
-		activeViewLeft.value = viewLeft
-		activeViewTop.value = viewTop
-		activeContentInsetTop.value = contentInset.top
-		activeContentInsetBottom.value = contentInset.bottom
-		activeContentElement = contentElement
-		activeItemElement = itemElement
+		const rect = getCurrentTargetRect(index)
+		activeViewLeft.value = rect != null ? rect.left : 0
+		activeViewTop.value = rect != null ? (rect.top + getWebWindowTopOffset()) : 0
 	}
 
-	const prepareDragContext = (clientX : number, clientY : number, itemElement : UniElement | null, eventTarget : UniElement | null) => {
-		const rect = getCurrentTargetRect(itemElement)
-		const contentElement = getContentElement(itemElement, eventTarget)
-		const contentInset = getContentInset(itemElement, contentElement)
-		const viewLeft = rect != null ? rect.left : 0
-		const viewTop = rect != null ? rect.top : 0
-		setDragContext(clientX, clientY, viewLeft, viewTop, contentInset, contentElement, itemElement)
-	}
-
-	const getItemElementFromHandle = (handleElement : UniElement | null) : UniElement | null => {
-		if (handleElement == null) {
-			return null
+	const getScaledDragRect = (baseLeft : number, baseTop : number, width : number, height : number, scale : number) : QueryRect => {
+		if (scale == 1) {
+			return {
+				left: baseLeft,
+				top: baseTop,
+				width,
+				height,
+				right: baseLeft + width,
+				bottom: baseTop + height
+			}
 		}
-		const innerElement = handleElement.parentElement
-		if (innerElement == null) {
-			return null
+		const centerX = width / 2
+		const centerY = height / 2
+		const left = baseLeft + centerX + (0 - centerX) * scale
+		const top = baseTop + centerY + (0 - centerY) * scale
+		return {
+			left,
+			top,
+			width: width * scale,
+			height: height * scale,
+			right: baseLeft + centerX + (width - centerX) * scale,
+			bottom: baseTop + centerY + (height - centerY) * scale
 		}
-		return innerElement.parentElement
 	}
 
 	function beginDrag(index : number, clientX : number, clientY : number) : void {
@@ -661,10 +581,9 @@
 		})
 	}
 
-	const beginHandleDrag = (index : number, clientX : number, clientY : number, handleElement : UniElement | null, eventTarget : UniElement | null) => {
-		const itemElement = getItemElementFromHandle(handleElement)
-		prepareDragContext(clientX, clientY, itemElement, eventTarget)
+	const beginHandleDrag = (index : number, clientX : number, clientY : number) => {
 		measureLayouts().then(() => {
+			setDragContext(index, clientX, clientY)
 			beginDrag(index, clientX, clientY)
 		})
 	}
@@ -680,32 +599,15 @@
 			return
 		}
 		const sourceLayout = layouts.value[activeIndex.value]
-		let contentLeft = sourceLayout.left + dragOffsetX.value
-		let contentRight = sourceLayout.left + sourceLayout.width + dragOffsetX.value
-		let contentTop = sourceLayout.pageTop + activeContentInsetTop.value + dragOffsetY.value
-		let contentBottom = sourceLayout.pageTop + sourceLayout.height - activeContentInsetBottom.value + dragOffsetY.value
+		const dragRect = getScaledDragRect(activeViewLeft.value + dragOffsetX.value, activeViewTop.value + dragOffsetY.value, sourceLayout.width, sourceLayout.height, activeDragScale.value)
+		const contentLeft = dragRect.left
+		const contentRight = dragRect.right != null ? dragRect.right : (dragRect.left + dragRect.width)
+		const contentBottom = dragRect.bottom != null ? dragRect.bottom : (dragRect.top + dragRect.height)
 		if (showAndroidDeleteProxy.value == true) {
 			const windowInfo = uni.getWindowInfo()
 			const barLeftAndroid = 0
 			const barRightAndroid = windowInfo.windowWidth
 			const barTopAndroid = windowInfo.windowHeight - deleteBarHeight
-			const scaledWidth = sourceLayout.width * activeDragScale.value
-			const scaledHeight = sourceLayout.height * activeDragScale.value
-			const deltaX = (scaledWidth - sourceLayout.width) / 2
-			const deltaY = (scaledHeight - sourceLayout.height) / 2
-			const scaledTop = activeViewTop.value + dragOffsetY.value - deltaY
-			let insetTopAndroid = activeContentInsetTop.value
-			let insetBottomAndroid = activeContentInsetBottom.value
-			const maxInsetAndroid = Math.max(0, sourceLayout.height / 2 - 1)
-			const invalidInsetAndroid = insetTopAndroid < 0 || insetBottomAndroid < 0 || insetTopAndroid > maxInsetAndroid || insetBottomAndroid > maxInsetAndroid || insetTopAndroid + insetBottomAndroid >= sourceLayout.height - 1
-			if (invalidInsetAndroid) {
-				insetTopAndroid = 0
-				insetBottomAndroid = 0
-			}
-			contentLeft = activeViewLeft.value + dragOffsetX.value - deltaX
-			contentRight = contentLeft + scaledWidth
-			contentTop = scaledTop + insetTopAndroid * activeDragScale.value
-			contentBottom = scaledTop + scaledHeight - insetBottomAndroid * activeDragScale.value
 			const horizontalOverlapAndroid = contentRight >= barLeftAndroid && contentLeft <= barRightAndroid
 			const bottomReachedDeleteBarAndroid = contentBottom >= barTopAndroid
 			const isInsideAndroid = horizontalOverlapAndroid && bottomReachedDeleteBarAndroid
@@ -718,45 +620,13 @@
 			}
 			return
 		}
-		const windowTopOffset = getWebWindowTopOffset()
-		const liveContentRect = getCurrentTargetRect(activeContentElement)
-		if (liveContentRect != null) {
-			contentLeft = liveContentRect.left
-			contentRight = liveContentRect.right != null ? liveContentRect.right : (liveContentRect.left + liveContentRect.width)
-			contentTop = liveContentRect.top
-			contentBottom = liveContentRect.bottom != null ? liveContentRect.bottom : (liveContentRect.top + liveContentRect.height)
-			// #ifdef WEB
-			contentTop = contentTop - windowTopOffset
-			contentBottom = contentBottom - windowTopOffset
-			// #endif
-		} else {
-			const liveItemRect = getCurrentTargetRect(activeItemElement)
-			if (liveItemRect != null && sourceLayout.height > 0) {
-				const liveRight = liveItemRect.right != null ? liveItemRect.right : (liveItemRect.left + liveItemRect.width)
-				const liveBottom = liveItemRect.bottom != null ? liveItemRect.bottom : (liveItemRect.top + liveItemRect.height)
-				const scaleY = liveItemRect.height / sourceLayout.height
-				contentLeft = liveItemRect.left
-				contentRight = liveRight
-				contentTop = liveItemRect.top + activeContentInsetTop.value * scaleY
-				contentBottom = liveBottom - activeContentInsetBottom.value * scaleY
-				// #ifdef WEB
-				contentTop = contentTop - windowTopOffset
-				contentBottom = contentBottom - windowTopOffset
-				// #endif
-			} else if (showClose.value == true) {
-				const scaledCenterX = sourceLayout.width / 2
-				const scaledCenterY = sourceLayout.height / 2
-				const contentTopLocal = activeContentInsetTop.value
-				const contentBottomLocal = sourceLayout.height - activeContentInsetBottom.value
-				contentLeft = activeViewLeft.value + dragOffsetX.value + scaledCenterX + (0 - scaledCenterX) * activeDragScale.value
-				contentRight = activeViewLeft.value + dragOffsetX.value + scaledCenterX + (sourceLayout.width - scaledCenterX) * activeDragScale.value
-				contentTop = activeViewTop.value + dragOffsetY.value + scaledCenterY + (contentTopLocal - scaledCenterY) * activeDragScale.value
-				contentBottom = activeViewTop.value + dragOffsetY.value + scaledCenterY + (contentBottomLocal - scaledCenterY) * activeDragScale.value
-			}
-		}
 		const measuredTop = barLayout.pageTop
 		const horizontalOverlap = contentRight >= barLayout.left && contentLeft <= barLayout.right
-		const bottomReachedDeleteBar = contentBottom >= measuredTop
+		let normalizedContentBottom = contentBottom
+		// #ifdef WEB
+		normalizedContentBottom = normalizedContentBottom - getWebWindowTopOffset()
+		// #endif
+		const bottomReachedDeleteBar = normalizedContentBottom >= measuredTop
 		const isInside = horizontalOverlap && bottomReachedDeleteBar
 		if (isInside != overDeleteBar.value) {
 			overDeleteBar.value = isInside
@@ -767,13 +637,15 @@
 		}
 	}
 
-	const scheduleLongPress = (index : number, clientX : number, clientY : number, viewLeft : number, viewTop : number, contentInset : ContentInset, contentElement : UniElement | null, itemElement : UniElement | null) => {
+	const scheduleLongPress = (index : number, clientX : number, clientY : number) => {
 		clearLongPressTimer()
 		pendingIndex.value = index
-		setDragContext(clientX, clientY, viewLeft, viewTop, contentInset, contentElement, itemElement)
+		startTouchX.value = clientX
+		startTouchY.value = clientY
 		longPressTimer = setTimeout(() => {
 			longPressTimer = 0
 			measureLayouts().then(() => {
+				setDragContext(index, clientX, clientY)
 				beginDrag(index, clientX, clientY)
 			})
 		}, longPressDuration)
@@ -859,14 +731,7 @@
 		}
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
-		const target = touchEvent.currentTarget as UniElement
-		const eventTarget = touchEvent.target as UniElement
-		const rect = getCurrentTargetRect(target)
-		const contentElement = getContentElement(target, eventTarget)
-		const contentInset = getContentInset(target, contentElement)
-		const viewLeft = rect != null ? rect.left : 0
-		const viewTop = rect != null ? rect.top : 0
-		scheduleLongPress(index, touch.clientX, touch.clientY, viewLeft, viewTop, contentInset, contentElement, target)
+		scheduleLongPress(index, touch.clientX, touch.clientY)
 	}
 
 	const onItemTouchMove = (event : any) => {
@@ -888,9 +753,7 @@
 		}
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
-		const handleTarget = touchEvent.currentTarget as UniElement
-		const eventTarget = touchEvent.target as UniElement
-		beginHandleDrag(index, touch.clientX, touch.clientY, handleTarget, eventTarget)
+		beginHandleDrag(index, touch.clientX, touch.clientY)
 	}
 
 	const onHandleTouchEnd = (_event : any) => {
@@ -1114,9 +977,6 @@
 		z-index: 25;
 	}
 </style>
-
-
-
 
 
 
