@@ -87,6 +87,24 @@
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
+		},
+		{
+			"path": "pages/tab-bar/tab-bar-dark",
+			"style": {
+				"navigationBarTitleText": "暗黑首页",
+				"navigationBarBackgroundColor": "#0f172a",
+				"navigationBarTextStyle": "white",
+				"backgroundColorContent": "#0f172a"  /* TODO web后退时，上一页的背景色也被干扰成深色了 */
+			}
+		},
+		{
+			"path": "pages/tab-bar/tab-bar-custom",
+			"style": {
+				"navigationBarTitleText": "精选",
+				"navigationBarBackgroundColor": "#dff3e8",
+				"navigationBarTextStyle": "black",
+				"backgroundColorContent": "#dff3e8"
+			}
 		}
 		/* 
 		{

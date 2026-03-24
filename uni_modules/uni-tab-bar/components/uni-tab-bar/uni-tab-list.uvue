@@ -59,7 +59,7 @@ provide('uniTabListRegisterItem', registerItem)
 	align-items: center;
 	overflow: visible;
 	border-top-width: 0.5px;
-	border-top-color: #000000;
+	border-top-color: rgba(0,0,0,0.33);
 	border-top-style: solid;
 }
 </style>

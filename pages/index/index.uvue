@@ -1,7 +1,10 @@
 <template>
+	<scroll-view>
 	<navigator class="padding-bottom" url="/pages/badge/badge">badge</navigator>
 	<navigator class="padding-bottom" url="/pages/rate/rate">rate</navigator>
 	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar">tab-bar</navigator>
+	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-dark">tab-bar-dark</navigator>
+	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-custom">tab-bar-custom</navigator>
 	<!-- <navigator class="padding-bottom" url="/pages/page-container/page-container">page-container</navigator>
 	<navigator class="padding-bottom" url="/pages/movable-view/movable-view">movable-view</navigator> -->
 	<navigator class="padding-bottom" url="/pages/nav-bar/nav-bar">nav-bar</navigator>
@@ -21,6 +24,7 @@
 	<button class="padding-bottom"><text style="color: green;">子text绿色</text></button>
 	<button class="padding-bottom" style="color: aqua;">button青色</button>
 	<button class="padding-bottom" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></button> --> <!-- TODO hover-class="navigator-hover" 会引发鸿蒙崩溃！-->
+	</scroll-view>
 </template>
 
 <script setup>
