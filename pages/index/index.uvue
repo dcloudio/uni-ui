@@ -1,5 +1,5 @@
 <template>
-	<scroll-view>
+	<scroll-view style="flex: 1;">
 	<navigator class="padding-bottom" url="/pages/badge/badge">badge</navigator>
 	<navigator class="padding-bottom" url="/pages/rate/rate">rate</navigator>
 	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar">tab-bar</navigator>
