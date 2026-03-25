@@ -393,6 +393,11 @@
 		emit('change', innerList.value)
 	}
 
+	const resetItemIdsByListOrder = () => {
+		itemIds.value = createIdentityOrder(innerList.value.length)
+		applyPreviewOrder(createIdentityOrder(innerList.value.length))
+	}
+
 	watch(() : number => {
 		const list = props.modelValue
 		return list != null ? list.length : -1
@@ -689,13 +694,11 @@
 		}
 		if (showClose.value == true && overDeleteBar.value == true) {
 			const nextList = innerList.value.slice()
-			const nextIds = itemIds.value.slice()
 			nextList.splice(currentActiveIndex, 1)
-			nextIds.splice(currentActiveIndex, 1)
 			settling.value = true
 			resetDragState()
 			innerList.value = nextList
-			itemIds.value = nextIds
+			resetItemIdsByListOrder()
 			emitChange()
 			nextTick(() => {
 				settling.value = false
@@ -709,16 +712,13 @@
 		}
 
 		const nextList = innerList.value.slice()
-		const nextIds = itemIds.value.slice()
 		const movedItem = nextList.splice(currentActiveIndex, 1)[0]
-		const movedId = nextIds.splice(currentActiveIndex, 1)[0]
 		nextList.splice(targetIndex, 0, movedItem)
-		nextIds.splice(targetIndex, 0, movedId)
 
 		settling.value = true
 		resetDragState()
 		innerList.value = nextList
-		itemIds.value = nextIds
+		resetItemIdsByListOrder()
 		emitChange()
 		nextTick(() => {
 			settling.value = false
@@ -977,7 +977,6 @@
 		z-index: 25;
 	}
 </style>
-
 
 
 
