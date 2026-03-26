@@ -21,6 +21,7 @@
 					@touchstart.stop="onHandleTouchStart($event, index)"
 					@touchend.stop="onHandleTouchEnd"
 					@touchcancel.stop="onHandleTouchEnd">
+					<!-- 此处item、index参数除传递参数之外，还会激活编译到小程序的scopedSlot特殊处理逻辑，使外部使用时能正常循环创建插槽内容。需要注意的是使用此插槽是也需要声明参数来激活特殊逻辑 -->
 					<slot name="handle" :item="item" :index="index"></slot>
 				</view>
 			</view>
@@ -39,13 +40,6 @@
 				<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
 			</view>
 		</view>
-		<!-- <view
-			v-if="dragging && showClose != true"
-			class="drag-cell-drag-layer"
-			@touchmove.stop.prevent="onItemTouchMove"
-			@touchend="onItemTouchEnd"
-			@touchcancel="onItemTouchEnd">
-		</view> -->
 	</view>
 	</view>
 </template>
