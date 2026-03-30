@@ -5,7 +5,7 @@
 			<text class="page-title">首页</text>
 			<text class="page-text">这是首页的内容</text>
 			<text class="page-text">当前索引: {{ activeIndex }}</text>
-			<text class="page-text">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n点首页tab可滚动回顶部</text>
+			<text class="page-text">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n点首页tab可滚动回顶部（mid-button示例无效）</text>
 		</view>
 	</scroll-view>
 </template>

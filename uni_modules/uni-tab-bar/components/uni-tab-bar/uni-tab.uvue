@@ -1,0 +1,85 @@
+<template>
+	<view class="uni-tab-bar-root"> <!-- 如果 tab 是一个非全屏的组件，需要套一层。如果是全屏场景，这一层可以省略 -->
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+import { UniTabBarLayout } from './types.uts'
+
+type Props = {
+	/**
+	 * @description 当前激活的选项卡索引
+	 */
+	activeIndex: number,
+	/**
+	 * @description tab-bar 的高度
+	 */
+	tabBarHeight?: number
+}
+
+// 定义组件属性
+const props = withDefaults(defineProps<Props>(), {
+	tabBarHeight: 50
+})
+
+// 定义事件
+const emit = defineEmits<{
+	change: [index: number]
+}>()
+
+// 当前激活的索引
+const currentIndex = ref<number>(props.activeIndex)
+
+const windowInfo = uni.getWindowInfo()
+const safeAreaInsetBottom = windowInfo.safeAreaInsets.bottom
+const tabBarLayout: UniTabBarLayout = {
+	tabListBaseHeight: props.tabBarHeight,
+	windowWidth: windowInfo.windowWidth,
+	safeAreaInsetBottom: safeAreaInsetBottom
+}
+const tabContentBottom = ref<number>(props.tabBarHeight + safeAreaInsetBottom)
+const tabContentHeight = ref<number>(windowInfo.windowHeight - tabContentBottom.value)
+
+// tab-content 的数量计数器
+const contentCount = ref<number>(0)
+
+// 监听 activeIndex 变化
+watch((): number => {
+	return props.activeIndex
+}, (newIndex: number) => {
+	currentIndex.value = newIndex
+})
+
+// 切换选项卡
+function changeTab(index: number): void {
+	if (currentIndex.value != index) {
+		currentIndex.value = index
+		emit('change', index)
+	}
+}
+
+// 注册 tab-content
+function registerContent(): number {
+	const index = contentCount.value
+	contentCount.value++
+	return index
+}
+
+// 通过 provide 向子组件提供数据和方法
+provide('uniTabBarCurrentIndex', currentIndex)
+provide('uniTabBarChangeTab', changeTab)
+provide('uniTabBarRegisterContent', registerContent)
+provide('uniTabBarContentHeight', tabContentHeight)
+provide('uniTabBarContentBottom', tabContentBottom)
+provide('uniTabBarLayout', tabBarLayout)
+</script>
+
+<style>
+	.uni-tab-bar-root {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		flex-direction: column;
+	}
+</style>

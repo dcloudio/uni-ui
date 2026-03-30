@@ -3,8 +3,7 @@ tabbar，需要控制激活样式
 
 movable-view
 
-tab-bar
-menu
+[x] tab-bar
 
 [x] nav-bar
 [x] badge-view
@@ -22,6 +21,10 @@ menu
 	鸿蒙拖动后视图和数据的顺序对不上。拖动时乱跑
 
 [ ] 日历选择
+
+menu
+segment
+竖排滚动
 
 drag-list
 	sort-type 哪个list-item的type要排序。不写就是所有item都参与排序

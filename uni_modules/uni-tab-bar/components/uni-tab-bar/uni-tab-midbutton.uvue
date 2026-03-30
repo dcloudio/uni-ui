@@ -1,0 +1,48 @@
+<template>
+	<view :style="midButtonStyle" class="uni-tab-list-item-midbutton-root">
+		<slot></slot>
+	</view>
+</template>
+
+<script setup lang="uts">
+import { UniTabBarLayout } from './types.uts'
+
+type Props = {
+	width?: number,
+	height?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	width: 90,
+	height: 90
+})
+const tabBarLayout = inject<UniTabBarLayout>('uniTabBarLayout', {
+	tabListBaseHeight: 50,
+	windowWidth: 0,
+	safeAreaInsetBottom: 0
+} as UniTabBarLayout)
+const registerMidButton = inject<(width : number, height : number) => void>('uniTabListRegisterMidButton', (width : number, height : number) => {})
+
+const midButtonStyle = computed(() => {
+	return {
+		width: props.width + 'px',
+		height: props.height + 'px',
+		bottom: tabBarLayout.safeAreaInsetBottom + 'px'
+	}
+})
+
+onMounted(() => {
+	registerMidButton(props.width, props.height)
+})
+</script>
+
+<style>
+	.uni-tab-list-item-midbutton-root {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		overflow: visible;
+		align-items: center;
+		justify-content: center;
+	}
+</style>

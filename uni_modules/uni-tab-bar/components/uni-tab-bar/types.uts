@@ -3,3 +3,8 @@ export type UniTabBarLayout = {
 	windowWidth: number
 	safeAreaInsetBottom: number
 }
+
+export type UniTabListItemLayout = {
+	width: number
+	marginLeft: number
+}

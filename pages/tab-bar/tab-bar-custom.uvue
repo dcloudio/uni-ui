@@ -1,10 +1,10 @@
 <template>
-	<uni-tab-bar style="flex: 1" :active-index="activeIndex" :tab-list-height="40" @change="handleChange">
+	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-bar-height="40" @change="handleChange">
 		<uni-tab-content>
 			<view class="custom-panel custom-panel-emerald">
 				<text class="custom-panel-kicker">自定义 tab-bar</text>
 				<text class="custom-panel-title">精选</text>
-				<text class="custom-panel-desc">uni-tab-list 使用 externalClass 覆盖了渐变背景和更低的高度，整体更像一条轻量导航条。</text>
+				<text class="custom-panel-desc">uni-tab-bar 使用 externalClass 覆盖了渐变背景和更低的高度，整体更像一条轻量导航条。</text>
 			</view>
 		</uni-tab-content>
 		<uni-tab-content>
@@ -18,34 +18,34 @@
 			<view class="custom-panel custom-panel-ink">
 				<text class="custom-panel-kicker">自定义 tab-bar</text>
 				<text class="custom-panel-title">我的</text>
-				<text class="custom-panel-desc">激活文字色改成绿色，同时每个 uni-tab-list-item 只有一行文本，更紧凑也更聚焦。</text>
+				<text class="custom-panel-desc">激活文字色改成绿色，同时每个 uni-tab-item 只有一行文本，更紧凑也更聚焦。</text>
 			</view>
 		</uni-tab-content>
 
-		<uni-tab-list class="custom-tab-list-shell custom-tab-list-root">
-			<uni-tab-list-item>
+		<uni-tab-bar class="custom-tab-list-shell custom-tab-list-root">
+			<uni-tab-item>
 				<view class="custom-tab-cell">
 					<text class="custom-tab-label" :class="activeIndex == 0 ? 'custom-tab-label-active' : ''">精选</text>
 				</view>
-			</uni-tab-list-item>
-			<uni-tab-list-item>
+			</uni-tab-item>
+			<uni-tab-item>
 				<view class="custom-tab-cell">
 					<text class="custom-tab-label" :class="activeIndex == 1 ? 'custom-tab-label-active' : ''">趋势</text>
 				</view>
-			</uni-tab-list-item>
-			<uni-tab-list-item>
+			</uni-tab-item>
+			<uni-tab-item>
 				<view class="custom-tab-cell">
 					<text class="custom-tab-label" :class="activeIndex == 2 ? 'custom-tab-label-active' : ''">我的</text>
 				</view>
-			</uni-tab-list-item>
-		</uni-tab-list>
-	</uni-tab-bar>
+			</uni-tab-item>
+		</uni-tab-bar>
+	</uni-tab>
 </template>
 
 <script setup lang="uts">
+	import uniTab from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab.uvue'
 	import uniTabBar from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-bar.uvue'
-	import uniTabList from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list.uvue'
-	import uniTabListItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list-item.uvue'
+	import uniTabItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-item.uvue'
 	import uniTabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-content.uvue'
 
 	const activeIndex = ref<number>(0)

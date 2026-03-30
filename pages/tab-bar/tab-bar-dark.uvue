@@ -1,5 +1,5 @@
 <template>
-	<uni-tab-bar style="flex: 1" :active-index="activeIndex" @change="handleChange">
+	<uni-tab style="flex: 1" :active-index="activeIndex" @change="handleChange">
 		<!-- 内容区域 -->
 		<uni-tab-content>
 			<!-- TODO 小程序下这些Class不生效，界面没有变黑！ -->
@@ -16,9 +16,9 @@
 		</uni-tab-content>
 
 		<!-- 底部选项卡 -->
-		<uni-tab-list class="dark-tab-list">
+		<uni-tab-bar class="dark-tab-list">
 			<!-- 图标高度24，文字字号10px，文字高度是12~14px，角标不能在图标的正右上角，需要向下偏移1px，避免角标画出tab-list之外) -->
-			<uni-tab-list-item>
+			<uni-tab-item>
 				<view class="first-tab-button" @click="handleFirstTabClick">
 					<view class="first-tab-animator">
 						<view class="first-tab-face"
@@ -33,26 +33,27 @@
 						</view>
 					</view>
 				</view>
-			</uni-tab-list-item>
-			<uni-tab-list-item badge-text="99+">
+			</uni-tab-item>
+			<uni-tab-item badge-text="99+">
 				<image :src="activeIndex == 1 ? '/static/apiHL.png' : '/static/api.png'" class="tab-icon-image"></image>
 				<text class="tab-label" :class="activeIndex == 1 ? 'tab-label-active' : ''">API</text>
-			</uni-tab-list-item>
-			<uni-tab-list-item>
+			</uni-tab-item>
+			<uni-tab-item>
 				<image :src="activeIndex == 2 ? '/static/cssHL.png' : '/static/css.png'" class="tab-icon-image"></image>
 				<text class="tab-label" :class="activeIndex == 2 ? 'tab-label-active' : ''">CSS</text>
-			</uni-tab-list-item>
-			<uni-tab-list-item badge-text="">
+			</uni-tab-item>
+			<uni-tab-item badge-text="">
 				<image :src="activeIndex == 3 ? '/static/templateHL.png' : '/static/template.png'" class="tab-icon-image"></image>
 				<text class="tab-label" :class="activeIndex == 3 ? 'tab-label-active' : ''">模板</text>
-			</uni-tab-list-item>
-		</uni-tab-list>
-	</uni-tab-bar>
+			</uni-tab-item>
+		</uni-tab-bar>
+	</uni-tab>
 </template>
 
 <script setup lang="uts">
-	import uniTabList from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list.uvue'
-	import uniTabListItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-list-item.uvue'
+	import uniTab from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab.uvue'
+	import uniTabBar from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-bar.uvue'
+	import uniTabItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-item.uvue'
 	import uniTabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-content.uvue'
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'

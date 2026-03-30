@@ -1,85 +1,103 @@
 <template>
-	<view class="uni-tab-bar-root"> <!-- 如果tabbar是一个非全屏的组件，需要套一层。如果是全屏的，比如pages.json中的tabbar，其实不需要这一层-->
+	<view :style="{ height: tabBarLayout.tabListBaseHeight + 'px', paddingBottom: tabBarLayout.safeAreaInsetBottom + 'px' }"
+		class="uni-tab-list-root">
 		<slot></slot>
 	</view>
 </template>
 
 <script setup lang="uts">
-import { UniTabBarLayout } from './types.uts'
+import { UniTabBarLayout, UniTabListItemLayout } from './types.uts'
 
-type Props = {
-	/**
-	 * @description 当前激活的选项卡索引
-	 */
-	activeIndex: number,
-	/**
-	 * @description tab-list 的高度
-	 */
-	tabListHeight?: number
-}
+const tabBarLayout = inject<UniTabBarLayout>('uniTabBarLayout', {
+	tabListBaseHeight: 50,
+	windowWidth: 0,
+	safeAreaInsetBottom: 0
+} as UniTabBarLayout)
+const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: number) => {})
 
-// 定义组件属性
-const props = withDefaults(defineProps<Props>(), {
-	tabListHeight: 50
+const itemCount = ref<number>(0)
+const hasMidButtonItem = ref<boolean>(false)
+const midButtonWidth = ref<number>(0)
+
+const validMidButtonLayout = computed(() : boolean => {
+	return hasMidButtonItem.value && itemCount.value > 0 && itemCount.value % 2 == 0 && midButtonWidth.value > 0
 })
 
-// 定义事件
-const emit = defineEmits<{
-	change: [index: number]
-}>()
-
-// 当前激活的索引
-const currentIndex = ref<number>(props.activeIndex)
-
-const windowInfo = uni.getWindowInfo()
-const safeAreaInsetBottom = windowInfo.safeAreaInsets.bottom
-const tabBarLayout: UniTabBarLayout = {
-	tabListBaseHeight: props.tabListHeight,
-	windowWidth: windowInfo.windowWidth,
-	safeAreaInsetBottom: safeAreaInsetBottom
-}
-const tabContentBottom = ref<number>(props.tabListHeight + safeAreaInsetBottom)
-const tabContentHeight = ref<number>(windowInfo.windowHeight - tabContentBottom.value)
-
-// tab-content 的数量计数器
-const contentCount = ref<number>(0)
-
-// 监听 activeIndex 变化
-watch((): number => {
-	return props.activeIndex
-}, (newIndex: number) => {
-	currentIndex.value = newIndex
-})
-
-// 切换选项卡
-function changeTab(index: number): void {
-	if (currentIndex.value != index) {
-		currentIndex.value = index
-		emit('change', index)
-	}
-}
-
-// 注册 tab-content
-function registerContent(): number {
-	const index = contentCount.value
-	contentCount.value++
+function registerItem() : number {
+	const index = itemCount.value
+	itemCount.value++
 	return index
 }
 
-// 通过 provide 向子组件提供数据和方法
-provide('uniTabBarCurrentIndex', currentIndex)
-provide('uniTabBarChangeTab', changeTab)
-provide('uniTabBarRegisterContent', registerContent)
-provide('uniTabBarContentHeight', tabContentHeight)
-provide('uniTabBarContentBottom', tabContentBottom)
-provide('uniTabBarLayout', tabBarLayout)
+function getItemLayout(index : number) : UniTabListItemLayout {
+	if (itemCount.value <= 0 || tabBarLayout.windowWidth <= 0) {
+		return {
+			width: 0,
+			marginLeft: 0
+		} as UniTabListItemLayout
+	}
+
+	if (validMidButtonLayout.value) {
+		const itemWidth = (tabBarLayout.windowWidth - midButtonWidth.value) / itemCount.value
+		const middleIndex = itemCount.value / 2
+		return {
+			width: itemWidth,
+			marginLeft: index == middleIndex ? midButtonWidth.value : 0
+		} as UniTabListItemLayout
+	}
+
+	return {
+		width: tabBarLayout.windowWidth / itemCount.value,
+		marginLeft: 0
+	} as UniTabListItemLayout
+}
+
+function registerMidButton(width : number, height : number) : void {
+	hasMidButtonItem.value = true
+	midButtonWidth.value = width
+	if (height <= 0) {
+		console.warn('uni-tab-midbutton: height 必须大于 0')
+	}
+}
+
+function syncOccupiedHeight() : void {
+	if (hasMidButtonItem.value && validMidButtonLayout.value == false) {
+		console.warn('uni-tab-bar: mid-button 需要偶数个普通 uni-tab-item，才能保持居中均分布局')
+	}
+}
+
+onMounted(() => {
+	syncOccupiedHeight()
+})
+
+watch(() : number => itemCount.value, () => {
+	syncOccupiedHeight()
+})
+
+watch(() : boolean => hasMidButtonItem.value, () => {
+	syncOccupiedHeight()
+})
+
+provide('uniTabListRegisterItem', registerItem)
+provide('uniTabListGetItemLayout', getItemLayout)
+provide('uniTabListRegisterMidButton', registerMidButton)
+provide('uniTabListChangeTab', changeTab)
 </script>
 
 <style>
-	.uni-tab-bar-root {
+	.uni-tab-list-root {
 		width: 100%;
-		height: 100%;
-		position: relative;
-		flex-direction: column;
+		height: 50px;
+		position: absolute;
+		bottom: 0;
+		box-sizing: content-box;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		overflow: visible;
+		border-top-width: 0.5px;
+		border-top-color: rgba(0,0,0,0.33);
+		border-top-style: solid;
 	}
 </style>
