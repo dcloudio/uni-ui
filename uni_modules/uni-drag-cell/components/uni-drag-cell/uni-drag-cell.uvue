@@ -160,7 +160,7 @@
 	})
 	let useDeleteProxyForDeleteDrag = false
 	// #ifdef APP-ANDROID && !VUE3-VAPOR || APP && VUE3-VAPOR
-	// 安卓平台非蒸汽模式切换为fixed时会触发touchcancel。蒸汽模式scroll-view内的元素由fixed切换为非fixed无法回到原位置（Bug待修复）。因此这两种情况暂不只用fixed方案
+	// 安卓平台非蒸汽模式切换为fixed时会触发touchcancel。蒸汽模式scroll-view内的元素由fixed切换为非fixed无法回到原位置（Bug待修复）。这两种情况暂不使用fixed方案
 	useDeleteProxyForDeleteDrag = true
 	// #endif
 	const showDeleteProxy = computed(() : boolean => {
