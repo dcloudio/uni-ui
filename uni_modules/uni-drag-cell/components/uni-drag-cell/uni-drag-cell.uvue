@@ -12,6 +12,7 @@
 			@touchcancel="onItemTouchEnd">
 			<view class="drag-cell-item-inner">
 				<view class="drag-cell-slot-content">
+					<view>{{getItemStyle(index)}}</view>
 					<slot :item="item" :index="index"></slot>
 				</view>
 				<view
@@ -32,14 +33,16 @@
 		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
 			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
 		</view>
+		<!-- #ifdef APP-ANDROID && !VUE3-VAPOR || APP && VUE3-VAPOR -->
 		<view
-			v-if="showAndroidDeleteProxy"
+			v-if="showDeleteProxy"
 			class="drag-cell-delete-proxy"
-			:style="getAndroidDeleteProxyStyle()">
+			:style="getDeleteProxyStyle()">
 			<view class="drag-cell-delete-proxy-inner">
 				<slot :item="innerList[activeIndex]" :index="activeIndex"></slot>
 			</view>
 		</view>
+		<!-- #endif -->
 	</view>
 	</view>
 </template>
@@ -155,8 +158,13 @@
 	const activeDragScale = computed(() : number => {
 		return handleModeEnabled.value ? 1 : dragActiveScale
 	})
-	const showAndroidDeleteProxy = computed(() : boolean => {
-		return showClose.value == true && dragging.value == true && activeIndex.value >= 0 && activeIndex.value < innerList.value.length
+	let useDeleteProxyForDeleteDrag = false
+	// #ifdef APP-ANDROID && !VUE3-VAPOR || APP && VUE3-VAPOR
+	// 安卓平台非蒸汽模式切换为fixed时会触发touchcancel。蒸汽模式scroll-view内的元素由fixed切换为非fixed无法回到原位置（Bug待修复）。因此这两种情况暂不只用fixed方案
+	useDeleteProxyForDeleteDrag = true
+	// #endif
+	const showDeleteProxy = computed(() : boolean => {
+		return useDeleteProxyForDeleteDrag && showClose.value == true && dragging.value == true && activeIndex.value >= 0 && activeIndex.value < innerList.value.length
 	})
 	const containerStyle = computed(() : string => {
 		const currentContainerLayout = containerLayout.value
@@ -165,12 +173,18 @@
 		}
 		return ''
 	})
-	const getAndroidDeleteProxyStyle = () : string => {
-		if (showAndroidDeleteProxy.value != true || activeIndex.value < 0 || activeIndex.value >= layouts.value.length) {
+	const getDeleteProxyStyle = () : string => {
+		if (showDeleteProxy.value != true || activeIndex.value < 0 || activeIndex.value >= layouts.value.length) {
 			return 'display: none;'
 		}
 		const sourceLayout = layouts.value[activeIndex.value]
 		return `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px; z-index: 30; transform: translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value});`
+	}
+	const getFixedActiveItemStyle = (sourceLayout : ItemLayout) : string => {
+		return `position: fixed; left: ${activeViewLeft.value}px; top: ${activeViewTop.value}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px; z-index: 30; transition-duration: 0ms; transform: translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value});`
+	}
+	const getDeletePlaceholderStyle = (baseLeft : number, baseTop : number, sourceLayout : ItemLayout) : string => {
+		return `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px; z-index: 0; transition-duration: 0ms; opacity: 0; transform: translateX(0px) translateY(0px);`
 	}
 	const appLanguage = uni.getAppBaseInfo().appLanguage ?? 'en'
 
@@ -592,17 +606,12 @@
 			overDeleteBar.value = false
 			return
 		}
-		const barLayout = deleteBarLayout.value
-		if (barLayout == null) {
-			overDeleteBar.value = false
-			return
-		}
 		const sourceLayout = layouts.value[activeIndex.value]
 		const dragRect = getScaledDragRect(activeViewLeft.value + dragOffsetX.value, activeViewTop.value + dragOffsetY.value, sourceLayout.width, sourceLayout.height, activeDragScale.value)
 		const contentLeft = dragRect.left
 		const contentRight = dragRect.right != null ? dragRect.right : (dragRect.left + dragRect.width)
 		const contentBottom = dragRect.bottom != null ? dragRect.bottom : (dragRect.top + dragRect.height)
-		if (showAndroidDeleteProxy.value == true) {
+		if (useDeleteProxyForDeleteDrag) {
 			const windowInfo = uni.getWindowInfo()
 			const barLeftAndroid = 0
 			const barRightAndroid = windowInfo.windowWidth
@@ -617,6 +626,11 @@
 					applyPreviewOrder(createIdentityOrder(innerList.value.length))
 				}
 			}
+			return
+		}
+		const barLayout = deleteBarLayout.value
+		if (barLayout == null) {
+			overDeleteBar.value = false
 			return
 		}
 		const measuredTop = barLayout.pageTop
@@ -795,9 +809,10 @@
 				positionStyle = `position: absolute; left: ${baseLeft}px; top: ${baseTop}px; width: ${sourceLayout.width}px; height: ${sourceLayout.height}px;`
 				transitionStyle = 'transition-duration: 0ms;'
 				if (showClose.value == true) {
-					zIndexStyle = 'z-index: 0;'
-					transformStyle = 'translateX(0px) translateY(0px)'
-					return `${widthStyle}${positionStyle}${zIndexStyle}${transitionStyle}opacity: 0; transform: ${transformStyle};`
+					if (useDeleteProxyForDeleteDrag) {
+						return `${widthStyle}${getDeletePlaceholderStyle(baseLeft, baseTop, sourceLayout)}`
+					}
+					return `${widthStyle}${getFixedActiveItemStyle(sourceLayout)}`
 				}
 				zIndexStyle = 'z-index: 30;'
 				transformStyle = `translateX(${dragOffsetX.value}px) translateY(${dragOffsetY.value}px) scale(${activeDragScale.value})`
@@ -971,8 +986,6 @@
 		z-index: 25;
 	}
 </style>
-
-
 
 
 
