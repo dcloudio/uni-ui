@@ -125,7 +125,6 @@
 	const startTouchY = ref(0)
 	const pendingIndex = ref(-1)
 	const overDeleteBar = ref(false)
-	const deleteBarLayout = ref<DeleteBarLayout | null>(null)
 	const containerLayout = ref<ContainerLayout | null>(null)
 	const activeViewLeft = ref(0)
 	const activeViewTop = ref(0)
@@ -280,7 +279,6 @@
 		hoverIndex.value = -1
 		pendingIndex.value = -1
 		overDeleteBar.value = false
-		deleteBarLayout.value = null
 		activeViewLeft.value = 0
 		activeViewTop.value = 0
 		dragCoordOffsetX.value = 0
@@ -421,38 +419,6 @@
 		// #endif
 	}
 
-	const measureDeleteBar = () => {
-		if (instance == null || instance.proxy == null || showDeleteBar.value != true) {
-			deleteBarLayout.value = null
-			return
-		}
-		uni.createSelectorQuery()
-			.in(instance.proxy)
-			.select('.drag-cell-delete-bar')
-			.boundingClientRect((rect) => {
-				if (rect != null) {
-					const barRect = rect as NodeInfo
-					const left = barRect.left != null ? barRect.left : 0
-					const top = barRect.top != null ? barRect.top : 0
-					const width = barRect.width != null ? barRect.width : 0
-					const height = barRect.height != null ? barRect.height : 0
-					const right = barRect.right != null ? barRect.right : (left + width)
-					const bottom = barRect.bottom != null ? barRect.bottom : (top + height)
-					deleteBarLayout.value = {
-						left,
-						pageTop: top,
-						right,
-						bottom: bottom
-					}
-				} else {
-					deleteBarLayout.value = null
-				}
-			})
-			.exec()
-	}
-
-
-
 	const buildPreviewOrder = (length : number, from : number, to : number) : number[] => {
 		const order = createIdentityOrder(length)
 		if (from == to) {
@@ -588,9 +554,6 @@
 		hoverIndex.value = index
 		overDeleteBar.value = false
 		applyPreviewOrder(createIdentityOrder(innerList.value.length))
-		nextTick(() => {
-			measureDeleteBar()
-		})
 	}
 
 	const beginHandleDrag = (index : number, clientX : number, clientY : number) => {
@@ -610,36 +573,10 @@
 		const contentLeft = dragRect.left
 		const contentRight = dragRect.right != null ? dragRect.right : (dragRect.left + dragRect.width)
 		const contentBottom = dragRect.bottom != null ? dragRect.bottom : (dragRect.top + dragRect.height)
-		if (useDeleteProxyForDeleteDrag) {
-			const windowInfo = uni.getWindowInfo()
-			const barLeftAndroid = 0
-			const barRightAndroid = windowInfo.windowWidth
-			const barTopAndroid = windowInfo.windowHeight - deleteBarHeight
-			const horizontalOverlapAndroid = contentRight >= barLeftAndroid && contentLeft <= barRightAndroid
-			const bottomReachedDeleteBarAndroid = contentBottom >= barTopAndroid
-			const isInsideAndroid = horizontalOverlapAndroid && bottomReachedDeleteBarAndroid
-			if (isInsideAndroid != overDeleteBar.value) {
-				overDeleteBar.value = isInsideAndroid
-				if (isInsideAndroid) {
-					hoverIndex.value = activeIndex.value
-					applyPreviewOrder(createIdentityOrder(innerList.value.length))
-				}
-			}
-			return
-		}
-		const barLayout = deleteBarLayout.value
-		if (barLayout == null) {
-			overDeleteBar.value = false
-			return
-		}
-		const measuredTop = barLayout.pageTop
-		const horizontalOverlap = contentRight >= barLayout.left && contentLeft <= barLayout.right
-		let normalizedContentBottom = contentBottom
-		// #ifdef WEB
-		normalizedContentBottom = normalizedContentBottom - getWebWindowTopOffset()
-		// #endif
-		const bottomReachedDeleteBar = normalizedContentBottom >= measuredTop
-		const isInside = horizontalOverlap && bottomReachedDeleteBar
+		const normalizedContentBottom = contentBottom - getWebWindowTopOffset()
+		const windowInfo = uni.getWindowInfo()
+		const barTop = windowInfo.windowHeight - deleteBarHeight
+		const isInside = normalizedContentBottom >= barTop
 		if (isInside != overDeleteBar.value) {
 			overDeleteBar.value = isInside
 			if (isInside) {
