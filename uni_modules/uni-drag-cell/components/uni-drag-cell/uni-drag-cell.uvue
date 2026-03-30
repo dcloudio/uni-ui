@@ -12,7 +12,6 @@
 			@touchcancel="onItemTouchEnd">
 			<view class="drag-cell-item-inner">
 				<view class="drag-cell-slot-content">
-					<view>{{getItemStyle(index)}}</view>
 					<slot :item="item" :index="index"></slot>
 				</view>
 				<view
