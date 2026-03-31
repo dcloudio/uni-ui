@@ -155,10 +155,12 @@
     }
   ]
 
-  const data = reactive<{
+  type Data = {
     lastEvent: string,
     enableOpen: boolean
-  }>({
+  }
+
+  const data = reactive<Data>({
     lastEvent: '暂无交互',
     enableOpen: true
   })
