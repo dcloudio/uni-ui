@@ -94,7 +94,7 @@
 				"navigationBarTitleText": "暗黑首页",
 				"navigationBarBackgroundColor": "#0f172a",
 				"navigationBarTextStyle": "white",
-				"backgroundColorContent": "#0f172a"  /* TODO web后退时，上一页的背景色也被干扰成深色了 */
+				"backgroundColorContent": "#0f172a"
 			}
 		},
 		{
