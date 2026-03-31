@@ -10,29 +10,29 @@
 		<!-- 基础用法 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">基础用法：</text>
-			<uni-number-box v-model="value1" @change="onChange" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ value1 }}</text>
+			<uni-number-box v-model="data.value1" @change="onChange" />
+			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value1 }}</text>
 		</view>
 
 		<!-- 设置最小值和最大值 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">设置范围 (min=5, max=20)：</text>
-			<uni-number-box v-model="value2" :min="5" :max="20" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ value2 }}</text>
+			<uni-number-box v-model="data.value2" :min="5" :max="20" />
+			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value2 }}</text>
 		</view>
 
 		<!-- 设置步长 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">步长为5 (step=5)：</text>
-			<uni-number-box v-model="value3" :step="5" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ value3 }}</text>
+			<uni-number-box v-model="data.value3" :step="5" />
+			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value3 }}</text>
 		</view>
 
 		<!-- 小数步长 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">小数步长 (step=0.1)：</text>
-			<uni-number-box v-model="value4" :step="0.1" :min="0" :max="10" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ value4 }}</text>
+			<uni-number-box v-model="data.value4" :step="0.1" :min="0" :max="10" />
+			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value4 }}</text>
 		</view>
 
 		<!-- 禁用状态 -->
@@ -44,26 +44,26 @@
 		<!-- 自定义样式 btn-class -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自定义按钮样式 (btn-class)：</text>
-			<uni-number-box v-model="value5" btn-class="custom-btn" />
+			<uni-number-box v-model="data.value5" btn-class="custom-btn" />
 		</view>
 
 		<!-- 自定义样式 input-class -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自定义输入框样式 (input-class)：</text>
-			<uni-number-box v-model="value6" input-class="custom-input" />
+			<uni-number-box v-model="data.value6" input-class="custom-input" />
 		</view>
 
 		<!-- 自定义样式组合 -->
 		<view style="margin-bottom: 20px;">
 			<text style="color: #666; margin-bottom: 10px;">自定义样式组合 (蓝色主题)：</text>
-			<uni-number-box v-model="value7" btn-class="blue-btn" input-class="blue-input" icon-class="blue-icon" />
+			<uni-number-box v-model="data.value7" btn-class="blue-btn" input-class="blue-input" icon-class="blue-icon" />
 		</view>
 
 		<!-- 暗黑模式 -->
 		<view style="margin-bottom: 20px; background-color: #1a1a1a; padding: 15px; border-radius: 8px;">
 			<text style="color: #fff; margin-bottom: 10px;">暗黑模式：</text>
-			<uni-number-box v-model="value8" btn-class="dark-btn" input-class="dark-input" icon-class="dark-icon" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ value8 }}</text>
+			<uni-number-box v-model="data.value8" btn-class="dark-btn" input-class="dark-input" icon-class="dark-icon" />
+			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value8 }}</text>
 		</view>
 
 	<!-- #ifdef APP -->
@@ -75,18 +75,35 @@
 </template>
 
 <script setup lang="uts">
-const value1 = ref<number>(1)
-const value2 = ref<number>(10)
-const value3 = ref<number>(0)
-const value4 = ref<number>(0.5)
-const value5 = ref<number>(1)
-const value6 = ref<number>(1)
-const value7 = ref<number>(1)
-const value8 = ref<number>(1)
+type Data = {
+	value1 : number
+	value2 : number
+	value3 : number
+	value4 : number
+	value5 : number
+	value6 : number
+	value7 : number
+	value8 : number
+}
+
+const data = reactive<Data>({
+	value1: 1,
+	value2: 10,
+	value3: 0,
+	value4: 0.5,
+	value5: 1,
+	value6: 1,
+	value7: 1,
+	value8: 1
+})
 
 const onChange = (value : number) : void => {
 	console.log('number-box change:', value)
 }
+
+defineExpose({
+	data
+})
 </script>
 
 <style>
