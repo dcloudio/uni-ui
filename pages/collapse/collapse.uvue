@@ -3,13 +3,13 @@
     <view class="section">
       <text class="section-title">手风琴模式</text>
       <uni-collapse :accordion="true">
-        <uni-collapse-item title="面板 A（默认展开）" :open="true" @change="onPanelAChange">
-          <view class="content-box">
+        <uni-collapse-item title="面板 A（默认展开）" :open="data.enableOpen" @change="onPanelAChange">
+          <view class="content-box" @click="onPanelAClick">
             <text class="content-text">手风琴模式下，同时只会保持一个面板展开。点击当前标题会自动收起其他面板。</text>
           </view>
         </uni-collapse-item>
         <uni-collapse-item title="面板 B" @change="onPanelBChange">
-          <view class="content-box">
+          <view id="panel-b" class="content-box">
             <text class="content-text">当前项展开时，其他已展开的项会自动收起。这里用于验证切换动画和事件回调。</text>
           </view>
         </uni-collapse-item>
@@ -113,7 +113,7 @@
 
     <view class="log-section">
       <text class="log-title">最近事件</text>
-      <text class="log-text">{{ lastEvent }}</text>
+      <text class="log-text">{{ data.lastEvent }}</text>
     </view>
   </scroll-view>
 </template>
@@ -155,12 +155,18 @@
     }
   ]
 
-  const lastEvent = ref<string>('暂无交互')
+  const data = reactive<{
+    lastEvent: string,
+    enableOpen: boolean
+  }>({
+    lastEvent: '暂无交互',
+    enableOpen: true
+  })
 
   function updateEvent(panel : string, open : boolean) {
     const stateText = open ? '展开' : '收起'
     const message = `${panel}${stateText}`
-    lastEvent.value = message
+    data.lastEvent = message
     console.log(`[collapse] ${message}`)
   }
 
@@ -175,6 +181,15 @@
   function onCategoryChange(title : string, open : boolean) {
     updateEvent(`${title} `, open)
   }
+
+  const onPanelAClick = () => {
+    console.log('onPanelAClick')
+  }
+
+  defineExpose({
+    data,
+    onPanelAClick
+  })
 </script>
 
 <style>
