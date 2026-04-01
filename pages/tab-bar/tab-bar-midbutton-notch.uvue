@@ -103,6 +103,10 @@
 
 	.tab-bg {
 		background-color: #2196F3;
+		/* 宽度用transform调宽1点，不然在某些屏幕上，item之间会出现半像素的间隙 */
+		transform: scaleX(1.005);
+		/* margin-left: -1px; */
+		/* margin-right: -1px; */
 	}
 
 	.notch-svg {
