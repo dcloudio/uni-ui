@@ -92,7 +92,7 @@ provide('uniTabListChangeTab', changeTab)
 		bottom: 0;
 		box-sizing: content-box;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: flex-start;
 		align-items: center;
 		overflow: visible;
