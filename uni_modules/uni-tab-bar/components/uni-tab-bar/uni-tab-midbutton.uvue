@@ -16,18 +16,18 @@ const props = withDefaults(defineProps<Props>(), {
 	width: 90,
 	height: 90
 })
-const tabBarLayout = inject<UniTabBarLayout>('uniTabBarLayout', {
+const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
 	tabListBaseHeight: 50,
 	windowWidth: 0,
 	safeAreaInsetBottom: 0
-} as UniTabBarLayout)
+} as UniTabBarLayout))
 const registerMidButton = inject<(width : number, height : number) => void>('uniTabListRegisterMidButton', (width : number, height : number) => {})
 
 const midButtonStyle = computed(() => {
 	return {
 		width: props.width + 'px',
 		height: props.height + 'px',
-		bottom: tabBarLayout.safeAreaInsetBottom + 'px'
+		bottom: tabBarLayout.value.safeAreaInsetBottom + 'px'
 	}
 })
 

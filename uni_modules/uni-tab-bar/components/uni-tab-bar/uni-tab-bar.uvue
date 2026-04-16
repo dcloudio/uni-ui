@@ -1,6 +1,5 @@
 <template>
-	<view :style="{ height: tabBarLayout.tabListBaseHeight + 'px', paddingBottom: tabBarLayout.safeAreaInsetBottom + 'px' }"
-		class="uni-tab-list-root">
+	<view :style="tabBarStyle" class="uni-tab-list-root">
 		<slot></slot>
 	</view>
 </template>
@@ -8,16 +7,23 @@
 <script setup lang="uts">
 import { UniTabBarLayout, UniTabListItemLayout } from './types.uts'
 
-const tabBarLayout = inject<UniTabBarLayout>('uniTabBarLayout', {
+const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
 	tabListBaseHeight: 50,
 	windowWidth: 0,
 	safeAreaInsetBottom: 0
-} as UniTabBarLayout)
+} as UniTabBarLayout))
 const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: number) => {})
 
 const itemCount = ref<number>(0)
 const hasMidButtonItem = ref<boolean>(false)
 const midButtonWidth = ref<number>(0)
+
+const tabBarStyle = computed(() => {
+	return {
+		height: tabBarLayout.value.tabListBaseHeight + 'px',
+		paddingBottom: tabBarLayout.value.safeAreaInsetBottom + 'px'
+	}
+})
 
 const validMidButtonLayout = computed(() : boolean => {
 	return hasMidButtonItem.value && itemCount.value > 0 && itemCount.value % 2 == 0 && midButtonWidth.value > 0
@@ -30,7 +36,7 @@ function registerItem() : number {
 }
 
 function getItemLayout(index : number) : UniTabListItemLayout {
-	if (itemCount.value <= 0 || tabBarLayout.windowWidth <= 0) {
+	if (itemCount.value <= 0 || tabBarLayout.value.windowWidth <= 0) {
 		return {
 			width: 0,
 			marginLeft: 0
@@ -38,7 +44,7 @@ function getItemLayout(index : number) : UniTabListItemLayout {
 	}
 
 	if (validMidButtonLayout.value) {
-		const itemWidth = (tabBarLayout.windowWidth - midButtonWidth.value) / itemCount.value
+		const itemWidth = (tabBarLayout.value.windowWidth - midButtonWidth.value) / itemCount.value
 		const middleIndex = itemCount.value / 2
 		return {
 			width: itemWidth,
@@ -47,7 +53,7 @@ function getItemLayout(index : number) : UniTabListItemLayout {
 	}
 
 	return {
-		width: tabBarLayout.windowWidth / itemCount.value,
+		width: tabBarLayout.value.windowWidth / itemCount.value,
 		marginLeft: 0
 	} as UniTabListItemLayout
 }
@@ -99,5 +105,6 @@ provide('uniTabListChangeTab', changeTab)
 		border-top-width: 0.5px;
 		border-top-color: rgba(0,0,0,0.33);
 		border-top-style: solid;
+		/* background-color: green; */
 	}
 </style>

@@ -2,11 +2,10 @@
 
 # 注意事项
 
-使用uni-app x框架开发。
-
-不引入任何三方依赖。
-
-回答问题使用中文。
+- 使用uni-app x框架开发。
+- 不引入任何三方依赖。
+- 回答问题使用中文。
+- 写完代码不要做语法校验，直接读控制台有没有报错就行了。
 
 ## 前端框架
 uni-app x必须使用vue框架，在本项目中必须使用组合式API，不能使用选项式API。
@@ -32,29 +31,40 @@ uni-app x必须使用uts编程语言，这是一种类似TS的语言，但又有
 - 不使用any。
 - 尽量不使用 === 和!==，使用 == 和!= 替代。
 - 不使用js的原型链特性。
-- 更多参考: [uts与ts的差异](https://doc.dcloud.net.cn/uni-app-x/uts/uts_diff_ts.html)
+- 更多参考: [uts与ts的差异](C:/Users/wa/Documents/HBuilderProjects/unidocs-uni-app-x-zh/docs/uts/uts_diff_ts.md)
 
 ## css注意事项
 uni-app x使用的css是标准浏览器css的子集，区别见下：
 ### 布局规范
 - 禁用浮动、网格等布局，仅使用flex布局或绝对定位
-- flex布局默认方向为垂直(通过 flex-direction:column 实现)
+- 注意uni-app x中flex-direction的默认值为 column
 
 ### 选择器规则
 - 仅支持基本的类选择器 (.class)和分组选择器，禁止使用其他选择器。
 - 类名必须符合 [A-Za-z0-9_-]+ 规范，禁止使用特殊字符(例如 @class)
 
 ### Class优先级
-- 浏览器的Class的优先级和定义Class的代码位置有关。而App与此无关，App的class优先级是后设覆盖前设。
+- 浏览器的Class的优先级和定义Class的代码位置有关。而App与此无关，App的class优先级是后设覆盖前设。需要以App的优先级方式写代码，并且调整Class的定义顺序来保障浏览器中也符合相同规则。
 
 ### 文字样式规则
 - 文字内容需放置在组件 <text> 或 <button> 中。 文字类样式(color、font-size)只能设置在 <text> 或 <button> 组件上。 其他组件（如<view>）禁止设置文本相关样式。
 - 文字样式不继承。
 - 禁用继承相关关键字，例如 inherit 和 unset
 
+### 性能
+- 没有动态属性和动态样式的静态组件性能最高，这种写法在App平台会编译为c代码，不经过js或arkts层。
+- 静态的内联style，比静态的class性能更高。后者需要在运行时计算样式优先级。所以对于不复用的class，要在style属性中内联。
+- 组件样式自定义，用class，子组件样式自定义用external-Class，除非为了向下兼容，否则默认不要通过组件属性来定义样式。
+
 ### 层级控制
-- z-index 仅对同级兄弟节点生效。 
+- z-index 仅对同级兄弟节点生效。
 - absolute 固定位与文档流分离，不支持分层覆盖。
+
+### 与web的默认值差异
+uni-app x重置了一批css属性默认值，包括在uni-app x编译到web时也重置了。
+
+- box-sizing 默认值是 border-box
+- overflow 默认值是 hidden
 
 ### 不能使用的css模块
 - 不能使用媒体查询
@@ -75,16 +85,7 @@ uni-app x使用的css是标准浏览器css的子集，区别见下：
 ## vue注意事项
 uvue组件的 onMounted 可以获取 UniElement，但不能立即获取元素的宽高等排版信息，此时获取排版信息需要 uni.createSelectorQuery 异步获取。
 
-# 调试
-- 打印日志
-可以通过console.log输出日志，并且要求手动粘贴日志到agent。
-在浏览器平台，可以要求粘贴DOM。
-在app平台，可以要求通过如下方式打印app的页面整体DOM结构，
-```uts
-console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson())
-```
-
-- 获取日志
+# 获取日志
 可以通过如下cli命令获取HBuilderX的控制台日志，包括编译错误和运行时log：
 * app-Android平台：`C:\hbuilderx\hx_dev\cli.exe logcat app-android --project uni-ui-x`
 * web平台：`C:\hbuilderx\hx_dev\cli.exe logcat web --browser Chrome --project uni-ui-x`
