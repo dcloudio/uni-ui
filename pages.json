@@ -6,12 +6,13 @@
 				"navigationBarTitleText": "uni-ui x"
 			}
 		},
+		// {
+		// 	"path": "pages/index-bar/index-bar",
+		// 	"style": {
+		// 		"navigationBarTitleText": "index-bar"
+		// 	}
+		// },
 		{
-			"path": "pages/index-bar/index-bar",
-			"style": {
-				"navigationBarTitleText": "index-bar"
-			}
-		}, {
 			"path": "pages/rate/rate",
 			"style": {
 				"navigationBarTitleText": "rate"
