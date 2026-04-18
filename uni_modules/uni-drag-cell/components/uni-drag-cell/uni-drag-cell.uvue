@@ -32,7 +32,7 @@
 		<view v-if="showDeleteBar" class="drag-cell-delete-bar" :class="overDeleteBar ? 'drag-cell-delete-bar-active' : ''">
 			<text class="drag-cell-delete-text">{{ deleteBarText }}</text>
 		</view>
-		<!-- #ifdef APP-ANDROID && !VUE3-VAPOR || APP && VUE3-VAPOR -->
+		<!-- #ifdef (APP-ANDROID || APP-IOS) && !VUE3-VAPOR || APP && VUE3-VAPOR -->
 		<view
 			v-if="showDeleteProxy"
 			class="drag-cell-delete-proxy"
@@ -157,8 +157,8 @@
 		return handleModeEnabled.value ? 1 : dragActiveScale
 	})
 	let useDeleteProxyForDeleteDrag = false
-	// #ifdef APP-ANDROID && !VUE3-VAPOR || APP && VUE3-VAPOR
-	// 安卓平台非蒸汽模式切换为fixed时会触发touchcancel。蒸汽模式scroll-view内的元素由fixed切换为非fixed无法回到原位置（Bug待修复）。这两种情况暂不使用fixed方案
+	// #ifdef (APP-ANDROID || APP-IOS) && !VUE3-VAPOR || APP && VUE3-VAPOR
+	// 安卓平台非蒸汽模式切换为fixed时会触发touchcancel。蒸汽模式scroll-view内的元素由fixed切换为非fixed无法回到原位置（Bug待修复）。iOS平台切换为fixed后无法通过preventDefault阻止滚动。
 	useDeleteProxyForDeleteDrag = true
 	// #endif
 	const showDeleteProxy = computed(() : boolean => {
@@ -599,10 +599,6 @@
 			})
 		}, longPressDuration)
 	}
-
-
-
-
 
 	const moveDrag = (clientX : number, clientY : number) => {
 		if (dragging.value == true && activeIndex.value >= 0) {
