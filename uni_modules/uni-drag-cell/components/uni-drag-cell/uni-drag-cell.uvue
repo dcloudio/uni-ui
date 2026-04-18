@@ -7,9 +7,9 @@
 			class="drag-cell-item"
 			:style="getItemStyle(index)"
 			@touchstart.stop="onItemTouchStart($event, index)"
-			@touchmove="onItemTouchMove"
-			@touchend="onItemTouchEnd"
-			@touchcancel="onItemTouchEnd">
+			@touchmove="onItemTouchMove($event, index)"
+			@touchend="onItemTouchEnd($event, index)"
+			@touchcancel="onItemTouchEnd($event, index)">
 			<view class="drag-cell-item-inner">
 				<view class="drag-cell-slot-content">
 					<slot :item="item" :index="index"></slot>
@@ -669,21 +669,30 @@
 		if (handleModeEnabled.value == true) {
 			return
 		}
+		if (dragging.value == true) {
+			return
+		}
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
 		scheduleLongPress(index, touch.clientX, touch.clientY)
 	}
 
-	const onItemTouchMove = (event : any) => {
+	const onItemTouchMove = (event : any, index : number) => {
 		const touchEvent = event as UniTouchEvent
 		const touch = touchEvent.touches[0]
 		if (dragging.value == true) {
 			touchEvent.preventDefault()
+			if (index != activeIndex.value) {
+				return
+			}
 		}
 		moveDrag(touch.clientX, touch.clientY)
 	}
 
-	const onItemTouchEnd = (_event : any) => {
+	const onItemTouchEnd = (_event : any, index : number) => {
+		if (index != activeIndex.value) {
+			return
+		}
 		finishDrag()
 	}
 
