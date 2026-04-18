@@ -6,12 +6,12 @@
 				"navigationBarTitleText": "uni-ui x"
 			}
 		},
-		// {
-		// 	"path": "pages/index-bar/index-bar",
-		// 	"style": {
-		// 		"navigationBarTitleText": "index-bar"
-		// 	}
-		// },
+		{
+			"path": "pages/index-bar/index-bar",
+			"style": {
+				"navigationBarTitleText": "index-bar"
+			}
+		},
 		{
 			"path": "pages/rate/rate",
 			"style": {
@@ -36,12 +36,6 @@
 				"navigationBarTitleText": "badge"
 			}
 		},
-		/* {
-			"path": "pages/pop-view/pop-view",
-			"style": {
-				"navigationBarTitleText": "pop-view"
-			}
-		}, */
 		{
 			"path": "pages/fab-button/fab-button",
 			"style": {
@@ -119,13 +113,6 @@
 				"navigationBarTitleText": "mid-button-notch"
 			}
 		}
-		/*
-		{
-			"path": "pages/movable-view/movable-view",
-			"style": {
-				"navigationBarTitleText": "movable-view"
-			}
-		} */
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -136,11 +123,6 @@
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [
-			/* {
-				"name": "tab-bar-midbutton-notch", //模式名称
-				"path": "pages/tab-bar/tab-bar-midbutton-notch", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
-			} */
 		]
 	}
 }

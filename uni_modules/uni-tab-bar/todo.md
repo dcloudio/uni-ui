@@ -8,5 +8,3 @@ Android常见，微信
 ## tab-bar高斯模糊
 等view支持高斯模糊的css后，补一个示例页面即可
 
-注意：
-屏幕变化适配，Android需5.09+支持。之前版本组件里无法监听页面的onResize。
