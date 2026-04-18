@@ -1,6 +1,6 @@
 # uni-tab 组件说明
 
-`uni_modules/uni-tab-bar` 现在对外提供一组新的 tab 组件名称：
+`uni_modules/uni-tab-bar` 包括一组 tab 相关组件：
 
 - `uni-tab`：最外层容器，负责激活索引、内容区高度和切换事件
 - `uni-tab-bar`：底部 tab 容器，负责底栏布局、安全区和中间按钮占位
@@ -8,17 +8,15 @@
 - `uni-tab-midbutton`：中间悬浮按钮占位容器
 - `uni-tab-content`：上方内容区域容器，负责内容注册、懒渲染和显示切换
 
-模块目录是 `uni_modules/uni-tab-bar`。
-
 ## 示例页面
 
 | 页面 | 说明 |
 | --- | --- |
-| `pages/tab-bar/tab-bar.uvue` | 基础示例，包含首页二次点击回到顶部 |
-| `pages/tab-bar/tab-bar-dark.uvue` | 深色风格示例 |
-| `pages/tab-bar/tab-bar-custom.uvue` | 自定义底栏高度、渐变背景和纯文字 tab |
-| `pages/tab-bar/tab-bar-midbutton.uvue` | 中间按钮凸起示例 |
-| `pages/tab-bar/tab-bar-midbutton-notch.uvue` | 中间镂空下凹按钮示例 |
+| `tab-bar/tab-bar.uvue` | 基础示例，包含首页二次点击回到顶部 |
+| `tab-bar/tab-bar-dark.uvue` | 深色风格示例 |
+| `tab-bar/tab-bar-custom.uvue` | 自定义底栏高度、渐变背景和纯文字 tab |
+| `tab-bar/tab-bar-midbutton.uvue` | 中间按钮凸起示例 |
+| `tab-bar/tab-bar-midbutton-notch.uvue` | 中间镂空下凹按钮示例 |
 
 ## 基础用法
 
@@ -102,10 +100,15 @@
 
 无专用属性和API，可直接通过 `class` / `style` 自定义外观。
 
+多个选项卡内容揉在一个uni-tab中比较乱，一般推荐uni-tab-content下放一个子组件，子组件作为独立uvue文件。
+
+各个uni-tab-content的子组件，在显示和隐藏的没有生命周期。
+如需监听显示/隐藏需要通过provide/inject方式从外层传入响应式变量activeIndex，然后在子组件中watch这个activeIndex。
+
 ## 使用注意事项
 
 1. `uni-tab` 所在的页面不应该滚动，应该在pages.json中配置页面style为`disableScroll:true`。
-2. 屏幕变化适配，Android需5.09+支持。之前版本组件里无法监听页面的onResize。
+2. 屏幕变化适配，Android需HBuilderX 5.09+支持。之前版本组件里无法监听页面的onResize。
 3. `uni-tab-content` 与 `uni-tab-item` 的数量必须一致，顺序也必须一一对应，否则切换后的内容会错位。
 4. `uni-tab` 默认占满页面的宽度和高度，即 `style="flex: 1"`
 5. 自定义底栏高度时，不要只改样式高度，要同步通过 `tab-bar-height` 传入 `uni-tab`，这样内容区底部留白和安全区计算才会一起更新。

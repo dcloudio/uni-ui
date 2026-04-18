@@ -55,14 +55,12 @@ function syncTabContentLayout() : void {
 syncTabContentLayout()
 
 // 监听页面的尺寸变化，更新布局信息
-// TODO App竟然在组件里无法监听页面的onResize事件!!! @fxy
 onResize(() => {
 	windowInfo = uni.getWindowInfo()
 	safeAreaInsetBottom = windowInfo.safeAreaInsets.bottom
 	tabBarLayout.value.windowWidth = windowInfo.windowWidth
 	tabBarLayout.value.safeAreaInsetBottom = safeAreaInsetBottom
-	console.log("resize", tabBarLayout.value.windowWidth)
-	// console.log("resize",tabBarLayout.safeAreaInsetBottom);
+	// console.log("resize", tabBarLayout.value.windowWidth)
 	syncTabContentLayout()
 })
 

@@ -17,8 +17,6 @@
 </template>
 
 <script setup lang="uts">
-import { inject, ref } from 'vue'
-import { Ref } from 'vue'
 
 // 从父组件注入当前激活的索引
 const activeIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
@@ -28,6 +26,14 @@ const setCurrentBadgeNumber = inject<() => void>('tabContent2SetBadgeNumber', ()
 const setCurrentBadgeDot = inject<() => void>('tabContent2SetBadgeDot', () => {})
 const clearCurrentBadge = inject<() => void>('tabContent2ClearBadge', () => {})
 const setCurrentBadgeClass = inject<() => void>('tabContent2SetBadgeClass', () => {})
+
+watch((): boolean => {
+	return activeIndex.value == currentTabItemIndex
+}, (isActive : boolean, wasActive : boolean) => {
+	if (wasActive && !isActive) {
+		console.log('tab-content-api 当前 tab 被切走了')
+	}
+})
 
 function switchToFirstTab() : void {
 	changeTab(0)
@@ -52,8 +58,6 @@ function setBadgeClass() : void {
 
 <style>
 .content-page {
-	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
@@ -63,8 +67,6 @@ function setBadgeClass() : void {
 }
 
 .panel-card {
-	display: flex;
-	flex-direction: column;
 	width: 100%;
 	padding: 16px;
 	margin-top: 16px;

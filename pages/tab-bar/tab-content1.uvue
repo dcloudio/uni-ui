@@ -15,8 +15,17 @@
 
 	// 从父组件注入当前激活的索引
 	const activeIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
+	const currentTabItemIndex = 0
 	const currentScrollTop = ref<number>(0)
 	const targetScrollTop = ref<number>(0)
+
+	watch((): boolean => {
+		return activeIndex.value == currentTabItemIndex
+	}, (isActive : boolean, wasActive : boolean) => {
+		if (!wasActive && isActive) {
+			console.log('tab-content1 当前 tab 出现了')
+		}
+	})
 
 	function handleScroll(event : UniScrollEvent) : void {
 		currentScrollTop.value = event.detail.scrollTop
