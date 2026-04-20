@@ -43,7 +43,7 @@
 
 ## 示例页面
 
-`/pages/time-format/time-format`  
+`/pages/uni-ui/time-format/time-format`  
 示例页面包含两组相对时间演示：
 - 输入框动态演示：输入 `yyyy-mm-dd hh:mm:ss`，实时展示对应相对时间
 - 固定分支演示：展示“刚刚 / 分钟前 / 小时前 / 昨天 HH:mm / 超过昨天”五种分支，且不随输入变化

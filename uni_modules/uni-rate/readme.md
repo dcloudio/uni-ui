@@ -2,7 +2,7 @@
 评分组件，多用于购买商品后，对商品进行评价等场景
 
 # 文件路径
-项目下有一个 /pages/rate/rate.uvue 页面，里面演示了rate组件的各种用法。
+项目下有一个 /pages/uni-ui/rate/rate.uvue 页面，里面演示了rate组件的各种用法。
 
 # 设计
 

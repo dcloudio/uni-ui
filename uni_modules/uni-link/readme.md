@@ -41,4 +41,4 @@
 
 ## 示例页面
 
-`/pages/link/link`
+`/pages/uni-ui/link/link`

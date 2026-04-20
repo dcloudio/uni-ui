@@ -117,7 +117,7 @@ uni-collapse-item的标题栏的自定义：
 
 ## 示例页面
 
-`/pages/collapse/collapse`
+`/pages/uni-ui/collapse/collapse`
 
 ## 注意
 - 本组件在Android上需HBuilderX 5.09+。在低版本上箭头变颜色+旋转时，在Android上会消失

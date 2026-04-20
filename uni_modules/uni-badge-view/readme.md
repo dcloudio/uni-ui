@@ -3,7 +3,7 @@
 badge角标，可以用于显示红点、被红圈或其他颜色圈包裹的数字、文字。提醒用户此时有需要注意的新信息。
 
 # 文件路径
-项目下有一个 /pages/badge/badge.uvue 页面，里面演示了badge组件的各种用法。
+项目下有一个 /pages/uni-ui/badge/badge.uvue 页面，里面演示了badge组件的各种用法。
 
 # 设计
 ## badge组件有多种用法：

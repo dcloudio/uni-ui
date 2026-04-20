@@ -7,55 +7,55 @@
 			}
 		},
 		{
-			"path": "pages/index-bar/index-bar",
+			"path": "pages/uni-ui/index-bar/index-bar",
 			"style": {
 				"navigationBarTitleText": "index-bar"
 			}
 		},
 		{
-			"path": "pages/rate/rate",
+			"path": "pages/uni-ui/rate/rate",
 			"style": {
 				"navigationBarTitleText": "rate"
 			}
 		},
 		{
-			"path": "pages/refresh-box/refresh-box",
+			"path": "pages/uni-ui/refresh-box/refresh-box",
 			"style": {
 				"navigationBarTitleText": "下拉刷新组件"
 			}
 		},
 		{
-			"path": "pages/nav-bar/nav-bar",
+			"path": "pages/uni-ui/nav-bar/nav-bar",
 			"style": {
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/badge/badge",
+			"path": "pages/uni-ui/badge/badge",
 			"style": {
 				"navigationBarTitleText": "badge"
 			}
 		},
 		{
-			"path": "pages/fab-button/fab-button",
+			"path": "pages/uni-ui/fab-button/fab-button",
 			"style": {
 				"navigationBarTitleText": "fab-button"
 			}
 		},
 		{
-			"path": "pages/number-box/number-box",
+			"path": "pages/uni-ui/number-box/number-box",
 			"style": {
 				"navigationBarTitleText": "number-box"
 			}
 		},
 		{
-			"path": "pages/collapse/collapse",
+			"path": "pages/uni-ui/collapse/collapse",
 			"style": {
 				"navigationBarTitleText": "collapse"
 			}
 		},
 		{
-			"path": "pages/link/link",
+			"path": "pages/uni-ui/link/link",
 			"style": {
 				"navigationBarTitleText": "link"
 			}
@@ -66,13 +66,13 @@
 			}
 		},
 		{
-			"path": "pages/time-format/time-format",
+			"path": "pages/uni-ui/time-format/time-format",
 			"style": {
 				"navigationBarTitleText": "time-format"
 			}
 		},
 		{
-			"path": "pages/drag-cell/drag-cell",
+			"path": "pages/uni-ui/drag-cell/drag-cell",
 			"style": {
 				"navigationBarTitleText": "drag-cell"
 			}
@@ -84,13 +84,13 @@
 			}
 		},
 		{
-			"path": "pages/tab-bar/tab-bar",
+			"path": "pages/uni-ui/tab-bar/tab-bar",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/tab-bar/tab-bar-dark",
+			"path": "pages/uni-ui/tab-bar/tab-bar-dark",
 			"style": {
 				"navigationBarTitleText": "暗黑首页",
 				"navigationBarBackgroundColor": "#0f172a",
@@ -99,7 +99,7 @@
 			}
 		},
 		{
-			"path": "pages/tab-bar/tab-bar-custom",
+			"path": "pages/uni-ui/tab-bar/tab-bar-custom",
 			"style": {
 				"navigationBarTitleText": "精选",
 				"navigationBarBackgroundColor": "#dff3e8",
@@ -108,13 +108,13 @@
 			}
 		},
 		{
-			"path": "pages/tab-bar/tab-bar-midbutton",
+			"path": "pages/uni-ui/tab-bar/tab-bar-midbutton",
 			"style": {
 				"navigationBarTitleText": "mid-button"
 			}
 		},
 		{
-			"path": "pages/tab-bar/tab-bar-midbutton-notch",
+			"path": "pages/uni-ui/tab-bar/tab-bar-midbutton-notch",
 			"style": {
 				"navigationBarTitleText": "mid-button-notch"
 			}
