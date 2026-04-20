@@ -4,26 +4,26 @@
 		<uni-nav-bar></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="black" title="黑色标题"></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="white" title="青色背景白色标题" style="background-color: cyan;"></uni-nav-bar>
-		<uni-nav-bar title="下边带灰线" style="border-bottom: 0.5px #ccc solid;"></uni-nav-bar>
-		<uni-nav-bar hideDefaultBack title="隐藏左侧返回箭头"></uni-nav-bar>
-		<uni-nav-bar navigationBarTextStyle="black" title="标题居左" mid-class="left-title"></uni-nav-bar>
-		<uni-nav-bar title="右边有按钮">
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="下边带灰线" style="border-bottom: 0.5px #ccc solid;"></uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" hideDefaultBack title="隐藏左侧返回箭头"></uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="标题居左" mid-class="left-title"></uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="右边有按钮">
 			<template #right>
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<uni-nav-bar title="右边有2个按钮" right-class="two-buttons">
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="右边有2个按钮" right-class="two-buttons">
 			<template #right>
 				<text class="txt-button" @click="clickButton">+</text>
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<uni-nav-bar title="左边有按钮">
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="左边有按钮">
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
 			</template>
 		</uni-nav-bar>
-		<uni-nav-bar title="左右各1个按钮">
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="左右各1个按钮">
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
 			</template>
@@ -31,13 +31,13 @@
 				<text class="txt-button" @click="clickButton">⋯</text>
 			</template>
 		</uni-nav-bar>
-		<uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle">
 			<template #mid>
-				<text>插槽右箭头可以点</text>
+				<text :style="{ color: navigationBarTextStyle }">插槽右箭头可以点</text>
 				<text style="padding: 3px;font-size: 10px;" @click="clickButton">▼</text>
 			</template>
 		</uni-nav-bar>
-		<uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle">
 			<template #left>
 				<text class="txt-button" @click="clickButton">+</text>
 			</template>
@@ -56,6 +56,10 @@
 
 	const isDarkMode = computed(() => {
 		return state.isDarkMode
+	})
+
+	const navigationBarTextStyle = computed(() => {
+		return isDarkMode.value ? 'white' : 'black'
 	})
 
 	function clickButton() {
