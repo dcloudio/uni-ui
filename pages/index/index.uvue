@@ -1,42 +1,54 @@
 <template>
-	<scroll-view style="flex: 1;">
-	<navigator class="padding-bottom" url="/pages/badge/badge">badge</navigator>
-	<navigator class="padding-bottom" url="/pages/rate/rate">rate</navigator>
-	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar">tab-bar</navigator>
-	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-dark">tab-bar-dark</navigator>
-	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-custom">tab-bar-custom</navigator>
-	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-midbutton">tab-bar-midbutton</navigator>
-	<navigator class="padding-bottom" url="/pages/tab-bar/tab-bar-midbutton-notch">tab-bar-midbutton-notch</navigator>
-	<navigator class="padding-bottom" url="/pages/nav-bar/nav-bar">nav-bar</navigator>
-	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box">refresh-box</navigator>
-<!-- 	<navigator class="padding-bottom" url="/pages/movable-view/movable-view">movable-view</navigator> -->
-<!-- 	<navigator class="padding-bottom" url="/pages/pop-view/pop-view">pop-view</navigator> -->
-	<navigator class="padding-bottom" url="/pages/fab-button/fab-button">fab-button</navigator>
-	<navigator class="padding-bottom" url="/pages/number-box/number-box">number-box</navigator>
-	<navigator class="padding-bottom" url="/pages/collapse/collapse">collapse</navigator>
-	<navigator class="padding-bottom" url="/pages/link/link">link</navigator>
-	<navigator class="padding-bottom" url="/pages/time-format/time-format">time-format</navigator>
-	<navigator class="padding-bottom" url="/pages/index-bar/index-bar">index-bar</navigator>
-	<navigator class="padding-bottom" url="/pages/drag-cell/drag-cell">drag-cell</navigator>
-	<navigator class="padding-bottom" url="/pages/theme-change/theme-change">theme-change</navigator>
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
+	<navigator class="nav-item" url="/pages/badge/badge"><text class="nav-text">badge</text></navigator>
+	<navigator class="nav-item" url="/pages/rate/rate"><text class="nav-text">rate</text></navigator>
+	<navigator class="nav-item" url="/pages/tab-bar/tab-bar"><text class="nav-text">tab-bar</text></navigator>
+	<navigator class="nav-item" url="/pages/tab-bar/tab-bar-dark"><text class="nav-text">tab-bar-dark</text></navigator>
+	<navigator class="nav-item" url="/pages/tab-bar/tab-bar-custom"><text class="nav-text">tab-bar-custom</text></navigator>
+	<navigator class="nav-item" url="/pages/tab-bar/tab-bar-midbutton"><text class="nav-text">tab-bar-midbutton</text></navigator>
+	<navigator class="nav-item" url="/pages/tab-bar/tab-bar-midbutton-notch"><text class="nav-text">tab-bar-midbutton-notch</text></navigator>
+	<navigator class="nav-item" url="/pages/nav-bar/nav-bar"><text class="nav-text">nav-bar</text></navigator>
+	<navigator class="nav-item" url="/pages/refresh-box/refresh-box"><text class="nav-text">refresh-box</text></navigator>
+<!-- 	<navigator class="nav-item" url="/pages/movable-view/movable-view"><text class="nav-text">movable-view</text></navigator> -->
+<!-- 	<navigator class="nav-item" url="/pages/pop-view/pop-view"><text class="nav-text">pop-view</text></navigator> -->
+	<navigator class="nav-item" url="/pages/fab-button/fab-button"><text class="nav-text">fab-button</text></navigator>
+	<navigator class="nav-item" url="/pages/number-box/number-box"><text class="nav-text">number-box</text></navigator>
+	<navigator class="nav-item" url="/pages/collapse/collapse"><text class="nav-text">collapse</text></navigator>
+	<navigator class="nav-item" url="/pages/link/link"><text class="nav-text">link</text></navigator>
+	<navigator class="nav-item" url="/pages/time-format/time-format"><text class="nav-text">time-format</text></navigator>
+	<navigator class="nav-item" url="/pages/index-bar/index-bar"><text class="nav-text">index-bar</text></navigator>
+	<navigator class="nav-item" url="/pages/drag-cell/drag-cell"><text class="nav-text">drag-cell</text></navigator>
+	<navigator class="nav-item" url="/pages/theme-change/theme-change"><text class="nav-text">theme-change</text></navigator>
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>
-	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
-	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>
-	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></navigator>
-	<button class="padding-bottom"><text style="color: green;">子text绿色</text></button>
-	<button class="padding-bottom" style="color: aqua;">button青色</button>
-	<button class="padding-bottom" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></button> --> <!-- TODO hover-class="navigator-hover" 会引发鸿蒙崩溃！-->
+	<navigator class="nav-item" url="/pages/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
+	<navigator class="nav-item" url="/pages/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>
+	<navigator class="nav-item" url="/pages/refresh-box/refresh-box" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></navigator>
+	<button class="nav-item"><text style="color: green;">子text绿色</text></button>
+	<button class="nav-item" style="color: aqua;">button青色</button>
+	<button class="nav-item" style="color: aqua;"><text style="color: green;" hover-class="navigator-hover">父青子绿</text></button> --> <!-- TODO hover-class="navigator-hover" 会引发鸿蒙崩溃！-->
 	</scroll-view>
 </template>
 
-<script setup>
+<script setup lang="uts">
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed((): boolean => {
+		return state.isDarkMode
+	})
+
 	onReady(() => {
-    // console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson())
-  })
+		// console.log((getCurrentInstance()!.proxy! as BasePage).$nativePage!.getDomJson())
+	})
 </script>
 <style>
-.padding-bottom {
-  padding-bottom: 20px;
+.page {
+	background-color: var(--background-color, #ffffff);
+}
+.nav-item {
+	padding-bottom: 20px;
+}
+.nav-text {
+	color: var(--text-color, #333333);
 }
 .navigator-hover {
 	background-color: yellow;

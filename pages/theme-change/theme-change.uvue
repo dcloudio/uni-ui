@@ -10,10 +10,6 @@
       <text class="label">应用当前主题:</text>
       <text id="theme" class="value">{{ appTheme }}</text>
     </view>
-    <view class="item-box">
-      <text class="label">state.isDarkMode:</text>
-      <text class="value">{{ isDarkMode ? 'true' : 'false' }}</text>
-    </view>
 
     <!-- #ifdef APP -->
     <view>
