@@ -67,7 +67,8 @@
 		"distribute": {
 			"bundleName": "io.dcloud.uniappx",
 			"deviceTypes": [
-				"phone"
+				"phone",
+				"tablet"
 			],
 			"deviceArchs": [
 				"arm64-v8a"
