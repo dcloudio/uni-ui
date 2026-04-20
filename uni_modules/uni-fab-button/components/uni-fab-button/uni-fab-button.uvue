@@ -9,6 +9,10 @@
 		externalClasses: ['plus-class']
 	})
 	const props = defineProps({
+		/**
+		 * @description 加号图标的自定义样式类，用于调整加号颜色、尺寸等样式
+		 * @default ""
+		 */
 		plusClass: { type: String, default: "" }
 	})
 </script>

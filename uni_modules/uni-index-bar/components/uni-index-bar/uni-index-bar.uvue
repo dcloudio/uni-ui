@@ -14,15 +14,18 @@
 
 	type Props = {
 		/**
-		 * @description 索引字符串，用换行符分隔
+		 * @description 索引字符列表，使用换行符 \n 分隔，每行作为一个索引项
+		 * @default "A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"
 		 */
 		indexs? : string,
 		/**
-		 * @description 指示器容器的外部样式类
+		 * @description 指示器容器的自定义样式类，触摸时显示当前索引的气泡
+		 * @default ""
 		 */
 		indicatorViewClass? : string.ClassString,
 		/**
-		 * @description 指示器文字的外部样式类
+		 * @description 指示器内文字的自定义样式类
+		 * @default ""
 		 */
 		indicatorTextClass? : string.ClassString
 	}

@@ -17,6 +17,10 @@
   })
 
   type Props = {
+    /**
+     * @description 是否开启手风琴模式，开启后同一时间仅允许一个子项展开
+     * @default true
+     */
     accordion? : boolean
   }
 

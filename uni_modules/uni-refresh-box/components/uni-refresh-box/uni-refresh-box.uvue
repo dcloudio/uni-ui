@@ -12,49 +12,75 @@ defineOptions({
 	externalClasses: ['loading-class', 'text-class']
 })
 
-// Props
 const props = defineProps({
-  // 下拉距离（由外部 scroll-view 传入）
+  /**
+   * @description 当前下拉距离（px），通常由外部 scroll-view 的 refresher 状态传入
+   * @default 0
+   */
   pullingDistance: {
     type: Number,
     default: 0
   },
-  // 是否正在刷新
+  /**
+   * @description 是否正在刷新中，外部控制；为 true 时显示 loading 动画
+   * @default false
+   */
   refreshing: {
     type: Boolean,
     default: false
   },
-  // 触发刷新的下拉阈值(px)
+  /**
+   * @description 触发刷新的下拉阈值（px），下拉距离超过该值时进入“松手刷新”状态
+   * @default 45
+   */
   threshold: {
     type: Number,
     default: 45
   },
-  // 下拉过程中的提示文字
+  /**
+   * @description 下拉过程中（未达到阈值）显示的提示文字
+   * @default "下拉刷新"
+   */
   pullingText: {
     type: String,
     default: '下拉刷新'
   },
-  // 下拉超过阈值的提示文字
+  /**
+   * @description 下拉超过阈值后显示的提示文字
+   * @default "松手刷新"
+   */
   loosingText: {
     type: String,
     default: '松手刷新'
   },
-  // 刷新中的提示文字
+  /**
+   * @description 刷新中显示的提示文字
+   * @default "正在刷新"
+   */
   loadingText: {
     type: String,
     default: '正在刷新'
   },
-  // 刷新完成的提示文字
+  /**
+   * @description 刷新完成瞬间显示的提示文字，为空则不展示
+   * @default ""
+   */
   completeText: {
     type: String,
     default: ''
   },
-  // 文字样式
+  /**
+   * @description 提示文字的自定义样式类
+   * @default ""
+   */
   textClass: {
     type: String,
     default: ''
   },
-  // loading 样式
+  /**
+   * @description loading 图标的自定义样式类
+   * @default ""
+   */
   loadingClass: {
     type: String,
     default: ''

@@ -19,41 +19,41 @@
 <script setup lang="uts">
 const props = defineProps<{
   /**
-	 * @description 当前评分。值域为大于等于0、小于等于5的数字
-	 */
-	value?: number,
-  /**
-   * @description v-model绑定值
+   * @description 当前评分，取值范围 0~5 的数字
    */
-	modelValue?: number,
-	/**
-	 * @description 是否显示全部5颗星。当黄色不够5星时，是否填充灰星以达到5星的固定长度。不填充灰星性能更高
-	 */
-	full?: boolean,
-	/**
-	 * @description 是否响应点击变化。full属性为false时不生效，即无灰星时一定只读
-	 */
-	readonly?: boolean,
-	/**
-	 * @description 灰星是否镂空
-	 */
-	plain?: boolean,
-	/**
-	 * @description 灰星的样式类
-	 */
-	starClass?: string.ClassString,
-	/**
-	 * @description 灰星的内联样式
-	 */
-	starStyle?: string
-	/**
-	 * @description 选中星星的样式类
-	 */
-	starActiveClass?: string.ClassString,
-	/**
-	 * @description 选中星星的内联样式
-	 */
-	starActiveStyle?: string
+  value?: number,
+  /**
+   * @description v-model 绑定值，支持双向绑定，优先级高于 value
+   */
+  modelValue?: number,
+  /**
+   * @description 是否显示完整 5 颗星。为 true 时用灰星填充未选中位置；为 false 时仅显示亮星，性能更高但不支持点击交互
+   */
+  full?: boolean,
+  /**
+   * @description 是否只读，为 true 时不响应点击评分（full 为 false 时始终只读）
+   */
+  readonly?: boolean,
+  /**
+   * @description 灰星是否使用镂空样式（☆），为 false 时使用实心灰星（★）
+   */
+  plain?: boolean,
+  /**
+   * @description 灰星（未选中）的自定义样式类
+   */
+  starClass?: string.ClassString,
+  /**
+   * @description 灰星（未选中）的内联样式
+   */
+  starStyle?: string
+  /**
+   * @description 亮星（选中）的自定义样式类
+   */
+  starActiveClass?: string.ClassString,
+  /**
+   * @description 亮星（选中）的内联样式
+   */
+  starActiveStyle?: string
 }>()
 
 // 计算星星显示

@@ -30,12 +30,36 @@
   	externalClasses: ['left-class','mid-class','right-class']
   })
   const props = defineProps({
+    /**
+     * @description 是否隐藏默认的返回箭头。为 true 时需要通过 left 插槽自定义返回按钮
+     * @default false
+     */
     hideDefaultBack: { type: Boolean, default: false },
+    /**
+     * @description 导航栏中间显示的标题文字，若使用 mid 插槽则该属性无效
+     * @default ""
+     */
     title: { type: String, default: "" },
     // navigationBarTextStyle: { type: "#000000" | "#ffffff" | "#000" | "#fff" | "black" | "white" | "", default: "" },
+    /**
+     * @description 导航栏前景色（文字和返回箭头颜色）。非小程序端未传入时会自动读取 pageStyle 的 navigationBarTextStyle
+     * @default ""
+     */
     navigationBarTextStyle: { type: String, default: "" },
+    /**
+     * @description 左侧区域的自定义样式类
+     * @default ""
+     */
     leftClass: { type: String, default: "" },
+    /**
+     * @description 中间区域的自定义样式类
+     * @default ""
+     */
     midClass: { type: String, default: "" },
+    /**
+     * @description 右侧区域的自定义样式类
+     * @default ""
+     */
     rightClass: { type: String, default: "" }
     // stat: { type: Boolean, default: false }
   })

@@ -13,7 +13,15 @@
   })
 
   type Props = {
+    /**
+     * @description 链接地址，点击组件时要打开的 URL
+     * @default ""
+     */
     href?: string
+    /**
+     * @description 打开方式。"_self" 在当前应用内置 webview 中打开；"_blank" 在外部浏览器中打开（小程序端会复制链接提示用户外部打开）
+     * @default "_self"
+     */
     target?: '_blank' | '_self'
   }
 

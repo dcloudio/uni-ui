@@ -39,19 +39,23 @@
 	// 定义组件属性接口
 	type Props = {
 		/**
-		 * @description badge的内容，为0表示不显示badge；为空表示圆点；有文字则显示文字
+		 * @description badge 的内容。为 "0" 时不显示 badge；为空字符串时显示圆点；有文字则显示文字
+		 * @default ""
 		 */
 		text? : string,
 		/**
-		 * @description 暴露给外部用于覆盖style
+		 * @description badge 的内联样式，用于覆盖内置 style
+		 * @default ""
 		 */
 		badgeStyle? : string,
 		/**
-		 * @description 暴露给外部用于覆盖class
+		 * @description badge 的样式类，用于覆盖内置 class
+		 * @default ""
 		 */
 		badgeClass? : string.ClassString,
 		/**
-		 * @description 当有slot内容时，即使text为0也保持包裹层（badge-wrap）
+		 * @description 当有 slot 内容时，即使 text 为 "0" 也保留包裹层（badge-wrap），避免多个子 slot 时 flex 方向错乱
+		 * @default false
 		 */
 		alwaysWrapWithContent? : boolean
 	}

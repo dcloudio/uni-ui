@@ -62,39 +62,48 @@ defineOptions({
 
 type Props = {
 	/**
-	 * @description 输入框当前值
+	 * @description 输入框当前值，不使用 v-model 时通过该属性传入初始值
+	 * @default 1
 	 */
 	value?: number,
 	/**
-	 * @description v-model绑定值
+	 * @description v-model 绑定值，支持双向绑定
+	 * @default 1
 	 */
 	modelValue?: number,
 	/**
-	 * @description 最小值
+	 * @description 允许输入的最小值
+	 * @default 0
 	 */
 	min?: number,
 	/**
-	 * @description 最大值
+	 * @description 允许输入的最大值
+	 * @default 100
 	 */
 	max?: number,
 	/**
-	 * @description 每次点击改变的间隔大小
+	 * @description 每次点击加/减按钮改变的步长，支持小数
+	 * @default 1
 	 */
 	step?: number,
 	/**
-	 * @description 是否为禁用状态
+	 * @description 是否禁用组件，禁用时输入框和加减按钮都不可操作
+	 * @default false
 	 */
 	disabled?: boolean,
 	/**
-	 * @description 按钮的样式类
+	 * @description 加减按钮的自定义样式类
+	 * @default ""
 	 */
 	btnClass?: string.ClassString,
 	/**
-	 * @description 输入框的样式类
+	 * @description 输入框的自定义样式类
+	 * @default ""
 	 */
 	inputClass?: string.ClassString,
 	/**
-	 * @description 图标的样式类
+	 * @description 加减按钮内部图标的自定义样式类
+	 * @default ""
 	 */
 	iconClass?: string.ClassString
 }
