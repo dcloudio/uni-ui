@@ -1,11 +1,11 @@
 <template>
 	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; flex-direction: column; position: relative;">
 		<!-- 控制条 -->
-		<view class="control-bar">
-			<button class="control-btn" @click="toggleStyle">{{ useCustomStyle ? '默认样式' : '自定义样式' }}</button>
-			<button class="control-btn" @click="toggleIndexs">{{ useCustomIndexs ? '根据数据设索引' : '自定义索引' }}</button>
-		</view>
-		<list-view ref="listRef" style="flex: 1;" :scroll-into-view="indexViewID">
+			<view class="control-bar">
+				<button class="control-btn" @click="toggleStyle">{{ data.useCustomStyle ? '默认样式' : '自定义样式' }}</button>
+				<button class="control-btn" @click="toggleIndexs">{{ data.useCustomIndexs ? '根据数据设索引' : '自定义索引' }}</button>
+			</view>
+			<list-view ref="listRef" style="flex: 1;" :scroll-into-view="data.indexViewID">
 			<sticky-section v-for="group in cityGroups" :key="group.index">
 				<sticky-header :id="'idx-' + group.index">
 					<view class="group-header">
@@ -20,13 +20,13 @@
 				</list-item>
 			</sticky-section>
 		</list-view>
-		<uni-index-bar
-			:indexs="currentIndexs"
-			:indicator-view-class="useCustomStyle ? 'custom-indicator' : ''"
-			:indicator-text-class="useCustomStyle ? 'custom-indicator-text' : ''"
-			:style="useCustomStyle ? 'color: aqua;' : ''"
-			@select="onSelect">
-		</uni-index-bar>
+			<uni-index-bar
+				:indexs="currentIndexs"
+				:indicator-view-class="data.useCustomStyle ? 'custom-indicator' : ''"
+				:indicator-text-class="data.useCustomStyle ? 'custom-indicator-text' : ''"
+				:style="data.useCustomStyle ? 'color: aqua;' : ''"
+				@select="onSelect">
+			</uni-index-bar>
 	</view>
 </template>
 
@@ -43,22 +43,29 @@
 	// 自定义索引列表
 	const customIndexs = '☆\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n#'
 
-	// 控制状态
-	const useCustomStyle = ref(false)
-	const useCustomIndexs = ref(false)
+	type Data = {
+		useCustomStyle: boolean
+		useCustomIndexs: boolean
+		indexViewID: string
+	}
+
+	const data = reactive<Data>({
+		useCustomStyle: false,
+		useCustomIndexs: false,
+		indexViewID: ""
+	})
 
 	// 当前使用的索引
-	const currentIndexs = computed(() : string => useCustomIndexs.value ? customIndexs : defaultIndexs)
+	const currentIndexs = computed(() : string => data.useCustomIndexs ? customIndexs : defaultIndexs)
 
 	const listRef = ref<UniListViewElement | null>(null)
-	const indexViewID = ref("")
 
 	const toggleStyle = () => {
-		useCustomStyle.value = !useCustomStyle.value
+		data.useCustomStyle = !data.useCustomStyle
 	}
 
 	const toggleIndexs = () => {
-		useCustomIndexs.value = !useCustomIndexs.value
+		data.useCustomIndexs = !data.useCustomIndexs
 	}
 
 	const onSelect = (index : string) => {
@@ -70,7 +77,7 @@
 		const childId = 'idx-' + index
 		// #ifndef VUE3-VAPOR && APP-HARMONY
 		// TODO 鸿蒙蒸汽模式修复scrollIntoView不能准确滚动到孙子节点的问题后也使用 scrollIntoView
-		indexViewID.value = childId
+		data.indexViewID = childId
 		// #endif
 		// #ifdef VUE3-VAPOR && APP-HARMONY
 		const element = uni.getElementById(childId)
@@ -83,6 +90,14 @@
 		}
 		// #endif
 	}
+
+	defineExpose({
+		data,
+		currentIndexs,
+		toggleStyle,
+		toggleIndexs,
+		onSelect
+	})
 </script>
 
 <style>

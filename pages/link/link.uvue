@@ -37,7 +37,7 @@
 
     <view class="log-section">
       <text class="log-title">最近事件</text>
-      <text class="log-text">{{ lastEvent }}</text>
+      <text class="log-text">{{ data.lastEvent }}</text>
     </view>
   </scroll-view>
 </template>
@@ -49,12 +49,23 @@
     return state.isDarkMode
   })
 
-  const lastEvent = ref<string>('暂无事件')
+  type Data = {
+    lastEvent: string
+  }
+
+  const data = reactive<Data>({
+    lastEvent: '暂无事件'
+  })
 
   function onError(message : string) {
-    lastEvent.value = `error: ${message}`
+    data.lastEvent = `error: ${message}`
     console.log(`[link] error: ${message}`)
   }
+
+  defineExpose({
+    data,
+    onError
+  })
 </script>
 
 <style>

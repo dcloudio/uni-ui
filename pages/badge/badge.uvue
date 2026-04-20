@@ -15,11 +15,11 @@
 			<text class="label">badge动态设置text属性：</text>
 			<text class="label" style="margin-bottom: 10px;">输入0不显示badge，空字符串显示红点，输入其他显示文字</text>
 			<input
-				v-model="dynamicBadgeText"
+				v-model="data.dynamicBadgeText"
 				placeholder="输入badge text属性"
 				class="demo-input"
 			/>
-			<uni-badge-view :text="dynamicBadgeText" >
+			<uni-badge-view :text="data.dynamicBadgeText" >
 				<view style="width: 20px;height: 20px;background-color: green;"></view>
 			</uni-badge-view>
 		</view>
@@ -162,16 +162,25 @@
 <script setup lang="uts">
 import { state } from '@/store/index.uts'
 
+type Data = {
+	dynamicBadgeText: string
+}
+
+const data = reactive<Data>({
+	dynamicBadgeText: "0"
+})
+
 const isDarkMode = computed((): boolean => {
 	return state.isDarkMode
 })
 
-// 动态badge的text值
-const dynamicBadgeText = ref<string>("0")
-
 /* onReady(() => {
 	console.log((getCurrentInstance()!.proxy!.$page as BasePage).$nativePage!.getDomJson());
 }) */
+
+defineExpose({
+	data
+})
 </script>
 
 <style>

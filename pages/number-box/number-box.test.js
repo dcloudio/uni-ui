@@ -1,11 +1,11 @@
-const PAGE_PATH = '/pages/number-box/number-box'
+const PAGE_PATH = '/pages/uni-ui/number-box/number-box'
 
 describe('number-box', () => {
 	let page
 
 	beforeEach(async () => {
 		page = await program.reLaunch(PAGE_PATH)
-		await page.waitFor('view')
+		await page.waitFor(3000)
 	})
 
 	async function setPageData(newData) {

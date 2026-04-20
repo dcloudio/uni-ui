@@ -3,7 +3,7 @@
     <scroll-view
       style="flex: 1;"
       :refresher-enabled="true"
-      :refresher-triggered="refreshing1"
+      :refresher-triggered="data.refreshing1"
       refresher-default-style="none"
       :refresher-threshold="45"
       refresher-max-drag-distance="200px"
@@ -13,22 +13,22 @@
       @refresherabort="onRefresherabort1"
     > <!-- TODO Android不支持bool属性，:refresher-enabled="true" 不能简写为 refresher-enabled -->
       <!-- 列表内容 -->
-      <view v-for="i in listCount1" :key="i" class="content-item">
+      <view v-for="i in data.listCount1" :key="i" class="content-item">
         <text class="text">item-{{ i }}</text>
       </view>
 
       <!-- refresher 插槽使用 uni-refresh-box 组件 -->
       <uni-refresh-box
         slot="refresher"
-        :pulling-distance="pullingDistance1"
-        :refreshing="refreshing1"
+        :pulling-distance="data.pullingDistance1"
+        :refreshing="data.refreshing1"
       ></uni-refresh-box> <!-- TODO web只认在组件外层使用slot="refresher"，不支持组件内根元素使用-->
     </scroll-view>
 		<text class="section-label">竖排暗黑自定义文字的下拉设置</text>
 		<scroll-view
 		  style="flex: 1;background-color: black;"
 		  :refresher-enabled="true"
-		  :refresher-triggered="refreshing2"
+		  :refresher-triggered="data.refreshing2"
 		  refresher-default-style="none"
 		  :refresher-threshold="45"
 		  refresher-max-drag-distance="200px"
@@ -38,15 +38,15 @@
 		  @refresherabort="onRefresherabort2"
 		> 
 		  <!-- 列表内容 -->
-		  <view v-for="i in listCount2" :key="i" class="content-item">
+		  <view v-for="i in data.listCount2" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
 		  </view>
 
 		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
 		  <uni-refresh-box
 		    slot="refresher"
-		    :pulling-distance="pullingDistance2"
-		    :refreshing="refreshing2"
+		    :pulling-distance="data.pullingDistance2"
+		    :refreshing="data.refreshing2"
 				loading-class="loading-dark"
 				text-class="text-dark"
 				style="flex-direction: column;height: 46px;padding-top: 6px;"
@@ -59,7 +59,7 @@
 		<scroll-view
 		  style="flex: 1;"
 		  :refresher-enabled="true"
-		  :refresher-triggered="refreshing3"
+		  :refresher-triggered="data.refreshing3"
 		  refresher-default-style="none"
 		  :refresher-threshold="45"
 		  refresher-max-drag-distance="200px"
@@ -69,15 +69,15 @@
 		  @refresherabort="onRefresherabort3"
 		> 
 		  <!-- 列表内容 -->
-		  <view v-for="i in listCount3" :key="i" class="content-item">
+		  <view v-for="i in data.listCount3" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
 		  </view>
 
 		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
 		  <uni-refresh-box
 		    slot="refresher"
-		    :pulling-distance="pullingDistance3"
-		    :refreshing="refreshing3"
+		    :pulling-distance="data.pullingDistance3"
+		    :refreshing="data.refreshing3"
 		  >
 				<template #loading="{ state }">
 				  <image
@@ -98,7 +98,7 @@
 		<scroll-view
 		  style="flex: 1;"
 		  :refresher-enabled="true"
-		  :refresher-triggered="refreshing4"
+		  :refresher-triggered="data.refreshing4"
 		  refresher-default-style="none"
 		  :refresher-threshold="45"
 		  refresher-max-drag-distance="200px"
@@ -108,15 +108,15 @@
 		  @refresherabort="onRefresherabort4"
 		> 
 		  <!-- 列表内容 -->
-		  <view v-for="i in listCount4" :key="i" class="content-item">
+		  <view v-for="i in data.listCount4" :key="i" class="content-item">
 		    <text class="text">item-{{ i }}</text>
 		  </view>
 
 		  <!-- refresher 插槽使用 uni-refresh-box 组件 -->
 		  <uni-refresh-box
 		    slot="refresher"
-		    :pulling-distance="pullingDistance4"
-		    :refreshing="refreshing4"
+		    :pulling-distance="data.pullingDistance4"
+		    :refreshing="data.refreshing4"
 				pulling-text=""
 				loosing-text=""
 				loading-text=""
@@ -133,113 +133,127 @@ const isDarkMode = computed((): boolean => {
   return state.isDarkMode
 })
 
-// 第1个 scroll-view 的状态
-const listCount1 = ref(3)
-const refreshing1 = ref(false)
-const pullingDistance1 = ref(0)
+type Data = {
+  listCount1: number
+  refreshing1: boolean
+  pullingDistance1: number
+  listCount2: number
+  refreshing2: boolean
+  pullingDistance2: number
+  listCount3: number
+  refreshing3: boolean
+  pullingDistance3: number
+  listCount4: number
+  refreshing4: boolean
+  pullingDistance4: number
+}
+
+const data = reactive<Data>({
+  listCount1: 3,
+  refreshing1: false,
+  pullingDistance1: 0,
+  listCount2: 3,
+  refreshing2: false,
+  pullingDistance2: 0,
+  listCount3: 3,
+  refreshing3: false,
+  pullingDistance3: 0,
+  listCount4: 3,
+  refreshing4: false,
+  pullingDistance4: 0
+})
 
 function onRefresherpulling1(e: RefresherEvent) {
-  pullingDistance1.value = e.detail.dy
+  data.pullingDistance1 = e.detail.dy
 }
 
 function onRefresherrefresh1() {
-  refreshing1.value = true
+  data.refreshing1 = true
   console.log('列表1 触发刷新')
   setTimeout(() => {
-    listCount1.value += 5
-    refreshing1.value = false
+    data.listCount1 += 5
+    data.refreshing1 = false
     console.log('列表1 刷新完成')
   }, 1500)
 }
 
 function onRefresherrestore1() {
-  pullingDistance1.value = 0
+  data.pullingDistance1 = 0
 }
 
 function onRefresherabort1() {
-  pullingDistance1.value = 0
+  data.pullingDistance1 = 0
 }
 
-// 第2个 scroll-view 的状态
-const listCount2 = ref(3)
-const refreshing2 = ref(false)
-const pullingDistance2 = ref(0)
-
 function onRefresherpulling2(e: RefresherEvent) {
-  pullingDistance2.value = e.detail.dy
+  data.pullingDistance2 = e.detail.dy
 }
 
 function onRefresherrefresh2() {
-  refreshing2.value = true
+  data.refreshing2 = true
   console.log('列表2 触发刷新')
   setTimeout(() => {
-    listCount2.value += 5
-    refreshing2.value = false
+    data.listCount2 += 5
+    data.refreshing2 = false
     console.log('列表2 刷新完成')
   }, 1500)
 }
 
 function onRefresherrestore2() {
-  pullingDistance2.value = 0
+  data.pullingDistance2 = 0
 }
 
 function onRefresherabort2() {
-  pullingDistance2.value = 0
+  data.pullingDistance2 = 0
 }
 
-// 第3个 scroll-view 的状态
-const listCount3 = ref(3)
-const refreshing3 = ref(false)
-const pullingDistance3 = ref(0)
-
 function onRefresherpulling3(e: RefresherEvent) {
-  pullingDistance3.value = e.detail.dy
+  data.pullingDistance3 = e.detail.dy
 }
 
 function onRefresherrefresh3() {
-  refreshing3.value = true
+  data.refreshing3 = true
   console.log('列表3 触发刷新')
   setTimeout(() => {
-    listCount3.value += 5
-    refreshing3.value = false
+    data.listCount3 += 5
+    data.refreshing3 = false
     console.log('列表3 刷新完成')
   }, 1500)
 }
 
 function onRefresherrestore3() {
-  pullingDistance3.value = 0
+  data.pullingDistance3 = 0
 }
 
 function onRefresherabort3() {
-  pullingDistance3.value = 0
+  data.pullingDistance3 = 0
 }
 
-// 第4个 scroll-view 的状态
-const listCount4 = ref(3)
-const refreshing4 = ref(false)
-const pullingDistance4 = ref(0)
-
 function onRefresherpulling4(e: RefresherEvent) {
-  pullingDistance4.value = e.detail.dy
+  data.pullingDistance4 = e.detail.dy
 }
 
 function onRefresherrefresh4() {
-  refreshing4.value = true
+  data.refreshing4 = true
   console.log('列表4 触发刷新')
   setTimeout(() => {
-    listCount4.value += 5
-    refreshing4.value = false
+    data.listCount4 += 5
+    data.refreshing4 = false
     console.log('列表4 刷新完成')
   }, 1500)
 }
 
 function onRefresherrestore4() {
-  pullingDistance4.value = 0
+  data.pullingDistance4 = 0
 }
 
 function onRefresherabort4() {
-  pullingDistance4.value = 0
+  data.pullingDistance4 = 0
 }
+
+defineExpose({
+  data
+})
 </script>
 
 <style>

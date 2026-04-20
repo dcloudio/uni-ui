@@ -1,11 +1,11 @@
-const PAGE_PATH = '/pages/fab-button/fab-button'
+const PAGE_PATH = '/pages/uni-ui/fab-button/fab-button'
 
 describe('fab-button', () => {
 	let page
 
 	beforeEach(async () => {
 		page = await program.reLaunch(PAGE_PATH)
-		await page.waitFor('view')
+		await page.waitFor(3000)
 	})
 
     it('fab-button snapshot', async () => {

@@ -10,7 +10,7 @@
 			<view class="section">
 				<text class="section-title">示例 1：标签拖拽排序</text>
 				<text class="section-desc">长按标签后可拖拽排序，点击标签可拿到 item 和 index</text>
-				<uni-drag-cell v-model="tagList" @change="onTagChange">
+				<uni-drag-cell v-model="data.tagList" @change="onTagChange">
 					<template #default="{ item, index }">
 						<view class="tag-slot">
 							<view class="tag-item" @click="clickItem(item as string, index as number)">
@@ -19,13 +19,13 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ tagList.join(', ') }}</text>
+				<text class="result-text">当前顺序：{{ data.tagList.join(', ') }}</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 2：宫格拖拽排序（3 列）</text>
 				<text class="section-desc">长按宫格项后可拖拽排序</text>
-				<uni-drag-cell v-model="gridList3" :column="3" @change="onGridChange">
+				<uni-drag-cell v-model="data.gridList3" :column="3" @change="onGridChange">
 					<template #default="{ item }">
 						<view class="grid-slot">
 							<view class="grid-item">
@@ -34,13 +34,13 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ getGridNames(gridList3) }}</text>
+				<text class="result-text">当前顺序：{{ getGridNames(data.gridList3) }}</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 3：列表拖拽排序（1 列）</text>
 				<text class="section-desc">长按列表项后可拖拽排序</text>
-				<uni-drag-cell v-model="gridList4" :column="1" @change="onGridChange">
+				<uni-drag-cell v-model="data.gridList4" :column="1" @change="onGridChange">
 					<template #default="{ item }">
 						<view class="grid-slot-small">
 							<view class="grid-item-small">
@@ -49,13 +49,13 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ getGridNames(gridList4) }}</text>
+				<text class="result-text">当前顺序：{{ getGridNames(data.gridList4) }}</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 4：可新增并删除的标签</text>
 				<text class="section-desc">长按标签可排序，拖到底部可删除，点击 + 可输入并新增标签</text>
-				<uni-drag-cell v-model="deleteList" :show-close="true" :show-append="true" @change="onDeleteChange">
+				<uni-drag-cell v-model="data.deleteList" :show-close="true" :show-append="true" @change="onDeleteChange">
 					<template #default="{ item }">
 						<view class="tag-slot">
 							<view class="tag-item-delete">
@@ -71,14 +71,14 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ deleteList.join(', ') }}</text>
-				<text class="result-text">剩余：{{ deleteList.length }} 项</text>
+				<text class="result-text">当前顺序：{{ data.deleteList.join(', ') }}</text>
+				<text class="result-text">剩余：{{ data.deleteList.length }} 项</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 5：带删除功能的图标宫格</text>
 				<text class="section-desc">长按后可拖动图标宫格项，并支持拖到底部删除</text>
-				<uni-drag-cell v-model="iconGridList" :column="3" :show-close="true" @change="onIconGridChange">
+				<uni-drag-cell v-model="data.iconGridList" :column="3" :show-close="true" @change="onIconGridChange">
 					<template #default="{ item }">
 						<view class="icon-grid-slot">
 							<view class="icon-grid-item">
@@ -90,14 +90,14 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ getIconNames(iconGridList) }}</text>
+				<text class="result-text">当前顺序：{{ getIconNames(data.iconGridList) }}</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 6：九宫格图片选择</text>
 				<text class="section-desc">点击 + 选择图片，支持拖拽排序，也支持拖到底部删除</text>
-				<uni-drag-cell v-model="imageList" :column="3" :show-close="true"
-					:show-append="imageList.length < maxImageCount" @change="onImageChange">
+				<uni-drag-cell v-model="data.imageList" :column="3" :show-close="true"
+					:show-append="data.imageList.length < maxImageCount" @change="onImageChange">
 					<template #default="{ item, index }">
 						<view class="image-grid-slot">
 							<view class="image-grid-item" @click="previewImages(index as number)">
@@ -113,13 +113,13 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">已选择：{{ imageList.length }}/{{ maxImageCount }}</text>
+				<text class="result-text">已选择：{{ data.imageList.length }}/{{ maxImageCount }}</text>
 			</view>
 
 			<view class="section">
 				<text class="section-title">示例 7：手柄拖拽排序</text>
 				<text class="section-desc">开启手柄模式后，不需要长按，只能拖动右侧手柄进行排序</text>
-				<uni-drag-cell v-model="handleList" :column="1" :handle-mode="true" @change="onHandleListChange">
+				<uni-drag-cell v-model="data.handleList" :column="1" :handle-mode="true" @change="onHandleListChange">
 					<template #default="{ item, index }">
 						<view class="handle-demo-slot">
 							<view class="handle-demo-item">
@@ -134,7 +134,7 @@
 						</view>
 					</template>
 				</uni-drag-cell>
-				<text class="result-text">当前顺序：{{ handleList.join(', ') }}</text>
+				<text class="result-text">当前顺序：{{ data.handleList.join(', ') }}</text>
 			</view>
 
 			<view style="height: 50px;"></view>
@@ -155,41 +155,48 @@
 
 	const maxImageCount = 9
 
-	const tagList = ref<string[]>(['标签1', '标签2', '标签3', '标签4'])
+	type Data = {
+		tagList: string[],
+		gridList3: UTSJSONObject[],
+		gridList4: UTSJSONObject[],
+		deleteList: string[],
+		iconGridList: UTSJSONObject[],
+		imageList: string[],
+		handleList: string[]
+	}
 
-	const gridList3 = ref<UTSJSONObject[]>([
-		{ name: '宫格1' },
-		{ name: '宫格2' },
-		{ name: '宫格3' },
-		{ name: '宫格4' },
-		{ name: '宫格5' },
-		{ name: '宫格6' },
-		{ name: '宫格7' },
-		{ name: '宫格8' },
-		{ name: '宫格9' }
-	])
-
-	const gridList4 = ref<UTSJSONObject[]>([
-		{ name: '1' },
-		{ name: '2' },
-		{ name: '3' },
-		{ name: '4' },
-		{ name: '5' }
-	])
-
-	const deleteList = ref<string[]>(['标签A', '标签B', '标签C', '标签D', '标签E'])
-
-	const iconGridList = ref<UTSJSONObject[]>([
-		{ icon: 'H', label: '首页' },
-		{ icon: 'M', label: '消息' },
-		{ icon: 'P', label: '我的' },
-		{ icon: 'S', label: '设置' },
-		{ icon: 'A', label: '相册' },
-		{ icon: 'Y', label: '音乐' }
-	])
-
-	const imageList = ref<string[]>([])
-	const handleList = ref<string[]>(['微信支付', '支付宝', 'Apple Pay'])
+	const data = reactive<Data>({
+		tagList: ['标签1', '标签2', '标签3', '标签4'],
+		gridList3: [
+			{ name: '宫格1' },
+			{ name: '宫格2' },
+			{ name: '宫格3' },
+			{ name: '宫格4' },
+			{ name: '宫格5' },
+			{ name: '宫格6' },
+			{ name: '宫格7' },
+			{ name: '宫格8' },
+			{ name: '宫格9' }
+		],
+		gridList4: [
+			{ name: '1' },
+			{ name: '2' },
+			{ name: '3' },
+			{ name: '4' },
+			{ name: '5' }
+		],
+		deleteList: ['标签A', '标签B', '标签C', '标签D', '标签E'],
+		iconGridList: [
+			{ icon: 'H', label: '首页' },
+			{ icon: 'M', label: '消息' },
+			{ icon: 'P', label: '我的' },
+			{ icon: 'S', label: '设置' },
+			{ icon: 'A', label: '相册' },
+			{ icon: 'Y', label: '音乐' }
+		],
+		imageList: [],
+		handleList: ['微信支付', '支付宝', 'Apple Pay']
+	})
 
 	const clickItem = (item : string, index : number) => {
 		uni.showToast({
@@ -229,7 +236,7 @@
 			placeholderText: '请输入标签内容',
 			confirmText: '确定',
 			cancelText: '取消',
-			success: (res) => {
+			success: (res : ShowModalSuccess) => {
 				if (res.confirm != true) {
 					return
 				}
@@ -241,10 +248,10 @@
 					})
 					return
 				}
-				const nextList = deleteList.value.slice()
+				const nextList = data.deleteList.slice()
 				nextList.push(value)
-				deleteList.value = nextList
-				onDeleteChange(deleteList.value)
+				data.deleteList = nextList
+				onDeleteChange(data.deleteList)
 			}
 		})
 	}
@@ -270,7 +277,7 @@
 	}
 
 	const chooseImages = () => {
-		const remainCount = maxImageCount - imageList.value.length
+		const remainCount = maxImageCount - data.imageList.length
 		if (remainCount <= 0) {
 			return
 		}
@@ -281,26 +288,26 @@
 				if (selectedPaths.length == 0) {
 					return
 				}
-				const nextList = imageList.value.slice()
+				const nextList = data.imageList.slice()
 				for (let i = 0; i < selectedPaths.length; i++) {
 					if (nextList.length >= maxImageCount) {
 						break
 					}
 					nextList.push(selectedPaths[i])
 				}
-				imageList.value = nextList
-				onImageChange(imageList.value)
+				data.imageList = nextList
+				onImageChange(data.imageList)
 			}
 		})
 	}
 
 	const previewImages = (index : number) => {
-		if (index < 0 || index >= imageList.value.length) {
+		if (index < 0 || index >= data.imageList.length) {
 			return
 		}
 		uni.previewImage({
-			urls: imageList.value,
-			current: imageList.value[index]
+			urls: data.imageList,
+			current: data.imageList[index]
 		})
 	}
 
@@ -325,6 +332,14 @@
 		}
 		return names.join(', ')
 	}
+
+	defineExpose({
+		data,
+		clickItem,
+		promptAddDeleteTag,
+		chooseImages,
+		previewImages
+	})
 </script>
 
 <style>

@@ -1,11 +1,11 @@
-const PAGE_PATH = '/pages/collapse/collapse'
+const PAGE_PATH = '/pages/uni-ui/collapse/collapse'
 
 describe('collapse', () => {
 	let page
 
 	beforeEach(async () => {
 		page = await program.reLaunch(PAGE_PATH)
-		await page.waitFor('scroll-view')
+		await page.waitFor(3000)
 	})
 
 	async function setPageData(newData) {

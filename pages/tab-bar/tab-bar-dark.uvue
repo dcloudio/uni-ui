@@ -1,5 +1,5 @@
 <template>
-	<uni-tab style="flex: 1" :active-index="activeIndex" @change="handleChange">
+	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<!-- 内容区域 -->
 		<uni-tab-content>
 			<!-- TODO 小程序下这些Class不生效，界面没有变黑！ -->
@@ -63,6 +63,10 @@
 	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
 	const TAB_CONTENT1_SWITCH_OFFSET = 100
 	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
+	let tabContentHeightFull = false
+	// #ifdef MP
+	tabContentHeightFull = true
+	// #endif
 
 	const activeIndex = ref<number>(0)
 	const showBackToTop = ref<boolean>(false)

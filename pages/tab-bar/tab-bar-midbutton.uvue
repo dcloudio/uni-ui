@@ -1,5 +1,5 @@
 <template>
-	<uni-tab style="flex: 1" :active-index="activeIndex" @change="handleChange">
+	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<uni-tab-content>
 			<tabContent1 />
 		</uni-tab-content>
@@ -56,6 +56,10 @@
 
 	const activeIndex = ref<number>(0)
 	const midButtonClickCount = ref<number>(0)
+	let tabContentHeightFull = false
+	// #ifdef MP
+	tabContentHeightFull = true
+	// #endif
 
 	function handleChange(index : number) : void {
 		activeIndex.value = index

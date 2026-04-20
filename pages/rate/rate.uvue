@@ -28,8 +28,8 @@
 		<text class="title">未选中的星星为实心且响应change事件</text>
 			<uni-rate full @change="onRateChange" />
 		<text class="title">响应点击并双向绑定响应式变量</text>
-			<uni-rate full v-model="vModelRateValue" />
-			<text>{{vModelRateValue}}</text>
+			<uni-rate full v-model="data.vModelRateValue" />
+			<text>{{data.vModelRateValue}}</text>
 		<text class="title">只读，不触发change" </text>
 			<uni-rate readonly :value="5" @change="onRateChange" />
 		<text class="title">高性能只读，自定义大小和颜色（style方式）</text>
@@ -42,7 +42,7 @@
 		<text class="title">自定义默认颜色和选中颜色 style方式</text>
 			<uni-rate :value="3" full star-style="color:lightgreen" star-active-style="color:green"/>
 		<text class="title">只读，程序动态赋值，不触发change</text>
-			<uni-rate :value="rateValue" @change="onRateChange"/>
+			<uni-rate :value="data.rateValue" @change="onRateChange"/>
 	<!-- #ifdef APP -->
 	</scroll-view>
 	<!-- #endif -->
@@ -57,8 +57,15 @@
 		return state.isDarkMode
 	})
 
-	const vModelRateValue = ref<number>(0)
-	const rateValue = ref<number>(0)
+	type Data = {
+		vModelRateValue: number
+		rateValue: number
+	}
+
+	const data = reactive<Data>({
+		vModelRateValue: 0,
+		rateValue: 0
+	})
 	let interval = 0
 	
 	/* onReady(() => {
@@ -88,7 +95,7 @@
 	onMounted(() => {
 		// 每2秒改变一次评分值
 		interval = setInterval(() => {
-			rateValue.value = Math.floor(Math.random() * 6) // 0-5之间的随机整数
+			data.rateValue = Math.floor(Math.random() * 6) // 0-5之间的随机整数
 		}, 2000)
 	})
 
@@ -96,6 +103,11 @@
 		if (interval != 0) {
 			clearInterval(interval)
 		}
+	})
+
+	defineExpose({
+		data,
+		onRateChange
 	})
 </script>
 <style>

@@ -4,15 +4,15 @@
       <text class="section-title">当前时间不同格式</text>
       <view class="row">
         <text class="row-label">date</text>
-        <uni-time-format :timestamp="currentTimestamp" format="date"></uni-time-format>
+        <uni-time-format :timestamp="data.currentTimestamp" format="date"></uni-time-format>
       </view>
       <view class="row">
         <text class="row-label">time</text>
-        <uni-time-format :timestamp="currentTimestamp" format="time"></uni-time-format>
+        <uni-time-format :timestamp="data.currentTimestamp" format="time"></uni-time-format>
       </view>
       <view class="row">
         <text class="row-label">datetime</text>
-        <uni-time-format :timestamp="currentTimestamp" format="datetime"></uni-time-format>
+        <uni-time-format :timestamp="data.currentTimestamp" format="datetime"></uni-time-format>
       </view>
     </view>
 
@@ -23,7 +23,7 @@
         <text class="tip-text">yyyy-mm-dd hh:mm:ss</text>
         <input
           class="datetime-input"
-          v-model="relativeDateTimeText"
+          v-model="data.relativeDateTimeText"
           placeholder="yyyy-mm-dd hh:mm:ss"
         />
       </view>
@@ -69,7 +69,7 @@
     <view class="section">
       <text class="section-title">非法时间戳</text>
       <view class="row">
-        <uni-time-format :timestamp="invalidTimestamp" format="datetime"></uni-time-format>
+        <uni-time-format :timestamp="data.invalidTimestamp" format="datetime"></uni-time-format>
       </view>
       <text class="tip-text">非法时间会显示为空字符串。</text>
     </view>
@@ -83,8 +83,17 @@
     return state.isDarkMode
   })
 
-  const currentTimestamp = ref<number>(Date.now())
-  const invalidTimestamp = ref<number>(NaN)
+  type Data = {
+    currentTimestamp: number
+    invalidTimestamp: number
+    relativeDateTimeText: string
+  }
+
+  const data = reactive<Data>({
+    currentTimestamp: Date.now(),
+    invalidTimestamp: NaN,
+    relativeDateTimeText: ''
+  })
   let timer : number | null = null
 
   const DAY_MS = 24 * 60 * 60 * 1000
@@ -134,10 +143,10 @@
   }
 
   const pageOpenDateText = formatDateTimeText(pageOpenDate)
-  const relativeDateTimeText = ref<string>(pageOpenDateText)
+  data.relativeDateTimeText = pageOpenDateText
 
   const inputRelativeTimestamp = computed(() : number => {
-    const parsed = parseDateTimeText(relativeDateTimeText.value)
+    const parsed = parseDateTimeText(data.relativeDateTimeText)
     if (parsed != null) {
       return parsed
     }
@@ -167,12 +176,12 @@
   const fixedOlderThanYesterdayTimestamp = fixedDayStartTimestamp - 2 * DAY_MS - 30 * 60 * 1000
 
   const secondTimestamp = computed(() : number => {
-    return Math.floor(currentTimestamp.value / 1000)
+    return Math.floor(data.currentTimestamp / 1000)
   })
 
   onMounted(() => {
     timer = setInterval(() => {
-      currentTimestamp.value = Date.now()
+      data.currentTimestamp = Date.now()
     }, 1000)
   })
 
@@ -182,6 +191,12 @@
       clearInterval(currentTimer)
       timer = null
     }
+  })
+
+  defineExpose({
+    data,
+    inputRelativeTimestamp,
+    secondTimestamp
   })
 </script>
 
