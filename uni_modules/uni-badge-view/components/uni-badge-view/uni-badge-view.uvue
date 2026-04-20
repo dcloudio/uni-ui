@@ -6,7 +6,7 @@
 	<!-- 微信小程序不支持外部绑定事件 -->
 	
 	<template v-else>
-		<view v-if="hasDefaultSlot" style="overflow: visible;" class="badge-wrap">
+		<view v-if="hasDefaultSlot" style="overflow: visible;" class="badge-wrap" v-bind="$attrs">
 			<!-- 目标内容插槽 -->
 			<slot></slot>
 

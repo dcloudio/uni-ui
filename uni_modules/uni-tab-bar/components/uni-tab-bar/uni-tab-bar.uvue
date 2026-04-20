@@ -1,5 +1,5 @@
 <template>
-	<view :style="tabBarStyle" class="uni-tab-list-root">
+	<view ref="tabBarRef" :style="tabBarStyle" class="uni-tab-list-root">
 		<slot></slot>
 	</view>
 </template>
@@ -17,6 +17,8 @@ const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: 
 const itemCount = ref<number>(0)
 const hasMidButtonItem = ref<boolean>(false)
 const midButtonWidth = ref<number>(0)
+const containerWidth = ref<number>(0)
+const tabBarRef = ref<UniElement | null>(null)
 
 const tabBarStyle = computed(() => {
 	return {
@@ -36,6 +38,30 @@ function registerItem() : number {
 }
 
 function getItemLayout(index : number) : UniTabListItemLayout {
+	// #ifdef WEB
+	if (itemCount.value <= 0 || containerWidth.value <= 0) {
+		return {
+			width: 0,
+			marginLeft: 0
+		} as UniTabListItemLayout
+	}
+
+	if (validMidButtonLayout.value) {
+		const itemWidth = (containerWidth.value - midButtonWidth.value) / itemCount.value
+		const middleIndex = itemCount.value / 2
+		return {
+			width: itemWidth,
+			marginLeft: index == middleIndex ? midButtonWidth.value : 0
+		} as UniTabListItemLayout
+	}
+
+	return {
+		width: containerWidth.value / itemCount.value,
+		marginLeft: 0
+	} as UniTabListItemLayout
+	// #endif
+
+	// #ifndef WEB
 	if (itemCount.value <= 0 || tabBarLayout.value.windowWidth <= 0) {
 		return {
 			width: 0,
@@ -56,6 +82,20 @@ function getItemLayout(index : number) : UniTabListItemLayout {
 		width: tabBarLayout.value.windowWidth / itemCount.value,
 		marginLeft: 0
 	} as UniTabListItemLayout
+	// #endif
+}
+
+async function syncContainerWidth() : Promise<void> {
+	const tabBarElement = tabBarRef.value
+	if (tabBarElement == null) {
+		return
+	}
+
+	// #ifdef WEB
+	if (tabBarElement.offsetWidth > 0) {
+		containerWidth.value = tabBarElement.offsetWidth
+	}
+	// #endif
 }
 
 function registerMidButton(width : number, height : number) : void {
@@ -74,14 +114,29 @@ function syncOccupiedHeight() : void {
 
 onMounted(() => {
 	syncOccupiedHeight()
+	// #ifdef WEB
+	nextTick(() => {
+		syncContainerWidth()
+	})
+	// #endif
 })
 
 watch(() : number => itemCount.value, () => {
 	syncOccupiedHeight()
+	// #ifdef WEB
+	nextTick(() => {
+		syncContainerWidth()
+	})
+	// #endif
 })
 
 watch(() : boolean => hasMidButtonItem.value, () => {
 	syncOccupiedHeight()
+	// #ifdef WEB
+	nextTick(() => {
+		syncContainerWidth()
+	})
+	// #endif
 })
 
 provide('uniTabListRegisterItem', registerItem)
@@ -97,6 +152,7 @@ provide('uniTabListChangeTab', changeTab)
 		position: absolute;
 		bottom: 0;
 		box-sizing: content-box;
+		background-color: #ffffff;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -105,6 +161,5 @@ provide('uniTabListChangeTab', changeTab)
 		border-top-width: 0.5px;
 		border-top-color: rgba(0,0,0,0.33);
 		border-top-style: solid;
-		/* background-color: green; */
 	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <text>{{ formattedTime }}</text>
+  <text class="time-text">{{ formattedTime }}</text>
 </template>
 
 <script setup lang="uts">
@@ -171,3 +171,10 @@
     refreshFormattedTime()
   })
 </script>
+
+<style>
+  .time-text {
+    font-size: 12px;
+    color: #999999;
+  }
+</style>

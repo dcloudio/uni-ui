@@ -44,26 +44,23 @@ const tabBarLayout = ref<UniTabBarLayout>({
 	safeAreaInsetBottom: safeAreaInsetBottom
 })
 const tabContentBottom = ref<number>(0)
-const tabContentHeight = ref<number>(windowInfo.windowHeight)
 
 function syncTabContentLayout() : void {
 	const occupiedBottom = props.tabContentHeightFull ? 0 : props.tabBarHeight + safeAreaInsetBottom
 	tabContentBottom.value = occupiedBottom
-	tabContentHeight.value = windowInfo.windowHeight - occupiedBottom
 }
 
 syncTabContentLayout()
 
 // 监听页面的尺寸变化，更新布局信息
+// TODO App 竟然在组件里无法监听页面的 onResize 事件！！！@fxy
 onResize(() => {
 	windowInfo = uni.getWindowInfo()
 	safeAreaInsetBottom = windowInfo.safeAreaInsets.bottom
 	tabBarLayout.value.windowWidth = windowInfo.windowWidth
 	tabBarLayout.value.safeAreaInsetBottom = safeAreaInsetBottom
-	// console.log("resize", tabBarLayout.value.windowWidth)
 	syncTabContentLayout()
 })
-
 
 // tab-content 的数量计数器
 const contentCount = ref<number>(0)
@@ -107,7 +104,6 @@ function registerContent(): number {
 provide('uniTabBarCurrentIndex', currentIndex)
 provide('uniTabBarChangeTab', changeTab)
 provide('uniTabBarRegisterContent', registerContent)
-provide('uniTabBarContentHeight', tabContentHeight)
 provide('uniTabBarContentBottom', tabContentBottom)
 provide('uniTabBarLayout', tabBarLayout)
 </script>

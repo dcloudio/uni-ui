@@ -1,6 +1,6 @@
 <template>
 	<view v-if="hasRendered" class="uni-tab-content-root"
-		:style="{ visibility: (isActive ? 'visible' : 'hidden'), height: (contentHeight + 'px'), bottom: (contentBottom + 'px') }">
+		:style="{ visibility: (isActive ? 'visible' : 'hidden'), bottom: (contentBottom + 'px') }">
 		<slot></slot>
 	</view>
 </template>
@@ -10,7 +10,6 @@
 // 从父组件注入数据和方法
 const currentIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
 const registerContent = inject<() => number>('uniTabBarRegisterContent', () => 0)
-const contentHeight = inject<Ref<number>>('uniTabBarContentHeight', ref(0))
 const contentBottom = inject<Ref<number>>('uniTabBarContentBottom', ref(0))
 
 // 当前 content 的索引
