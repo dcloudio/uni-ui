@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page">
+  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
     <view class="section">
       <text class="section-title">手风琴模式</text>
       <uni-collapse :accordion="true">
@@ -119,6 +119,12 @@
 </template>
 
 <script setup lang="uts">
+  import { state } from '@/store/index.uts'
+
+  const isDarkMode = computed((): boolean => {
+    return state.isDarkMode
+  })
+
   type CategoryItem = {
     title : string
   }
@@ -198,36 +204,37 @@
   .page {
     flex: 1;
     padding: 12px;
-    background-color: #f3f4f6;
+    background-color: var(--background-color, #f3f4f6);
   }
 
   .section {
     margin-bottom: 12px;
     border-radius: 8px;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: var(--list-background-color, #ffffff);
   }
 
   .section-title {
     padding: 12px;
     font-size: 14px;
-    color: #333333;
+    color: var(--text-color, #333333);
     font-weight: 500;
   }
 
   .content-box {
     padding: 12px;
-    background-color: #f8fafc;
+    background-color: var(--active-background-color, #f8fafc);
   }
 
   .content-text {
     font-size: 13px;
-    color: #475569;
+    color: var(--text-color, #475569);
+    opacity: 0.78;
     line-height: 20px;
   }
 
   .category-list {
-    background-color: #f8fafc;
+    background-color: var(--active-background-color, #f8fafc);
   }
 
   .category-list-item {
@@ -237,7 +244,7 @@
     padding: 12px 18px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: #e2e8f0;
+    border-bottom-color: var(--border-color, #e2e8f0);
   }
 
   .category-list-item--last {
@@ -247,7 +254,7 @@
   .category-list-text {
     flex: 1;
     font-size: 13px;
-    color: #334155;
+    color: var(--text-color, #334155);
     line-height: 20px;
   }
 
@@ -258,10 +265,10 @@
     transform: rotate(-45deg);
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: #94a3b8;
+    border-right-color: var(--arrow-color, #94a3b8);
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: #94a3b8;
+    border-bottom-color: var(--arrow-color, #94a3b8);
   }
 
   .demo-title-emphasis {
@@ -318,7 +325,7 @@
   .slot-title-text {
     flex: 1;
     font-size: 14px;
-    color: #1f2937;
+    color: var(--text-color, #1f2937);
     font-weight: 600;
   }
 
@@ -445,12 +452,12 @@
   .log-section {
     padding: 12px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--list-background-color, #ffffff);
   }
 
   .log-title {
     font-size: 13px;
-    color: #333333;
+    color: var(--text-color, #333333);
     font-weight: 500;
     margin-bottom: 8px;
   }

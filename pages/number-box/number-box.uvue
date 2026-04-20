@@ -1,65 +1,65 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex: 1; padding: 15px;">
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view style="padding: 15px;">
+	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
 	<!-- #endif -->
-		<text style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 20px;">NumberBox 数字输入框</text>
+		<text class="page-title">NumberBox 数字输入框</text>
 
 		<!-- 基础用法 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">基础用法：</text>
+			<text class="label">基础用法：</text>
 			<uni-number-box v-model="data.value1" @change="onChange" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value1 }}</text>
+			<text class="hint">当前值：{{ data.value1 }}</text>
 		</view>
 
 		<!-- 设置最小值和最大值 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">设置范围 (min=5, max=20)：</text>
+			<text class="label">设置范围 (min=5, max=20)：</text>
 			<uni-number-box v-model="data.value2" :min="5" :max="20" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value2 }}</text>
+			<text class="hint">当前值：{{ data.value2 }}</text>
 		</view>
 
 		<!-- 设置步长 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">步长为5 (step=5)：</text>
+			<text class="label">步长为5 (step=5)：</text>
 			<uni-number-box v-model="data.value3" :step="5" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value3 }}</text>
+			<text class="hint">当前值：{{ data.value3 }}</text>
 		</view>
 
 		<!-- 小数步长 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">小数步长 (step=0.1)：</text>
+			<text class="label">小数步长 (step=0.1)：</text>
 			<uni-number-box v-model="data.value4" :step="0.1" :min="0" :max="10" />
-			<text style="color: #999; margin-top: 5px;">当前值：{{ data.value4 }}</text>
+			<text class="hint">当前值：{{ data.value4 }}</text>
 		</view>
 
 		<!-- 禁用状态 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">禁用状态：</text>
+			<text class="label">禁用状态：</text>
 			<uni-number-box :value="5" :disabled="true" />
 		</view>
 
 		<!-- 自定义样式 btn-class -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">自定义按钮样式 (btn-class)：</text>
+			<text class="label">自定义按钮样式 (btn-class)：</text>
 			<uni-number-box v-model="data.value5" btn-class="custom-btn" />
 		</view>
 
 		<!-- 自定义样式 input-class -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">自定义输入框样式 (input-class)：</text>
+			<text class="label">自定义输入框样式 (input-class)：</text>
 			<uni-number-box v-model="data.value6" input-class="custom-input" />
 		</view>
 
 		<!-- 自定义样式组合 -->
 		<view style="margin-bottom: 20px;">
-			<text style="color: #666; margin-bottom: 10px;">自定义样式组合 (蓝色主题)：</text>
+			<text class="label">自定义样式组合 (蓝色主题)：</text>
 			<uni-number-box v-model="data.value7" btn-class="blue-btn" input-class="blue-input" icon-class="blue-icon" />
 		</view>
 
-		<!-- 暗黑模式 -->
+		<!-- 暗黑模式外观演示：此区域固定展示深色外观，不跟随系统主题 -->
 		<view style="margin-bottom: 20px; background-color: #1a1a1a; padding: 15px; border-radius: 8px;">
 			<text style="color: #fff; margin-bottom: 10px;">暗黑模式：</text>
 			<uni-number-box v-model="data.value8" btn-class="dark-btn" input-class="dark-input" icon-class="dark-icon" />
@@ -75,6 +75,12 @@
 </template>
 
 <script setup lang="uts">
+import { state } from '@/store/index.uts'
+
+const isDarkMode = computed((): boolean => {
+	return state.isDarkMode
+})
+
 type Data = {
 	value1 : number
 	value2 : number
@@ -107,6 +113,29 @@ defineExpose({
 </script>
 
 <style>
+.page {
+	background-color: var(--background-color, #f8f8f8);
+}
+
+.page-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: var(--text-color, #333333);
+	margin-bottom: 20px;
+}
+
+.label {
+	color: var(--text-color, #666666);
+	opacity: 0.75;
+	margin-bottom: 10px;
+}
+
+.hint {
+	color: var(--text-color, #999999);
+	opacity: 0.6;
+	margin-top: 5px;
+}
+
 .custom-btn {
 	background-color: #28a745;
 }

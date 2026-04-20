@@ -1,18 +1,24 @@
 <template>
-	<view style="flex: 1;position: relative;">
-		<text>标准uni-fab-button</text>
+	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
+		<text class="label">标准uni-fab-button</text>
 		<uni-fab-button></uni-fab-button>
-		<text>自定义fab样式</text>
+		<text class="label">自定义fab样式</text>
 		<uni-fab-button class="custom-class"></uni-fab-button>
-		<text>自定义plus样式</text>
+		<text class="label">自定义plus样式</text>
 		<uni-fab-button plus-class="custom-plus-class"></uni-fab-button>
-		<text>自定义fab和plus样式，变成一个16px的纯+</text>
+		<text class="label">自定义fab和plus样式，变成一个16px的纯+</text>
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
 		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="clickme"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
 	</view>
 </template>
 
 <script setup>
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed(() => {
+		return state.isDarkMode
+	})
+
 	const clickme = () => {
 		uni.showToast({
 			title: '点击了右下角的fab',
@@ -22,6 +28,12 @@
 </script>
 
 <style>
+	.page {
+		background-color: var(--background-color, #f8f8f8);
+	}
+	.label {
+		color: var(--text-color, #333333);
+	}
 	.custom-class{
 		background-color: green;
 		width: 20px;

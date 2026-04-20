@@ -1,11 +1,11 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex: 1;padding: 5px;">
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;padding: 15px 15px 30px 15px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view style="padding: 5px;">
+	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px 15px 30px 15px;">
 	<!-- #endif -->
-		<text>评分组件用于商品评价打分、服务态度评价、用户满意度等场景。\n
+		<text class="desc">评分组件用于商品评价打分、服务态度评价、用户满意度等场景。\n
 		高性能模式仅有一个text组件，不可修改评分，适合长列表中显示的场景。\n
 		普通模式可以通过点击星星进行评分，且专门调大字号、调宽间距以适合点击。
 		</text>
@@ -51,6 +51,11 @@
 	<!-- #endif -->
 </template>
 <script setup lang="uts">
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed((): boolean => {
+		return state.isDarkMode
+	})
 
 	const vModelRateValue = ref<number>(0)
 	const rateValue = ref<number>(0)
@@ -94,6 +99,12 @@
 	})
 </script>
 <style>
+.page {
+	background-color: var(--background-color, #ffffff);
+}
+.desc {
+	color: var(--text-color, #333333);
+}
 .custom-default{
 	color:black
 }
@@ -103,6 +114,7 @@
 .title{
 	font-weight: bold;
 	margin-top: 10px;
+	color: var(--text-color, #333333);
 }
 .star-active-class{
 	letter-spacing: 5px;

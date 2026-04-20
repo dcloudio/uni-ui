@@ -18,6 +18,7 @@
 	<navigator class="padding-bottom" url="/pages/time-format/time-format">time-format</navigator>
 	<navigator class="padding-bottom" url="/pages/index-bar/index-bar">index-bar</navigator>
 	<navigator class="padding-bottom" url="/pages/drag-cell/drag-cell">drag-cell</navigator>
+	<navigator class="padding-bottom" url="/pages/theme-change/theme-change">theme-change</navigator>
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>
 	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
 	<navigator class="padding-bottom" url="/pages/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>

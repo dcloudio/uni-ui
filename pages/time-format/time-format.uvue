@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page">
+  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
     <view class="section">
       <text class="section-title">当前时间不同格式</text>
       <view class="row">
@@ -77,6 +77,12 @@
 </template>
 
 <script setup lang="uts">
+  import { state } from '@/store/index.uts'
+
+  const isDarkMode = computed((): boolean => {
+    return state.isDarkMode
+  })
+
   const currentTimestamp = ref<number>(Date.now())
   const invalidTimestamp = ref<number>(NaN)
   let timer : number | null = null
@@ -183,10 +189,11 @@
   .page {
     flex: 1;
     padding: 12px;
+    background-color: var(--background-color, #f8f8f8);
   }
 
   .section {
-    background-color: #ffffff;
+    background-color: var(--list-background-color, #ffffff);
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 12px;
@@ -194,7 +201,7 @@
 
   .section-title {
     font-size: 14px;
-    color: #333333;
+    color: var(--text-color, #333333);
     font-weight: 500;
     margin-bottom: 10px;
   }
@@ -208,11 +215,12 @@
     margin-bottom: 6px;
     border-width: 1px;
     border-style: solid;
-    border-color: #dddddd;
+    border-color: var(--border-color, #dddddd);
     border-radius: 6px;
     height: 38px;
     padding-left: 10px;
     padding-right: 10px;
+    color: var(--text-color, #333333);
   }
 
   .row {
@@ -225,12 +233,14 @@
 
   .row-label {
     font-size: 13px;
-    color: #666666;
+    color: var(--text-color, #666666);
+    opacity: 0.75;
   }
 
   .tip-text {
     margin-top: 4px;
     font-size: 12px;
-    color: #999999;
+    color: var(--text-color, #999999);
+    opacity: 0.6;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<view style="flex: 1; flex-direction: column; position: relative;">
+	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; flex-direction: column; position: relative;">
 		<!-- 控制条 -->
 		<view class="control-bar">
 			<button class="control-btn" @click="toggleStyle">{{ useCustomStyle ? '默认样式' : '自定义样式' }}</button>
@@ -8,7 +8,7 @@
 		<list-view ref="listRef" style="flex: 1;" :scroll-into-view="indexViewID">
 			<sticky-section v-for="group in cityGroups" :key="group.index">
 				<sticky-header :id="'idx-' + group.index">
-					<view class="group-header" style="background-color: lightgray;">
+					<view class="group-header">
 						<text class="group-header-text">{{ group.index }}</text>
 					</view>
 				</sticky-header>
@@ -32,6 +32,11 @@
 
 <script lang="uts" setup>
 	import { cityGroups } from './cities.uts'
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed((): boolean => {
+		return state.isDarkMode
+	})
 
 	// 默认索引列表
 	const defaultIndexs = cityGroups.map((g) : string => g.index).join('\n')
@@ -81,10 +86,14 @@
 </script>
 
 <style>
+	.page {
+		background-color: var(--background-color, #ffffff);
+	}
+
 	.control-bar {
 		flex-direction: row;
 		padding: 10px;
-		background-color: #f5f5f5;
+		background-color: var(--background-color, #f5f5f5);
 	}
 
 	.control-btn {
@@ -94,7 +103,7 @@
 	}
 
 	.group-header {
-		background-color: #f5f5f5;
+		background-color: var(--background-color, #f5f5f5);
 		padding-left: 16px;
 		padding-top: 8px;
 		padding-bottom: 8px;
@@ -102,7 +111,8 @@
 
 	.group-header-text {
 		font-size: 14px;
-		color: #999999;
+		color: var(--text-color, #999999);
+		opacity: 0.7;
 		font-weight: bold;
 	}
 
@@ -110,14 +120,15 @@
 		padding-left: 16px;
 		padding-top: 14px;
 		padding-bottom: 14px;
+		background-color: var(--list-background-color, #ffffff);
 		border-bottom-width: 1px;
-		border-bottom-color: #eeeeee;
+		border-bottom-color: var(--border-color, #eeeeee);
 		border-bottom-style: solid;
 	}
 
 	.city-name {
 		font-size: 16px;
-		color: #333333;
+		color: var(--text-color, #333333);
 	}
 
 	.custom-indicator {

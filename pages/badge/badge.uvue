@@ -1,23 +1,23 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex: 1;padding: 5px;">
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;padding: 5px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view style="padding: 5px;">
+	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 5px;">
 	<!-- #endif -->
 	<uni-badge-view text="99+" >
 		<view style="width: 50px; height: 20px; background-color: green;"></view>
 	</uni-badge-view>
 	<!-- TODO 上面被注掉的代码，在Android上顶部被裁剪，但web上角标上部可以露出来不少，没有拉齐表现 -->
-		<text style="font-size: 18px; font-weight: bold; color: #333;margin-bottom: 20px;">Badge 组件演示</text>
+		<text class="page-title">Badge 组件演示</text>
 		<!-- 动态badge -->
 		<view style="margin-bottom: 20px;">
-			<text style=" color: #666;">badge动态设置text属性：</text>
-			<text style=" color: #666; margin-bottom: 10px;">输入0不显示badge，空字符串显示红点，输入其他显示文字</text>
+			<text class="label">badge动态设置text属性：</text>
+			<text class="label" style="margin-bottom: 10px;">输入0不显示badge，空字符串显示红点，输入其他显示文字</text>
 			<input
 				v-model="dynamicBadgeText"
 				placeholder="输入badge text属性"
-				style="border: 1px solid #ddd; border-radius: 4px; width: 200px;height: 24px;padding-left: 2px;"
+				class="demo-input"
 			/>
 			<uni-badge-view :text="dynamicBadgeText" >
 				<view style="width: 20px;height: 20px;background-color: green;"></view>
@@ -26,7 +26,7 @@
 
 		<!-- 不显示badge -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">不显示badge：</text>
+			<text class="label" style="margin-bottom: 10px;">不显示badge：</text>
 			<uni-badge-view text="0">
 				<view style="width: 20px;height: 16px;background-color: green;"></view>
 			</uni-badge-view>
@@ -34,29 +34,29 @@
 		
 		<!-- 不包裹内容 -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的圆点：</text>
+			<text class="label" style="margin-bottom: 10px;">不包裹内容的圆点：</text>
 			<uni-badge-view text="">
 			</uni-badge-view>
 		</view>
 		
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">不包裹内容的文字：</text>
+			<text class="label" style="margin-bottom: 10px;">不包裹内容的文字：</text>
 			<uni-badge-view text="1" badge-style="align-self:flex-start;"/> <!-- 在flex方向为竖时，默认横向拉伸，需要设flex-start避免 -->
 		</view>
 
 		<!-- 文字样式 -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">文字样式：</text>
+			<text class="label" style="margin-bottom: 10px;">文字样式：</text>
 			<uni-badge-view text="3" >
 				<view style="width: 80px;">
-					<text>20px区域</text>
+					<text class="label">20px区域</text>
 				</view>
 			</uni-badge-view>
 		</view>
 
 		<!-- text为99+ -->
 		<view style="margin-bottom: 10px;overflow: visible;"> <!--  添加 overflow: visible 兼容内部宽度不够使角标被裁剪 -->
-			<text style="color: #666; margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
+			<text class="label" style="margin-bottom: 10px;">99+是自己写的，不会自动计算max</text>
 			<uni-badge-view text="99+" >
 				<view style="width: 80px; background-color: #6c757d; ">
 					<text style="color: white;">50px区域</text>
@@ -70,7 +70,7 @@
 
 		<!-- 文字样式自定义badge-class -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">自定义badge-class（绿色badge）：</text>
+			<text class="label" style="margin-bottom: 10px;">自定义badge-class（绿色badge）：</text>
 			<uni-badge-view text="NEW" badge-class="custom-badge-text">
 				<view style="height: 20px; background-color: #ffc107; ">
 					<text>20px区域</text>
@@ -80,7 +80,7 @@
 
 		<!-- 文字样式自定义badge-style -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">自定义样式badge-style（紫色badge）：</text>
+			<text class="label" style="margin-bottom: 10px;">自定义样式badge-style（紫色badge）：</text>
 			<uni-badge-view text="HOT" badge-style="background-color: #6f42c1; color: yellow;">
 				<view style="height: 20px; background-color: #dc3545; ">
 					<text style="color: white;">20px区域</text>
@@ -90,7 +90,7 @@
 
 		<!-- 红点样式 -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">红点默认样式：</text>
+			<text class="label" style="margin-bottom: 10px;">红点默认样式：</text>
 			<uni-badge-view>
 				<button size="mini">按钮</button>
 			</uni-badge-view>
@@ -98,7 +98,7 @@
 
 		<!-- 空文字测试 -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">空文字（红点模式）：</text>
+			<text class="label" style="margin-bottom: 10px;">空文字（红点模式）：</text>
 			<uni-badge-view text="">
 				<view style="height: 20px; background-color: #17a2b8; border-radius: 4px; ">
 					<text style="color: white;">20px区域</text>
@@ -109,7 +109,7 @@
 
 		<!-- 红点自定义badge-class -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">dot自定义badge-class（绿色badge）：</text>
+			<text class="label" style="margin-bottom: 10px;">dot自定义badge-class（绿色badge）：</text>
 			<uni-badge-view badge-class="custom-badge-dot">
 				<view style="height: 20px; background-color: #ffc107; ">
 					<text>20px区域</text>
@@ -119,7 +119,7 @@
 
 		<!-- 红点自定义badge-style -->
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">dot自定义badge-style（紫色badge）：</text>
+			<text class="label" style="margin-bottom: 10px;">dot自定义badge-style（紫色badge）：</text>
 			<uni-badge-view badge-style="background-color: #6f42c1;">
 				<view style="height: 20px; background-color: #dc3545; ">
 					<text style="color: white;">20px区域</text>
@@ -128,7 +128,7 @@
 		</view>
 		
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">按钮中badge文字：</text>
+			<text class="label" style="margin-bottom: 10px;">按钮中badge文字：</text>
 			<!-- <button size="mini">按钮<uni-badge-view text="9"/></button> -->
 			<!-- TODO Android的button不支持子组件，上述badge样式错乱。先遗留，等button用前端重构-->
 			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
@@ -144,7 +144,7 @@
 		</view>
 		
 		<view style="margin-bottom: 10px;">
-			<text style=" color: #666; margin-bottom: 10px;">按钮中badge红点：</text>
+			<text class="label" style="margin-bottom: 10px;">按钮中badge红点：</text>
 			<view	style="width: 150px; height: 30px; background-color: lightgray; border-radius: 4px; align-items: center; justify-content: center;flex-direction: row;">
 				<text>按钮&nbsp;</text>
 				<uni-badge-view/>
@@ -160,6 +160,12 @@
 </template>
 
 <script setup lang="uts">
+import { state } from '@/store/index.uts'
+
+const isDarkMode = computed((): boolean => {
+	return state.isDarkMode
+})
+
 // 动态badge的text值
 const dynamicBadgeText = ref<string>("0")
 
@@ -169,6 +175,33 @@ const dynamicBadgeText = ref<string>("0")
 </script>
 
 <style>
+	.page {
+		background-color: var(--background-color, #f8f8f8);
+	}
+
+	.page-title {
+		font-size: 18px;
+		font-weight: bold;
+		color: var(--text-color, #333333);
+		margin-bottom: 20px;
+	}
+
+	.label {
+		color: var(--text-color, #666666);
+		opacity: 0.75;
+	}
+
+	.demo-input {
+		border-width: 1px;
+		border-style: solid;
+		border-color: var(--border-color, rgba(0, 0, 0, 0.06));
+		border-radius: 4px;
+		width: 200px;
+		height: 24px;
+		padding-left: 2px;
+		color: var(--text-color, #333333);
+	}
+
 	.custom-badge-text {
 		background-color: #28a745;
 		color: black;

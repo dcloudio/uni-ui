@@ -78,6 +78,12 @@
 			}
 		},
 		{
+			"path": "pages/theme-change/theme-change",
+			"style": {
+				"navigationBarTitleText": "theme-change"
+			}
+		},
+		{
 			"path": "pages/tab-bar/tab-bar",
 			"style": {
 				"navigationBarTitleText": "首页"

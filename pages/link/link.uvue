@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page">
+  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
     <view class="section">
       <text class="section-title">基础用法</text>
       <uni-link href="https://uniapp.dcloud.net.cn" @error="onError">https://uniapp.dcloud.net.cn</uni-link>
@@ -43,6 +43,12 @@
 </template>
 
 <script setup lang="uts">
+  import { state } from '@/store/index.uts'
+
+  const isDarkMode = computed((): boolean => {
+    return state.isDarkMode
+  })
+
   const lastEvent = ref<string>('暂无事件')
 
   function onError(message : string) {
@@ -55,18 +61,19 @@
   .page {
     flex: 1;
     padding: 12px;
+    background-color: var(--background-color, #f8f8f8);
   }
 
   .section {
     padding: 12px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--list-background-color, #ffffff);
     margin-bottom: 12px;
   }
 
   .section-title {
     font-size: 14px;
-    color: #333333;
+    color: var(--text-color, #333333);
     font-weight: 500;
     margin-bottom: 8px;
   }
@@ -74,7 +81,8 @@
   .tip-text {
     margin-top: 8px;
     font-size: 12px;
-    color: #999999;
+    color: var(--text-color, #999999);
+    opacity: 0.6;
   }
 
   .custom-link {
@@ -85,12 +93,12 @@
   .log-section {
     padding: 12px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--list-background-color, #ffffff);
   }
 
   .log-title {
     font-size: 13px;
-    color: #333333;
+    color: var(--text-color, #333333);
     font-weight: 500;
     margin-bottom: 8px;
   }

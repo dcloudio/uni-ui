@@ -1,42 +1,49 @@
-<script lang="uts">
-  // #ifdef APP-ANDROID || APP-HARMONY
+<script setup lang="uts">
+	import { checkSystemTheme } from '@/store/index.uts'
+
+	// #ifdef APP-ANDROID || APP-HARMONY
 	let firstBackTime = 0
-  // #endif
-	export default {
-		onLaunch: function () {
-			console.log('App Launch')
-		},
-		onShow: function () {
-			console.log('App Show')
-		},
-		onHide: function () {
-			console.log('App Hide')
-		},
-		// #ifdef APP-ANDROID || APP-HARMONY
-		onLastPageBackPress: function () {
-			console.log('App LastPageBackPress')
-			if (firstBackTime == 0) {
-				uni.showToast({
-					title: '再按一次退出应用',
-					position: 'bottom',
-				})
-				firstBackTime = Date.now()
-				setTimeout(() => {
-					firstBackTime = 0
-				}, 2000)
-			} else if (Date.now() - firstBackTime < 2000) {
-				firstBackTime = Date.now()
-				uni.exit()
-			}
-		},
-		// #endif
-		onExit: function () {
-			console.log('App Exit')
-		},
-	}
+	// #endif
+
+	onLaunch(() => {
+		console.log('App Launch')
+		checkSystemTheme()
+	})
+
+	onAppShow(() => {
+		console.log('App Show')
+	})
+
+	onAppHide(() => {
+		console.log('App Hide')
+	})
+
+	// #ifdef APP-ANDROID || APP-HARMONY
+	onLastPageBackPress(() => {
+		console.log('App LastPageBackPress')
+		if (firstBackTime == 0) {
+			uni.showToast({
+				title: '再按一次退出应用',
+				position: 'bottom',
+			})
+			firstBackTime = Date.now()
+			setTimeout(() => {
+				firstBackTime = 0
+			}, 2000)
+		} else if (Date.now() - firstBackTime < 2000) {
+			firstBackTime = Date.now()
+			uni.exit()
+		}
+	})
+
+	onExit(() => {
+		console.log('App Exit')
+	})
+	// #endif
 </script>
 
 <style>
+	@import "./common/uni.css";
 	/*每个页面公共css */
 	.uni-row {
 		flex-direction: row;

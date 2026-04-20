@@ -1,6 +1,6 @@
 <template>
 	<!-- 正常使用场景应把uni-nav-bar放在template的根节点，下方并列方式scroll-view滚动容器。本示例为了演示多种导航栏效果把导航栏组件放到了scroll-view里了 -->
-	<scroll-view style="flex: 1;padding-bottom: var(--uni-safe-area-inset-bottom);">
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;padding-bottom: var(--uni-safe-area-inset-bottom);">
 		<uni-nav-bar></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="black" title="黑色标题"></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="white" title="青色背景白色标题" style="background-color: cyan;"></uni-nav-bar>
@@ -52,6 +52,12 @@
 </template>
 
 <script setup>
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed(() => {
+		return state.isDarkMode
+	})
+
 	function clickButton() {
 		uni.showToast({
 			title: '点击了按钮'
@@ -60,6 +66,9 @@
 </script>
 
 <style>
+.page {
+	background-color: var(--background-color, #ffffff);
+}
 .left-title{
 	justify-content: flex-start;
 }

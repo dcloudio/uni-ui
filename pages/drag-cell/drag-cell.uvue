@@ -1,9 +1,9 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex: 1; padding: 15px;">
+	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
 	<!-- #endif -->
 		<!-- #ifndef APP -->
-		<view style="padding: 15px;">
+		<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
 		<!-- #endif -->
 			<text class="page-title">drag-cell 拖拽排序组件</text>
 
@@ -147,6 +147,12 @@
 </template>
 
 <script setup lang="uts">
+	import { state } from '@/store/index.uts'
+
+	const isDarkMode = computed((): boolean => {
+		return state.isDarkMode
+	})
+
 	const maxImageCount = 9
 
 	const tagList = ref<string[]>(['标签1', '标签2', '标签3', '标签4'])
@@ -322,17 +328,21 @@
 </script>
 
 <style>
+	.page {
+		background-color: var(--background-color, #f8f8f8);
+	}
+
 	.page-title {
 		font-size: 24px;
 		font-weight: bold;
-		color: #333333;
+		color: var(--text-color, #333333);
 		margin-bottom: 20px;
 		text-align: center;
 	}
 
 	.section {
 		margin-bottom: 30px;
-		background-color: #ffffff;
+		background-color: var(--list-background-color, #ffffff);
 		border-radius: 8px;
 		padding: 15px;
 	}
@@ -346,7 +356,8 @@
 
 	.section-desc {
 		font-size: 12px;
-		color: #666666;
+		color: var(--text-color, #666666);
+		opacity: 0.7;
 		margin-bottom: 15px;
 	}
 
@@ -573,7 +584,8 @@
 
 	.result-text {
 		font-size: 12px;
-		color: #666666;
+		color: var(--text-color, #666666);
+		opacity: 0.7;
 		margin-top: 10px;
 	}
 </style>
