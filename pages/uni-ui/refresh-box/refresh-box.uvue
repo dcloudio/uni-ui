@@ -1,5 +1,5 @@
 <template>
-  <view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
+  <view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
     <scroll-view
       style="flex: 1;"
       :refresher-enabled="true"
@@ -257,9 +257,6 @@ defineExpose({
 </script>
 
 <style>
-.page {
-  background-color: var(--background-color, #ffffff);
-}
 .section-label {
   margin: 5px;
   color: var(--text-color, #333333);

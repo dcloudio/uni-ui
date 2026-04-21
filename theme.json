@@ -1,0 +1,10 @@
+{
+    "light": {
+        "backgroundColor": "#efeff4",
+        "backgroundColorContent": "#efeff4"
+    },
+    "dark": {
+        "backgroundColor": "#1F1F1F",
+        "backgroundColorContent": "#646464"
+    }
+}

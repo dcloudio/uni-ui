@@ -1,5 +1,5 @@
 <template>
-	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
+	<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
 		<text class="label">标准uni-fab-button</text>
 		<uni-fab-button></uni-fab-button>
 		<text class="label">自定义fab样式</text>
@@ -28,9 +28,6 @@
 </script>
 
 <style>
-	.page {
-		background-color: var(--background-color, #f8f8f8);
-	}
 	.label {
 		color: var(--text-color, #333333);
 	}

@@ -1,5 +1,5 @@
 <template>
-	<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; flex-direction: column; position: relative;">
+	<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; flex-direction: column; position: relative;">
 		<!-- 控制条 -->
 			<view class="control-bar">
 				<button class="control-btn" @click="toggleStyle">{{ data.useCustomStyle ? '默认样式' : '自定义样式' }}</button>
@@ -101,10 +101,6 @@
 </script>
 
 <style>
-	.page {
-		background-color: var(--background-color, #ffffff);
-	}
-
 	.control-bar {
 		flex-direction: row;
 		padding: 10px;

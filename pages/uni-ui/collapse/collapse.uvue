@@ -204,7 +204,6 @@
   .page {
     flex: 1;
     padding: 12px;
-    background-color: var(--background-color, #f3f4f6);
   }
 
   .section {

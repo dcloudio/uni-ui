@@ -1,9 +1,9 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
+	<scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
 	<!-- #endif -->
 		<!-- #ifndef APP -->
-		<view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
+		<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
 		<!-- #endif -->
 			<text class="page-title">drag-cell 拖拽排序组件</text>
 
@@ -343,10 +343,6 @@
 </script>
 
 <style>
-	.page {
-		background-color: var(--background-color, #f8f8f8);
-	}
-
 	.page-title {
 		font-size: 24px;
 		font-weight: bold;

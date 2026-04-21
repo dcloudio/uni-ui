@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'">
     <view class="section">
       <text class="section-title">基础用法</text>
       <uni-link href="https://uniapp.dcloud.net.cn" @error="onError">https://uniapp.dcloud.net.cn</uni-link>
@@ -72,7 +72,6 @@
   .page {
     flex: 1;
     padding: 12px;
-    background-color: var(--background-color, #f8f8f8);
   }
 
   .section {

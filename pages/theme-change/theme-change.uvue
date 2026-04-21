@@ -126,7 +126,6 @@
   .page {
     flex: 1;
     padding: 15px;
-    background-color: var(--background-color, #f8f8f8);
   }
 
   .item-box {
