@@ -1,5 +1,5 @@
 <template>
-  <scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <scroll-view>
     <view class="section">
       <text class="section-title">基础用法</text>
       <uni-link href="https://uniapp.dcloud.net.cn" @error="onError">https://uniapp.dcloud.net.cn</uni-link>
@@ -43,12 +43,6 @@
 </template>
 
 <script setup lang="uts">
-  import { state } from '@/store/index.uts'
-
-  const isDarkMode = computed((): boolean => {
-    return state.isDarkMode
-  })
-
   type Data = {
     lastEvent: string
   }
@@ -91,7 +85,7 @@
   .tip-text {
     margin-top: 8px;
     font-size: 12px;
-    color: var(--text-color, #999999);
+    color: var(--text-color, #333333);
     opacity: 0.6;
   }
 

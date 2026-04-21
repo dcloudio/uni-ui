@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <scroll-view class="page">
     <view class="section">
       <text class="section-title">手风琴模式</text>
       <uni-collapse :accordion="true">
@@ -119,12 +119,6 @@
 </template>
 
 <script setup lang="uts">
-  import { state } from '@/store/index.uts'
-
-  const isDarkMode = computed((): boolean => {
-    return state.isDarkMode
-  })
-
   type CategoryItem = {
     title : string
   }

@@ -1,5 +1,5 @@
 <template>
-  <view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
+  <view style="flex: 1;">
     <scroll-view
       style="flex: 1;"
       :refresher-enabled="true"
@@ -127,12 +127,6 @@
 </template>
 
 <script setup lang="uts">
-import { state } from '@/store/index.uts'
-
-const isDarkMode = computed((): boolean => {
-  return state.isDarkMode
-})
-
 type Data = {
   listCount1: number
   refreshing1: boolean
@@ -265,7 +259,7 @@ defineExpose({
   margin: 5px 10px;
 }
 .text {
-  color: var(--text-color, #666666);
+  color: var(--text-color, #333333);
   font-size: 14px;
 }
 

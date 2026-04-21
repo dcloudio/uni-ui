@@ -1,9 +1,9 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
+	<scroll-view style="flex: 1; padding: 15px;">
 	<!-- #endif -->
 		<!-- #ifndef APP -->
-		<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
+		<view style="padding: 15px;">
 		<!-- #endif -->
 			<text class="page-title">drag-cell 拖拽排序组件</text>
 
@@ -147,12 +147,6 @@
 </template>
 
 <script setup lang="uts">
-	import { state } from '@/store/index.uts'
-
-	const isDarkMode = computed((): boolean => {
-		return state.isDarkMode
-	})
-
 	const maxImageCount = 9
 
 	type Data = {
@@ -367,7 +361,7 @@
 
 	.section-desc {
 		font-size: 12px;
-		color: var(--text-color, #666666);
+		color: var(--text-color, #333333);
 		opacity: 0.7;
 		margin-bottom: 15px;
 	}
@@ -595,7 +589,7 @@
 
 	.result-text {
 		font-size: 12px;
-		color: var(--text-color, #666666);
+		color: var(--text-color, #333333);
 		opacity: 0.7;
 		margin-top: 10px;
 	}

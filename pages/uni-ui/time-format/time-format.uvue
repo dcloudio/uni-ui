@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <scroll-view class="page">
     <view class="section">
       <text class="section-title">当前时间不同格式</text>
       <view class="row">
@@ -77,12 +77,6 @@
 </template>
 
 <script setup lang="uts">
-  import { state } from '@/store/index.uts'
-
-  const isDarkMode = computed((): boolean => {
-    return state.isDarkMode
-  })
-
   type Data = {
     currentTimestamp: number
     invalidTimestamp: number
@@ -247,14 +241,14 @@
 
   .row-label {
     font-size: 13px;
-    color: var(--text-color, #666666);
+    color: var(--text-color, #333333);
     opacity: 0.75;
   }
 
   .tip-text {
     margin-top: 4px;
     font-size: 12px;
-    color: var(--text-color, #999999);
+    color: var(--text-color, #333333);
     opacity: 0.6;
   }
 </style>

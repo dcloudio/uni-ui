@@ -1,5 +1,5 @@
 <template>
-	<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
+	<view style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
 		<text class="label">标准uni-fab-button</text>
 		<uni-fab-button></uni-fab-button>
 		<text class="label">自定义fab样式</text>
@@ -13,12 +13,6 @@
 </template>
 
 <script setup>
-	import { state } from '@/store/index.uts'
-
-	const isDarkMode = computed(() => {
-		return state.isDarkMode
-	})
-
 	const clickme = () => {
 		uni.showToast({
 			title: '点击了右下角的fab',
