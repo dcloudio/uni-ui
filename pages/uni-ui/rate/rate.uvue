@@ -1,9 +1,9 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;padding: 15px 15px 30px 15px;">
+	<scroll-view style="flex: 1;padding: 15px 15px 30px 15px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px 15px 30px 15px;">
+	<view style="padding: 15px 15px 30px 15px;">
 	<!-- #endif -->
 		<text class="desc">评分组件用于商品评价打分、服务态度评价、用户满意度等场景。\n
 		高性能模式仅有一个text组件，不可修改评分，适合长列表中显示的场景。\n
@@ -51,12 +51,6 @@
 	<!-- #endif -->
 </template>
 <script setup lang="uts">
-	import { state } from '@/store/index.uts'
-
-	const isDarkMode = computed((): boolean => {
-		return state.isDarkMode
-	})
-
 	type Data = {
 		vModelRateValue: number
 		rateValue: number

@@ -1,9 +1,9 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1; padding: 15px;">
+	<scroll-view style="flex: 1; padding: 15px;">
 	<!-- #endif -->
 	<!-- #ifndef APP -->
-	<view :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="padding: 15px;">
+	<view style="padding: 15px;">
 	<!-- #endif -->
 		<text class="page-title">NumberBox 数字输入框</text>
 
@@ -75,12 +75,6 @@
 </template>
 
 <script setup lang="uts">
-import { state } from '@/store/index.uts'
-
-const isDarkMode = computed((): boolean => {
-	return state.isDarkMode
-})
-
 type Data = {
 	value1 : number
 	value2 : number
@@ -121,13 +115,13 @@ defineExpose({
 }
 
 .label {
-	color: var(--text-color, #666666);
+	color: var(--text-color, #333333);
 	opacity: 0.75;
 	margin-bottom: 10px;
 }
 
 .hint {
-	color: var(--text-color, #999999);
+	color: var(--text-color, #333333);
 	opacity: 0.6;
 	margin-top: 5px;
 }
