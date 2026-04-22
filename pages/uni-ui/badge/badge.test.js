@@ -16,6 +16,7 @@ describe('badge', () => {
   beforeEach(async () => {
     page = await program.reLaunch(PAGE_PATH)
     await page.waitFor('view')
+    await page.waitFor(1000)
   })
 
   async function setPageData(newData) {
