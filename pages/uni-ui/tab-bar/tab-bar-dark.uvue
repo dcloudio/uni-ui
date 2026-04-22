@@ -51,10 +51,6 @@
 </template>
 
 <script setup lang="uts">
-	import uniTab from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab.uvue'
-	import uniTabBar from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-bar.uvue'
-	import uniTabItem from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-item.uvue'
-	import uniTabContent from '@/uni_modules/uni-tab-bar/components/uni-tab-bar/uni-tab-content.uvue'
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'

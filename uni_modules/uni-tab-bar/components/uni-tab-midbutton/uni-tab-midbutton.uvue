@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="uts">
-import { UniTabBarLayout } from './types.uts'
+import { UniTabBarLayout } from '../types.uts'
 
 type Props = {
 	width?: number,

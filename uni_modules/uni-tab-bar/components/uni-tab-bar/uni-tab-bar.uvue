@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="uts">
-import { UniTabBarLayout, UniTabListItemLayout } from './types.uts'
+import { UniTabBarLayout, UniTabListItemLayout } from '../types.uts'
 
 const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
 	tabListBaseHeight: 50,

@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="uts">
-import { UniTabListItemLayout } from './types.uts'
+import { UniTabListItemLayout } from '../types.uts'
 
 defineOptions({
 		externalClasses: ['badge-class']
