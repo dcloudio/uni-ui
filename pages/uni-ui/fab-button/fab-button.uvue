@@ -24,7 +24,6 @@
 <style>
 	.label {
 		color: var(--text-color, #333333);
-		display: block;
 		margin-top: 24px;
 		margin-bottom: 12px;
 	}
