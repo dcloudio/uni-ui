@@ -1,6 +1,6 @@
 <template>
 	<view style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
-		<text class="label">标准uni-fab-button</text>
+		<text class="label first-label">标准uni-fab-button</text>
 		<uni-fab-button></uni-fab-button>
 		<text class="label">自定义fab样式</text>
 		<uni-fab-button class="custom-class"></uni-fab-button>
@@ -24,6 +24,12 @@
 <style>
 	.label {
 		color: var(--text-color, #333333);
+		display: block;
+		margin-top: 24px;
+		margin-bottom: 12px;
+	}
+	.first-label {
+		margin-top: 0;
 	}
 	.custom-class{
 		background-color: green;
