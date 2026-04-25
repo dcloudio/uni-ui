@@ -16,4 +16,4 @@
 支持属性：
 - hideDefaultBack: 隐藏返回箭头
 - title: 通过属性方便设置标题。如果传入mid slot，则不生效
-- navigationBarTextStyle: 返回箭头和属性设置的标题，它们的颜色均由该属性控制，可选 white|black 。在非MP平台，不传入时可自动获取页面pageStyle的默认值
+- navigationBarTextStyle: 返回箭头和属性设置的标题，它们的颜色均由该属性控制，可选 white|black
