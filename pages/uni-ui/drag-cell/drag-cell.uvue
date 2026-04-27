@@ -230,7 +230,7 @@
 			placeholderText: '请输入标签内容',
 			confirmText: '确定',
 			cancelText: '取消',
-			success: (res : ShowModalSuccess) => {
+			success: (res) => {
 				if (res.confirm != true) {
 					return
 				}
