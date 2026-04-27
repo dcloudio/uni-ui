@@ -140,6 +140,14 @@
 	}
 
 	const onTouchMove = (e : UniTouchEvent) => {
+		// #ifdef APP && UNI-APP-X
+		e.preventDefault()
+		// #endif
+		// #ifdef WEB && UNI-APP-X
+		if (e.cancelable) {
+			e.preventDefault()
+		}
+		// #endif
 		const touch = e.touches[0]
 		const idx = getIndexFromY(touch.clientY)
 		const newIndex = cachedIndexList[idx]
