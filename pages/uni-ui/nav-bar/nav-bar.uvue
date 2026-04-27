@@ -1,7 +1,7 @@
 <template>
 	<!-- 正常使用场景应把uni-nav-bar放在template的根节点，下方并列方式scroll-view滚动容器。本示例为了演示多种导航栏效果把导航栏组件放到了scroll-view里了 -->
 	<scroll-view style="flex: 1;padding-bottom: var(--uni-safe-area-inset-bottom);">
-		<uni-nav-bar></uni-nav-bar>
+		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle"></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="black" title="黑色标题"></uni-nav-bar>
 		<uni-nav-bar navigationBarTextStyle="white" title="青色背景白色标题" style="background-color: cyan;"></uni-nav-bar>
 		<uni-nav-bar :navigationBarTextStyle="navigationBarTextStyle" title="下边带灰线" style="border-bottom: 0.5px #ccc solid;"></uni-nav-bar>
@@ -52,13 +52,23 @@
 </template>
 
 <script setup>
-	const navigationBarTextStyle = 'black'
+	import { state } from '@/store/index';
+
+	const navigationBarTextStyle = ref('black')
 
 	function clickButton() {
 		uni.showToast({
 			title: '点击了按钮'
 		});
 	}
+
+	watch((): boolean => state.isDarkMode, (newVal: boolean) => {
+		if (newVal) {
+			navigationBarTextStyle.value = 'white'
+		} else {
+			navigationBarTextStyle.value = 'black'
+		}
+	}, { immediate: true })
 </script>
 
 <style>
