@@ -17,3 +17,5 @@
 - hideDefaultBack: 隐藏返回箭头
 - title: 通过属性方便设置标题。如果传入mid slot，则不生效
 - navigationBarTextStyle: 返回箭头和属性设置的标题，它们的颜色均由该属性控制，可选 white|black
+
+本组件默认没有背景色，即透明，会透显页面的背景色。开发者可通过组件的class自行设置背景色

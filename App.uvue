@@ -7,6 +7,11 @@
 
 	onLaunch(() => {
 		console.log('App Launch')
+		// #ifdef APP
+		uni.setAppTheme({
+			theme:"auto"
+		})
+		// #endif
 		checkSystemTheme()
 	})
 

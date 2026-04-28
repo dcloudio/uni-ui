@@ -11,6 +11,7 @@
 	"quickapp": {},
 	/* 小程序特有相关 */
 	"mp-weixin": {
+		"darkmode": true,
 		"appid": "wx3acd2e1222cca0c2",
 		"setting": {
 			"urlCheck": false
@@ -75,5 +76,8 @@
 			],
 			"no-debug": true
 		}
+	},
+	"web": {
+		"darkmode": true
 	}
 }
