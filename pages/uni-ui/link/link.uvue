@@ -20,10 +20,9 @@
       <text class="section-title">target="_self" (默认)</text>
       <view class="link-block">
         <uni-link href="https://uniapp.dcloud.net.cn" target="_self" @error="onError" >
-          在 webview 中打开
+          在内置 webview 中打开
         </uni-link>
       </view>
-      <text class="tip-text">小程序和 APP 使用 webview 页面打开链接</text>
     </view>
 
     <view class="section">
@@ -33,7 +32,17 @@
           使用外部浏览器打开
         </uni-link>
       </view>
-      <text class="tip-text">APP 使用 openSchema 插件，小程序复制链接提示，Web 新窗口打开</text>
+      <text class="tip-text">APP 使用 openSchema 插件，小程序回退到内置 webview 打开，Web 打开新页签</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">target="_blank" 且 失败回退策略为复制URL</text>
+      <view class="link-block">
+        <uni-link href="https://uniapp.dcloud.net.cn" target="_blank" blankFallback="copy-link-modal" @error="onError" >
+          使用外部浏览器打开
+        </uni-link>
+      </view>
+      <text class="tip-text">使用外部浏览器打开失败时，回退为复制URL到剪贴板且弹框提示用户手动粘贴URL到浏览器</text>
     </view>
 
     <view class="section">
@@ -63,7 +72,7 @@
 
   function onError(message : string) {
     data.lastEvent = `error: ${message}`
-    console.log(`[link] error: ${message}`)
+    console.error(`[link] error: ${message}`)
   }
 
   defineExpose({
