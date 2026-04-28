@@ -24,19 +24,19 @@
 				{
 					"path": "index-bar/index-bar",
 					"style": {
-						"navigationBarTitleText": "index-bar"
+						"navigationBarTitleText": "uni-index-bar"
 					}
 				},
 				{
 					"path": "rate/rate",
 					"style": {
-						"navigationBarTitleText": "rate"
+						"navigationBarTitleText": "uni-rate"
 					}
 				},
 				{
 					"path": "refresh-box/refresh-box",
 					"style": {
-						"navigationBarTitleText": "下拉刷新组件"
+						"navigationBarTitleText": "uni-refresh-box"
 					}
 				},
 				{
@@ -48,79 +48,84 @@
 				{
 					"path": "badge/badge",
 					"style": {
-						"navigationBarTitleText": "badge"
+						"navigationBarTitleText": "uni-badge-view"
 					}
 				},
 				{
 					"path": "fab-button/fab-button",
 					"style": {
-						"navigationBarTitleText": "fab-button"
+						"navigationBarTitleText": "uni-fab-button"
 					}
 				},
 				{
 					"path": "number-box/number-box",
 					"style": {
-						"navigationBarTitleText": "number-box"
+						"navigationBarTitleText": "uni-number-box"
 					}
 				},
 				{
 					"path": "collapse/collapse",
 					"style": {
-						"navigationBarTitleText": "collapse"
+						"navigationBarTitleText": "uni-collapse"
 					}
 				},
 				{
 					"path": "link/link",
 					"style": {
-						"navigationBarTitleText": "link"
+						"navigationBarTitleText": "uni-link"
 					}
 				},
 				{
 					"path": "time-format/time-format",
 					"style": {
-						"navigationBarTitleText": "time-format"
+						"navigationBarTitleText": "uni-time-format"
 					}
 				},
 				{
 					"path": "drag-cell/drag-cell",
 					"style": {
-						"navigationBarTitleText": "drag-cell"
+						"navigationBarTitleText": "uni-drag-cell"
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar",
 					"style": {
-						"navigationBarTitleText": "首页"
+						"navigationBarTitleText": "uni-tab-bar",
+						"disableScroll": true
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-dark",
 					"style": {
-						"navigationBarTitleText": "暗黑首页",
+						"navigationBarTitleText": "uni-tab-bar-dark",
 						"navigationBarBackgroundColor": "#0f172a",
 						"navigationBarTextStyle": "white",
-						"backgroundColorContent": "#0f172a"
+						"backgroundColorContent": "#0f172a",
+						"disableScroll": true
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-custom",
 					"style": {
-						"navigationBarTitleText": "精选",
+						"navigationBarTitleText": "uni-tab-bar-custom",
 						"navigationBarBackgroundColor": "#dff3e8",
 						"navigationBarTextStyle": "black",
-						"backgroundColorContent": "#dff3e8"
+						"backgroundColorContent": "#dff3e8",
+						"disableScroll": true
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
-						"navigationBarTitleText": "mid-button"
+						"navigationBarTitleText": "uni-tab-bar-midbutton",
+						"disableScroll": true
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-midbutton-notch",
 					"style": {
-						"navigationBarTitleText": "mid-button-notch"
+						"navigationBarTitleText": "uni-tab-bar-midbutton-notch",
+						"disableScroll": true
 					}
 				}
 			]
