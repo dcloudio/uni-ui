@@ -23,6 +23,11 @@
      * @default "_self"
      */
     target?: '_blank' | '_self'
+    /**
+     * @description `target="_blank"`失败时，可以通过本属性控制失败回退策略。"turn-self"使用_self方式打开；"copy-link-modal"复制链接并弹框提醒；"none"不回退，触发失败回调
+     * @default "turn-self"
+     */
+    blankFallback: 'turn-self' | 'copy-link-modal' | 'none'
   }
 
   type LocaleType = 'zh-Hans' | 'zh-Hant' | 'en' | 'fr' | 'la'
@@ -39,7 +44,8 @@
 
   const props = withDefaults(defineProps<Props>(), {
     href: '',
-    target: '_self'
+    target: '_self',
+		blankFallback: 'turn-self'
   })
 
   const emit = defineEmits<{
@@ -76,7 +82,7 @@
       return {
         emptyHref: '链接地址不能为空',
         popupBlocked: '浏览器拦截了新窗口',
-        internalOpenFailed: '页面内打开失败',
+        internalOpenFailed: '应用中未找到uni-link组件下的link-webview页面',
         copiedOpenInBrowserPrefix: '已复制链接，请使用外部浏览器打开：',
         copyFailedOpenInBrowser: '复制链接失败，请手动复制链接并使用外部浏览器打开'
       }
@@ -86,7 +92,7 @@
       return {
         emptyHref: '連結地址不能為空',
         popupBlocked: '瀏覽器封鎖了新視窗',
-        internalOpenFailed: '頁面內開啟失敗',
+        internalOpenFailed: '應用中未找到 uni-link 組件下的 link-webview 頁面',
         copiedOpenInBrowserPrefix: '已複製連結，請使用外部瀏覽器開啟：',
         copyFailedOpenInBrowser: '複製連結失敗，請手動複製連結並使用外部瀏覽器開啟'
       }
@@ -96,7 +102,7 @@
       return {
         emptyHref: 'L’URL ne peut pas être vide',
         popupBlocked: 'Le navigateur a bloqué la nouvelle fenêtre',
-        internalOpenFailed: 'Échec de l’ouverture dans la page intégrée',
+        internalOpenFailed: 'Échec de l\'ouverture de la page @uni_modules/uni-link/pages/link-webview',
         copiedOpenInBrowserPrefix: 'Le lien a été copié. Veuillez l’ouvrir dans un navigateur externe :',
         copyFailedOpenInBrowser: 'Échec de la copie du lien. Veuillez le copier manuellement et l’ouvrir dans un navigateur externe.'
       }
@@ -106,7 +112,7 @@
       return {
         emptyHref: 'Inscriptio nexus vacua esse non potest',
         popupBlocked: 'Navigator fenestram novam prohibuit',
-        internalOpenFailed: 'Apertio intra paginam defecit',
+        internalOpenFailed: 'Pagina aperiri non potuit @uni_modules/uni-link/pages/link-webview',
         copiedOpenInBrowserPrefix: 'Nexus descriptus est. Quaeso eum in navigatro externo aperi:',
         copyFailedOpenInBrowser: 'Descriptio nexus defecit. Quaeso nexum manu describe et in navigatro externo aperi.'
       }
@@ -115,7 +121,7 @@
     return {
       emptyHref: 'The link URL cannot be empty',
       popupBlocked: 'The browser blocked the new window',
-      internalOpenFailed: 'Failed to open the link in the built-in page',
+      internalOpenFailed: 'Failed to open page @uni_modules/uni-link/pages/link-webview',
       copiedOpenInBrowserPrefix: 'The link has been copied. Please open it in an external browser:',
       copyFailedOpenInBrowser: 'Failed to copy the link. Please copy it manually and open it in an external browser.'
     }
@@ -146,50 +152,72 @@
     emit('error', message)
   }
 
-  function openInBuiltInWebview(url : string, copyOnFail : boolean, messages : LocaleMessages) {
+  function openInBuiltInWebview(url : string) {
     uni.navigateTo({
       url: `${LINK_WEBVIEW_PAGE_PATH}?url=${encodeURIComponent(url)}`,
       success: () => {},
       fail: () => {
-        reportOpenError(messages.internalOpenFailed)
-        if (copyOnFail) {
-          copyLinkAndPrompt(url)
-        }
+        // 异常情况下可能pages.json中漏配了本组件下的link-webview.uvue页面
+        reportOpenError(getLocaleMessages().internalOpenFailed)
       }
     })
   }
 
   function openURL() {
     const url = props.href.trim()
-    const messages = getLocaleMessages()
 
     if (url.length == 0) {
-      reportOpenError(messages.emptyHref)
+      reportOpenError(getLocaleMessages().emptyHref)
       return
     }
 
-    // #ifdef WEB
-    const targetWindow = window.open(url, '_blank')
-    if (targetWindow == null) {
-      reportOpenError(messages.popupBlocked)
+    if (props.target == '_self') {
+      openInBuiltInWebview(url)
     }
-    // #endif
+    else{
+      // _blank方式
+      // #ifdef WEB
+        const targetWindow = window.open(url, '_blank')
+        if (targetWindow != null) {
+          return
+        }
+        else if (props.blankFallback=="turn-self"){
+          openInBuiltInWebview(url)
+          return
+        }
+        else if(props.blankFallback=="copy-link-modal"){
+          copyLinkAndPrompt(url)
+          return
+        }
+        reportOpenError(getLocaleMessages().popupBlocked)
+      // #endif
 
-    // #ifdef MP
-    if (props.target == '_blank') {
-      copyLinkAndPrompt(url)
-      return
-    }
-    openInBuiltInWebview(url, true, messages)
-    // #endif
+      // #ifdef MP
+        if (props.blankFallback=="turn-self"){
+          openInBuiltInWebview(url)
+        }
+        else if(props.blankFallback=="copy-link-modal"){
+          copyLinkAndPrompt(url)
+        }
+      // #endif
 
-    // #ifdef APP
-    if (props.target == '_blank') {
-      openSchema(url)
-      return
+      // #ifdef APP
+        try {
+          openSchema(url)
+        } catch (error) {
+        // 这里常见的情况是iOS设备在真机运行时缺少xcode环境编译openSchema失败
+          if (props.blankFallback=="turn-self"){
+            openInBuiltInWebview(url)
+          }
+          else if(props.blankFallback=="copy-link-modal"){
+            copyLinkAndPrompt(url)
+          }
+          else{
+            reportOpenError((error as Error).message) // 报错后发送错误事件，这里的错误原因未知，无法自行提前国际化
+          }
+      }
+      // #endif
     }
-    openInBuiltInWebview(url, false, messages)
-    // #endif
   }
 </script>
 
