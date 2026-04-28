@@ -133,7 +133,7 @@
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-ui x",
 		"navigationBarBackgroundColor": "#00aaff",
 		"backgroundColor": "@backgroundColor",
