@@ -7,117 +7,123 @@
 			}
 		},
 		{
-			"path": "pages/uni-ui/index-bar/index-bar",
-			"style": {
-				"navigationBarTitleText": "index-bar"
-			}
-		},
-		{
-			"path": "pages/uni-ui/rate/rate",
-			"style": {
-				"navigationBarTitleText": "rate"
-			}
-		},
-		{
-			"path": "pages/uni-ui/refresh-box/refresh-box",
-			"style": {
-				"navigationBarTitleText": "下拉刷新组件"
-			}
-		},
-		{
-			"path": "pages/uni-ui/nav-bar/nav-bar",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/uni-ui/badge/badge",
-			"style": {
-				"navigationBarTitleText": "badge"
-			}
-		},
-		{
-			"path": "pages/uni-ui/fab-button/fab-button",
-			"style": {
-				"navigationBarTitleText": "fab-button"
-			}
-		},
-		{
-			"path": "pages/uni-ui/number-box/number-box",
-			"style": {
-				"navigationBarTitleText": "number-box"
-			}
-		},
-		{
-			"path": "pages/uni-ui/collapse/collapse",
-			"style": {
-				"navigationBarTitleText": "collapse"
-			}
-		},
-		{
-			"path": "pages/uni-ui/link/link",
-			"style": {
-				"navigationBarTitleText": "link"
-			}
-		},
-		{
 			"path": "uni_modules/uni-link/pages/link-webview",
-			"style": {
-			}
-		},
-		{
-			"path": "pages/uni-ui/time-format/time-format",
-			"style": {
-				"navigationBarTitleText": "time-format"
-			}
-		},
-		{
-			"path": "pages/uni-ui/drag-cell/drag-cell",
-			"style": {
-				"navigationBarTitleText": "drag-cell"
-			}
+			"style": {}
 		},
 		{
 			"path": "pages/theme-change/theme-change",
 			"style": {
 				"navigationBarTitleText": "theme-change"
 			}
-		},
+		}
+	],
+	"subPackages": [
 		{
-			"path": "pages/uni-ui/tab-bar/tab-bar",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/uni-ui/tab-bar/tab-bar-dark",
-			"style": {
-				"navigationBarTitleText": "暗黑首页",
-				"navigationBarBackgroundColor": "#0f172a",
-				"navigationBarTextStyle": "white",
-				"backgroundColorContent": "#0f172a"
-			}
-		},
-		{
-			"path": "pages/uni-ui/tab-bar/tab-bar-custom",
-			"style": {
-				"navigationBarTitleText": "精选",
-				"navigationBarBackgroundColor": "#dff3e8",
-				"navigationBarTextStyle": "black",
-				"backgroundColorContent": "#dff3e8"
-			}
-		},
-		{
-			"path": "pages/uni-ui/tab-bar/tab-bar-midbutton",
-			"style": {
-				"navigationBarTitleText": "mid-button"
-			}
-		},
-		{
-			"path": "pages/uni-ui/tab-bar/tab-bar-midbutton-notch",
-			"style": {
-				"navigationBarTitleText": "mid-button-notch"
-			}
+			"root": "pages/uni-ui",
+			"pages": [
+				{
+					"path": "index-bar/index-bar",
+					"style": {
+						"navigationBarTitleText": "index-bar"
+					}
+				},
+				{
+					"path": "rate/rate",
+					"style": {
+						"navigationBarTitleText": "rate"
+					}
+				},
+				{
+					"path": "refresh-box/refresh-box",
+					"style": {
+						"navigationBarTitleText": "下拉刷新组件"
+					}
+				},
+				{
+					"path": "nav-bar/nav-bar",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "badge/badge",
+					"style": {
+						"navigationBarTitleText": "badge"
+					}
+				},
+				{
+					"path": "fab-button/fab-button",
+					"style": {
+						"navigationBarTitleText": "fab-button"
+					}
+				},
+				{
+					"path": "number-box/number-box",
+					"style": {
+						"navigationBarTitleText": "number-box"
+					}
+				},
+				{
+					"path": "collapse/collapse",
+					"style": {
+						"navigationBarTitleText": "collapse"
+					}
+				},
+				{
+					"path": "link/link",
+					"style": {
+						"navigationBarTitleText": "link"
+					}
+				},
+				{
+					"path": "time-format/time-format",
+					"style": {
+						"navigationBarTitleText": "time-format"
+					}
+				},
+				{
+					"path": "drag-cell/drag-cell",
+					"style": {
+						"navigationBarTitleText": "drag-cell"
+					}
+				},
+				{
+					"path": "tab-bar/tab-bar",
+					"style": {
+						"navigationBarTitleText": "首页"
+					}
+				},
+				{
+					"path": "tab-bar/tab-bar-dark",
+					"style": {
+						"navigationBarTitleText": "暗黑首页",
+						"navigationBarBackgroundColor": "#0f172a",
+						"navigationBarTextStyle": "white",
+						"backgroundColorContent": "#0f172a"
+					}
+				},
+				{
+					"path": "tab-bar/tab-bar-custom",
+					"style": {
+						"navigationBarTitleText": "精选",
+						"navigationBarBackgroundColor": "#dff3e8",
+						"navigationBarTextStyle": "black",
+						"backgroundColorContent": "#dff3e8"
+					}
+				},
+				{
+					"path": "tab-bar/tab-bar-midbutton",
+					"style": {
+						"navigationBarTitleText": "mid-button"
+					}
+				},
+				{
+					"path": "tab-bar/tab-bar-midbutton-notch",
+					"style": {
+						"navigationBarTitleText": "mid-button-notch"
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {
@@ -127,9 +133,8 @@
 		"backgroundColor": "@backgroundColor",
 		"backgroundColorContent": "@backgroundColorContent"
 	},
-	"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-		]
+		"list": []
 	}
 }
