@@ -19,6 +19,10 @@
 	--border-color: rgba(255, 255, 255, 0.1);
 }
 
+.uni-theme-text{
+	color: var(--text-color);
+}
+
 .uni-padding-wrap {
   padding: 0 15px;
 }
