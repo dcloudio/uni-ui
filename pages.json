@@ -22,15 +22,9 @@
 			"root": "pages/uni-ui",
 			"pages": [
 				{
-					"path": "index-bar/index-bar",
+					"path": "time-format/time-format",
 					"style": {
-						"navigationBarTitleText": "uni-index-bar"
-					}
-				},
-				{
-					"path": "rate/rate",
-					"style": {
-						"navigationBarTitleText": "uni-rate"
+						"navigationBarTitleText": "uni-time-format"
 					}
 				},
 				{
@@ -40,15 +34,9 @@
 					}
 				},
 				{
-					"path": "nav-bar/nav-bar",
+					"path": "number-box/number-box",
 					"style": {
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "badge/badge",
-					"style": {
-						"navigationBarTitleText": "uni-badge-view"
+						"navigationBarTitleText": "uni-number-box"
 					}
 				},
 				{
@@ -58,9 +46,9 @@
 					}
 				},
 				{
-					"path": "number-box/number-box",
+					"path": "rate/rate",
 					"style": {
-						"navigationBarTitleText": "uni-number-box"
+						"navigationBarTitleText": "uni-rate"
 					}
 				},
 				{
@@ -76,15 +64,16 @@
 					}
 				},
 				{
-					"path": "time-format/time-format",
-					"style": {
-						"navigationBarTitleText": "uni-time-format"
-					}
-				},
-				{
 					"path": "drag-cell/drag-cell",
 					"style": {
 						"navigationBarTitleText": "uni-drag-cell"
+					}
+				},
+				{
+					"path": "nav-bar/nav-bar",
+					"style": {
+						"navigationBarTitleText": "uni-nav-bar",
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -126,6 +115,18 @@
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton-notch",
 						"disableScroll": true
+					}
+				},
+				{
+					"path": "badge/badge",
+					"style": {
+						"navigationBarTitleText": "uni-badge-view"
+					}
+				},
+				{
+					"path": "index-bar/index-bar",
+					"style": {
+						"navigationBarTitleText": "uni-index-bar"
 					}
 				}
 			]
