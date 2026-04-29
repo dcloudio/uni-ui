@@ -118,7 +118,7 @@
 					}
 				},
 				{
-					"path": "badge/badge",
+					"path": "badge-view/badge-view",
 					"style": {
 						"navigationBarTitleText": "uni-badge-view"
 					}
