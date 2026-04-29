@@ -1,16 +1,6 @@
-const platformInfo = process.env.uniTestPlatformInfo.toLocaleLowerCase()
-const isMP = platformInfo.startsWith('mp')
-
-const PAGE_PATH = '/pages/uni-ui/badge/badge'
+const PAGE_PATH = '/pages/uni-ui/badge-view/badge-view'
 
 describe('badge', () => {
-  if (isMP) {
-    it('not support', () => {
-      expect(1).toBe(1)
-    })
-    return
-  }
-
   let page
 
   beforeEach(async () => {
