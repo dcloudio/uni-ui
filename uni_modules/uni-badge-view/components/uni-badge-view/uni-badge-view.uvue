@@ -30,6 +30,39 @@
 </template>
 
 <script setup lang="uts">
+  /**
+   * Badge 数字角标
+   * @description 数字角标（徽章）组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
 	// 禁用自动属性继承，手动控制属性绑定位置
 	defineOptions({
 		inheritAttrs: false,

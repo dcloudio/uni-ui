@@ -5,6 +5,39 @@
 </template>
 
 <script setup lang="uts">
+  /**
+   * 底部选项卡栏
+   * @description 底部选项卡栏组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
 import { UniTabBarLayout, UniTabListItemLayout } from '../types.uts'
 
 const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({

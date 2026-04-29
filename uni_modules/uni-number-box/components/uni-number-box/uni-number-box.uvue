@@ -42,6 +42,35 @@
 /**
  * NumberBox 数字输入框
  * @description 带加减按钮的数字输入框，常见于购物车商品数量选择
+ * @uniPlatform {
+ *   "app": {
+ *     "android": {
+ *       "uniVer": "x",
+ *       "unixVer": "3.9",
+ *       "unixvVer": "x"
+ *     },
+ *     "ios": {
+ *       "uniVer": "x",
+ *       "unixVer": "4.11",
+ *       "unixvVer": "x"
+ *     },
+ *     "harmony": {
+ *       "uniVer": "x",
+ *       "unixVer": "4.61",
+ *       "unixvVer": "5.08"
+ *     }
+ *   },
+ *   "mp": {
+ *     "weixin": {
+ *       "uniVer": "x",
+ *       "unixVer": "4.41"
+ *     }
+ *   },
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "4.0"
+ *   }
+ * }
  * @property {Number} value 输入框当前值，默认值 1
  * @property {Number} modelValue v-model 绑定值，默认值 1
  * @property {Number} min 最小值，默认值 0
