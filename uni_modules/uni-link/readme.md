@@ -1,5 +1,3 @@
-# uni-link
-
 打开web链接组件。点击后通过内置或外部浏览器打开链接，加载 `href` 属性中配置的 URL。
 
 - `target="_self"` 时，使用 `uni_modules/uni-link/pages/link-webview` 页面内的 `web-view` 打开链接。
@@ -23,33 +21,25 @@
 - iOS运行基座未包括openSchema插件，仅在无xcode时运行会触发。打包其实不会发生此错误。
 - app平台，有些手机系统会弹框询问用户是否允许app打开浏览器，如果用户点了拒绝，这种情况没有失败回调。但有种判断方式是app的onHide生命周期是否触发，如果没有触发，那么意味着并没有启动系统浏览器。
 
-## 基本用法
+### 基本用法
 
 ```html
 <uni-link href="https://uniapp.dcloud.net.cn">uni-app x 文档
 </uni-link>
 ```
 
-## Props
-
-| 属性名 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| href | String | `''` | 链接地址 |
-| target | String | `'_self'` | 打开方式，可选值为 `_self`、`_blank` |
-| blankFallback | String | `'turn-self'` | 打开外部浏览器失败的回退策略，可选值为 `turn-self`、`copy-link-modal`、`none` |
-
-## Events
+### Events
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
 | error | 打开失败时触发 | `message: string` |
 
-## 依赖
+### 依赖
 
 `APP` 平台依赖 `uts-openSchema`。`uni-link` 已在 `uni_modules/uni-link/package.json` 中声明该依赖。
 
 组件目录下有 `pages_init.json`，会向应用的 pages.json 中注册组件中自带的内置浏览器页面。如在HBuilderX中弹框询问是否将组件中的页面注册到项目pages.json中时，请选择同意。
 
-## 示例页面
+### 示例页面
 
 `/pages/uni-ui/link/link`
