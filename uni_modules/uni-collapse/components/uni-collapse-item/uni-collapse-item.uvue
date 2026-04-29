@@ -21,6 +21,39 @@
 </template>
 
 <script lang="uts" setup>
+  /**
+   * 折叠面板子项
+   * @description 折叠面板子项组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
   import { state } from '@/store/index.uts'
   import type { ItemChildType } from '../type.uts'
   import {

@@ -3,6 +3,39 @@
 </template>
 
 <script setup lang="uts">
+  /**
+   * 时间格式化
+   * @description 时间格式化展示组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
   type Props = {
     /**
      * @description 需要格式化的时间戳，支持秒级（10 位）或毫秒级（13 位），秒级会自动换算成毫秒

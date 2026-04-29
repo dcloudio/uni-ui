@@ -6,7 +6,39 @@
 </template>
 
 <script setup lang="uts">
-
+  /**
+   * 选项卡内容
+   * @description 选项卡内容组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
 // 从父组件注入数据和方法
 const currentIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
 const registerContent = inject<() => number>('uniTabBarRegisterContent', () => 0)

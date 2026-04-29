@@ -25,6 +25,39 @@
 </template>
 
 <script lang="uts" setup>
+  /**
+   * 自定义导航栏
+   * @description 自定义导航栏组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "3.9",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.11",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "4.41"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
   defineOptions({
   	// inheritAttrs: false,
   	externalClasses: ['left-class','mid-class','right-class']
