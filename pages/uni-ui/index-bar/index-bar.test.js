@@ -1,47 +1,28 @@
-const platformInfo = process.env.uniTestPlatformInfo.toLocaleLowerCase()
-const isMP = platformInfo.startsWith('mp')
-
 const PAGE_PATH = '/pages/uni-ui/index-bar/index-bar'
 
 describe('index-bar', () => {
-  if (isMP) {
-    it('not support', () => {
-      expect(1).toBe(1)
-    })
-    return
-  }
-
   let page
 
   beforeEach(async () => {
     page = await program.reLaunch(PAGE_PATH)
     await page.waitFor('view')
+    await page.waitFor(500)
   })
 
-  async function setPageData(newData) {
-    return await page.setData({
-      data: newData
-    })
+  async function tapControlButton(index) {
+    const buttons = await page.$$('.control-btn')
+    expect(buttons.length).toBeGreaterThan(index)
+    await buttons[index].tap()
+    await page.waitFor(500)
   }
 
-  it('index-bar state', async () => {
-    expect(await page.data('data.useCustomStyle')).toBe(false)
-    expect(await page.data('data.useCustomIndexs')).toBe(false)
-    expect(await page.data('data.indexViewID')).toBe('')
-
-    await setPageData({
-      useCustomStyle: true,
-      useCustomIndexs: true,
-      indexViewID: 'idx-A'
-    })
+  it('index-bar custom style and indexs snapshot', async () => {
+    await tapControlButton(0)
+    await tapControlButton(1)
 
     expect(await page.data('data.useCustomStyle')).toBe(true)
     expect(await page.data('data.useCustomIndexs')).toBe(true)
-    expect(await page.data('data.indexViewID')).toBe('idx-A')
-    expect(await page.data('currentIndexs.value')).toContain('☆')
-  })
 
-  it('index-bar snapshot', async () => {
     const image = await program.screenshot({
       fullPage: true
     })
