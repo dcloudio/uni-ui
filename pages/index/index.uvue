@@ -1,6 +1,6 @@
 <template>
 	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
-	<navigator class="nav-item" url="/pages/uni-ui/badge/badge"><text class="nav-text">badge</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/badge-view/badge-view"><text class="nav-text">badge-view</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/rate/rate"><text class="nav-text">rate</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar"><text class="nav-text">tab-bar</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-dark"><text class="nav-text">tab-bar-dark</text></navigator>
