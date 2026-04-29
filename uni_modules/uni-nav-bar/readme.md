@@ -1,4 +1,3 @@
-# uni-nav-bar
 自定义导航栏组件
 
 在页面pages.json中关闭原生导航栏后，即使用`"style": {"navigationStyle": "custom"}`，可以使用本组件实现自定义导航栏。

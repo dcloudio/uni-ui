@@ -1,6 +1,3 @@
-## NumberBox 数字输入框
-> **组件名：uni-number-box**
-
 带加减按钮的数字输入框，常见于购物车商品数量选择。
 
 ### 基本用法
@@ -51,20 +48,6 @@
   background-color: #fff;
 }
 ```
-
-### Props
-
-| 属性名 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| value | Number | 1 | 输入框当前值 |
-| v-model | Number | 1 | 双向绑定值 |
-| min | Number | 0 | 最小值 |
-| max | Number | 100 | 最大值 |
-| step | Number | 1 | 步长，支持小数 |
-| disabled | Boolean | false | 是否禁用 |
-| btn-class | String | - | 按钮自定义样式类 |
-| input-class | String | - | 输入框自定义样式类 |
-| icon-class | String | - | 图标自定义样式类 |
 
 ### Events
 

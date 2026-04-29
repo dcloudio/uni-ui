@@ -1,5 +1,3 @@
-# uni-collapse
-
 折叠面板组件，包含：
 
 - `uni-collapse`：父容器
@@ -7,7 +5,7 @@
 
 一个折叠面板组件可以包含若干uni-collapse-item。每个uni-collapse-item包括顶部标题栏和通过slot传入的内容区。
 
-## 基本用法
+### 基本用法
 
 ```html
 <uni-collapse :accordion="true">
@@ -29,7 +27,7 @@ uni-collapse-item的标题栏的自定义：
 - 箭头展开态和禁用态可分别通过 `arrow-open-class`、`arrow-disabled-class` 覆盖。组件默认也使用透明度区分状态，便于外部继续覆盖箭头颜色。
 - 如果完全不想要默认包含的title和arrow，也可以传入一个名为title的具名插槽来替换。
 
-## 具名插槽标题
+### 具名插槽标题
 
 ```html
 <uni-collapse-item>
@@ -43,7 +41,7 @@ uni-collapse-item的标题栏的自定义：
 </uni-collapse-item>
 ```
 
-## externalClass
+### externalClass
 
 ```html
 <uni-collapse-item
@@ -58,56 +56,33 @@ uni-collapse-item的标题栏的自定义：
 </uni-collapse-item>
 ```
 
-## Props
+### Slots
 
-### uni-collapse
-
-| 属性名 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| accordion | Boolean | `true` | 是否为手风琴模式。为 `true` 时，同一时间仅允许一个面板展开 |
-
-### uni-collapse-item
-
-| 属性名 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| title | String | `''` | 默认标题文本。在未使用 `#title` 插槽时生效 |
-| open | Boolean | `false` | 是否展开，支持外部监听后更新 |
-| disabled | Boolean | `false` | 是否禁用点击展开/收起 |
-| titleWrapClass | string.ClassString | `''` | 对应 externalClass `title-wrap-class`，作用于标题栏容器 `view` |
-| titleClass | string.ClassString | `''` | 对应 externalClass `title-class`，作用于默认标题 `text` |
-| titleOpenClass | string.ClassString | `''` | 对应 externalClass `title-open-class`，作用于默认标题展开态 `text` |
-| titleDisabledClass | string.ClassString | `''` | 对应 externalClass `title-disabled-class`，作用于默认标题禁用态 `text` |
-| arrowClass | string.ClassString | `''` | 对应 externalClass `arrow-class`，作用于默认箭头 `view` |
-| arrowOpenClass | string.ClassString | `''` | 对应 externalClass `arrow-open-class`，作用于默认箭头展开态 `view` |
-| arrowDisabledClass | string.ClassString | `''` | 对应 externalClass `arrow-disabled-class`，作用于默认箭头禁用态 `view` |
-
-## Slots
-
-### uni-collapse-item
+#### uni-collapse-item
 
 | 插槽名 | 说明 | 插槽参数 |
 | --- | --- | --- |
 | default | 面板内容 | - |
 | title | 自定义标题区域 | `open: boolean`、`disabled: boolean` |
 
-## Events
+### Events
 
-### uni-collapse-item
+#### uni-collapse-item
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
 | change | 面板展开状态变化时触发 | `open: boolean` |
 
-## Expose
+### Expose
 
-### uni-collapse-item
+#### uni-collapse-item
 
 | 方法名 | 说明 |
 | --- | --- |
 | openCollapse(open: boolean) | 执行展开/收起，会遵循 `disabled` 和手风琴逻辑 |
 | openOrClose(open: boolean) | 直接切换内容显示状态 |
 
-## 暗黑模式适配
+### 暗黑模式适配
 
 建议通过组件 `class` 和 externalClass 组合传入暗色样式：
 
@@ -115,9 +90,5 @@ uni-collapse-item的标题栏的自定义：
 - 用 `title-wrap-class`、`title-class`、`title-open-class`、`arrow-class`、`arrow-open-class` 等 externalClass 覆盖标题区和箭头样式。
 - 默认展开态和禁用态主要通过透明度表达，减少颜色覆盖时的交叉冲突。
 
-## 示例页面
-
-`/pages/uni-ui/collapse/collapse`
-
-## 注意
+### 注意
 - 本组件在Android上需HBuilderX 5.09+。在低版本上箭头变颜色+旋转时，在Android上会消失
