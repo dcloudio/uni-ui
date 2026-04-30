@@ -5,8 +5,8 @@ const fs = require('fs')
 const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
-// const modulesId = process.env.UNI_MODULES_ID
-const modulesId = 'uni-tab-bar'
+const modulesId = process.env.UNI_MODULES_ID
+// const modulesId = 'uni-tab-bar'
 const comName = modulesId.replace(/uni-/, '')
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
