@@ -3,15 +3,42 @@ const fs = require('fs')
 const root = path.join(__dirname, '..')
 const util = require('./util.js')
 
+const UNI_UI_X_ID = 'uni-ui-x'
 const COMPONENTS_START = '<!-- 组件列表开始 -->'
 const COMPONENTS_END = '<!-- 组件列表结束 -->'
 const LEGACY_PLACEHOLDER = '<!-- 组件列表占位 -->'
 
 function buildReadme() {
-	const readmePath = path.join(root, 'README.md')
-	const readmeContent = util.read(readmePath)
+	const readmePath = getReadmeSourcePath()
+	const readmeContent = buildReadmeContent(readmePath)
 	const componentsList = buildComponentsList()
-	util.write(readmePath, updateComponentsList(readmeContent, componentsList))
+	const nextReadmeContent = updateComponentsList(readmeContent, componentsList)
+	util.write(path.join(root, 'README.md'), nextReadmeContent)
+	syncUniUiXReadme(nextReadmeContent)
+}
+
+function buildReadmeContent(readmePath) {
+	const docsReadmePath = path.join(root, 'docs', 'README.md')
+	const docsQuickstartPath = path.join(root, 'docs', 'quickstart.md')
+	if (fs.existsSync(docsReadmePath) && fs.existsSync(docsQuickstartPath)) {
+		return util.handleReadme(docsReadmePath) + '\n' + util.handleReadme(docsQuickstartPath)
+	}
+	return util.read(readmePath)
+}
+
+function getReadmeSourcePath() {
+	const moduleReadmePath = path.join(root, 'uni_modules', UNI_UI_X_ID, 'readme.md')
+	if (fs.existsSync(moduleReadmePath)) {
+		return moduleReadmePath
+	}
+	return path.join(root, 'README.md')
+}
+
+function syncUniUiXReadme(content) {
+	const moduleReadmePath = path.join(root, 'uni_modules', UNI_UI_X_ID, 'readme.md')
+	if (fs.existsSync(path.dirname(moduleReadmePath))) {
+		util.write(moduleReadmePath, content)
+	}
 }
 
 function buildComponentsList() {
@@ -19,11 +46,11 @@ function buildComponentsList() {
 	const packagesLists = fs.readdirSync(uniModulesPath, { withFileTypes: true })
 		.filter(item => item.isDirectory())
 		.map(item => item.name)
-		.filter(item => item !== 'uni-test' && item !== 'uni-ui')
+		.filter(item => item !== 'uni-test' && item !== UNI_UI_X_ID)
 		.sort()
 
 	const lines = [
-		'## 已支持的组件列表',
+		'## uni-ui x 已支持的组件列表',
 		'',
 		'| 组件名 | 组件说明 |',
 		'| --- | --- |'

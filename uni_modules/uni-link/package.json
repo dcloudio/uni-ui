@@ -8,19 +8,17 @@
     "uniui",
     "link",
     "链接"
-],
+  ],
   "engines": {
-    "HBuilderX": ""
+    "HBuilderX": "",
+    "uni-app": "^3.1.0",
+    "uni-app-x": "^3.1.0"
   },
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "directories": {
     "example": "../../temps/example_temps"
   },
   "dcloudext": {
-    "category": [
-      "前端组件",
-      "通用组件"
-    ],
     "sale": {
       "regular": {
         "price": "0.00"
@@ -36,7 +34,11 @@
       "ads": "无",
       "data": "无",
       "permissions": "无"
-    }
+    },
+    "type": "component-vue",
+    "darkmode": "-",
+    "i18n": "-",
+    "widescreen": "-"
   },
   "uni_modules": {
     "dependencies": [
@@ -45,8 +47,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
-        "aliyun": "y"
+        "tcb": "√",
+        "aliyun": "√"
       },
       "client": {
         "uni-app-x": {

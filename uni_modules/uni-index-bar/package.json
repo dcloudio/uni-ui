@@ -1,15 +1,18 @@
 {
-	"id": "uni-fab-button",
-	"displayName": "uni-fab-button",
+	"id": "uni-index-bar",
+	"displayName": "uni-index-bar 索引栏",
 	"version": "1.0.0",
-	"description": "uni-fab-button",
+	"description": "uni-index-bar 索引栏组件，用于显示索引栏，支持自定义索引栏的样式和内容。",
 	"keywords": [
-        "uni-fab-button"
+        "uni-index-bar",
+        "索引栏",
+        "index-bar"
     ],
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
-		"HBuilderX": "^3.1.0",
-		"uni-app-x": "^3.1.0"
+		"HBuilderX": "",
+        "uni-app-x": "^5.0",
+        "uni-app": ""
 	},
 	"directories": {
 		"example": "../../temps/example_temps"
@@ -28,36 +31,37 @@
 			"qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "无",
+			"permissions": "无"
 		},
-		"darkmode": "-",
-		"i18n": "-",
-		"widescreen": "-"
+		"darkmode": "x",
+		"i18n": "x",
+        "widescreen": "x",
+        "npmurl": ""
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "-",
-				"aliyun": "-",
-				"alipay": "-"
+				"tcb": "x",
+				"aliyun": "x",
+				"alipay": "x"
 			},
 			"client": {
 				"uni-app-x": {
 					"web": {
-						"safari": "4.0",
-						"chrome": "4.0"
+						"safari": "√",
+						"chrome": "√"
 					},
 					"app": {
-						"android": "3.9",
-						"ios": "4.11",
-						"harmony": "4.61"
+						"android": "√",
+						"ios": "√",
+						"harmony": "√"
 					},
 					"mp": {
-						"weixin": "4.41"
+						"weixin": "√"
 					}
 				}
 			}

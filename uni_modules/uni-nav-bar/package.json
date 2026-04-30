@@ -9,7 +9,8 @@
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^5.0",
-		"uni-app-x": "^5.0"
+        "uni-app-x": "^5.0",
+        "uni-app": ""
 	},
 	"directories": {
 		"example": "../../temps/example_temps"
@@ -24,39 +25,41 @@
 				"price": "0.00"
 			}
 		},
-		"contact": {
+        "contact": {
+            "qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "无",
+			"permissions": "无"
 		},
-		"darkmode": "-",
-		"i18n": "-",
-		"widescreen": "-"
+		"darkmode": "x",
+		"i18n": "x",
+        "widescreen": "x",
+        "npmurl": ""
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "-",
-				"aliyun": "-",
-				"alipay": "-"
+				"tcb": "x",
+				"aliyun": "x",
+				"alipay": "x"
 			},
 			"client": {
 				"uni-app-x": {
 					"web": {
-						"safari": "4.0",
-						"chrome": "4.0"
+						"safari": "√",
+						"chrome": "√"
 					},
 					"app": {
-						"android": "3.9",
-						"ios": "4.11",
-						"harmony": "4.61"
+						"android": "√",
+						"ios": "√",
+						"harmony": "√"
 					},
 					"mp": {
-						"weixin": "4.41"
+						"weixin": "√"
 					}
 				}
 			}
