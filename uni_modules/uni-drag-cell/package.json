@@ -6,11 +6,13 @@
 	"keywords": [
         "uni-drag-cell"
     ],
-	"repository": "",
+	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^3.1.0",
-		"uni-app": "^3.1.0",
 		"uni-app-x": "^3.1.0"
+	},
+	"directories": {
+		"example": "../../temps/example_temps"
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -30,7 +32,6 @@
 			"data": "",
 			"permissions": ""
 		},
-		"npmurl": "",
 		"darkmode": "-",
 		"i18n": "-",
 		"widescreen": "-"
@@ -45,51 +46,18 @@
 				"alipay": "-"
 			},
 			"client": {
-				"uni-app": {
-					"vue": {
-						"vue2": "-",
-						"vue3": "-"
-					},
-					"web": {
-						"safari": "-",
-						"chrome": "-"
-					},
-					"app": {
-						"vue": "-",
-						"nvue": "-",
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
-					},
-					"mp": {
-						"weixin": "-",
-						"alipay": "-",
-						"toutiao": "-",
-						"baidu": "-",
-						"kuaishou": "-",
-						"jd": "-",
-						"harmony": "-",
-						"qq": "-",
-						"lark": "-",
-						"xhs": "-"
-					},
-					"quickapp": {
-						"huawei": "-",
-						"union": "-"
-					}
-				},
 				"uni-app-x": {
 					"web": {
-						"safari": "-",
-						"chrome": "-"
+						"safari": "4.0",
+						"chrome": "4.0"
 					},
 					"app": {
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
+						"android": "3.9",
+						"ios": "4.11",
+						"harmony": "4.61"
 					},
 					"mp": {
-						"weixin": "-"
+						"weixin": "4.41"
 					}
 				}
 			}

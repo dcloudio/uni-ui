@@ -1,12 +1,13 @@
 {
-  "name": "uniapp-test",
-  "version": "1.0.0",
-  "scripts": {
-  	"dev": "set HBUILDERX_HOME=C:\\hbuilderx\\hx_dev\\cli.exe&& .\\scripts\\run.bat h5",
-  	"dev:app-android": "set HBUILDERX_HOME=C:\\hbuilderx\\hx_dev\\cli.exe&& .\\scripts\\run.bat app-android",
-  	"test": "set HBUILDERX_HOME=C:\\hbuilderx\\hx_dev\\cli.exe&& .\\scripts\\test.bat h5",
-		"test:app-android": "set HBUILDERX_HOME=C:\\hbuilderx\\hx_dev\\cli.exe&& .\\scripts\\test.bat app-android"
-
-  },
-  "license": "MIT"
+	"name": "@dcloudio/uni-ui-x",
+	"version": "1.0.0",
+	"description": "",
+	"author": "dcloud",
+	"license": "Apache-2.0",
+	"scripts": {
+		"build:lib": "node build/index.js lib",
+		"build:npm": "node build/index.js npm",
+		"build:release": "node build/index.js release",
+		"build:readme": "node build/index.js readme"
+	}
 }

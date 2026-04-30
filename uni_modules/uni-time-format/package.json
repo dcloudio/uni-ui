@@ -1,80 +1,66 @@
 {
-    "id": "uni-time-format",
-    "displayName": "uni-time-format 时间格式化",
-    "version": "1.0.0",
-    "description": "TimeFormat 时间格式化组件，可自定义时间格式化。",
-    "keywords": [
-      "uni-ui",
-      "uniui",
-      "time-format"
+  "id": "uni-time-format",
+  "displayName": "uni-time-format 时间格式化",
+  "version": "1.0.0",
+  "description": "TimeFormat 时间格式化组件，可自定义时间格式化。",
+  "keywords": [
+    "uni-ui",
+    "uniui",
+    "time-format"
   ],
-    "engines": {
-      "HBuilderX": ""
-    },
-    "dcloudext": {
-      "category": [
-        "前端组件",
-        "通用组件"
-      ],
-      "sale": {
-        "regular": {
-          "price": "0.00"
-        },
-        "sourcecode": {
-          "price": "0.00"
-        }
+  "engines": {
+    "HBuilderX": "",
+    "uni-app-x": "^3.1.0"
+  },
+  "repository": "https://gitcode.com/dcloud/uni-ui-x",
+  "directories": {
+    "example": "../../temps/example_temps"
+  },
+  "dcloudext": {
+    "sale": {
+      "regular": {
+        "price": "0.00"
       },
-      "contact": {
-        "qq": ""
-      },
-      "declaration": {
-        "ads": "无",
-        "data": "无",
-        "permissions": "无"
+      "sourcecode": {
+        "price": "0.00"
       }
     },
-    "uni_modules": {
-      "encrypt": [],
-      "platforms": {
-        "cloud": {
-          "tcb": "y",
-          "aliyun": "y"
-        },
-        "client": {
-          "App": {
-            "app-vue": "y",
-            "app-nvue": "y"
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "type": "component-vue",
+    "darkmode": "-",
+    "i18n": "-",
+    "widescreen": "-"
+  },
+  "uni_modules": {
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "√",
+        "aliyun": "√"
+      },
+      "client": {
+        "uni-app-x": {
+          "web": {
+            "safari": "4.0",
+            "chrome": "4.0"
           },
-          "H5-mobile": {
-            "Safari": "y",
-            "Android Browser": "y",
-            "微信浏览器(Android)": "y",
-            "QQ浏览器(Android)": "y"
+          "app": {
+            "android": "3.9",
+            "ios": "4.11",
+            "harmony": "4.61"
           },
-          "H5-pc": {
-            "Chrome": "y",
-            "IE": "y",
-            "Edge": "y",
-            "Firefox": "y",
-            "Safari": "y"
-          },
-          "小程序": {
-            "微信": "y",
-            "阿里": "y",
-            "百度": "y",
-            "字节跳动": "y",
-            "QQ": "y"
-          },
-          "快应用": {
-            "华为": "u",
-            "联盟": "u"
-          },
-          "Vue": {
-              "vue2": "y",
-              "vue3": "y"
+          "mp": {
+            "weixin": "4.41"
           }
         }
       }
     }
   }
-  
+}
