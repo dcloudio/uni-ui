@@ -1,8 +1,10 @@
 # 项目介绍
 
-uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。
+uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。[开源库地址](https://gitcode.com/dcloud/uni-ui-x/tree/alpha)
 
 uni-ui x 是全新设计的，与为uni-app做的uni-ui不同。
+
+uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件详情的兼容性表格。再往前的HBuilderX版本未测试。
 
 # 特点
 
@@ -58,7 +60,7 @@ uni-ui x 优先代码而不是二进制文件。目前没有引入字体文件�
 | uni-number-box | [数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box) |
 | uni-rate | [评分](https://ext.dcloud.net.cn/plugin?name=uni-rate) |
 | uni-refresh-box | [uni-refresh-box](https://ext.dcloud.net.cn/plugin?name=uni-refresh-box) |
-| uni-tab-bar | [选项卡](https://ext.dcloud.net.cn/plugin?name=uni-tab-bar) |
+| uni-tab | [选项卡](https://ext.dcloud.net.cn/plugin?name=uni-tab-bar) |
 | uni-time-format | [时间格式化](https://ext.dcloud.net.cn/plugin?name=uni-time-format) |
 <!-- 组件列表结束 -->
 
