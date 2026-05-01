@@ -1,8 +1,10 @@
 # 项目介绍
 
-uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。
+uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。[开源库地址](https://gitcode.com/dcloud/uni-ui-x/tree/alpha)
 
 uni-ui x 是全新设计的，与为uni-app做的uni-ui不同。
+
+uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件详情的兼容性表格。再往前的HBuilderX版本未测试。
 
 # 特点
 
@@ -11,7 +13,7 @@ uni-ui x 非常注重性能，在DOM层级控制、包体积、代码执行时�
 
 它了解 uni-app x 蒸汽模式的最佳实践，尽可能利用模板和样式的预编译特性来提升性能。当然它也支持非蒸汽模式。
 
-- 抽象水平
+- 合理的抽象
 
 一个组件的抽象能力非常重要，如何在自定义性、易用性、性能之间尽可能三全其美。
 
@@ -22,7 +24,7 @@ uni-ui x 非常注重性能，在DOM层级控制、包体积、代码执行时�
 uni-ui x 提供了完全的样式自定义能力，所有的样式定义都可以通过class设置，组件属性只控制功能逻辑。
 
 * 组件的根节点样式，可以在使用组件时的组件class或style上设置。
-* 组件的子节点样式，可以通过externalClass设置样式。子组件开放自己的样式出来，外部可通过externalClass进行子组件的样式自定义。
+* 组件的子节点样式，可以通过[externalClass](https://doc.dcloud.net.cn/uni-app-x/css/common/style-isolation.html#external-class)设置样式。子组件开放自己的样式出来，外部可通过externalClass进行子组件的样式自定义。
 
 组件使用者完全可以通过css自己控制所有样式。无需修改组件源码。加上css变量加持，灵活度远高于其他组件库。
 
@@ -42,6 +44,25 @@ uni-ui x 优先代码而不是二进制文件。目前没有引入字体文件�
 
 * 没有写死的文字，不影响国际化。
 * 没有写死的颜色，不影响自定义主题。
+
+<!-- 组件列表开始 -->
+## uni-ui x 已支持的组件列表
+
+| 组件名 | 组件说明 |
+| --- | --- |
+| uni-badge-view | [数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge-view) |
+| uni-collapse | [折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse) |
+| uni-drag-cell | [可拖拽排序组件](https://ext.dcloud.net.cn/plugin?name=uni-drag-cell) |
+| uni-fab-button | [uni-fab-button](https://ext.dcloud.net.cn/plugin?name=uni-fab-button) |
+| uni-index-bar | [uni-index-bar](https://ext.dcloud.net.cn/plugin?name=uni-index-bar) |
+| uni-link | [链接](https://ext.dcloud.net.cn/plugin?name=uni-link) |
+| uni-nav-bar | [uni-nav-bar](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar) |
+| uni-number-box | [数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box) |
+| uni-rate | [评分](https://ext.dcloud.net.cn/plugin?name=uni-rate) |
+| uni-refresh-box | [uni-refresh-box](https://ext.dcloud.net.cn/plugin?name=uni-refresh-box) |
+| uni-tab | [选项卡](https://ext.dcloud.net.cn/plugin?name=uni-tab-bar) |
+| uni-time-format | [时间格式化](https://ext.dcloud.net.cn/plugin?name=uni-time-format) |
+<!-- 组件列表结束 -->
 
 # uni-ui的升级建议@uniuiupgrade
 
