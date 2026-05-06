@@ -59,24 +59,24 @@
    *     },
    *     "ios": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0",
+   *       "unixVer": "5.07",
    *       "unixvVer": "x"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0",
+   *       "unixVer": "5.07",
    *       "unixvVer": "5.08"
    *     }
    *   },
    *   "mp": {
    *     "weixin": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0"
+   *       "unixVer": "5.07"
    *     }
    *   },
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "5.0"
+   *     "unixVer": "5.07"
    *   }
    * }
    */

@@ -15,17 +15,17 @@
    *   "app": {
    *     "android": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0",
+   *       "unixVer": "5.07",
    *       "unixvVer": "x"
    *     },
    *     "ios": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0",
+   *       "unixVer": "5.07",
    *       "unixvVer": "x"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
-   *       "unixVer": "5.0",
+   *       "unixVer": "5.07",
    *       "unixvVer": "5.08"
    *     }
    *   },
@@ -37,7 +37,7 @@
    *   },
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "5.0"
+   *     "unixVer": "5.07"
    *   }
    * }
    */
