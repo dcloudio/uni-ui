@@ -3,6 +3,7 @@
 	"displayName": "uni-refresh-box",
 	"version": "1.0.0",
 	"description": "uni-refresh-box",
+	"isExt": true,
 	"keywords": [
         "uni-refresh-box"
     ],

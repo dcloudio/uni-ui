@@ -3,6 +3,7 @@
 	"displayName": "uni-nav-bar",
 	"version": "1.0.0",
 	"description": "uni-nav-bar",
+	"isExt": true,
 	"keywords": [
         "uni-nav-bar"
     ],

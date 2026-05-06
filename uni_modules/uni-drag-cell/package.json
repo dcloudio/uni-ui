@@ -3,6 +3,7 @@
 	"displayName": "uni-drag-cell",
 	"version": "1.0.0",
 	"description": "可拖拽排序组件",
+	"isExt": true,
 	"keywords": [
         "uni-drag-cell"
     ],

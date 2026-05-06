@@ -3,6 +3,7 @@
 	"displayName": "uni-fab-button",
 	"version": "1.0.0",
 	"description": "uni-fab-button",
+	"isExt": true,
 	"keywords": [
         "uni-fab-button"
     ],

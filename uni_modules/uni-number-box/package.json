@@ -3,6 +3,7 @@
   "displayName": "uni-number-box 数字输入框",
   "version": "1.0.0",
   "description": "NumberBox 带加减按钮的数字输入框组件，用户可以控制每次点击增加的数值，支持小数。",
+	"isExt": true,
   "keywords": [
     "uni-ui",
     "uniui",

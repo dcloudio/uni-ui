@@ -3,6 +3,7 @@
   "displayName": "uni-time-format 时间格式化",
   "version": "1.0.0",
   "description": "TimeFormat 时间格式化组件，可自定义时间格式化。",
+	"isExt": true,
   "keywords": [
     "uni-ui",
     "uniui",
