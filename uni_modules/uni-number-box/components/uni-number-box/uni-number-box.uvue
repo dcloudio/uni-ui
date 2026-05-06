@@ -46,29 +46,29 @@
  *   "app": {
  *     "android": {
  *       "uniVer": "x",
- *       "unixVer": "5.0",
+ *       "unixVer": "5.07",
  *       "unixvVer": "x"
  *     },
  *     "ios": {
  *       "uniVer": "x",
- *       "unixVer": "5.0",
+ *       "unixVer": "5.07",
  *       "unixvVer": "x"
  *     },
  *     "harmony": {
  *       "uniVer": "x",
- *       "unixVer": "5.0",
+ *       "unixVer": "5.07",
  *       "unixvVer": "5.08"
  *     }
  *   },
  *   "mp": {
  *     "weixin": {
  *       "uniVer": "x",
- *       "unixVer": "5.0"
+ *       "unixVer": "5.07"
  *     }
  *   },
  *   "web": {
  *     "uniVer": "x",
- *     "unixVer": "5.0"
+ *     "unixVer": "5.07"
  *   }
  * }
  * @property {Number} value 输入框当前值，默认值 1
