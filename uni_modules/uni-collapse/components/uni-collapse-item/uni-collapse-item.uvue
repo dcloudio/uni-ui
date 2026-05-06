@@ -1,5 +1,5 @@
 <template>
-  <view class="uni-collapse-item-root" :class="isDarkMode ? 'theme-dark' : 'theme-light'">
+  <view>
     <view class="uni-collapse-item__title" :class="props.titleWrapClass" @click="openCollapse(!is_open)">
       <view class="uni-collapse-item__title-main">
         <slot name="title" :open="is_open" :disabled="props.disabled">
@@ -54,7 +54,6 @@
    *   }
    * }
    */
-  import { state } from '@/store/index.uts'
   import type { ItemChildType } from '../type.uts'
   import {
     UNI_COLLAPSE_REGISTER_CHILD,
@@ -170,10 +169,6 @@
     return isAndroidArrowRenderFix ? 'down_arrow--android-fix' : ''
   })
 
-  const isDarkMode = computed(() : boolean => {
-    return state.isDarkMode
-  })
-
   const arrowStateClass = computed(() : string => {
     if (!is_open.value) {
       return ''
@@ -261,15 +256,11 @@
 </script>
 
 <style>
-  .uni-collapse-item-root {
-    background-color: var(--list-background-color, #ffffff);
-  }
-
   .uni-collapse-item__title {
     flex-direction: row;
     align-items: center;
     padding: 12px 18px;
-    background-color: var(--list-background-color, #ffffff);
+    background-color: #ffffff;
   }
 
   .uni-collapse-item__title-main {
@@ -282,7 +273,7 @@
     flex: 1;
     font-size: 14px;
     font-weight: 400;
-    color: var(--text-color, #333333);
+    color: #333333;
   }
 
   .open--active {
@@ -301,10 +292,10 @@
     transform: rotate(45deg);
     border-right-width: 1px;
     border-right-style: solid;
-    border-right-color: var(--arrow-color, #999999);
+    border-right-color: #999999;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: var(--arrow-color, #999999);
+    border-bottom-color: #999999;
     transition-property: transform, border-right-color, border-bottom-color;
     transition-duration: 150ms;
   }
@@ -331,7 +322,7 @@
     overflow: hidden;
     width: 100%;
     max-height: 0px;
-    background-color: var(--list-background-color, #ffffff);
+    background-color: #ffffff;
   }
 
   .uni-collapse-item__content-box {
