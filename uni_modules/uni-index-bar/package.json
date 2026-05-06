@@ -1,7 +1,7 @@
 {
 	"id": "uni-index-bar",
 	"displayName": "uni-index-bar 索引栏",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "uni-index-bar 索引栏组件，用于显示索引栏，支持自定义索引栏的样式和内容。",
 	"keywords": [
         "uni-index-bar",
