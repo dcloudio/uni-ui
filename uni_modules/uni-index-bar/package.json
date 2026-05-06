@@ -1,16 +1,21 @@
 {
-	"id": "uni-fab-button",
-	"displayName": "uni-fab-button",
-	"version": "1.0.0",
-	"description": "uni-fab-button",
+	"id": "uni-index-bar",
+	"displayName": "uni-index-bar 索引栏",
+	"version": "1.0.1",
+	"description": "uni-index-bar 索引栏组件，用于显示索引栏，支持自定义索引栏的样式和内容。",
 	"keywords": [
-        "uni-fab-button"
+        "uni-index-bar",
+        "索引栏",
+        "index-bar"
     ],
-	"repository": "",
+	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
-		"HBuilderX": "^3.1.0",
-		"uni-app": "^3.1.0",
-		"uni-app-x": "^3.1.0"
+		"HBuilderX": "",
+        "uni-app-x": "^5.0",
+        "uni-app": ""
+	},
+	"directories": {
+		"example": "../../temps/example_temps"
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -26,70 +31,37 @@
 			"qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "无",
+			"permissions": "无"
 		},
-		"npmurl": "",
-		"darkmode": "-",
-		"i18n": "-",
-		"widescreen": "-"
+		"darkmode": "x",
+		"i18n": "x",
+        "widescreen": "x",
+        "npmurl": ""
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "-",
-				"aliyun": "-",
-				"alipay": "-"
+				"tcb": "x",
+				"aliyun": "x",
+				"alipay": "x"
 			},
 			"client": {
-				"uni-app": {
-					"vue": {
-						"vue2": "-",
-						"vue3": "-"
-					},
-					"web": {
-						"safari": "-",
-						"chrome": "-"
-					},
-					"app": {
-						"vue": "-",
-						"nvue": "-",
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
-					},
-					"mp": {
-						"weixin": "-",
-						"alipay": "-",
-						"toutiao": "-",
-						"baidu": "-",
-						"kuaishou": "-",
-						"jd": "-",
-						"harmony": "-",
-						"qq": "-",
-						"lark": "-",
-						"xhs": "-"
-					},
-					"quickapp": {
-						"huawei": "-",
-						"union": "-"
-					}
-				},
 				"uni-app-x": {
 					"web": {
-						"safari": "-",
-						"chrome": "-"
+						"safari": "√",
+						"chrome": "√"
 					},
 					"app": {
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
+						"android": "√",
+						"ios": "√",
+						"harmony": "√"
 					},
 					"mp": {
-						"weixin": "-"
+						"weixin": "√"
 					}
 				}
 			}

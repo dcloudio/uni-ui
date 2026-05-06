@@ -1,0 +1,5 @@
+{
+	"scripts": {
+		"preupload": "node plugin/upload.js"
+	}
+}

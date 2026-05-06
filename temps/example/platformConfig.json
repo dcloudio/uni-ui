@@ -1,0 +1,7 @@
+
+// 参考链接 https://doc.dcloud.net.cn/uni-app-x/tutorial/ls-plugin.html#setting
+{
+    "targets": [
+        "APP-ANDROID"
+    ]
+}
