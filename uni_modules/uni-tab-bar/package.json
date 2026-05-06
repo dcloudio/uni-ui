@@ -3,6 +3,7 @@
   "displayName": "uni-tab 选项卡",
   "version": "1.0.0",
   "description": "底部选项卡组件集",
+	"isExt": true,
   "keywords": [
     "uni-ui",
     "uniui",
