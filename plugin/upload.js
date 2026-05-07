@@ -7,7 +7,7 @@ const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
 const modulesId = process.env.UNI_MODULES_ID
 // const modulesId = 'uni-tab-bar'
-const comName = modulesId.replace(/uni-/, '')
+const comName = getExampleName(modulesId)
 const comPath = path.join(root, 'uni_modules')
 // console.error('upload.js - modulesId :' + modulesId);
 const packageJson = getPackage(modulesId, comPath)
@@ -36,7 +36,7 @@ if (exampleExists) {
 // 同步临时项目目录
 util.copyDir(path.join(examplePath, 'example'), tempExamplePath)
 
-if (modulesId === 'uni-ui') {
+if (modulesId === 'uni-ui' || modulesId === 'uni-ui-x') {
 	// buildReadme()
 	// util.copyFile(path.join(root, 'README.md'),path.join(root, 'uni_modules', modulesId, 'readme.md'))
 	// 同步 uni-ui 示例
@@ -197,6 +197,10 @@ function copyDirByExt(src, dist, exts) {
 
 function getModulesPath(name) {
 	return path.join(comPath, name)
+}
+
+function getExampleName(modulesId) {
+	return modulesId.replace(/^uni-/, '').replace(/-x$/, '')
 }
 
 /**
