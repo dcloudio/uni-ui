@@ -5,6 +5,28 @@
   "description": "底部选项卡组件集",
   "isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27849",
+  "examples": [
+    {
+      "name": "tab-bar-dark",
+      "description": "暗色风格",
+      "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-dark.uvue"
+    },
+    {
+      "name": "tab-bar-custom",
+      "description": "自定义样式",
+      "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-custom.uvue"
+    },
+    {
+      "name": "tab-bar-midbutton",
+      "description": "中间按钮",
+      "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-midbutton.uvue"
+    },
+    {
+      "name": "tab-bar-midbutton-notch",
+      "description": "中间按钮镂空",
+      "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-midbutton-notch.uvue"
+    }
+  ],
   "keywords": [
     "uni-ui",
     "uniui",
