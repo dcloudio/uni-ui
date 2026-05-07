@@ -10,8 +10,8 @@
     "time-format"
 ],
   "engines": {
-    "HBuilderX": "",
-    "uni-app-x": "^5.0",
+    "HBuilderX": "^5.07",
+    "uni-app-x": "^5.07",
     "uni-app": ""
   },
   "repository": "https://gitcode.com/dcloud/uni-ui-x",

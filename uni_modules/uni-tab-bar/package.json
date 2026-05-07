@@ -11,9 +11,9 @@
 ],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
-    "HBuilderX": "",
+    "HBuilderX": "^5.07",
     "uni-app": "",
-    "uni-app-x": "^5.0"
+    "uni-app-x": "^5.07"
   },
   "directories": {
     "example": "../../temps/example_temps"
