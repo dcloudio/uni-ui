@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"description": "uni-fab-button",
 	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27846",
 	"keywords": [
         "uni-fab-button"
     ],

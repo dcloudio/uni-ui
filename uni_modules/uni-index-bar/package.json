@@ -4,6 +4,7 @@
 	"version": "1.0.1",
 	"description": "uni-index-bar 索引栏组件，用于显示索引栏，支持自定义索引栏的样式和内容。",
 	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27847",
 	"keywords": [
         "uni-index-bar",
         "索引栏",
