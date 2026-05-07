@@ -1,21 +1,20 @@
 {
-  "id": "uni-collapse-X",
-  "displayName": "uni-collapse 折叠面板",
+  "id": "uni-rate-x",
+  "displayName": "uni-rate 评分",
   "version": "1.0.0",
-  "description": "Collapse 折叠面板组件，可自定义折叠面板的展开和收起。",
+  "description": "Rate 评分组件，可自定义评分星星图标的大小、间隔、评分数。",
 	"isExt": true,
   "keywords": [
     "uni-ui",
     "uniui",
-    "collapse",
-    "折叠面板"
+    "评分"
 ],
+  "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "",
     "uni-app": "",
-    "uni-app-x": "^5.0"
+    "uni-app-x": "^5.07"
   },
-  "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "directories": {
     "example": "../../temps/example_temps"
   },
@@ -43,8 +42,8 @@
     "npmurl": ""
   },
   "uni_modules": {
-    "encrypt": [],
     "dependencies": [],
+    "encrypt": [],
     "platforms": {
       "cloud": {
         "tcb": "x",

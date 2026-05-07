@@ -1,13 +1,13 @@
 {
   "uni-badge-view": "1.0.0",
-  "uni-collapse": "1.0.0",
+  "uni-collapse-x": "1.0.0",
   "uni-drag-cell": "1.0.0",
   "uni-fab-button": "1.0.0",
   "uni-index-bar": "1.0.0",
-  "uni-link": "1.0.0",
-  "uni-nav-bar": "1.0.0",
-  "uni-number-box": "1.0.0",
-  "uni-rate": "1.0.0",
+  "uni-link-x": "1.0.0",
+  "uni-nav-bar-x": "1.0.0",
+  "uni-number-box-x": "1.0.0",
+  "uni-rate-x": "1.0.0",
   "uni-refresh-box": "1.0.0",
   "uni-tab-bar": "1.0.0",
   "uni-time-format": "1.0.0"

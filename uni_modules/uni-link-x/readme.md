@@ -1,6 +1,6 @@
 打开web链接组件。点击后通过内置或外部浏览器打开链接，加载 `href` 属性中配置的 URL。
 
-- `target="_self"` 时，使用 `uni_modules/uni-link/pages/link-webview` 页面内的 `web-view` 打开链接。
+- `target="_self"` 时，使用 `uni_modules/uni-link-x/pages/link-webview` 页面内的 `web-view` 打开链接。
   * 注意小程序需要将域名加入应用的域名白名单。
 - `target="_blank"` 时，
   * APP平台调用手机浏览器打开链接
@@ -36,7 +36,7 @@
 
 ### 依赖
 
-`APP` 平台依赖 `uts-openSchema`。`uni-link` 已在 `uni_modules/uni-link/package.json` 中声明该依赖。
+`APP` 平台依赖 `uts-openSchema`。`uni-link` 已在 `uni_modules/uni-link-x/package.json` 中声明该依赖。
 
 组件目录下有 `pages_init.json`，会向应用的 pages.json 中注册组件中自带的内置浏览器页面。如在HBuilderX中弹框询问是否将组件中的页面注册到项目pages.json中时，请选择同意。
 

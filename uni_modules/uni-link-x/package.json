@@ -1,5 +1,5 @@
 {
-  "id": "uni-link-X",
+  "id": "uni-link-x",
   "displayName": "uni-link 链接",
   "version": "1.0.0",
   "description": "Link 链接组件，可自定义链接的打开方式。",
@@ -9,11 +9,11 @@
     "uniui",
     "link",
     "链接"
-  ],
+],
   "engines": {
     "HBuilderX": "",
-    "uni-app": "^3.1.0",
-    "uni-app-x": "^3.1.0"
+    "uni-app": "",
+    "uni-app-x": "^5.07"
   },
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "directories": {
@@ -37,9 +37,10 @@
       "permissions": "无"
     },
     "type": "component-vue",
-    "darkmode": "-",
-    "i18n": "-",
-    "widescreen": "-"
+    "darkmode": "x",
+    "i18n": "x",
+    "widescreen": "x",
+    "npmurl": ""
   },
   "uni_modules": {
     "dependencies": [
@@ -49,21 +50,22 @@
     "platforms": {
       "cloud": {
         "tcb": "√",
-        "aliyun": "√"
+        "aliyun": "√",
+        "alipay": "x"
       },
       "client": {
         "uni-app-x": {
           "web": {
-            "safari": "4.0",
-            "chrome": "4.0"
+            "safari": "√",
+            "chrome": "√"
           },
           "app": {
-            "android": "3.9",
-            "ios": "4.11",
-            "harmony": "4.61"
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
           },
           "mp": {
-            "weixin": "4.41"
+            "weixin": "√"
           }
         }
       }

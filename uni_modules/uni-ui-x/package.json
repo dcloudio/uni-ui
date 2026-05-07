@@ -3,7 +3,7 @@
     "displayName": "uni-ui-x",
     "version": "1.0.0",
     "description": "uni-ui-x是DCloud为uni-app x提供的组件库",
-	"isExt": true,
+    "isExt": true,
     "keywords": [
         "uni-ui-x",
         "UI组件库",
@@ -45,14 +45,14 @@
     "uni_modules": {
         "dependencies": [
             "uni-badge-view",
-            "uni-collapse",
+            "uni-collapse-x",
             "uni-drag-cell",
             "uni-fab-button",
             "uni-index-bar",
-            "uni-link",
-            "uni-nav-bar",
-            "uni-number-box",
-            "uni-rate",
+            "uni-link-x",
+            "uni-nav-bar-x",
+            "uni-number-box-x",
+            "uni-rate-x",
             "uni-refresh-box",
             "uni-tab-bar",
             "uni-time-format"

@@ -73,7 +73,7 @@
     copyFailedOpenInBrowser: string
   }
 
-  const LINK_WEBVIEW_PAGE_PATH = '/uni_modules/uni-link/pages/link-webview'
+  const LINK_WEBVIEW_PAGE_PATH = '/uni_modules/uni-link-x/pages/link-webview'
 
   const props = withDefaults(defineProps<Props>(), {
     href: '',
@@ -135,7 +135,7 @@
       return {
         emptyHref: 'L’URL ne peut pas être vide',
         popupBlocked: 'Le navigateur a bloqué la nouvelle fenêtre',
-        internalOpenFailed: 'Échec de l\'ouverture de la page @uni_modules/uni-link/pages/link-webview',
+        internalOpenFailed: 'Échec de l\'ouverture de la page @uni_modules/uni-link-x/pages/link-webview',
         copiedOpenInBrowserPrefix: 'Le lien a été copié. Veuillez l’ouvrir dans un navigateur externe :',
         copyFailedOpenInBrowser: 'Échec de la copie du lien. Veuillez le copier manuellement et l’ouvrir dans un navigateur externe.'
       }
@@ -145,7 +145,7 @@
       return {
         emptyHref: 'Inscriptio nexus vacua esse non potest',
         popupBlocked: 'Navigator fenestram novam prohibuit',
-        internalOpenFailed: 'Pagina aperiri non potuit @uni_modules/uni-link/pages/link-webview',
+        internalOpenFailed: 'Pagina aperiri non potuit @uni_modules/uni-link-x/pages/link-webview',
         copiedOpenInBrowserPrefix: 'Nexus descriptus est. Quaeso eum in navigatro externo aperi:',
         copyFailedOpenInBrowser: 'Descriptio nexus defecit. Quaeso nexum manu describe et in navigatro externo aperi.'
       }
@@ -154,7 +154,7 @@
     return {
       emptyHref: 'The link URL cannot be empty',
       popupBlocked: 'The browser blocked the new window',
-      internalOpenFailed: 'Failed to open page @uni_modules/uni-link/pages/link-webview',
+      internalOpenFailed: 'Failed to open page @uni_modules/uni-link-x/pages/link-webview',
       copiedOpenInBrowserPrefix: 'The link has been copied. Please open it in an external browser:',
       copyFailedOpenInBrowser: 'Failed to copy the link. Please copy it manually and open it in an external browser.'
     }
