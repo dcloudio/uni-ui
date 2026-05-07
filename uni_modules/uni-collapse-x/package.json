@@ -10,11 +10,11 @@
     "uniui",
     "collapse",
     "折叠面板"
-  ],
+],
   "engines": {
     "HBuilderX": "",
     "uni-app": "",
-    "uni-app-x": "^5.0"
+    "uni-app-x": "^5.07"
   },
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "directories": {
