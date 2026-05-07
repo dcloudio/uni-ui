@@ -1,7 +1,7 @@
 {
   "id": "uni-number-box-x",
   "displayName": "uni-number-box 数字输入框",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NumberBox 带加减按钮的数字输入框组件，用户可以控制每次点击增加的数值，支持小数。",
 	"isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27896",
@@ -44,7 +44,6 @@
   },
   "uni_modules": {
     "dependencies": [
-      "uni-scss"
     ],
     "encrypt": [],
     "platforms": {
