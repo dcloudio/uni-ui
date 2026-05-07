@@ -2,7 +2,9 @@
 
 在页面pages.json中关闭原生导航栏后，即使用`"style": {"navigationStyle": "custom"}`，可以使用本组件实现自定义导航栏。
 
-本组件自动适配的顶部安全区。用padding-top让出顶部状态栏的高度。除去状态栏高度后，本组件的高度为44px。
+同时注意在pages.json中配置页面style增加属性`disableScroll:true`，即禁止页面滚动。此时只有uni-nav-bar组件的下方才可以滚动。否则页面的回弹bounce效果会把自定义导航栏也拉下来。
+
+本组件自动适配顶部安全区。用padding-top让出顶部状态栏的高度。除去状态栏高度后，本组件的高度为44px。
 
 本组件左右两边默认各让出了6px的边距。也可以在left-class和right-class中自定义边距。
 
