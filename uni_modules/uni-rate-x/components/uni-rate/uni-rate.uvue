@@ -53,38 +53,299 @@
 const props = defineProps<{
   /**
    * @description 当前评分，取值范围 0~5 的数字
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   value?: number,
   /**
    * @description v-model 绑定值，支持双向绑定，优先级高于 value
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   modelValue?: number,
   /**
    * @description 是否显示完整 5 颗星。为 true 时用灰星填充未选中位置；为 false 时仅显示亮星，性能更高但不支持点击交互
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   full?: boolean,
   /**
    * @description 是否只读，为 true 时不响应点击评分（full 为 false 时始终只读）
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   readonly?: boolean,
   /**
    * @description 灰星是否使用镂空样式（☆），为 false 时使用实心灰星（★）
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   plain?: boolean,
   /**
    * @description 灰星（未选中）的自定义样式类
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   starClass?: string.ClassString,
   /**
    * @description 灰星（未选中）的内联样式
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   starStyle?: string
   /**
    * @description 亮星（选中）的自定义样式类
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   starActiveClass?: string.ClassString,
   /**
    * @description 亮星（选中）的内联样式
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   starActiveStyle?: string
 }>()

@@ -49,16 +49,103 @@
     /**
      * @description 链接地址，点击组件时要打开的 URL
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "3.9",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.11",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.61",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.41"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "4.0"
+      *   }
+      * }
      */
     href?: string
     /**
      * @description 打开方式。"_self" 在当前应用内置 webview 中打开；"_blank" 在外部浏览器中打开（小程序端会复制链接提示用户外部打开）
      * @default "_self"
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "3.9",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.11",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.61",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.41"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "4.0"
+      *   }
+      * }
      */
     target?: '_blank' | '_self'
     /**
      * @description `target="_blank"`失败时，可以通过本属性控制失败回退策略。"turn-self"使用_self方式打开；"copy-link-modal"复制链接并弹框提醒；"none"不回退，触发失败回调
      * @default "turn-self"
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "3.9",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.11",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.61",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "4.41"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "4.0"
+      *   }
+      * }
      */
     blankFallback: 'turn-self' | 'copy-link-modal' | 'none'
   }

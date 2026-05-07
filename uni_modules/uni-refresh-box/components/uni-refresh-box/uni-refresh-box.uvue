@@ -49,6 +49,35 @@ const props = defineProps({
   /**
    * @description 当前下拉距离（px），通常由外部 scroll-view 的 refresher 状态传入
    * @default 0
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   pullingDistance: {
     type: Number,
@@ -57,6 +86,35 @@ const props = defineProps({
   /**
    * @description 是否正在刷新中，外部控制；为 true 时显示 loading 动画
    * @default false
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   refreshing: {
     type: Boolean,
@@ -65,6 +123,35 @@ const props = defineProps({
   /**
    * @description 触发刷新的下拉阈值（px），下拉距离超过该值时进入“松手刷新”状态
    * @default 45
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   threshold: {
     type: Number,
@@ -73,6 +160,35 @@ const props = defineProps({
   /**
    * @description 下拉过程中（未达到阈值）显示的提示文字
    * @default "下拉刷新"
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   pullingText: {
     type: String,
@@ -81,6 +197,35 @@ const props = defineProps({
   /**
    * @description 下拉超过阈值后显示的提示文字
    * @default "松手刷新"
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   loosingText: {
     type: String,
@@ -89,6 +234,35 @@ const props = defineProps({
   /**
    * @description 刷新中显示的提示文字
    * @default "正在刷新"
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   loadingText: {
     type: String,
@@ -97,6 +271,35 @@ const props = defineProps({
   /**
    * @description 刷新完成瞬间显示的提示文字，为空则不展示
    * @default ""
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   completeText: {
     type: String,
@@ -105,6 +308,35 @@ const props = defineProps({
   /**
    * @description 提示文字的自定义样式类
    * @default ""
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   textClass: {
     type: String,
@@ -113,6 +345,35 @@ const props = defineProps({
   /**
    * @description loading 图标的自定义样式类
    * @default ""
+    * @uniPlatform {
+    *   "app": {
+    *     "android": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "ios": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "x"
+    *     },
+    *     "harmony": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07",
+    *       "unixvVer": "5.08"
+    *     }
+    *   },
+    *   "mp": {
+    *     "weixin": {
+    *       "uniVer": "x",
+    *       "unixVer": "5.07"
+    *     }
+    *   },
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "5.07"
+    *   }
+    * }
    */
   loadingClass: {
     type: String,

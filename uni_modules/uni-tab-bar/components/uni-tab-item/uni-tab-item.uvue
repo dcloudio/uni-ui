@@ -50,10 +50,68 @@ defineOptions({
 type Props = {
 	/**
 	 * @description badge 的内容
+	  * @uniPlatform {
+	  *   "app": {
+	  *     "android": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "x"
+	  *     },
+	  *     "ios": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "x"
+	  *     },
+	  *     "harmony": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "5.08"
+	  *     }
+	  *   },
+	  *   "mp": {
+	  *     "weixin": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07"
+	  *     }
+	  *   },
+	  *   "web": {
+	  *     "uniVer": "x",
+	  *     "unixVer": "5.07"
+	  *   }
+	  * }
 	 */
 	badgeText?: string,
 	/**
 	 * @description badge 的样式类
+	  * @uniPlatform {
+	  *   "app": {
+	  *     "android": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "x"
+	  *     },
+	  *     "ios": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "x"
+	  *     },
+	  *     "harmony": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07",
+	  *       "unixvVer": "5.08"
+	  *     }
+	  *   },
+	  *   "mp": {
+	  *     "weixin": {
+	  *       "uniVer": "x",
+	  *       "unixVer": "5.07"
+	  *     }
+	  *   },
+	  *   "web": {
+	  *     "uniVer": "x",
+	  *     "unixVer": "5.07"
+	  *   }
+	  * }
 	 */
 	badgeClass?: string.ClassString,
 }

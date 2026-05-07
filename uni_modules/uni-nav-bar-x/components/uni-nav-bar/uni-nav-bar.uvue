@@ -66,32 +66,206 @@
     /**
      * @description 是否隐藏默认的返回箭头。为 true 时需要通过 left 插槽自定义返回按钮
      * @default false
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     hideDefaultBack: { type: Boolean, default: false },
     /**
      * @description 导航栏中间显示的标题文字，若使用 mid 插槽则该属性无效
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     title: { type: String, default: "" },
     // navigationBarTextStyle: { type: "#000000" | "#ffffff" | "#000" | "#fff" | "black" | "white" | "", default: "" },
     /**
      * @description 导航栏前景色（文字和返回箭头颜色）。非小程序端未传入时会自动读取 pageStyle 的 navigationBarTextStyle
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     navigationBarTextStyle: { type: String as PropType<"white" | "black" | "">, default: "" },
     /**
      * @description 左侧区域的自定义样式类
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     leftClass: { type: String, default: "" },
     /**
      * @description 中间区域的自定义样式类
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     midClass: { type: String, default: "" },
     /**
      * @description 右侧区域的自定义样式类
      * @default ""
+      * @uniPlatform {
+      *   "app": {
+      *     "android": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "ios": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "x"
+      *     },
+      *     "harmony": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07",
+      *       "unixvVer": "5.08"
+      *     }
+      *   },
+      *   "mp": {
+      *     "weixin": {
+      *       "uniVer": "x",
+      *       "unixVer": "5.07"
+      *     }
+      *   },
+      *   "web": {
+      *     "uniVer": "x",
+      *     "unixVer": "5.07"
+      *   }
+      * }
      */
     rightClass: { type: String, default: "" }
     // stat: { type: Boolean, default: false }
