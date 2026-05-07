@@ -1,10 +1,19 @@
-`uni_modules/uni-tab-bar` 包括一组 tab 相关组件：
+自定义tab-bar组件， 包括一组前端组件：
 
 - `uni-tab`：最外层容器，负责激活索引、内容区高度和切换事件
 - `uni-tab-bar`：底部 tab 容器，负责底栏布局、安全区和中间按钮占位
 - `uni-tab-item`：普通 tab 项，负责插槽展示和 badge
 - `uni-tab-midbutton`：中间悬浮按钮占位容器
 - `uni-tab-content`：上方内容区域容器，负责内容注册、懒渲染和显示切换
+
+每个选项卡内容，不再是页面，而变成了uni-tab-content组件的子组件。
+
+自定义tab-bar组件的使用方式是纯前端的、也是跨平台的。这与pages.json中的tabBar完全不同：
+1. pages.json中的tabBar相关的api无法应用于自定义tab-bar，比如uni.switchTab、uni.showTabBar、uni.hideTabBar、uni.showTabBarRedDot、uni.hideTabBarRedDot、uni.setTabBarBadge、uni.removeTabBarBadge、uni.setTabBarStyle、uni.setTabBarItem。
+2. pages.json中的tabBar页面，生命周期仍然是页面生命周期。但自定义tab-bar的uni-tab-content内容不触发页面生命周期，只触发组件生命周期。
+
+当然，自定义tab-bar组件拥有更强的功能、更灵活的控制方式。比如下凹式midbutton。在uni-app x的非小程序平台中，性能并不会比pages.json中的tabBar差。
+
 
 ### 基础用法
 
@@ -81,3 +90,4 @@
 10. `uni-tab-midbutton` 只负责预留中间按钮位置，不参与激活索引计算；中间按钮点击行为需要在插槽内部自行处理。
 11. `badge-text` 传空字符串时显示红点，传 `'0'` 时不显示；如果需要自定义 badge 外观，请使用 `badge-class` 覆盖样式。
 12. `uni-tab-bar`、`uni-tab-item`、`uni-tab-content` 的根节点都支持直接挂 `class` / `style`，推荐把视觉差异放在页面侧处理，不要改组件内部逻辑。
+13. 微信小程序提供了一种webview方式渲染的底部tabBar方式，来进行tabBar自定义。这种方式仅微信小程序支持，与本组件无关。
