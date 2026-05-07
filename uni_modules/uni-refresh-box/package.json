@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"description": "uni-refresh-box",
 	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27848",
 	"keywords": [
         "uni-refresh-box"
     ],

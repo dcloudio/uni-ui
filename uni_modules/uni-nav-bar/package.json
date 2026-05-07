@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"description": "uni-nav-bar",
 	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27897",
 	"keywords": [
         "uni-nav-bar"
     ],

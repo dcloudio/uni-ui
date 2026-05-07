@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Link 链接组件，可自定义链接的打开方式。",
 	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27898",
   "keywords": [
     "uni-ui",
     "uniui",
