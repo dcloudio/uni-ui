@@ -1,7 +1,7 @@
 {
     "id": "uni-ui-x",
     "displayName": "uni-ui-x",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "uni-ui-x是DCloud为uni-app x提供的组件库",
 	"isExt": true,
     "keywords": [
@@ -12,7 +12,7 @@
     ],
     "engines": {
         "HBuilderX": "",
-        "uni-app-x": "^5.0",
+        "uni-app-x": "^5.08",
         "uni-app": ""
     },
     "repository": "https://gitcode.com/dcloud/uni-ui-x",
