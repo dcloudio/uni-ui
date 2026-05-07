@@ -1,5 +1,5 @@
 {
 	"scripts": {
-		"preupload": "node plugin/upload.js"
+		"preupload": "node plugin/update_readme.js && node plugin/upload.js"
 	}
 }
