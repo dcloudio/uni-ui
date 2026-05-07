@@ -11,29 +11,29 @@
    *   "app": {
    *     "android": {
    *       "uniVer": "x",
-   *       "unixVer": "3.9",
+   *       "unixVer": "5.07",
    *       "unixvVer": "x"
    *     },
    *     "ios": {
    *       "uniVer": "x",
-   *       "unixVer": "4.11",
+   *       "unixVer": "5.07",
    *       "unixvVer": "x"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
-   *       "unixVer": "4.61",
+   *       "unixVer": "5.07",
    *       "unixvVer": "5.08"
    *     }
    *   },
    *   "mp": {
    *     "weixin": {
    *       "uniVer": "x",
-   *       "unixVer": "4.41"
+   *       "unixVer": "5.07"
    *     }
    *   },
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "4.0"
+   *     "unixVer": "5.07"
    *   }
    * }
    */
@@ -53,29 +53,29 @@
       *   "app": {
       *     "android": {
       *       "uniVer": "x",
-      *       "unixVer": "3.9",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "ios": {
       *       "uniVer": "x",
-      *       "unixVer": "4.11",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "harmony": {
       *       "uniVer": "x",
-      *       "unixVer": "4.61",
+      *       "unixVer": "5.07",
       *       "unixvVer": "5.08"
       *     }
       *   },
       *   "mp": {
       *     "weixin": {
       *       "uniVer": "x",
-      *       "unixVer": "4.41"
+      *       "unixVer": "5.07"
       *     }
       *   },
       *   "web": {
       *     "uniVer": "x",
-      *     "unixVer": "4.0"
+      *     "unixVer": "5.07"
       *   }
       * }
      */
@@ -87,29 +87,29 @@
       *   "app": {
       *     "android": {
       *       "uniVer": "x",
-      *       "unixVer": "3.9",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "ios": {
       *       "uniVer": "x",
-      *       "unixVer": "4.11",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "harmony": {
       *       "uniVer": "x",
-      *       "unixVer": "4.61",
+      *       "unixVer": "5.07",
       *       "unixvVer": "5.08"
       *     }
       *   },
       *   "mp": {
       *     "weixin": {
       *       "uniVer": "x",
-      *       "unixVer": "4.41"
+      *       "unixVer": "5.07"
       *     }
       *   },
       *   "web": {
       *     "uniVer": "x",
-      *     "unixVer": "4.0"
+      *     "unixVer": "5.07"
       *   }
       * }
      */
@@ -121,29 +121,29 @@
       *   "app": {
       *     "android": {
       *       "uniVer": "x",
-      *       "unixVer": "3.9",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "ios": {
       *       "uniVer": "x",
-      *       "unixVer": "4.11",
+      *       "unixVer": "5.07",
       *       "unixvVer": "x"
       *     },
       *     "harmony": {
       *       "uniVer": "x",
-      *       "unixVer": "4.61",
+      *       "unixVer": "5.07",
       *       "unixvVer": "5.08"
       *     }
       *   },
       *   "mp": {
       *     "weixin": {
       *       "uniVer": "x",
-      *       "unixVer": "4.41"
+      *       "unixVer": "5.07"
       *     }
       *   },
       *   "web": {
       *     "uniVer": "x",
-      *     "unixVer": "4.0"
+      *     "unixVer": "5.07"
       *   }
       * }
      */
