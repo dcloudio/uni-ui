@@ -304,10 +304,68 @@
 	const emit = defineEmits<{
 		/**
 		 * @description v-model 绑定值变化事件，参数为最新数组，类型为数组
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.08"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		'update:modelValue': [value: any[]]
 		/**
 		 * @description 排序完成后、删除完成后触发，参数为最新数组，类型为数组
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.08"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		change: [value: any[]]
 	}>()
@@ -1164,7 +1222,6 @@
 		z-index: 25;
 	}
 </style>
-
 
 
 

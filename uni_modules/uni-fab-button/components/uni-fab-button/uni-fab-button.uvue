@@ -80,6 +80,35 @@
 	const emit = defineEmits<{
 		/**
 		 * @description 点击事件，参数为事件对象，类型为 UniPointerEvent
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.08"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		click: [event: UniPointerEvent]
 	}>()

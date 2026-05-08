@@ -413,18 +413,134 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
 	/**
 	 * @description 值改变时触发，参数为当前值，类型为 number
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.08"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	change: [value: number]
 	/**
 	 * @description v-model 绑定值变化事件，参数为当前值，类型为 number
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.08"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	'update:modelValue': [value: number]
 	/**
 	 * @description 输入框失焦时触发，参数为事件对象，类型为 UniInputBlurEvent
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.08"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	blur: [event: UniInputBlurEvent]
 	/**
 	 * @description 输入框聚焦时触发，参数为事件对象，类型为 UniInputFocusEvent
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.08"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	focus: [event: UniInputFocusEvent]
 }>()

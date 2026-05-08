@@ -365,10 +365,68 @@ const stars = computed(() => {
 const emit = defineEmits<{
   /**
    * @description 评分变化事件，参数为评分值，类型为 number
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "5.07"
+   *   }
+   * }
    */
   change: [value: number]
   /**
    * @description v-model 绑定值变化事件，参数为评分值，类型为 number
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixvVer": "5.08"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "5.07"
+   *   }
+   * }
    */
   'update:modelValue': [value: number]
 }>()
