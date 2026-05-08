@@ -363,7 +363,13 @@ const stars = computed(() => {
 // 问题：props.full != true 时，下面的Script其实都没有意义，但却需要执行。但vue里又无法用if包裹下面的代码，不灵活
 
 const emit = defineEmits<{
+  /**
+   * @description 评分变化事件，参数为评分值，类型为 number
+   */
   change: [value: number]
+  /**
+   * @description v-model 绑定值变化事件，参数为评分值，类型为 number
+   */
   'update:modelValue': [value: number]
 }>()
 

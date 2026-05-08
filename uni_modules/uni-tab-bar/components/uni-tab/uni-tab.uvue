@@ -150,6 +150,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 // 定义事件
 const emit = defineEmits<{
+	/**
+	 * @description 选项卡变化时触发，参数为当前激活的选项卡索引，类型为 number
+	 */
 	change: [index: number]
 }>()
 

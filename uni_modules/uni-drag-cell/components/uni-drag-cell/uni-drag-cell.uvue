@@ -301,7 +301,16 @@
 		}
 	})
 
-	const emit = defineEmits(['update:modelValue', 'change'])
+	const emit = defineEmits<{
+		/**
+		 * @description v-model 绑定值变化事件，参数为最新数组，类型为数组
+		 */
+		'update:modelValue': [value: any[]]
+		/**
+		 * @description 排序完成后、删除完成后触发，参数为最新数组，类型为数组
+		 */
+		change: [value: any[]]
+	}>()
 	const instance = getCurrentInstance()
 	const slots = useSlots()
 
