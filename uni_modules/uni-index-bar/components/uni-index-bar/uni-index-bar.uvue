@@ -160,6 +160,35 @@
 	const emit = defineEmits<{
 		/**
 		 * @description 选择索引时触发，参数为当前选择的索引字符，类型为 string
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.08"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		select: [index: string]
 	}>()
