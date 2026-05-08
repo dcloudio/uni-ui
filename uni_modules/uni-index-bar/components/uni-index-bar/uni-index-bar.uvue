@@ -158,7 +158,10 @@
 	})
 
 	const emit = defineEmits<{
-		(e : 'select', index : string) : void
+		/**
+		 * @description 选择索引时触发，参数为当前选择的索引字符，类型为 string
+		 */
+		select: [index: string]
 	}>()
 
 	// 将索引字符串按换行分割为数组

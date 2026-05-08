@@ -77,10 +77,15 @@
 		 */
 		plusClass: { type: String, default: "" }
 	})
-	const emit = defineEmits(['click'])
+	const emit = defineEmits<{
+		/**
+		 * @description 点击事件，参数为事件对象，类型为 UniPointerEvent
+		 */
+		click: [event: UniPointerEvent]
+	}>()
 
-	const handleClick = () => {
-		emit('click')
+	const handleClick = (event: UniPointerEvent) => {
+		emit('click', event)
 	}
 </script>
 <style>
