@@ -50,103 +50,103 @@
 		/**
 		 * @description 索引字符列表，使用换行符 \n 分隔，每行作为一个索引项
 		 * @default "A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ"
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		indexs? : string,
 		/**
 		 * @description 指示器容器的自定义样式类，触摸时显示当前索引的气泡
 		 * @default ""
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		indicatorViewClass? : string.ClassString,
 		/**
 		 * @description 指示器内文字的自定义样式类
 		 * @default ""
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		indicatorTextClass? : string.ClassString
 	}

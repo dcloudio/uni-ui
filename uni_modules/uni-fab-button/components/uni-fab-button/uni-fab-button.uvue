@@ -45,35 +45,35 @@
 		/**
 		 * @description 加号图标的自定义样式类，用于调整加号颜色、尺寸等样式
 		 * @default ""
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		plusClass: { type: String, default: "" }
 	})

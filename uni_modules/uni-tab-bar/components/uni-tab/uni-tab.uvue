@@ -43,101 +43,101 @@ import { UniTabBarLayout } from '../types.uts'
 type Props = {
 	/**
 	 * @description 当前激活的选项卡索引
-	  * @uniPlatform {
-	  *   "app": {
-	  *     "android": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "ios": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "harmony": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "5.07"
-	  *     }
-	  *   },
-	  *   "mp": {
-	  *     "weixin": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07"
-	  *     }
-	  *   },
-	  *   "web": {
-	  *     "uniVer": "x",
-	  *     "unixVer": "5.07"
-	  *   }
-	  * }
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.07"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	activeIndex: number,
 	/**
 	 * @description tab-bar 的高度
-	  * @uniPlatform {
-	  *   "app": {
-	  *     "android": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "ios": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "harmony": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "5.07"
-	  *     }
-	  *   },
-	  *   "mp": {
-	  *     "weixin": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07"
-	  *     }
-	  *   },
-	  *   "web": {
-	  *     "uniVer": "x",
-	  *     "unixVer": "5.07"
-	  *   }
-	  * }
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.07"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	tabBarHeight?: number
 	/**
 	 * @description tab-content 的高度是否通到tab-bar下面
-	  * @uniPlatform {
-	  *   "app": {
-	  *     "android": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "ios": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "x"
-	  *     },
-	  *     "harmony": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07",
-	  *       "unixvVer": "5.07"
-	  *     }
-	  *   },
-	  *   "mp": {
-	  *     "weixin": {
-	  *       "uniVer": "x",
-	  *       "unixVer": "5.07"
-	  *     }
-	  *   },
-	  *   "web": {
-	  *     "uniVer": "x",
-	  *     "unixVer": "5.07"
-	  *   }
-	  * }
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "x"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07",
+	 *       "unixvVer": "5.07"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.07"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
 	 */
 	tabContentHeightFull?: boolean
 }

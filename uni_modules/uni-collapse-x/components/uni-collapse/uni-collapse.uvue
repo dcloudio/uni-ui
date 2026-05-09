@@ -53,35 +53,35 @@
     /**
      * @description 是否开启手风琴模式，开启后同一时间仅允许一个子项展开
      * @default true
-      * @uniPlatform {
-      *   "app": {
-      *     "android": {
-      *       "uniVer": "x",
-      *       "unixVer": "5.07",
-      *       "unixvVer": "x"
-      *     },
-      *     "ios": {
-      *       "uniVer": "x",
-      *       "unixVer": "5.07",
-      *       "unixvVer": "x"
-      *     },
-      *     "harmony": {
-      *       "uniVer": "x",
-      *       "unixVer": "5.07",
-      *       "unixvVer": "5.07"
-      *     }
-      *   },
-      *   "mp": {
-      *     "weixin": {
-      *       "uniVer": "x",
-      *       "unixVer": "5.07"
-      *     }
-      *   },
-      *   "web": {
-      *     "uniVer": "x",
-      *     "unixVer": "5.07"
-      *   }
-      * }
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixvVer": "x"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixvVer": "x"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixvVer": "5.07"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.07"
+     *   }
+     * }
      */
     accordion? : boolean
   }
