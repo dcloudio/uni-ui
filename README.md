@@ -120,3 +120,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-transition				|过渡动画								|无																									|
 
 标记为`无`的，大多比较简单，对于AI而言直接写相关UI比下载学习一个组件更合适。
+
+# 交流群
+
+有关 uni-ui-x 组件的任何意见或建议，欢迎通过 [uni-ui-x im 交流群](https://ext.dcloud.net.cn/publisher/start-session?pluginId=27852) 沟通交流。
