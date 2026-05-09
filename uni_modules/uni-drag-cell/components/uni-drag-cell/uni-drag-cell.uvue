@@ -117,35 +117,35 @@
 	const props = defineProps({
 		/**
 		 * @description 可拖拽排序的数据源，支持 v-model 双向绑定，内部会在拖拽结束后更新顺序
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		modelValue: {
 			type: Array,
@@ -154,35 +154,35 @@
 		/**
 		 * @description 网格列数。大于 0 时按网格排布，等于 0 时按一行流式排布
 		 * @default 0
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		column: {
 			type: Number,
@@ -191,35 +191,35 @@
 		/**
 		 * @description 是否显示拖拽到底部删除栏，开启后可将 item 拖入底部删除
 		 * @default false
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		showClose: {
 			type: Boolean,
@@ -228,35 +228,35 @@
 		/**
 		 * @description 是否显示末尾的 append 插槽（非拖拽状态下）
 		 * @default true
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		showAppend: {
 			type: Boolean,
@@ -265,35 +265,35 @@
 		/**
 		 * @description 是否启用拖拽手柄模式，仅点击 handle 插槽才能触发拖拽
 		 * @default false
-		  * @uniPlatform {
-		  *   "app": {
-		  *     "android": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.08",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "ios": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "x"
-		  *     },
-		  *     "harmony": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07",
-		  *       "unixvVer": "5.07"
-		  *     }
-		  *   },
-		  *   "mp": {
-		  *     "weixin": {
-		  *       "uniVer": "x",
-		  *       "unixVer": "5.07"
-		  *     }
-		  *   },
-		  *   "web": {
-		  *     "uniVer": "x",
-		  *     "unixVer": "5.07"
-		  *   }
-		  * }
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixvVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		handleMode: {
 			type: Boolean,
