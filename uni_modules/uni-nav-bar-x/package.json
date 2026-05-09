@@ -1,5 +1,5 @@
 {
-	"id": "uni-nav-bar-X",
+	"id": "uni-nav-bar-x",
 	"displayName": "uni-nav-bar",
 	"version": "1.0.0",
 	"description": "uni-nav-bar",
@@ -11,7 +11,7 @@
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^5.0",
-        "uni-app-x": "^5.0",
+        "uni-app-x": "^5.07",
         "uni-app": ""
 	},
 	"directories": {

@@ -1,21 +1,22 @@
 {
-  "id": "uni-number-box-X",
-  "displayName": "uni-number-box 数字输入框",
+  "id": "uni-link-x",
+  "displayName": "uni-link 链接",
   "version": "1.0.0",
-  "description": "NumberBox 带加减按钮的数字输入框组件，用户可以控制每次点击增加的数值，支持小数。",
+  "description": "Link 链接组件，可自定义链接的打开方式。",
 	"isExt": true,
-  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27896",
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27898",
   "keywords": [
     "uni-ui",
     "uniui",
-    "数字输入框"
+    "link",
+    "链接"
 ],
-  "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "",
     "uni-app": "",
-    "uni-app-x": "^5.0"
+    "uni-app-x": "^5.07"
   },
+  "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "directories": {
     "example": "../../temps/example_temps"
   },
@@ -44,13 +45,13 @@
   },
   "uni_modules": {
     "dependencies": [
-      "uni-scss"
+      "uts-openSchema"
     ],
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "x",
-        "aliyun": "x",
+        "tcb": "√",
+        "aliyun": "√",
         "alipay": "x"
       },
       "client": {
