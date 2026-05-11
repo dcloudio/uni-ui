@@ -6,7 +6,7 @@
     :id="containerId"
     <!-- #endif -->
     style="position: relative;align-self: flex-start;" @click="onTap">
-    <text class="stars-pos gray-stars" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
+    <text class="stars-pos gray-stars" style="white-space: nowrap;" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
     <!-- Android/iOS平台不支持裁剪显示半个文字，需通过包裹一层view裁剪实现 -->
 		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth">
 			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''"
@@ -561,7 +561,6 @@ async function onTap(event: UniPointerEvent) : Promise<void> {
   position: absolute;
   top: 0;
   left: 0;
-  white-space: nowrap; /* 确保星不会换行 */
   overflow: hidden; /* 关键：裁剪点亮层 */
 }
 .gray-stars {
