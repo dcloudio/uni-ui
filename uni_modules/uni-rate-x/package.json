@@ -1,7 +1,7 @@
 {
   "id": "uni-rate-x",
   "displayName": "uni-rate 评分",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rate 评分组件，可自定义评分星星图标的大小、间隔、评分数。",
   "isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27900",
@@ -9,7 +9,7 @@
     "uni-ui",
     "uniui",
     "评分"
-  ],
+],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "",
