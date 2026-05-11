@@ -4,7 +4,9 @@ uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。[开源库地址](h
 
 uni-ui x 是全新设计的，与为uni-app做的uni-ui不同。
 
-uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件详情的兼容性表格。再往前的HBuilderX版本未测试。
+uni-ui x 有包括所有组件的[套装](https://ext.dcloud.net.cn/plugin?id=27852)，也可以单独下载每个组件（左侧每个组件文档中有该组件的下载地址）。
+
+uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件文档的兼容性表格。5.07以前的HBuilderX版本未测试。
 
 # 特点
 
