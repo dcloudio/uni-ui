@@ -50,6 +50,11 @@
    *   }
    * }
    */
+
+defineOptions({
+  externalClasses: ['star-class', 'star-active-class']
+})
+
 const props = defineProps<{
   /**
    * @description 当前评分，取值范围 0~5 的数字
