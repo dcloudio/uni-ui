@@ -17,11 +17,13 @@
       "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-custom.uvue"
     },
     {
+      "id": "uni-tab-midbutton",
       "name": "tab-bar-midbutton",
       "description": "中间按钮",
       "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-midbutton.uvue"
     },
     {
+      "id": "uni-tab-midbutton",
       "name": "tab-bar-midbutton-notch",
       "description": "中间按钮镂空",
       "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-midbutton-notch.uvue"
