@@ -5,9 +5,7 @@
 	"author": "dcloud",
 	"license": "Apache-2.0",
 	"scripts": {
-		"build:lib": "node build/index.js lib",
-		"build:npm": "node build/index.js npm",
-		"build:release": "node build/index.js release",
-		"build:readme": "node build/index.js readme"
+		"build:changelog": "node scripts/collect-changelog.js",
+		"update:version": "node scripts/update-sync-version.js"
 	}
 }
