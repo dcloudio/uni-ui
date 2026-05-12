@@ -16,17 +16,17 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixvVer": "x"
+   *       "unixVaporVer": "x"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixvVer": "x"
+   *       "unixVaporVer": "x"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixvVer": "5.07"
+   *       "unixVaporVer": "5.07"
    *     }
    *   },
    *   "mp": {
@@ -55,17 +55,17 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "5.07"
+		 *       "unixVaporVer": "5.07"
 		 *     }
 		 *   },
 		 *   "mp": {
@@ -89,17 +89,17 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "5.07"
+		 *       "unixVaporVer": "5.07"
 		 *     }
 		 *   },
 		 *   "mp": {
@@ -123,17 +123,17 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "5.07"
+		 *       "unixVaporVer": "5.07"
 		 *     }
 		 *   },
 		 *   "mp": {
@@ -165,17 +165,17 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "x"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixvVer": "5.07"
+		 *       "unixVaporVer": "5.07"
 		 *     }
 		 *   },
 		 *   "mp": {
