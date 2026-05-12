@@ -1,7 +1,7 @@
 {
     "id": "uni-ui-x",
     "displayName": "uni-ui-x",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "uni-ui-x是DCloud为uni-app x提供的组件库",
     "isExt": true,
     "keywords": [
