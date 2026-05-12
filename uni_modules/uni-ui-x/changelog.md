@@ -1,3 +1,8 @@
+## 1.0.2（2026-05-12）
+- uni-badge-view 更新文档
+- uni-index-bar 更新文档
+- uni-number-box 移除无用依赖
+- uni-rate 修复 starClass 和 starActiveClass 设置不生效的问题
 ## 1.0.1（2026-05-07）
 - 新增 uni-collapse、uni-link、uni-nav-bar、uni-number-box、uni-rate 组件
 ## 1.0.0（2026-04-30）
