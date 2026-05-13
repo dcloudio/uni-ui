@@ -23,6 +23,7 @@ uni-collapse-item的标题栏的自定义：
 - 标题栏支持title属性，可通过title-class自定义文字样式。
 - 标题展开态可通过 `title-open-class` 自定义激活文字样式。组件默认使用透明度区分状态，便于外部继续覆盖文字颜色。
 - 标题禁用态可通过 `title-disabled-class` 自定义禁用文字样式。若同时存在展开态和禁用态，以禁用态为最终状态。
+- 内容外层容器可通过 `content-wrap-class` 自定义背景等容器样式。
 - 标题栏右边默认带有箭头，可通过arrow-class自定义箭头样式。该箭头为一个view包括2个直角边的边框，然后旋转而成。
 - 箭头展开态和禁用态可分别通过 `arrow-open-class`、`arrow-disabled-class` 覆盖。组件默认也使用透明度区分状态，便于外部继续覆盖箭头颜色。
 - 如果完全不想要默认包含的title和arrow，也可以传入一个名为title的具名插槽来替换。
@@ -49,6 +50,7 @@ uni-collapse-item的标题栏的自定义：
   title-wrap-class="my-title-wrap-class"
   title-class="my-title-class"
   title-open-class="my-title-open-class"
+  content-wrap-class="my-content-wrap-class"
   arrow-class="my-arrow-class"
   arrow-open-class="my-arrow-open-class"
 >
@@ -87,7 +89,7 @@ uni-collapse-item的标题栏的自定义：
 建议通过组件 `class` 和 externalClass 组合传入暗色样式：
 
 - 用组件 `class` 统一控制根节点和内容区等外层视觉。
-- 用 `title-wrap-class`、`title-class`、`title-open-class`、`arrow-class`、`arrow-open-class` 等 externalClass 覆盖标题区和箭头样式。
+- 用 `title-wrap-class`、`title-class`、`title-open-class`、`content-wrap-class`、`arrow-class`、`arrow-open-class` 等 externalClass 覆盖标题区、内容外层和箭头样式。
 - 默认展开态和禁用态主要通过透明度表达，减少颜色覆盖时的交叉冲突。
 
 ### 注意

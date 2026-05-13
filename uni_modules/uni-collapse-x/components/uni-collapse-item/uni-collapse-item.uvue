@@ -11,7 +11,7 @@
         :class="[arrowPlatformClass, arrowStateClass, arrowDisabledClass, props.arrowClass, is_open ? props.arrowOpenClass : '', props.disabled ? props.arrowDisabledClass : '']"></view>
     </view>
     <view ref="contentWrapRef" class="uni-collapse-item__content"
-      :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-state-open' : 'content-state-close']">
+      :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-state-open' : 'content-state-close', contentWrapClass]">
       <view ref="contentRef" class="uni-collapse-item__content-box"
         :class="[transition_enabled ? 'content-transition--active' : '', box_is_open ? 'content-box-open' : 'content-box-close']">
         <slot></slot>
@@ -64,7 +64,7 @@
   defineOptions({
     name: 'UniCollapseItem',
     styleIsolation: 'app',
-    externalClasses: ['title-wrap-class', 'title-class', 'title-open-class', 'title-disabled-class', 'arrow-class', 'arrow-open-class', 'arrow-disabled-class']
+    externalClasses: ['title-wrap-class', 'title-class', 'title-open-class', 'title-disabled-class', 'content-wrap-class', 'arrow-class', 'arrow-open-class', 'arrow-disabled-class']
   })
 
   type Props = {
@@ -307,6 +307,40 @@
      */
     titleDisabledClass? : string.ClassString,
     /**
+     * @description 内容外层容器的样式类
+     * @default ""
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "5.07"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.07"
+     *   }
+     * }
+     */
+    contentWrapClass? : string.ClassString,
+    /**
      * @description 箭头图标的基础样式类
      * @default ""
      * @uniPlatform {
@@ -418,6 +452,7 @@
     titleClass: '',
     titleOpenClass: '',
     titleDisabledClass: '',
+    contentWrapClass: '',
     arrowClass: '',
     arrowOpenClass: '',
     arrowDisabledClass: ''
