@@ -70,6 +70,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 | uni-refresh-box | [uni-refresh-box](https://ext.dcloud.net.cn/plugin?name=uni-refresh-box) |
 | uni-tab | [选项卡](https://ext.dcloud.net.cn/plugin?name=uni-tab-bar) |
 | uni-time-format | [时间格式化](https://ext.dcloud.net.cn/plugin?name=uni-time-format) |
+
 <!-- 组件列表结束 -->
 
 # uni-ui的升级建议@uniuiupgrade
