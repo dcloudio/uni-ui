@@ -117,7 +117,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-steps						|步骤条									|无																									|
 |uni-swipe-action			|滑动操作								|参考hello uni-app x模板中可左滑删除长列表示例				|
 |uni-swiper-dot				|轮播图指示点						|改用内置组件swiper，通过externalClass控制指示点样式	|
-|uni-table						|表格										|推荐使用rich-text或web-view中的table。																									|
+|uni-table						|表格										|推荐使用rich-text或web-view中的table。								|
 |uni-tag							|标签										|无																									|
 |uni-title						|章节标题								|无																									|
 |uni-transition				|过渡动画								|无																									|
