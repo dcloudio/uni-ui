@@ -8,7 +8,10 @@
         "uni-ui-x",
         "UI组件库",
         "ui框架",
-        "ui库"
+        "ui库",
+        "uni-app-x",
+        "uni-app x",
+        "组件"
     ],
     "engines": {
         "HBuilderX": "",

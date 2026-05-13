@@ -6,7 +6,10 @@
 	"isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27846",
 	"keywords": [
-        "uni-fab-button"
+        "uni-fab-button",
+        "uni-app-x",
+        "uni-app x",
+        "组件"
     ],
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {

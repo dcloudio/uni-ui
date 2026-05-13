@@ -6,7 +6,10 @@
 	"isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27845",
 	"keywords": [
-        "uni-drag-cell"
+        "uni-drag-cell",
+        "uni-app-x",
+        "uni-app x",
+        "组件"
     ],
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {

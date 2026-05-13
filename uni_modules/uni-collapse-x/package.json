@@ -9,7 +9,10 @@
     "uni-ui",
     "uniui",
     "collapse",
-    "折叠面板"
+    "折叠面板",
+    "uni-app-x",
+    "uni-app x",
+    "组件"
 ],
   "engines": {
     "HBuilderX": "",
