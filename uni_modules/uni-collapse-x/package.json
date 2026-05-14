@@ -1,7 +1,7 @@
 {
   "id": "uni-collapse-x",
   "displayName": "uni-collapse 折叠面板",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collapse 折叠面板组件，可自定义折叠面板的展开和收起。",
   "isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27899",
@@ -10,9 +10,7 @@
     "uniui",
     "collapse",
     "折叠面板",
-    "uni-app-x",
-    "uni-app x",
-    "组件"
+    "uni-app-x"
 ],
   "engines": {
     "HBuilderX": "",
