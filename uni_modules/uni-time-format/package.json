@@ -9,9 +9,7 @@
     "uni-ui",
     "uniui",
     "time-format",
-    "uni-app-x",
-    "uni-app x",
-    "组件"
+    "uni-app-x"
   ],
   "engines": {
     "HBuilderX": "^5.07",
