@@ -1,3 +1,5 @@
+## 1.0.3（2026-05-15）
+- uni-collapse 支持 content-wrap-class 定义内层容器样式
 ## 1.0.2（2026-05-12）
 - uni-badge-view 更新文档
 - uni-index-bar 更新文档
