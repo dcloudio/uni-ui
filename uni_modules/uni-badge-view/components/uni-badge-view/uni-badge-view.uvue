@@ -11,12 +11,12 @@
 			<slot></slot>
 
 			<!-- badge 文字模式 -->
-			<text v-if="text != '' && text != '0' " :class="['text', 'postion', badgeClass]" :style="badgeStyle">
+			<text v-if="text != '' && text != '0' " :class="['text', 'position', badgeClass]" :style="badgeStyle">
 				{{ text }}
 			</text>
 
 			<!-- badge 红点模式 -->
-			<view v-else-if="text != '0'" :class="['dot', 'postion', badgeClass]" :style="badgeStyle"></view>
+			<view v-else-if="text != '0'" :class="['dot', 'position', badgeClass]" :style="badgeStyle"></view>
 		</view>
 
 		<!-- 不包裹，直接显示badge 文字模式 -->
@@ -251,7 +251,7 @@
 	}
 	
 	/* 有包裹内容，才定位在右上角。所以这个样式是一个单独的class，在slot有内容时才生效 */
-	.postion {
+	.position {
 		position: absolute;
 		top: 0px; /* 定位在顶部*/
 		right: 0px; /* 定位在右边*/
