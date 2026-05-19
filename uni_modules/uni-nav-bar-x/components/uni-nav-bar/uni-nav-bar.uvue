@@ -4,7 +4,7 @@
     <!-- #ifdef WEB -->
     cursor: pointer
     <!-- #endif -->
-    " class="uni-left-class-buildin" :class="leftClass">
+    " class="uni-left-class-builtin" :class="leftClass">
 			<!-- 旋转边框的view实现返回箭头。因需要扩大点击区域，外面多套了一层 -->
 			<view v-if="!hideDefaultBack && slots['left']==null" style="width: 44px;height: 44px;justify-content: center;align-items: center;" @click="back">
 				<view style="width: 12px;height: 12px;transform: rotate(45deg);
@@ -13,11 +13,11 @@
       <slot name="left" v-else></slot>
     </view>
 
-    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;" class="uni-mid-class-buildin" :class="midClass" flatten>
+    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;" class="uni-mid-class-builtin" :class="midClass" flatten>
       <text v-if="slots['mid']==null" :style="{ color: props.navigationBarTextStyle }" flatten> {{ title }} </text>
 			<slot name="mid" v-else></slot>
     </view>
-    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;right: 0;" class="uni-right-class-buildin" :class="rightClass" flatten>
+    <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;right: 0;" class="uni-right-class-builtin" :class="rightClass" flatten>
       <slot name="right"></slot>
     </view>
 
@@ -310,16 +310,16 @@
 </script>
 
 <style>
-	.uni-left-class-buildin {
+	.uni-left-class-builtin {
     width: 44px;
 		margin-left: 6px;
 	}
-  .uni-mid-class-buildin {
+  .uni-mid-class-builtin {
     justify-content: center;
 		left: 52px; /* padding 6 + 44 = 52*/
     right: 52px;
   }
-  .uni-right-class-buildin {
+  .uni-right-class-builtin {
     width: 44px;
     margin-right: 6px;
   }
