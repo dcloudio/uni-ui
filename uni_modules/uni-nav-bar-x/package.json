@@ -1,14 +1,14 @@
 {
 	"id": "uni-nav-bar-x",
 	"displayName": "uni-nav-bar",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "uni-nav-bar",
 	"isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27897",
 	"keywords": [
         "uni-nav-bar",
         "uni-app-x",
-        "uni-app x",
+        "导航栏",
         "组件"
     ],
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
