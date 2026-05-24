@@ -8,6 +8,8 @@ uni-ui x 有包括所有组件的[套装](https://ext.dcloud.net.cn/plugin?id=27
 
 uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件文档的兼容性表格。5.07以前的HBuilderX版本未测试。
 
+uni-ui x 仅支持[样式隔离策略2.0](https://doc.dcloud.net.cn/uni-app-x/css/common/style-isolation.html)，需注意5.0以前创建的老项目需要在manifest.json中手动开启。
+
 # 特点
 
 - 性能
@@ -21,7 +23,7 @@ uni-ui x 非常注重性能，在DOM层级控制、包体积、代码执行时�
 
 很多组件为了满足使用者的需求，封装的属性越来越多，但组件使用者仍然在抱怨自定义性不足。
 
-尤其是组件把样式封装在组件属性上，造成用户需要自定义样式时无限封装属性，并且这些属性的控制无法使用css变量。
+尤其是把样式封装在组件属性上，造成用户需要自定义样式时无限封装属性，并且这些属性的控制无法使用css变量。
 
 uni-ui x 提供了完全的样式自定义能力，所有的样式定义都可以通过class设置，组件属性只控制功能逻辑。
 
@@ -103,7 +105,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-icons						|图标										|无																									|
 |uni-indexed-list			|索引列表								|改用uni-index-bar																		|
 |uni-link							|超链接									|改用uni-link																				|
-|uni-list							|列表										|使用内置组件list																		|
+|uni-list							|列表										|使用内置组件list-view																|
 |uni-load-more				|加载更多								|使用内置组件loading																	|
 |uni-nav-bar					|自定义导航栏						|改用uni-nav-bar																			|
 |uni-notice-bar				|通告栏									|无																									|
@@ -122,7 +124,38 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-title						|章节标题								|无																									|
 |uni-transition				|过渡动画								|无																									|
 
-标记为`无`的，大多比较简单，对于AI而言直接写相关UI比下载学习一个组件更合适。
+标记为`无`的，大多比较简单，有些其实没必要做成组件，使用class即可。有些可以交给AI快速写一个布局view组合，也没有必要封装为组件。
+
+在hello uni-app x示例中，全局css里有一些class，
+
+- uni-row组件，推荐改用使用全局class `uni-row`
+- uni-title组件，可以使用全局class `uni-h1`、`uni-h2`、`uni-h3`、`uni-h4`
+```css
+.uni-row {
+  flex-direction: row;
+}
+.uni-h1 {
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  margin: 8px 0;
+}
+.uni-h2 {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  margin: 8px 0;
+}
+.uni-h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+.uni-h4 {
+  font-weight: bold;
+  margin: 8px 0;
+}
+```
 
 # 交流群
 
