@@ -1,3 +1,6 @@
+## 1.0.4（2026-05-26）
+- uni-badge-view 修复类名拼写错误
+- uni-nav-bar 纠正类名拼写错误
 ## 1.0.3（2026-05-15）
 - uni-collapse 支持 content-wrap-class 定义内层容器样式
 ## 1.0.2（2026-05-12）
