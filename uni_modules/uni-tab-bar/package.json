@@ -1,6 +1,6 @@
 {
   "id": "uni-tab-bar",
-  "displayName": "uni-tab 选项卡",
+  "displayName": "uni-tab-bar 选项卡",
   "version": "1.0.0",
   "description": "底部选项卡组件集",
   "isExt": true,
@@ -33,7 +33,8 @@
     "uni-ui",
     "uniui",
     "自定义选项卡",
-    "uni-app-x"
+    "uni-app-x",
+    "tab-bar"
   ],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
