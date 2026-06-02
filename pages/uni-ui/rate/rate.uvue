@@ -24,11 +24,11 @@
 		<text class="title">只读，value小于0超限测试</text>
 			<uni-rate full readonly :value="-1"/>
 		<text class="title">未选中的星星为镂空状态" </text>
-			<uni-rate full :value="3.5" :plain="true" />
+			<uni-rate full :value="3.5" :plain="true" star-class="tap-rate-star" star-active-class="tap-rate-star" />
 		<text class="title">未选中的星星为实心且响应change事件</text>
-			<uni-rate full @change="onRateChange" />
+			<uni-rate full star-class="tap-rate-star" star-active-class="tap-rate-star" @change="onRateChange" />
 		<text class="title">响应点击并双向绑定响应式变量</text>
-			<uni-rate full v-model="data.vModelRateValue" />
+			<uni-rate full v-model="data.vModelRateValue" star-class="tap-rate-star" star-active-class="tap-rate-star" />
 			<text>{{data.vModelRateValue}}</text>
 		<text class="title">只读，不触发change" </text>
 			<uni-rate readonly :value="5" @change="onRateChange" />
@@ -38,9 +38,9 @@
 		<text class="title">高性能只读，自定义间隔letter-space（class方式）" </text>
 			<uni-rate :value="4" star-active-class="star-active-class"/>
 		<text class="title">自定义默认颜色和选中颜色 class方式</text>
-			<uni-rate :value="3" full star-class="custom-default" star-active-class="custom-selected"/>
+			<uni-rate :value="3" full star-class="custom-default tap-rate-star" star-active-class="custom-selected tap-rate-star"/>
 		<text class="title">自定义默认颜色和选中颜色 style方式</text>
-			<uni-rate :value="3" full star-style="color:lightgreen" star-active-style="color:green"/>
+			<uni-rate :value="3" full star-style="color:lightgreen;letter-spacing:8px" star-active-style="color:green"/>
 		<text class="title">只读，程序动态赋值，不触发change</text>
 			<uni-rate :value="data.rateValue" @change="onRateChange"/>
 	<!-- #ifdef APP -->
@@ -121,5 +121,8 @@
 }
 .star-active-class{
 	letter-spacing: 5px;
+}
+.tap-rate-star{
+	letter-spacing: 8px;
 }
 </style>
