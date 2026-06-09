@@ -1,5 +1,5 @@
 <template>
-	<view ref="tabBarRef" :style="tabBarStyle" class="uni-tab-list-root">
+	<view :style="tabBarStyle" class="uni-tab-list-root" :class="tabBarRootClass">
 		<slot></slot>
 	</view>
 </template>
@@ -38,30 +38,29 @@
    *   }
    * }
    */
-import { UniTabBarLayout, UniTabListItemLayout } from '../types.uts'
+import { UniTabBarLayout } from '../types.uts'
 
 const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
 	tabListBaseHeight: 50,
-	windowWidth: 0,
-	safeAreaInsetBottom: 0
+	tabContentHeightFull: false
 } as UniTabBarLayout))
 const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: number) => {})
 
 const itemCount = ref<number>(0)
 const hasMidButtonItem = ref<boolean>(false)
-const midButtonWidth = ref<number>(0)
-const containerWidth = ref<number>(0)
-const tabBarRef = ref<UniElement | null>(null)
 
 const tabBarStyle = computed(() => {
 	return {
-		height: tabBarLayout.value.tabListBaseHeight + 'px',
-		paddingBottom: tabBarLayout.value.safeAreaInsetBottom + 'px'
+		height: tabBarLayout.value.tabListBaseHeight + 'px'
 	}
 })
 
+const tabBarRootClass = computed(() : string => {
+	return tabBarLayout.value.tabContentHeightFull ? 'uni-tab-list-root-full' : 'uni-tab-list-root-normal'
+})
+
 const validMidButtonLayout = computed(() : boolean => {
-	return hasMidButtonItem.value && itemCount.value > 0 && itemCount.value % 2 == 0 && midButtonWidth.value > 0
+	return hasMidButtonItem.value == false || (itemCount.value > 0 && itemCount.value % 2 == 0)
 })
 
 function registerItem() : number {
@@ -70,70 +69,12 @@ function registerItem() : number {
 	return index
 }
 
-function getItemLayout(index : number) : UniTabListItemLayout {
-	// #ifdef WEB
-	if (itemCount.value <= 0 || containerWidth.value <= 0) {
-		return {
-			width: 0,
-			marginLeft: 0
-		} as UniTabListItemLayout
-	}
-
-	if (validMidButtonLayout.value) {
-		const itemWidth = (containerWidth.value - midButtonWidth.value) / itemCount.value
-		const middleIndex = itemCount.value / 2
-		return {
-			width: itemWidth,
-			marginLeft: index == middleIndex ? midButtonWidth.value : 0
-		} as UniTabListItemLayout
-	}
-
-	return {
-		width: containerWidth.value / itemCount.value,
-		marginLeft: 0
-	} as UniTabListItemLayout
-	// #endif
-
-	// #ifndef WEB
-	if (itemCount.value <= 0 || tabBarLayout.value.windowWidth <= 0) {
-		return {
-			width: 0,
-			marginLeft: 0
-		} as UniTabListItemLayout
-	}
-
-	if (validMidButtonLayout.value) {
-		const itemWidth = (tabBarLayout.value.windowWidth - midButtonWidth.value) / itemCount.value
-		const middleIndex = itemCount.value / 2
-		return {
-			width: itemWidth,
-			marginLeft: index == middleIndex ? midButtonWidth.value : 0
-		} as UniTabListItemLayout
-	}
-
-	return {
-		width: tabBarLayout.value.windowWidth / itemCount.value,
-		marginLeft: 0
-	} as UniTabListItemLayout
-	// #endif
-}
-
-async function syncContainerWidth() : Promise<void> {
-	const tabBarElement = tabBarRef.value
-	if (tabBarElement == null) {
-		return
-	}
-
-	// #ifdef WEB
-	if (tabBarElement.offsetWidth > 0) {
-		containerWidth.value = tabBarElement.offsetWidth
-	}
-	// #endif
-}
 
 function registerMidButton(width : number, height : number) : void {
 	hasMidButtonItem.value = true
-	midButtonWidth.value = width
+	if (width <= 0) {
+		console.warn('uni-tab-midbutton: width 必须大于 0')
+	}
 	if (height <= 0) {
 		console.warn('uni-tab-midbutton: height 必须大于 0')
 	}
@@ -147,51 +88,49 @@ function syncOccupiedHeight() : void {
 
 onMounted(() => {
 	syncOccupiedHeight()
-	// #ifdef WEB
-	nextTick(() => {
-		syncContainerWidth()
-	})
-	// #endif
 })
 
 watch(() : number => itemCount.value, () => {
 	syncOccupiedHeight()
-	// #ifdef WEB
-	nextTick(() => {
-		syncContainerWidth()
-	})
-	// #endif
 })
 
 watch(() : boolean => hasMidButtonItem.value, () => {
 	syncOccupiedHeight()
-	// #ifdef WEB
-	nextTick(() => {
-		syncContainerWidth()
-	})
-	// #endif
 })
 
 provide('uniTabListRegisterItem', registerItem)
-provide('uniTabListGetItemLayout', getItemLayout)
 provide('uniTabListRegisterMidButton', registerMidButton)
 provide('uniTabListChangeTab', changeTab)
 </script>
 
 <style>
 	.uni-tab-list-root {
-		width: 100%;
-		height: 50px;
-		position: absolute;
-		bottom: 0;
-		box-sizing: content-box;
 		display: flex;
 		flex-direction: row;
+		width: 100%;
+		height: 50px;
+		flex-shrink: 0;
+		box-sizing: content-box;
+		padding-bottom: var(--uni-safe-area-inset-bottom);
 		justify-content: flex-start;
-		align-items: center;
+		align-items: flex-end;
 		overflow: visible;
 		border-top-width: 0.5px;
 		border-top-color: rgba(0,0,0,0.33);
 		border-top-style: solid;
+	}
+
+	.uni-tab-list-root-normal {
+		position: relative;
+		z-index: 1;
+		background-color: #ffffff;
+	}
+
+	.uni-tab-list-root-full {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
 	}
 </style>
