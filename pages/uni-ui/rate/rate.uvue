@@ -123,6 +123,7 @@
 	letter-spacing: 5px;
 }
 .tap-rate-star{
+	font-size: 32px;
 	letter-spacing: 8px;
 }
 </style>
