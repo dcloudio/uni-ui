@@ -126,7 +126,8 @@
 				{
 					"path": "index-bar/index-bar",
 					"style": {
-						"navigationBarTitleText": "uni-index-bar"
+						"navigationBarTitleText": "uni-index-bar",
+						"backgroundColorContent": "#ffffff"
 					}
 				}
 			]
