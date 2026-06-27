@@ -6,7 +6,11 @@
 				<button class="control-btn" @click="toggleIndexs">{{ data.useCustomIndexs ? '根据数据设索引' : '自定义索引' }}</button>
 			</view>
 			<list-view ref="listRef" style="flex: 1;" :scroll-into-view="data.indexViewID">
-			<sticky-section v-for="group in cityGroups" :key="group.index">
+			<sticky-section v-for="group in cityGroups" :key="group.index"
+			<!-- #ifdef APP && VUE3-VAPOR -->
+			:preload="true"
+			<!-- #endif -->
+			>
 				<sticky-header :id="'idx-' + group.index">
 					<view class="group-header">
 						<text class="group-header-text">{{ group.index }}</text>
