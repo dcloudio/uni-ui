@@ -1,24 +1,90 @@
 <template>
 	<view style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
 		<text class="label first-label">标准uni-fab-button</text>
-		<uni-fab-button></uni-fab-button>
+		<view class="move-fab-placeholder">
+			<view id="move-fab" class="move-fab" :style="movepos" @touchstart="onTouchStart" @touchmove="onTouchMove">
+				<uni-fab-button></uni-fab-button>
+			</view>
+		</view>
 		<text class="label">自定义fab样式</text>
 		<uni-fab-button class="custom-class"></uni-fab-button>
 		<text class="label">自定义plus样式</text>
 		<uni-fab-button plus-class="custom-plus-class"></uni-fab-button>
 		<text class="label">自定义fab和plus样式，变成一个16px的纯+</text>
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
-		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="clickme"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
+		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="handleClick"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
 	</view>
 </template>
 
-<script setup>
-	const clickme = () => {
+<script setup lang="uts">
+	type Data = {
+		dx : number
+		dy : number
+		left : number
+		top : number
+	}
+
+	const data = reactive<Data>({
+		dx: 0,
+		dy: 0,
+		left: 15,
+		top: 47
+	})
+	const movepos = ref<string>('')
+	let sx = 0
+	let sy = 0
+	let mx = 0
+	let my = 0
+	let baseLeft = 15
+	let baseTop = 47
+
+	function handleClick() {
 		uni.showToast({
 			title: '点击了右下角的fab',
 			icon: 'none'
 		})
 	}
+
+	function updateMovePos() {
+		data.left = baseLeft + mx
+		data.top = baseTop + my
+		movepos.value = 'position: fixed;left: ' + baseLeft + 'px;top: ' + baseTop + 'px;transform: translate(' + mx + 'px,' + my + 'px)'
+	}
+
+	function onTouchStart(e : UniTouchEvent) {
+		sx = e.touches[0].clientX
+		sy = e.touches[0].clientY
+		updateMovePos()
+	}
+
+	function onTouchMove(e : UniTouchEvent) {
+		mx = e.touches[0].clientX - sx + mx
+		my = e.touches[0].clientY - sy + my
+		sx = e.touches[0].clientX
+		sy = e.touches[0].clientY
+		data.dx = mx
+		data.dy = my
+		updateMovePos()
+	}
+
+	onReady(() => {
+		uni.createSelectorQuery()
+			.select('.move-fab-placeholder')
+			.boundingClientRect((rect) => {
+				if (rect != null) {
+					const nodeInfo = rect as NodeInfo
+					baseLeft = nodeInfo.left != null ? nodeInfo.left : baseLeft
+					baseTop = nodeInfo.top != null ? nodeInfo.top : baseTop
+					data.left = baseLeft
+					data.top = baseTop
+				}
+			})
+			.exec()
+	})
+
+	defineExpose({
+		data
+	})
 </script>
 
 <style>
@@ -52,6 +118,14 @@
 		width: 100%;
 		height: 2px;
 		border-radius: 0px;
+	}
+	.move-fab-placeholder {
+		width: 44px;
+		height: 44px;
+	}
+	.move-fab {
+		width: 44px;
+		height: 44px;
 	}
 	.right-bottom {
 		position: absolute;
