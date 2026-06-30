@@ -15,33 +15,37 @@ describe('fab-button', () => {
 		expect(image).toSaveImageSnapshot()
 	})
 
-	it('fab-button first example swipe', async () => {
+	it('fab-button movable example swipe', async () => {
 		await page.waitFor(500)
 
 		const startLeft = await page.data('data.left')
 		const startTop = await page.data('data.top')
+		const startX = startLeft + 22
+		const startY = startTop + 22
+		const endX = startX + 80
+		const endY = startY + 60
 		const el = await page.$('#move-fab')
 		await el.touchstart({
 			touches: [
 				{
 					identifier: 1,
-					pageX: 37,
-					pageY: 69,
-					clientX: 37,
-					clientY: 69,
-					screenX: 37,
-					screenY: 69,
+					pageX: startX,
+					pageY: startY,
+					clientX: startX,
+					clientY: startY,
+					screenX: startX,
+					screenY: startY,
 				},
 			],
 			changedTouches: [
 				{
 					identifier: 1,
-					pageX: 37,
-					pageY: 69,
-					clientX: 37,
-					clientY: 69,
-					screenX: 37,
-					screenY: 69,
+					pageX: startX,
+					pageY: startY,
+					clientX: startX,
+					clientY: startY,
+					screenX: startX,
+					screenY: startY,
 				},
 			],
 		})
@@ -50,23 +54,23 @@ describe('fab-button', () => {
 			touches: [
 				{
 					identifier: 1,
-					pageX: 117,
-					pageY: 129,
-					clientX: 117,
-					clientY: 129,
-					screenX: 117,
-					screenY: 129,
+					pageX: endX,
+					pageY: endY,
+					clientX: endX,
+					clientY: endY,
+					screenX: endX,
+					screenY: endY,
 				},
 			],
 			changedTouches: [
 				{
 					identifier: 1,
-					pageX: 117,
-					pageY: 129,
-					clientX: 117,
-					clientY: 129,
-					screenX: 117,
-					screenY: 129,
+					pageX: endX,
+					pageY: endY,
+					clientX: endX,
+					clientY: endY,
+					screenX: endX,
+					screenY: endY,
 				},
 			],
 		})
@@ -75,23 +79,23 @@ describe('fab-button', () => {
 			touches: [
 				{
 					identifier: 1,
-					pageX: 117,
-					pageY: 129,
-					clientX: 117,
-					clientY: 129,
-					screenX: 117,
-					screenY: 129,
+					pageX: endX,
+					pageY: endY,
+					clientX: endX,
+					clientY: endY,
+					screenX: endX,
+					screenY: endY,
 				},
 			],
 			changedTouches: [
 				{
 					identifier: 1,
-					pageX: 117,
-					pageY: 129,
-					clientX: 117,
-					clientY: 129,
-					screenX: 117,
-					screenY: 129,
+					pageX: endX,
+					pageY: endY,
+					clientX: endX,
+					clientY: endY,
+					screenX: endX,
+					screenY: endY,
 				},
 			],
 		})
