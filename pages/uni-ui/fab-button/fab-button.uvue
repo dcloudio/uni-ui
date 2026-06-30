@@ -1,17 +1,19 @@
 <template>
 	<view style="flex: 1;position: relative;padding: 15px 15px 0 15px;">
 		<text class="label first-label">标准uni-fab-button</text>
-		<view class="move-fab-placeholder">
-			<view id="move-fab" class="move-fab" :style="movepos" @touchstart="onTouchStart" @touchmove="onTouchMove">
-				<uni-fab-button></uni-fab-button>
-			</view>
-		</view>
+		<uni-fab-button></uni-fab-button>
 		<text class="label">自定义fab样式</text>
 		<uni-fab-button class="custom-class"></uni-fab-button>
 		<text class="label">自定义plus样式</text>
 		<uni-fab-button plus-class="custom-plus-class"></uni-fab-button>
 		<text class="label">自定义fab和plus样式，变成一个16px的纯+</text>
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
+		<text class="label">可移动uni-fab-button</text>
+		<view class="move-fab-placeholder">
+			<view id="move-fab" class="move-fab" :style="movepos" @touchstart="onTouchStart" @touchmove="onTouchMove">
+				<uni-fab-button></uni-fab-button>
+			</view>
+		</view>
 		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="handleClick"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
 	</view>
 </template>
