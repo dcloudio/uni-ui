@@ -14,7 +14,14 @@
 				<uni-fab-button></uni-fab-button>
 			</view>
 		</view>
-		<uni-fab-button class="right-bottom" hover-class="fab-hover" @click="handleClick"></uni-fab-button> <!-- TODO: hover-class仅web生效-->
+		<view
+			class="right-bottom"
+			:class="rightBottomFabPressed ? 'fab-pressed' : ''"
+			@touchstart="rightBottomFabPressed = true"
+			@touchend="rightBottomFabPressed = false"
+			@touchcancel="rightBottomFabPressed = false">
+			<uni-fab-button @click="handleClick"></uni-fab-button>
+		</view>
 	</view>
 </template>
 
@@ -39,6 +46,7 @@
 	let my = 0
 	let baseLeft = 15
 	let baseTop = 47
+	const rightBottomFabPressed = ref(false)
 
 	function handleClick() {
 		uni.showToast({
@@ -133,10 +141,17 @@
 		position: absolute;
 		right: 44px;
 		bottom: 44px;
-		transition: transform 0.1s ease;
+		width: 44px;
+		height: 44px;
+		opacity: 1;
+		transform: scale(1);
+		transform-origin: center center;
+		transition-property: transform, opacity;
+		transition-duration: 140ms;
+		transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 	}
-	.fab-hover{
-		opacity: 0.8;
-		transform: scale(0.8); /* TOOD hover-class里使用transform和transition，取消hover后无法复位*/
+	.fab-pressed {
+		opacity: 0.9;
+		transform: scale(0.95);
 	}
 </style>
