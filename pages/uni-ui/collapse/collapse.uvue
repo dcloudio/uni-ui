@@ -93,17 +93,17 @@
         <text class="dark-tip-text">这个示例通过给 uni-collapse-item 传入 class 和 externalClass，分别定制内容区和标题区样式。</text>
       </view>
       <uni-collapse :accordion="false">
-        <uni-collapse-item class="dark-collapse-item" title="暗色标题 A" :open="true" title-wrap-class="dark-title-wrap" title-class="dark-title-text" title-open-class="dark-title-text-open" arrow-class="dark-arrow" arrow-open-class="dark-arrow-open">
+        <uni-collapse-item class="dark-collapse-item" title="暗色标题 A" :open="true" title-wrap-class="dark-title-wrap" title-class="dark-title-text" title-open-class="dark-title-text-open" content-wrap-class="dark-content-wrap" arrow-class="dark-arrow" arrow-open-class="dark-arrow-open">
           <view class="content-box dark-content-box">
             <text class="content-text dark-content-text">组件根节点通过 class 统一接入暗色卡片样式，标题背景、默认文字、展开态文字和箭头颜色通过 externalClass 传入。</text>
           </view>
         </uni-collapse-item>
-        <uni-collapse-item class="dark-collapse-item dark-collapse-item-strong" title="暗色标题 B" title-wrap-class="dark-title-wrap-strong" title-class="dark-title-text-strong" title-open-class="dark-title-text-open" arrow-class="dark-arrow-strong" arrow-open-class="dark-arrow-open">
+        <uni-collapse-item class="dark-collapse-item dark-collapse-item-strong" title="暗色标题 B" title-wrap-class="dark-title-wrap-strong" title-class="dark-title-text-strong" title-open-class="dark-title-text-open" content-wrap-class="dark-content-wrap" arrow-class="dark-arrow-strong" arrow-open-class="dark-arrow-open">
           <view class="content-box dark-content-box">
             <text class="content-text dark-content-text">你也可以继续组合不同的根容器 class、标题字重、箭头粗细和激活色样式。</text>
           </view>
         </uni-collapse-item>
-        <uni-collapse-item class="dark-collapse-item dark-collapse-item-muted" title="暗色禁用项" :disabled="true" title-wrap-class="dark-title-wrap-muted" title-class="dark-title-text" title-disabled-class="dark-title-text-disabled" arrow-class="dark-arrow" arrow-disabled-class="dark-arrow-disabled">
+        <uni-collapse-item class="dark-collapse-item dark-collapse-item-muted" title="暗色禁用项" :disabled="true" title-wrap-class="dark-title-wrap-muted" title-class="dark-title-text" title-disabled-class="dark-title-text-disabled" content-wrap-class="dark-content-wrap-muted" arrow-class="dark-arrow" arrow-disabled-class="dark-arrow-disabled">
           <view class="content-box dark-content-box dark-content-box-muted">
             <text class="content-text dark-content-text">禁用态默认通过透明度表达状态，外部依然可以继续指定禁用态文字和箭头颜色。</text>
           </view>
@@ -382,11 +382,19 @@
     background-color: #1f2937;
   }
 
+  .dark-content-wrap {
+    background-color: #1f2937;
+  }
+
   .dark-content-text {
     color: #cbd5e1;
   }
 
   .dark-content-box-muted {
+    background-color: #182333;
+  }
+
+  .dark-content-wrap-muted {
     background-color: #182333;
   }
 

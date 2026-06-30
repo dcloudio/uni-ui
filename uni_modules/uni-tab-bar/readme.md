@@ -1,6 +1,4 @@
-# uni-tab 组件说明
-
-`uni_modules/uni-tab-bar` 包括一组 tab 相关组件：
+自定义tab-bar组件， 包括一组前端组件：
 
 - `uni-tab`：最外层容器，负责激活索引、内容区高度和切换事件
 - `uni-tab-bar`：底部 tab 容器，负责底栏布局、安全区和中间按钮占位
@@ -8,17 +6,16 @@
 - `uni-tab-midbutton`：中间悬浮按钮占位容器
 - `uni-tab-content`：上方内容区域容器，负责内容注册、懒渲染和显示切换
 
-## 示例页面
+每个选项卡内容，不再是页面，而变成了uni-tab-content组件的子组件。
 
-| 页面 | 说明 |
-| --- | --- |
-| `tab-bar/tab-bar.uvue` | 基础示例，包含首页二次点击回到顶部 |
-| `tab-bar/tab-bar-dark.uvue` | 深色风格示例 |
-| `tab-bar/tab-bar-custom.uvue` | 自定义底栏高度、渐变背景和纯文字 tab |
-| `tab-bar/tab-bar-midbutton.uvue` | 中间按钮凸起示例 |
-| `tab-bar/tab-bar-midbutton-notch.uvue` | 中间镂空下凹按钮示例 |
+自定义tab-bar组件的使用方式是纯前端的、也是跨平台的。这与pages.json中的tabBar完全不同：
+1. pages.json中的tabBar相关的api无法应用于自定义tab-bar，比如uni.switchTab、uni.showTabBar、uni.hideTabBar、uni.showTabBarRedDot、uni.hideTabBarRedDot、uni.setTabBarBadge、uni.removeTabBarBadge、uni.setTabBarStyle、uni.setTabBarItem。
+2. pages.json中的tabBar页面，生命周期仍然是页面生命周期。但自定义tab-bar的uni-tab-content内容不触发页面生命周期，只触发组件生命周期。
 
-## 基础用法
+当然，自定义tab-bar组件拥有更强的功能、更灵活的控制方式。比如下凹式midbutton。在uni-app x的非小程序平台中，性能并不会比pages.json中的tabBar差。
+
+
+### 基础用法
 
 ```vue
 <template>
@@ -56,47 +53,21 @@
 </uni-tab>
 ```
 
-## 组件 API
+### 组件 API
 
-### uni-tab
+#### uni-tab
 
-#### 属性
-
-| 属性名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `active-index` | `number` | - | 是 | 当前激活的 tab 索引，从 `0` 开始 |
-| `tab-bar-height` | `number` | `50` | 否 | 底部 `uni-tab-bar` 的主体高度，不包含安全区 |
-| `tab-content-height-full` | `boolean` | `false` | 否 | 是否让 `uni-tab-content` 通到 `uni-tab-bar` 下方；适合 `tab-bar-midbutton-notch` 这类需要让下凹透明边缘透出底部内容的场景 |
-
-#### 事件
+##### 事件
 
 | 事件名 | 返回参数 | 说明 |
 | --- | --- | --- |
 | `change` | `index: number` | 点击普通 tab 项切换后触发，返回新的激活索引 |
 
-### uni-tab-bar
+#### uni-tab-bar
 
 无专用属性和API，可直接通过 `class` / `style` 自定义底栏外观。
 
-### uni-tab-item
-
-#### 属性
-
-| 属性名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `badge-text` | `string` | - | 否 | badge 内容；未传或 `null` 不显示，传空字符串 `''` 显示红点，传非空且不为 `'0'` 的字符串显示数字或文本 |
-| `badge-class` | `string.ClassString` | `''` | 否 | 自定义 badge 的 class |
-
-### uni-tab-midbutton
-
-#### 属性
-
-| 属性名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `width` | `number` | `90` | 否 | 中间按钮占位宽度，单位为 `px` |
-| `height` | `number` | `90` | 否 | 中间按钮占位高度，单位为 `px`，必须大于 `0` |
-
-### uni-tab-content
+#### uni-tab-content
 
 无专用属性和API，可直接通过 `class` / `style` 自定义外观。
 
@@ -105,7 +76,7 @@
 各个uni-tab-content的子组件，在显示和隐藏的没有生命周期。
 如需监听显示/隐藏需要通过provide/inject方式从外层传入响应式变量activeIndex，然后在子组件中watch这个activeIndex。
 
-## 使用注意事项
+### 使用注意事项
 
 1. `uni-tab` 所在的页面不应该滚动，应该在pages.json中配置页面style为`disableScroll:true`。
 2. 屏幕变化适配，Android需HBuilderX 5.09+支持。之前版本组件里无法监听页面的onResize。
@@ -119,3 +90,4 @@
 10. `uni-tab-midbutton` 只负责预留中间按钮位置，不参与激活索引计算；中间按钮点击行为需要在插槽内部自行处理。
 11. `badge-text` 传空字符串时显示红点，传 `'0'` 时不显示；如果需要自定义 badge 外观，请使用 `badge-class` 覆盖样式。
 12. `uni-tab-bar`、`uni-tab-item`、`uni-tab-content` 的根节点都支持直接挂 `class` / `style`，推荐把视觉差异放在页面侧处理，不要改组件内部逻辑。
+13. 微信小程序提供了一种webview方式渲染的底部tabBar方式，来进行tabBar自定义。这种方式仅微信小程序支持，与本组件无关。

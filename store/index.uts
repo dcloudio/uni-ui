@@ -121,7 +121,7 @@ export const setAllowCapture = (allow: boolean) => {
 
 // 检查系统主题
 export const checkSystemTheme = () => {
-  // #ifdef WEB || MP
+  // #ifdef WEB || MP-WEIXIN
   const info = uni.getAppBaseInfo();
   state.isDarkMode = info.hostTheme === 'dark';
   uni.onHostThemeChange((result) => {

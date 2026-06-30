@@ -4,7 +4,9 @@ uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。[开源库地址](h
 
 uni-ui x 是全新设计的，与为uni-app做的uni-ui不同。
 
-uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件详情的兼容性表格。再往前的HBuilderX版本未测试。
+uni-ui x 有包括所有组件的[套装](https://ext.dcloud.net.cn/plugin?id=27852)，也可以单独下载每个组件（左侧每个组件文档中有该组件的下载地址）。
+
+uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件文档的兼容性表格。5.07以前的HBuilderX版本未测试。
 
 uni-ui x 仅支持[样式隔离策略2.0](https://doc.dcloud.net.cn/uni-app-x/css/common/style-isolation.html)，需注意5.0以前创建的老项目需要在manifest.json中手动开启。
 
@@ -70,6 +72,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 | uni-refresh-box | [uni-refresh-box](https://ext.dcloud.net.cn/plugin?name=uni-refresh-box) |
 | uni-tab | [选项卡](https://ext.dcloud.net.cn/plugin?name=uni-tab-bar) |
 | uni-time-format | [时间格式化](https://ext.dcloud.net.cn/plugin?name=uni-time-format) |
+
 <!-- 组件列表结束 -->
 
 # uni-ui的升级建议@uniuiupgrade
@@ -116,7 +119,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-steps						|步骤条									|无																									|
 |uni-swipe-action			|滑动操作								|参考hello uni-app x模板中可左滑删除长列表示例				|
 |uni-swiper-dot				|轮播图指示点						|改用内置组件swiper，通过externalClass控制指示点样式	|
-|uni-table						|表格										|推荐使用rich-text或web-view中的table。																									|
+|uni-table						|表格										|推荐使用rich-text或web-view中的table。								|
 |uni-tag							|标签										|无																									|
 |uni-title						|章节标题								|无																									|
 |uni-transition				|过渡动画								|无																									|

@@ -47,7 +47,39 @@
 </template>
 
 <script setup lang="uts">
-
+  /**
+   * 可拖拽单元格组件
+   * @description 可拖拽单元格组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.08",
+   *       "unixVaporVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixVaporVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixVaporVer": "5.07"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "5.07"
+   *   }
+   * }
+   */
 	type ItemLayout = {
 		left: number,
 		pageTop: number,
@@ -85,6 +117,35 @@
 	const props = defineProps({
 		/**
 		 * @description 可拖拽排序的数据源，支持 v-model 双向绑定，内部会在拖拽结束后更新顺序
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		modelValue: {
 			type: Array,
@@ -93,6 +154,35 @@
 		/**
 		 * @description 网格列数。大于 0 时按网格排布，等于 0 时按一行流式排布
 		 * @default 0
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		column: {
 			type: Number,
@@ -101,6 +191,35 @@
 		/**
 		 * @description 是否显示拖拽到底部删除栏，开启后可将 item 拖入底部删除
 		 * @default false
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		showClose: {
 			type: Boolean,
@@ -109,6 +228,35 @@
 		/**
 		 * @description 是否显示末尾的 append 插槽（非拖拽状态下）
 		 * @default true
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		showAppend: {
 			type: Boolean,
@@ -117,6 +265,35 @@
 		/**
 		 * @description 是否启用拖拽手柄模式，仅点击 handle 插槽才能触发拖拽
 		 * @default false
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
 		 */
 		handleMode: {
 			type: Boolean,
@@ -124,7 +301,74 @@
 		}
 	})
 
-	const emit = defineEmits(['update:modelValue', 'change'])
+	const emit = defineEmits<{
+		/**
+		 * @description v-model 绑定值变化事件，参数为最新数组，类型为数组
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
+		 */
+		'update:modelValue': [value: any[]]
+		/**
+		 * @description 排序完成后、删除完成后触发，参数为最新数组，类型为数组
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.08",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "ios": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "x"
+		 *     },
+		 *     "harmony": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07",
+		 *       "unixVaporVer": "5.07"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.07"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "uniVer": "x",
+		 *     "unixVer": "5.07"
+		 *   }
+		 * }
+		 */
+		change: [value: any[]]
+	}>()
 	const instance = getCurrentInstance()
 	const slots = useSlots()
 
@@ -782,7 +1026,7 @@
 		let transitionStyle = 'transition-duration: 200ms;'
 		let transformStyle = 'translateX(0px) translateY(0px)'
 
-		// #ifdef APP-ANDROID
+		// #ifdef APP-ANDROID && !VUE3-VAPOR
 		// TODO 安卓平台transition动画过程中新设置的属性不生效，暂时在安卓平台屏蔽transition动画，待安卓平台修复后移除此条件编译
 		transitionStyle = 'transition-duration: 0ms;'
 		// #endif
@@ -978,7 +1222,6 @@
 		z-index: 25;
 	}
 </style>
-
 
 
 

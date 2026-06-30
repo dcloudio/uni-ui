@@ -5,7 +5,7 @@ describe('link', () => {
 
   beforeEach(async () => {
     page = await program.reLaunch(PAGE_PATH)
-    await page.waitFor(3000)
+    await page.waitFor('view')
   })
 
   async function setPageData(newData) {

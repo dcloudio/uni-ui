@@ -3,13 +3,22 @@
 	"displayName": "uni-refresh-box",
 	"version": "1.0.0",
 	"description": "uni-refresh-box",
+	"isExt": true,
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=27848",
 	"keywords": [
-        "uni-refresh-box"
+        "uni-refresh-box",
+        "uni-app-x",
+        "uni-app x",
+        "组件"
     ],
-	"repository": "",
+	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
-		"HBuilderX": "^5.0",
-		"uni-app-x": "^5.0"
+		"HBuilderX": "^5.07",
+        "uni-app-x": "^5.07",
+        "uni-app": ""
+	},
+	"directories": {
+		"example": "../../temps/example_temps"
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -21,60 +30,29 @@
 				"price": "0.00"
 			}
 		},
-		"contact": {
+        "contact": {
+            "qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "无",
+			"permissions": "无"
 		},
-		"npmurl": "",
-		"darkmode": "-",
-		"i18n": "-",
-		"widescreen": "-"
+		"darkmode": "x",
+		"i18n": "x",
+        "widescreen": "x",
+        "npmurl": ""
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "-",
-				"aliyun": "-",
-				"alipay": "-"
+				"tcb": "x",
+				"aliyun": "x",
+				"alipay": "x"
 			},
 			"client": {
-				"uni-app": {
-					"vue": {
-						"vue2": "x",
-						"vue3": "x"
-					},
-					"web": {
-						"safari": "-",
-						"chrome": "-"
-					},
-					"app": {
-						"vue": "x",
-						"nvue": "x",
-						"android": "-",
-						"ios": "-",
-						"harmony": "-"
-					},
-					"mp": {
-						"weixin": "-",
-						"alipay": "-",
-						"toutiao": "-",
-						"baidu": "-",
-						"kuaishou": "-",
-						"jd": "-",
-						"harmony": "-",
-						"qq": "-",
-						"lark": "-"
-					},
-					"quickapp": {
-						"huawei": "-",
-						"union": "-"
-					}
-				},
 				"uni-app-x": {
 					"web": {
 						"safari": "√",

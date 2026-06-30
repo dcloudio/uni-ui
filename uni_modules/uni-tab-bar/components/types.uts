@@ -1,10 +1,4 @@
 export type UniTabBarLayout = {
 	tabListBaseHeight: number
-	windowWidth: number
-	safeAreaInsetBottom: number
-}
-
-export type UniTabListItemLayout = {
-	width: number
-	marginLeft: number
+	tabContentHeightFull: boolean
 }

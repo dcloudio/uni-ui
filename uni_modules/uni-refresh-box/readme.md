@@ -1,12 +1,10 @@
-# uni-refresh-box
-
 自定义下拉刷新组件。
 
 本组件封装了 scroll-view/list-view等滚动容器的下拉刷新功能，使用者只需在滚动容器中加入本组件，设置组件的属性和样式，即可实现自定义下拉刷新功能。
 
 本组件自带一个全平台通用的下拉刷新样式，即左边一个 loading 圈，右边为下拉刷新相关的文字。也提供了各种自定义方法，包括文字、样式，甚至通过插槽传入完全不同的自定义下拉效果。
 
-## 基本用法
+### 基本用法
 
 ```vue
 <template>
@@ -21,7 +19,7 @@
   @refresherrefresh="onRefresherrefresh1"
   @refresherrestore="onRefresherrestore1"
   @refresherabort="onRefresherabort1"
-> 
+>
   <!-- 列表内容 -->
   <view v-for="i in listCount1" :key="i" class="content-item">
     <text class="text">item-{{ i }}</text>
@@ -65,20 +63,7 @@ function onRefresherabort1() {
 </script>
 ```
 
-## Props
-
-| 属性 | 类型 | 默认值 | 说明 |
-| :-- | :-- | :-- | :-- |
-| refreshing | Boolean | false | 是否正在刷新 |
-| threshold | Number | 45 | 触发刷新的下拉阈值(px) |
-| pullingText | String | '下拉刷新' | 下拉过程中的提示文字 |
-| loosingText | String | '松手刷新' | 下拉超过阈值的提示文字 |
-| loadingText | String | '正在刷新' | 刷新中的提示文字 |
-| completeText | String | '' | 刷新完成的提示文字 |
-| textClass | String | '' | 文字样式类名 |
-| loadingClass | String | '' | loading 样式类名 |
-
-### state 状态说明
+#### state 状态说明
 
 | 值 | 说明 |
 | :-- | :-- |
@@ -88,7 +73,7 @@ function onRefresherabort1() {
 | 3 | 刷新完成 |
 | 4 | 归位中（不显示文字） |
 
-## Slots
+### Slots
 
 | 名称 | 说明 | 插槽参数 |
 | :-- | :-- | :-- |

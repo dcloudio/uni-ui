@@ -59,7 +59,7 @@
       appTheme.value = res.appTheme
     })
     // #endif
-    // #ifdef WEB || MP
+    // #ifdef WEB || MP-WEIXIN
     return uni.onHostThemeChange((res : OnHostThemeChangeCallbackResult) => {
       appTheme.value = res.hostTheme
     })

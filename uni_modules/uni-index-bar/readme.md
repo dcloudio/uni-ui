@@ -1,8 +1,4 @@
-# uni-index-bar
-
-索引条组件
-
-## 介绍
+### 介绍
 
 本组件以竖排方式显示字母索引，常悬浮或固定于列表右侧，用户通过点击或滑动索引条上的字母索引，触发 `select` 事件。在该事件中通过代码驱动指定的列表滚动到该字母索引所在的位置。
 
@@ -12,7 +8,7 @@
 
 本组件包括一个指示器（indicator）子组件。当用户手指触摸在索引条上的某个字母时，在触摸的字母左边悬浮显示一个水滴形气泡，箭头指向当前触摸的字母。
 
-## 基本用法
+### 基本用法
 
 ```html
 <view style="flex: 1; position: relative;">
@@ -29,36 +25,28 @@ const onSelect = (index: string) => {
 }
 ```
 
-## 组件属性
-
-| 属性名 | 类型 | 默认值 | 说明 |
-|--------|------|--------|------|
-| indexs | string | A\nB\nC\n...\nZ | 索引字符串，用换行符 `\n` 分隔每个索引字符 |
-| indicator-view-class | string | - | 指示器容器的外部样式类 |
-| indicator-text-class | string | - | 指示器文字的外部样式类 |
-
-## 事件
+### 事件
 
 | 事件名 | 说明 | 回调参数 |
 |--------|------|----------|
 | select | 选择索引时触发 | index: string - 当前选择的索引字符 |
 
-## 外部样式类
+### 外部样式类
 
 | 类名 | 说明 |
 |------|------|
 | indicator-view-class | 指示器容器样式，可自定义气泡背景色等 |
 | indicator-text-class | 指示器文字样式，可自定义文字颜色等 |
 
-## 示例
+### 示例
 
-### 自定义索引
+#### 自定义索引
 
 ```html
 <uni-index-bar :indexs="'☆\nA\nB\nC\n#'" @select="onSelect"></uni-index-bar>
 ```
 
-### 自定义样式
+#### 自定义样式
 
 ```html
 <uni-index-bar
@@ -78,7 +66,7 @@ const onSelect = (index: string) => {
 }
 ```
 
-### 配合 list-view 使用
+#### 配合 list-view 使用
 
 ```html
 <view style="flex: 1; position: relative;">

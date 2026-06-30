@@ -3,14 +3,105 @@
 </template>
 
 <script setup lang="uts">
+  /**
+   * 时间格式化
+   * @description 时间格式化展示组件
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixVaporVer": "x"
+   *     },
+   *     "ios": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixVaporVer": "x"
+   *     },
+   *     "harmony": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07",
+   *       "unixVaporVer": "5.07"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.07"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "5.07"
+   *   }
+   * }
+   */
   type Props = {
     /**
      * @description 需要格式化的时间戳，支持秒级（10 位）或毫秒级（13 位），秒级会自动换算成毫秒
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "5.07"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.07"
+     *   }
+     * }
      */
     timestamp: number
     /**
      * @description 输出格式。"datetime" 输出 YYYY-MM-DD HH:mm；"date" 输出 YYYY-MM-DD；"time" 输出 HH:mm:ss；"relative" 输出相对时间（刚刚 / N 分钟前 / N 小时前 / 昨天 HH:mm / 完整日期）
      * @default "datetime"
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "x"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07",
+     *       "unixVaporVer": "5.07"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.07"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.07"
+     *   }
+     * }
      */
     format?: string
   }

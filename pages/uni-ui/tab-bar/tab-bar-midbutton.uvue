@@ -115,7 +115,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		box-shadow: 0px 6px 16px rgba(255, 122, 24, 0.22);
+		/* box-shadow: 0px 6px 16px rgba(255, 122, 24, 0.22); */
 	}
 
 	.mid-button-core-hover {
