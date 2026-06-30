@@ -1,6 +1,6 @@
 <template>
 	<view v-if="hasRendered" class="uni-tab-content-root"
-		:style="{ visibility: (isActive ? 'visible' : 'hidden'), bottom: (contentBottom + 'px') }">
+		:style="contentStyle">
 		<slot></slot>
 	</view>
 </template>
@@ -39,10 +39,15 @@
    *   }
    * }
    */
+import { UniTabBarLayout } from '../types.uts'
+
 // 从父组件注入数据和方法
 const currentIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
 const registerContent = inject<() => number>('uniTabBarRegisterContent', () => 0)
-const contentBottom = inject<Ref<number>>('uniTabBarContentBottom', ref(0))
+const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
+	tabListBaseHeight: 50,
+	tabContentHeightFull: false
+} as UniTabBarLayout))
 
 // 当前 content 的索引
 const contentIndex = ref<number>(-1)
@@ -73,14 +78,28 @@ watch((): boolean => {
 		hasRendered.value = true
 	}
 })
+
+const contentStyle = computed(() => {
+	const active = isActive.value
+	return {
+		visibility: active ? 'visible' : 'hidden',
+		position: active ? 'relative' : 'absolute',
+		left: active ? 'auto' : '0px',
+		top: active ? 'auto' : '0px',
+		right: active ? 'auto' : '0px',
+		bottom: active ? 'auto' : (tabBarLayout.value.tabContentHeightFull ? '0px' : 'auto')
+	}
+})
 </script>
 
 <style>
 .uni-tab-content-root {
+	flex: 1;
+	min-height: 0px;
 	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
+	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	z-index: 0;
 }
 </style>

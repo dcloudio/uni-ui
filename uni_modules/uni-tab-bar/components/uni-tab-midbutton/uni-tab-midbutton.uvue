@@ -1,6 +1,8 @@
 <template>
-	<view :style="midButtonStyle" class="uni-tab-list-item-midbutton-root">
-		<slot></slot>
+	<view :style="{ width: props.width + 'px', height: props.height + 'px' }" class="uni-tab-list-item-midbutton-root">
+		<view class="uni-tab-list-item-midbutton-slot">
+			<slot></slot>
+		</view>
 	</view>
 </template>
 
@@ -38,8 +40,6 @@
    *   }
    * }
    */
-import { UniTabBarLayout } from '../types.uts'
-
 type Props = {
 	/**
 	 * @description 中间按钮宽度，单位 px
@@ -115,20 +115,8 @@ const props = withDefaults(defineProps<Props>(), {
 	width: 90,
 	height: 90
 })
-const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
-	tabListBaseHeight: 50,
-	windowWidth: 0,
-	safeAreaInsetBottom: 0
-} as UniTabBarLayout))
 const registerMidButton = inject<(width : number, height : number) => void>('uniTabListRegisterMidButton', (width : number, height : number) => {})
 
-const midButtonStyle = computed(() => {
-	return {
-		width: props.width + 'px',
-		height: props.height + 'px',
-		bottom: tabBarLayout.value.safeAreaInsetBottom + 'px'
-	}
-})
 
 onMounted(() => {
 	registerMidButton(props.width, props.height)
@@ -137,11 +125,23 @@ onMounted(() => {
 
 <style>
 	.uni-tab-list-item-midbutton-root {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		overflow: visible;
+		width: 90px;
+		height: 90px;
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		overflow: visible;
+	}
+
+	.uni-tab-list-item-midbutton-slot {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		overflow: visible;
 	}
 </style>

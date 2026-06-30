@@ -8,7 +8,9 @@
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton"><text class="nav-text">tab-bar-midbutton</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton-notch"><text class="nav-text">tab-bar-midbutton-notch</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/nav-bar/nav-bar"><text class="nav-text">nav-bar</text></navigator>
+	<!-- #ifndef MP-ALIPAY -->
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box"><text class="nav-text">refresh-box</text></navigator>
+	<!-- #endif -->
 <!-- 	<navigator class="nav-item" url="/pages/uni-ui/movable-view/movable-view"><text class="nav-text">movable-view</text></navigator> -->
 <!-- 	<navigator class="nav-item" url="/pages/uni-ui/pop-view/pop-view"><text class="nav-text">pop-view</text></navigator> -->
 	<navigator class="nav-item" url="/pages/uni-ui/fab-button/fab-button"><text class="nav-text">fab-button</text></navigator>
@@ -18,7 +20,9 @@
 	<navigator class="nav-item" url="/pages/uni-ui/time-format/time-format"><text class="nav-text">time-format</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/index-bar/index-bar"><text class="nav-text">index-bar</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/drag-cell/drag-cell"><text class="nav-text">drag-cell</text></navigator>
+	<!-- #ifndef MP-ALIPAY -->
 	<navigator class="nav-item" url="/pages/theme-change/theme-change"><text class="nav-text">theme-change</text></navigator>
+	<!-- #endif -->
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>

@@ -1,5 +1,5 @@
 <template>
-	<view :style="itemStyle" class="uni-tab-list-item-root" @click.stop="handleClick">
+	<view class="uni-tab-list-item-root" @click.stop="handleClick">
 		<slot></slot>
 		<text v-if="props.badgeText != null && props.badgeText != '0' && props.badgeText != ''" class="uni-tab-list-item-badge-position uni-tab-list-item-badge-text" :class="props.badgeClass">{{ props.badgeText }}</text>
 		<view v-else-if="props.badgeText != null && props.badgeText != '0'" class="uni-tab-list-item-badge-position uni-tab-list-item-badge-dot" :class="props.badgeClass"></view>
@@ -40,8 +40,6 @@
    *   }
    * }
    */
-import { UniTabListItemLayout } from '../types.uts'
-
 defineOptions({
 		externalClasses: ['badge-class']
 })
@@ -121,28 +119,9 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const registerItem = inject<() => number>('uniTabListRegisterItem', () => 0)
-const getItemLayout = inject<(index: number) => UniTabListItemLayout>('uniTabListGetItemLayout', (index: number) => {
-	return {
-		width: 0,
-		marginLeft: 0
-	} as UniTabListItemLayout
-})
 const changeTab = inject<(index: number) => void>('uniTabListChangeTab', (index: number) => {})
 const itemIndex = ref<number>(-1)
 
-const itemStyle = computed(() => {
-	if (itemIndex.value < 0) {
-		return {
-			width: '0px',
-			marginLeft: '0px'
-		}
-	}
-	const layout = getItemLayout(itemIndex.value)
-	return {
-		width: layout.width + 'px',
-		marginLeft: layout.marginLeft + 'px'
-	}
-})
 
 onMounted(() => {
 	itemIndex.value = registerItem()
@@ -157,8 +136,8 @@ function handleClick() : void {
 
 <style>
 .uni-tab-list-item-root {
+	flex: 1;
 	height: 100%;
-	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

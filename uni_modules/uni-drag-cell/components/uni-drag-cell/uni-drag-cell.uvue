@@ -1026,7 +1026,7 @@
 		let transitionStyle = 'transition-duration: 200ms;'
 		let transformStyle = 'translateX(0px) translateY(0px)'
 
-		// #ifdef APP-ANDROID
+		// #ifdef APP-ANDROID && !VUE3-VAPOR
 		// TODO 安卓平台transition动画过程中新设置的属性不生效，暂时在安卓平台屏蔽transition动画，待安卓平台修复后移除此条件编译
 		transitionStyle = 'transition-duration: 0ms;'
 		// #endif
