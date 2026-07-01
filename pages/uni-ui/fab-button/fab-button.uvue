@@ -10,7 +10,7 @@
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
 		<text class="label">可移动uni-fab-button</text>
 		<view class="move-fab-placeholder">
-			<view id="move-fab" class="move-fab" :style="movepos" @touchstart="onTouchStart" @touchmove="onTouchMove">
+			<view id="move-fab" class="move-fab" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="updateMoveData" @touchcancel="updateMoveData">
 				<uni-fab-button></uni-fab-button>
 			</view>
 		</view>
@@ -39,7 +39,6 @@
 		left: 15,
 		top: 47
 	})
-	const movepos = ref<string>('')
 	let sx = 0
 	let sy = 0
 	let mx = 0
@@ -55,16 +54,24 @@
 		})
 	}
 
-	function updateMovePos() {
+	function updateMoveData() {
 		data.left = baseLeft + mx
 		data.top = baseTop + my
-		movepos.value = 'position: fixed;left: ' + baseLeft + 'px;top: ' + baseTop + 'px;transform: translate(' + mx + 'px,' + my + 'px)'
+		data.dx = mx
+		data.dy = my
+	}
+
+	function updateMovePos(element : UniElement) {
+		element.style.setProperty('position', 'fixed')
+		element.style.setProperty('left', baseLeft + 'px')
+		element.style.setProperty('top', baseTop + 'px')
+		element.style.setProperty('transform', 'translate(' + mx + 'px,' + my + 'px)')
 	}
 
 	function onTouchStart(e : UniTouchEvent) {
 		sx = e.touches[0].clientX
 		sy = e.touches[0].clientY
-		updateMovePos()
+		updateMovePos(e.currentTarget as UniElement)
 	}
 
 	function onTouchMove(e : UniTouchEvent) {
@@ -72,9 +79,7 @@
 		my = e.touches[0].clientY - sy + my
 		sx = e.touches[0].clientX
 		sy = e.touches[0].clientY
-		data.dx = mx
-		data.dy = my
-		updateMovePos()
+		updateMovePos(e.currentTarget as UniElement)
 	}
 
 	onReady(() => {
