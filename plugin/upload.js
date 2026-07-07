@@ -6,6 +6,9 @@ const util = require('../build/util.js')
 const buildReadme = require('../build/build-readme.js')
 const root = path.join(__dirname,'..')
 const modulesId = process.env.UNI_MODULES_ID
+if (!modulesId) {
+	throw new Error('upload.js: UNI_MODULES_ID is required')
+}
 // const modulesId = 'uni-tab-bar'
 const comName = getExampleName(modulesId)
 const comPath = path.join(root, 'uni_modules')
@@ -44,7 +47,7 @@ if (modulesId === 'uni-ui' || modulesId === 'uni-ui-x') {
 } else {
 	// 将组件拷贝到临时目录
 	util.copyDir(getModulesPath(modulesId), path.join(tempExamplePath, 'uni_modules', modulesId))
-	handlePageJson(comName, tempExamplePath)
+	handlePageJson(comName, tempExamplePath, packageJson)
 	// 同步页面使用的组件
 	setPageComponents(modulesId, comName)
 	// 同步组件依赖的组间
@@ -137,23 +140,27 @@ function getComName(dataFile) {
 	return newUniNameArray
 }
 
-function handlePageJson(comName, tempExamplePath) {
+function handlePageJson(comName, tempExamplePath, packageJson = {}) {
 	// 处理 pages.json 文件
 	const uniUiPagesJson = path.join(root, 'pages.json')
 	let pageJsonData = util.read(uniUiPagesJson)
+	pageJsonData = stripPagesJsonComments(pageJsonData)
 	// 避免unicode转为实体字符
-	pageJsonData = pageJsonData.replace(/\\u/, '\\\\u')
+	pageJsonData = pageJsonData.replace(/\\u/g, '\\\\u')
 	const pagesJson = JSON.parse(pageJsonData)
 	let examplePages = pagesJson.subPackages.map(item => item.pages).flat()
 
-	let jsonData = examplePages.find(item => {
-		return item.path === `${comName}/${comName}`
-	})
-	let pagePaths = []
-	if (jsonData) {
-		jsonData.path = `pages/${comName}/${comName}`
-		pagePaths.push(jsonData)
-	}
+	const pageNames = getExamplePageNames(comName, packageJson)
+	let pagePaths = pageNames.map(pageName => {
+		const jsonData = examplePages.find(item => {
+			return item.path === `${comName}/${pageName}`
+		})
+		if (!jsonData) return null
+		return {
+			...jsonData,
+			path: `pages/${comName}/${pageName}`
+		}
+	}).filter(Boolean)
 
 	let pageJson = JSON.stringify({
 		'pages': pagePaths,
@@ -166,7 +173,7 @@ function handlePageJson(comName, tempExamplePath) {
 	}, '', 2)
 
 	// 转换回对应的字符
-	pageJson = pageJson.replace(/\\\\u/, '\\u')
+	pageJson = pageJson.replace(/\\\\u/g, '\\u')
 
 	// 同步 json 文件
 	util.write(path.join(tempExamplePath, 'pages.json'), pageJson)
@@ -201,6 +208,22 @@ function getModulesPath(name) {
 
 function getExampleName(modulesId) {
 	return modulesId.replace(/^uni-/, '').replace(/-x$/, '')
+}
+
+function getExamplePageNames(comName, packageJson) {
+	const pageNames = [comName]
+	if (packageJson && Array.isArray(packageJson.examples)) {
+		packageJson.examples.forEach(item => {
+			if (item && item.name && !pageNames.includes(item.name)) {
+				pageNames.push(item.name)
+			}
+		})
+	}
+	return pageNames
+}
+
+function stripPagesJsonComments(content) {
+	return content.replace(/^\s*\/\/.*(?:\r?\n|$)/gm, '')
 }
 
 /**
