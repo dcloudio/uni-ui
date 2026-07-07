@@ -1,7 +1,7 @@
 {
   "id": "uni-tab-bar",
   "displayName": "uni-tab-bar 选项卡",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "底部选项卡组件集",
   "isExt": true,
   "extUrl": "https://ext.dcloud.net.cn/plugin?id=27849",
@@ -35,7 +35,7 @@
     "自定义选项卡",
     "uni-app-x",
     "tab-bar"
-  ],
+],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "^5.07",
