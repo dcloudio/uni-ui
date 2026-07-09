@@ -1,7 +1,7 @@
 <template>
   <view class="uni-data-pickerview">
-    <view v-if="error!=null" class="error">
-      <text class="error-text">{{error!.errMsg}}</text>
+    <view v-if="error!=null" class="error" flatten>
+      <text class="error-text" flatten>{{error!.errMsg}}</text>
     </view>
     <scroll-view v-if="!isCloudDataList" :scroll-x="true">
       <view class="selected-node-list">
@@ -14,9 +14,9 @@
       </view>
     </scroll-view>
     <list-view class="list-view" :scroll-y="true">
-      <list-item class="list-item" v-for="(item, _) in currentDataList" @click="onNodeClick(item)">
-        <text class="item-text" :class="{'item-text-disabled': item['disable']}">{{item[mappingTextName]}}</text>
-        <text class="check" v-if="item[mappingValueName] == selectedNodes[selectedIndex][mappingValueName]"></text>
+      <list-item class="list-item" v-for="(item, _) in currentDataList" @click="onNodeClick(item)" flatten>
+        <text class="item-text" :class="{'item-text-disabled': item['disable']}" flatten>{{item[mappingTextName]}}</text>
+        <text class="check" v-if="item[mappingValueName] == selectedNodes[selectedIndex][mappingValueName]" flatten></text>
       </list-item>
     </list-view>
     <view class="loading-cover" v-if="loading">
