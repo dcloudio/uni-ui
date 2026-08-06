@@ -11,7 +11,9 @@
 </template>
 
 <script setup lang="uts">
-	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
+	const emit = defineEmits<{
+		contentscroll: [scrollTop: number]
+	}>()
 
 	// 从父组件注入当前激活的索引
 	const activeIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
@@ -20,7 +22,7 @@
 
 	function handleScroll(event : UniScrollEvent) : void {
 		currentScrollTop.value = event.detail.scrollTop
-		uni.$emit(TAB_CONTENT1_SCROLL_EVENT, currentScrollTop.value)
+		emit("contentscroll", currentScrollTop.value)
 	}
 
 	function scrollToTop() : void {
@@ -31,7 +33,7 @@
 	}
 
 	onMounted(() => {
-		uni.$emit(TAB_CONTENT1_SCROLL_EVENT, 0)
+		emit("contentscroll", 0)
 	})
 
 	defineExpose({
