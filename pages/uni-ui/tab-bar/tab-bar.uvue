@@ -2,7 +2,7 @@
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<!-- 内容区域 -->
 		<uni-tab-content>
-			<tabContent1 ref="tabContent1Ref" />
+			<tabContent1 ref="tabContent1Ref" @contentscroll="handleTabContent1Scroll" />
 		</uni-tab-content>
 		<uni-tab-content>
 			<tabContent2 />
@@ -56,8 +56,6 @@
 	// import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'
 	import tabContent4 from './tab-content4.uvue'
-
-	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
 	const TAB_CONTENT1_SWITCH_OFFSET = 100 // 当 tab-content1 滚动超过这个距离（单位px）时显示回到顶部按钮，如需调节请自行定义
 	const TAB_CONTENT2_INDEX = 1
 	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
@@ -133,14 +131,6 @@
 				break
 		}
 	}
-
-	onLoad(() => {
-		uni.$on(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
-	})
-
-	onUnload(() => {
-		uni.$off(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
-	})
 
 	provide('tabContent2Index', TAB_CONTENT2_INDEX)
 	provide('tabContent2SetBadgeNumber', setTabContent2BadgeNumber)
