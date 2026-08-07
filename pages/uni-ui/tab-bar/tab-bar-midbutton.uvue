@@ -1,15 +1,15 @@
 <template>
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent1 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent2 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent3 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent4 />
 		</uni-tab-content>
 
@@ -52,8 +52,12 @@
 	const activeIndex = ref<number>(0)
 	const midButtonClickCount = ref<number>(0)
 	let tabContentHeightFull = false
-	// #ifdef MP
+	// #ifdef MP-WEIXIN
 	tabContentHeightFull = true
+	// #endif
+	let tabContentStyle = ''
+	// #ifdef MP-ALIPAY
+	tabContentStyle = 'flex: 1; min-height: 0px;'
 	// #endif
 
 	function handleChange(index : number) : void {
