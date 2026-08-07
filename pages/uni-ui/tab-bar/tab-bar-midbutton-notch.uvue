@@ -1,15 +1,15 @@
 <template>
-	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="true" @change="handleChange">
-		<uni-tab-content>
+	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent1 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent2 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent3 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent4 />
 		</uni-tab-content>
 
@@ -42,7 +42,7 @@
 				<text class="tab-label" :class="activeIndex == 3 ? 'tab-label-active' : ''">我的</text>
 			</uni-tab-item>
 		</uni-tab-bar>
-		<view class="tab-bg" style="width: 100%; height: var(--uni-safe-area-inset-bottom);position: absolute; bottom: 0;"></view> <!-- 因为要镂空，tabbar不能整体设背景色，只能加一个占位view覆盖安全区的颜色，-->
+		<view class="tab-bg tab-safe-area-bg"></view> <!-- 因为要镂空，tabbar不能整体设背景色，只能加一个占位view覆盖安全区的颜色，-->
 	</uni-tab>
 </template>
 
@@ -54,6 +54,12 @@
 
 	const activeIndex = ref<number>(0)
 	const midButtonClickCount = ref<number>(0)
+	let tabContentHeightFull = true
+	let tabContentStyle = ''
+	// #ifdef MP-ALIPAY
+	tabContentHeightFull = false
+	tabContentStyle = 'flex: 1; min-height: 0px;'
+	// #endif
 
 	function handleChange(index : number) : void {
 		activeIndex.value = index
@@ -105,6 +111,32 @@
 		/* margin-right: -1px; */
 	}
 
+	/* #ifdef MP-ALIPAY */
+	.tab-bg {
+		transform: none;
+		margin-left: -1px;
+		margin-right: -1px;
+	}
+	/* #endif */
+
+	.tab-safe-area-bg {
+		width: 100%;
+		height: var(--uni-safe-area-inset-bottom);
+		position: absolute;
+		bottom: 0;
+	}
+
+	/* #ifdef MP-ALIPAY */
+	.tab-safe-area-bg {
+		height: calc(var(--uni-safe-area-inset-bottom) + 1px);
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 9;
+	}
+	/* #endif */
+
 	.notch-svg {
 		width: 108px;
 		height: 50px;
@@ -114,6 +146,16 @@
 		bottom: 0;
 		pointer-events: none; /* 不拦截点击。 TODO 鸿蒙上有bug，svg图仍然遮挡了点击区，导致加号的下半部分点不着*/
 	}
+
+	/* #ifdef MP-ALIPAY */
+	.notch-svg {
+		width: 112px;
+		height: 51px;
+		margin-left: -3px;
+		margin-right: -3px;
+		bottom: -1px;
+	}
+	/* #endif */
 
 	.floating-ball {
 		position: relative;

@@ -1,17 +1,17 @@
 <template>
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<!-- 内容区域 -->
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<!-- TODO 小程序下这些Class不生效，界面没有变黑！ -->
 			<tabContent1 ref="tabContent1Ref" class="dark-tab-content dark-tab-content-home" @contentscroll="handleTabContent1Scroll" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent2 class="dark-tab-content dark-tab-content-api" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent3 class="dark-tab-content dark-tab-content-css" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent4 class="dark-tab-content dark-tab-content-template" />
 		</uni-tab-content>
 
@@ -58,8 +58,12 @@
 	const TAB_CONTENT1_SWITCH_OFFSET = 100
 	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
 	let tabContentHeightFull = false
-	// #ifdef MP
+	// #ifdef MP-WEIXIN
 	tabContentHeightFull = true
+	// #endif
+	let tabContentStyle = ''
+	// #ifdef MP-ALIPAY
+	tabContentStyle = 'flex: 1; min-height: 0px;'
 	// #endif
 
 	const activeIndex = ref<number>(0)

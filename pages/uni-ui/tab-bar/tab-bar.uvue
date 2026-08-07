@@ -1,16 +1,16 @@
 <template>
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<!-- 内容区域 -->
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent1 ref="tabContent1Ref" @contentscroll="handleTabContent1Scroll" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent2 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent3 />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent4 />
 		</uni-tab-content>
 
@@ -60,8 +60,12 @@
 	const TAB_CONTENT2_INDEX = 1
 	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
 	let tabContentHeightFull = false
-	// #ifdef MP
+	// #ifdef MP-WEIXIN
 	tabContentHeightFull = true
+	// #endif
+	let tabContentStyle = ''
+	// #ifdef MP-ALIPAY
+	tabContentStyle = 'flex: 1; min-height: 0px;'
 	// #endif
 
 	  // 当前激活的索引

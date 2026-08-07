@@ -126,6 +126,15 @@ provide('uniTabListChangeTab', changeTab)
 		background-color: #ffffff;
 	}
 
+	/* #ifdef MP-ALIPAY */
+	.uni-tab-list-root-normal {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	/* #endif */
+
 	.uni-tab-list-root-full {
 		position: absolute;
 		left: 0;
