@@ -4,7 +4,8 @@
 	</text>
 </template>
 
-<script>
+<script setup>
+	import { computed } from 'vue'
 	import { fontData, IconsDataItem } from './uniicons_file'
 
 	/**
@@ -17,63 +18,59 @@
 	 * @property {String} customPrefix 自定义图标
 	 * @event {Function} click 点击 Icon 触发事件
 	 */
-	export default {
-		name: "uni-icons",
-		props: {
-			type: {
-				type: String,
-				default: ''
-			},
-			color: {
-				type: String,
-				default: '#333333'
-			},
-			size: {
-        type: [Number, String],
-        default: 16
-			},
-			fontFamily: {
-				type: String,
-				default: ''
-			}
+	defineOptions({
+		name: 'uni-icons'
+	})
+
+	const props = defineProps({
+		type: {
+			type: String,
+			default: ''
 		},
-		data() {
-			return {};
+		color: {
+			type: String,
+			default: '#333333'
 		},
-		computed: {
-			unicode() : string {
-				let codes = fontData.find((item : IconsDataItem) : boolean => { return item.font_class == this.type })
-				if (codes !== null) {
-					return codes.unicode
-				}
-				return ''
-			},
-			iconSize() : string {
-				const size = this.size
-				if (typeof size == 'string') {
-				  const reg = /^[0-9]*$/g
-				  return reg.test(size as string) ? '' + size + 'px' : '' + size;
-				  // return '' + this.size
-				}
-				return this.getFontSize(size as number)
-			},
-			styleObj() : UTSJSONObject {
-				if (this.fontFamily !== '') {
-					return { color: this.color, fontSize: this.iconSize, fontFamily: this.fontFamily }
-				}
-				return { color: this.color, fontSize: this.iconSize }
-			}
+		size: {
+			type: [Number, String],
+			default: 16
 		},
-		created() { },
-		methods: {
-			/**
-			 * 字体大小
-			 */
-			getFontSize(size : number) : string {
-				return size + 'px';
-			},
-		},
+		fontFamily: {
+			type: String,
+			default: ''
+		}
+	})
+
+	/**
+	 * 字体大小
+	 */
+	const getFontSize = (size : number) : string => {
+		return size + 'px';
 	}
+
+	const unicode = computed(() : string => {
+		let codes = fontData.find((item : IconsDataItem) : boolean => { return item.font_class == props.type })
+		if (codes !== null) {
+			return codes.unicode
+		}
+		return ''
+	})
+
+	const iconSize = computed(() : string => {
+		const size = props.size
+		if (typeof size == 'string') {
+		  const reg = /^[0-9]*$/g
+		  return reg.test(size as string) ? '' + size + 'px' : '' + size;
+		}
+		return getFontSize(size as number)
+	})
+
+	const styleObj = computed(() : UTSJSONObject => {
+		if (props.fontFamily !== '') {
+			return { color: props.color, fontSize: iconSize.value, fontFamily: props.fontFamily }
+		}
+		return { color: props.color, fontSize: iconSize.value }
+	})
 </script>
 
 <style scoped>

@@ -7,6 +7,96 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 <!-- 更新占位 -->
+<log title="1.5.12" date="2026-03-26">
+	<log-item title="uni-collapse 组件更新">
+		<log-item-text tag-type="fix">
+			 modelValue 修改会两次触发 change 事件的 Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 modelValue 修改不会触发更新的 Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 modelValue 修改不会触发 change 事件的 Bug
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 非手风琴模式 不能设置 modeValue 为 [] 的 Bug (question/205130)
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-datetime-picker 组件更新">
+		<log-item-text tag-type="fix">
+			 datetime-picker 小程序样式警告
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-datetime-picker组件时间对比报错问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-easyinput 组件更新">
+		<log-item-text tag-type="fix">
+			 禁用状态下背景不生效的问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 在 @input 中修改 v-model 不生效的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-file-picker 组件更新">
+		<log-item-text tag-type="fix">
+			: 腾讯云目录错误导致的上传错误问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 设置readonly属性后内容插槽失效的问题。
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 动态dir目录，不生效的问题
+		</log-item-text>
+		<log-item-text tag-type="feat">
+			 dir 属性，可以选择上传目录
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-icons 组件更新">
+		<log-item-text tag-type="perf">
+			 uni-app x 下 size 类型问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-indexed-list 组件更新">
+		<log-item-text tag-type="fix">
+			 pc 触屏问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-list 组件更新">
+		<log-item-text tag-type="fix">
+			 右侧箭头类型错误的问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-load-more 组件更新">
+		<log-item-text tag-type="fix">
+			 微信小程序css警告问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-nav-bar 组件更新">
+		<log-item-text tag-type="fix">
+			 内部样式问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-popup 组件更新">
+		<log-item-text tag-type="fix">
+			 uni-app x 下类型错误导致的编译问题
+		</log-item-text>
+		<log-item-text tag-type="fix">
+			 uni-popup-dialog组件设置 borderRadius 不生效的 Bug
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-rate 组件更新">
+		<log-item-text tag-type="fix">
+			 pc 触屏问题
+		</log-item-text>
+	</log-item>
+	<log-item title="uni-swipe-action 组件更新">
+		<log-item-text tag-type="fix">
+			 pc 触屏问题
+		</log-item-text>
+	</log-item>
+</log>
+
 <log title="1.5.11" date="2025-08-19">
 	<log-item title="uni-data-select 组件更新">
 		<log-item-text tag-type="feat">

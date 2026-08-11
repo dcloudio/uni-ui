@@ -1,3 +1,25 @@
+## 1.5.12（2026-03-26）
+- uni-collapse 修复 modelValue 修改会两次触发 change 事件的 Bug
+- uni-collapse 修复 modelValue 修改不会触发更新的 Bug
+- uni-collapse 修复 modelValue 修改不会触发 change 事件的 Bug
+- uni-collapse 修复 非手风琴模式 不能设置 modeValue 为 [] 的 Bug (question/205130)
+- uni-datetime-picker 修复 datetime-picker 小程序样式警告
+- uni-datetime-picker 修复 uni-datetime-picker组件时间对比报错问题
+- uni-easyinput 修复 禁用状态下背景不生效的问题
+- uni-easyinput 修复 在 @input 中修改 v-model 不生效的问题
+- uni-file-picker 修复: 腾讯云目录错误导致的上传错误问题
+- uni-file-picker 修复 设置readonly属性后内容插槽失效的问题。
+- uni-file-picker 修复 动态dir目录，不生效的问题
+- uni-file-picker 新增 dir 属性，可以选择上传目录
+- uni-icons 优化 uni-app x 下 size 类型问题
+- uni-indexed-list 修复 pc 触屏问题
+- uni-list 修复 右侧箭头类型错误的问题
+- uni-load-more 修复 微信小程序css警告问题
+- uni-nav-bar 修复 内部样式问题
+- uni-popup 修复 uni-app x 下类型错误导致的编译问题
+- uni-popup 修复 uni-popup-dialog组件设置 borderRadius 不生效的 Bug
+- uni-rate 修复 pc 触屏问题
+- uni-swipe-action 修复 pc 触屏问题
 ## 1.5.11（2025-08-19）
 - uni-data-select 新增 插槽 selected empty option
 - uni-data-select 新增 mutiple 属性,支持多选功能

@@ -5,10 +5,10 @@
         <view class="input-value" :class="{'input-value-border': border}">
           <text v-if="error!=null" class="error-text">{{error!.errMsg}}</text>
           <scroll-view v-if="selectedPaths.length" class="selected-path" scroll-x="true">
-            <view class="selected-list">
+            <view class="selected-list" flatten>
               <template v-for="(item, index) in selectedPaths">
-                <text class="text-color">{{item[mappingTextName]}}</text>
-                <text v-if="index<selectedPaths.length-1" class="input-split-line">{{split}}</text>
+                <text class="text-color" flatten>{{item[mappingTextName]}}</text>
+                <text v-if="index<selectedPaths.length-1" class="input-split-line" flatten>{{split}}</text>
               </template>
             </view>
           </scroll-view>
@@ -26,17 +26,17 @@
     <view class="uni-data-tree-dialog" v-if="isOpened">
       <view class="uni-popper__arrow"></view>
       <view class="dialog-caption">
-        <view class="dialog-title-view">
-          <text class="dialog-title">{{popupTitle}}</text>
+        <view class="dialog-title-view" flatten>
+          <text class="dialog-title" flatten>{{popupTitle}}</text>
         </view>
         <view class="dialog-close" @click="handleClose">
-          <view class="dialog-close-plus" data-id="close"></view>
-          <view class="dialog-close-plus dialog-close-rotate" data-id="close"></view>
+          <view class="dialog-close-plus" data-id="close" flatten></view>
+          <view class="dialog-close-plus dialog-close-rotate" data-id="close" flatten></view>
         </view>
       </view>
       <view ref="pickerView" class="uni-data-pickerview">
-        <view v-if="error!=null" class="error">
-          <text class="error-text">{{error!.errMsg}}</text>
+        <view v-if="error!=null" class="error" flatten>
+          <text class="error-text" flatten>{{error!.errMsg}}</text>
         </view>
         <scroll-view v-if="!isCloudDataList" :scroll-x="true">
           <view class="selected-node-list">
@@ -50,8 +50,8 @@
         </scroll-view>
         <list-view class="list-view" :scroll-y="true">
           <list-item class="list-item" v-for="(item, _) in currentDataList" @click="onNodeClick(item)">
-            <text class="item-text" :class="{'item-text-disabled': item['disable']}">{{item[mappingTextName]}}</text>
-            <text class="check" v-if="item[mappingValueName] == selectedNodes[selectedIndex][mappingValueName]"></text>
+            <text class="item-text" :class="{'item-text-disabled': item['disable']}" flatten>{{item[mappingTextName]}}</text>
+            <text class="check" v-if="item[mappingValueName] == selectedNodes[selectedIndex][mappingValueName]" flatten></text>
           </list-item>
         </list-view>
         <view class="loading-cover" v-if="loading">

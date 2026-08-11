@@ -1,7 +1,7 @@
 {
   "id": "uni-ui",
   "displayName": "uni-ui",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
@@ -121,7 +121,8 @@
             "jd": "-",
             "harmony": "√",
             "qq": "√",
-            "lark": "-"
+            "lark": "-",
+            "xhs": "-"
           },
           "quickapp": {
             "huawei": "-",

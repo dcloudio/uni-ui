@@ -1,7 +1,7 @@
 {
   "id": "uni-popup",
   "displayName": "uni-popup 弹出层",
-  "version": "1.9.11",
+  "version": "1.9.12",
   "description": " Popup 组件，提供常用的弹层",
   "keywords": [
     "uni-ui",
@@ -14,7 +14,7 @@
   "engines": {
     "HBuilderX": "",
     "uni-app": "^4.07",
-    "uni-app-x": ""
+    "uni-app-x": "^5.0"
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -80,7 +80,8 @@
             "jd": "-",
             "harmony": "-",
             "qq": "√",
-            "lark": "-"
+            "lark": "-",
+            "xhs": "-"
           },
           "quickapp": {
             "huawei": "-",
