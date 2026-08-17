@@ -107,6 +107,16 @@
 					}
 				},
 				{
+					"path": "tab-bar/tab-bar-blur",
+					"style": {
+						"navigationBarTitleText": "uni-tab-bar-blur",
+						"navigationBarBackgroundColor": "#f4f8ff",
+						"navigationBarTextStyle": "black",
+						"backgroundColorContent": "#f4f8ff",
+						"disableScroll": true
+					}
+				},
+				{
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton",
