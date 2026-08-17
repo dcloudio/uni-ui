@@ -2,6 +2,7 @@ const PAGE_PATHS = [
   '/pages/uni-ui/tab-bar/tab-bar',
   '/pages/uni-ui/tab-bar/tab-bar-dark',
   '/pages/uni-ui/tab-bar/tab-bar-custom',
+  '/pages/uni-ui/tab-bar/tab-bar-blur',
   '/pages/uni-ui/tab-bar/tab-bar-midbutton',
   '/pages/uni-ui/tab-bar/tab-bar-midbutton-notch'
 ]
