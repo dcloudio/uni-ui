@@ -17,6 +17,11 @@
       "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-custom.uvue"
     },
     {
+      "name": "tab-bar-blur",
+      "description": "半透明毛玻璃",
+      "url": "https://gitcode.com/dcloud/hello-uni-app-x/blob/prod_alpha/pages/uni-ui/tab-bar/tab-bar-blur.uvue"
+    },
+    {
       "id": "uni-tab-midbutton",
       "name": "tab-bar-midbutton",
       "description": "中间按钮",
