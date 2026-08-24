@@ -28,39 +28,43 @@
 
 		<teleport to="page">
 			<view v-if="opened && popupReady" class="uni-combox__mask" @click="closeOptions">
-				<scroll-view
-					direction="vertical"
+				<view
 					class="uni-combox__options"
 					:class="optionsViewClass"
 					:style="optionsStyle"
-					:scroll-into-view="scrollIntoViewId"
 					@click.stop="noop"
 				>
-					<view
-						v-if="visibleOptions.length == 0"
-						class="uni-combox__option-row"
+					<scroll-view
+						direction="vertical"
+						class="uni-combox__options-scroll"
+						:scroll-into-view="scrollIntoViewId"
 					>
-						<text
-							class="uni-combox__option uni-combox__option--empty"
-							:class="optionTextClass"
-							max-lines="1"
-						>无匹配项</text>
-					</view>
-					<view
-						v-for="(item, index) in visibleOptions"
-						:id="getOptionId(index)"
-						:key="item + '_' + index.toString()"
-						class="uni-combox__option-row"
-						:class="index == highlightedIndex ? 'uni-combox__option-row--highlight' : ''"
-						@click.stop="selectOption(index)"
-					>
-						<text
-							class="uni-combox__option"
-							:class="[optionTextClass, index == highlightedIndex ? optionTextHighlightClass : '']"
-							max-lines="1"
-						>{{ item }}</text>
-					</view>
-				</scroll-view>
+						<view
+							v-if="visibleOptions.length == 0"
+							class="uni-combox__option-row"
+						>
+							<text
+								class="uni-combox__option uni-combox__option--empty"
+								:class="optionTextClass"
+								max-lines="1"
+							>无匹配项</text>
+						</view>
+						<view
+							v-for="(item, index) in visibleOptions"
+							:id="getOptionId(index)"
+							:key="item + '_' + index.toString()"
+							class="uni-combox__option-row"
+							:class="index == highlightedIndex ? 'uni-combox__option-row--highlight' : ''"
+							@click.stop="selectOption(index)"
+						>
+							<text
+								class="uni-combox__option"
+								:class="[optionTextClass, index == highlightedIndex ? optionTextHighlightClass : '']"
+								max-lines="1"
+							>{{ item }}</text>
+						</view>
+					</scroll-view>
+				</view>
 			</view>
 		</teleport>
 	</view>
@@ -281,14 +285,6 @@ const updatePositionThenOpen = () : void => {
 const openOptionsWithMode = (filter : boolean) : void => {
 	filterEnabled.value = filter
 	syncHighlight()
-	if (popupWidth.value > 0) {
-		popupReady.value = true
-		opened.value = true
-		nextTick(() => {
-			updatePosition()
-		})
-		return
-	}
 	popupReady.value = false
 	updatePositionThenOpen()
 }
@@ -489,6 +485,13 @@ onBackPress(() : boolean => {
 	border-radius: 6px;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
+	overflow: hidden;
+}
+
+.uni-combox__options-scroll {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
 	padding-top: 4px;
 	padding-bottom: 4px;
 }
