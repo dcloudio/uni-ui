@@ -1,0 +1,145 @@
+<template>
+	<scroll-view class="page" direction="vertical">
+		<view class="section">
+			<text class="page-title">uni-combox 组合框</text>
+			<text class="page-desc">默认单选模式只能从候选项中选择；传入 input 插槽后，可输入并按左侧匹配过滤候选项。</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">单选模式</text>
+			<uni-combox
+				:options="gradeOptions"
+				placeholder="请选择年级"
+				v-model="grade"
+				@selectchange="onGradeChange"
+			/>
+			<text class="result-text">当前选择：{{ grade }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">组合模式</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="city"
+				placeholder="选择或输入城市"
+				@selectchange="onCityChange"
+			>
+				<template #input="{ value, input }">
+					<input
+						class="custom-input"
+						:value="value"
+						placeholder="选择或输入城市"
+						@input="input"
+					/>
+				</template>
+			</uni-combox>
+			<text class="result-text">当前输入：{{ city }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">大量候选</text>
+			<uni-combox
+				:options="largeOptions"
+				placeholder="请选择编号"
+				v-model="largeValue"
+			/>
+			<text class="result-text">当前选择：{{ largeValue }}</text>
+		</view>
+	</scroll-view>
+</template>
+
+<script setup lang="uts">
+const grade = ref<string>('')
+const city = ref<string>('杭州')
+const largeValue = ref<string>('')
+
+const gradeOptions = [
+	'一年级',
+	'二年级',
+	'三年级',
+	'四年级',
+	'五年级',
+	'六年级',
+	'初一',
+	'初二',
+	'初三'
+] as string[]
+
+const cityOptions = [
+	'北京',
+	'上海',
+	'广州',
+	'深圳',
+	'杭州',
+	'南京',
+	'苏州',
+	'成都',
+	'重庆',
+	'武汉',
+	'西安',
+	'郑州'
+] as string[]
+
+const largeOptions = computed(() : string[] => {
+	const list = [] as string[]
+	for (let i = 1; i <= 120; i++) {
+		const value = i < 10 ? `编号 00${i}` : (i < 100 ? `编号 0${i}` : `编号 ${i}`)
+		list.push(value)
+	}
+	return list
+})
+
+const onGradeChange = (value : string) : void => {
+	console.log('grade selectchange:', value)
+}
+
+const onCityChange = (value : string) : void => {
+	console.log('city selectchange:', value)
+}
+</script>
+
+<style>
+.page {
+	flex: 1;
+	background-color: #f5f7fb;
+	padding: 16px;
+}
+
+.section {
+	margin-bottom: 24px;
+}
+
+.page-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-bottom: 8px;
+}
+
+.page-desc {
+	font-size: 14px;
+	line-height: 22px;
+	color: #64748b;
+}
+
+.section-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #1f2937;
+	margin-bottom: 10px;
+}
+
+.result-text {
+	font-size: 13px;
+	color: #64748b;
+	margin-top: 8px;
+}
+
+.custom-input {
+	flex: 1;
+	width: 100%;
+	height: 22px;
+	font-size: 14px;
+	color: #1f2937;
+}
+</style>

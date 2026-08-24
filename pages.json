@@ -42,6 +42,12 @@
 					}
 				},
 				{
+					"path": "combox/combox",
+					"style": {
+						"navigationBarTitleText": "uni-combox"
+					}
+				},
+				{
 					"path": "fab-button/fab-button",
 					"style": {
 						"navigationBarTitleText": "uni-fab-button"
