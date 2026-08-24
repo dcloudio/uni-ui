@@ -1,0 +1,521 @@
+<template>
+	<view :id="anchorId" class="uni-combox">
+		<view
+			class="uni-combox__field"
+			@click="onFieldClick"
+			<!-- #ifdef WEB -->
+			tabindex="0"
+			@keydown="onInputKeydown"
+			<!-- #endif -->
+		>
+			<view v-if="inputMode" class="uni-combox__input-slot">
+				<slot
+					name="input"
+					:value="currentValue"
+					:input="onInput"
+				></slot>
+			</view>
+			<text
+				v-else
+				class="uni-combox__result"
+				:class="[resultTextClass, currentValue == '' ? 'uni-combox__result--placeholder' : '']"
+				max-lines="1"
+			>{{ displayText }}</text>
+			<view class="uni-combox__arrow-wrap" @click.stop="toggleOptionsByArrow">
+				<view class="uni-combox__arrow" :class="[arrowClass, opened ? 'uni-combox__arrow--open' : '']"></view>
+			</view>
+		</view>
+
+		<teleport to="page">
+			<view v-if="opened && popupReady" class="uni-combox__mask" @click="closeOptions">
+				<scroll-view
+					direction="vertical"
+					class="uni-combox__options"
+					:class="optionsViewClass"
+					:style="optionsStyle"
+					:scroll-into-view="scrollIntoViewId"
+					@click.stop="noop"
+				>
+					<view
+						v-if="visibleOptions.length == 0"
+						class="uni-combox__option-row"
+					>
+						<text
+							class="uni-combox__option uni-combox__option--empty"
+							:class="optionTextClass"
+							max-lines="1"
+						>无匹配项</text>
+					</view>
+					<view
+						v-for="(item, index) in visibleOptions"
+						:id="getOptionId(index)"
+						:key="item + '_' + index.toString()"
+						class="uni-combox__option-row"
+						:class="index == highlightedIndex ? 'uni-combox__option-row--highlight' : ''"
+						@click.stop="selectOption(index)"
+					>
+						<text
+							class="uni-combox__option"
+							:class="[optionTextClass, index == highlightedIndex ? optionTextHighlightClass : '']"
+							max-lines="1"
+						>{{ item }}</text>
+					</view>
+				</scroll-view>
+			</view>
+		</teleport>
+	</view>
+</template>
+
+<script setup lang="uts">
+/**
+ * Combox 组合框
+ * @description 默认是单选选择框，通过 input 具名插槽切换为可输入、可选择的组合框。
+ * @property {Array<String>} options 候选字符串数组
+ * @property {String} modelValue 当前值，支持 v-model
+ * @property {String} placeholder 占位文字
+ * @property {String} arrowClass 右侧箭头自定义样式类
+ * @property {String} optionsViewClass 候选浮层外层自定义样式类
+ * @property {String} optionTextClass 候选项文字自定义样式类
+ * @property {String} optionTextHighlightClass 候选项高亮自定义样式类
+ * @property {String} resultTextClass 单选模式结果文字自定义样式类
+ * @event {Function} update:modelValue 值更新时触发
+ * @event {Function} selectchange 从候选项选中时触发
+ */
+
+defineOptions({
+	externalClasses: [
+		'arrow-class',
+		'options-view-class',
+		'option-text-class',
+		'option-text-highlight-class',
+		'result-text-class'
+	]
+})
+
+type Props = {
+	options? : string[],
+	modelValue? : string,
+	placeholder? : string,
+	arrowClass? : string.ClassString,
+	optionsViewClass? : string.ClassString,
+	optionTextClass? : string.ClassString,
+	optionTextHighlightClass? : string.ClassString,
+	resultTextClass? : string.ClassString
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	options: () : string[] => [] as string[],
+	modelValue: '',
+	placeholder: '',
+	arrowClass: '',
+	optionsViewClass: '',
+	optionTextClass: '',
+	optionTextHighlightClass: '',
+	resultTextClass: ''
+})
+
+const emit = defineEmits<{
+	'update:modelValue': [value : string],
+	selectchange: [value : string]
+}>()
+
+defineSlots<{
+	input(props : {
+		value : string,
+		input : (event : any) => void
+	}) : any
+}>()
+
+const slots = useSlots()
+const anchorId = `uni_combox_x_${Math.ceil(Math.random() * 10e8).toString(36)}`
+const optionIdPrefix = `uni_combox_x_option_${Math.ceil(Math.random() * 10e8).toString(36)}_`
+const optionHeight = 36
+const defaultMaxOptionsHeight = 200
+const popupVerticalPadding = 8
+const viewportGap = 8
+const popupGap = 12
+
+function getOptionId(index : number) : string {
+	return optionIdPrefix + index.toString()
+}
+
+const currentValue = ref<string>(props.modelValue)
+const opened = ref<boolean>(false)
+const popupReady = ref<boolean>(false)
+const filterEnabled = ref<boolean>(false)
+const highlightedIndex = ref<number>(-1)
+const popupLeft = ref<number>(0)
+const popupTop = ref<number>(0)
+const popupWidth = ref<number>(0)
+const popupHeight = ref<number>(optionHeight + popupVerticalPadding)
+
+const inputMode = computed(() : boolean => {
+	return slots['input'] != null
+})
+
+const displayText = computed(() : string => {
+	if (currentValue.value == '') {
+		return props.placeholder
+	}
+	return currentValue.value
+})
+
+const visibleOptions = computed(() : string[] => {
+	if (!filterEnabled.value || currentValue.value == '') {
+		return props.options
+	}
+	return props.options.filter((item : string) : boolean => {
+		return item.indexOf(currentValue.value) == 0
+	})
+})
+
+const optionsStyle = computed(() : string => {
+	return `left: ${popupLeft.value}px; top: ${popupTop.value}px; width: ${popupWidth.value}px; height: ${popupHeight.value}px;`
+})
+
+const scrollIntoViewId = computed(() : string => {
+	if (highlightedIndex.value < 0) {
+		return ''
+	}
+	return getOptionId(highlightedIndex.value)
+})
+
+const findMatchedIndex = (list : string[], keyword : string) : number => {
+	if (keyword == '') {
+		return -1
+	}
+	const exactIndex = list.indexOf(keyword)
+	if (exactIndex >= 0) {
+		return exactIndex
+	}
+	return list.findIndex((item : string) : boolean => {
+		return item.indexOf(keyword) == 0
+	})
+}
+
+const syncHighlight = () : void => {
+	const list = visibleOptions.value
+	if (list.length == 0) {
+		highlightedIndex.value = -1
+		return
+	}
+	const matchedIndex = findMatchedIndex(list, currentValue.value)
+	highlightedIndex.value = matchedIndex
+}
+
+const emitValue = (value : string) : void => {
+	currentValue.value = value
+	emit('update:modelValue', value)
+}
+
+const noop = () : void => {
+}
+
+function applyPopupRect(rect : DOMRect) : void {
+	const rectTop = rect.top != null ? rect.top : 0
+	const rectLeft = rect.left != null ? rect.left : 0
+	let rectWidth = rect.width != null ? rect.width : 0
+	const rectHeight = rect.height != null ? rect.height : 0
+	const rectBottom = rect.bottom != null ? rect.bottom : rectTop + rectHeight
+	if (rectWidth <= 0) {
+		rectWidth = uni.getWindowInfo().windowWidth - 32
+	}
+
+	const windowInfo = uni.getWindowInfo()
+	const windowHeight = windowInfo.windowHeight
+	const optionCount = Math.max(1, visibleOptions.value.length)
+	const expectedHeight = Math.min(defaultMaxOptionsHeight, optionCount * optionHeight) + popupVerticalPadding
+	const minOptionsHeight = optionHeight + popupVerticalPadding
+	const belowSpace = windowHeight - rectBottom - viewportGap
+	const aboveSpace = rectTop - viewportGap
+
+	let height = expectedHeight
+	let top = rectBottom + popupGap
+	if (belowSpace < expectedHeight && aboveSpace > belowSpace) {
+		height = Math.max(minOptionsHeight, Math.min(expectedHeight, aboveSpace - popupGap))
+		top = rectTop - popupGap - height
+	} else {
+		height = Math.max(minOptionsHeight, Math.min(expectedHeight, belowSpace - popupGap))
+	}
+
+	popupLeft.value = rectLeft
+	popupTop.value = top
+	popupWidth.value = rectWidth
+	popupHeight.value = height
+}
+
+const updatePosition = () : void => {
+	const element = uni.getElementById(anchorId)
+	if (element == null) {
+		return
+	}
+	const rectPromise = element.getBoundingClientRectAsync()
+	if (rectPromise == null) {
+		return
+	}
+	rectPromise.then((rect : DOMRect) => {
+		applyPopupRect(rect)
+	})
+}
+
+const updatePositionThenOpen = () : void => {
+	const element = uni.getElementById(anchorId)
+	if (element == null) {
+		popupReady.value = true
+		opened.value = true
+		return
+	}
+	const rectPromise = element.getBoundingClientRectAsync()
+	if (rectPromise == null) {
+		popupReady.value = true
+		opened.value = true
+		return
+	}
+	rectPromise.then((rect : DOMRect) => {
+		applyPopupRect(rect)
+		popupReady.value = true
+		opened.value = true
+	})
+}
+
+const openOptionsWithMode = (filter : boolean) : void => {
+	filterEnabled.value = filter
+	syncHighlight()
+	if (popupWidth.value > 0) {
+		popupReady.value = true
+		opened.value = true
+		nextTick(() => {
+			updatePosition()
+		})
+		return
+	}
+	popupReady.value = false
+	updatePositionThenOpen()
+}
+
+const openOptions = () : void => {
+	openOptionsWithMode(false)
+}
+
+const closeOptions = () : void => {
+	opened.value = false
+}
+
+const toggleOptionsByArrow = () : void => {
+	if (opened.value) {
+		closeOptions()
+		return
+	}
+	openOptions()
+}
+
+const onFieldClick = () : void => {
+	if (inputMode.value) {
+		openOptionsWithMode(true)
+		return
+	}
+	openOptions()
+}
+
+const onInput = (event : any) : void => {
+	const detail = (event as UTSJSONObject)['detail'] as UTSJSONObject
+	const rawValue = detail['value']
+	const value = rawValue != null ? rawValue as string : ''
+	emitValue(value)
+	openOptionsWithMode(true)
+}
+
+const onInputFocus = (_event : any) : void => {
+	updatePosition()
+}
+
+const onInputBlur = (_event : any) : void => {
+}
+
+const onInputKeydown = (event : any) : void => {
+	// #ifdef WEB
+	const key = event.key as string
+	if (key == 'Escape') {
+		event.preventDefault()
+		closeOptions()
+		return
+	}
+	if (key == 'ArrowDown') {
+		event.preventDefault()
+		if (!opened.value) {
+			openOptions()
+			return
+		}
+		if (visibleOptions.value.length == 0) {
+			return
+		}
+		highlightedIndex.value = Math.min(visibleOptions.value.length - 1, highlightedIndex.value + 1)
+		return
+	}
+	if (key == 'ArrowUp') {
+		event.preventDefault()
+		if (!opened.value) {
+			openOptions()
+			return
+		}
+		if (visibleOptions.value.length == 0) {
+			return
+		}
+		highlightedIndex.value = Math.max(0, highlightedIndex.value - 1)
+		return
+	}
+	if (key == 'Enter' && opened.value && highlightedIndex.value >= 0) {
+		event.preventDefault()
+		selectOption(highlightedIndex.value)
+	}
+	// #endif
+}
+
+const selectOption = (index : number) : void => {
+	if (index < 0 || index >= visibleOptions.value.length) {
+		return
+	}
+	const value = visibleOptions.value[index]
+	emitValue(value)
+	emit('selectchange', value)
+	closeOptions()
+}
+
+const setInputValue = (value : string) : void => {
+	emitValue(value)
+	openOptionsWithMode(true)
+}
+
+watch(() : string => props.modelValue, (value : string) => {
+	currentValue.value = value
+	if (opened.value) {
+		syncHighlight()
+		nextTick(() => {
+			updatePosition()
+		})
+	}
+})
+
+watch(() : string[] => props.options, () => {
+	if (opened.value) {
+		syncHighlight()
+		nextTick(() => {
+			updatePosition()
+		})
+	}
+})
+
+onBackPress(() : boolean => {
+	if (opened.value) {
+		closeOptions()
+		return true
+	}
+	return false
+})
+</script>
+
+<style>
+.uni-combox {
+	width: 100%;
+}
+
+.uni-combox__field {
+	width: 100%;
+	box-sizing: border-box;
+	height: 36px;
+	border: 1px solid #DCDFE6;
+	border-radius: 4px;
+	background-color: #ffffff;
+	flex-direction: row;
+	align-items: center;
+	padding-left: 10px;
+}
+
+.uni-combox__input-slot {
+	flex: 1;
+	height: 22px;
+	flex-direction: row;
+	align-items: center;
+}
+
+.uni-combox__result {
+	flex: 1;
+	height: 22px;
+	line-height: 22px;
+	padding-right: 10px;
+	font-size: 14px;
+	color: #333333;
+	text-overflow: ellipsis;
+}
+
+.uni-combox__result--placeholder {
+	color: #999999;
+}
+
+.uni-combox__arrow-wrap {
+	width: 28px;
+	height: 36px;
+	align-items: center;
+	justify-content: center;
+}
+
+.uni-combox__arrow {
+	width: 7px;
+	height: 7px;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	transform: rotate(45deg);
+}
+
+.uni-combox__arrow--open {
+	transform: rotate(225deg);
+}
+
+.uni-combox__mask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.uni-combox__options {
+	position: fixed;
+	box-sizing: border-box;
+	background-color: #ffffff;
+	border: 1px solid #EBEEF5;
+	border-radius: 6px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.uni-combox__option-row {
+	width: 100%;
+	height: 36px;
+	flex-direction: row;
+	align-items: center;
+}
+
+.uni-combox__option-row--highlight {
+	background-color: #f9f9f9;
+}
+
+.uni-combox__option {
+	flex: 1;
+	height: 36px;
+	line-height: 36px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 14px;
+	color: #333333;
+	text-overflow: ellipsis;
+}
+
+.uni-combox__option--empty {
+	color: #999999;
+}
+</style>

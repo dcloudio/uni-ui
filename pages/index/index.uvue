@@ -18,6 +18,7 @@
 <!-- 	<navigator class="nav-item" url="/pages/uni-ui/pop-view/pop-view"><text class="nav-text">pop-view</text></navigator> -->
 	<navigator class="nav-item" url="/pages/uni-ui/fab-button/fab-button"><text class="nav-text">fab-button</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/number-box/number-box"><text class="nav-text">number-box</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/combox/combox"><text class="nav-text">combox</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/collapse/collapse"><text class="nav-text">collapse</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/link/link"><text class="nav-text">link</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/time-format/time-format"><text class="nav-text">time-format</text></navigator>
