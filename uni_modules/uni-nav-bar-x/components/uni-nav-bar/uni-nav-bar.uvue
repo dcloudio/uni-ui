@@ -8,13 +8,13 @@
 			<!-- 旋转边框的view实现返回箭头。因需要扩大点击区域，外面多套了一层 -->
 			<view v-if="!hideDefaultBack && slots['left']==null" style="width: 44px;height: 44px;justify-content: center;align-items: center;" @click="back">
 				<view style="width: 12px;height: 12px;transform: rotate(45deg);
-        border-left: 2px solid; border-bottom: 2px solid;" :style="{borderLeftColor:props.navigationBarTextStyle,borderBottomColor:props.navigationBarTextStyle}"></view>
+        border-left: 2px solid; border-bottom: 2px solid;" :style="backIconStyle"></view>
 			</view>
       <slot name="left" v-else></slot>
     </view>
 
     <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;" class="uni-mid-class-builtin" :class="midClass" flatten>
-      <text v-if="slots['mid']==null" :style="{ color: props.navigationBarTextStyle }" flatten> {{ title }} </text>
+      <text v-if="slots['mid']==null" :style="titleStyle" flatten> {{ title }} </text>
 			<slot name="mid" v-else></slot>
     </view>
     <view style="position: absolute; height: 44px; flex-direction: row; align-items: center;right: 0;" class="uni-right-class-builtin" :class="rightClass" flatten>
@@ -271,6 +271,12 @@
     // stat: { type: Boolean, default: false }
   })
   const slots = useSlots();
+  const backIconStyle = computed(() : string => {
+    return props.navigationBarTextStyle == "" ? "" : `border-left-color: ${props.navigationBarTextStyle}; border-bottom-color: ${props.navigationBarTextStyle};`;
+  })
+  const titleStyle = computed(() : string => {
+    return props.navigationBarTextStyle == "" ? "" : `color: ${props.navigationBarTextStyle};`;
+  })
 
 // #ifndef MP
 // 获取pageStyle在web和app上都没有兼容theme.json的场景，这段代码注释掉。需要先修改底层bug。本组件使用了其他方案
