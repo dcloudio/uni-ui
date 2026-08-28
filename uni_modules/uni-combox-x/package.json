@@ -1,7 +1,7 @@
 {
   "id": "uni-combox-x",
   "displayName": "uni-combox 组合框",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Combox 组合框组件，支持默认单选和通过 input 插槽启用可输可选模式。",
   "isExt": true,
   "extUrl": "",
@@ -9,7 +9,7 @@
     "组合框",
     "combox",
     "uni-app-x"
-  ],
+],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "",
