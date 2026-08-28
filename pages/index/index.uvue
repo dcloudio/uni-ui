@@ -5,7 +5,9 @@
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar"><text class="nav-text">tab-bar</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-dark"><text class="nav-text">tab-bar-dark</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-custom"><text class="nav-text">tab-bar-custom</text></navigator>
+	<!-- #ifndef APP && !VUE3-VAPOR -->
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-blur"><text class="nav-text">tab-bar-blur</text></navigator>
+	<!-- #endif -->
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton"><text class="nav-text">tab-bar-midbutton</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton-notch"><text class="nav-text">tab-bar-midbutton-notch</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/nav-bar/nav-bar"><text class="nav-text">nav-bar</text></navigator>
