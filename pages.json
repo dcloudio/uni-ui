@@ -41,12 +41,14 @@
 						"navigationBarTitleText": "uni-number-box"
 					}
 				},
+				// #ifndef (APP-IOS || APP-HARMONY) && !VUE3-VAPOR
 				{
 					"path": "combox/combox",
 					"style": {
 						"navigationBarTitleText": "uni-combox"
 					}
 				},
+				// #endif
 				{
 					"path": "fab-button/fab-button",
 					"style": {
