@@ -68,7 +68,8 @@
 				{
 					"path": "drag-cell/drag-cell",
 					"style": {
-						"navigationBarTitleText": "uni-drag-cell"
+						"navigationBarTitleText": "uni-drag-cell",
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
@@ -82,7 +83,8 @@
 					"path": "tab-bar/tab-bar",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
@@ -93,7 +95,8 @@
 						"navigationBarTextStyle": "white",
 						"backgroundColorContent": "#0f172a",
 						"backgroundColorBottom": "#0f172a",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
@@ -103,7 +106,8 @@
 						"navigationBarBackgroundColor": "#dff3e8",
 						"navigationBarTextStyle": "black",
 						"backgroundColorContent": "#dff3e8",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				// #ifndef APP && !VUE3-VAPOR
@@ -114,7 +118,8 @@
 						"navigationBarBackgroundColor": "#f4f8ff",
 						"navigationBarTextStyle": "black",
 						"backgroundColorContent": "#f4f8ff",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				// #endif
@@ -122,14 +127,16 @@
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-midbutton-notch",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton-notch",
-						"disableScroll": true
+						"disableScroll": true,
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
