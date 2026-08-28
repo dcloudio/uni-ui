@@ -106,6 +106,7 @@
 						"disableScroll": true
 					}
 				},
+				// #ifndef APP && !VUE3-VAPOR
 				{
 					"path": "tab-bar/tab-bar-blur",
 					"style": {
@@ -116,6 +117,7 @@
 						"disableScroll": true
 					}
 				},
+				// #endif
 				{
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
