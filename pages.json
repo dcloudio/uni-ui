@@ -44,7 +44,8 @@
 				{
 					"path": "fab-button/fab-button",
 					"style": {
-						"navigationBarTitleText": "uni-fab-button"
+						"navigationBarTitleText": "uni-fab-button",
+						"allowsBounceVertical": "NO"
 					}
 				},
 				{
