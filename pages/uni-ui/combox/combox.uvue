@@ -6,18 +6,124 @@
 		</view>
 
 		<view class="section">
-			<text class="section-title">单选模式</text>
-			<uni-combox
-				:options="gradeOptions"
-				placeholder="请选择年级"
-				v-model="grade"
-				@selectchange="onGradeChange"
-			/>
-			<text class="result-text">当前选择：{{ grade }}</text>
+			<text class="group-title">属性示例</text>
 		</view>
 
 		<view class="section">
-			<text class="section-title">组合模式</text>
+			<text class="section-title">options：候选字符串数组</text>
+			<uni-combox
+				:options="gradeOptions"
+				placeholder="请选择年级"
+				v-model="optionsValue"
+			/>
+			<text class="result-text">当前选择：{{ optionsValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">modelValue / v-model：当前值</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="modelValue"
+				placeholder="请选择城市"
+			/>
+			<text class="result-text">绑定值：{{ modelValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">placeholder：占位文字</text>
+			<uni-combox
+				:options="cityOptions"
+				placeholder="这里展示 placeholder"
+				v-model="placeholderValue"
+			/>
+			<text class="result-text">未选择时展示占位文字</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">arrow-class：右侧箭头样式</text>
+			<uni-combox
+				:options="statusOptions"
+				placeholder="请选择状态"
+				v-model="arrowClassValue"
+				arrow-class="demo-arrow"
+			/>
+			<text class="result-text">当前选择：{{ arrowClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">options-view-class：候选浮层样式</text>
+			<uni-combox
+				:options="cityOptions"
+				placeholder="打开查看浮层样式"
+				v-model="optionsViewClassValue"
+				options-view-class="demo-options-view"
+			/>
+			<text class="result-text">当前选择：{{ optionsViewClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">option-text-class：候选项文字样式</text>
+			<uni-combox
+				:options="statusOptions"
+				placeholder="打开查看候选文字"
+				v-model="optionTextClassValue"
+				option-text-class="demo-option-text"
+			/>
+			<text class="result-text">当前选择：{{ optionTextClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">option-text-highlight-class：高亮项文字样式</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="optionTextHighlightClassValue"
+				option-text-highlight-class="demo-option-highlight"
+			/>
+			<text class="result-text">打开后当前匹配项会使用高亮文字样式：{{ optionTextHighlightClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">result-text-class：单选结果文字样式</text>
+			<uni-combox
+				:options="gradeOptions"
+				v-model="resultTextClassValue"
+				result-text-class="demo-result-text"
+			/>
+			<text class="result-text">当前选择：{{ resultTextClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="group-title">事件示例</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">update:modelValue：值更新时触发</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="updateEventValue"
+				placeholder="请选择城市"
+				@update:modelValue="onUpdateModelValue"
+			/>
+			<text class="result-text">事件值：{{ updateEventText }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">selectchange：从候选项选中时触发</text>
+			<uni-combox
+				:options="statusOptions"
+				v-model="selectEventValue"
+				placeholder="请选择状态"
+				@selectchange="onSelectChange"
+			/>
+			<text class="result-text">事件值：{{ selectEventText }}</text>
+		</view>
+
+		<view class="section">
+			<text class="group-title">模式示例</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">input 插槽：可输入可选择</text>
 			<uni-combox
 				:options="cityOptions"
 				v-model="city"
@@ -49,7 +155,18 @@
 </template>
 
 <script setup lang="uts">
-const grade = ref<string>('')
+const optionsValue = ref<string>('')
+const modelValue = ref<string>('杭州')
+const placeholderValue = ref<string>('')
+const arrowClassValue = ref<string>('')
+const optionsViewClassValue = ref<string>('')
+const optionTextClassValue = ref<string>('')
+const optionTextHighlightClassValue = ref<string>('杭州')
+const resultTextClassValue = ref<string>('三年级')
+const updateEventValue = ref<string>('')
+const updateEventText = ref<string>('未触发')
+const selectEventValue = ref<string>('')
+const selectEventText = ref<string>('未触发')
 const city = ref<string>('杭州')
 const largeValue = ref<string>('')
 
@@ -80,6 +197,13 @@ const cityOptions = [
 	'郑州'
 ] as string[]
 
+const statusOptions = [
+	'待处理',
+	'处理中',
+	'已完成',
+	'已取消'
+] as string[]
+
 const largeOptions = computed(() : string[] => {
 	const list = [] as string[]
 	for (let i = 1; i <= 120; i++) {
@@ -89,8 +213,14 @@ const largeOptions = computed(() : string[] => {
 	return list
 })
 
-const onGradeChange = (value : string) : void => {
-	console.log('grade selectchange:', value)
+const onUpdateModelValue = (value : string) : void => {
+	updateEventText.value = value == '' ? '空字符串' : value
+	console.log('combox update:modelValue:', value)
+}
+
+const onSelectChange = (value : string) : void => {
+	selectEventText.value = value
+	console.log('combox selectchange:', value)
 }
 
 const onCityChange = (value : string) : void => {
@@ -122,6 +252,13 @@ const onCityChange = (value : string) : void => {
 	color: #64748b;
 }
 
+.group-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #111827;
+	margin-top: 4px;
+}
+
 .section-title {
 	font-size: 16px;
 	font-weight: bold;
@@ -141,5 +278,33 @@ const onCityChange = (value : string) : void => {
 	height: 22px;
 	font-size: 14px;
 	color: #1f2937;
+}
+
+.demo-arrow {
+	border-right-color: #16a34a;
+	border-bottom-color: #16a34a;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+}
+
+.demo-options-view {
+	border-color: #2563eb;
+	border-width: 2px;
+	background-color: #eff6ff;
+}
+
+.demo-option-text {
+	color: #7c3aed;
+	font-weight: bold;
+}
+
+.demo-option-highlight {
+	color: #dc2626;
+	font-weight: bold;
+}
+
+.demo-result-text {
+	color: #2563eb;
+	font-weight: bold;
 }
 </style>
