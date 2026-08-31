@@ -53,6 +53,9 @@
 					"path": "fab-button/fab-button",
 					"style": {
 						"navigationBarTitleText": "uni-fab-button"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -76,8 +79,10 @@
 				{
 					"path": "drag-cell/drag-cell",
 					"style": {
-						"navigationBarTitleText": "uni-drag-cell",
-						"allowsBounceVertical": "NO"
+						"navigationBarTitleText": "uni-drag-cell"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -91,8 +96,10 @@
 					"path": "tab-bar/tab-bar",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -103,8 +110,10 @@
 						"navigationBarTextStyle": "white",
 						"backgroundColorContent": "#0f172a",
 						"backgroundColorBottom": "#0f172a",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -114,8 +123,10 @@
 						"navigationBarBackgroundColor": "#dff3e8",
 						"navigationBarTextStyle": "black",
 						"backgroundColorContent": "#dff3e8",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				// #ifndef APP && !VUE3-VAPOR
@@ -126,8 +137,10 @@
 						"navigationBarBackgroundColor": "#f4f8ff",
 						"navigationBarTextStyle": "black",
 						"backgroundColorContent": "#f4f8ff",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				// #endif
@@ -145,16 +158,20 @@
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
 					"path": "tab-bar/tab-bar-midbutton-notch",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton-notch",
-						"disableScroll": true,
-						"allowsBounceVertical": "NO"
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
