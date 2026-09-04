@@ -48,6 +48,14 @@
 	background-color: #f5f5f5;
 }
 
+/* #ifdef MP-ALIPAY */
+.content-page {
+	height: calc(100vh - 50px - var(--uni-safe-area-inset-bottom));
+	flex: none;
+	min-height: 0px;
+}
+/* #endif */
+
 .content-page-inner {
 	width: 100%;
 	align-items: center;
