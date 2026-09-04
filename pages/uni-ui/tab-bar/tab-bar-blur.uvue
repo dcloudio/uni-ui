@@ -1,6 +1,6 @@
 <template>
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-bar-height="TAB_BAR_HEIGHT" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
-		<uni-tab-content :style="tabContentStyle">
+		<uni-tab-content>
 			<scroll-view class="blur-scroll blur-scene-morning" direction="vertical">
 				<view class="blur-content-inner">
 					<text class="blur-title">精选</text>
@@ -42,7 +42,7 @@
 				</view>
 			</scroll-view>
 		</uni-tab-content>
-		<uni-tab-content :style="tabContentStyle">
+		<uni-tab-content>
 			<scroll-view class="blur-scroll blur-scene-coral" direction="vertical">
 				<view class="blur-content-inner">
 					<text class="blur-title">趋势</text>
@@ -84,7 +84,7 @@
 				</view>
 			</scroll-view>
 		</uni-tab-content>
-		<uni-tab-content :style="tabContentStyle">
+		<uni-tab-content>
 			<scroll-view class="blur-scroll blur-scene-ink" direction="vertical">
 				<view class="blur-content-inner">
 					<text class="blur-title">我的</text>
@@ -155,11 +155,6 @@
 	const activeIndex = ref<number>(0)
 	const tabBarStyle = ref<string>(buildTabBarStyle())
 	let tabContentHeightFull = true
-	let tabContentStyle = ''
-	// #ifdef MP-ALIPAY
-	tabContentHeightFull = false
-	tabContentStyle = 'flex: 1; min-height: 0px;'
-	// #endif
 
 	function syncTabBarStyle() : void {
 		tabBarStyle.value = buildTabBarStyle()
