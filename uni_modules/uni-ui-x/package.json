@@ -1,7 +1,7 @@
 {
     "id": "uni-ui-x",
     "displayName": "uni-ui-x",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "uni-ui-x是DCloud为uni-app x提供的组件库",
     "isExt": true,
     "keywords": [
@@ -68,16 +68,34 @@
             "client": {
                 "uni-app-x": {
                     "web": {
-                        "safari": "√",
-                        "chrome": "√"
+                        "safari": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        },
+                        "chrome": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        }
                     },
                     "app": {
-                        "android": "√",
-                        "ios": "√",
-                        "harmony": "√"
+                        "android": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        },
+                        "ios": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        },
+                        "harmony": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        }
                     },
                     "mp": {
-                        "weixin": "√"
+                        "weixin": {
+                            "extVersion": "1.0.3",
+                            "minVersion": ""
+                        }
                     }
                 }
             }
