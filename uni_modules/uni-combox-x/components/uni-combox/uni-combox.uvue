@@ -13,6 +13,7 @@
 					name="input"
 					:value="currentValue"
 					:input="onInput"
+					:focus="onInputFocus"
 				></slot>
 			</view>
 			<text
@@ -130,7 +131,8 @@ const emit = defineEmits<{
 defineSlots<{
 	input(props : {
 		value : string,
-		input : (event : UniInputEvent) => void
+		input : (event : UniInputEvent) => void,
+		focus : (event : UniInputFocusEvent) => void
 	}) : any
 }>()
 
@@ -156,6 +158,7 @@ const popupLeft = ref<number>(0)
 const popupTop = ref<number>(0)
 const popupWidth = ref<number>(0)
 const popupHeight = ref<number>(optionHeight + popupVerticalPadding)
+const keyboardHeight = ref<number>(0)
 
 const inputMode = computed(() : boolean => {
 	return slots['input'] != null
@@ -238,7 +241,7 @@ function applyPopupRect(rect : DOMRect) {
 	}
 
 	const windowInfo = uni.getWindowInfo()
-	const windowHeight = windowInfo.windowHeight
+	const windowHeight = Math.max(0, windowInfo.windowHeight - keyboardHeight.value)
 	const optionCount = Math.max(1, visibleOptions.value.length)
 	const expectedHeight = Math.min(defaultMaxOptionsHeight, optionCount * optionHeight) + popupVerticalPadding
 	const minOptionsHeight = optionHeight + popupVerticalPadding
@@ -334,12 +337,35 @@ function onInput(event : UniInputEvent) {
 	openOptionsWithMode(true)
 }
 
-function onInputFocus() {
-	updatePosition()
+function onInputFocus(_event : UniInputFocusEvent) {
+	openOptionsWithMode(true)
 }
 
 function onInputBlur() {
 }
+
+let keyboardListenerId = 0
+
+function onKeyboardHeightChange(res : OnKeyboardHeightChangeCallbackResult) {
+	keyboardHeight.value = Math.max(0, res.height)
+	if (opened.value) {
+		nextTick(() => {
+			updatePosition()
+		})
+	}
+}
+
+onMounted(() => {
+	keyboardListenerId = uni.onKeyboardHeightChange(onKeyboardHeightChange)
+})
+
+onUnmounted(() => {
+	if (keyboardListenerId != 0) {
+		uni.offKeyboardHeightChange(keyboardListenerId)
+		keyboardListenerId = 0
+	}
+})
+
 
 // #ifdef WEB
 function onInputKeydown(event : KeyboardEvent) {

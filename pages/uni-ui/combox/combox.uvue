@@ -20,6 +20,27 @@
 		</view>
 
 		<view class="section">
+			<text class="section-title">input 插槽：可输入可选择</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="city"
+				placeholder="选择或输入城市"
+				@selectchange="onCityChange"
+			>
+				<template #input="{ value, input, focus }">
+					<input
+						class="custom-input"
+						:value="value"
+						placeholder="选择或输入城市"
+						@focus="focus"
+						@input="input"
+					/>
+				</template>
+			</uni-combox>
+			<text class="result-text">当前输入：{{ city }}</text>
+		</view>
+
+		<view class="section">
 			<text class="section-title">placeholder：占位文字</text>
 			<uni-combox
 				:options="cityOptions"
@@ -83,6 +104,16 @@
 		</view>
 
 		<view class="section">
+			<text class="section-title">大量候选</text>
+			<uni-combox
+				:options="largeOptions"
+				placeholder="请选择编号"
+				v-model="largeValue"
+			/>
+			<text class="result-text">当前选择：{{ largeValue }}</text>
+		</view>
+
+		<view class="section">
 			<text class="group-title">事件示例</text>
 		</view>
 
@@ -108,39 +139,6 @@
 			<text class="result-text">事件值：{{ selectEventText }}</text>
 		</view>
 
-		<view class="section">
-			<text class="group-title">模式示例</text>
-		</view>
-
-		<view class="section">
-			<text class="section-title">input 插槽：可输入可选择</text>
-			<uni-combox
-				:options="cityOptions"
-				v-model="city"
-				placeholder="选择或输入城市"
-				@selectchange="onCityChange"
-			>
-				<template #input="{ value, input }">
-					<input
-						class="custom-input"
-						:value="value"
-						placeholder="选择或输入城市"
-						@input="input"
-					/>
-				</template>
-			</uni-combox>
-			<text class="result-text">当前输入：{{ city }}</text>
-		</view>
-
-		<view class="section">
-			<text class="section-title">大量候选</text>
-			<uni-combox
-				:options="largeOptions"
-				placeholder="请选择编号"
-				v-model="largeValue"
-			/>
-			<text class="result-text">当前选择：{{ largeValue }}</text>
-		</view>
 	</scroll-view>
 </template>
 
