@@ -181,12 +181,7 @@ const optionsStyle = computed(() : string => {
 	return `left: ${popupLeft.value}px; top: ${popupTop.value}px; width: ${popupWidth.value}px; height: ${popupHeight.value}px;`
 })
 
-const scrollIntoViewId = computed(() : string => {
-	if (highlightedIndex.value < 0) {
-		return ''
-	}
-	return getOptionId(highlightedIndex.value)
-})
+const scrollIntoViewId = ref<string>('')
 
 const findMatchedIndex = (list : string[], keyword : string) : number => {
 	if (keyword == '') {
@@ -209,6 +204,19 @@ const syncHighlight = () : void => {
 	}
 	const matchedIndex = findMatchedIndex(list, currentValue.value)
 	highlightedIndex.value = matchedIndex
+}
+
+const refreshScrollTarget = () : void => {
+	const targetId = highlightedIndex.value >= 0 ? getOptionId(highlightedIndex.value) : ''
+	scrollIntoViewId.value = ''
+	if (targetId == '') {
+		return
+	}
+	nextTick(() => {
+		if (opened.value) {
+			scrollIntoViewId.value = targetId
+		}
+	})
 }
 
 const emitValue = (value : string) : void => {
@@ -271,18 +279,21 @@ const updatePositionThenOpen = () : void => {
 	if (element == null) {
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 		return
 	}
 	const rectPromise = element.getBoundingClientRectAsync()
 	if (rectPromise == null) {
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 		return
 	}
 	rectPromise.then((rect : DOMRect) => {
 		applyPopupRect(rect)
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 	})
 }
 
@@ -350,6 +361,7 @@ const onInputKeydown = (event : any) : void => {
 			return
 		}
 		highlightedIndex.value = Math.min(visibleOptions.value.length - 1, highlightedIndex.value + 1)
+		refreshScrollTarget()
 		return
 	}
 	if (key == 'ArrowUp') {
@@ -362,6 +374,7 @@ const onInputKeydown = (event : any) : void => {
 			return
 		}
 		highlightedIndex.value = Math.max(0, highlightedIndex.value - 1)
+		refreshScrollTarget()
 		return
 	}
 	if (key == 'Enter' && opened.value && highlightedIndex.value >= 0) {
@@ -392,6 +405,7 @@ watch(() : string => props.modelValue, (value : string) => {
 		syncHighlight()
 		nextTick(() => {
 			updatePosition()
+			refreshScrollTarget()
 		})
 	}
 })
@@ -401,6 +415,7 @@ watch(() : string[] => props.options, () => {
 		syncHighlight()
 		nextTick(() => {
 			updatePosition()
+			refreshScrollTarget()
 		})
 	}
 })
