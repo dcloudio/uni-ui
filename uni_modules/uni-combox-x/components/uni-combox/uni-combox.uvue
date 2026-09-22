@@ -25,10 +25,10 @@
 				<view class="uni-combox__arrow" :class="[arrowClass, opened ? 'uni-combox__arrow--open' : '']"></view>
 			</view>
 		</view>
-        <!-- #ifdef WEB -->
+        <!-- #ifdef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
 		<teleport to="body">
 		<!-- #endif -->
-		<!-- #ifndef WEB -->
+		<!-- #ifndef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
 		<teleport to="page">
 		<!-- #endif -->
 			<view v-if="opened && popupReady" class="uni-combox__mask" @click="closeOptions">
@@ -130,7 +130,7 @@ const emit = defineEmits<{
 defineSlots<{
 	input(props : {
 		value : string,
-		input : (event : any) => void
+		input : (event : UniInputEvent) => void
 	}) : any
 }>()
 
@@ -183,7 +183,7 @@ const optionsStyle = computed(() : string => {
 
 const scrollIntoViewId = ref<string>('')
 
-const findMatchedIndex = (list : string[], keyword : string) : number => {
+function findMatchedIndex(list : string[], keyword : string) : number {
 	if (keyword == '') {
 		return -1
 	}
@@ -196,7 +196,7 @@ const findMatchedIndex = (list : string[], keyword : string) : number => {
 	})
 }
 
-const syncHighlight = () : void => {
+function syncHighlight() {
 	const list = visibleOptions.value
 	if (list.length == 0) {
 		highlightedIndex.value = -1
@@ -206,7 +206,7 @@ const syncHighlight = () : void => {
 	highlightedIndex.value = matchedIndex
 }
 
-const refreshScrollTarget = () : void => {
+function refreshScrollTarget() {
 	const targetId = highlightedIndex.value >= 0 ? getOptionId(highlightedIndex.value) : ''
 	scrollIntoViewId.value = ''
 	if (targetId == '') {
@@ -219,15 +219,15 @@ const refreshScrollTarget = () : void => {
 	})
 }
 
-const emitValue = (value : string) : void => {
+function emitValue(value : string) {
 	currentValue.value = value
 	emit('update:modelValue', value)
 }
 
-const noop = () : void => {
+function noop() {
 }
 
-function applyPopupRect(rect : DOMRect) : void {
+function applyPopupRect(rect : DOMRect) {
 	const rectTop = rect.top != null ? rect.top : 0
 	const rectLeft = rect.left != null ? rect.left : 0
 	let rectWidth = rect.width != null ? rect.width : 0
@@ -260,7 +260,7 @@ function applyPopupRect(rect : DOMRect) : void {
 	popupHeight.value = height
 }
 
-const updatePosition = () : void => {
+function updatePosition() {
 	const element = uni.getElementById(anchorId)
 	if (element == null) {
 		return
@@ -274,7 +274,7 @@ const updatePosition = () : void => {
 	})
 }
 
-const updatePositionThenOpen = () : void => {
+function updatePositionThenOpen() {
 	const element = uni.getElementById(anchorId)
 	if (element == null) {
 		popupReady.value = true
@@ -297,22 +297,22 @@ const updatePositionThenOpen = () : void => {
 	})
 }
 
-const openOptionsWithMode = (filter : boolean) : void => {
+function openOptionsWithMode(filter : boolean) {
 	filterEnabled.value = filter
 	syncHighlight()
 	popupReady.value = false
 	updatePositionThenOpen()
 }
 
-const openOptions = () : void => {
+function openOptions() {
 	openOptionsWithMode(false)
 }
 
-const closeOptions = () : void => {
+function closeOptions() {
 	opened.value = false
 }
 
-const toggleOptionsByArrow = () : void => {
+function toggleOptionsByArrow() {
 	if (opened.value) {
 		closeOptions()
 		return
@@ -320,7 +320,7 @@ const toggleOptionsByArrow = () : void => {
 	openOptions()
 }
 
-const onFieldClick = () : void => {
+function onFieldClick() {
 	if (inputMode.value) {
 		openOptionsWithMode(true)
 		return
@@ -328,23 +328,21 @@ const onFieldClick = () : void => {
 	openOptions()
 }
 
-const onInput = (event : any) : void => {
-	const detail = (event as UTSJSONObject)['detail'] as UTSJSONObject
-	const rawValue = detail['value']
-	const value = rawValue != null ? rawValue as string : ''
+function onInput(event : UniInputEvent) {
+	const value = event.detail.value
 	emitValue(value)
 	openOptionsWithMode(true)
 }
 
-const onInputFocus = (_event : any) : void => {
+function onInputFocus() {
 	updatePosition()
 }
 
-const onInputBlur = (_event : any) : void => {
+function onInputBlur() {
 }
 
-const onInputKeydown = (event : any) : void => {
-	// #ifdef WEB
+// #ifdef WEB
+function onInputKeydown(event : KeyboardEvent) {
 	const key = event.key as string
 	if (key == 'Escape') {
 		event.preventDefault()
@@ -381,10 +379,10 @@ const onInputKeydown = (event : any) : void => {
 		event.preventDefault()
 		selectOption(highlightedIndex.value)
 	}
-	// #endif
 }
+// #endif
 
-const selectOption = (index : number) : void => {
+function selectOption(index : number) {
 	if (index < 0 || index >= visibleOptions.value.length) {
 		return
 	}
@@ -394,10 +392,16 @@ const selectOption = (index : number) : void => {
 	closeOptions()
 }
 
-const setInputValue = (value : string) : void => {
+function setInputValue(value : string) {
 	emitValue(value)
 	openOptionsWithMode(true)
 }
+
+defineExpose({
+	setInputValue,
+	openOptions,
+	closeOptions
+})
 
 watch(() : string => props.modelValue, (value : string) => {
 	currentValue.value = value
