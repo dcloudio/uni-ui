@@ -176,7 +176,7 @@ const visibleOptions = computed(() : string[] => {
 		return props.options
 	}
 	return props.options.filter((item : string) : boolean => {
-		return item.indexOf(currentValue.value) == 0
+		return item.indexOf(currentValue.value) >= 0
 	})
 })
 
