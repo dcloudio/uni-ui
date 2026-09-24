@@ -50,7 +50,7 @@
 	</uni-tab>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content-api.uvue'
 	// import tabContent2 from './tab-content2.uvue'

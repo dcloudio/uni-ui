@@ -13,7 +13,7 @@
 			<tabContent4 />
 		</uni-tab-content>
 
-		<uni-tab-bar style="border-top: 0px;background-color: rgba(0, 0, 0, 0);">
+		<uni-tab-bar :style="tabBarStyle">
 			<uni-tab-item class="tab-bg">
 				<!-- <image :src="activeIndex == 0 ? '/static/componentHL.png' : '/static/component.png'" class="tab-icon-image"></image> -->
 				<text :class="activeIndex == 0 ? 'tab-label-active' : ''">🏠</text>
@@ -46,7 +46,7 @@
 	</uni-tab>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'
@@ -54,11 +54,13 @@
 
 	const activeIndex = ref<number>(0)
 	const midButtonClickCount = ref<number>(0)
+	let tabBarStyle = 'border-top: 0px;background-color: rgba(0, 0, 0, 0);'
 	let tabContentHeightFull = true
 	let tabContentStyle = ''
 	// #ifdef MP-ALIPAY
 	tabContentHeightFull = false
 	tabContentStyle = 'flex: 1; min-height: 0px;'
+    tabBarStyle = 'border-top: 0px;background-color: #f5f5f5;'
 	// #endif
 
 	function handleChange(index : number) : void {

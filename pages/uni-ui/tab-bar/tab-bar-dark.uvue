@@ -50,7 +50,7 @@
 	</uni-tab>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'
@@ -110,7 +110,11 @@
 	}
 </script>
 
-<style>
+	<style>
+		page {
+			background-color: #0f172a;
+		}
+
 	.first-tab-button {
 		width: 100%;
 		height: 100%;

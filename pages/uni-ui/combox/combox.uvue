@@ -142,7 +142,7 @@
 	</scroll-view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 const optionsValue = ref<string>('')
 const placeholderValue = ref<string>('')
 const arrowClassValue = ref<string>('')
@@ -157,7 +157,7 @@ const selectEventText = ref<string>('未触发')
 const city = ref<string>('杭州')
 const largeValue = ref<string>('')
 
-const gradeOptions = [
+const gradeOptions: string[] = [
 	'一年级',
 	'二年级',
 	'三年级',
@@ -167,9 +167,9 @@ const gradeOptions = [
 	'初一',
 	'初二',
 	'初三'
-] as string[]
+]
 
-const cityOptions = [
+const cityOptions: string[] = [
 	'北京',
 	'上海',
 	'广州',
@@ -182,17 +182,17 @@ const cityOptions = [
 	'武汉',
 	'西安',
 	'郑州'
-] as string[]
+]
 
-const statusOptions = [
+const statusOptions: string[] = [
 	'待处理',
 	'处理中',
 	'已完成',
 	'已取消'
-] as string[]
+]
 
 const largeOptions = computed(() : string[] => {
-	const list = [] as string[]
+	const list: string[] = []
 	for (let i = 1; i <= 120; i++) {
 		const value = i < 10 ? `编号 00${i}` : (i < 100 ? `编号 0${i}` : `编号 ${i}`)
 		list.push(value)
@@ -218,7 +218,6 @@ function onCityChange(value : string) {
 <style>
 .page {
 	flex: 1;
-	background-color: #f5f7fb;
 	padding: 16px;
 }
 
@@ -229,33 +228,35 @@ function onCityChange(value : string) {
 .page-title {
 	font-size: 20px;
 	font-weight: bold;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
 	margin-bottom: 8px;
 }
 
 .page-desc {
 	font-size: 14px;
 	line-height: 22px;
-	color: #64748b;
+	color: var(--text-color, #64748b);
+	opacity: 0.7;
 }
 
 .group-title {
 	font-size: 18px;
 	font-weight: bold;
-	color: #111827;
+	color: var(--text-color, #111827);
 	margin-top: 4px;
 }
 
 .section-title {
 	font-size: 16px;
 	font-weight: bold;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
 	margin-bottom: 10px;
 }
 
 .result-text {
 	font-size: 13px;
-	color: #64748b;
+	color: var(--text-color, #64748b);
+	opacity: 0.7;
 	margin-top: 8px;
 }
 
@@ -264,34 +265,35 @@ function onCityChange(value : string) {
 	width: 100%;
 	height: 22px;
 	font-size: 14px;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
+	background-color: transparent;
 }
 
 .demo-arrow {
-	border-right-color: #16a34a;
-	border-bottom-color: #16a34a;
+	border-right-color: var(--tips-color, #16a34a);
+	border-bottom-color: var(--tips-color, #16a34a);
 	border-right-width: 2px;
 	border-bottom-width: 2px;
 }
 
 .demo-options-view {
-	border-color: #2563eb;
+	border-color: var(--tips-border-color, #2563eb);
 	border-width: 2px;
-	background-color: #eff6ff;
+	background-color: var(--tips-background-color, #eff6ff);
 }
 
 .demo-option-text {
-	color: #7c3aed;
+	color: var(--tips-color, #7c3aed);
 	font-weight: bold;
 }
 
 .demo-option-highlight {
-	color: #dc2626;
+	color: var(--tips-color, #dc2626);
 	font-weight: bold;
 }
 
 .demo-result-text {
-	color: #2563eb;
+	color: var(--tips-color, #2563eb);
 	font-weight: bold;
 }
 </style>
