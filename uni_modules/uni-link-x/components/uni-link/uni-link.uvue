@@ -3,7 +3,7 @@
     <slot></slot>
   </text>
 </template>
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 链接
    * @description 链接组件

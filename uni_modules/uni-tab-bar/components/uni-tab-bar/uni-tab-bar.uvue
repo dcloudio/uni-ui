@@ -4,7 +4,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 底部选项卡栏
    * @description 底部选项卡栏组件

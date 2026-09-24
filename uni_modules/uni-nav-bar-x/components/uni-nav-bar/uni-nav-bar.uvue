@@ -24,7 +24,7 @@
   </view>
 </template>
 
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 自定义导航栏
    * @description 自定义导航栏组件

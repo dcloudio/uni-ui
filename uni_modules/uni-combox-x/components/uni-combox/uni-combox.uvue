@@ -75,7 +75,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 /**
  * Combox 组合框
  * @description 默认是单选选择框，通过 input 具名插槽切换为可输入、可选择的组合框。

@@ -46,7 +46,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 可拖拽单元格组件
    * @description 可拖拽单元格组件

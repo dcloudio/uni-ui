@@ -38,7 +38,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 /**
  * NumberBox 数字输入框
  * @description 带加减按钮的数字输入框，常见于购物车商品数量选择
