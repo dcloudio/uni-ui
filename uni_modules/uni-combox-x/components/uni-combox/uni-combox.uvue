@@ -570,4 +570,36 @@ onBackPress(() : boolean => {
 .uni-combox__option--empty {
 	color: #999999;
 }
+
+@media (prefers-color-scheme: dark) {
+	.uni-combox__field {
+		border-color: rgba(255, 255, 255, 0.2);
+		background-color: #2d2d2d;
+	}
+
+	.uni-combox__result,
+	.uni-combox__option {
+		color: #ffffff;
+	}
+
+	.uni-combox__result--placeholder,
+	.uni-combox__option--empty {
+		color: #8f8f8f;
+	}
+
+	.uni-combox__arrow {
+		border-right-color: #8f8f8f;
+		border-bottom-color: #8f8f8f;
+	}
+
+	.uni-combox__options {
+		background-color: #2d2d2d;
+		border-color: rgba(255, 255, 255, 0.2);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	}
+
+	.uni-combox__option-row--highlight {
+		background-color: #3b3b3b;
+	}
+}
 </style>
