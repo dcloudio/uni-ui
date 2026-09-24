@@ -1,5 +1,5 @@
 <template>
-	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-bar-height="TAB_BAR_HEIGHT" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
+	<uni-tab style="flex: 1; --uni-tab-bar-height: 64px" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<uni-tab-content :style="tabContentStyle">
 			<scroll-view class="blur-scroll blur-scene-morning" direction="vertical">
 				<view class="blur-content-inner">
@@ -144,12 +144,11 @@
 <script setup lang="uts">
 	const TAB_BAR_MARGIN = 24
 	const TAB_BAR_BOTTOM = 40
-	const TAB_BAR_HEIGHT = 64
 
 	function buildTabBarStyle() : string {
 		const windowInfo = uni.getWindowInfo()
 		const tabBarWidth = Math.max(0, windowInfo.windowWidth - TAB_BAR_MARGIN * 2)
-		return 'left: ' + TAB_BAR_MARGIN + 'px; bottom: ' + TAB_BAR_BOTTOM + 'px; width: ' + tabBarWidth + 'px; height: ' + TAB_BAR_HEIGHT + 'px; padding-bottom: 0px; align-items: center; border-radius: 22px; overflow: hidden; border-top-width: 0px; background-color: rgba(255, 255, 255, 0.12);'
+		return 'left: ' + TAB_BAR_MARGIN + 'px; bottom: ' + TAB_BAR_BOTTOM + 'px; width: ' + tabBarWidth + 'px; padding-bottom: 0px; align-items: center; border-radius: 22px; overflow: hidden; border-top-width: 0px; background-color: rgba(255, 255, 255, 0.12);'
 	}
 
 	const activeIndex = ref<number>(0)

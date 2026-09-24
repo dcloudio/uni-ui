@@ -1,5 +1,5 @@
 <template>
-	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-bar-height="40" @change="handleChange">
+	<uni-tab style="flex: 1; --uni-tab-bar-height: 40px" :active-index="activeIndex" @change="handleChange">
 		<uni-tab-content>
 			<view class="custom-panel custom-panel-emerald">
 				<text class="custom-panel-kicker">自定义 tab-bar</text>
@@ -128,7 +128,6 @@
 
 	.custom-tab-list-root {
 		background: linear-gradient(to right, #f7d9a8, #c6ece3);
-		height: 40px;
 		border-top-width: 0px;
 	}
 
