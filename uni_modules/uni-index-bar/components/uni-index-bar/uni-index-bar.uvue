@@ -7,7 +7,7 @@
 	</view>
 </template>
 
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 索引列表
    * @description 索引列表组件

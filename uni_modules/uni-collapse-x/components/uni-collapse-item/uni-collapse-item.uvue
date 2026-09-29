@@ -20,7 +20,7 @@
   </view>
 </template>
 
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 折叠面板子项
    * @description 折叠面板子项组件

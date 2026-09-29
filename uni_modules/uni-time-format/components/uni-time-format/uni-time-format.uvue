@@ -2,7 +2,7 @@
   <text class="time-text">{{ formattedTime }}</text>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 时间格式化
    * @description 时间格式化展示组件

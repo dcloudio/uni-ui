@@ -41,7 +41,7 @@
 						"navigationBarTitleText": "uni-number-box"
 					}
 				},
-				// #ifndef (APP-IOS || APP-HARMONY) && !VUE3-VAPOR
+				// #ifndef MP-ALIPAY || ((APP-IOS || APP-HARMONY) && !VUE3-VAPOR)
 				{
 					"path": "combox/combox",
 					"style": {
@@ -145,16 +145,6 @@
 				},
 				// #endif
 				{
-					"path": "tab-bar/tab-bar-blur",
-					"style": {
-						"navigationBarTitleText": "uni-tab-bar-blur",
-						"navigationBarBackgroundColor": "#f4f8ff",
-						"navigationBarTextStyle": "black",
-						"backgroundColorContent": "#f4f8ff",
-						"disableScroll": true
-					}
-				},
-				{
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton",
@@ -183,8 +173,10 @@
 				{
 					"path": "index-bar/index-bar",
 					"style": {
-						"navigationBarTitleText": "uni-index-bar",
-						"backgroundColorContent": "#ffffff"
+						"navigationBarTitleText": "uni-index-bar"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				}
 			]

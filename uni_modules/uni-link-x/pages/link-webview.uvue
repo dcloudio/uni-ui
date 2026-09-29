@@ -2,7 +2,7 @@
   <web-view style="flex: 1;" :src="currentUrl" @error="onWebViewError"></web-view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   const currentUrl = ref<string>('')
 
   onLoad((options : UTSJSONObject | null) => {

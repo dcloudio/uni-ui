@@ -5,7 +5,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 选项卡内容
    * @description 选项卡内容组件
@@ -39,15 +39,10 @@
    *   }
    * }
    */
-import { UniTabBarLayout } from '../types.uts'
-
 // 从父组件注入数据和方法
 const currentIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
 const registerContent = inject<() => number>('uniTabBarRegisterContent', () => 0)
-const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
-	tabListBaseHeight: 50,
-	tabContentHeightFull: false
-} as UniTabBarLayout))
+const tabContentHeightFull = inject<Ref<boolean>>('uniTabContentHeightFull', ref(false))
 
 // 当前 content 的索引
 const contentIndex = ref<number>(-1)
@@ -87,7 +82,7 @@ const contentStyle = computed(() => {
 		left: active ? 'auto' : '0px',
 		top: active ? 'auto' : '0px',
 		right: active ? 'auto' : '0px',
-		bottom: active ? 'auto' : (tabBarLayout.value.tabContentHeightFull ? '0px' : 'auto')
+		bottom: active ? 'auto' : (tabContentHeightFull.value ? '0px' : 'auto')
 	}
 })
 </script>

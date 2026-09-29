@@ -13,6 +13,7 @@
 					name="input"
 					:value="currentValue"
 					:input="onInput"
+					:focus="onInputFocus"
 				></slot>
 			</view>
 			<text
@@ -25,10 +26,10 @@
 				<view class="uni-combox__arrow" :class="[arrowClass, opened ? 'uni-combox__arrow--open' : '']"></view>
 			</view>
 		</view>
-        <!-- #ifdef WEB -->
+        <!-- #ifdef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
 		<teleport to="body">
 		<!-- #endif -->
-		<!-- #ifndef WEB -->
+		<!-- #ifndef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
 		<teleport to="page">
 		<!-- #endif -->
 			<view v-if="opened && popupReady" class="uni-combox__mask" @click="closeOptions">
@@ -74,7 +75,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 /**
  * Combox 组合框
  * @description 默认是单选选择框，通过 input 具名插槽切换为可输入、可选择的组合框。
@@ -130,7 +131,8 @@ const emit = defineEmits<{
 defineSlots<{
 	input(props : {
 		value : string,
-		input : (event : any) => void
+		input : (event : UniInputEvent) => void,
+		focus : (event : UniInputFocusEvent) => void
 	}) : any
 }>()
 
@@ -156,6 +158,7 @@ const popupLeft = ref<number>(0)
 const popupTop = ref<number>(0)
 const popupWidth = ref<number>(0)
 const popupHeight = ref<number>(optionHeight + popupVerticalPadding)
+const keyboardHeight = ref<number>(0)
 
 const inputMode = computed(() : boolean => {
 	return slots['input'] != null
@@ -173,7 +176,7 @@ const visibleOptions = computed(() : string[] => {
 		return props.options
 	}
 	return props.options.filter((item : string) : boolean => {
-		return item.indexOf(currentValue.value) == 0
+		return item.indexOf(currentValue.value) >= 0
 	})
 })
 
@@ -181,14 +184,9 @@ const optionsStyle = computed(() : string => {
 	return `left: ${popupLeft.value}px; top: ${popupTop.value}px; width: ${popupWidth.value}px; height: ${popupHeight.value}px;`
 })
 
-const scrollIntoViewId = computed(() : string => {
-	if (highlightedIndex.value < 0) {
-		return ''
-	}
-	return getOptionId(highlightedIndex.value)
-})
+const scrollIntoViewId = ref<string>('')
 
-const findMatchedIndex = (list : string[], keyword : string) : number => {
+function findMatchedIndex(list : string[], keyword : string) : number {
 	if (keyword == '') {
 		return -1
 	}
@@ -201,7 +199,7 @@ const findMatchedIndex = (list : string[], keyword : string) : number => {
 	})
 }
 
-const syncHighlight = () : void => {
+function syncHighlight() {
 	const list = visibleOptions.value
 	if (list.length == 0) {
 		highlightedIndex.value = -1
@@ -211,15 +209,28 @@ const syncHighlight = () : void => {
 	highlightedIndex.value = matchedIndex
 }
 
-const emitValue = (value : string) : void => {
+function refreshScrollTarget() {
+	const targetId = highlightedIndex.value >= 0 ? getOptionId(highlightedIndex.value) : ''
+	scrollIntoViewId.value = ''
+	if (targetId == '') {
+		return
+	}
+	nextTick(() => {
+		if (opened.value) {
+			scrollIntoViewId.value = targetId
+		}
+	})
+}
+
+function emitValue(value : string) {
 	currentValue.value = value
 	emit('update:modelValue', value)
 }
 
-const noop = () : void => {
+function noop() {
 }
 
-function applyPopupRect(rect : DOMRect) : void {
+function applyPopupRect(rect : DOMRect) {
 	const rectTop = rect.top != null ? rect.top : 0
 	const rectLeft = rect.left != null ? rect.left : 0
 	let rectWidth = rect.width != null ? rect.width : 0
@@ -230,7 +241,7 @@ function applyPopupRect(rect : DOMRect) : void {
 	}
 
 	const windowInfo = uni.getWindowInfo()
-	const windowHeight = windowInfo.windowHeight
+	const windowHeight = Math.max(0, windowInfo.windowHeight - keyboardHeight.value)
 	const optionCount = Math.max(1, visibleOptions.value.length)
 	const expectedHeight = Math.min(defaultMaxOptionsHeight, optionCount * optionHeight) + popupVerticalPadding
 	const minOptionsHeight = optionHeight + popupVerticalPadding
@@ -252,7 +263,7 @@ function applyPopupRect(rect : DOMRect) : void {
 	popupHeight.value = height
 }
 
-const updatePosition = () : void => {
+function updatePosition() {
 	const element = uni.getElementById(anchorId)
 	if (element == null) {
 		return
@@ -266,42 +277,45 @@ const updatePosition = () : void => {
 	})
 }
 
-const updatePositionThenOpen = () : void => {
+function updatePositionThenOpen() {
 	const element = uni.getElementById(anchorId)
 	if (element == null) {
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 		return
 	}
 	const rectPromise = element.getBoundingClientRectAsync()
 	if (rectPromise == null) {
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 		return
 	}
 	rectPromise.then((rect : DOMRect) => {
 		applyPopupRect(rect)
 		popupReady.value = true
 		opened.value = true
+		refreshScrollTarget()
 	})
 }
 
-const openOptionsWithMode = (filter : boolean) : void => {
+function openOptionsWithMode(filter : boolean) {
 	filterEnabled.value = filter
 	syncHighlight()
 	popupReady.value = false
 	updatePositionThenOpen()
 }
 
-const openOptions = () : void => {
+function openOptions() {
 	openOptionsWithMode(false)
 }
 
-const closeOptions = () : void => {
+function closeOptions() {
 	opened.value = false
 }
 
-const toggleOptionsByArrow = () : void => {
+function toggleOptionsByArrow() {
 	if (opened.value) {
 		closeOptions()
 		return
@@ -309,7 +323,7 @@ const toggleOptionsByArrow = () : void => {
 	openOptions()
 }
 
-const onFieldClick = () : void => {
+function onFieldClick() {
 	if (inputMode.value) {
 		openOptionsWithMode(true)
 		return
@@ -317,23 +331,44 @@ const onFieldClick = () : void => {
 	openOptions()
 }
 
-const onInput = (event : any) : void => {
-	const detail = (event as UTSJSONObject)['detail'] as UTSJSONObject
-	const rawValue = detail['value']
-	const value = rawValue != null ? rawValue as string : ''
+function onInput(event : UniInputEvent) {
+	const value = event.detail.value
 	emitValue(value)
 	openOptionsWithMode(true)
 }
 
-const onInputFocus = (_event : any) : void => {
-	updatePosition()
+function onInputFocus(_event : UniInputFocusEvent) {
+	openOptionsWithMode(true)
 }
 
-const onInputBlur = (_event : any) : void => {
+function onInputBlur() {
 }
 
-const onInputKeydown = (event : any) : void => {
-	// #ifdef WEB
+let keyboardListenerId = 0
+
+function onKeyboardHeightChange(res : OnKeyboardHeightChangeCallbackResult) {
+	keyboardHeight.value = Math.max(0, res.height)
+	if (opened.value) {
+		nextTick(() => {
+			updatePosition()
+		})
+	}
+}
+
+onMounted(() => {
+	keyboardListenerId = uni.onKeyboardHeightChange(onKeyboardHeightChange)
+})
+
+onUnmounted(() => {
+	if (keyboardListenerId != 0) {
+		uni.offKeyboardHeightChange(keyboardListenerId)
+		keyboardListenerId = 0
+	}
+})
+
+
+// #ifdef WEB
+function onInputKeydown(event : KeyboardEvent) {
 	const key = event.key as string
 	if (key == 'Escape') {
 		event.preventDefault()
@@ -350,6 +385,7 @@ const onInputKeydown = (event : any) : void => {
 			return
 		}
 		highlightedIndex.value = Math.min(visibleOptions.value.length - 1, highlightedIndex.value + 1)
+		refreshScrollTarget()
 		return
 	}
 	if (key == 'ArrowUp') {
@@ -362,16 +398,17 @@ const onInputKeydown = (event : any) : void => {
 			return
 		}
 		highlightedIndex.value = Math.max(0, highlightedIndex.value - 1)
+		refreshScrollTarget()
 		return
 	}
 	if (key == 'Enter' && opened.value && highlightedIndex.value >= 0) {
 		event.preventDefault()
 		selectOption(highlightedIndex.value)
 	}
-	// #endif
 }
+// #endif
 
-const selectOption = (index : number) : void => {
+function selectOption(index : number) {
 	if (index < 0 || index >= visibleOptions.value.length) {
 		return
 	}
@@ -381,10 +418,16 @@ const selectOption = (index : number) : void => {
 	closeOptions()
 }
 
-const setInputValue = (value : string) : void => {
+function setInputValue(value : string) {
 	emitValue(value)
 	openOptionsWithMode(true)
 }
+
+defineExpose({
+	setInputValue,
+	openOptions,
+	closeOptions
+})
 
 watch(() : string => props.modelValue, (value : string) => {
 	currentValue.value = value
@@ -392,6 +435,7 @@ watch(() : string => props.modelValue, (value : string) => {
 		syncHighlight()
 		nextTick(() => {
 			updatePosition()
+			refreshScrollTarget()
 		})
 	}
 })
@@ -401,6 +445,7 @@ watch(() : string[] => props.options, () => {
 		syncHighlight()
 		nextTick(() => {
 			updatePosition()
+			refreshScrollTarget()
 		})
 	}
 })
@@ -524,5 +569,37 @@ onBackPress(() : boolean => {
 
 .uni-combox__option--empty {
 	color: #999999;
+}
+
+@media (prefers-color-scheme: dark) {
+	.uni-combox__field {
+		border-color: rgba(255, 255, 255, 0.2);
+		background-color: #2d2d2d;
+	}
+
+	.uni-combox__result,
+	.uni-combox__option {
+		color: #ffffff;
+	}
+
+	.uni-combox__result--placeholder,
+	.uni-combox__option--empty {
+		color: #8f8f8f;
+	}
+
+	.uni-combox__arrow {
+		border-right-color: #8f8f8f;
+		border-bottom-color: #8f8f8f;
+	}
+
+	.uni-combox__options {
+		background-color: #2d2d2d;
+		border-color: rgba(255, 255, 255, 0.2);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	}
+
+	.uni-combox__option-row--highlight {
+		background-color: #3b3b3b;
+	}
 }
 </style>

@@ -6,7 +6,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 选项卡中间按钮
    * @description 选项卡中间悬浮按钮组件

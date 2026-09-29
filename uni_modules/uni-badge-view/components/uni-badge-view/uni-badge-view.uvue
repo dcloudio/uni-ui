@@ -29,7 +29,7 @@
 	</template>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * Badge 数字角标
    * @description 数字角标（徽章）组件

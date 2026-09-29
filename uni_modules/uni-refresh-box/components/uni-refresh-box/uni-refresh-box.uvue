@@ -7,7 +7,7 @@
   </view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 自定义下拉刷新
    * @description 自定义下拉刷新组件

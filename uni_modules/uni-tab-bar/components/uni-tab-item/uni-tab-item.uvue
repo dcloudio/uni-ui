@@ -6,7 +6,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 选项卡项
    * @description 选项卡项组件

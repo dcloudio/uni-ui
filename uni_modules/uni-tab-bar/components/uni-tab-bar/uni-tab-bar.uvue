@@ -1,10 +1,10 @@
 <template>
-	<view :style="tabBarStyle" class="uni-tab-list-root" :class="tabBarRootClass">
+	<view class="uni-tab-list-root" :class="tabBarRootClass">
 		<slot></slot>
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 底部选项卡栏
    * @description 底部选项卡栏组件
@@ -38,25 +38,14 @@
    *   }
    * }
    */
-import { UniTabBarLayout } from '../types.uts'
-
-const tabBarLayout = inject<Ref<UniTabBarLayout>>('uniTabBarLayout', ref({
-	tabListBaseHeight: 50,
-	tabContentHeightFull: false
-} as UniTabBarLayout))
+const tabContentHeightFull = inject<Ref<boolean>>('uniTabContentHeightFull', ref(false))
 const changeTab = inject<(index: number) => void>('uniTabBarChangeTab', (index: number) => {})
 
 const itemCount = ref<number>(0)
 const hasMidButtonItem = ref<boolean>(false)
 
-const tabBarStyle = computed(() => {
-	return {
-		height: tabBarLayout.value.tabListBaseHeight + 'px'
-	}
-})
-
 const tabBarRootClass = computed(() : string => {
-	return tabBarLayout.value.tabContentHeightFull ? 'uni-tab-list-root-full' : 'uni-tab-list-root-normal'
+	return tabContentHeightFull.value ? 'uni-tab-list-root-full' : 'uni-tab-list-root-normal'
 })
 
 const validMidButtonLayout = computed(() : boolean => {
@@ -108,7 +97,7 @@ provide('uniTabListChangeTab', changeTab)
 		display: flex;
 		flex-direction: row;
 		width: 100%;
-		height: 50px;
+		height: var(--uni-tab-bar-height, 50px);
 		flex-shrink: 0;
 		box-sizing: content-box;
 		padding-bottom: var(--uni-safe-area-inset-bottom);

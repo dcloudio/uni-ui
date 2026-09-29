@@ -1,5 +1,5 @@
 <template>
-	<scroll-view class="page" direction="vertical">
+	<scroll-view class="page">
 		<view class="section">
 			<text class="page-title">uni-combox 组合框</text>
 			<text class="page-desc">默认单选模式只能从候选项中选择；传入 input 插槽后，可输入并按左侧匹配过滤候选项。</text>
@@ -20,13 +20,24 @@
 		</view>
 
 		<view class="section">
-			<text class="section-title">modelValue / v-model：当前值</text>
+			<text class="section-title">input 插槽：可输入可选择</text>
 			<uni-combox
 				:options="cityOptions"
-				v-model="modelValue"
-				placeholder="请选择城市"
-			/>
-			<text class="result-text">绑定值：{{ modelValue }}</text>
+				v-model="city"
+				placeholder="选择或输入城市"
+				@selectchange="onCityChange"
+			>
+				<template #input="{ value, input, focus }">
+					<input
+						class="custom-input"
+						:value="value"
+						placeholder="选择或输入城市"
+						@focus="focus"
+						@input="input"
+					/>
+				</template>
+			</uni-combox>
+			<text class="result-text">当前输入：{{ city }}</text>
 		</view>
 
 		<view class="section">
@@ -93,6 +104,16 @@
 		</view>
 
 		<view class="section">
+			<text class="section-title">大量候选</text>
+			<uni-combox
+				:options="largeOptions"
+				placeholder="请选择编号"
+				v-model="largeValue"
+			/>
+			<text class="result-text">当前选择：{{ largeValue }}</text>
+		</view>
+
+		<view class="section">
 			<text class="group-title">事件示例</text>
 		</view>
 
@@ -118,45 +139,11 @@
 			<text class="result-text">事件值：{{ selectEventText }}</text>
 		</view>
 
-		<view class="section">
-			<text class="group-title">模式示例</text>
-		</view>
-
-		<view class="section">
-			<text class="section-title">input 插槽：可输入可选择</text>
-			<uni-combox
-				:options="cityOptions"
-				v-model="city"
-				placeholder="选择或输入城市"
-				@selectchange="onCityChange"
-			>
-				<template #input="{ value, input }">
-					<input
-						class="custom-input"
-						:value="value"
-						placeholder="选择或输入城市"
-						@input="input"
-					/>
-				</template>
-			</uni-combox>
-			<text class="result-text">当前输入：{{ city }}</text>
-		</view>
-
-		<view class="section">
-			<text class="section-title">大量候选</text>
-			<uni-combox
-				:options="largeOptions"
-				placeholder="请选择编号"
-				v-model="largeValue"
-			/>
-			<text class="result-text">当前选择：{{ largeValue }}</text>
-		</view>
 	</scroll-view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 const optionsValue = ref<string>('')
-const modelValue = ref<string>('杭州')
 const placeholderValue = ref<string>('')
 const arrowClassValue = ref<string>('')
 const optionsViewClassValue = ref<string>('')
@@ -170,7 +157,7 @@ const selectEventText = ref<string>('未触发')
 const city = ref<string>('杭州')
 const largeValue = ref<string>('')
 
-const gradeOptions = [
+const gradeOptions: string[] = [
 	'一年级',
 	'二年级',
 	'三年级',
@@ -180,9 +167,9 @@ const gradeOptions = [
 	'初一',
 	'初二',
 	'初三'
-] as string[]
+]
 
-const cityOptions = [
+const cityOptions: string[] = [
 	'北京',
 	'上海',
 	'广州',
@@ -195,17 +182,17 @@ const cityOptions = [
 	'武汉',
 	'西安',
 	'郑州'
-] as string[]
+]
 
-const statusOptions = [
+const statusOptions: string[] = [
 	'待处理',
 	'处理中',
 	'已完成',
 	'已取消'
-] as string[]
+]
 
 const largeOptions = computed(() : string[] => {
-	const list = [] as string[]
+	const list: string[] = []
 	for (let i = 1; i <= 120; i++) {
 		const value = i < 10 ? `编号 00${i}` : (i < 100 ? `编号 0${i}` : `编号 ${i}`)
 		list.push(value)
@@ -213,17 +200,17 @@ const largeOptions = computed(() : string[] => {
 	return list
 })
 
-const onUpdateModelValue = (value : string) : void => {
+function onUpdateModelValue(value : string) {
 	updateEventText.value = value == '' ? '空字符串' : value
 	console.log('combox update:modelValue:', value)
 }
 
-const onSelectChange = (value : string) : void => {
+function onSelectChange(value : string) {
 	selectEventText.value = value
 	console.log('combox selectchange:', value)
 }
 
-const onCityChange = (value : string) : void => {
+function onCityChange(value : string) {
 	console.log('city selectchange:', value)
 }
 </script>
@@ -231,7 +218,6 @@ const onCityChange = (value : string) : void => {
 <style>
 .page {
 	flex: 1;
-	background-color: #f5f7fb;
 	padding: 16px;
 }
 
@@ -242,33 +228,35 @@ const onCityChange = (value : string) : void => {
 .page-title {
 	font-size: 20px;
 	font-weight: bold;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
 	margin-bottom: 8px;
 }
 
 .page-desc {
 	font-size: 14px;
 	line-height: 22px;
-	color: #64748b;
+	color: var(--text-color, #64748b);
+	opacity: 0.7;
 }
 
 .group-title {
 	font-size: 18px;
 	font-weight: bold;
-	color: #111827;
+	color: var(--text-color, #111827);
 	margin-top: 4px;
 }
 
 .section-title {
 	font-size: 16px;
 	font-weight: bold;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
 	margin-bottom: 10px;
 }
 
 .result-text {
 	font-size: 13px;
-	color: #64748b;
+	color: var(--text-color, #64748b);
+	opacity: 0.7;
 	margin-top: 8px;
 }
 
@@ -277,34 +265,35 @@ const onCityChange = (value : string) : void => {
 	width: 100%;
 	height: 22px;
 	font-size: 14px;
-	color: #1f2937;
+	color: var(--text-color, #1f2937);
+	background-color: transparent;
 }
 
 .demo-arrow {
-	border-right-color: #16a34a;
-	border-bottom-color: #16a34a;
+	border-right-color: var(--tips-color, #16a34a);
+	border-bottom-color: var(--tips-color, #16a34a);
 	border-right-width: 2px;
 	border-bottom-width: 2px;
 }
 
 .demo-options-view {
-	border-color: #2563eb;
+	border-color: var(--tips-border-color, #2563eb);
 	border-width: 2px;
-	background-color: #eff6ff;
+	background-color: var(--tips-background-color, #eff6ff);
 }
 
 .demo-option-text {
-	color: #7c3aed;
+	color: var(--tips-color, #7c3aed);
 	font-weight: bold;
 }
 
 .demo-option-highlight {
-	color: #dc2626;
+	color: var(--tips-color, #dc2626);
 	font-weight: bold;
 }
 
 .demo-result-text {
-	color: #2563eb;
+	color: var(--tips-color, #2563eb);
 	font-weight: bold;
 }
 </style>

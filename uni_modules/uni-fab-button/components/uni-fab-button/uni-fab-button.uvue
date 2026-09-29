@@ -4,7 +4,7 @@
 		<view flatten class="plus" :class="plusClass" style="position: absolute;transform: rotate(90deg);"></view>
 	</view>
 </template>
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 悬浮加号按钮
    * @description 悬浮加号按钮组件
