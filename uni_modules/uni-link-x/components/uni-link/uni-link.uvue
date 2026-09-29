@@ -42,7 +42,8 @@
   // #endif
 
   defineOptions({
-    name: 'UniLink'
+    name: 'UniLink',
+    styleIsolation: 'app'
   })
 
   type Props = {
