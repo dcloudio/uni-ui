@@ -41,11 +41,14 @@
 						"navigationBarTitleText": "uni-number-box"
 					}
 				},
-				// #ifndef MP-ALIPAY || ((APP-IOS || APP-HARMONY) && !VUE3-VAPOR)
+				// #ifndef (APP-IOS || APP-HARMONY) && !VUE3-VAPOR
 				{
 					"path": "combox/combox",
 					"style": {
 						"navigationBarTitleText": "uni-combox"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				// #endif
