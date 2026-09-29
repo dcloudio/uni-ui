@@ -54,12 +54,12 @@
    *   }
    * }
    */
-  import type { ItemChildType } from '../type.uts'
+  import type { ItemChildType } from '../type.ts'
   import {
     UNI_COLLAPSE_REGISTER_CHILD,
     UNI_COLLAPSE_UNREGISTER_CHILD,
     UNI_COLLAPSE_CHILD_TOGGLE
-  } from '../common.uts'
+  } from '../common.ts'
 
   defineOptions({
     name: 'UniCollapseItem',

@@ -1,6 +1,14 @@
 <template>
+	<!-- #ifdef MP-ALIPAY -->
+	<view class="index-text" ref="indexTextRef" v-bind="$attrs" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove"
+		@touchend="onTouchEnd">
+		<text v-for="(item, index) in indexList" :key="item" class="index-item">{{ item }}</text>
+	</view>
+	<!-- #endif -->
+	<!-- #ifndef MP-ALIPAY -->
 	<text class="index-text" ref="indexTextRef" v-bind="$attrs" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove"
 		@touchend="onTouchEnd">{{ indexs }}</text>
+	<!-- #endif -->
 	<!-- indicator with arrow -->
 	<view v-show="touching" class="indicator" :class="indicatorViewClass" :style="indicatorStyle">
 		<text class="indicator-text" :class="indicatorTextClass">{{ currentIndex }}</text>
@@ -328,6 +336,10 @@
 		text-align: center;
 		line-height: 1.4;
 		z-index: 1000;
+	}
+
+	.index-item {
+		text-align: center;
 	}
 
 	.indicator {
