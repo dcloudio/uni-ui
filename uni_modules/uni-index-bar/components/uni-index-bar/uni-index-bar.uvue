@@ -41,6 +41,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.08"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -80,6 +84,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -114,6 +122,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -148,6 +160,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -190,6 +206,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {

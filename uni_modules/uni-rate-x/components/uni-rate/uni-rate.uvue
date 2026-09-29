@@ -42,6 +42,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -80,6 +84,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -113,6 +121,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -146,6 +158,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -179,6 +195,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -212,6 +232,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -245,6 +269,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -278,6 +306,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -311,6 +343,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -344,6 +380,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -392,6 +432,10 @@ const emit = defineEmits<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -425,6 +469,10 @@ const emit = defineEmits<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {

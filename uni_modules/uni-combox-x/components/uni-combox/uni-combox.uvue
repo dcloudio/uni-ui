@@ -79,6 +79,18 @@
 /**
  * Combox 组合框
  * @description 默认是单选选择框，通过 input 具名插槽切换为可输入、可选择的组合框。
+ * @uniPlatform {
+ *   "mp": {
+ *     "weixin": {
+ *       "uniVer": "x",
+ *       "unixVer": "5.07"
+ *     },
+ *     "alipay": {
+ *       "uniVer": "x",
+ *       "unixVer": "5.31"
+ *     }
+ *   }
+ * }
  * @property {Array<String>} options 候选字符串数组
  * @property {String} modelValue 当前值，支持 v-model
  * @property {String} placeholder 占位文字

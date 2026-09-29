@@ -32,6 +32,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -66,6 +70,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -100,6 +108,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {

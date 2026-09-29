@@ -65,7 +65,8 @@
 						"harmony": "√"
 					},
 					"mp": {
-						"weixin": "√"
+						"weixin": "√",
+						"alipay": "√"
 					}
 				}
 			}
