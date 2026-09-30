@@ -34,7 +34,7 @@
 </scroll-view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 const listCount1 = ref(3)
 const refreshing1 = ref(false)
 const pullingDistance1 = ref(0)

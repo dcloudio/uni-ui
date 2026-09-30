@@ -36,7 +36,7 @@
 	</uni-nav-bar>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	const rightMargin = ref(0)
 	onMounted(() => {
 		// #ifdef MP-WEIXIN

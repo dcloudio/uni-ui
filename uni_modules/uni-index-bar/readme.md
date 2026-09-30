@@ -19,7 +19,7 @@
 </view>
 ```
 
-```uts
+```ts
 const onSelect = (index: string) => {
   // 处理索引选择，滚动列表到对应位置
 }
@@ -88,7 +88,7 @@ const onSelect = (index: string) => {
 </view>
 ```
 
-```uts
+```ts
 const indexList = cityGroups.map((g): string => g.index).join('\n')
 const indexViewID = ref("")
 

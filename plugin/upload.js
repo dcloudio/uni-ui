@@ -182,7 +182,7 @@ function handlePageJson(comName, tempExamplePath, packageJson = {}) {
 	if (exists) {
 		util.deleteFolder(outPath)
 	}
-	copyDirByExt(path.join(root, 'pages', 'uni-ui', comName), path.join(tempExamplePath, 'pages', comName), ['.uvue', '.uts'])
+	copyDirByExt(path.join(root, 'pages', 'uni-ui', comName), path.join(tempExamplePath, 'pages', comName), ['.uvue', '.ts'])
 	util.copyDir(path.join(root, 'common'), path.join(tempExamplePath, 'common'))
 }
 
