@@ -27,12 +27,12 @@
 			</view>
 		</view>
         <!-- #ifdef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
-		<teleport to="body">
+        <teleport v-if="opened && popupReady" to="body">
 		<!-- #endif -->
 		<!-- #ifndef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
-		<teleport to="page">
+        <teleport v-if="opened && popupReady" to="page">
 		<!-- #endif -->
-			<view v-if="opened && popupReady" class="uni-combox__mask" @click="closeOptions">
+			<view class="uni-combox__mask" @click="closeOptions">
 				<view
 					class="uni-combox__options"
 					:class="optionsViewClass"
@@ -171,6 +171,8 @@ const popupTop = ref<number>(0)
 const popupWidth = ref<number>(0)
 const popupHeight = ref<number>(optionHeight + popupVerticalPadding)
 const keyboardHeight = ref<number>(0)
+let positionRequestId = 0
+let isUnmounted = false
 
 const inputMode = computed(() : boolean => {
 	return slots['input'] != null
@@ -285,13 +287,21 @@ function updatePosition() {
 		return
 	}
 	rectPromise.then((rect : DOMRect) => {
+		if (isUnmounted || !opened.value) {
+			return
+		}
 		applyPopupRect(rect)
 	})
 }
 
 function updatePositionThenOpen() {
+	const requestId = positionRequestId + 1
+	positionRequestId = requestId
 	const element = uni.getElementById(anchorId)
 	if (element == null) {
+		if (isUnmounted || requestId != positionRequestId) {
+			return
+		}
 		popupReady.value = true
 		opened.value = true
 		refreshScrollTarget()
@@ -299,12 +309,18 @@ function updatePositionThenOpen() {
 	}
 	const rectPromise = element.getBoundingClientRectAsync()
 	if (rectPromise == null) {
+		if (isUnmounted || requestId != positionRequestId) {
+			return
+		}
 		popupReady.value = true
 		opened.value = true
 		refreshScrollTarget()
 		return
 	}
 	rectPromise.then((rect : DOMRect) => {
+		if (isUnmounted || requestId != positionRequestId) {
+			return
+		}
 		applyPopupRect(rect)
 		popupReady.value = true
 		opened.value = true
@@ -324,7 +340,9 @@ function openOptions() {
 }
 
 function closeOptions() {
+	positionRequestId += 1
 	opened.value = false
+	popupReady.value = false
 }
 
 function toggleOptionsByArrow() {
@@ -356,19 +374,31 @@ function onInputFocus(_event : UniInputFocusEvent) {
 function onInputBlur() {
 }
 
-let keyboardListenerId = 0
-
 function onKeyboardHeightChange(res : OnKeyboardHeightChangeCallbackResult) {
+	if (isUnmounted) {
+		return
+	}
 	keyboardHeight.value = Math.max(0, res.height)
 	if (opened.value) {
 		nextTick(() => {
-			updatePosition()
+			if (!isUnmounted && opened.value) {
+				updatePosition()
+			}
 		})
 	}
 }
 
+let keyboardListenerId = 0
+
 onMounted(() => {
 	keyboardListenerId = uni.onKeyboardHeightChange(onKeyboardHeightChange)
+})
+
+onBeforeUnmount(() => {
+	isUnmounted = true
+	positionRequestId += 1
+	opened.value = false
+	popupReady.value = false
 })
 
 onUnmounted(() => {
@@ -589,12 +619,18 @@ onBackPress(() : boolean => {
 		background-color: #2d2d2d;
 	}
 
-	.uni-combox__result,
+	.uni-combox__result {
+		color: #ffffff;
+	}
+
 	.uni-combox__option {
 		color: #ffffff;
 	}
 
-	.uni-combox__result--placeholder,
+	.uni-combox__result--placeholder {
+		color: #8f8f8f;
+	}
+
 	.uni-combox__option--empty {
 		color: #8f8f8f;
 	}
