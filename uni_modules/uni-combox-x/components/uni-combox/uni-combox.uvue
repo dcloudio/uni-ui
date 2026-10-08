@@ -153,11 +153,23 @@ defineSlots<{
 const slots = useSlots()
 const anchorId = `uni_combox_x_${Math.ceil(Math.random() * 10e8).toString(36)}`
 const optionIdPrefix = `uni_combox_x_option_${Math.ceil(Math.random() * 10e8).toString(36)}_`
-const optionHeight = 36
+const defaultOptionHeight = 36
+// #ifdef WEB
+const pcOptionHeight = 32
+// #endif
 const defaultMaxOptionsHeight = 200
 const popupVerticalPadding = 8
 const viewportGap = 8
 const popupGap = 4
+
+function getOptionHeight() : number {
+	// #ifdef WEB
+	if (uni.getWindowInfo().windowWidth >= 768) {
+		return pcOptionHeight
+	}
+	// #endif
+	return defaultOptionHeight
+}
 
 function getOptionId(index : number) : string {
 	return optionIdPrefix + index.toString()
@@ -171,7 +183,7 @@ const highlightedIndex = ref<number>(-1)
 const popupLeft = ref<number>(0)
 const popupTop = ref<number>(0)
 const popupWidth = ref<number>(0)
-const popupHeight = ref<number>(optionHeight + popupVerticalPadding)
+const popupHeight = ref<number>(getOptionHeight() + popupVerticalPadding)
 const keyboardHeight = ref<number>(0)
 let positionRequestId = 0
 let isUnmounted = false
@@ -258,6 +270,7 @@ function applyPopupRect(rect : DOMRect) {
 
 	const windowInfo = uni.getWindowInfo()
 	const windowHeight = Math.max(0, windowInfo.windowHeight - keyboardHeight.value)
+	const optionHeight = getOptionHeight()
 	const optionCount = Math.max(1, visibleOptions.value.length)
 	const expectedHeight = Math.min(defaultMaxOptionsHeight, optionCount * optionHeight) + popupVerticalPadding
 	const minOptionsHeight = optionHeight + popupVerticalPadding
@@ -629,6 +642,17 @@ onBackPress(() : boolean => {
 }
 
 /* #ifdef WEB */
+@media (min-width: 768px) {
+	.uni-combox__option-row {
+		height: 32px;
+	}
+
+	.uni-combox__option {
+		height: 32px;
+		line-height: 32px;
+	}
+}
+
 .uni-combox__field {
 	outline: none;
 	transition-property: border-color, box-shadow;
