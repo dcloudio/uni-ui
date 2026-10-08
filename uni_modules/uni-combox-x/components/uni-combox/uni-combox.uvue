@@ -376,6 +376,14 @@ function onInputFocus(_event : UniInputFocusEvent) {
 function onInputBlur() {
 }
 
+onBeforeUnmount(() => {
+	isUnmounted = true
+	positionRequestId += 1
+	opened.value = false
+	popupReady.value = false
+})
+
+// #ifndef WEB
 function onKeyboardHeightChange(res : OnKeyboardHeightChangeCallbackResult) {
 	if (isUnmounted) {
 		return
@@ -396,20 +404,13 @@ onMounted(() => {
 	keyboardListenerId = uni.onKeyboardHeightChange(onKeyboardHeightChange)
 })
 
-onBeforeUnmount(() => {
-	isUnmounted = true
-	positionRequestId += 1
-	opened.value = false
-	popupReady.value = false
-})
-
 onUnmounted(() => {
 	if (keyboardListenerId != 0) {
 		uni.offKeyboardHeightChange(keyboardListenerId)
 		keyboardListenerId = 0
 	}
 })
-
+// #endif
 
 // #ifdef WEB
 function onInputKeydown(event : KeyboardEvent) {
