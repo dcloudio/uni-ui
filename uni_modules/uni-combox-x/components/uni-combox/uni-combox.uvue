@@ -2,9 +2,10 @@
 	<view :id="anchorId" class="uni-combox">
 		<view
 			class="uni-combox__field"
+			:class="disabled ? 'uni-combox__field--disabled' : ''"
 			@click="onFieldClick"
 			<!-- #ifdef WEB -->
-			tabindex="0"
+			:tabindex="disabled ? '-1' : '0'"
 			@keydown="onInputKeydown"
 			<!-- #endif -->
 		>
@@ -14,6 +15,7 @@
 					:value="currentValue"
 					:input="onInput"
 					:focus="onInputFocus"
+					:disabled="disabled"
 				></slot>
 			</view>
 			<text
@@ -25,6 +27,7 @@
 			<view class="uni-combox__arrow-wrap" @click.stop="toggleOptionsByArrow">
 				<view class="uni-combox__arrow" :class="[arrowClass, opened ? 'uni-combox__arrow--open' : '']"></view>
 			</view>
+			<view v-if="disabled" class="uni-combox__disabled-mask"></view>
 		</view>
         <!-- #ifdef WEB || (APP-ANDROID && !VUE3-VAPOR) -->
         <teleport v-if="opened && popupReady" to="body">
@@ -96,6 +99,7 @@
  * @property {Array<String>} options 候选字符串数组
  * @property {String} modelValue 当前值，支持 v-model
  * @property {String} placeholder 占位文字
+ * @property {Boolean} disabled 是否禁用，默认值 false
  * @property {String} arrowClass 右侧箭头自定义样式类
  * @property {String} optionsViewClass 候选浮层外层自定义样式类
  * @property {String} optionTextClass 候选项文字自定义样式类
@@ -119,6 +123,7 @@ type Props = {
 	options? : string[],
 	modelValue? : string,
 	placeholder? : string,
+	disabled? : boolean,
 	arrowClass? : string.ClassString,
 	optionsViewClass? : string.ClassString,
 	optionTextClass? : string.ClassString,
@@ -130,6 +135,7 @@ const props = withDefaults(defineProps<Props>(), {
 	options: () : string[] => [] as string[],
 	modelValue: '',
 	placeholder: '',
+	disabled: false,
 	arrowClass: '',
 	optionsViewClass: '',
 	optionTextClass: '',
@@ -146,7 +152,8 @@ defineSlots<{
 	input(props : {
 		value : string,
 		input : (event : UniInputEvent) => void,
-		focus : (event : UniInputFocusEvent) => void
+		focus : (event : UniInputFocusEvent) => void,
+		disabled : boolean
 	}) : any
 }>()
 
@@ -344,6 +351,9 @@ function updatePositionThenOpen() {
 }
 
 function openOptionsWithMode(filter : boolean) {
+	if (props.disabled) {
+		return
+	}
 	filterEnabled.value = filter
 	syncHighlight()
 	popupReady.value = false
@@ -361,6 +371,9 @@ function closeOptions() {
 }
 
 function toggleOptionsByArrow() {
+	if (props.disabled) {
+		return
+	}
 	if (opened.value) {
 		closeOptions()
 		return
@@ -369,6 +382,9 @@ function toggleOptionsByArrow() {
 }
 
 function onFieldClick() {
+	if (props.disabled) {
+		return
+	}
 	if (inputMode.value) {
 		openOptionsWithMode(true)
 		return
@@ -377,12 +393,18 @@ function onFieldClick() {
 }
 
 function onInput(event : UniInputEvent) {
+	if (props.disabled) {
+		return
+	}
 	const value = event.detail.value
 	emitValue(value)
 	openOptionsWithMode(true)
 }
 
 function onInputFocus(_event : UniInputFocusEvent) {
+	if (props.disabled) {
+		return
+	}
 	openOptionsWithMode(true)
 }
 
@@ -427,6 +449,9 @@ onUnmounted(() => {
 
 // #ifdef WEB
 function onInputKeydown(event : KeyboardEvent) {
+	if (props.disabled) {
+		return
+	}
 	const key = event.key as string
 	if (key == 'Escape') {
 		event.preventDefault()
@@ -467,6 +492,9 @@ function onInputKeydown(event : KeyboardEvent) {
 // #endif
 
 function selectOption(index : number) {
+	if (props.disabled) {
+		return
+	}
 	if (index < 0 || index >= visibleOptions.value.length) {
 		return
 	}
@@ -477,6 +505,9 @@ function selectOption(index : number) {
 }
 
 function setInputValue(value : string) {
+	if (props.disabled) {
+		return
+	}
 	emitValue(value)
 	openOptionsWithMode(true)
 }
@@ -508,6 +539,12 @@ watch(() : string[] => props.options, () => {
 	}
 })
 
+watch(() : boolean => props.disabled, (disabled : boolean) => {
+	if (disabled && opened.value) {
+		closeOptions()
+	}
+})
+
 onBackPress(() : boolean => {
 	if (opened.value) {
 		closeOptions()
@@ -523,6 +560,7 @@ onBackPress(() : boolean => {
 }
 
 .uni-combox__field {
+	position: relative;
 	width: 100%;
 	box-sizing: border-box;
 	height: 36px;
@@ -532,6 +570,19 @@ onBackPress(() : boolean => {
 	flex-direction: row;
 	align-items: center;
 	padding-left: 12px;
+}
+
+.uni-combox__field--disabled {
+	opacity: 0.5;
+}
+
+.uni-combox__disabled-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
 }
 
 .uni-combox__input-slot {
@@ -664,6 +715,15 @@ onBackPress(() : boolean => {
 	box-shadow: 0 0 0 3px rgba(161, 161, 170, 0.24);
 }
 
+.uni-combox__field--disabled:focus {
+	border-color: #e4e4e7;
+	box-shadow: none;
+}
+
+.uni-combox__disabled-mask {
+	cursor: not-allowed;
+}
+
 .uni-combox__option-row:hover {
 	background-color: #f4f4f5;
 }
@@ -710,6 +770,11 @@ onBackPress(() : boolean => {
 	.uni-combox__field:focus {
 		border-color: #71717a;
 		box-shadow: 0 0 0 3px rgba(113, 113, 122, 0.32);
+	}
+
+	.uni-combox__field--disabled:focus {
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: none;
 	}
 
 	.uni-combox__option-row:hover {
