@@ -4,7 +4,7 @@
 		<view @click="onClick(!isOpen)" class="uni-collapse-item__title"
 			:class="{'is-open':isOpen &&titleBorder === 'auto' ,'uni-collapse-item-border':titleBorder !== 'none'}">
 			<view class="uni-collapse-item__title-wrap">
-				<slot name="title">
+				<slot name="title" :extraData="extraData">
 					<view class="uni-collapse-item__title-box" :class="{'is-disabled':disabled}">
 						<image v-if="thumb" :src="thumb" class="uni-collapse-item__title-img" />
 						<text class="uni-collapse-item__title-text">{{ title }}</text>
@@ -21,7 +21,7 @@
 			:style="{height: (isOpen?height:0) +'px'}">
 			<view :id="elId" ref="collapse--hook" class="uni-collapse-item__wrap-content"
 				:class="{open:isheight,'uni-collapse-item--border':border&&isOpen}">
-				<slot></slot>
+				<slot :extraData="extraData"></slot>
 			</view>
 		</view>
 
@@ -44,6 +44,7 @@
 	 * @property {Boolean} disabled = [true|false] 是否展开面板
 	 * @property {Boolean} showAnimation = [true|false] 开启动画
 	 * @property {Boolean} showArrow = [true|false] 是否显示右侧箭头
+	 * @property {Object} extraData = {} 额外数据
 	 */
 	export default {
 		name: 'uniCollapseItem',
@@ -98,6 +99,10 @@
 			showArrow: {
 				type: Boolean,
 				default: true
+			}，
+			extraData: {
+				type: Object,
+				default: () => null
 			}
 		},
 		data() {
@@ -399,4 +404,5 @@
 		}
 
 	}
+
 </style>
