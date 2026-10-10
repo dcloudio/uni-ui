@@ -9,8 +9,7 @@
 	<!-- #endif -->
 </template>
 
-<script setup>
-	import { computed } from 'vue';
+<script>
 	import { fontData } from './uniicons_file_vue.js';
 
 	const getVal = (val) => {
@@ -37,58 +36,59 @@
 	 * @property {String} customPrefix 自定义图标
 	 * @event {Function} click 点击 Icon 触发事件
 	 */
-	defineOptions({
-		name: 'UniIcons'
-	})
-
-	const emit = defineEmits(['click'])
-
-	const props = defineProps({
-		type: {
-			type: String,
-			default: ''
+	export default {
+		name: 'UniIcons',
+		emits: ['click'],
+		props: {
+			type: {
+				type: String,
+				default: ''
+			},
+			color: {
+				type: String,
+				default: '#333333'
+			},
+			size: {
+				type: [Number, String],
+				default: 16
+			},
+			customPrefix: {
+				type: String,
+				default: ''
+			},
+			fontFamily: {
+				type: String,
+				default: ''
+			}
 		},
-		color: {
-			type: String,
-			default: '#333333'
+		data() {
+			return {
+				icons: fontData
+			}
 		},
-		size: {
-			type: [Number, String],
-			default: 16
+		computed: {
+			unicode() {
+				let code = this.icons.find(v => v.font_class === this.type)
+				if (code) {
+					return code.unicode
+				}
+				return ''
+			},
+			iconSize() {
+				return getVal(this.size)
+			},
+			styleObj() {
+				if (this.fontFamily !== '') {
+					return `color: ${this.color}; font-size: ${this.iconSize}; font-family: ${this.fontFamily};`
+				}
+				return `color: ${this.color}; font-size: ${this.iconSize};`
+			}
 		},
-		customPrefix: {
-			type: String,
-			default: ''
-		},
-		fontFamily: {
-			type: String,
-			default: ''
+		methods: {
+			_onClick(e) {
+				this.$emit('click', e)
+			}
 		}
-	})
-
-	const icons = fontData
-
-	const unicode = computed(() => {
-		let code = icons.find(v => v.font_class === props.type)
-		if (code) {
-			return code.unicode
-		}
-		return ''
-	})
-
-	const iconSize = computed(() => {
-		return getVal(props.size)
-	})
-
-	const styleObj = computed(() => {
-		if (props.fontFamily !== '') {
-			return `color: ${props.color}; font-size: ${iconSize.value}; font-family: ${props.fontFamily};`
-		}
-		return `color: ${props.color}; font-size: ${iconSize.value};`
-	})
-
-	const _onClick = (e) => {
-		emit('click', e)
 	}
 </script>
 

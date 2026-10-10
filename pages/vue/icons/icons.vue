@@ -39,9 +39,9 @@
 </template>
 
 <script>
-	import {iconlist} from'./icons.js'
+	import { iconlist } from './icons.js'
+
 	export default {
-		components: {},
 		data() {
 			return {
 				iconClassList: iconlist,
@@ -54,17 +54,17 @@
 				// e.detail.value在安卓手机上可能是String类型，后续修复后要修改
 				this.checked = e.detail.value === 'false' || !e.detail.value ? false : true
 			},
-			switchActive(index,item) {
+			switchActive(index, item) {
 				this.activeIndex = index
 				uni.setClipboardData({
-				    data: !this.checked ? item.name:item.unicode,
-				    success:  ()=> {
-				        uni.showToast({
-				        	icon:'none',
-									title:`${!this.checked ?'图标名称':'unicode'}复制成功`
-				        })
-				    }
-				});
+					data: !this.checked ? item.font_class : item.unicode,
+					success: () => {
+						uni.showToast({
+							icon: 'none',
+							title: `${!this.checked ? '图标名称' : 'unicode'}复制成功`
+						})
+					}
+				})
 			}
 		}
 	}

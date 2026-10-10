@@ -1,7 +1,7 @@
 {
   "id": "uni-icons",
   "displayName": "uni-icons 图标",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "图标组件，用于展示移动端常见的图标，可自定义颜色、大小。",
   "keywords": [
     "uni-ui",
@@ -13,7 +13,7 @@
   "engines": {
     "HBuilderX": "^3.2.14",
     "uni-app": "^4.08",
-    "uni-app-x": "^4.61"
+    "uni-app-x": ""
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -55,55 +55,80 @@
       "client": {
         "uni-app": {
           "vue": {
-            "vue2": "√",
-            "vue3": "√"
+            "vue2": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "vue3": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            }
           },
           "web": {
-            "safari": "√",
-            "chrome": "√"
+            "safari": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "chrome": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            }
           },
           "app": {
-            "vue": "√",
+            "vue": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
             "nvue": "-",
             "android": {
-                "extVersion": "",
+                "extVersion": "2.0.14",
                 "minVersion": "29"
             },
-            "ios": "√",
-            "harmony": "√"
+            "ios": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "harmony": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            }
           },
           "mp": {
-            "weixin": "√",
-            "alipay": "√",
-            "toutiao": "√",
-            "baidu": "√",
+            "weixin": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "alipay": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "toutiao": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
+            "baidu": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
             "kuaishou": "-",
             "jd": "-",
             "harmony": "-",
-            "qq": "√",
+            "qq": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            },
             "lark": "-",
             "xhs": "-"
           },
           "quickapp": {
-            "huawei": "√",
-            "union": "√"
-          }
-        },
-        "uni-app-x": {
-          "web": {
-            "safari": "√",
-            "chrome": "√"
-          },
-          "app": {
-            "android": {
-                "extVersion": "",
-                "minVersion": "29"
+            "huawei": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
             },
-            "ios": "√",
-            "harmony": "√"
-          },
-          "mp": {
-            "weixin": "√"
+            "union": {
+                "extVersion": "2.0.14",
+                "minVersion": ""
+            }
           }
         }
       }
