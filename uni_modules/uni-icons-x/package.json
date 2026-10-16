@@ -4,15 +4,16 @@
 	"version": "1.0.0",
 	"description": "适用于 uni-app x 的字体图标组件，可自定义颜色、大小和字体。",
 	"keywords": [
-		"uni-ui-x",
-		"uni-app-x",
-		"icon",
-		"图标"
-	],
+        "uni-ui-x",
+        "uni-app-x",
+        "icon",
+        "图标"
+    ],
 	"repository": "https://github.com/dcloudio/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^5.0",
-		"uni-app-x": "^5.0"
+        "uni-app-x": "^5.0",
+        "uni-app": ""
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -24,25 +25,27 @@
 				"price": "0.00"
 			}
 		},
-		"contact": {},
+        "contact": {
+            "qq": ""
+        },
 		"declaration": {
 			"ads": "无",
 			"data": "无",
 			"permissions": "无"
 		},
 		"npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui-x",
-		"darkmode": "-",
-		"i18n": "-",
-		"widescreen": "-"
+		"darkmode": "x",
+		"i18n": "x",
+		"widescreen": "x"
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "-",
-				"aliyun": "-",
-				"alipay": "-"
+				"tcb": "x",
+				"aliyun": "x",
+				"alipay": "x"
 			},
 			"client": {
 				"uni-app": {
