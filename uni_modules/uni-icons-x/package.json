@@ -3,13 +3,15 @@
 	"displayName": "uni-icons 图标",
 	"version": "1.0.0",
 	"description": "适用于 uni-app x 的字体图标组件，可自定义颜色、大小和字体。",
+	"isExt": true,
+	"extUrl": "https://ext.dcloud.net.cn/plugin?id=30221",
 	"keywords": [
         "uni-ui-x",
         "uni-app-x",
         "icon",
         "图标"
     ],
-	"repository": "https://github.com/dcloudio/uni-ui-x",
+	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^5.0",
         "uni-app-x": "^5.0",
