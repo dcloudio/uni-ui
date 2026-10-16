@@ -181,6 +181,12 @@
 						,"allowsBounceVertical": "NO"
 						// #endif
 					}
+				},
+				{
+					"path": "icons/icons",
+					"style": {
+						"navigationBarTitleText": "Icons 图标"
+					}
 				}
 			]
 		}

@@ -33,7 +33,7 @@ uni-ui x 提供了完全的样式自定义能力，所有的样式定义都可�
 
 - **为AI设计**
 
-uni-ui x 优先代码而不是二进制文件。目前没有引入字体文件。这出于性能考虑，也出于AI友好度考虑。
+uni-ui x 优先代码而不是二进制文件。除兼容既有图标资产的 `uni-icons` 外，其他组件不引入字体文件。这出于性能考虑，也便于 AI 理解和修改组件。
 
 以箭头为例，uni-ui x 中使用一个view配置左下边框并transform旋转来实现，这种设计性能比字体更好，且AI可以方便的理解这段代码的UI表现，可以在代码层面调整样式。
 
@@ -63,6 +63,7 @@ uni-ui x 没有写死的颜色和文字:
 | uni-drag-cell | [可拖拽排序组件](https://ext.dcloud.net.cn/plugin?name=uni-drag-cell) |
 | uni-fab-button | [uni-fab-button](https://ext.dcloud.net.cn/plugin?name=uni-fab-button) |
 | uni-index-bar | [uni-index-bar](https://ext.dcloud.net.cn/plugin?name=uni-index-bar) |
+| uni-icons | [图标](https://ext.dcloud.net.cn/plugin?name=uni-icons-x) |
 | uni-link | [链接](https://ext.dcloud.net.cn/plugin?name=uni-link-x) |
 | uni-nav-bar | [uni-nav-bar](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar-x) |
 | uni-number-box | [数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box-x) |
@@ -99,7 +100,7 @@ uni-ui x 没有写死的颜色和文字:
 |uni-goods-nav				|商品导航								|无																									|
 |uni-grid							|宫格										|无																									|
 |uni-group						|分组										|无																									|
-|uni-icons						|图标										|无																									|
+|uni-icons						|图标										|改用[uni-icons](https://ext.dcloud.net.cn/plugin?name=uni-icons-x)										|
 |uni-indexed-list			|索引列表								|改用uni-index-bar																		|
 |uni-link							|超链接									|改用uni-link																				|
 |uni-list							|列表										|使用内置组件list																		|
