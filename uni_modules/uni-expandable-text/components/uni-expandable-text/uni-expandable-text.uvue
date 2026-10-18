@@ -1,0 +1,338 @@
+<template>
+	<!-- 【情况 A】inline = true：行尾内联模式，通过 text 组件嵌套实现  实际上用不了-->
+	<text v-if="inline" class="text-class" :max-lines="isExpanded ? -1 : lines">
+		<!-- <text class="text-body">{{ text }}</text>
+		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="inline-trigger trigger-class" @click="toggle">
+			{{ isExpanded ? collapseText : expandText}}
+		</text> -->
+	</text>
+
+	<!-- 【情况 B】inline = false：换行独立一行模式，通过 view 包裹独立 text 实现 -->
+	<view v-else ref="containerRef">
+		<text ref="textRef" class="expandable-text-node" :class="textClass" :max-lines="isExpanded ? -1 : lines" user-select <!-- #ifdef WEB || MP -->
+			:style="webClampStyle"
+			<!-- #endif -->
+			>
+			{{ text }}
+		</text>
+		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="default-trigger-class" :class="triggerClass" @click="toggle">
+			{{ isExpanded ? collapseText : expandText}}
+		</text>
+		<!--
+			隐藏的测量节点 (仅 APP & MP) 说明：
+			1. 宽度 100% 且共享与正文文本和Class相同，确保宽度绝对一致。
+			2. APP 端通过条件编译拍平，减少性能损失。
+		-->
+		<!-- #ifdef APP || MP -->
+		<text ref="measureRef" style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
+			class="expandable-measure-node" :class="textClass"
+			<!-- #ifdef APP-ANDROID -->
+			flatten
+			<!-- #endif -->
+			> <!-- TODO: 鸿蒙flatten不支持visibility: hidden，导致无法隐藏，需要去掉flatten-->
+			<!-- BUG: ios flatten后，getBoundRect取不到值！表现为checkOverflow里的fullHeight一直是0，进而无法显示全文按钮 @熊花雨 -->
+			{{ text }}
+		</text>
+		<!-- #ifdef MP -->
+		<text class="expandable-clamp-measure-node"
+			style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
+			:max-lines="lines" :class="textClass">{{ text }}</text>
+		<!-- #endif -->
+		<!-- #endif -->
+	</view>
+
+</template>
+
+<script setup lang="ts">
+	// 声明外部样式类：text-class 用于控制正文，trigger-class 用于控制展开/收起按钮
+	/**
+	 * 展开收起文字组件。
+	 *
+	 * @description 按指定行数截断文本，并在文本溢出时显示展开/收起触发器。
+	 */
+	defineOptions({
+		externalClasses: ['text-class', 'trigger-class']
+	})
+
+	type LocaleType = 'zh-Hans' | 'zh-Hant' | 'en' | 'fr' | 'la'
+
+	type LocaleMessages = {
+		expandText: string
+		collapseText: string
+	}
+
+	type Props = {
+		/** 要显示的文本内容。 */
+		text?: string
+		/** 折叠状态下最多显示的行数。 */
+		lines?: number
+		/** 是否以内联方式显示触发器。 */
+		inline?: boolean
+		/** 展开状态下显示的文字，不传时根据应用语言使用默认文案。 */
+		expandText?: string
+		/** 收起状态下显示的文字，不传时根据应用语言使用默认文案。 */
+		collapseText?: string
+		/** 正文的 externalClass。 */
+		textClass?: string
+		/** 展开/收起触发器的 externalClass。 */
+		triggerClass?: string
+		/** 是否在展开状态下显示收起触发器。 */
+		showCollapse?: boolean
+	}
+
+	const props = withDefaults(
+		defineProps<Props>(),
+		{
+			text: '',
+			lines: 1,
+			inline: false,
+			textClass: '',
+			triggerClass: '',
+			showCollapse: true
+		}
+	)
+
+	const emit = defineEmits<{
+	  change: [expanded: boolean]
+	  'update:expanded': [expanded: boolean]
+	}>()
+
+	function resolveLocaleType() : LocaleType {
+		const appLanguage = (uni.getAppBaseInfo().appLanguage ?? 'en').toLowerCase()
+		if (
+			appLanguage.indexOf('zh-hant') == 0 ||
+			appLanguage.indexOf('zh-tw') == 0 ||
+			appLanguage.indexOf('zh-hk') == 0 ||
+			appLanguage.indexOf('zh-mo') == 0
+		) {
+			return 'zh-Hant'
+		}
+		if (appLanguage.indexOf('zh') == 0) return 'zh-Hans'
+		if (appLanguage.indexOf('fr') == 0) return 'fr'
+		if (appLanguage.indexOf('la') == 0 || appLanguage.indexOf('lat') == 0) return 'la'
+		return 'en'
+	}
+
+	function getLocaleMessages() : LocaleMessages {
+		const localeType = resolveLocaleType()
+		if (localeType == 'zh-Hans') return { expandText: '全文', collapseText: '收起' }
+		if (localeType == 'zh-Hant') return { expandText: '全文', collapseText: '收起' }
+		if (localeType == 'fr') return { expandText: 'Lire la suite', collapseText: 'Réduire' }
+		if (localeType == 'la') return { expandText: 'Plura', collapseText: 'Contrahere' }
+		return { expandText: 'Show more', collapseText: 'Show less' }
+	}
+
+	const localeMessages = getLocaleMessages()
+	const expandText = computed(() => props.expandText ?? localeMessages.expandText)
+	const collapseText = computed(() => props.collapseText ?? localeMessages.collapseText)
+	const isExpanded = ref(false)
+	const showTrigger = ref(true) // 是否需要显示展开触发器。在文字内容不超过lines时，隐藏展开触发器。默认显示。
+
+	const containerRef = ref(null)
+	const textRef = ref<UniElement | null>(null)
+	const measureRef = ref<UniElement | null>(null)
+	const instance = getCurrentInstance()
+	let resizeObserver : any = null
+
+	// #ifdef WEB
+	const webClampStyle = computed(() => {
+		if (isExpanded.value) return {}
+		return {
+			display: '-webkit-box',
+			'-webkit-box-orient': 'vertical',
+			'-webkit-line-clamp': `${props.lines}`,
+			overflow: 'hidden',
+			textOverflow: 'ellipsis'
+		}
+	})
+	// #endif
+
+	/** 切换当前文本的展开状态，并触发 change 事件。 */
+	const toggle = () => {
+		isExpanded.value = !isExpanded.value
+		emit('change', isExpanded.value)
+		emit('update:expanded', isExpanded.value) // 补上双向绑定触发，保证外部同步
+		// #ifdef MP
+		// 小程序端没有 ResizeObserver。点击 trigger 后主动补测一次，
+		// 让没有主动调用 checkOverflow 的场景也能修正 trigger 状态。
+		checkOverflowOnMP()
+		// #endif
+	}
+
+	const checkOverflowOnMP = () => {
+		// #ifdef MP
+		if (!instance) return
+		nextTick(() => {
+			const queryMP = uni.createSelectorQuery().in(instance.proxy)
+			queryMP.select('.expandable-measure-node').boundingClientRect()
+			queryMP.select('.expandable-clamp-measure-node').boundingClientRect()
+			queryMP.exec((res) => {
+				if (!res || res.length < 2 || !res[0] || !res[1]) return
+				const fullHeight = (res[0] as UniElementBoundingClientRect).height
+				const clampedHeight = (res[1] as UniElementBoundingClientRect).height
+				if (fullHeight > 0 && clampedHeight > 0) {
+					showTrigger.value = fullHeight > clampedHeight + 2
+				}
+			})
+		})
+		// #endif
+	}
+
+	/**
+		 * 重新检查文本是否超出折叠行数。小程序端需要由外部主动调用。（支持通过参数区分触发来源）
+		 * @sources
+		 *   - 'init': 初始化挂载
+		 *   - 'text': 文本内容或行数发生改变
+		 *   - 'resize': 容器宽度发生自适应改变
+		 */
+	const checkOverflow = (source : 'init' | 'text' | 'resize') => {
+		if (props.text=="") {
+			showTrigger.value = false
+			return
+		}
+		// 文本或尺寸确实发生变化时，先回到收起态再测量折叠高度。
+		// 首次布局检测使用 init 来源，不会进入这里，避免覆盖用户的首次展开。
+		if ((source === 'text' || source === 'resize') && isExpanded.value) {
+			isExpanded.value = false
+			emit('change', false)
+			emit('update:expanded', false)
+		}
+		nextTick(() => {
+
+			// 以下web和MP是伪代码，前面的text基础显示就有问题
+			// #ifdef WEB
+			// 1. WEB 端：利用 scrollHeight 与 clientHeight 同步对比
+			/* const el = textRef.value
+			if (el) {
+				const currentClamp = el.style.webkitLineClamp
+				el.style.webkitLineClamp = 'none'
+				const fullHeight = el.scrollHeight
+				el.style.webkitLineClamp = String(props.lines)
+				const clampedHeight = el.clientHeight
+				el.style.webkitLineClamp = currentClamp
+				showTrigger.value = fullHeight > clampedHeight + 1
+			} */
+			// #endif
+
+			// #ifdef MP
+			// 2. 小程序端：通过异步 SelectorQuery 对比“隐藏完整文本高度”与“受限文本高度”
+			/* if (!instance) return
+			const queryMP = uni.createSelectorQuery().in(instance.proxy)
+			queryMP.select('.measure-node').boundingClientRect()
+			queryMP.select('.text-node').boundingClientRect()
+			queryMP.exec((res) => {
+				if (!res || res.length < 2 || !res[0] || !res[1]) return
+				const fullHeight = (res[0] as UniElementBoundingClientRect).height
+				const clampedHeight = (res[1] as UniElementBoundingClientRect).height
+				showTrigger.value = fullHeight > clampedHeight + 2
+			}) */
+			// #endif
+
+			// #ifdef APP
+			// 3. APP 端 (uni-app x)：利用原生布局查询对比完整高度与受限高度
+			if (isExpanded.value) {
+				return // 首次布局的异步测量不能覆盖用户的展开操作
+			}
+			const fullHeight = (measureRef.value as UniElement)?.getBoundingClientRect().height
+			// console.log('fullHeight', fullHeight)
+			const clampedHeight = (textRef.value as UniElement)?.getBoundingClientRect().height
+			// console.log('clampedHeight', clampedHeight)
+			if (fullHeight > 0 && clampedHeight > 0) {
+				showTrigger.value = fullHeight > clampedHeight + 2
+				// console.log('showTrigger', showTrigger.value)
+			}
+
+			// 如果当前是收起状态，也可以直接对比 fullHeight 与当前 clampedHeight
+			/* if (!isExpanded.value) {
+				const clampedHeight = (textRef.value as UniElement)?.getBoundingClientRect().height
+				// console.log('clampedHeight', clampedHeight)
+				showTrigger.value = fullHeight > clampedHeight + 2
+			} else {
+				// 如果当前是展开状态，此时发生文字变化和resize。如果要保留展开状态不变，需要用 完整高度 与 最大允许高度对比，需要用 lines * line-height 来反推最大允许高度
+				// 这个方案不现实，行高可能是 px、rpx、em、纯数字，font-size 也可能是 px、rpx、百分比，要处理的转换判断非常多，性能也不好
+				const lineHeight = textRef.value?.style.getPropertyValue("line-height")
+				console.log('lineHeight', lineHeight)
+				const lineHeightPx = parseFloat(lineHeight)
+				const maxHeight = props.lines * lineHeightPx
+				showTrigger.value = fullHeight > maxHeight + 2
+			} */
+			// #endif
+		})
+	}
+
+	let lastWidth = 0
+	let hasInitialWidth = false
+	onMounted(() => {
+		checkOverflow('init')
+		// App和Web平台监听容器大小自适应变化
+		// #ifdef APP || WEB
+		if (containerRef.value != null) {
+			// 疑问: 这个监听会多触发2次
+			resizeObserver = new UniResizeObserver((entries : Array<UniResizeObserverEntry>) => {
+				// console.log(entries[0].contentRect, entries[0].target);
+				for (const entry of entries) { // 实际业务只监听了一个元素，其实写死[0]也可以
+					// 获取当前根容器的最新宽度
+					const currentWidth = entry.contentRect.width
+
+					// 【关键防范】只有当宽度发生实质性变化时，才重新计算溢出状态
+					// 忽略由于显示/隐藏 trigger 引起的高度变化，防止死循环！
+					if (currentWidth !== lastWidth) {
+						lastWidth = currentWidth
+						if (!hasInitialWidth && currentWidth > 0) {
+							// ResizeObserver 的首次有效回调属于初始化布局，不能重置展开状态。
+							hasInitialWidth = true
+							checkOverflow('init')
+						} else if (hasInitialWidth) {
+							checkOverflow('resize') // 后续宽度变化才重新测量
+						}
+					}
+				}
+			})
+			resizeObserver.observe(containerRef.value!)
+		}
+		// #endif
+	})
+
+	onUnmounted(() => {
+		if (resizeObserver && containerRef.value) {
+			resizeObserver.unobserve(containerRef.value!)
+			resizeObserver = null
+		}
+	})
+
+	// 监听 props.text 和 line 的变化，重新检查是否需要显示展开/收起按钮。当设置max-line时，文字变短但可视行数不变时不会触发resize，必须同时监听文字内容变化
+	watch([() => props.text, () => props.lines], () => {
+	  checkOverflow('text')
+	})
+
+	defineExpose({
+		/** 切换当前文本的展开状态。 */
+		toggle,
+		/** 展开文本。 */
+		expand: () => {
+			if (!isExpanded.value) toggle()
+		},
+		/** 收起文本。 */
+		collapse: () => {
+			if (isExpanded.value) toggle()
+		}
+		// #ifdef MP
+		// 小程序没有 ResizeObserver，需对外暴露 checkOverflow 方法，外部调用时需要手动调用 checkOverflow() 来更新展开/收起按钮的显示状态
+		, checkOverflow
+		// #endif
+	})
+</script>
+
+<style>
+	.default-trigger-class {
+		padding: 4px 4px 4px 1px;
+		/* 适当扩大点击区域。左边扩的少，因为扩了左边，会导致左边换行对不齐*/
+		color: #586b95;
+		/* 取自微信朋友圈全文颜色*/
+	}
+
+	/* inline = true 时的行尾内联样式 */
+	.inline-trigger {
+		margin-left: 6px;
+	}
+</style>

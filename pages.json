@@ -187,6 +187,11 @@
 					"style": {
 						"navigationBarTitleText": "Icons 图标"
 					}
+				{
+					"path": "expandable-text/expandable-text",
+					"style": {
+						"navigationBarTitleText": "可折叠文本"
+					}
 				}
 			]
 		}

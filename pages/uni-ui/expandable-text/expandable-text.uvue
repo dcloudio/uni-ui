@@ -1,0 +1,119 @@
+<template>
+		<!-- BUG: web和小程序 max-line不生效！文字不自动换行！文字嵌套没有inline！@wangyaqi -->
+	<view>
+		<!-- 开头是几个简单示例测试行尾内联，发现各种bug -->
+		<!-- BUG: Android为什么行首多了一个空格？ iOS和鸿蒙干脆不显示！ @yinjiacheng @xionghuayu @xutongyin -->
+		<text style="width:100px;margin-bottom: 8px;" max-lines="1">
+			11111111111111111111
+		</text>
+		<!-- BUG: max-lines写在嵌套文字外层，Android、iOS、鸿蒙全都不显示！ @yinjiacheng @xionghuayu @xutongyin-->
+		<text style="width:100px;margin-bottom: 8px;" max-lines="1">
+			22222222222222222222
+			<text class="expand">展开</text>
+		</text>
+		<!-- BUG: Android、iOS、鸿蒙 max-lines写在嵌套内层也不生效。反正就是嵌套时没办法控制max-line  @yinjiacheng @xionghuayu @xutongyin -->
+		<text style="width:100px;margin-bottom: 8px;">
+			<text max-lines="1">333333333333333</text>
+			<text class="expand">展开</text>
+		</text>
+		<!-- <view style="width:100px;margin-bottom: 8px">
+			<text :max-lines="isExpanded ? -1 : lines">44444444444444444444</text>
+			<text class="expand" @click="toggle">展开</text>
+		</view> -->
+	</view>
+
+	<!-- 这里开始是uni-expandable-text组件的正式示例内容 -->
+	<view class="container">
+	    <!-- 行尾内联模式目前底层有bug，暂不启用 -->
+	    <!-- <uni-expandable-text
+	      :text="articleText"
+	      :lines="1"
+	      :inline="true"
+	      expand-text="展开"
+				collapse-text="收起"
+	      text-class="custom-text"
+	      trigger-class="custom-trigger"
+				style="width:100px;margin-bottom: 8px"
+	    /> -->
+	    <text class="uni-h4">空字符串</text>
+		<uni-expandable-text />
+		<text class="uni-h4">默认模式</text>
+		<uni-expandable-text :text="articleText" :style="dynamicStyle" />
+		<text class="uni-h4">lines=1模式。监听change事件</text>
+	    <uni-expandable-text :text="articleText" :lines="1" @change="triggerEvent" style="width:100px;" />
+		<text class="uni-h4">lines=2模式。展开后不显示trigger</text>
+	    <uni-expandable-text :text="articleText" :lines="2" :show-collapse="false" style="width:100px;" />
+		<text class="uni-h4">lines=2，自定义正文和trigger文字和样式</text>
+		<uni-expandable-text
+			:text="articleText"
+			:lines="2"
+			text-class="custom-text"
+			expand-text="展开"
+			collapse-text="自定义收起文字"
+			trigger-class="custom-trigger-bold"
+			:style="'width:'+ dynamicWidth2 +'px'"
+		/>
+		<text class="uni-h4">测试动态调整文字内容、组件宽度，trigger是否正常的出现和消失</text>
+		<button @click="changeArticleText" style="margin-top: 10px;">缩短显示文字内容，line行可以显示完整时不再出现trigger</button>
+		<button @click="changeDynamicStyle">缩短默认模式的正文width，1行显示不全时自动出现trigger</button>
+		<button @click="changeDynamicWidth">加宽最后一个组件的正文width，2行可以显示完整时不再出现trigger</button>
+		<button @click="resetChange">reset上述3个修改</button>
+	  </view>
+</template>
+
+<script setup lang="ts">
+// start 模板开头的简单示例配套的脚本。正式版需要删除掉
+const lines = ref(1)
+const isExpanded = ref(false)
+const toggle = () => {
+  isExpanded.value = !isExpanded.value
+}
+// end
+const articleText = ref("123456789123456789123456789")
+const dynamicStyle = ref("")
+const dynamicWidth2 = ref(100)
+const triggerEvent = (expanded: boolean) => {
+	  console.log('触发change事件，当前展开状态：', expanded)
+}
+const changeArticleText = () => {
+  articleText.value = "123456789123456789"
+}
+const changeDynamicStyle = () => {
+  dynamicStyle.value = "width: 100px"
+}
+const changeDynamicWidth = () => {
+  dynamicWidth2.value = 180
+}
+const resetChange = () => {
+	dynamicStyle.value	= ""
+	articleText.value = "123456789123456789123456789"
+	dynamicWidth2.value = 100
+}
+</script>
+
+<style>
+page{
+  padding: 10px;
+}
+.expand{
+	color: aqua;
+}
+
+/* 外部控制正文样式 */
+.custom-text {
+  font-size: 15px;
+  color: #00aa00;
+  line-height: 2em;
+}
+
+/* 外部控制展开/收起按钮样式 */
+.custom-trigger {
+  color: #ff5500;
+  font-size: 14px;
+}
+
+.custom-trigger-bold {
+  color: #007aff;
+  font-weight: bold;
+}
+</style>

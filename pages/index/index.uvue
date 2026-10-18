@@ -28,6 +28,7 @@
 	<!-- #ifndef MP-ALIPAY -->
 	<navigator class="nav-item" url="/pages/theme-change/theme-change"><text class="nav-text">theme-change</text></navigator>
 	<!-- #endif -->
+	<navigator class="nav-item" url="/pages/uni-ui/expandable-text/expandable-text"><text class="nav-text">expandable-text</text></navigator>
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>
