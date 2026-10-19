@@ -1,5 +1,5 @@
 <template>
-	<!-- 【情况 A】inline = true：行尾内联模式，通过 text 组件嵌套实现  实际上用不了-->
+	<!-- 行尾内联模式，通过 text 组件嵌套实现  实际上用不了-->
 	<text v-if="inline" class="text-class" :max-lines="isExpanded ? -1 : lines">
 		<!-- <text class="text-body">{{ text }}</text>
 		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="inline-trigger trigger-class" @click="toggle">
@@ -7,7 +7,7 @@
 		</text> -->
 	</text>
 
-	<!-- 【情况 B】inline = false：换行独立一行模式，通过 view 包裹独立 text 实现 -->
+	<!-- 换行模式，通过 view 包裹 text 实现 -->
 	<view v-else ref="containerRef">
 		<text ref="textRef" class="expandable-text-node" :class="textClass" :max-lines="isExpanded ? -1 : lines" user-select <!-- #ifdef WEB || MP -->
 			:style="webClampStyle"
@@ -30,14 +30,9 @@
 			flatten
 			<!-- #endif -->
 			> <!-- TODO: 鸿蒙flatten不支持visibility: hidden，导致无法隐藏，需要去掉flatten-->
-			<!-- BUG: ios flatten后，getBoundRect取不到值！表现为checkOverflow里的fullHeight一直是0，进而无法显示全文按钮 @熊花雨 -->
+			<!-- BUG: ios flatten后，getBoundRect取不到值！表现为checkOverflow里的fullHeight一直是0，进而无法显示全文按钮 @xionghuayu -->
 			{{ text }}
 		</text>
-		<!-- #ifdef MP -->
-		<text class="expandable-clamp-measure-node"
-			style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
-			:max-lines="lines" :class="textClass">{{ text }}</text>
-		<!-- #endif -->
 		<!-- #endif -->
 	</view>
 
@@ -134,15 +129,14 @@
 	const instance = getCurrentInstance()
 	let resizeObserver : any = null
 
-	// #ifdef WEB
+	// #ifdef WEB || MP
 	const webClampStyle = computed(() => {
 		if (isExpanded.value) return {}
 		return {
 			display: '-webkit-box',
 			'-webkit-box-orient': 'vertical',
 			'-webkit-line-clamp': `${props.lines}`,
-			overflow: 'hidden',
-			textOverflow: 'ellipsis'
+			overflow: 'hidden'
 		}
 	})
 	// #endif
@@ -161,7 +155,7 @@
 
 	const checkOverflowOnMP = () => {
 		// #ifdef MP
-		if (!instance) return
+		/* if (!instance) return
 		nextTick(() => {
 			const queryMP = uni.createSelectorQuery().in(instance.proxy)
 			queryMP.select('.expandable-measure-node').boundingClientRect()
@@ -174,7 +168,7 @@
 					showTrigger.value = fullHeight > clampedHeight + 2
 				}
 			})
-		})
+		}) */
 		// #endif
 	}
 
@@ -202,7 +196,7 @@
 			// 以下web和MP是伪代码，前面的text基础显示就有问题
 			// #ifdef WEB
 			// 1. WEB 端：利用 scrollHeight 与 clientHeight 同步对比
-			/* const el = textRef.value
+			const el = textRef.value
 			if (el) {
 				const currentClamp = el.style.webkitLineClamp
 				el.style.webkitLineClamp = 'none'
@@ -211,7 +205,7 @@
 				const clampedHeight = el.clientHeight
 				el.style.webkitLineClamp = currentClamp
 				showTrigger.value = fullHeight > clampedHeight + 1
-			} */
+			}
 			// #endif
 
 			// #ifdef MP
@@ -324,11 +318,19 @@
 </script>
 
 <style>
+	@media (prefers-color-scheme: dark) {
+		.default-trigger-class {
+			color: #a2b2e2;
+		}
+	}
+	@media (prefers-color-scheme: light) {
+		.default-trigger-class {
+			color: #586b95; 		/* 取自微信朋友圈全文颜色*/
+		}
+	}
 	.default-trigger-class {
 		padding: 4px 4px 4px 1px;
 		/* 适当扩大点击区域。左边扩的少，因为扩了左边，会导致左边换行对不齐*/
-		color: #586b95;
-		/* 取自微信朋友圈全文颜色*/
 	}
 
 	/* inline = true 时的行尾内联样式 */
