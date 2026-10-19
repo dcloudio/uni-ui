@@ -6,20 +6,23 @@
 
 本组件利用的是max-line和-webkit-line-clamp技术，控制最大显示行数。本组件不适合处理长文内容底部的“阅读更多”，这种需求应该使用 (max-height) + 渐变遮罩 (Gradient Mask) + 平滑动画 的方案另行处理。
 
-本组件支持App。Web平台仅支持蒸汽模式，不支持现网的Web VDOM模式。因Web蒸汽还未发布，目前可以视为不支持web平台。本组件暂不支持小程序。
+平台支持：
+- App平台仅支持蒸汽模式，不支持App VDOM模式。
+- Web平台仅支持蒸汽模式，不支持现网的Web VDOM模式。因Web蒸汽还未发布，目前可以视为暂不支持web平台。
+- 小程序平台：不支持。
 
 差异：
 - Web平台-webkit-line-clamp 在裁剪文本后会在文本后显示...省略号。
 - App平台在max-line限高后，行尾不会出现...省略号。
 
-## 文件路径
+## 示例页面路径
 项目下 /pages/uni-ui/expandable-text/expandable-text.uvue 为组件使用示例页面。
 
 ## 设计
 
 本组件在App平台利用text组件的max-line属性。在Web和小程序平台利用-webkit-line-clamp实现。
 
-需要判断是否溢出，来决定是否显示trigger。当文本内容在line指定的行数内已经全部显示，就不应该再显示trigger。
+需要判断是否溢出，来决定是否显示trigger。当文本内容在line指定的行数内已经全部显示，就不再显示trigger。
 
 但web、小程序、app，在计算正文文本是否溢出最大行数限制的逻辑不一样。
 
