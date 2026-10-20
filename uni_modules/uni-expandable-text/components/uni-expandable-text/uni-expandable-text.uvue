@@ -676,4 +676,14 @@
 	.inline-trigger {
 		margin-left: 6px;
 	}
+
+	/* #ifdef MP-WEIXIN */
+	.expandable-text-node :is(span) {
+		/* user-select会把内部span设为display inline-block */
+		display: -webkit-inline-box !important;
+		-webkit-box-orient: inherit;
+		-webkit-line-clamp: inherit;
+		overflow: inherit;
+	}
+	/* #endif */
 </style>
