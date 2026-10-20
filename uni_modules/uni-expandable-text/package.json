@@ -6,12 +6,10 @@
   "isExt": true,
   "extUrl": "",
   "keywords": [
-    "uni-ui",
     "uniui",
     "文字展开收起",
-		"全文显示",
-		"文本折叠",
-    "uni-app-x"
+    "全文显示",
+    "文本折叠"
 ],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
@@ -41,9 +39,10 @@
     },
     "type": "component-vue",
     "darkmode": "x",
-    "i18n": "x",
+    "i18n": "√",
     "widescreen": "x",
-    "npmurl": ""
+    "npmurl": "",
+    "vapor": "√"
   },
   "uni_modules": {
     "dependencies": [],
@@ -57,16 +56,34 @@
       "client": {
         "uni-app-x": {
           "web": {
-            "safari": "√",
-            "chrome": "√"
+            "safari": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            },
+            "chrome": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            }
           },
           "app": {
-            "android": "√",
-            "ios": "√",
-            "harmony": "√"
+            "android": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            },
+            "ios": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            },
+            "harmony": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            }
           },
           "mp": {
-            "weixin": "√"
+            "weixin": {
+                "extVersion": "1.0.1",
+                "minVersion": ""
+            }
           }
         }
       }
