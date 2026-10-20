@@ -3,7 +3,7 @@
 	<view class="container">
 	    <!-- 行尾内联模式目前底层有bug，暂不启用 -->
 	    <!-- <uni-expandable-text
-	      :text="articleText"
+	      :text="data.articleText"
 	      :lines="1"
 	      :inline="true"
 	      expand-text="展开"
@@ -15,20 +15,20 @@
 		<text class="uni-h4">空字符串</text>
 		<uni-expandable-text />
 		<text class="uni-h4">默认模式</text>
-		<uni-expandable-text :text="articleText" :style="dynamicStyle" />
+		<uni-expandable-text :text="data.articleText" :style="data.dynamicStyle" text-class="test-default-text" trigger-class="test-default-trigger" />
 		<text class="uni-h4">lines=1模式。监听change事件</text>
-			<uni-expandable-text :text="articleText" :lines="1" @change="triggerEvent" style="width:100px;" />
+			<uni-expandable-text :text="data.articleText" :lines="1" @change="triggerEvent" trigger-class="test-single-line-trigger" style="width:100px;" />
 		<text class="uni-h4">lines=2模式。展开后不显示trigger</text>
-			<uni-expandable-text :text="articleText" :lines="2" :show-collapse="false" style="width:100px;" />
+			<uni-expandable-text :text="data.articleText" :lines="2" :show-collapse="false" trigger-class="test-no-collapse-trigger" style="width:100px;" />
 		<text class="uni-h4">lines=2，自定义正文和trigger文字和样式</text>
 		<uni-expandable-text
-			:text="articleText"
+			:text="data.articleText"
 			:lines="2"
 			text-class="custom-text"
 			expand-text="展开"
 			collapse-text="自定义收起文字"
 			trigger-class="custom-trigger-bold"
-			:style="'width:'+ dynamicWidth2 +'px'"
+			:style="'width:'+ data.dynamicWidth2 +'px'"
 		/>
 		<text class="uni-h4">测试动态调整文字内容、组件宽度，trigger是否正常的出现和消失</text>
 		<button @click="changeArticleText" style="margin-top: 10px;">缩短显示文字内容，line行可以显示完整时不再出现trigger</button>
@@ -40,26 +40,38 @@
 
 <script setup lang="ts">
 
-const articleText = ref("uni-app x 蒸汽模式。uni-app x 蒸汽模式。")
-const dynamicStyle = ref("")
-const dynamicWidth2 = ref(100)
+type Data = {
+	articleText: string
+	dynamicStyle: string
+	dynamicWidth2: number
+}
+
+const data = reactive<Data>({
+	articleText: "uni-app x 蒸汽模式。uni-app x 蒸汽模式。",
+	dynamicStyle: "",
+	dynamicWidth2: 100
+})
 const triggerEvent = (expanded: boolean) => {
 	  console.log('触发change事件，当前展开状态：', expanded)
 }
 const changeArticleText = () => {
-  articleText.value = "uni-app x 蒸汽模式。"
+  data.articleText = "uni-app x 蒸汽模式。"
 }
 const changeDynamicStyle = () => {
-  dynamicStyle.value = "width: 100px"
+  data.dynamicStyle = "width: 100px"
 }
 const changeDynamicWidth = () => {
-  dynamicWidth2.value = 180
+  data.dynamicWidth2 = 180
 }
 const resetChange = () => {
-	dynamicStyle.value	= ""
-	articleText.value = "uni-app x 蒸汽模式。uni-app x 蒸汽模式。"
-	dynamicWidth2.value = 100
+	data.dynamicStyle = ""
+	data.articleText = "uni-app x 蒸汽模式。uni-app x 蒸汽模式。"
+	data.dynamicWidth2 = 100
 }
+
+defineExpose({
+	data
+})
 </script>
 
 <style>
