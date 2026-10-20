@@ -58,7 +58,8 @@
       "uni-refresh-box",
       "uni-tab-bar",
       "uni-time-format",
-      "uni-combox-x"
+      "uni-combox-x",
+      "uni-expandable-text"
     ],
     "encrypt": [],
     "platforms": {
