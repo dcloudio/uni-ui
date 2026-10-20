@@ -131,6 +131,12 @@
 						"navigationBarTitleText": "uni-index-bar",
 						"backgroundColorContent": "#ffffff"
 					}
+				},
+				{
+					"path": "icons/icons",
+					"style": {
+						"navigationBarTitleText": "Icons 图标"
+					}
 				}
 			]
 		}
