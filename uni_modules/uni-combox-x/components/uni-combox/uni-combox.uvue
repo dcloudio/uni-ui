@@ -85,15 +85,36 @@
  * Combox 组合框
  * @description 默认是单选选择框，通过 input 具名插槽切换为可输入、可选择的组合框。
  * @uniPlatform {
+ *   "app": {
+ *     "android": {
+ *       "uniVer": "x",
+ *       "unixVer": "5.31",
+ *       "unixVaporVer": "5.31"
+ *     },
+ *     "ios": {
+ *       "uniVer": "x",
+ *       "unixVer": "x",
+ *       "unixVaporVer": "5.31"
+ *     },
+ *     "harmony": {
+ *       "uniVer": "x",
+ *       "unixVer": "x",
+ *       "unixVaporVer": "5.31"
+ *     }
+ *   },
  *   "mp": {
  *     "weixin": {
  *       "uniVer": "x",
- *       "unixVer": "5.07"
+ *       "unixVer": "5.31"
  *     },
  *     "alipay": {
  *       "uniVer": "x",
  *       "unixVer": "5.31"
  *     }
+ *   },
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "5.31"
  *   }
  * }
  * @property {Array<String>} options 候选字符串数组
@@ -120,14 +141,347 @@ defineOptions({
 })
 
 type Props = {
+	/**
+	 * @description 候选字符串数组
+	 * @default []
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	options? : string[],
+	/**
+	 * @description 当前值，支持 v-model 双向绑定
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	modelValue? : string,
+	/**
+	 * @description 占位文字
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	placeholder? : string,
+	/**
+	 * @description 是否禁用
+	 * @default false
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	disabled? : boolean,
+	/**
+	 * @description 右侧箭头自定义样式类
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	arrowClass? : string.ClassString,
+	/**
+	 * @description 候选浮层外层自定义样式类
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	optionsViewClass? : string.ClassString,
+	/**
+	 * @description 候选项文字自定义样式类
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	optionTextClass? : string.ClassString,
+	/**
+	 * @description 候选项高亮自定义样式类
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	optionTextHighlightClass? : string.ClassString,
+	/**
+	 * @description 单选模式结果文字自定义样式类
+	 * @default ""
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	resultTextClass? : string.ClassString
 }
 
@@ -144,11 +498,119 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
+	/**
+	 * @description 值更新时触发，参数为当前值，类型为 string
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	'update:modelValue': [value : string],
+	/**
+	 * @description 从候选项选中时触发，参数为选中的值，类型为 string
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	selectchange: [value : string]
 }>()
 
 defineSlots<{
+	/**
+	 * @description 自定义输入框插槽，提供 value、input、focus 和 disabled，使用后启用可输入、可选择模式
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "x",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "5.31"
+	 *   }
+	 * }
+	 */
 	input(props : {
 		value : string,
 		input : (event : UniInputEvent) => void,
