@@ -44,6 +44,34 @@
 	 * 展开收起文字组件。
 	 *
 	 * @description 按指定行数截断文本，并在文本溢出时显示展开/收起触发器。
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "ios": {
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     },
+	 *     "harmony": {
+	 *       "unixVer": "5.31",
+	 *       "unixVaporVer": "5.31"
+	 *     }
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {
+	 *       "unixVer": "x"
+	 *     },
+	 *     "alipay": {
+	 *       "unixVer": "x"
+	 *     }
+	 *   },
+	 *   "web": {
+	 *     "unixVer": "x",
+	 *     "unixVaporVer": "x"
+	 *   }
+	 * }
 	 */
 	defineOptions({
 		externalClasses: ['text-class', 'trigger-class']
@@ -57,21 +85,269 @@
 	}
 
 	type Props = {
-		/** 要显示的文本内容。 */
+		/**
+		 * @description 要显示的文本内容。
+		 * @default ""
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		text?: string
-		/** 折叠状态下最多显示的行数。 */
+		/**
+		 * @description 折叠状态下最多显示的行数。
+		 * @default 1
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		lines?: number
-		/** 是否以内联方式显示触发器。 */
+		/**
+		 * @description 是否以内联方式显示触发器。
+		 * @default false
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		inline?: boolean
-		/** 展开状态下显示的文字，不传时根据应用语言使用默认文案。 */
+		/**
+		 * @description 展开状态下显示的文字，不传时根据应用语言使用默认文案。
+		 * @default 根据应用语言，中文下为"全文"
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		expandText?: string
-		/** 收起状态下显示的文字，不传时根据应用语言使用默认文案。 */
+		/**
+		 * @description 收起状态下显示的文字，不传时根据应用语言使用默认文案。
+		 * @default 根据应用语言，中文下为"收起"
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		collapseText?: string
-		/** 正文的 externalClass。 */
+		/**
+		 * @description 正文的 externalClass。
+		 * @default ""
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		textClass?: string
-		/** 展开/收起触发器的 externalClass。 */
+		/**
+		 * @description 展开/收起触发器的 externalClass。
+		 * @default ""
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		triggerClass?: string
-		/** 是否在展开状态下显示收起触发器。 */
+		/**
+		 * @description 是否在展开状态下显示收起触发器。
+		 * @default true
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		showCollapse?: boolean
 	}
 
@@ -88,8 +364,71 @@
 	)
 
 	const emit = defineEmits<{
-	  change: [expanded: boolean]
-	  'update:expanded': [expanded: boolean]
+		/**
+		 * @description 展开或收起状态发生变化时触发
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
+		change: [expanded: boolean]
+		/**
+		 * @description 展开状态的双向绑定更新事件，用于 v-model:expanded
+		 * @param {Boolean} expanded true 表示已展开，false 表示已收起
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVer": "5.31",
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "x"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "x"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVer": "x",
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
+		'update:expanded': [expanded: boolean]
 	}>()
 
 	function resolveLocaleType() : LocaleType {
