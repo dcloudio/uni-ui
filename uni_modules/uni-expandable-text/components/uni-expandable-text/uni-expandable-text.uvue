@@ -21,7 +21,7 @@
 		<!--
 			隐藏的测量节点 (仅 APP & MP) 说明：
 			1. 宽度 100% 且共享与正文文本和Class相同，确保宽度绝对一致。
-			2. APP 端通过条件编译拍平，减少性能损失。
+			2. APP 端通过条件编译拍平，减少性能损失。ios拍平后，5.33以前getBoundRect取不到值，低版本不能拍平
 		-->
 		<!-- #ifdef APP || MP -->
 		<text ref="measureRef" style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
@@ -29,8 +29,10 @@
 			<!-- #ifdef APP-ANDROID -->
 			flatten
 			<!-- #endif -->
-			> <!-- TODO: 鸿蒙flatten不支持visibility: hidden，导致无法隐藏，需要去掉flatten-->
-			<!-- BUG: ios flatten后，getBoundRect取不到值！表现为checkOverflow里的fullHeight一直是0，进而无法显示全文按钮 @xionghuayu -->
+			<!-- #ifdef APP-IOS && uniVersion>=5.34 -->
+			flatten
+			<!-- #endif -->
+			> <!-- TODO: 鸿蒙flatten不支持visibility: hidden，导致无法隐藏，鸿蒙暂不能flatten-->
 			{{ text }}
 		</text>
 		<!-- #endif -->
@@ -41,7 +43,7 @@
 <script setup lang="ts">
 	// 声明外部样式类：text-class 用于控制正文，trigger-class 用于控制展开/收起按钮
 	/**
-	 * 展开收起文字组件。
+	 * 折叠文本组件。
 	 *
 	 * @description 按指定行数截断文本，并在文本溢出时显示展开/收起触发器。
 	 * @uniPlatform {
@@ -61,7 +63,7 @@
 	 *   },
 	 *   "mp": {
 	 *     "weixin": {
-	 *       "unixVer": "x"
+	 *       "unixVer": "5.33"
 	 *     },
 	 *     "alipay": {
 	 *       "unixVer": "x"
@@ -69,7 +71,7 @@
 	 *   },
 	 *   "web": {
 	 *     "unixVer": "x",
-	 *     "unixVaporVer": "x"
+	 *     "unixVaporVer": "5.41"
 	 *   }
 	 * }
 	 */
@@ -105,7 +107,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -138,7 +140,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -171,7 +173,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -190,16 +192,16 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVer": "x",
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVer": "x",
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVer": "x",
+		 *       "unixVaporVer": "x"
 		 *     }
 		 *   },
 		 *   "mp": {
@@ -237,7 +239,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -270,7 +272,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -303,7 +305,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -336,7 +338,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -383,7 +385,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -416,7 +418,7 @@
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
@@ -485,30 +487,6 @@
 		isExpanded.value = !isExpanded.value
 		emit('change', isExpanded.value)
 		emit('update:expanded', isExpanded.value) // 补上双向绑定触发，保证外部同步
-		// #ifdef MP
-		// 小程序端没有 ResizeObserver。点击 trigger 后主动补测一次，
-		// 让没有主动调用 checkOverflow 的场景也能修正 trigger 状态。
-		checkOverflowOnMP()
-		// #endif
-	}
-
-	const checkOverflowOnMP = () => {
-		// #ifdef MP
-		/* if (!instance) return
-		nextTick(() => {
-			const queryMP = uni.createSelectorQuery().in(instance.proxy)
-			queryMP.select('.expandable-measure-node').boundingClientRect()
-			queryMP.select('.expandable-clamp-measure-node').boundingClientRect()
-			queryMP.exec((res) => {
-				if (!res || res.length < 2 || !res[0] || !res[1]) return
-				const fullHeight = (res[0] as UniElementBoundingClientRect).height
-				const clampedHeight = (res[1] as UniElementBoundingClientRect).height
-				if (fullHeight > 0 && clampedHeight > 0) {
-					showTrigger.value = fullHeight > clampedHeight + 2
-				}
-			})
-		}) */
-		// #endif
 	}
 
 	/**
@@ -549,16 +527,16 @@
 
 			// #ifdef MP
 			// 2. 小程序端：通过异步 SelectorQuery 对比“隐藏完整文本高度”与“受限文本高度”
-			/* if (!instance) return
+			if (!instance) return
 			const queryMP = uni.createSelectorQuery().in(instance.proxy)
-			queryMP.select('.measure-node').boundingClientRect()
-			queryMP.select('.text-node').boundingClientRect()
+			queryMP.select('.expandable-measure-node').boundingClientRect()
+			queryMP.select('.expandable-text-node').boundingClientRect()
 			queryMP.exec((res) => {
 				if (!res || res.length < 2 || !res[0] || !res[1]) return
 				const fullHeight = (res[0] as UniElementBoundingClientRect).height
 				const clampedHeight = (res[1] as UniElementBoundingClientRect).height
 				showTrigger.value = fullHeight > clampedHeight + 2
-			}) */
+			})
 			// #endif
 
 			// #ifdef APP
@@ -574,21 +552,6 @@
 				showTrigger.value = fullHeight > clampedHeight + 2
 				// console.log('showTrigger', showTrigger.value)
 			}
-
-			// 如果当前是收起状态，也可以直接对比 fullHeight 与当前 clampedHeight
-			/* if (!isExpanded.value) {
-				const clampedHeight = (textRef.value as UniElement)?.getBoundingClientRect().height
-				// console.log('clampedHeight', clampedHeight)
-				showTrigger.value = fullHeight > clampedHeight + 2
-			} else {
-				// 如果当前是展开状态，此时发生文字变化和resize。如果要保留展开状态不变，需要用 完整高度 与 最大允许高度对比，需要用 lines * line-height 来反推最大允许高度
-				// 这个方案不现实，行高可能是 px、rpx、em、纯数字，font-size 也可能是 px、rpx、百分比，要处理的转换判断非常多，性能也不好
-				const lineHeight = textRef.value?.style.getPropertyValue("line-height")
-				console.log('lineHeight', lineHeight)
-				const lineHeightPx = parseFloat(lineHeight)
-				const maxHeight = props.lines * lineHeightPx
-				showTrigger.value = fullHeight > maxHeight + 2
-			} */
 			// #endif
 		})
 	}
@@ -625,14 +588,14 @@
 		}
 		// #endif
 	})
-
+	// #ifdef APP || WEB
 	onUnmounted(() => {
 		if (resizeObserver && containerRef.value) {
 			resizeObserver.unobserve(containerRef.value!)
 			resizeObserver = null
 		}
 	})
-
+	// #endif
 	// 监听 props.text 和 line 的变化，重新检查是否需要显示展开/收起按钮。当设置max-line时，文字变短但可视行数不变时不会触发resize，必须同时监听文字内容变化
 	watch([() => props.text, () => props.lines], () => {
 	  checkOverflow('text')
@@ -677,6 +640,7 @@
 		margin-left: 6px;
 	}
 
+	/* 小程序的样式无法直接作用于text组件的根部，需作用于text组件的子节点 */
 	/* #ifdef MP-WEIXIN */
 	.expandable-text-node :is(span) {
 		/* user-select会把内部span设为display inline-block */

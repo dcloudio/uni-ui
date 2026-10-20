@@ -15,13 +15,14 @@
 		<text class="uni-h4">空字符串</text>
 		<uni-expandable-text />
 		<text class="uni-h4">默认模式</text>
-		<uni-expandable-text :text="data.articleText" :style="data.dynamicStyle" text-class="test-default-text" trigger-class="test-default-trigger" />
+		<uni-expandable-text ref="expandabeltext1" :text="data.articleText" :style="data.dynamicStyle" text-class="test-default-text" trigger-class="test-default-trigger" />
 		<text class="uni-h4">lines=1模式。监听change事件</text>
-			<uni-expandable-text :text="data.articleText" :lines="1" @change="triggerEvent" trigger-class="test-single-line-trigger" style="width:100px;" />
+			<uni-expandable-text :text="data.articleText" :lines="1" @change="triggerEvent" trigger-class="test-single-line-trigger" style="wrefth:100px;" />
 		<text class="uni-h4">lines=2模式。展开后不显示trigger</text>
 			<uni-expandable-text :text="data.articleText" :lines="2" :show-collapse="false" trigger-class="test-no-collapse-trigger" style="width:100px;" />
 		<text class="uni-h4">lines=2，自定义正文和trigger文字和样式</text>
 		<uni-expandable-text
+			ref="expandabeltext4"
 			:text="data.articleText"
 			:lines="2"
 			text-class="custom-text"
@@ -35,6 +36,14 @@
 		<button @click="changeDynamicStyle" style="margin-top: 4px;">缩短默认模式的正文width，1行显示不全时自动出现trigger</button>
 		<button @click="changeDynamicWidth" style="margin-top: 4px;">加宽最后一个组件的正文width，2行可以显示完整时不再出现trigger</button>
 		<button @click="resetChange" style="margin-top: 4px;">reset上述3个修改</button>
+		<text class="uni-h4">测试组件方法</text>
+		<button @click="toggle" style="margin-top: 10px;">最后一个组件的toggle()</button>
+		<button @click="expand" style="margin-top: 4px;">最后一个组件的expand()</button>
+		<button @click="collapse" style="margin-top: 4px;">最后一个组件的collapse()</button>
+		<!-- #ifdef MP -->
+		<button @click="checkOverflow()" style="margin-top: 4px;">小程序无resize监听，手动检查是否溢出checkOverflow</button>
+		<!-- #endif -->
+
 	</view>
 </template>
 
@@ -68,6 +77,24 @@ const resetChange = () => {
 	data.articleText = "uni-app x 蒸汽模式。uni-app x 蒸汽模式。"
 	data.dynamicWidth2 = 100
 }
+const expandabeltext1 = ref<CallEasyMethodComponentPublicInstance | null>(null)
+const expandabeltext4 = ref<CallEasyMethodComponentPublicInstance | null>(null)
+// #ifdef MP
+const checkOverflow = () => {
+	expandabeltext1.value?.checkOverflow()
+	expandabeltext4.value?.checkOverflow()
+}
+// #endif
+const toggle = () => {
+	expandabeltext4.value?.toggle()
+}
+const expand = () => {
+	expandabeltext4.value?.expand()
+}
+const collapse = () => {
+	expandabeltext4.value?.collapse()
+}
+
 
 defineExpose({
 	data
