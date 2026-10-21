@@ -41,7 +41,7 @@
 
 <script setup lang="uts">
 	import { state } from '@/store/index.uts'
-	import { iconlist, iconType } from './icons_type'
+	import { iconlist, iconType } from './icons_type.uts'
 
 	const activeIndex = ref(-1)
 	const checked = ref(false)
