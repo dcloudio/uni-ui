@@ -558,18 +558,109 @@
 	})
 
 	defineExpose({
-		/** 切换当前文本的展开状态。 */
+		/**
+		 * 切换当前文本的展开状态。
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "5.33"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "5.33"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		toggle,
-		/** 展开文本。 */
+		/**
+		 * 展开文本。
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "5.33"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "5.33"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		expand: () => {
 			if (!isExpanded.value) toggle()
 		},
-		/** 收起文本。 */
+		/**
+		 * 收起文本。
+		 * @uniPlatform {
+		 *   "app": {
+		 *     "android": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "ios": {
+		 *       "unixVaporVer": "5.31"
+		 *     },
+		 *     "harmony": {
+		 *       "unixVaporVer": "5.31"
+		 *     }
+		 *   },
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "5.33"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "5.33"
+		 *     }
+		 *   },
+		 *   "web": {
+		 *     "unixVaporVer": "x"
+		 *   }
+		 * }
+		 */
 		collapse: () => {
 			if (isExpanded.value) toggle()
 		}
 		// #ifdef MP
-		// 小程序没有 ResizeObserver，需对外暴露 checkOverflow 方法，外部调用时需要手动调用 checkOverflow() 来更新展开/收起按钮的显示状态
+		/**
+		 * 重新检查文本是否超出折叠行数。
+		 * 小程序没有 ResizeObserver，外部调用时需要手动调用此方法来更新展开/收起按钮的显示状态。
+		 * @uniPlatform {
+		 *   "mp": {
+		 *     "weixin": {
+		 *       "unixVer": "5.33"
+		 *     },
+		 *     "alipay": {
+		 *       "unixVer": "5.33"
+		 *     }
+		 *   }
+		 * }
+		 */
 		, checkOverflow
 		// #endif
 	})
