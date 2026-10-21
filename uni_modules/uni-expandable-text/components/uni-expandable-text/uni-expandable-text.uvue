@@ -176,13 +176,13 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "ios": {
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVaporVer": "x"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVaporVer": "5.31"
+		 *       "unixVaporVer": "x"
 		 *     }
 		 *   },
 		 *   "mp": {
