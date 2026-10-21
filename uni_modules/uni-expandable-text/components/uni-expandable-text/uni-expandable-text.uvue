@@ -26,13 +26,10 @@
 		<!-- #ifdef APP || MP -->
 		<text ref="measureRef" style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
 			class="expandable-measure-node" :class="textClass"
-			<!-- #ifdef APP-ANDROID -->
+			<!-- #ifdef APP-ANDROID || ((APP-IOS || APP-HARMONY ) && uniVersion>=5.34) -->
 			flatten
 			<!-- #endif -->
-			<!-- #ifdef APP-IOS && uniVersion>=5.34 -->
-			flatten
-			<!-- #endif -->
-			> <!-- TODO: 鸿蒙flatten不支持visibility: hidden，导致无法隐藏，鸿蒙暂不能flatten-->
+			>
 			{{ text }}
 		</text>
 		<!-- #endif -->
@@ -466,7 +463,6 @@
 		}
 		nextTick(() => {
 
-			// 以下web和MP是伪代码，前面的text基础显示就有问题
 			// #ifdef WEB
 			// 1. WEB 端：利用 scrollHeight 与 clientHeight 同步对比
 			const el = textRef.value

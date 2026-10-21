@@ -4,7 +4,8 @@
 
 可以通过externalClass来分别控制正文和trigger的样式。
 
-本组件利用的是max-line和-webkit-line-clamp技术，控制最大显示行数。本组件不适合处理长文内容底部的“阅读更多”，这种需求应该使用 (max-height) + 渐变遮罩 (Gradient Mask) + 平滑动画 的方案另行处理。
+本组件利用的是max-line和-webkit-line-clamp技术，控制最大显示行数。
+本组件不适合处理长文内容底部的“阅读更多”，这种需求应该使用 (max-height) + 渐变遮罩 (Gradient Mask) + 平滑动画 的方案另行处理。
 
 平台支持：
 - App平台仅支持蒸汽模式，不支持App VDOM模式。
@@ -34,9 +35,9 @@
 
 当应用了 line-clamp 后，元素的 clientHeight 是受限的高度，而 scrollHeight 是不换行/完整展开时的真实高度。
 
-如果 scrollHeight > clientHeight：说明文字超出了指定的行数，确实发生了截断，此时应该显示“全文”按钮。
+如果 scrollHeight > clientHeight：说明文字超出了指定的行数，确实发生了截断，此时应该显示trigger按钮。
 
-如果 scrollHeight <= clientHeight：说明文字没有超过指定行数，没有发生截断，此时隐藏“全文”按钮。
+如果 scrollHeight <= clientHeight：说明文字没有超过指定行数，没有发生截断，此时隐藏trigger按钮。
 
 - 小程序
 
@@ -82,5 +83,5 @@
 | checkOverflow() | 重新检查文本是否超出折叠行数。仅小程序端需要在文本容器宽度变化后主动调用。 |
 
 ### TODO
-- inline尾部跟随未实现，text组件嵌套和max-line组合时有bug
+- inline尾部跟随未实现，text组件嵌套和max-line组合时目前有bug
 - 在list-view中滚动时，未监听复用和回收事件。展开后的内容被复用后会折叠。观察微信朋友圈也如此，暂不实现此功能
