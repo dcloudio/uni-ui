@@ -49,15 +49,12 @@
 	 * @uniPlatform {
 	 *   "app": {
 	 *     "android": {
-	 *       "unixVer": "5.31",
 	 *       "unixVaporVer": "5.31"
 	 *     },
 	 *     "ios": {
-	 *       "unixVer": "5.31",
 	 *       "unixVaporVer": "5.31"
 	 *     },
 	 *     "harmony": {
-	 *       "unixVer": "5.31",
 	 *       "unixVaporVer": "5.31"
 	 *     }
 	 *   },
@@ -70,7 +67,6 @@
 	 *     }
 	 *   },
 	 *   "web": {
-	 *     "unixVer": "x",
 	 *     "unixVaporVer": "5.41"
 	 *   }
 	 * }
@@ -93,15 +89,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -114,7 +107,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -126,15 +118,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -147,7 +136,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -159,15 +147,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -180,7 +165,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -192,28 +176,24 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "x",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "x",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "x",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
 		 *   "mp": {
 		 *     "weixin": {
-		 *       "unixVer": "x"
+		 *       "unixVer": "5.33"
 		 *     },
 		 *     "alipay": {
 		 *       "unixVer": "x"
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -225,15 +205,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -246,7 +223,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -258,15 +234,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -279,7 +252,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -291,15 +263,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -312,7 +281,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -324,15 +292,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -345,7 +310,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -371,15 +335,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -392,7 +353,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
@@ -404,15 +364,12 @@
 		 * @uniPlatform {
 		 *   "app": {
 		 *     "android": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "ios": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     },
 		 *     "harmony": {
-		 *       "unixVer": "5.31",
 		 *       "unixVaporVer": "5.31"
 		 *     }
 		 *   },
@@ -425,7 +382,6 @@
 		 *     }
 		 *   },
 		 *   "web": {
-		 *     "unixVer": "x",
 		 *     "unixVaporVer": "x"
 		 *   }
 		 * }
