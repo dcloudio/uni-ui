@@ -650,5 +650,29 @@ export const iconlist = [
   {
     "font_class": "starhalf",
     "unicode": "e683"
+  },
+  {
+    "font_class": "skip-back-fill",
+    "unicode": "e818"
+  },
+  {
+    "font_class": "skip-back-line",
+    "unicode": "e819"
+  },
+  {
+    "font_class": "skip-forward-fill",
+    "unicode": "e81a"
+  },
+  {
+    "font_class": "skip-forward-line",
+    "unicode": "e81b"
+  },
+  {
+    "font_class": "skip-left-line",
+    "unicode": "e777"
+  },
+  {
+    "font_class": "skip-right-line",
+    "unicode": "e778"
   }
 ] as Array<iconType>
