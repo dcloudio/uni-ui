@@ -187,12 +187,15 @@
 					"style": {
 						"navigationBarTitleText": "Icons 图标"
 					}
+				},
+				// #ifndef WEB
 				{
 					"path": "expandable-text/expandable-text",
 					"style": {
 						"navigationBarTitleText": "可折叠文本"
 					}
 				}
+				// #endif
 			]
 		}
 	],
