@@ -2,30 +2,31 @@
 	<!-- 行尾内联模式，通过 text 组件嵌套实现  实际上用不了-->
 	<text v-if="inline" class="text-class" :max-lines="isExpanded ? -1 : lines">
 		<!-- <text class="text-body">{{ text }}</text>
-		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="inline-trigger trigger-class" @click="toggle">
+		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="uni-expandable-text-inline-trigger trigger-class" @click="toggle">
 			{{ isExpanded ? collapseText : expandText}}
 		</text> -->
 	</text>
 
 	<!-- 换行模式，通过 view 包裹 text 实现 -->
 	<view v-else ref="containerRef">
-		<text ref="textRef" class="expandable-text-node" :class="textClass" :max-lines="isExpanded ? -1 : lines" user-select <!-- #ifdef WEB || MP -->
+		<text ref="textRef" class="uni-expandable-text-default-text-class" :class="textClass" :max-lines="isExpanded ? -1 : lines" user-select
+			<!-- #ifdef WEB || MP -->
 			:style="webClampStyle"
 			<!-- #endif -->
 			>
 			{{ text }}
 		</text>
-		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="default-trigger-class" :class="triggerClass" @click="toggle">
+		<text v-if="showTrigger && (!isExpanded || props.showCollapse)" class="uni-expandable-text-default-trigger-class" :class="triggerClass" @click="toggle">
 			{{ isExpanded ? collapseText : expandText}}
 		</text>
 		<!--
 			隐藏的测量节点 (仅 APP & MP) 说明：
 			1. 宽度 100% 且共享与正文文本和Class相同，确保宽度绝对一致。
-			2. APP 端通过条件编译拍平，减少性能损失。ios拍平后，5.33以前getBoundRect取不到值，低版本不能拍平
+			2. APP 端通过条件编译拍平，减少性能损失。5.34以前版本不能拍平，ios拍平后getBoundRect取不到值；鸿蒙拍平后无法设visibility
 		-->
 		<!-- #ifdef APP || MP -->
 		<text ref="measureRef" style="position: absolute; visibility: hidden; top: 0; left: 0; width: 100%;"
-			class="expandable-measure-node" :class="textClass"
+			class="uni-expandable-measure" :class="textClass"
 			<!-- #ifdef APP-ANDROID || ((APP-IOS || APP-HARMONY ) && uniVersion>=5.34) -->
 			flatten
 			<!-- #endif -->
@@ -481,8 +482,8 @@
 			// 2. 小程序端：通过异步 SelectorQuery 对比“隐藏完整文本高度”与“受限文本高度”
 			if (!instance) return
 			const queryMP = uni.createSelectorQuery().in(instance.proxy)
-			queryMP.select('.expandable-measure-node').boundingClientRect()
-			queryMP.select('.expandable-text-node').boundingClientRect()
+			queryMP.select('.uni-expandable-measure').boundingClientRect()
+			queryMP.select('.uni-expandable-text-default-text-class').boundingClientRect()
 			queryMP.exec((res) => {
 				if (!res || res.length < 2 || !res[0] || !res[1]) return
 				const fullHeight = (res[0] as UniElementBoundingClientRect).height
@@ -664,28 +665,28 @@
 
 <style>
 	@media (prefers-color-scheme: dark) {
-		.default-trigger-class {
+		.uni-expandable-text-default-trigger-class {
 			color: #a2b2e2;
 		}
 	}
 	@media (prefers-color-scheme: light) {
-		.default-trigger-class {
+		.uni-expandable-text-default-trigger-class {
 			color: #586b95; 		/* 取自微信朋友圈全文颜色*/
 		}
 	}
-	.default-trigger-class {
+	.uni-expandable-text-default-trigger-class {
 		padding: 4px 4px 4px 1px;
 		/* 适当扩大点击区域。左边扩的少，因为扩了左边，会导致左边换行对不齐*/
 	}
 
 	/* inline = true 时的行尾内联样式 */
-	.inline-trigger {
+	/* .uni-expandable-text-inline-trigger {
 		margin-left: 6px;
-	}
+	} */
 
 	/* 小程序的样式无法直接作用于text组件的根部，需作用于text组件的子节点 */
 	/* #ifdef MP-WEIXIN */
-	.expandable-text-node :is(span) {
+	.uni-expandable-text-default-text-class :is(span) {
 		/* user-select会把内部span设为display inline-block */
 		display: -webkit-inline-box !important;
 		-webkit-box-orient: inherit;

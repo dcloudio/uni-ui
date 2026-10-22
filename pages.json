@@ -188,7 +188,7 @@
 						"navigationBarTitleText": "Icons 图标"
 					}
 				},
-				// #ifndef WEB
+				// #ifdef VUE3-VAPOR || MP
 				{
 					"path": "expandable-text/expandable-text",
 					"style": {
