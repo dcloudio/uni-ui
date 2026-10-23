@@ -1065,7 +1065,7 @@ onBackPress(() : boolean => {
 }
 
 .uni-combox__result--placeholder {
-	color: #71717a;
+	color: #757575;
 }
 
 .uni-combox__arrow-wrap {
@@ -1203,10 +1203,6 @@ onBackPress(() : boolean => {
 
 	.uni-combox__option {
 		color: #fafafa;
-	}
-
-	.uni-combox__result--placeholder {
-		color: #a1a1aa;
 	}
 
 	.uni-combox__option--empty {
