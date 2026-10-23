@@ -321,10 +321,10 @@
 	}
 
 	const onTouchMove = (e : UniTouchEvent) => {
-		// #ifdef APP && UNI-APP-X
+		// #ifdef APP
 		e.preventDefault()
 		// #endif
-		// #ifdef WEB && UNI-APP-X
+		// #ifdef WEB
 		if (e.cancelable) {
 			e.preventDefault()
 		}
@@ -347,7 +347,7 @@
 <style>
 	.index-text {
 		position: absolute;
-		right: 0;
+		right: 3px;
 		top: 50%;
 		transform: translateY(-50%);
 		width: 28px;

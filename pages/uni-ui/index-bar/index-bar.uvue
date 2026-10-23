@@ -118,6 +118,7 @@
 
 	.city-list {
 		background-color: var(--list-background-color, #ffffff);
+		/* scrollbar-width: thin; */
 	}
 
 	.city-item {
