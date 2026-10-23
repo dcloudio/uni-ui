@@ -1027,7 +1027,7 @@ onBackPress(() : boolean => {
 	box-sizing: border-box;
 	height: 36px;
 	border: 1px solid #e4e4e7;
-	border-radius: 8px;
+	border-radius: 5px;
 	background-color: #ffffff;
 	flex-direction: row;
 	align-items: center;
