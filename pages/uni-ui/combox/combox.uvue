@@ -62,6 +62,17 @@
 		</view>
 
 		<view class="section">
+			<text class="section-title">无边框：class 覆盖</text>
+			<uni-combox
+				field-class="borderless-combox"
+				:options="cityOptions"
+				v-model="borderlessValue"
+				placeholder="无边框组合框"
+			/>
+			<text class="result-text">当前选择：{{ borderlessValue }}</text>
+		</view>
+
+		<view class="section">
 			<text class="section-title">arrow-class：右侧箭头样式</text>
 			<uni-combox
 				:options="statusOptions"
@@ -102,6 +113,17 @@
 				option-text-highlight-class="demo-option-highlight"
 			/>
 			<text class="result-text">打开后当前匹配项会使用高亮文字样式：{{ optionTextHighlightClassValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">option-row-highlight-class：高亮项背景样式</text>
+			<uni-combox
+				:options="cityOptions"
+				v-model="optionRowHighlightValue"
+				options-content-class="demo-full-highlight-content"
+				option-row-highlight-class="demo-option-row-highlight"
+			/>
+			<text class="result-text">打开后当前选中项背景铺满候选区域并去除圆角：{{ optionRowHighlightValue }}</text>
 		</view>
 
 		<view class="section">
@@ -157,10 +179,12 @@
 const optionsValue = ref<string>('')
 const placeholderValue = ref<string>('')
 const disabledValue = ref<string>('三年级')
+const borderlessValue = ref<string>('')
 const arrowClassValue = ref<string>('')
 const optionsViewClassValue = ref<string>('')
 const optionTextClassValue = ref<string>('')
 const optionTextHighlightClassValue = ref<string>('杭州')
+const optionRowHighlightValue = ref<string>('杭州')
 const resultTextClassValue = ref<string>('三年级')
 const updateEventValue = ref<string>('')
 const updateEventText = ref<string>('未触发')
@@ -281,6 +305,10 @@ function onCityChange(value : string) {
 	background-color: transparent;
 }
 
+.borderless-combox {
+	border-width: 0;
+}
+
 .demo-arrow {
 	border-right-color: var(--tips-color, #16a34a);
 	border-bottom-color: var(--tips-color, #16a34a);
@@ -302,6 +330,22 @@ function onCityChange(value : string) {
 .demo-option-highlight {
 	color: var(--tips-color, #dc2626);
 	font-weight: bold;
+}
+
+.demo-full-highlight-content {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.demo-option-row-highlight {
+	border-radius: 0;
+	background-color: #dbeafe;
+}
+
+@media (prefers-color-scheme: dark) {
+	.demo-option-row-highlight {
+		background-color: #3b3b3b;
+	}
 }
 
 .demo-result-text {
