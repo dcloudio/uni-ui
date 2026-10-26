@@ -64,7 +64,7 @@ uni-ui x 没有写死的颜色和文字:
 | uni-collapse				| [折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse-x)				|
 | uni-combox					| [组合框](https://ext.dcloud.net.cn/plugin?name=uni-combox-x)						|
 | uni-drag-cell				| [可拖拽排序组件](https://ext.dcloud.net.cn/plugin?name=uni-drag-cell)		|
-| uni-expandable-text	| [可折叠文本](./uni_modules/uni-expandable-text/readme.md)													|
+| uni-expandable-text	| [可折叠文本](https://ext.dcloud.net.cn/plugin?name=uni-expandable-text)													|
 | uni-fab-button			| [uni-fab-button](https://ext.dcloud.net.cn/plugin?name=uni-fab-button)	|
 | uni-index-bar				| [uni-index-bar](https://ext.dcloud.net.cn/plugin?name=uni-index-bar)		|
 | uni-icons						| [图标](https://ext.dcloud.net.cn/plugin?name=uni-icons-x)								|
