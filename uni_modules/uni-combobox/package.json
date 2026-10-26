@@ -56,34 +56,16 @@
       "client": {
         "uni-app-x": {
           "web": {
-            "safari": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            },
-            "chrome": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            }
+            "safari": "√",
+            "chrome": "√"
           },
           "app": {
-            "android": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            },
-            "ios": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            },
-            "harmony": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            }
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
           },
           "mp": {
-            "weixin": {
-                "extVersion": "1.0.2",
-                "minVersion": ""
-            }
+            "weixin": "√"
           }
         }
       }
