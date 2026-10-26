@@ -2,7 +2,7 @@
 	<view :id="anchorId" class="uni-combox">
 		<view
 			class="uni-combox__field"
-			:class="disabled ? 'uni-combox__field--disabled' : ''"
+			:class="[fieldClass, disabled ? 'uni-combox__field--disabled' : '']"
 			@click="onFieldClick"
 			<!-- #ifdef WEB -->
 			:tabindex="disabled ? '-1' : '0'"
@@ -47,7 +47,7 @@
 						class="uni-combox__options-scroll"
 						:scroll-into-view="scrollIntoViewId"
 					>
-						<view class="uni-combox__options-content">
+						<view class="uni-combox__options-content" :class="optionsContentClass">
 							<view
 								v-if="visibleOptions.length == 0"
 								class="uni-combox__option-row"
@@ -63,7 +63,10 @@
 								:id="getOptionId(index)"
 								:key="item + '_' + index.toString()"
 								class="uni-combox__option-row"
-								:class="index == highlightedIndex ? 'uni-combox__option-row--highlight' : ''"
+								:class="[
+									index == highlightedIndex ? 'uni-combox__option-row--highlight' : '',
+									index == highlightedIndex ? optionRowHighlightClass : ''
+								]"
 								@click.stop="selectOption(index)"
 							>
 								<text
@@ -122,9 +125,12 @@
  * @property {String} placeholder 占位文字
  * @property {Boolean} disabled 是否禁用，默认值 false
  * @property {String} arrowClass 右侧箭头自定义样式类
+ * @property {String} fieldClass 非弹出区域自定义样式类
  * @property {String} optionsViewClass 候选浮层外层自定义样式类
+ * @property {String} optionsContentClass 候选浮层内容自定义样式类
  * @property {String} optionTextClass 候选项文字自定义样式类
  * @property {String} optionTextHighlightClass 候选项高亮自定义样式类
+ * @property {String} optionRowHighlightClass 候选项高亮行自定义样式类
  * @property {String} resultTextClass 单选模式结果文字自定义样式类
  * @event {Function} update:modelValue 值更新时触发
  * @event {Function} selectchange 从候选项选中时触发
@@ -133,9 +139,12 @@
 defineOptions({
 	externalClasses: [
 		'arrow-class',
+		'field-class',
 		'options-view-class',
+		'options-content-class',
 		'option-text-class',
 		'option-text-highlight-class',
+		'option-row-highlight-class',
 		'result-text-class'
 	]
 })
@@ -294,6 +303,11 @@ type Props = {
 	 */
 	disabled? : boolean,
 	/**
+	 * @description 非弹出区域自定义样式类
+	 * @default ""
+	 */
+	fieldClass? : string.ClassString,
+	/**
 	 * @description 右侧箭头自定义样式类
 	 * @default ""
 	 * @uniPlatform {
@@ -369,6 +383,11 @@ type Props = {
 	 * }
 	 */
 	optionsViewClass? : string.ClassString,
+	/**
+	 * @description 候选浮层内容自定义样式类
+	 * @default ""
+	 */
+	optionsContentClass? : string.ClassString,
 	/**
 	 * @description 候选项文字自定义样式类
 	 * @default ""
@@ -446,6 +465,11 @@ type Props = {
 	 */
 	optionTextHighlightClass? : string.ClassString,
 	/**
+	 * @description 候选项高亮行自定义样式类
+	 * @default ""
+	 */
+	optionRowHighlightClass? : string.ClassString,
+	/**
 	 * @description 单选模式结果文字自定义样式类
 	 * @default ""
 	 * @uniPlatform {
@@ -491,9 +515,12 @@ const props = withDefaults(defineProps<Props>(), {
 	placeholder: '',
 	disabled: false,
 	arrowClass: '',
+	fieldClass: '',
 	optionsViewClass: '',
+	optionsContentClass: '',
 	optionTextClass: '',
 	optionTextHighlightClass: '',
+	optionRowHighlightClass: '',
 	resultTextClass: ''
 })
 
