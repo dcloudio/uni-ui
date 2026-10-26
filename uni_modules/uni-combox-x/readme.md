@@ -1,3 +1,5 @@
+> **已废弃：** uni-combox-x 仅用于兼容已有项目。新项目请安装并使用 [uni-combobox](https://ext.dcloud.net.cn/plugin?name=uni-combobox)。
+
 uni-combox 组合框组件。
 
 默认为单选模式，类似 select 组件，只能选择不能输入。通过具名插槽 `input` 传入 input 组件后，切换为可输入、可选择的组合模式。
