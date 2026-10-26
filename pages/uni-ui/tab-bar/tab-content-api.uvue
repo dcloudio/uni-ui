@@ -16,7 +16,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 import { inject, ref } from 'vue'
 import { Ref } from 'vue'
 
@@ -59,7 +59,6 @@ function setBadgeClass() : void {
 	width: 100%;
 	height: 100%;
 	padding: 20px;
-	background-color: #fff5f5;
 }
 
 .panel-card {
@@ -122,5 +121,43 @@ function setBadgeClass() : void {
 	font-size: 16px;
 	color: #666;
 	margin-bottom: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+	.panel-card {
+		background-color: #2d2d2d;
+		box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
+	}
+
+	.panel-title,
+	.page-title {
+		color: #ffffff;
+	}
+
+	.page-text {
+		color: #a0a0a0;
+	}
+
+	.panel-tip {
+		color: #d7aaaa;
+	}
+
+	.action-button {
+		background-color: #3b3b3b;
+		border-color: #765858;
+		color: #f0caca;
+	}
+
+	.primary-button {
+		background-color: #ff8a8a;
+		border-color: #ff8a8a;
+		color: #ffffff;
+	}
+
+	.accent-button {
+		background-color: #ffe7c7;
+		border-color: #ffd18c;
+		color: #8a4d00;
+	}
 }
 </style>

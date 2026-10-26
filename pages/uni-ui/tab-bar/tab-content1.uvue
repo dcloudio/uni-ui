@@ -1,5 +1,5 @@
 <template>
-	<scroll-view class="content-page" :scroll-with-animation="true" :scroll-top="targetScrollTop"
+	<scroll-view class="content-page" direction="vertical" :scroll-with-animation="true" :scroll-top="targetScrollTop"
 		@scroll="handleScroll" >
 		<view class="content-page-inner">
 			<text class="page-title">首页</text>
@@ -10,8 +10,10 @@
 	</scroll-view>
 </template>
 
-<script setup lang="uts">
-	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
+<script setup lang="ts">
+	const emit = defineEmits<{
+		contentscroll: [scrollTop: number]
+	}>()
 
 	// 从父组件注入当前激活的索引
 	const activeIndex = inject<Ref<number>>('uniTabBarCurrentIndex', ref(0))
@@ -20,7 +22,7 @@
 
 	function handleScroll(event : UniScrollEvent) : void {
 		currentScrollTop.value = event.detail.scrollTop
-		uni.$emit(TAB_CONTENT1_SCROLL_EVENT, currentScrollTop.value)
+		emit("contentscroll", currentScrollTop.value)
 	}
 
 	function scrollToTop() : void {
@@ -31,7 +33,7 @@
 	}
 
 	onMounted(() => {
-		uni.$emit(TAB_CONTENT1_SCROLL_EVENT, 0)
+		emit("contentscroll", 0)
 	})
 
 	defineExpose({
@@ -45,6 +47,14 @@
 	height: 100%;
 	background-color: #f5f5f5;
 }
+
+/* #ifdef MP-ALIPAY */
+.content-page {
+	height: calc(100vh - var(--uni-tab-bar-height, 50px) - var(--uni-safe-area-inset-bottom));
+	flex: none;
+	min-height: 0px;
+}
+/* #endif */
 
 .content-page-inner {
 	width: 100%;

@@ -1,13 +1,21 @@
 <template>
+	<!-- #ifdef MP-ALIPAY -->
+	<view class="index-text" ref="indexTextRef" v-bind="$attrs" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove"
+		@touchend="onTouchEnd">
+		<text v-for="(item, index) in indexList" :key="item" class="index-item">{{ item }}</text>
+	</view>
+	<!-- #endif -->
+	<!-- #ifndef MP-ALIPAY -->
 	<text class="index-text" ref="indexTextRef" v-bind="$attrs" @touchstart="onTouchStart" @touchmove.stop.prevent="onTouchMove"
 		@touchend="onTouchEnd">{{ indexs }}</text>
+	<!-- #endif -->
 	<!-- indicator with arrow -->
 	<view v-show="touching" class="indicator" :class="indicatorViewClass" :style="indicatorStyle">
 		<text class="indicator-text" :class="indicatorTextClass">{{ currentIndex }}</text>
 	</view>
 </template>
 
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 索引列表
    * @description 索引列表组件
@@ -16,12 +24,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -33,6 +41,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.08"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -55,12 +67,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -72,6 +84,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -89,12 +105,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -106,6 +122,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -123,12 +143,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -140,6 +160,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -165,12 +189,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -182,6 +206,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -293,10 +321,10 @@
 	}
 
 	const onTouchMove = (e : UniTouchEvent) => {
-		// #ifdef APP && UNI-APP-X
+		// #ifdef APP
 		e.preventDefault()
 		// #endif
-		// #ifdef WEB && UNI-APP-X
+		// #ifdef WEB
 		if (e.cancelable) {
 			e.preventDefault()
 		}
@@ -319,7 +347,7 @@
 <style>
 	.index-text {
 		position: absolute;
-		right: 0;
+		right: 3px;
 		top: 50%;
 		transform: translateY(-50%);
 		width: 28px;
@@ -328,6 +356,10 @@
 		text-align: center;
 		line-height: 1.4;
 		z-index: 1000;
+	}
+
+	.index-item {
+		text-align: center;
 	}
 
 	.indicator {

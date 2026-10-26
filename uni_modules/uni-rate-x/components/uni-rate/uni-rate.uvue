@@ -16,7 +16,7 @@
   </view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * Rate 评分
    * @description 评分组件
@@ -25,12 +25,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -42,6 +42,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -63,12 +67,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -80,6 +84,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -96,12 +104,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -113,6 +121,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -129,12 +141,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -146,6 +158,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -162,12 +178,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -179,6 +195,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -195,12 +215,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -212,6 +232,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -228,12 +252,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -245,6 +269,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -261,12 +289,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -278,6 +306,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -294,12 +326,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -311,6 +343,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -327,12 +363,12 @@ const props = defineProps<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -344,6 +380,10 @@ const props = defineProps<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -375,12 +415,12 @@ const emit = defineEmits<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -392,6 +432,10 @@ const emit = defineEmits<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -408,12 +452,12 @@ const emit = defineEmits<{
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -425,6 +469,10 @@ const emit = defineEmits<{
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {

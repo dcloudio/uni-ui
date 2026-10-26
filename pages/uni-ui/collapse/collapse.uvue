@@ -1,4 +1,5 @@
 <template>
+  <!-- 该页面不进行暗黑适配 -->
   <scroll-view class="page">
     <view class="section">
       <text class="section-title">手风琴模式</text>
@@ -118,7 +119,7 @@
   </scroll-view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   type CategoryItem = {
     title : string
   }

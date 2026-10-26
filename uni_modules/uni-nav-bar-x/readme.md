@@ -19,4 +19,45 @@
 - title: 通过属性方便设置标题。如果传入mid slot，则不生效
 - navigationBarTextStyle: 返回箭头和属性设置的标题，它们的颜色均由该属性控制，可选 white|black
 
-本组件默认没有背景色，即透明，会透显页面的背景色。开发者可通过组件的class自行设置背景色
+本组件默认没有背景色，即透明，会透显页面的背景色，开发者可通过组件的class自行设置背景色。
+
+如果遇到顶部安全区避让失效的问题，可升级到 HBuilderX 5.25 版本。
+
+在小程序端，如果需要规避右上角胶囊按钮，可以参考下方代码设置 margin-right 让出胶囊按钮的宽度和右侧间距。
+
+```html
+<template>
+	<uni-nav-bar title="标题" right-class="nav-right">
+		<template #right>
+			<view :style="{ transform: 'translateX(-' + rightMargin + 'px)' }">
+				<text class="txt-button">right</text>
+			</view>
+		</template>
+	</uni-nav-bar>
+</template>
+
+<script setup lang="ts">
+	const rightMargin = ref(0)
+	onMounted(() => {
+		// #ifdef MP-WEIXIN
+		const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
+		const windowInfo = uni.getWindowInfo()
+		// 预留胶囊按钮宽度和右侧间距，让右侧插槽显示在胶囊按钮左边
+		rightMargin.value = windowInfo.windowWidth - menuButtonInfo.right + menuButtonInfo.width
+		// #endif
+	})
+</script>
+
+<style>
+	.nav-right {
+		overflow: visible;
+	}
+
+	.txt-button {
+		width: 44px;
+		height: 44px;
+		line-height: 44px;
+		text-align: center;
+	}
+</style>
+```

@@ -38,7 +38,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 /**
  * NumberBox 数字输入框
  * @description 带加减按钮的数字输入框，常见于购物车商品数量选择
@@ -47,12 +47,12 @@
  *     "android": {
  *       "uniVer": "x",
  *       "unixVer": "5.07",
- *       "unixVaporVer": "x"
+ *       "unixVaporVer": "5.21"
  *     },
  *     "ios": {
  *       "uniVer": "x",
  *       "unixVer": "5.07",
- *       "unixVaporVer": "x"
+ *       "unixVaporVer": "5.11"
  *     },
  *     "harmony": {
  *       "uniVer": "x",
@@ -64,6 +64,10 @@
  *     "weixin": {
  *       "uniVer": "x",
  *       "unixVer": "5.07"
+ *     },
+ *     "alipay": {
+ *       "uniVer": "x",
+ *       "unixVer": "5.31"
  *     }
  *   },
  *   "web": {
@@ -98,12 +102,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -115,6 +119,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -132,12 +140,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -149,6 +157,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -166,12 +178,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -183,6 +195,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -200,12 +216,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -217,6 +233,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -234,12 +254,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -251,6 +271,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -268,12 +292,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -285,6 +309,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -302,12 +330,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -319,6 +347,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -336,12 +368,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -353,6 +385,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -370,12 +406,12 @@ type Props = {
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -387,6 +423,10 @@ type Props = {
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -418,12 +458,12 @@ const emit = defineEmits<{
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -435,6 +475,10 @@ const emit = defineEmits<{
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -451,12 +495,12 @@ const emit = defineEmits<{
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -468,6 +512,10 @@ const emit = defineEmits<{
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -484,12 +532,12 @@ const emit = defineEmits<{
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -501,6 +549,10 @@ const emit = defineEmits<{
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {
@@ -517,12 +569,12 @@ const emit = defineEmits<{
 	 *     "android": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.21"
 	 *     },
 	 *     "ios": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07",
-	 *       "unixVaporVer": "x"
+	 *       "unixVaporVer": "5.11"
 	 *     },
 	 *     "harmony": {
 	 *       "uniVer": "x",
@@ -534,6 +586,10 @@ const emit = defineEmits<{
 	 *     "weixin": {
 	 *       "uniVer": "x",
 	 *       "unixVer": "5.07"
+	 *     },
+	 *     "alipay": {
+	 *       "uniVer": "x",
+	 *       "unixVer": "5.31"
 	 *     }
 	 *   },
 	 *   "web": {

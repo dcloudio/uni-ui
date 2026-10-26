@@ -4,7 +4,7 @@
   </view>
 </template>
 
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 折叠面板
    * @description 折叠面板组件
@@ -13,12 +13,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -30,6 +30,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -38,12 +42,12 @@
    *   }
    * }
    */
-  import type { ItemChildType } from '../type.uts'
+  import type { ItemChildType } from '../type.ts'
   import {
     UNI_COLLAPSE_REGISTER_CHILD,
     UNI_COLLAPSE_UNREGISTER_CHILD,
     UNI_COLLAPSE_CHILD_TOGGLE
-  } from '../common.uts'
+  } from '../common.ts'
 
   defineOptions({
     name: 'UniCollapse'
@@ -58,12 +62,12 @@
      *     "android": {
      *       "uniVer": "x",
      *       "unixVer": "5.07",
-     *       "unixVaporVer": "x"
+     *       "unixVaporVer": "5.21"
      *     },
      *     "ios": {
      *       "uniVer": "x",
      *       "unixVer": "5.07",
-     *       "unixVaporVer": "x"
+     *       "unixVaporVer": "5.11"
      *     },
      *     "harmony": {
      *       "uniVer": "x",
@@ -75,6 +79,10 @@
      *     "weixin": {
      *       "uniVer": "x",
      *       "unixVer": "5.07"
+     *     },
+     *     "alipay": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.31"
      *     }
      *   },
      *   "web": {

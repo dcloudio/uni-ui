@@ -41,10 +41,24 @@
 						"navigationBarTitleText": "uni-number-box"
 					}
 				},
+				// #ifndef (APP-IOS || APP-HARMONY) && !VUE3-VAPOR
+				{
+					"path": "combox/combox",
+					"style": {
+						"navigationBarTitleText": "uni-combox"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
+					}
+				},
+				// #endif
 				{
 					"path": "fab-button/fab-button",
 					"style": {
 						"navigationBarTitleText": "uni-fab-button"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -69,6 +83,9 @@
 					"path": "drag-cell/drag-cell",
 					"style": {
 						"navigationBarTitleText": "uni-drag-cell"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -83,6 +100,9 @@
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar",
 						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -92,7 +112,11 @@
 						"navigationBarBackgroundColor": "#0f172a",
 						"navigationBarTextStyle": "white",
 						"backgroundColorContent": "#0f172a",
+						"backgroundColorBottom": "#0f172a",
 						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -103,13 +127,34 @@
 						"navigationBarTextStyle": "black",
 						"backgroundColorContent": "#dff3e8",
 						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
+				// #ifndef APP && !VUE3-VAPOR
+				{
+					"path": "tab-bar/tab-bar-blur",
+					"style": {
+						"navigationBarTitleText": "uni-tab-bar-blur",
+						"navigationBarBackgroundColor": "#f4f8ff",
+						"navigationBarTextStyle": "black",
+						"backgroundColorContent": "#f4f8ff",
+						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
+					}
+				},
+				// #endif
 				{
 					"path": "tab-bar/tab-bar-midbutton",
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton",
 						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -117,6 +162,9 @@
 					"style": {
 						"navigationBarTitleText": "uni-tab-bar-midbutton-notch",
 						"disableScroll": true
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				{
@@ -128,10 +176,26 @@
 				{
 					"path": "index-bar/index-bar",
 					"style": {
-						"navigationBarTitleText": "uni-index-bar",
-						"backgroundColorContent": "#ffffff"
+						"navigationBarTitleText": "uni-index-bar"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
+					}
+				},
+				{
+					"path": "icons/icons",
+					"style": {
+						"navigationBarTitleText": "Icons 图标"
+					}
+				},
+				// #ifdef VUE3-VAPOR || MP
+				{
+					"path": "expandable-text/expandable-text",
+					"style": {
+						"navigationBarTitleText": "可折叠文本"
 					}
 				}
+				// #endif
 			]
 		}
 	],

@@ -7,7 +7,7 @@
   </view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 自定义下拉刷新
    * @description 自定义下拉刷新组件
@@ -16,12 +16,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -33,6 +33,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -54,12 +58,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -71,6 +75,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -91,12 +99,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -108,6 +116,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -128,12 +140,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -145,6 +157,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -165,12 +181,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -182,6 +198,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -202,12 +222,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -219,6 +239,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -239,12 +263,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -256,6 +280,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -276,12 +304,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -293,6 +321,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -313,12 +345,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -330,6 +362,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {
@@ -350,12 +386,12 @@ const props = defineProps({
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -367,6 +403,10 @@ const props = defineProps({
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "x"
    *     }
    *   },
    *   "web": {

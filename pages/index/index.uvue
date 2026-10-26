@@ -1,10 +1,14 @@
 <template>
 	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
 	<navigator class="nav-item" url="/pages/uni-ui/badge-view/badge-view"><text class="nav-text">badge-view</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/icons/icons"><text class="nav-text">icons</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/rate/rate"><text class="nav-text">rate</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar"><text class="nav-text">tab-bar</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-dark"><text class="nav-text">tab-bar-dark</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-custom"><text class="nav-text">tab-bar-custom</text></navigator>
+	<!-- #ifndef APP && !VUE3-VAPOR -->
+	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-blur"><text class="nav-text">tab-bar-blur</text></navigator>
+	<!-- #endif -->
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton"><text class="nav-text">tab-bar-midbutton</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar-midbutton-notch"><text class="nav-text">tab-bar-midbutton-notch</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/nav-bar/nav-bar"><text class="nav-text">nav-bar</text></navigator>
@@ -15,6 +19,7 @@
 <!-- 	<navigator class="nav-item" url="/pages/uni-ui/pop-view/pop-view"><text class="nav-text">pop-view</text></navigator> -->
 	<navigator class="nav-item" url="/pages/uni-ui/fab-button/fab-button"><text class="nav-text">fab-button</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/number-box/number-box"><text class="nav-text">number-box</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/combox/combox"><text class="nav-text">combox</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/collapse/collapse"><text class="nav-text">collapse</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/link/link"><text class="nav-text">link</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/time-format/time-format"><text class="nav-text">time-format</text></navigator>
@@ -23,6 +28,7 @@
 	<!-- #ifndef MP-ALIPAY -->
 	<navigator class="nav-item" url="/pages/theme-change/theme-change"><text class="nav-text">theme-change</text></navigator>
 	<!-- #endif -->
+	<navigator class="nav-item" url="/pages/uni-ui/expandable-text/expandable-text"><text class="nav-text">expandable-text</text></navigator>
 	<!-- <text>--测试navigator和button嵌套text组件的表现--</text>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" hover-class="navigator-hover"><text style="color: green;">子text绿色</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/refresh-box/refresh-box" style="color: aqua;">navigator青色</navigator>
@@ -33,8 +39,8 @@
 	</scroll-view>
 </template>
 
-<script setup lang="uts">
-	import { state } from '@/store/index.uts'
+<script setup lang="ts">
+	import { state } from '@/store/index.ts'
 
 	const isDarkMode = computed((): boolean => {
 		return state.isDarkMode

@@ -30,7 +30,7 @@
   </view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   
 
   const osThemeChangeId = ref(0)

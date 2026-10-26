@@ -46,7 +46,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
   /**
    * 可拖拽单元格组件
    * @description 可拖拽单元格组件
@@ -55,12 +55,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.08",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -72,6 +72,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -122,12 +126,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -139,6 +143,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -159,12 +167,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -176,6 +184,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -196,12 +208,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -213,6 +225,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -233,12 +249,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -250,6 +266,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -270,12 +290,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -287,6 +307,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -309,12 +333,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -326,6 +350,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -342,12 +370,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.08",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -359,6 +387,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {

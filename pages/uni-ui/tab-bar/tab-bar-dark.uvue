@@ -1,17 +1,17 @@
 <template>
 	<uni-tab style="flex: 1" :active-index="activeIndex" :tab-content-height-full="tabContentHeightFull" @change="handleChange">
 		<!-- 内容区域 -->
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<!-- TODO 小程序下这些Class不生效，界面没有变黑！ -->
-			<tabContent1 ref="tabContent1Ref" class="dark-tab-content dark-tab-content-home" />
+			<tabContent1 ref="tabContent1Ref" class="dark-tab-content dark-tab-content-home" @contentscroll="handleTabContent1Scroll" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent2 class="dark-tab-content dark-tab-content-api" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent3 class="dark-tab-content dark-tab-content-css" />
 		</uni-tab-content>
-		<uni-tab-content>
+		<uni-tab-content :style="tabContentStyle">
 			<tabContent4 class="dark-tab-content dark-tab-content-template" />
 		</uni-tab-content>
 
@@ -50,18 +50,20 @@
 	</uni-tab>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	import tabContent1 from './tab-content1.uvue'
 	import tabContent2 from './tab-content2.uvue'
 	import tabContent3 from './tab-content3.uvue'
 	import tabContent4 from './tab-content4.uvue'
-
-	const TAB_CONTENT1_SCROLL_EVENT = 'uni-tab-bar-tab-content1-scroll'
 	const TAB_CONTENT1_SWITCH_OFFSET = 100
 	const tabContent1Ref = ref<ComponentPublicInstance | null>(null)
 	let tabContentHeightFull = false
-	// #ifdef MP
+	// #ifdef MP-WEIXIN
 	tabContentHeightFull = true
+	// #endif
+	let tabContentStyle = ''
+	// #ifdef MP-ALIPAY
+	tabContentStyle = 'flex: 1; min-height: 0px;'
 	// #endif
 
 	const activeIndex = ref<number>(0)
@@ -106,17 +108,13 @@
 				break
 		}
 	}
-
-	onLoad(() => {
-		uni.$on(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
-	})
-
-	onUnload(() => {
-		uni.$off(TAB_CONTENT1_SCROLL_EVENT, handleTabContent1Scroll)
-	})
 </script>
 
-<style>
+	<style>
+		page {
+			background-color: #0f172a;
+		}
+
 	.first-tab-button {
 		width: 100%;
 		height: 100%;

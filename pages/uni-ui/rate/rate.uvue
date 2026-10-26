@@ -50,7 +50,7 @@
 	</view>
 	<!-- #endif -->
 </template>
-<script setup lang="uts">
+<script setup lang="ts">
 	type Data = {
 		vModelRateValue: number
 		rateValue: number

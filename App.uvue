@@ -1,5 +1,5 @@
-<script setup lang="uts">
-	import { checkSystemTheme } from '@/store/index.uts'
+<script setup lang="ts">
+	import { checkSystemTheme } from '@/store/index.ts'
 
 	// #ifdef APP-ANDROID || APP-HARMONY
 	let firstBackTime = 0

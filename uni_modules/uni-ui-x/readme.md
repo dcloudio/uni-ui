@@ -1,4 +1,4 @@
-# 项目介绍
+## 项目介绍
 
 uni-ui x，是DCloud为 uni-app x 提供的扩展组件库。[开源库地址](https://gitcode.com/dcloud/uni-ui-x/tree/alpha)
 
@@ -6,14 +6,15 @@ uni-ui x 是全新设计的，与为uni-app做的uni-ui不同。
 
 uni-ui x 是伴随着HBuilderX 5.08发版的。5.07版本上有部分组件在部分平台有兼容性问题，详见组件详情的兼容性表格。再往前的HBuilderX版本未测试。
 
-# 特点
+## 特点
 
-- 性能
+- **性能优先**
+
 uni-ui x 非常注重性能，在DOM层级控制、包体积、代码执行时间方面精益求精。
 
 它了解 uni-app x 蒸汽模式的最佳实践，尽可能利用模板和样式的预编译特性来提升性能。当然它也支持非蒸汽模式。
 
-- 合理的抽象
+- **合理的抽象**
 
 一个组件的抽象能力非常重要，如何在自定义性、易用性、性能之间尽可能三全其美。
 
@@ -30,9 +31,9 @@ uni-ui x 提供了完全的样式自定义能力，所有的样式定义都可�
 
 使用者可以通过css变量完全自定义自己的主题，而不会被组件属性上不能写css变量困扰。
 
-- 为AI设计
+- **为AI设计**
 
-uni-ui x 优先代码而不是二进制文件。目前没有引入字体文件。这处于性能考虑，也出于AI友好度考虑。
+uni-ui x 优先代码而不是二进制文件。除兼容既有图标资产的 `uni-icons` 外，其他组件不引入字体文件。这出于性能考虑，也便于 AI 理解和修改组件。
 
 以箭头为例，uni-ui x 中使用一个view配置左下边框并transform旋转来实现，这种设计性能比字体更好，且AI可以方便的理解这段代码的UI表现，可以在代码层面调整样式。
 
@@ -40,27 +41,30 @@ uni-ui x 优先代码而不是二进制文件。目前没有引入字体文件�
 
 再举一个例子，uni-tab下沉midbutton，涉及一个贝塞尔曲线，此时没有使用图片，而是使用svg，同样是为了方便AI理解和修改。
 
-- 中性
+- **中性**
 
 uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样，重视是开发者可以自定义成各种风格，而不是为开发者提供某套风格。
 
 开发者可以通过自定义css，形成自己的风格，或者交给AI完成类似工作。
 
-- 没有写死的颜色和文字
+uni-ui x 没有写死的颜色和文字:
 
 * 没有写死的文字，不影响国际化。
 * 没有写死的颜色，不影响自定义主题。
 
 <!-- 组件列表开始 -->
-## uni-ui x 已支持的组件列表
+### uni-ui x 已支持的组件列表
 
 | 组件名 | 组件说明 |
 | --- | --- |
 | uni-badge-view | [数字角标](https://ext.dcloud.net.cn/plugin?name=uni-badge-view) |
 | uni-collapse | [折叠面板](https://ext.dcloud.net.cn/plugin?name=uni-collapse-x) |
+| uni-combox | [组合框](https://ext.dcloud.net.cn/plugin?name=uni-combox-x) |
 | uni-drag-cell | [可拖拽排序组件](https://ext.dcloud.net.cn/plugin?name=uni-drag-cell) |
+| uni-expandable-text | [可折叠文本](https://ext.dcloud.net.cn/plugin?name=uni-expandable-text) |
 | uni-fab-button | [uni-fab-button](https://ext.dcloud.net.cn/plugin?name=uni-fab-button) |
 | uni-index-bar | [uni-index-bar](https://ext.dcloud.net.cn/plugin?name=uni-index-bar) |
+| uni-icons | [图标](https://ext.dcloud.net.cn/plugin?name=uni-icons-x) |
 | uni-link | [链接](https://ext.dcloud.net.cn/plugin?name=uni-link-x) |
 | uni-nav-bar | [uni-nav-bar](https://ext.dcloud.net.cn/plugin?name=uni-nav-bar-x) |
 | uni-number-box | [数字输入框](https://ext.dcloud.net.cn/plugin?name=uni-number-box-x) |
@@ -70,7 +74,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 | uni-time-format | [时间格式化](https://ext.dcloud.net.cn/plugin?name=uni-time-format) |
 <!-- 组件列表结束 -->
 
-# uni-ui的升级建议@uniuiupgrade
+## uni-ui的升级建议@uniuiupgrade
 
 为uni-app提供的uni-ui，升级到uni-app x时无法直接对照升级，因为组件名称、用法都有变化。
 
@@ -97,7 +101,7 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 |uni-goods-nav				|商品导航								|无																									|
 |uni-grid							|宫格										|无																									|
 |uni-group						|分组										|无																									|
-|uni-icons						|图标										|无																									|
+|uni-icons						|图标										|改用[uni-icons](https://ext.dcloud.net.cn/plugin?name=uni-icons-x)										|
 |uni-indexed-list			|索引列表								|改用uni-index-bar																		|
 |uni-link							|超链接									|改用uni-link																				|
 |uni-list							|列表										|使用内置组件list																		|
@@ -121,6 +125,6 @@ uni-ui x的风格是中性的，和uni内置组件、小程序内置组件一样
 
 标记为`无`的，大多比较简单，对于AI而言直接写相关UI比下载学习一个组件更合适。
 
-# 交流群
+## 交流群
 
 有关 uni-ui-x 组件的任何意见或建议，欢迎通过 [uni-ui-x im 交流群](https://ext.dcloud.net.cn/publisher/start-session?pluginId=27852) 沟通交流。

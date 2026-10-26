@@ -4,7 +4,7 @@
 		<view flatten class="plus" :class="plusClass" style="position: absolute;transform: rotate(90deg);"></view>
 	</view>
 </template>
-<script lang="uts" setup>
+<script lang="ts" setup>
   /**
    * 悬浮加号按钮
    * @description 悬浮加号按钮组件
@@ -13,12 +13,12 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.21"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "x"
+   *       "unixVaporVer": "5.11"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
@@ -30,6 +30,10 @@
    *     "weixin": {
    *       "uniVer": "x",
    *       "unixVer": "5.07"
+   *     },
+   *     "alipay": {
+   *       "uniVer": "x",
+   *       "unixVer": "5.31"
    *     }
    *   },
    *   "web": {
@@ -50,12 +54,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -67,6 +71,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {
@@ -85,12 +93,12 @@
 		 *     "android": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.21"
 		 *     },
 		 *     "ios": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07",
-		 *       "unixVaporVer": "x"
+		 *       "unixVaporVer": "5.11"
 		 *     },
 		 *     "harmony": {
 		 *       "uniVer": "x",
@@ -102,6 +110,10 @@
 		 *     "weixin": {
 		 *       "uniVer": "x",
 		 *       "unixVer": "5.07"
+		 *     },
+		 *     "alipay": {
+		 *       "uniVer": "x",
+		 *       "unixVer": "5.31"
 		 *     }
 		 *   },
 		 *   "web": {

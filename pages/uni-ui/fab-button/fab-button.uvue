@@ -10,7 +10,7 @@
 		<uni-fab-button class="transparent" plus-class="black-plus"></uni-fab-button>
 		<text class="label">可移动uni-fab-button</text>
 		<view class="move-fab-placeholder">
-			<view id="move-fab" class="move-fab" :style="movepos" @touchstart="onTouchStart" @touchmove="onTouchMove">
+			<view id="move-fab" class="move-fab" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="updateMoveData" @touchcancel="updateMoveData">
 				<uni-fab-button></uni-fab-button>
 			</view>
 		</view>
@@ -25,7 +25,7 @@
 	</view>
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 	type Data = {
 		dx : number
 		dy : number
@@ -39,7 +39,6 @@
 		left: 15,
 		top: 47
 	})
-	const movepos = ref<string>('')
 	let sx = 0
 	let sy = 0
 	let mx = 0
@@ -55,16 +54,24 @@
 		})
 	}
 
-	function updateMovePos() {
+	function updateMoveData() {
 		data.left = baseLeft + mx
 		data.top = baseTop + my
-		movepos.value = 'position: fixed;left: ' + baseLeft + 'px;top: ' + baseTop + 'px;transform: translate(' + mx + 'px,' + my + 'px)'
+		data.dx = mx
+		data.dy = my
+	}
+
+	function updateMovePos(element : UniElement) {
+		element.style.setProperty('position', 'fixed')
+		element.style.setProperty('left', baseLeft + 'px')
+		element.style.setProperty('top', baseTop + 'px')
+		element.style.setProperty('transform', 'translate(' + mx + 'px,' + my + 'px)')
 	}
 
 	function onTouchStart(e : UniTouchEvent) {
 		sx = e.touches[0].clientX
 		sy = e.touches[0].clientY
-		updateMovePos()
+		updateMovePos(e.currentTarget as UniElement)
 	}
 
 	function onTouchMove(e : UniTouchEvent) {
@@ -72,9 +79,7 @@
 		my = e.touches[0].clientY - sy + my
 		sx = e.touches[0].clientX
 		sy = e.touches[0].clientY
-		data.dx = mx
-		data.dy = my
-		updateMovePos()
+		updateMovePos(e.currentTarget as UniElement)
 	}
 
 	onReady(() => {
@@ -130,19 +135,23 @@
 		border-radius: 0px;
 	}
 	.move-fab-placeholder {
-		width: 44px;
-		height: 44px;
+		width: 56px;
+		height: 56px;
 	}
 	.move-fab {
-		width: 44px;
-		height: 44px;
+		width: 56px;
+		height: 56px;
+		align-items: center;
+		justify-content: center;
 	}
 	.right-bottom {
 		position: absolute;
-		right: 44px;
-		bottom: 44px;
-		width: 44px;
-		height: 44px;
+		right: 38px;
+		bottom: 38px;
+		width: 56px;
+		height: 56px;
+		align-items: center;
+		justify-content: center;
 		opacity: 1;
 		transform: scale(1);
 		transform-origin: center center;

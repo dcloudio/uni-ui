@@ -159,7 +159,7 @@
 	<!-- #endif -->
 </template>
 
-<script setup lang="uts">
+<script setup lang="ts">
 type Data = {
 	dynamicBadgeText: string
 }
