@@ -194,6 +194,12 @@
 					"style": {
 						"navigationBarTitleText": "可折叠文本"
 					}
+				},
+				{
+					"path": "icons/icons",
+					"style": {
+						"navigationBarTitleText": "Icons 图标"
+					}
 				}
 				// #endif
 			]
