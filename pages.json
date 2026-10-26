@@ -45,10 +45,16 @@
 				{
 					"path": "combox/combox",
 					"style": {
-						"navigationBarTitleText": "uni-combox"
+						"navigationBarTitleText": "uni-combox（已废弃）"
 						// #ifdef MP-ALIPAY
 						,"allowsBounceVertical": "NO"
 						// #endif
+					}
+				},
+				{
+					"path": "combobox/combobox",
+					"style": {
+						"navigationBarTitleText": "uni-combobox"
 					}
 				},
 				// #endif
