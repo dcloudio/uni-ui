@@ -1248,7 +1248,7 @@ onBackPress(() : boolean => {
 	}
 
 	.uni-combobox__option {
-		color: #fafafa;
+		color: rgba(255, 255, 255, 0.8);
 	}
 
 	.uni-combobox__option--empty {
@@ -1262,12 +1262,11 @@ onBackPress(() : boolean => {
 
 	.uni-combobox__options {
 		background-color: #232323;
-		border-color: rgba(255, 255, 255, 0.12);
-		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+		border-color: rgba(255, 255, 255, 0.05);
 	}
 
 	.uni-combobox__option-row--highlight {
-		background-color: #27272a;
+		background-color: #373737;
 	}
 
 	/* #ifdef WEB */
@@ -1282,7 +1281,7 @@ onBackPress(() : boolean => {
 	}
 
 	.uni-combobox__option-row:hover {
-		background-color: #27272a;
+		background-color: #373737;
 	}
 	/* #endif */
 }
