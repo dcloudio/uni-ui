@@ -1,3 +1,6 @@
+## 1.0.2
+- autoBack 属性，默认值改为 false ；设为 true 时自动调用 uni.navigateBack({}) 返回上一页。
+
 ## 1.0.1
 - 新增 autoBack 属性，点击后是否自动返回上一页，默认 true；设为 false 时只触发 click，由调用方处理后续行为。
 

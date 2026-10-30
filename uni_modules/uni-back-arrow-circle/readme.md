@@ -13,7 +13,8 @@
 
 <script setup lang="ts">
   const onBackClick = () => {
-    // 点击通知；组件随后自动执行 uni.navigateBack({})。
+    // 默认只触发 click，由调用方处理返回。
+    uni.navigateBack({})
   }
 </script>
 
@@ -30,21 +31,21 @@
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| autoBack | boolean | true | 点击后是否自动调用 uni.navigateBack({}) 返回上一页 |
+| autoBack | boolean | false | 点击后是否自动调用 uni.navigateBack({}) 返回上一页 |
 
-需要自行处理导航、关闭弹层或确认后再返回时，关闭自动返回：
+默认只触发 `click`，由调用方处理导航、关闭弹层或确认后再返回。需要组件自动返回上一页时，显式开启：
 
 ```vue
-<uni-back-arrow-circle :auto-back="false" @click="handleBack" />
+<uni-back-arrow-circle :auto-back="true" />
 ```
 
-关闭自动返回后仍触发 `click`。请使用 `:auto-back="false"` 传入布尔值。组件不会等待异步点击处理完成；需要离开确认时，应关闭自动返回，在确认后自行调用导航 API。
+请使用 `:auto-back="true"` 传入布尔值。开启自动返回后，组件先触发 `click`，随后调用 `uni.navigateBack({})`，不会等待异步点击处理完成；需要离开确认时，保持默认关闭，在确认后自行调用导航 API。
 
 ## 事件
 
 | 事件 | 说明 |
 | --- | --- |
-| click | 点击时触发，无参数；当 autoBack 为 true 时随后返回上一页；监听事件或返回 false 不会取消默认返回。 |
+| click | 点击时触发，无参数；当 autoBack 为 true 时随后返回上一页。 |
 
 ## 样式
 
