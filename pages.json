@@ -202,6 +202,21 @@
 					}
 				}
 				// #endif
+				// #ifdef VUE3-VAPOR
+				,
+				{
+					"path": "data-picker/data-picker",
+					"style": {
+						"navigationBarTitleText": "uni-data-picker"
+					}
+				},
+				{
+					"path": "data-picker/data-picker-view",
+					"style": {
+						"navigationBarTitleText": "uni-data-picker-view"
+					}
+				}
+				// #endif
 			]
 		}
 	],
