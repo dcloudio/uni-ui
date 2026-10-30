@@ -1,3 +1,5 @@
+> **已废弃：** uni-combox-x 仅用于兼容已有项目。新项目请安装并使用 [uni-combobox](https://ext.dcloud.net.cn/plugin?name=uni-combobox)。
+
 uni-combox 组合框组件。
 
 默认为单选模式，类似 select 组件，只能选择不能输入。通过具名插槽 `input` 传入 input 组件后，切换为可输入、可选择的组合模式。
@@ -58,9 +60,12 @@ uni-combox 组合框组件。
   :options="options"
   v-model="value"
   arrow-class="demo-arrow"
+  field-class="demo-field"
   options-view-class="demo-options-view"
+  options-content-class="demo-options-content"
   option-text-class="demo-option-text"
   option-text-highlight-class="demo-option-highlight"
+  option-row-highlight-class="demo-option-row-highlight"
   result-text-class="demo-result-text"
 />
 ```
@@ -72,6 +77,7 @@ uni-combox 组合框组件。
 <uni-combox :options="options" v-model="value" options-view-class="demo-options-view" />
 <uni-combox :options="options" v-model="value" option-text-class="demo-option-text" />
 <uni-combox :options="options" v-model="value" option-text-highlight-class="demo-option-highlight" />
+<uni-combox :options="options" v-model="value" option-row-highlight-class="demo-option-row-highlight" />
 <uni-combox :options="options" v-model="value" result-text-class="demo-result-text" />
 ```
 
@@ -97,9 +103,12 @@ uni-combox 组合框组件。
 | 类名 | 说明 |
 | --- | --- |
 | arrow-class | 右侧箭头样式 |
+| field-class | 非弹出区域样式 |
 | options-view-class | 候选浮层外层样式 |
+| options-content-class | 候选浮层内容样式 |
 | option-text-class | 候选项文字样式 |
 | option-text-highlight-class | 候选项高亮样式 |
+| option-row-highlight-class | 候选项高亮行样式 |
 | result-text-class | 单选模式结果文字样式 |
 
 ### Props
@@ -111,9 +120,12 @@ uni-combox 组合框组件。
 | placeholder | String | '' | 占位文字 |
 | disabled | Boolean | false | 是否禁用 |
 | arrowClass | String | '' | 右侧箭头自定义样式类 |
+| fieldClass | String | '' | 非弹出区域自定义样式类 |
 | optionsViewClass | String | '' | 候选浮层外层自定义样式类 |
+| optionsContentClass | String | '' | 候选浮层内容自定义样式类 |
 | optionTextClass | String | '' | 候选项文字自定义样式类 |
 | optionTextHighlightClass | String | '' | 候选项高亮自定义样式类 |
+| optionRowHighlightClass | String | '' | 候选项高亮行自定义样式类 |
 | resultTextClass | String | '' | 单选模式结果文字自定义样式类 |
 
 ### Events

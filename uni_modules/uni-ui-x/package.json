@@ -58,7 +58,9 @@
       "uni-refresh-box",
       "uni-tab-bar",
       "uni-time-format",
+      "uni-combobox",
       "uni-combox-x",
+      "uni-icons",
       "uni-expandable-text"
     ],
     "encrypt": [],

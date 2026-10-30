@@ -2,7 +2,7 @@
 	<view :id="anchorId" class="uni-combox">
 		<view
 			class="uni-combox__field"
-			:class="disabled ? 'uni-combox__field--disabled' : ''"
+			:class="[fieldClass, disabled ? 'uni-combox__field--disabled' : '']"
 			@click="onFieldClick"
 			<!-- #ifdef WEB -->
 			:tabindex="disabled ? '-1' : '0'"
@@ -21,7 +21,11 @@
 			<text
 				v-else
 				class="uni-combox__result"
-				:class="[resultTextClass, currentValue == '' ? 'uni-combox__result--placeholder' : '']"
+				:class="[
+					resultTextClass,
+					currentValue == '' ? 'uni-combox__result--placeholder' : '',
+					disabled ? 'uni-combox__result--disabled' : ''
+				]"
 				max-lines="1"
 			>{{ displayText }}</text>
 			<view class="uni-combox__arrow-wrap" @click.stop="toggleOptionsByArrow">
@@ -47,7 +51,7 @@
 						class="uni-combox__options-scroll"
 						:scroll-into-view="scrollIntoViewId"
 					>
-						<view class="uni-combox__options-content">
+						<view class="uni-combox__options-content" :class="optionsContentClass">
 							<view
 								v-if="visibleOptions.length == 0"
 								class="uni-combox__option-row"
@@ -63,7 +67,10 @@
 								:id="getOptionId(index)"
 								:key="item + '_' + index.toString()"
 								class="uni-combox__option-row"
-								:class="index == highlightedIndex ? 'uni-combox__option-row--highlight' : ''"
+								:class="[
+									index == highlightedIndex ? 'uni-combox__option-row--highlight' : '',
+									index == highlightedIndex ? optionRowHighlightClass : ''
+								]"
 								@click.stop="selectOption(index)"
 							>
 								<text
@@ -122,9 +129,12 @@
  * @property {String} placeholder 占位文字
  * @property {Boolean} disabled 是否禁用，默认值 false
  * @property {String} arrowClass 右侧箭头自定义样式类
+ * @property {String} fieldClass 非弹出区域自定义样式类
  * @property {String} optionsViewClass 候选浮层外层自定义样式类
+ * @property {String} optionsContentClass 候选浮层内容自定义样式类
  * @property {String} optionTextClass 候选项文字自定义样式类
  * @property {String} optionTextHighlightClass 候选项高亮自定义样式类
+ * @property {String} optionRowHighlightClass 候选项高亮行自定义样式类
  * @property {String} resultTextClass 单选模式结果文字自定义样式类
  * @event {Function} update:modelValue 值更新时触发
  * @event {Function} selectchange 从候选项选中时触发
@@ -133,9 +143,12 @@
 defineOptions({
 	externalClasses: [
 		'arrow-class',
+		'field-class',
 		'options-view-class',
+		'options-content-class',
 		'option-text-class',
 		'option-text-highlight-class',
+		'option-row-highlight-class',
 		'result-text-class'
 	]
 })
@@ -294,6 +307,11 @@ type Props = {
 	 */
 	disabled? : boolean,
 	/**
+	 * @description 非弹出区域自定义样式类
+	 * @default ""
+	 */
+	fieldClass? : string.ClassString,
+	/**
 	 * @description 右侧箭头自定义样式类
 	 * @default ""
 	 * @uniPlatform {
@@ -369,6 +387,11 @@ type Props = {
 	 * }
 	 */
 	optionsViewClass? : string.ClassString,
+	/**
+	 * @description 候选浮层内容自定义样式类
+	 * @default ""
+	 */
+	optionsContentClass? : string.ClassString,
 	/**
 	 * @description 候选项文字自定义样式类
 	 * @default ""
@@ -446,6 +469,11 @@ type Props = {
 	 */
 	optionTextHighlightClass? : string.ClassString,
 	/**
+	 * @description 候选项高亮行自定义样式类
+	 * @default ""
+	 */
+	optionRowHighlightClass? : string.ClassString,
+	/**
 	 * @description 单选模式结果文字自定义样式类
 	 * @default ""
 	 * @uniPlatform {
@@ -491,9 +519,12 @@ const props = withDefaults(defineProps<Props>(), {
 	placeholder: '',
 	disabled: false,
 	arrowClass: '',
+	fieldClass: '',
 	optionsViewClass: '',
+	optionsContentClass: '',
 	optionTextClass: '',
 	optionTextHighlightClass: '',
+	optionRowHighlightClass: '',
 	resultTextClass: ''
 })
 
@@ -1025,17 +1056,16 @@ onBackPress(() : boolean => {
 	position: relative;
 	width: 100%;
 	box-sizing: border-box;
-	height: 36px;
-	border: 1px solid #e4e4e7;
-	border-radius: 5px;
-	background-color: #ffffff;
+	height: 40px;
+	border: 1px solid #d1d5db;
+	border-radius: 4px;
+	background-color: transparent;
 	flex-direction: row;
 	align-items: center;
-	padding-left: 12px;
 }
 
 .uni-combox__field--disabled {
-	opacity: 0.5;
+	background-color: #f7f6f6;
 }
 
 .uni-combox__disabled-mask {
@@ -1050,18 +1080,27 @@ onBackPress(() : boolean => {
 .uni-combox__input-slot {
 	flex: 1;
 	height: 22px;
+	box-sizing: border-box;
 	flex-direction: row;
 	align-items: center;
+	padding: 0 10px;
+	margin: 0;
 }
 
 .uni-combox__result {
 	flex: 1;
 	height: 22px;
 	line-height: 22px;
-	padding-right: 10px;
+	box-sizing: border-box;
+	padding: 0 10px;
+	margin: 0;
 	font-size: 14px;
-	color: #18181b;
+	color: #1f2937;
 	text-overflow: ellipsis;
+}
+
+.uni-combox__result--disabled {
+	color: #d5d5d5;
 }
 
 .uni-combox__result--placeholder {
@@ -1070,7 +1109,7 @@ onBackPress(() : boolean => {
 
 .uni-combox__arrow-wrap {
 	width: 28px;
-	height: 36px;
+	height: 40px;
 	align-items: center;
 	justify-content: center;
 }
@@ -1078,8 +1117,8 @@ onBackPress(() : boolean => {
 .uni-combox__arrow {
 	width: 6px;
 	height: 6px;
-	border-right: 1px solid #71717a;
-	border-bottom: 1px solid #71717a;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
 	transform: rotate(45deg);
 	transition-property: transform;
 	transition-duration: 150ms;
@@ -1173,12 +1212,12 @@ onBackPress(() : boolean => {
 }
 
 .uni-combox__field:focus {
-	border-color: #a1a1aa;
-	box-shadow: 0 0 0 3px rgba(161, 161, 170, 0.24);
+	border-color: #2979ff;
+	box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.24);
 }
 
 .uni-combox__field--disabled:focus {
-	border-color: #e4e4e7;
+	border-color: #d1d5db;
 	box-shadow: none;
 }
 
@@ -1193,12 +1232,24 @@ onBackPress(() : boolean => {
 
 @media (prefers-color-scheme: dark) {
 	.uni-combox__field {
-		border-color: rgba(255, 255, 255, 0.12);
-		background-color: #27272a;
+		border-color: rgba(255, 255, 255, 0.18);
+		background-color: #3b3b3b;
+	}
+
+	.uni-combox__field--disabled {
+		background-color: #3b3b3b;
 	}
 
 	.uni-combox__result {
-		color: #fafafa;
+		color: #ffffff;
+	}
+
+	.uni-combox__result--disabled {
+		color: #8f8f8f;
+	}
+
+	.uni-combox__result--placeholder {
+		color: #757575;
 	}
 
 	.uni-combox__option {
@@ -1210,8 +1261,8 @@ onBackPress(() : boolean => {
 	}
 
 	.uni-combox__arrow {
-		border-right-color: #a1a1aa;
-		border-bottom-color: #a1a1aa;
+		border-right-color: #ffffff;
+		border-bottom-color: #ffffff;
 	}
 
 	.uni-combox__options {
@@ -1226,12 +1277,12 @@ onBackPress(() : boolean => {
 
 	/* #ifdef WEB */
 	.uni-combox__field:focus {
-		border-color: #71717a;
-		box-shadow: 0 0 0 3px rgba(113, 113, 122, 0.32);
+		border-color: #2979ff;
+		box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.32);
 	}
 
 	.uni-combox__field--disabled:focus {
-		border-color: rgba(255, 255, 255, 0.12);
+		border-color: rgba(255, 255, 255, 0.18);
 		box-shadow: none;
 	}
 
