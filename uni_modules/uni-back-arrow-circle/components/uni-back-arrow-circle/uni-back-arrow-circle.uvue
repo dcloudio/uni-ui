@@ -8,10 +8,18 @@
 </template>
 
 <script lang="ts" setup>
+  const props = withDefaults(defineProps<{
+    autoBack?: boolean
+  }>(), {
+    autoBack: true
+  })
+
   const emit = defineEmits(['click'])
   const handleClick = () => {
     emit('click')
-    uni.navigateBack({})
+    if (props.autoBack) {
+      uni.navigateBack({})
+    }
   }
 </script>
 
