@@ -6,16 +6,15 @@
 	"isExt": true,
 	"extUrl": "https://ext.dcloud.net.cn/plugin?id=30221",
 	"keywords": [
-        "uni-ui-x",
-        "uni-app-x",
-        "icon",
-        "图标"
-    ],
+		"uni-ui-x",
+		"uni-app-x",
+		"icon",
+		"图标"
+	],
 	"repository": "https://gitcode.com/dcloud/uni-ui-x",
 	"engines": {
 		"HBuilderX": "^5.0",
-        "uni-app-x": "^5.0",
-        "uni-app": ""
+		"uni-app-x": "^5.0"
 	},
 	"dcloudext": {
 		"type": "component-vue",
@@ -27,27 +26,25 @@
 				"price": "0.00"
 			}
 		},
-        "contact": {
-            "qq": ""
-        },
+		"contact": {},
 		"declaration": {
 			"ads": "无",
 			"data": "无",
 			"permissions": "无"
 		},
 		"npmurl": "https://www.npmjs.com/package/@dcloudio/uni-ui-x",
-		"darkmode": "x",
-		"i18n": "x",
-		"widescreen": "x"
+		"darkmode": "-",
+		"i18n": "-",
+		"widescreen": "-"
 	},
 	"uni_modules": {
 		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "x",
-				"aliyun": "x",
-				"alipay": "x"
+				"tcb": "-",
+				"aliyun": "-",
+				"alipay": "-"
 			},
 			"client": {
 				"uni-app": {
