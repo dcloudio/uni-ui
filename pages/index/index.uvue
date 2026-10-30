@@ -3,6 +3,10 @@
 	<navigator class="nav-item" url="/pages/uni-ui/badge-view/badge-view"><text class="nav-text">badge-view</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/data-picker/data-picker"><text class="nav-text">data-picker</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/data-picker/data-picker-view"><text class="nav-text">data-picker-view</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/data-checkbox/data-checkbox"><text class="nav-text">data-checkbox</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/data-checkbox/alipay-label-event"><text class="nav-text">data-checkbox 支付宝 label 事件验证（临时）</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/forms/form-item"><text class="nav-text">forms 表单项布局</text></navigator>
+	<navigator class="nav-item" url="/pages/uni-ui/forms/formcard"><text class="nav-text">forms 表单卡片</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/icons/icons"><text class="nav-text">icons</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/rate/rate"><text class="nav-text">rate</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/tab-bar/tab-bar"><text class="nav-text">tab-bar</text></navigator>
