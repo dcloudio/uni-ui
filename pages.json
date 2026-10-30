@@ -188,17 +188,17 @@
 						// #endif
 					}
 				},
+				{
+					"path": "icons/icons",
+					"style": {
+						"navigationBarTitleText": "Icons 图标"
+					}
+				},
 				// #ifdef VUE3-VAPOR || MP
 				{
 					"path": "expandable-text/expandable-text",
 					"style": {
 						"navigationBarTitleText": "可折叠文本"
-					}
-				},
-				{
-					"path": "icons/icons",
-					"style": {
-						"navigationBarTitleText": "Icons 图标"
 					}
 				}
 				// #endif
