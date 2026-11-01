@@ -221,6 +221,12 @@
 						"navigationBarTitleText": "label 点击验证"
 					}
 				},
+				{
+					"path": "data-vertical-marquee/data-vertical-marquee",
+					"style": {
+						"navigationBarTitleText": "uni-data-vertical-marquee"
+					}
+				},
 				// #ifdef VUE3-VAPOR || MP
 				{
 					"path": "expandable-text/expandable-text",

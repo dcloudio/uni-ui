@@ -1,5 +1,6 @@
 <template>
 	<scroll-view class="page" :class="isDarkMode ? 'theme-dark' : 'theme-light'" style="flex: 1;">
+	<navigator class="nav-item" url="/pages/uni-ui/data-vertical-marquee/data-vertical-marquee"><text class="nav-text">data-vertical-marquee</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/badge-view/badge-view"><text class="nav-text">badge-view</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/data-picker/data-picker"><text class="nav-text">data-picker</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/data-picker/data-picker-view"><text class="nav-text">data-picker-view</text></navigator>
