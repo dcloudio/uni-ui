@@ -108,7 +108,7 @@ uni-ui 无法直接升级 uni-ui x，组件名称、用法都有变化。
 |uni-easyinput				|增强输入框							|改用内置input组件														|
 |uni-fab							|悬浮按钮								|改用[uni-fab-button](https://ext.dcloud.net.cn/plugin?name=uni-fab-button)									|
 |uni-fav							|收藏按钮								|无																									|
-|uni-file-picker			|文件选择上传						|无																									|
+|uni-file-picker			|文件选择上传						|参考[uni-drag-cell](https://ext.dcloud.net.cn/plugin?name=uni-drag-cell)的九宫格图片选择示例|
 |uni-forms						|表单										|改用内置form组件|
 |uni-goods-nav				|商品导航								|无																									|
 |uni-grid							|宫格										|无																									|
