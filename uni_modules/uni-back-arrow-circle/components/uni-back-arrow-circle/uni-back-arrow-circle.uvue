@@ -16,32 +16,32 @@
    *     "android": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
+   *       "unixVaporVer": "5.33"
    *     },
    *     "ios": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
+   *       "unixVaporVer": "5.33"
    *     },
    *     "harmony": {
    *       "uniVer": "x",
    *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
+   *       "unixVaporVer": "5.33"
    *     }
    *   },
    *   "mp": {
    *     "weixin": {
    *       "uniVer": "x",
-   *       "unixVer": "5.07"
+   *       "unixVer": "5.33"
    *     },
    *     "alipay": {
    *       "uniVer": "x",
-   *       "unixVer": "5.31"
+   *       "unixVer": "5.33"
    *     }
    *   },
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "5.07"
+   *     "unixVer": "5.33"
    *   }
    * }
    * @property {Boolean} autoBack 点击后是否自动调用 uni.navigateBack({}) 返回上一页，默认值 false
@@ -57,32 +57,32 @@
      *     "android": {
      *       "uniVer": "x",
      *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.21"
+     *       "unixVaporVer": "5.33"
      *     },
      *     "ios": {
      *       "uniVer": "x",
      *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.11"
+     *       "unixVaporVer": "5.33"
      *     },
      *     "harmony": {
      *       "uniVer": "x",
      *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.07"
+     *       "unixVaporVer": "5.33"
      *     }
      *   },
      *   "mp": {
      *     "weixin": {
      *       "uniVer": "x",
-     *       "unixVer": "5.07"
+     *       "unixVer": "5.33"
      *     },
      *     "alipay": {
      *       "uniVer": "x",
-     *       "unixVer": "5.31"
+     *       "unixVer": "5.33"
      *     }
      *   },
      *   "web": {
      *     "uniVer": "x",
-     *     "unixVer": "5.07"
+     *     "unixVer": "5.33"
      *   }
      * }
      */
