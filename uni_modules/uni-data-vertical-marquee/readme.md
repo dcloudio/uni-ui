@@ -133,6 +133,8 @@ function onChange(event : any) {
 组件不自带任何文字样式与高度。文字样式通过 external class `text-class` 控制。
 容器高度自动被文字撑开。整体在父容器中的垂直居中由外层控制。
 
+文字单行显示，超出容器宽度时显示省略号。微信小程序端展示时会将换行符（`\n`、`\r`、`\r\n`）替换为空格；`click` / `change` 事件仍回传未经修改的原始数据。
+
 ```vue
 <template>
   <view class="notice-bar">
