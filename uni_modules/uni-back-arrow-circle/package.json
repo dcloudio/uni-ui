@@ -13,8 +13,8 @@
   ],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
-    "HBuilderX": "^5.07",
-    "uni-app-x": "^5.07",
+    "HBuilderX": "^5.33",
+    "uni-app-x": "^5.33",
     "uni-app": ""
   },
   "directories": {

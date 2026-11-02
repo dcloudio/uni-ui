@@ -13,36 +13,15 @@
    * @description 带圆形背景的返回箭头组件，使用旋转边框绘制箭头，支持暗黑模式与 CSS 变量定制箭头颜色、线宽；默认只触发 click，开启 autoBack 后自动返回上一页。
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.33"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.33"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.33"
-   *     }
+   *     "android": {"unixVaporVer": "5.33"},
+   *     "ios": {"unixVaporVer": "5.33"},
+   *     "harmony": {"unixVaporVer": "5.33"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.33"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.33"
-   *     }
+   *     "weixin": {"unixVer": "5.33"},
+   *     "alipay": {"unixVer": "5.33"}
    *   },
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "5.33"
-   *   }
+   *   "web": {"unixVer": "5.33","unixVaporVer": "5.33"}
    * }
    * @property {Boolean} autoBack 点击后是否自动调用 uni.navigateBack({}) 返回上一页，默认值 false
    * @event {Function} click 点击时触发，无参数；当 autoBack 为 true 时随后返回上一页
@@ -54,36 +33,15 @@
      * @default false
      * @uniPlatform {
      *   "app": {
-     *     "android": {
-     *       "uniVer": "x",
-     *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.33"
-     *     },
-     *     "ios": {
-     *       "uniVer": "x",
-     *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.33"
-     *     },
-     *     "harmony": {
-     *       "uniVer": "x",
-     *       "unixVer": "5.07",
-     *       "unixVaporVer": "5.33"
-     *     }
+     *     "android": {"unixVaporVer": "5.33"},
+     *     "ios": {"unixVaporVer": "5.33"},
+     *     "harmony": {"unixVaporVer": "5.33"}
      *   },
      *   "mp": {
-     *     "weixin": {
-     *       "uniVer": "x",
-     *       "unixVer": "5.33"
-     *     },
-     *     "alipay": {
-     *       "uniVer": "x",
-     *       "unixVer": "5.33"
-     *     }
+     *     "weixin": {"unixVer": "5.33"},
+     *     "alipay": {"unixVer": "5.33"}
      *   },
-     *   "web": {
-     *     "uniVer": "x",
-     *     "unixVer": "5.33"
-     *   }
+     *   "web": {"unixVer": "5.33","unixVaporVer": "5.33"}
      * }
      */
     autoBack?: boolean
