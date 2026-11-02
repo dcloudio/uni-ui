@@ -1,14 +1,16 @@
 # uni-back-arrow-circle 圆形返回按钮
 
-使用旋转边框绘制箭头，保留圆形背景和 28px × 28px 点击区域。App 的箭头子 view 使用 flatten；Web、小程序使用 ::after 伪元素。支持系统暗黑模式，无字体或图片依赖。
+带圆形背景的返回箭头组件。箭头由旋转 45° 的边框绘制，保留 28px × 28px 的圆形点击区域，支持系统暗黑模式，无字体或图片依赖。
 
-## 使用
+App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上；Web、小程序端使用根节点的 `::after` 伪元素绘制箭头，不额外创建内部节点。
+
+## 基本用法
 
 将模块放入项目的 `uni_modules` 目录后，通过 easycom 使用：
 
 ```vue
 <template>
-  <uni-back-arrow-circle class="back" @click="onBackClick" />
+  <uni-back-arrow-circle @click="onBackClick" />
 </template>
 
 <script setup lang="ts">
@@ -17,23 +19,17 @@
     uni.navigateBack({})
   }
 </script>
-
-<style>
-  .back {
-    --back-arrow-color: #ffffff;
-    --back-arrow-width: 1px;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-</style>
 ```
 
 ## 属性
 
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| autoBack | boolean | false | 点击后是否自动调用 uni.navigateBack({}) 返回上一页 |
+| autoBack | boolean | false | 点击后是否自动调用 `uni.navigateBack({})` 返回上一页 |
 
-默认只触发 `click`，由调用方处理导航、关闭弹层或确认后再返回。需要组件自动返回上一页时，显式开启：
+### autoBack
+
+默认只触发 `click`，由调用方处理导航、关闭弹层或二次确认。需要组件自动返回上一页时，显式开启：
 
 ```vue
 <uni-back-arrow-circle :auto-back="true" />
@@ -43,9 +39,9 @@
 
 ## 事件
 
-| 事件 | 说明 |
-| --- | --- |
-| click | 点击时触发，无参数；当 autoBack 为 true 时随后返回上一页。 |
+| 事件 | 说明 | 回调参数 |
+| --- | --- | --- |
+| click | 点击时触发；当 autoBack 为 `true` 时随后返回上一页 | 无 |
 
 ## 样式
 
@@ -56,4 +52,20 @@
 | --back-arrow-color | 浅色 #000000，深色 #ffffff | 箭头颜色；显式设置后覆盖深浅色默认值 |
 | --back-arrow-width | 2px | 箭头边框线宽 |
 
+```vue
+<uni-back-arrow-circle class="back" />
+```
+
+```css
+.back {
+  --back-arrow-color: #ffffff;
+  --back-arrow-width: 1px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+```
+
 默认外边距为 6px，圆形背景直径为 28px。
+
+## 暗黑模式
+
+组件默认跟随系统暗黑模式：圆形背景色自动加深，箭头颜色由 #000000 切换为 #ffffff。未显式设置 `--back-arrow-color` 时生效。
