@@ -55,6 +55,9 @@
 					"path": "combobox/combobox",
 					"style": {
 						"navigationBarTitleText": "uni-combobox"
+						// #ifdef MP-ALIPAY
+						,"allowsBounceVertical": "NO"
+						// #endif
 					}
 				},
 				// #endif
