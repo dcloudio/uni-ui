@@ -35,7 +35,7 @@
 
   /**
    * DataPickerview
-   * @description 通过本地数据或 datacom 数据的级联选择组件，支持单列和多列级联选择，列数没有限制
+   * @description 通过本地数据或 datacom 数据的级联选择组件，支持单列和多列级联选择，列数没有限制，如果屏幕显示不全，顶部tab区域会左右滚动。
    * @uniPlatform {
    *   "app": {
    *     "android": {
