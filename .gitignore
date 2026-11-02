@@ -14,6 +14,7 @@ harmony-configs
 /nul
 
 temps/example_temps
+temps/readme_backups/
 
 temps/sync-changelog.md
 temps/sync-version.json
