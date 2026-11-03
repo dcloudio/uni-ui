@@ -1,18 +1,24 @@
 <template>
-	<!-- TODO  Android/iOS平台不支持裁剪显示半个文字，高性能场景包裹一层view不合适，需要等App平台解决-->
-	<text v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''" :style="props.starActiveStyle ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
+	<text flatten v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else
     <!-- #ifdef MP -->
     :id="containerId"
     <!-- #endif -->
     style="position: relative;align-self: flex-start;" @click="onTap">
-    <text class="stars-pos gray-stars" style="white-space: nowrap;" :class="props.starClass ?? ''" :style="props.starStyle ?? ''">{{ stars }}</text> <!-- 背景灰星-->
+    <text flatten class="stars-pos gray-stars" style="white-space: nowrap;" :class="props.starClass ?? ''" :style="props.letterSpacing ? { letterSpacing: props.letterSpacing + 'px' } : {}">{{ stars }}</text> <!-- 背景灰星-->
     <!-- Android/iOS平台不支持裁剪显示半个文字，需通过包裹一层view裁剪实现 -->
+		<!-- #ifdef (APP-ANDROID || APP-IOS) && !VUE3-VAPOR -->
 		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth">
-			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''"
-      :style="'white-space: nowrap; align-self: flex-start;' + props.starStyle + ';' + props.starActiveStyle">★★★★★</text>
+			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;">★★★★★</text>
+			<!-- 前景亮星，宽度根据value变化-->
 		</view>
+		<!-- #endif -->
+		<!-- #ifndef ((APP-ANDROID || APP-IOS) && !VUE3-VAPOR) -->
+		<text flatten class="stars-pos active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;"
+		:style="props.letterSpacing ? { width: calculatedWidth, letterSpacing: props.letterSpacing + 'px' } : { width: calculatedWidth }"
+		>★★★★★</text>
 		<!-- 前景亮星，宽度根据value变化-->
+		<!-- #endif -->
   </view>
 </template>
 
@@ -22,34 +28,15 @@
    * @description 评分组件
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -64,34 +51,15 @@ const props = defineProps<{
    * @description 当前评分，取值范围 0~5 的数字
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -101,34 +69,15 @@ const props = defineProps<{
    * @description v-model 绑定值，支持双向绑定，优先级高于 value
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -138,34 +87,15 @@ const props = defineProps<{
    * @description 是否显示完整 5 颗星。为 true 时用灰星填充未选中位置；为 false 时仅显示亮星，性能更高但不支持点击交互
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -175,34 +105,15 @@ const props = defineProps<{
    * @description 是否只读，为 true 时不响应点击评分（full 为 false 时始终只读）
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -212,34 +123,15 @@ const props = defineProps<{
    * @description 灰星是否使用镂空样式（☆），为 false 时使用实心灰星（★）
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -249,150 +141,56 @@ const props = defineProps<{
    * @description 灰星（未选中）的自定义样式类
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
    */
   starClass?: string.ClassString,
   /**
-   * @description 灰星（未选中）的内联样式
-   * @uniPlatform {
-   *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
-   *   },
-   *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
-   *   },
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "5.07"
-   *   }
-   * }
-   */
-  starStyle?: string
-  /**
    * @description 亮星（选中）的自定义样式类
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
    */
   starActiveClass?: string.ClassString,
-  /**
-   * @description 亮星（选中）的内联样式
-   * @uniPlatform {
-   *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
-   *   },
-   *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
-   *   },
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "5.07"
-   *   }
-   * }
-   */
-  starActiveStyle?: string
+	/**
+	 * @description 字间距 (px)
+	 * @uniPlatform {
+	 *   "app": {
+	 *     "android": {"unixVer": "x",  "unixVaporVer": "5.21"},
+	 *     "ios": {"unixVer": "x",  "unixVaporVer": "5.11"},
+	 *     "harmony": {"unixVer": "x",  "unixVaporVer": "5.07"}
+	 *   },
+	 *   "mp": {
+	 *     "weixin": {"unixVer": "5.07"},
+	 *     "alipay": {"unixVer": "5.31"}
+	 *   },
+	 *   "web": {
+	 *     "unixVer": "5.07"
+	 *   }
+	 * }
+	 */
+	letterSpacing ?: Number
 }>()
 
 // 计算星星显示
@@ -412,34 +210,15 @@ const emit = defineEmits<{
    * @description 评分变化事件，参数为评分值，类型为 number
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -449,34 +228,15 @@ const emit = defineEmits<{
    * @description v-model 绑定值变化事件，参数为评分值，类型为 number
    * @uniPlatform {
    *   "app": {
-   *     "android": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.21"
-   *     },
-   *     "ios": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.11"
-   *     },
-   *     "harmony": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07",
-   *       "unixVaporVer": "5.07"
-   *     }
+   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
    *   },
    *   "mp": {
-   *     "weixin": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.07"
-   *     },
-   *     "alipay": {
-   *       "uniVer": "x",
-   *       "unixVer": "5.31"
-   *     }
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
    *   },
    *   "web": {
-   *     "uniVer": "x",
    *     "unixVer": "5.07"
    *   }
    * }
@@ -516,10 +276,25 @@ watch(() : number | null => {
 const calculatedWidth = computed(() => {
   // 确保在 0 到 5 之间
   const value = currentValue.value
-  const rate = Math.max(0, Math.min(5, value))
-	// console.log('rate: ',rate);
-	// TODO Android端小数无法正常渲染，不是宽度计算的问题
-  return `${(rate / 5) * 100}%`
+  const rate = Math.max(0, Math.min(5, value)) //防止传入值超过5
+
+// #ifdef (APP && !VUE3-VAPOR) || APP-ANDROID
+// app vdom 保持之前逻辑不变，iOS和鸿蒙通过css设置字间距不准的问题也遗留
+// Android平台的字间距是前后平均分配的，这个百分比计算是正确的
+		return `${(rate / 5) * 100}%`
+// #endif
+
+// #ifdef WEB || MP || (APP-IOS && VUE3-VAPOR) || (APP-HARMONY && VUE3-VAPOR)
+// 非Android平台，css的letter-spacing是每个字符向后分配的。用上面的百分比计算有差异。如果仍保留css设置字间距的方式，需要getBoundRect测量，影响性能。所以新增了组件属性letterSpacing来解决
+	if (props.letterSpacing == undefined || props.letterSpacing == 0) { //外部没有传letter space组件属性,仍然走原来的方式,传css的letter-space时会有一些误差
+		return `${(rate / 5) * 100}%`
+	}
+	const percentageStr = (rate/5 * 100) + '%';
+	// 计算当前分数下多出了多少个 letter-spacing。例如 3.5 星时，5 * 0.7 = 3.5，向下取整 = 3，多出了 0.5 个间距
+	const factor = (5 * (rate / 5)) - Math.floor(5 * (rate / 5)) // 实际就是小数部分对应比例，如 0.5、0.2 等
+	// 如果是整数星（如 3.0 星），factor 为 0，不需要修正；如果是半星（如 3.5 星），扣除 0.5 * letterSpacing
+	return `calc(${percentageStr} - ${factor * props.letterSpacing}px)`
+// #endif
 })
 
 // #ifndef MP
@@ -599,7 +374,6 @@ async function onTap(event: UniPointerEvent) : Promise<void> {
 }
 // #endif
 
-// TODO 接入form表单规范，可以submit
 </script>
 
 <style>
@@ -616,7 +390,7 @@ async function onTap(event: UniPointerEvent) : Promise<void> {
   position: relative; /* 确保底层可见 */
 }
 .active-init-width {
-  width: 0%; /* full时高亮星的初始宽度 */
+  width: 0px; /* full时高亮星的初始宽度 */
 }
 .active-color{
  color: #ffca3e; /* 点亮颜色 */
