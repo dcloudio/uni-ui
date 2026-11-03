@@ -79,6 +79,15 @@
   height: 72px;
 }
 
+/* #ifdef H5 */
+@media all and (min-width: 768px) {
+  .list-item {
+    float: left;
+    border-bottom: none;
+  }
+}
+/* #endif */
+
 @media (prefers-color-scheme: dark) {
   .uni-data-picker-view {
     background-color: #2b2b2b;
