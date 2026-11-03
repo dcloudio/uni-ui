@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "绑定数组数据，上下轮播",
   "isExt": true,
-  "extUrl": "",
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=30514",
   "keywords": [
     "vertical-marquee",
     "数据驱动的上下滚动文字组件",
