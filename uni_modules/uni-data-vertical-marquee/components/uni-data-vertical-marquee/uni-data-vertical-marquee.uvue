@@ -144,15 +144,12 @@ const nextText = computed(() : string => {
   return source.value[index]['_text']
 })
 
-// 微信小程序 text 会保留换行；只规范化展示文本，事件仍回传原始数据。
+// #ifdef MP-WEIXIN
+// 微信小程序 text 在 nowrap 下仍会保留换行；只规范化展示文本，事件仍回传原始数据。
 function toSingleLine(text: string) : string {
-  // #ifdef MP-WEIXIN
   return text.replace(/[\r\n]+/g, ' ')
-  // #endif
-  // #ifndef MP-WEIXIN
-  return text
-  // #endif
 }
+// #endif
 
 // 将字符串数组或对象数组统一归一化为内部渲染结构
 function buildSource(list: any) {
@@ -162,12 +159,20 @@ function buildSource(list: any) {
   for (let i = 0; i < total; i++) {
     const item = list[i]
     if (typeof item === 'string') {
-      result.push({ _text: toSingleLine(item), _value: item, _data: item })
+      let text = item
+      // #ifdef MP-WEIXIN
+      text = toSingleLine(text)
+      // #endif
+      result.push({ _text: text, _value: item, _data: item })
     } else if (item != null) {
       const text = item['text']
       const value = item['value']
+      let displayText = text != null ? String(text) : ''
+      // #ifdef MP-WEIXIN
+      displayText = toSingleLine(displayText)
+      // #endif
       result.push({
-        _text: text != null ? toSingleLine(String(text)) : '',
+        _text: displayText,
         _value: value != null ? value : '',
         _data: item
       })
