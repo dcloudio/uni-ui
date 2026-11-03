@@ -1,13 +1,14 @@
 {
-  "id": "uni-data-vertical-marquee",
+  "id": "uni-data-v-marquee",
   "displayName": "上下滚动文字组件",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "绑定数组数据，上下轮播",
   "isExt": true,
   "extUrl": "",
   "keywords": [
-    "uni-data-vertical-marquee",
+    "vertical-marquee",
     "数据驱动的上下滚动文字组件",
+    "marquee",
     "uni-app-x"
 ],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
@@ -40,7 +41,8 @@
     "darkmode": "x",
     "i18n": "x",
     "widescreen": "x",
-    "npmurl": ""
+    "npmurl": "",
+    "vapor": "√"
   },
   "uni_modules": {
     "dependencies": [],
