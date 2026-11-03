@@ -56,8 +56,6 @@
 </template>
 
 <script setup lang="ts">
-  import { dataPickerProps, useDataPicker } from "../uni-data-picker-view/uni-data-picker.ts"
-
   /**
    * DataPicker 级联选择
    * @description 通过本地数据或 datacom 数据的级联选择组件，支持单列和多列级联选择，列数没有限制，如果屏幕显示不全，顶部tab区域会左右滚动。
@@ -84,6 +82,11 @@
    *     "unixVer": "5.33"
    *   }
    * }
+   */
+
+  import { dataPickerProps, useDataPicker } from "../uni-data-picker-view/uni-data-picker.ts"
+
+  /**
    * @tutorial https://ext.dcloud.net.cn/plugin?id=uni-data-picker-x
    * @property {String} popup-title 弹出窗口标题
    * @property {String} popup-class 弹出窗口自定义样式类名

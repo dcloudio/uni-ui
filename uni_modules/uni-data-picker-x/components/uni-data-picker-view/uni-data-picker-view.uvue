@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-  import { dataPickerProps, useDataPicker } from "./uni-data-picker.ts"
-
   /**
    * DataPickerview
    * @description 通过本地数据或 datacom 数据的级联选择组件，支持单列和多列级联选择，列数没有限制，如果屏幕显示不全，顶部tab区域会左右滚动。
@@ -59,7 +57,11 @@
    *     "unixVer": "5.33"
    *   }
    * }
-   * @description uni-data-picker-view
+   */
+
+  import { dataPickerProps, useDataPicker } from "./uni-data-picker.ts"
+
+  /**
    * @tutorial https://ext.dcloud.net.cn/plugin?id=uni-data-picker-x
    * @property {Array} localdata 本地数据，参考
    * @property {Boolean} step-searh = [true|false] 是否分布查询
