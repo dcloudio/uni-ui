@@ -1,0 +1,47 @@
+<template>
+	<view class="page">
+		<view class="navigation-bar" :style="{ paddingTop: 'var(--uni-safe-area-inset-top)' }">
+			<uni-back-arrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
+			<text class="navigation-title">uni-back-arrow-circle</text>
+		</view>
+		<view class="content">
+			<text class="description">圆形返回箭头，适配安全区，点击左上角返回按钮自动返回上一页。</text>
+			<text class="section-title">自定义样式</text>
+			<view class="examples">
+				<uni-back-arrow-circle id="custom-blue" class="blue-arrow" @click="onCustomClick" />
+				<uni-back-arrow-circle id="custom-large" class="large-arrow" @click="onCustomClick" />
+				<uni-back-arrow-circle id="custom-dark" class="dark-arrow" @click="onCustomClick" />
+			</view>
+			<text class="section-title">事件</text>
+			<button id="event-button" type="primary" @click="onCustomClick">点击返回箭头或按钮</button>
+			<text class="event-result">{{ eventMessage }}</text>
+		</view>
+	</view>
+</template>
+
+<script setup lang="ts">
+	const eventMessage = ref('尚未触发 click 事件')
+
+	function onBackClick() {
+		eventMessage.value = '默认返回按钮触发了 click'
+	}
+
+	function onCustomClick() {
+		eventMessage.value = '自定义返回按钮触发了 click'
+		uni.showToast({ title: '点击了返回箭头', icon: 'none' })
+	}
+</script>
+
+<style>
+	.page { flex: 1; background-color: var(--page-bg); }
+	.navigation-bar { height: 44px; flex-direction: row; align-items: center; border-bottom: 1px solid #e5e5e5; }
+	.navigation-title { flex: 1; text-align: center; font-size: 17px; font-weight: bold; margin-right: 40px; color: var(--text-color); }
+	.content { flex: 1; padding: 20px; }
+	.description, .event-result { color: #666; line-height: 24px; }
+	.section-title { display: block; margin-top: 24px; margin-bottom: 12px; font-size: 16px; font-weight: bold; color: var(--text-color); }
+	.examples { flex-direction: row; align-items: center; gap: 12px; }
+	.blue-arrow { --back-arrow-color: #007aff; --back-arrow-width: 3px; background-color: #e5f1ff; }
+	.large-arrow { transform: scale(1.25); --back-arrow-width: 3px; }
+	.dark-arrow { --back-arrow-color: #fff; background-color: #333; }
+	.event-result { margin-top: 16px; }
+</style>
