@@ -12,16 +12,18 @@
         </template>
       </view>
     </scroll-view>
-    <list-view ref="listView" class="list-view" :class="listViewClass" :scroll-y="true" @scroll="onListScroll">
-      <list-item class="list-item" :class="listItemClass" v-for="(item, index) in dataPicker.currentDataList" :key="index"
+    <scroll-view ref="listView" class="list-view" :class="listViewClass" :scroll-y="true" @scroll="onListScroll">
+      <view class="list-item" :class="listItemClass" v-for="(item, index) in dataPicker.currentDataList" :key="index"
         @click="dataPicker.onNodeClick(item)">
-        <text class="item-text" :class="[listItemTextClass, (item['disable'] as boolean) ? 'item-text-disabled' : '']"
+        <text class="item-text" :class="[listItemTextClass,
+          (item['disable'] as boolean) ? 'item-text-disabled' : '',
+          item[dataPicker.mappingValueName] == dataPicker.selectedNodes[dataPicker.selectedIndex][dataPicker.mappingValueName] ? 'item-text-active' : '']"
           flatten>{{item[dataPicker.mappingTextName]}}</text>
         <text class="check" :class="listItemCheckClass"
           v-if="item[dataPicker.mappingValueName] == dataPicker.selectedNodes[dataPicker.selectedIndex][dataPicker.mappingValueName]"
           flatten></text>
-      </list-item>
-    </list-view>
+      </view>
+    </scroll-view>
     <view class="loading-cover" v-if="dataPicker.loading">
       <slot name="picker-view-loading" :loading="dataPicker.loading">
         <loading class="loading-size" :class="loadingClass"></loading>

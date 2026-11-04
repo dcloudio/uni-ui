@@ -615,7 +615,7 @@
       position: unset;
       height: auto;
       width: 100%;
-      min-height: 200px;
+      min-height: 150px;
       max-height: 50vh;
       overflow: unset;
       /* 宽屏下不使用滑入/滑出动画，直接显示 */
