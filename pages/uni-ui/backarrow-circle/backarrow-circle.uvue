@@ -2,16 +2,16 @@
 	<view class="page">
 		<view class="status-bar"></view>
 		<view class="navigation-bar">
-			<uni-back-arrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
-			<text class="navigation-title">uni-back-arrow-circle</text>
+			<uni-backarrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
+			<text class="navigation-title">uni-backarrow-circle</text>
 		</view>
 		<view class="content">
 			<text class="description">圆形返回箭头，适配安全区，点击左上角返回按钮自动返回上一页。</text>
 			<text class="section-title">自定义样式</text>
 			<view class="examples">
-				<uni-back-arrow-circle id="custom-blue" class="blue-arrow" @click="onCustomClick" />
-				<uni-back-arrow-circle id="custom-large" class="large-arrow" @click="onCustomClick" />
-				<uni-back-arrow-circle id="custom-dark" class="dark-arrow" @click="onCustomClick" />
+				<uni-backarrow-circle id="custom-blue" class="blue-arrow" @click="onCustomClick" />
+				<uni-backarrow-circle id="custom-large" class="large-arrow" @click="onCustomClick" />
+				<uni-backarrow-circle id="custom-dark" class="dark-arrow" @click="onCustomClick" />
 			</view>
 			<text class="section-title">事件</text>
 			<button id="event-button" type="primary" @click="onCustomClick">点击返回箭头或按钮</button>

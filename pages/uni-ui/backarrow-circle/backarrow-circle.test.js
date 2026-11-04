@@ -1,6 +1,6 @@
-const PAGE_PATH = '/pages/uni-ui/back-arrow-circle/back-arrow-circle'
+const PAGE_PATH = '/pages/uni-ui/backarrow-circle/backarrow-circle'
 
-describe('back-arrow-circle', () => {
+describe('backarrow-circle', () => {
 	let page
 
 	beforeEach(async () => {
@@ -8,7 +8,7 @@ describe('back-arrow-circle', () => {
 		await page.waitFor('#default-back')
 	})
 
-	it('back-arrow-circle snapshot', async () => {
+	it('backarrow-circle snapshot', async () => {
 		const image = await program.screenshot({ fullPage: true })
 		expect(image).toSaveImageSnapshot()
 	})

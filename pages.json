@@ -98,9 +98,9 @@
 					}
 				},
 				{
-					"path": "back-arrow-circle/back-arrow-circle",
+					"path": "backarrow-circle/backarrow-circle",
 					"style": {
-						"navigationBarTitleText": "uni-back-arrow-circle",
+						"navigationBarTitleText": "uni-backarrow-circle",
 						"navigationStyle": "custom"
 					}
 				},

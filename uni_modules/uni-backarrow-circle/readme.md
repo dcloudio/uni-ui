@@ -1,4 +1,4 @@
-# uni-back-arrow-circle 圆形返回按钮
+# uni-backarrow-circle 圆形返回按钮
 
 带圆形背景的返回箭头组件。箭头由旋转 45° 的边框绘制，保留 28px × 28px 的圆形点击区域，支持系统暗黑模式，无字体或图片依赖。
 
@@ -10,7 +10,7 @@ App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上�
 
 ```vue
 <template>
-  <uni-back-arrow-circle @click="onBackClick" />
+  <uni-backarrow-circle @click="onBackClick" />
 </template>
 
 <script setup lang="ts">
@@ -32,7 +32,7 @@ App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上�
 默认只触发 `click`，由调用方处理导航、关闭弹层或二次确认。需要组件自动返回上一页时，显式开启：
 
 ```vue
-<uni-back-arrow-circle :auto-back="true" />
+<uni-backarrow-circle :auto-back="true" />
 ```
 
 请使用 `:auto-back="true"` 传入布尔值。开启自动返回后，组件先触发 `click`，随后调用 `uni.navigateBack({})`，不会等待异步点击处理完成；需要离开确认时，保持默认关闭，在确认后自行调用导航 API。
@@ -53,7 +53,7 @@ App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上�
 | --back-arrow-width | 2px | 箭头边框线宽 |
 
 ```vue
-<uni-back-arrow-circle class="back" />
+<uni-backarrow-circle class="back" />
 ```
 
 ```css
