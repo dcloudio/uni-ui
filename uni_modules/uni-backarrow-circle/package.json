@@ -1,16 +1,17 @@
 {
   "id": "uni-backarrow-circle",
-  "displayName": "uni-backarrow-circle 圆形返回按钮",
-  "version": "1.0.2",
+  "displayName": "uni-backarrow-circle 返回箭头组件",
+  "version": "1.0.0",
   "description": "带圆形背景的返回箭头组件，使用旋转边框绘制箭头，支持暗黑模式和自定义颜色、线宽。",
   "isExt": true,
-  "extUrl": "",
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=30536",
   "keywords": [
     "uni-ui",
     "uni-app-x",
     "返回",
-    "箭头"
-  ],
+    "箭头",
+    "自定义返回按钮"
+],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "^5.33",
