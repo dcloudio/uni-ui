@@ -1,6 +1,6 @@
 {
   "id": "uni-backarrow-circle",
-  "displayName": "uni-backarrow-circle 返回箭头组件",
+  "displayName": "uni-backarrow-circle 圆形返回按钮",
   "version": "1.0.0",
   "description": "带圆形背景的返回箭头组件，使用旋转边框绘制箭头，支持暗黑模式和自定义颜色、线宽。",
   "isExt": true,
