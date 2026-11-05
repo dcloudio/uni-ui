@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<view class="status-bar"></view>
 		<view class="navigation-bar">
 			<uni-backarrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
 			<text class="navigation-title">uni-backarrow-circle</text>
@@ -42,8 +41,7 @@
 		padding: 15px;
 	}
 
-	.description,
-	.examples {
+	.description {
 		margin-bottom: 15px;
 	}
 
@@ -56,14 +54,13 @@
 		margin-top: 15px;
 	}
 
-	.status-bar {
-		height: var(--status-bar-height);
-		flex-shrink: 0;
-	}
-
 	.navigation-bar {
 		flex-direction: row;
-		height: 44px;
+		/* 返回按钮自身包含顶部安全区，导航行只提供对应的布局高度。 */
+		height: calc(var(--uni-safe-area-inset-top, 0px) + 44px);
+		/* #ifdef MP */
+		height: calc(var(--status-bar-height, 0px) + 44px);
+		/* #endif */
 		flex-shrink: 0;
 		align-items: center;
 	}
@@ -71,30 +68,43 @@
 	.navigation-title {
 		flex: 1;
 		text-align: center;
-		font-size: 17px;
+		font-size: 18px;
 		font-weight: bold;
-		margin-right: 40px;
+		/* 标题与返回按钮一起下移，保持同一行的视觉中心。 */
+		margin-top: var(--uni-safe-area-inset-top);
+		/* #ifdef MP */
+		margin-top: var(--status-bar-height);
+		/* #endif */
 	}
 
 	.examples {
 		flex-direction: row;
 		align-items: center;
+		height: 100px;
+	}
+
+	/* 内容区展示按钮无需再次避让屏幕安全区。 */
+	.blue-arrow,
+	.large-arrow,
+	.dark-arrow {
+		margin-top: 0;
+		margin-left: 0;
 	}
 
 	.blue-arrow {
-		margin-right: 18px;
 		--back-arrow-color: #007aff;
 		--back-arrow-width: 3px;
 		background-color: #e5f1ff;
 	}
 
 	.large-arrow {
-		margin-right: 18px;
+		margin-left: 40px;
 		transform: scale(1.25);
 		--back-arrow-width: 3px;
 	}
 
 	.dark-arrow {
+		margin-left: 40px;
 		--back-arrow-color: #fff;
 		background-color: #333;
 	}
