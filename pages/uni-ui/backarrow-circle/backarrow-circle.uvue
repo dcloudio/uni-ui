@@ -1,7 +1,10 @@
 <template>
 	<view class="page">
 		<view class="navigation-bar">
+			<!-- 支付宝小程序导航栏左上角返回按钮始终存在，无法隐藏，会导致重叠 -->
+			<!-- #ifndef MP-ALIPAY -->
 			<uni-backarrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
+			<!-- #endif -->
 			<text class="navigation-title" :style="{ marginRight: titleRightSpace + 'px' }">uni-backarrow-circle</text>
 		</view>
 		<view class="content">

@@ -100,8 +100,15 @@
 				{
 					"path": "backarrow-circle/backarrow-circle",
 					"style": {
+						// #ifndef MP-ALIPAY
 						"navigationBarTitleText": "uni-backarrow-circle",
 						"navigationStyle": "custom"
+						// #endif
+						// #ifdef MP-ALIPAY
+						,
+						"transparentTitle": "always",
+						"navigationBarTextStyle":"black"
+						// #endif
 					}
 				},
 				{
@@ -262,7 +269,9 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
+		// #ifndef MP-ALIPAY
 		"navigationBarTitleText": "uni-ui x",
+		// #endif
 		"navigationBarBackgroundColor": "#00aaff",
 		"backgroundColor": "@backgroundColor",
 		"backgroundColorContent": "@backgroundColorContent"
