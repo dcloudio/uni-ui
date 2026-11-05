@@ -22,6 +22,11 @@
 	<text class="title">响应点击并双向绑定响应式变量</text>
 		<uni-rate full :letter-spacing="10" v-model="data.vModelRateValue" star-class="big-font" star-active-class="big-font" />
 		<text>{{data.vModelRateValue}}</text>
+	<text class="title">向右偏移 100px，点击评分</text>
+		<view id="rate-offset-test" class="offset-rate">
+			<uni-rate full v-model="data.offsetRateValue" :letter-spacing="10" star-class="big-font" star-active-class="big-font" />
+		</view>
+		<text class="desc">当前评分：{{ data.offsetRateValue }}</text>
 	<text class="title">只读，不触发change" </text>
 		<uni-rate readonly :value="5" @change="onRateChange" />
 	<text class="title">高性能只读，自定义大小和颜色（style方式），此时小数不生效</text>
@@ -38,12 +43,15 @@
 	type Data = {
 		vModelRateValue: number
 		rateValue: number
+		offsetRateValue: number
 	}
 
 	const data = reactive<Data>({
 		vModelRateValue: 0,
-		rateValue: 0
+		rateValue: 0,
+		offsetRateValue: 0
 	})
+
 	let interval = 0
 
 	function onRateChange(value: number) {
@@ -87,6 +95,10 @@
 <style>
 page{
 	padding: 10px;
+}
+.offset-rate {
+	margin-left: 100px;
+	align-self: flex-start;
 }
 .desc {
 	color: var(--text-color, #333333);
