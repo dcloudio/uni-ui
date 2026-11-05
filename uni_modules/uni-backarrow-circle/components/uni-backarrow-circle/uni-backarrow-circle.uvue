@@ -85,8 +85,8 @@
     width: 12px;
     height: 12px;
     transform: rotate(45deg);
-    border-left: var(--back-arrow-width, 2px) solid var(--back-arrow-color, #000000);
-    border-bottom: var(--back-arrow-width, 2px) solid var(--back-arrow-color, #000000);
+    border-left: var(--uni-backarrow-circle-width, 2px) solid var(--uni-backarrow-circle-color, #000000);
+    border-bottom: var(--uni-backarrow-circle-width, 2px) solid var(--uni-backarrow-circle-color, #000000);
   }
 
   /* #ifdef WEB || MP */
@@ -105,8 +105,8 @@
     .back-circle::after,
     /* #endif */
     .back-arrow {
-      border-left-color: var(--back-arrow-color, #ffffff);
-      border-bottom-color: var(--back-arrow-color, #ffffff);
+      border-left-color: var(--uni-backarrow-circle-color, #ffffff);
+      border-bottom-color: var(--uni-backarrow-circle-color, #ffffff);
     }
   }
 </style>

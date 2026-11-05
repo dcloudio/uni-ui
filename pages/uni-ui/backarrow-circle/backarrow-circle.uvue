@@ -119,20 +119,20 @@
 	}
 
 	.blue-arrow {
-		--back-arrow-color: #007aff;
-		--back-arrow-width: 3px;
+		--uni-backarrow-circle-color: #007aff;
+		--uni-backarrow-circle-width: 3px;
 		background-color: #e5f1ff;
 	}
 
 	.large-arrow {
 		margin-left: 40px;
 		transform: scale(1.25);
-		--back-arrow-width: 3px;
+		--uni-backarrow-circle-width: 3px;
 	}
 
 	.dark-arrow {
 		margin-left: 40px;
-		--back-arrow-color: #fff;
+		--uni-backarrow-circle-color: #fff;
 		background-color: #333;
 	}
 </style>
