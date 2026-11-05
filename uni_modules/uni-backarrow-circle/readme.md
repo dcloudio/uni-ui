@@ -32,7 +32,7 @@ App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上�
 默认只触发 `click`，由调用方处理导航、关闭弹层或二次确认。需要组件自动返回上一页时，显式开启：
 
 ```vue
-<uni-backarrow-circle :auto-back="true" />
+<uni-backarrow-circle auto-back />
 ```
 
 请使用 `:auto-back="true"` 传入布尔值。开启自动返回后，组件先触发 `click`，随后调用 `uni.navigateBack({})`，不会等待异步点击处理完成；需要离开确认时，保持默认关闭，在确认后自行调用导航 API。
