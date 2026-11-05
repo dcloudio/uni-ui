@@ -1,46 +1,46 @@
 <template>
-	<text flatten v-if="props.full!=true" class="active-color" :class="props.starActiveClass ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
+  <text flatten v-if="props.full != true" class="active-color" :class="props.starActiveClass ?? ''">{{ stars }}</text> <!-- 高性能，单层，只读，不显示灰星，不支持小数。必须给value-->
   <view v-else
     <!-- #ifdef MP -->
     :id="containerId"
     <!-- #endif -->
-    style="position: relative;align-self: flex-start;" @click="onTap">
+    style="position: relative; align-self: flex-start;" @click="onTap">
     <text flatten class="stars-pos gray-stars" style="white-space: nowrap;" :class="props.starClass ?? ''" :style="props.letterSpacing ? { letterSpacing: props.letterSpacing + 'px' } : {}">{{ stars }}</text> <!-- 背景灰星-->
     <!-- Android/iOS平台不支持裁剪显示半个文字，需通过包裹一层view裁剪实现 -->
-		<!-- #ifdef (APP-ANDROID || APP-IOS) && !VUE3-VAPOR -->
-		<view class="stars-pos active-init-width" :style="'width:'+calculatedWidth">
-			<text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;">★★★★★</text>
-			<!-- 前景亮星，宽度根据value变化-->
-		</view>
-		<!-- #endif -->
-		<!-- #ifndef ((APP-ANDROID || APP-IOS) && !VUE3-VAPOR) -->
-		<text flatten class="stars-pos active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;"
-		:style="props.letterSpacing ? { width: calculatedWidth, letterSpacing: props.letterSpacing + 'px' } : { width: calculatedWidth }"
-		>★★★★★</text>
-		<!-- 前景亮星，宽度根据value变化-->
-		<!-- #endif -->
+    <!-- #ifdef (APP-ANDROID || APP-IOS) && !VUE3-VAPOR -->
+    <view class="stars-pos active-init-width" :style="'width:' + calculatedWidth">
+      <text v-if="props.full" class="active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;">★★★★★</text>
+      <!-- 前景亮星，宽度根据value变化-->
+    </view>
+    <!-- #endif -->
+    <!-- #ifndef ((APP-ANDROID || APP-IOS) && !VUE3-VAPOR) -->
+    <text flatten class="stars-pos active-color" :class="props.starActiveClass ?? ''" style="white-space: nowrap; align-self: flex-start;"
+    :style="props.letterSpacing ? { width: calculatedWidth, letterSpacing: props.letterSpacing + 'px' } : { width: calculatedWidth }"
+    >★★★★★</text>
+    <!-- 前景亮星，宽度根据value变化-->
+    <!-- #endif -->
   </view>
 </template>
 
 <script setup lang="ts">
-  /**
-   * Rate 评分
-   * @description 评分组件
-   * @uniPlatform {
-   *   "app": {
-   *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
-   *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
-   *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
-   *   },
-   *   "mp": {
-   *     "weixin": {"unixVer": "5.07"},
-   *     "alipay": {"unixVer": "5.31"}
-   *   },
-   *   "web": {
-   *     "unixVer": "5.07"
-   *   }
-   * }
-   */
+/**
+ * Rate 评分
+ * @description 评分组件
+ * @uniPlatform {
+ *   "app": {
+ *     "android": {"unixVer": "5.07",  "unixVaporVer": "5.21"},
+ *     "ios": {"unixVer": "5.07",  "unixVaporVer": "5.11"},
+ *     "harmony": {"unixVer": "5.07",  "unixVaporVer": "5.07"}
+ *   },
+ *   "mp": {
+ *     "weixin": {"unixVer": "5.07"},
+ *     "alipay": {"unixVer": "5.31"}
+ *   },
+ *   "web": {
+ *     "unixVer": "5.07"
+ *   }
+ * }
+ */
 
 defineOptions({
   externalClasses: ['star-class', 'star-active-class']
@@ -173,37 +173,25 @@ const props = defineProps<{
    * }
    */
   starActiveClass?: string.ClassString,
-	/**
-	 * @description 字间距 (px)
-	 * @uniPlatform {
-	 *   "app": {
-	 *     "android": {"unixVer": "x",  "unixVaporVer": "5.21"},
-	 *     "ios": {"unixVer": "x",  "unixVaporVer": "5.11"},
-	 *     "harmony": {"unixVer": "x",  "unixVaporVer": "5.07"}
-	 *   },
-	 *   "mp": {
-	 *     "weixin": {"unixVer": "5.07"},
-	 *     "alipay": {"unixVer": "5.31"}
-	 *   },
-	 *   "web": {
-	 *     "unixVer": "5.07"
-	 *   }
-	 * }
-	 */
-	letterSpacing ?: Number
+  /**
+   * @description 字间距 (px)
+   * @uniPlatform {
+   *   "app": {
+   *     "android": {"unixVer": "x",  "unixVaporVer": "5.21"},
+   *     "ios": {"unixVer": "x",  "unixVaporVer": "5.11"},
+   *     "harmony": {"unixVer": "x",  "unixVaporVer": "5.07"}
+   *   },
+   *   "mp": {
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
+   *   },
+   *   "web": {
+   *     "unixVer": "5.07"
+   *   }
+   * }
+   */
+  letterSpacing?: number
 }>()
-
-// 计算星星显示
-const stars = computed(() => {
-  if (props.full!=true) {
-    const value = Math.max(0, Math.min(5, props.value ?? 0))
-    return '★'.repeat(Math.round(value)) //返回亮星数量
-  } else {
-    return props.plain == true ? '☆'.repeat(5) : '★'.repeat(5) //返回灰星数量
-  }
-})
-
-// 问题：props.full != true 时，下面的Script其实都没有意义，但却需要执行。但vue里又无法用if包裹下面的代码，不灵活
 
 const emit = defineEmits<{
   /**
@@ -249,135 +237,74 @@ const instance = getCurrentInstance()
 const containerId = `uni_rate_${instance?.uid || 'default'}`
 // #endif
 
-// 响应式数据 - 优先使用modelValue，其次使用value
-const currentValue = ref<number>(0)
-currentValue.value = props.modelValue ?? props.value ?? 0
-// 安全初始化函数
-/* function safeInitValue() {
-  const initialValue = props.modelValue ?? props.value ?? 0
-  if (typeof initialValue === 'number' && !isNaN(initialValue)) {
-    currentValue.value = initialValue
-  } else {
-    currentValue.value = 0
+const stars = computed(() => {
+  if (props.full != true) {
+    const value = Math.max(0, Math.min(5, props.value ?? 0))
+    return '★'.repeat(Math.round(value))
   }
-}
-// 初始化
-safeInitValue() */
-// 监听props变化
-watch(() : number | null => {
-  return props.modelValue ?? props.value ?? null
-}, (newValue : number | null) => {
-  if (newValue != null && typeof newValue === 'number' && !isNaN(newValue as number)) {
-    currentValue.value = newValue as number
+  return props.plain == true ? '☆☆☆☆☆' : '★★★★★'
+})
+
+const currentValue = ref<number>(props.modelValue ?? props.value ?? 0)
+
+watch((): number | null => props.modelValue ?? props.value ?? null, (value: number | null) => {
+  if (value != null && typeof value === 'number' && !isNaN(value)) {
+    currentValue.value = value
   }
 }, { immediate: true })
 
-// 计算点亮层的宽度
 const calculatedWidth = computed(() => {
-  // 确保在 0 到 5 之间
-  const value = currentValue.value
-  const rate = Math.max(0, Math.min(5, value)) //防止传入值超过5
+  const rate = Math.max(0, Math.min(5, currentValue.value))
+  const percentage = `${rate / 5 * 100}%`
 
-// #ifdef (APP && !VUE3-VAPOR) || APP-ANDROID
-// app vdom 保持之前逻辑不变，iOS和鸿蒙通过css设置字间距不准的问题也遗留
-// Android平台的字间距是前后平均分配的，这个百分比计算是正确的
-		return `${(rate / 5) * 100}%`
-// #endif
+  // #ifdef (APP && !VUE3-VAPOR) || APP-ANDROID
+  // Android 字间距前后均分；App VDOM 保留百分比裁剪。
+  return percentage
+  // #endif
 
-// #ifdef WEB || MP || (APP-IOS && VUE3-VAPOR) || (APP-HARMONY && VUE3-VAPOR)
-// 非Android平台，css的letter-spacing是每个字符向后分配的。用上面的百分比计算有差异。如果仍保留css设置字间距的方式，需要getBoundRect测量，影响性能。所以新增了组件属性letterSpacing来解决
-	if (props.letterSpacing == undefined || props.letterSpacing == 0) { //外部没有传letter space组件属性,仍然走原来的方式,传css的letter-space时会有一些误差
-		return `${(rate / 5) * 100}%`
-	}
-	const percentageStr = (rate/5 * 100) + '%';
-	// 计算当前分数下多出了多少个 letter-spacing。例如 3.5 星时，5 * 0.7 = 3.5，向下取整 = 3，多出了 0.5 个间距
-	const factor = (5 * (rate / 5)) - Math.floor(5 * (rate / 5)) // 实际就是小数部分对应比例，如 0.5、0.2 等
-	// 如果是整数星（如 3.0 星），factor 为 0，不需要修正；如果是半星（如 3.5 星），扣除 0.5 * letterSpacing
-	return `calc(${percentageStr} - ${factor * props.letterSpacing}px)`
-// #endif
+  // #ifdef WEB || MP || (APP-IOS && VUE3-VAPOR) || (APP-HARMONY && VUE3-VAPOR)
+  const spacing = props.letterSpacing ?? 0
+  if (spacing == 0) return percentage
+  // 字间距向后分配的平台，扣除小数星多占的间距。
+  return `calc(${percentage} - ${(rate - Math.floor(rate)) * spacing}px)`
+  // #endif
 })
 
-// #ifndef MP
-// 处理点击事件
-function onTap(event: UniPointerEvent) : void {
-  // 如果是禁用模式，不处理点击
-  if (props.readonly == true) {
-    return
-  }
+function updateRating(localX: number, width: number): void {
+  if (!isFinite(width) || width <= 0 || !isFinite(localX)) return
 
-  // 获取点击位置 - 优化的事件处理
-  let clickX = event.x
-
-  // 获取容器宽度 - 使用 currentTarget 获取绑定事件的 view 容器，而不是被点击的 text 元素
-  let containerWidth = 0
-  try {
-    if (event.currentTarget?.offsetWidth != null && (event.currentTarget as UniElement).offsetWidth > 0) {
-      containerWidth = (event.currentTarget as UniElement).offsetWidth
-    }
-  } catch (e) {
-    // 忽略错误，使用默认值
-		console.log('e: ',e);
-  }
-	// console.log("containerWidth:" + 	containerWidth);
-
-  // 计算点击的是第几颗星（从0开始）
-  const finalValue = Math.round(clickX / containerWidth * 5)
-	// console.log('finalValue: ',finalValue);
-
-	// 计算每颗星的宽度
-	// const starWidth = containerWidth / 5
-  // 计算点击位置在星内的偏移量
-  // const offsetInStar = (clickX % starWidth) / starWidth
-  /* // 根据偏移量决定是整星还是半星
-  let newValue: number
-  if (offsetInStar <= 0.5) {
-    newValue = starIndex + 0.5 // 半星
-  } else {
-    newValue = starIndex + 1 // 整星
-  }
-  // 确保值在有效范围内 */
-  // const finalValue = Math.max(0.5, Math.min(5, starIndex + 1))
-
-  // 更新值
-  currentValue.value = finalValue
-
-  // 触发change事件
-  emit('change', finalValue)
-
-  // 触发v-model更新
-  emit('update:modelValue', finalValue)
+  const clampedX = Math.max(0, Math.min(width, localX))
+  const value = Math.max(0, Math.min(5, Math.round(clampedX / width * 5)))
+  currentValue.value = value
+  emit('change', value)
+  emit('update:modelValue', value)
 }
-// #endif
 
-// #ifdef MP
-async function onTap(event: UniPointerEvent) : Promise<void> {
-  if (props.readonly == true) {
-    return
-  }
+async function onTap(event: UniPointerEvent): Promise<void> {
+  if (props.readonly == true) return
 
+  // #ifdef MP
   const rect = await uni.getElementById(containerId)?.getBoundingClientRectAsync()
-  if (rect == null || rect.width <= 0) {
-    return
-  }
+  if (rect == null) return
+  updateRating(event.clientX - rect.left, rect.width)
+  // #endif
 
-  const localX = event.clientX - rect.left
-  if (!isFinite(localX)) {
-    return
-  }
+  // #ifndef MP
+  const container = event.currentTarget as UniElement | null
+  if (container == null) return
 
-  const clampedX = Math.max(0, Math.min(rect.width, localX))
-  const finalValue = Math.max(0, Math.min(5, Math.round(clampedX / rect.width * 5)))
-
-  currentValue.value = finalValue
-  emit('change', finalValue)
-  emit('update:modelValue', finalValue)
+  // #ifdef WEB
+  updateRating((event as PointerEvent).offsetX, container.offsetWidth)
+  // #endif
+  // #ifndef WEB
+  const rect = container.getBoundingClientRect()
+  updateRating(event.clientX - rect.left, rect.width)
+  // #endif
+  // #endif
 }
-// #endif
-
 </script>
 
 <style>
-
 .stars-pos {
   /* 确保两个 star 的位置重叠 */
   position: absolute;
@@ -392,7 +319,7 @@ async function onTap(event: UniPointerEvent) : Promise<void> {
 .active-init-width {
   width: 0px; /* full时高亮星的初始宽度 */
 }
-.active-color{
- color: #ffca3e; /* 点亮颜色 */
+.active-color {
+  color: #ffca3e; /* 点亮颜色 */
 }
 </style>
