@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class="navigation-bar">
 			<uni-backarrow-circle id="default-back" :auto-back="true" @click="onBackClick" />
-			<text class="navigation-title">uni-backarrow-circle</text>
+			<text class="navigation-title" :style="{ marginRight: titleRightSpace + 'px' }">uni-backarrow-circle</text>
 		</view>
 		<view class="content">
 			<text class="description">圆形返回箭头，适配安全区，点击左上角返回按钮自动返回上一页。</text>
@@ -21,6 +21,25 @@
 
 <script setup lang="ts">
 	const eventMessage = ref('尚未触发 click 事件')
+	const titleRightSpace = ref(0)
+	// #ifdef MP
+	titleRightSpace.value = 96
+	// #endif
+	// #ifdef MP-WEIXIN
+	function updateTitleRightSpace() {
+		const capsule = uni.getMenuButtonBoundingClientRect()
+		const windowWidth = uni.getWindowInfo().windowWidth
+		if (capsule.width > 0 && capsule.left > 0 && capsule.left < windowWidth) {
+			// 胶囊左侧额外留出 8px，标题只使用返回按钮与胶囊之间的空间。
+			titleRightSpace.value = windowWidth - capsule.left + 8
+			console.log('titleRightSpace.value: ',titleRightSpace.value);
+		}
+	}
+	onReady(updateTitleRightSpace)
+	onResize(() => {
+		updateTitleRightSpace()
+	})
+	// #endif
 
 	function onBackClick() {
 		eventMessage.value = '默认返回按钮触发了 click'
@@ -67,6 +86,8 @@
 
 	.navigation-title {
 		flex: 1;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 		text-align: center;
 		font-size: 18px;
 		font-weight: bold;
