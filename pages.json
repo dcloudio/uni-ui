@@ -107,8 +107,9 @@
 						// #ifdef MP-ALIPAY
 						,
 						"transparentTitle": "always",
-						"navigationBarTextStyle":"black"
+						"allowsBounceVertical": "NO"
 						// #endif
+						,"navigationBarTextStyle":"black"
 					}
 				},
 				{
