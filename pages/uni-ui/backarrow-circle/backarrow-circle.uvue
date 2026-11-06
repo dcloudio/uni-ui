@@ -77,7 +77,7 @@
 		height: calc(var(--status-bar-height, 0px) + 160px);
 		background-color: #007aff;
 		justify-content: flex-end;
-		padding:15px;
+		padding: 15px;
 	}
 
 	.hero-title {
@@ -92,33 +92,29 @@
 		margin-top: 4px;
 	}
 
-	.content {
+	.content,
+	.scene {
 		flex-direction: column;
 		padding: 15px;
 	}
 
 	.scene {
-		flex-direction: column;
 		height: 630px;
 		justify-content: center;
-		padding: 15px;
 	}
 
 	.scene-title {
-		color: #333333;
 		font-size: 18px;
 		font-weight: bold;
 		margin-bottom: 8px;
 	}
 
 	.scene-text {
-		color: #333333;
 		font-size: 14px;
 		line-height: 20px;
 	}
 
 	.description {
-		color: #333333;
 		line-height: 20px;
 		margin-bottom: 15px;
 	}
@@ -136,32 +132,35 @@
 		flex-direction: row;
 		align-items: center;
 		height: 100px;
+		padding-left: 30px;
 	}
 
 	/* 内容区展示按钮无需再次避让屏幕安全区。 */
 	.blue-arrow,
 	.large-arrow,
 	.dark-arrow {
-		margin-top: 0;
-		margin-left: 0;
+		margin: 0;
 	}
 
 	.blue-arrow {
+		background-color: #e5f1ff;
 		--uni-backarrow-circle-color: #007aff;
 		--uni-backarrow-circle-width: 3px;
-		background-color: #e5f1ff;
+	}
+
+	.large-arrow,
+	.dark-arrow {
+		margin-left: 40px;
 	}
 
 	.large-arrow {
-		margin-left: 40px;
 		transform: scale(1.25);
 		--uni-backarrow-circle-width: 3px;
 	}
 
 	.dark-arrow {
-		margin-left: 40px;
-		--uni-backarrow-circle-color: #fff;
 		background-color: #333;
+		--uni-backarrow-circle-color: #fff;
 	}
 
 	/* 悬浮导航：固定在页面顶部，覆盖在内容之上，安全区由自身内边距处理。 */
