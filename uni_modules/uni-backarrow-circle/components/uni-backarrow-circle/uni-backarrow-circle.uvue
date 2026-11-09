@@ -1,7 +1,7 @@
 <template>
   <!-- 圆形背景承载点击区域，箭头由旋转边框绘制。 -->
   <!-- #ifdef APP-IOS -->
-  <glass-effect-view v-if="props.iosGlass" class="back-circle" glass-style="clear" :interactive="true" @click="handleClick">
+  <glass-effect-view v-if="props.iosGlass" class="back-circle back-circle-glass" glass-style="clear" tint-color="transparent" :interactive="true" @click="handleClick">
     <view class="back-arrow" flatten></view>
   </glass-effect-view>
   <!-- #endif -->
@@ -97,6 +97,12 @@
   .back-circle-hover {
     opacity: 0.6;
   }
+
+  /* #ifdef APP-IOS */
+  .back-circle-glass {
+    background-color: transparent;
+  }
+  /* #endif */
 
   /* Web 端鼠标悬浮态：用阴影做"浮起"反馈，避免覆盖自定义的背景色。 */
   /* #ifdef WEB */
