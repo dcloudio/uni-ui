@@ -1,6 +1,15 @@
 <template>
   <!-- 圆形背景承载点击区域，箭头由旋转边框绘制。 -->
-  <view class="back-circle" hover-class="back-circle-hover" @click="handleClick">
+  <!-- #ifdef APP-IOS -->
+  <glass-effect-view v-if="props.iosGlass" class="back-circle" glass-style="clear" :interactive="true" @click="handleClick">
+    <view class="back-arrow" flatten></view>
+  </glass-effect-view>
+  <!-- #endif -->
+  <view
+    <!-- #ifdef APP-IOS -->
+    v-else
+    <!-- #endif -->
+    class="back-circle" hover-class="back-circle-hover" @click="handleClick">
     <!-- #ifdef APP -->
     <view class="back-arrow" flatten></view>
     <!-- #endif -->
@@ -24,6 +33,7 @@
    *   "web": {"unixVer": "5.33","unixVaporVer": "5.33"}
    * }
    * @property {Boolean} autoBack 点击后是否自动调用 uni.navigateBack({}) 返回上一页，默认值 false
+   * @property {Boolean} iosGlass 仅 iOS：使用 glass-effect-view 液态玻璃背景，默认值 false
    * @event {Function} click 点击时触发，无参数；当 autoBack 为 true 时随后返回上一页
    */
 
@@ -45,8 +55,14 @@
      * }
      */
     autoBack?: boolean
+    /**
+     * @description 仅 iOS 使用 glass-effect-view 液态玻璃背景，并启用按下交互效果
+     * @default false
+     */
+    iosGlass?: boolean
   }>(), {
-    autoBack: false
+    autoBack: false,
+    iosGlass: false
   })
 
   const emit = defineEmits(['click'])
@@ -66,7 +82,7 @@
     background-color: rgba(206, 206, 206, 0.6);
     justify-content: center;
     align-items: center;
-    margin-left: calc(var(--uni-safe-area-inset-left, 0px) + 6px);
+    margin-left: calc(var(--uni-safe-area-inset-left, 0px) + 12px);
     /* #ifdef MP */
     margin-top: var(--status-bar-height);
     /* #endif */

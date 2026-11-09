@@ -32,6 +32,7 @@ App 端使用一个 `flatten` 子 view 绘制箭头并拍平到圆形背景上�
 | 属性 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | autoBack | boolean | false | 点击后是否自动调用 `uni.navigateBack({})` 返回上一页 |
+| iosGlass | boolean | false | 仅 iOS：使用 `glass-effect-view` 液态玻璃背景，并启用按下交互效果 |
 
 ### autoBack
 
