@@ -58,6 +58,18 @@
     /**
      * @description 仅 iOS 使用 glass-effect-view 液态玻璃背景，并启用按下交互效果
      * @default false
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {"unixVaporVer": "x"},
+     *     "ios": {"unixVaporVer": "5.33"},
+     *     "harmony": {"unixVaporVer": "x"}
+     *   },
+     *   "mp": {
+     *     "weixin": {"unixVer": "x"},
+     *     "alipay": {"unixVer": "x"}
+     *   },
+     *   "web": {"unixVer": "x","unixVaporVer": "x"}
+     * }
      */
     iosGlass?: boolean
   }>(), {
