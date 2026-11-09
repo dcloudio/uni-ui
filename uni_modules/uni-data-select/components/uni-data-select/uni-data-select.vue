@@ -42,13 +42,13 @@
 							<template v-else>
 								<view v-if="!multiple && mixinDatacomResData.length > 0" class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index"
 									@click="change(item)">
-									<text :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</text>
+									<text :class="{'uni-select__selector__disabled': disabled || item.disable}">{{formatItemName(item)}}</text>
 								</view>
 								<view v-if="multiple && mixinDatacomResData.length > 0" >
 									<checkbox-group @change="checkBoxChange">
 										<label class="uni-select__selector-item" v-for="(item,index) in mixinDatacomResData" :key="index" >
-											<checkbox :value="index+''" :checked="getCurrentValues().includes(item.value)" :disabled="item.disable"></checkbox>
-											<view :class="{'uni-select__selector__disabled': item.disable}">{{formatItemName(item)}}</view>
+											<checkbox :value="index+''" :checked="getCurrentValues().includes(item.value)" :disabled="disabled || item.disable"></checkbox>
+											<view :class="{'uni-select__selector__disabled': disabled || item.disable}">{{formatItemName(item)}}</view>
 										</label>
 									</checkbox-group>
 								</view>
@@ -417,6 +417,7 @@
 				this.$emit('clear')
 			},
 			checkBoxChange(res){
+				if (this.disabled) return
 				let range = res.detail.value
 
 				let currentValues = range && range.length > 0? range.map((item)=>{
@@ -438,7 +439,7 @@
 				this.emit(currentValues);
 			},
 			change(item) {
-				if (!item.disable) {
+				if (!this.disabled && !item.disable) {
 					if (this.multiple) {
 						// 多选模式
 						let currentValues = this.getCurrentValues();
