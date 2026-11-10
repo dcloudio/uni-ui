@@ -219,6 +219,12 @@
 					}
 				},
 				{
+					"path": "sidebar/sidebar",
+					"style": {
+						"navigationBarTitleText": "uni-sidebar"
+					}
+				},
+				{
 					"path": "forms/formcard",
 					"style": {
 						"navigationBarTitleText": "表单卡片"
