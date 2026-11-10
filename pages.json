@@ -194,6 +194,12 @@
 						"navigationBarTitleText": "Icons 图标"
 					}
 				},
+				{
+					"path": "sidebar/sidebar",
+					"style": {
+						"navigationBarTitleText": "uni-sidebar"
+					}
+				},
 				// #ifdef VUE3-VAPOR || MP
 				{
 					"path": "expandable-text/expandable-text",
