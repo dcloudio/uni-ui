@@ -1,0 +1,477 @@
+<template>
+	<view
+		class="uni-easyinput"
+		:class="[
+			inputBorder ? 'uni-easyinput--border' : '',
+			inputBorder && isFocused ? 'uni-easyinput--focused' : '',
+			inputBorder && hasError() ? 'uni-easyinput--error' : '',
+			disabled ? 'uni-easyinput--disabled' : '',
+			type == 'textarea' ? 'uni-easyinput--textarea' : ''
+		]"
+	>
+		<uni-icons
+			v-if="prefixIcon != ''"
+			class="uni-easyinput__icon uni-easyinput__icon--prefix"
+			:class="[type == 'textarea' ? 'uni-easyinput__icon--textarea' : '', prefixIconClass]"
+			:type="prefixIcon"
+			@click="onIconClick('prefix')"
+		/>
+		<slot name="left"></slot>
+
+		<textarea
+			v-if="type == 'textarea'"
+			class="uni-easyinput__field uni-easyinput__textarea"
+			:class="[inputClass, disabled ? 'uni-easyinput__field--disabled' : '']"
+			:name="name"
+			:value="currentValue"
+			:placeholder="placeholder"
+			:placeholder-class="getPlaceholderClass()"
+			:disabled="disabled"
+			:maxlength="maxlength"
+			:focus="inputFocus"
+			:auto-height="autoHeight"
+			:cursor-spacing="cursorSpacing"
+			:adjust-position="adjustPosition"
+			@input="onInput"
+			@focus="onTextareaFocus"
+			@blur="onTextareaBlur"
+			@confirm="onConfirm"
+			@keyboardheightchange="onKeyboardHeightChange"
+		></textarea>
+		<input
+			v-else
+			class="uni-easyinput__field uni-easyinput__input"
+			:class="[inputClass, disabled ? 'uni-easyinput__field--disabled' : '']"
+			:name="name"
+			:value="currentValue"
+			:type="getNativeInputType()"
+			:password="type == 'password' && !passwordVisible"
+			:placeholder="placeholder"
+			:placeholder-class="getPlaceholderClass()"
+			:disabled="disabled"
+			:maxlength="maxlength"
+			:focus="inputFocus"
+			:confirm-type="confirmType"
+			:cursor-spacing="cursorSpacing"
+			:adjust-position="adjustPosition"
+			@input="onInput"
+			@focus="onInputFocus"
+			@blur="onInputBlur"
+			@confirm="onConfirm"
+			@keyboardheightchange="onKeyboardHeightChange"
+		/>
+
+		<uni-icons
+			v-if="type == 'password' && passwordIcon && currentValue != ''"
+			class="uni-easyinput__icon uni-easyinput__action-icon"
+			:class="[
+				hasError() ? 'uni-easyinput__action-icon--error' : '',
+				!hasError() && isFocused ? 'uni-easyinput__action-icon--focused' : '',
+				actionIconClass
+			]"
+			:type="passwordVisible ? 'eye-slash-filled' : 'eye-filled'"
+			@click="onEyes"
+		/>
+		<uni-icons
+			v-if="suffixIcon != ''"
+			class="uni-easyinput__icon uni-easyinput__icon--suffix"
+			:class="[type == 'textarea' ? 'uni-easyinput__icon--textarea' : '', suffixIconClass]"
+			:type="suffixIcon"
+			@click="onIconClick('suffix')"
+		/>
+		<uni-icons
+			v-else-if="clearable && currentValue != '' && !disabled && type != 'textarea'"
+			class="uni-easyinput__icon uni-easyinput__action-icon"
+			:class="[
+				hasError() ? 'uni-easyinput__action-icon--error' : '',
+				!hasError() && isFocused ? 'uni-easyinput__action-icon--focused' : '',
+				actionIconClass
+			]"
+			type="clear"
+			@click="onClear"
+		/>
+		<slot name="right"></slot>
+	</view>
+</template>
+
+<script setup lang="ts">
+/**
+ * Easyinput 增强输入框
+ * @description 对 input 和 textarea 的常用能力进行封装，支持清空、密码显隐、前后图标及输入内容裁剪。
+ * @property {String | Number} modelValue 输入内容，支持 v-model
+ * @property {String | Number} value 不使用 v-model 时传入的输入内容
+ * @property {String} type 输入类型，textarea 和 password 为组件扩展类型
+ * @property {Boolean} clearable 是否显示清空图标，默认 true
+ * @property {Boolean} autoHeight textarea 是否自动增高，默认 false
+ * @property {String} placeholder 占位文字
+ * @property {Boolean} focus 是否聚焦，默认 false
+ * @property {Boolean} disabled 是否禁用，默认 false
+ * @property {Number} maxlength 最大输入长度，默认 140
+ * @property {String} confirmType 键盘右下角按钮类型，默认 done
+ * @property {Boolean} inputBorder 是否显示边框，默认 true
+ * @property {String} prefixIcon 前置 uni-icons 图标名称
+ * @property {String} suffixIcon 后置 uni-icons 图标名称
+ * @property {Boolean | String} trim 输入时的空白裁剪方式，默认 false
+ * @property {Number} cursorSpacing 光标与键盘的距离，默认 0
+ * @property {Boolean} passwordIcon 密码输入时是否显示显隐图标，默认 true
+ * @property {Boolean} adjustPosition 键盘弹起时是否自动上推页面，默认 true
+ * @property {String | Boolean} errorMessage 是否显示错误状态
+ * @property {String} inputClass input 和 textarea 的自定义样式类
+ * @property {String} placeholderClass 占位文字的自定义样式类
+ * @property {String} prefixIconClass 前置图标的自定义样式类
+ * @property {String} suffixIconClass 后置图标的自定义样式类
+ * @property {String} actionIconClass 清空和密码显隐图标的自定义样式类
+ * @event {Function} update:modelValue 输入值更新时触发
+ * @event {Function} input 输入时触发
+ * @event {Function} focus 聚焦时触发
+ * @event {Function} blur 失焦时触发
+ * @event {Function} confirm 点击键盘完成按钮时触发
+ * @event {Function} change 失焦或点击键盘完成按钮时触发
+ * @event {Function} clear 点击清空图标时触发
+ * @event {Function} eyes 切换密码显隐时触发
+ * @event {Function} iconClick 点击前置或后置图标时触发
+ * @event {Function} keyboardheightchange 键盘高度变化时触发
+ */
+
+defineOptions({
+	name: 'uni-easyinput',
+	externalClasses: [
+		'input-class',
+		'placeholder-class',
+		'prefix-icon-class',
+		'suffix-icon-class',
+		'action-icon-class'
+	]
+})
+
+type Props = {
+	name? : string,
+	value? : string | number | null,
+	modelValue? : string | number | null,
+	type? : string,
+	clearable? : boolean,
+	autoHeight? : boolean,
+	placeholder? : string,
+	focus? : boolean,
+	disabled? : boolean,
+	maxlength? : number,
+	confirmType? : string,
+	inputBorder? : boolean,
+	prefixIcon? : string,
+	suffixIcon? : string,
+	trim? : boolean | string,
+	cursorSpacing? : number,
+	passwordIcon? : boolean,
+	adjustPosition? : boolean,
+	errorMessage? : string | boolean,
+	inputClass? : string.ClassString,
+	placeholderClass? : string.ClassString,
+	prefixIconClass? : string.ClassString,
+	suffixIconClass? : string.ClassString,
+	actionIconClass? : string.ClassString
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	name: '',
+	type: 'text',
+	clearable: true,
+	autoHeight: false,
+	placeholder: '',
+	focus: false,
+	disabled: false,
+	maxlength: 140,
+	confirmType: 'done',
+	inputBorder: true,
+	prefixIcon: '',
+	suffixIcon: '',
+	trim: false,
+	cursorSpacing: 0,
+	passwordIcon: true,
+	adjustPosition: true,
+	errorMessage: false,
+	inputClass: '',
+	placeholderClass: '',
+	prefixIconClass: '',
+	suffixIconClass: '',
+	actionIconClass: ''
+})
+
+const emit = defineEmits<{
+	'update:modelValue': [value : string],
+	input: [value : string],
+	focus: [event : UniInputFocusEvent | UniTextareaFocusEvent],
+	blur: [event : UniInputBlurEvent | UniTextareaBlurEvent],
+	confirm: [value : string],
+	change: [value : string],
+	clear: [],
+	eyes: [visible : boolean],
+	iconClick: [position : string],
+	keyboardheightchange: [event : UniInputKeyboardHeightChangeEvent]
+}>()
+
+defineSlots<{
+	left(props : {}) : any,
+	right(props : {}) : any
+}>()
+
+function normalizeValue(value : string | number | null | undefined) : string {
+	return value == null ? '' : value.toString()
+}
+
+function getPropValue() : string | number | null {
+	if (props.modelValue != null) {
+		return props.modelValue
+	}
+	return props.value ?? null
+}
+
+function trimValue(value : string) : string {
+	if (props.trim === true || props.trim == 'both') {
+		return value.trim()
+	}
+	if (props.trim == 'left' || props.trim == 'start') {
+		return value.trimStart()
+	}
+	if (props.trim == 'right' || props.trim == 'end') {
+		return value.trimEnd()
+	}
+	if (props.trim == 'all') {
+		return value.replace(/\s+/g, '')
+	}
+	return value
+}
+
+function appendExternalClass(baseClass : string, externalClass : string.ClassString) : string.ClassString {
+	return (externalClass == '' ? baseClass : baseClass + ' ' + externalClass) as string.ClassString
+}
+
+const currentValue = ref<string>(normalizeValue(getPropValue()))
+const inputFocus = ref<boolean>(props.focus)
+const isFocused = ref<boolean>(false)
+const passwordVisible = ref<boolean>(false)
+let skipBlurChange = false
+let confirmedValue = ''
+
+function hasError() : boolean {
+	if (typeof props.errorMessage == 'boolean') {
+		return props.errorMessage
+	}
+	return props.errorMessage != ''
+}
+
+function getNativeInputType() : string {
+	return props.type == 'password' ? 'text' : props.type
+}
+
+function getPlaceholderClass() : string.ClassString {
+	let className = 'uni-easyinput__placeholder'
+	if (props.disabled) {
+		className += ' uni-easyinput__placeholder--disabled'
+	} else if (hasError()) {
+		className += ' uni-easyinput__placeholder--error'
+	}
+	return appendExternalClass(className, props.placeholderClass)
+}
+
+function emitInputValue(value : string) {
+	currentValue.value = value
+	if (skipBlurChange && value != confirmedValue) {
+		skipBlurChange = false
+	}
+	emit('update:modelValue', value)
+	emit('input', value)
+}
+
+function onInput(event : UniInputEvent) : string {
+	const value = trimValue(event.detail.value)
+	emitInputValue(value)
+	return value
+}
+
+function onInputFocus(event : UniInputFocusEvent) {
+	isFocused.value = true
+	emit('focus', event)
+}
+
+function onTextareaFocus(event : UniTextareaFocusEvent) {
+	isFocused.value = true
+	emit('focus', event)
+}
+
+function finishBlur() {
+	isFocused.value = false
+	inputFocus.value = false
+	if (!skipBlurChange || confirmedValue != currentValue.value) {
+		emit('change', currentValue.value)
+	}
+	skipBlurChange = false
+}
+
+function onInputBlur(event : UniInputBlurEvent) {
+	emit('blur', event)
+	finishBlur()
+}
+
+function onTextareaBlur(event : UniTextareaBlurEvent) {
+	emit('blur', event)
+	finishBlur()
+}
+
+function onConfirm(_event : UniInputConfirmEvent) {
+	emit('confirm', currentValue.value)
+	emit('change', currentValue.value)
+	confirmedValue = currentValue.value
+	skipBlurChange = true
+}
+
+function onClear() {
+	emitInputValue('')
+	emit('clear')
+}
+
+function onEyes() {
+	passwordVisible.value = !passwordVisible.value
+	emit('eyes', passwordVisible.value)
+}
+
+function onIconClick(position : string) {
+	emit('iconClick', position)
+}
+
+function onKeyboardHeightChange(event : UniInputKeyboardHeightChangeEvent) {
+	emit('keyboardheightchange', event)
+}
+
+function focusInput() {
+	inputFocus.value = false
+	nextTick(() => {
+		inputFocus.value = true
+	})
+}
+
+function blurInput() {
+	inputFocus.value = false
+}
+
+watch(() : string | number | null => getPropValue(), (value : string | number | null) => {
+	currentValue.value = normalizeValue(value)
+})
+
+watch(() : boolean => props.focus, (focus : boolean) => {
+	inputFocus.value = focus
+})
+
+defineExpose({
+	focus: focusInput,
+	blur: blurInput,
+	onFocus: focusInput,
+	onBlur: blurInput
+})
+</script>
+
+<style>
+.uni-easyinput {
+	width: 100%;
+	min-height: 36px;
+	flex: 1;
+	flex-direction: row;
+	align-items: center;
+	box-sizing: border-box;
+	background-color: #ffffff;
+	border-width: 0;
+	border-style: solid;
+	border-color: #dcdfe6;
+	border-radius: 4px;
+	transition-property: border-color;
+	transition-duration: 0.2s;
+}
+
+.uni-easyinput--border {
+	border-width: 1px;
+}
+
+.uni-easyinput--focused {
+	border-color: #2979ff;
+}
+
+.uni-easyinput--error {
+	border-color: #dd524d;
+}
+
+.uni-easyinput--disabled {
+	background-color: #f7f6f6;
+}
+
+.uni-easyinput--textarea {
+	align-items: flex-start;
+}
+
+.uni-easyinput__field {
+	position: relative;
+	flex: 1;
+	width: auto;
+	color: #333333;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+.uni-easyinput__field--disabled {
+	color: #d5d5d5;
+}
+
+.uni-easyinput__input {
+	height: 34px;
+	padding: 0 10px;
+}
+
+.uni-easyinput__textarea {
+	height: 80px;
+	min-height: 80px;
+	margin: 6px 0;
+	padding: 0 10px;
+	line-height: 21px;
+}
+
+.uni-easyinput__placeholder {
+	color: #999999;
+	font-size: 12px;
+}
+
+.uni-easyinput__placeholder--disabled {
+	color: #d5d5d5;
+}
+
+.uni-easyinput__placeholder--error {
+	color: #ee9e9b;
+}
+
+.uni-easyinput__icon {
+	padding: 6px 5px;
+	color: #c0c4cc;
+	font-size: 22px;
+}
+
+.uni-easyinput__icon--prefix {
+	padding-right: 0;
+}
+
+.uni-easyinput__icon--suffix {
+	padding-left: 0;
+}
+
+.uni-easyinput__action-icon {
+	font-size: 22px;
+}
+
+.uni-easyinput__action-icon--focused {
+	color: #2979ff;
+}
+
+.uni-easyinput__action-icon--error {
+	color: #dd524d;
+}
+
+.uni-easyinput__icon--textarea {
+	margin-top: 2px;
+}
+</style>

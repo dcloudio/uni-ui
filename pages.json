@@ -213,6 +213,12 @@
 					}
 				},
 				{
+					"path": "easyinput/easyinput",
+					"style": {
+						"navigationBarTitleText": "Easyinput 增强输入框"
+					}
+				},
+				{
 					"path": "forms/form-item",
 					"style": {
 						"navigationBarTitleText": "表单项布局"

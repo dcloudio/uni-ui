@@ -1,0 +1,313 @@
+<template>
+	<scroll-view class="page">
+		<view class="intro">
+			<text class="page-title">Easyinput 增强输入框</text>
+			<text class="page-desc">支持单行、多行、密码、清空、图标、空白裁剪和自定义内部样式。</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">基础输入</text>
+			<uni-easyinput
+				v-model="data.basicValue"
+				placeholder="请输入内容"
+				input-class="test-basic-input"
+				action-icon-class="test-clear-icon"
+				@clear="onClear"
+			/>
+			<text class="result-text">当前值：{{ data.basicValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">外部值同步</text>
+			<view class="button-row">
+				<button class="small-button" size="mini" @click="setExternalValue(0)">设为 0</button>
+				<button class="small-button" size="mini" @click="setExternalValue(null)">设为 null</button>
+				<button class="small-button" size="mini" @click="setExternalValue('外部更新')">设为文本</button>
+			</view>
+			<uni-easyinput
+				v-model="data.externalValue"
+				placeholder="观察外部值同步"
+				input-class="test-external-input"
+			/>
+			<text class="result-text">当前值：{{ data.externalValue == null ? 'null' : data.externalValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">去除全部空白</text>
+			<uni-easyinput
+				v-model="data.trimValue"
+				trim="all"
+				placeholder="输入空格会被移除"
+				input-class="test-trim-input"
+			/>
+			<text class="result-text">当前值：{{ data.trimValue }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">前后图标</text>
+			<uni-easyinput
+				v-model="data.iconValue"
+				prefix-icon="search"
+				suffix-icon="compose"
+				placeholder="点击左右图标"
+				prefix-icon-class="demo-prefix-icon test-prefix-icon"
+				suffix-icon-class="demo-suffix-icon test-suffix-icon"
+				@iconClick="onIconClick"
+			/>
+			<text class="result-text">最后点击：{{ data.lastIcon }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">密码和清空</text>
+			<uni-easyinput
+				v-model="data.passwordValue"
+				type="password"
+				placeholder="请输入密码"
+				input-class="test-password-input"
+				action-icon-class="demo-action-icon test-password-icon"
+				@eyes="onEyes"
+			/>
+			<text class="result-text">密码显隐：{{ data.passwordVisible ? '显示' : '隐藏' }}</text>
+		</view>
+
+		<view class="section">
+			<text class="section-title">多行输入</text>
+			<uni-easyinput
+				v-model="data.textareaValue"
+				type="textarea"
+				auto-height
+				prefix-icon="compose"
+				placeholder="请输入多行内容"
+				input-class="demo-textarea test-textarea"
+				prefix-icon-class="test-textarea-prefix"
+			/>
+		</view>
+
+		<view class="section">
+			<text class="section-title">状态</text>
+			<uni-easyinput
+				class="state-input"
+				value="已禁用"
+				disabled
+				input-class="test-disabled-input"
+			/>
+			<uni-easyinput
+				class="state-input"
+				v-model="data.borderlessValue"
+				:input-border="false"
+				placeholder="无边框"
+			/>
+			<uni-easyinput
+				class="state-input"
+				v-model="data.errorValue"
+				error-message="输入内容有误"
+				placeholder="错误状态"
+			/>
+		</view>
+
+		<view class="section">
+			<text class="section-title">左右插槽</text>
+			<uni-easyinput v-model="data.slotValue" placeholder="请输入域名">
+				<template #left>
+					<text class="slot-prefix">https://</text>
+				</template>
+				<template #right>
+					<text class="slot-suffix">.com</text>
+				</template>
+			</uni-easyinput>
+		</view>
+
+		<view class="section section-last">
+			<text class="section-title">自定义样式与窄布局</text>
+			<uni-easyinput
+				class="custom-root"
+				v-model="data.customValue"
+				prefix-icon="email"
+				placeholder="宽度受限时保持输入区域可用"
+				input-class="custom-field"
+				placeholder-class="custom-placeholder"
+				prefix-icon-class="custom-prefix-icon"
+				action-icon-class="custom-action-icon"
+			/>
+		</view>
+	</scroll-view>
+</template>
+
+<script setup lang="ts">
+type Data = {
+	basicValue : string,
+	externalValue : string | number | null,
+	trimValue : string,
+	iconValue : string,
+	lastIcon : string,
+	passwordValue : string,
+	passwordVisible : boolean,
+	textareaValue : string,
+	borderlessValue : string,
+	errorValue : string,
+	slotValue : string,
+	customValue : string,
+	clearCount : number,
+	eyesCount : number,
+	iconClickCount : number
+}
+
+const data = reactive<Data>({
+	basicValue: '初始内容',
+	externalValue: '初始值',
+	trimValue: '',
+	iconValue: '',
+	lastIcon: '未点击',
+	passwordValue: '123456',
+	passwordVisible: false,
+	textareaValue: '',
+	borderlessValue: '',
+	errorValue: '',
+	slotValue: '',
+	customValue: '窄布局内容',
+	clearCount: 0,
+	eyesCount: 0,
+	iconClickCount: 0
+})
+
+function setExternalValue(value : string | number | null) {
+	data.externalValue = value
+}
+
+function onClear() {
+	data.clearCount += 1
+}
+
+function onEyes(visible : boolean) {
+	data.passwordVisible = visible
+	data.eyesCount += 1
+}
+
+function onIconClick(position : string) {
+	data.lastIcon = position
+	data.iconClickCount += 1
+}
+
+defineExpose({
+	data,
+	setExternalValue
+})
+</script>
+
+<style>
+.page {
+	flex: 1;
+	background-color: var(--background-color, #f5f5f5);
+}
+
+.intro {
+	padding: 18px 16px;
+	background-color: var(--content-background-color, #ffffff);
+}
+
+.page-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: var(--text-color, #222222);
+}
+
+.page-desc {
+	margin-top: 8px;
+	font-size: 14px;
+	line-height: 21px;
+	color: var(--secondary-text-color, #657180);
+}
+
+.section {
+	padding: 16px;
+	margin-top: 10px;
+	background-color: var(--content-background-color, #ffffff);
+}
+
+.section-last {
+	padding-bottom: 32px;
+}
+
+.section-title {
+	margin-bottom: 12px;
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--text-color, #333333);
+}
+
+.result-text {
+	margin-top: 8px;
+	font-size: 13px;
+	color: var(--secondary-text-color, #657180);
+}
+
+.button-row {
+	margin-bottom: 10px;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.small-button {
+	margin: 0 8px 6px 0;
+}
+
+.state-input {
+	margin-bottom: 10px;
+}
+
+.slot-prefix,
+.slot-suffix {
+	padding: 0 8px;
+	font-size: 13px;
+	color: #657180;
+}
+
+.slot-prefix {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #dcdfe6;
+}
+
+.slot-suffix {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #dcdfe6;
+}
+
+.demo-prefix-icon {
+	color: #0f766e;
+}
+
+.demo-suffix-icon {
+	color: #b45309;
+}
+
+.demo-action-icon {
+	color: #7c3aed;
+}
+
+.demo-textarea {
+	min-height: 96px;
+}
+
+.custom-root {
+	width: 260px;
+	border-color: #0f766e;
+	border-radius: 0;
+	background-color: #f0fdfa;
+}
+
+.custom-field {
+	color: #115e59;
+	font-size: 15px;
+}
+
+.custom-placeholder {
+	color: #5f8f89;
+}
+
+.custom-prefix-icon,
+.custom-action-icon {
+	color: #0f766e;
+}
+</style>
