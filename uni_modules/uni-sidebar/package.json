@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "侧边滚动导航，用于长滚动容器的侧边导航，点击左侧导航切换右侧滚动条位置。",
   "isExt": true,
-  "extUrl": "https://ext.dcloud.net.cn/plugin?id=",
+  "extUrl": "https://ext.dcloud.net.cn/plugin?id=30676",
   "keywords": [
     "sidebar",
     "uni-ui",
