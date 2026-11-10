@@ -12,12 +12,12 @@
 | --- | :---: | --- |
 | Web | √ | HBuilderX 5.07 |
 | 微信小程序 | √ | HBuilderX 5.08 |
-| 支付宝小程序 | × | - |
+| 支付宝小程序 | √ | HBuilderX 5.31 |
 | Android | √ | HBuilderX 5.07（Vapor 5.21） |
 | iOS | √ | HBuilderX 5.07（Vapor 5.11） |
 | HarmonyOS | √ | HBuilderX 5.07（Vapor 5.07） |
 
-组件基于 `list-view` / `list-item` 实现。支付宝小程序暂不支持 `list-view`，因此本组件不支持支付宝小程序。
+组件基于 `list-view` / `list-item` 实现。
 
 ## 安装与引入
 
@@ -231,9 +231,9 @@ const measureNewHeaders = () => {
 >
 > 说明：容器高度变化（如出现底部购物车栏）不改变吸顶头与滚动内容的相对位置，无需重新测量，也不需要用 `UniResizeObserver` 监听容器。`sticky-section` 原生吸顶由 `list-view` 负责，跨平台行为见下方「平台说明」。
 
-### 接入方式二：CSS sticky 吸顶（微信小程序）
+### 接入方式二：CSS sticky 吸顶（小程序）
 
-微信小程序的 `sticky-section` / `sticky-header` 是 Skyline 渲染引擎专属组件（默认 WebView 渲染下不生效）。因此小程序端吸顶改用 CSS `position: sticky`：
+微信小程序的 `sticky-section` / `sticky-header` 是 Skyline 渲染引擎专属组件（默认 WebView 渲染下不生效）。示例在小程序端统一使用 CSS `position: sticky`：
 
 模板：
 
@@ -352,9 +352,8 @@ const onSelect = (index : number) => {
 ## 平台说明
 
 - 各平台统一使用独立滚动容器（`list-view`）+ `@scroll` 坐标计算高亮 + `scroll-into-view` 点击滚动 + `scrolltolower` 触底加载，条件编译仅剩「吸顶模板」与「坐标测量 API」两处；
-- 吸顶实现：App / Web / 鸿蒙使用 `sticky-section` / `sticky-header` 原生分段吸顶；微信小程序使用 CSS `position: sticky`（微信默认 WebView 渲染不支持 `sticky-section`，该组件为 Skyline 专属）；
+- 吸顶实现：App / Web / 鸿蒙使用 `sticky-section` / `sticky-header` 原生分段吸顶；小程序使用 CSS `position: sticky`（微信默认 WebView 渲染不支持 `sticky-section`，该组件为 Skyline 专属）；
 - 微信端 `list-view` 编译为增强 `scroll-view`（`enhanced="true"`），CSS sticky 在该容器内已被微信模拟器与真机验证可用；
-- 支付宝小程序不支持 `list-view`，本组件不支持该平台；
 - 不使用相交观察器做滚动高亮：IO 的回调只发生在相交状态 0↔非 0 跨越时，窄参照带在慢速拖动下会在头部到达吸顶位置前就停止回调，导致高亮滞后（该问题在 App 与微信端均已实测确认）；
 - iOS 平台 `UniResizeObserver.observe(list-view)` 会导致 `sticky-section` 吸顶失效（[DCloud issue #34579](https://issues.dcloud.net.cn/pages/issues/detail?id=34579)），本示例的高亮方案不依赖 `UniResizeObserver`，因此不受影响；如需监听 `list-view` 尺寸变化，iOS 上请避开此 API；
 - 组件本身全平台通用，无平台条件编译。
