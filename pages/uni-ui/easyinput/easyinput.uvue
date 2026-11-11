@@ -1,20 +1,29 @@
 <template>
-	<scroll-view class="page">
+	<view>
 		<view class="intro">
 			<text class="page-title">Easyinput 增强输入框</text>
-			<text class="page-desc">支持单行、多行、密码、清空、图标、空白裁剪和自定义内部样式。</text>
+			<text class="page-desc">支持单行、多行、密码、清空、前后插槽和自定义内部样式。</text>
 		</view>
 
 		<view class="section">
 			<text class="section-title">基础输入</text>
 			<uni-easyinput
 				v-model="data.basicValue"
+				clearable
 				placeholder="请输入内容"
 				input-class="test-basic-input"
-				action-icon-class="test-clear-icon"
+				icon-class="test-clear-icon"
 				@clear="onClear"
+				@change="onChange"
+				@confirm="onConfirm"
+				@blur="handleBlur"
 			/>
-			<text class="result-text">当前值：{{ data.basicValue }}</text>
+			<text
+				class="result-text test-basic-result"
+				:data-change-count="data.changeCount"
+				:data-confirm-count="data.confirmCount"
+				:data-blur-count="data.blurCount"
+			>当前值：{{ data.basicValue }}</text>
 		</view>
 
 		<view class="section">
@@ -26,6 +35,7 @@
 			</view>
 			<uni-easyinput
 				v-model="data.externalValue"
+				value="后备值"
 				placeholder="观察外部值同步"
 				input-class="test-external-input"
 			/>
@@ -33,28 +43,13 @@
 		</view>
 
 		<view class="section">
-			<text class="section-title">去除全部空白</text>
+			<text class="section-title">Vue 修饰符</text>
 			<uni-easyinput
-				v-model="data.trimValue"
-				trim="all"
-				placeholder="输入空格会被移除"
-				input-class="test-trim-input"
+				v-model.trim="data.modifierValue"
+				placeholder="首尾空格由 v-model.trim 处理"
+				input-class="test-modifier-input"
 			/>
-			<text class="result-text">当前值：{{ data.trimValue }}</text>
-		</view>
-
-		<view class="section">
-			<text class="section-title">前后图标</text>
-			<uni-easyinput
-				v-model="data.iconValue"
-				prefix-icon="search"
-				suffix-icon="compose"
-				placeholder="点击左右图标"
-				prefix-icon-class="demo-prefix-icon test-prefix-icon"
-				suffix-icon-class="demo-suffix-icon test-suffix-icon"
-				@iconClick="onIconClick"
-			/>
-			<text class="result-text">最后点击：{{ data.lastIcon }}</text>
+			<text class="result-text">当前值：[{{ data.modifierValue }}]</text>
 		</view>
 
 		<view class="section">
@@ -62,9 +57,11 @@
 			<uni-easyinput
 				v-model="data.passwordValue"
 				type="password"
+				password-icon
+				clearable
 				placeholder="请输入密码"
 				input-class="test-password-input"
-				action-icon-class="demo-action-icon test-password-icon"
+				icon-class="test-password-icon"
 				@eyes="onEyes"
 			/>
 			<text class="result-text">密码显隐：{{ data.passwordVisible ? '显示' : '隐藏' }}</text>
@@ -76,32 +73,28 @@
 				v-model="data.textareaValue"
 				type="textarea"
 				auto-height
-				prefix-icon="compose"
 				placeholder="请输入多行内容"
 				input-class="demo-textarea test-textarea"
-				prefix-icon-class="test-textarea-prefix"
 			/>
+			<text class="result-text">当前值：{{ data.textareaValue }}</text>
 		</view>
 
 		<view class="section">
 			<text class="section-title">状态</text>
 			<uni-easyinput
 				class="state-input"
-				value="已禁用"
+				value="disabled-secret"
+				type="password"
+				password-icon
+				clearable
 				disabled
 				input-class="test-disabled-input"
+				icon-class="test-disabled-icon"
 			/>
 			<uni-easyinput
-				class="state-input"
+				class="state-input state-borderless"
 				v-model="data.borderlessValue"
-				:input-border="false"
-				placeholder="无边框"
-			/>
-			<uni-easyinput
-				class="state-input"
-				v-model="data.errorValue"
-				error-message="输入内容有误"
-				placeholder="错误状态"
+				placeholder="无边框（class 覆盖）"
 			/>
 		</view>
 
@@ -122,52 +115,63 @@
 			<uni-easyinput
 				class="custom-root"
 				v-model="data.customValue"
-				prefix-icon="email"
+				clearable
 				placeholder="宽度受限时保持输入区域可用"
 				input-class="custom-field"
 				placeholder-class="custom-placeholder"
-				prefix-icon-class="custom-prefix-icon"
-				action-icon-class="custom-action-icon"
+				icon-class="custom-icon"
+			/>
+
+			<text class="section-title custom-title-gap">自定义图标颜色（自定义样式）</text>
+			<uni-easyinput
+				v-model="data.iconColorValue"
+				clearable
+				placeholder="示例：紫色清空图标"
+				icon-class="custom-icon-purple"
 			/>
 		</view>
-	</scroll-view>
+	</view>
 </template>
 
 <script setup lang="ts">
 type Data = {
 	basicValue : string,
 	externalValue : string | number | null,
-	trimValue : string,
-	iconValue : string,
-	lastIcon : string,
+	modifierValue : string,
 	passwordValue : string,
 	passwordVisible : boolean,
 	textareaValue : string,
 	borderlessValue : string,
-	errorValue : string,
 	slotValue : string,
 	customValue : string,
+	iconColorValue : string,
 	clearCount : number,
 	eyesCount : number,
-	iconClickCount : number
+	changeCount : number,
+	confirmCount : number,
+	blurCount : number,
+	lastChangeValue : string,
+	lastConfirmValue : string
 }
 
 const data = reactive<Data>({
 	basicValue: '初始内容',
 	externalValue: '初始值',
-	trimValue: '',
-	iconValue: '',
-	lastIcon: '未点击',
+	modifierValue: '',
 	passwordValue: '123456',
 	passwordVisible: false,
 	textareaValue: '',
 	borderlessValue: '',
-	errorValue: '',
 	slotValue: '',
 	customValue: '窄布局内容',
+	iconColorValue: '',
 	clearCount: 0,
 	eyesCount: 0,
-	iconClickCount: 0
+	changeCount: 0,
+	confirmCount: 0,
+	blurCount: 0,
+	lastChangeValue: '',
+	lastConfirmValue: ''
 })
 
 function setExternalValue(value : string | number | null) {
@@ -183,9 +187,18 @@ function onEyes(visible : boolean) {
 	data.eyesCount += 1
 }
 
-function onIconClick(position : string) {
-	data.lastIcon = position
-	data.iconClickCount += 1
+function onChange(value : string) {
+	data.lastChangeValue = value
+	data.changeCount += 1
+}
+
+function onConfirm(value : string) {
+	data.lastConfirmValue = value
+	data.confirmCount += 1
+}
+
+function handleBlur(_event : UniInputBlurEvent) {
+	data.blurCount += 1
 }
 
 defineExpose({
@@ -195,9 +208,17 @@ defineExpose({
 </script>
 
 <style>
-.page {
-	flex: 1;
-	background-color: var(--background-color, #f5f5f5);
+page {
+	--list-background-color: #ffffff;
+	--background-color: #f5f5f5;
+	--active-color: #a0a0a0;
+	--active-background-color: #f8f8f8;
+	--text-color: #333333;
+	--arrow-color: #999999;
+	--content-background-color: #ffffff;
+	--secondary-text-color: #657180;
+	--input-border-color: #dcdfe6;
+	background-color: var(--background-color);
 }
 
 .intro {
@@ -249,41 +270,35 @@ defineExpose({
 
 .small-button {
 	margin: 0 8px 6px 0;
+	color: var(--text-color, #333333);
+	background-color: var(--active-background-color, #f8f8f8);
 }
 
 .state-input {
 	margin-bottom: 10px;
 }
 
+.state-borderless {
+	border-width: 0;
+}
+
 .slot-prefix,
 .slot-suffix {
 	padding: 0 8px;
 	font-size: 13px;
-	color: #657180;
+	color: var(--secondary-text-color, #657180);
 }
 
 .slot-prefix {
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: #dcdfe6;
+	border-right-color: var(--input-border-color, #dcdfe6);
 }
 
 .slot-suffix {
 	border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #dcdfe6;
-}
-
-.demo-prefix-icon {
-	color: #0f766e;
-}
-
-.demo-suffix-icon {
-	color: #b45309;
-}
-
-.demo-action-icon {
-	color: #7c3aed;
+	border-left-color: var(--input-border-color, #dcdfe6);
 }
 
 .demo-textarea {
@@ -306,8 +321,30 @@ defineExpose({
 	color: #5f8f89;
 }
 
-.custom-prefix-icon,
-.custom-action-icon {
+.custom-icon {
 	color: #0f766e;
+}
+
+/* 自定义图标颜色示例：通过 icon-class 覆盖默认灰色图标 */
+.custom-title-gap {
+	margin-top: 16px;
+}
+
+.custom-icon-purple {
+	color: #7c3aed;
+}
+
+@media (prefers-color-scheme: dark) {
+	page {
+		--list-background-color: #2d2d2d;
+		--background-color: #1a1a1a;
+		--active-color: rgba(255, 255, 255, 0.35);
+		--active-background-color: #3b3b3b;
+		--text-color: #ffffff;
+		--arrow-color: #a0a0a0;
+		--content-background-color: #2d2d2d;
+		--secondary-text-color: rgba(255, 255, 255, 0.65);
+		--input-border-color: rgba(255, 255, 255, 0.18);
+	}
 }
 </style>

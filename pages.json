@@ -219,6 +219,36 @@
 					}
 				},
 				{
+					"path": "forms/forms",
+					"style": {
+						"navigationBarTitleText": "uni-forms 表单"
+					}
+				},
+				{
+					"path": "forms/validation",
+					"style": {
+						"navigationBarTitleText": "uni-forms 校验"
+					}
+				},
+				{
+					"path": "forms/valibot",
+					"style": {
+						"navigationBarTitleText": "uni-forms Valibot"
+					}
+				},
+				{
+					"path": "forms/controls",
+					"style": {
+						"navigationBarTitleText": "uni-forms 控件接入"
+					}
+				},
+				{
+					"path": "forms/styles",
+					"style": {
+						"navigationBarTitleText": "uni-forms 样式与属性"
+					}
+				},
+				{
 					"path": "forms/form-item",
 					"style": {
 						"navigationBarTitleText": "表单项布局"
