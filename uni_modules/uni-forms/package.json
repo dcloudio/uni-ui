@@ -1,7 +1,7 @@
 {
   "id": "uni-forms",
   "displayName": "uni-forms 表单",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "description": "由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据",
   "keywords": [
     "uni-ui",
@@ -40,7 +40,8 @@
     "type": "component-vue",
     "darkmode": "x",
     "i18n": "x",
-    "widescreen": "x"
+    "widescreen": "x",
+    "vapor": "x"
   },
   "uni_modules": {
     "dependencies": [
@@ -80,7 +81,8 @@
             "jd": "-",
             "harmony": "-",
             "qq": "√",
-            "lark": "-"
+            "lark": "-",
+            "xhs": "-"
           },
           "quickapp": {
             "huawei": "√",
