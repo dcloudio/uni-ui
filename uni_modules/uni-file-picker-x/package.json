@@ -9,7 +9,7 @@
     "uni-app-x",
     "图片上传",
     "文件上传"
-  ],
+],
   "repository": "https://gitcode.com/dcloud/uni-ui-x",
   "engines": {
     "HBuilderX": "^5.08",
