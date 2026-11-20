@@ -299,6 +299,12 @@
 					"style": {
 						"navigationBarTitleText": "uni-data-picker-view"
 					}
+				},
+				{
+					"path": "file-picker/file-picker",
+					"style": {
+						"navigationBarTitleText": "uni-file-picker"
+					}
 				}
 				// #endif
 			]
