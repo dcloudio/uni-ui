@@ -134,6 +134,10 @@
    *     "ios": {"unixVaporVer": "5.11"},
    *     "harmony": {"unixVaporVer": "5.07"}
    *   },
+   *   "mp": {
+   *     "weixin": {"unixVer": "5.07"},
+   *     "alipay": {"unixVer": "5.31"}
+   *   },
    *   "web": {"unixVer": "5.07"}
    * }
    * @property {Array|Object} modelValue 组件数据，支持 v-model，格式由 return-type 决定，默认值为空数组
