@@ -15,12 +15,11 @@
 			@update:modelValue="onReorder"
 		>
       <template #default="{ item, index }">
-        <view class="file-picker__box" :class="imageStyles ?? ''">
-          <view class="file-picker__box-content">
-            <image
-              class="file-image"
-              :class="imageClass ?? ''"
-              :src="item.url"
+        <view class="file-picker__box" :class="imageClass ?? ''">
+					<view class="file-picker__box-content">
+						<image
+							class="file-image"
+							:src="item.url"
               mode="aspectFill"
               @click="previewImage(item, index)"
             ></image>
@@ -48,7 +47,7 @@
         </view>
       </template>
       <template #append>
-        <view class="file-picker__box" :class="imageStyles ?? ''">
+        <view class="file-picker__box" :class="imageClass ?? ''">
           <view
             class="file-picker__box-content is-add"
             :class="placeholderClass ?? ''"
@@ -85,7 +84,7 @@
 			<uni-drag-cell
 				v-if="filesList.length > 0"
 				class="uni-file-picker__lists is-text-box"
-				:class="listStyles ?? ''"
+				:class="listClass ?? ''"
 				:model-value="filesList"
 				:column="1"
 				:show-append="false"
@@ -159,13 +158,12 @@
    * @property {Array} mediaType chooseMedia 的媒体类型，image 图片 video 视频 mix 混合，默认值 ['image','video']
    * @property {Boolean} compressed 是否压缩所选视频，默认值 false
    * @property {String} pageOrientation 屏幕方向，仅 Android 生效，auto 自动 portrait 竖屏 landscape 横屏，默认值为空字符串
-   * @property {String} imageStyles 图片宫格区域的自定义样式类，默认值为空字符串
-   * @property {String} listStyles 文件列表区域的自定义样式类，默认值为空字符串
+   * @property {String} imageClass 图片宫格单元格的自定义样式类，默认值为空字符串
+   * @property {String} listClass 文件列表区域的自定义样式类，默认值为空字符串
    * @property {String} titleClass 标题的自定义样式类，默认值为空字符串
    * @property {String} countClass 右侧计数的自定义样式类，默认值为空字符串
    * @property {String} itemClass 列表项的自定义样式类，默认值为空字符串
    * @property {String} placeholderClass 添加或选择按钮区域的自定义样式类，默认值为空字符串
-   * @property {String} imageClass 图片的自定义样式类，默认值为空字符串
    * @property {String} delIconClass 删除按钮的自定义样式类，默认值为空字符串
    * @property {String} progressClass 上传进度条的自定义样式类，默认值为空字符串
    * @property {String} errorClass 上传失败重试遮罩的自定义样式类，默认值为空字符串
@@ -192,13 +190,12 @@
 
   defineOptions({
     externalClasses: [
-      'image-styles',
-      'list-styles',
+      'image-class',
+      'list-class',
       'title-class',
       'count-class',
       'item-class',
       'placeholder-class',
-      'image-class',
       'del-icon-class',
       'progress-class',
       'error-class'
@@ -302,15 +299,15 @@
      */
     pageOrientation ?: string,
     /**
-     * @description 图片宫格区域的自定义样式类
+     * @description 图片宫格单元格的自定义样式类
      * @default ""
      */
-    imageStyles ?: string.ClassString,
+    imageClass ?: string.ClassString,
     /**
      * @description 文件列表区域的自定义样式类
      * @default ""
      */
-    listStyles ?: string.ClassString,
+    listClass ?: string.ClassString,
     /**
      * @description 标题的自定义样式类
      * @default ""
@@ -331,11 +328,6 @@
      * @default ""
      */
     placeholderClass ?: string.ClassString,
-    /**
-     * @description 图片的自定义样式类
-     * @default ""
-     */
-    imageClass ?: string.ClassString,
     /**
      * @description 删除按钮的自定义样式类
      * @default ""
@@ -371,13 +363,12 @@
     mediaType: () : string[] => ['image', 'video'] as string[],
     compressed: false,
     pageOrientation: '',
-    imageStyles: '',
-    listStyles: '',
+    imageClass: '',
+    listClass: '',
     titleClass: '',
     countClass: '',
     itemClass: '',
     placeholderClass: '',
-    imageClass: '',
     delIconClass: '',
     progressClass: '',
     errorClass: ''
