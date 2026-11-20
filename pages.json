@@ -261,12 +261,6 @@
 					}
 				},
 				{
-					"path": "forms/formcard",
-					"style": {
-						"navigationBarTitleText": "表单卡片"
-					}
-				},
-				{
 					"path": "data-checkbox/data-checkbox",
 					"style": {
 						"navigationBarTitleText": "uni-data-checkbox"

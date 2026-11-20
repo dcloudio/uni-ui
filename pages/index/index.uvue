@@ -8,7 +8,6 @@
 	<navigator class="nav-item" url="/pages/uni-ui/data-checkbox/alipay-label-event"><text class="nav-text">data-checkbox 支付宝 label 事件验证（临时）</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/forms/forms"><text class="nav-text">forms</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/forms/form-item"><text class="nav-text">forms 表单项布局</text></navigator>
-	<navigator class="nav-item" url="/pages/uni-ui/forms/formcard"><text class="nav-text">forms 表单卡片</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/icons/icons"><text class="nav-text">icons</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/easyinput/easyinput"><text class="nav-text">easyinput</text></navigator>
 	<navigator class="nav-item" url="/pages/uni-ui/rate/rate"><text class="nav-text">rate</text></navigator>
