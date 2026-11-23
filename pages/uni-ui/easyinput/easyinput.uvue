@@ -376,20 +376,6 @@ page {
 	color: #7c3aed;
 }
 
-/* #ifdef WEB */
-.uni-log {
-	word-break: break-all;
-}
-
-@media (min-width: 768px) {
-	page {
-		max-width: 760px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
-/* #endif */
-
 @media (prefers-color-scheme: dark) {
 	page {
 		--list-background-color: #2d2d2d;
