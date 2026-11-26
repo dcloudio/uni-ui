@@ -41,7 +41,8 @@
     "darkmode": "√",
     "i18n": "√",
     "widescreen": "√",
-    "npmurl": ""
+    "npmurl": "",
+    "vapor": "√"
   },
   "uni_modules": {
     "dependencies": [],
@@ -59,7 +60,8 @@
             "harmony": "√"
           },
           "mp": {
-            "weixin": "√"
+            "weixin": "√",
+            "alipay": "√"
           }
         }
       },
