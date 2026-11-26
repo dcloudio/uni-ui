@@ -289,6 +289,18 @@
 				// #ifdef VUE3-VAPOR
 				,
 				{
+					"path": "calendar-view/calendar-view",
+					"style": {
+						"navigationBarTitleText": "calendar-view"
+					}
+				},
+				{
+					"path": "calendar-picker/calendar-picker",
+					"style": {
+						"navigationBarTitleText": "calendar-picker"
+					}
+				},
+				{
 					"path": "data-picker/data-picker",
 					"style": {
 						"navigationBarTitleText": "uni-data-picker"
